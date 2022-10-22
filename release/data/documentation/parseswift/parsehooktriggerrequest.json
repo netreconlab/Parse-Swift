@@ -162,7 +162,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : ".useMasterKey",
+                  "code" : ".usePrimaryKey",
                   "type" : "codeVoice"
                 },
                 {
@@ -243,6 +243,7 @@
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/object",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/objects",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/original",
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/primaryKey",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/query",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/subscriptions",
@@ -1189,32 +1190,9 @@
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/masterKey": {
   "abstract" : [
-    {
-      "text" : "Specifies if the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "masterKey",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " was used in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Parse hook call.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -1371,6 +1349,68 @@
   "title" : "original",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/original"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/primaryKey": {
+  "abstract" : [
+    {
+      "text" : "Specifies if the ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "masterKey",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " was used in the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Parse hook call.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "primaryKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/primaryKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "primaryKey",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/primarykey"
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/query": {
   "abstract" : [

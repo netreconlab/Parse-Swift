@@ -60,6 +60,9 @@
         "name" : "ParseSwift"
       }
     ],
+    "platforms" : [
+
+    ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
@@ -99,7 +102,15 @@
             },
             {
               "kind" : "text",
-              "text" : "? { get }"
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -192,6 +203,7 @@
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

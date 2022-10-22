@@ -128,7 +128,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : ".useMasterKey",
+                  "code" : ".usePrimaryKey",
                   "type" : "codeVoice"
                 },
                 {
@@ -207,7 +207,7 @@
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/headers",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/installationId",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/ipAddress",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/masterKey",
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/primaryKey",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/user"
       ],
       "title" : "Instance Properties"
@@ -852,69 +852,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookrequestable\/ipaddress"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable/masterKey": {
-  "abstract" : [
-    {
-      "text" : "Specifies if the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "masterKey",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " was used in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Parse hook call.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "masterKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/masterKey",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "masterKey",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehookrequestable\/masterkey"
-},
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable/options()": {
   "abstract" : [
     {
@@ -968,6 +905,69 @@
   "title" : "options()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookrequestable\/options()"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable/primaryKey": {
+  "abstract" : [
+    {
+      "text" : "Specifies if the ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "masterKey",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " was used in the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Parse hook call.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "primaryKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/primaryKey",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "primaryKey",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookrequestable\/primarykey"
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable/user": {
   "abstract" : [

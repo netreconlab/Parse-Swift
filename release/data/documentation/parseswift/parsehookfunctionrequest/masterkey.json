@@ -1,31 +1,4 @@
 {
-  "abstract" : [
-    {
-      "text" : "Specifies if the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "masterKey",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " was used in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Parse hook call.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -73,6 +46,9 @@
         "name" : "ParseSwift"
       }
     ],
+    "platforms" : [
+
+    ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
@@ -112,7 +88,15 @@
             },
             {
               "kind" : "text",
-              "text" : "?"
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -200,32 +184,9 @@
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest/masterKey": {
   "abstract" : [
-    {
-      "text" : "Specifies if the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "masterKey",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " was used in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Parse hook call.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

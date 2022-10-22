@@ -30,17 +30,17 @@
     "paths" : [
       [
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable"
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/masterKey"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest\/primaryKey"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A15HookRequestableP9masterKeySbSgvp",
+    "externalID" : "s:10ParseSwift0A19HookFunctionRequestV10primaryKeySbSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -52,7 +52,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "masterKey"
+        "text" : "primaryKey"
       },
       {
         "kind" : "text",
@@ -73,11 +73,10 @@
         "name" : "ParseSwift"
       }
     ],
-    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "masterKey"
+    "title" : "primaryKey"
   },
   "primaryContentSections" : [
     {
@@ -100,7 +99,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "masterKey"
+              "text" : "primaryKey"
             },
             {
               "kind" : "text",
@@ -113,15 +112,7 @@
             },
             {
               "kind" : "text",
-              "text" : "? { "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "get"
-            },
-            {
-              "kind" : "text",
-              "text" : " }"
+              "text" : "?"
             }
           ]
         }
@@ -140,7 +131,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehookrequestable\/masterkey"
+        "\/documentation\/parseswift\/parsehookfunctionrequest\/primarykey"
       ],
       "traits" : [
         {
@@ -165,26 +156,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest": {
   "abstract" : [
     {
-      "text" : "Conforming to ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseHookRequestable",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " allows you to create types that",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "can decode requests when ",
+      "text" : "A type that can decode requests when ",
       "type" : "text"
     },
     {
@@ -199,7 +174,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "protocol"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -207,23 +182,23 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookRequestable"
+      "text" : "ParseHookFunctionRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookRequestable"
+      "text" : "ParseHookFunctionRequest"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookRequestable",
+  "title" : "ParseHookFunctionRequest",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehookrequestable"
+  "url" : "\/documentation\/parseswift\/parsehookfunctionrequest"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable/masterKey": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest/primaryKey": {
   "abstract" : [
     {
       "text" : "Specifies if the ",
@@ -262,7 +237,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "masterKey"
+      "text" : "primaryKey"
     },
     {
       "kind" : "text",
@@ -278,13 +253,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable\/masterKey",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest\/primaryKey",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
-  "title" : "masterKey",
+  "title" : "primaryKey",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehookrequestable\/masterkey"
+  "url" : "\/documentation\/parseswift\/parsehookfunctionrequest\/primarykey"
 }
 }
 }

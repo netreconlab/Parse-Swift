@@ -5,6 +5,17 @@
       "type" : "text"
     }
   ],
+  "deprecationSummary" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Change: masterKey->primaryKey.",
+          "type" : "text"
+        }
+      ],
+      "type" : "paragraph"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -436,6 +447,9 @@
       {
         "name" : "ParseSwift"
       }
+    ],
+    "platforms" : [
+
     ],
     "role" : "symbol",
     "roleHeading" : "Initializer",
@@ -1209,54 +1223,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "If your app previously used the iOS Objective-C SDK, setting this value",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "to ",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "true",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "strong"
-                },
-                {
-                  "text" : " will attempt to migrate relevant data stored in the Keychain to ParseSwift. Defaults to ",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "false",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "strong"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "migratingFromObjcSDK"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "Sets ",
                   "type" : "text"
                 },
@@ -1723,6 +1689,7 @@
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "identifier",

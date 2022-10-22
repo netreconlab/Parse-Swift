@@ -40,6 +40,9 @@
         "name" : "ParseSwift"
       }
     ],
+    "platforms" : [
+
+    ],
     "role" : "symbol",
     "roleHeading" : "Case",
     "symbolKind" : "case",
@@ -185,6 +188,7 @@
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

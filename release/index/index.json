@@ -13,6 +13,11 @@
             "type" : "func"
           },
           {
+            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-51rzt",
+            "title" : "func initialize(applicationId: String, clientKey: String?, primaryKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
+            "type" : "func"
+          },
+          {
             "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingda-90uad",
             "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
             "type" : "func"
@@ -577,13 +582,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       }
                     ],
@@ -638,13 +643,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
                         "type" : "method"
                       }
                     ],
@@ -1353,8 +1358,8 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsehookrequestable\/masterkey",
-                "title" : "var masterKey: Bool?",
+                "path" : "\/documentation\/parseswift\/parsehookrequestable\/primarykey",
+                "title" : "var primaryKey: Bool?",
                 "type" : "property"
               },
               {
@@ -1821,13 +1826,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -1844,13 +1849,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -3726,6 +3731,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/api\/option\/useprimarykey",
+                    "title" : "case usePrimaryKey",
+                    "type" : "case"
+                  },
+                  {
                     "title" : "Instance Methods",
                     "type" : "groupMarker"
                   },
@@ -5251,6 +5261,11 @@
                 "type" : "init"
               },
               {
+                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:u-8ce5p",
+                "title" : "init(applicationId: String, clientKey: String?, primaryKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
+                "type" : "init"
+              },
+              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -5337,6 +5352,11 @@
               {
                 "path" : "\/documentation\/parseswift\/parseconfiguration\/parsefiletransfer",
                 "title" : "var parseFileTransfer: ParseFileTransferable",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseconfiguration\/primarykey",
+                "title" : "var primaryKey: String?",
                 "type" : "property"
               },
               {
@@ -7528,6 +7548,11 @@
                 "type" : "property"
               },
               {
+                "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/primarykey",
+                "title" : "var primaryKey: Bool?",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/user",
                 "title" : "var user: U?",
                 "type" : "property"
@@ -7926,6 +7951,11 @@
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/original",
                 "title" : "var original: T?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/primarykey",
+                "title" : "var primaryKey: Bool?",
                 "type" : "property"
               },
               {

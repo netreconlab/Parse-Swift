@@ -180,7 +180,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : ".useMasterKey",
+                  "code" : ".usePrimaryKey",
                   "type" : "codeVoice"
                 },
                 {
