@@ -8,7 +8,6 @@
 [![Build Status Release](https://github.com/netreconlab/Parse-Swift/workflows/release/badge.svg)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Arelease)
 [![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/netreconlab/Parse-Swift/branches)
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/carthage/carthage)
-[![Pod](https://img.shields.io/cocoapods/v/ParseSwift.svg)](https://cocoapods.org/pods/ParseSwift)
 
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
@@ -31,7 +30,6 @@ To learn how to use or experiment with ParseSwift, you can run and edit the [Par
 
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
-  - [CocoaPods](#cocoapods)
   - [Carthage](#carthage)
 - [Usage Guide](#usage-guide)
 - [LiveQuery](#livequery)
@@ -64,16 +62,6 @@ Then run `swift build`.
 You can also install using SPM in your Xcode project by going to 
 "Project->NameOfYourProject->Swift Packages" and placing `https://github.com/netreconlab/Parse-Swift.git` in the 
 search field.
-
-### [CocoaPods](https://cocoapods.org)
-
-Add the following line to your Podfile:
-
-```ruby
-pod 'ParseSwift'
-```
-
-Run `pod install`, and you should now have the latest version from the main branch.
 
 ### [Carthage](https://github.com/carthage/carthage)
 
