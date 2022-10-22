@@ -30,13 +30,8 @@ public struct ParseConfiguration {
     /// The master key for your Parse application. This key should only
     /// be specified when using the SDK on a server.
     @available(*, deprecated, renamed: "primaryKey")
-    public internal(set) var masterKey: String? { // swiftlint:disable:this inclusive_language
-        get {
-            primaryKey
-        }
-        set {
-            primaryKey = newValue
-        }
+    public var masterKey: String? { // swiftlint:disable:this inclusive_language
+        primaryKey
     }
 
     /// The primary key for your Parse application. This key should only

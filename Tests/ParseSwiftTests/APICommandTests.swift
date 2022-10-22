@@ -368,6 +368,8 @@ class APICommandTests: XCTestCase {
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Master-Key"],
                            primaryKey)
+            XCTAssertEqual(ParseSwift.configuration.masterKey,
+                           primaryKey)
         case .failure(let error):
             XCTFail(error.localizedDescription)
         }

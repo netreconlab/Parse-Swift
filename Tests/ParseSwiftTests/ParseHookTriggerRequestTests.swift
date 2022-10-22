@@ -83,6 +83,7 @@ class ParseHookTriggerRequestTests: XCTestCase {
                                                                   object: object)
         let expected2 = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"object\":{\"objectId\":\"geez\"}}"
         XCTAssertEqual(triggerRequest2.description, expected2)
+        XCTAssertEqual(triggerRequest2.masterKey, triggerRequest2.primaryKey)
     }
 
     func testGetLog() async throws {
