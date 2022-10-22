@@ -147,7 +147,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  spm-test-5_2:
+  xcode-test-ios-5_3:
     needs: xcode-build-watchos
     runs-on: macos-latest
     steps:
