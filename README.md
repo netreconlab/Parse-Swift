@@ -249,3 +249,4 @@ An example application that demonstrates how to convert from the Objective-C SDK
 1. Create a `User` and `Installation` [model](https://github.com/netreconlab/ParseMigrateKeychain/tree/main/ParseMigrateKeychain/Models) that conform to `ParseObject`
 1. Migrate `PFUser->User` using [loginusingobjckeychain](https://swiftpackageindex.com/parse-community/parse-swift/4.14.2/documentation/parseswift/parseuser/loginusingobjckeychain(options:))
 1. Migrate `PFInstallation->Installation` using [become](https://swiftpackageindex.com/parse-community/parse-swift/4.14.2/documentation/parseswift/parseinstallation/become(_:copyentireinstallation:options:))
+1. Remove the Objective-C SDK from your project after you have migrated all users 
