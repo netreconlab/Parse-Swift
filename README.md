@@ -31,6 +31,7 @@ To learn how to use or experiment with ParseSwift, you can run and edit the [Par
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
+- [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Usage Guide](#usage-guide)
 - [LiveQuery](#livequery)
   - [Setup Server](#setup-server)
@@ -53,7 +54,7 @@ import PackageDescription
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "4.0.0")),
+        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "4.15.0")),
     ]
 )
 ```
@@ -70,6 +71,13 @@ Add the following line to your Cartfile:
 github "netreconlab/Parse-Swift"
 ```
 Run `carthage update`, and you should now have the latest version of ParseSwift SDK in your Carthage folder.
+
+## Example Apps and Frameworks
+Below is a list of apps and frameworks that use Parse-Swift to help developers take advantage of the framework:
+- [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) - Write Parse Cloud Code in Swift
+- [CarekitSampe-ParseCareKit](https://github.com/netreconlab/CareKitSample-ParseCareKit) - An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit)
+- [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using Parse-Swift
+- [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift SDK
 
 ## Usage Guide
 
