@@ -12,11 +12,7 @@
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
 
-[![Backers on Open Collective](https://opencollective.com/parse-server/backers/badge.svg)][open-collective-link]
-[![Sponsors on Open Collective](https://opencollective.com/parse-server/sponsors/badge.svg)][open-collective-link]
-[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)][license-link]
-[![Forum](https://img.shields.io/discourse/https/community.parseplatform.org/topics.svg)](https://community.parseplatform.org/c/client-sdks/parseswift-sdk)
-[![Twitter](https://img.shields.io/twitter/follow/ParsePlatform.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=ParsePlatform)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)][license-link]
 
 ---
 
@@ -241,8 +237,15 @@ You are not limited to a single Live Query Client - you can create multiple inst
 
 [docs]: https://docs.parseplatform.org
 [license-link]: LICENSE
-[open-collective-link]: https://opencollective.com/parse-server
 
 ## Migration from Parse ObjC SDK
 
-See the [Migration Guide](MIGRATION.md) to help you migrate from the Parse ObjC SDK.
+An example application that demonstrates how to convert from the Objective-C SDK to the Swift SDK can be found at [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain). Specifically, look at [ContentViewModel.swift](https://github.com/netreconlab/ParseMigrateKeychain/blob/main/ParseMigrateKeychain/ContentViewModel.swift) for code examples. The basic steps are below:
+
+1. Add the ParseSwift framework to your project using SPM
+1. Remove the Objective-C SDK from your project
+1. Add the Objective-C SDK to your project using SPM. You can use this [repo](https://github.com/mman/Parse-SDK-iOS-OSX/tree/spm) as you will only need `PFUser` and `PFInstallation`
+1. Convert your app from using the Objective-C SDK to the Swift SDK
+1. Create a `User` and `Installation` [model](https://github.com/netreconlab/ParseMigrateKeychain/tree/main/ParseMigrateKeychain/Models) that conform to `ParseObject`
+1. Migrate `PFUser->User` using [loginusingobjckeychain](https://swiftpackageindex.com/parse-community/parse-swift/4.14.2/documentation/parseswift/parseuser/loginusingobjckeychain(options:))
+1. Migrate `PFInstallation->Installation` using [become](https://swiftpackageindex.com/parse-community/parse-swift/4.14.2/documentation/parseswift/parseinstallation/become(_:copyentireinstallation:options:))
