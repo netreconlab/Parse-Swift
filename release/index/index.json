@@ -19,7 +19,7 @@
           },
           {
             "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingda-90uad",
-            "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
+            "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
             "type" : "func"
           },
           {
@@ -582,13 +582,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       }
                     ],
@@ -5257,7 +5257,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:masterkey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:us-4ygss",
-                "title" : "init(applicationId: String, clientKey: String?, masterKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
+                "title" : "init(applicationId: String, clientKey: String?, masterKey: String, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
                 "type" : "init"
               },
               {
