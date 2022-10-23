@@ -22,6 +22,59 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let url: URL
     }
 
+    //: Create your own value typed `ParseObject`.
+    struct GameScore: ParseObject {
+        //: These are required by ParseObject
+        var objectId: String?
+        var createdAt: Date?
+        var updatedAt: Date?
+        var ACL: ParseACL?
+        var originalData: Data?
+
+        //: Your own properties.
+        var points: Int? = 0
+        var profilePicture: ParseFile?
+        var myData: ParseFile?
+        var otherPhoto: GamePhoto?
+
+        /*:
+         Optional - implement your own version of merge
+         for faster decoding after updating your `ParseObject`.
+         */
+        func merge(with object: Self) throws -> Self {
+            var updated = try mergeParse(with: object)
+            if updated.shouldRestoreKey(\.points,
+                                         original: object) {
+                updated.points = object.points
+            }
+            if updated.shouldRestoreKey(\.profilePicture,
+                                         original: object) {
+                updated.profilePicture = object.profilePicture
+            }
+            if updated.shouldRestoreKey(\.myData,
+                                         original: object) {
+                updated.myData = object.myData
+            }
+            if updated.shouldRestoreKey(\.otherPhoto,
+                                         original: object) {
+                updated.otherPhoto = object.otherPhoto
+            }
+            return updated
+        }
+    }
+
+    struct GamePhoto: ParseObject {
+        //: These are required by ParseObject
+        var objectId: String?
+        var createdAt: Date?
+        var updatedAt: Date?
+        var ACL: ParseACL?
+        var originalData: Data?
+
+        //: Your own properties.
+        var image: ParseFile?
+    }
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         guard let url = URL(string: "http://localhost:1337/1") else {
