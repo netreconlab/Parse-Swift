@@ -19,7 +19,7 @@ If you are not familiar with Pull Requests and want to know more about them, you
 
 Before you start to code, please open a [new issue](https://github.com/netreconlab/Parse-Swift/issues/new/choose) to describe your idea, or search for and continue the discussion in an [existing issue](https://github.com/netreconlab/Parse-Swift/issues).
 
-> ⚠️ Please do not post a security vulnerability on GitHub or in the Parse Community Forum. Instead, follow the [Parse Community Security Policy](https://github.com/netreconlab/parse-server/security/policy).
+> ⚠️ Please do not post a security vulnerability on GitHub. Instead, follow the [Security Policy](https://github.com/netreconlab/parse-server/security/policy).
 
 Please completely fill out any templates to provide essential information about your new feature or the bug you discovered.
 
@@ -27,7 +27,7 @@ Together we will plan out the best conceptual approach for your contribution, so
 
 When you are ready to code, you can find more information about opening a pull request in the [GitHub docs](https://help.github.com/articles/creating-a-pull-request/).
 
-Whether this is your first contribution or you are already an experienced contributor, the Parse Community has your back – do not hesitate to ask for help!
+Whether this is your first contribution or you are already an experienced contributor, do not hesitate to ask for help!
 
 ## Why Contributing?
 
