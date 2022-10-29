@@ -49,7 +49,7 @@ public protocol ParseObject: ParseTypeable,
 
     /**
      A JSON encoded version of this `ParseObject` before `.set()` or
-     `mergeable` was called and properties were changed.
+     `.mergeable` was called and properties were changed.
      - warning: This property is not intended to be set or modified by the developer.
     */
     var originalData: Data? { get set }
