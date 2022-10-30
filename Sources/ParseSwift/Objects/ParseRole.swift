@@ -107,16 +107,16 @@ public extension ParseRole {
             throw ParseError(code: .unknownError,
                              message: "objectId's of objects do not match")
         }
-        var updatedUser = self
+        var updatedRole = self
         if shouldRestoreKey(\.ACL,
                              original: object) {
-            updatedUser.ACL = object.ACL
+            updatedRole.ACL = object.ACL
         }
         if shouldRestoreKey(\.name,
                              original: object) {
-            updatedUser.name = object.name
+            updatedRole.name = object.name
         }
-        return updatedUser
+        return updatedRole
     }
 
     func merge(with object: Self) throws -> Self {
