@@ -101,6 +101,31 @@ public extension ParseRole {
         let name = self.name ?? self.objectId
         hasher.combine(name)
     }
+
+    func mergeParse(with object: Self) throws -> Self {
+        guard hasSameObjectId(as: object) else {
+            throw ParseError(code: .unknownError,
+                             message: "objectId's of objects do not match")
+        }
+        var updatedUser = self
+        if shouldRestoreKey(\.ACL,
+                             original: object) {
+            updatedUser.ACL = object.ACL
+        }
+        if shouldRestoreKey(\.name,
+                             original: object) {
+            updatedUser.name = object.name
+        }
+        return updatedUser
+    }
+
+    func merge(with object: Self) throws -> Self {
+        do {
+            return try mergeAutomatically(object)
+        } catch {
+            return try mergeParse(with: object)
+        }
+    }
 }
 
 // MARK: Convenience
