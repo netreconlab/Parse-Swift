@@ -553,7 +553,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 4,
   "fragments" : [
     {
       "kind" : "keyword",

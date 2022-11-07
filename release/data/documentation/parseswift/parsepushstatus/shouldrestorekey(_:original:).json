@@ -182,7 +182,7 @@
             },
             {
               "kind" : "internalParam",
-              "text" : "key"
+              "text" : "keyPath"
             },
             {
               "kind" : "text",
@@ -334,7 +334,7 @@
               "type" : "paragraph"
             }
           ],
-          "name" : "key"
+          "name" : "keyPath"
         },
         {
           "content" : [

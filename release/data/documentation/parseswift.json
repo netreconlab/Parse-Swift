@@ -98,7 +98,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "http:\/\/parseplatform.org\/Parse-Swift\/release\/documentation\/parseswift\/",
+              "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
               "isActive" : true,
               "type" : "reference"
             },
@@ -116,7 +116,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages",
+              "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages",
               "isActive" : true,
               "type" : "reference"
             },
@@ -151,7 +151,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19",
+              "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19",
               "isActive" : true,
               "type" : "reference"
             },
@@ -160,7 +160,143 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds",
+              "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Use-Parse-Swift-from-NetReconLab",
+          "level" : 2,
+          "text" : "Use Parse-Swift from NetReconLab",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This repo is maintained by ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/cbaker6",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/graphs\/contributors",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ". Corey was responsible for the direction and development of all releases from ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/releases\/tag\/4.14.2",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/releases\/tag\/4.14.2",
+              "isActive" : true,
+              "overridingTitle" : "4.14.2",
+              "overridingTitleInlineContent" : [
+                {
+                  "text" : "4.14.2",
+                  "type" : "text"
+                }
+              ],
+              "type" : "reference"
+            },
+            {
+              "text" : ". This repo will remain aligned with the original core principals of a swifty framework that contains zero dependencies and takes advantage of all of the features the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/parse-server",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " has to offer. The reason for the bifurcation from the parse-community version of Parse-Swift is due to interference and a number of disagreements with a member of ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Governance\/blob\/main\/TEAM.md#project-management-committee-pmc",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " about the future of ParseSwift along with the PMC member ignoring code reviews and comments, marking relevant comments as ",
+              "type" : "text"
+            },
+            {
+              "code" : "off-topic",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", merging commits directly to main branch, lack-of-understanding of Swift fundamentals, client-side development, and lack of knowledge about how the Parse-Swift framework is designed. It is important to emphasize that no member of the Parse PMC participated in the design, release, and direction of Parse-Swift from its ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/cf69b7f0638819a7070b82228bc51a97df5757e6",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to version ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/releases\/tag\/4.14.2",
+              "isActive" : true,
+              "overridingTitle" : "4.14.2",
+              "overridingTitleInlineContent" : [
+                {
+                  "text" : "4.14.2",
+                  "type" : "text"
+                }
+              ],
+              "type" : "reference"
+            },
+            {
+              "text" : ". In addition, no funding or support from the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/opencollective.com\/parse-server",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " was ever offered to Corey for any of his ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/search?q=user%3Aparse-community+author%3Acbaker6&type=issues",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", though a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/opencollective.com\/parse-server#category-BUDGET",
               "isActive" : true,
               "type" : "reference"
             },
@@ -11756,18 +11892,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinradians(key:geopoint:distance:sorted:)"
 },
-"http://parseplatform.org/Parse-Swift/release/documentation/parseswift/": {
-  "identifier" : "http:\/\/parseplatform.org\/Parse-Swift\/release\/documentation\/parseswift\/",
-  "title" : "api documentation",
-  "titleInlineContent" : [
-    {
-      "text" : "api documentation",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "http:\/\/parseplatform.org\/Parse-Swift\/release\/documentation\/parseswift\/"
-},
 "https://developer.apple.com/documentation/authenticationservices/implementing_user_authentication_with_sign_in_with_apple": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/authenticationservices\/implementing_user_authentication_with_sign_in_with_apple",
   "title" : "Apple’s Documentation",
@@ -12092,6 +12216,54 @@
   "type" : "link",
   "url" : "https:\/\/firebase.google.com\/docs\/reference\/fcm\/rest\/v1\/projects.messages#Notification"
 },
+"https://github.com/cbaker6": {
+  "identifier" : "https:\/\/github.com\/cbaker6",
+  "title" : "Corey E. Baker",
+  "titleInlineContent" : [
+    {
+      "text" : "Corey E. Baker",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/cbaker6"
+},
+"https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19",
+  "title" : "Common.swift",
+  "titleInlineContent" : [
+    {
+      "text" : "Common.swift",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19"
+},
+"https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds",
+  "title" : "CONTRIBUTING.md",
+  "titleInlineContent" : [
+    {
+      "text" : "CONTRIBUTING.md",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds"
+},
+"https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages",
+  "title" : "ParseSwift.playground",
+  "titleInlineContent" : [
+    {
+      "text" : "ParseSwift.playground",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages"
+},
 "https://github.com/netreconlab/parse-hipaa/tree/parse-swift": {
   "identifier" : "https:\/\/github.com\/netreconlab\/parse-hipaa\/tree\/parse-swift",
   "title" : "this repo",
@@ -12103,6 +12275,18 @@
   ],
   "type" : "link",
   "url" : "https:\/\/github.com\/netreconlab\/parse-hipaa\/tree\/parse-swift"
+},
+"https://github.com/parse-community/Governance/blob/main/TEAM.md#project-management-committee-pmc": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Governance\/blob\/main\/TEAM.md#project-management-committee-pmc",
+  "title" : "Parse Project Management Committee (PMC)",
+  "titleInlineContent" : [
+    {
+      "text" : "Parse Project Management Committee (PMC)",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/parse-community\/Governance\/blob\/main\/TEAM.md#project-management-committee-pmc"
 },
 "https://github.com/parse-community/Parse-SDK-iOS-OSX": {
   "identifier" : "https:\/\/github.com\/parse-community\/Parse-SDK-iOS-OSX",
@@ -12116,41 +12300,41 @@
   "type" : "link",
   "url" : "https:\/\/github.com\/parse-community\/Parse-SDK-iOS-OSX"
 },
-"https://github.com/parse-community/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19": {
-  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19",
-  "title" : "Common.swift",
+"https://github.com/parse-community/Parse-Swift/graphs/contributors": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/graphs\/contributors",
+  "title" : "1 of 2 of the original developers of Parse-Swift",
   "titleInlineContent" : [
     {
-      "text" : "Common.swift",
+      "text" : "1 of 2 of the original developers of Parse-Swift",
       "type" : "text"
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/e9ba846c399257100b285d25d2bd055628b13b4b\/ParseSwift.playground\/Sources\/Common.swift#L4-L19"
+  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/graphs\/contributors"
 },
-"https://github.com/parse-community/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds": {
-  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds",
-  "title" : "CONTRIBUTING.md",
+"https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/releases\/tag\/4.14.2",
+  "title" : "1.0.0",
   "titleInlineContent" : [
     {
-      "text" : "CONTRIBUTING.md",
+      "text" : "1.0.0",
       "type" : "text"
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/blob\/main\/CONTRIBUTING.md#swift-playgrounds"
+  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/releases\/tag\/4.14.2"
 },
-"https://github.com/parse-community/Parse-Swift/tree/main/ParseSwift.playground/Pages": {
-  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages",
-  "title" : "ParseSwift.playground",
+"https://github.com/parse-community/Parse-Swift/tree/cf69b7f0638819a7070b82228bc51a97df5757e6": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/cf69b7f0638819a7070b82228bc51a97df5757e6",
+  "title" : "first commit",
   "titleInlineContent" : [
     {
-      "text" : "ParseSwift.playground",
+      "text" : "first commit",
       "type" : "text"
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages"
+  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/tree\/cf69b7f0638819a7070b82228bc51a97df5757e6"
 },
 "https://github.com/parse-community/parse-dashboard": {
   "identifier" : "https:\/\/github.com\/parse-community\/parse-dashboard",
@@ -12163,6 +12347,66 @@
   ],
   "type" : "link",
   "url" : "https:\/\/github.com\/parse-community\/parse-dashboard"
+},
+"https://github.com/parse-community/parse-server": {
+  "identifier" : "https:\/\/github.com\/parse-community\/parse-server",
+  "title" : "parse-server",
+  "titleInlineContent" : [
+    {
+      "text" : "parse-server",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/parse-community\/parse-server"
+},
+"https://github.com/search?q=user%3Aparse-community+author%3Acbaker6&type=issues": {
+  "identifier" : "https:\/\/github.com\/search?q=user%3Aparse-community+author%3Acbaker6&type=issues",
+  "title" : "contributions to Parse",
+  "titleInlineContent" : [
+    {
+      "text" : "contributions to Parse",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/search?q=user%3Aparse-community+author%3Acbaker6&type=issues"
+},
+"https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/": {
+  "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
+  "title" : "api documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "api documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/"
+},
+"https://opencollective.com/parse-server": {
+  "identifier" : "https:\/\/opencollective.com\/parse-server",
+  "title" : "parse-community funds",
+  "titleInlineContent" : [
+    {
+      "text" : "parse-community funds",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/opencollective.com\/parse-server"
+},
+"https://opencollective.com/parse-server#category-BUDGET": {
+  "identifier" : "https:\/\/opencollective.com\/parse-server#category-BUDGET",
+  "title" : "number of payments have been offered and made to other contributors",
+  "titleInlineContent" : [
+    {
+      "text" : "number of payments have been offered and made to other contributors",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/opencollective.com\/parse-server#category-BUDGET"
 },
 "https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift": {
   "identifier" : "https:\/\/www.pluralsight.com\/guides\/protocol-oriented-programming-in-swift",

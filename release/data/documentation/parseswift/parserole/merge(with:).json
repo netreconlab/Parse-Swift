@@ -17,7 +17,7 @@
       "type" : "text"
     },
     {
-      "text" : "and unchanged Parse properties.",
+      "text" : "and unchanged properties.",
       "type" : "text"
     }
   ],
@@ -26,18 +26,18 @@
       [
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeParse(with:)-9yft4"
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/merge(with:)-6romo"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser\/mergeParse(with:)"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/merge(with:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A4UserPAAE05mergeA04withxx_tKF",
+    "externalID" : "s:10ParseSwift0A4RolePAAE5merge4withxx_tKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -49,7 +49,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "mergeParse"
+        "text" : "merge"
       },
       {
         "kind" : "text",
@@ -92,7 +92,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "mergeParse(with:)"
+    "title" : "merge(with:)"
   },
   "primaryContentSections" : [
     {
@@ -115,7 +115,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "mergeParse"
+              "text" : "merge"
             },
             {
               "kind" : "text",
@@ -173,7 +173,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "The updated installation.",
+              "text" : "The merged object.",
               "type" : "text"
             }
           ],
@@ -210,6 +210,33 @@
           "type" : "heading"
         },
         {
+          "code" : [
+            "\/\/: Create your own value typed `ParseObject`.",
+            "struct GameScore: ParseObject {",
+            "    \/\/: These are required by ParseObject",
+            "    var objectId: String?",
+            "    var createdAt: Date?",
+            "    var updatedAt: Date?",
+            "    var ACL: ParseACL?",
+            "",
+            "    \/\/: Your own properties.",
+            "    var points: Int?",
+            "",
+            "    \/\/: Implement your own version of merge",
+            "    func merge(with object: Self) throws -> Self {",
+            "        var updated = try mergeParse(with: object)",
+            "        if updated.shouldRestoreKey(\\.points,",
+            "                                         original: object) {",
+            "            updated.points = object.points",
+            "        }",
+            "        return updated",
+            "    }",
+            "}"
+          ],
+          "syntax" : null,
+          "type" : "codeListing"
+        },
+        {
           "content" : [
             {
               "inlineContent" : [
@@ -238,11 +265,11 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "This is used in combination with ",
+                  "text" : "Use this in combination with ",
                   "type" : "text"
                 },
                 {
-                  "code" : "merge",
+                  "code" : "ParseMutable",
                   "type" : "codeVoice"
                 },
                 {
@@ -270,7 +297,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "You should only call this method and should not implement it directly",
+                  "text" : "It is recommend you provide an implementation of this method",
                   "type" : "text"
                 },
                 {
@@ -278,15 +305,63 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "as it is already implemented for developers to use.",
+                  "text" : "for all of your ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : "’s as the developer has access to all properties of a",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". You should always call ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "mergeParse",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "in the beginning of your implementation to handle all default Parse properties. In addition,",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "shouldRestoreKey",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to compare key modifications between objects.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "Warning",
-          "style" : "warning",
+          "name" : "Important",
+          "style" : "important",
           "type" : "aside"
         }
       ],
@@ -304,7 +379,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseuser\/mergeparse(with:)"
+        "\/documentation\/parseswift\/parserole\/merge(with:)"
       ],
       "traits" : [
         {
@@ -379,7 +454,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/mergeParse(with:)-9yft4": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/merge(with:)-6romo": {
   "abstract" : [
     {
       "text" : "Merges two ",
@@ -398,7 +473,7 @@
       "type" : "text"
     },
     {
-      "text" : "and unchanged Parse properties.",
+      "text" : "and unchanged properties.",
       "type" : "text"
     }
   ],
@@ -414,7 +489,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "mergeParse"
+      "text" : "merge"
     },
     {
       "kind" : "text",
@@ -449,15 +524,15 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeParse(with:)-9yft4",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/merge(with:)-6romo",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "mergeParse(with:)",
+  "title" : "merge(with:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-9yft4"
+  "url" : "\/documentation\/parseswift\/parseobject\/merge(with:)-6romo"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseUser/mergeParse(with:)": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRole/merge(with:)": {
   "abstract" : [
     {
       "text" : "Merges two ",
@@ -476,7 +551,7 @@
       "type" : "text"
     },
     {
-      "text" : "and unchanged Parse properties.",
+      "text" : "and unchanged properties.",
       "type" : "text"
     }
   ],
@@ -491,7 +566,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "mergeParse"
+      "text" : "merge"
     },
     {
       "kind" : "text",
@@ -526,12 +601,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser\/mergeParse(with:)",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/merge(with:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "mergeParse(with:)",
+  "title" : "merge(with:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/mergeparse(with:)"
+  "url" : "\/documentation\/parseswift\/parserole\/merge(with:)"
 }
 }
 }

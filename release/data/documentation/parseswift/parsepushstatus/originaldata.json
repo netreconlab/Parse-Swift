@@ -13,11 +13,11 @@
       "type" : "text"
     },
     {
-      "code" : "mergeable",
+      "code" : ".set()",
       "type" : "codeVoice"
     },
     {
-      "text" : " was called and",
+      "text" : " or",
       "type" : "text"
     },
     {
@@ -25,7 +25,11 @@
       "type" : "text"
     },
     {
-      "text" : "properties were changed.",
+      "code" : ".mergeable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was called and properties were changed.",
       "type" : "text"
     }
   ],
@@ -235,11 +239,11 @@
       "type" : "text"
     },
     {
-      "code" : "mergeable",
+      "code" : ".set()",
       "type" : "codeVoice"
     },
     {
-      "text" : " was called and",
+      "text" : " or",
       "type" : "text"
     },
     {
@@ -247,7 +251,11 @@
       "type" : "text"
     },
     {
-      "text" : "properties were changed.",
+      "code" : ".mergeable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was called and properties were changed.",
       "type" : "text"
     }
   ],

@@ -36,6 +36,12 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/mergeParse(with:)"
+      ],
+      "title" : "ParseRole Implementations"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser\/mergeParse(with:)"
       ],
       "title" : "ParseUser Implementations"
@@ -573,7 +579,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 4,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -627,6 +633,82 @@
   "title" : "mergeParse(with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-9yft4"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRole/mergeParse(with:)": {
+  "abstract" : [
+    {
+      "text" : "Merges two ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s with the resulting object consisting of all modified",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and unchanged Parse properties.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "mergeParse"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/mergeParse(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "mergeParse(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parserole\/mergeparse(with:)"
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseUser/mergeParse(with:)": {
   "abstract" : [

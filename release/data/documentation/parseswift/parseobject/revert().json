@@ -178,7 +178,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "mergeable",
+                  "code" : ".mergeable",
                   "type" : "codeVoice"
                 },
                 {
@@ -186,7 +186,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "set",
+                  "code" : ".set()",
                   "type" : "codeVoice"
                 },
                 {

@@ -11,6 +11,27 @@
     {
       "text" : "’s can be encoded\/decoded properly.",
       "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "All properties of this instance are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "nil",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " resulting in an empty object.",
+      "type" : "text"
     }
   ],
   "hierarchy" : {
@@ -390,6 +411,27 @@
     },
     {
       "text" : "’s can be encoded\/decoded properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "All properties of this instance are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "nil",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " resulting in an empty object.",
       "type" : "text"
     }
   ],

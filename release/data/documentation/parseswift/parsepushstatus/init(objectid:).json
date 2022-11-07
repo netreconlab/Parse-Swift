@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Reverts the ",
+      "text" : "Creates a ",
       "type" : "text"
     },
     {
@@ -9,7 +9,31 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " back to the original object before mutations began.",
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
       "type" : "text"
     }
   ],
@@ -24,40 +48,37 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertObject()"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE06revertC0xyKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE8objectIdxSS_tcfc::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
     "fragments" : [
       {
-        "kind" : "keyword",
-        "text" : "func"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
-      {
         "kind" : "identifier",
-        "text" : "revertObject"
+        "text" : "init"
       },
       {
         "kind" : "text",
-        "text" : "() "
+        "text" : "("
       },
       {
-        "kind" : "keyword",
-        "text" : "throws"
+        "kind" : "externalParam",
+        "text" : "objectId"
       },
       {
         "kind" : "text",
-        "text" : " -> "
+        "text" : ": "
       },
       {
         "kind" : "typeIdentifier",
-        "text" : "Self"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
       }
     ],
     "modules" : [
@@ -65,13 +86,10 @@
         "name" : "ParseSwift"
       }
     ],
-    "platforms" : [
-
-    ],
     "role" : "symbol",
-    "roleHeading" : "Instance Method",
-    "symbolKind" : "method",
-    "title" : "revertObject()"
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(objectId:)"
   },
   "primaryContentSections" : [
     {
@@ -86,31 +104,28 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "func"
+              "text" : "init"
             },
             {
               "kind" : "text",
-              "text" : " "
+              "text" : "("
             },
             {
-              "kind" : "identifier",
-              "text" : "revertObject"
-            },
-            {
-              "kind" : "text",
-              "text" : "() "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "throws"
+              "kind" : "externalParam",
+              "text" : "objectId"
             },
             {
               "kind" : "text",
-              "text" : " -> "
+              "text" : ": "
             },
             {
               "kind" : "typeIdentifier",
-              "text" : "Self"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
             }
           ]
         }
@@ -130,47 +145,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An error of type ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseError",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Throws",
-          "style" : "note",
-          "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "This reverts to the contents in ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "originalData",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". This means ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "originalData",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " should have",
+                  "text" : "It is required that all added properties be optional properties so they can eventually be used as",
                   "type" : "text"
                 },
                 {
@@ -178,31 +153,48 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "been populated by calling ",
+                  "text" : "Parse ",
                   "type" : "text"
                 },
                 {
-                  "code" : ".mergeable",
+                  "code" : "Pointer",
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " or the ",
+                  "text" : "’s. If a developer really wants to have a required key, they should require it on the server-side or",
                   "type" : "text"
                 },
                 {
-                  "code" : ".set()",
-                  "type" : "codeVoice"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "text" : " method.",
+                  "text" : "create methods to check the respective properties on the client-side before saving objects. See",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "for more information.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "Important",
-          "style" : "important",
+          "name" : "Warning",
+          "style" : "warning",
           "type" : "aside"
         }
       ],
@@ -220,7 +212,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsepushstatus\/revertobject()"
+        "\/documentation\/parseswift\/parsepushstatus\/init(objectid:)"
       ],
       "traits" : [
         {
@@ -290,10 +282,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/parseobject-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/revertObject()": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/init(objectId:)": {
   "abstract" : [
     {
-      "text" : "Reverts the ",
+      "text" : "Creates a ",
       "type" : "text"
     },
     {
@@ -301,47 +293,79 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " back to the original object before mutations began.",
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
       "kind" : "identifier",
-      "text" : "revertObject"
+      "text" : "init"
     },
     {
       "kind" : "text",
-      "text" : "() "
+      "text" : "("
     },
     {
-      "kind" : "keyword",
-      "text" : "throws"
+      "kind" : "externalParam",
+      "text" : "objectId"
     },
     {
       "kind" : "text",
-      "text" : " -> "
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertObject()",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "revertObject()",
+  "title" : "init(objectId:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/revertobject()"
+  "url" : "\/documentation\/parseswift\/parsepushstatus\/init(objectid:)"
+},
+"https://github.com/parse-community/Parse-Swift/pull/315#issuecomment-1014701003": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003",
+  "title" : "here",
+  "titleInlineContent" : [
+    {
+      "text" : "here",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003"
 }
 }
 }

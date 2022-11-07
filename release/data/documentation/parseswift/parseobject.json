@@ -249,7 +249,7 @@
               "type" : "text"
             },
             {
-              "code" : "mergeable",
+              "code" : ".mergeable",
               "type" : "codeVoice"
             },
             {
@@ -773,7 +773,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init()"
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init()",
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)"
       ],
       "title" : "Initializers"
     },
@@ -801,6 +802,7 @@
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/getEncoder()-swift.method",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/getJSONEncoder()-swift.method",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)",
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/isDirtyForKey(_:)",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/merge(with:)-6romo",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeParse(with:)-9yft4",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/relation(_:child:)",
@@ -2698,6 +2700,27 @@
     {
       "text" : "’s can be encoded\/decoded properly.",
       "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "All properties of this instance are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "nil",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " resulting in an empty object.",
+      "type" : "text"
     }
   ],
   "fragments" : [
@@ -2717,6 +2740,174 @@
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/init()"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "objectId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(objectId:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/isDirtyForKey(_:)": {
+  "abstract" : [
+    {
+      "text" : "Get whether a value associated with a ",
+      "type" : "text"
+    },
+    {
+      "code" : "KeyPath",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has been added\/updated on the client, but has",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "not been updated on a Parse Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isDirtyForKey"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7KeyPathC",
+      "text" : "KeyPath"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : "?>) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/isDirtyForKey(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isDirtyForKey(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject\/isdirtyforkey(_:)"
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/merge(with:)-6romo": {
   "abstract" : [
@@ -2741,7 +2932,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 4,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -2819,7 +3010,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 4,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -2984,11 +3175,11 @@
       "type" : "text"
     },
     {
-      "code" : "mergeable",
+      "code" : ".set()",
       "type" : "codeVoice"
     },
     {
-      "text" : " was called and",
+      "text" : " or",
       "type" : "text"
     },
     {
@@ -2996,7 +3187,11 @@
       "type" : "text"
     },
     {
-      "text" : "properties were changed.",
+      "code" : ".mergeable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was called and properties were changed.",
       "type" : "text"
     }
   ],

@@ -33,6 +33,13 @@
     {
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/id-27z0a",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeable",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/operation",
@@ -57,6 +64,7 @@
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getEncoder()",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getJSONEncoder()",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/hasSameObjectId(as:)",
+        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/merge(with:)",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeParse(with:)",
         "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:child:)",
@@ -1589,6 +1597,174 @@
   "title" : "id",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/id-27z0a"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/init(objectId:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "objectId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(objectId:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushstatus\/init(objectid:)"
+},
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/isDirtyForKey(_:)": {
+  "abstract" : [
+    {
+      "text" : "Get whether a value associated with a ",
+      "type" : "text"
+    },
+    {
+      "code" : "KeyPath",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has been added\/updated on the client, but has",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "not been updated on a Parse Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isDirtyForKey"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7KeyPathC",
+      "text" : "KeyPath"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : "?>) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isDirtyForKey(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushstatus\/isdirtyforkey(_:)"
 },
 "doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/merge(with:)": {
   "abstract" : [

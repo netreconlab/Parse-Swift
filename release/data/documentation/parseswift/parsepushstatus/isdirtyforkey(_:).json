@@ -1,7 +1,23 @@
 {
   "abstract" : [
     {
-      "text" : "Get the unwrapped property value.",
+      "text" : "Get whether a value associated with a ",
+      "type" : "text"
+    },
+    {
+      "code" : "KeyPath",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has been added\/updated on the client, but has",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "not been updated on a Parse Server.",
       "type" : "text"
     }
   ],
@@ -16,12 +32,12 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -33,7 +49,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "get"
+        "text" : "isDirtyForKey"
       },
       {
         "kind" : "text",
@@ -66,7 +82,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
         "text" : "W"
       },
       {
@@ -83,8 +99,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
-        "text" : "W"
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
       }
     ],
     "modules" : [
@@ -95,7 +111,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "get(_:)"
+    "title" : "isDirtyForKey(_:)"
   },
   "primaryContentSections" : [
     {
@@ -109,14 +125,6 @@
           ],
           "tokens" : [
             {
-              "kind" : "attribute",
-              "text" : "@discardableResult"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
               "kind" : "keyword",
               "text" : "func"
             },
@@ -126,7 +134,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "get"
+              "text" : "isDirtyForKey"
             },
             {
               "kind" : "text",
@@ -175,7 +183,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
               "text" : "W"
             },
             {
@@ -192,8 +200,8 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
-              "text" : "W"
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
             },
             {
               "kind" : "text",
@@ -236,7 +244,41 @@
         {
           "inlineContent" : [
             {
-              "text" : "The unwrapped value.",
+              "text" : "",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "true",
+                  "type" : "text"
+                }
+              ],
+              "type" : "strong"
+            },
+            {
+              "text" : " if the ",
+              "type" : "text"
+            },
+            {
+              "code" : "KeyPath",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is dirty, ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "false",
+                  "type" : "text"
+                }
+              ],
+              "type" : "strong"
+            },
+            {
+              "text" : " otherwise.",
               "type" : "text"
             }
           ],
@@ -261,7 +303,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " of the value to get.",
+                  "text" : " of the value to check.",
                   "type" : "text"
                 }
               ],
@@ -293,13 +335,97 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " when the value is ",
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Throws",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "In order for a ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "KeyPath",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to be considered dirty, the respective ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " needs to",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "first be saved to a Parse Server and fetched locally.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Important",
+          "style" : "important",
+          "type" : "aside"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "This method should only be used after updating a ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " using ",
+                  "type" : "text"
+                },
+                {
+                  "code" : ".set()",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " or",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : ".mergeable",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " otherwide it will always return ",
                   "type" : "text"
                 },
                 {
                   "inlineContent" : [
                     {
-                      "text" : "nil",
+                      "text" : "false",
                       "type" : "text"
                     }
                   ],
@@ -313,7 +439,7 @@
               "type" : "paragraph"
             }
           ],
-          "name" : "Throws",
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         }
@@ -332,7 +458,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsepushstatus\/get(_:)"
+        "\/documentation\/parseswift\/parsepushstatus\/isdirtyforkey(_:)"
       ],
       "traits" : [
         {
@@ -402,10 +528,26 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/parseobject-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/get(_:)": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/isDirtyForKey(_:)": {
   "abstract" : [
     {
-      "text" : "Get the unwrapped property value.",
+      "text" : "Get whether a value associated with a ",
+      "type" : "text"
+    },
+    {
+      "code" : "KeyPath",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has been added\/updated on the client, but has",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "not been updated on a Parse Server.",
       "type" : "text"
     }
   ],
@@ -420,7 +562,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "get"
+      "text" : "isDirtyForKey"
     },
     {
       "kind" : "text",
@@ -453,7 +595,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13isDirtyForKeyySbs0G4PathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -470,16 +612,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE3getyqd__s7KeyPathCyxqd__SgGKSQRd__lF1WL_qd__mfp",
-      "text" : "W"
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "get(_:)",
+  "title" : "isDirtyForKey(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/get(_:)"
+  "url" : "\/documentation\/parseswift\/parsepushstatus\/isdirtyforkey(_:)"
 }
 }
 }

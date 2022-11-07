@@ -32,12 +32,12 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser\/mergeParse(with:)"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/mergeParse(with:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A4UserPAAE05mergeA04withxx_tKF",
+    "externalID" : "s:10ParseSwift0A4RolePAAE05mergeA04withxx_tKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -304,7 +304,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseuser\/mergeparse(with:)"
+        "\/documentation\/parseswift\/parserole\/mergeparse(with:)"
       ],
       "traits" : [
         {
@@ -457,7 +457,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-9yft4"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseUser/mergeParse(with:)": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRole/mergeParse(with:)": {
   "abstract" : [
     {
       "text" : "Merges two ",
@@ -526,12 +526,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser\/mergeParse(with:)",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole\/mergeParse(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mergeParse(with:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/mergeparse(with:)"
+  "url" : "\/documentation\/parseswift\/parserole\/mergeparse(with:)"
 }
 }
 }

@@ -307,7 +307,7 @@
               "type" : "paragraph"
             }
           ],
-          "name" : "key"
+          "name" : "keyPath"
         },
         {
           "content" : [

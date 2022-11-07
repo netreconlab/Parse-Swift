@@ -1,7 +1,23 @@
 {
   "abstract" : [
     {
-      "text" : "An empty copy of the respective object that allows you to update a",
+      "text" : "Creates a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
       "type" : "text"
     },
     {
@@ -9,16 +25,16 @@
       "type" : "text"
     },
     {
-      "text" : "a subset of the fields (PATCH) of an object as oppose to replacing an object (PUT).",
+      "text" : "between ",
       "type" : "text"
-    }
-  ],
-  "defaultImplementationsSections" : [
+    },
     {
-      "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-96fqk"
-      ],
-      "title" : "ParseObject Implementations"
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
     }
   ],
   "hierarchy" : {
@@ -31,23 +47,24 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-1pmms"
+    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A6ObjectP9mergeablexvp",
+    "extendedModule" : "ParseSwift",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE8objectIdxSS_tcfc",
     "fragments" : [
       {
-        "kind" : "keyword",
-        "text" : "var"
+        "kind" : "identifier",
+        "text" : "init"
       },
       {
         "kind" : "text",
-        "text" : " "
+        "text" : "("
       },
       {
-        "kind" : "identifier",
-        "text" : "mergeable"
+        "kind" : "externalParam",
+        "text" : "objectId"
       },
       {
         "kind" : "text",
@@ -55,7 +72,12 @@
       },
       {
         "kind" : "typeIdentifier",
-        "text" : "Self"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
       }
     ],
     "modules" : [
@@ -63,11 +85,10 @@
         "name" : "ParseSwift"
       }
     ],
-    "required" : true,
     "role" : "symbol",
-    "roleHeading" : "Instance Property",
-    "symbolKind" : "property",
-    "title" : "mergeable"
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(objectId:)"
   },
   "primaryContentSections" : [
     {
@@ -82,15 +103,15 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "init"
             },
             {
               "kind" : "text",
-              "text" : " "
+              "text" : "("
             },
             {
-              "kind" : "identifier",
-              "text" : "mergeable"
+              "kind" : "externalParam",
+              "text" : "objectId"
             },
             {
               "kind" : "text",
@@ -98,19 +119,12 @@
             },
             {
               "kind" : "typeIdentifier",
-              "text" : "Self"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : " { "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "get"
-            },
-            {
-              "kind" : "text",
-              "text" : " }"
+              "text" : ")"
             }
           ]
         }
@@ -130,47 +144,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "It is recommended to use this to create a mergeable copy of your ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseObject",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Note",
-          "style" : "note",
-          "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "",
-                  "type" : "text"
-                },
-                {
-                  "code" : ".mergeable",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " should only be used on ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseObject",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : "’s that have already",
+                  "text" : "It is required that all added properties be optional properties so they can eventually be used as",
                   "type" : "text"
                 },
                 {
@@ -178,15 +152,15 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "been saved at least once to a Parse Server and have a valid ",
+                  "text" : "Parse ",
                   "type" : "text"
                 },
                 {
-                  "code" : "objectId",
+                  "code" : "Pointer",
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : ". In addition,",
+                  "text" : "’s. If a developer really wants to have a required key, they should require it on the server-side or",
                   "type" : "text"
                 },
                 {
@@ -194,15 +168,24 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "the developer should have implemented added all of their properties to ",
+                  "text" : "create methods to check the respective properties on the client-side before saving objects. See",
                   "type" : "text"
                 },
                 {
-                  "code" : "merge",
-                  "type" : "codeVoice"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "text" : ".",
+                  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "for more information.",
                   "type" : "text"
                 }
               ],
@@ -228,7 +211,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseobject\/mergeable-1pmms"
+        "\/documentation\/parseswift\/parseobject\/init(objectid:)"
       ],
       "traits" : [
         {
@@ -303,10 +286,26 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-1pmms": {
+"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)": {
   "abstract" : [
     {
-      "text" : "An empty copy of the respective object that allows you to update a",
+      "text" : "Creates a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
       "type" : "text"
     },
     {
@@ -314,23 +313,30 @@
       "type" : "text"
     },
     {
-      "text" : "a subset of the fields (PATCH) of an object as oppose to replacing an object (PUT).",
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
-      "kind" : "keyword",
-      "text" : "var"
+      "kind" : "identifier",
+      "text" : "init"
     },
     {
       "kind" : "text",
-      "text" : " "
+      "text" : "("
     },
     {
-      "kind" : "identifier",
-      "text" : "mergeable"
+      "kind" : "externalParam",
+      "text" : "objectId"
     },
     {
       "kind" : "text",
@@ -338,60 +344,32 @@
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-1pmms",
+  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
-  "title" : "mergeable",
+  "title" : "init(objectId:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/mergeable-1pmms"
+  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-96fqk": {
-  "abstract" : [
+"https://github.com/parse-community/Parse-Swift/pull/315#issuecomment-1014701003": {
+  "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003",
+  "title" : "here",
+  "titleInlineContent" : [
     {
-      "text" : "An empty copy of the respective object that allows you to update a",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "a subset of the fields (PATCH) of an object as oppose to replacing an object (PUT).",
+      "text" : "here",
       "type" : "text"
     }
   ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "mergeable"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-96fqk",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "mergeable",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/mergeable-96fqk"
+  "type" : "link",
+  "url" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003"
 }
 }
 }
