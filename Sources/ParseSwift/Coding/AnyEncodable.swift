@@ -1,7 +1,5 @@
 import Foundation
 
-// swiftlint:disable type_name
-
 /**
  A type-erased `Encodable` value.
  
