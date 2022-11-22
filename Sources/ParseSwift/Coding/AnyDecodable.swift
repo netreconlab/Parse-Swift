@@ -35,6 +35,7 @@ struct AnyDecodable: Decodable {
     }
 }
 
+// swiftlint:disable:next type_name
 protocol _AnyDecodable {
     var value: Any { get }
     init<T>(_ value: T?)

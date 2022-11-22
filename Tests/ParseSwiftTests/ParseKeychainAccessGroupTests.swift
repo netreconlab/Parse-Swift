@@ -11,6 +11,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable unused_optional_binding
+
 class ParseKeychainAccessGroupTests: XCTestCase {
 
     struct User: ParseUser {
