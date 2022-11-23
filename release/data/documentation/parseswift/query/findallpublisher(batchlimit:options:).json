@@ -314,7 +314,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The maximum number of objects to send in each batch. If the items to be batched.",
+                  "text" : "The maximum number of objects to send in each batch. If the amount of items to be batched",
                   "type" : "text"
                 }
               ],
