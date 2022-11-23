@@ -1137,9 +1137,8 @@ extension ParseObject {
          do {
             try fetchCommand(include: includeKeys)
                 .executeAsync(options: options,
-                              callbackQueue: callbackQueue) { result in
-                    completion(result)
-            }
+                              callbackQueue: callbackQueue,
+                              completion: completion)
          } catch {
             callbackQueue.async {
                 if let error = error as? ParseError {

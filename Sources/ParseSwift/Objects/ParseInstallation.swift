@@ -555,9 +555,7 @@ extension ParseInstallation {
                             let defaultError = ParseError(code: .unknownError,
                                                           message: error.localizedDescription)
                             let parseError = error as? ParseError ?? defaultError
-                            callbackQueue.async {
-                                completion(.failure(parseError))
-                            }
+                            completion(.failure(parseError))
                         }
                     } else {
                         completion(result)
@@ -1025,9 +1023,7 @@ extension ParseInstallation {
                              let defaultError = ParseError(code: .unknownError,
                                                            message: error.localizedDescription)
                              let parseError = error as? ParseError ?? defaultError
-                             callbackQueue.async {
-                                 completion(.failure(parseError))
-                             }
+                             completion(.failure(parseError))
                          }
                      case .failure(let error):
                          completion(.failure(error))
