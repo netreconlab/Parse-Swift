@@ -16,15 +16,8 @@
 
 ---
 
-<div class="warning" style='background-color:#E9D8FD; color: #69337A; border-left: solid #805AD5 4px; border-radius: 4px; padding:0.7em;'>
-<span>
-<p style='margin-top:1em;'>
-<b>Why Parse-Swift++?</b></p>
-<p style='margin-left:1em;'>
-Parse-Swift++ has the most up-to-date features and bug fixes for Parse-Swift. It is the most flexible Parse Client SDK to date, the only SDK with zero dependencies, works with Cloud Code, all of which works on all Apple platforms, Linux, Android, and Windows. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit issues and pull requests to https://github.com/netreconlab/Parse-Swift instead of the Parse-Community Parse-Swift to support it's development. <a href="#why-parse-swift">Get more info</a>.
-</p>
-</span>
-</div>
+> :information_source: **Why Parse-Swift++?** <br>
+> Parse-Swift++ has the most up-to-date features and bug fixes for Parse-Swift. It is the most flexible Parse Client SDK to date, the only SDK with zero dependencies, works with Cloud Code, all of which works on all Apple platforms, Linux, Android, and Windows. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit issues and pull requests to https://github.com/netreconlab/Parse-Swift instead of the Parse-Community Parse-Swift to support it's development. <a href="#why-parse-swift">Get more info</a>.
 
 ---
 
