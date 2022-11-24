@@ -16,7 +16,7 @@
 ---
 
 > :information_source: **Why Parse-Swift++?** <br>
-> Parse-Swift++ has the most up-to-date features and bug fixes for Parse-Swift. It is the most flexible Parse Client SDK to date, the only SDK with zero dependencies, works with Cloud Code, all of which works on all Apple platforms, Linux, Android, and Windows. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit issues and pull requests to https://github.com/netreconlab/Parse-Swift instead of the Parse-Community Parse-Swift to support it's development. <a href="#why-parse-swift">Get more info</a>.
+> Parse-Swift<sup>OG</sup> has the most up-to-date features and bug fixes to develop client and server-side applications. It is the most flexible Parse Client SDK to date, can be used to write [Cloud Code](https://github.com/netreconlab/parse-server-swift), and is developed with zero dependencies. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit issues and pull requests to https://github.com/netreconlab/Parse-Swift instead of the Parse-Community Parse-Swift to support it's development. <a href="#why-parse-swift">Get more info</a>.
 
 ---
 
