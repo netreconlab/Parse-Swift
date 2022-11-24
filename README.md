@@ -31,7 +31,7 @@ This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2
 
 ---
 
-- [<a name="why-parse-swift"></a> Why use Parse-Swift++ from NetReconLab?](#-why-use-parse-swift-from-netreconlab)
+- [<a name="why-parse-swift"></a> Why use Parse-Swift<sup>OG</sup> from NetReconLab?](#-why-use-parse-swift-from-netreconlab)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
