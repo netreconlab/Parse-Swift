@@ -1,4 +1,4 @@
-![parse-repository-header-sdk-swift](https://github.com/Kondamon/Parse-Swift/blob/923e82986df905dc7ec81d9eb997a68fc1a190f4/Sources/ParseSwift/Documentation.docc/Resources/parse-swift.png)
+![parse-repository-header-sdk-swift](Sources/ParseSwift/Documentation.docc/Resources/parse-swift.png)
 
 <h3 align="center">iOS · macOS · watchOS · tvOS · Linux · Android · Windows</h3>
 
