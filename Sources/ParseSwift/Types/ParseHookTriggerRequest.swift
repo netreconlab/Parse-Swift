@@ -75,7 +75,7 @@ extension ParseHookTriggerRequest {
      */
     public func getLog<V>() throws -> V where V: Codable {
         guard let log = log?.value as? V else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "Cannot be casted to the inferred type")
         }
         return log
@@ -88,7 +88,7 @@ extension ParseHookTriggerRequest {
      */
     public func getContext<V>() throws -> V where V: Codable {
         guard let context = context?.value as? V else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "Cannot be casted to the inferred type")
         }
         return context

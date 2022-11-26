@@ -211,7 +211,7 @@ public extension ParseObject {
 
     func mergeParse(with object: Self) throws -> Self {
         guard hasSameObjectId(as: object) else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "objectId's of objects do not match")
         }
         var updated = self
@@ -273,13 +273,13 @@ public extension ParseObject {
     */
     func revert<W>(_ keyPath: WritableKeyPath<Self, W?>) throws -> Self where W: Equatable {
         guard let originalData = originalData else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "Missing original data to revert to")
         }
         let original = try ParseCoding.jsonDecoder().decode(Self.self,
                                                             from: originalData)
         guard hasSameObjectId(as: original) else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "The current object does not have the same objectId as the original")
         }
         var updated = self
@@ -298,13 +298,13 @@ public extension ParseObject {
     */
     func revert() throws -> Self {
         guard let originalData = originalData else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "Missing original data to revert to")
         }
         let original = try ParseCoding.jsonDecoder().decode(Self.self,
                                                             from: originalData)
         guard hasSameObjectId(as: original) else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "The current object does not have the same objectId as the original")
         }
         return original
@@ -319,7 +319,7 @@ public extension ParseObject {
     @discardableResult
     func get<W>(_ keyPath: KeyPath<Self, W?>) throws -> W where W: Equatable {
         guard let value = self[keyPath: keyPath] else {
-            throw ParseError(code: .unknownError, message: "Could not unwrap value")
+            throw ParseError(code: .otherCause, message: "Could not unwrap value")
         }
         return value
     }
@@ -374,7 +374,7 @@ extension ParseObject {
         let originalData = try ParseCoding.jsonEncoder().encode(originalObject)
         guard let updated = try JSONSerialization.jsonObject(with: updatedEncoded) as? [String: AnyObject],
             var original = try JSONSerialization.jsonObject(with: originalData) as? [String: AnyObject] else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: "Could not encode/decode necessary objects")
         }
         updated.forEach { (key, value) in
@@ -394,7 +394,7 @@ public extension Sequence where Element: ParseObject {
                                       batchLimit: Int) throws {
         if usingTransactions {
             if objectCount > batchLimit {
-                let error = ParseError(code: .unknownError,
+                let error = ParseError(code: .otherCause,
                                        message: """
 The amount of objects (\(objectCount)) cannot exceed the batch size(\(batchLimit)).
 Either decrease the amount of objects, increase the batch size, or disable
@@ -463,7 +463,7 @@ transactions for this call.
                     if childObjects[key] == nil {
                         childObjects[key] = value
                     } else {
-                        error = ParseError(code: .unknownError, message: "circular dependency")
+                        error = ParseError(code: .otherCause, message: "circular dependency")
                         return
                     }
                 }
@@ -474,7 +474,7 @@ transactions for this call.
                     if childFiles[key] == nil {
                         childFiles[key] = value
                     } else {
-                        error = ParseError(code: .unknownError, message: "circular dependency")
+                        error = ParseError(code: .otherCause, message: "circular dependency")
                         return
                     }
                 }
@@ -554,7 +554,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -610,7 +610,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -665,7 +665,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -720,7 +720,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -774,7 +774,7 @@ transactions for this call.
                             return
                         }
                         guard childObjects[key] == nil else {
-                            error = ParseError(code: .unknownError, message: "circular dependency")
+                            error = ParseError(code: .otherCause, message: "circular dependency")
                             return
                         }
                         childObjects[key] = value
@@ -784,7 +784,7 @@ transactions for this call.
                             return
                         }
                         guard childFiles[key] == nil else {
-                            error = ParseError(code: .unknownError, message: "circular dependency")
+                            error = ParseError(code: .otherCause, message: "circular dependency")
                             return
                         }
                         childFiles[key] = value
@@ -813,7 +813,7 @@ transactions for this call.
                         commands.append(try object.updateCommand())
                     }
                 } catch {
-                    let defaultError = ParseError(code: .unknownError,
+                    let defaultError = ParseError(code: .otherCause,
                                                   message: error.localizedDescription)
                     let parseError = error as? ParseError ?? defaultError
                     callbackQueue.async {
@@ -853,7 +853,7 @@ transactions for this call.
                     }
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -900,7 +900,7 @@ transactions for this call.
             }
             return fetchedObjectsToReturn
         } else {
-            throw ParseError(code: .unknownError, message: "all items to fetch must be of the same class")
+            throw ParseError(code: .otherCause, message: "all items to fetch must be of the same class")
         }
     }
 
@@ -953,7 +953,7 @@ transactions for this call.
             }
         } else {
             callbackQueue.async {
-                completion(.failure(ParseError(code: .unknownError,
+                completion(.failure(ParseError(code: .otherCause,
                                                message: "all items to fetch must be of the same class")))
             }
         }
@@ -1064,7 +1064,7 @@ transactions for this call.
                 }
             }
         } catch {
-            let defaultError = ParseError(code: .unknownError,
+            let defaultError = ParseError(code: .otherCause,
                                           message: error.localizedDescription)
             let parseError = error as? ParseError ?? defaultError
             callbackQueue.async {
@@ -1144,7 +1144,7 @@ extension ParseObject {
                 if let error = error as? ParseError {
                     completion(.failure(error))
                 } else {
-                    completion(.failure(ParseError(code: .unknownError,
+                    completion(.failure(ParseError(code: .otherCause,
                                                    message: error.localizedDescription)))
                 }
             }
@@ -1259,7 +1259,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -1300,7 +1300,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -1340,7 +1340,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -1380,7 +1380,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 callbackQueue.async {
@@ -1422,7 +1422,7 @@ extension ParseObject {
                                       childFiles: savedChildFiles,
                                       completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .unknownError,
+                    let defaultError = ParseError(code: .otherCause,
                                                   message: error.localizedDescription)
                     let parseError = error as? ParseError ?? defaultError
                     callbackQueue.async {
@@ -1486,7 +1486,7 @@ extension ParseObject {
 
                 var waitingToBeSaved = object.unsavedChildren
                 if isShouldReturnIfChildObjectsFound && waitingToBeSaved.count > 0 {
-                    let error = ParseError(code: .unknownError,
+                    let error = ParseError(code: .otherCause,
                                            message: """
     When using transactions, all child ParseObjects have to originally
     be saved to the Parse Server. Either save all child objects first
@@ -1528,7 +1528,7 @@ extension ParseObject {
                     if waitingToBeSaved.count > 0 && savableObjects.count == 0 && savableFiles.count == 0 {
                         completion(objectsFinishedSaving,
                                    filesFinishedSaving,
-                                   ParseError(code: .unknownError,
+                                   ParseError(code: .otherCause,
                                               message: "Found a circular dependency in ParseObject."))
                         return
                     }
@@ -1550,7 +1550,7 @@ extension ParseObject {
                 }
                 completion(objectsFinishedSaving, filesFinishedSaving, nil)
             } catch {
-                let defaultError = ParseError(code: .unknownError,
+                let defaultError = ParseError(code: .otherCause,
                                               message: error.localizedDescription)
                 let parseError = error as? ParseError ?? defaultError
                 completion(objectsFinishedSaving, filesFinishedSaving, parseError)
@@ -1618,7 +1618,7 @@ extension ParseObject {
             }
          } catch {
             callbackQueue.async {
-                completion(.failure(ParseError(code: .unknownError, message: error.localizedDescription)))
+                completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
             }
          }
     }

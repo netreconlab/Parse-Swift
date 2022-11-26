@@ -60,7 +60,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
                        to value: W) throws -> Self where W: Encodable & Equatable {
         guard operations.isEmpty,
               keysToNull.isEmpty else {
-            throw ParseError(code: .unknownError,
+            throw ParseError(code: .otherCause,
                              message: """
                                 Cannot combine other operations such as: add, increment,
                                 forceSet, etc., with this method. Use the \"set\" method that takes
@@ -500,7 +500,7 @@ extension ParseOperation {
         guard target.originalData == nil else {
             guard operations.isEmpty,
                   keysToNull.isEmpty else {
-                throw ParseError(code: .unknownError,
+                throw ParseError(code: .otherCause,
                                  message: """
                                     Cannot combine operations with the \"set\" method that uses
                                     just the KeyPath with other operations such as: add, increment,
@@ -539,7 +539,7 @@ extension ParseOperation {
         guard target.originalData == nil else {
             guard operations.isEmpty,
                   keysToNull.isEmpty else {
-                let error = ParseError(code: .unknownError,
+                let error = ParseError(code: .otherCause,
                                        message: """
                                             Cannot combine operations with the \"set\" method that uses
                                             just the KeyPath with other operations such as: add, increment,
