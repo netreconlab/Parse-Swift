@@ -264,7 +264,7 @@ jobs:
         env:
           BUILD_VERSION: '4.16.2'
       - name: CocoaPods
-        run: pod lib lint --allow-warnings
+        run: pod lib lint --allow-warnings --no-clean
         env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
