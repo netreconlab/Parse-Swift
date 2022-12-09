@@ -264,9 +264,9 @@ jobs:
         env:
           BUILD_VERSION: '4.16.2'
       - name: CocoaPods
-        run: pod lib lint --allow-warnings --no-clean
+        run: pod lib lint --allow-warnings
         env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_13 }}
 
   carthage:
    timeout-minutes: 25
