@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = "ParseSwift"
-  s.version  = "[[VERSION]]"
+  s.version  = "1.0.0"
   s.summary  = "The original Parse Swift SDK"
   s.homepage = "https://github.com/netreconlab/Parse-Swift"
   s.authors = {

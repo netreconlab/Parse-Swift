@@ -2,7 +2,7 @@
 
 # Prepare podspec update
 TEMPLATE_FILE_NAME="ParseSwift.podtemplate"
-OUT_FILE_NAME="ParseSwiftOG.podspec"
+OUT_FILE_NAME="ParseSwift.podspec"
 
 # Load the template podspec and replace version
 TEMPLATE=$(cat "$TEMPLATE_FILE_NAME" | sed "s/\[\[VERSION\]\]/${BUILD_VERSION}/g")
