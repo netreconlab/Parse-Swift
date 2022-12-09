@@ -7,8 +7,8 @@
 [![Build Status CI](https://github.com/netreconlab/Parse-Swift/workflows/ci/badge.svg?branch=main)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Aci+branch%3Amain)
 [![Build Status Release](https://github.com/netreconlab/Parse-Swift/workflows/release/badge.svg)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Arelease)
 [![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/netreconlab/Parse-Swift/branches)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/403b74d0f2514e288b0a1b2e52b6d841)](https://www.codacy.com/gh/netreconlab/Parse-Swift/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=netreconlab/Parse-Swift&amp;utm_campaign=Badge_Grade)
 [![Carthage](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/carthage/carthage)
-[![Pod](https://img.shields.io/cocoapods/v/ParseSwiftOG.svg)](https://cocoapods.org/pods/ParseSwiftOG)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)][license-link]
 
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
@@ -35,6 +35,7 @@ This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2
 - [<a name="why-parse-swift"></a> Why use Parse-Swift<sup>OG</sup> from NetReconLab?](#-why-use-parse-swift-from-netreconlab)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
+  - [CocoaPods](#cocoapods)
   - [Carthage](#carthage)
 - [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Usage Guide](#usage-guide)
@@ -68,6 +69,14 @@ Then run `swift build`.
 You can also install using SPM in your Xcode project by going to 
 "Project->NameOfYourProject->Swift Packages" and placing `https://github.com/netreconlab/Parse-Swift.git` in the 
 search field.
+
+### [CocoaPods](https://cocoapods.org)
+
+Add the following line to your Podfile:
+
+```ruby
+pod 'ParseSwift', :git => 'https://github.com/netreconlab/Parse-Swift.git', :branch => 'main'
+```
 
 ### [Carthage](https://github.com/carthage/carthage)
 
