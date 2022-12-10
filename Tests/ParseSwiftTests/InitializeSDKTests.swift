@@ -9,6 +9,8 @@
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length type_body_length
+
 class InitializeSDKTests: XCTestCase {
 
     struct Installation: ParseInstallation {
@@ -575,7 +577,7 @@ class InitializeSDKTests: XCTestCase {
 
     func testDeleteObjcSDKKeychain() throws {
 
-        //Set keychain the way objc sets keychain
+        // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")
             return
@@ -592,7 +594,7 @@ class InitializeSDKTests: XCTestCase {
         let retrievedInstallationId2: String? = objcParseKeychain.objectObjectiveC(forKey: "installationId")
         XCTAssertNil(retrievedInstallationId2)
 
-        //This is needed for tear down
+        // This is needed for tear down
         guard let url = URL(string: "http://localhost:1337/1") else {
             XCTFail("Should create valid URL")
             return
@@ -606,7 +608,7 @@ class InitializeSDKTests: XCTestCase {
 
     func testMigrateObjcSDKMissingInstallation() {
 
-        //Set keychain the way objc sets keychain
+        // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")
             return

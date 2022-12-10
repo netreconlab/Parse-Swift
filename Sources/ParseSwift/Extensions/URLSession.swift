@@ -60,6 +60,7 @@ internal extension URLSession {
         return Int.random(in: 0 ..< Int(truncating: min))
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func makeResult<U>(request: URLRequest,
                        responseData: Data?,
                        urlResponse: URLResponse?,
@@ -217,7 +218,7 @@ internal extension URLSession {
 }
 
 internal extension URLSession {
-    func uploadTask<U>( // swiftlint:disable:this function_parameter_count
+    func uploadTask<U>( // swiftlint:disable:this function_body_length function_parameter_count
         notificationQueue: DispatchQueue,
         with request: URLRequest,
         from data: Data?,

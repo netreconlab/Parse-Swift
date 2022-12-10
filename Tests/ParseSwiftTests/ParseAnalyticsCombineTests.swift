@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseAnalyticsCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAnalyticsCombineTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()

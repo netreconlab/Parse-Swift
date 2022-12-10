@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class IOS13Tests: XCTestCase { // swiftlint:disable:this type_body_length
+class IOS13Tests: XCTestCase {
     struct Level: ParseObject {
         var objectId: String?
 
@@ -40,7 +40,7 @@ class IOS13Tests: XCTestCase { // swiftlint:disable:this type_body_length
         var level: Level?
         var levels: [Level]?
 
-        //custom initializers
+        // custom initializers
         init() {}
         init (objectId: String?) {
             self.objectId = objectId

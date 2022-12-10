@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class APICommandTests: XCTestCase {
 
     struct Level: ParseObject {
@@ -155,7 +157,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    //This is how errors from the server should typically come in
+    // This is how errors from the server should typically come in
     func testErrorFromParseServer() {
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
@@ -225,7 +227,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    //This is how errors HTTP errors should typically come in
+    // This is how errors HTTP errors should typically come in
     func testErrorHTTP500JSON() {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
@@ -527,17 +529,18 @@ class APICommandTests: XCTestCase {
         let splitString = clientVersion
             .components(separatedBy: ParseConstants.sdk)
         XCTAssertEqual(splitString.count, 2)
-        //If successful, will remove `swift` resulting in ""
+        // If successful, will remove `swift` resulting in ""
         XCTAssertEqual(splitString[0], "")
         XCTAssertEqual(splitString[1], ParseConstants.version)
 
-        //Test incorrect split
+        // Test incorrect split
         let splitString2 = clientVersion
             .components(separatedBy: "hello")
         XCTAssertEqual(splitString2.count, 1)
         XCTAssertEqual(splitString2[0], clientVersion)
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testClientVersionHeader() {
         let headers = API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Version"], API.clientVersion())
@@ -608,6 +611,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodency() {
         let headers = API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
@@ -678,6 +682,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodencyNoParseBody() {
         let headers = API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])

@@ -57,7 +57,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertNotNil(error) //Should always fail since WS is not intercepted.
+                    XCTAssertNotNil(error) // Should always fail since WS is not intercepted.
                 }
                 expectation1.fulfill()
 

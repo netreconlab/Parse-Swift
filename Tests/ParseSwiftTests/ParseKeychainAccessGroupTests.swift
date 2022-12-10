@@ -11,6 +11,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable unused_optional_binding function_body_length type_body_length
+
 class ParseKeychainAccessGroupTests: XCTestCase {
 
     struct User: ParseUser {
@@ -185,6 +187,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, keychainAccessGroup)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func testCanCopyEntireKeychain() throws {
         try userLogin()
         Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)
@@ -261,6 +264,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         XCTAssertEqual(acl, otherAcl)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func testRemoveOldObjectsFromKeychain() throws {
         try userLogin()
         Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)

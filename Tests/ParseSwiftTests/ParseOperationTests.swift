@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseOperationTests: XCTestCase {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -52,7 +54,7 @@ class ParseOperationTests: XCTestCase {
         init() {
         }
 
-        //custom initializers
+        // custom initializers
         init(level: Int) {
             self.level = level
             self.members = [String]()
@@ -107,7 +109,7 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSave() { // swiftlint:disable:this function_body_length
+    func testSave() {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -121,7 +123,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -169,7 +171,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPath() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPath() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -184,7 +186,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -203,7 +205,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathOtherTypeOperationsExist() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathOtherTypeOperationsExist() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -222,7 +224,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathNilOperationsExist() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathNilOperationsExist() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -256,7 +258,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -296,7 +298,7 @@ class ParseOperationTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSaveSet() throws { // swiftlint:disable:this function_body_length
+    func testSaveSet() throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -310,7 +312,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -339,7 +341,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveSetToNull() throws { // swiftlint:disable:this function_body_length
+    func testSaveSetToNull() throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -353,7 +355,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -397,7 +399,7 @@ class ParseOperationTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")

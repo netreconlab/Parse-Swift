@@ -27,7 +27,7 @@ class ParseQueryAsyncTests: XCTestCase { // swiftlint:disable:this type_body_len
         var points: Int?
         var player: String?
         init() { }
-        //custom initializers
+        // custom initializers
         init (objectId: String?) {
             self.objectId = objectId
         }

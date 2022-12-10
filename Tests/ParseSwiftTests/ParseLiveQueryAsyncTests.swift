@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseLiveQueryAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseLiveQueryAsyncTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         guard let url = URL(string: "http://localhost:1337/1") else {

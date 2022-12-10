@@ -541,6 +541,7 @@ internal extension ParseUser {
 
 // MARK: Batch Support
 internal extension Sequence where Element: ParseUser {
+    // swiftlint:disable:next function_body_length
     func batchCommand(method: Method,
                       batchLimit limit: Int?,
                       transaction: Bool,

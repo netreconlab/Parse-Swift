@@ -366,6 +366,7 @@ internal extension ParseInstallation {
 
 // MARK: Batch Support
 internal extension Sequence where Element: ParseInstallation {
+    // swiftlint:disable:next function_body_length
     func batchCommand(method: Method,
                       batchLimit limit: Int?,
                       transaction: Bool,

@@ -39,7 +39,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         var level: Level?
         var levels: [Level]?
 
-        //custom initializers
+        // custom initializers
         init() {}
         init (objectId: String?) {
             self.objectId = objectId
@@ -553,7 +553,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
     }
 
-    func testSave() { // swiftlint:disable:this function_body_length
+    func testSave() {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
 
@@ -563,7 +563,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -586,7 +586,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try score.save())
     }
 
-    func testSaveNoObjectIdIgnoreConfig() { // swiftlint:disable:this function_body_length
+    func testSaveNoObjectIdIgnoreConfig() {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -596,7 +596,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -627,7 +627,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -664,7 +664,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -682,7 +682,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func saveAsync(score: GameScore,
                    scoreOnServer: GameScore,
                    callbackQueue: DispatchQueue,
@@ -732,7 +731,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -772,7 +771,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -840,7 +839,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -880,7 +879,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -895,7 +894,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                          callbackQueue: .main)
     }
 
-    func testSaveAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAll() {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         var score2 = GameScore(points: 20)
@@ -914,7 +913,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
            encoded = try scoreOnServer.getJSONEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -960,7 +959,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try [score, score2].saveAll())
     }
 
-    func testSaveAllNoObjectIdIgnoreConfig() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAllNoObjectIdIgnoreConfig() {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -979,7 +978,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
            encoded = try scoreOnServer.getJSONEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -1035,7 +1034,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testUpdateAll() {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.createdAt = Date()
@@ -1056,7 +1055,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
            encoded = try scoreOnServer.getJSONEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -1122,7 +1121,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserSave() { // swiftlint:disable:this function_body_length
+    func testUserSave() {
         var user = User()
         user.objectId = "yarr"
         user.ACL = nil
@@ -1133,7 +1132,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1156,7 +1155,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try score.save())
     }
 
-    func testUserSaveNoObjectIdIgnoreConfig() { // swiftlint:disable:this function_body_length
+    func testUserSaveNoObjectIdIgnoreConfig() {
         var user = User()
         user.ACL = nil
 
@@ -1167,7 +1166,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1198,7 +1197,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1235,7 +1234,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1253,7 +1252,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func saveUserAsync(user: User, userOnServer: User,
                        ignoringCustomObjectIdConfig: Bool = false,
                        callbackQueue: DispatchQueue) {
@@ -1286,7 +1284,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1324,7 +1322,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1371,7 +1369,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1400,7 +1398,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserSaveAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testUserSaveAll() {
         var user = User()
         user.objectId = "yarr"
 
@@ -1420,7 +1418,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try userOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(userOnServer)
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(userOnServer2)
@@ -1482,7 +1480,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserUpdateAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testUserUpdateAll() {
         var user = User()
         user.objectId = "yarr"
         user.createdAt = Date()
@@ -1503,7 +1501,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try userOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(userOnServer)
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(userOnServer2)
@@ -1551,7 +1549,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try [user, user2].saveAll())
     }
 
-    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testUserUpdateAllNoObjectIdIgnoreConfig() {
         var user = User()
         user.createdAt = Date()
@@ -1573,7 +1570,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try userOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(userOnServer)
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(userOnServer2)
@@ -1631,7 +1628,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationSave() { // swiftlint:disable:this function_body_length
+    func testInstallationSave() {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.ACL = nil
@@ -1642,7 +1639,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1665,7 +1662,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try score.save())
     }
 
-    func testInstallationSaveNoObjectIdIgnoreConfig() { // swiftlint:disable:this function_body_length
+    func testInstallationSaveNoObjectIdIgnoreConfig() {
         var installation = Installation()
         installation.ACL = nil
 
@@ -1676,7 +1673,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1707,7 +1704,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1744,7 +1741,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1762,7 +1759,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func saveInstallationAsync(installation: Installation,
                                installationOnServer: Installation,
                                ignoringCustomObjectIdConfig: Bool = false,
@@ -1811,7 +1807,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1852,7 +1848,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1902,7 +1898,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1945,7 +1941,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -1960,7 +1956,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                                      callbackQueue: .main)
     }
 
-    func testInstallationSaveAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testInstallationSaveAll() { // swiftlint:disable:this function_body_length
         var installation = Installation()
         installation.objectId = "yarr"
 
@@ -1980,7 +1976,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try installationOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installationOnServer)
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(installationOnServer2)
@@ -2034,7 +2030,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try [installation, installation2].saveAll())
     }
 
-    func testInstallationSaveAllIgnoreConfig() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testInstallationSaveAllIgnoreConfig() { // swiftlint:disable:this function_body_length
         let installation = Installation()
 
         let installation2 = Installation()
@@ -2054,7 +2050,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try installationOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installationOnServer)
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(installationOnServer2)
@@ -2118,7 +2114,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationUpdateAll() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testInstallationUpdateAll() {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.createdAt = Date()
@@ -2139,7 +2135,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try installationOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installationOnServer)
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(installationOnServer2)
@@ -2187,7 +2183,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertThrowsError(try [installation, installation2].saveAll())
     }
 
-    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testInstallationUpdateAllNoObjectIdIgnoreConfig() {
         var installation = Installation()
         installation.createdAt = Date()
@@ -2209,7 +2204,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try installationOnServer.getJSONEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installationOnServer)
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded1)
             let encoded2 = try ParseCoding.jsonEncoder().encode(installationOnServer2)
@@ -2267,7 +2262,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
     func testFetch() {
         var score = GameScore(points: 10)
         let objectId = "yarr"
@@ -2280,7 +2274,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -2311,7 +2305,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testFetchUser() { // swiftlint:disable:this function_body_length
+    func testFetchUser() {
         var user = User()
         let objectId = "yarr"
         user.objectId = objectId
@@ -2323,7 +2317,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

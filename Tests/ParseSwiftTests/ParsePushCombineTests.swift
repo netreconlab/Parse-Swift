@@ -13,6 +13,8 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParsePushCombineTests: XCTestCase {
     struct Installation: ParseInstallation {
         var installationId: String?

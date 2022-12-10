@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseOperationCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseOperationCombineTests: XCTestCase {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -27,7 +27,7 @@ class ParseOperationCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         var points: Int?
         var player: String?
 
-        //custom initializers
+        // custom initializers
         init() {}
         init (objectId: String?) {
             self.objectId = objectId
@@ -81,7 +81,7 @@ class ParseOperationCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

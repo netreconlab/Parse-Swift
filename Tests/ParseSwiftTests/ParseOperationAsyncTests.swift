@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseOperationAsyncTests: XCTestCase {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -28,7 +28,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         var player: String?
 
         init() { }
-        //custom initializers
+        // custom initializers
         init (objectId: String?) {
             self.objectId = objectId
         }
@@ -80,7 +80,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -159,7 +159,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     @MainActor
-    func testSaveKeyPath() async throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPath() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -174,7 +174,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -194,7 +194,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     @MainActor
-    func testSaveKeyPathOtherTypeOperationsExist() async throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathOtherTypeOperationsExist() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -214,7 +214,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     @MainActor
-    func testSaveKeyPathNilOperationsExist() async throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathNilOperationsExist() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation

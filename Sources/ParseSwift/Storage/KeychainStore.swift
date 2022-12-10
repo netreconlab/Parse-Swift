@@ -13,6 +13,8 @@ import Security
 
 #if !os(Linux) && !os(Android) && !os(Windows)
 
+// swiftlint:disable type_body_length
+
 /**
  KeychainStore is UserDefaults-like wrapper on top of Keychain.
  It supports any object, with Coding support. All objects are available after the

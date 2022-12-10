@@ -8,6 +8,8 @@
 
 import Foundation
 
+// swiftlint:disable type_body_length
+
 // MARK: Query
 /**
   The `Query` class defines a query that is used to query for `ParseObject`s.
@@ -126,6 +128,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
         case pipeline
     }
 
+    // swiftlint:disable:next function_body_length
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         `where` = try values.decode(QueryWhere.self, forKey: .`where`)
@@ -623,7 +626,7 @@ extension Query: Queryable {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
-    public func findAll(batchLimit limit: Int? = nil,
+    public func findAll(batchLimit limit: Int? = nil, // swiftlint:disable:this function_body_length
                         options: API.Options = [],
                         callbackQueue: DispatchQueue = .main,
                         completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
@@ -1237,7 +1240,7 @@ extension Query: Queryable {
         `usingMongoDB` flag needs to be set for MongoDB users. See more
         [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func aggregateExplain<U: Decodable>(_ pipeline: [[String: Encodable]],
+    public func aggregateExplain<U: Decodable>(_ pipeline: [[String: Encodable]], // swiftlint:disable:this function_body_length line_length
                                                usingMongoDB: Bool = false,
                                                options: API.Options = [],
                                                callbackQueue: DispatchQueue = .main,

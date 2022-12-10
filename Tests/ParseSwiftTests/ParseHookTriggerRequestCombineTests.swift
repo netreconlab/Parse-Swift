@@ -79,7 +79,7 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
         userOnServer.updatedAt = Date()
         var server = userOnServer
         let encoded = try ParseCoding.jsonEncoder().encode(server)
-        //Get dates in correct format from ParseDecoding strategy
+        // Get dates in correct format from ParseDecoding strategy
         server = try ParseCoding.jsonDecoder().decode(User.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)

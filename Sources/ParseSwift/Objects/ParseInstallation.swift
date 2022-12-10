@@ -95,6 +95,7 @@ public extension ParseInstallation {
         "_Installation"
     }
 
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func mergeParse(with object: Self) throws -> Self {
         guard hasSameObjectId(as: object) else {
             throw ParseError(code: .otherCause,
@@ -1193,7 +1194,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func saveAll( // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func saveAll(
         batchLimit limit: Int? = nil,
         transaction: Bool = configuration.isUsingTransactions,
         ignoringCustomObjectIdConfig: Bool = false,
@@ -1251,7 +1252,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func createAll( // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func createAll(
         batchLimit limit: Int? = nil,
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
@@ -1307,7 +1308,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func replaceAll( // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func replaceAll(
         batchLimit limit: Int? = nil,
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
@@ -1363,7 +1364,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    internal func updateAll( // swiftlint:disable:this function_body_length cyclomatic_complexity
+    internal func updateAll(
         batchLimit limit: Int? = nil,
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
@@ -1401,6 +1402,7 @@ public extension Sequence where Element: ParseInstallation {
         #endif
     }
 
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     internal func batchCommand( // swiftlint:disable:this function_parameter_count
         method: Method,
         batchLimit limit: Int?,

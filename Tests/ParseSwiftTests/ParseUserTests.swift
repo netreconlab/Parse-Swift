@@ -294,7 +294,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -363,7 +363,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -391,11 +391,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(fetched.ACL)
             XCTAssertEqual(fetched.customKey, userOnServer.customKey)
 
-            //Should be updated in memory
+            // Should be updated in memory
             XCTAssertEqual(User.current?.updatedAt, fetchedUpdatedAt)
             XCTAssertEqual(User.current?.customKey, userOnServer.customKey)
 
-            //Should be updated in Keychain
+            // Should be updated in Keychain
             #if !os(Linux) && !os(Android) && !os(Windows)
             guard let keychainUser: CurrentUserContainer<BaseParseUser>
                 = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
@@ -429,7 +429,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -462,11 +462,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTAssertNil(fetched.ACL)
                 XCTAssertEqual(User.current?.customKey, userOnServer.customKey)
 
-                //Should be updated in memory
+                // Should be updated in memory
                 XCTAssertEqual(User.current?.updatedAt, fetchedUpdatedAt)
 
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                //Should be updated in Keychain
+                // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                         XCTFail("Should get object from Keychain")
@@ -557,7 +557,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -753,7 +753,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     #endif
 
-    func testSaveAndUpdateCurrentUser() throws { // swiftlint:disable:this function_body_length
+    func testSaveAndUpdateCurrentUser() throws {
         XCTAssertNil(User.current?.objectId)
         try userSignUp()
         XCTAssertNotNil(User.current?.objectId)
@@ -770,7 +770,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -793,12 +793,12 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertEqual(savedUpdatedAt, userOnServer.updatedAt)
             XCTAssertNil(saved.ACL)
 
-            //Should be updated in memory
+            // Should be updated in memory
             XCTAssertEqual(User.current?.updatedAt, savedUpdatedAt)
             XCTAssertEqual(User.current?.email, user.email)
 
             #if !os(Linux) && !os(Android) && !os(Windows)
-            //Should be updated in Keychain
+            // Should be updated in Keychain
             guard let keychainUser: CurrentUserContainer<BaseParseUser>
                 = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                     XCTFail("Should get object from Keychain")
@@ -813,7 +813,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveAndUpdateCurrentUserModifiedEmail() throws { // swiftlint:disable:this function_body_length
+    func testSaveAndUpdateCurrentUserModifiedEmail() throws {
         XCTAssertNil(User.current?.objectId)
         try userSignUp()
         XCTAssertNotNil(User.current?.objectId)
@@ -831,7 +831,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -854,12 +854,12 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertEqual(savedUpdatedAt, userOnServer.updatedAt)
             XCTAssertNil(saved.ACL)
 
-            //Should be updated in memory
+            // Should be updated in memory
             XCTAssertEqual(User.current?.updatedAt, savedUpdatedAt)
             XCTAssertEqual(User.current?.email, user.email)
 
             #if !os(Linux) && !os(Android) && !os(Windows)
-            //Should be updated in Keychain
+            // Should be updated in Keychain
             guard let keychainUser: CurrentUserContainer<BaseParseUser>
                 = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                     XCTFail("Should get object from Keychain")
@@ -874,6 +874,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testSaveMutableMergeCurrentUser() throws {
         // Signup current User
         XCTAssertNil(User.current?.objectId)
@@ -891,7 +892,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try response.getEncoder().encode(response, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             response = try response.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -957,7 +958,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -984,12 +985,12 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTAssertEqual(savedUpdatedAt, userOnServer.updatedAt)
                 XCTAssertNil(saved.ACL)
 
-                //Should be updated in memory
+                // Should be updated in memory
                 XCTAssertEqual(User.current?.updatedAt, savedUpdatedAt)
                 XCTAssertEqual(User.current?.email, user.email)
 
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                //Should be updated in Keychain
+                // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                         XCTFail("Should get object from Keychain")
@@ -1025,7 +1026,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1052,12 +1053,12 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTAssertEqual(savedUpdatedAt, userOnServer.updatedAt)
                 XCTAssertNil(saved.ACL)
 
-                //Should be updated in memory
+                // Should be updated in memory
                 XCTAssertEqual(User.current?.updatedAt, savedUpdatedAt)
                 XCTAssertEqual(User.current?.email, user.email)
 
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                //Should be updated in Keychain
+                // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                         XCTFail("Should get object from Keychain")
@@ -1075,7 +1076,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdate() { // swiftlint:disable:this function_body_length
+    func testUpdate() {
         var user = User()
         let objectId = "yarr"
         user.objectId = objectId
@@ -1088,7 +1089,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1130,7 +1131,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveWithDefaultACL() throws { // swiftlint:disable:this function_body_length
+    func testSaveWithDefaultACL() throws {
         try userSignUp()
         guard let userObjectId = User.current?.objectId else {
             XCTFail("Should have objectId")
@@ -1147,7 +1148,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1181,7 +1182,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testUpdateWithDefaultACL() throws { // swiftlint:disable:this function_body_length
+    func testUpdateWithDefaultACL() throws {
         try userSignUp()
         _ = try ParseACL.setDefaultACL(ParseACL(),
                                                     withAccessForCurrentUser: true)
@@ -1197,7 +1198,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1292,7 +1293,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -1319,7 +1320,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -2123,7 +2124,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try userOnServer.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -2161,7 +2162,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(user)
             user = try user.getDecoder().decode(User.self, from: encoded1)
         } catch {
@@ -2194,7 +2195,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
                     XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                    //Should be updated in memory
+                    // Should be updated in memory
                     guard let updatedCurrentDate = User.current?.updatedAt else {
                         XCTFail("Should unwrap current date")
                         return
@@ -2202,7 +2203,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
                     #if !os(Linux) && !os(Android) && !os(Windows)
-                    //Should be updated in Keychain
+                    // Should be updated in Keychain
                     guard let keychainUser: CurrentUserContainer<BaseParseUser>
                         = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                         let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2239,7 +2240,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(user)
             user = try user.getDecoder().decode(User.self, from: encoded1)
         } catch {
@@ -2277,7 +2278,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
                         XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                        //Should be updated in memory
+                        // Should be updated in memory
                         guard let updatedCurrentDate = User.current?.updatedAt else {
                             XCTFail("Should unwrap current date")
                             expectation1.fulfill()
@@ -2286,7 +2287,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
                         #if !os(Linux) && !os(Android) && !os(Windows)
-                        //Should be updated in Keychain
+                        // Should be updated in Keychain
                         guard let keychainUser: CurrentUserContainer<BaseParseUser>
                             = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                             let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2309,7 +2310,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2329,7 +2330,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(user)
             user = try user.getDecoder().decode(User.self, from: encoded1)
         } catch {
@@ -2357,7 +2358,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                     XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                    //Should be updated in memory
+                    // Should be updated in memory
                     guard let updatedCurrentDate = User.current?.updatedAt else {
                         XCTFail("Should unwrap current date")
                         return
@@ -2365,7 +2366,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                     #if !os(Linux) && !os(Android) && !os(Windows)
-                    //Should be updated in Keychain
+                    // Should be updated in Keychain
                     guard let keychainUser: CurrentUserContainer<BaseParseUser>
                         = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                         let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2399,7 +2400,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                     XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                    //Should be updated in memory
+                    // Should be updated in memory
                     guard let updatedCurrentDate = User.current?.updatedAt else {
                         XCTFail("Should unwrap current date")
                         return
@@ -2407,7 +2408,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                     XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                     #if !os(Linux) && !os(Android) && !os(Windows)
-                    //Should be updated in Keychain
+                    // Should be updated in Keychain
                     guard let keychainUser: CurrentUserContainer<BaseParseUser>
                         = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                         let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2425,7 +2426,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllAsyncMainQueueCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2450,7 +2451,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(user)
             user = try user.getDecoder().decode(User.self, from: encoded1)
         } catch {
@@ -2484,7 +2485,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                         XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                        //Should be updated in memory
+                        // Should be updated in memory
                         guard let updatedCurrentDate = User.current?.updatedAt else {
                             XCTFail("Should unwrap current date")
                             expectation1.fulfill()
@@ -2493,7 +2494,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                         #if !os(Linux) && !os(Android) && !os(Windows)
-                        //Should be updated in Keychain
+                        // Should be updated in Keychain
                         guard let keychainUser: CurrentUserContainer<BaseParseUser>
                             = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                             let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2535,7 +2536,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                         XCTAssertEqual(User.current?.customKey, user.customKey)
 
-                        //Should be updated in memory
+                        // Should be updated in memory
                         guard let updatedCurrentDate = User.current?.updatedAt else {
                             XCTFail("Should unwrap current date")
                             expectation2.fulfill()
@@ -2544,7 +2545,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                         #if !os(Linux) && !os(Android) && !os(Windows)
-                        //Should be updated in Keychain
+                        // Should be updated in Keychain
                         guard let keychainUser: CurrentUserContainer<BaseParseUser>
                             = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                             let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
@@ -2612,6 +2613,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testDeleteAllAsyncMainQueueCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2691,7 +2693,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testBecome() { // swiftlint:disable:this function_body_length
+    func testBecome() {
         testLogin()
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
@@ -2711,7 +2713,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -2735,10 +2737,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertGreaterThan(becomeUpdatedAt, originalUpdatedAt)
             XCTAssertNil(become.ACL)
 
-            //Should be updated in memory
+            // Should be updated in memory
             XCTAssertEqual(User.current?.updatedAt, becomeUpdatedAt)
 
-            //Should be updated in Keychain
+            // Should be updated in Keychain
             #if !os(Linux) && !os(Android) && !os(Windows)
             guard let keychainUser: CurrentUserContainer<BaseParseUser>
                 = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
@@ -2775,7 +2777,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -2804,11 +2806,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTAssertGreaterThan(becomeUpdatedAt, originalUpdatedAt)
                 XCTAssertNil(become.ACL)
 
-                //Should be updated in memory
+                // Should be updated in memory
                 XCTAssertEqual(User.current?.updatedAt, becomeUpdatedAt)
 
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                //Should be updated in Keychain
+                // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                         XCTFail("Should get object from Keychain")

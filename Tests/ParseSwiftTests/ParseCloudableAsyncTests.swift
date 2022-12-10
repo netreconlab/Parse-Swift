@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseCloudableAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseCloudableAsyncTests: XCTestCase {
     struct Cloud: ParseCloudable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
 

@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseAnonymousTests: XCTestCase {
 
     struct User: ParseUser {
@@ -138,7 +140,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -172,7 +174,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -206,7 +208,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -251,7 +253,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -295,7 +297,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             response = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -342,7 +344,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             response = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -387,7 +389,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             response = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -425,7 +427,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(response)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             response = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -508,7 +510,7 @@ class ParseAnonymousTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -538,12 +540,12 @@ class ParseAnonymousTests: XCTestCase {
                 XCTAssertGreaterThan(becomeUpdatedAt, originalUpdatedAt)
                 XCTAssertNil(become.ACL)
 
-                //Should be updated in memory
+                // Should be updated in memory
                 XCTAssertEqual(User.current?.updatedAt, becomeUpdatedAt)
                 XCTAssertFalse(User.anonymous.isLinked)
 
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                //Should be updated in Keychain
+                // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
                         XCTFail("Should get object from Keychain")

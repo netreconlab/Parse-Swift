@@ -13,6 +13,7 @@ import FoundationNetworking
 
 internal extension API {
     // MARK: API.Command
+    // swiftlint:disable:next type_body_length
     struct Command<T, U>: Encodable where T: ParseEncodable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
@@ -249,7 +250,7 @@ internal extension API {
                             }
                         }
                     } else if let otherURL = self.otherURL {
-                        //Non-parse servers do not receive any parse dedicated request info
+                        // Non-parse servers do not receive any parse dedicated request info
                         var request = URLRequest(url: otherURL)
                         request.cachePolicy = requestCachePolicy(options: options)
                         URLSession.parse.downloadTask(with: request, mapper: mapper) { result in

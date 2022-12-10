@@ -23,7 +23,7 @@ jobs:
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(iOS\) -destination platform\=iOS\ Simulator,name\=iPhone\ 12\ Pro\ Max -derivedDataPath DerivedData -test-iterations 10 -retry-tests-on-failure clean test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(iOS\) -destination platform\=iOS\ Simulator,name\=iPhone\ 12\ Pro\ Max -derivedDataPath DerivedData clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -57,7 +57,7 @@ jobs:
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(macOS\) -destination platform\=macOS -derivedDataPath DerivedData -test-iterations 10 -retry-tests-on-failure clean test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(macOS\) -destination platform\=macOS -derivedDataPath DerivedData clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -84,8 +84,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
-    - name: Build
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(tvOS\) -destination platform\=tvOS\ Simulator,name\=Apple\ TV -derivedDataPath DerivedData -test-iterations 10 -retry-tests-on-failure clean test | xcpretty
+    - name: Build-Test
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(tvOS\) -destination platform\=tvOS\ Simulator,name\=Apple\ TV -derivedDataPath DerivedData clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -136,7 +136,7 @@ jobs:
         security set-keychain-settings -lut 7200 temporary
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
-    - name: Build and Test
+    - name: Build-Test
       run: swift test --enable-code-coverage -v
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
@@ -157,14 +157,14 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-ios-5_4:
+  xcode-test-tvos-5_4:
     timeout-minutes: 15
     needs: xcode-build-watchos
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v3
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(iOS\) -destination platform\=iOS\ Simulator,name\=iPhone\ 11 -derivedDataPath DerivedData clean test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(tvOS\) -destination platform\=tvOS\ Simulator,name\=Apple\ TV -derivedDataPath DerivedData clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov

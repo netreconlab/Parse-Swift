@@ -17,7 +17,7 @@ import XCTest
 import Combine
 #endif
 
-class ParseAuthenticationAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAuthenticationAsyncTests: XCTestCase {
     struct User: ParseUser {
 
         //: These are required by ParseObject
@@ -160,7 +160,7 @@ class ParseAuthenticationAsyncTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -207,7 +207,7 @@ class ParseAuthenticationAsyncTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

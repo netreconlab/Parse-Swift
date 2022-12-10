@@ -92,7 +92,7 @@ public var configuration: ParseConfiguration {
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
-public func initialize(configuration: ParseConfiguration) {
+public func initialize(configuration: ParseConfiguration) { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)

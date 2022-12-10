@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseCloudableCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseCloudableCombineTests: XCTestCase {
 
     struct Cloud: ParseCloudable {
         typealias ReturnType = String? // swiftlint:disable:this nesting

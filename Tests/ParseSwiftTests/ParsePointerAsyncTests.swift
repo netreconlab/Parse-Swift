@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParsePointerAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParsePointerAsyncTests: XCTestCase {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -73,7 +73,7 @@ class ParsePointerAsyncTests: XCTestCase { // swiftlint:disable:this type_body_l
         let encoded: Data!
         do {
             encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

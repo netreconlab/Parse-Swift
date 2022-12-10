@@ -1,6 +1,8 @@
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class AnyCodableTests: XCTestCase {
 
     struct SomeCodable: Codable {
@@ -55,7 +57,7 @@ class AnyCodableTests: XCTestCase {
         }
     }
 
-    //Test has objective-c
+    // Test has objective-c
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testJSONEncoding() {
 

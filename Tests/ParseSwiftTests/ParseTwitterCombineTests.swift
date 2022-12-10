@@ -105,7 +105,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -157,7 +157,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -225,7 +225,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -277,7 +277,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -341,7 +341,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

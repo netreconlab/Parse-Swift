@@ -2873,7 +2873,6 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func testWhereKeyNearGeoBox() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$within": ["$box": [
@@ -2930,7 +2929,6 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    // swiftlint:disable:next function_body_length
     func testWhereKeyWithinPolygonPoints() throws {
         // swiftlint:disable:next line_length
         let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":[{\"__type\":\"GeoPoint\",\"latitude\":10.1,\"longitude\":20.100000000000001},{\"__type\":\"GeoPoint\",\"latitude\":20.100000000000001,\"longitude\":30.100000000000001},{\"__type\":\"GeoPoint\",\"latitude\":30.100000000000001,\"longitude\":40.100000000000001}]}}}"
@@ -2943,7 +2941,6 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(query.where.description, expected)
     }
 
-    // swiftlint:disable:next function_body_length
     func testWhereKeyWithinPolygon() throws {
         // swiftlint:disable:next line_length
         let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":{\"__type\":\"Polygon\",\"coordinates\":[[20.100000000000001,10.1],[30.100000000000001,20.100000000000001],[40.100000000000001,30.100000000000001]]}}}}"

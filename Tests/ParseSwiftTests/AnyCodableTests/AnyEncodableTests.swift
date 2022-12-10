@@ -1,6 +1,8 @@
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 // Test has objective-c
 #if !os(Linux) && !os(Android) && !os(Windows)
 class AnyEncodableTests: XCTestCase {

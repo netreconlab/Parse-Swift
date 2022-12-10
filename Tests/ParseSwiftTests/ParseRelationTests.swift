@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length type_body_length
+
 class ParseRelationTests: XCTestCase {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -24,7 +26,7 @@ class ParseRelationTests: XCTestCase {
         var members = [String]()
         var levels: ParseRelation<Self>?
 
-        //custom initializers
+        // custom initializers
         init() {
             self.points = 5
         }
@@ -46,7 +48,7 @@ class ParseRelationTests: XCTestCase {
         var members = [String]()
         var levels: ParseRelation<Self>?
 
-        //custom initializers
+        // custom initializers
         init() {
             self.points = 5
         }
@@ -67,7 +69,7 @@ class ParseRelationTests: XCTestCase {
         var level: Int
         var members = [String]()
 
-        //custom initializers
+        // custom initializers
         init() {
             self.level = 5
         }

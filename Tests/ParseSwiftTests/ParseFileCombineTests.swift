@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseFileCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseFileCombineTests: XCTestCase {
 
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 

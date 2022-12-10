@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseLDAPTests: XCTestCase {
     struct User: ParseUser {
 
@@ -131,7 +133,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -153,7 +155,7 @@ class ParseLDAPTests: XCTestCase {
                 XCTAssertEqual(user.password, "world")
                 XCTAssertTrue(user.ldap.isLinked)
 
-                //Test stripping
+                // Test stripping
                 user.ldap.strip()
                 XCTAssertFalse(user.ldap.isLinked)
             case .failure(let error):
@@ -200,7 +202,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -240,7 +242,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -281,7 +283,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -324,7 +326,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -368,7 +370,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -435,7 +437,7 @@ class ParseLDAPTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

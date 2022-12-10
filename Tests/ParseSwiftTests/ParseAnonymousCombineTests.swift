@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseAnonymousCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAnonymousCombineTests: XCTestCase {
 
     struct User: ParseUser {
 
@@ -104,7 +104,7 @@ class ParseAnonymousCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -154,7 +154,7 @@ class ParseAnonymousCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         let encoded: Data!
         do {
             encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

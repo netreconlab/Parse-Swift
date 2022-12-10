@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigAsyncTests: XCTestCase {
     struct Config: ParseConfig {
         var welcomeMessage: String?
         var winningNumber: Int?
@@ -141,7 +141,7 @@ class ParseConfigAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(Config.current?.welcomeMessage, configOnServer.welcomeMessage)
 
         #if !os(Linux) && !os(Android) && !os(Windows)
-        //Should be updated in Keychain
+        // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
             = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
@@ -176,7 +176,7 @@ class ParseConfigAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)
 
         #if !os(Linux) && !os(Android) && !os(Windows)
-        //Should be updated in Keychain
+        // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
             = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
