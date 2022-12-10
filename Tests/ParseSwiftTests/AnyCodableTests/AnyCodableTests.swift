@@ -1,6 +1,8 @@
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class AnyCodableTests: XCTestCase {
 
     struct SomeCodable: Codable {
