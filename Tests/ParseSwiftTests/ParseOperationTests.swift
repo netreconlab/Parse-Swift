@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseOperationTests: XCTestCase {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -107,7 +109,7 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSave() { // swiftlint:disable:this function_body_length
+    func testSave() {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -169,7 +171,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPath() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPath() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -203,7 +205,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathOtherTypeOperationsExist() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathOtherTypeOperationsExist() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -222,7 +224,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathNilOperationsExist() throws { // swiftlint:disable:this function_body_length
+    func testSaveKeyPathNilOperationsExist() throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -296,7 +298,7 @@ class ParseOperationTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSaveSet() throws { // swiftlint:disable:this function_body_length
+    func testSaveSet() throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -339,7 +341,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveSetToNull() throws { // swiftlint:disable:this function_body_length
+    func testSaveSetToNull() throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"

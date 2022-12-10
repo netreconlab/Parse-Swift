@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseAnonymousCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAnonymousCombineTests: XCTestCase {
 
     struct User: ParseUser {
 

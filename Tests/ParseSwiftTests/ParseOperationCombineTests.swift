@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseOperationCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseOperationCombineTests: XCTestCase {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject

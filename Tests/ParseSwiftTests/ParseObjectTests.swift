@@ -1003,7 +1003,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(command.body)
     }
 
-    func testSave() { // swiftlint:disable:this function_body_length
+    func testSave() {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -1054,7 +1054,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveWithDefaultACL() throws { // swiftlint:disable:this function_body_length
+    func testSaveWithDefaultACL() throws {
         let user = try loginNormally()
         guard let userObjectId = user.objectId else {
             XCTFail("Should have objectId")
@@ -1199,7 +1199,6 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func saveAsync(score: GameScore, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
 
         let expectation1 = XCTestExpectation(description: "Save object1")

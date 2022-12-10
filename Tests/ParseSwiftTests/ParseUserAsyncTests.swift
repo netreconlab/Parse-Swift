@@ -14,6 +14,8 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {

@@ -151,6 +151,7 @@ internal extension API.NonParseBodyCommand {
 
 internal extension API.NonParseBodyCommand {
     // MARK: Batch - Child Objects
+    // swiftlint:disable:next function_body_length
     static func batch(objects: [ParseEncodable],
                       transaction: Bool,
                       objectsSavedBeforeThisOne: [String: PointerType]?,

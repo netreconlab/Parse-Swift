@@ -17,7 +17,7 @@ import XCTest
 import Combine
 #endif
 
-class ParseAuthenticationAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAuthenticationAsyncTests: XCTestCase {
     struct User: ParseUser {
 
         //: These are required by ParseObject

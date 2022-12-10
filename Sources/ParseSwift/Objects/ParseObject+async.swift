@@ -398,6 +398,7 @@ or disable transactions for this call.
 
 // MARK: Batch Support
 internal extension Sequence where Element: ParseObject {
+    // swiftlint:disable:next function_body_length
     func batchCommand(method: Method,
                       batchLimit limit: Int?,
                       transaction: Bool,

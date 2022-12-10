@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable line_length
+// swiftlint:disable line_length function_body_length
 
 class ParsePushPayloadAnyTests: XCTestCase {
 

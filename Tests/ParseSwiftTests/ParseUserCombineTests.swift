@@ -13,6 +13,8 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {

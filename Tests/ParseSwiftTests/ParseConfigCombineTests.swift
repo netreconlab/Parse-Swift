@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseConfigCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigCombineTests: XCTestCase {
 
     struct Config: ParseConfig {
         var welcomeMessage: String?

@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseSpotifyAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseSpotifyAsyncTests: XCTestCase {
     struct User: ParseUser {
 
         //: These are required by ParseObject

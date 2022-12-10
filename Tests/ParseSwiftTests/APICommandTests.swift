@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class APICommandTests: XCTestCase {
 
     struct Level: ParseObject {
@@ -538,6 +540,7 @@ class APICommandTests: XCTestCase {
         XCTAssertEqual(splitString2[0], clientVersion)
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testClientVersionHeader() {
         let headers = API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Version"], API.clientVersion())
@@ -608,6 +611,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodency() {
         let headers = API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
@@ -678,6 +682,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodencyNoParseBody() {
         let headers = API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])

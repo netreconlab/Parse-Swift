@@ -13,6 +13,8 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseInstagramTests: XCTestCase {
     struct User: ParseUser {
 

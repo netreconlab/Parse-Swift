@@ -9,6 +9,8 @@
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length type_body_length
+
 class InitializeSDKTests: XCTestCase {
 
     struct Installation: ParseInstallation {

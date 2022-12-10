@@ -13,6 +13,8 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
@@ -314,6 +316,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func testFetchAll() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")

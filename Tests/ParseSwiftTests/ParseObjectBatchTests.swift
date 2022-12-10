@@ -245,7 +245,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    func testSaveAllWithPointer() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAllWithPointer() {
         var score = GameScore(points: 10)
         score.other = Game2()
 
@@ -303,7 +303,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    func testSaveAllWithPointerArray() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAllWithPointerArray() {
         var score = GameScore(points: 10)
         score.otherArray = [Game2()]
 
@@ -361,7 +361,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    func testSaveAllTransaction() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAllTransaction() { // swiftlint:disable:this function_body_length
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -956,7 +956,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func saveAllAsyncPointer(scores: [GameScore], // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func saveAllAsyncPointer(scores: [GameScore], // swiftlint:disable:this function_body_length
                              transaction: Bool = false,
                              scoresOnServer: [GameScore], callbackQueue: DispatchQueue) {
 
@@ -1172,7 +1172,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
                                  callbackQueue: .main)
     }
 
-    func testSaveAllAsyncTransaction() { // swiftlint:disable:this function_body_length cyclomatic_complexity
+    func testSaveAllAsyncTransaction() {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -1724,6 +1724,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
                           callbackQueue: .main)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func testDeleteAll() {
         let response = [BatchResponseItem<NoBody>(success: NoBody(), error: nil),
                         BatchResponseItem<NoBody>(success: NoBody(), error: nil)]
@@ -1791,6 +1792,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func testDeleteAllTransaction() {
         let response = [BatchResponseItem<NoBody>(success: NoBody(), error: nil),
                         BatchResponseItem<NoBody>(success: NoBody(), error: nil)]
@@ -1922,6 +1924,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
     #endif
 
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func deleteAllAsync(transaction: Bool = false, callbackQueue: DispatchQueue) {
 
         let expectation1 = XCTestExpectation(description: "Delete object1")

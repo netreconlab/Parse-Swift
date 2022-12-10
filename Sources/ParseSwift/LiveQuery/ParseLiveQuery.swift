@@ -348,6 +348,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
         }
     }
 
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func received(_ data: Data) {
         synchronizationQueue.sync {
             if let redirect = try? ParseCoding.jsonDecoder().decode(RedirectResponse.self, from: data) {

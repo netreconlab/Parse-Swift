@@ -753,7 +753,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     #endif
 
-    func testSaveAndUpdateCurrentUser() throws { // swiftlint:disable:this function_body_length
+    func testSaveAndUpdateCurrentUser() throws {
         XCTAssertNil(User.current?.objectId)
         try userSignUp()
         XCTAssertNotNil(User.current?.objectId)
@@ -813,7 +813,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveAndUpdateCurrentUserModifiedEmail() throws { // swiftlint:disable:this function_body_length
+    func testSaveAndUpdateCurrentUserModifiedEmail() throws {
         XCTAssertNil(User.current?.objectId)
         try userSignUp()
         XCTAssertNotNil(User.current?.objectId)
@@ -874,6 +874,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testSaveMutableMergeCurrentUser() throws {
         // Signup current User
         XCTAssertNil(User.current?.objectId)
@@ -1075,7 +1076,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdate() { // swiftlint:disable:this function_body_length
+    func testUpdate() {
         var user = User()
         let objectId = "yarr"
         user.objectId = objectId
@@ -1130,7 +1131,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveWithDefaultACL() throws { // swiftlint:disable:this function_body_length
+    func testSaveWithDefaultACL() throws {
         try userSignUp()
         guard let userObjectId = User.current?.objectId else {
             XCTFail("Should have objectId")
@@ -1181,7 +1182,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testUpdateWithDefaultACL() throws { // swiftlint:disable:this function_body_length
+    func testUpdateWithDefaultACL() throws {
         try userSignUp()
         _ = try ParseACL.setDefaultACL(ParseACL(),
                                                     withAccessForCurrentUser: true)
@@ -2309,7 +2310,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2425,7 +2426,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllAsyncMainQueueCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2612,6 +2613,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testDeleteAllAsyncMainQueueCurrent() {
         testLogin()
         MockURLProtocol.removeAll()
@@ -2691,7 +2693,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testBecome() { // swiftlint:disable:this function_body_length
+    func testBecome() {
         testLogin()
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)

@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseLDAPTests: XCTestCase {
     struct User: ParseUser {
 

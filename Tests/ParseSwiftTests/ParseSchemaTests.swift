@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class ParseSchemaTests: XCTestCase { // swiftlint:disable:this type_body_length
     struct GameScore: ParseObject {
         //: These are required by ParseObject

@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigAsyncTests: XCTestCase {
     struct Config: ParseConfig {
         var welcomeMessage: String?
         var winningNumber: Int?

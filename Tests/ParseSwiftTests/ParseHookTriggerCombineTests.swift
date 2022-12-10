@@ -13,6 +13,8 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
+// swiftlint:disable type_body_length
+
 class ParseHookTriggerCombineTests: XCTestCase {
     struct TestTrigger: ParseHookTriggerable {
         var className: String?

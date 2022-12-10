@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class IOS13Tests: XCTestCase { // swiftlint:disable:this type_body_length
+class IOS13Tests: XCTestCase {
     struct Level: ParseObject {
         var objectId: String?
 

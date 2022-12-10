@@ -14,6 +14,8 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
@@ -1470,7 +1472,6 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    // swiftlint:disable:next function_body_length
     @MainActor
     func testDeepSaveOneDeep() async throws {
         let score = GameScore(points: 10)
@@ -1564,7 +1565,6 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(savedGame.gameScore, gameOnServer.gameScore)
     }
 
-    // swiftlint:disable:next function_body_length
     @MainActor
     func testDeepSaveOneDeepWithDefaultACL() async throws {
         let user = try await loginNormally()
@@ -1756,7 +1756,6 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    // swiftlint:disable:next function_body_length
     @MainActor
     func testDeepSaveObjectWithFile() async throws {
         var game = Game2()

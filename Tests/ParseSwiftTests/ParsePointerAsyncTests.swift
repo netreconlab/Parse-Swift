@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParsePointerAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParsePointerAsyncTests: XCTestCase {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject

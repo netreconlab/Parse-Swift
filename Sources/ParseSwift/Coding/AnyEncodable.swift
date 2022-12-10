@@ -38,7 +38,7 @@ struct AnyEncodable: Encodable {
 }
 
 @usableFromInline
-protocol _AnyEncodable {
+protocol _AnyEncodable { // swiftlint:disable:this type_name
 
     var value: Any { get }
     init<T>(_ value: T?)
@@ -110,6 +110,7 @@ extension _AnyEncodable {
     }
 
     #if canImport(Foundation)
+    // swiftlint:disable:next cyclomatic_complexity
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
         switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee))) {
         case "c", "C":

@@ -10,6 +10,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable file_length
+
 class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
@@ -240,7 +242,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(keychainInstallation.currentInstallation?.customKey, customField)
     }
 
-    // swiftlint:disable:next function_body_length
     func testInstallationImmutableFieldsCannotBeChangedInKeychain() {
         guard let originalInstallation = Installation.current,
             let originalInstallationId = originalInstallation.installationId,
@@ -526,6 +527,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testSaveMutableMergeCurrentInstallation() throws {
         // Save current Installation
         try testSaveCurrentInstallation()
@@ -656,7 +658,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func updateAsync(installation: Installation, installationOnServer: Installation, callbackQueue: DispatchQueue) {
 
         let expectation1 = XCTestExpectation(description: "Update installation1")
@@ -722,7 +723,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         self.updateAsync(installation: installation, installationOnServer: installationOnServer, callbackQueue: .main)
     }
 
-    // swiftlint:disable:next function_body_length
     func saveCurrentAsync(installation: Installation,
                           installationOnServer: Installation,
                           callbackQueue: DispatchQueue) {
@@ -1170,7 +1170,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         }
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testFetchAllAsyncMainQueueCurrent() throws {
         try testSaveCurrentInstallation()
         MockURLProtocol.removeAll()
@@ -1327,7 +1327,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertNotNil(command.body)
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllCurrent() throws {
         try testSaveCurrentInstallation()
         MockURLProtocol.removeAll()
@@ -1452,7 +1452,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         }
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testSaveAllAsyncMainQueueCurrent() throws {
         try testSaveCurrentInstallation()
         MockURLProtocol.removeAll()
@@ -1644,6 +1644,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testDeleteAllAsyncMainQueueCurrent() throws {
         try testSaveCurrentInstallation()
         MockURLProtocol.removeAll()
@@ -1709,4 +1710,3 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
-// swiftlint:disable:this file_length
