@@ -157,20 +157,14 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  spm-test-5_4:
+  xcode-test-tvos-5_4:
     timeout-minutes: 15
     needs: xcode-build-watchos
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v3
-    - name: Create and set the default keychain
-      run: |
-        security create-keychain -p "" temporary
-        security default-keychain -s temporary
-        security unlock-keychain -p "" temporary
-        security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: swift test --enable-code-coverage -v
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(tvOS\) -destination platform\=tvOS\ Simulator,name\=Apple\ TV -derivedDataPath DerivedData -test-iterations 10 -retry-tests-on-failure clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov
