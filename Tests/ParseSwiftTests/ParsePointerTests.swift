@@ -161,7 +161,7 @@ class ParsePointerTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -321,7 +321,7 @@ class ParsePointerTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")
@@ -351,7 +351,7 @@ class ParsePointerTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should have encoded/decoded: Error: \(error)")

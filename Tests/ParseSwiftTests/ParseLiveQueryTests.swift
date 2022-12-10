@@ -22,7 +22,7 @@ class ParseLiveQueryTests: XCTestCase {
         //: Your own properties
         var points: Int = 0
 
-        //custom initializer
+        // custom initializer
         init() {}
 
         init(points: Int) {
@@ -450,7 +450,7 @@ class ParseLiveQueryTests: XCTestCase {
         client.close()
         let expectation1 = XCTestExpectation(description: "Response delegate")
         client.open(isUserWantsToConnect: true) { error in
-            XCTAssertNotNil(error) //Should always fail since WS is not intercepted.
+            XCTAssertNotNil(error) // Should always fail since WS is not intercepted.
             expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
@@ -706,7 +706,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertNil(subscription.unsubscribed)
             XCTAssertNil(subscription.event)
 
-            //Unsubscribe
+            // Unsubscribe
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 guard let unsubscribed = subscription.unsubscribed else {
                     XCTFail("Should unwrap unsubscribed.")
@@ -723,7 +723,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertEqual(client.pendingSubscriptions.count, 1)
             XCTAssertEqual(client.subscriptions.count, 1)
 
-            //Received Unsubscribe
+            // Received Unsubscribe
             let response2 = PreliminaryMessageResponse(op: .unsubscribed,
                                                        requestId: 1,
                                                        clientId: "yolo",
@@ -776,7 +776,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertTrue(isNew)
             expectation1.fulfill()
 
-            //Unsubscribe
+            // Unsubscribe
             subscription.handleUnsubscribe { query in
                 XCTAssertEqual(query, subscribedQuery)
                 XCTAssertTrue(client.pendingSubscriptions.isEmpty)
@@ -788,7 +788,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertEqual(client.pendingSubscriptions.count, 1)
             XCTAssertEqual(client.subscriptions.count, 1)
 
-            //Received Unsubscribe
+            // Received Unsubscribe
             let response2 = PreliminaryMessageResponse(op: .unsubscribed,
                                                                requestId: 1,
                                                                clientId: "yolo",
@@ -863,7 +863,7 @@ class ParseLiveQueryTests: XCTestCase {
                 return
             }
 
-            //Resubscribe
+            // Resubscribe
             do {
                 count += 1
                 subscription = try Query<GameScore>.subscribe(handler)
@@ -1276,7 +1276,7 @@ class ParseLiveQueryTests: XCTestCase {
                 expectation1.fulfill()
             }
 
-            //Update
+            // Update
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 guard let subscribed = subscription.subscribed else {
                     XCTFail("Should unwrap")
@@ -1362,12 +1362,12 @@ class ParseLiveQueryTests: XCTestCase {
                 expectation1.fulfill()
             }
 
-            //Disconnect, subscriptions should remain the same
+            // Disconnect, subscriptions should remain the same
             client.isConnected = false
             XCTAssertEqual(client.subscriptions.count, 1)
             XCTAssertEqual(client.pendingSubscriptions.count, 0)
 
-            //Connect moving to true should move to pending
+            // Connect moving to true should move to pending
             client.clientId = "naw"
             client.isConnected = true
             XCTAssertEqual(client.subscriptions.count, 0)
@@ -1389,7 +1389,7 @@ class ParseLiveQueryTests: XCTestCase {
                 return
             }
 
-            //Fake server response
+            // Fake server response
             let response = PreliminaryMessageResponse(op: .subscribed,
                                                                requestId: 1,
                                                                clientId: "yolo",
@@ -1662,7 +1662,7 @@ class ParseLiveQueryTests: XCTestCase {
                 return
             }
 
-            //Update
+            // Update
             XCTAssertNotNil(try? query.update(subscription))
 
             guard let isSubscribed = try? client.isSubscribed(query),
@@ -1736,18 +1736,18 @@ class ParseLiveQueryTests: XCTestCase {
                 return
             }
 
-            //Disconnect, subscriptions should remain the same
+            // Disconnect, subscriptions should remain the same
             client.isConnected = false
             XCTAssertEqual(client.subscriptions.count, 1)
             XCTAssertEqual(client.pendingSubscriptions.count, 0)
 
-            //Connect moving to true should move to pending
+            // Connect moving to true should move to pending
             client.clientId = "naw"
             client.isConnected = true
             XCTAssertEqual(client.subscriptions.count, 0)
             XCTAssertEqual(client.pendingSubscriptions.count, 1)
 
-            //Fake server response
+            // Fake server response
             let response = PreliminaryMessageResponse(op: .subscribed,
                                                                requestId: 1,
                                                                clientId: "yolo",

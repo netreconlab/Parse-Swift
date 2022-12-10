@@ -364,7 +364,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let encoded: Data!
         do {
             encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

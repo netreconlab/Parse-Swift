@@ -27,7 +27,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         var points: Int?
         var player: String?
 
-        //custom initializers
+        // custom initializers
         init() {}
 
         init (objectId: String?) {

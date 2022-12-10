@@ -147,7 +147,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -281,7 +281,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                //Get dates in correct format from ParseDecoding strategy
+                // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
                 return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
             } catch {
@@ -327,7 +327,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                //Get dates in correct format from ParseDecoding strategy
+                // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
                 return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
             } catch {
@@ -418,7 +418,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installation)
             installation = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
@@ -462,7 +462,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
                     XCTAssertEqual(Installation.current?.customKey, installation.customKey)
 
-                    //Should be updated in memory
+                    // Should be updated in memory
                     guard let updatedCurrentDate = Installation.current?.updatedAt else {
                         XCTFail("Should unwrap current date")
                         expectation1.fulfill()
@@ -471,7 +471,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
                     #if !os(Linux) && !os(Android) && !os(Windows)
-                    //Should be updated in Keychain
+                    // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
                         = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
                         let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
@@ -509,7 +509,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(installation)
             installation = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
@@ -549,7 +549,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                     XCTAssertEqual(Installation.current?.customKey, installation.customKey)
 
-                    //Should be updated in memory
+                    // Should be updated in memory
                     guard let updatedCurrentDate = Installation.current?.updatedAt else {
                         XCTFail("Should unwrap current date")
                         expectation1.fulfill()
@@ -558,7 +558,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                     #if !os(Linux) && !os(Android) && !os(Windows)
-                    //Should be updated in Keychain
+                    // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
                         = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
                         let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
@@ -595,7 +595,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(serverResponse)
             serverResponse = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
@@ -663,7 +663,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(serverResponse)
             serverResponse = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
@@ -720,7 +720,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(serverResponse)
             serverResponse = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
@@ -786,7 +786,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             let encoded1 = try ParseCoding.jsonEncoder().encode(serverResponse)
             serverResponse = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {

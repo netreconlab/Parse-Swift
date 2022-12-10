@@ -28,7 +28,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         var player: String?
 
         init() { }
-        //custom initializers
+        // custom initializers
         init (objectId: String?) {
             self.objectId = objectId
         }
@@ -80,7 +80,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -174,7 +174,7 @@ class ParseOperationAsyncTests: XCTestCase { // swiftlint:disable:this type_body
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

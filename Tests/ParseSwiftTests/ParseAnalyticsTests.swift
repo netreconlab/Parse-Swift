@@ -54,7 +54,7 @@ class ParseAnalyticsTests: XCTestCase {
         XCTAssertEqual(command2.body?.date, date)
         XCTAssertNotNil(command2.body?.dimensions)
 
-        event2.date = nil //Clear date for comparison
+        event2.date = nil // Clear date for comparison
         let decoded = event2.debugDescription
         let expected = "{\"dimensions\":{\"stop\":\"drop\"},\"name\":\"hello\"}"
         XCTAssertEqual(decoded, expected)

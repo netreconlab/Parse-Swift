@@ -1492,10 +1492,10 @@ extension ParseObject {
                                         filesSavedBeforeThisOne: filesFinishedSaving)
 
                             if waitingObjectInfo.unsavedChildren.count == 0 {
-                                //If this ParseObject has no additional children, it can be saved now
+                                // If this ParseObject has no additional children, it can be saved now
                                 savableObjects.append(parseObject)
                             } else {
-                                //Else this ParseObject needs to wait until it is children are saved
+                                // Else this ParseObject needs to wait until it is children are saved
                                 nextBatch.append(parseObject)
                             }
                         }

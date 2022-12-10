@@ -86,7 +86,7 @@ class ParseSessionTests: XCTestCase {
         do {
             let command = try session.fetchCommand(include: nil)
             XCTAssertNotNil(command)
-            //Generates this component because fetchCommand is at the Objective protocol level
+            // Generates this component because fetchCommand is at the Objective protocol level
             XCTAssertEqual(command.path.urlComponent, "/classes/_Session/me")
             XCTAssertEqual(command.method, API.Method.GET)
             XCTAssertNil(command.params)

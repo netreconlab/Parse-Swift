@@ -24,7 +24,7 @@ class ParseRoleTests: XCTestCase {
         var members = [String]()
         var levels: [String]?
 
-        //custom initializers
+        // custom initializers
         init() {
             self.points = 5
         }
@@ -91,7 +91,7 @@ class ParseRoleTests: XCTestCase {
         var level: Int
         var members = [String]()
 
-        //custom initializers
+        // custom initializers
         init() {
             self.level = 5
         }
@@ -458,7 +458,7 @@ class ParseRoleTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -500,7 +500,7 @@ class ParseRoleTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -575,7 +575,7 @@ class ParseRoleTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -646,7 +646,7 @@ class ParseRoleTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -734,7 +734,7 @@ class ParseRoleTests: XCTestCase {
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")

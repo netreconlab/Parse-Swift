@@ -249,7 +249,7 @@ internal extension API {
                             }
                         }
                     } else if let otherURL = self.otherURL {
-                        //Non-parse servers do not receive any parse dedicated request info
+                        // Non-parse servers do not receive any parse dedicated request info
                         var request = URLRequest(url: otherURL)
                         request.cachePolicy = requestCachePolicy(options: options)
                         URLSession.parse.downloadTask(with: request, mapper: mapper) { result in

@@ -1536,7 +1536,7 @@ public extension Sequence where Element: ParseUser {
             user.ensureDeepSave(options: options,
                                 // swiftlint:disable:next line_length
                                 isShouldReturnIfChildObjectsFound: transaction) { (savedChildObjects, savedChildFiles, parseError) -> Void in
-                //If an error occurs, everything should be skipped
+                // If an error occurs, everything should be skipped
                 if parseError != nil {
                     error = parseError
                 }

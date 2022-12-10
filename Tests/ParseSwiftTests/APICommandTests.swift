@@ -155,7 +155,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    //This is how errors from the server should typically come in
+    // This is how errors from the server should typically come in
     func testErrorFromParseServer() {
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
@@ -225,7 +225,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    //This is how errors HTTP errors should typically come in
+    // This is how errors HTTP errors should typically come in
     func testErrorHTTP500JSON() {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
@@ -527,11 +527,11 @@ class APICommandTests: XCTestCase {
         let splitString = clientVersion
             .components(separatedBy: ParseConstants.sdk)
         XCTAssertEqual(splitString.count, 2)
-        //If successful, will remove `swift` resulting in ""
+        // If successful, will remove `swift` resulting in ""
         XCTAssertEqual(splitString[0], "")
         XCTAssertEqual(splitString[1], ParseConstants.version)
 
-        //Test incorrect split
+        // Test incorrect split
         let splitString2 = clientVersion
             .components(separatedBy: "hello")
         XCTAssertEqual(splitString2.count, 1)

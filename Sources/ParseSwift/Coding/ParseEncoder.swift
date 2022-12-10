@@ -6,7 +6,7 @@
 //  Copyright © 2020 Parse. All rights reserved.
 //
 
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 //
 // This source file is part of the Swift.org open source project
 //
@@ -16,7 +16,7 @@
 // See https://swift.org/LICENSE.txt for license information
 // See https://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
 //
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 
 import Foundation
 
@@ -1117,9 +1117,9 @@ internal struct _ParseEncodingStorage {
     }
 }
 
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 // Error Utilities
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 
 extension EncodingError {
     /// Returns a `.invalidValue` error describing the given invalid floating-point value.
@@ -1143,9 +1143,9 @@ extension EncodingError {
     }
 }
 
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 // Shared Key Types
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 
 private struct _JSONKey : CodingKey {
     public var stringValue: String
@@ -1174,9 +1174,9 @@ private struct _JSONKey : CodingKey {
     static let `super` = _JSONKey(stringValue: "super")!
 }
 
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 // Shared ISO8601 Date Formatter
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------===//
 // swiftlint:disable:next line_length
 // NOTE: This value is implicitly lazy and _must_ be lazy. We're compiled against the latest SDK (w/ ISO8601DateFormatter), but linked against whichever Foundation the user has. ISO8601DateFormatter might not exist, so we better not hit this code path on an older OS.
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)

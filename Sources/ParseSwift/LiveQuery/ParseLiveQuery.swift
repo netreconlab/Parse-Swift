@@ -51,7 +51,7 @@ public final class ParseLiveQuery: NSObject {
     let synchronizationQueue: DispatchQueue
     let notificationQueue: DispatchQueue
 
-    //Task
+    // Task
     var task: URLSessionWebSocketTask! {
         willSet {
             if newValue == nil && isSocketEstablished {
@@ -108,7 +108,7 @@ Not attempting to open ParseLiveQuery socket anymore
     public weak var receiveDelegate: ParseLiveQueryDelegate?
 
     /// True if the connection to the url is up and available. False otherwise.
-    public internal(set) var isSocketEstablished = false { //URLSession has an established socket
+    public internal(set) var isSocketEstablished = false { // URLSession has an established socket
         willSet {
             if !newValue {
                 isConnected = newValue
@@ -125,7 +125,7 @@ Not attempting to open ParseLiveQuery socket anymore
                     if let task = self.task {
                         attempts = 1
 
-                        //Resubscribe to all subscriptions by moving them in front of pending
+                        // Resubscribe to all subscriptions by moving them in front of pending
                         var tempPendingSubscriptions = [(RequestId, SubscriptionRecord)]()
                         self.subscriptions.forEach { (key, value) -> Void in
                             tempPendingSubscriptions.append((key, value))
@@ -134,7 +134,7 @@ Not attempting to open ParseLiveQuery socket anymore
                         tempPendingSubscriptions.append(contentsOf: pendingSubscriptions)
                         pendingSubscriptions = tempPendingSubscriptions
 
-                        //Send all pending messages in order
+                        // Send all pending messages in order
                         self.pendingSubscriptions.forEach {
                             let messageToSend = $0
                             URLSession.liveQuery.send(messageToSend.1.messageData, task: task) { _ in }
@@ -161,7 +161,7 @@ Not attempting to open ParseLiveQuery socket anymore
         }
     }
 
-    //Subscription
+    // Subscription
     let requestIdGenerator: () -> RequestId
     var subscriptions = [RequestId: SubscriptionRecord]()
     var pendingSubscriptions = [(RequestId, SubscriptionRecord)]() // Behave as FIFO to maintain sending order
@@ -355,21 +355,21 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                     self.url = redirect.url
                     if self.isConnected {
                         self.close(useDedicatedQueue: true)
-                        //Try to reconnect
+                        // Try to reconnect
                         self.resumeTask { _ in }
                     }
                 }
                 return
             }
 
-            //Check if this is an error response
+            // Check if this is an error response
             if let error = try? ParseCoding.jsonDecoder().decode(ErrorResponse.self, from: data) {
                 if !error.reconnect {
-                    //Treat this as a user disconnect because the server does not want to hear from us anymore
+                    // Treat this as a user disconnect because the server does not want to hear from us anymore
                     self.close()
                 }
                 guard let parseError = try? ParseCoding.jsonDecoder().decode(ParseError.self, from: data) else {
-                    //Turn LiveQuery error into ParseError
+                    // Turn LiveQuery error into ParseError
                     let parseError = ParseError(code: .otherCause,
                                                 // swiftlint:disable:next line_length
                                                 message: "ParseLiveQuery Error: code: \(error.code), message: \(error.message)")
@@ -383,10 +383,10 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                 }
                 return
             } else if !self.isConnected {
-                //Check if this is a connected response
+                // Check if this is a connected response
                 guard let response = try? ParseCoding.jsonDecoder().decode(ConnectionResponse.self, from: data),
                       response.op == .connected else {
-                    //If not connected, should not receive anything other than a connection response
+                    // If not connected, should not receive anything other than a connection response
                     guard let outOfOrderMessage = try? ParseCoding
                             .jsonDecoder()
                             .decode(AnyCodable.self, from: data) else {

@@ -55,7 +55,7 @@ class AnyCodableTests: XCTestCase {
         }
     }
 
-    //Test has objective-c
+    // Test has objective-c
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testJSONEncoding() {
 

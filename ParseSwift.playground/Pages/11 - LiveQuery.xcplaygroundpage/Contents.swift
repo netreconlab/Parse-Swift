@@ -191,7 +191,7 @@ subscription2.handleUnsubscribe { query in
 ParseLiveQuery.client?.close()
 
 //: To close all LiveQuery connections use:
-//ParseLiveQuery.client?.closeAll()
+// ParseLiveQuery.client?.closeAll()
 
 //: Ping the LiveQuery server. This should produce an error
 //: because LiveQuery is disconnected.

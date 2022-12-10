@@ -27,7 +27,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var points: Int?
         var player: String?
 
-        //custom initializers
+        // custom initializers
         init() {}
         init (objectId: String?) {
             self.objectId = objectId
@@ -80,7 +80,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -135,7 +135,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -185,7 +185,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -239,7 +239,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            //Get dates in correct format from ParseDecoding strategy
+            // Get dates in correct format from ParseDecoding strategy
             scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
@@ -337,7 +337,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -439,7 +439,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -521,7 +521,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -609,7 +609,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -687,7 +687,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
@@ -771,7 +771,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         let encoded: Data!
         do {
            encoded = try ParseCoding.jsonEncoder().encode(response)
-           //Get dates in correct format from ParseDecoding strategy
+           // Get dates in correct format from ParseDecoding strategy
            let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
            let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)

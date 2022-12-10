@@ -24,7 +24,7 @@ class ParseRelationTests: XCTestCase {
         var members = [String]()
         var levels: ParseRelation<Self>?
 
-        //custom initializers
+        // custom initializers
         init() {
             self.points = 5
         }
@@ -46,7 +46,7 @@ class ParseRelationTests: XCTestCase {
         var members = [String]()
         var levels: ParseRelation<Self>?
 
-        //custom initializers
+        // custom initializers
         init() {
             self.points = 5
         }
@@ -67,7 +67,7 @@ class ParseRelationTests: XCTestCase {
         var level: Int
         var members = [String]()
 
-        //custom initializers
+        // custom initializers
         init() {
             self.level = 5
         }

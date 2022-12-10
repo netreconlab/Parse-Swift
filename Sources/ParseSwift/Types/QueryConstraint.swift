@@ -28,7 +28,7 @@ public struct QueryConstraint: ParseTypeable, Hashable {
         case inQuery = "$inQuery"
         case notInQuery = "$notInQuery"
         case nearSphere = "$nearSphere"
-        case or = "$or" //swiftlint:disable:this identifier_name
+        case or = "$or" // swiftlint:disable:this identifier_name
         case and = "$and"
         case nor = "$nor"
         case relatedTo = "$relatedTo"
@@ -155,7 +155,7 @@ public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  */
 public func equalTo <T>(key: String,
                         value: T,
-                        //swiftlint:disable:next line_length
+                        // swiftlint:disable:next line_length
                         usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) -> QueryConstraint where T: Codable {
     if !usingEqComparator {
         return QueryConstraint(key: key, value: value)
@@ -194,7 +194,7 @@ public func == <T>(key: String, object: T) throws -> QueryConstraint where T: Pa
  */
 public func equalTo <T>(key: String,
                         object: T,
-                        //swiftlint:disable:next line_length
+                        // swiftlint:disable:next line_length
                         usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) throws -> QueryConstraint where T: ParseObject {
     if !usingEqComparator {
         return try QueryConstraint(key: key, value: object.toPointer())
