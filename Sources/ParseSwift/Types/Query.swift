@@ -486,7 +486,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
 
 // MARK: Identifiable
 extension Query: Identifiable {
-    
+
     public var id: String {
         var mutableQuery = self
         mutableQuery.keys = nil
@@ -499,7 +499,7 @@ extension Query: Identifiable {
             return className
         }
 
-        //Sets need to be sorted to maintain the same queryIdentifier
+        // Sets need to be sorted to maintain the same queryIdentifier
         let sortedKeys = ((keys?.count == 0 ? [] : ["keys"]) +
                           (keys?.sorted(by: { $0 < $1 }) ?? []))
         let sortedInclude = ((include?.count == 0 ? [] : ["include"]) +
