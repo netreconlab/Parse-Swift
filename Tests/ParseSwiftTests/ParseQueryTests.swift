@@ -104,6 +104,22 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(query5.`where`.constraints.values.count, 0)
     }
 
+    func testIdentifier() {
+        let query = GameScore.query()
+            .order([.ascending("points"), .descending("oldScore")])
+            .exclude("hello", "world")
+            .include("foo", "bar")
+            .select("yolo", "nolo")
+            .limit(10)
+        XCTAssertFalse(query.id.isEmpty)
+        XCTAssertTrue(query.id.contains("orderpointsoldScore"))
+        XCTAssertTrue(query.id.contains("excludeKeyshelloworld"))
+        XCTAssertTrue(query.id.contains("includebarfoo"))
+        XCTAssertTrue(query.id.contains("yolo"))
+        XCTAssertTrue(query.id.contains("nolo"))
+        XCTAssertTrue(query.id.contains("limit10"))
+    }
+
     func testDecodingQueryArrays() throws {
         let query = GameScore.query
             .order([.ascending("points"), .descending("oldScore")])
