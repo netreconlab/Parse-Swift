@@ -19,7 +19,7 @@ public extension ParseHealth {
      - returns: Status of ParseServer.
      - throws: An error of type `ParseError`.
     */
-    static func check(options: API.Options = []) async throws -> String {
+    static func check(options: API.Options = []) async throws -> Status {
         try await withCheckedThrowingContinuation { continuation in
             Self.check(options: options,
                        completion: continuation.resume)

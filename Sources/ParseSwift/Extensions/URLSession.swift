@@ -168,6 +168,27 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
+    func computeDelay(_ seconds: Int) -> TimeInterval? {
+        Calendar.current.date(byAdding: .second,
+                              value: seconds,
+                              to: Date())?.timeIntervalSinceNow
+    }
+
+    func computeDelay(_ delayString: String) -> TimeInterval? {
+        guard let seconds = Int(delayString) else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
+
+            guard let delayUntil = dateFormatter.date(from: delayString) else {
+                return nil
+            }
+
+            return delayUntil.timeIntervalSinceNow
+        }
+        return computeDelay(seconds)
+    }
+
+    // swiftlint:disable:next function_body_length
     func dataTask<U>(
         with request: URLRequest,
         callbackQueue: DispatchQueue,
@@ -187,19 +208,51 @@ internal extension URLSession {
             }
             let statusCode = httpResponse.statusCode
             guard (200...299).contains(statusCode) else {
-                guard statusCode >= 500,
-                      attempts <= Parse.configuration.maxConnectionAttempts + 1,
-                      responseData == nil else {
-                          completion(self.makeResult(request: request,
-                                                     responseData: responseData,
-                                                     urlResponse: urlResponse,
-                                                     responseError: responseError,
-                                                     mapper: mapper))
-                          return
-                    }
+
                 let attempts = attempts + 1
-                callbackQueue.asyncAfter(deadline: .now() + DispatchTimeInterval
-                                                .seconds(Self.reconnectInterval(2))) {
+
+                // Retry if max attempts have not been reached.
+                guard attempts <= Parse.configuration.maxConnectionAttempts + 1,
+                      var delayInterval = self.computeDelay(Self.reconnectInterval(2)) else {
+                    // If max attempts have been reached update the client now.
+                    completion(self.makeResult(request: request,
+                                               responseData: responseData,
+                                               urlResponse: urlResponse,
+                                               responseError: responseError,
+                                               mapper: mapper))
+                    return
+                }
+
+                // If there is current response data, update the client now.
+                if let responseData = responseData {
+                    completion(self.makeResult(request: request,
+                                               responseData: responseData,
+                                               urlResponse: urlResponse,
+                                               responseError: responseError,
+                                               mapper: mapper))
+                }
+
+                // Check for constant delays in header information.
+                switch statusCode {
+                case 429:
+                    if let delayString = httpResponse.value(forHTTPHeaderField: "x-rate-limit-reset"),
+                       let constantDelay = self.computeDelay(delayString) {
+                        delayInterval = constantDelay
+                    }
+
+                case 503:
+
+                    if let delayString = httpResponse.value(forHTTPHeaderField: "retry-after"),
+                       let constantDelay = self.computeDelay(delayString) {
+                        delayInterval = constantDelay
+                    }
+
+                default:
+                    // Use random delay
+                    delayInterval = delayInterval
+                }
+
+                callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
                     self.dataTask(with: request,
                                   callbackQueue: callbackQueue,
                                   attempts: attempts,

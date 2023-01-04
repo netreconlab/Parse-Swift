@@ -40,7 +40,7 @@ class ParseHealthCombineTests: XCTestCase {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
-        let healthOfServer = "ok"
+        let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {

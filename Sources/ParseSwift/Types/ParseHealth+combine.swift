@@ -19,7 +19,7 @@ public extension ParseHealth {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    static func checkPublisher(options: API.Options = []) -> Future<String, ParseError> {
+    static func checkPublisher(options: API.Options = []) -> Future<Status, ParseError> {
         Future { promise in
             Self.check(options: options,
                        completion: promise)

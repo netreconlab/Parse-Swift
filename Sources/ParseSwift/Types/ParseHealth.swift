@@ -13,6 +13,18 @@ import Foundation
  */
 public struct ParseHealth: ParseTypeable {
 
+    /// The health status value of a Parse Server.
+    public enum Status: String, Codable {
+        /// The server started and is running.
+        case ok
+        /// The server has been created but the start method has not been called yet.
+        case initialized
+        /// The server is starting up.
+        case starting
+        /// There was a startup error, see the logs for details.
+        case error
+    }
+
     /**
      Calls the health check function *synchronously* and returns a result of it is execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -21,7 +33,7 @@ public struct ParseHealth: ParseTypeable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static public func check(options: API.Options = []) throws -> String {
+    static public func check(options: API.Options = []) throws -> Status {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         return try healthCommand().execute(options: options)
@@ -36,7 +48,7 @@ public struct ParseHealth: ParseTypeable {
     */
     static public func check(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
-                             completion: @escaping (Result<String, ParseError>) -> Void) {
+                             completion: @escaping (Result<Status, ParseError>) -> Void) {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         healthCommand()
@@ -45,9 +57,9 @@ public struct ParseHealth: ParseTypeable {
                           completion: completion)
     }
 
-    internal static func healthCommand() -> API.Command<NoBody, String> {
+    internal static func healthCommand() -> API.Command<NoBody, Status> {
         return API.Command(method: .POST,
-                           path: .health) { (data) -> String in
+                           path: .health) { (data) -> Status in
             return try ParseCoding.jsonDecoder().decode(HealthResponse.self, from: data).status
         }
     }

@@ -174,7 +174,7 @@ internal struct BooleanResponse: Codable {
 
 // MARK: HealthResponse
 internal struct HealthResponse: Codable {
-    let status: String
+    let status: ParseHealth.Status
 }
 
 // MARK: PushResponse
