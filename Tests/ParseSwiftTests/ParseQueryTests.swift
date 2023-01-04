@@ -111,6 +111,19 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             .include("foo", "bar")
             .select("yolo", "nolo")
             .limit(10)
+
+        let query2 = GameScore.query()
+            .order([.ascending("points"), .descending("oldScore")])
+            .exclude("hello", "world")
+            .include("foo", "bar")
+            .select("yolo", "nolo")
+            .limit(10)
+
+        let query3 = GameScore.query()
+            .order([.ascending("teams"), .descending("points")])
+            .include("yolo", "nolo")
+            .limit(100)
+
         XCTAssertFalse(query.id.isEmpty)
         XCTAssertTrue(query.id.contains("orderpointsoldScore"))
         XCTAssertTrue(query.id.contains("excludeKeyshelloworld"))
@@ -118,6 +131,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(query.id.contains("yolo"))
         XCTAssertTrue(query.id.contains("nolo"))
         XCTAssertTrue(query.id.contains("limit10"))
+        XCTAssertEqual(query.id, query2.id)
+        XCTAssertNotEqual(query2.id, query3.id)
     }
 
     func testDecodingQueryArrays() throws {

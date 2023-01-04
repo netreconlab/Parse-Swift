@@ -514,7 +514,7 @@ extension Query: Identifiable {
             sortedInclude +
             sortedExcludeKeys +
             sortedFieldsKeys
-        ).joined(separator: "")
+        ).joined(separator: ";")
 
         return (
             className +
