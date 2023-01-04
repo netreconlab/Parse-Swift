@@ -178,11 +178,9 @@ internal extension URLSession {
         guard let seconds = Int(delayString) else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
-
             guard let delayUntil = dateFormatter.date(from: delayString) else {
                 return nil
             }
-
             return delayUntil.timeIntervalSinceNow
         }
         return computeDelay(seconds)
@@ -212,8 +210,7 @@ internal extension URLSession {
                 let attempts = attempts + 1
 
                 // Retry if max attempts have not been reached.
-                guard attempts <= Parse.configuration.maxConnectionAttempts + 1,
-                      var delayInterval = self.computeDelay(Self.reconnectInterval(2)) else {
+                guard attempts <= Parse.configuration.maxConnectionAttempts + 1 else {
                     // If max attempts have been reached update the client now.
                     completion(self.makeResult(request: request,
                                                responseData: responseData,
@@ -232,24 +229,28 @@ internal extension URLSession {
                                                mapper: mapper))
                 }
 
+                let delayInterval: TimeInterval!
+
                 // Check for constant delays in header information.
                 switch statusCode {
                 case 429:
                     if let delayString = httpResponse.value(forHTTPHeaderField: "x-rate-limit-reset"),
                        let constantDelay = self.computeDelay(delayString) {
                         delayInterval = constantDelay
+                    } else {
+                        delayInterval = self.computeDelay(Self.reconnectInterval(2))
                     }
 
                 case 503:
-
                     if let delayString = httpResponse.value(forHTTPHeaderField: "retry-after"),
                        let constantDelay = self.computeDelay(delayString) {
                         delayInterval = constantDelay
+                    } else {
+                        delayInterval = self.computeDelay(Self.reconnectInterval(2))
                     }
 
                 default:
-                    // Use random delay
-                    delayInterval = delayInterval
+                    delayInterval = self.computeDelay(Self.reconnectInterval(2))
                 }
 
                 callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
