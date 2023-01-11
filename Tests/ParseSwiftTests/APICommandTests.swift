@@ -38,6 +38,7 @@ class APICommandTests: XCTestCase {
                               clientKey: "clientKey",
                               primaryKey: "primaryKey",
                               serverURL: url,
+                              maxConnectionAttempts: 1,
                               testing: true)
     }
 
@@ -187,7 +188,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    // This is how errors HTTP errors should typically come in
+    // This is how HTTP errors should typically come in
     func testErrorHTTP400JSON() {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"

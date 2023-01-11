@@ -210,7 +210,7 @@ internal extension URLSession {
                 let attempts = attempts + 1
 
                 // Retry if max attempts have not been reached.
-                guard attempts <= Parse.configuration.maxConnectionAttempts + 1 else {
+                guard attempts <= Parse.configuration.maxConnectionAttempts else {
                     // If max attempts have been reached update the client now.
                     completion(self.makeResult(request: request,
                                                responseData: responseData,

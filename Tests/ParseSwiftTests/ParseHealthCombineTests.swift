@@ -36,7 +36,7 @@ class ParseHealthCombineTests: XCTestCase {
         try ParseStorage.shared.deleteAll()
     }
 
-    func testCheck() {
+    func testCheckOk() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -54,18 +54,85 @@ class ParseHealthCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
         }
 
-        let publisher = ParseHealth.checkPublisher()
+        ParseHealth.checkPublisher()
             .sink(receiveCompletion: { result in
-
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
                 }
                 expectation1.fulfill()
+            }, receiveValue: { health in
+                XCTAssertEqual(health, healthOfServer)
+                expectation1.fulfill()
+            })
+            .store(in: &subscriptions)
 
-        }, receiveValue: { health in
-            XCTAssertEqual(health, healthOfServer)
-        })
-        publisher.store(in: &subscriptions)
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testCheckInitialized() {
+        var subscriptions = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Save")
+
+        let healthOfServer = ParseHealth.Status.initialized
+        let serverResponse = HealthResponse(status: healthOfServer)
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+        }
+
+        ParseHealth.checkPublisher()
+            .sink(receiveCompletion: { result in
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                XCTFail("Should not have received completion")
+                expectation1.fulfill()
+            }, receiveValue: { health in
+                XCTAssertEqual(health, healthOfServer)
+                expectation1.fulfill()
+            })
+            .store(in: &subscriptions)
+
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testCheckStarting() {
+        var subscriptions = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Save")
+
+        let healthOfServer = ParseHealth.Status.starting
+        let serverResponse = HealthResponse(status: healthOfServer)
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+        }
+
+        ParseHealth.checkPublisher()
+            .sink(receiveCompletion: { result in
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                XCTFail("Should not have received completion")
+                expectation1.fulfill()
+            }, receiveValue: { health in
+                XCTAssertEqual(health, healthOfServer)
+                expectation1.fulfill()
+            })
+            .store(in: &subscriptions)
 
         wait(for: [expectation1], timeout: 20.0)
     }
