@@ -16,7 +16,7 @@ internal extension URLSession {
     #if !os(Linux) && !os(Android) && !os(Windows)
     static var parse = URLSession.shared
     #else
-    static var parse: URLSession = /* URLSession.shared */ {
+    static var parse: URLSession = {
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
             configuration.urlCache = URLCache.parse
@@ -191,6 +191,7 @@ internal extension URLSession {
         with request: URLRequest,
         callbackQueue: DispatchQueue,
         attempts: Int = 1,
+        allowIntermediateResponses: Bool,
         mapper: @escaping (Data) throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
@@ -221,7 +222,8 @@ internal extension URLSession {
                 }
 
                 // If there is current response data, update the client now.
-                if let responseData = responseData {
+                if allowIntermediateResponses,
+                    let responseData = responseData {
                     completion(self.makeResult(request: request,
                                                responseData: responseData,
                                                urlResponse: urlResponse,
@@ -257,6 +259,7 @@ internal extension URLSession {
                     self.dataTask(with: request,
                                   callbackQueue: callbackQueue,
                                   attempts: attempts,
+                                  allowIntermediateResponses: allowIntermediateResponses,
                                   mapper: mapper,
                                   completion: completion)
                 }

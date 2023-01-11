@@ -43,17 +43,22 @@ public struct ParseHealth: ParseTypeable {
      Calls the health check function *asynchronously* and returns a result of it is execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+     - parameter allowIntermediateResponses: If *true*, this method will continue to update `Status`
+     until the server returns `Status.ok`. Otherwise, calling this method will only return `Status.ok`
+     or throw a `ParseError`.
      - parameter completion: A block that will be called when the health check completes or fails.
      It should have the following argument signature: `(Result<String, ParseError>)`.
     */
     static public func check(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
+                             allowIntermediateResponses: Bool = true,
                              completion: @escaping (Result<Status, ParseError>) -> Void) {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         healthCommand()
             .executeAsync(options: options,
                           callbackQueue: callbackQueue,
+                          allowIntermediateResponses: allowIntermediateResponses,
                           completion: completion)
     }
 

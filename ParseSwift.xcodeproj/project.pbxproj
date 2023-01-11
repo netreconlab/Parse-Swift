@@ -131,6 +131,9 @@
 		7028373A26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
 		7028373B26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
 		7028373C26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
+		7031F356296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
+		7031F357296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
+		7031F358296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
 		7033ECB325584A83009770F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033ECB225584A83009770F3 /* AppDelegate.swift */; };
 		7033ECB525584A83009770F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033ECB425584A83009770F3 /* ViewController.swift */; };
 		7033ECB825584A83009770F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7033ECB625584A83009770F3 /* Main.storyboard */; };
@@ -1196,6 +1199,7 @@
 		7023800E2747FCCD00EFC443 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		7028373326BD8883007688C9 /* ParseObject+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseObject+async.swift"; sourceTree = "<group>"; };
 		7028373826BD8C89007688C9 /* ParseUser+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseUser+async.swift"; sourceTree = "<group>"; };
+		7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICommandMultipleAttemptsTests.swift; sourceTree = "<group>"; };
 		7033ECB025584A83009770F3 /* TestHostTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHostTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7033ECB225584A83009770F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7033ECB425584A83009770F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1597,6 +1601,7 @@
 			children = (
 				4AA8076D1F794C1C008CD551 /* Info.plist */,
 				911DB12D24C4837E0027F3C7 /* APICommandTests.swift */,
+				7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */,
 				7003957525A0EE770052CB31 /* BatchUtilsTests.swift */,
 				7023800E2747FCCD00EFC443 /* ExtensionsTests.swift */,
 				70DFEA892618E77800F8EB4B /* InitializeSDKTests.swift */,
@@ -2955,6 +2960,7 @@
 				70E6B01E28612FF00043EC4A /* ParseHookTriggerTests.swift in Sources */,
 				705025A12843F0E7008D6624 /* ParseSchemaCombineTests.swift in Sources */,
 				7044C1F925C5CFAB0011F6E7 /* ParseFileCombineTests.swift in Sources */,
+				7031F356296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */,
 				70C5502225B3D8F700B5DBC2 /* ParseAppleTests.swift in Sources */,
 				917BA4322703E36800F8D747 /* ParseConfigAsyncTests.swift in Sources */,
 				89899DB526045DC4002E2043 /* ParseFacebookCombineTests.swift in Sources */,
@@ -3278,6 +3284,7 @@
 				70E6B02028612FF00043EC4A /* ParseHookTriggerTests.swift in Sources */,
 				705025A32843F0E7008D6624 /* ParseSchemaCombineTests.swift in Sources */,
 				7044C1FB25C5CFAB0011F6E7 /* ParseFileCombineTests.swift in Sources */,
+				7031F358296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */,
 				70C5502425B3D8F700B5DBC2 /* ParseAppleTests.swift in Sources */,
 				917BA4342703E36800F8D747 /* ParseConfigAsyncTests.swift in Sources */,
 				89899DB726045DC4002E2043 /* ParseFacebookCombineTests.swift in Sources */,
@@ -3402,6 +3409,7 @@
 				70E6B01F28612FF00043EC4A /* ParseHookTriggerTests.swift in Sources */,
 				705025A22843F0E7008D6624 /* ParseSchemaCombineTests.swift in Sources */,
 				7044C1FA25C5CFAB0011F6E7 /* ParseFileCombineTests.swift in Sources */,
+				7031F357296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */,
 				70C5502325B3D8F700B5DBC2 /* ParseAppleTests.swift in Sources */,
 				917BA4332703E36800F8D747 /* ParseConfigAsyncTests.swift in Sources */,
 				89899DB626045DC4002E2043 /* ParseFacebookCombineTests.swift in Sources */,
@@ -3967,7 +3975,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -4029,7 +4037,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -104,6 +104,7 @@ internal extension API {
                               notificationQueue: notificationQueue,
                               childObjects: childObjects,
                               childFiles: childFiles,
+                              allowIntermediateResponses: false,
                               uploadProgress: uploadProgress,
                               downloadProgress: downloadProgress) { result in
                 responseResult = result
@@ -126,6 +127,7 @@ internal extension API {
                           notificationQueue: DispatchQueue? = nil,
                           childObjects: [String: PointerType]? = nil,
                           childFiles: [UUID: ParseFile]? = nil,
+                          allowIntermediateResponses: Bool = false,
                           uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                           downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
                           completion: @escaping(Result<U, ParseError>) -> Void) {
@@ -144,6 +146,7 @@ internal extension API {
                 case .success(let urlRequest):
                     URLSession.parse.dataTask(with: urlRequest,
                                               callbackQueue: callbackQueue,
+                                              allowIntermediateResponses: allowIntermediateResponses,
                                               mapper: mapper) { result in
                         callbackQueue.async {
                             switch result {
@@ -202,6 +205,7 @@ internal extension API {
                     case .success(let urlRequest):
                         URLSession.parse.dataTask(with: urlRequest,
                                                   callbackQueue: callbackQueue,
+                                                  allowIntermediateResponses: allowIntermediateResponses,
                                                   mapper: mapper) { result in
                             callbackQueue.async {
                                 switch result {

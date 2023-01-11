@@ -43,7 +43,8 @@ internal extension API {
             let group = DispatchGroup()
             group.enter()
             self.executeAsync(options: options,
-                              callbackQueue: synchronizationQueue) { result in
+                              callbackQueue: synchronizationQueue,
+                              allowIntermediateResponses: false) { result in
                 responseResult = result
                 group.leave()
             }
@@ -59,12 +60,14 @@ internal extension API {
         // MARK: Asynchronous Execution
         func executeAsync(options: API.Options,
                           callbackQueue: DispatchQueue,
+                          allowIntermediateResponses: Bool = false,
                           completion: @escaping(Result<U, ParseError>) -> Void) {
 
             switch self.prepareURLRequest(options: options) {
             case .success(let urlRequest):
                 URLSession.parse.dataTask(with: urlRequest,
                                           callbackQueue: callbackQueue,
+                                          allowIntermediateResponses: allowIntermediateResponses,
                                           mapper: mapper) { result in
                     callbackQueue.async {
                         switch result {
