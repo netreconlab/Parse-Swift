@@ -38,7 +38,8 @@ class ParseHealthCombineTests: XCTestCase {
 
     func testCheckOk() {
         var subscriptions = Set<AnyCancellable>()
-        let expectation1 = XCTestExpectation(description: "Save")
+        let expectation1 = XCTestExpectation(description: "Received Value")
+        let expectation2 = XCTestExpectation(description: "Received Complete")
 
         let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -59,19 +60,53 @@ class ParseHealthCombineTests: XCTestCase {
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
                 }
-                expectation1.fulfill()
+                expectation2.fulfill()
             }, receiveValue: { health in
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
             .store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
+    }
+
+    func testCheckError() {
+        var subscriptions = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Received Value")
+        let expectation2 = XCTestExpectation(description: "Received Complete")
+
+        let healthOfServer = ParseHealth.Status.error
+        let serverResponse = HealthResponse(status: healthOfServer)
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+        }
+
+        ParseHealth.checkPublisher()
+            .sink(receiveCompletion: { result in
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }, receiveValue: { health in
+                XCTAssertEqual(health, healthOfServer)
+                expectation1.fulfill()
+            })
+            .store(in: &subscriptions)
+
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCheckInitialized() {
         var subscriptions = Set<AnyCancellable>()
-        let expectation1 = XCTestExpectation(description: "Save")
+        let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.initialized
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -105,7 +140,7 @@ class ParseHealthCombineTests: XCTestCase {
 
     func testCheckStarting() {
         var subscriptions = Set<AnyCancellable>()
-        let expectation1 = XCTestExpectation(description: "Save")
+        let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.starting
         let serverResponse = HealthResponse(status: healthOfServer)

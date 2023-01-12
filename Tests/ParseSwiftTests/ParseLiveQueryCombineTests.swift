@@ -26,7 +26,9 @@ class ParseLiveQueryCombineTests: XCTestCase {
                               clientKey: "clientKey",
                               primaryKey: "primaryKey",
                               serverURL: url,
-                              testing: true)
+                              liveQueryMaxConnectionAttempts: 1,
+                              testing: true,
+                              testLiveQueryDontCloseSocket: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
     }
 

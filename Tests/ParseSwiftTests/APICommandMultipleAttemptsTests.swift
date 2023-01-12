@@ -14,6 +14,8 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable function_body_length
+
 // swiftlint:disable:next type_body_length
 class APICommandMultipleAttemptsTests: XCTestCase {
     struct Level: ParseObject {
@@ -72,7 +74,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         XCTAssertLessThan(date.timeIntervalSinceNow - computedDate, 1)
     }
 
-    func testErrorHTTP400JSON() async throws {
+    func testErrorHTTP400JSON() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -95,7 +97,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             }
         }
 
-        let expectation1 = XCTestExpectation(description: "Wait")
+        let expectation1 = XCTestExpectation(description: "Wait 1")
 
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
@@ -114,8 +116,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -151,7 +155,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONInterval() async throws {
+    func testErrorHTTP429JSONInterval() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -196,8 +200,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -205,8 +211,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
-    func testErrorHTTP429JSONDate() async throws {
+    func testErrorHTTP429JSONDate() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -259,8 +264,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -268,7 +275,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONNoHeader() async throws {
+    func testErrorHTTP429JSONNoHeader() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -310,8 +317,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -319,7 +328,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONInterval() async throws {
+    func testErrorHTTP503JSONInterval() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -364,8 +373,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -373,8 +384,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
-    func testErrorHTTP503JSONDate() async throws {
+    func testErrorHTTP503JSONDate() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -427,8 +437,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }
@@ -436,7 +448,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONNoHeader() async throws {
+    func testErrorHTTP503JSONNoHeader() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -478,8 +490,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current >= Parse.configuration.maxConnectionAttempts {
-                        expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             }

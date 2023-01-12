@@ -25,7 +25,7 @@ public extension ParseHealth {
             switch result {
             case .success(let status):
                 subject.send(status)
-                if status == .ok {
+                if status == .ok || status == .error {
                     subject.send(completion: .finished)
                 }
             case .failure(let error):
