@@ -35,10 +35,10 @@ public struct ParseConfiguration {
     /// The client key for your Parse application.
     public internal(set) var clientKey: String?
 
-    /// The server URL to connect to Parse Server.
+    /// The server URL to connect to a Parse Server.
     public internal(set) var serverURL: URL
 
-    /// The live query server URL to connect to Parse Server.
+    /// The live query server URL to connect to a Parse LiveQuery Server.
     public internal(set) var liveQuerysServerURL: URL?
 
     /// Requires `objectId`'s to be created on the client.
@@ -91,9 +91,13 @@ public struct ParseConfiguration {
     ///  apps do not have credentials to setup a Keychain.
     public internal(set) var isUsingDataProtectionKeychain: Bool = false
 
-    /// Maximum number of times to try to connect to Parse Server.
+    /// Maximum number of times to try to connect to a Parse Server.
     /// Defaults to 5.
     public internal(set) var maxConnectionAttempts: Int = 5
+
+    /// Maximum number of times to try to connect to a Parse LiveQuery Server.
+    /// Defaults to 20.
+    public internal(set) var liveQueryMaxConnectionAttempts: Int = 20
 
     /**
      Override the default transfer behavior for `ParseFile`'s.
@@ -105,7 +109,8 @@ public struct ParseConfiguration {
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
-    internal var isTestingSDK = false // Enable this only for certain tests like ParseFile
+    internal var isTestingSDK = false
+    internal var isTestingLiveQueryDontCloseSocket = false
     #if !os(Linux) && !os(Android) && !os(Windows)
     internal var keychainAccessGroup = ParseKeychainAccessGroup()
     #endif
@@ -116,8 +121,8 @@ public struct ParseConfiguration {
      - parameter clientKey: The client key for your Parse application.
      - parameter primaryKey: The master key for your Parse application. This key should only be
      specified when using the SDK on a server.
-     - parameter serverURL: The server URL to connect to Parse Server.
-     - parameter liveQueryServerURL: The live query server URL to connect to Parse Server.
+     - parameter serverURL: The server URL to connect to a Parse Server.
+     - parameter liveQueryServerURL: The live query server URL to connect to a Parse LiveQuery Server.
      - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
      side for each object. Must be enabled on the server to work.
      - parameter usingTransactions: Use transactions when saving/updating multiple objects.
@@ -140,8 +145,10 @@ public struct ParseConfiguration {
      - parameter httpAdditionalHeaders: A dictionary of additional headers to send with requests. See Apple's
      [documentation](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411532-httpadditionalheaders)
      for more info.
-     - parameter maxConnectionAttempts: Maximum number of times to try to connect to Parse Server.
+     - parameter maxConnectionAttempts: Maximum number of times to try to connect to a Parse Server.
      Defaults to 5.
+     - parameter liveQueryMaxConnectionAttempts: Maximum number of times to try to connect to a Parse
+     LiveQuery Server. Defaults to 20.
      - parameter parseFileTransfer: Override the default transfer behavior for `ParseFile`'s.
      Allows for direct uploads to other file storage providers.
      - parameter authentication: A callback block that will be used to receive/accept/decline network challenges.
@@ -173,6 +180,7 @@ public struct ParseConfiguration {
                 deletingKeychainIfNeeded: Bool = false,
                 httpAdditionalHeaders: [AnyHashable: Any]? = nil,
                 maxConnectionAttempts: Int = 5,
+                liveQueryMaxConnectionAttempts: Int = 20,
                 parseFileTransfer: ParseFileTransferable? = nil,
                 authentication: ((URLAuthenticationChallenge,
                                   (URLSession.AuthChallengeDisposition,
@@ -197,6 +205,7 @@ public struct ParseConfiguration {
         self.isDeletingKeychainIfNeeded = deletingKeychainIfNeeded
         self.httpAdditionalHeaders = httpAdditionalHeaders
         self.maxConnectionAttempts = maxConnectionAttempts
+        self.liveQueryMaxConnectionAttempts = liveQueryMaxConnectionAttempts
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
         ParseStorage.shared.use(primitiveStore ?? InMemoryKeyValueStore())
     }

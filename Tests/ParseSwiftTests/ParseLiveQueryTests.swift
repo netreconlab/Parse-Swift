@@ -57,7 +57,9 @@ class ParseLiveQueryTests: XCTestCase {
                               clientKey: "clientKey",
                               primaryKey: "primaryKey",
                               serverURL: url,
-                              testing: true)
+                              liveQueryMaxConnectionAttempts: 1,
+                              testing: true,
+                              testLiveQueryDontCloseSocket: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery()
     }
 
@@ -364,14 +366,14 @@ class ParseLiveQueryTests: XCTestCase {
         client.isSocketEstablished = true // Socket needs to be true
         client.isConnecting = true
         client.isConnected = true
-        client.attempts = ParseLiveQueryConstants.maxConnectionAttempts + 1
+        client.attempts = Parse.configuration.liveQueryMaxConnectionAttempts + 1
         client.clientId = "yolo"
         client.isDisconnectedByUser = false
 
-        XCTAssertEqual(client.isSocketEstablished, false)
+        XCTAssertEqual(client.isSocketEstablished, true)
         XCTAssertEqual(client.isConnecting, false)
         XCTAssertEqual(client.clientId, "yolo")
-        XCTAssertEqual(client.attempts, ParseLiveQueryConstants.maxConnectionAttempts + 1)
+        XCTAssertEqual(client.attempts, Parse.configuration.liveQueryMaxConnectionAttempts + 1)
     }
 
     func testDisconnectedState() throws {

@@ -15,10 +15,12 @@ import FoundationNetworking
 extension API.NonParseBodyCommand {
     // MARK: Asynchronous Execution
     func execute(options: API.Options,
-                 callbackQueue: DispatchQueue) async throws -> U {
+                 callbackQueue: DispatchQueue,
+                 allowIntermediateResponses: Bool = false) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
             self.executeAsync(options: options,
                               callbackQueue: callbackQueue,
+                              allowIntermediateResponses: allowIntermediateResponses,
                               completion: continuation.resume)
         }
     }

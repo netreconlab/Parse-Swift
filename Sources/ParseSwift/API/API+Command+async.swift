@@ -20,6 +20,7 @@ internal extension API.Command {
                  notificationQueue: DispatchQueue? = nil,
                  childObjects: [String: PointerType]? = nil,
                  childFiles: [UUID: ParseFile]? = nil,
+                 allowIntermediateResponses: Bool = false,
                  uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                  downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
@@ -29,6 +30,7 @@ internal extension API.Command {
                               notificationQueue: notificationQueue,
                               childObjects: childObjects,
                               childFiles: childFiles,
+                              allowIntermediateResponses: allowIntermediateResponses,
                               uploadProgress: uploadProgress,
                               downloadProgress: downloadProgress,
                               completion: continuation.resume)

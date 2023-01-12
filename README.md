@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ![parse-swift](https://user-images.githubusercontent.com/8621344/204069535-e1882bb0-bbcb-4178-87e6-58fd1bed96d1.png)
 
 <h3 align="center">iOS · macOS · watchOS · tvOS · Linux · Android · Windows</h3>

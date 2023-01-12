@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Contributing to the ParseSwift SDK <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->

@@ -43,7 +43,7 @@ class ParseHealthTests: XCTestCase {
 
     func testCheck() {
 
-        let healthOfServer = "ok"
+        let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -66,7 +66,7 @@ class ParseHealthTests: XCTestCase {
     }
 
     func testCheckAsync() {
-        let healthOfServer = "ok"
+        let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {

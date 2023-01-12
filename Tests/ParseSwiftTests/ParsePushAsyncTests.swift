@@ -190,7 +190,7 @@ class ParsePushAsyncTests: XCTestCase {
         let appleAlert = ParsePushAppleAlert(body: "hello world")
 
         let headers = ["X-Parse-Push-Status-Id": objectId]
-        let results = HealthResponse(status: "peace")
+        let results = HealthResponse(status: ParseHealth.Status.error)
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)

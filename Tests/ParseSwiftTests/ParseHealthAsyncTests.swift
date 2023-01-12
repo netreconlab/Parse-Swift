@@ -40,7 +40,7 @@ class ParseHealthAsyncTests: XCTestCase {
     @MainActor
     func testCheck() async throws {
 
-        let healthOfServer = "ok"
+        let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
