@@ -63,11 +63,11 @@ public final class ParseLiveQuery: NSObject {
     var clientId: String!
     var attempts: Int = 1 {
         willSet {
-            if newValue >= ParseLiveQueryConstants.maxConnectionAttempts + 1 {
+            if newValue >= Parse.configuration.liveQueryMaxConnectionAttempts + 1 {
                 let error = ParseError(code: .otherCause,
                                        message: """
 ParseLiveQuery Error: Reached max attempts of
-\(ParseLiveQueryConstants.maxConnectionAttempts).
+\(Parse.configuration.liveQueryMaxConnectionAttempts).
 Not attempting to open ParseLiveQuery socket anymore
 """)
                 notificationQueue.async {

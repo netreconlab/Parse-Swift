@@ -591,10 +591,6 @@
 		70C550A125B4A9F600B5DBC2 /* RemoveRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5509F25B4A9F600B5DBC2 /* RemoveRelation.swift */; };
 		70C550A225B4A9F600B5DBC2 /* RemoveRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5509F25B4A9F600B5DBC2 /* RemoveRelation.swift */; };
 		70C550A325B4A9F600B5DBC2 /* RemoveRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5509F25B4A9F600B5DBC2 /* RemoveRelation.swift */; };
-		70C5655925AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */; };
-		70C5655A25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */; };
-		70C5655B25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */; };
-		70C5655C25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */; };
 		70C7DC1E24D20E530050419B /* ParseUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C7DC1D24D20E530050419B /* ParseUserTests.swift */; };
 		70C7DC2124D20F190050419B /* ParseQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C7DC1F24D20F180050419B /* ParseQueryTests.swift */; };
 		70C7DC2224D20F190050419B /* ParseObjectBatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C7DC2024D20F190050419B /* ParseObjectBatchTests.swift */; };
@@ -1327,7 +1323,6 @@
 		70C5508425B4A68700B5DBC2 /* ParseOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOperationTests.swift; sourceTree = "<group>"; };
 		70C5509125B4A99100B5DBC2 /* AddRelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRelation.swift; sourceTree = "<group>"; };
 		70C5509F25B4A9F600B5DBC2 /* RemoveRelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveRelation.swift; sourceTree = "<group>"; };
-		70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseLiveQueryConstants.swift; sourceTree = "<group>"; };
 		70C7DC1D24D20E530050419B /* ParseUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUserTests.swift; sourceTree = "<group>"; };
 		70C7DC1F24D20F180050419B /* ParseQueryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseQueryTests.swift; sourceTree = "<group>"; };
 		70C7DC2024D20F190050419B /* ParseObjectBatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseObjectBatchTests.swift; sourceTree = "<group>"; };
@@ -1945,7 +1940,6 @@
 				7003960825A184EF0052CB31 /* ParseLiveQuery.swift */,
 				703B091526BD99BC005A112F /* ParseLiveQuery+async.swift */,
 				918CED582684C74000CFDC83 /* ParseLiveQuery+combine.swift */,
-				70C5655825AA147B00BDD57F /* ParseLiveQueryConstants.swift */,
 				700395B925A1470F0052CB31 /* Subscription.swift */,
 				705D950725BE4C08003EF6F8 /* SubscriptionCallback.swift */,
 				700395DE25A147C40052CB31 /* Protocols */,
@@ -2795,7 +2789,6 @@
 				7004C22025B63C7A005E0AD9 /* ParseRelation.swift in Sources */,
 				7003959525A10DFC0052CB31 /* Messages.swift in Sources */,
 				703B091126BD992E005A112F /* ParseOperation+async.swift in Sources */,
-				70C5655925AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */,
 				91F346BE269B77B5005727B6 /* CloudObservable.swift in Sources */,
 				F97B462F24D9C74400F4A88B /* BatchUtils.swift in Sources */,
 				70385E802858EAA90084D306 /* ParseHookFunctionRequest.swift in Sources */,
@@ -3109,7 +3102,6 @@
 				7004C22125B63C7A005E0AD9 /* ParseRelation.swift in Sources */,
 				7003959625A10DFC0052CB31 /* Messages.swift in Sources */,
 				703B091226BD992E005A112F /* ParseOperation+async.swift in Sources */,
-				70C5655A25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */,
 				91F346BF269B77B5005727B6 /* CloudObservable.swift in Sources */,
 				F97B463024D9C74400F4A88B /* BatchUtils.swift in Sources */,
 				4AFDA72A1F26DAE1002AE4FC /* Parse.swift in Sources */,
@@ -3558,7 +3550,6 @@
 				7004C22325B63C7A005E0AD9 /* ParseRelation.swift in Sources */,
 				7003959825A10DFC0052CB31 /* Messages.swift in Sources */,
 				703B091426BD992E005A112F /* ParseOperation+async.swift in Sources */,
-				70C5655C25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */,
 				91F346C1269B77B5005727B6 /* CloudObservable.swift in Sources */,
 				70BDA2B6250536FF00FC2237 /* ParseInstallation.swift in Sources */,
 				F97B465924D9C78C00F4A88B /* Remove.swift in Sources */,
@@ -3748,7 +3739,6 @@
 				7004C22225B63C7A005E0AD9 /* ParseRelation.swift in Sources */,
 				7003959725A10DFC0052CB31 /* Messages.swift in Sources */,
 				703B091326BD992E005A112F /* ParseOperation+async.swift in Sources */,
-				70C5655B25AA147B00BDD57F /* ParseLiveQueryConstants.swift in Sources */,
 				91F346C0269B77B5005727B6 /* CloudObservable.swift in Sources */,
 				70BDA2B5250536FF00FC2237 /* ParseInstallation.swift in Sources */,
 				F97B465824D9C78C00F4A88B /* Remove.swift in Sources */,

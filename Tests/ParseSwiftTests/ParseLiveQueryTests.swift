@@ -57,6 +57,7 @@ class ParseLiveQueryTests: XCTestCase {
                               clientKey: "clientKey",
                               primaryKey: "primaryKey",
                               serverURL: url,
+                              liveQueryMaxConnectionAttempts: 1,
                               testing: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery()
     }
@@ -364,14 +365,14 @@ class ParseLiveQueryTests: XCTestCase {
         client.isSocketEstablished = true // Socket needs to be true
         client.isConnecting = true
         client.isConnected = true
-        client.attempts = ParseLiveQueryConstants.maxConnectionAttempts + 1
+        client.attempts = Parse.configuration.liveQueryMaxConnectionAttempts + 1
         client.clientId = "yolo"
         client.isDisconnectedByUser = false
 
         XCTAssertEqual(client.isSocketEstablished, false)
         XCTAssertEqual(client.isConnecting, false)
         XCTAssertEqual(client.clientId, "yolo")
-        XCTAssertEqual(client.attempts, ParseLiveQueryConstants.maxConnectionAttempts + 1)
+        XCTAssertEqual(client.attempts, Parse.configuration.liveQueryMaxConnectionAttempts + 1)
     }
 
     func testDisconnectedState() throws {
@@ -681,6 +682,7 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testSubscribeConnected() throws {
+        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1247,6 +1249,7 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testSubscriptionUpdate() throws {
+        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1335,6 +1338,7 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testResubscribing() throws {
+        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")

@@ -30,6 +30,7 @@ internal func initialize(applicationId: String,
                          deletingKeychainIfNeeded: Bool = false,
                          httpAdditionalHeaders: [AnyHashable: Any]? = nil,
                          maxConnectionAttempts: Int = 5,
+                         liveQueryMaxConnectionAttempts: Int = 20,
                          testing: Bool = false,
                          authentication: ((URLAuthenticationChallenge,
                                           (URLSession.AuthChallengeDisposition,
@@ -51,6 +52,7 @@ internal func initialize(applicationId: String,
                                            deletingKeychainIfNeeded: deletingKeychainIfNeeded,
                                            httpAdditionalHeaders: httpAdditionalHeaders,
                                            maxConnectionAttempts: maxConnectionAttempts,
+                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            authentication: authentication)
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
@@ -208,6 +210,8 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
  for more info.
  - parameter maxConnectionAttempts: Maximum number of times to try to connect to Parse Server.
  Defaults to 5.
+ - parameter liveQueryMaxConnectionAttempts: Maximum number of times to try to connect to a Parse
+ LiveQuery Server. Defaults to 20.
  - parameter parseFileTransfer: Override the default transfer behavior for `ParseFile`'s.
  Allows for direct uploads to other file storage providers.
  - parameter authentication: A callback block that will be used to receive/accept/decline network challenges.
@@ -239,6 +243,7 @@ public func initialize(
     deletingKeychainIfNeeded: Bool = false,
     httpAdditionalHeaders: [AnyHashable: Any]? = nil,
     maxConnectionAttempts: Int = 5,
+    liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
     authentication: ((URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
@@ -261,6 +266,7 @@ public func initialize(
                                            deletingKeychainIfNeeded: deletingKeychainIfNeeded,
                                            httpAdditionalHeaders: httpAdditionalHeaders,
                                            maxConnectionAttempts: maxConnectionAttempts,
+                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,
                                            authentication: authentication)
     initialize(configuration: configuration)

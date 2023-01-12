@@ -168,13 +168,13 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
-    func computeDelay(_ seconds: Int) -> TimeInterval? {
+    static func computeDelay(_ seconds: Int) -> TimeInterval? {
         Calendar.current.date(byAdding: .second,
                               value: seconds,
                               to: Date())?.timeIntervalSinceNow
     }
 
-    func computeDelay(_ delayString: String) -> TimeInterval? {
+    static func computeDelay(_ delayString: String) -> TimeInterval? {
         guard let seconds = Int(delayString) else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
@@ -237,22 +237,22 @@ internal extension URLSession {
                 switch statusCode {
                 case 429:
                     if let delayString = httpResponse.value(forHTTPHeaderField: "x-rate-limit-reset"),
-                       let constantDelay = self.computeDelay(delayString) {
+                       let constantDelay = Self.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = self.computeDelay(Self.reconnectInterval(2))
+                        delayInterval = Self.computeDelay(Self.reconnectInterval(2))
                     }
 
                 case 503:
                     if let delayString = httpResponse.value(forHTTPHeaderField: "retry-after"),
-                       let constantDelay = self.computeDelay(delayString) {
+                       let constantDelay = Self.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = self.computeDelay(Self.reconnectInterval(2))
+                        delayInterval = Self.computeDelay(Self.reconnectInterval(2))
                     }
 
                 default:
-                    delayInterval = self.computeDelay(Self.reconnectInterval(2))
+                    delayInterval = Self.computeDelay(Self.reconnectInterval(2))
                 }
 
                 callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
