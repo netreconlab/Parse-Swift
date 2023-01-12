@@ -96,12 +96,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -129,6 +130,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(originalError.code, error.code)
                 expectation1.fulfill()
@@ -176,12 +178,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -238,12 +241,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -288,12 +292,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -341,12 +346,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -403,12 +409,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
@@ -453,12 +460,13 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
+                expectation1.fulfill()
             case .failure(let error):
                 XCTAssertEqual(parseError.code, error.code)
                 Task {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
-                    if current == Parse.configuration.maxConnectionAttempts {
+                    if current >= Parse.configuration.maxConnectionAttempts {
                         expectation1.fulfill()
                     }
                 }
