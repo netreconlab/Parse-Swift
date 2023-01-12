@@ -58,7 +58,8 @@ class ParseLiveQueryTests: XCTestCase {
                               primaryKey: "primaryKey",
                               serverURL: url,
                               liveQueryMaxConnectionAttempts: 1,
-                              testing: true)
+                              testing: true,
+                              testLiveQueryDontCloseSocket: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery()
     }
 
@@ -369,7 +370,7 @@ class ParseLiveQueryTests: XCTestCase {
         client.clientId = "yolo"
         client.isDisconnectedByUser = false
 
-        XCTAssertEqual(client.isSocketEstablished, false)
+        XCTAssertEqual(client.isSocketEstablished, true)
         XCTAssertEqual(client.isConnecting, false)
         XCTAssertEqual(client.clientId, "yolo")
         XCTAssertEqual(client.attempts, Parse.configuration.liveQueryMaxConnectionAttempts + 1)
@@ -682,7 +683,6 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testSubscribeConnected() throws {
-        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1249,7 +1249,6 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testSubscriptionUpdate() throws {
-        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1338,7 +1337,6 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testResubscribing() throws {
-        Parse.configuration.liveQueryMaxConnectionAttempts = 2
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")

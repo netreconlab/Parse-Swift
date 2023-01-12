@@ -32,6 +32,7 @@ internal func initialize(applicationId: String,
                          maxConnectionAttempts: Int = 5,
                          liveQueryMaxConnectionAttempts: Int = 20,
                          testing: Bool = false,
+                         testLiveQueryDontCloseSocket: Bool = false,
                          authentication: ((URLAuthenticationChallenge,
                                           (URLSession.AuthChallengeDisposition,
                                            URLCredential?) -> Void) -> Void)? = nil) {
@@ -56,6 +57,7 @@ internal func initialize(applicationId: String,
                                            authentication: authentication)
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
+    configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
     initialize(configuration: configuration)
 }
 

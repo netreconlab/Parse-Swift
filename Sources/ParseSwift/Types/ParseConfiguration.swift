@@ -109,7 +109,8 @@ public struct ParseConfiguration {
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
-    internal var isTestingSDK = false // Enable this only for certain tests like ParseFile
+    internal var isTestingSDK = false
+    internal var isTestingLiveQueryDontCloseSocket = false
     #if !os(Linux) && !os(Android) && !os(Windows)
     internal var keychainAccessGroup = ParseKeychainAccessGroup()
     #endif
