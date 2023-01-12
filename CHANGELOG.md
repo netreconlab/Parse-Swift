@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Parse-Swift Changelog
 
 ### main
@@ -8,13 +9,29 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.16.2...5.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.0.0/documentation/parseswift)
 
 __New features__
-* (Breaking Change) Added a new ParseHealth.Status enum to support Parse Server 6. Developers can access the new status values (Status.initialized, Status.starting) using the ParseHealth.check callback or Combine methods. The new status values are not available for async/await and synchounous methods. Connecting to Parse Servers < 6.0.0, using async/await, or synchronous methods only returns Status.ok or throws an error ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+* (Breaking Change) Added a new ParseHealth.Status enum to support Parse Server. 
+Developers can access the new status values (Status.initialized, Status.starting) 
+using the ParseHealth.check callback or Combine methods. The new status values 
+are not available for async/await and synchounous methods. Connecting to Parse 
+Servers < 6.0.0, using async/await, or synchronous methods only returns 
+Status.ok or throws an error 
+([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), 
+thanks to [Corey Baker](https://github.com/cbaker6).
+
 * The Swift SDK can now properly handle HTTP Status codes 429 and 503 and will retry after the delay specified in the respective header ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 * The max connection attempts for LiveQuery can now be changed when initializing the SDK ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
-* (Breaking Change) Add and update ParseError codes. unknownError has been renamed to otherCause. invalidImageData now has the error code of 150. webhookError has the error code of 143 ([#23](https://github.com/netreconlab/Parse-Swift/pull/23)), thanks to [Corey Baker](https://github.com/cbaker6).
-* (Breaking Change) Remove deprecated code ([#23](https://github.com/netreconlab/Parse-Swift/pull/23)), thanks to [Corey Baker](https://github.com/cbaker6).
+* (Breaking Change) Add and update ParseError codes. unknownError has been renamed 
+to otherCause. invalidImageData now has the error code of 150. webhookError has 
+the error code of 143 ([#23](https://github.com/netreconlab/Parse-Swift/pull/23)),
+thanks to [Corey Baker](https://github.com/cbaker6).
+
+* (Breaking Change) Remove deprecated code 
+([#23](https://github.com/netreconlab/Parse-Swift/pull/23)), thanks 
+to [Corey Baker](https://github.com/cbaker6).
 
 ### 4.16.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.16.1...4.16.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/4.16.2/documentation/parseswift)
