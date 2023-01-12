@@ -232,7 +232,7 @@ jobs:
           tag: 5.7.1-RELEASE
       - name: Build
         run: |
-          swift build -v
+          swift test --enable-test-discovery --enable-code-coverage -v
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
