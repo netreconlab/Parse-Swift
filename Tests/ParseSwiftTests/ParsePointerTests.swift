@@ -171,7 +171,7 @@ class ParsePointerTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let fetched = try pointer.fetch(options: [])
@@ -331,7 +331,7 @@ class ParsePointerTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
@@ -361,7 +361,7 @@ class ParsePointerTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }

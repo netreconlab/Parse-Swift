@@ -13,7 +13,7 @@ struct MockURLResponse {
     var statusCode: Int = 200
     var headerFields = [String: String]()
     var responseData: Data?
-    var delay: TimeInterval = Self.addRandomDelay(1)
+    var delay: TimeInterval = Self.addRandomDelay(2)
     var error: Error?
 
     init(error: Error) {
@@ -45,17 +45,14 @@ struct MockURLResponse {
         self.headerFields = headerFields
         self.responseData = data
         if let delay = delay {
-            self.delay = Self.addRandomDelay(delay)
+            self.delay = delay
         }
         self.error = nil
     }
 
-    static func addRandomDelay(_ delay: TimeInterval) -> TimeInterval {
-        if delay == TimeInterval(0.0) {
-            let delayInSeconds = Utility.reconnectInterval(1)
-            return Utility.computeDelay(delayInSeconds) ?? delay
-        }
-        return delay
+    static func addRandomDelay(_ delayMax: Int) -> TimeInterval {
+        let delayInSeconds = Utility.reconnectInterval(delayMax)
+        return Utility.computeDelay(delayInSeconds) ?? TimeInterval(0.5)
     }
 
 }

@@ -123,7 +123,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -156,7 +156,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -197,7 +197,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -242,7 +242,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -285,7 +285,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -331,7 +331,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -378,7 +378,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -429,7 +429,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].fetchAllPublisher()
@@ -520,7 +520,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].saveAllPublisher()
@@ -606,7 +606,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].createAllPublisher()
@@ -674,7 +674,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].replaceAllPublisher()
@@ -731,7 +731,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].replaceAllPublisher()
@@ -797,7 +797,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].updateAllPublisher()
@@ -859,7 +859,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [installation].deleteAllPublisher()
@@ -917,7 +917,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = Installation.becomePublisher("wowsers")

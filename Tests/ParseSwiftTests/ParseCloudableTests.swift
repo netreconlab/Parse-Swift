@@ -138,7 +138,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -161,7 +161,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
                 let encodedResult = try ParseCoding.jsonEncoder().encode(result)
                 result = try ParseCoding.jsonDecoder().decode([String: String].self, from: encodedResult)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -188,7 +188,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud(functionJobName: "test")
@@ -227,7 +227,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -262,7 +262,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -298,7 +298,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -318,7 +318,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -345,7 +345,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud(functionJobName: "test")
@@ -368,7 +368,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud(functionJobName: "test")
@@ -409,7 +409,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -444,7 +444,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }

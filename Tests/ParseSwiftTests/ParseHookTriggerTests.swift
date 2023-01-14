@@ -124,7 +124,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let created = try await hookTrigger.create()
@@ -137,7 +137,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -175,7 +175,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let updated = try await hookTrigger.update()
@@ -188,7 +188,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -239,7 +239,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await hookTrigger.fetch()
@@ -252,7 +252,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -290,7 +290,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await hookTrigger.fetchAll()
@@ -303,7 +303,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -323,7 +323,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -338,7 +338,7 @@ class ParseHookTriggerTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookTrigger = TestTrigger(className: "foo",

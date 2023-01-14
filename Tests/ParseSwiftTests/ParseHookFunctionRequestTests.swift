@@ -207,7 +207,7 @@ class ParseHookFunctionRequestTests: XCTestCase {
         // Get dates in correct format from ParseDecoding strategy
         server = try ParseCoding.jsonDecoder().decode(User.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let parameters = Parameters()
@@ -235,7 +235,7 @@ class ParseHookFunctionRequestTests: XCTestCase {
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let parameters = Parameters()
@@ -259,7 +259,7 @@ class ParseHookFunctionRequestTests: XCTestCase {
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let parameters = Parameters()

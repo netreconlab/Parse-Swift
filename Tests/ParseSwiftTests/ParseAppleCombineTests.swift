@@ -112,7 +112,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let tokenData = "this".data(using: .utf8) else {
@@ -167,7 +167,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.apple.loginPublisher(authData: ["id": "testing",
@@ -198,7 +198,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -228,7 +228,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let tokenData = "this".data(using: .utf8) else {
@@ -280,7 +280,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.apple.linkPublisher(authData: ["id": "testing",
@@ -339,7 +339,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.apple.unlinkPublisher()

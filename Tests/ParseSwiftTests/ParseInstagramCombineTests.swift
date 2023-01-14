@@ -112,7 +112,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.instagram.loginPublisher(id: "testing",
@@ -164,7 +164,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.instagram.loginPublisher(authData: (["id": "testing",
@@ -196,7 +196,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -226,7 +226,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.instagram.linkPublisher(id: "testing",
@@ -275,7 +275,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseInstagram<User>
@@ -333,7 +333,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.instagram.unlinkPublisher()

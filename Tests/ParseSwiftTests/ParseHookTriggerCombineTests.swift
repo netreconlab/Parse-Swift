@@ -56,7 +56,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.createPublisher()
@@ -86,7 +86,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.createPublisher()
@@ -117,7 +117,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.updatePublisher()
@@ -147,7 +147,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.updatePublisher()
@@ -178,7 +178,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.fetchPublisher()
@@ -208,7 +208,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.fetchPublisher()
@@ -239,7 +239,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.fetchAllPublisher()
@@ -269,7 +269,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.fetchAllPublisher()
@@ -300,7 +300,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.deletePublisher()
@@ -328,7 +328,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = hookTrigger.deletePublisher()

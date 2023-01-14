@@ -242,7 +242,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save()
@@ -270,7 +270,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save()
@@ -301,7 +301,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save()
@@ -333,7 +333,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let stream = InputStream(fileAtPath: tempFilePath.relativePath) else {
@@ -365,7 +365,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let stream = InputStream(fileAtPath: tempFilePath.relativePath) else {
@@ -401,7 +401,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let stream = InputStream(fileAtPath: tempFilePath.relativePath) else {
@@ -452,7 +452,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let stream = InputStream(fileAtPath: tempFilePath.relativePath) else {
@@ -482,7 +482,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -521,7 +521,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -563,7 +563,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -608,7 +608,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -651,7 +651,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -866,7 +866,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -911,7 +911,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -950,7 +950,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -996,7 +996,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -1042,7 +1042,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -1084,7 +1084,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save()
@@ -1113,7 +1113,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetchedFile = try parseFile.fetch()
@@ -1146,7 +1146,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetchedFile = try parseFile.fetch(options: [.cachePolicy(.reloadIgnoringLocalAndRemoteCacheData)])
@@ -1200,7 +1200,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetchedFile = try parseFile.fetch()
@@ -1237,7 +1237,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetchedFile = try parseFile.fetch { (_, _, totalDownloaded, totalExpected) in
@@ -1277,7 +1277,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         // swiftlint:disable:next line_length
         let fetchedFile = try parseFile.fetch(options: [.cachePolicy(.reloadIgnoringLocalAndRemoteCacheData)]) { (_, _, totalDownloaded, totalExpected) in
@@ -1342,7 +1342,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -1374,7 +1374,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "ParseFile async")
@@ -1407,7 +1407,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         try parseFile.delete(options: [.usePrimaryKey])
@@ -1435,7 +1435,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save { (_, _, totalWritten, totalExpected) in
@@ -1470,7 +1470,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let savedFile = try parseFile.save { (task, _, totalWritten, totalExpected) in

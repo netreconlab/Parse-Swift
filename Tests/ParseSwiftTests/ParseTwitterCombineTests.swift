@@ -112,7 +112,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.twitter.loginPublisher(userId: "testing", screenName: "screenName",
@@ -164,7 +164,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let twitterAuthData = ParseTwitter<User>
@@ -202,7 +202,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -232,7 +232,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.twitter.linkPublisher(userId: "testing",
@@ -284,7 +284,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let twitterAuthData = ParseTwitter<User>
@@ -348,7 +348,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.twitter.unlinkPublisher()

@@ -54,7 +54,7 @@ class ParseHealthTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let health = try ParseHealth.check()
@@ -77,7 +77,7 @@ class ParseHealthTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Health check")
@@ -106,7 +106,7 @@ class ParseHealthTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Health check")

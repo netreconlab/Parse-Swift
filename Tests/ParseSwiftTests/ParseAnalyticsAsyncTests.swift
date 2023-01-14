@@ -51,7 +51,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let options = [UIApplication.LaunchOptionsKey.remoteNotification: ["stop": "drop"]]
         _ = try await ParseAnalytics.trackAppOpened(launchOptions: options)
@@ -69,7 +69,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let options = [UIApplication.LaunchOptionsKey.remoteNotification: ["stop": "drop"]]
         _ = try await ParseAnalytics.trackAppOpened(launchOptions: options)
@@ -88,7 +88,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -116,7 +116,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -144,7 +144,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let event = ParseAnalytics(name: "hello")
         _ = try await event.track()
@@ -162,7 +162,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let event = ParseAnalytics(name: "hello")
 
@@ -190,7 +190,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         var event = ParseAnalytics(name: "hello")
         _ = try await event.track(dimensions: ["stop": "drop"])
@@ -207,7 +207,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         var event = ParseAnalytics(name: "hello")
         do {

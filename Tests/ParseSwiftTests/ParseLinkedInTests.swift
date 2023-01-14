@@ -91,7 +91,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -123,7 +123,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try User.anonymous.login()
@@ -179,7 +179,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.login(id: "testing",
@@ -217,7 +217,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.login(authData: (["id": "testing",
@@ -264,7 +264,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.login(id: "testing",
@@ -298,7 +298,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.link(id: "testing",
@@ -333,7 +333,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.link(id: "testing",
@@ -369,7 +369,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseLinkedIn<User>
@@ -429,7 +429,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.linkedin.unlink()

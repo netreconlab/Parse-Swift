@@ -78,7 +78,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 400, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 400)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -162,7 +162,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -226,7 +226,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -279,7 +279,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 429)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -335,7 +335,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -399,7 +399,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -452,7 +452,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 503)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil

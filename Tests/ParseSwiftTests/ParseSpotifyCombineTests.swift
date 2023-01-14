@@ -112,7 +112,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.spotify.loginPublisher(id: "testing", accessToken: "access_token")
@@ -162,7 +162,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.spotify.loginPublisher(authData: ["id": "testing",
@@ -193,7 +193,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -223,7 +223,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.spotify.linkPublisher(id: "testing", accessToken: "access_token")
@@ -270,7 +270,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.spotify.linkPublisher(authData: ["id": "testing",
@@ -324,7 +324,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.spotify.unlinkPublisher()
