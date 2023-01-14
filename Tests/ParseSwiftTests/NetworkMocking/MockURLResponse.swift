@@ -17,7 +17,7 @@ struct MockURLResponse {
     var error: Error?
 
     init(error: Error) {
-        self.delay = .init(0.0)
+        self.delay = Self.addRandomDelay(.init(0.0))
         self.error = error
         self.responseData = nil
         self.statusCode = 400
@@ -32,7 +32,10 @@ struct MockURLResponse {
          delay: TimeInterval,
          headerFields: [String: String] = ["Content-Type": "application/json"]) throws {
         let encoded = try JSONEncoder().encode(string)
-        self.init(data: encoded, statusCode: statusCode, delay: delay, headerFields: headerFields)
+        self.init(data: encoded,
+                  statusCode: statusCode,
+                  delay: Self.addRandomDelay(delay),
+                  headerFields: headerFields)
     }
 
     init(data: Data,
@@ -42,7 +45,15 @@ struct MockURLResponse {
         self.statusCode = statusCode
         self.headerFields = headerFields
         self.responseData = data
-        self.delay = delay
+        self.delay = Self.addRandomDelay(delay)
         self.error = nil
+    }
+
+    static func addRandomDelay(_ delay: TimeInterval) -> TimeInterval {
+        if delay == TimeInterval(0.0) {
+            let delayInSeconds = Utility.reconnectInterval(1)
+            return Utility.computeDelay(delayInSeconds) ?? delay
+        }
+        return delay
     }
 }
