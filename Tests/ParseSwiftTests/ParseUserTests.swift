@@ -567,7 +567,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 2) {_ in
+        DispatchQueue.concurrentPerform(iterations: 2) { _ in
             self.fetchAsync(user: user, userOnServer: userOnServer)
         }
     }
@@ -1303,7 +1303,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 2) {_ in
+        DispatchQueue.concurrentPerform(iterations: 2) { _ in
             self.updateAsync(user: user, userOnServer: userOnServer, callbackQueue: .global(qos: .background))
         }
     }

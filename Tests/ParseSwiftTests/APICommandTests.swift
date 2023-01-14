@@ -801,4 +801,16 @@ class APICommandTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
+
+    func testComputeDelayFromString() {
+        let dateString = "Wed, 21 Oct 2015 07:28:00 GMT"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
+        guard let date = dateFormatter.date(from: dateString),
+            let computedDate = URLSession.computeDelay(dateString) else {
+            XCTFail("Should have produced date")
+            return
+        }
+        XCTAssertLessThan(date.timeIntervalSinceNow - computedDate, 1)
+    }
 }

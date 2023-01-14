@@ -35,7 +35,7 @@ internal extension URLSession {
     }()
     #endif
 
-    static func updateParseURLSession() {
+    class func updateParseURLSession() {
         #if !os(Linux) && !os(Android) && !os(Windows)
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
@@ -55,7 +55,7 @@ internal extension URLSession {
         #endif
     }
 
-    static func reconnectInterval(_ maxExponent: Int) -> Int {
+    class func reconnectInterval(_ maxExponent: Int) -> Int {
         let min = NSDecimalNumber(decimal: Swift.min(30, pow(2, maxExponent) - 1))
         return Int.random(in: 0 ..< Int(truncating: min))
     }
@@ -168,13 +168,13 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
-    static func computeDelay(_ seconds: Int) -> TimeInterval? {
+    class func computeDelay(_ seconds: Int) -> TimeInterval? {
         Calendar.current.date(byAdding: .second,
                               value: seconds,
                               to: Date())?.timeIntervalSinceNow
     }
 
-    static func computeDelay(_ delayString: String) -> TimeInterval? {
+    class func computeDelay(_ delayString: String) -> TimeInterval? {
         guard let seconds = Int(delayString) else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"

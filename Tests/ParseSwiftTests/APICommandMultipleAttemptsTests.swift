@@ -62,18 +62,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
     }
 
-    func testComputeDelayFromString() {
-        let dateString = "Wed, 21 Oct 2015 07:28:00 GMT"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
-        guard let date = dateFormatter.date(from: dateString),
-            let computedDate = URLSession.computeDelay(dateString) else {
-            XCTFail("Should have produced date")
-            return
-        }
-        XCTAssertLessThan(date.timeIntervalSinceNow - computedDate, 1)
-    }
-
     func testErrorHTTP400JSON() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
