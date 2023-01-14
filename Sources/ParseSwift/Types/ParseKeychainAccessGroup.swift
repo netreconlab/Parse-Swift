@@ -16,16 +16,19 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
 
     static var current: Self? {
         get {
-            guard let versionInMemory: Self =
-                try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                guard let versionInMemory: Self =
+                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
                     guard let versionFromKeyChain: Self =
-                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
-                         else {
+                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
+                    else {
                         return nil
                     }
                     return versionFromKeyChain
-            }
-            return versionInMemory
+                }
+                return versionInMemory
+            })
         }
         set {
             let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.setCurrent")

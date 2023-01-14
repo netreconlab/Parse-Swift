@@ -17,26 +17,29 @@ public struct ParseVersion: ParseTypeable, Comparable {
     /// Current version of the SDK.
     public internal(set) static var current: String? {
         get {
-            guard let versionInMemory: String =
-                try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
-                #if !os(Linux) && !os(Android) && !os(Windows)
+            let synchronizationQueue = createSynchronizationQueue("ParseVersion.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> String? in
+                guard let versionInMemory: String =
+                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+#if !os(Linux) && !os(Android) && !os(Windows)
                     guard let versionFromKeyChain: String =
-                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
-                         else {
+                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
+                    else {
                         guard let versionFromKeyChain: String =
-                            try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion)
-                             else {
+                                try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion)
+                        else {
                             return nil
                         }
                         try? KeychainStore.shared.set(versionFromKeyChain, for: ParseStorage.Keys.currentVersion)
                         return versionFromKeyChain
                     }
                     return versionFromKeyChain
-                #else
+                    #else
                     return nil
-                #endif
-            }
-            return versionInMemory
+                    #endif
+                }
+                return versionInMemory
+            })
         }
         set {
             let synchronizationQueue = createSynchronizationQueue("ParseVersion.setCurrent")

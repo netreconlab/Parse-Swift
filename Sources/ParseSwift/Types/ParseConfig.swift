@@ -171,7 +171,10 @@ public extension ParseConfig {
     */
     internal(set) static var current: Self? {
         get {
-            return Self.currentContainer?.currentConfig
+            let synchronizationQueue = createSynchronizationQueue("ParseConfig.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                return Self.currentContainer?.currentConfig
+            })
         }
         set {
             let synchronizationQueue = createSynchronizationQueue("ParseConfig.setCurrent")

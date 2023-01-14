@@ -154,7 +154,12 @@ public extension ParseUser {
      - warning: Only use `current` users on the main thread as as modifications to `current` have to be unique.
     */
     internal(set) static var current: Self? {
-        get { Self.currentContainer?.currentUser }
+        get {
+            let synchronizationQueue = createSynchronizationQueue("ParseUser.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                Self.currentContainer?.currentUser
+            })
+        }
         set {
             let synchronizationQueue = createSynchronizationQueue("ParseUser.setCurrent")
             synchronizationQueue.sync {
