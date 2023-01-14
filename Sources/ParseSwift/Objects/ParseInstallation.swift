@@ -297,7 +297,10 @@ public extension ParseInstallation {
     */
     internal(set) static var current: Self? {
         get {
-            return Self.currentContainer.currentInstallation
+            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                return Self.currentContainer.currentInstallation
+            })
         }
         set {
             let synchronizationQueue = createSynchronizationQueue("ParseInstallation.setCurrent")
