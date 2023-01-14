@@ -13,7 +13,7 @@ struct MockURLResponse {
     var statusCode: Int = 200
     var headerFields = [String: String]()
     var responseData: Data?
-    var delay: TimeInterval = Self.addRandomDelay(2)
+    var delay: TimeInterval = Self.addRandomDelay(1)
     var error: Error?
 
     init(error: Error) {
