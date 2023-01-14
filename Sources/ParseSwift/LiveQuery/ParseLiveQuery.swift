@@ -615,7 +615,7 @@ extension ParseLiveQuery {
             } else {
                 self.synchronizationQueue
                     .asyncAfter(deadline: .now() + DispatchTimeInterval
-                                    .seconds(URLSession.reconnectInterval(attempts))) {
+                                    .seconds(Utility.reconnectInterval(attempts))) {
                         self.attempts += 1
                         self.resumeTask { _ in }
                         let error = ParseError(code: .otherCause,

@@ -100,7 +100,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
     Parse.configuration = configuration
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
-    URLSession.updateParseURLSession()
+    Utility.updateParseURLSession()
     deleteKeychainIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -287,7 +287,7 @@ public func updateAuthentication(_ authentication: ((URLAuthenticationChallenge,
                                                       URLCredential?) -> Void) -> Void)?) {
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: authentication)
-    URLSession.updateParseURLSession()
+    Utility.updateParseURLSession()
 }
 
 /**

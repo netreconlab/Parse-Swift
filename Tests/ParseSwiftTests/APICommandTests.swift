@@ -807,7 +807,7 @@ class APICommandTests: XCTestCase {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
         guard let date = dateFormatter.date(from: dateString),
-            let computedDate = URLSession.computeDelay(dateString) else {
+            let computedDate = Utility.computeDelay(dateString) else {
             XCTFail("Should have produced date")
             return
         }

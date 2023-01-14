@@ -704,6 +704,10 @@
 		70E6B036286289FF0043EC4A /* ParseHookResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E6B035286289FF0043EC4A /* ParseHookResponseTests.swift */; };
 		70E6B037286289FF0043EC4A /* ParseHookResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E6B035286289FF0043EC4A /* ParseHookResponseTests.swift */; };
 		70E6B038286289FF0043EC4A /* ParseHookResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E6B035286289FF0043EC4A /* ParseHookResponseTests.swift */; };
+		70ED62AC2972FFC600DF5FC7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62AB2972FFC600DF5FC7 /* Utility.swift */; };
+		70ED62AD2972FFC600DF5FC7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62AB2972FFC600DF5FC7 /* Utility.swift */; };
+		70ED62AE2972FFC600DF5FC7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62AB2972FFC600DF5FC7 /* Utility.swift */; };
+		70ED62AF2972FFC600DF5FC7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ED62AB2972FFC600DF5FC7 /* Utility.swift */; };
 		70F03A232780BDE200E5AFB4 /* ParseGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A222780BDE200E5AFB4 /* ParseGoogle.swift */; };
 		70F03A252780BDF700E5AFB4 /* ParseGoogle+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A242780BDF700E5AFB4 /* ParseGoogle+async.swift */; };
 		70F03A272780BE0F00E5AFB4 /* ParseGoogle+combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A262780BE0F00E5AFB4 /* ParseGoogle+combine.swift */; };
@@ -1364,6 +1368,7 @@
 		70E6B02D28614E480043EC4A /* ParseHookTriggerRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHookTriggerRequestTests.swift; sourceTree = "<group>"; };
 		70E6B031286152550043EC4A /* ParseHookTriggerRequestCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHookTriggerRequestCombineTests.swift; sourceTree = "<group>"; };
 		70E6B035286289FF0043EC4A /* ParseHookResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHookResponseTests.swift; sourceTree = "<group>"; };
+		70ED62AB2972FFC600DF5FC7 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		70F03A222780BDE200E5AFB4 /* ParseGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGoogle.swift; sourceTree = "<group>"; };
 		70F03A242780BDF700E5AFB4 /* ParseGoogle+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseGoogle+async.swift"; sourceTree = "<group>"; };
 		70F03A262780BE0F00E5AFB4 /* ParseGoogle+combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseGoogle+combine.swift"; sourceTree = "<group>"; };
@@ -1763,6 +1768,7 @@
 				4AB8B4F71F254AE10070F682 /* Parse.h */,
 				4A82B7EE1F254B820063D731 /* Parse.swift */,
 				70110D51250680140091CC1D /* ParseConstants.swift */,
+				70ED62AB2972FFC600DF5FC7 /* Utility.swift */,
 				F97B45C924D9C6F200F4A88B /* API */,
 				707A3BEF25B0A3B8000D215C /* Authentication */,
 				F97B45B324D9C6F200F4A88B /* Coding */,
@@ -2783,6 +2789,7 @@
 				707A3C2025B14BD0000D215C /* ParseApple.swift in Sources */,
 				703B095D26BF481F005A112F /* ParseFacebook+async.swift in Sources */,
 				709A147D283949D100BF85E5 /* ParseSchema.swift in Sources */,
+				70ED62AC2972FFC600DF5FC7 /* Utility.swift in Sources */,
 				704E781728CFD8A00075F952 /* ParseFileTransferable.swift in Sources */,
 				F97B462224D9C6F200F4A88B /* ParsePrimitiveStorable.swift in Sources */,
 				703B090226BD9652005A112F /* ParseAnalytics+async.swift in Sources */,
@@ -3098,6 +3105,7 @@
 				703B095E26BF481F005A112F /* ParseFacebook+async.swift in Sources */,
 				F97B462324D9C6F200F4A88B /* ParsePrimitiveStorable.swift in Sources */,
 				709A147E283949D100BF85E5 /* ParseSchema.swift in Sources */,
+				70ED62AD2972FFC600DF5FC7 /* Utility.swift in Sources */,
 				704E781828CFD8A00075F952 /* ParseFileTransferable.swift in Sources */,
 				703B090326BD9652005A112F /* ParseAnalytics+async.swift in Sources */,
 				703B094026BF47AC005A112F /* ParseApple+async.swift in Sources */,
@@ -3547,6 +3555,7 @@
 				703B096026BF481F005A112F /* ParseFacebook+async.swift in Sources */,
 				F97B462124D9C6F200F4A88B /* ParseStorage.swift in Sources */,
 				709A1480283949D100BF85E5 /* ParseSchema.swift in Sources */,
+				70ED62AF2972FFC600DF5FC7 /* Utility.swift in Sources */,
 				704E781A28CFD8A00075F952 /* ParseFileTransferable.swift in Sources */,
 				703B090526BD9652005A112F /* ParseAnalytics+async.swift in Sources */,
 				703B094226BF47AC005A112F /* ParseApple+async.swift in Sources */,
@@ -3737,6 +3746,7 @@
 				703B095F26BF481F005A112F /* ParseFacebook+async.swift in Sources */,
 				F97B462024D9C6F200F4A88B /* ParseStorage.swift in Sources */,
 				709A147F283949D100BF85E5 /* ParseSchema.swift in Sources */,
+				70ED62AE2972FFC600DF5FC7 /* Utility.swift in Sources */,
 				704E781928CFD8A00075F952 /* ParseFileTransferable.swift in Sources */,
 				703B090426BD9652005A112F /* ParseAnalytics+async.swift in Sources */,
 				703B094126BF47AC005A112F /* ParseApple+async.swift in Sources */,
