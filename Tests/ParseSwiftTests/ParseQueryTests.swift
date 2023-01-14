@@ -548,7 +548,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
+                let delay = MockURLResponse.addRandomDelay(2)
+                return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
             } catch {
                 return nil
             }
@@ -955,7 +956,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
+                let delay = MockURLResponse.addRandomDelay(2)
+                return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
             } catch {
                 return nil
             }

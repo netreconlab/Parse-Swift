@@ -564,7 +564,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            let delay = MockURLResponse.addRandomDelay(2)
+            return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
@@ -1300,7 +1301,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            let delay = MockURLResponse.addRandomDelay(2)
+            return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
