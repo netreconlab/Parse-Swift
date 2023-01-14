@@ -19,7 +19,7 @@ public protocol ParsePrimitiveStorable {
     mutating func deleteAll() throws
     /// Gets an object from the store based on its `key`.
     /// - parameter key: The unique key value of the object.
-    mutating func get<T: Decodable>(valueFor key: String) throws -> T?
+    func get<T: Decodable>(valueFor key: String) throws -> T?
     /// Stores an object in the store with a given `key`.
     /// - parameter object: The object to store.
     /// - parameter key: The unique key value of the object.

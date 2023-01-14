@@ -37,6 +37,7 @@ struct ParseStorage {
 
 // MARK: ParsePrimitiveStorable
 extension ParseStorage: ParsePrimitiveStorable {
+
     public mutating func delete(valueFor key: String) throws {
         try requireBackingStore()
         return try backingStore.delete(valueFor: key)
@@ -46,7 +47,8 @@ extension ParseStorage: ParsePrimitiveStorable {
         try requireBackingStore()
         return try backingStore.deleteAll()
     }
-    public mutating func get<T>(valueFor key: String) throws -> T? where T: Decodable {
+
+    public func get<T>(valueFor key: String) throws -> T? where T: Decodable {
         try requireBackingStore()
         return try backingStore.get(valueFor: key)
     }
@@ -55,4 +57,5 @@ extension ParseStorage: ParsePrimitiveStorable {
         try requireBackingStore()
         return try backingStore.set(object, for: key)
     }
+
 }

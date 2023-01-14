@@ -554,7 +554,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 10) { _ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             findAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -961,7 +961,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 10) { _ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }

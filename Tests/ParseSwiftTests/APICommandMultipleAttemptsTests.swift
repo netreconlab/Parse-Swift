@@ -90,7 +90,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -126,7 +126,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw originalError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -174,7 +174,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -238,7 +238,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -291,7 +291,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -347,7 +347,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -411,7 +411,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -464,7 +464,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
