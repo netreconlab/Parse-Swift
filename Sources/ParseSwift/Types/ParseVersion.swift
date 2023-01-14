@@ -39,10 +39,13 @@ public struct ParseVersion: ParseTypeable, Comparable {
             return versionInMemory
         }
         set {
-            try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            try? KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
-            #endif
+            let synchronizationQueue = createSynchronizationQueue("ParseVersion.setCurrent")
+            synchronizationQueue.sync {
+                try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+                #if !os(Linux) && !os(Android) && !os(Windows)
+                try? KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+                #endif
+            }
         }
     }
 

@@ -28,16 +28,19 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
             return versionInMemory
         }
         set {
-            guard let updatedKeychainAccessGroup = newValue else {
-                let defaultKeychainAccessGroup = Self()
-                try? ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                try? KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
-                return
+            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.setCurrent")
+            synchronizationQueue.sync {
+                guard let updatedKeychainAccessGroup = newValue else {
+                    let defaultKeychainAccessGroup = Self()
+                    try? ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                    try? KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                    Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
+                    return
+                }
+                try? ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                try? KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
             }
-            try? ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-            try? KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-            Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
         }
     }
 

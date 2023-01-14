@@ -26,7 +26,7 @@ public struct ParseHealth: ParseTypeable {
     }
 
     /**
-     Calls the health check function *synchronously* and returns a result of it is execution.
+     Calls the health check function *synchronously* and returns a result of its execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: Returns the status of the server.
      - throws: An error of type `ParseError`.
@@ -44,7 +44,7 @@ public struct ParseHealth: ParseTypeable {
     }
 
     /**
-     Calls the health check function *asynchronously* and returns a result of it is execution.
+     Calls the health check function *asynchronously* and returns the result of its execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter allowIntermediateResponses: If *true*, this method will continue to update `Status`

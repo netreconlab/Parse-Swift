@@ -20,7 +20,7 @@ import Security
  It supports any object, with Coding support. All objects are available after the
  first device unlock and are not backed up.
  */
-struct KeychainStore: SecureStorage {
+struct KeychainStore: SecureStorable {
 
     let synchronizationQueue: DispatchQueue
     let service: String

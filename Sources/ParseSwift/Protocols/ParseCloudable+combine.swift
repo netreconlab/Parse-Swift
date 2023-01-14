@@ -15,7 +15,7 @@ public extension ParseCloudable {
     // MARK: Combine
 
     /**
-     Calls a Cloud Code function *asynchronously* and returns a result of it is execution.
+     Calls a Cloud Code function *asynchronously* and returns a result of its execution.
      Publishes when complete.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.

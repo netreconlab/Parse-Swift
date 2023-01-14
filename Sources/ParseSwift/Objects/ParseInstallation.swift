@@ -300,8 +300,11 @@ public extension ParseInstallation {
             return Self.currentContainer.currentInstallation
         }
         set {
-            Self.currentContainer.currentInstallation = newValue
-            Self.updateInternalFieldsCorrectly()
+            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.setCurrent")
+            synchronizationQueue.sync {
+                Self.currentContainer.currentInstallation = newValue
+                Self.updateInternalFieldsCorrectly()
+            }
         }
     }
 

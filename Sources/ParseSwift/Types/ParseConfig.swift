@@ -155,10 +155,13 @@ public extension ParseConfig {
     }
 
     internal static func deleteCurrentContainerFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
-        #endif
+        let synchronizationQueue = createSynchronizationQueue("ParseConfig.updateKeychainIfNeeded")
+        synchronizationQueue.sync {
+            try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
+            #if !os(Linux) && !os(Android) && !os(Windows)
+            try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
+            #endif
+        }
     }
 
     /**
@@ -171,10 +174,13 @@ public extension ParseConfig {
             return Self.currentContainer?.currentConfig
         }
         set {
-            if Self.currentContainer == nil {
-                Self.currentContainer = CurrentConfigContainer<Self>()
+            let synchronizationQueue = createSynchronizationQueue("ParseConfig.setCurrent")
+            synchronizationQueue.sync {
+                if Self.currentContainer == nil {
+                    Self.currentContainer = CurrentConfigContainer<Self>()
+                }
+                Self.currentContainer?.currentConfig = newValue
             }
-            Self.currentContainer?.currentConfig = newValue
         }
     }
 }

@@ -15,13 +15,13 @@ struct ParseStorage {
         self.backingStore = store
     }
 
-    private mutating func requireBackingStore() {
+    private func requireBackingStore() throws {
         guard backingStore != nil else {
-            print("""
+            throw ParseError(code: .otherCause,
+                             message: """
                 You cannot use ParseStorage without a backing store.
                 An in-memory store is being used as a fallback.
             """)
-            return
         }
     }
 
@@ -35,24 +35,24 @@ struct ParseStorage {
     }
 }
 
-// MARK: ParseKeyValueStore
+// MARK: ParsePrimitiveStorable
 extension ParseStorage: ParsePrimitiveStorable {
     public mutating func delete(valueFor key: String) throws {
-        requireBackingStore()
+        try requireBackingStore()
         return try backingStore.delete(valueFor: key)
     }
 
     public mutating func deleteAll() throws {
-        requireBackingStore()
+        try requireBackingStore()
         return try backingStore.deleteAll()
     }
     public mutating func get<T>(valueFor key: String) throws -> T? where T: Decodable {
-        requireBackingStore()
+        try requireBackingStore()
         return try backingStore.get(valueFor: key)
     }
 
     public mutating func set<T>(_ object: T, for key: String) throws where T: Encodable {
-        requireBackingStore()
+        try requireBackingStore()
         return try backingStore.set(object, for: key)
     }
 }
