@@ -1,6 +1,6 @@
 //
 //  ParsePrimitiveStorable.swift
-//  
+//
 //
 //  Created by Pranjal Satija on 7/19/20.
 //
@@ -53,6 +53,7 @@ extension KeychainStore: ParsePrimitiveStorable {
                              message: "Could not save object: \(object) key \"\(key)\" in Keychain")
         }
     }
+
 }
 
 #endif
