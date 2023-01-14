@@ -57,4 +57,5 @@ struct MockURLResponse {
         }
         return delay
     }
+
 }
