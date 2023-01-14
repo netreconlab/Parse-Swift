@@ -13,39 +13,40 @@ struct MockURLResponse {
     var statusCode: Int = 200
     var headerFields = [String: String]()
     var responseData: Data?
-    var delay: TimeInterval!
+    var delay: TimeInterval = Self.addRandomDelay(1)
     var error: Error?
 
     init(error: Error) {
-        self.delay = Self.addRandomDelay(.init(0.0))
         self.error = error
         self.responseData = nil
         self.statusCode = 400
     }
 
     init(string: String) throws {
-        try self.init(string: string, statusCode: 200, delay: .init(0.0))
+        try self.init(string: string, statusCode: 200)
     }
 
     init(string: String,
          statusCode: Int,
-         delay: TimeInterval,
+         delay: TimeInterval? = nil,
          headerFields: [String: String] = ["Content-Type": "application/json"]) throws {
         let encoded = try JSONEncoder().encode(string)
         self.init(data: encoded,
                   statusCode: statusCode,
-                  delay: Self.addRandomDelay(delay),
+                  delay: delay,
                   headerFields: headerFields)
     }
 
     init(data: Data,
          statusCode: Int,
-         delay: TimeInterval,
+         delay: TimeInterval? = nil,
          headerFields: [String: String] = ["Content-Type": "application/json"]) {
         self.statusCode = statusCode
         self.headerFields = headerFields
         self.responseData = data
-        self.delay = Self.addRandomDelay(delay)
+        if let delay = delay {
+            self.delay = Self.addRandomDelay(delay)
+        }
         self.error = nil
     }
 

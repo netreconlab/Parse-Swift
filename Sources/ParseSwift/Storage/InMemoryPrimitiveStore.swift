@@ -26,30 +26,38 @@ struct InMemoryPrimitiveStore: ParsePrimitiveStorable {
     }
 
     mutating func delete(valueFor key: String) throws {
+
         synchronizationQueue.sync(flags: .barrier) {
             storage[key] = nil
         }
+
     }
 
     mutating func deleteAll() throws {
+
         synchronizationQueue.sync {
             storage.removeAll()
         }
+
     }
 
     mutating func get<T>(valueFor key: String) throws -> T? where T: Decodable {
+
         guard let data = synchronizationQueue.sync(execute: { () -> Data? in
             return storage[key]
         }) else {
             return nil
         }
         return try decoder.decode(T.self, from: data)
+
     }
 
     mutating func set<T>(_ object: T, for key: String) throws where T: Encodable {
+
         let data = try encoder.encode(object)
         synchronizationQueue.sync(flags: .barrier) {
             storage[key] = data
         }
+
     }
 }

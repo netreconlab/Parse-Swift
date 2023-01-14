@@ -10,6 +10,7 @@ import Foundation
 
 struct Utility {
     static func updateParseURLSession() {
+
         #if !os(Linux) && !os(Android) && !os(Windows)
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
@@ -27,20 +28,26 @@ struct Utility {
             URLSession.parse = session
         }
         #endif
+
     }
 
     static func reconnectInterval(_ maxExponent: Int) -> Int {
+
         let min = NSDecimalNumber(decimal: Swift.min(30, pow(2, maxExponent) - 1))
         return Int.random(in: 0 ..< Int(truncating: min))
+
     }
 
     static func computeDelay(_ seconds: Int) -> TimeInterval? {
+
         Calendar.current.date(byAdding: .second,
                               value: seconds,
                               to: Date())?.timeIntervalSinceNow
+
     }
 
     static func computeDelay(_ delayString: String) -> TimeInterval? {
+
         guard let seconds = Int(delayString) else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
@@ -50,5 +57,6 @@ struct Utility {
             return delayUntil.timeIntervalSinceNow
         }
         return computeDelay(seconds)
+
     }
 }
