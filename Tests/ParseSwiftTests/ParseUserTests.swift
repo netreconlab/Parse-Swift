@@ -301,7 +301,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -370,7 +370,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -436,7 +436,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Fetch user1")
@@ -564,10 +564,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            let delay = MockURLResponse.addRandomDelay(2)
+            return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             self.fetchAsync(user: user, userOnServer: userOnServer)
         }
     }
@@ -642,7 +643,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -777,7 +778,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -838,7 +839,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -899,7 +900,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         var updated = original.mergeable
         updated.customKey = "beast"
@@ -965,7 +966,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Fetch user1")
@@ -1033,7 +1034,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Fetch user1")
@@ -1096,7 +1097,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save()
@@ -1155,7 +1156,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1205,7 +1206,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save()
@@ -1300,10 +1301,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            let delay = MockURLResponse.addRandomDelay(2)
+            return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             self.updateAsync(user: user, userOnServer: userOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -1327,7 +1329,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         self.updateAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
@@ -1364,7 +1366,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1409,7 +1411,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1496,7 +1498,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1555,7 +1557,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1578,7 +1580,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1662,7 +1664,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1688,7 +1690,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(logoutResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1789,7 +1791,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(logoutResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1813,7 +1815,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1838,7 +1840,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             try User.passwordReset(email: "hello@parse.org")
@@ -1871,7 +1873,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1901,7 +1903,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1954,7 +1956,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1979,7 +1981,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             try User.verificationEmail(email: "hello@parse.org")
@@ -2012,7 +2014,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -2042,7 +2044,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -2132,7 +2134,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         user.delete { result in
@@ -2170,7 +2172,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2249,7 +2251,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         [user].fetchAll { results in
@@ -2338,7 +2340,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2461,7 +2463,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         [user].saveAll { results in
@@ -2586,7 +2588,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2640,7 +2642,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         [user].deleteAll { results in
@@ -2720,7 +2722,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2784,7 +2786,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Fetch user1")

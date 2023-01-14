@@ -173,7 +173,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -206,7 +206,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -284,7 +284,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -315,7 +315,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -345,7 +345,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -376,7 +376,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -407,7 +407,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -438,7 +438,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -468,7 +468,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -498,7 +498,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 // Get dates in correct format from ParseDecoding strategy
                 serverResponse = try serverResponse.getDecoder().decode(InstallationDefaultMerge.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -532,7 +532,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let response = originalResponse
         var originalUpdate = original.mergeable
@@ -613,7 +613,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let response = originalResponse
         var originalUpdate = original.mergeable
@@ -702,7 +702,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -731,7 +731,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -778,7 +778,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await [installation].fetchAll()
@@ -850,7 +850,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [installation].saveAll()
@@ -918,7 +918,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [installation].createAll()
@@ -970,7 +970,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [installation].replaceAll()
@@ -1013,7 +1013,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [installation].replaceAll()
@@ -1063,7 +1063,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [installation].updateAll()
@@ -1108,7 +1108,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let deleted = try await [installation].deleteAll()
@@ -1153,7 +1153,7 @@ class ParseInstallationAsyncTests: XCTestCase { // swiftlint:disable:this type_b
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await Installation.become("wowsers")

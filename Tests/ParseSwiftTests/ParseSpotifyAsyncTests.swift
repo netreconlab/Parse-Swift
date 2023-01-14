@@ -110,7 +110,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.spotify.login(id: "testing", accessToken: "access_token")
@@ -145,7 +145,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.spotify.login(authData: ["id": "testing",
@@ -163,7 +163,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -191,7 +191,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.spotify.link(id: "testing", accessToken: "access_token")
@@ -223,7 +223,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.spotify.link(authData: ["id": "testing",
@@ -262,7 +262,7 @@ class ParseSpotifyAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.spotify.unlink()

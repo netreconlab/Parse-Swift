@@ -111,7 +111,7 @@ class ParseLDAPAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.ldap.login(id: "testing", password: "this")
@@ -147,7 +147,7 @@ class ParseLDAPAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.ldap.login(authData: (["id": "testing",
@@ -165,7 +165,7 @@ class ParseLDAPAsyncTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -194,7 +194,7 @@ class ParseLDAPAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.ldap.link(id: "testing", password: "password")
@@ -227,7 +227,7 @@ class ParseLDAPAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing", password: "authenticationToken")
@@ -268,7 +268,7 @@ class ParseLDAPAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.ldap.unlink()

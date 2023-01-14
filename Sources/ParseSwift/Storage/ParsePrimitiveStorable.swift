@@ -1,6 +1,6 @@
 //
 //  ParsePrimitiveStorable.swift
-//  
+//
 //
 //  Created by Pranjal Satija on 7/19/20.
 //
@@ -19,45 +19,16 @@ public protocol ParsePrimitiveStorable {
     mutating func deleteAll() throws
     /// Gets an object from the store based on its `key`.
     /// - parameter key: The unique key value of the object.
-    mutating func get<T: Decodable>(valueFor key: String) throws -> T?
+    func get<T: Decodable>(valueFor key: String) throws -> T?
     /// Stores an object in the store with a given `key`.
     /// - parameter object: The object to store.
     /// - parameter key: The unique key value of the object.
     mutating func set<T: Encodable>(_ object: T, for key: String) throws
 }
 
-// MARK: InMemoryKeyValueStore
-
-/// A `ParseKeyValueStore` that lives in memory for unit testing purposes.
-/// It works by encoding / decoding all values just like a real `Codable` store would
-/// but it stores all values as `Data` blobs in memory.
-struct InMemoryKeyValueStore: ParsePrimitiveStorable {
-    var decoder = ParseCoding.jsonDecoder()
-    var encoder = ParseCoding.jsonEncoder()
-    var storage = [String: Data]()
-
-    mutating func delete(valueFor key: String) throws {
-        storage[key] = nil
-    }
-
-    mutating func deleteAll() throws {
-        storage.removeAll()
-    }
-
-    mutating func get<T>(valueFor key: String) throws -> T? where T: Decodable {
-        guard let data = storage[key] else { return nil }
-        return try decoder.decode(T.self, from: data)
-    }
-
-    mutating func set<T>(_ object: T, for key: String) throws where T: Encodable {
-        let data = try encoder.encode(object)
-        storage[key] = data
-    }
-}
-
 #if !os(Linux) && !os(Android) && !os(Windows)
 
-// MARK: KeychainStore + ParseKeyValueStore
+// MARK: KeychainStore + ParsePrimitiveStorable
 extension KeychainStore: ParsePrimitiveStorable {
 
     func delete(valueFor key: String) throws {
@@ -82,6 +53,7 @@ extension KeychainStore: ParsePrimitiveStorable {
                              message: "Could not save object: \(object) key \"\(key)\" in Keychain")
         }
     }
+
 }
 
 #endif

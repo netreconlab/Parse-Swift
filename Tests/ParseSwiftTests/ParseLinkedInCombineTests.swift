@@ -112,7 +112,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.linkedin.loginPublisher(id: "testing",
@@ -164,7 +164,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.linkedin.loginPublisher(authData: (["id": "testing",
@@ -196,7 +196,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -226,7 +226,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.linkedin.linkPublisher(id: "testing",
@@ -275,7 +275,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseLinkedIn<User>
@@ -333,7 +333,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.linkedin.unlinkPublisher()

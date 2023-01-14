@@ -100,7 +100,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -151,7 +151,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -207,7 +207,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -258,7 +258,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -291,7 +291,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -347,7 +347,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -409,7 +409,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -471,7 +471,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -500,7 +500,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -529,7 +529,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -583,7 +583,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -612,7 +612,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -641,7 +641,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(parseError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -683,7 +683,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -733,7 +733,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -780,7 +780,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 serverResponse = try user.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -823,7 +823,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 serverResponse = try user.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -863,7 +863,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -916,7 +916,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].fetchAllPublisher()
@@ -1008,7 +1008,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].saveAllPublisher()
@@ -1093,7 +1093,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].createAllPublisher()
@@ -1160,7 +1160,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].replaceAllPublisher()
@@ -1216,7 +1216,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].replaceAllPublisher()
@@ -1281,7 +1281,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].updateAllPublisher()
@@ -1343,7 +1343,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [user].deleteAllPublisher()

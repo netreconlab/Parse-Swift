@@ -90,7 +90,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = score.fetchPublisher()
@@ -145,7 +145,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = score.savePublisher()
@@ -195,7 +195,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = score.createPublisher()
@@ -249,7 +249,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = score.updatePublisher()
@@ -297,7 +297,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = score.deletePublisher()
@@ -351,7 +351,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")].fetchAllPublisher()
@@ -453,7 +453,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [score, score2].saveAllPublisher()
@@ -535,7 +535,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [score, score2].createAllPublisher()
@@ -623,7 +623,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [score, score2].replaceAllPublisher()
@@ -701,7 +701,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [score, score2].replaceAllPublisher()
@@ -785,7 +785,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [score, score2].updateAllPublisher()
@@ -853,7 +853,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")].deleteAllPublisher()

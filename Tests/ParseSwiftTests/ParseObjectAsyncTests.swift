@@ -350,7 +350,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -384,7 +384,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await score2.fetch()
@@ -423,7 +423,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await score.save()
@@ -458,7 +458,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let response = originalResponse
         var originalUpdated = original.mergeable
@@ -498,7 +498,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await score.create()
@@ -537,7 +537,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await score.replace()
@@ -571,7 +571,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await score.replace()
@@ -623,7 +623,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await score.update()
@@ -668,7 +668,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         score = score.set(\.player, to: "Ali")
@@ -713,7 +713,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let response = originalResponse
         var originalUpdated = original.mergeable
@@ -752,7 +752,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let response = originalResponse
         let originalUpdated = original.mergeable
@@ -786,7 +786,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         try await score2.delete()
     }
@@ -808,7 +808,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -857,7 +857,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")].fetchAll()
@@ -945,7 +945,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [score, score2].saveAll()
@@ -1016,7 +1016,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [score, score2].createAll()
@@ -1079,7 +1079,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
         let saved = try await [score].createAll()
         XCTAssertEqual(saved.count, 1)
@@ -1112,7 +1112,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
         let saved = try await [score].createAll()
         XCTAssertEqual(saved.count, 1)
@@ -1163,7 +1163,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [score, score2].replaceAll()
@@ -1240,7 +1240,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [score, score2].replaceAll()
@@ -1314,7 +1314,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
         let saved = try await [score].replaceAll()
         XCTAssertEqual(saved.count, 1)
@@ -1361,7 +1361,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await [score, score2].updateAll()
@@ -1420,7 +1420,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
         let saved = try await [score].updateAll()
         XCTAssertEqual(saved.count, 1)
@@ -1449,7 +1449,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
         let deleted = try await [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")].deleteAll()
         XCTAssertEqual(deleted.count, 2)
@@ -1496,7 +1496,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let (savedChildren, savedChildFiles) = try await game.ensureDeepSave()
@@ -1548,7 +1548,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encodedGamed, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
         guard let savedGame = try? game
@@ -1597,7 +1597,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let (savedChildren, savedChildFiles) = try await game.ensureDeepSave()
@@ -1649,7 +1649,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encodedGamed, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
         guard let savedGame = try? game
@@ -1726,7 +1726,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let (savedChildren, savedChildFiles) = try await game.ensureDeepSave()
@@ -1782,7 +1782,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let (savedChildren, savedChildFiles) = try await game.ensureDeepSave()
@@ -1821,7 +1821,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encodedGamed, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
         guard let savedGame = try? game

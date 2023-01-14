@@ -297,11 +297,17 @@ public extension ParseInstallation {
     */
     internal(set) static var current: Self? {
         get {
-            return Self.currentContainer.currentInstallation
+            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                return Self.currentContainer.currentInstallation
+            })
         }
         set {
-            Self.currentContainer.currentInstallation = newValue
-            Self.updateInternalFieldsCorrectly()
+            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.setCurrent")
+            synchronizationQueue.sync {
+                Self.currentContainer.currentInstallation = newValue
+                Self.updateInternalFieldsCorrectly()
+            }
         }
     }
 

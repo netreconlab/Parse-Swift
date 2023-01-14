@@ -16,28 +16,34 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
 
     static var current: Self? {
         get {
-            guard let versionInMemory: Self =
-                try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                guard let versionInMemory: Self =
+                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
                     guard let versionFromKeyChain: Self =
-                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
-                         else {
+                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
+                    else {
                         return nil
                     }
                     return versionFromKeyChain
-            }
-            return versionInMemory
+                }
+                return versionInMemory
+            })
         }
         set {
-            guard let updatedKeychainAccessGroup = newValue else {
-                let defaultKeychainAccessGroup = Self()
-                try? ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                try? KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
-                return
+            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.setCurrent")
+            synchronizationQueue.sync {
+                guard let updatedKeychainAccessGroup = newValue else {
+                    let defaultKeychainAccessGroup = Self()
+                    try? ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                    try? KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                    Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
+                    return
+                }
+                try? ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                try? KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+                Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
             }
-            try? ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-            try? KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-            Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
         }
     }
 

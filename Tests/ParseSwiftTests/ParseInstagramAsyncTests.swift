@@ -110,7 +110,7 @@ class ParseInstagramAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.instagram.login(id: "testing", accessToken: "access_token", apiURL: "apiURL")
@@ -145,7 +145,7 @@ class ParseInstagramAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.instagram.login(authData: ["id": "testing",
@@ -164,7 +164,7 @@ class ParseInstagramAsyncTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -192,7 +192,7 @@ class ParseInstagramAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.instagram.link(id: "testing", accessToken: "access_token", apiURL: "apiURL")
@@ -224,7 +224,7 @@ class ParseInstagramAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.instagram.link(authData: ["id": "testing",
@@ -265,7 +265,7 @@ class ParseInstagramAsyncTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.instagram.unlink()

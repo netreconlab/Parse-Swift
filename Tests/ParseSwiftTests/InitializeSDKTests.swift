@@ -192,7 +192,7 @@ class InitializeSDKTests: XCTestCase {
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testFetchMissingCurrentInstallation() {
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         let installationId = "testMe"
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
@@ -210,7 +210,7 @@ class InitializeSDKTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -288,7 +288,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
@@ -317,7 +317,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         ParseVersion.current = "0.0.0"
         var newInstallation = Installation()
@@ -353,7 +353,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         ParseVersion.current = ParseConstants.version
         var newInstallation = Installation()
@@ -389,7 +389,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         let newVersion = "1000.0.0"
         ParseVersion.current = newVersion
@@ -427,7 +427,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        let memory = InMemoryKeyValueStore()
+        let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()

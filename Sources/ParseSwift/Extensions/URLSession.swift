@@ -35,31 +35,6 @@ internal extension URLSession {
     }()
     #endif
 
-    static func updateParseURLSession() {
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        if !Parse.configuration.isTestingSDK {
-            let configuration = URLSessionConfiguration.default
-            configuration.urlCache = URLCache.parse
-            configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            Self.parse = URLSession(configuration: configuration,
-                                    delegate: Parse.sessionDelegate,
-                                    delegateQueue: nil)
-        } else {
-            let session = URLSession.shared
-            session.configuration.urlCache = URLCache.parse
-            session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            Self.parse = session
-        }
-        #endif
-    }
-
-    static func reconnectInterval(_ maxExponent: Int) -> Int {
-        let min = NSDecimalNumber(decimal: Swift.min(30, pow(2, maxExponent) - 1))
-        return Int.random(in: 0 ..< Int(truncating: min))
-    }
-
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     func makeResult<U>(request: URLRequest,
                        responseData: Data?,
@@ -168,24 +143,6 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
-    static func computeDelay(_ seconds: Int) -> TimeInterval? {
-        Calendar.current.date(byAdding: .second,
-                              value: seconds,
-                              to: Date())?.timeIntervalSinceNow
-    }
-
-    static func computeDelay(_ delayString: String) -> TimeInterval? {
-        guard let seconds = Int(delayString) else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
-            guard let delayUntil = dateFormatter.date(from: delayString) else {
-                return nil
-            }
-            return delayUntil.timeIntervalSinceNow
-        }
-        return computeDelay(seconds)
-    }
-
     // swiftlint:disable:next function_body_length
     func dataTask<U>(
         with request: URLRequest,
@@ -237,22 +194,22 @@ internal extension URLSession {
                 switch statusCode {
                 case 429:
                     if let delayString = httpResponse.value(forHTTPHeaderField: "x-rate-limit-reset"),
-                       let constantDelay = Self.computeDelay(delayString) {
+                       let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Self.computeDelay(Self.reconnectInterval(2))
+                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
                     }
 
                 case 503:
                     if let delayString = httpResponse.value(forHTTPHeaderField: "retry-after"),
-                       let constantDelay = Self.computeDelay(delayString) {
+                       let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Self.computeDelay(Self.reconnectInterval(2))
+                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
                     }
 
                 default:
-                    delayInterval = Self.computeDelay(Self.reconnectInterval(2))
+                    delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
                 }
 
                 callbackQueue.asyncAfter(deadline: .now() + delayInterval) {

@@ -90,7 +90,7 @@ class ParseFileCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = parseFile.fetchPublisher()
@@ -134,7 +134,7 @@ class ParseFileCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = parseFile.fetchPublisher(progress: { (_, _, totalDownloaded, totalExpected) in
@@ -181,7 +181,7 @@ class ParseFileCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = parseFile.savePublisher()
@@ -225,7 +225,7 @@ class ParseFileCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = parseFile.savePublisher(progress: { (_, _, totalDownloaded, totalExpected) in
@@ -270,7 +270,7 @@ class ParseFileCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = parseFile.deletePublisher(options: [.usePrimaryKey])

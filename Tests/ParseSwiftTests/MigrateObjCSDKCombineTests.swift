@@ -169,7 +169,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -192,7 +192,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -252,7 +252,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -312,7 +312,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             do {
                 let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
                 serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -450,7 +450,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -503,7 +503,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = Installation.deleteObjCKeychainPublisher()

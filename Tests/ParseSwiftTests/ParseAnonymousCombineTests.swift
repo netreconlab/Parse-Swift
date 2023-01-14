@@ -111,7 +111,7 @@ class ParseAnonymousCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.anonymous.loginPublisher()
@@ -161,7 +161,7 @@ class ParseAnonymousCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.anonymous.loginPublisher(authData: .init())

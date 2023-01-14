@@ -207,6 +207,6 @@ public struct ParseConfiguration {
         self.maxConnectionAttempts = maxConnectionAttempts
         self.liveQueryMaxConnectionAttempts = liveQueryMaxConnectionAttempts
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
-        ParseStorage.shared.use(primitiveStore ?? InMemoryKeyValueStore())
+        ParseStorage.shared.use(primitiveStore ?? InMemoryPrimitiveStore())
     }
 }

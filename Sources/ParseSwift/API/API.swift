@@ -203,11 +203,11 @@ public struct API {
             headers["X-Parse-Client-Key"] = clientKey
         }
 
-        if let token = BaseParseUser.currentContainer?.sessionToken {
+        if let token = BaseParseUser.current?.sessionToken {
             headers["X-Parse-Session-Token"] = token
         }
 
-        if let installationId = BaseParseInstallation.currentContainer.installationId {
+        if let installationId = BaseParseInstallation.current?.installationId {
             headers["X-Parse-Installation-Id"] = installationId
         }
 

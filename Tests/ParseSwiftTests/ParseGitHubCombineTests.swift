@@ -112,7 +112,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.github.loginPublisher(id: "testing", accessToken: "this")
@@ -162,7 +162,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.github.loginPublisher(authData: (["id": "testing",
@@ -193,7 +193,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -223,7 +223,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.github.linkPublisher(id: "testing",
@@ -271,7 +271,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseGitHub<User>
@@ -326,7 +326,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.github.unlinkPublisher()

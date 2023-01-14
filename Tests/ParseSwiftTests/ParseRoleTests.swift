@@ -468,7 +468,7 @@ class ParseRoleTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let updatedRole = try operation.save()
@@ -510,7 +510,7 @@ class ParseRoleTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let changedRole = role
@@ -585,7 +585,7 @@ class ParseRoleTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let updatedRole = try operation.save()
@@ -656,7 +656,7 @@ class ParseRoleTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Save object1")
@@ -744,7 +744,7 @@ class ParseRoleTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Save object1")

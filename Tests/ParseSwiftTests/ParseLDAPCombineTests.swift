@@ -112,7 +112,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.ldap.loginPublisher(id: "testing", password: "this")
@@ -162,7 +162,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.ldap.loginPublisher(authData: (["id": "testing",
@@ -193,7 +193,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -223,7 +223,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.ldap.linkPublisher(id: "testing", password: "this")
@@ -270,7 +270,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseLDAP<User>
@@ -325,7 +325,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = User.ldap.unlinkPublisher()

@@ -176,7 +176,7 @@ class KeychainStoreTests: XCTestCase {
     }
 
     func testThreadSafeRemoveAllObjects() {
-        DispatchQueue.concurrentPerform(iterations: 100) { (_) in
+        DispatchQueue.concurrentPerform(iterations: 100) { _ in
             XCTAssertTrue(testStore.set(object: "yarr", forKey: "pirate1"), "Should set value")
             XCTAssertTrue(testStore.set(object: "yarr", forKey: "pirate2"), "Should set value")
             XCTAssertTrue(testStore.removeAllObjects(), "Should set value")

@@ -110,7 +110,7 @@ class APICommandTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -137,7 +137,7 @@ class APICommandTests: XCTestCase {
         let originalObject = "test"
         MockURLProtocol.mockRequests { _ in
             do {
-                return try MockURLResponse(string: originalObject, statusCode: 200, delay: 0.0)
+                return try MockURLResponse(string: originalObject, statusCode: 200)
             } catch {
                 return nil
             }
@@ -163,7 +163,7 @@ class APICommandTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try JSONEncoder().encode(originalError)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 XCTFail("Should encode error")
                 return nil
@@ -174,7 +174,7 @@ class APICommandTests: XCTestCase {
             _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                             path: .login,
                                                             params: nil,
-                                                            mapper: { (_) -> NoBody in
+                                                            mapper: { _ -> NoBody in
                 throw originalError
             }).execute(options: [])
             XCTFail("Should have thrown an error")
@@ -203,7 +203,7 @@ class APICommandTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 400, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 400)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -214,7 +214,7 @@ class APICommandTests: XCTestCase {
             _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                             path: .login,
                                                             params: nil,
-                                                            mapper: { (_) -> NoBody in
+                                                            mapper: { _ -> NoBody in
                 throw parseError
             }).execute(options: [])
 
@@ -238,7 +238,7 @@ class APICommandTests: XCTestCase {
             _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                             path: .login,
                                                             params: nil,
-                                                            mapper: { (_) -> NoBody in
+                                                            mapper: { _ -> NoBody in
                 throw originalError
             }).execute(options: [])
             XCTFail("Should have thrown an error")
@@ -267,7 +267,7 @@ class APICommandTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 500, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 500)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -278,7 +278,7 @@ class APICommandTests: XCTestCase {
             _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                             path: .login,
                                                             params: nil,
-                                                            mapper: { (_) -> NoBody in
+                                                            mapper: { _ -> NoBody in
                 throw parseError
             }).execute(options: [])
 
@@ -304,7 +304,7 @@ class APICommandTests: XCTestCase {
             _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                             path: .login,
                                                             params: nil,
-                                                            mapper: { (_) -> NoBody in
+                                                            mapper: { _ -> NoBody in
                 throw originalError
             }).execute(options: [])
             XCTFail("Should have thrown an error")
@@ -800,5 +800,17 @@ class APICommandTests: XCTestCase {
         case .failure(let error):
             XCTFail(error.localizedDescription)
         }
+    }
+
+    func testComputeDelayFromString() {
+        let dateString = "Wed, 21 Oct 2015 07:28:00 GMT"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
+        guard let date = dateFormatter.date(from: dateString),
+            let computedDate = Utility.computeDelay(dateString) else {
+            XCTFail("Should have produced date")
+            return
+        }
+        XCTAssertLessThan(date.timeIntervalSinceNow - computedDate, 1)
     }
 }

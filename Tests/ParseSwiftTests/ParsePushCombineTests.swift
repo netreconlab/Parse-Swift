@@ -80,7 +80,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0, headerFields: headers)
+                return MockURLResponse(data: encoded, statusCode: 200, headerFields: headers)
             } catch {
                 return nil
             }
@@ -117,7 +117,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0, headerFields: headers)
+                return MockURLResponse(data: encoded, statusCode: 200, headerFields: headers)
             } catch {
                 return nil
             }
@@ -156,7 +156,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0, headerFields: headers)
+                return MockURLResponse(data: encoded, statusCode: 200, headerFields: headers)
             } catch {
                 return nil
             }
@@ -196,7 +196,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0, headerFields: headers)
+                return MockURLResponse(data: encoded, statusCode: 200, headerFields: headers)
             } catch {
                 return nil
             }
@@ -237,7 +237,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0, headerFields: headers)
+                return MockURLResponse(data: encoded, statusCode: 200, headerFields: headers)
             } catch {
                 return nil
             }
@@ -274,7 +274,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -319,7 +319,7 @@ class ParsePushCombineTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }

@@ -91,7 +91,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -123,7 +123,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try User.anonymous.login()
@@ -176,7 +176,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.login(id: "testing",
@@ -213,7 +213,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.login(authData: (["id": "testing",
@@ -259,7 +259,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.login(id: "testing",
@@ -292,7 +292,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.link(id: "testing",
@@ -326,7 +326,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.link(id: "testing",
@@ -361,7 +361,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseGitHub<User>
@@ -418,7 +418,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.github.unlink()

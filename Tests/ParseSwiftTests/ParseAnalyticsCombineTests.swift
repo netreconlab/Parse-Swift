@@ -52,7 +52,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let options = [UIApplication.LaunchOptionsKey.remoteNotification: ["stop": "drop"]]
         let publisher = ParseAnalytics.trackAppOpenedPublisher(launchOptions: options)
@@ -83,7 +83,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let publisher = ParseAnalytics.trackAppOpenedPublisher(dimensions: ["stop": "drop"])
@@ -113,7 +113,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let event = ParseAnalytics(name: "hello")
         let publisher = event.trackPublisher()
@@ -143,7 +143,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let event = ParseAnalytics(name: "hello")
         let publisher = event.trackPublisher(dimensions: ["stop": "drop"])

@@ -13,7 +13,24 @@ import FoundationNetworking
 
 final class LiveQuerySocket: NSObject {
     private var session: URLSession!
-    var delegates = [URLSessionWebSocketTask: LiveQuerySocketDelegate]()
+    let synchronizationQueue = DispatchQueue(label: "parse.LiveQuerySocket.\(UUID().uuidString)",
+                                             qos: .default,
+                                             attributes: .concurrent,
+                                             autoreleaseFrequency: .inherit,
+                                             target: nil)
+    var delegates: [URLSessionWebSocketTask: LiveQuerySocketDelegate] {
+        get {
+            synchronizationQueue.sync(execute: { () -> [URLSessionWebSocketTask: LiveQuerySocketDelegate] in
+                delegateTasks
+            })
+        }
+        set {
+            synchronizationQueue.sync(flags: .barrier) {
+                delegateTasks = newValue
+            }
+        }
+    }
+    var delegateTasks = [URLSessionWebSocketTask: LiveQuerySocketDelegate]()
     var receivingTasks = [URLSessionWebSocketTask: Bool]()
     weak var authenticationDelegate: LiveQuerySocketDelegate?
 

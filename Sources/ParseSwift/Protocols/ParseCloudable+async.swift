@@ -14,7 +14,7 @@ public extension ParseCloudable {
     // MARK: Aysnc/Await
 
     /**
-     Calls a Cloud Code function *asynchronously* and returns a result of it is execution.
+     Calls a Cloud Code function *asynchronously* and returns a result of its execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: The return type.
      - throws: An error of type `ParseError`.

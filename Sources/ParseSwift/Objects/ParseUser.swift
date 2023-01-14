@@ -115,15 +115,18 @@ struct CurrentUserContainer<T: ParseUser>: Codable, Hashable {
 public extension ParseUser {
     internal static var currentContainer: CurrentUserContainer<Self>? {
         get {
-            guard let currentUserInMemory: CurrentUserContainer<Self>
-                = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
-                #if !os(Linux) && !os(Android) && !os(Windows)
-                return try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
-                #else
-                return nil
-                #endif
-            }
-            return currentUserInMemory
+            let synchronizationQueue = createSynchronizationQueue("ParseUser.getCurrentContainer")
+            return synchronizationQueue.sync(execute: { () -> CurrentUserContainer<Self>? in
+                guard let currentUserInMemory: CurrentUserContainer<Self>
+                        = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    return try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+                    #else
+                    return nil
+                    #endif
+                }
+                return currentUserInMemory
+            })
         }
         set { try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentUser) }
     }
@@ -151,9 +154,17 @@ public extension ParseUser {
      - warning: Only use `current` users on the main thread as as modifications to `current` have to be unique.
     */
     internal(set) static var current: Self? {
-        get { Self.currentContainer?.currentUser }
+        get {
+            let synchronizationQueue = createSynchronizationQueue("ParseUser.getCurrent")
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                Self.currentContainer?.currentUser
+            })
+        }
         set {
-            Self.currentContainer?.currentUser = newValue
+            let synchronizationQueue = createSynchronizationQueue("ParseUser.setCurrent")
+            synchronizationQueue.sync {
+                Self.currentContainer?.currentUser = newValue
+            }
         }
     }
 

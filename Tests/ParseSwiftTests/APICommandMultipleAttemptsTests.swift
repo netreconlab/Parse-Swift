@@ -62,18 +62,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
     }
 
-    func testComputeDelayFromString() {
-        let dateString = "Wed, 21 Oct 2015 07:28:00 GMT"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
-        guard let date = dateFormatter.date(from: dateString),
-            let computedDate = URLSession.computeDelay(dateString) else {
-            XCTFail("Should have produced date")
-            return
-        }
-        XCTAssertLessThan(date.timeIntervalSinceNow - computedDate, 1)
-    }
-
     func testErrorHTTP400JSON() throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
@@ -90,7 +78,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 400, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 400)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -102,7 +90,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -138,7 +126,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw originalError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -174,7 +162,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -186,7 +174,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -238,7 +226,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -250,7 +238,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -291,7 +279,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 429)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -303,7 +291,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -347,7 +335,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -359,7 +347,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -411,7 +399,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0, headerFields: headerFields)
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -423,7 +411,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,
@@ -464,7 +452,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             do {
                 let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, delay: 0.0)
+                return MockURLResponse(data: json, statusCode: 503)
             } catch {
                 XCTFail(error.localizedDescription)
                 return nil
@@ -476,7 +464,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
                                                 path: .login,
                                                 params: nil,
-                                                mapper: { (_) -> NoBody in
+                                                mapper: { _ -> NoBody in
             throw parseError
         }).executeAsync(options: [],
                         callbackQueue: .main,

@@ -51,7 +51,7 @@ class ParseHealthAsyncTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let health = try await ParseHealth.check()

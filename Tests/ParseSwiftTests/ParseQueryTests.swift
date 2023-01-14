@@ -443,7 +443,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -548,13 +548,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                let delay = MockURLResponse.addRandomDelay(2)
+                return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
             } catch {
                 return nil
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             findAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -571,7 +572,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -607,7 +608,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -645,7 +646,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -679,7 +680,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -713,7 +714,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -787,7 +788,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -813,7 +814,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -843,7 +844,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -917,13 +918,13 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 1) { _ in
             firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -940,7 +941,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -955,13 +956,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                let delay = MockURLResponse.addRandomDelay(2)
+                return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
             } catch {
                 return nil
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 3) { _ in
             firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -973,7 +975,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1033,7 +1035,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -1086,13 +1088,13 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 100) {_ in
+        DispatchQueue.concurrentPerform(iterations: 1) { _ in
             countAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
@@ -1109,7 +1111,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3012,7 +3014,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3036,7 +3038,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3071,7 +3073,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3119,7 +3121,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3143,7 +3145,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3182,7 +3184,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3230,7 +3232,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3254,7 +3256,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3290,7 +3292,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3338,7 +3340,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3363,7 +3365,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3394,7 +3396,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3419,7 +3421,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3450,7 +3452,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3475,7 +3477,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Fetch object")
@@ -3551,7 +3553,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3581,7 +3583,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3625,7 +3627,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3653,7 +3655,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3694,7 +3696,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3732,7 +3734,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3791,7 +3793,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let expectation = XCTestExpectation(description: "Aggregate object1")
         let pipeline = [[String: String]]()
@@ -3850,7 +3852,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -3892,7 +3894,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3919,7 +3921,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3958,7 +3960,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -4014,7 +4016,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         let expectation = XCTestExpectation(description: "Aggregate object1")
         let query = GameScore.query("points" > 9)

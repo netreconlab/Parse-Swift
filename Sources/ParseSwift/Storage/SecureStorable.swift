@@ -1,5 +1,5 @@
 //
-//  SecureStorage.swift
+//  SecureStorable.swift
 //  ParseSwift
 //
 //  Created by Florent Vilmart on 17-09-25.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SecureStorage {
+protocol SecureStorable {
     init(service: String?)
     func object<T>(forKey key: String) -> T? where T: Decodable
     func set<T>(object: T?, forKey: String) -> Bool where T: Encodable

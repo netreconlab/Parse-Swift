@@ -148,7 +148,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -174,7 +174,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -201,7 +201,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -226,7 +226,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -251,7 +251,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -277,7 +277,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -303,7 +303,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
@@ -329,7 +329,7 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")

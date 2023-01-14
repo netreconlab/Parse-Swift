@@ -110,7 +110,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.login(userId: "testing",
@@ -146,7 +146,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.login(userId: "testing", accessToken: "accessToken")
@@ -182,7 +182,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let faceookAuthData = ParseFacebook<User>
@@ -204,7 +204,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
         MockURLProtocol.mockRequests { _ in
             do {
                 let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+                return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
             }
@@ -233,7 +233,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.link(userId: "testing",
@@ -267,7 +267,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.link(userId: "testing",
@@ -301,7 +301,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let authData = ParseFacebook<User>
@@ -346,7 +346,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.unlink()
@@ -385,7 +385,7 @@ class ParseFacebookAsyncTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = try await User.facebook.unlink()

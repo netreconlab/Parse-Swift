@@ -571,7 +571,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try score.save()
@@ -604,7 +604,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try score.save(ignoringCustomObjectIdConfig: true)
@@ -635,7 +635,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try score.save()
@@ -672,7 +672,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try score.save(ignoringCustomObjectIdConfig: true)
@@ -738,7 +738,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
@@ -778,7 +778,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         self.saveAsync(score: score,
@@ -846,7 +846,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
@@ -886,7 +886,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.updateAsync(score: score,
                          scoreOnServer: scoreOnServer,
@@ -924,7 +924,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -989,7 +989,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1066,7 +1066,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1140,7 +1140,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save()
@@ -1174,7 +1174,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save(ignoringCustomObjectIdConfig: true)
@@ -1205,7 +1205,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save()
@@ -1242,7 +1242,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try user.save(ignoringCustomObjectIdConfig: true)
@@ -1291,7 +1291,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.saveUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
     }
@@ -1329,7 +1329,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.saveUserAsync(user: user,
                            userOnServer: userOnServer,
@@ -1376,7 +1376,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.updateUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
     }
@@ -1429,7 +1429,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1512,7 +1512,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1581,7 +1581,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1647,7 +1647,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try installation.save()
@@ -1681,7 +1681,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try installation.save(ignoringCustomObjectIdConfig: true)
@@ -1712,7 +1712,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try installation.save()
@@ -1749,7 +1749,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try installation.save(ignoringCustomObjectIdConfig: true)
@@ -1814,7 +1814,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.saveInstallationAsync(installation: installation,
                                    installationOnServer: installationOnServer,
@@ -1855,7 +1855,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.saveInstallationAsync(installation: installation,
                                    installationOnServer: installationOnServer,
@@ -1905,7 +1905,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.updateInstallationAsync(installation: installation,
                                      installationOnServer: installationOnServer,
@@ -1948,7 +1948,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         self.updateInstallationAsync(installation: installation,
                                      installationOnServer: installationOnServer,
@@ -1987,7 +1987,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2061,7 +2061,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2146,7 +2146,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2215,7 +2215,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-           return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+           return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -2282,7 +2282,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let fetched = try score.fetch(options: [])
@@ -2324,7 +2324,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return
         }
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {

@@ -59,7 +59,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let created = try await hookFunction.create()
@@ -72,7 +72,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
@@ -107,7 +107,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let updated = try await hookFunction.update()
@@ -120,7 +120,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
@@ -155,7 +155,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await hookFunction.fetch()
@@ -168,7 +168,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
@@ -203,7 +203,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await hookFunction.fetchAll()
@@ -216,7 +216,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
@@ -235,7 +235,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
@@ -249,7 +249,7 @@ class ParseHookFunctionTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200, delay: 0.0)
+            return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let hookFunction = TestFunction(name: "foo",
