@@ -24,6 +24,11 @@ thanks to [Corey Baker](https://github.com/cbaker6).
 * The max connection attempts for LiveQuery can now be changed when initializing the SDK ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
+
+* Fixed a threading issue with .current objects that can cause apps to crash 
+([#45](https://github.com/netreconlab/Parse-Swift/pull/45)), thanks 
+to [Corey Baker](https://github.com/cbaker6).
+
 * (Breaking Change) Add and update ParseError codes. unknownError has been renamed 
 to otherCause. invalidImageData now has the error code of 150. webhookError has 
 the error code of 143 ([#23](https://github.com/netreconlab/Parse-Swift/pull/23)),
