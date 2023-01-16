@@ -10,6 +10,8 @@
 
 __New features__
 
+* Adds the the ability to listen to particular keys with LiveQueries. Requires Parse-Server 6.0.0 ([#46](https://github.com/netreconlab/Parse-Swift/pull/46)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 * (Breaking Change) Added a new ParseHealth.Status enum to support Parse Server. 
 Developers can access the new status values (Status.initialized, Status.starting) 
 using the ParseHealth.check callback or Combine methods. The new status values 
@@ -24,6 +26,8 @@ thanks to [Corey Baker](https://github.com/cbaker6).
 * The max connection attempts for LiveQuery can now be changed when initializing the SDK ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
+
+* Fixed issues that can cause cache misses when querying ([#46](https://github.com/netreconlab/Parse-Swift/pull/46)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 * Fixed a threading issue with .current objects that can cause apps to crash 
 ([#45](https://github.com/netreconlab/Parse-Swift/pull/45)), thanks 
