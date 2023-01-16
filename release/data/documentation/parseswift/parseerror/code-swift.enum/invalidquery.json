@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "You tried to find values matching a datatype that does not",
+      "text" : "There is a problem with the parameters used to",
       "type" : "text"
     },
     {
@@ -9,22 +9,38 @@
       "type" : "text"
     },
     {
-      "text" : "support exact database matching, like an array or a dictionary.",
+      "text" : "construct this query. This could be an invalid field name",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "or an invalid field type for a specific constraint. Check",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error message for more details.",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum\/invalidQuery"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum\/invalidQuery"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -104,21 +120,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
   "abstract" : [
     {
       "text" : "An object with a Parse code and message.",
@@ -139,7 +155,7 @@
       "text" : "ParseError"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -152,7 +168,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum": {
   "abstract" : [
     {
       "code" : "ParseError.Code",
@@ -201,7 +217,7 @@
       "text" : "Code"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -214,10 +230,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/code-swift.enum"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum/invalidQuery": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum/invalidQuery": {
   "abstract" : [
     {
-      "text" : "You tried to find values matching a datatype that does not",
+      "text" : "There is a problem with the parameters used to",
       "type" : "text"
     },
     {
@@ -225,7 +241,23 @@
       "type" : "text"
     },
     {
-      "text" : "support exact database matching, like an array or a dictionary.",
+      "text" : "construct this query. This could be an invalid field name",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "or an invalid field type for a specific constraint. Check",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error message for more details.",
       "type" : "text"
     }
   ],
@@ -243,7 +275,7 @@
       "text" : "invalidQuery"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum\/invalidQuery",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum\/invalidQuery",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseError.Code.invalidQuery",

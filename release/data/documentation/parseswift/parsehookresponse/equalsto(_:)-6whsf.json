@@ -16,15 +16,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -125,7 +125,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
               "text" : "ParseError"
@@ -135,7 +135,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A5ErrorV4CodeO",
               "text" : "Code"
@@ -274,21 +274,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
   "abstract" : [
     {
       "text" : "An object with a Parse code and message.",
@@ -309,7 +309,7 @@
       "text" : "ParseError"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -322,7 +322,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum": {
   "abstract" : [
     {
       "code" : "ParseError.Code",
@@ -371,7 +371,7 @@
       "text" : "Code"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Code-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -384,7 +384,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/code-swift.enum"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
   "abstract" : [
     {
       "text" : "Build a response after processing a ",
@@ -425,7 +425,7 @@
       "text" : "ParseHookResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -438,18 +438,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/Error-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/Error-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Error Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/error-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-6whsf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-6whsf": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -505,7 +505,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalsTo(_:)",

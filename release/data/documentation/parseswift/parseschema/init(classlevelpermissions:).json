@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/init(classLevelPermissions:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/init(classLevelPermissions:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -118,7 +118,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A3CLPV",
               "text" : "ParseCLP"
@@ -182,21 +182,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -225,7 +225,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -238,7 +238,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSchema": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema": {
   "abstract" : [
     {
       "code" : "ParseSchema",
@@ -263,7 +263,7 @@
       "text" : "ParseSchema"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -276,7 +276,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSchema/init(classLevelPermissions:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/init(classLevelPermissions:)": {
   "abstract" : [
     {
       "text" : "Create an empty instance of ParseSchema type with a specific CLP.",
@@ -342,7 +342,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/init(classLevelPermissions:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/init(classLevelPermissions:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(classLevelPermissions:)",

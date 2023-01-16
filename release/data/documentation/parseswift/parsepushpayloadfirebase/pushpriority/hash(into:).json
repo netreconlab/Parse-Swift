@@ -16,16 +16,16 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/hash(into:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/hash(into:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -220,21 +220,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
   "abstract" : [
     {
       "text" : "The payload data for an Firebase Cloud Messaging (FCM) push notification.",
@@ -276,7 +276,7 @@
       "text" : "ParsePushPayloadFirebase"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -289,7 +289,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority": {
   "abstract" : [
     {
       "text" : "The priority type of a notification.",
@@ -310,7 +310,7 @@
       "text" : "PushPriority"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -323,18 +323,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/RawRepresentable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/rawrepresentable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/hash(into:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/hash(into:)": {
   "abstract" : [
 
   ],
@@ -429,7 +429,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/hash(into:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",

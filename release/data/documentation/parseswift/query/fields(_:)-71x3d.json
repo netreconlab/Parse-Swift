@@ -1,15 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "A list of fields to receive updates on when the ",
+      "text" : "A list of select keys to receive for a ",
       "type" : "text"
     },
     {
-      "code" : "Query",
+      "code" : "ParseObject",
       "type" : "codeVoice"
     },
     {
-      "text" : " is used as a",
+      "text" : " whenever an update occurs for a",
       "type" : "text"
     },
     {
@@ -28,14 +28,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-71x3d"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-71x3d"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -148,7 +148,7 @@
               "text" : "]) -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift5QueryV",
               "text" : "Query"
@@ -199,7 +199,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An array of fields to receive back instead of the whole ",
+                  "text" : "An array of keys to receive back instead of the whole ",
                   "type" : "text"
                 },
                 {
@@ -371,8 +371,8 @@
               "type" : "paragraph"
             }
           ],
-          "name" : "Warning",
-          "style" : "warning",
+          "name" : "Important",
+          "style" : "important",
           "type" : "aside"
         }
       ],
@@ -401,21 +401,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Query": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query": {
   "abstract" : [
     {
       "text" : "The ",
@@ -452,7 +452,7 @@
       "text" : "Query"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -465,18 +465,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Query/fields(_:)-71x3d": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/fields(_:)-71x3d": {
   "abstract" : [
     {
-      "text" : "A list of fields to receive updates on when the ",
+      "text" : "A list of select keys to receive for a ",
       "type" : "text"
     },
     {
-      "code" : "Query",
+      "code" : "ParseObject",
       "type" : "codeVoice"
     },
     {
-      "text" : " is used as a",
+      "text" : " whenever an update occurs for a",
       "type" : "text"
     },
     {
@@ -537,7 +537,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-71x3d",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-71x3d",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fields(_:)",

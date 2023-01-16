@@ -2,14 +2,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -33,78 +33,76 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/id-27z0a",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/operation",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/id-27z0a",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/operation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/createPublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/deletePublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetchPublisher(includeKeys:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getDecoder()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getEncoder()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getJSONEncoder()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/hasSameObjectId(as:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/merge(with:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeParse(with:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:child:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:className:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-473ct",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-6n2lm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replacePublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertKeyPath(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertObject()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/savePublisher(ignoringCustomObjectIdConfig:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/set(_:to:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/shouldRestoreKey(_:original:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/toPointer()"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/createPublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/deletePublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetchPublisher(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getDecoder()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getEncoder()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getJSONEncoder()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/hasSameObjectId(as:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/merge(with:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeParse(with:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:child:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:className:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-473ct",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-6n2lm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replacePublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/savePublisher(ignoringCustomObjectIdConfig:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/set(_:to:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/shouldRestoreKey(_:original:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/toPointer()"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query-swift.type.property"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query-swift.type.property"
       ],
       "title" : "Type Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-1f2xg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-m51y",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-4cj59",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-p3o1",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-4n4k6",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-9k0oc"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-1f2xg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-m51y",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-4cj59",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-p3o1",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-4n4k6",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-9k0oc"
       ],
       "title" : "Type Methods"
     }
@@ -123,21 +121,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
   "abstract" : [
     {
       "text" : "The PushStatus on the Parse Server.",
@@ -158,7 +156,7 @@
       "text" : "ParsePushStatus"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -171,7 +169,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/create(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/create(options:)": {
   "abstract" : [
     {
       "text" : "Creates the ",
@@ -263,14 +261,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "create(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/create(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/create(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/create(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Creates the ",
@@ -402,14 +400,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/create(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "create(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/create(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/createPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/createPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Creates the ",
@@ -507,14 +505,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/createPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/createPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "createPublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/createpublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/delete(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/delete(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -590,14 +588,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/delete(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/delete(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/delete(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -730,14 +728,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/delete(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/delete(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/deletePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/deletePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -836,14 +834,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/deletePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/deletePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "deletePublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/deletepublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch(includeKeys:options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -944,14 +942,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/fetch(includekeys:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch(includeKeys:options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch(includeKeys:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -1100,14 +1098,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetch(includeKeys:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/fetch(includekeys:options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetchPublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetchPublisher(includeKeys:options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -1230,14 +1228,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetchPublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/fetchPublisher(includeKeys:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchPublisher(includeKeys:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/fetchpublisher(includekeys:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/get(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/get(_:)": {
   "abstract" : [
     {
       "text" : "Get the unwrapped property value.",
@@ -1309,14 +1307,14 @@
       "text" : "W"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/get(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "get(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/get(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/getDecoder()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/getDecoder()": {
   "abstract" : [
     {
       "text" : "The JSON decoder setup with the correct ",
@@ -1366,14 +1364,14 @@
       "text" : "JSONDecoder"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getDecoder()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getDecoder()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getDecoder()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/getdecoder()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/getEncoder()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/getEncoder()": {
   "abstract" : [
     {
       "text" : "The Parse encoder is used to JSON encode all ",
@@ -1419,14 +1417,14 @@
       "text" : "ParseEncoder"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getEncoder()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getEncoder()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getEncoder()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/getencoder()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/getJSONEncoder()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/getJSONEncoder()": {
   "abstract" : [
     {
       "text" : "The JSON encoder setup with the correct ",
@@ -1468,14 +1466,14 @@
       "text" : "JSONEncoder"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getJSONEncoder()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/getJSONEncoder()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getJSONEncoder()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/getjsonencoder()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/hasSameObjectId(as:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/hasSameObjectId(as:)": {
   "abstract" : [
     {
       "text" : "Determines if two objects have the same objectId.",
@@ -1530,14 +1528,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/hasSameObjectId(as:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/hasSameObjectId(as:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasSameObjectId(as:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/hassameobjectid(as:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/id-27z0a": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/id-27z0a": {
   "abstract" : [
     {
       "text" : "A computed property that is the same value as ",
@@ -1591,14 +1589,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/id-27z0a",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/id-27z0a",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "id",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/id-27z0a"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/init(objectId:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/init(objectId:)": {
   "abstract" : [
     {
       "text" : "Creates a ",
@@ -1664,14 +1662,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/init(objectId:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(objectId:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/init(objectid:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/isDirtyForKey(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/isDirtyForKey(_:)": {
   "abstract" : [
     {
       "text" : "Get whether a value associated with a ",
@@ -1759,14 +1757,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isDirtyForKey(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isDirtyForKey(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/isdirtyforkey(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/merge(with:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/merge(with:)": {
   "abstract" : [
     {
       "text" : "Merges two ",
@@ -1835,14 +1833,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/merge(with:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/merge(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "merge(with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/merge(with:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/mergeParse(with:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/mergeParse(with:)": {
   "abstract" : [
     {
       "text" : "Merges two ",
@@ -1911,14 +1909,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeParse(with:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeParse(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mergeParse(with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/mergeparse(with:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/mergeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/mergeable": {
   "abstract" : [
     {
       "text" : "An empty copy of the respective object that allows you to update a",
@@ -1955,14 +1953,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/mergeable",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mergeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/mergeable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/operation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/operation": {
   "abstract" : [
     {
       "text" : "Create a new operation.",
@@ -2004,14 +2002,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/operation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/operation",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "operation",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/operation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/query(_:)-1f2xg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/query(_:)-1f2xg": {
   "abstract" : [
     {
       "text" : "Create a query with an array of constraints.",
@@ -2070,14 +2068,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-1f2xg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-1f2xg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/query(_:)-1f2xg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/query(_:)-m51y": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/query(_:)-m51y": {
   "abstract" : [
     {
       "text" : "Create a query with a variadic amount constraints.",
@@ -2136,14 +2134,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-m51y",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query(_:)-m51y",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/query(_:)-m51y"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/query-swift.type.property": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/query-swift.type.property": {
   "abstract" : [
     {
       "text" : "Create a query with no constraints.",
@@ -2193,14 +2191,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query-swift.type.property",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/query-swift.type.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/query-swift.type.property"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/queryRelations(_:parent:)-4cj59": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/queryRelations(_:parent:)-4cj59": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2316,14 +2314,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-4cj59",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-4cj59",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "queryRelations(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/queryrelations(_:parent:)-4cj59"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/queryRelations(_:parent:)-p3o1": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/queryRelations(_:parent:)-p3o1": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2440,14 +2438,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-p3o1",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/queryRelations(_:parent:)-p3o1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "queryRelations(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/queryrelations(_:parent:)-p3o1"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation": {
   "abstract" : [
     {
       "text" : "Create a new relation with this ",
@@ -2497,14 +2495,14 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:child:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:child:)": {
   "abstract" : [
     {
       "text" : "Create a new relation to a specific child.",
@@ -2588,14 +2586,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:child:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:child:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:child:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:child:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:className:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:className:)": {
   "abstract" : [
     {
       "text" : "Create a new relation with a specific key.",
@@ -2671,14 +2669,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:className:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:className:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:className:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:classname:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:)": {
   "abstract" : [
     {
       "text" : "Establish a relation based on a stored relation with this ",
@@ -2770,14 +2768,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.method-473ct": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.method-473ct": {
   "abstract" : [
     {
       "text" : "Establish a relation based on a stored relation.",
@@ -2897,14 +2895,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-473ct",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-473ct",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:key:with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:key:with:)-swift.method-473ct"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.method-6n2lm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.method-6n2lm": {
   "abstract" : [
     {
       "text" : "Establish a relation based on a stored relation.",
@@ -3015,14 +3013,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-6n2lm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.method-6n2lm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:key:with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:key:with:)-swift.method-6n2lm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.type.method-4n4k6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.type.method-4n4k6": {
   "abstract" : [
     {
       "text" : "Establish a relation based on a stored relation.",
@@ -3141,14 +3139,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-4n4k6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-4n4k6",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:key:with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:key:with:)-swift.type.method-4n4k6"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.type.method-9k0oc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/relation(_:key:with:)-swift.type.method-9k0oc": {
   "abstract" : [
     {
       "text" : "Establish a relation based on a stored relation.",
@@ -3276,14 +3274,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-9k0oc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/relation(_:key:with:)-swift.type.method-9k0oc",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relation(_:key:with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/relation(_:key:with:)-swift.type.method-9k0oc"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/replace(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/replace(options:)": {
   "abstract" : [
     {
       "text" : "Replaces the ",
@@ -3375,14 +3373,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "replace(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/replace(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/replace(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/replace(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Replaces the ",
@@ -3514,14 +3512,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replace(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "replace(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/replace(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/replacePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/replacePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Replaces the ",
@@ -3619,14 +3617,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replacePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/replacePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "replacePublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/replacepublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/revert()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/revert()": {
   "abstract" : [
     {
       "text" : "Reverts the ",
@@ -3671,14 +3669,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "revert()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/revert()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/revert(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/revert(_:)": {
   "abstract" : [
     {
       "text" : "Reverts the ",
@@ -3777,174 +3775,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revert(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "revert(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/revert(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/revertKeyPath(_:)": {
-  "abstract" : [
-    {
-      "text" : "Reverts the ",
-      "type" : "text"
-    },
-    {
-      "code" : "KeyPath",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " of the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " back to  the original ",
-      "type" : "text"
-    },
-    {
-      "code" : "KeyPath",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "before mutations began.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "revertKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE13revertKeyPathyxs08WritableeF0Cyxqd__SgGKSQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : "?>) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertKeyPath(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "revertKeyPath(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/revertkeypath(_:)"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/revertObject()": {
-  "abstract" : [
-    {
-      "text" : "Reverts the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " back to the original object before mutations began.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "revertObject"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/revertObject()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "revertObject()",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/revertobject()"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(ignoringCustomObjectIdConfig:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -4045,14 +3883,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(ignoringCustomObjectIdConfig:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/save(ignoringcustomobjectidconfig:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -4201,14 +4039,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/save(ignoringcustomobjectidconfig:options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/save(options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -4292,14 +4130,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/save(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/save(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/savePublisher(ignoringCustomObjectIdConfig:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/savePublisher(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -4414,14 +4252,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/savePublisher(ignoringCustomObjectIdConfig:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/savePublisher(ignoringCustomObjectIdConfig:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "savePublisher(ignoringCustomObjectIdConfig:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/savepublisher(ignoringcustomobjectidconfig:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/set(_:to:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/set(_:to:)": {
   "abstract" : [
     {
       "text" : "Set the value of a specific ",
@@ -4517,14 +4355,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/set(_:to:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/set(_:to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "set(_:to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/set(_:to:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/shouldRestoreKey(_:original:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/shouldRestoreKey(_:original:)": {
   "abstract" : [
     {
       "text" : "Determines if a ",
@@ -4636,14 +4474,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/shouldRestoreKey(_:original:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/shouldRestoreKey(_:original:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "shouldRestoreKey(_:original:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/shouldrestorekey(_:original:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus/toPointer()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/toPointer()": {
   "abstract" : [
     {
       "text" : "Converts this ",
@@ -4701,7 +4539,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/toPointer()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/toPointer()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "toPointer()",

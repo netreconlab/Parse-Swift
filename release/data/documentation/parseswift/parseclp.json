@@ -16,13 +16,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -89,12 +89,12 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -112,105 +112,105 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(from:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(requiresAuthentication:publicAccess:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(from:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(requiresAuthentication:publicAccess:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/protectedFields",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/readUserFields",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/writeUserFields"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/protectedFields",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/readUserFields",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/writeUserFields"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addPointerFields(_:on:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-2hwwg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-3ld7d",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-7mmnw",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsRequiresAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsUser(_:userField:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getPointerFields(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-1ibkv",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-35eqy",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-3oyee",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-6ueex",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsPublic()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsRequiresAuthentication()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsUser(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-37b9k",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-94bwb",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-msxs",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessRequiresAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-31rh7",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-4yuat",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-7lyeb",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-bbom",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessPublic()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessRequiresAuthentication()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-5ldwm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-7ov62",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-8k62f",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-9svo4",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessRequiresAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removePointerFields(_:on:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-4w6oa",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-7qajb",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-8it6u",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-9c9jl",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsRequiresAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsUser(_:userField:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-1fd37",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-2clcm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-b3t7",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-z0aw",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessPublic(_:on:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessRequiresAuthentication(_:on:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setPointerFields(_:on:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-2fsdg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-3ewb1",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-46xeu",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-7w0s5",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:userField:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsRequiresAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-3nc5c",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-464o",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-4q3c9",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-6ssgv",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessPublic(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessRequiresAuthentication(_:canAddField:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-3axhs",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4gvup",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4ws0r",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-5qka",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessPublic(_:canAddField:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessRequiresAuthentication(_:canAddField:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addPointerFields(_:on:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-2hwwg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-3ld7d",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-7mmnw",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsRequiresAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsUser(_:userField:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getPointerFields(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-1ibkv",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-35eqy",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-3oyee",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-6ueex",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsPublic()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsRequiresAuthentication()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsUser(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-37b9k",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-94bwb",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-msxs",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessRequiresAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-31rh7",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-4yuat",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-7lyeb",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-bbom",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessPublic()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessRequiresAuthentication()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-5ldwm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-7ov62",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-8k62f",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-9svo4",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessRequiresAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removePointerFields(_:on:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-4w6oa",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-7qajb",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-8it6u",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-9c9jl",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsRequiresAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsUser(_:userField:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-1fd37",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-2clcm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-b3t7",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-z0aw",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessPublic(_:on:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessRequiresAuthentication(_:on:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setPointerFields(_:on:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-2fsdg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-3ewb1",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-46xeu",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-7w0s5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:userField:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsRequiresAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-3nc5c",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-464o",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-4q3c9",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-6ssgv",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessPublic(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessRequiresAuthentication(_:canAddField:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-3axhs",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4gvup",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4ws0r",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-5qka",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessPublic(_:canAddField:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessRequiresAuthentication(_:canAddField:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action"
       ],
       "title" : "Enumerations"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -229,36 +229,36 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -287,7 +287,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -300,7 +300,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
   "abstract" : [
     {
       "text" : "The avialable actions to perform on a Parse class.",
@@ -321,7 +321,7 @@
       "text" : "Action"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -334,40 +334,40 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/CustomDebugStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomDebugStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/customdebugstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/CustomStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/CustomStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/customstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addPointerFields(_:on:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addPointerFields(_:on:)": {
   "abstract" : [
     {
       "text" : "Add access to an additional set of fields that are either of ",
@@ -460,14 +460,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addPointerFields(_:on:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addPointerFields(_:on:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addPointerFields(_:on:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addpointerfields(_:on:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-2hwwg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-2hwwg": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given ",
@@ -540,14 +540,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-2hwwg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-2hwwg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfields(_:for:)-2hwwg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-3ld7d": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-3ld7d": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given ",
@@ -637,14 +637,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-3ld7d",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-3ld7d",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfields(_:for:)-3ld7d"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-6fcbm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-6fcbm": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given ",
@@ -733,14 +733,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfields(_:for:)-6fcbm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-7mmnw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-7mmnw": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given ",
@@ -829,14 +829,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-7mmnw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-7mmnw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfields(_:for:)-7mmnw"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsPublic(_:)": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the public should not have access to on a Parse class.",
@@ -884,14 +884,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFieldsPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfieldspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsRequiresAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsRequiresAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields authenticated users should not have access to on a Parse class.",
@@ -939,14 +939,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsRequiresAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsRequiresAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFieldsRequiresAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfieldsrequiresauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsUser(_:userField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFieldsUser(_:userField:)": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given field that is either of ",
@@ -1035,14 +1035,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsUser(_:userField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFieldsUser(_:userField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFieldsUser(_:userField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfieldsuser(_:userfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getPointerFields(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getPointerFields(_:)": {
   "abstract" : [
     {
       "text" : "Retreive the fields in a Parse class that determine access for a specific ",
@@ -1102,14 +1102,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getPointerFields(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getPointerFields(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getPointerFields(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getpointerfields(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-1ibkv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-1ibkv": {
   "abstract" : [
     {
       "text" : "Get the protected fields the given ",
@@ -1185,14 +1185,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-1ibkv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-1ibkv",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFields(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfields(_:)-1ibkv"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-35eqy": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-35eqy": {
   "abstract" : [
     {
       "text" : "Get the protected fields the given ",
@@ -1252,14 +1252,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-35eqy",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-35eqy",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFields(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfields(_:)-35eqy"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-3oyee": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-3oyee": {
   "abstract" : [
     {
       "text" : "Get the protected fields for the given ",
@@ -1336,14 +1336,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-3oyee",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-3oyee",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFields(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfields(_:)-3oyee"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-6ueex": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFields(_:)-6ueex": {
   "abstract" : [
     {
       "text" : "Get the protected fields the given ",
@@ -1419,14 +1419,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-6ueex",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFields(_:)-6ueex",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFields(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfields(_:)-6ueex"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsPublic()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsPublic()": {
   "abstract" : [
     {
       "text" : "Get the fields the publc cannot access.",
@@ -1469,14 +1469,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsPublic()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsPublic()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFieldsPublic()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfieldspublic()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsRequiresAuthentication()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsRequiresAuthentication()": {
   "abstract" : [
     {
       "text" : "Get the fields the users with authentication cannot access.",
@@ -1519,14 +1519,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsRequiresAuthentication()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsRequiresAuthentication()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFieldsRequiresAuthentication()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfieldsrequiresauthentication()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsUser(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/getProtectedFieldsUser(_:)": {
   "abstract" : [
     {
       "text" : "Get the protected fields either a field of ",
@@ -1602,14 +1602,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsUser(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/getProtectedFieldsUser(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getProtectedFieldsUser(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/getprotectedfieldsuser(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-37b9k": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-37b9k": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -1697,14 +1697,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-37b9k",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-37b9k",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccess(_:for:)-37b9k"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-7qp10": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-7qp10": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -1792,14 +1792,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccess(_:for:)-7qp10"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-94bwb": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-94bwb": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -1871,14 +1871,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-94bwb",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-94bwb",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccess(_:for:)-94bwb"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-msxs": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-msxs": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -1967,14 +1967,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-msxs",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-msxs",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccess(_:for:)-msxs"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccessPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccessPublic(_:)": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -2021,14 +2021,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccessPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccesspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccessRequiresAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccessRequiresAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -2075,14 +2075,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessRequiresAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccessRequiresAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccessRequiresAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccessrequiresauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-31rh7": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-31rh7": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2146,14 +2146,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-31rh7",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-31rh7",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccess(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccess(_:)-31rh7"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-4yuat": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-4yuat": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2216,14 +2216,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-4yuat",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-4yuat",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccess(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccess(_:)-4yuat"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-7lyeb": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-7lyeb": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2270,14 +2270,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-7lyeb",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-7lyeb",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccess(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccess(_:)-7lyeb"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-bbom": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccess(_:)-bbom": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2340,14 +2340,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-bbom",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccess(_:)-bbom",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccess(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccess(_:)-bbom"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccessPublic()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccessPublic()": {
   "abstract" : [
     {
       "text" : "Check whether the public has access to perform get\/find\/count actions on a Parse class.",
@@ -2377,14 +2377,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessPublic()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessPublic()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccessPublic()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccesspublic()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccessRequiresAuthentication()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasReadAccessRequiresAuthentication()": {
   "abstract" : [
     {
       "text" : "Check whether user authentication is required to perform get\/find\/count actions on a Parse class.",
@@ -2414,14 +2414,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessRequiresAuthentication()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasReadAccessRequiresAuthentication()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasReadAccessRequiresAuthentication()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasreadaccessrequiresauthentication()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-5ldwm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-5ldwm": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2501,14 +2501,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-5ldwm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-5ldwm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccess(_:checkAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccess(_:checkaddfield:)-5ldwm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-7ov62": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-7ov62": {
   "abstract" : [
     {
       "text" : "Check whether a ",
@@ -2572,14 +2572,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-7ov62",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-7ov62",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccess(_:checkAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccess(_:checkaddfield:)-7ov62"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-8k62f": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-8k62f": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2660,14 +2660,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-8k62f",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-8k62f",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccess(_:checkAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccess(_:checkaddfield:)-8k62f"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-9svo4": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccess(_:checkAddField:)-9svo4": {
   "abstract" : [
     {
       "text" : "Check whether the ",
@@ -2747,14 +2747,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-9svo4",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccess(_:checkAddField:)-9svo4",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccess(_:checkAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccess(_:checkaddfield:)-9svo4"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccessPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccessPublic(_:)": {
   "abstract" : [
     {
       "text" : "Check whether the public has access to perform create\/update\/delete\/addField actions on a Parse class.",
@@ -2793,14 +2793,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccessPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccesspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccessRequiresAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasWriteAccessRequiresAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Check whether user authentication is required to perform create\/update\/delete\/addField actions on a Parse class.",
@@ -2839,14 +2839,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessRequiresAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasWriteAccessRequiresAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasWriteAccessRequiresAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/haswriteaccessrequiresauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/init()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/init()": {
   "abstract" : [
     {
       "text" : "Creates an empty instance of CLP.",
@@ -2863,14 +2863,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/init()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/init(from:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/init(from:)": {
   "abstract" : [
 
   ],
@@ -2905,14 +2905,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(from:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/init(from:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/init(requiresAuthentication:publicAccess:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/init(requiresAuthentication:publicAccess:)": {
   "abstract" : [
     {
       "text" : "Creates an instance of CLP with particular access.",
@@ -2963,14 +2963,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(requiresAuthentication:publicAccess:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/init(requiresAuthentication:publicAccess:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(requiresAuthentication:publicAccess:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/init(requiresauthentication:publicaccess:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/protectedFields": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/protectedFields": {
   "abstract" : [
     {
       "text" : "The users, roles, and access level restrictions who cannot access particular",
@@ -3030,14 +3030,14 @@
       "text" : ">]?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/protectedFields",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/protectedFields",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "protectedFields",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/protectedfields"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/readUserFields": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/readUserFields": {
   "abstract" : [
     {
       "text" : "Fields of ",
@@ -3104,14 +3104,14 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/readUserFields",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/readUserFields",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "readUserFields",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/readuserfields"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removePointerFields(_:on:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removePointerFields(_:on:)": {
   "abstract" : [
     {
       "text" : "Remove access for the set of fields that are either of ",
@@ -3204,14 +3204,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removePointerFields(_:on:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removePointerFields(_:on:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removePointerFields(_:on:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removepointerfields(_:on:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-4w6oa": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-4w6oa": {
   "abstract" : [
     {
       "text" : "Remove fields from the set of specific fields the given ",
@@ -3300,14 +3300,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-4w6oa",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-4w6oa",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfields(_:for:)-4w6oa"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-7qajb": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-7qajb": {
   "abstract" : [
     {
       "text" : "Remove fields from the set of specific fields the given ",
@@ -3405,14 +3405,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-7qajb",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-7qajb",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfields(_:for:)-7qajb"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-8it6u": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-8it6u": {
   "abstract" : [
     {
       "text" : "Remove fields from the set of specific fields the given ",
@@ -3501,14 +3501,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-8it6u",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-8it6u",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfields(_:for:)-8it6u"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-9c9jl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFields(_:for:)-9c9jl": {
   "abstract" : [
     {
       "text" : "Remove fields from the set of specific fields the given ",
@@ -3589,14 +3589,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-9c9jl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFields(_:for:)-9c9jl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfields(_:for:)-9c9jl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsPublic(_:)": {
   "abstract" : [
     {
       "text" : "Remove the set of specific fields the public should not have access to on a Parse class.",
@@ -3644,14 +3644,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFieldsPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfieldspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsRequiresAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsRequiresAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Remove the set of specific fields authenticated users should not have access to",
@@ -3707,14 +3707,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsRequiresAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsRequiresAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFieldsRequiresAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfieldsrequiresauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsUser(_:userField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/removeProtectedFieldsUser(_:userField:)": {
   "abstract" : [
     {
       "text" : "Remove fields from the set of specific fields the given field that is either of ",
@@ -3803,14 +3803,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsUser(_:userField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/removeProtectedFieldsUser(_:userField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeProtectedFieldsUser(_:userField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/removeprotectedfieldsuser(_:userfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-1fd37": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-1fd37": {
   "abstract" : [
     {
       "text" : "Set\/remove access to an ",
@@ -3891,14 +3891,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-1fd37",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-1fd37",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccess(_:on:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccess(_:on:for:)-1fd37"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-2clcm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-2clcm": {
   "abstract" : [
     {
       "text" : "Set\/remove access to an ",
@@ -4003,14 +4003,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-2clcm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-2clcm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccess(_:on:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccess(_:on:for:)-2clcm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-b3t7": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-b3t7": {
   "abstract" : [
     {
       "text" : "Set\/remove access to an ",
@@ -4115,14 +4115,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-b3t7",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-b3t7",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccess(_:on:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccess(_:on:for:)-b3t7"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-z0aw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccess(_:on:for:)-z0aw": {
   "abstract" : [
     {
       "text" : "Set\/remove access to an ",
@@ -4228,14 +4228,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-z0aw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccess(_:on:for:)-z0aw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccess(_:on:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccess(_:on:for:)-z0aw"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccessPublic(_:on:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccessPublic(_:on:)": {
   "abstract" : [
     {
       "text" : "Set\/remove public access to an ",
@@ -4299,14 +4299,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessPublic(_:on:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessPublic(_:on:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccessPublic(_:on:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccesspublic(_:on:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setAccessRequiresAuthentication(_:on:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setAccessRequiresAuthentication(_:on:)": {
   "abstract" : [
     {
       "text" : "Set\/remove require user authentication to access an ",
@@ -4370,14 +4370,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessRequiresAuthentication(_:on:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setAccessRequiresAuthentication(_:on:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccessRequiresAuthentication(_:on:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setaccessrequiresauthentication(_:on:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setPointerFields(_:on:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setPointerFields(_:on:)": {
   "abstract" : [
     {
       "text" : "Give access to a set of fields that are either of ",
@@ -4470,14 +4470,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setPointerFields(_:on:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setPointerFields(_:on:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setPointerFields(_:on:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setpointerfields(_:on:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-2fsdg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-2fsdg": {
   "abstract" : [
     {
       "text" : "Set whether the given ",
@@ -4550,14 +4550,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-2fsdg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-2fsdg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfields(_:for:)-2fsdg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-3ewb1": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-3ewb1": {
   "abstract" : [
     {
       "text" : "Set whether the given ",
@@ -4647,14 +4647,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-3ewb1",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-3ewb1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfields(_:for:)-3ewb1"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-46xeu": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-46xeu": {
   "abstract" : [
     {
       "text" : "Set whether the given ",
@@ -4743,14 +4743,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-46xeu",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-46xeu",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfields(_:for:)-46xeu"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-7w0s5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:for:)-7w0s5": {
   "abstract" : [
     {
       "text" : "Set whether the given ",
@@ -4839,14 +4839,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-7w0s5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:for:)-7w0s5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfields(_:for:)-7w0s5"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:userField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFields(_:userField:)": {
   "abstract" : [
     {
       "text" : "Set whether the given field that is either of ",
@@ -4935,14 +4935,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:userField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFields(_:userField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFields(_:userField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfields(_:userfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFieldsPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFieldsPublic(_:)": {
   "abstract" : [
     {
       "text" : "Set whether the public should not have access to specific fields of a Parse class.",
@@ -4990,14 +4990,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFieldsPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfieldspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFieldsRequiresAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setProtectedFieldsRequiresAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Set whether authenticated users should not have access to specific fields of a Parse class.",
@@ -5045,14 +5045,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsRequiresAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setProtectedFieldsRequiresAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setProtectedFieldsRequiresAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setprotectedfieldsrequiresauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-3nc5c": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-3nc5c": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5132,14 +5132,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-3nc5c",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-3nc5c",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccess(_:for:)-3nc5c"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-464o": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-464o": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5220,14 +5220,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-464o",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-464o",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccess(_:for:)-464o"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-4q3c9": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-4q3c9": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5291,14 +5291,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-4q3c9",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-4q3c9",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccess(_:for:)-4q3c9"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-6ssgv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccess(_:for:)-6ssgv": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5378,14 +5378,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-6ssgv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccess(_:for:)-6ssgv",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccess(_:for:)-6ssgv"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccessPublic(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccessPublic(_:)": {
   "abstract" : [
     {
       "text" : "Sets whether the public has access to perform get\/find\/count actions on a Parse class.",
@@ -5424,14 +5424,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessPublic(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessPublic(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccessPublic(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccesspublic(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccessRequiresAuthentication(_:canAddField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setReadAccessRequiresAuthentication(_:canAddField:)": {
   "abstract" : [
     {
       "text" : "Sets whether authentication is required to perform get\/find\/count actions on a Parse class.",
@@ -5487,14 +5487,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessRequiresAuthentication(_:canAddField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setReadAccessRequiresAuthentication(_:canAddField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setReadAccessRequiresAuthentication(_:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setreadaccessrequiresauthentication(_:canaddfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-3axhs": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-3axhs": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5600,14 +5600,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-3axhs",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-3axhs",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccess(_:for:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccess(_:for:canaddfield:)-3axhs"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-4gvup": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-4gvup": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5704,14 +5704,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4gvup",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4gvup",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccess(_:for:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccess(_:for:canaddfield:)-4gvup"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-4ws0r": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-4ws0r": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5800,14 +5800,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4ws0r",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-4ws0r",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccess(_:for:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccess(_:for:canaddfield:)-4ws0r"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-5qka": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccess(_:for:canAddField:)-5qka": {
   "abstract" : [
     {
       "text" : "Sets whether the given ",
@@ -5904,14 +5904,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-5qka",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccess(_:for:canAddField:)-5qka",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccess(_:for:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccess(_:for:canaddfield:)-5qka"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccessPublic(_:canAddField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccessPublic(_:canAddField:)": {
   "abstract" : [
     {
       "text" : "Sets whether the public has access to perform create\/update\/delete\/addField actions on a Parse class.",
@@ -5967,14 +5967,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessPublic(_:canAddField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessPublic(_:canAddField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccessPublic(_:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccesspublic(_:canaddfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccessRequiresAuthentication(_:canAddField:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/setWriteAccessRequiresAuthentication(_:canAddField:)": {
   "abstract" : [
     {
       "text" : "Sets whether user authentication is required to perform create\/update\/delete\/addField actions on a Parse class.",
@@ -6030,14 +6030,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessRequiresAuthentication(_:canAddField:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/setWriteAccessRequiresAuthentication(_:canAddField:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setWriteAccessRequiresAuthentication(_:canAddField:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/setwriteaccessrequiresauthentication(_:canaddfield:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/writeUserFields": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/writeUserFields": {
   "abstract" : [
     {
       "text" : "Fields of ",
@@ -6104,14 +6104,14 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/writeUserFields",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/writeUserFields",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "writeUserFields",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/writeuserfields"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -6132,7 +6132,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -6145,13 +6145,13 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 }

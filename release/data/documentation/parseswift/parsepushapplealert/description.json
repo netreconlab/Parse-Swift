@@ -16,15 +16,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/CustomStringConvertible-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/CustomStringConvertible-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/description"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/description"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -135,21 +135,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert": {
   "abstract" : [
     {
       "text" : "An alert payload for Apple push notifications. See Apple’s ",
@@ -183,7 +183,7 @@
       "text" : "ParsePushAppleAlert"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -196,18 +196,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplealert"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert/CustomStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert/CustomStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/CustomStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/CustomStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplealert\/customstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert/description": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert/description": {
   "abstract" : [
 
   ],
@@ -234,7 +234,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/description",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert\/description",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "description",

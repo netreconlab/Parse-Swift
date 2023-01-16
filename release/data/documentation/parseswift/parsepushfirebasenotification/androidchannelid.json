@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/androidChannelId"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/androidChannelId"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -172,21 +172,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
   "abstract" : [
     {
       "text" : "The Firebase Cloud Messaging (FCM) notification payload. For more information, see",
@@ -233,7 +233,7 @@
       "text" : "ParsePushFirebaseNotification"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -246,7 +246,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasenotification"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification/androidChannelId": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification/androidChannelId": {
   "abstract" : [
     {
       "text" : "The app must create a channel with this channel ID before any",
@@ -288,7 +288,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/androidChannelId",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/androidChannelId",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "androidChannelId",

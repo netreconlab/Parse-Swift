@@ -24,14 +24,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -164,7 +164,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A3CLPV6ActionO",
               "text" : "Action"
@@ -232,7 +232,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A4RoleP",
               "text" : "ParseRole"
@@ -395,21 +395,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -438,7 +438,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -451,7 +451,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
   "abstract" : [
     {
       "text" : "The avialable actions to perform on a Parse class.",
@@ -472,7 +472,7 @@
       "text" : "Action"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -485,7 +485,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-7qp10": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/hasAccess(_:for:)-7qp10": {
   "abstract" : [
     {
       "text" : "Checks if an ",
@@ -573,14 +573,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/hasAccess(_:for:)-7qp10",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasAccess(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/hasaccess(_:for:)-7qp10"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRole": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -693,7 +693,7 @@
       "text" : "ParseRole"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

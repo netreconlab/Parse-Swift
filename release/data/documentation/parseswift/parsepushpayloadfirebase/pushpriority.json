@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -82,11 +82,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH",
-        "doc:\/\/com.parse.ParseSwift\/SY"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -104,22 +104,22 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/high",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/normal"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/high",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/normal"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/init(rawValue:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/Equatable-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -138,46 +138,46 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SY": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SY",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SY": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
   "abstract" : [
     {
       "text" : "The payload data for an Firebase Cloud Messaging (FCM) push notification.",
@@ -219,7 +219,7 @@
       "text" : "ParsePushPayloadFirebase"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -232,7 +232,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority": {
   "abstract" : [
     {
       "text" : "The priority type of a notification.",
@@ -253,7 +253,7 @@
       "text" : "PushPriority"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -266,29 +266,29 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/RawRepresentable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/rawrepresentable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/high": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/high": {
   "abstract" : [
     {
       "text" : "Sets the priority to ",
@@ -322,14 +322,14 @@
       "text" : "high"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/high",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/high",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParsePushPayloadFirebase.PushPriority.high",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/high"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/init(rawValue:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/init(rawValue:)": {
   "abstract" : [
 
   ],
@@ -360,14 +360,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/init(rawValue:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/init(rawvalue:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/normal": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/normal": {
   "abstract" : [
     {
       "text" : "Sets the priority to ",
@@ -401,7 +401,7 @@
       "text" : "normal"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/normal",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/normal",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParsePushPayloadFirebase.PushPriority.normal",

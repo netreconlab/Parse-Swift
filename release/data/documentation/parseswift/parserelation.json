@@ -32,13 +32,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -125,7 +125,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
               "text" : "ParseObject"
@@ -191,13 +191,13 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -215,55 +215,55 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(from:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-25hfj",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-9iv6m",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-6zxtt",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-7ek9i",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-8evhy",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-912hj",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-5ijuf",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-7xhg8"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(from:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-25hfj",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-9iv6m",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-6zxtt",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-7ek9i",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-8evhy",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-912hj",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-5ijuf",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-7xhg8"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/className",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/parent"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/className",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/parent"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-89hhl",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-fiw5",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-ob98",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:objects:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-2ymy3",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-6niph",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-5sx9o",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-8lzzm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-ks5y",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:objects:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-89hhl",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-fiw5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-ob98",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:objects:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-2ymy3",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-6niph",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-5sx9o",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-8lzzm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-ks5y",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:objects:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-4a90y",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-52scm"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-4a90y",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-52scm"
       ],
       "title" : "Type Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomDebugStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -282,41 +282,41 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -353,7 +353,7 @@
       "text" : "ParseObject"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -366,7 +366,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation": {
   "abstract" : [
     {
       "text" : "The ",
@@ -411,7 +411,7 @@
       "text" : "ParseRelation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -424,40 +424,40 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/CustomDebugStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomDebugStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomDebugStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomDebugStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/customdebugstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/CustomStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/CustomStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/CustomStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/customstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-89hhl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-89hhl": {
   "abstract" : [
     {
       "text" : "Adds a relation to the respective ",
@@ -573,14 +573,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-89hhl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-89hhl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/add(_:)-89hhl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-fiw5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-fiw5": {
   "abstract" : [
     {
       "text" : "Adds a relation to the respective ",
@@ -672,14 +672,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-fiw5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-fiw5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/add(_:)-fiw5"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-ob98": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:)-ob98": {
   "abstract" : [
     {
       "text" : "Adds a relation to the respective ",
@@ -795,14 +795,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-ob98",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:)-ob98",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/add(_:)-ob98"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:objects:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/add(_:objects:)": {
   "abstract" : [
     {
       "text" : "Adds a relation to the respective objects.",
@@ -887,14 +887,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:objects:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/add(_:objects:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/add(_:objects:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/className": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/className": {
   "abstract" : [
     {
       "text" : "The name of the class of the target child objects.",
@@ -928,14 +928,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/className",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/className",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "className",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/classname"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(from:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(from:)": {
   "abstract" : [
 
   ],
@@ -970,14 +970,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(from:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(from:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:)-25hfj": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:)-25hfj": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1045,14 +1045,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-25hfj",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-25hfj",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:)-25hfj"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:)-9iv6m": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:)-9iv6m": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1115,14 +1115,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-9iv6m",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:)-9iv6m",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:)-9iv6m"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-6zxtt": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-6zxtt": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1215,14 +1215,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-6zxtt",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-6zxtt",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:child:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:child:)-6zxtt"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-7ek9i": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-7ek9i": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1324,14 +1324,14 @@
       "text" : ">)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-7ek9i",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-7ek9i",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:child:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:child:)-7ek9i"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-8evhy": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-8evhy": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1419,14 +1419,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-8evhy",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-8evhy",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:child:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:child:)-8evhy"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-912hj": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:child:)-912hj": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1523,14 +1523,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-912hj",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:child:)-912hj",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:child:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:child:)-912hj"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:className:)-5ijuf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:className:)-5ijuf": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1610,14 +1610,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-5ijuf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-5ijuf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:className:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:classname:)-5ijuf"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:className:)-7xhg8": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/init(parent:key:className:)-7xhg8": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -1702,14 +1702,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-7xhg8",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/init(parent:key:className:)-7xhg8",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(parent:key:className:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/init(parent:key:classname:)-7xhg8"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/parent": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/parent": {
   "abstract" : [
     {
       "text" : "The parent ",
@@ -1756,14 +1756,14 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/parent",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/parent",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "parent",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/parent"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query()": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -1830,14 +1830,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:)": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -1929,14 +1929,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.method-2ymy3": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.method-2ymy3": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2045,14 +2045,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-2ymy3",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-2ymy3",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query(_:parent:)-swift.method-2ymy3"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.method-6niph": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.method-6niph": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2162,14 +2162,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-6niph",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.method-6niph",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query(_:parent:)-swift.method-6niph"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.type.method-4a90y": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.type.method-4a90y": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2287,14 +2287,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-4a90y",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-4a90y",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query(_:parent:)-swift.type.method-4a90y"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.type.method-52scm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/query(_:parent:)-swift.type.method-52scm": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -2411,14 +2411,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-52scm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/query(_:parent:)-swift.type.method-52scm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query(_:parent:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/query(_:parent:)-swift.type.method-52scm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-5sx9o": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-5sx9o": {
   "abstract" : [
     {
       "text" : "Removes a relation to the respective objects using the ",
@@ -2502,14 +2502,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-5sx9o",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-5sx9o",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/remove(_:)-5sx9o"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-8lzzm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-8lzzm": {
   "abstract" : [
     {
       "text" : "Removes a relation to the respective ",
@@ -2625,14 +2625,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-8lzzm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-8lzzm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/remove(_:)-8lzzm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-ks5y": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:)-ks5y": {
   "abstract" : [
     {
       "text" : "Removes a relation to the respective ",
@@ -2748,14 +2748,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-ks5y",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:)-ks5y",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/remove(_:)-ks5y"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:objects:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation/remove(_:objects:)": {
   "abstract" : [
     {
       "text" : "Removes a relation to the respective objects.",
@@ -2840,14 +2840,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:objects:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation\/remove(_:objects:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation\/remove(_:objects:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -2868,7 +2868,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2881,13 +2881,13 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 }

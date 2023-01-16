@@ -8,15 +8,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-h8xr"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-h8xr"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-52ukn"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-52ukn"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -346,21 +346,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
   "abstract" : [
     {
       "text" : "A protocol for overriding the default transfer behavior for ",
@@ -397,7 +397,7 @@
       "text" : "ParseFileTransferable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -410,7 +410,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeSuccessfulUploadResponse(_:url:)-52ukn": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeSuccessfulUploadResponse(_:url:)-52ukn": {
   "abstract" : [
     {
       "text" : "Compose a valid file upload response with a name and url.",
@@ -487,14 +487,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-52ukn",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-52ukn",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "makeSuccessfulUploadResponse(_:url:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable\/makesuccessfuluploadresponse(_:url:)-52ukn"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeSuccessfulUploadResponse(_:url:)-h8xr": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeSuccessfulUploadResponse(_:url:)-h8xr": {
   "abstract" : [
     {
       "text" : "Compose a valid file upload response with a name and url.",
@@ -572,7 +572,7 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-h8xr",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeSuccessfulUploadResponse(_:url:)-h8xr",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

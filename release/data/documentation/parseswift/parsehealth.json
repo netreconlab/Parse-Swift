@@ -12,13 +12,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -85,12 +85,12 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -108,25 +108,31 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/init(from:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-4x9n3",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-q7uf",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/checkPublisher(options:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7gul1",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7id9f",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:callbackQueue:allowIntermediateResponses:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/checkPublisher(options:)"
       ],
       "title" : "Type Methods"
     },
     {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Status"
+      ],
+      "title" : "Enumerations"
+    },
+    {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomDebugStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -145,36 +151,36 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth": {
   "abstract" : [
     {
       "code" : "ParseHealth",
@@ -199,7 +205,7 @@
       "text" : "ParseHealth"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -212,40 +218,74 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/CustomDebugStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomDebugStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomDebugStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomDebugStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/customdebugstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/CustomStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/CustomStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/CustomStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/customstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-4x9n3": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/Status": {
+  "abstract" : [
+    {
+      "text" : "The health status value of a Parse Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Status"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/Status",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Status"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHealth.Status",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehealth\/status"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-7gul1": {
   "abstract" : [
     {
       "text" : "Calls the health check function ",
@@ -334,18 +374,18 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10ParseSwift0A6HealthV6StatusO",
+      "text" : "Status"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-4x9n3",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7gul1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "check(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-4x9n3"
+  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7gul1"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-q7uf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-7id9f": {
   "abstract" : [
     {
       "text" : "Calls the health check function ",
@@ -361,7 +401,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " and returns a result of it is execution.",
+      "text" : " and returns a result of its execution.",
       "type" : "text"
     }
   ],
@@ -426,18 +466,18 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10ParseSwift0A6HealthV6StatusO",
+      "text" : "Status"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-q7uf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7id9f",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "check(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-q7uf"
+  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7id9f"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:callbackQueue:allowIntermediateResponses:completion:)": {
   "abstract" : [
     {
       "text" : "Calls the health check function ",
@@ -453,7 +493,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " and returns a result of it is execution.",
+      "text" : " and returns the result of its execution.",
       "type" : "text"
     }
   ],
@@ -527,6 +567,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "allowIntermediateResponses"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -544,8 +601,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10ParseSwift0A6HealthV6StatusO",
+      "text" : "Status"
     },
     {
       "kind" : "text",
@@ -570,14 +627,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:callbackQueue:allowIntermediateResponses:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "check(options:callbackQueue:completion:)",
+  "title" : "check(options:callbackQueue:allowIntermediateResponses:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:callbackqueue:completion:)"
+  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:callbackqueue:allowintermediateresponses:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/checkPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/checkPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Calls the health check function ",
@@ -650,8 +707,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:7Combine6FutureC",
-      "text" : "Future"
+      "preciseIdentifier" : "s:7Combine12AnyPublisherV",
+      "text" : "AnyPublisher"
     },
     {
       "kind" : "text",
@@ -659,8 +716,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10ParseSwift0A6HealthV6StatusO",
+      "text" : "Status"
     },
     {
       "kind" : "text",
@@ -676,14 +733,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/checkPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/checkPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "checkPublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/checkpublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth/init(from:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/init(from:)": {
   "abstract" : [
 
   ],
@@ -718,14 +775,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/init(from:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/init(from:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -746,7 +803,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -759,13 +816,13 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 }

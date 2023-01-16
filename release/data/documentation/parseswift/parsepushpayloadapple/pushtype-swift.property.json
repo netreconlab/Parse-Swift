@@ -32,14 +32,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -109,7 +109,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV0C4TypeO",
               "text" : "PushType"
@@ -181,21 +181,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
   "abstract" : [
     {
       "text" : "The payload data for an Apple push notification.",
@@ -216,7 +216,7 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -229,7 +229,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/PushType-swift.enum": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/PushType-swift.enum": {
   "abstract" : [
     {
       "text" : "The type of notification.",
@@ -250,7 +250,7 @@
       "text" : "PushType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -263,7 +263,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/pushtype-swift.enum"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/pushType-swift.property": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/pushType-swift.property": {
   "abstract" : [
     {
       "text" : "The type of the notification. The value is alert or background. Specify alert when the",
@@ -321,7 +321,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "pushType",

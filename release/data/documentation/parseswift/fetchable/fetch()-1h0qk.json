@@ -2,7 +2,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-sa5a"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-sa5a"
       ],
       "title" : "Fetchable Implementations"
     }
@@ -10,14 +10,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-1h0qk"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-1h0qk"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -100,7 +100,7 @@
               "text" : " -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/FetchingType",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/FetchingType",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift9FetchableP12FetchingTypeQa",
               "text" : "FetchingType"
@@ -133,21 +133,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Fetchable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable": {
   "abstract" : [
 
   ],
@@ -165,7 +165,7 @@
       "text" : "Fetchable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -178,7 +178,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Fetchable/FetchingType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/FetchingType": {
   "abstract" : [
 
   ],
@@ -196,7 +196,7 @@
       "text" : "FetchingType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/FetchingType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/FetchingType",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -204,7 +204,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable\/fetchingtype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-1h0qk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-1h0qk": {
   "abstract" : [
 
   ],
@@ -240,7 +240,7 @@
       "text" : "FetchingType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-1h0qk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-1h0qk",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -248,7 +248,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable\/fetch()-1h0qk"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-sa5a": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-sa5a": {
   "abstract" : [
 
   ],
@@ -283,7 +283,7 @@
       "text" : "FetchingType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-sa5a",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-sa5a",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch()",

@@ -13,26 +13,6 @@
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-51rzt",
-            "title" : "func initialize(applicationId: String, clientKey: String?, primaryKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingda-90uad",
-            "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingdata-47zw9",
-            "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String?, serverURL: URL, liveQueryServerURL: URL?, allowingCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, keyValueStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:migrating-9kadg",
-            "title" : "func initialize(applicationId: String, clientKey: String?, masterKey: String?, serverURL: URL, liveQueryServerURL: URL?, allowingCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, keyValueStore: ParseKeyValueStore?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, migratingFromObjcSDK: Bool, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-            "type" : "func"
-          },
-          {
             "path" : "\/documentation\/parseswift\/configuration",
             "title" : "var configuration: ParseConfiguration",
             "type" : "var"
@@ -256,20 +236,6 @@
                 "path" : "\/documentation\/parseswift\/parselivequery\/defaultclient",
                 "title" : "class var defaultClient: ParseLiveQuery?",
                 "type" : "property"
-              },
-              {
-                "title" : "Type Methods",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parselivequery\/getdefault()",
-                "title" : "class func getDefault() -> ParseLiveQuery?",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parselivequery\/setdefault(_:)",
-                "title" : "class func setDefault(ParseLiveQuery)",
-                "type" : "method"
               }
             ],
             "path" : "\/documentation\/parseswift\/parselivequery",
@@ -582,13 +548,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       }
                     ],
@@ -643,13 +609,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
                       }
                     ],
@@ -1758,21 +1724,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/migratefromobjckeychain(copyentireinstallation:options:)",
-                "title" : "static func migrateFromObjCKeychain(copyEntireInstallation: Bool, options: API.Options) async throws -> Self",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/migratefromobjckeychain(copyentireinstallation:options:callbackqueue:completion:)",
-                "title" : "static func migrateFromObjCKeychain(copyEntireInstallation: Bool, options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Self, ParseError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/migratefromobjckeychainpublisher(copyentireinstallation:options:)",
-                "title" : "static func migrateFromObjCKeychainPublisher(copyEntireInstallation: Bool, options: API.Options) -> Future<Self, ParseError>",
-                "type" : "method"
-              },
-              {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
               },
@@ -2185,16 +2136,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseobject\/revert(_:)",
                 "title" : "func revert<W>(WritableKeyPath<Self, W?>) throws -> Self",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseobject\/revertkeypath(_:)",
-                "title" : "func revertKeyPath<W>(WritableKeyPath<Self, W?>) throws -> Self",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseobject\/revertobject()",
-                "title" : "func revertObject() throws -> Self",
                 "type" : "method"
               },
               {
@@ -3758,11 +3699,6 @@
                     "type" : "case"
                   },
                   {
-                    "path" : "\/documentation\/parseswift\/api\/option\/usemasterkey",
-                    "title" : "case useMasterKey",
-                    "type" : "case"
-                  },
-                  {
                     "path" : "\/documentation\/parseswift\/api\/option\/useprimarykey",
                     "title" : "case usePrimaryKey",
                     "type" : "case"
@@ -4165,11 +4101,6 @@
               {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseanalytics\/at",
-                "title" : "var at: Date?",
-                "type" : "property"
               },
               {
                 "path" : "\/documentation\/parseswift\/parseanalytics\/date",
@@ -5278,23 +5209,8 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:masterkey:webhookkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:migr-1ysol",
-                "title" : "init(applicationId: String, clientKey: String?, masterKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, allowingCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, keyValueStore: ParseKeyValueStore?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, migratingFromObjcSDK: Bool, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:masterkey:webhookkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usin-54haa",
-                "title" : "init(applicationId: String, clientKey: String?, masterKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, allowingCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, keyValueStore: ParseKeyValueStore?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:masterkey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:us-4ygss",
-                "title" : "init(applicationId: String, clientKey: String?, masterKey: String, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:u-8ce5p",
-                "title" : "init(applicationId: String, clientKey: String?, primaryKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
+                "path" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:u-81oic",
+                "title" : "init(applicationId: String, clientKey: String?, primaryKey: String?, webhookKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, liveQueryMaxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
                 "type" : "init"
               },
               {
@@ -5324,11 +5240,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseconfiguration\/httpadditionalheaders",
                 "title" : "var httpAdditionalHeaders: [AnyHashable : Any]?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/isallowingcustomobjectids",
-                "title" : "var isAllowingCustomObjectIds: Bool",
                 "type" : "property"
               },
               {
@@ -5367,13 +5278,13 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/livequerysserverurl",
-                "title" : "var liveQuerysServerURL: URL?",
+                "path" : "\/documentation\/parseswift\/parseconfiguration\/livequerymaxconnectionattempts",
+                "title" : "var liveQueryMaxConnectionAttempts: Int",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseconfiguration\/masterkey",
-                "title" : "var masterKey: String?",
+                "path" : "\/documentation\/parseswift\/parseconfiguration\/livequerysserverurl",
+                "title" : "var liveQuerysServerURL: URL?",
                 "type" : "property"
               },
               {
@@ -5523,6 +5434,16 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/changedimmutablefielderror",
+                    "title" : "case changedImmutableFieldError",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/clientdisconnected",
+                    "title" : "case clientDisconnected",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/commandunavailable",
                     "title" : "case commandUnavailable",
                     "type" : "case"
@@ -5573,8 +5494,18 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/hostingerror",
+                    "title" : "case hostingError",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/incorrecttype",
                     "title" : "case incorrectType",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/inefficientqueryerror",
+                    "title" : "case inefficientQueryError",
                     "type" : "case"
                   },
                   {
@@ -5588,8 +5519,18 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidauthdataerror",
+                    "title" : "case invalidAuthDataError",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidchannelname",
                     "title" : "case invalidChannelName",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidchannelsarrayerror",
+                    "title" : "case invalidChannelsArrayError",
                     "type" : "case"
                   },
                   {
@@ -5608,6 +5549,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invaliddevicetypeerror",
+                    "title" : "case invalidDeviceTypeError",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidemailaddress",
                     "title" : "case invalidEmailAddress",
                     "type" : "case"
@@ -5615,6 +5561,11 @@
                   {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalideventname",
                     "title" : "case invalidEventName",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidexpirationerror",
+                    "title" : "case invalidExpirationError",
                     "type" : "case"
                   },
                   {
@@ -5628,6 +5579,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidinstallationiderror",
+                    "title" : "case invalidInstallationIdError",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidjson",
                     "title" : "case invalidJSON",
                     "type" : "case"
@@ -5635,6 +5591,11 @@
                   {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidkeyname",
                     "title" : "case invalidKeyName",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidlimiterror",
+                    "title" : "case invalidLimitError",
                     "type" : "case"
                   },
                   {
@@ -5678,6 +5639,16 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidskiperror",
+                    "title" : "case invalidSkipError",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidsubscriptiontype",
+                    "title" : "case invalidSubscriptionType",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/invalidvalue",
                     "title" : "case invalidValue",
                     "type" : "case"
@@ -5713,6 +5684,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/missingrequiredfielderror",
+                    "title" : "case missingRequiredFieldError",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/objectnotfound",
                     "title" : "case objectNotFound",
                     "type" : "case"
@@ -5733,6 +5709,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/othercause",
+                    "title" : "case otherCause",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/pushmisconfigured",
                     "title" : "case pushMisconfigured",
                     "type" : "case"
@@ -5748,13 +5729,13 @@
                     "type" : "case"
                   },
                   {
-                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/timeout",
-                    "title" : "case timeout",
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/serviceunavailable",
+                    "title" : "case serviceUnavailable",
                     "type" : "case"
                   },
                   {
-                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/unknownerror",
-                    "title" : "case unknownError",
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/timeout",
+                    "title" : "case timeout",
                     "type" : "case"
                   },
                   {
@@ -5810,6 +5791,11 @@
                   {
                     "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/validationfailed",
                     "title" : "case validationFailed",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/webhookerror",
+                    "title" : "case webhookError",
                     "type" : "case"
                   },
                   {
@@ -7041,16 +7027,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsegeopoint\/tocllocation(_:)",
-                "title" : "func toCLLocation(ParseGeoPoint?) -> CLLocation",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsegeopoint\/tocllocationcoordinate2d(_:)",
-                "title" : "func toCLLocationCoordinate2D(ParseGeoPoint?) -> CLLocationCoordinate2D",
-                "type" : "method"
-              },
-              {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
               },
@@ -7463,24 +7439,127 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:)-4x9n3",
-                "title" : "static func check(options: API.Options) async throws -> String",
+                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7gul1",
+                "title" : "static func check(options: API.Options) async throws -> Status",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:)-q7uf",
-                "title" : "static func check(options: API.Options) throws -> String",
+                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7id9f",
+                "title" : "static func check(options: API.Options) throws -> Status",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:callbackqueue:completion:)",
-                "title" : "static func check(options: API.Options, callbackQueue: DispatchQueue, completion: (Result<String, ParseError>) -> Void)",
+                "path" : "\/documentation\/parseswift\/parsehealth\/check(options:callbackqueue:allowintermediateresponses:completion:)",
+                "title" : "static func check(options: API.Options, callbackQueue: DispatchQueue, allowIntermediateResponses: Bool, completion: (Result<Status, ParseError>) -> Void)",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehealth\/checkpublisher(options:)",
-                "title" : "static func checkPublisher(options: API.Options) -> Future<String, ParseError>",
+                "title" : "static func checkPublisher(options: API.Options) -> AnyPublisher<Status, ParseError>",
                 "type" : "method"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/error",
+                    "title" : "case error",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/initialized",
+                    "title" : "case initialized",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/ok",
+                    "title" : "case ok",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/starting",
+                    "title" : "case starting",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parsehealth\/status\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parsehealth\/status\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parsehealth\/status\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parsehealth\/status\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parsehealth\/status\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/parsehealth\/status\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsehealth\/status",
+                "title" : "ParseHealth.Status",
+                "type" : "enum"
               },
               {
                 "title" : "Default Implementations",
@@ -7567,11 +7646,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/ipaddress",
                 "title" : "var ipAddress: String?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/masterkey",
-                "title" : "var masterKey: Bool?",
                 "type" : "property"
               },
               {
@@ -7963,11 +8037,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/isget",
                 "title" : "var isGet: Bool?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/masterkey",
-                "title" : "var masterKey: Bool?",
                 "type" : "property"
               },
               {
@@ -8613,18 +8682,8 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-951bu",
-                "title" : "func add<V>((String, WritableKeyPath<T, [V]>), objects: [V]) -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-9ko4e",
                 "title" : "func add<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseoperation\/addrelation(_:objects:)-1nthr",
-                "title" : "func addRelation<V>((String, WritableKeyPath<T, [V]>), objects: [V]) throws -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -8645,11 +8704,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-6zoa7",
                 "title" : "func addUnique<W>(String, objects: [W]) -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-8bggg",
-                "title" : "func addUnique<V>((String, WritableKeyPath<T, [V]>), objects: [V]) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -8678,11 +8732,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-o2ht",
-                "title" : "func remove<V>((String, WritableKeyPath<T, [V]>), objects: [V]) -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-ope6",
                 "title" : "func remove<W>(String, objects: [W]) -> ParseOperation<T>",
                 "type" : "method"
@@ -8695,11 +8744,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseoperation\/removerelation(_:objects:)-3ty5e",
                 "title" : "func removeRelation<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) throws -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseoperation\/removerelation(_:objects:)-8piqo",
-                "title" : "func removeRelation<V>((String, WritableKeyPath<T, [V]>), objects: [V]) throws -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -8725,16 +8769,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-6e7l2",
                 "title" : "func set<W>(WritableKeyPath<T, W?>, to: W) throws -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseoperation\/set(_:value:)-6xhni",
-                "title" : "func set<W>(WritableKeyPath<T, W?>, value: W) throws -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseoperation\/set(_:value:)-xsi5",
-                "title" : "func set<W>((String, WritableKeyPath<T, W?>), value: W?) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -10614,16 +10648,6 @@
                     "type" : "method"
                   },
                   {
-                    "path" : "\/documentation\/parseswift\/parsepushstatus\/revertkeypath(_:)",
-                    "title" : "func revertKeyPath<W>(WritableKeyPath<Self, W?>) throws -> Self",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parsepushstatus\/revertobject()",
-                    "title" : "func revertObject() throws -> Self",
-                    "type" : "method"
-                  },
-                  {
                     "path" : "\/documentation\/parseswift\/parsepushstatus\/save(ignoringcustomobjectidconfig:options:)",
                     "title" : "func save(ignoringCustomObjectIdConfig: Bool, options: API.Options) throws -> Self",
                     "type" : "method"
@@ -11777,11 +11801,6 @@
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/parseswift\/query\/init(from:)",
-                "title" : "init(from: Decoder) throws",
-                "type" : "init"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -12040,6 +12059,16 @@
                 "type" : "method"
               },
               {
+                "path" : "\/documentation\/parseswift\/query\/listen(_:)-8kbjm",
+                "title" : "func listen(String...) -> Query<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/query\/listen(_:)-fr38",
+                "title" : "func listen([String]) -> Query<T>",
+                "type" : "method"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/query\/order(_:)-75g9s",
                 "title" : "func order([Order]?) -> Query<T>",
                 "type" : "method"
@@ -12279,6 +12308,38 @@
                 ],
                 "path" : "\/documentation\/parseswift\/query\/customstringconvertible-implementations",
                 "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/query\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/query\/decodable-implementations",
+                "title" : "Decodable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/query\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/query\/encodable-implementations",
+                "title" : "Encodable Implementations",
                 "type" : "symbol"
               },
               {
@@ -12578,12 +12639,7 @@
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)-9w5u0",
-            "title" : "func equalTo<T>(key: String, value: T, usingEqComparator: Bool) throws -> QueryConstraint",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)-imiz",
+            "path" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)",
             "title" : "func equalTo<T>(key: String, value: T, usingEqComparator: Bool) -> QueryConstraint",
             "type" : "func"
           },
@@ -12600,6 +12656,11 @@
           {
             "path" : "\/documentation\/parseswift\/hassuffix(key:suffix:modifiers:)",
             "title" : "func hasSuffix(key: String, suffix: String, modifiers: String?) -> QueryConstraint",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-5pbr0",
+            "title" : "func initialize(applicationId: String, clientKey: String?, primaryKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, liveQueryMaxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
             "type" : "func"
           },
           {
@@ -12785,20 +12846,6 @@
             "path" : "\/documentation\/parseswift\/_=(_:_:)-6tzg",
             "title" : "func <= <T>(String, T) -> QueryConstraint",
             "type" : "op"
-          },
-          {
-            "title" : "Type Aliases",
-            "type" : "groupMarker"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/parsecloud",
-            "title" : "ParseCloud",
-            "type" : "typealias"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/parsekeyvaluestore",
-            "title" : "ParseKeyValueStore",
-            "type" : "typealias"
           },
           {
             "title" : "Enumerations",

@@ -2,15 +2,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -34,22 +34,22 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(from:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hashValue"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hashValue"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/encode(to:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hash(into:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/encode(to:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hash(into:)"
       ],
       "title" : "Instance Methods"
     }
@@ -68,21 +68,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField": {
   "abstract" : [
     {
       "text" : "A type used to create internal fields for ",
@@ -111,7 +111,7 @@
       "text" : "ParseField"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -124,7 +124,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
   "abstract" : [
     {
       "text" : "Field types available in ",
@@ -153,7 +153,7 @@
       "text" : "FieldType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -166,7 +166,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/encode(to:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/encode(to:)": {
   "abstract" : [
 
   ],
@@ -257,14 +257,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/encode(to:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/encode(to:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/hash(into:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/hash(into:)": {
   "abstract" : [
 
   ],
@@ -359,14 +359,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hash(into:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/hash(into:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/hashValue": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/hashValue": {
   "abstract" : [
 
   ],
@@ -441,14 +441,14 @@
       "text" : "Int"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hashValue",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/hashValue",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hashValue",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/hashvalue"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/init(from:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/init(from:)": {
   "abstract" : [
 
   ],
@@ -531,7 +531,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(from:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",

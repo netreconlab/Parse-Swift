@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -216,7 +216,7 @@
               "text" : " -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A3CLPV",
               "text" : "ParseCLP"
@@ -242,7 +242,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A4UserP",
               "text" : "ParseUser"
@@ -403,21 +403,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -446,7 +446,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -459,7 +459,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-6fcbm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addProtectedFields(_:for:)-6fcbm": {
   "abstract" : [
     {
       "text" : "Add to the set of specific fields the given ",
@@ -548,14 +548,14 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/addProtectedFields(_:for:)-6fcbm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addProtectedFields(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/addprotectedfields(_:for:)-6fcbm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseUser": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -624,7 +624,7 @@
       "text" : "ParseUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

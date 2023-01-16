@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -82,8 +82,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -101,20 +101,20 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/addField",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/count",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/create",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/delete",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/find",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/get",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/update"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/addField",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/count",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/create",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/delete",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/find",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/get",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/update"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -133,31 +133,31 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -186,7 +186,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -199,7 +199,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action": {
   "abstract" : [
     {
       "text" : "The avialable actions to perform on a Parse class.",
@@ -220,7 +220,7 @@
       "text" : "Action"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -233,18 +233,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/addField": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/addField": {
   "abstract" : [
     {
       "text" : "Add fields to the Parse class.",
@@ -265,14 +265,14 @@
       "text" : "addField"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/addField",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/addField",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.addField",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/addfield"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/count": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/count": {
   "abstract" : [
     {
       "text" : "Count ",
@@ -301,14 +301,14 @@
       "text" : "count"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/count",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/count",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.count",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/count"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/create": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/create": {
   "abstract" : [
     {
       "text" : "Create new ",
@@ -337,14 +337,14 @@
       "text" : "create"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/create",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/create",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.create",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/create"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/delete": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/delete": {
   "abstract" : [
     {
       "text" : "Delete ",
@@ -373,14 +373,14 @@
       "text" : "delete"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/delete",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/delete",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.delete",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/delete"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/find": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/find": {
   "abstract" : [
     {
       "text" : "Query for ",
@@ -409,14 +409,14 @@
       "text" : "find"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/find",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/find",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.find",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/find"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/get": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/get": {
   "abstract" : [
     {
       "text" : "Fetch ",
@@ -445,14 +445,14 @@
       "text" : "get"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/get",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/get",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.get",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action\/get"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP/Action/update": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Action/update": {
   "abstract" : [
     {
       "text" : "Update ",
@@ -481,7 +481,7 @@
       "text" : "update"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/update",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Action\/update",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseCLP.Action.update",

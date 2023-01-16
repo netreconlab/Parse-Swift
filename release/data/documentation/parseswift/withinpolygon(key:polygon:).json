@@ -24,13 +24,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -155,7 +155,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A7PolygonV",
               "text" : "ParsePolygon"
@@ -165,7 +165,7 @@
               "text" : ") -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
               "text" : "QueryConstraint"
@@ -294,21 +294,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePolygon": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon": {
   "abstract" : [
     {
       "code" : "ParsePolygon",
@@ -349,7 +349,7 @@
       "text" : "ParsePolygon"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -362,7 +362,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepolygon"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryConstraint": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryConstraint": {
   "abstract" : [
     {
       "text" : "Used to constrain a query.",
@@ -383,7 +383,7 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -396,7 +396,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryconstraint"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinPolygon(key:polygon:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinPolygon(key:polygon:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s",
@@ -476,7 +476,7 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinPolygon(key:polygon:)",

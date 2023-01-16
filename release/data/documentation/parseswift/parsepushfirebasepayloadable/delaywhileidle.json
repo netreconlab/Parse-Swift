@@ -97,14 +97,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable\/delayWhileIdle"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable\/delayWhileIdle"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -227,21 +227,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for adding the standard properties for Firebase Cloud Messaging (FCM) push notifications.",
@@ -262,7 +262,7 @@
       "text" : "ParsePushFirebasePayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -275,7 +275,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasepayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable/delayWhileIdle": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable/delayWhileIdle": {
   "abstract" : [
     {
       "text" : "If the device is connected but idle, the message will",
@@ -398,7 +398,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable\/delayWhileIdle",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable\/delayWhileIdle",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

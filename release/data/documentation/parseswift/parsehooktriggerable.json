@@ -24,13 +24,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -93,7 +93,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A8HookableP",
               "text" : "ParseHookable"
@@ -158,13 +158,13 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -182,42 +182,42 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(className:triggerName:url:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:triggerName:url:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(triggerName:url:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(className:triggerName:url:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:triggerName:url:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(triggerName:url:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/className",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/triggerName"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/className",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/triggerName"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/createPublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/deletePublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.method",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAllPublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchPublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/updatePublisher(options:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/createPublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/deletePublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.method",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAllPublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchPublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/updatePublisher(options:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.type.method"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.type.method"
       ],
       "title" : "Type Methods"
     }
@@ -236,36 +236,36 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable": {
   "abstract" : [
     {
       "text" : "Conforming to ",
@@ -302,7 +302,7 @@
       "text" : "ParseHookTriggerable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -315,7 +315,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/className": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/className": {
   "abstract" : [
     {
       "text" : "The name of the ",
@@ -357,7 +357,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/className",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/className",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -365,7 +365,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/classname"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/create(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/create(options:)": {
   "abstract" : [
     {
       "text" : "Creates the Parse hook trigger ",
@@ -449,14 +449,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "create(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/create(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/create(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/create(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Creates the Parse hook trigger ",
@@ -580,14 +580,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/create(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "create(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/create(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/createPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/createPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Creates the Parse hook trigger ",
@@ -677,14 +677,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/createPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/createPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "createPublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/createpublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/delete(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/delete(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the Parse hook trigger ",
@@ -760,14 +760,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/delete(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/delete(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/delete(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Deletes the Parse hook trigger ",
@@ -892,14 +892,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/delete(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/delete(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/deletePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/deletePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the Parse hook trigger ",
@@ -990,14 +990,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/deletePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/deletePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "deletePublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/deletepublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetch(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetch(options:)": {
   "abstract" : [
     {
       "text" : "Fetches the Parse hook trigger ",
@@ -1081,14 +1081,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetch(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetch(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetch(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Fetches the Parse hook trigger ",
@@ -1212,14 +1212,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetch(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetch(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:)": {
   "abstract" : [
     {
       "text" : "Fetches all of the Parse hook triggers ",
@@ -1307,14 +1307,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchAll(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetchall(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:callbackQueue:completion:)-swift.method": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:callbackQueue:completion:)-swift.method": {
   "abstract" : [
     {
       "text" : "Fetches all of the Parse hook triggers ",
@@ -1438,14 +1438,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.method",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.method",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchAll(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetchall(options:callbackqueue:completion:)-swift.method"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:callbackQueue:completion:)-swift.type.method": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAll(options:callbackQueue:completion:)-swift.type.method": {
   "abstract" : [
     {
       "text" : "Fetches all of the Parse hook triggers ",
@@ -1577,14 +1577,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.type.method",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAll(options:callbackQueue:completion:)-swift.type.method",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchAll(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetchall(options:callbackqueue:completion:)-swift.type.method"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAllPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchAllPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Fetches the Parse hook triggers ",
@@ -1674,14 +1674,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAllPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchAllPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchAllPublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetchallpublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/fetchPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Fetches the Parse hook trigger ",
@@ -1771,14 +1771,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/fetchPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchPublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/fetchpublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(className:triggerName:url:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(className:triggerName:url:)": {
   "abstract" : [
     {
       "text" : "Creates a new Parse hook trigger.",
@@ -1846,14 +1846,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(className:triggerName:url:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(className:triggerName:url:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(className:triggerName:url:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/init(classname:triggername:url:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(object:triggerName:url:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(object:triggerName:url:)": {
   "abstract" : [
     {
       "text" : "Creates a new Parse hook trigger.",
@@ -1929,14 +1929,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:triggerName:url:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:triggerName:url:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(object:triggerName:url:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/init(object:triggername:url:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(triggerName:url:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(triggerName:url:)": {
   "abstract" : [
     {
       "text" : "Creates a new ",
@@ -2007,14 +2007,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(triggerName:url:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(triggerName:url:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(triggerName:url:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/init(triggername:url:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/triggerName": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/triggerName": {
   "abstract" : [
     {
       "text" : "The ",
@@ -2056,7 +2056,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/triggerName",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/triggerName",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -2064,7 +2064,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/triggername"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/update(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/update(options:)": {
   "abstract" : [
     {
       "text" : "Updates the Parse hook trigger ",
@@ -2148,14 +2148,14 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "update(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/update(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/update(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/update(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Fetches the Parse hook trigger ",
@@ -2279,14 +2279,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/update(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "update(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/update(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/updatePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/updatePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Updates the Parse hook trigger ",
@@ -2376,14 +2376,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/updatePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/updatePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "updatePublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/updatepublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookable": {
   "abstract" : [
     {
       "text" : "Hooks and Triggers should conform to ",
@@ -2412,7 +2412,7 @@
       "text" : "ParseHookable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2425,7 +2425,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -2446,7 +2446,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2459,13 +2459,13 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 }

@@ -24,13 +24,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -335,7 +335,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/objc(cs)NSObject"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(cs)NSObject"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -343,12 +343,12 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/objc(pl)NSObject",
-        "doc:\/\/com.parse.ParseSwift\/s7CVarArgP",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(pl)NSObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s7CVarArgP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -366,50 +366,43 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/init(serverURL:isDefault:notificationQueue:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/init(serverURL:isDefault:notificationQueue:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/authenticationDelegate",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnected",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnecting",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSocketEstablished",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/receiveDelegate"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/authenticationDelegate",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnected",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnecting",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSocketEstablished",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/receiveDelegate"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/close()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/closeAll()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isPendingSubscription(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSubscribed(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/openPublisher(isUserWantsToConnect:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/removePendingSubscription(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing(pongReceiveHandler:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPingPublisher()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/subscribe(_:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/close()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/closeAll()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isPendingSubscription(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSubscribed(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/openPublisher(isUserWantsToConnect:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/removePendingSubscription(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing(pongReceiveHandler:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPingPublisher()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/subscribe(_:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/client",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/defaultClient"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/client",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/defaultClient"
       ],
       "title" : "Type Properties"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/getDefault()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/setDefault(_:)"
-      ],
-      "title" : "Type Methods"
     }
   ],
   "variants" : [
@@ -426,31 +419,31 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery": {
   "abstract" : [
     {
       "text" : "The ",
@@ -487,7 +480,7 @@
       "text" : "ParseLiveQuery"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -500,7 +493,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/authenticationDelegate": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/authenticationDelegate": {
   "abstract" : [
     {
       "text" : "Have all ",
@@ -594,14 +587,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/authenticationDelegate",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/authenticationDelegate",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authenticationDelegate",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/authenticationdelegate"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/client": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/client": {
   "abstract" : [
     {
       "text" : "Current LiveQuery client.",
@@ -643,14 +636,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/client",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/client",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "client",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/client"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/close()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/close()": {
   "abstract" : [
     {
       "text" : "Manually disconnect from the ",
@@ -683,14 +676,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/close()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/close()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "close()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/close()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/closeAll()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/closeAll()": {
   "abstract" : [
     {
       "text" : "Manually disconnect all sessions and subscriptions from the ",
@@ -723,14 +716,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/closeAll()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/closeAll()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "closeAll()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/closeall()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/defaultClient": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/defaultClient": {
   "abstract" : [
     {
       "text" : "The default ",
@@ -780,72 +773,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/defaultClient",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/defaultClient",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "defaultClient",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/defaultclient"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/getDefault()": {
-  "abstract" : [
-    {
-      "text" : "Get the default ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseLiveQuery",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " client for all LiveQuery connections.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "getDefault"
-    },
-    {
-      "kind" : "text",
-      "text" : "() -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@M@ParseSwift@objc(cs)ParseLiveQuery",
-      "text" : "ParseLiveQuery"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/getDefault()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "getDefault()",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequery\/getdefault()"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/init(serverURL:isDefault:notificationQueue:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/init(serverURL:isDefault:notificationQueue:)": {
   "abstract" : [
 
   ],
@@ -914,14 +849,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/init(serverURL:isDefault:notificationQueue:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/init(serverURL:isDefault:notificationQueue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(serverURL:isDefault:notificationQueue:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/init(serverurl:isdefault:notificationqueue:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isConnected": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isConnected": {
   "abstract" : [
     {
       "text" : "True if this client is connected. False otherwise.",
@@ -951,14 +886,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnected",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnected",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isConnected",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/isconnected"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isConnecting": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isConnecting": {
   "abstract" : [
     {
       "text" : "True if this client is connecting. False otherwise.",
@@ -988,14 +923,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnecting",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isConnecting",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isConnecting",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/isconnecting"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isPendingSubscription(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isPendingSubscription(_:)": {
   "abstract" : [
     {
       "text" : "Check if a query has a pending subscription on this ",
@@ -1067,14 +1002,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isPendingSubscription(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isPendingSubscription(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isPendingSubscription(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/ispendingsubscription(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isSocketEstablished": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isSocketEstablished": {
   "abstract" : [
     {
       "text" : "True if the connection to the url is up and available. False otherwise.",
@@ -1104,14 +1039,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSocketEstablished",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSocketEstablished",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isSocketEstablished",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/issocketestablished"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isSubscribed(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/isSubscribed(_:)": {
   "abstract" : [
     {
       "text" : "Check if a query has an active subscription on this ",
@@ -1183,14 +1118,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSubscribed(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/isSubscribed(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isSubscribed(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/issubscribed(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/open(isUserWantsToConnect:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/open(isUserWantsToConnect:)": {
   "abstract" : [
     {
       "text" : "Manually establish a connection to the ",
@@ -1252,14 +1187,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "open(isUserWantsToConnect:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/open(isuserwantstoconnect:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/open(isUserWantsToConnect:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/open(isUserWantsToConnect:completion:)": {
   "abstract" : [
     {
       "text" : "Manually establish a connection to the ",
@@ -1335,14 +1270,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/open(isUserWantsToConnect:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "open(isUserWantsToConnect:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/open(isuserwantstoconnect:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/openPublisher(isUserWantsToConnect:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/openPublisher(isUserWantsToConnect:)": {
   "abstract" : [
     {
       "text" : "Manually establish a connection to the ",
@@ -1419,14 +1354,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/openPublisher(isUserWantsToConnect:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/openPublisher(isUserWantsToConnect:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "openPublisher(isUserWantsToConnect:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/openpublisher(isuserwantstoconnect:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/receiveDelegate": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/receiveDelegate": {
   "abstract" : [
     {
       "text" : "Have ",
@@ -1484,14 +1419,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/receiveDelegate",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/receiveDelegate",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "receiveDelegate",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/receivedelegate"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/removePendingSubscription(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/removePendingSubscription(_:)": {
   "abstract" : [
     {
       "text" : "Remove a pending subscription on this ",
@@ -1554,14 +1489,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/removePendingSubscription(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/removePendingSubscription(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removePendingSubscription(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/removependingsubscription(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPing()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPing()": {
   "abstract" : [
     {
       "text" : "Sends a ping frame from the client side. Returns when a pong is received from the",
@@ -1606,14 +1541,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "sendPing()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/sendping()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPing(pongReceiveHandler:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPing(pongReceiveHandler:)": {
   "abstract" : [
     {
       "text" : "Sends a ping frame from the client side, with a closure to receive the pong from the server endpoint.",
@@ -1664,14 +1599,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing(pongReceiveHandler:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPing(pongReceiveHandler:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "sendPing(pongReceiveHandler:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/sendping(pongreceivehandler:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPingPublisher()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/sendPingPublisher()": {
   "abstract" : [
     {
       "text" : "Sends a ping frame from the client side. Publishes when a pong is received from the",
@@ -1731,72 +1666,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPingPublisher()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/sendPingPublisher()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "sendPingPublisher()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/sendpingpublisher()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/setDefault(_:)": {
-  "abstract" : [
-    {
-      "text" : "Set a specific ParseLiveQuery client to be the default for all ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseLiveQuery",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " connections.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "setDefault"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@M@ParseSwift@objc(cs)ParseLiveQuery",
-      "text" : "ParseLiveQuery"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/setDefault(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "setDefault(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequery\/setdefault(_:)"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery/subscribe(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/subscribe(_:)": {
   "abstract" : [
 
   ],
@@ -1848,35 +1725,35 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/subscribe(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/subscribe(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscribe(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/subscribe(_:)"
 },
-"doc://com.parse.ParseSwift/objc(cs)NSObject": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/objc(cs)NSObject",
+"doc://edu.uky.cs.netreconlab.ParseSwift/objc(cs)NSObject": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(cs)NSObject",
   "title" : "ObjectiveC.NSObject",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/objc(pl)NSObject": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/objc(pl)NSObject",
+"doc://edu.uky.cs.netreconlab.ParseSwift/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(pl)NSObject",
   "title" : "ObjectiveC.NSObjectProtocol",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s7CVarArgP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s7CVarArgP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s7CVarArgP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s7CVarArgP",
   "title" : "Swift.CVarArg",
   "type" : "unresolvable"
 }

@@ -2,14 +2,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -33,27 +33,27 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked(with:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/linkPublisher(authData:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/login(authData:options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/loginPublisher(authData:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(_:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(options:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked(with:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/linkPublisher(authData:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/login(authData:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/loginPublisher(authData:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(_:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(options:)"
       ],
       "title" : "Instance Methods"
     }
@@ -72,21 +72,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Spotify User Authentication and ",
@@ -149,7 +149,7 @@
       "text" : "ParseSpotify"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -162,7 +162,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/isLinked": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/isLinked": {
   "abstract" : [
 
   ],
@@ -189,14 +189,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isLinked",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/islinked"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/isLinked(with:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/isLinked(with:)": {
   "abstract" : [
     {
       "text" : "Whether the ",
@@ -251,14 +251,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked(with:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/isLinked(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isLinked(with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/islinked(with:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/link(authData:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/link(authData:options:)": {
   "abstract" : [
     {
       "text" : "Link the ",
@@ -422,14 +422,14 @@
       "text" : "AuthenticatedUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "link(authData:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/link(authdata:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/link(authData:options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/link(authData:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Link the ",
@@ -633,14 +633,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/link(authData:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "link(authData:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/link(authdata:options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/linkPublisher(authData:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/linkPublisher(authData:options:)": {
   "abstract" : [
     {
       "text" : "Link the ",
@@ -818,14 +818,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/linkPublisher(authData:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/linkPublisher(authData:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "linkPublisher(authData:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/linkpublisher(authdata:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/login(authData:options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/login(authData:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Login a ",
@@ -1016,14 +1016,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/login(authData:options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/login(authData:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "login(authData:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/login(authdata:options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/loginPublisher(authData:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/loginPublisher(authData:options:)": {
   "abstract" : [
     {
       "text" : "Login a ",
@@ -1180,14 +1180,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/loginPublisher(authData:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/loginPublisher(authData:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "loginPublisher(authData:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/loginpublisher(authdata:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/strip()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/strip()": {
   "abstract" : [
     {
       "text" : "Strips the ",
@@ -1225,14 +1225,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "strip()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/strip()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/strip(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/strip(_:)": {
   "abstract" : [
     {
       "text" : "Strips the ",
@@ -1279,14 +1279,14 @@
       "text" : "AuthenticatedUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/strip(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "strip(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/strip(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(_:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(_:options:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -1388,14 +1388,14 @@
       "text" : "AuthenticatedUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlink(_:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/unlink(_:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(_:options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(_:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -1537,14 +1537,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(_:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlink(_:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/unlink(_:options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(options:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -1650,14 +1650,14 @@
       "text" : "AuthenticatedUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlink(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/unlink(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -1803,14 +1803,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlink(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlink(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/unlink(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlinkPublisher(_:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlinkPublisher(_:options:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -1918,14 +1918,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(_:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlinkPublisher(_:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify\/unlinkpublisher(_:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify/unlinkPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlinkPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Unlink the ",
@@ -2037,7 +2037,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/unlinkPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unlinkPublisher(options:)",

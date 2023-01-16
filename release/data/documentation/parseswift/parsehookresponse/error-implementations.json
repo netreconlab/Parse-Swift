@@ -2,14 +2,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/Error-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -33,19 +33,19 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/localizedDescription"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/localizedDescription"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1ahdr",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1zvnk",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-2ui18",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-3necj",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-4kve4",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1ahdr",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1zvnk",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-2ui18",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-3necj",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-4kve4",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf"
       ],
       "title" : "Instance Methods"
     }
@@ -64,21 +64,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
   "abstract" : [
     {
       "text" : "Build a response after processing a ",
@@ -119,7 +119,7 @@
       "text" : "ParseHookResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -132,7 +132,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-1ahdr": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-1ahdr": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -188,14 +188,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1ahdr",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1ahdr",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/containedin(_:)-1ahdr"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-1zvnk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-1zvnk": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -251,14 +251,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1zvnk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-1zvnk",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/containedin(_:)-1zvnk"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-2ui18": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-2ui18": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -334,14 +334,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-2ui18",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-2ui18",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/containedin(_:)-2ui18"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-3necj": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/containedIn(_:)-3necj": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -417,14 +417,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-3necj",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/containedIn(_:)-3necj",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/containedin(_:)-3necj"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-4kve4": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-4kve4": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -492,14 +492,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-4kve4",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-4kve4",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalsTo(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/equalsto(_:)-4kve4"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-6whsf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/equalsTo(_:)-6whsf": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -555,14 +555,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/equalsTo(_:)-6whsf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalsTo(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse\/equalsto(_:)-6whsf"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse/localizedDescription": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse/localizedDescription": {
   "abstract" : [
 
   ],
@@ -589,7 +589,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/localizedDescription",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse\/localizedDescription",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "localizedDescription",

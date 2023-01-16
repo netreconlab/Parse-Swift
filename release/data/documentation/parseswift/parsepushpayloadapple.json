@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,14 +81,14 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -106,55 +106,55 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(alert:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(body:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(from:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(alert:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(body:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/alert",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/body",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/category",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/collapseId",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/contentAvailable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/interruptionLevel",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mdm",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mutableContent",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/priority",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/relevanceScore",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/targetContentId",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/threadId",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/topic",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/urlArgs"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/alert",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/body",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/category",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/collapseId",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/contentAvailable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/interruptionLevel",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mdm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mutableContent",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/priority",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/relevanceScore",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/targetContentId",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/threadId",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/topic",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/urlArgs"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/getSound()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/incrementBadge()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setBadge(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/getSound()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/incrementBadge()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setBadge(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum"
       ],
       "title" : "Enumerations"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -173,36 +173,36 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushApplePayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushApplePayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for adding the standard properties for Apple push notifications.",
@@ -223,7 +223,7 @@
       "text" : "ParsePushApplePayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -236,7 +236,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplepayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
   "abstract" : [
     {
       "text" : "The payload data for an Apple push notification.",
@@ -257,7 +257,7 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -270,40 +270,40 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomDebugStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomDebugStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/customdebugstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomStringConvertible-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "CustomStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/customstringconvertible-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/PushType-swift.enum": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/PushType-swift.enum": {
   "abstract" : [
     {
       "text" : "The type of notification.",
@@ -324,7 +324,7 @@
       "text" : "PushType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/PushType-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -337,7 +337,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/pushtype-swift.enum"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/alert": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/alert": {
   "abstract" : [
     {
       "text" : "The payload for displaying an alert.",
@@ -371,14 +371,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/alert",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/alert",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "alert",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/alert"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/body": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/body": {
   "abstract" : [
     {
       "text" : "The content of the alert message.",
@@ -412,14 +412,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/body",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/body",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "body",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/body"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/category": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/category": {
   "abstract" : [
     {
       "text" : "The identifier of the ",
@@ -486,14 +486,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/category",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/category",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "category",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/category"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/collapseId": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/collapseId": {
   "abstract" : [
     {
       "text" : "Multiple notifications with same collapse identifier are displayed to the user as a single",
@@ -535,14 +535,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/collapseId",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/collapseId",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "collapseId",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/collapseid"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/contentAvailable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/contentAvailable": {
   "abstract" : [
     {
       "text" : "If you are a writing an app using the Remote Notification",
@@ -592,14 +592,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/contentAvailable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/contentAvailable",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "contentAvailable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/contentavailable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/getSound()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/getSound()": {
   "abstract" : [
     {
       "text" : "Get the sound using any type that conforms to ",
@@ -653,14 +653,14 @@
       "text" : "V"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/getSound()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/getSound()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "getSound()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/getsound()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/incrementBadge()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/incrementBadge()": {
   "abstract" : [
     {
       "text" : "Increment the badge value by 1 to display on your app’s icon.",
@@ -690,14 +690,14 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/incrementBadge()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/incrementBadge()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "incrementBadge()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/incrementbadge()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init()": {
   "abstract" : [
     {
       "text" : "Creates an empty payload.",
@@ -714,14 +714,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/init()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(alert:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(alert:)": {
   "abstract" : [
     {
       "text" : "Create an instance of ",
@@ -763,14 +763,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(alert:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(alert:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(alert:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/init(alert:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(body:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(body:)": {
   "abstract" : [
     {
       "text" : "Create an instance of ",
@@ -812,14 +812,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(body:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(body:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(body:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/init(body:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(from:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/init(from:)": {
   "abstract" : [
 
   ],
@@ -854,14 +854,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(from:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/init(from:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/interruptionLevel": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/interruptionLevel": {
   "abstract" : [
     {
       "text" : "A string that indicates the importance and delivery timing of a notification.",
@@ -924,14 +924,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/interruptionLevel",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/interruptionLevel",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "interruptionLevel",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/interruptionlevel"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mdm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mdm": {
   "abstract" : [
     {
       "text" : "Specify for the ",
@@ -973,14 +973,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mdm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mdm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mdm",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/mdm"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mutableContent": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mutableContent": {
   "abstract" : [
     {
       "text" : "If you are a writing an app using the Remote Notification Background Mode introduced",
@@ -1022,14 +1022,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mutableContent",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/mutableContent",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mutableContent",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/mutablecontent"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/priority": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/priority": {
   "abstract" : [
     {
       "text" : "The priority of the notification. Specify 10 to send the notification immediately.",
@@ -1092,14 +1092,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/priority",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/priority",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "priority",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/priority"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/pushType-swift.property": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/pushType-swift.property": {
   "abstract" : [
     {
       "text" : "The type of the notification. The value is alert or background. Specify alert when the",
@@ -1157,14 +1157,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/pushType-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "pushType",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/pushtype-swift.property"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/relevanceScore": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/relevanceScore": {
   "abstract" : [
     {
       "text" : "The relevance score, a number between 0 and 1, that the system uses to",
@@ -1223,14 +1223,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/relevanceScore",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/relevanceScore",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relevanceScore",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/relevancescore"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setBadge(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setBadge(_:)": {
   "abstract" : [
     {
       "text" : "Set the badge to a specific value to display on your app’s icon.",
@@ -1269,14 +1269,14 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setBadge(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setBadge(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setBadge(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setbadge(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-27wko": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-27wko": {
   "abstract" : [
     {
       "text" : "Set the name of a sound file in your app’s main bundle or in the Library\/Sounds folder",
@@ -1336,14 +1336,14 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setSound(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setsound(_:)-27wko"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-4d1ma": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-4d1ma": {
   "abstract" : [
     {
       "text" : "Set the name of a sound file in your app’s main bundle or in the Library\/Sounds folder",
@@ -1444,14 +1444,14 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setSound(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setsound(_:)-4d1ma"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/targetContentId": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/targetContentId": {
   "abstract" : [
     {
       "text" : "The identifier of the window brought forward. The value of this key will be populated",
@@ -1527,14 +1527,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/targetContentId",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/targetContentId",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "targetContentId",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/targetcontentid"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/threadId": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/threadId": {
   "abstract" : [
     {
       "text" : "An app-specific identifier for grouping related notifications. This value corresponds",
@@ -1589,14 +1589,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/threadId",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/threadId",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "threadId",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/threadid"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/topic": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/topic": {
   "abstract" : [
     {
       "text" : "The destination topic for the notification.",
@@ -1630,14 +1630,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/topic",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/topic",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "topic",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/topic"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/urlArgs": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/urlArgs": {
   "abstract" : [
     {
       "text" : "Used for Safari Push Notifications and should be an array of values. See the",
@@ -1684,14 +1684,14 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/urlArgs",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/urlArgs",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "urlArgs",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/urlargs"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for making push notification payloads.",
@@ -1736,7 +1736,7 @@
       "text" : "ParsePushPayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1749,7 +1749,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -1770,7 +1770,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1783,13 +1783,13 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s23CustomStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/s28CustomDebugStringConvertibleP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 },

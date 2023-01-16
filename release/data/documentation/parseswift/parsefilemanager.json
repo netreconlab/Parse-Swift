@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -89,21 +89,21 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/init()"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/init()"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/defaultDataDirectoryPath"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/defaultDataDirectoryPath"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/downloadDirectory()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-3nh5r",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-4h3hl"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/downloadDirectory()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-3nh5r",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-4h3hl"
       ],
       "title" : "Type Methods"
     }
@@ -122,21 +122,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager": {
   "abstract" : [
     {
       "text" : "Manages Parse files and directories.",
@@ -157,7 +157,7 @@
       "text" : "ParseFileManager"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -170,7 +170,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager/defaultDataDirectoryPath": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager/defaultDataDirectoryPath": {
   "abstract" : [
     {
       "text" : "The default directory for storing Parse files.",
@@ -204,14 +204,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/defaultDataDirectoryPath",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/defaultDataDirectoryPath",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "defaultDataDirectoryPath",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager\/defaultdatadirectorypath"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager/downloadDirectory()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager/downloadDirectory()": {
   "abstract" : [
     {
       "text" : "The download directory for all ",
@@ -265,14 +265,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/downloadDirectory()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/downloadDirectory()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "downloadDirectory()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager\/downloaddirectory()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager/fileExists(_:)-3nh5r": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager/fileExists(_:)-3nh5r": {
   "abstract" : [
     {
       "text" : "Check if a file exists in the Swift SDK download directory.",
@@ -327,14 +327,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-3nh5r",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-3nh5r",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fileExists(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager\/fileexists(_:)-3nh5r"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager/fileExists(_:)-4h3hl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager/fileExists(_:)-4h3hl": {
   "abstract" : [
     {
       "text" : "Check if a ",
@@ -397,14 +397,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-4h3hl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/fileExists(_:)-4h3hl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fileExists(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager\/fileexists(_:)-4h3hl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager/init()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager/init()": {
   "abstract" : [
     {
       "text" : "Creates an instance of ",
@@ -429,7 +429,7 @@
       "text" : "?()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/init()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",

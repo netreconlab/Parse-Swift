@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -90,11 +90,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH",
-        "doc:\/\/com.parse.ParseSwift\/SY"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -112,33 +112,33 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/acl",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/array",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/boolean",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/bytes",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/date",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/file",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/geoPoint",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/number",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/object",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/pointer",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/polygon",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/relation",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/string"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/acl",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/array",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/boolean",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/bytes",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/date",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/file",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/geoPoint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/number",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/object",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/pointer",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/polygon",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/relation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/string"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(rawValue:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/Equatable-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -157,46 +157,46 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SY": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SY",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SY": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField": {
   "abstract" : [
     {
       "text" : "A type used to create internal fields for ",
@@ -225,7 +225,7 @@
       "text" : "ParseField"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -238,7 +238,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
   "abstract" : [
     {
       "text" : "Field types available in ",
@@ -267,7 +267,7 @@
       "text" : "FieldType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -280,29 +280,29 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/RawRepresentable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/rawrepresentable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/acl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/acl": {
   "abstract" : [
     {
       "text" : "A acl type.",
@@ -323,14 +323,14 @@
       "text" : "acl"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/acl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/acl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.acl",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/acl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/array": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/array": {
   "abstract" : [
     {
       "text" : "An array type.",
@@ -351,14 +351,14 @@
       "text" : "array"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/array",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/array",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.array",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/array"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/boolean": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/boolean": {
   "abstract" : [
     {
       "text" : "A boolean type.",
@@ -379,14 +379,14 @@
       "text" : "boolean"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/boolean",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/boolean",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.boolean",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/boolean"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/bytes": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/bytes": {
   "abstract" : [
     {
       "text" : "A bytes type.",
@@ -407,14 +407,14 @@
       "text" : "bytes"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/bytes",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/bytes",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.bytes",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/bytes"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/date": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/date": {
   "abstract" : [
     {
       "text" : "A date type.",
@@ -435,14 +435,14 @@
       "text" : "date"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/date",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/date",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.date",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/date"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/file": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/file": {
   "abstract" : [
     {
       "text" : "A file type.",
@@ -463,14 +463,14 @@
       "text" : "file"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/file",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/file",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.file",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/file"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/geoPoint": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/geoPoint": {
   "abstract" : [
     {
       "text" : "A geoPoint type.",
@@ -491,14 +491,14 @@
       "text" : "geoPoint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/geoPoint",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/geoPoint",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.geoPoint",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/geopoint"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/init(rawValue:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/init(rawValue:)": {
   "abstract" : [
 
   ],
@@ -529,14 +529,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(rawValue:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/init(rawvalue:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/number": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/number": {
   "abstract" : [
     {
       "text" : "A number type.",
@@ -557,14 +557,14 @@
       "text" : "number"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/number",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/number",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.number",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/number"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/object": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/object": {
   "abstract" : [
     {
       "text" : "An object type.",
@@ -585,14 +585,14 @@
       "text" : "object"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/object",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/object",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.object",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/object"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/pointer": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/pointer": {
   "abstract" : [
     {
       "text" : "A pointer type.",
@@ -613,14 +613,14 @@
       "text" : "pointer"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/pointer",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/pointer",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.pointer",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/pointer"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/polygon": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/polygon": {
   "abstract" : [
     {
       "text" : "A polygon type.",
@@ -641,14 +641,14 @@
       "text" : "polygon"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/polygon",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/polygon",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.polygon",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/polygon"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/relation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/relation": {
   "abstract" : [
     {
       "text" : "A relation type.",
@@ -669,14 +669,14 @@
       "text" : "relation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/relation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/relation",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.relation",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype\/relation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType/string": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType/string": {
   "abstract" : [
     {
       "text" : "A string type.",
@@ -697,7 +697,7 @@
       "text" : "string"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/string",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType\/string",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseField.FieldType.string",

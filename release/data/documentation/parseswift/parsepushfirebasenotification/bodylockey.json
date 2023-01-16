@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/bodyLocKey"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/bodyLocKey"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -172,21 +172,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
   "abstract" : [
     {
       "text" : "The Firebase Cloud Messaging (FCM) notification payload. For more information, see",
@@ -233,7 +233,7 @@
       "text" : "ParsePushFirebaseNotification"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -246,7 +246,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasenotification"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification/bodyLocKey": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification/bodyLocKey": {
   "abstract" : [
     {
       "text" : "Indicates the key to the body string for localization. On iOS, this",
@@ -288,7 +288,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/bodyLocKey",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/bodyLocKey",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "bodyLocKey",

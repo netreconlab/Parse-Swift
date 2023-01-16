@@ -29,14 +29,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -127,7 +127,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A14PushAppleSoundV",
               "text" : "ParsePushAppleSound"
@@ -137,7 +137,7 @@
               "text" : ") -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV",
               "text" : "ParsePushPayloadApple"
@@ -252,21 +252,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleSound": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleSound": {
   "abstract" : [
     {
       "text" : "Use these keys to configure the sound for a critical alert.",
@@ -287,7 +287,7 @@
       "text" : "ParsePushAppleSound"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -300,7 +300,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplesound"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
   "abstract" : [
     {
       "text" : "The payload data for an Apple push notification.",
@@ -321,7 +321,7 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -334,7 +334,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-27wko": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-27wko": {
   "abstract" : [
     {
       "text" : "Set the name of a sound file in your app’s main bundle or in the Library\/Sounds folder",
@@ -394,7 +394,7 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setSound(_:)",

@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,11 +81,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/Se",
-        "doc:\/\/com.parse.ParseSwift\/SE",
-        "doc:\/\/com.parse.ParseSwift\/SQ",
-        "doc:\/\/com.parse.ParseSwift\/SH",
-        "doc:\/\/com.parse.ParseSwift\/SY"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -103,32 +103,32 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterDelete",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterEvent",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterFind",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogin",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogout",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeConnect",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeDelete",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeFind",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeLogin",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSave",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSubscribe"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterDelete",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterEvent",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterFind",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogin",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogout",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeConnect",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeDelete",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeFind",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeLogin",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSave",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSubscribe"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/init(rawValue:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/Equatable-Implementations",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/RawRepresentable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -147,46 +147,46 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SH": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SH",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SQ",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/SY": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SY",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SY": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/Se": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/Se",
+"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
   "abstract" : [
     {
       "text" : "The types of Parse Hook Triggers available.",
@@ -207,7 +207,7 @@
       "text" : "ParseHookTriggerType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -220,29 +220,29 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/Equatable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/Equatable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/equatable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/RawRepresentable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/rawrepresentable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterDelete": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterDelete": {
   "abstract" : [
     {
       "text" : "Occurs after deleting a ",
@@ -279,14 +279,14 @@
       "text" : "afterDelete"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterDelete",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterDelete",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterDelete",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/afterdelete"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterEvent": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterEvent": {
   "abstract" : [
     {
       "text" : "Occurs after a ",
@@ -315,14 +315,14 @@
       "text" : "afterEvent"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterEvent",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterEvent",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterEvent",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/afterevent"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterFind": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterFind": {
   "abstract" : [
     {
       "text" : "Occurs after finding a ",
@@ -351,14 +351,14 @@
       "text" : "afterFind"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterFind",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterFind",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterFind",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/afterfind"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterLogin": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterLogin": {
   "abstract" : [
     {
       "text" : "Occurs after login of a ",
@@ -387,14 +387,14 @@
       "text" : "afterLogin"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogin",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogin",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterLogin",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/afterlogin"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterLogout": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterLogout": {
   "abstract" : [
     {
       "text" : "Occurs after logout of a ",
@@ -423,14 +423,14 @@
       "text" : "afterLogout"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogout",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterLogout",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterLogout",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/afterlogout"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterSave": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterSave": {
   "abstract" : [
     {
       "text" : "Occurs after saving a ",
@@ -467,14 +467,14 @@
       "text" : "afterSave"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.afterSave",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/aftersave"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeConnect": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeConnect": {
   "abstract" : [
     {
       "text" : "Occurs before a ",
@@ -503,14 +503,14 @@
       "text" : "beforeConnect"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeConnect",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeConnect",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeConnect",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforeconnect"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeDelete": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeDelete": {
   "abstract" : [
     {
       "text" : "Occurs before deleting a ",
@@ -547,14 +547,14 @@
       "text" : "beforeDelete"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeDelete",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeDelete",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeDelete",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforedelete"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeFind": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeFind": {
   "abstract" : [
     {
       "text" : "Occurs before finding a ",
@@ -583,14 +583,14 @@
       "text" : "beforeFind"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeFind",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeFind",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeFind",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforefind"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeLogin": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeLogin": {
   "abstract" : [
     {
       "text" : "Occurs before login of a ",
@@ -619,14 +619,14 @@
       "text" : "beforeLogin"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeLogin",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeLogin",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeLogin",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforelogin"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeSave": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeSave": {
   "abstract" : [
     {
       "text" : "Occurs before saving a ",
@@ -663,14 +663,14 @@
       "text" : "beforeSave"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSave",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSave",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeSave",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforesave"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeSubscribe": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeSubscribe": {
   "abstract" : [
     {
       "text" : "Occurs before a ",
@@ -699,14 +699,14 @@
       "text" : "beforeSubscribe"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSubscribe",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSubscribe",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "ParseHookTriggerType.beforeSubscribe",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforesubscribe"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/init(rawValue:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/init(rawValue:)": {
   "abstract" : [
 
   ],
@@ -737,7 +737,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/init(rawValue:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",

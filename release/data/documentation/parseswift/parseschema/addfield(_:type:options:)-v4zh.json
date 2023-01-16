@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/addField(_:type:options:)-v4zh"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/addField(_:type:options:)-v4zh"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -244,7 +244,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A5FieldV",
               "text" : "ParseField"
@@ -254,7 +254,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A5FieldV0C4TypeO",
               "text" : "FieldType"
@@ -272,7 +272,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A12FieldOptionsV",
               "text" : "ParseFieldOptions"
@@ -291,7 +291,7 @@
               "text" : ">) -> "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A6SchemaV",
               "text" : "ParseSchema"
@@ -516,21 +516,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField": {
   "abstract" : [
     {
       "text" : "A type used to create internal fields for ",
@@ -559,7 +559,7 @@
       "text" : "ParseField"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -572,7 +572,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField/FieldType": {
   "abstract" : [
     {
       "text" : "Field types available in ",
@@ -601,7 +601,7 @@
       "text" : "FieldType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField\/FieldType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -614,7 +614,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield\/fieldtype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
   "abstract" : [
     {
       "text" : "The options for a field in ",
@@ -639,7 +639,7 @@
       "text" : "ParseFieldOptions"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -652,7 +652,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefieldoptions"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSchema": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema": {
   "abstract" : [
     {
       "code" : "ParseSchema",
@@ -677,7 +677,7 @@
       "text" : "ParseSchema"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -690,7 +690,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSchema/addField(_:type:options:)-v4zh": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/addField(_:type:options:)-v4zh": {
   "abstract" : [
     {
       "text" : "Add a Field to create\/update a ",
@@ -841,7 +841,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/addField(_:type:options:)-v4zh",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/addField(_:type:options:)-v4zh",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addField(_:type:options:)",

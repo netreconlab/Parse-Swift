@@ -21,14 +21,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable\/query"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable\/query"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -99,7 +99,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift10QueryWhereV",
               "text" : "QueryWhere"
@@ -144,21 +144,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatusable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatusable": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -195,7 +195,7 @@
       "text" : "ParsePushStatusable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -208,7 +208,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatusable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatusable/query": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatusable/query": {
   "abstract" : [
     {
       "text" : "The ",
@@ -255,7 +255,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable\/query",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable\/query",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -263,7 +263,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatusable\/query"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryWhere": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryWhere": {
   "abstract" : [
     {
       "text" : "The ",
@@ -305,7 +305,7 @@
       "text" : "QueryWhere"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

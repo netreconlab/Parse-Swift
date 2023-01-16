@@ -14,7 +14,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -172,9 +172,9 @@
           "type" : "paragraph"
         },
         {
-          "anchor" : "Use-Parse-Swift-from-NetReconLab",
+          "anchor" : "Why-use-Parse-Swift-from-NetReconLab",
           "level" : 2,
-          "text" : "Use Parse-Swift from NetReconLab",
+          "text" : "Why use Parse-Swift from NetReconLab?",
           "type" : "heading"
         },
         {
@@ -322,191 +322,180 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:migratingFromObjcSDK:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/configuration",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/clearCache()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/clearCache()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()"
       ],
       "title" : "Configure SDK"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Subscription",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Subscription",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback"
       ],
       "title" : "Classes"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Deletable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Objectable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudTypeable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseQueryScorable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSession",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryObservable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Queryable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Savable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseQueryScorable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSession",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryObservable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Queryable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable"
       ],
       "title" : "Protocols"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/API",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseACL",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseApple",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseEncoder",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFacebook",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFile",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseInstagram",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePush",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTwitter",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Pointer",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryWhere"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseACL",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstagram",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePush",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Pointer",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere"
       ],
       "title" : "Structures"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/and(queries:)-4ugox",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/and(queries:)-8cafq",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-3irrl",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-f8wn",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-7bkbc",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/doesNotMatchKeyInQuery(key:queryKey:query:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)-9w5u0",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)-imiz",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesRegex(key:regex:modifiers:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/near(key:geoPoint:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-4b4r0",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-l87w",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-2eqxa",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/or(queries:)-1117v",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/or(queries:)-8hqvz",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-23s9i",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-6tnr6",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(object:)-3ndwf",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(object:)-9ex2g",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/relative(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinGeoBox(key:fromSouthWest:toNortheast:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinKilometers(key:geoPoint:distance:sorted:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinMiles(key:geoPoint:distance:sorted:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinRadians(key:geoPoint:distance:sorted:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-4ugox",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-8cafq",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-3irrl",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-f8wn",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-7bkbc",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotMatchKeyInQuery(key:queryKey:query:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesRegex(key:regex:modifiers:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/near(key:geoPoint:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-4b4r0",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-l87w",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-2eqxa",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-1117v",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-8hqvz",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-23s9i",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-6tnr6",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(object:)-3ndwf",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(object:)-9ex2g",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/relative(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinGeoBox(key:fromSouthWest:toNortheast:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinKilometers(key:geoPoint:distance:sorted:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinMiles(key:geoPoint:distance:sorted:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinRadians(key:geoPoint:distance:sorted:)"
       ],
       "title" : "Functions"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-4oylc",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-6f2gk",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-998hz",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-4oylc",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-6f2gk",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-998hz",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg"
       ],
       "title" : "Operators"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloud",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseKeyValueStore"
-      ],
-      "title" : "Type Aliases"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Event",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTextOption"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Event",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTextOption"
       ],
       "title" : "Enumerations"
     }
@@ -525,21 +514,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/!=(_:_:)-4oylc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/!=(_:_:)-4oylc": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key’s value do not match a ",
@@ -616,14 +605,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-4oylc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-4oylc",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/!=(_:_:)-4oylc"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/!=(_:_:)-6f2gk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/!=(_:_:)-6f2gk": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is not equal to a ",
@@ -699,14 +688,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-6f2gk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-6f2gk",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/!=(_:_:)-6f2gk"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/!=(_:_:)-8iwik": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/!=(_:_:)-8iwik": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is not equal to a value.",
@@ -766,14 +755,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/!=(_:_:)-8iwik"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/==(_:_:)-5jg5t": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-5jg5t": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a value.",
@@ -833,14 +822,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "==(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/==(_:_:)-5jg5t"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/==(_:_:)-8pl0h": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-8pl0h": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a ",
@@ -916,14 +905,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "==(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/==(_:_:)-8pl0h"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/==(_:_:)-998hz": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-998hz": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key’s value matches a ",
@@ -1000,14 +989,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-998hz",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-998hz",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "==(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/==(_:_:)-998hz"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/API": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API": {
   "abstract" : [
     {
       "text" : "The REST API for communicating with a Parse Server.",
@@ -1028,7 +1017,7 @@
       "text" : "API"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/API",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1041,7 +1030,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudObservable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudObservable": {
   "abstract" : [
     {
       "text" : "This protocol describes the interface for creating a view model for ",
@@ -1086,7 +1075,7 @@
       "text" : "CloudObservable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1099,7 +1088,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudobservable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -1157,7 +1146,7 @@
       "text" : "CloudViewModel"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1170,7 +1159,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Deletable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Deletable": {
   "abstract" : [
 
   ],
@@ -1188,7 +1177,7 @@
       "text" : "Deletable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Deletable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1201,7 +1190,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/deletable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Event": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Event": {
   "abstract" : [
     {
       "text" : "Represents an update on a specific object from the ",
@@ -1230,7 +1219,7 @@
       "text" : "Event"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Event",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Event",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1243,7 +1232,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/event"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Fetchable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable": {
   "abstract" : [
 
   ],
@@ -1261,7 +1250,7 @@
       "text" : "Fetchable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Fetchable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1274,7 +1263,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Objectable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable": {
   "abstract" : [
     {
       "text" : "The base protocol for a ",
@@ -1303,7 +1292,7 @@
       "text" : "Objectable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Objectable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1316,7 +1305,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseACL": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseACL": {
   "abstract" : [
     {
       "code" : "ParseACL",
@@ -1398,7 +1387,7 @@
       "text" : "ParseACL"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseACL",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseACL",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1411,7 +1400,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseacl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseAnalytics": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnalytics": {
   "abstract" : [
     {
       "code" : "ParseAnalytics",
@@ -1436,7 +1425,7 @@
       "text" : "ParseAnalytics"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1449,7 +1438,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseanalytics"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseAnonymous": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Anonymously logged-in users.",
@@ -1470,7 +1459,7 @@
       "text" : "ParseAnonymous"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1483,7 +1472,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseanonymous"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseApple": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseApple": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Apple User Authentication and ",
@@ -1554,7 +1543,7 @@
       "text" : "ParseApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseApple",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1567,7 +1556,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseapple"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseAuthentication": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAuthentication": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -1625,7 +1614,7 @@
       "text" : "ParseAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1638,7 +1627,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseauthentication"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseBytes": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseBytes": {
   "abstract" : [
     {
       "code" : "ParseBytes",
@@ -1663,7 +1652,7 @@
       "text" : "ParseBytes"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1676,7 +1665,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsebytes"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCLP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
   "abstract" : [
     {
       "text" : "Class Level Permissions for ",
@@ -1705,7 +1694,7 @@
       "text" : "ParseCLP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1718,70 +1707,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCloud": {
-  "abstract" : [
-    {
-      "text" : "Objects that conform to the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseCloud",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " protocol are able to call Parse Cloud Functions and Jobs.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "An object should be instantiated for each function and job type. When conforming to",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseCloud",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", any properties added will be passed as parameters to your Cloud Function or Job.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseCloud"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloud",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseCloud"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseCloud",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsecloud"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCloudTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudTypeable": {
   "abstract" : [
 
   ],
@@ -1799,7 +1725,7 @@
       "text" : "ParseCloudTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1812,7 +1738,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudtypeable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCloudUser": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser": {
   "abstract" : [
 
   ],
@@ -1830,7 +1756,7 @@
       "text" : "ParseCloudUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1843,7 +1769,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclouduser"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCloudable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -1892,7 +1818,7 @@
       "text" : "ParseCloudable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1905,7 +1831,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseConfig": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -1966,7 +1892,7 @@
       "text" : "ParseConfig"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1979,7 +1905,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfig"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseConfiguration": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration": {
   "abstract" : [
     {
       "text" : "The Configuration for a Parse client.",
@@ -2000,7 +1926,7 @@
       "text" : "ParseConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2013,7 +1939,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfiguration"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseEncodable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncodable": {
   "abstract" : [
     {
       "text" : "Types that conform to ",
@@ -2059,7 +1985,7 @@
       "text" : "ParseEncodable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2072,7 +1998,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseencodable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseEncoder": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncoder": {
   "abstract" : [
     {
       "text" : "An object that encodes Parse instances of a data type as JSON objects.",
@@ -2093,7 +2019,7 @@
       "text" : "ParseEncoder"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseEncoder",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2106,7 +2032,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseencoder"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
   "abstract" : [
     {
       "text" : "An object with a Parse code and message.",
@@ -2127,7 +2053,7 @@
       "text" : "ParseError"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2140,7 +2066,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFacebook": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFacebook": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Facebook User Authentication and ",
@@ -2211,7 +2137,7 @@
       "text" : "ParseFacebook"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFacebook",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2224,7 +2150,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefacebook"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseField": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField": {
   "abstract" : [
     {
       "text" : "A type used to create internal fields for ",
@@ -2253,7 +2179,7 @@
       "text" : "ParseField"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseField",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2266,7 +2192,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefield"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
   "abstract" : [
     {
       "text" : "The options for a field in ",
@@ -2291,7 +2217,7 @@
       "text" : "ParseFieldOptions"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2304,7 +2230,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefieldoptions"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFile": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile": {
   "abstract" : [
     {
       "text" : "A ",
@@ -2341,7 +2267,7 @@
       "text" : "ParseFile"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFile",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2354,7 +2280,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileManager": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileManager": {
   "abstract" : [
     {
       "text" : "Manages Parse files and directories.",
@@ -2375,7 +2301,7 @@
       "text" : "ParseFileManager"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileManager",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2388,7 +2314,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefilemanager"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
   "abstract" : [
     {
       "text" : "A protocol for overriding the default transfer behavior for ",
@@ -2425,7 +2351,7 @@
       "text" : "ParseFileTransferable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2438,7 +2364,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseGeoPoint": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGeoPoint": {
   "abstract" : [
     {
       "code" : "ParseGeoPoint",
@@ -2487,7 +2413,7 @@
       "text" : "ParseGeoPoint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2500,7 +2426,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsegeopoint"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseGitHub": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGitHub": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with GitHub User Authentication and ",
@@ -2571,7 +2497,7 @@
       "text" : "ParseGitHub"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2584,7 +2510,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsegithub"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseGoogle": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGoogle": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Google User Authentication and ",
@@ -2655,7 +2581,7 @@
       "text" : "ParseGoogle"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2668,7 +2594,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsegoogle"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHealth": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth": {
   "abstract" : [
     {
       "code" : "ParseHealth",
@@ -2693,7 +2619,7 @@
       "text" : "ParseHealth"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2706,7 +2632,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest": {
   "abstract" : [
     {
       "text" : "A type that can decode requests when ",
@@ -2735,7 +2661,7 @@
       "text" : "ParseHookFunctionRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2748,7 +2674,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookfunctionrequest"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookFunctionable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionable": {
   "abstract" : [
     {
       "text" : "Conforming to ",
@@ -2785,7 +2711,7 @@
       "text" : "ParseHookFunctionable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2798,7 +2724,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookfunctionable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookParametable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookParametable": {
   "abstract" : [
     {
       "text" : "Conforming to ",
@@ -2843,7 +2769,7 @@
       "text" : "ParseHookParametable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2856,7 +2782,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookparametable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookRequestable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookRequestable": {
   "abstract" : [
     {
       "text" : "Conforming to ",
@@ -2901,7 +2827,7 @@
       "text" : "ParseHookRequestable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2914,7 +2840,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookrequestable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
   "abstract" : [
     {
       "text" : "Build a response after processing a ",
@@ -2955,7 +2881,7 @@
       "text" : "ParseHookResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -2968,7 +2894,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookresponse"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
   "abstract" : [
     {
       "text" : "A type that can decode requests when ",
@@ -2997,7 +2923,7 @@
       "text" : "ParseHookTriggerRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3010,7 +2936,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
   "abstract" : [
     {
       "text" : "The types of Parse Hook Triggers available.",
@@ -3031,7 +2957,7 @@
       "text" : "ParseHookTriggerType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3044,7 +2970,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookTriggerable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable": {
   "abstract" : [
     {
       "text" : "Conforming to ",
@@ -3081,7 +3007,7 @@
       "text" : "ParseHookTriggerable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3094,7 +3020,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseHookable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookable": {
   "abstract" : [
     {
       "text" : "Hooks and Triggers should conform to ",
@@ -3123,7 +3049,7 @@
       "text" : "ParseHookable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3136,7 +3062,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseInstagram": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstagram": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Instagram User Authentication and ",
@@ -3207,7 +3133,7 @@
       "text" : "ParseInstagram"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseInstagram",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstagram",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3220,7 +3146,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstagram"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseInstallation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -3293,7 +3219,7 @@
       "text" : "ParseInstallation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3306,50 +3232,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseKeyValueStore": {
-  "abstract" : [
-    {
-      "text" : "A store that supports key\/value storage. It should be able",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "to handle any object that conforms to encodable and decodable.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseKeyValueStore"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseKeyValueStore",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseKeyValueStore"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseKeyValueStore",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsekeyvaluestore"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLDAP": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLDAP": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with LDAP User Authentication and ",
@@ -3395,7 +3278,7 @@
       "text" : "ParseLDAP"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3408,7 +3291,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseldap"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLinkedIn": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLinkedIn": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with LinkedIn User Authentication and ",
@@ -3479,7 +3362,7 @@
       "text" : "ParseLinkedIn"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3492,7 +3375,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselinkedin"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQuery": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery": {
   "abstract" : [
     {
       "text" : "The ",
@@ -3529,7 +3412,7 @@
       "text" : "ParseLiveQuery"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3542,7 +3425,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate": {
   "abstract" : [
     {
       "text" : "Receive\/respond to notifications from the ParseLiveQuery Server.",
@@ -3563,7 +3446,7 @@
       "text" : "ParseLiveQueryDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3576,7 +3459,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequerydelegate"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -3613,7 +3496,7 @@
       "text" : "ParseObject"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3626,7 +3509,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation": {
   "abstract" : [
     {
       "text" : "A ",
@@ -3691,7 +3574,7 @@
       "text" : "ParseOperation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3704,7 +3587,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePolygon": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon": {
   "abstract" : [
     {
       "code" : "ParsePolygon",
@@ -3745,7 +3628,7 @@
       "text" : "ParsePolygon"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3758,7 +3641,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepolygon"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable": {
   "abstract" : [
     {
       "text" : "A store that supports key\/value storage. It should be able",
@@ -3787,7 +3670,7 @@
       "text" : "ParsePrimitiveStorable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3800,7 +3683,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePush": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePush": {
   "abstract" : [
     {
       "text" : "Send and check the status of push notificaitons.",
@@ -3821,7 +3704,7 @@
       "text" : "ParsePush"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePush",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePush",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3834,7 +3717,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepush"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert": {
   "abstract" : [
     {
       "text" : "An alert payload for Apple push notifications. See Apple’s ",
@@ -3868,7 +3751,7 @@
       "text" : "ParsePushAppleAlert"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3881,7 +3764,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplealert"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushApplePayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushApplePayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for adding the standard properties for Apple push notifications.",
@@ -3902,7 +3785,7 @@
       "text" : "ParsePushApplePayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3915,7 +3798,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplepayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushAppleSound": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleSound": {
   "abstract" : [
     {
       "text" : "Use these keys to configure the sound for a critical alert.",
@@ -3936,7 +3819,7 @@
       "text" : "ParsePushAppleSound"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -3949,7 +3832,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushapplesound"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
   "abstract" : [
     {
       "text" : "The Firebase Cloud Messaging (FCM) notification payload. For more information, see",
@@ -3996,7 +3879,7 @@
       "text" : "ParsePushFirebaseNotification"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4009,7 +3892,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasenotification"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for adding the standard properties for Firebase Cloud Messaging (FCM) push notifications.",
@@ -4030,7 +3913,7 @@
       "text" : "ParsePushFirebasePayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4043,7 +3926,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasepayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadAny": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadAny": {
   "abstract" : [
     {
       "text" : "The payload data for both a ",
@@ -4084,7 +3967,7 @@
       "text" : "ParsePushPayloadAny"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4097,7 +3980,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadany"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
   "abstract" : [
     {
       "text" : "The payload data for an Apple push notification.",
@@ -4118,7 +4001,7 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4131,7 +4014,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
   "abstract" : [
     {
       "text" : "The payload data for an Firebase Cloud Messaging (FCM) push notification.",
@@ -4173,7 +4056,7 @@
       "text" : "ParsePushPayloadFirebase"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4186,7 +4069,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushPayloadable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadable": {
   "abstract" : [
     {
       "text" : "A protocol for making push notification payloads.",
@@ -4231,7 +4114,7 @@
       "text" : "ParsePushPayloadable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4244,7 +4127,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
   "abstract" : [
     {
       "text" : "The PushStatus on the Parse Server.",
@@ -4265,7 +4148,7 @@
       "text" : "ParsePushStatus"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4278,7 +4161,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePushStatusable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatusable": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -4315,7 +4198,7 @@
       "text" : "ParsePushStatusable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4328,7 +4211,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatusable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseQueryScorable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseQueryScorable": {
   "abstract" : [
     {
       "text" : "Conform to this protocol to add the required properties to your ",
@@ -4377,7 +4260,7 @@
       "text" : "ParseQueryScorable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseQueryScorable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseQueryScorable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4390,7 +4273,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsequeryscorable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRelation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation": {
   "abstract" : [
     {
       "text" : "The ",
@@ -4435,7 +4318,7 @@
       "text" : "ParseRelation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4448,7 +4331,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseRole": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -4561,7 +4444,7 @@
       "text" : "ParseRole"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4574,7 +4457,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSchema": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema": {
   "abstract" : [
     {
       "code" : "ParseSchema",
@@ -4599,7 +4482,7 @@
       "text" : "ParseSchema"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4612,7 +4495,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSession": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSession": {
   "abstract" : [
     {
       "code" : "ParseSession",
@@ -4661,7 +4544,7 @@
       "text" : "ParseSession"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSession",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSession",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4674,7 +4557,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsesession"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseSpotify": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Spotify User Authentication and ",
@@ -4737,7 +4620,7 @@
       "text" : "ParseSpotify"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4750,7 +4633,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTextOption": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTextOption": {
   "abstract" : [
     {
       "text" : "Options used to constrain a text search.",
@@ -4771,7 +4654,7 @@
       "text" : "ParseTextOption"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTextOption",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTextOption",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4784,7 +4667,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetextoption"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTwitter": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTwitter": {
   "abstract" : [
     {
       "text" : "Provides utility functions for working with Twitter User Authentication and ",
@@ -4855,7 +4738,7 @@
       "text" : "ParseTwitter"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTwitter",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4868,7 +4751,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetwitter"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
       "text" : "A special type that is considered a Parse type.",
@@ -4889,7 +4772,7 @@
       "text" : "ParseTypeable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4902,7 +4785,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseUser": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -4971,7 +4854,7 @@
       "text" : "ParseUser"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -4984,7 +4867,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseVersion": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion": {
   "abstract" : [
     {
       "code" : "ParseVersion",
@@ -5017,7 +4900,7 @@
       "text" : "ParseVersion"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5030,7 +4913,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseversion"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Pointer": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Pointer": {
   "abstract" : [
     {
       "text" : "A Pointer referencing a ParseObject.",
@@ -5051,7 +4934,7 @@
       "text" : "Pointer"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Pointer",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Pointer",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5064,7 +4947,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/pointer"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Query": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query": {
   "abstract" : [
     {
       "text" : "The ",
@@ -5101,7 +4984,7 @@
       "text" : "Query"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Query",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5114,7 +4997,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryConstraint": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryConstraint": {
   "abstract" : [
     {
       "text" : "Used to constrain a query.",
@@ -5135,7 +5018,7 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5148,7 +5031,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryconstraint"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryObservable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryObservable": {
   "abstract" : [
     {
       "text" : "This protocol describes the interface for creating a view model for a ",
@@ -5193,7 +5076,7 @@
       "text" : "QueryObservable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryObservable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryObservable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5206,7 +5089,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryobservable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QuerySubscribable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QuerySubscribable": {
   "abstract" : [
     {
       "text" : "This protocol describes the interface for handling events from a ",
@@ -5263,7 +5146,7 @@
       "text" : "QuerySubscribable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5276,7 +5159,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/querysubscribable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryViewModel": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryViewModel": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -5334,7 +5217,7 @@
       "text" : "QueryViewModel"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5347,7 +5230,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryviewmodel"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QueryWhere": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryWhere": {
   "abstract" : [
     {
       "text" : "The ",
@@ -5389,7 +5272,7 @@
       "text" : "QueryWhere"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5402,7 +5285,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/querywhere"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Queryable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Queryable": {
   "abstract" : [
 
   ],
@@ -5420,7 +5303,7 @@
       "text" : "Queryable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Queryable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Queryable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5433,7 +5316,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Savable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable": {
   "abstract" : [
 
   ],
@@ -5451,7 +5334,7 @@
       "text" : "Savable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Savable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5464,7 +5347,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/savable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Subscription": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Subscription": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -5530,7 +5413,7 @@
       "text" : "Subscription"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Subscription",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Subscription",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5543,7 +5426,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscription"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -5572,7 +5455,7 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -5585,7 +5468,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/_(_:_:)-35vq2": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-35vq2": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is greater than a value.",
@@ -5645,14 +5528,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : ">(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/_(_:_:)-35vq2"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/_(_:_:)-4bsb2": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-4bsb2": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is less than a value.",
@@ -5712,14 +5595,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "<(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/_(_:_:)-4bsb2"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/_=(_:_:)-434pw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-434pw": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is greater than or equal to a value.",
@@ -5779,14 +5662,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : ">=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/_=(_:_:)-434pw"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/_=(_:_:)-6tzg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-6tzg": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is less than or equal to a value.",
@@ -5846,14 +5729,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "<=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/_=(_:_:)-6tzg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/and(queries:)-4ugox": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/and(queries:)-4ugox": {
   "abstract" : [
     {
       "text" : "Constructs a Query that is the ",
@@ -5925,14 +5808,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/and(queries:)-4ugox",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-4ugox",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "and(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/and(queries:)-4ugox"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/and(queries:)-8cafq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/and(queries:)-8cafq": {
   "abstract" : [
     {
       "text" : "Constructs a Query that is the ",
@@ -6004,14 +5887,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/and(queries:)-8cafq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-8cafq",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "and(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/and(queries:)-8cafq"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/clearCache()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/clearCache()": {
   "abstract" : [
     {
       "text" : "Manually remove all stored cache.",
@@ -6036,14 +5919,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/clearCache()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/clearCache()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "clearCache()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/clearcache()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/configuration": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/configuration": {
   "abstract" : [
     {
       "text" : "The current ",
@@ -6081,14 +5964,14 @@
       "text" : "ParseConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/configuration",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "configuration",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/configuration"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-3irrl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-3irrl": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -6192,14 +6075,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-3irrl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-3irrl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedBy(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedby(key:array:)-3irrl"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-8m6r2": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-8m6r2": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -6279,14 +6162,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedBy(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedby(key:array:)-8m6r2"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-36xo5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-36xo5": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -6366,14 +6249,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedin(key:array:)-36xo5"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-f8wn": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-f8wn": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -6469,14 +6352,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-f8wn",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-f8wn",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedin(key:array:)-f8wn"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-1g8ks": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-1g8ks": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s array",
@@ -6556,14 +6439,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containsAll(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containsall(key:array:)-1g8ks"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-7bkbc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-7bkbc": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s array",
@@ -6651,14 +6534,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-7bkbc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-7bkbc",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containsAll(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containsall(key:array:)-7bkbc"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/containsString(key:substring:modifiers:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsString(key:substring:modifiers:)": {
   "abstract" : [
     {
       "text" : "Add a constraint for finding string values that contain a provided substring.",
@@ -6739,14 +6622,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containsString(key:substring:modifiers:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containsstring(key:substring:modifiers:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/deleteObjectiveCKeychain()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/deleteObjectiveCKeychain()": {
   "abstract" : [
     {
       "text" : "Delete the Parse iOS Objective-C SDK Keychain from the device.",
@@ -6775,14 +6658,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "deleteObjectiveCKeychain()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/deleteobjectiveckeychain()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/doesNotExist(key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/doesNotExist(key:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key to be equal to ",
@@ -6842,14 +6725,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "doesNotExist(key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/doesnotexist(key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/doesNotMatchKeyInQuery(key:queryKey:query:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/doesNotMatchKeyInQuery(key:queryKey:query:)": {
   "abstract" : [
     {
       "text" : "Adds a constraint that requires that a key’s value ",
@@ -6968,14 +6851,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/doesNotMatchKeyInQuery(key:queryKey:query:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotMatchKeyInQuery(key:queryKey:query:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "doesNotMatchKeyInQuery(key:queryKey:query:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/doesnotmatchkeyinquery(key:querykey:query:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/equalTo(key:object:usingEqComparator:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:object:usingEqComparator:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a ",
@@ -7080,127 +6963,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalTo(key:object:usingEqComparator:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/equalto(key:object:usingeqcomparator:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/equalTo(key:value:usingEqComparator:)-9w5u0": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint that requires that a key is equal to a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "equalTo"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "key"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5value17usingEqComparatorAA15QueryConstraintVSS_xSbtKAA0A6ObjectRzlF1TL_xmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqComparator"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)-9w5u0",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "equalTo(key:value:usingEqComparator:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)-9w5u0"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/equalTo(key:value:usingEqComparator:)-imiz": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:value:usingEqComparator:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a value.",
@@ -7289,14 +7059,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)-imiz",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalTo(key:value:usingEqComparator:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)-imiz"
+  "url" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/exists(key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/exists(key:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a particular key to not be equal to ",
@@ -7356,14 +7126,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "exists(key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/exists(key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/hasPrefix(key:prefix:modifiers:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/hasPrefix(key:prefix:modifiers:)": {
   "abstract" : [
     {
       "text" : "Add a constraint for finding string values that start with a provided prefix.",
@@ -7452,14 +7222,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasPrefix(key:prefix:modifiers:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/hasprefix(key:prefix:modifiers:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/hasSuffix(key:suffix:modifiers:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/hasSuffix(key:suffix:modifiers:)": {
   "abstract" : [
     {
       "text" : "Add a constraint for finding string values that end with a provided suffix.",
@@ -7540,1321 +7310,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hasSuffix(key:suffix:modifiers:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/hassuffix(key:suffix:modifiers:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:migratingFromObjcSDK:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)": {
-  "abstract" : [
-    {
-      "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "code" : "application(... didFinishLaunchingWithOptions launchOptions...)",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "initialize"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "applicationId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "masterKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "serverURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "liveQueryServerURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "allowingCustomObjectIds"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingTransactions"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqualQueryConstraint"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingPostForQuery"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "keyValueStore"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A13KeyValueStorea",
-      "text" : "ParseKeyValueStore"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "requestCachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV11CachePolicya",
-      "text" : "CachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheMemoryCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheDiskCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "migratingFromObjcSDK"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingDataProtectionKeychain"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "deletingKeychainIfNeeded"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "httpAdditionalHeaders"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s11AnyHashableV",
-      "text" : "AnyHashable"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "maxConnectionAttempts"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "parseFileTransfer"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16FileTransferableP",
-      "text" : "ParseFileTransferable"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLAuthenticationChallenge",
-      "text" : "URLAuthenticationChallenge"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSession",
-      "text" : "URLSession"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@E@NSURLSessionAuthChallengeDisposition",
-      "text" : "AuthChallengeDisposition"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLCredential",
-      "text" : "URLCredential"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?)"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:migratingFromObjcSDK:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:migratingFromObjcSDK:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:migrating-9kadg"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)": {
-  "abstract" : [
-    {
-      "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "code" : "application(... didFinishLaunchingWithOptions launchOptions...)",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "initialize"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "applicationId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "masterKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "serverURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "liveQueryServerURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "allowingCustomObjectIds"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingTransactions"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqualQueryConstraint"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingPostForQuery"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "keyValueStore"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP",
-      "text" : "ParsePrimitiveStorable"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "requestCachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV11CachePolicya",
-      "text" : "CachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheMemoryCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheDiskCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingDataProtectionKeychain"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "deletingKeychainIfNeeded"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "httpAdditionalHeaders"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s11AnyHashableV",
-      "text" : "AnyHashable"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "maxConnectionAttempts"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "parseFileTransfer"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16FileTransferableP",
-      "text" : "ParseFileTransferable"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLAuthenticationChallenge",
-      "text" : "URLAuthenticationChallenge"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSession",
-      "text" : "URLSession"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@E@NSURLSessionAuthChallengeDisposition",
-      "text" : "AuthChallengeDisposition"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLCredential",
-      "text" : "URLCredential"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?)"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:allowingCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:keyValueStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:allowingcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:keyvaluestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingdata-47zw9"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)": {
-  "abstract" : [
-    {
-      "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "code" : "application(... didFinishLaunchingWithOptions launchOptions...)",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "initialize"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "applicationId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "masterKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "serverURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "liveQueryServerURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "requiringCustomObjectIds"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingTransactions"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqualQueryConstraint"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingPostForQuery"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "primitiveStore"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP",
-      "text" : "ParsePrimitiveStorable"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "requestCachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV11CachePolicya",
-      "text" : "CachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheMemoryCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "cacheDiskCapacity"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingDataProtectionKeychain"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "deletingKeychainIfNeeded"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "httpAdditionalHeaders"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s11AnyHashableV",
-      "text" : "AnyHashable"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "maxConnectionAttempts"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "parseFileTransfer"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16FileTransferableP",
-      "text" : "ParseFileTransferable"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLAuthenticationChallenge",
-      "text" : "URLAuthenticationChallenge"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSession",
-      "text" : "URLSession"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@E@NSURLSessionAuthChallengeDisposition",
-      "text" : "AuthChallengeDisposition"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLCredential",
-      "text" : "URLCredential"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?)"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "initialize(applicationId:clientKey:masterKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:masterkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingda-90uad"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
   "abstract" : [
     {
       "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
@@ -9198,6 +7661,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "liveQueryMaxConnectionAttempts"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "parseFileTransfer"
     },
     {
@@ -9276,14 +7756,14 @@
       "text" : ")?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)",
+  "title" : "initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-51rzt"
+  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-5pbr0"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/initialize(configuration:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(configuration:)": {
   "abstract" : [
     {
       "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
@@ -9337,14 +7817,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "initialize(configuration:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/initialize(configuration:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/isNotNull(key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/isNotNull(key:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is not equal to ",
@@ -9417,14 +7897,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isNotNull(key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/isnotnull(key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/isNull(key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/isNull(key:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to ",
@@ -9497,14 +7977,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isNull(key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/isnull(key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/matchesKeyInQuery(key:queryKey:query:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/matchesKeyInQuery(key:queryKey:query:)": {
   "abstract" : [
     {
       "text" : "Adds a constraint that requires that a key’s value matches a value in another key",
@@ -9610,14 +8090,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "matchesKeyInQuery(key:queryKey:query:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/matcheskeyinquery(key:querykey:query:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/matchesRegex(key:regex:modifiers:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/matchesRegex(key:regex:modifiers:)": {
   "abstract" : [
     {
       "text" : "Add a regular expression constraint for finding string values that match the provided regular expression.",
@@ -9698,14 +8178,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesRegex(key:regex:modifiers:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesRegex(key:regex:modifiers:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "matchesRegex(key:regex:modifiers:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/matchesregex(key:regex:modifiers:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/matchesText(key:text:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/matchesText(key:text:)": {
   "abstract" : [
     {
       "text" : "Add a constraint for finding string values that contain a provided",
@@ -9777,14 +8257,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "matchesText(key:text:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/matchestext(key:text:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/matchesText(key:text:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/matchesText(key:text:options:)": {
   "abstract" : [
     {
       "text" : "Add a constraint for finding string values that contain a provided",
@@ -9890,14 +8370,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesText(key:text:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "matchesText(key:text:options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/matchestext(key:text:options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/near(key:geoPoint:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/near(key:geoPoint:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s coordinates (specified via ",
@@ -9985,14 +8465,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/near(key:geoPoint:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/near(key:geoPoint:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "near(key:geoPoint:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/near(key:geopoint:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/nor(queries:)-4b4r0": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/nor(queries:)-4b4r0": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -10072,14 +8552,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-4b4r0",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-4b4r0",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nor(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/nor(queries:)-4b4r0"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/nor(queries:)-l87w": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/nor(queries:)-l87w": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -10159,14 +8639,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-l87w",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-l87w",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nor(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/nor(queries:)-l87w"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-2eqxa": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-2eqxa": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -10262,14 +8742,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-2eqxa",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-2eqxa",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "notContainedIn(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/notcontainedin(key:array:)-2eqxa"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-lma5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-lma5": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -10349,14 +8829,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "notContainedIn(key:array:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/notcontainedin(key:array:)-lma5"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/or(queries:)-1117v": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/or(queries:)-1117v": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -10436,14 +8916,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/or(queries:)-1117v",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-1117v",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "or(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/or(queries:)-1117v"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/or(queries:)-8hqvz": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/or(queries:)-8hqvz": {
   "abstract" : [
     {
       "text" : "Returns a ",
@@ -10523,14 +9003,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/or(queries:)-8hqvz",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-8hqvz",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "or(queries:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/or(queries:)-8hqvz"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/polygonContains(key:point:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/polygonContains(key:point:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s",
@@ -10610,14 +9090,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "polygonContains(key:point:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/polygoncontains(key:point:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/related(key:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(key:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key is related.",
@@ -10664,14 +9144,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "related(key:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/related(key:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/related(key:object:)-23s9i": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(key:object:)-23s9i": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key is related.",
@@ -10751,14 +9231,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-23s9i",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-23s9i",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "related(key:object:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/related(key:object:)-23s9i"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/related(key:object:)-6tnr6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(key:object:)-6tnr6": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key is related.",
@@ -10839,14 +9319,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-6tnr6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-6tnr6",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "related(key:object:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/related(key:object:)-6tnr6"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/related(object:)-3ndwf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(object:)-3ndwf": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key is related.",
@@ -10910,14 +9390,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(object:)-3ndwf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(object:)-3ndwf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "related(object:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/related(object:)-3ndwf"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/related(object:)-9ex2g": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(object:)-9ex2g": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires a key is related.",
@@ -10980,14 +9460,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/related(object:)-9ex2g",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(object:)-9ex2g",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "related(object:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/related(object:)-9ex2g"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/relative(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/relative(_:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s time is related to a specified time.",
@@ -11026,14 +9506,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/relative(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/relative(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "relative(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/relative(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/setAccessGroup(_:synchronizeAcrossDevices:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/setAccessGroup(_:synchronizeAcrossDevices:)": {
   "abstract" : [
     {
       "text" : "Sets all of the items in the Parse Keychain to a specific access group.",
@@ -11122,14 +9602,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setAccessGroup(_:synchronizeAcrossDevices:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/setaccessgroup(_:synchronizeacrossdevices:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/updateAuthentication(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/updateAuthentication(_:)": {
   "abstract" : [
     {
       "text" : "Update the authentication callback.",
@@ -11208,14 +9688,14 @@
       "text" : ")?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "updateAuthentication(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/updateauthentication(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinGeoBox(key:fromSouthWest:toNortheast:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinGeoBox(key:fromSouthWest:toNortheast:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s coordinates (specified via ",
@@ -11312,14 +9792,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinGeoBox(key:fromSouthWest:toNortheast:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinGeoBox(key:fromSouthWest:toNortheast:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinGeoBox(key:fromSouthWest:toNortheast:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withingeobox(key:fromsouthwest:tonortheast:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinKilometers(key:geoPoint:distance:sorted:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinKilometers(key:geoPoint:distance:sorted:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s coordinates (specified via ",
@@ -11445,14 +9925,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinKilometers(key:geoPoint:distance:sorted:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinKilometers(key:geoPoint:distance:sorted:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinKilometers(key:geoPoint:distance:sorted:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinkilometers(key:geopoint:distance:sorted:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinMiles(key:geoPoint:distance:sorted:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinMiles(key:geoPoint:distance:sorted:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s coordinates (specified via ",
@@ -11578,14 +10058,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinMiles(key:geoPoint:distance:sorted:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinMiles(key:geoPoint:distance:sorted:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinMiles(key:geoPoint:distance:sorted:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinmiles(key:geopoint:distance:sorted:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinPolygon(key:points:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinPolygon(key:points:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s",
@@ -11665,14 +10145,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinPolygon(key:points:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinpolygon(key:points:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinPolygon(key:polygon:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinPolygon(key:polygon:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s",
@@ -11752,14 +10232,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinPolygon(key:polygon:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinpolygon(key:polygon:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/withinRadians(key:geoPoint:distance:sorted:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinRadians(key:geoPoint:distance:sorted:)": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s coordinates (specified via ",
@@ -11885,7 +10365,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/withinRadians(key:geoPoint:distance:sorted:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinRadians(key:geoPoint:distance:sorted:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "withinRadians(key:geoPoint:distance:sorted:)",

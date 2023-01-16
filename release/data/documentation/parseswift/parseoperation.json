@@ -52,13 +52,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -145,7 +145,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
               "text" : "ParseObject"
@@ -211,8 +211,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Savable",
-        "doc:\/\/com.parse.ParseSwift\/SE"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -230,47 +230,40 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/init(target:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/init(target:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-35lsc",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-951bu",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-9ko4e",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-1nthr",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-47ckx",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-gw2h",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2tfhg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-6zoa7",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-8bggg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/encode(to:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:to:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:value:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-3e0qg",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-o2ht",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-ope6",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-1wbm6",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-3ty5e",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-8piqo",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:)-2i4un",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:callbackQueue:completion:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/savePublisher(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1t3ca",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:value:)-6xhni",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:value:)-xsi5",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1fmaa",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-7dqb3"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-35lsc",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-9ko4e",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-47ckx",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-gw2h",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2tfhg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-6zoa7",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/encode(to:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:to:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:value:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-3e0qg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-ope6",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-1wbm6",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-3ty5e",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:)-2i4un",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/savePublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1t3ca",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1fmaa",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-7dqb3"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/Savable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/Savable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -289,26 +282,26 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/SE": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/SE",
+"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -345,7 +338,7 @@
       "text" : "ParseObject"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -358,7 +351,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation": {
   "abstract" : [
     {
       "text" : "A ",
@@ -423,7 +416,7 @@
       "text" : "ParseOperation"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -436,18 +429,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/Savable-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/Savable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/Savable-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/Savable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Savable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/savable-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-35lsc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-35lsc": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field.",
@@ -523,125 +516,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-35lsc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-35lsc",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-35lsc"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-951bu": {
-  "abstract" : [
-    {
-      "text" : "An operation that adds a new element to an array field.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "add"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-951bu",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "add(_:objects:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-951bu"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-9ko4e": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-9ko4e": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field.",
@@ -744,133 +626,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-9ko4e",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-9ko4e",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-9ko4e"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-1nthr": {
-  "abstract" : [
-    {
-      "text" : "An operation that adds a new relation to an array field.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "addRelation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV11addRelation_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItKAA0A6ObjectRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV11addRelation_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItKAA0A6ObjectRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-1nthr",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "addRelation(_:objects:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/addrelation(_:objects:)-1nthr"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-47ckx": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-47ckx": {
   "abstract" : [
     {
       "text" : "An operation that adds a new relation to an array field.",
@@ -954,14 +717,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-47ckx",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-47ckx",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addRelation(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/addrelation(_:objects:)-47ckx"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-gw2h": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-gw2h": {
   "abstract" : [
     {
       "text" : "An operation that adds a new relation to an array field.",
@@ -1072,14 +835,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-gw2h",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-gw2h",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addRelation(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/addrelation(_:objects:)-gw2h"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-2tfhg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-2tfhg": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field,",
@@ -1190,14 +953,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2tfhg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2tfhg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addUnique(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-2tfhg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-6zoa7": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-6zoa7": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field,",
@@ -1281,133 +1044,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-6zoa7",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-6zoa7",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addUnique(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-6zoa7"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-8bggg": {
-  "abstract" : [
-    {
-      "text" : "An operation that adds a new element to an array field,",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "only if it was not already present.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "addUnique"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__SHRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__SHRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-8bggg",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "addUnique(_:objects:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-8bggg"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/encode(to:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/encode(to:)": {
   "abstract" : [
 
   ],
@@ -1450,14 +1094,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/encode(to:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/encode(to:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/forceSet(_:to:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/forceSet(_:to:)": {
   "abstract" : [
     {
       "text" : "An operation that force sets a field’s value.",
@@ -1560,14 +1204,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:to:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "forceSet(_:to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/forceset(_:to:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/forceSet(_:value:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/forceSet(_:value:)": {
   "abstract" : [
     {
       "text" : "An operation that force sets a field’s value.",
@@ -1670,14 +1314,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:value:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:value:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "forceSet(_:value:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/forceset(_:value:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/increment(_:by:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/increment(_:by:)": {
   "abstract" : [
     {
       "text" : "An operation that increases a numeric field’s value by a given amount.",
@@ -1745,14 +1389,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "increment(_:by:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/increment(_:by:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/init(target:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/init(target:)": {
   "abstract" : [
 
   ],
@@ -1783,14 +1427,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/init(target:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/init(target:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(target:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/init(target:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-3e0qg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-3e0qg": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of an element from",
@@ -1901,133 +1545,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-3e0qg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-3e0qg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-3e0qg"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-o2ht": {
-  "abstract" : [
-    {
-      "text" : "An operation that removes every instance of an element from",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "an array field.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "remove"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__SHRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItSERd__SHRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-o2ht",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "remove(_:objects:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-o2ht"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-ope6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-ope6": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of an element from",
@@ -2111,14 +1636,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-ope6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-ope6",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-ope6"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-1wbm6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-1wbm6": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of a relation from",
@@ -2210,14 +1735,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-1wbm6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-1wbm6",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeRelation(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/removerelation(_:objects:)-1wbm6"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-3ty5e": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-3ty5e": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of a relation from",
@@ -2336,141 +1861,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-3ty5e",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-3ty5e",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "removeRelation(_:objects:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/removerelation(_:objects:)-3ty5e"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-8piqo": {
-  "abstract" : [
-    {
-      "text" : "An operation that removes every instance of a relation from",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "an array field.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "removeRelation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV14removeRelation_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItKAA0A6ObjectRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV14removeRelation_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GGt_AItKAA0A6ObjectRd__lF1VL_qd__mfp",
-      "text" : "V"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-8piqo",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "removeRelation(_:objects:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/removerelation(_:objects:)-8piqo"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/save(options:)-2i4un": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/save(options:)-2i4un": {
   "abstract" : [
     {
       "text" : "Saves the operations on the ",
@@ -2595,14 +1993,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:)-2i4un",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:)-2i4un",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/save(options:)-2i4un"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/save(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/save(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Saves the operations on the ",
@@ -2767,14 +2165,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/save(options:callbackqueue:completion:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/savePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/savePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Saves the operations on the ",
@@ -2905,14 +2303,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/savePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/savePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "savePublisher(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/savepublisher(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-1t3ca": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-1t3ca": {
   "abstract" : [
     {
       "text" : "An operation that sets a field’s value if it has changed from its previous value.",
@@ -3015,14 +2413,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1t3ca",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1t3ca",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "set(_:to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-1t3ca"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-6e7l2": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-6e7l2": {
   "abstract" : [
     {
       "text" : "An operation that sets a field’s value.",
@@ -3124,235 +2522,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "set(_:to:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-6e7l2"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:value:)-6xhni": {
-  "abstract" : [
-    {
-      "text" : "An operation that sets a field’s value.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "set"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_5valueACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : "?>, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_5valueACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:value:)-6xhni",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "set(_:value:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:value:)-6xhni"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:value:)-xsi5": {
-  "abstract" : [
-    {
-      "text" : "An operation that sets a field’s value if it has changed from its previous value.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "set"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ">(("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : "?>), "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:value:)-xsi5",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "set(_:value:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:value:)-xsi5"
-},
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-1fmaa": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-1fmaa": {
   "abstract" : [
     {
       "text" : "An operation where a field is deleted from the object.",
@@ -3438,14 +2615,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1fmaa",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1fmaa",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unset(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-1fmaa"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-7dqb3": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-7dqb3": {
   "abstract" : [
     {
       "text" : "An operation where a field is deleted from the object.",
@@ -3496,14 +2673,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-7dqb3",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-7dqb3",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unset(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-7dqb3"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/Savable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable": {
   "abstract" : [
 
   ],
@@ -3521,7 +2698,7 @@
       "text" : "Savable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/Savable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

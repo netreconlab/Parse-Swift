@@ -8,15 +8,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-6r9at"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-6r9at"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -211,21 +211,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
   "abstract" : [
     {
       "text" : "A protocol for overriding the default transfer behavior for ",
@@ -262,7 +262,7 @@
       "text" : "ParseFileTransferable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -275,7 +275,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeDummyUploadTask()-6r9at": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeDummyUploadTask()-6r9at": {
   "abstract" : [
     {
       "text" : "Compose a dummy upload task.",
@@ -313,14 +313,14 @@
       "text" : "URLSessionUploadTask"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-6r9at",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-6r9at",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "makeDummyUploadTask()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable\/makedummyuploadtask()-6r9at"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeDummyUploadTask()-71gc1": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeDummyUploadTask()-71gc1": {
   "abstract" : [
     {
       "text" : "Compose a dummy upload task.",
@@ -359,7 +359,7 @@
       "text" : "URLSessionUploadTask"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

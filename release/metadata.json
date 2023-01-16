@@ -1,6 +1,6 @@
 {
   "bundleDisplayName" : "ParseSwift",
-  "bundleIdentifier" : "com.parse.ParseSwift",
+  "bundleIdentifier" : "edu.uky.cs.netreconlab.ParseSwift",
   "schemaVersion" : {
     "major" : 0,
     "minor" : 1,

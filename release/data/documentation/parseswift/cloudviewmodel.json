@@ -45,13 +45,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -138,7 +138,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A9CloudableP",
               "text" : "ParseCloudable"
@@ -152,8 +152,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
-        "doc:\/\/com.parse.ParseSwift\/7Combine16ObservableObjectP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/7Combine16ObservableObjectP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -171,35 +171,35 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/init(cloudCode:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/init(cloudCode:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/cloudCode",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/error",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/results"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/cloudCode",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/error",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/results"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/runFunction(options:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/startJob(options:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/runFunction(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/startJob(options:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/CloudCodeType"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/CloudCodeType"
       ],
       "title" : "Type Aliases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/ObservableObject-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/ObservableObject-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -218,26 +218,26 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/7Combine16ObservableObjectP": {
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/7Combine16ObservableObjectP",
+"doc://edu.uky.cs.netreconlab.ParseSwift/7Combine16ObservableObjectP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/7Combine16ObservableObjectP",
   "title" : "Combine.ObservableObject",
   "type" : "unresolvable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudObservable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudObservable": {
   "abstract" : [
     {
       "text" : "This protocol describes the interface for creating a view model for ",
@@ -282,7 +282,7 @@
       "text" : "CloudObservable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -295,7 +295,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudobservable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -353,7 +353,7 @@
       "text" : "CloudViewModel"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -366,7 +366,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/CloudCodeType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/CloudCodeType": {
   "abstract" : [
     {
       "text" : "The ",
@@ -395,7 +395,7 @@
       "text" : "CloudCodeType"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/CloudCodeType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/CloudCodeType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -408,18 +408,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/cloudcodetype"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/ObservableObject-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/ObservableObject-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/ObservableObject-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/ObservableObject-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "ObservableObject Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/observableobject-implementations"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/cloudCode": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/cloudCode": {
   "abstract" : [
 
   ],
@@ -446,14 +446,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/cloudCode",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/cloudCode",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "cloudCode",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/cloudcode"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/error": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/error": {
   "abstract" : [
     {
       "text" : "Updates and notifies when there is an error retrieving the results.",
@@ -487,14 +487,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/error",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/error",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "error",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/error"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/init(cloudCode:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/init(cloudCode:)": {
   "abstract" : [
     {
       "text" : "Creates a new view model that can be used to handle updates.",
@@ -528,14 +528,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/init(cloudCode:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/init(cloudCode:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(cloudCode:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/init(cloudcode:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/results": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/results": {
   "abstract" : [
     {
       "text" : "Updates and notifies when the new results have been retrieved.",
@@ -578,14 +578,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/results",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/results",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "results",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/results"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/runFunction(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/runFunction(options:)": {
   "abstract" : [
     {
       "text" : "Calls a Cloud Code function ",
@@ -609,7 +609,7 @@
       "type" : "text"
     },
     {
-      "text" : "when the result of it is execution.",
+      "text" : "when the result of its execution.",
       "type" : "text"
     }
   ],
@@ -657,14 +657,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/runFunction(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/runFunction(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "runFunction(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/runfunction(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/CloudViewModel/startJob(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/CloudViewModel/startJob(options:)": {
   "abstract" : [
     {
       "text" : "Starts a Cloud Code Job ",
@@ -728,14 +728,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/startJob(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudViewModel\/startJob(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "startJob(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/cloudviewmodel\/startjob(options:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseCloudable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -784,7 +784,7 @@
       "text" : "ParseCloudable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

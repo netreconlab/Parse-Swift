@@ -2,14 +2,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/Error-Implementations"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/Error-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -33,19 +33,19 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/localizedDescription"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/localizedDescription"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-18mqc",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-5oudf",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-6itoq",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-95ktw",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-786kn",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-9xnax"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-18mqc",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-5oudf",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-6itoq",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-95ktw",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-786kn",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-9xnax"
       ],
       "title" : "Instance Methods"
     }
@@ -64,21 +64,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
   "abstract" : [
     {
       "text" : "An object with a Parse code and message.",
@@ -99,7 +99,7 @@
       "text" : "ParseError"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -112,7 +112,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-18mqc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-18mqc": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -188,14 +188,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-18mqc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-18mqc",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/containedin(_:)-18mqc"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-5oudf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-5oudf": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -251,14 +251,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-5oudf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-5oudf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/containedin(_:)-5oudf"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-6itoq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-6itoq": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -334,14 +334,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-6itoq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-6itoq",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/containedin(_:)-6itoq"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-95ktw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/containedIn(_:)-95ktw": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -397,14 +397,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-95ktw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/containedIn(_:)-95ktw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/containedin(_:)-95ktw"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/equalsTo(_:)-786kn": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/equalsTo(_:)-786kn": {
   "abstract" : [
     {
       "text" : "Validates if the given ",
@@ -460,14 +460,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-786kn",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-786kn",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalsTo(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/equalsto(_:)-786kn"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/equalsTo(_:)-9xnax": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/equalsTo(_:)-9xnax": {
   "abstract" : [
     {
       "text" : "Returns the respective ",
@@ -535,14 +535,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-9xnax",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/equalsTo(_:)-9xnax",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "equalsTo(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseerror\/equalsto(_:)-9xnax"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseError/localizedDescription": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/localizedDescription": {
   "abstract" : [
 
   ],
@@ -569,7 +569,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseError\/localizedDescription",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError\/localizedDescription",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "localizedDescription",

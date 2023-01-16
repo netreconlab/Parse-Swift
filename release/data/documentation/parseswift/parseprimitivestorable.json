@@ -16,13 +16,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -97,10 +97,10 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/delete(valueFor:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/deleteAll()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/get(valueFor:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/set(_:for:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/delete(valueFor:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/deleteAll()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/get(valueFor:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/set(_:for:)"
       ],
       "title" : "Instance Methods"
     }
@@ -119,21 +119,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable": {
   "abstract" : [
     {
       "text" : "A store that supports key\/value storage. It should be able",
@@ -162,7 +162,7 @@
       "text" : "ParsePrimitiveStorable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,7 +175,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/delete(valueFor:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/delete(valueFor:)": {
   "abstract" : [
     {
       "text" : "Delete an object from the store.",
@@ -221,7 +221,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/delete(valueFor:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/delete(valueFor:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -229,7 +229,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable\/delete(valuefor:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/deleteAll()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/deleteAll()": {
   "abstract" : [
     {
       "text" : "Delete all objects from the store.",
@@ -258,7 +258,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/deleteAll()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/deleteAll()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -266,7 +266,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable\/deleteall()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/get(valueFor:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/get(valueFor:)": {
   "abstract" : [
     {
       "text" : "Gets an object from the store based on its ",
@@ -341,7 +341,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/get(valueFor:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/get(valueFor:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -349,7 +349,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable\/get(valuefor:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/set(_:for:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePrimitiveStorable/set(_:for:)": {
   "abstract" : [
     {
       "text" : "Stores an object in the store with a given ",
@@ -420,7 +420,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/set(_:for:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePrimitiveStorable\/set(_:for:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

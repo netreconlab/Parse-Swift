@@ -16,13 +16,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -109,7 +109,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
               "text" : "ParseObject"
@@ -123,7 +123,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -141,31 +141,31 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/init(query:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/init(query:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/query"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/query"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didReceive(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didSubscribe(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didUnsubscribe()",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handle(_:_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleEvent(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleSubscribe(_:)",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleUnsubscribe(_:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didReceive(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didSubscribe(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didUnsubscribe()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handle(_:_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleEvent(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleSubscribe(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleUnsubscribe(_:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/Object"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/Object"
       ],
       "title" : "Type Aliases"
     }
@@ -184,21 +184,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseObject": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
   "abstract" : [
     {
       "text" : "Objects that conform to the ",
@@ -235,7 +235,7 @@
       "text" : "ParseObject"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -248,7 +248,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/QuerySubscribable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QuerySubscribable": {
   "abstract" : [
     {
       "text" : "This protocol describes the interface for handling events from a ",
@@ -305,7 +305,7 @@
       "text" : "QuerySubscribable"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QuerySubscribable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -318,7 +318,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/querysubscribable"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback": {
   "abstract" : [
     {
       "text" : "A default implementation of the ",
@@ -347,7 +347,7 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -360,7 +360,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/Object": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/Object": {
   "abstract" : [
     {
       "text" : "The ",
@@ -389,7 +389,7 @@
       "text" : "Object"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/Object",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/Object",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -402,7 +402,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/object"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didReceive(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didReceive(_:)": {
   "abstract" : [
     {
       "text" : "Tells the handler that an event has been received from the ",
@@ -448,14 +448,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didReceive(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didReceive(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "didReceive(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/didreceive(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didSubscribe(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didSubscribe(_:)": {
   "abstract" : [
     {
       "text" : "Tells the handler that a query has been successfully registered with the server.",
@@ -489,14 +489,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didSubscribe(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didSubscribe(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "didSubscribe(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/didsubscribe(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didUnsubscribe()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/didUnsubscribe()": {
   "abstract" : [
     {
       "text" : "Tells the handler that a query has been successfully deregistered from the server.",
@@ -521,14 +521,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didUnsubscribe()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/didUnsubscribe()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "didUnsubscribe()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/didunsubscribe()"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handle(_:_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handle(_:_:)": {
   "abstract" : [
     {
       "text" : "Register a callback for when an event occurs of a specific type",
@@ -653,14 +653,14 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handle(_:_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handle(_:_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "handle(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/handle(_:_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleEvent(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleEvent(_:)": {
   "abstract" : [
     {
       "text" : "Register a callback for when an event occurs.",
@@ -735,14 +735,14 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleEvent(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleEvent(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "handleEvent(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/handleevent(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleSubscribe(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleSubscribe(_:)": {
   "abstract" : [
     {
       "text" : "Register a callback for when a client successfully subscribes to a query.",
@@ -808,14 +808,14 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleSubscribe(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleSubscribe(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "handleSubscribe(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/handlesubscribe(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleUnsubscribe(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/handleUnsubscribe(_:)": {
   "abstract" : [
     {
       "text" : "Register a callback for when a query has been unsubscribed.",
@@ -872,14 +872,14 @@
       "text" : "SubscriptionCallback"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleUnsubscribe(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/handleUnsubscribe(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "handleUnsubscribe(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/handleunsubscribe(_:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/init(query:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/init(query:)": {
   "abstract" : [
     {
       "text" : "Creates a new subscription that can be used to handle updates.",
@@ -922,14 +922,14 @@
       "text" : ">)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/init(query:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/init(query:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(query:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback\/init(query:)"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/SubscriptionCallback/query": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/SubscriptionCallback/query": {
   "abstract" : [
     {
       "text" : "The query associated with this subscription.",
@@ -972,7 +972,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/query",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/SubscriptionCallback\/query",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query",

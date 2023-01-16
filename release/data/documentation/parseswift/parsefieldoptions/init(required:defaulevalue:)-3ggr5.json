@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions\/init(required:defauleValue:)-3ggr5"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions\/init(required:defauleValue:)-3ggr5"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -222,21 +222,21 @@
   ]
 , 
 "references": {
-"doc://com.parse.ParseSwift/documentation/ParseSwift": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
       "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFieldOptions": {
   "abstract" : [
     {
       "text" : "The options for a field in ",
@@ -261,7 +261,7 @@
       "text" : "ParseFieldOptions"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -274,7 +274,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefieldoptions"
 },
-"doc://com.parse.ParseSwift/documentation/ParseSwift/ParseFieldOptions/init(required:defauleValue:)-3ggr5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFieldOptions/init(required:defauleValue:)-3ggr5": {
   "abstract" : [
     {
       "text" : "Create new options for a ",
@@ -333,7 +333,7 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.parse.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions\/init(required:defauleValue:)-3ggr5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFieldOptions\/init(required:defauleValue:)-3ggr5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(required:defauleValue:)",
