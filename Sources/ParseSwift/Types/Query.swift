@@ -31,7 +31,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
     internal var distinct: String?
     internal var pipeline: [[String: AnyCodable]]?
     internal var fields: Set<String>?
-    internal var listen: Set<String>?
+    internal var watch: Set<String>?
     var endpoint: API.Endpoint {
         .objects(className: T.className)
     }
@@ -416,11 +416,11 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
     }
 
     /**
-     A variadic list of keys to listen to mutations on when using `ParseLiveQuery`.
+     A variadic list of keys to watch mutations on when using `ParseLiveQuery`.
      
-     Suppose the `ParseObject` Player contains three fields name, id and age.
+     Suppose the `ParseObject` Player contains three fields: name, position, and age.
      If you are only interested in the change of the **name** key, you can set
-     `query.listen` to **name**. In this situation, when the change of a
+     `query.watch` to **name**. In this situation, when the change of a
      Player `ParseObject` fulfills the subscription and the **name** key is updated,
      only the name field will be sent to the clients instead of the full Player `ParseObject`.
      If this is called multiple times, then all of the keys specified in each of the calls will be received.
@@ -429,16 +429,16 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
      - parameter keys: A variadic list of fields to receive back instead of the whole `ParseObject`.
      - returns: The mutated instance of query for easy chaining.
      */
-    public func listen(_ keys: String...) -> Query<T> {
-        self.listen(keys)
+    public func watch(_ keys: String...) -> Query<T> {
+        self.watch(keys)
     }
 
     /**
-     A list of keys to listen to mutations on when using `ParseLiveQuery`.
+     A list of keys to watch mutations on when using `ParseLiveQuery`.
      
-     Suppose the `ParseObject` Player contains three fields name, id and age.
+     Suppose the `ParseObject` Player contains three fields: name, position, and age.
      If you are only interested in the change of the **name** key, you can set
-     `query.listen` to **name**. In this situation, when the change of a
+     `query.watch` to **name**. In this situation, when the change of a
      Player `ParseObject` fulfills the subscription and the **name** key is updated,
      only the name field will be sent to the clients instead of the full Player `ParseObject`.
      If this is called multiple times, then all of the keys specified in each of the calls will be received.
@@ -447,12 +447,12 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
      - parameter keys: An array of keys to lisen to instead of the whole `ParseObject`.
      - returns: The mutated instance of query for easy chaining.
      */
-    public func listen(_ keys: [String]) -> Query<T> {
+    public func watch(_ keys: [String]) -> Query<T> {
         var mutableQuery = self
-        if mutableQuery.listen != nil {
-            mutableQuery.listen = mutableQuery.listen?.union(keys)
+        if mutableQuery.watch != nil {
+            mutableQuery.watch = mutableQuery.watch?.union(keys)
         } else {
-            mutableQuery.listen = Set(keys)
+            mutableQuery.watch = Set(keys)
         }
         return mutableQuery
     }

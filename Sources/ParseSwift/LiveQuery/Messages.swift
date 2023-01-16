@@ -49,7 +49,7 @@ struct SubscribeQuery: Encodable {
     let className: String
     let `where`: QueryWhere
     let fields: [String]?
-    let listen: [String]?
+    let watch: [String]?
 }
 
 struct SubscribeMessage<T: ParseObject>: LiveQueryable, Encodable {
@@ -71,7 +71,7 @@ struct SubscribeMessage<T: ParseObject>: LiveQueryable, Encodable {
             self.query = SubscribeQuery(className: query.className,
                                         where: query.where,
                                         fields: query.fields?.sorted() ?? query.keys?.sorted(),
-                                        listen: query.listen?.sorted())
+                                        watch: query.watch?.sorted())
         }
         self.sessionToken = BaseParseUser.currentContainer?.sessionToken
     }

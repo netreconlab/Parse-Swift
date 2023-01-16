@@ -10,7 +10,7 @@
 
 __New features__
 
-* Adds the the ability to listen to particular keys with LiveQueries. Requires Parse-Server 6.0.0 ([#46](https://github.com/netreconlab/Parse-Swift/pull/46)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Adds the the ability to watch particular keys with LiveQueries. Requires Parse-Server 6.0.0 ([#47](https://github.com/netreconlab/Parse-Swift/pull/47)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 * (Breaking Change) Added a new ParseHealth.Status enum to support Parse Server. 
 Developers can access the new status values (Status.initialized, Status.starting) 
