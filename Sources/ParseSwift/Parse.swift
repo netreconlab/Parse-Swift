@@ -35,7 +35,7 @@ internal func initialize(applicationId: String,
                          testLiveQueryDontCloseSocket: Bool = false,
                          authentication: ((URLAuthenticationChallenge,
                                           (URLSession.AuthChallengeDisposition,
-                                           URLCredential?) -> Void) -> Void)? = nil) {
+                                           URLCredential?) -> Void) -> Void)? = nil) throws {
     var configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -58,7 +58,7 @@ internal func initialize(applicationId: String,
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
-    initialize(configuration: configuration)
+    try initialize(configuration: configuration)
 }
 
 internal func deleteKeychainIfNeeded() {
@@ -96,7 +96,7 @@ public var configuration: ParseConfiguration {
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
-public func initialize(configuration: ParseConfiguration) { // swiftlint:disable:this cyclomatic_complexity function_body_length
+public func initialize(configuration: ParseConfiguration) throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
@@ -112,9 +112,11 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
     #endif
 
     do {
-        let previousSDKVersion = try ParseVersion(ParseVersion.current)
-        let currentSDKVersion = try ParseVersion(ParseConstants.version)
-        let oneNineEightSDKVersion = try ParseVersion("1.9.8")
+        guard let previousSDKVersion = ParseVersion.current else {
+            throw ParseError(code: .otherCause, message: "Could not get previous version")
+        }
+        let currentSDKVersion = try ParseVersion(string: ParseConstants.version)
+        let oneNineEightSDKVersion = try ParseVersion(string: "1.9.8")
 
         // All migrations from previous versions to current should occur here:
         #if !os(Linux) && !os(Android) && !os(Windows)
@@ -129,7 +131,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
-            ParseVersion.current = currentSDKVersion.string
+            ParseVersion.current = currentSDKVersion
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
@@ -143,7 +145,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
             // Prepare installation
             BaseParseInstallation.createNewInstallationIfNeeded()
         }
-        ParseVersion.current = ParseConstants.version
+        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
     }
 
     // Migrate installations with installationId, but missing
@@ -250,7 +252,7 @@ public func initialize(
     authentication: ((URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
-) {
+) throws {
     let configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -271,7 +273,7 @@ public func initialize(
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,
                                            authentication: authentication)
-    initialize(configuration: configuration)
+    try initialize(configuration: configuration)
 }
 
 /**
