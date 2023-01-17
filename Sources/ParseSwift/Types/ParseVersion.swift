@@ -39,21 +39,24 @@ public struct ParseVersion: ParseTypeable, Hashable {
                     guard let versionFromKeyChain: Self =
                             try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
                     else {
+                        // Handle migrations from String to ParseVersion
                         guard let versionStringFromKeyChainToMigrate: String =
-                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
+                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                              // swiftlint:disable:next line_length
+                              let versionFromKeyChainToMigrate = try? ParseVersion(string: versionStringFromKeyChainToMigrate)
                         else {
-                            guard let versionFromKeyChain: Self =
-                                    try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion)
-                            else {
+                            guard let versionStringFromOldKeyChainToMigrate: String =
+                                    try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
+                                  // swiftlint:disable:next line_length
+                                  let versionFromOldKeyChainToMigrate = try? ParseVersion(string: versionStringFromOldKeyChainToMigrate) else {
                                 return nil
                             }
-                            try? KeychainStore.shared.set(versionFromKeyChain, for: ParseStorage.Keys.currentVersion)
-                            return versionFromKeyChain
+                            try? KeychainStore.shared.set(versionFromOldKeyChainToMigrate,
+                                                          for: ParseStorage.Keys.currentVersion)
+                            return versionFromOldKeyChainToMigrate
                         }
-                        // swiftlint:disable:next line_length
-                        guard let versionFromKeyChainToMigrate = try? convertVersionString(versionStringFromKeyChainToMigrate) else {
-                            return nil
-                        }
+                        try? KeychainStore.shared.set(versionFromKeyChainToMigrate,
+                                                      for: ParseStorage.Keys.currentVersion)
                         return versionFromKeyChainToMigrate
                     }
                     return versionFromKeyChain
