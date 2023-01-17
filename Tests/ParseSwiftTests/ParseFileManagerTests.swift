@@ -23,11 +23,11 @@ class ParseFileManagerTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
 
         guard let fileManager = ParseFileManager(),
               let defaultDirectory = fileManager.defaultDataDirectoryPath else {

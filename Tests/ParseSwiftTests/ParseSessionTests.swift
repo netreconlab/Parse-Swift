@@ -61,11 +61,11 @@ class ParseSessionTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: false) // Set to false for codecov
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: false) // Set to false for codecov
 
     }
 
@@ -132,12 +132,12 @@ class ParseSessionTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              // swiftlint:disable:next line_length
-                              testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  // swiftlint:disable:next line_length
+                                  testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
             completion(.cancelAuthenticationChallenge, .none)
         }
         let expectation1 = XCTestExpectation(description: "Authentication")

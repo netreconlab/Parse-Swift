@@ -100,11 +100,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
         login()
     }
 

@@ -42,11 +42,11 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {

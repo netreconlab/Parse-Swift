@@ -123,12 +123,12 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              requiringCustomObjectIds: true,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  requiringCustomObjectIds: true,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {

@@ -17,11 +17,11 @@ class ParseVersionTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {
@@ -34,29 +34,28 @@ class ParseVersionTests: XCTestCase {
     }
 
     func testGetSet() throws {
-        XCTAssertEqual(ParseVersion.current, ParseConstants.version)
-        ParseVersion.current = "1.0.0"
-        XCTAssertEqual(ParseVersion.current, "1.0.0")
+        XCTAssertEqual(ParseVersion.current?.string, ParseConstants.version)
+        ParseVersion.current = try ParseVersion(string: "1.0.0")
+        XCTAssertEqual(ParseVersion.current?.string, "1.0.0")
     }
 
     func testDebug() throws {
-        let version = try ParseVersion("1.0.0")
-        XCTAssertEqual(version.debugDescription,
-                       "{\"string\":\"1.0.0\"}")
-        XCTAssertEqual(version.description,
-                       "{\"string\":\"1.0.0\"}")
+        let version = try ParseVersion(string: "1.0.0")
+        XCTAssertEqual(version.debugDescription, "1.0.0")
+        XCTAssertEqual(version.description, "1.0.0")
     }
 
-    func testCantInitializeWithNil() throws {
-        XCTAssertThrowsError(try ParseVersion(nil))
+    func testCantInitializeWithBadString() throws {
+        XCTAssertThrowsError(try ParseVersion(string: "1.0"))
     }
 
     func testDeleteFromKeychain() throws {
-        XCTAssertEqual(ParseVersion.current, ParseConstants.version)
+        XCTAssertEqual(ParseVersion.current?.string, ParseConstants.version)
         ParseVersion.deleteCurrentContainerFromKeychain()
         XCTAssertNil(ParseVersion.current)
-        ParseVersion.current = "1.0.0"
-        XCTAssertEqual(ParseVersion.current, "1.0.0")
+        ParseVersion.current = try ParseVersion(string: "1.0.0")
+        XCTAssertEqual(ParseVersion.current?.string, "1.0.0")
+        XCTAssertEqual(ParseVersion.current?.description, "1.0.0")
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -71,70 +70,70 @@ class ParseVersionTests: XCTestCase {
     #endif
 
     func testEqualTo() throws {
-        let version1 = try ParseVersion("1.0.0")
-        let version2 = try ParseVersion("0.9.0")
+        let version1 = try ParseVersion(string: "1.0.0")
+        let version2 = try ParseVersion(string: "0.9.0")
         XCTAssertTrue(version1 == version1)
         XCTAssertFalse(version1 == version2)
     }
 
     func testLessThan() throws {
-        let version1 = try ParseVersion("1.0.0")
-        var version2 = try ParseVersion("2.0.0")
+        let version1 = try ParseVersion(string: "1.0.0")
+        var version2 = try ParseVersion(string: "2.0.0")
         XCTAssertFalse(version1 < version1)
         XCTAssertTrue(version1 < version2)
         XCTAssertFalse(version2 < version1)
-        version2 = try ParseVersion("1.1.0")
+        version2 = try ParseVersion(string: "1.1.0")
         XCTAssertTrue(version1 < version2)
         XCTAssertFalse(version2 < version1)
-        version2 = try ParseVersion("1.0.1")
+        version2 = try ParseVersion(string: "1.0.1")
         XCTAssertTrue(version1 < version2)
         XCTAssertFalse(version2 < version1)
     }
 
     func testLessThanEqual() throws {
-        let version1 = try ParseVersion("1.0.0")
+        let version1 = try ParseVersion(string: "1.0.0")
         var version2 = version1
         XCTAssertTrue(version1 <= version2)
-        version2 = try ParseVersion("0.9.0")
+        version2 = try ParseVersion(string: "0.9.0")
         XCTAssertFalse(version1 <= version2)
-        version2 = try ParseVersion("2.0.0")
+        version2 = try ParseVersion(string: "2.0.0")
         XCTAssertTrue(version1 <= version2)
         XCTAssertFalse(version2 <= version1)
-        version2 = try ParseVersion("1.1.0")
+        version2 = try ParseVersion(string: "1.1.0")
         XCTAssertTrue(version1 <= version2)
         XCTAssertFalse(version2 <= version1)
-        version2 = try ParseVersion("1.0.1")
+        version2 = try ParseVersion(string: "1.0.1")
         XCTAssertTrue(version1 <= version2)
         XCTAssertFalse(version2 <= version1)
     }
 
     func testGreaterThan() throws {
-        let version1 = try ParseVersion("1.0.0")
-        var version2 = try ParseVersion("2.0.0")
+        let version1 = try ParseVersion(string: "1.0.0")
+        var version2 = try ParseVersion(string: "2.0.0")
         XCTAssertFalse(version1 > version1)
         XCTAssertTrue(version2 > version1)
         XCTAssertFalse(version1 > version2)
-        version2 = try ParseVersion("1.1.0")
+        version2 = try ParseVersion(string: "1.1.0")
         XCTAssertTrue(version2 > version1)
         XCTAssertFalse(version1 > version2)
-        version2 = try ParseVersion("1.0.1")
+        version2 = try ParseVersion(string: "1.0.1")
         XCTAssertTrue(version2 > version1)
         XCTAssertFalse(version1 > version2)
     }
 
     func testGreaterThanEqual() throws {
-        let version1 = try ParseVersion("1.0.0")
+        let version1 = try ParseVersion(string: "1.0.0")
         var version2 = version1
         // XCTAssertTrue(version1 >= version2)
-        version2 = try ParseVersion("0.9.0")
+        version2 = try ParseVersion(string: "0.9.0")
         XCTAssertFalse(version2 >= version1)
-        version2 = try ParseVersion("2.0.0")
+        version2 = try ParseVersion(string: "2.0.0")
         XCTAssertTrue(version2 >= version1)
         XCTAssertFalse(version1 >= version2)
-        version2 = try ParseVersion("1.1.0")
+        version2 = try ParseVersion(string: "1.1.0")
         XCTAssertTrue(version2 >= version1)
         XCTAssertFalse(version1 >= version2)
-        version2 = try ParseVersion("1.0.1")
+        version2 = try ParseVersion(string: "1.0.1")
         XCTAssertTrue(version2 >= version1)
         XCTAssertFalse(version1 >= version2)
     }

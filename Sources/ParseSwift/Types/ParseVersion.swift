@@ -170,9 +170,9 @@ extension ParseVersion: Comparable {
             return true
         } else if left.patch < right.patch {
             return false
-        } else if left.prereleaseVersion == nil || right.prereleaseVersion != nil {
+        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
             return true
-        } else if left.prereleaseVersion != nil || right.prereleaseVersion == nil {
+        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
             return false
         } else if let leftPreReleaseName = left.prereleaseName,
                   let rightPreReleaseName = right.prereleaseName,
@@ -214,9 +214,9 @@ extension ParseVersion: Comparable {
             return true
         } else if left.patch > right.patch {
             return false
-        } else if left.prereleaseVersion != nil || right.prereleaseVersion == nil {
+        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
             return true
-        } else if left.prereleaseVersion == nil || right.prereleaseVersion != nil {
+        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
             return false
         } else if let leftPreReleaseName = left.prereleaseName,
                   let rightPreReleaseName = right.prereleaseName,

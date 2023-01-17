@@ -42,11 +42,11 @@ class ParsePointerTests: XCTestCase {
         guard let url = URL(string: "http://localhost:1337/1") else {
             throw ParseError(code: .otherCause, message: "Should create valid URL")
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {

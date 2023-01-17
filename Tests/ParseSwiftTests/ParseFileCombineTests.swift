@@ -28,11 +28,11 @@ class ParseFileCombineTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
         }

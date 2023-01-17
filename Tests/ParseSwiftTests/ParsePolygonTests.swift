@@ -22,11 +22,11 @@ class ParsePolygonTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
         points = [
             try ParseGeoPoint(latitude: 0, longitude: 0),
             try ParseGeoPoint(latitude: 0, longitude: 1),

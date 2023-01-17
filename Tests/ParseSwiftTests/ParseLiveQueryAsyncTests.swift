@@ -21,13 +21,13 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              liveQueryMaxConnectionAttempts: 1,
-                              testing: true,
-                              testLiveQueryDontCloseSocket: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  liveQueryMaxConnectionAttempts: 1,
+                                  testing: true,
+                                  testLiveQueryDontCloseSocket: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
     }
 

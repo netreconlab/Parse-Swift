@@ -53,12 +53,12 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              usingPostForQuery: true,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  usingPostForQuery: true,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {

@@ -96,11 +96,11 @@ class ParseFileTransferableTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
 
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
@@ -147,17 +147,17 @@ class ParseFileTransferableTests: XCTestCase {
         let fileTransferAdapterOther = try TestFileTransfer(name: "test", url: url)
         XCTAssertTrue(fileTransferAdapter !== fileTransferAdapterOther)
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer !== fileTransferAdapter)
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              parseFileTransfer: fileTransferAdapter)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  parseFileTransfer: fileTransferAdapter)
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer === fileTransferAdapter)
-        ParseSwift.initialize(configuration: .init(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              parseFileTransfer: fileTransferAdapterOther))
+        try ParseSwift.initialize(configuration: .init(applicationId: "applicationId",
+                                                       clientKey: "clientKey",
+                                                       primaryKey: "primaryKey",
+                                                       serverURL: url,
+                                                       parseFileTransfer: fileTransferAdapterOther))
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer === fileTransferAdapterOther)
     }
 
