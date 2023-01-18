@@ -1,5 +1,5 @@
-<!-- markdownlint-disable -->
 # ``ParseSwift``
+<!-- markdownlint-disable -->
 A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.
 
 ## Overview
