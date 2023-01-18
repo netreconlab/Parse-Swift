@@ -20,7 +20,7 @@ do {
 } catch {
     assertionFailure("Error initializing Parse-Swift: \(error)")
 }
-    
+
 //: Get current SDK version
 if let version = ParseVersion.current {
     print("Current Swift SDK version is \"\(version)\"")

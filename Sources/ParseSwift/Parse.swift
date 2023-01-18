@@ -90,6 +90,7 @@ public var configuration: ParseConfiguration {
  Configure the Parse Swift client. This should only be used when starting your app. Typically in the
  `application(... didFinishLaunchingWithOptions launchOptions...)`.
  - parameter configuration: The Parse configuration.
+ - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: `usingTransactions` is experimental.
@@ -223,6 +224,7 @@ public func initialize(configuration: ParseConfiguration) throws { // swiftlint:
  It should have the following argument signature: `(challenge: URLAuthenticationChallenge,
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
+ - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: `usingTransactions` is experimental.
@@ -306,6 +308,7 @@ public func clearCache() {
 
 /**
  Delete the Parse iOS Objective-C SDK Keychain from the device.
+ - throws: An error of `ParseError` type.
  - note: ParseSwift uses a different Keychain. After migration, the iOS Objective-C SDK Keychain is no longer needed.
  - warning: The keychain cannot be recovered after deletion.
  */
