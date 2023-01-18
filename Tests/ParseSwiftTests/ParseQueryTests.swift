@@ -345,6 +345,19 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(Set(decodedValues2), Set(["yolo", "hello", "wow"]))
     }
 
+    func testEncodingSetParameters() throws {
+        let query = GameScore.query
+            .exclude("world", "hello")
+            .include("foo", "bar")
+            .select("yolo", "nolo")
+
+        let encoded = try ParseCoding.jsonEncoder().encode(query)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded,
+                       // swiftlint:disable:next line_length
+                       "{\"_method\":\"GET\",\"excludeKeys\":[\"hello\",\"world\"],\"include\":[\"bar\",\"foo\"],\"keys\":[\"nolo\",\"yolo\"],\"limit\":100,\"skip\":0,\"where\":{}}")
+    }
+
     func testSortByTextScore() throws {
         let query = GameScore.query
         XCTAssertNil(query.keys)

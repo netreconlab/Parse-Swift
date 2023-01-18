@@ -8,8 +8,6 @@
 
 import Foundation
 
-// swiftlint:disable type_body_length
-
 // MARK: Query
 /**
   The `Query` class defines a query that is used to query for `ParseObject`s.
@@ -33,6 +31,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
     internal var distinct: String?
     internal var pipeline: [[String: AnyCodable]]?
     internal var fields: Set<String>?
+    internal var listen: Set<String>?
     var endpoint: API.Endpoint {
         .objects(className: T.className)
     }
@@ -126,73 +125,6 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
         case subqueryReadPreference
         case distinct
         case pipeline
-    }
-
-    // swiftlint:disable:next function_body_length
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        `where` = try values.decode(QueryWhere.self, forKey: .`where`)
-        if let limit = try values.decodeIfPresent(Int.self, forKey: .limit) {
-            self.limit = limit
-        }
-        if let skip = try values.decodeIfPresent(Int.self, forKey: .skip) {
-            self.skip = skip
-        }
-        do {
-            keys = try values.decodeIfPresent(Set<String>.self, forKey: .keys)
-        } catch {
-            if let commaString = try values.decodeIfPresent(String.self, forKey: .keys) {
-                let commaArray = commaString
-                    .split(separator: ",")
-                    .compactMap { String($0) }
-                keys = Set(commaArray)
-            }
-        }
-        do {
-            include = try values.decodeIfPresent(Set<String>.self, forKey: .include)
-        } catch {
-            if let commaString = try values.decodeIfPresent(String.self, forKey: .include) {
-                let commaArray = commaString
-                    .split(separator: ",")
-                    .compactMap { String($0) }
-                include = Set(commaArray)
-            }
-        }
-        do {
-            order = try values.decodeIfPresent([Order].self, forKey: .order)
-        } catch {
-            let orderString = try values
-                .decodeIfPresent(String.self, forKey: .order)?
-                .split(separator: ",")
-                .compactMap { String($0) }
-            order = orderString?.map {
-                var value = $0
-                if value.hasPrefix("-") {
-                    value.removeFirst()
-                    return Order.descending(value)
-                } else {
-                    return Order.ascending(value)
-                }
-            }
-        }
-        do {
-            excludeKeys = try values.decodeIfPresent(Set<String>.self, forKey: .excludeKeys)
-        } catch {
-            if let commaString = try values.decodeIfPresent(String.self, forKey: .excludeKeys) {
-                let commaArray = commaString
-                    .split(separator: ",")
-                    .compactMap { String($0) }
-                excludeKeys = Set(commaArray)
-            }
-        }
-        isCount = try values.decodeIfPresent(Bool.self, forKey: .isCount)
-        explain = try values.decodeIfPresent(Bool.self, forKey: .explain)
-        hint = try values.decodeIfPresent(AnyCodable.self, forKey: .hint)
-        readPreference = try values.decodeIfPresent(String.self, forKey: .readPreference)
-        includeReadPreference = try values.decodeIfPresent(String.self, forKey: .includeReadPreference)
-        subqueryReadPreference = try values.decodeIfPresent(String.self, forKey: .subqueryReadPreference)
-        distinct = try values.decodeIfPresent(String.self, forKey: .distinct)
-        pipeline = try values.decodeIfPresent([[String: AnyCodable]].self, forKey: .pipeline)
     }
 
     /**
@@ -440,7 +372,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
     }
 
     /**
-     A variadic list of selected fields to receive updates on when the `Query` is used as a
+     A variadic list of select keys to receive for a `ParseObject` whenever an update occurs for a
      `ParseLiveQuery`.
      
      Suppose the `ParseObject` Player contains three fields name, id and age.
@@ -450,8 +382,8 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
      If this is called multiple times, then all of the keys specified in each of the calls will be received.
      - note: Setting `fields` will take precedence over `select`. If `fields` are not set, the
      `select` keys will be used.
-     - warning: This is only for `ParseLiveQuery`.
-     - parameter keys: A variadic list of fields to receive back instead of the whole `ParseObject`.
+     - note: This is only for `ParseLiveQuery`.
+     - parameter keys: A variadic list of keys to receive back instead of the whole `ParseObject`.
      - returns: The mutated instance of query for easy chaining.
      */
     public func fields(_ keys: String...) -> Query<T> {
@@ -459,7 +391,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
     }
 
     /**
-     A list of fields to receive updates on when the `Query` is used as a
+     A list of select keys to receive for a `ParseObject` whenever an update occurs for a
      `ParseLiveQuery`.
      
      Suppose the `ParseObject` Player contains three fields name, id and age.
@@ -469,8 +401,8 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
      If this is called multiple times, then all of the keys specified in each of the calls will be received.
      - note: Setting `fields` will take precedence over `select`. If `fields` are not set, the
      `select` keys will be used.
-     - warning: This is only for `ParseLiveQuery`.
-     - parameter keys: An array of fields to receive back instead of the whole `ParseObject`.
+     - important: This is only for `ParseLiveQuery`.
+     - parameter keys: An array of keys to receive back instead of the whole `ParseObject`.
      - returns: The mutated instance of query for easy chaining.
      */
     public func fields(_ keys: [String]) -> Query<T> {
@@ -479,6 +411,48 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
             mutableQuery.fields = mutableQuery.fields?.union(keys)
         } else {
             mutableQuery.fields = Set(keys)
+        }
+        return mutableQuery
+    }
+
+    /**
+     A variadic list of keys to listen to mutations on when using `ParseLiveQuery`.
+     
+     Suppose the `ParseObject` Player contains three fields name, id and age.
+     If you are only interested in the change of the **name** key, you can set
+     `query.listen` to **name**. In this situation, when the change of a
+     Player `ParseObject` fulfills the subscription and the **name** key is updated,
+     only the name field will be sent to the clients instead of the full Player `ParseObject`.
+     If this is called multiple times, then all of the keys specified in each of the calls will be received.
+     - important: This is only for `ParseLiveQuery`.
+     - warning: Requires Parse Server 6.0.0+.
+     - parameter keys: A variadic list of fields to receive back instead of the whole `ParseObject`.
+     - returns: The mutated instance of query for easy chaining.
+     */
+    public func listen(_ keys: String...) -> Query<T> {
+        self.listen(keys)
+    }
+
+    /**
+     A list of keys to listen to mutations on when using `ParseLiveQuery`.
+     
+     Suppose the `ParseObject` Player contains three fields name, id and age.
+     If you are only interested in the change of the **name** key, you can set
+     `query.listen` to **name**. In this situation, when the change of a
+     Player `ParseObject` fulfills the subscription and the **name** key is updated,
+     only the name field will be sent to the clients instead of the full Player `ParseObject`.
+     If this is called multiple times, then all of the keys specified in each of the calls will be received.
+     - important: This is only for `ParseLiveQuery`.
+     - warning: Requires Parse Server 6.0.0+.
+     - parameter keys: An array of keys to lisen to instead of the whole `ParseObject`.
+     - returns: The mutated instance of query for easy chaining.
+     */
+    public func listen(_ keys: [String]) -> Query<T> {
+        var mutableQuery = self
+        if mutableQuery.listen != nil {
+            mutableQuery.listen = mutableQuery.listen?.union(keys)
+        } else {
+            mutableQuery.listen = Set(keys)
         }
         return mutableQuery
     }
@@ -1837,6 +1811,97 @@ extension Query {
     }
 }
 
+// MARK: Codable
+public extension Query {
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(`where`, forKey: .`where`)
+        try container.encodeIfPresent(method, forKey: .method)
+        try container.encodeIfPresent(limit, forKey: .limit)
+        try container.encodeIfPresent(skip, forKey: .skip)
+        try container.encodeIfPresent(include?.sorted(), forKey: .include)
+        try container.encodeIfPresent(isCount, forKey: .isCount)
+        try container.encodeIfPresent(keys?.sorted(), forKey: .keys)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(explain, forKey: .explain)
+        try container.encodeIfPresent(hint, forKey: .hint)
+        try container.encodeIfPresent(excludeKeys?.sorted(), forKey: .excludeKeys)
+        try container.encodeIfPresent(readPreference, forKey: .readPreference)
+        try container.encodeIfPresent(includeReadPreference, forKey: .includeReadPreference)
+        try container.encodeIfPresent(subqueryReadPreference, forKey: .subqueryReadPreference)
+        try container.encodeIfPresent(distinct, forKey: .distinct)
+        try container.encodeIfPresent(pipeline, forKey: .pipeline)
+    }
+
+    // swiftlint:disable:next function_body_length
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        `where` = try values.decode(QueryWhere.self, forKey: .`where`)
+        if let limit = try values.decodeIfPresent(Int.self, forKey: .limit) {
+            self.limit = limit
+        }
+        if let skip = try values.decodeIfPresent(Int.self, forKey: .skip) {
+            self.skip = skip
+        }
+        do {
+            keys = try values.decodeIfPresent(Set<String>.self, forKey: .keys)
+        } catch {
+            if let commaString = try values.decodeIfPresent(String.self, forKey: .keys) {
+                let commaArray = commaString
+                    .split(separator: ",")
+                    .compactMap { String($0) }
+                keys = Set(commaArray)
+            }
+        }
+        do {
+            include = try values.decodeIfPresent(Set<String>.self, forKey: .include)
+        } catch {
+            if let commaString = try values.decodeIfPresent(String.self, forKey: .include) {
+                let commaArray = commaString
+                    .split(separator: ",")
+                    .compactMap { String($0) }
+                include = Set(commaArray)
+            }
+        }
+        do {
+            order = try values.decodeIfPresent([Order].self, forKey: .order)
+        } catch {
+            let orderString = try values
+                .decodeIfPresent(String.self, forKey: .order)?
+                .split(separator: ",")
+                .compactMap { String($0) }
+            order = orderString?.map {
+                var value = $0
+                if value.hasPrefix("-") {
+                    value.removeFirst()
+                    return Order.descending(value)
+                } else {
+                    return Order.ascending(value)
+                }
+            }
+        }
+        do {
+            excludeKeys = try values.decodeIfPresent(Set<String>.self, forKey: .excludeKeys)
+        } catch {
+            if let commaString = try values.decodeIfPresent(String.self, forKey: .excludeKeys) {
+                let commaArray = commaString
+                    .split(separator: ",")
+                    .compactMap { String($0) }
+                excludeKeys = Set(commaArray)
+            }
+        }
+        isCount = try values.decodeIfPresent(Bool.self, forKey: .isCount)
+        explain = try values.decodeIfPresent(Bool.self, forKey: .explain)
+        hint = try values.decodeIfPresent(AnyCodable.self, forKey: .hint)
+        readPreference = try values.decodeIfPresent(String.self, forKey: .readPreference)
+        includeReadPreference = try values.decodeIfPresent(String.self, forKey: .includeReadPreference)
+        subqueryReadPreference = try values.decodeIfPresent(String.self, forKey: .subqueryReadPreference)
+        distinct = try values.decodeIfPresent(String.self, forKey: .distinct)
+        pipeline = try values.decodeIfPresent([[String: AnyCodable]].self, forKey: .pipeline)
+    }
+}
+
 // MARK: Query
 public extension ParseObject {
 
@@ -1936,6 +2001,14 @@ internal extension Query {
 
     func encodeAsString<W>(_ key: KeyPath<Self, W?>) throws -> String? where W: Encodable {
         guard let value = self[keyPath: key] else {
+            return nil
+        }
+        let encoded = try ParseCoding.jsonEncoder().encode(value)
+        return String(data: encoded, encoding: .utf8)
+    }
+
+    func encodeAsString(_ key: KeyPath<Self, Set<String>?>) throws -> String? {
+        guard let value = self[keyPath: key]?.sorted() else {
             return nil
         }
         let encoded = try ParseCoding.jsonEncoder().encode(value)

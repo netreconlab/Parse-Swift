@@ -102,19 +102,15 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
             XCTFail("Should have unwrapped")
             return
         }
-        XCTAssertTrue(whereParameter.contains("{}"))
-        XCTAssertTrue(orderParameter.contains("\"points"))
-        XCTAssertTrue(orderParameter.contains("\"-oldScore"))
-        XCTAssertTrue(skipParameter.contains("0"))
-        XCTAssertTrue(excludeKeysParameter.contains("\"hello"))
-        XCTAssertTrue(excludeKeysParameter.contains("\"world"))
-        XCTAssertTrue(limitParameter.contains("100"))
-        XCTAssertTrue(keysParameter.contains("\"nolo"))
-        XCTAssertTrue(keysParameter.contains("\"yolo"))
-        XCTAssertTrue(includeParameter.contains("\"foo\""))
-        XCTAssertTrue(includeParameter.contains("\"bar\""))
-        XCTAssertTrue(hintParameter.contains("\"right\""))
-        XCTAssertTrue(readPreferenceParameter.contains("\"now\""))
+        XCTAssertEqual(whereParameter, "{}")
+        XCTAssertEqual(orderParameter, "[\"points\",\"-oldScore\"]")
+        XCTAssertEqual(skipParameter, "0")
+        XCTAssertEqual(excludeKeysParameter, "[\"hello\",\"world\"]")
+        XCTAssertEqual(limitParameter, "100")
+        XCTAssertEqual(keysParameter, "[\"nolo\",\"yolo\"]")
+        XCTAssertEqual(includeParameter, "[\"bar\",\"foo\"]")
+        XCTAssertEqual(hintParameter, "\"right\"")
+        XCTAssertEqual(readPreferenceParameter, "\"now\"")
     }
 
     func testAggregateQueryParameters() throws {
@@ -175,6 +171,15 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
             return
         }
         XCTAssert(object.hasSameObjectId(as: scoreOnServer))
+
+        // Remove URL mocker so we can check cache
+        MockURLProtocol.removeAll()
+        let found2 = try await query.find(options: [.cachePolicy(.returnCacheDataDontLoad)])
+        guard let object2 = found2.first else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssert(object2.hasSameObjectId(as: scoreOnServer))
     }
 
     @MainActor

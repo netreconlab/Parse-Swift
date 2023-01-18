@@ -206,10 +206,10 @@ class ParseLiveQueryTests: XCTestCase {
 
     func testSubscribeMessageFieldsEncoding() throws {
         // swiftlint:disable:next line_length
-        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
+        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
-            .fields(["points"])
-            .select(["talk"])
+            .fields(["hello", "points"])
+            .select(["hello", "talk"])
         let message = SubscribeMessage(operation: .subscribe,
                                        requestId: RequestId(value: 1),
                                        query: query,
@@ -222,9 +222,9 @@ class ParseLiveQueryTests: XCTestCase {
 
     func testSubscribeMessageSelectEncoding() throws {
         // swiftlint:disable:next line_length
-        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
+        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
-            .select(["points"])
+            .select(["hello", "points"])
         let message = SubscribeMessage(operation: .subscribe,
                                        requestId: RequestId(value: 1),
                                        query: query,
@@ -259,6 +259,41 @@ class ParseLiveQueryTests: XCTestCase {
         query2 = query2.fields("hello", "wow")
         XCTAssertEqual(query2.fields?.count, 3)
         XCTAssertEqual(query2.fields, ["yolo", "hello", "wow"])
+    }
+
+    func testSubscribeMessageListenEncoding() throws {
+        // swiftlint:disable:next line_length
+        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"listen\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
+        let query = GameScore.query("points" > 9)
+            .listen(["hello", "points"])
+        let message = SubscribeMessage(operation: .subscribe,
+                                       requestId: RequestId(value: 1),
+                                       query: query,
+                                       additionalProperties: true)
+        let encoded = try ParseCoding.jsonEncoder()
+            .encode(message)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testListenKeys() throws {
+        var query = GameScore.query.listen(["yolo"])
+        XCTAssertEqual(query.listen?.count, 1)
+        XCTAssertEqual(query.listen?.first, "yolo")
+
+        query = query.listen(["hello", "wow"])
+        XCTAssertEqual(query.listen?.count, 3)
+        XCTAssertEqual(query.listen, ["yolo", "hello", "wow"])
+    }
+
+    func testListenKeysVariadic() throws {
+        var query = GameScore.query.listen("yolo")
+        XCTAssertEqual(query.listen?.count, 1)
+        XCTAssertEqual(query.listen?.first, "yolo")
+
+        query = query.listen("hello", "wow")
+        XCTAssertEqual(query.listen?.count, 3)
+        XCTAssertEqual(query.listen, ["yolo", "hello", "wow"])
     }
 
     func testRedirectResponseDecoding() throws {
