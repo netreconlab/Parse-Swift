@@ -263,9 +263,9 @@ class ParseLiveQueryTests: XCTestCase {
 
     func testSubscribeMessageListenEncoding() throws {
         // swiftlint:disable:next line_length
-        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"listen\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
+        let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"watch\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
-            .listen(["hello", "points"])
+            .watch(["hello", "points"])
         let message = SubscribeMessage(operation: .subscribe,
                                        requestId: RequestId(value: 1),
                                        query: query,
@@ -277,23 +277,23 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testListenKeys() throws {
-        var query = GameScore.query.listen(["yolo"])
-        XCTAssertEqual(query.listen?.count, 1)
-        XCTAssertEqual(query.listen?.first, "yolo")
+        var query = GameScore.query.watch(["yolo"])
+        XCTAssertEqual(query.watch?.count, 1)
+        XCTAssertEqual(query.watch?.first, "yolo")
 
-        query = query.listen(["hello", "wow"])
-        XCTAssertEqual(query.listen?.count, 3)
-        XCTAssertEqual(query.listen, ["yolo", "hello", "wow"])
+        query = query.watch(["hello", "wow"])
+        XCTAssertEqual(query.watch?.count, 3)
+        XCTAssertEqual(query.watch, ["yolo", "hello", "wow"])
     }
 
     func testListenKeysVariadic() throws {
-        var query = GameScore.query.listen("yolo")
-        XCTAssertEqual(query.listen?.count, 1)
-        XCTAssertEqual(query.listen?.first, "yolo")
+        var query = GameScore.query.watch("yolo")
+        XCTAssertEqual(query.watch?.count, 1)
+        XCTAssertEqual(query.watch?.first, "yolo")
 
-        query = query.listen("hello", "wow")
-        XCTAssertEqual(query.listen?.count, 3)
-        XCTAssertEqual(query.listen, ["yolo", "hello", "wow"])
+        query = query.watch("hello", "wow")
+        XCTAssertEqual(query.watch?.count, 3)
+        XCTAssertEqual(query.watch, ["yolo", "hello", "wow"])
     }
 
     func testRedirectResponseDecoding() throws {
