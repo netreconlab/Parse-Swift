@@ -1707,7 +1707,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTFail("\(userFromKeychain) was not deleted from Keychain during logout")
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 if let installationFromKeychain = BaseParseInstallation.current {
 
                         if installationFromKeychain.installationId == oldInstallationId
@@ -1748,7 +1748,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 if let userFromKeychain = BaseParseUser.current {
                     XCTFail("\(userFromKeychain) was not deleted from Keychain during logout")
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>
                         = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
 

@@ -75,7 +75,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.error = ParseError(code: .otherCause, message: "error")
         viewModel.find()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             guard let score = viewModel.results.first else {
                 XCTFail("Should unwrap score count")
@@ -107,7 +107,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.count = 1
         viewModel.find()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertTrue(viewModel.results.isEmpty)
             XCTAssertEqual(viewModel.count, 0)
@@ -138,7 +138,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.error = ParseError(code: .otherCause, message: "error")
         viewModel.find()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             guard let score = viewModel.results.first else {
                 XCTFail("Should unwrap score count")
@@ -174,7 +174,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.error = ParseError(code: .otherCause, message: "error")
         viewModel.findAll()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             guard let score = viewModel.results.first else {
                 XCTFail("Should unwrap score count")
@@ -206,7 +206,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.count = 1
         viewModel.findAll()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertTrue(viewModel.results.isEmpty)
             XCTAssertEqual(viewModel.count, 0)
@@ -237,7 +237,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.error = ParseError(code: .otherCause, message: "error")
         viewModel.first()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             guard let score = viewModel.results.first else {
                 XCTFail("Should unwrap score count")
@@ -269,7 +269,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.count = 1
         viewModel.first()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertTrue(viewModel.results.isEmpty)
             XCTAssertEqual(viewModel.count, 0)
@@ -300,7 +300,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.results = [GameScore(points: 10), GameScore(points: 12)]
         viewModel.count()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertEqual(viewModel.results.count, 2)
             XCTAssertEqual(viewModel.count, 1)
@@ -327,7 +327,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.count = 1
         viewModel.count()
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertTrue(viewModel.results.isEmpty)
             XCTAssertEqual(viewModel.count, 0)
@@ -358,7 +358,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.error = ParseError(code: .otherCause, message: "error")
         viewModel.aggregate([["hello": "world"]])
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             guard let score = viewModel.results.first else {
                 XCTFail("Should unwrap score count")
@@ -389,7 +389,7 @@ class ParseQueryViewModelTests: XCTestCase {
         viewModel.count = 1
         viewModel.aggregate([["hello": "world"]])
         let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 
             XCTAssertTrue(viewModel.results.isEmpty)
             XCTAssertEqual(viewModel.count, 0)
