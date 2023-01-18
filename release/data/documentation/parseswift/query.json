@@ -217,8 +217,6 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/include(_:)-47jms",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/includeAll()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/limit(_:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-8kbjm",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-fr38",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/order(_:)-75g9s",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/order(_:)-779cz",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/readPreference(_:includeReadPreference:subqueryReadPreference:)",
@@ -234,6 +232,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/unsubscribe(client:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/update(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/update(_:client:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-41gct",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-9h5yl",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/where(_:)-60ukn",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/where(_:)-m71l",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/withCount(options:)",
@@ -309,10 +309,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -7174,140 +7171,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/limit(_:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/listen(_:)-8kbjm": {
-  "abstract" : [
-    {
-      "text" : "A variadic list of keys to listen to mutations on when using ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseLiveQuery",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "listen"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "...) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV",
-      "text" : "Query"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-8kbjm",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "listen(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/listen(_:)-8kbjm"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/listen(_:)-fr38": {
-  "abstract" : [
-    {
-      "text" : "A list of keys to listen to mutations on when using ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseLiveQuery",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "listen"
-    },
-    {
-      "kind" : "text",
-      "text" : "(["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV",
-      "text" : "Query"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-fr38",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "listen(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/listen(_:)-fr38"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/order(_:)-75g9s": {
   "abstract" : [
     {
@@ -9351,6 +9214,140 @@
   "title" : "viewModel(_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/viewmodel(_:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/watch(_:)-41gct": {
+  "abstract" : [
+    {
+      "text" : "A variadic list of keys to watch mutations on when using ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseLiveQuery",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "watch"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "...) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV",
+      "text" : "Query"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV1Txmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-41gct",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "watch(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query\/watch(_:)-41gct"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/watch(_:)-9h5yl": {
+  "abstract" : [
+    {
+      "text" : "A list of keys to watch mutations on when using ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseLiveQuery",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "watch"
+    },
+    {
+      "kind" : "text",
+      "text" : "(["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV",
+      "text" : "Query"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV1Txmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-9h5yl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "watch(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query\/watch(_:)-9h5yl"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/where(_:)-60ukn": {
   "abstract" : [

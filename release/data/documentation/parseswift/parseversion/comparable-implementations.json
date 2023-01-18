@@ -65,10 +65,7 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -500,21 +497,11 @@
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : "(`Self`"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : ", `Self`"
     },
     {
       "kind" : "text",
@@ -564,21 +551,11 @@
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : "(`Self`"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : ", `Self`"
     },
     {
       "kind" : "text",
@@ -814,21 +791,11 @@
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : "(`Self`"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : ", `Self`"
     },
     {
       "kind" : "text",
@@ -878,21 +845,11 @@
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : "(`Self`"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
-      "text" : "ParseVersion"
+      "text" : ", `Self`"
     },
     {
       "kind" : "text",

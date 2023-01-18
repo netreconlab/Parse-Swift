@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "A variadic list of keys to listen to mutations on when using ",
+      "text" : "A variadic list of keys to watch mutations on when using ",
       "type" : "text"
     },
     {
@@ -23,11 +23,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-8kbjm"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-41gct"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift5QueryV6listenyACyxGSSd_tF",
+    "externalID" : "s:10ParseSwift5QueryV5watchyACyxGSSd_tF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -39,7 +39,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "listen"
+        "text" : "watch"
       },
       {
         "kind" : "text",
@@ -81,7 +81,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "listen(_:)"
+    "title" : "watch(_:)"
   },
   "primaryContentSections" : [
     {
@@ -104,7 +104,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "listen"
+              "text" : "watch"
             },
             {
               "kind" : "text",
@@ -225,7 +225,7 @@
               "type" : "codeVoice"
             },
             {
-              "text" : " Player contains three fields name, id and age.",
+              "text" : " Player contains three fields: name, position, and age.",
               "type" : "text"
             },
             {
@@ -254,7 +254,7 @@
               "type" : "text"
             },
             {
-              "code" : "query.listen",
+              "code" : "query.watch",
               "type" : "codeVoice"
             },
             {
@@ -385,7 +385,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/query\/listen(_:)-8kbjm"
+        "\/documentation\/parseswift\/query\/watch(_:)-41gct"
       ],
       "traits" : [
         {
@@ -398,10 +398,7 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -460,10 +457,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/listen(_:)-8kbjm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/watch(_:)-41gct": {
   "abstract" : [
     {
-      "text" : "A variadic list of keys to listen to mutations on when using ",
+      "text" : "A variadic list of keys to watch mutations on when using ",
       "type" : "text"
     },
     {
@@ -486,7 +483,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "listen"
+      "text" : "watch"
     },
     {
       "kind" : "text",
@@ -520,12 +517,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/listen(_:)-8kbjm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/watch(_:)-41gct",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "listen(_:)",
+  "title" : "watch(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/listen(_:)-8kbjm"
+  "url" : "\/documentation\/parseswift\/query\/watch(_:)-41gct"
 }
 }
 }

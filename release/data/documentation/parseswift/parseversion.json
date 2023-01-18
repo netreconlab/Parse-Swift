@@ -99,7 +99,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -157,6 +158,11 @@
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/SH": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/SL": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SL",
   "title" : "Swift.Comparable",
@@ -174,10 +180,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -340,12 +343,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "text" : ": `Self`"
     },
     {
       "kind" : "text",

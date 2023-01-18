@@ -1,10 +1,4 @@
 {
-  "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -32,6 +26,21 @@
   "primaryContentSections" : [
     {
       "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
         {
           "anchor" : "Overview",
           "level" : 2,
@@ -232,7 +241,7 @@
               "type" : "reference"
             },
             {
-              "text" : " has to offer. The reason for the bifurcation from the parse-community version of Parse-Swift is due to interference and a number of disagreements with a member of ",
+              "text" : " has to offer. The reason for the bifurcation from the parse-community version of Parse-Swift is due to interference and a number of disagreements with the ",
               "type" : "text"
             },
             {
@@ -274,7 +283,7 @@
               "type" : "reference"
             },
             {
-              "text" : ". In addition, no funding or support from the ",
+              "text" : ". The Parse PMC also does not properly give attribution or show appreciation to Corey as the lead developer of Parse-Swift. In addition, no funding or support from the ",
               "type" : "text"
             },
             {
@@ -283,7 +292,7 @@
               "type" : "reference"
             },
             {
-              "text" : " was ever offered to Corey for any of his ",
+              "text" : " has ever been offered to Corey for any of his ",
               "type" : "text"
             },
             {
@@ -323,6 +332,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
@@ -446,7 +456,6 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
@@ -516,10 +525,7 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -5233,20 +5239,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryWhere": {
   "abstract" : [
     {
-      "text" : "The ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "where",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " of a ",
+      "text" : "The specified criteria to constrain a ",
       "type" : "text"
     },
     {
@@ -7753,7 +7746,11 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
@@ -7814,7 +7811,11 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
@@ -10878,10 +10879,10 @@
 },
 "https://opencollective.com/parse-server#category-BUDGET": {
   "identifier" : "https:\/\/opencollective.com\/parse-server#category-BUDGET",
-  "title" : "number of payments have been offered and made to other contributors",
+  "title" : "number of funds have been offered and made to other contributors",
   "titleInlineContent" : [
     {
-      "text" : "number of payments have been offered and made to other contributors",
+      "text" : "number of funds have been offered and made to other contributors",
       "type" : "text"
     }
   ],

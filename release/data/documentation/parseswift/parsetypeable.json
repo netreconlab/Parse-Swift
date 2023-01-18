@@ -243,10 +243,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -2444,20 +2441,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryWhere": {
   "abstract" : [
     {
-      "text" : "The ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "where",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " of a ",
+      "text" : "The specified criteria to constrain a ",
       "type" : "text"
     },
     {

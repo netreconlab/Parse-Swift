@@ -24,7 +24,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/debugDescription"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/debugDescription-3205l"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -124,7 +124,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseversion\/debugdescription"
+        "\/documentation\/parseswift\/parseversion\/debugdescription-3205l"
       ],
       "traits" : [
         {
@@ -137,10 +137,7 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-    {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-      "type" : "text"
-    }
+
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -206,7 +203,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseversion\/customdebugstringconvertible-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion/debugDescription": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion/debugDescription-3205l": {
   "abstract" : [
 
   ],
@@ -233,12 +230,12 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/debugDescription",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/debugDescription-3205l",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "debugDescription",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseversion\/debugdescription"
+  "url" : "\/documentation\/parseswift\/parseversion\/debugdescription-3205l"
 }
 }
 }

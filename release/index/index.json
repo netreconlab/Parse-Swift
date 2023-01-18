@@ -9,7 +9,12 @@
           },
           {
             "path" : "\/documentation\/parseswift\/initialize(configuration:)",
-            "title" : "func initialize(configuration: ParseConfiguration)",
+            "title" : "func initialize(configuration: ParseConfiguration) throws",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-5pbr0",
+            "title" : "func initialize(applicationId: String, clientKey: String?, primaryKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, liveQueryMaxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?) throws",
             "type" : "func"
           },
           {
@@ -1800,13 +1805,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -11501,7 +11506,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseversion\/current",
-                "title" : "static var current: String?",
+                "title" : "static var current: `Self`?",
                 "type" : "property"
               },
               {
@@ -11541,12 +11546,12 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseversion\/_(_:_:)-2eh5t",
-                    "title" : "static func > (ParseVersion, ParseVersion) -> Bool",
+                    "title" : "static func > (`Self`, `Self`) -> Bool",
                     "type" : "op"
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseversion\/_(_:_:)-2fa7s",
-                    "title" : "static func < (ParseVersion, ParseVersion) -> Bool",
+                    "title" : "static func < (`Self`, `Self`) -> Bool",
                     "type" : "op"
                   },
                   {
@@ -11566,12 +11571,12 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseversion\/_=(_:_:)-7dags",
-                    "title" : "static func >= (ParseVersion, ParseVersion) -> Bool",
+                    "title" : "static func >= (`Self`, `Self`) -> Bool",
                     "type" : "op"
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseversion\/_=(_:_:)-7eh1a",
-                    "title" : "static func <= (ParseVersion, ParseVersion) -> Bool",
+                    "title" : "static func <= (`Self`, `Self`) -> Bool",
                     "type" : "op"
                   }
                 ],
@@ -11586,7 +11591,12 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/parseswift\/parseversion\/debugdescription",
+                    "path" : "\/documentation\/parseswift\/parseversion\/debugdescription-3205l",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseversion\/debugdescription-7o1c2",
                     "title" : "var debugDescription: String",
                     "type" : "property"
                   }
@@ -11620,11 +11630,6 @@
                   {
                     "path" : "\/documentation\/parseswift\/parseversion\/!=(_:_:)",
                     "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseversion\/==(_:_:)",
-                    "title" : "static func == (ParseVersion, ParseVersion) -> Bool",
                     "type" : "op"
                   }
                 ],
@@ -12059,16 +12064,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/query\/listen(_:)-8kbjm",
-                "title" : "func listen(String...) -> Query<T>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/query\/listen(_:)-fr38",
-                "title" : "func listen([String]) -> Query<T>",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/query\/order(_:)-75g9s",
                 "title" : "func order([Order]?) -> Query<T>",
                 "type" : "method"
@@ -12141,6 +12136,16 @@
               {
                 "path" : "\/documentation\/parseswift\/query\/update(_:client:)",
                 "title" : "func update<T>(T, client: ParseLiveQuery) throws",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/query\/watch(_:)-41gct",
+                "title" : "func watch(String...) -> Query<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/query\/watch(_:)-9h5yl",
+                "title" : "func watch([String]) -> Query<T>",
                 "type" : "method"
               },
               {
@@ -12656,11 +12661,6 @@
           {
             "path" : "\/documentation\/parseswift\/hassuffix(key:suffix:modifiers:)",
             "title" : "func hasSuffix(key: String, suffix: String, modifiers: String?) -> QueryConstraint",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-5pbr0",
-            "title" : "func initialize(applicationId: String, clientKey: String?, primaryKey: String?, serverURL: URL, liveQueryServerURL: URL?, requiringCustomObjectIds: Bool, usingTransactions: Bool, usingEqualQueryConstraint: Bool, usingPostForQuery: Bool, primitiveStore: ParsePrimitiveStorable?, requestCachePolicy: URLRequest.CachePolicy, cacheMemoryCapacity: Int, cacheDiskCapacity: Int, usingDataProtectionKeychain: Bool, deletingKeychainIfNeeded: Bool, httpAdditionalHeaders: [AnyHashable : Any]?, maxConnectionAttempts: Int, liveQueryMaxConnectionAttempts: Int, parseFileTransfer: ParseFileTransferable?, authentication: ((URLAuthenticationChallenge, (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void)?)",
             "type" : "func"
           },
           {
