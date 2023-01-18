@@ -15,7 +15,7 @@ This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2
 ### Configure SDK
 
 - ``ParseSwift/initialize(configuration:)``
-- ``ParseSwift/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:parseFileTransfer:authentication:)``
+- ``ParseSwift/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:maxConnectionAttempts:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)``
 - ``ParseSwift/configuration``
 - ``ParseSwift/setAccessGroup(_:synchronizeAcrossDevices:)``
 - ``ParseSwift/updateAuthentication(_:)``
