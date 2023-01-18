@@ -15,7 +15,11 @@ import SwiftUI
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-initializeParse()
+do {
+    try initializeParse()
+} catch {
+    assertionFailure("Error initializing Parse-Swift: \(error)")
+}
 
 //: Create your own value typed ParseObject.
 struct GameScore: ParseObject {

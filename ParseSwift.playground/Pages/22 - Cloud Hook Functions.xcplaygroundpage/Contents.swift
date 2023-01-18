@@ -3,7 +3,7 @@
 /*:
  The code in this Playground is intended to run at the
  server level only. It is not intended to be run in client
- applications as it requires the use of the master key.
+ applications as it requires the use of the primary key.
  */
 
 import PlaygroundSupport
@@ -11,7 +11,12 @@ import Foundation
 import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-initializeParse()
+
+do {
+    try initializeParse()
+} catch {
+    assertionFailure("Error initializing Parse-Swift: \(error)")
+}
 
 /*:
  Parse Hook Functions can be created by conforming to
