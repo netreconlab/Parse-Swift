@@ -202,7 +202,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        guard let version: String =
+        guard let version: ParseVersion =
                 try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
@@ -236,7 +236,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        guard let otherVersion: String =
+        guard let otherVersion: ParseVersion =
                 try? otherKeychain.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
@@ -280,7 +280,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        guard let _: String =
+        guard let _: ParseVersion =
                 try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
@@ -319,7 +319,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        guard let _: String =
+        guard let _: ParseVersion =
                 try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return

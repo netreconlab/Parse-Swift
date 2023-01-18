@@ -35,34 +35,41 @@ public struct ParseVersion: ParseTypeable, Hashable {
             return synchronizationQueue.sync(execute: { () -> Self? in
                 guard let versionInMemory: Self =
                         try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
-#if !os(Linux) && !os(Android) && !os(Windows)
-                    guard let versionFromKeyChain: Self =
-                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
-                    else {
-                        // Handle migrations from String to ParseVersion
-                        guard let versionStringFromKeyChainToMigrate: String =
-                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
-                              // swiftlint:disable:next line_length
-                              let versionFromKeyChainToMigrate = try? ParseVersion(string: versionStringFromKeyChainToMigrate)
-                        else {
-                            guard let versionStringFromOldKeyChainToMigrate: String =
-                                    try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
-                                  // swiftlint:disable:next line_length
-                                  let versionFromOldKeyChainToMigrate = try? ParseVersion(string: versionStringFromOldKeyChainToMigrate) else {
-                                return nil
+                    // Handle Memory migrations from String to ParseVersion
+                    guard let versionStringFromMemoryToMigrate: String =
+                            try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                            // swiftlint:disable:next line_length
+                            let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
+                        #if !os(Linux) && !os(Android) && !os(Windows)
+                        guard let versionFromKeychain: Self =
+                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                            // Handle Keychain migrations from String to ParseVersion
+                            guard let versionStringFromKeychainToMigrate: String =
+                                    try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                                    // swiftlint:disable:next line_length
+                                    let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
+                                guard let versionStringFromOldKeychainToMigrate: String =
+                                        try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
+                                      // swiftlint:disable:next line_length
+                                      let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
+                                    return nil
+                                }
+                                try? KeychainStore.shared.set(versionFromOldKeychainToMigrate,
+                                                              for: ParseStorage.Keys.currentVersion)
+                                return versionFromOldKeychainToMigrate
                             }
-                            try? KeychainStore.shared.set(versionFromOldKeyChainToMigrate,
+                            try? KeychainStore.shared.set(versionFromKeychainToMigrate,
                                                           for: ParseStorage.Keys.currentVersion)
-                            return versionFromOldKeyChainToMigrate
+                            return versionFromKeychainToMigrate
                         }
-                        try? KeychainStore.shared.set(versionFromKeyChainToMigrate,
-                                                      for: ParseStorage.Keys.currentVersion)
-                        return versionFromKeyChainToMigrate
+                        return versionFromKeychain
+                        #else
+                        return nil
+                        #endif
                     }
-                    return versionFromKeyChain
-                    #else
-                    return nil
-                    #endif
+                    try? ParseStorage.shared.set(versionFromMemoryToMigrate,
+                                                 for: ParseStorage.Keys.currentVersion)
+                    return versionFromMemoryToMigrate
                 }
                 return versionInMemory
             })
@@ -160,7 +167,7 @@ extension ParseVersion {
 extension ParseVersion: Comparable {
 
     // swiftlint:disable:next cyclomatic_complexity
-    public static func > (left: ParseVersion, right: ParseVersion) -> Bool {
+    public static func > (left: Self, right: Self) -> Bool {
         if left.major > right.major {
             return true
         } else if left.major < right.major {
@@ -195,16 +202,15 @@ extension ParseVersion: Comparable {
         }
     }
 
-    public static func >= (left: ParseVersion, right: ParseVersion) -> Bool {
-        if left == right || left > right {
-            return true
-        } else {
+    public static func >= (left: Self, right: Self) -> Bool {
+        guard left == right || left > right else {
             return false
         }
+        return true
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    public static func < (left: ParseVersion, right: ParseVersion) -> Bool {
+    public static func < (left: Self, right: Self) -> Bool {
         if left.major < right.major {
             return true
         } else if left.major > right.major {
@@ -239,16 +245,11 @@ extension ParseVersion: Comparable {
         }
     }
 
-    public static func <= (left: ParseVersion, right: ParseVersion) -> Bool {
-        if left == right || left < right {
-            return true
-        } else {
+    public static func <= (left: Self, right: Self) -> Bool {
+        guard left == right || left < right else {
             return false
         }
-    }
-
-    public static func == (left: ParseVersion, right: ParseVersion) -> Bool {
-        left.string == right.string
+        return true
     }
 }
 
