@@ -10,33 +10,60 @@ import Foundation
 
 /// `ParseVersion` is used to determine the version of the SDK. The current
 /// version of the SDK is persisted to the Keychain.
-public struct ParseVersion: ParseTypeable, Comparable {
+public struct ParseVersion: ParseTypeable, Hashable {
 
-    var string: String
+    var major: Int
+    var minor: Int
+    var patch: Int
+    var prereleaseName: PrereleaseName?
+    var prereleaseVersion: Int?
 
     /// Current version of the SDK.
-    public internal(set) static var current: String? {
+    public internal(set) static var current: Self? {
         get {
             let synchronizationQueue = createSynchronizationQueue("ParseVersion.getCurrent")
-            return synchronizationQueue.sync(execute: { () -> String? in
-                guard let versionInMemory: String =
+            return synchronizationQueue.sync(execute: { () -> Self? in
+                guard let versionInMemory: Self =
                         try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
-#if !os(Linux) && !os(Android) && !os(Windows)
-                    guard let versionFromKeyChain: String =
-                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion)
-                    else {
-                        guard let versionFromKeyChain: String =
-                                try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion)
-                        else {
-                            return nil
+                    // Handle Memory migrations from String to ParseVersion
+                    guard let versionStringFromMemoryToMigrate: String =
+                            try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                            // swiftlint:disable:next line_length
+                            let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
+                        #if !os(Linux) && !os(Android) && !os(Windows)
+                        guard let versionFromKeychain: Self =
+                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                            // Handle Keychain migrations from String to ParseVersion
+                            guard let versionStringFromKeychainToMigrate: String =
+                                    try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                                    // swiftlint:disable:next line_length
+                                    let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
+                                guard let versionStringFromOldKeychainToMigrate: String =
+                                        try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
+                                      // swiftlint:disable:next line_length
+                                      let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
+                                    return nil
+                                }
+                                try? ParseStorage.shared.set(versionFromOldKeychainToMigrate,
+                                                             for: ParseStorage.Keys.currentVersion)
+                                try? KeychainStore.shared.set(versionFromOldKeychainToMigrate,
+                                                              for: ParseStorage.Keys.currentVersion)
+                                return versionFromOldKeychainToMigrate
+                            }
+                            try? ParseStorage.shared.set(versionFromKeychainToMigrate,
+                                                         for: ParseStorage.Keys.currentVersion)
+                            try? KeychainStore.shared.set(versionFromKeychainToMigrate,
+                                                          for: ParseStorage.Keys.currentVersion)
+                            return versionFromKeychainToMigrate
                         }
-                        try? KeychainStore.shared.set(versionFromKeyChain, for: ParseStorage.Keys.currentVersion)
-                        return versionFromKeyChain
+                        return versionFromKeychain
+                        #else
+                        return nil
+                        #endif
                     }
-                    return versionFromKeyChain
-                    #else
-                    return nil
-                    #endif
+                    try? ParseStorage.shared.set(versionFromMemoryToMigrate,
+                                                 for: ParseStorage.Keys.currentVersion)
+                    return versionFromMemoryToMigrate
                 }
                 return versionInMemory
             })
@@ -52,12 +79,39 @@ public struct ParseVersion: ParseTypeable, Comparable {
         }
     }
 
-    init(_ string: String?) throws {
-        guard let newString = string else {
-            throw ParseError(code: .otherCause,
-                             message: "Cannot initialize with nil value.")
+    enum PrereleaseName: String, Codable, Comparable {
+
+        case alpha, beta
+
+        static func < (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
+            lhs == .alpha && rhs == .beta
         }
-        self.string = newString
+
+        static func > (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
+            lhs == .beta && rhs == .alpha
+        }
+
+    }
+
+    init(major: Int, minor: Int, patch: Int) {
+        self.major = major
+        self.minor = minor
+        self.patch = patch
+    }
+
+    init(major: Int,
+         minor: Int,
+         patch: Int,
+         prereleaseName: PrereleaseName?,
+         prereleaseVersion: Int?) throws {
+        if prereleaseName != nil && prereleaseVersion == nil || prereleaseName == nil && prereleaseVersion != nil {
+            throw ParseError(code: .otherCause,
+                             // swiftlint:disable:next line_length
+                             message: "preleaseName and prereleaseVersion are both required, you cannot have one without the other")
+        }
+        self.init(major: major, minor: minor, patch: patch)
+        self.prereleaseName = prereleaseName
+        self.prereleaseVersion = prereleaseVersion
     }
 
     static func deleteCurrentContainerFromKeychain() {
@@ -66,67 +120,164 @@ public struct ParseVersion: ParseTypeable, Comparable {
         try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
         #endif
     }
+
+    static func convertVersionString(_ string: String) throws -> Self {
+        let splitVersion = string.split(separator: ".")
+        if splitVersion.count < 3 {
+            throw ParseError(code: .otherCause,
+                             message: "Version is in the incorrect format, should be: \"1.1.1\" or \"1.1.1-beta.1\"")
+        }
+        var major: Int!
+        var minor: Int!
+        var patch: Int!
+        var prereleaseName: PrereleaseName?
+        var prereleaseVersion: Int?
+
+        for (index, item) in splitVersion.enumerated() {
+            switch index {
+            case 0:
+                major = try convertToInt(item)
+            case 1:
+                minor = try convertToInt(item)
+            case 2:
+                let splitPrerelease = item.split(separator: "-")
+                patch = try convertToInt(splitPrerelease[0])
+                if splitPrerelease.count > 1 {
+                    prereleaseName = PrereleaseName(rawValue: String(splitPrerelease[1]))
+                }
+            case 3:
+                prereleaseVersion = try convertToInt(item)
+            default:
+                throw ParseError(code: .otherCause,
+                                 // swiftlint:disable:next line_length
+                                 message: "Version string has too many values, should be: \"1.1.1\" or \"1.1.1-beta.1\"")
+            }
+        }
+
+        return try Self(major: major,
+                        minor: minor,
+                        patch: patch,
+                        prereleaseName: prereleaseName,
+                        prereleaseVersion: prereleaseVersion)
+    }
+
+    static func convertToInt(_ subSequence: String.SubSequence) throws -> Int {
+        guard let integer = Int(subSequence) else {
+            throw ParseError(code: .otherCause,
+                             message: "Could not convert version to semver")
+        }
+        return integer
+    }
+
 }
 
-public extension ParseVersion {
+// MARK: Default Implementation
+extension ParseVersion {
 
-    static func > (left: ParseVersion, right: ParseVersion) -> Bool {
-        let left = left.string.split(separator: ".").compactMap { Int($0) }
-        assert(left.count == 3, "Left version must have 3 values, \"1.1.1\".")
-        let right = right.string.split(separator: ".").compactMap { Int($0) }
-        assert(right.count == 3, "Right version must have 3 values, \"1.1.1\".")
-        if left[0] > right[0] {
+    init(string: String) throws {
+        self = try Self.convertVersionString(string)
+    }
+
+}
+
+// MARK: Comparable
+extension ParseVersion: Comparable {
+
+    // swiftlint:disable:next cyclomatic_complexity
+    public static func > (left: Self, right: Self) -> Bool {
+        if left.major > right.major {
             return true
-        } else if left[0] < right[0] {
+        } else if left.major < right.major {
             return false
-        } else if left[1] > right[1] {
+        } else if left.minor > right.minor {
             return true
-        } else if left[1] < right[1] {
+        } else if left.minor < right.minor {
             return false
-        } else if left[2] > right[2] {
+        } else if left.patch > right.patch {
             return true
+        } else if left.patch < right.patch {
+            return false
+        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
+            return true
+        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
+            return false
+        } else if let leftPreReleaseName = left.prereleaseName,
+                  let rightPreReleaseName = right.prereleaseName,
+                  let leftPreReleaseVersion = left.prereleaseVersion,
+                  let rightPreReleaseVersion = right.prereleaseVersion {
+            if leftPreReleaseName > rightPreReleaseName {
+                return true
+            } else if leftPreReleaseName < rightPreReleaseName {
+                return false
+            } else if leftPreReleaseVersion > rightPreReleaseVersion {
+                return true
+            } else {
+                return false
+            }
         } else {
             return false
         }
     }
 
-    static func >= (left: ParseVersion, right: ParseVersion) -> Bool {
-        if left == right || left > right {
+    public static func >= (left: Self, right: Self) -> Bool {
+        guard left == right || left > right else {
+            return false
+        }
+        return true
+    }
+
+    // swiftlint:disable:next cyclomatic_complexity
+    public static func < (left: Self, right: Self) -> Bool {
+        if left.major < right.major {
             return true
+        } else if left.major > right.major {
+            return false
+        } else if left.minor < right.minor {
+            return true
+        } else if left.minor > right.minor {
+            return false
+        } else if left.patch < right.patch {
+            return true
+        } else if left.patch > right.patch {
+            return false
+        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
+            return true
+        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
+            return false
+        } else if let leftPreReleaseName = left.prereleaseName,
+                  let rightPreReleaseName = right.prereleaseName,
+                  let leftPreReleaseVersion = left.prereleaseVersion,
+                  let rightPreReleaseVersion = right.prereleaseVersion {
+            if leftPreReleaseName < rightPreReleaseName {
+                return true
+            } else if leftPreReleaseName > rightPreReleaseName {
+                return false
+            } else if leftPreReleaseVersion < rightPreReleaseVersion {
+                return true
+            } else {
+                return false
+            }
         } else {
             return false
         }
     }
 
-    static func < (left: ParseVersion, right: ParseVersion) -> Bool {
-        let left = left.string.split(separator: ".").compactMap { Int($0) }
-        assert(left.count == 3, "Left version must have 3 values, \"1.1.1\".")
-        let right = right.string.split(separator: ".").compactMap { Int($0) }
-        assert(right.count == 3, "Right version must have 3 values, \"1.1.1\".")
-        if left[0] < right[0] {
-            return true
-        } else if left[0] > right[0] {
-            return false
-        } else if left[1] < right[1] {
-            return true
-        } else if left[1] > right[1] {
-            return false
-        } else if left[2] < right[2] {
-            return true
-        } else {
+    public static func <= (left: Self, right: Self) -> Bool {
+        guard left == right || left < right else {
             return false
         }
+        return true
     }
+}
 
-    static func <= (left: ParseVersion, right: ParseVersion) -> Bool {
-        if left == right || left < right {
-            return true
-        } else {
-            return false
+// MARK: CustomDebugStringConvertible
+extension ParseVersion {
+    public var debugDescription: String {
+        var version = "\(major).\(minor).\(patch)"
+        if let prereleaseName = prereleaseName,
+           let prereleaseVersion = prereleaseVersion {
+            version = "\(version)-\(prereleaseName).\(prereleaseVersion)"
         }
-    }
-
-    static func == (left: ParseVersion, right: ParseVersion) -> Bool {
-        left.string == right.string
+        return version
     }
 }

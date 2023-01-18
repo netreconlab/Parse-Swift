@@ -11,7 +11,12 @@ import Foundation
 import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-initializeParse()
+
+do {
+    try initializeParse()
+} catch {
+    assertionFailure("Error initializing Parse-Swift: \(error)")
+}
 
 struct GameScore: ParseObject {
     //: These are required by ParseObject.

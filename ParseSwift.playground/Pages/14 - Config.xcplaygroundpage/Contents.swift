@@ -11,7 +11,12 @@ import Foundation
 import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-initializeParse()
+
+do {
+    try initializeParse()
+} catch {
+    assertionFailure("Error initializing Parse-Swift: \(error)")
+}
 
 //: Create a value typed `ParseConfig` that matches your server config.
 struct Config: ParseConfig {

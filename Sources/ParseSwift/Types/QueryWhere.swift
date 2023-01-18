@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// The **where** of a `Query`.
+/// The specified criteria to constrain a `Query`.
 public struct QueryWhere: ParseTypeable {
     var constraints = [String: Set<QueryConstraint>]()
 

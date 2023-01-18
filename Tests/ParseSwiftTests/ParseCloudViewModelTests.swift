@@ -29,11 +29,11 @@ class ParseCloudViewModelTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        ParseSwift.initialize(applicationId: "applicationId",
-                              clientKey: "clientKey",
-                              primaryKey: "primaryKey",
-                              serverURL: url,
-                              testing: true)
+        try ParseSwift.initialize(applicationId: "applicationId",
+                                  clientKey: "clientKey",
+                                  primaryKey: "primaryKey",
+                                  serverURL: url,
+                                  testing: true)
     }
 
     override func tearDownWithError() throws {
@@ -60,7 +60,7 @@ class ParseCloudViewModelTests: XCTestCase {
         viewModel.runFunction()
 
         let expectation = XCTestExpectation(description: "Run Function")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             XCTAssertEqual(viewModel.results, "hello")
             XCTAssertNil(viewModel.error)
             expectation.fulfill()
@@ -85,7 +85,7 @@ class ParseCloudViewModelTests: XCTestCase {
         viewModel.runFunction()
 
         let expectation = XCTestExpectation(description: "Run Function")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             XCTAssertEqual(viewModel.results, nil)
             XCTAssertNotNil(viewModel.error)
             expectation.fulfill()
@@ -110,7 +110,7 @@ class ParseCloudViewModelTests: XCTestCase {
         viewModel.startJob()
 
         let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             XCTAssertEqual(viewModel.results, "hello")
             XCTAssertNil(viewModel.error)
             expectation.fulfill()
@@ -135,7 +135,7 @@ class ParseCloudViewModelTests: XCTestCase {
         viewModel.startJob()
 
         let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             XCTAssertEqual(viewModel.results, "hello")
             XCTAssertNil(viewModel.error)
             expectation.fulfill()
@@ -160,7 +160,7 @@ class ParseCloudViewModelTests: XCTestCase {
         viewModel.startJob()
 
         let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             XCTAssertEqual(viewModel.results, nil)
             XCTAssertNotNil(viewModel.error)
             expectation.fulfill()

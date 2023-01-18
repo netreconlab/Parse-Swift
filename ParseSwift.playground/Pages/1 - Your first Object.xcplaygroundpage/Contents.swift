@@ -7,15 +7,19 @@
 import PlaygroundSupport
 import Foundation
 import ParseSwift
+
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-/*: start parse-server with
-npm start -- --appId applicationId --clientKey clientKey --masterKey masterKey --mountPath /1
+/*:
+ Start your parse-server with:
+ npm start -- --appId applicationId --clientKey clientKey --masterKey primaryKey --mountPath /1
 */
 
-//: In Xcode, make sure you are building the "ParseSwift (macOS)" framework.
-
-initializeParse()
+do {
+    try initializeParse()
+} catch {
+    assertionFailure("Error initializing Parse-Swift: \(error)")
+}
 
 //: Get current SDK version
 if let version = ParseVersion.current {
@@ -26,7 +30,7 @@ if let version = ParseVersion.current {
 do {
     print("Server health is: \(try ParseHealth.check())")
 } catch {
-    print(error)
+    assertionFailure("Error checking the server health: \(error)")
 }
 
 //: Create your own value typed `ParseObject`.
@@ -79,7 +83,7 @@ struct GameData: ParseObject {
     //: Your own properties.
     var polygon: ParsePolygon?
     //: `ParseBytes` needs to be a part of the original schema
-    //: or else you will need your masterKey to force an upgrade.
+    //: or else you will need your primaryKey to force an upgrade.
     var bytes: ParseBytes?
 
     /*:
@@ -125,6 +129,10 @@ score.save { result in
         assert(savedScore.createdAt != nil)
         assert(savedScore.updatedAt != nil)
         assert(savedScore.points == 10)
+        print("""
+            Saved \"\(savedScore.className)\" with the following info:
+            \(savedScore)
+        """)
 
         /*:
          To modify, you need to make it a var as the value type
@@ -141,6 +149,10 @@ score.save { result in
             case .success(let savedChangedScore):
                 assert(savedChangedScore.points == 200)
                 assert(savedScore.objectId == savedChangedScore.objectId)
+                print("""
+                    Updated \"\(savedScore.className)\" with the following info:
+                    \(savedChangedScore)
+                """)
 
             case .failure(let error):
                 assertionFailure("Error saving: \(error)")
@@ -154,7 +166,7 @@ score.save { result in
 //: This will store the second batch score to be used later.
 var score2ForFetchedLater: GameScore?
 
-//: Saving multiple GameScores at once.
+//: Saving multiple GameScores at once with batching.
 [score, score2].saveAll { results in
     switch results {
     case .success(let otherResults):

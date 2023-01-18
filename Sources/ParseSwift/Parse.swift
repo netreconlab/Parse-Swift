@@ -35,7 +35,7 @@ internal func initialize(applicationId: String,
                          testLiveQueryDontCloseSocket: Bool = false,
                          authentication: ((URLAuthenticationChallenge,
                                           (URLSession.AuthChallengeDisposition,
-                                           URLCredential?) -> Void) -> Void)? = nil) {
+                                           URLCredential?) -> Void) -> Void)? = nil) throws {
     var configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -58,7 +58,7 @@ internal func initialize(applicationId: String,
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
-    initialize(configuration: configuration)
+    try initialize(configuration: configuration)
 }
 
 internal func deleteKeychainIfNeeded() {
@@ -90,13 +90,14 @@ public var configuration: ParseConfiguration {
  Configure the Parse Swift client. This should only be used when starting your app. Typically in the
  `application(... didFinishLaunchingWithOptions launchOptions...)`.
  - parameter configuration: The Parse configuration.
+ - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
-public func initialize(configuration: ParseConfiguration) { // swiftlint:disable:this cyclomatic_complexity function_body_length
+public func initialize(configuration: ParseConfiguration) throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
@@ -112,9 +113,11 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
     #endif
 
     do {
-        let previousSDKVersion = try ParseVersion(ParseVersion.current)
-        let currentSDKVersion = try ParseVersion(ParseConstants.version)
-        let oneNineEightSDKVersion = try ParseVersion("1.9.8")
+        guard let previousSDKVersion = ParseVersion.current else {
+            throw ParseError(code: .otherCause, message: "Could not get previous version")
+        }
+        let currentSDKVersion = try ParseVersion(string: ParseConstants.version)
+        let oneNineEightSDKVersion = try ParseVersion(string: "1.9.8")
 
         // All migrations from previous versions to current should occur here:
         #if !os(Linux) && !os(Android) && !os(Windows)
@@ -129,7 +132,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
-            ParseVersion.current = currentSDKVersion.string
+            ParseVersion.current = currentSDKVersion
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
@@ -143,7 +146,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
             // Prepare installation
             BaseParseInstallation.createNewInstallationIfNeeded()
         }
-        ParseVersion.current = ParseConstants.version
+        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
     }
 
     // Migrate installations with installationId, but missing
@@ -221,6 +224,7 @@ public func initialize(configuration: ParseConfiguration) { // swiftlint:disable
  It should have the following argument signature: `(challenge: URLAuthenticationChallenge,
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
+ - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: `usingTransactions` is experimental.
@@ -250,7 +254,7 @@ public func initialize(
     authentication: ((URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
-) {
+) throws {
     let configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -271,7 +275,7 @@ public func initialize(
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,
                                            authentication: authentication)
-    initialize(configuration: configuration)
+    try initialize(configuration: configuration)
 }
 
 /**
@@ -304,6 +308,7 @@ public func clearCache() {
 
 /**
  Delete the Parse iOS Objective-C SDK Keychain from the device.
+ - throws: An error of `ParseError` type.
  - note: ParseSwift uses a different Keychain. After migration, the iOS Objective-C SDK Keychain is no longer needed.
  - warning: The keychain cannot be recovered after deletion.
  */
