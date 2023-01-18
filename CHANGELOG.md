@@ -10,6 +10,8 @@
 
 __New features__
 
+* ParseVersion now supports pre-release versions of the SDK ([#49](https://github.com/netreconlab/Parse-Swift/pull/49)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 * Adds the the ability to watch particular keys with LiveQueries. Requires Parse-Server 6.0.0 ([#48](https://github.com/netreconlab/Parse-Swift/pull/48)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 * (Breaking Change) Added a new ParseHealth.Status enum to support Parse Server. 

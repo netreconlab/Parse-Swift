@@ -345,7 +345,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
-        XCTAssertEqual(ParseVersion.current?.string, ParseConstants.version)
+        XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
     }
 
     func testDontOverwriteOldInstallationBecauseVersionEqual() throws {
@@ -418,7 +418,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
-        XCTAssertEqual(ParseVersion.current?.string, newVersion)
+        XCTAssertEqual(ParseVersion.current?.description, newVersion)
     }
     #endif
 
@@ -517,7 +517,7 @@ class InitializeSDKTests: XCTestCase {
                                        primaryKey: "primaryKey",
                                        serverURL: url,
                                        testing: true)
-            XCTAssertEqual(ParseVersion.current?.string, ParseConstants.version)
+            XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
             XCTAssertEqual(BaseParseUser.current, user)
             XCTAssertEqual(Installation.current, installation)
             XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)

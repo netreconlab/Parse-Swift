@@ -18,16 +18,6 @@ public struct ParseVersion: ParseTypeable, Hashable {
     var prereleaseName: PrereleaseName?
     var prereleaseVersion: Int?
 
-    /// The string representation of the version.
-    public var string: String {
-        var version = "\(major).\(minor).\(patch)"
-        if let prereleaseName = prereleaseName,
-           let prereleaseVersion = prereleaseVersion {
-            version = "\(version)-\(prereleaseName).\(prereleaseVersion)"
-        }
-        return version
-    }
-
     /// Current version of the SDK.
     public internal(set) static var current: Self? {
         get {
@@ -54,10 +44,14 @@ public struct ParseVersion: ParseTypeable, Hashable {
                                       let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
                                     return nil
                                 }
+                                try? ParseStorage.shared.set(versionFromOldKeychainToMigrate,
+                                                             for: ParseStorage.Keys.currentVersion)
                                 try? KeychainStore.shared.set(versionFromOldKeychainToMigrate,
                                                               for: ParseStorage.Keys.currentVersion)
                                 return versionFromOldKeychainToMigrate
                             }
+                            try? ParseStorage.shared.set(versionFromKeychainToMigrate,
+                                                         for: ParseStorage.Keys.currentVersion)
                             try? KeychainStore.shared.set(versionFromKeychainToMigrate,
                                                           for: ParseStorage.Keys.currentVersion)
                             return versionFromKeychainToMigrate
@@ -106,8 +100,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
     init(major: Int,
          minor: Int,
          patch: Int,
-         prereleaseName: PrereleaseName,
-         prereleaseVersion: Int) {
+         prereleaseName: PrereleaseName?,
+         prereleaseVersion: Int?) throws {
+        if prereleaseName != nil && prereleaseVersion == nil || prereleaseName == nil && prereleaseVersion != nil {
+            throw ParseError(code: .otherCause,
+                             // swiftlint:disable:next line_length
+                             message: "preleaseName and prereleaseVersion are both required, you cannot have one without the other")
+        }
         self.init(major: major, minor: minor, patch: patch)
         self.prereleaseName = prereleaseName
         self.prereleaseVersion = prereleaseVersion
@@ -124,11 +123,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
         let splitVersion = string.split(separator: ".")
         if splitVersion.count < 3 {
             throw ParseError(code: .otherCause,
-                             message: "Version is in the incorrect format, should be, \"1.1.1\"")
+                             message: "Version is in the incorrect format, should be: \"1.1.1\" or \"1.1.1-beta.1\"")
         }
         var major: Int!
         var minor: Int!
         var patch: Int!
+        var prereleaseName: PrereleaseName?
+        var prereleaseVersion: Int?
 
         for (index, item) in splitVersion.enumerated() {
             switch index {
@@ -137,14 +138,25 @@ public struct ParseVersion: ParseTypeable, Hashable {
             case 1:
                 minor = try convertToInt(item)
             case 2:
-                patch = try convertToInt(item)
+                let splitPrerelease = item.split(separator: "-")
+                patch = try convertToInt(splitPrerelease[0])
+                if splitPrerelease.count > 1 {
+                    prereleaseName = PrereleaseName(rawValue: String(splitPrerelease[1]))
+                }
+            case 3:
+                prereleaseVersion = try convertToInt(item)
             default:
                 throw ParseError(code: .otherCause,
-                                 message: "Version string has too many values")
+                                 // swiftlint:disable:next line_length
+                                 message: "Version string has too many values, should be: \"1.1.1\" or \"1.1.1-beta.1\"")
             }
         }
 
-        return Self(major: major, minor: minor, patch: patch)
+        return try Self(major: major,
+                        minor: minor,
+                        patch: patch,
+                        prereleaseName: prereleaseName,
+                        prereleaseVersion: prereleaseVersion)
     }
 
     static func convertToInt(_ subSequence: String.SubSequence) throws -> Int {
@@ -256,6 +268,11 @@ extension ParseVersion: Comparable {
 // MARK: CustomDebugStringConvertible
 extension ParseVersion {
     public var debugDescription: String {
-        string
+        var version = "\(major).\(minor).\(patch)"
+        if let prereleaseName = prereleaseName,
+           let prereleaseVersion = prereleaseVersion {
+            version = "\(version)-\(prereleaseName).\(prereleaseVersion)"
+        }
+        return version
     }
 }
