@@ -80,6 +80,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
     }
 
     enum PrereleaseName: String, Codable, Comparable {
+
         case alpha, beta
 
         static func < (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
@@ -89,6 +90,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
         static func > (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
             lhs == .beta && rhs == .alpha
         }
+
     }
 
     init(major: Int, minor: Int, patch: Int) {
@@ -166,13 +168,16 @@ public struct ParseVersion: ParseTypeable, Hashable {
         }
         return integer
     }
+
 }
 
 // MARK: Default Implementation
 extension ParseVersion {
+
     init(string: String) throws {
         self = try Self.convertVersionString(string)
     }
+
 }
 
 // MARK: Comparable
