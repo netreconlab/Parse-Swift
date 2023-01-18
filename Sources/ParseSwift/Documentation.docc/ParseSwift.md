@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # ``ParseSwift``
 A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.
 
