@@ -276,7 +276,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testListenKeys() throws {
+    func testWatchKeys() throws {
         var query = GameScore.query.watch(["yolo"])
         XCTAssertEqual(query.watch?.count, 1)
         XCTAssertEqual(query.watch?.first, "yolo")
@@ -286,7 +286,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(query.watch, ["yolo", "hello", "wow"])
     }
 
-    func testListenKeysVariadic() throws {
+    func testWatchKeysVariadic() throws {
         var query = GameScore.query.watch("yolo")
         XCTAssertEqual(query.watch?.count, 1)
         XCTAssertEqual(query.watch?.first, "yolo")
