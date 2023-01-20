@@ -130,6 +130,10 @@ class APICommandTests: XCTestCase {
         let serverURL2 = API.serverURL(options: [.serverURL(newServerURLString)])
         XCTAssertNotEqual(Parse.configuration.serverURL, serverURL2)
         XCTAssertEqual(serverURL2, URL(string: newServerURLString))
+        let serverURL3 = API.serverURL(options: [.context("Hello"), .serverURL(newServerURLString)])
+        XCTAssertEqual(serverURL2, serverURL3)
+        let serverURL4 = API.serverURL(options: [.context("Hello"), .fileSize("500")])
+        XCTAssertEqual(serverURL4, serverURL1)
     }
 
     func testOptionCacheHasher() throws {
