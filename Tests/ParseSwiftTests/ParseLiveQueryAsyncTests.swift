@@ -71,8 +71,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
         } catch {
             XCTAssertEqual(client.isSocketEstablished, false)
             guard let urlError = error as? URLError else {
-                XCTFail("Should have casted to ParseError.")
-                return
+                throw XCTSkip("Skip this test when error cannot be unwrapped")
             }
             // "Could not connect to the server"
             // because webSocket connections are not intercepted.

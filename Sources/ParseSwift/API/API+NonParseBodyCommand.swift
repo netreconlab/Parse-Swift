@@ -93,7 +93,7 @@ internal extension API {
             if method == .GET || method == .DELETE {
                 headers.removeValue(forKey: "X-Parse-Request-Id")
             }
-            let url = Parse.configuration.serverURL.appendingPathComponent(path.urlComponent)
+            let url = API.serverURL(options: options).appendingPathComponent(path.urlComponent)
 
             guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
                 return .failure(ParseError(code: .otherCause,
