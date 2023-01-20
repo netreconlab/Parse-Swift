@@ -164,7 +164,12 @@ public struct API {
         /// [documentation](https://developer.apple.com/documentation/foundation/url_loading_system/accessing_cached_data)
         /// for more info.
         case cachePolicy(URLRequest.CachePolicy)
+        /// Use a specific server URL.
+        /// - note: The URL of the Swift SDK is provided by default. Only set this
+        /// option if you need to connect to a different server than the one configured.
+        case serverURL(String)
 
+        // swiftlint:disable:next cyclomatic_complexity
         public func hash(into hasher: inout Hasher) {
             switch self {
             case .usePrimaryKey:
@@ -187,6 +192,8 @@ public struct API {
                 hasher.combine(9)
             case .cachePolicy:
                 hasher.combine(10)
+            case .serverURL:
+                hasher.combine(11)
             }
         }
 
@@ -252,5 +259,14 @@ public struct API {
 
     internal static func clientVersion() -> String {
         ParseConstants.sdk+ParseConstants.version
+    }
+
+    internal static func serverURL(options: API.Options) -> URL {
+        guard let differentServerURLOption = options.first(where: { $0 == .serverURL("") }),
+                case .serverURL(let differentServerURLString) = differentServerURLOption,
+                let differentURL = URL(string: differentServerURLString) else {
+            return Parse.configuration.serverURL
+        }
+        return differentURL
     }
 }
