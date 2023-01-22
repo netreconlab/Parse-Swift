@@ -30,7 +30,7 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
         var emailVerified: Bool?
         var password: String?
         var authData: [String: [String: String]?]?
-        
+
         // These are required by ParseCloudUser
         var sessionToken: String?
         var _failed_login_count: Int?
