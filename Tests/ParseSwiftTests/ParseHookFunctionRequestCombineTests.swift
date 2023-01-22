@@ -33,8 +33,12 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
         var emailVerified: Bool?
         var password: String?
         var authData: [String: [String: String]?]?
+        
+        // These are required by ParseCloudUser
         var sessionToken: String?
-
+        var _failed_login_count: Int?
+        var _account_lockout_expires_at: Date?
+        
         // Your custom keys
         var customKey: String?
 

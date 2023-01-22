@@ -5,6 +5,9 @@
 
 ---
 
+[![Documentation](http://img.shields.io/badge/read_the-docs-2196f3.svg)](https://swiftpackageindex.com/netreconlab/Parse-Swift/documentation)
+[![Playgrounds](http://img.shields.io/badge/read_the-playgrounds-2196f3.svg)](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages)
+[![Tuturiol](http://img.shields.io/badge/read_the-tuturials-2196f3.svg)](https://netreconlab.github.io/Parse-Swift/release/tutorials/parseswift/)
 [![Build Status CI](https://github.com/netreconlab/Parse-Swift/workflows/ci/badge.svg?branch=main)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Aci+branch%3Amain)
 [![Build Status Release](https://github.com/netreconlab/Parse-Swift/workflows/release/badge.svg)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Arelease)
 [![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/netreconlab/Parse-Swift/branches)

@@ -28,6 +28,7 @@ deprecation warnings when building your app in Xcode before upgrading
 to [Corey Baker](https://github.com/cbaker6).
 
 __New features__
+* Add user login related attempts to ParseCloudUser. This allows developers to decode login related information when using Parse-Swift for Cloud Code ([#51](https://github.com/netreconlab/Parse-Swift/pull/51)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Add option to set the serverURL for a particular call. This is useful when using the Swift SDK for Cloud Code in a multi-server environment ([#50](https://github.com/netreconlab/Parse-Swift/pull/50)), thanks to [Corey Baker](https://github.com/cbaker6).
 * ParseVersion now supports pre-release versions of the SDK ([#49](https://github.com/netreconlab/Parse-Swift/pull/49)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Adds the the ability to watch particular keys with LiveQueries. Requires Parse-Server 6.0.0 ([#48](https://github.com/netreconlab/Parse-Swift/pull/48)), thanks to [Corey Baker](https://github.com/cbaker6).
