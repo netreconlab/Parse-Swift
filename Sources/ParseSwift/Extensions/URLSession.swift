@@ -40,7 +40,7 @@ internal extension URLSession {
                        responseData: Data?,
                        urlResponse: URLResponse?,
                        responseError: Error?,
-                       mapper: @escaping (Data) throws -> U) -> Result<U, ParseError> {
+                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         if let responseError = responseError {
             guard let parseError = responseError as? ParseError else {
                 return .failure(ParseError(code: .otherCause,
@@ -77,7 +77,7 @@ internal extension URLSession {
                 }
             }
             do {
-                return try .success(mapper(responseData))
+                return try await .success(mapper(responseData))
             } catch {
                 URLSession.parse.configuration.urlCache?.removeCachedResponse(for: request)
                 guard let parseError = error as? ParseError else {
@@ -110,7 +110,7 @@ internal extension URLSession {
                        location: URL?,
                        urlResponse: URLResponse?,
                        responseError: Error?,
-                       mapper: @escaping (Data) throws -> U) -> Result<U, ParseError> {
+                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         guard let response = urlResponse else {
             guard let parseError = responseError as? ParseError else {
                 return .failure(ParseError(code: .otherCause,
@@ -129,7 +129,7 @@ internal extension URLSession {
         if let location = location {
             do {
                 let data = try ParseCoding.jsonEncoder().encode(location)
-                return try .success(mapper(data))
+                return try await .success(mapper(data))
             } catch {
                 let defaultError = ParseError(code: .otherCause,
                                               // swiftlint:disable:next line_length
@@ -149,17 +149,18 @@ internal extension URLSession {
         callbackQueue: DispatchQueue,
         attempts: Int = 1,
         allowIntermediateResponses: Bool,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
-    ) {
-
-        dataTask(with: request) { (responseData, urlResponse, responseError) in
+    ) async {
+        do {
+            let (responseData, urlResponse) = try await data(for: request)
             guard let httpResponse = urlResponse as? HTTPURLResponse else {
-                completion(self.makeResult(request: request,
-                                           responseData: responseData,
-                                           urlResponse: urlResponse,
-                                           responseError: responseError,
-                                           mapper: mapper))
+                let result = await self.makeResult(request: request,
+                                                   responseData: responseData,
+                                                   urlResponse: urlResponse,
+                                                   responseError: nil,
+                                                   mapper: mapper)
+                completion(result)
                 return
             }
             let statusCode = httpResponse.statusCode
@@ -170,22 +171,23 @@ internal extension URLSession {
                 // Retry if max attempts have not been reached.
                 guard attempts <= Parse.configuration.maxConnectionAttempts else {
                     // If max attempts have been reached update the client now.
-                    completion(self.makeResult(request: request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
                     return
                 }
 
                 // If there is current response data, update the client now.
-                if allowIntermediateResponses,
-                    let responseData = responseData {
-                    completion(self.makeResult(request: request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                if allowIntermediateResponses {
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
                 }
 
                 let delayInterval: TimeInterval!
@@ -213,21 +215,31 @@ internal extension URLSession {
                 }
 
                 callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
-                    self.dataTask(with: request,
-                                  callbackQueue: callbackQueue,
-                                  attempts: attempts,
-                                  allowIntermediateResponses: allowIntermediateResponses,
-                                  mapper: mapper,
-                                  completion: completion)
+                    Task {
+                        await self.dataTask(with: request,
+                                            callbackQueue: callbackQueue,
+                                            attempts: attempts,
+                                            allowIntermediateResponses: allowIntermediateResponses,
+                                            mapper: mapper,
+                                            completion: completion)
+                    }
                 }
                 return
             }
-            completion(self.makeResult(request: request,
-                                       responseData: responseData,
-                                       urlResponse: urlResponse,
-                                       responseError: responseError,
-                                       mapper: mapper))
-        }.resume()
+            let result = await self.makeResult(request: request,
+                                               responseData: responseData,
+                                               urlResponse: urlResponse,
+                                               responseError: nil,
+                                               mapper: mapper)
+            completion(result)
+        } catch {
+            let result = await self.makeResult(request: request,
+                                               responseData: nil,
+                                               urlResponse: nil,
+                                               responseError: error,
+                                               mapper: mapper)
+            completion(result)
+        }
     }
 }
 
@@ -238,7 +250,7 @@ internal extension URLSession {
         from data: Data?,
         from file: URL?,
         progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
         var task: URLSessionTask?
@@ -249,11 +261,14 @@ internal extension URLSession {
                     .parseFileTransfer
                     .upload(with: request,
                             from: data) { (responseData, urlResponse, updatedRequest, responseError) in
-                    completion(self.makeResult(request: updatedRequest ?? request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                        Task {
+                            let result = await self.makeResult(request: updatedRequest ?? request,
+                                                               responseData: responseData,
+                                                               urlResponse: urlResponse,
+                                                               responseError: responseError,
+                                                               mapper: mapper)
+                            completion(result)
+                        }
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -268,11 +283,14 @@ internal extension URLSession {
                     .parseFileTransfer
                     .upload(with: request,
                             fromFile: file) { (responseData, urlResponse, updatedRequest, responseError) in
-                    completion(self.makeResult(request: updatedRequest ?? request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                        Task {
+                            let result = await self.makeResult(request: updatedRequest ?? request,
+                                                               responseData: responseData,
+                                                               urlResponse: urlResponse,
+                                                               responseError: responseError,
+                                                               mapper: mapper)
+                            completion(result)
+                        }
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -303,40 +321,38 @@ internal extension URLSession {
         notificationQueue: DispatchQueue,
         with request: URLRequest,
         progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
-    ) {
+    ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
-            let result = self.makeResult(request: request,
-                                         location: location,
-                                         urlResponse: urlResponse,
-                                         responseError: responseError, mapper: mapper)
-            completion(result)
+            Task {
+                let result = await self.makeResult(request: request,
+                                                   location: location,
+                                                   urlResponse: urlResponse,
+                                                   responseError: responseError,
+                                                   mapper: mapper)
+                completion(result)
+            }
         }
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
-        Task {
-            await Parse.sessionDelegate.delegates.updateDownload(task, callback: progress)
-            await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
-            task.resume()
-        }
-        #else
-        Parse.sessionDelegate.downloadDelegates[task] = progress
-        Parse.sessionDelegate.taskCallbackQueues[task] = notificationQueue
+        await Parse.sessionDelegate.delegates.updateDownload(task, callback: progress)
+        await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
         task.resume()
-        #endif
     }
 
     func downloadTask<U>(
         with request: URLRequest,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
         downloadTask(with: request) { (location, urlResponse, responseError) in
-            completion(self.makeResult(request: request,
-                                       location: location,
-                                       urlResponse: urlResponse,
-                                       responseError: responseError,
-                                       mapper: mapper))
+            Task {
+                let result = await self.makeResult(request: request,
+                                                   location: location,
+                                                   urlResponse: urlResponse,
+                                                   responseError: responseError,
+                                                   mapper: mapper)
+                completion(result)
+            }
         }.resume()
     }
 }

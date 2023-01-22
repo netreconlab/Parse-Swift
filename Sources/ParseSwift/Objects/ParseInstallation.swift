@@ -204,35 +204,13 @@ struct CurrentInstallationContainer<T: ParseInstallation>: Codable, Hashable {
 
 // MARK: Current Installation Support
 public extension ParseInstallation {
-    internal static var currentContainer: CurrentInstallationContainer<Self> {
-        get {
-            guard let installationInMemory: CurrentInstallationContainer<Self> =
-                    try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                #if !os(Linux) && !os(Android) && !os(Windows)
-                guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
-                else {
-                    let newInstallationId = UUID().uuidString.lowercased()
-                    var newInstallation = BaseParseInstallation()
-                    newInstallation.installationId = newInstallationId
-                    newInstallation.createInstallationId(newId: newInstallationId)
-                    newInstallation.updateAutomaticInfo()
-                    let newBaseInstallationContainer =
-                        CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
-                                                                            installationId: newInstallationId)
-                    try? KeychainStore.shared.set(newBaseInstallationContainer,
-                                                  for: ParseStorage.Keys.currentInstallation)
-                    guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
-                    else {
-                        // Could not create container correctly, return empty one.
-                        return CurrentInstallationContainer<Self>()
-                    }
-                    try? ParseStorage.shared.set(installationFromKeyChain, for: ParseStorage.Keys.currentInstallation)
-                    return installationFromKeyChain
-                }
-                return installationFromKeyChain
-                #else
+    internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
+        guard let installationInMemory: CurrentInstallationContainer<Self> =
+                try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            #if !os(Linux) && !os(Android) && !os(Windows)
+            guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
+                    try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            else {
                 let newInstallationId = UUID().uuidString.lowercased()
                 var newInstallation = BaseParseInstallation()
                 newInstallation.installationId = newInstallationId
@@ -241,53 +219,78 @@ public extension ParseInstallation {
                 let newBaseInstallationContainer =
                     CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
                                                                         installationId: newInstallationId)
-                try? ParseStorage.shared.set(newBaseInstallationContainer,
+                try? await KeychainStore.shared.set(newBaseInstallationContainer,
                                               for: ParseStorage.Keys.currentInstallation)
-                guard let installationFromMemory: CurrentInstallationContainer<Self> =
-                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
+                        try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 else {
                     // Could not create container correctly, return empty one.
                     return CurrentInstallationContainer<Self>()
                 }
-                return installationFromMemory
-                #endif
+                try? await ParseStorage.shared.set(installationFromKeyChain, for: ParseStorage.Keys.currentInstallation)
+                return installationFromKeyChain
             }
-            return installationInMemory
+            return installationFromKeyChain
+            #else
+            let newInstallationId = UUID().uuidString.lowercased()
+            var newInstallation = BaseParseInstallation()
+            newInstallation.installationId = newInstallationId
+            newInstallation.createInstallationId(newId: newInstallationId)
+            newInstallation.updateAutomaticInfo()
+            let newBaseInstallationContainer =
+                CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
+                                                                    installationId: newInstallationId)
+            try? await ParseStorage.shared.set(newBaseInstallationContainer,
+                                          for: ParseStorage.Keys.currentInstallation)
+            guard let installationFromMemory: CurrentInstallationContainer<Self> =
+                    try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            else {
+                // Could not create container correctly, return empty one.
+                return CurrentInstallationContainer<Self>()
+            }
+            return installationFromMemory
+            #endif
         }
-        set {
-            try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentInstallation)
-        }
+        return installationInMemory
+    }
+    
+    internal static func setCurrentContainer(_ newValue: CurrentInstallationContainer<Self>) async {
+        try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentInstallation)
     }
 
-    internal static func updateInternalFieldsCorrectly() {
+    internal static func updateInternalFieldsCorrectly() async {
 
-        if let currentContainerInstallationId = Self.currentContainer.installationId,
-            Self.currentContainer.currentInstallation?.installationId !=
+        if let currentContainerInstallationId = await Self.currentContainer().installationId,
+            await Self.currentContainer().currentInstallation?.installationId !=
             currentContainerInstallationId {
 
             // If the user made changes, set back to the original
-            Self.currentContainer.currentInstallation?.installationId =
-            currentContainerInstallationId
+            var currentContainer = await Self.currentContainer()
+            currentContainer.currentInstallation?.installationId = currentContainerInstallationId
+            await Self.setCurrentContainer(currentContainer)
         }
 
         // Always pull automatic info to ensure user made no changes to immutable values
-        Self.currentContainer.currentInstallation?.updateAutomaticInfo()
+        var currentContainer = await Self.currentContainer()
+        currentContainer.currentInstallation?.updateAutomaticInfo()
+        await Self.setCurrentContainer(currentContainer)
     }
 
-    internal static func saveCurrentContainerToKeychain() {
-        Self.currentContainer.currentInstallation?.originalData = nil
+    internal static func saveCurrentContainerToKeychain() async {
+        var currentContainer = await Self.currentContainer()
+        currentContainer.currentInstallation?.originalData = nil
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
+        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
         #endif
     }
 
-    internal static func deleteCurrentContainerFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+    internal static func deleteCurrentContainerFromKeychain() async {
+        try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         // Prepare new installation
-        BaseParseInstallation.createNewInstallationIfNeeded()
+        await BaseParseInstallation.createNewInstallationIfNeeded()
     }
 
     /**
@@ -295,20 +298,15 @@ public extension ParseInstallation {
 
      - returns: Returns a `ParseInstallation` that is the current device. If there is none, returns `nil`.
     */
-    internal(set) static var current: Self? {
-        get {
-            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.getCurrent")
-            return synchronizationQueue.sync(execute: { () -> Self? in
-                return Self.currentContainer.currentInstallation
-            })
-        }
-        set {
-            let synchronizationQueue = createSynchronizationQueue("ParseInstallation.setCurrent")
-            synchronizationQueue.sync {
-                Self.currentContainer.currentInstallation = newValue
-                Self.updateInternalFieldsCorrectly()
-            }
-        }
+    static func current() async -> Self? {
+        await Self.currentContainer().currentInstallation
+    }
+    
+    internal static func setCurrent(_ newValue: Self?) async {
+        var currentContainer = await Self.currentContainer()
+        currentContainer.currentInstallation = newValue
+        await Self.setCurrentContainer(currentContainer)
+        await Self.updateInternalFieldsCorrectly()
     }
 
     /**
@@ -332,50 +330,60 @@ public extension ParseInstallation {
                        options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        guard var currentInstallation = Self.current else {
-            let error = ParseError(code: .otherCause,
-                                   message: "Current installation does not exist")
-            callbackQueue.async {
-                completion(.failure(error))
-            }
-            return
-        }
-        guard currentInstallation.objectId != objectId else {
-            // If the installationId's are the same, assume successful replacement already occured.
-            callbackQueue.async {
-                completion(.success(currentInstallation))
-            }
-            return
-        }
-        currentInstallation.objectId = objectId
-        currentInstallation.fetch(options: options, callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success(var updatedInstallation):
-                if copyEntireInstallation {
-                    updatedInstallation.updateAutomaticInfo()
-                    Self.currentContainer.installationId = updatedInstallation.installationId
-                    Self.currentContainer.currentInstallation = updatedInstallation
-                } else {
-                    Self.current?.channels = updatedInstallation.channels
-                    if Self.current?.deviceToken == nil {
-                        Self.current?.deviceToken = updatedInstallation.deviceToken
-                    }
+        Task {
+            guard var currentInstallation = await Self.current() else {
+                let error = ParseError(code: .otherCause,
+                                       message: "Current installation does not exist")
+                callbackQueue.async {
+                    completion(.failure(error))
                 }
-                Self.saveCurrentContainerToKeychain()
-                guard let latestInstallation = Self.current else {
-                    let error = ParseError(code: .otherCause,
-                                           message: "Had trouble migrating the installation")
+                return
+            }
+            guard currentInstallation.objectId != objectId else {
+                let currentInstallation = currentInstallation
+                // If the installationId's are the same, assume successful replacement already occured.
+                callbackQueue.async {
+                    completion(.success(currentInstallation))
+                }
+                return
+            }
+            currentInstallation.objectId = objectId
+            currentInstallation.fetch(options: options, callbackQueue: callbackQueue) { result in
+                switch result {
+                case .success(let updatedInstallation):
+                    Task {
+                        if copyEntireInstallation {
+                            var updatedInstallation = updatedInstallation
+                            updatedInstallation.updateAutomaticInfo()
+                            var currentContainer = await Self.currentContainer()
+                            currentContainer.installationId = updatedInstallation.installationId
+                            currentContainer.currentInstallation = updatedInstallation
+                            await Self.setCurrentContainer(currentContainer)
+                        } else {
+                            var current = await Self.current()
+                            current?.channels = updatedInstallation.channels
+                            if current?.deviceToken == nil {
+                                current?.deviceToken = updatedInstallation.deviceToken
+                            }
+                            await Self.setCurrent(current)
+                        }
+                        await Self.saveCurrentContainerToKeychain()
+                        guard let latestInstallation = await Self.current() else {
+                            let error = ParseError(code: .otherCause,
+                                                   message: "Had trouble migrating the installation")
+                            callbackQueue.async {
+                                completion(.failure(error))
+                            }
+                            return
+                        }
+                        latestInstallation.save(options: options,
+                                                callbackQueue: callbackQueue,
+                                                completion: completion)
+                    }
+                case .failure(let error):
                     callbackQueue.async {
                         completion(.failure(error))
                     }
-                    return
-                }
-                latestInstallation.save(options: options,
-                                        callbackQueue: callbackQueue,
-                                        completion: completion)
-            case .failure(let error):
-                callbackQueue.async {
-                    completion(.failure(error))
                 }
             }
         }
@@ -483,8 +491,8 @@ extension ParseInstallation {
 
 // MARK: Fetchable
 extension ParseInstallation {
-    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) throws {
-        guard let currentInstallation = Self.current else {
+    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+        guard let currentInstallation = await Self.current() else {
             return
         }
 
@@ -499,33 +507,12 @@ extension ParseInstallation {
         })
         if let foundCurrentInstallation = foundCurrentInstallationObjects.first {
             if !deleting {
-                Self.current = foundCurrentInstallation
-                Self.saveCurrentContainerToKeychain()
+                await Self.setCurrent(foundCurrentInstallation)
+                await Self.saveCurrentContainerToKeychain()
             } else {
-                Self.deleteCurrentContainerFromKeychain()
+                await Self.deleteCurrentContainerFromKeychain()
             }
         }
-    }
-
-    /**
-     Fetches the `ParseInstallation` *synchronously* with the current data from the server.
-     - parameter includeKeys: The name(s) of the key(s) to include that are
-     `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
-     `includeAll` for `Query`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of `ParseError` type.
-     - important: If an object fetched has the same objectId as current, it will automatically update the current.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public func fetch(includeKeys: [String]? = nil,
-                      options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let result: Self = try fetchCommand(include: includeKeys)
-            .execute(options: options)
-        try Self.updateKeychainIfNeeded([result])
-        return result
     }
 
     /**
@@ -548,36 +535,42 @@ extension ParseInstallation {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-         do {
-            try fetchCommand(include: includeKeys)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue) { result in
-                    if case .success(let foundResult) = result {
-                        do {
-                            try Self.updateKeychainIfNeeded([foundResult])
-                            completion(.success(foundResult))
-                        } catch {
-                            let defaultError = ParseError(code: .otherCause,
-                                                          message: error.localizedDescription)
-                            let parseError = error as? ParseError ?? defaultError
-                            completion(.failure(parseError))
+        var murabeOptions = options
+        murabeOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+        let options = murabeOptions
+        Task {
+            do {
+                try await fetchCommand(include: includeKeys)
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue) { result in
+                        if case .success(let foundResult) = result {
+                            Task {
+                                do {
+                                    try await Self.updateKeychainIfNeeded([foundResult])
+                                    completion(.success(foundResult))
+                                } catch {
+                                    let defaultError = ParseError(code: .otherCause,
+                                                                  message: error.localizedDescription)
+                                    let parseError = error as? ParseError ?? defaultError
+                                    completion(.failure(parseError))
+                                }
+                            }
+                        } else {
+                            completion(result)
                         }
+                    }
+                
+            } catch {
+                callbackQueue.async {
+                    if let error = error as? ParseError {
+                        completion(.failure(error))
                     } else {
-                        completion(result)
+                        completion(.failure(ParseError(code: .otherCause,
+                                                       message: error.localizedDescription)))
                     }
                 }
-         } catch {
-            callbackQueue.async {
-                if let error = error as? ParseError {
-                    completion(.failure(error))
-                } else {
-                    completion(.failure(ParseError(code: .otherCause,
-                                                   message: error.localizedDescription)))
-                }
             }
-         }
+        }
     }
 
     func fetchCommand(include: [String]?) throws -> API.Command<Self, Self> {
@@ -614,58 +607,6 @@ extension ParseInstallation {
     public func save(options: API.Options = []) throws -> Self {
         try save(ignoringCustomObjectIdConfig: false,
                  options: options)
-    }
-
-    /**
-     Saves the `ParseInstallation` *synchronously* and throws an error if there is an issue.
-
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: Returns saved `ParseInstallation`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    @discardableResult
-    public func save(ignoringCustomObjectIdConfig: Bool,
-                     options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        var childObjects: [String: PointerType]?
-        var childFiles: [UUID: ParseFile]?
-        var error: ParseError?
-        let group = DispatchGroup()
-        group.enter()
-        self.ensureDeepSave(options: options) { (savedChildObjects, savedChildFiles, parseError) in
-            childObjects = savedChildObjects
-            childFiles = savedChildFiles
-            error = parseError
-            group.leave()
-        }
-        group.wait()
-
-        if let error = error {
-            throw error
-        }
-
-        let result: Self = try saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-            .execute(options: options,
-                     childObjects: childObjects,
-                     childFiles: childFiles)
-        try Self.updateKeychainIfNeeded([result])
-        return result
     }
 
     /**

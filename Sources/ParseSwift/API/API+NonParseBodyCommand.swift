@@ -18,14 +18,14 @@ internal extension API {
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) throws -> U)
+        let mapper: ((Data) async throws -> U)
         let params: [String: String?]?
 
         init(method: API.Method,
              path: API.Endpoint,
              params: [String: String]? = nil,
              body: T? = nil,
-             mapper: @escaping ((Data) throws -> U)) {
+             mapper: @escaping ((Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.params = params
@@ -33,6 +33,7 @@ internal extension API {
             self.mapper = mapper
         }
 
+        /*
         func execute(options: API.Options) throws -> U {
             var responseResult: Result<U, ParseError>?
             let synchronizationQueue = DispatchQueue(label: "com.parse.NonParseBodyCommand.sync.\(UUID().uuidString)",
@@ -55,20 +56,20 @@ internal extension API {
                                  message: "Could not unrwrap server response")
             }
             return try response.get()
-        }
+        } */
 
         // MARK: Asynchronous Execution
         func executeAsync(options: API.Options,
                           callbackQueue: DispatchQueue,
                           allowIntermediateResponses: Bool = false,
-                          completion: @escaping(Result<U, ParseError>) -> Void) {
+                          completion: @escaping(Result<U, ParseError>) -> Void) async {
 
             switch self.prepareURLRequest(options: options) {
             case .success(let urlRequest):
-                URLSession.parse.dataTask(with: urlRequest,
-                                          callbackQueue: callbackQueue,
-                                          allowIntermediateResponses: allowIntermediateResponses,
-                                          mapper: mapper) { result in
+                await URLSession.parse.dataTask(with: urlRequest,
+                                                callbackQueue: callbackQueue,
+                                                allowIntermediateResponses: allowIntermediateResponses,
+                                                mapper: mapper) { result in
                     callbackQueue.async {
                         switch result {
 

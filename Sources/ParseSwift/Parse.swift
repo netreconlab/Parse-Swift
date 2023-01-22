@@ -35,7 +35,7 @@ internal func initialize(applicationId: String,
                          testLiveQueryDontCloseSocket: Bool = false,
                          authentication: ((URLAuthenticationChallenge,
                                           (URLSession.AuthChallengeDisposition,
-                                           URLCredential?) -> Void) -> Void)? = nil) throws {
+                                           URLCredential?) -> Void) -> Void)? = nil) async throws {
     var configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -58,16 +58,16 @@ internal func initialize(applicationId: String,
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
-    try initialize(configuration: configuration)
+    try await initialize(configuration: configuration)
 }
 
-internal func deleteKeychainIfNeeded() {
+internal func deleteKeychainIfNeeded() async {
     #if !os(Linux) && !os(Android) && !os(Windows)
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? KeychainStore.old.deleteAll()
-            try? KeychainStore.shared.deleteAll()
+            try? await KeychainStore.old.deleteAll()
+            try? await KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
         clearCache()
@@ -97,23 +97,23 @@ public var configuration: ParseConfiguration {
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
-public func initialize(configuration: ParseConfiguration) throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
+public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
     Utility.updateParseURLSession()
-    deleteKeychainIfNeeded()
+    await deleteKeychainIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    if let keychainAccessGroup = ParseKeychainAccessGroup.current {
+    if let keychainAccessGroup = await ParseKeychainAccessGroup.current() {
         Parse.configuration.keychainAccessGroup = keychainAccessGroup
     } else {
-        ParseKeychainAccessGroup.current = ParseKeychainAccessGroup()
+        await ParseKeychainAccessGroup.setCurrent(ParseKeychainAccessGroup())
     }
     #endif
 
     do {
-        guard let previousSDKVersion = ParseVersion.current else {
+        guard let previousSDKVersion = await ParseVersion.current() else {
             throw ParseError(code: .otherCause, message: "Could not get previous version")
         }
         let currentSDKVersion = try ParseVersion(string: ParseConstants.version)
@@ -124,15 +124,15 @@ public func initialize(configuration: ParseConfiguration) throws { // swiftlint:
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
             _ = KeychainStore.old
-            try? KeychainStore.shared.copy(KeychainStore.old,
-                                           oldAccessGroup: configuration.keychainAccessGroup,
-                                           newAccessGroup: configuration.keychainAccessGroup)
+            try? await KeychainStore.shared.copy(KeychainStore.old,
+                                                 oldAccessGroup: configuration.keychainAccessGroup,
+                                                 newAccessGroup: configuration.keychainAccessGroup)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? KeychainStore.old.deleteAll()
+            try? await KeychainStore.old.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
-            ParseVersion.current = currentSDKVersion
+            await ParseVersion.setCurrent(currentSDKVersion)
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
@@ -140,20 +140,20 @@ public func initialize(configuration: ParseConfiguration) throws { // swiftlint:
             if currentInstallation.objectId == nil {
                 BaseParseInstallation.deleteCurrentContainerFromKeychain()
                 // Prepare installation
-                BaseParseInstallation.createNewInstallationIfNeeded()
+                await BaseParseInstallation.createNewInstallationIfNeeded()
             }
         } else {
             // Prepare installation
-            BaseParseInstallation.createNewInstallationIfNeeded()
+            await BaseParseInstallation.createNewInstallationIfNeeded()
         }
-        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
+        await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
     // Migrate installations with installationId, but missing
     // currentInstallation, ParseSwift < 1.9.10
     if let installationId = BaseParseInstallation.currentContainer.installationId,
        BaseParseInstallation.currentContainer.currentInstallation == nil {
-        if let foundInstallation = try? BaseParseInstallation
+        if let foundInstallation = try? await BaseParseInstallation
             .query("installationId" == installationId)
             .first(options: [.cachePolicy(.reloadIgnoringLocalCacheData)]) {
             let newContainer = CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: foundInstallation,
@@ -162,12 +162,12 @@ public func initialize(configuration: ParseConfiguration) throws { // swiftlint:
             BaseParseInstallation.saveCurrentContainerToKeychain()
         }
     }
-    BaseParseInstallation.createNewInstallationIfNeeded()
+    await BaseParseInstallation.createNewInstallationIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     if configuration.isMigratingFromObjcSDK {
         if let objcParseKeychain = KeychainStore.objectiveC {
-            guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
+            guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
                   BaseParseInstallation.current?.installationId != installationId else {
                 return
             }
@@ -254,7 +254,7 @@ public func initialize(
     authentication: ((URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
-) throws {
+) async throws {
     let configuration = ParseConfiguration(applicationId: applicationId,
                                            clientKey: clientKey,
                                            primaryKey: primaryKey,
@@ -275,7 +275,7 @@ public func initialize(
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,
                                            authentication: authentication)
-    try initialize(configuration: configuration)
+    try await initialize(configuration: configuration)
 }
 
 /**
@@ -312,8 +312,8 @@ public func clearCache() {
  - note: ParseSwift uses a different Keychain. After migration, the iOS Objective-C SDK Keychain is no longer needed.
  - warning: The keychain cannot be recovered after deletion.
  */
-public func deleteObjectiveCKeychain() throws {
-    try KeychainStore.objectiveC?.deleteAllObjectiveC()
+public func deleteObjectiveCKeychain() async throws {
+    try await KeychainStore.objectiveC?.deleteAllObjectiveC()
 }
 
 /**
@@ -331,28 +331,28 @@ public func deleteObjectiveCKeychain() throws {
  set to a valid [keychain group](https://developer.apple.com/documentation/security/ksecattraccessgroup).
  */
 @discardableResult public func setAccessGroup(_ accessGroup: String?,
-                                              synchronizeAcrossDevices: Bool) throws -> Bool {
+                                              synchronizeAcrossDevices: Bool) async throws -> Bool {
     if synchronizeAcrossDevices && accessGroup == nil {
         throw ParseError(code: .otherCause,
                          message: "\"accessGroup\" must be set to a valid string when \"synchronizeAcrossDevices == true\"")
     }
-    guard let currentAccessGroup = ParseKeychainAccessGroup.current else {
+    guard let currentAccessGroup = await ParseKeychainAccessGroup.current() else {
         throw ParseError(code: .otherCause,
                          message: "Problem unwrapping the current access group. Did you initialize the SDK before calling this method?")
     }
     let newKeychainAccessGroup = ParseKeychainAccessGroup(accessGroup: accessGroup,
                                                           isSyncingKeychainAcrossDevices: synchronizeAcrossDevices)
     guard newKeychainAccessGroup != currentAccessGroup else {
-        ParseKeychainAccessGroup.current = newKeychainAccessGroup
+        await ParseKeychainAccessGroup.setCurrent(newKeychainAccessGroup)
         return true
     }
     do {
-        try KeychainStore.shared.copy(KeychainStore.shared,
-                                      oldAccessGroup: currentAccessGroup,
-                                      newAccessGroup: newKeychainAccessGroup)
-        ParseKeychainAccessGroup.current = newKeychainAccessGroup
+        try await KeychainStore.shared.copy(KeychainStore.shared,
+                                            oldAccessGroup: currentAccessGroup,
+                                            newAccessGroup: newKeychainAccessGroup)
+        await ParseKeychainAccessGroup.setCurrent(newKeychainAccessGroup)
     } catch {
-        ParseKeychainAccessGroup.current = currentAccessGroup
+        await ParseKeychainAccessGroup.setCurrent(currentAccessGroup)
         throw error
     }
     return true

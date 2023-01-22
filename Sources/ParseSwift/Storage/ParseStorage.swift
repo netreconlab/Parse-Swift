@@ -38,24 +38,24 @@ struct ParseStorage {
 // MARK: ParsePrimitiveStorable
 extension ParseStorage: ParsePrimitiveStorable {
 
-    public mutating func delete(valueFor key: String) throws {
+    public mutating func delete(valueFor key: String) async throws {
         try requireBackingStore()
-        return try backingStore.delete(valueFor: key)
+        return try await backingStore.delete(valueFor: key)
     }
 
-    public mutating func deleteAll() throws {
+    public mutating func deleteAll() async throws {
         try requireBackingStore()
-        return try backingStore.deleteAll()
+        return try await backingStore.deleteAll()
     }
 
-    public func get<T>(valueFor key: String) throws -> T? where T: Decodable {
+    public func get<T>(valueFor key: String) async throws -> T? where T: Decodable {
         try requireBackingStore()
-        return try backingStore.get(valueFor: key)
+        return try await backingStore.get(valueFor: key)
     }
 
-    public mutating func set<T>(_ object: T, for key: String) throws where T: Encodable {
+    public mutating func set<T>(_ object: T, for key: String) async throws where T: Encodable {
         try requireBackingStore()
-        return try backingStore.set(object, for: key)
+        return try await backingStore.set(object, for: key)
     }
 
 }

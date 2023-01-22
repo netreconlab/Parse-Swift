@@ -20,7 +20,7 @@ import Security
  It supports any object, with Coding support. All objects are available after the
  first device unlock and are not backed up.
  */
-struct KeychainStore: SecureStorable {
+actor KeychainStore: SecureStorable {
 
     let synchronizationQueue: DispatchQueue
     let service: String
@@ -74,44 +74,44 @@ struct KeychainStore: SecureStorable {
 
     func copy(_ keychain: KeychainStore,
               oldAccessGroup: ParseKeychainAccessGroup,
-              newAccessGroup: ParseKeychainAccessGroup) throws {
-        if let user = keychain.data(forKey: ParseStorage.Keys.currentUser,
-                                    accessGroup: oldAccessGroup) {
+              newAccessGroup: ParseKeychainAccessGroup) async throws {
+        if let user = await keychain.data(forKey: ParseStorage.Keys.currentUser,
+                                          accessGroup: oldAccessGroup) {
             try set(user,
                     forKey: ParseStorage.Keys.currentUser,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let installation = keychain.data(forKey: ParseStorage.Keys.currentInstallation,
-                                            accessGroup: oldAccessGroup) {
+        if let installation = await keychain.data(forKey: ParseStorage.Keys.currentInstallation,
+                                                  accessGroup: oldAccessGroup) {
             try set(installation,
                     forKey: ParseStorage.Keys.currentInstallation,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let version = keychain.data(forKey: ParseStorage.Keys.currentVersion,
-                                       accessGroup: oldAccessGroup) {
+        if let version = await keychain.data(forKey: ParseStorage.Keys.currentVersion,
+                                             accessGroup: oldAccessGroup) {
             try set(version,
                     forKey: ParseStorage.Keys.currentVersion,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let config = keychain.data(forKey: ParseStorage.Keys.currentConfig,
-                                      accessGroup: oldAccessGroup) {
+        if let config = await keychain.data(forKey: ParseStorage.Keys.currentConfig,
+                                            accessGroup: oldAccessGroup) {
             try set(config,
                     forKey: ParseStorage.Keys.currentConfig,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let acl = keychain.data(forKey: ParseStorage.Keys.defaultACL,
-                                   accessGroup: oldAccessGroup) {
+        if let acl = await keychain.data(forKey: ParseStorage.Keys.defaultACL,
+                                         accessGroup: oldAccessGroup) {
             try set(acl,
                     forKey: ParseStorage.Keys.defaultACL,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let keychainAccessGroup = keychain.data(forKey: ParseStorage.Keys.currentAccessGroup,
-                                                   accessGroup: oldAccessGroup) {
+        if let keychainAccessGroup = await keychain.data(forKey: ParseStorage.Keys.currentAccessGroup,
+                                                         accessGroup: oldAccessGroup) {
             try set(keychainAccessGroup,
                     forKey: ParseStorage.Keys.currentAccessGroup,
                     oldAccessGroup: oldAccessGroup,
@@ -210,22 +210,26 @@ struct KeychainStore: SecureStorable {
             update[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock as String
         }
 
-        let status = synchronizationQueue.sync(flags: .barrier) { () -> OSStatus in
-            let mergedQuery = query.merging(update) { (_, otherValue) -> Any in otherValue }
-            if self.data(forKey: key,
-                         accessGroup: newAccessGroup) != nil {
-                let updateStatus = SecItemUpdate(query as CFDictionary, update as CFDictionary)
-                guard updateStatus == errSecDuplicateItem,
-                      SecItemDelete(mergedQuery as CFDictionary) == errSecSuccess else {
-                    return updateStatus
-                }
+        let mergedQuery = query.merging(update) { (_, otherValue) -> Any in otherValue }
+        guard self.data(forKey: key,
+                     accessGroup: newAccessGroup) != nil else {
+            let status = SecItemAdd(mergedQuery as CFDictionary, nil)
+            guard status == errSecSuccess else {
+                throw ParseError(code: .otherCause,
+                                 message: "Could not save to Keychain, OSStatus: \(status)")
             }
-            return SecItemAdd(mergedQuery as CFDictionary, nil)
+            return
         }
-
-        guard status == errSecSuccess else {
+        
+        var updateStatus = SecItemUpdate(query as CFDictionary, update as CFDictionary)
+        if updateStatus == errSecDuplicateItem {
+            if SecItemDelete(mergedQuery as CFDictionary) == errSecSuccess {
+                updateStatus = SecItemAdd(mergedQuery as CFDictionary, nil)
+            }
+        }
+        guard updateStatus == errSecSuccess else {
             throw ParseError(code: .otherCause,
-                             message: "Could not save to Keychain, OSStatus: \(status)")
+                             message: "Could not save to Keychain, OSStatus: \(updateStatus)")
         }
     }
 
@@ -244,27 +248,25 @@ struct KeychainStore: SecureStorable {
         query[kSecReturnAttributes as String] = kCFBooleanTrue
         query[kSecMatchLimit as String] = kSecMatchLimitAll
 
-        return synchronizationQueue.sync(flags: .barrier) { () -> Bool in
-            var result: AnyObject?
-            let status = withUnsafeMutablePointer(to: &result) {
-                SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
-            }
-            if status != errSecSuccess { return true }
-
-            guard let results = result as? [[String: Any]] else { return false }
-
-            for item in results {
-                guard let key = item[kSecAttrAccount as String] as? String,
-                      isSyncableKey(key) else {
-                    continue
-                }
-                guard self.removeObject(forKey: key,
-                                        accessGroup: accessGroup) else {
-                    return false
-                }
-            }
-            return true
+        var result: AnyObject?
+        let status = withUnsafeMutablePointer(to: &result) {
+            SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
         }
+        if status != errSecSuccess { return true }
+
+        guard let results = result as? [[String: Any]] else { return false }
+
+        for item in results {
+            guard let key = item[kSecAttrAccount as String] as? String,
+                  isSyncableKey(key) else {
+                continue
+            }
+            guard self.removeObject(forKey: key,
+                                    accessGroup: accessGroup) else {
+                return false
+            }
+        }
+        return true
     }
 
     func removeAllObjects(useObjectiveCKeychain: Bool) -> Bool {
@@ -272,47 +274,43 @@ struct KeychainStore: SecureStorable {
         query[kSecReturnAttributes as String] = kCFBooleanTrue
         query[kSecMatchLimit as String] = kSecMatchLimitAll
 
-        return synchronizationQueue.sync(flags: .barrier) { () -> Bool in
-            var result: AnyObject?
-            let status = withUnsafeMutablePointer(to: &result) {
-                SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
-            }
-            if status != errSecSuccess { return true }
-
-            guard let results = result as? [[String: Any]] else { return false }
-
-            for item in results {
-                guard let key = item[kSecAttrAccount as String] as? String else {
-                    continue
-                }
-                let removedDefaultObject = self.removeObject(forKey: key,
-                                                             useObjectiveCKeychain: useObjectiveCKeychain,
-                                                             accessGroup: Parse.configuration.keychainAccessGroup)
-                if !useObjectiveCKeychain {
-                    var mutatedKeychainAccessGroup = Parse.configuration.keychainAccessGroup
-                    mutatedKeychainAccessGroup.isSyncingKeychainAcrossDevices.toggle()
-                    let removedToggledObject = self.removeObject(forKey: key,
-                                                                 accessGroup: mutatedKeychainAccessGroup)
-                    mutatedKeychainAccessGroup.accessGroup = nil
-                    let removedNoAccessGroupObject = self.removeObject(forKey: key,
-                                                                       accessGroup: mutatedKeychainAccessGroup)
-                    if !(removedDefaultObject || removedToggledObject || removedNoAccessGroupObject) {
-                        return false
-                    }
-                }
-            }
-            return true
+        var result: AnyObject?
+        let status = withUnsafeMutablePointer(to: &result) {
+            SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
         }
+        if status != errSecSuccess { return true }
+
+        guard let results = result as? [[String: Any]] else { return false }
+
+        for item in results {
+            guard let key = item[kSecAttrAccount as String] as? String else {
+                continue
+            }
+            let removedDefaultObject = self.removeObject(forKey: key,
+                                                         useObjectiveCKeychain: useObjectiveCKeychain,
+                                                         accessGroup: Parse.configuration.keychainAccessGroup)
+            if !useObjectiveCKeychain {
+                var mutatedKeychainAccessGroup = Parse.configuration.keychainAccessGroup
+                mutatedKeychainAccessGroup.isSyncingKeychainAcrossDevices.toggle()
+                let removedToggledObject = self.removeObject(forKey: key,
+                                                             accessGroup: mutatedKeychainAccessGroup)
+                mutatedKeychainAccessGroup.accessGroup = nil
+                let removedNoAccessGroupObject = self.removeObject(forKey: key,
+                                                                   accessGroup: mutatedKeychainAccessGroup)
+                if !(removedDefaultObject || removedToggledObject || removedNoAccessGroupObject) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }
 
 // MARK: SecureStorage
 extension KeychainStore {
-    func object<T>(forKey key: String) -> T? where T: Decodable {
-        guard let data = synchronizationQueue.sync(execute: { () -> Data? in
-            return self.data(forKey: key,
-                             accessGroup: Parse.configuration.keychainAccessGroup)
-        }) else {
+    func object<T>(forKey key: String) async -> T? where T: Decodable {
+        guard let data = self.data(forKey: key,
+                                   accessGroup: Parse.configuration.keychainAccessGroup) else {
             return nil
         }
         do {
@@ -322,9 +320,9 @@ extension KeychainStore {
         }
     }
 
-    func set<T>(object: T?, forKey key: String) -> Bool where T: Encodable {
+    func set<T>(object: T?, forKey key: String) async -> Bool where T: Encodable {
         guard let object = object else {
-            return removeObject(forKey: key)
+            return await removeObject(forKey: key)
         }
         do {
             let data = try ParseCoding.jsonEncoder().encode(object)
@@ -337,7 +335,7 @@ extension KeychainStore {
             return false
         }
     }
-
+/*
     subscript<T>(key: String) -> T? where T: Codable {
         get {
             object(forKey: key)
@@ -345,22 +343,20 @@ extension KeychainStore {
         set (object) {
             _ = set(object: object, forKey: key)
         }
+    } */
+
+    func removeObject(forKey key: String) async -> Bool {
+        removeObject(forKey: key,
+                     accessGroup: Parse.configuration.keychainAccessGroup)
     }
 
-    func removeObject(forKey key: String) -> Bool {
-        return synchronizationQueue.sync {
-            return removeObject(forKey: key,
-                                accessGroup: Parse.configuration.keychainAccessGroup)
-        }
-    }
-
-    func removeAllObjects() -> Bool {
+    func removeAllObjects() async -> Bool {
         removeAllObjects(useObjectiveCKeychain: false)
     }
 }
 
 // MARK: TypedSubscript
-extension KeychainStore {
+/* extension KeychainStore {
     subscript(string key: String) -> String? {
         get {
             object(forKey: key)
@@ -378,16 +374,14 @@ extension KeychainStore {
             _ = set(object: object, forKey: key)
         }
     }
-}
+} */
 
 // MARK: Objective-C SDK Keychain
 extension KeychainStore {
     func objectObjectiveC<T>(forKey key: String) -> T? where T: Decodable {
-        guard let data = synchronizationQueue.sync(execute: { () -> Data? in
-            return self.data(forKey: key,
-                             useObjectiveCKeychain: true,
-                             accessGroup: Parse.configuration.keychainAccessGroup)
-        }) else {
+        guard let data = self.data(forKey: key,
+                                   useObjectiveCKeychain: true,
+                                   accessGroup: Parse.configuration.keychainAccessGroup) else {
             return nil
         }
         do {
@@ -398,11 +392,9 @@ extension KeychainStore {
     }
 
     func removeObjectObjectiveC(forKey key: String) -> Bool {
-        return synchronizationQueue.sync {
-            return removeObject(forKey: key,
-                                useObjectiveCKeychain: true,
-                                accessGroup: Parse.configuration.keychainAccessGroup)
-        }
+        removeObject(forKey: key,
+                     useObjectiveCKeychain: true,
+                     accessGroup: Parse.configuration.keychainAccessGroup)
     }
 
     func setObjectiveC<T>(object: T?, forKey key: String) -> Bool where T: Encodable {

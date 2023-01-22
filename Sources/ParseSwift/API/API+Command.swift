@@ -82,7 +82,7 @@ internal extension API {
                 throw error
             }
         }
-
+/*
         func execute(options: API.Options,
                      batching: Bool = false,
                      notificationQueue: DispatchQueue? = nil,
@@ -117,7 +117,7 @@ internal extension API {
                                  message: "Could not unrwrap server response")
             }
             return try response.get()
-        }
+        } */
 
         // MARK: Asynchronous Execution
         // swiftlint:disable:next function_body_length cyclomatic_complexity
@@ -130,7 +130,7 @@ internal extension API {
                           allowIntermediateResponses: Bool = false,
                           uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                           downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                          completion: @escaping(Result<U, ParseError>) -> Void) {
+                          completion: @escaping(Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue
@@ -144,10 +144,10 @@ internal extension API {
                                               childObjects: childObjects,
                                               childFiles: childFiles) {
                 case .success(let urlRequest):
-                    URLSession.parse.dataTask(with: urlRequest,
-                                              callbackQueue: callbackQueue,
-                                              allowIntermediateResponses: allowIntermediateResponses,
-                                              mapper: mapper) { result in
+                    await URLSession.parse.dataTask(with: urlRequest,
+                                                    callbackQueue: callbackQueue,
+                                                    allowIntermediateResponses: allowIntermediateResponses,
+                                                    mapper: mapper) { result in
                         callbackQueue.async {
                             switch result {
 
@@ -203,10 +203,10 @@ internal extension API {
                                                   childObjects: childObjects,
                                                   childFiles: childFiles) {
                     case .success(let urlRequest):
-                        URLSession.parse.dataTask(with: urlRequest,
-                                                  callbackQueue: callbackQueue,
-                                                  allowIntermediateResponses: allowIntermediateResponses,
-                                                  mapper: mapper) { result in
+                        await URLSession.parse.dataTask(with: urlRequest,
+                                                        callbackQueue: callbackQueue,
+                                                        allowIntermediateResponses: allowIntermediateResponses,
+                                                        mapper: mapper) { result in
                             callbackQueue.async {
                                 switch result {
 
@@ -232,7 +232,7 @@ internal extension API {
                                                       childFiles: childFiles) {
 
                         case .success(let urlRequest):
-                            URLSession
+                            await URLSession
                                 .parse
                                 .downloadTask(notificationQueue: currentNotificationQueue,
                                               with: urlRequest,
@@ -412,7 +412,7 @@ internal extension API.Command {
     static func save<T>(_ object: T,
                         original data: Data?,
                         ignoringCustomObjectIdConfig: Bool,
-                        batching: Bool = false) throws -> API.Command<T, T> where T: ParseObject {
+                        batching: Bool = false) async throws -> API.Command<T, T> where T: ParseObject {
         if Parse.configuration.isRequiringCustomObjectIds
             && object.objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
@@ -422,13 +422,13 @@ internal extension API.Command {
             return try replace(object,
                                original: data)
         }
-        return create(object)
+        return await create(object)
     }
 
-    static func create<T>(_ object: T) -> API.Command<T, T> where T: ParseObject {
+    static func create<T>(_ object: T) async -> API.Command<T, T> where T: ParseObject {
         var object = object
         if object.ACL == nil,
-            let acl = try? ParseACL.defaultACL() {
+            let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
         let mapper = { (data) -> T in
