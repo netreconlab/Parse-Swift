@@ -185,13 +185,15 @@ extension ParsePush {
             completion(.failure(error))
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        sendCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await sendCommand()
+                .executeAsync(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func sendCommand() -> API.NonParseBodyCommand<Self, String> {

@@ -64,7 +64,7 @@ internal extension API {
                           allowIntermediateResponses: Bool = false,
                           completion: @escaping(Result<U, ParseError>) -> Void) async {
 
-            switch self.prepareURLRequest(options: options) {
+            switch await self.prepareURLRequest(options: options) {
             case .success(let urlRequest):
                 await URLSession.parse.dataTask(with: urlRequest,
                                                 callbackQueue: callbackQueue,
@@ -88,9 +88,9 @@ internal extension API {
         }
 
         // MARK: URL Preperation
-        func prepareURLRequest(options: API.Options) -> Result<URLRequest, ParseError> {
+        func prepareURLRequest(options: API.Options) async -> Result<URLRequest, ParseError> {
             let params = self.params?.getURLQueryItems()
-            var headers = API.getHeaders(options: options)
+            var headers = await API.getHeaders(options: options)
             if method == .GET || method == .DELETE {
                 headers.removeValue(forKey: "X-Parse-Request-Id")
             }

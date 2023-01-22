@@ -24,16 +24,18 @@ internal extension API.Command {
                  uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                  downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
-            self.executeAsync(options: options,
-                              batching: batching,
-                              callbackQueue: callbackQueue,
-                              notificationQueue: notificationQueue,
-                              childObjects: childObjects,
-                              childFiles: childFiles,
-                              allowIntermediateResponses: allowIntermediateResponses,
-                              uploadProgress: uploadProgress,
-                              downloadProgress: downloadProgress,
-                              completion: continuation.resume)
+            Task {
+                await self.executeAsync(options: options,
+                                        batching: batching,
+                                        callbackQueue: callbackQueue,
+                                        notificationQueue: notificationQueue,
+                                        childObjects: childObjects,
+                                        childFiles: childFiles,
+                                        allowIntermediateResponses: allowIntermediateResponses,
+                                        uploadProgress: uploadProgress,
+                                        downloadProgress: downloadProgress,
+                                        completion: continuation.resume)
+            }
         }
     }
 }

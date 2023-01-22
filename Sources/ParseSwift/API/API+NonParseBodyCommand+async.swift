@@ -18,10 +18,12 @@ extension API.NonParseBodyCommand {
                  callbackQueue: DispatchQueue,
                  allowIntermediateResponses: Bool = false) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
-            self.executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              allowIntermediateResponses: allowIntermediateResponses,
-                              completion: continuation.resume)
+            Task {
+                await self.executeAsync(options: options,
+                                        callbackQueue: callbackQueue,
+                                        allowIntermediateResponses: allowIntermediateResponses,
+                                        completion: continuation.resume)
+            }
         }
     }
 }

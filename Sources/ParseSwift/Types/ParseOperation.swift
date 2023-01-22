@@ -324,35 +324,6 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
 
 // MARK: Savable
 extension ParseOperation {
-    /**
-     Saves the operations on the `ParseObject` *synchronously* and throws an error if there is an issue.
-
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: Returns saved `ParseObject`.
-    */
-    @discardableResult public func save(options: API.Options = []) throws -> T {
-        guard target.objectId != nil else {
-            throw ParseError(code: .missingObjectId,
-                             message: "ParseObject is not saved.")
-        }
-        guard target.originalData == nil else {
-            guard operations.isEmpty,
-                  keysToNull.isEmpty else {
-                throw ParseError(code: .otherCause,
-                                 message: """
-                                    Cannot combine operations with the \"set\" method that uses
-                                    just the KeyPath with other operations such as: add, increment,
-                                    forceSet, etc., that use the KeyPath and/or key String. Use the
-                                    \"set\" method that takes the (String, WritableKeyPath) tuple
-                                    as an argument instead to combine multiple types of operations.
-                                    """)
-            }
-            return try target.save(options: options)
-        }
-        return try saveCommand()
-            .execute(options: options)
-    }
 
     /**
      Saves the operations on the `ParseObject` *asynchronously* and executes the given callback block.
@@ -396,9 +367,11 @@ extension ParseOperation {
                         completion: completion)
             return
         }
-        self.saveCommand().executeAsync(options: options,
-                                        callbackQueue: callbackQueue,
-                                        completion: completion)
+        Task {
+            await self.saveCommand().executeAsync(options: options,
+                                                  callbackQueue: callbackQueue,
+                                                  completion: completion)
+        }
     }
 
     func saveCommand() -> API.NonParseBodyCommand<ParseOperation<T>, T> {

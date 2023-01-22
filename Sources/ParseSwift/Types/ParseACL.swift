@@ -339,7 +339,7 @@ extension ParseACL {
         if !aclController.useCurrentUser {
             return aclController.defaultACL
         } else {
-            guard let userObjectId = BaseParseUser.current?.objectId else {
+            guard let userObjectId = await BaseParseUser.current()?.objectId else {
                 return aclController.defaultACL
             }
 
@@ -368,7 +368,7 @@ extension ParseACL {
     */
     public static func setDefaultACL(_ acl: ParseACL, withAccessForCurrentUser: Bool) async throws -> ParseACL {
 
-        guard let currentUser = BaseParseUser.current,
+        guard let currentUser = await BaseParseUser.current(),
             let currentUserObjectId = currentUser.objectId else {
             throw ParseError(code: .missingObjectId, message: "Cannot set defaultACL with no current user")
         }

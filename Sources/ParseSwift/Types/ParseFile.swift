@@ -7,7 +7,7 @@ import FoundationNetworking
   A `ParseFile` object representes a file of binary data stored on the Parse server.
   This can be a image, video, or anything else that an application needs to reference in a non-relational way.
  */
-public struct ParseFile: Fileable, Savable, Fetchable, Deletable, Hashable {
+public struct ParseFile: Fileable, Savable, Deletable, Hashable {
 
     internal static var type: String {
         "File"
@@ -214,38 +214,6 @@ extension ParseFile {
 
 // MARK: Deleting
 extension ParseFile {
-    /**
-     Deletes the file from the Parse cloud.
-     - requires: `.usePrimaryKey` has to be available.  It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
-     exposed to the public.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after synchronous completion.
-     - throws: A `ParseError` if there was an issue deleting the file. Otherwise it was successful.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-     */
-    public func delete(options: API.Options,
-                       callbackQueue: DispatchQueue) throws {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        options = options.union(self.options)
-
-        _ = try deleteFileCommand().execute(options: options)
-    }
-
-    /**
-     Deletes the file from the Parse cloud.
-     - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
-     exposed to the public.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: A `ParseError` if there was an issue deleting the file. Otherwise it was successful.
-     */
-    public func delete(options: API.Options) throws {
-        try delete(options: options, callbackQueue: .main)
-    }
 
     /**
      Deletes the file from the Parse cloud. Completes with `nil` if successful.
@@ -260,17 +228,19 @@ extension ParseFile {
     public func delete(options: API.Options,
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        options = options.union(self.options)
-
-        deleteFileCommand().executeAsync(options: options, callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            options = options.union(self.options)
+            
+            await deleteFileCommand().executeAsync(options: options, callbackQueue: callbackQueue) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -329,84 +299,13 @@ extension ParseFile {
                      stream: InputStream,
                      callbackQueue: DispatchQueue = .main,
                      progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil) throws {
-        try uploadFileCommand()
-            .executeStream(options: setDefaultOptions(options),
-                           callbackQueue: callbackQueue,
-                           uploadProgress: progress,
-                           stream: stream)
-    }
-
-    /**
-     Creates a file with given data *synchronously*. A name will be assigned to it by the server.
-     If the file has not been downloaded, it will automatically be downloaded before saved.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A saved `ParseFile`.
-     */
-    public func save(options: API.Options = []) throws -> ParseFile {
-        let options = setDefaultOptions(options)
-        if isDownloadNeeded {
-            let fetched = try fetch(options: options)
-            return try fetched.uploadFileCommand().execute(options: options)
+        Task {
+            try await uploadFileCommand()
+                .executeStream(options: setDefaultOptions(options),
+                               callbackQueue: callbackQueue,
+                               uploadProgress: progress,
+                               stream: stream)
         }
-        return try uploadFileCommand().execute(options: options)
-    }
-
-    /**
-     Creates a file with given data *synchronously*. A name will be assigned to it by the server.
-     If the file has not been downloaded, it will automatically be downloaded before saved.
-     
-    **Checking progress**
-             
-          guard let parseFileURL = URL(string: "https://parseplatform.org/img/logo.svg") else {
-            return
-          }
-
-          let parseFile = ParseFile(name: "logo.svg", cloudURL: parseFileURL)
-          let fetchedFile = try parseFile.save { (_, _, totalWritten, totalExpected) in
-            let currentProgess = Double(totalWritten)/Double(totalExpected) * 100
-            print(currentProgess)
-          }
-     
-    **Cancelling**
-              
-           guard let parseFileURL = URL(string: "https://parseplatform.org/img/logo.svg") else {
-             return
-           }
-
-           let parseFile = ParseFile(name: "logo.svg", cloudURL: parseFileURL)
-           let fetchedFile = try parseFile.save { (task, _, totalWritten, totalExpected) in
-             let currentProgess = Double(totalWritten)/Double(totalExpected) * 100
-             //Cancel when data exceeds 10%
-             if currentProgess > 10 {
-               task.cancel()
-               print("task has been cancelled")
-             }
-             print(currentProgess)
-           }
-      
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after synchronous completion.
-     Defailts to .main.
-     - parameter progress: A block that will be called when file updates it is progress.
-     It should have the following argument signature: `(task: URLSessionDownloadTask,
-     bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)`.
-     - returns: A saved `ParseFile`.
-     */
-    public func save(options: API.Options = [],
-                     callbackQueue: DispatchQueue = .main,
-                     progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?) throws -> ParseFile {
-        let options = setDefaultOptions(options)
-        if isDownloadNeeded {
-            let fetched = try fetch(options: options)
-            return try fetched
-                .uploadFileCommand()
-                .execute(options: options,
-                         notificationQueue: callbackQueue,
-                         uploadProgress: progress)
-        }
-        return try uploadFileCommand().execute(options: options,
-                                               notificationQueue: callbackQueue,
-                                               uploadProgress: progress)
     }
 
     /**
@@ -463,18 +362,20 @@ extension ParseFile {
                 switch result {
 
                 case .success(let fetched):
-                    do {
-                        try fetched.uploadFileCommand()
-                            .executeAsync(options: options,
-                                          callbackQueue: callbackQueue,
-                                          uploadProgress: progress,
-                                          completion: completion)
-                    } catch {
-                        let defaultError = ParseError(code: .otherCause,
-                                                      message: error.localizedDescription)
-                        let parseError = error as? ParseError ?? defaultError
-                        callbackQueue.async {
-                            completion(.failure(parseError))
+                    Task {
+                        do {
+                            try await fetched.uploadFileCommand()
+                                .executeAsync(options: options,
+                                              callbackQueue: callbackQueue,
+                                              uploadProgress: progress,
+                                              completion: completion)
+                        } catch {
+                            let defaultError = ParseError(code: .otherCause,
+                                                          message: error.localizedDescription)
+                            let parseError = error as? ParseError ?? defaultError
+                            callbackQueue.async {
+                                completion(.failure(parseError))
+                            }
                         }
                     }
                 case .failure(let error):
@@ -484,18 +385,20 @@ extension ParseFile {
                 }
             }
         } else {
-            do {
-                try uploadFileCommand()
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  uploadProgress: progress,
-                                  completion: completion)
-            } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
+            Task {
+                do {
+                    try await uploadFileCommand()
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      uploadProgress: progress,
+                                      completion: completion)
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -509,129 +412,6 @@ extension ParseFile {
 
 // MARK: Fetching
 extension ParseFile {
-
-    /**
-     Fetches a file with given url *synchronously*.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter stream: An input file stream.
-     - parameter callbackQueue: The queue to return to after synchronous completion.
-     Default value of .main.
-     - returns: A saved `ParseFile`.
-     */
-    public func fetch(options: API.Options = [],
-                      stream: InputStream,
-                      callbackQueue: DispatchQueue = .main) throws {
-        try downloadFileCommand()
-            .executeStream(options: setDefaultOptions(options),
-                           callbackQueue: callbackQueue,
-                           stream: stream)
-    }
-
-    /**
-     Fetches a file with given url *synchronously*.
-     - parameter includeKeys: Currently not used for `ParseFile`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after synchronous completion.
-     - returns: A saved `ParseFile`.
-     */
-    public func fetch(includeKeys: [String]? = nil,
-                      options: API.Options = [],
-                      callbackQueue: DispatchQueue) throws -> ParseFile {
-        let options = setDefaultOptions(options)
-        do {
-            guard let file = try checkDownloadsForFile(options: options) else {
-                throw ParseError(code: .unsavedFileFailure,
-                                 message: "File not downloaded")
-            }
-            return file
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            guard parseError.code != .unsavedFileFailure else {
-                throw parseError
-            }
-            return try downloadFileCommand()
-                .execute(options: options)
-        }
-    }
-
-    /**
-     Fetches a file with given url *synchronously*.
-     - parameter includeKeys: Currently not used for `ParseFile`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A saved `ParseFile`.
-     */
-    public func fetch(includeKeys: [String]? = nil,
-                      options: API.Options = []) throws -> ParseFile {
-        try fetch(includeKeys: includeKeys,
-                  options: options,
-                  callbackQueue: .main)
-    }
-
-    /**
-     Fetches a file with given url *synchronously*.
-     
-    **Checking progress**
-            
-         guard let parseFileURL = URL(string: "https://parseplatform.org/img/logo.svg") else {
-           return
-         }
-
-         let parseFile = ParseFile(name: "logo.svg", cloudURL: parseFileURL)
-         let fetchedFile = try parseFile.fetch { (_, _, totalDownloaded, totalExpected) in
-           let currentProgess = Double(totalWritten)/Double(totalExpected) * 100
-           print(currentProgess)
-         }
-    
-    **Cancelling**
-             
-          guard let parseFileURL = URL(string: "https://parseplatform.org/img/logo.svg") else {
-            return
-          }
-
-          let parseFile = ParseFile(name: "logo.svg", cloudURL: parseFileURL)
-          let fetchedFile = try parseFile.fetch { (task, _, totalDownloaded, totalExpected) in
-            let currentProgess = Double(totalDownloaded)/Double(totalExpected) * 100
-            //Cancel when data exceeds 10%
-            if currentProgess > 10 {
-              task.cancel()
-              print("task has been cancelled")
-            }
-            print(currentProgess)
-          }
-     
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after synchronous completion.
-     Defaults to .main.
-     - parameter progress: A block that will be called when file updates it is progress.
-     It should have the following argument signature: `(task: URLSessionDownloadTask,
-     bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)`.
-     - returns: A saved `ParseFile`.
-     */
-    public func fetch(options: API.Options = [],
-                      callbackQueue: DispatchQueue = .main,
-                      progress: @escaping ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)) throws -> ParseFile {
-        let options = setDefaultOptions(options)
-        do {
-            guard let file = try checkDownloadsForFile(options: options) else {
-                throw ParseError(code: .unsavedFileFailure,
-                                 message: "File not downloaded")
-            }
-            return file
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            guard parseError.code != .unsavedFileFailure else {
-                throw parseError
-            }
-            return try downloadFileCommand()
-                .execute(options: options,
-                         notificationQueue: callbackQueue,
-                         downloadProgress: progress)
-        }
-    }
 
     /**
      Fetches a file with given url *asynchronously*.
@@ -698,11 +478,13 @@ extension ParseFile {
                 }
                 return
             }
-            downloadFileCommand()
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              downloadProgress: progress,
-                              completion: completion)
+            Task {
+                await downloadFileCommand()
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue,
+                                  downloadProgress: progress,
+                                  completion: completion)
+            }
         }
     }
 

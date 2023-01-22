@@ -19,7 +19,7 @@ internal extension API {
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) throws -> U)
+        let mapper: ((Data) async throws -> U)
         let params: [String: String?]?
         let uploadData: Data?
         let uploadFile: URL?
@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping ((Data) throws -> U)) {
+             mapper: @escaping ((Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body
@@ -55,11 +55,11 @@ internal extension API {
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [UUID: ParseFile]? = nil,
                            uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                           stream: InputStream) throws {
-            switch self.prepareURLRequest(options: options,
-                                          batching: false,
-                                          childObjects: childObjects,
-                                          childFiles: childFiles) {
+                           stream: InputStream) async throws {
+            switch await self.prepareURLRequest(options: options,
+                                                batching: false,
+                                                childObjects: childObjects,
+                                                childFiles: childFiles) {
 
             case .success(let urlRequest):
                 if method == .POST || method == .PUT || method == .PATCH {
@@ -139,10 +139,10 @@ internal extension API {
             }
             if !path.urlComponent.contains("/files/") {
                 // All ParseObjects use the shared URLSession
-                switch self.prepareURLRequest(options: options,
-                                              batching: batching,
-                                              childObjects: childObjects,
-                                              childFiles: childFiles) {
+                switch await self.prepareURLRequest(options: options,
+                                                    batching: batching,
+                                                    childObjects: childObjects,
+                                                    childFiles: childFiles) {
                 case .success(let urlRequest):
                     await URLSession.parse.dataTask(with: urlRequest,
                                                     callbackQueue: callbackQueue,
@@ -166,10 +166,10 @@ internal extension API {
             } else {
                 // ParseFiles are handled with a dedicated URLSession
                 if method == .POST || method == .PUT || method == .PATCH {
-                    switch self.prepareURLRequest(options: options,
-                                                  batching: batching,
-                                                  childObjects: childObjects,
-                                                  childFiles: childFiles) {
+                    switch await self.prepareURLRequest(options: options,
+                                                        batching: batching,
+                                                        childObjects: childObjects,
+                                                        childFiles: childFiles) {
 
                     case .success(let urlRequest):
 
@@ -198,10 +198,10 @@ internal extension API {
                     }
                 } else if method == .DELETE {
 
-                    switch self.prepareURLRequest(options: options,
-                                                  batching: batching,
-                                                  childObjects: childObjects,
-                                                  childFiles: childFiles) {
+                    switch await self.prepareURLRequest(options: options,
+                                                        batching: batching,
+                                                        childObjects: childObjects,
+                                                        childFiles: childFiles) {
                     case .success(let urlRequest):
                         await URLSession.parse.dataTask(with: urlRequest,
                                                         callbackQueue: callbackQueue,
@@ -226,10 +226,10 @@ internal extension API {
                 } else {
 
                     if parseURL != nil {
-                        switch self.prepareURLRequest(options: options,
-                                                      batching: batching,
-                                                      childObjects: childObjects,
-                                                      childFiles: childFiles) {
+                        switch await self.prepareURLRequest(options: options,
+                                                            batching: batching,
+                                                            childObjects: childObjects,
+                                                            childFiles: childFiles) {
 
                         case .success(let urlRequest):
                             await URLSession
@@ -283,9 +283,9 @@ internal extension API {
         func prepareURLRequest(options: API.Options,
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
-                               childFiles: [UUID: ParseFile]? = nil) -> Result<URLRequest, ParseError> {
+                               childFiles: [UUID: ParseFile]? = nil) async -> Result<URLRequest, ParseError> {
             let params = self.params?.getURLQueryItems()
-            var headers = API.getHeaders(options: options)
+            var headers = await API.getHeaders(options: options)
             if method == .GET || method == .DELETE {
                 headers.removeValue(forKey: "X-Parse-Request-Id")
             }

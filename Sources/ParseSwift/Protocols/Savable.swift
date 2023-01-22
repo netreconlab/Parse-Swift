@@ -9,12 +9,12 @@
 public protocol Savable: Encodable {
     associatedtype SavingType
 
-    func save(options: API.Options) throws -> SavingType
-    func save() throws -> SavingType
+    func save(options: API.Options) async throws -> SavingType
+    func save() async throws -> SavingType
 }
 
 extension Savable {
-    public func save() throws -> SavingType {
-        try save(options: [])
+    public func save() async throws -> SavingType {
+        try await save(options: [])
     }
 }

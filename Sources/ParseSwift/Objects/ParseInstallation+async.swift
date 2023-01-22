@@ -342,7 +342,7 @@ internal extension ParseInstallation {
             case .save:
                 command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = self.createCommand()
+                command = await self.createCommand()
             case .replace:
                 command = try self.replaceCommand()
             case .update:
@@ -353,7 +353,7 @@ internal extension ParseInstallation {
                               callbackQueue: callbackQueue,
                               childObjects: savedChildObjects,
                               childFiles: savedChildFiles)
-            try? Self.updateKeychainIfNeeded([saved])
+            try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
             let defaultError = ParseError(code: .otherCause,
@@ -402,7 +402,7 @@ internal extension Sequence where Element: ParseInstallation {
                         try object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(object.createCommand())
+                    commands.append(await object.createCommand())
                 case .replace:
                     commands.append(try object.replaceCommand())
                 case .update:
@@ -431,7 +431,7 @@ internal extension Sequence where Element: ParseInstallation {
                                       childFiles: childFiles)
                 returnBatch.append(contentsOf: saved)
             }
-            try? Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
+            try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
             let defaultError = ParseError(code: .otherCause,

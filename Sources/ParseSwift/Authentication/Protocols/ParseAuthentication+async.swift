@@ -19,7 +19,7 @@ public extension ParseAuthentication {
     }
 
     func unlink(options: API.Options = []) async throws -> AuthenticatedUser {
-        guard let current = AuthenticatedUser.current else {
+        guard let current = await AuthenticatedUser.current() else {
             let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
             return try await withCheckedThrowingContinuation { continuation in
                 continuation.resume(with: .failure(error))

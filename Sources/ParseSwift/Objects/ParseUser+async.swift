@@ -517,18 +517,18 @@ internal extension ParseUser {
             case .save:
                 command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = self.createCommand()
+                command = await self.createCommand()
             case .replace:
-                command = try self.replaceCommand()
+                command = try await self.replaceCommand()
             case .update:
-                command = try self.updateCommand()
+                command = try await self.updateCommand()
             }
             let saved = try await command
                 .execute(options: options,
                               callbackQueue: callbackQueue,
                               childObjects: savedChildObjects,
                               childFiles: savedChildFiles)
-            try? Self.updateKeychainIfNeeded([saved])
+            try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
             let defaultError = ParseError(code: .otherCause,
@@ -577,11 +577,11 @@ internal extension Sequence where Element: ParseUser {
                         try object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(object.createCommand())
+                    commands.append(await object.createCommand())
                 case .replace:
-                    commands.append(try object.replaceCommand())
+                    commands.append(try await object.replaceCommand())
                 case .update:
-                    commands.append(try object.updateCommand())
+                    commands.append(try await object.updateCommand())
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -606,7 +606,7 @@ internal extension Sequence where Element: ParseUser {
                                       childFiles: childFiles)
                 returnBatch.append(contentsOf: saved)
             }
-            try? Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
+            try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
             let defaultError = ParseError(code: .otherCause,

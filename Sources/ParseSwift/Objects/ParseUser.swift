@@ -96,11 +96,11 @@ extension ParseUser {
         }
     }
 
-    static func deleteCurrentKeychain() {
-        deleteCurrentContainerFromKeychain()
-        BaseParseInstallation.deleteCurrentContainerFromKeychain()
-        ParseACL.deleteDefaultFromKeychain()
-        BaseConfig.deleteCurrentContainerFromKeychain()
+    static func deleteCurrentKeychain() async {
+        await deleteCurrentContainerFromKeychain()
+        await BaseParseInstallation.deleteCurrentContainerFromKeychain()
+        await ParseACL.deleteDefaultFromKeychain()
+        await BaseConfig.deleteCurrentContainerFromKeychain()
         clearCache()
     }
 }
@@ -113,38 +113,37 @@ struct CurrentUserContainer<T: ParseUser>: Codable, Hashable {
 
 // MARK: Current User Support
 public extension ParseUser {
-    internal static var currentContainer: CurrentUserContainer<Self>? {
-        get {
-            let synchronizationQueue = createSynchronizationQueue("ParseUser.getCurrentContainer")
-            return synchronizationQueue.sync(execute: { () -> CurrentUserContainer<Self>? in
-                guard let currentUserInMemory: CurrentUserContainer<Self>
-                        = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    return try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
-                    #else
-                    return nil
-                    #endif
-                }
-                return currentUserInMemory
-            })
+    internal static func currentContainer() async -> CurrentUserContainer<Self>? {
+        guard let currentUserInMemory: CurrentUserContainer<Self>
+                = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
+            #if !os(Linux) && !os(Android) && !os(Windows)
+            return try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            #else
+            return nil
+            #endif
         }
-        set { try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentUser) }
+        return currentUserInMemory
+    }
+    
+    internal static func setCurrentContainer(_ newValue: CurrentUserContainer<Self>?) async {
+        try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentUser)
     }
 
-    internal static func saveCurrentContainerToKeychain() {
-        Self.currentContainer?.currentUser?.originalData = nil
+    internal static func saveCurrentContainerToKeychain() async {
+        var currentContainer = await Self.currentContainer()
+        currentContainer?.currentUser?.originalData = nil
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
+        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #endif
     }
 
-    internal static func deleteCurrentContainerFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
+    internal static func deleteCurrentContainerFromKeychain() async {
+        try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows)
         URLSession.liveQuery.closeAll()
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
+        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #endif
-        Self.currentContainer = nil
+        await Self.setCurrentContainer(nil)
     }
 
     /**
@@ -153,19 +152,14 @@ public extension ParseUser {
      - returns: Returns a `ParseUser` that is the currently logged in user. If there is none, returns `nil`.
      - warning: Only use `current` users on the main thread as as modifications to `current` have to be unique.
     */
-    internal(set) static var current: Self? {
-        get {
-            let synchronizationQueue = createSynchronizationQueue("ParseUser.getCurrent")
-            return synchronizationQueue.sync(execute: { () -> Self? in
-                Self.currentContainer?.currentUser
-            })
-        }
-        set {
-            let synchronizationQueue = createSynchronizationQueue("ParseUser.setCurrent")
-            synchronizationQueue.sync {
-                Self.currentContainer?.currentUser = newValue
-            }
-        }
+    static func current() async -> Self? {
+        await Self.currentContainer()?.currentUser
+    }
+    
+    internal static func setCurrent(_ newValue: Self?) async {
+        var currentContainer = await Self.currentContainer()
+        currentContainer?.currentUser = newValue
+        await Self.setCurrentContainer(currentContainer)
     }
 
     /**
@@ -173,8 +167,8 @@ public extension ParseUser {
 
      This is set by the server upon successful authentication.
     */
-    var sessionToken: String? {
-        Self.currentContainer?.sessionToken
+    func sessionToken() async -> String? {
+        await Self.currentContainer()?.sessionToken
     }
 }
 
@@ -203,28 +197,6 @@ struct EmailBody: ParseEncodable {
 extension ParseUser {
 
     /**
-     Makes a *synchronous* request to login a user with specified credentials.
-
-     Returns an instance of the successfully logged in `ParseUser`.
-     This also caches the user locally so that calls to *current* will use the latest logged in user.
-
-     - parameter username: The username of the user.
-     - parameter password: The password of the user.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: An instance of the logged in `ParseUser`.
-     If login failed due to either an incorrect password or incorrect username, it throws a `ParseError`.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public static func login(username: String,
-                             password: String, options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        return try loginCommand(username: username, password: password).execute(options: options)
-    }
-
-    /**
      Makes an *asynchronous* request to log in a user with specified credentials.
      Returns an instance of the successfully logged in `ParseUser`.
 
@@ -245,12 +217,14 @@ extension ParseUser {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        loginCommand(username: username, password: password)
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await loginCommand(username: username, password: password)
+                .executeAsync(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     internal static func loginCommand(username: String,
@@ -259,38 +233,17 @@ extension ParseUser {
         let body = SignupLoginBody(username: username, password: password)
         return API.Command<SignupLoginBody, Self>(method: .POST,
                                                   path: .login,
-                                                  body: body) { (data) -> Self in
+                                                  body: body) { (data) async throws -> Self in
             let sessionToken = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: data).sessionToken
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
-            Self.currentContainer = .init(
+            await Self.setCurrentContainer(.init(
                 currentUser: user,
                 sessionToken: sessionToken
-            )
-            Self.saveCurrentContainerToKeychain()
+            ))
+            await Self.saveCurrentContainerToKeychain()
             return user
         }
-    }
-
-    /**
-     Logs in a `ParseUser` *synchronously* with a session token. On success, this saves the logged in
-     `ParseUser`with this session to the keychain, so you can retrieve the currently logged in user using
-     *current*.
-
-     - parameter sessionToken: The sessionToken of the user to login.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An Error of `ParseError` type.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public func become(sessionToken: String, options: API.Options = []) throws -> Self {
-        var newUser = self
-        newUser.objectId = "me"
-        var options = options
-        options.insert(.sessionToken(sessionToken))
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        return try newUser.meCommand(sessionToken: sessionToken)
-            .execute(options: options)
     }
 
     /**
@@ -335,23 +288,25 @@ extension ParseUser {
                               options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
                               completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var newUser = Self()
-        newUser.objectId = "me"
-        var options = options
-        options.insert(.sessionToken(sessionToken))
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try newUser.meCommand(sessionToken: sessionToken)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
-        } catch let error as ParseError {
-            callbackQueue.async {
-                completion(.failure(error))
-            }
-        } catch {
-            callbackQueue.async {
-                completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+        Task {
+            var newUser = Self()
+            newUser.objectId = "me"
+            var options = options
+            options.insert(.sessionToken(sessionToken))
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await newUser.meCommand(sessionToken: sessionToken)
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue,
+                                  completion: completion)
+            } catch let error as ParseError {
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+            } catch {
+                callbackQueue.async {
+                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                }
             }
         }
     }
@@ -378,42 +333,43 @@ extension ParseUser {
     public static func loginUsingObjCKeychain(options: API.Options = [],
                                               callbackQueue: DispatchQueue = .main,
                                               completion: @escaping (Result<Self, ParseError>) -> Void) {
-
-        let objcParseKeychain = KeychainStore.objectiveC
-
-        guard let objcParseUser: [String: String] = objcParseKeychain?.objectObjectiveC(forKey: "currentUser"),
-            let sessionToken: String = objcParseUser["sessionToken"] ??
-                objcParseUser["session_token"] else {
-            let error = ParseError(code: .otherCause,
-                                   message: "Could not find a session token in the Parse Objective-C SDK Keychain.")
-            callbackQueue.async {
-                completion(.failure(error))
+        Task {
+            let objcParseKeychain = KeychainStore.objectiveC
+            
+            guard let objcParseUser: [String: String] = await objcParseKeychain?.objectObjectiveC(forKey: "currentUser"),
+                  let sessionToken: String = objcParseUser["sessionToken"] ??
+                    objcParseUser["session_token"] else {
+                let error = ParseError(code: .otherCause,
+                                       message: "Could not find a session token in the Parse Objective-C SDK Keychain.")
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+                return
             }
-            return
-        }
-
-        guard let currentUser = Self.current else {
-            become(sessionToken: sessionToken,
-                   options: options,
-                   callbackQueue: callbackQueue,
-                   completion: completion)
-            return
-        }
-
-        guard currentUser.sessionToken == sessionToken else {
-            let error = ParseError(code: .otherCause,
-                                   message: """
+            
+            guard let currentUser = await Self.current() else {
+                become(sessionToken: sessionToken,
+                       options: options,
+                       callbackQueue: callbackQueue,
+                       completion: completion)
+                return
+            }
+            
+            guard await currentUser.sessionToken() == sessionToken else {
+                let error = ParseError(code: .otherCause,
+                                       message: """
                                    Currently logged in as a ParseUser who has a different
                                    session token than the Objective-C Parse SDK session token. Please log out before
                                    calling this method.
             """)
-            callbackQueue.async {
-                completion(.failure(error))
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+                return
             }
-            return
-        }
-        callbackQueue.async {
-            completion(.success(currentUser))
+            callbackQueue.async {
+                completion(.success(currentUser))
+            }
         }
     }
 #endif
@@ -421,20 +377,20 @@ extension ParseUser {
     internal func meCommand(sessionToken: String) throws -> API.Command<Self, Self> {
 
         return API.Command(method: .GET,
-                           path: endpoint) { (data) -> Self in
+                           path: endpoint) { (data) async throws -> Self in
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
-            if let current = Self.current {
+            if let current = await Self.current() {
                 if !current.hasSameObjectId(as: user) && self.anonymous.isLinked {
-                    Self.deleteCurrentContainerFromKeychain()
+                    await Self.deleteCurrentContainerFromKeychain()
                 }
             }
 
-            Self.currentContainer = .init(
+            await Self.setCurrentContainer(.init(
                 currentUser: user,
                 sessionToken: sessionToken
-            )
-            Self.saveCurrentContainerToKeychain()
+            ))
+            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -442,25 +398,6 @@ extension ParseUser {
 
 // MARK: Logging Out
 extension ParseUser {
-
-    /**
-    Logs out the currently logged in user in Keychain *synchronously*.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of `ParseError` type.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public static func logout(options: API.Options = []) throws {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let error = try? logoutCommand().execute(options: options)
-        // Always let user logout locally, no matter the error.
-        deleteCurrentKeychain()
-        // Wait to throw error
-        if let parseError = error {
-            throw parseError
-        }
-    }
 
     /**
      Logs out the currently logged in user *asynchronously*.
@@ -476,23 +413,27 @@ extension ParseUser {
     */
     public static func logout(options: API.Options = [], callbackQueue: DispatchQueue = .main,
                               completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        logoutCommand().executeAsync(options: options,
-                                     callbackQueue: callbackQueue) { result in
-            // Always let user logout locally, no matter the error.
-            deleteCurrentKeychain()
-
-            switch result {
-
-            case .success(let error):
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await logoutCommand().executeAsync(options: options,
+                                               callbackQueue: callbackQueue) { result in
+                Task {
+                    // Always let user logout locally, no matter the error.
+                    await deleteCurrentKeychain()
+                    
+                    switch result {
+                        
+                    case .success(let error):
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
     }
@@ -513,23 +454,6 @@ extension ParseUser {
 extension ParseUser {
 
     /**
-     Requests *synchronously* a password reset email to be sent to the specified email address
-     associated with the user account. This email allows the user to securely reset their password on the web.
-        - parameter email: The email address associated with the user that forgot their password.
-        - parameter options: A set of header options sent to the server. Defaults to an empty set.
-        - throws: An error of `ParseError` type.
-        - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-        desires a different policy, it should be inserted in `options`.
-    */
-    public static func passwordReset(email: String, options: API.Options = []) throws {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if let error = try passwordResetCommand(email: email).execute(options: options) {
-            throw error
-        }
-    }
-
-    /**
      Requests *asynchronously* a password reset email to be sent to the specified email address
      associated with the user account. This email allows the user to securely reset their password on the web.
         - parameter email: The email address associated with the user that forgot their password.
@@ -542,20 +466,22 @@ extension ParseUser {
     public static func passwordReset(email: String, options: API.Options = [],
                                      callbackQueue: DispatchQueue = .main,
                                      completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        passwordResetCommand(email: email).executeAsync(options: options,
-                                                        callbackQueue: callbackQueue) { result in
-            switch result {
-
-            case .success(let error):
-                if let error = error {
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await passwordResetCommand(email: email).executeAsync(options: options,
+                                                                  callbackQueue: callbackQueue) { result in
+                switch result {
+                    
+                case .success(let error):
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                case .failure(let error):
                     completion(.failure(error))
-                } else {
-                    completion(.success(()))
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
     }
@@ -591,16 +517,18 @@ extension ParseUser {
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
                                       completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let username = BaseParseUser.current?.username ?? ""
-        let method: API.Method = usingPost ? .POST : .GET
-        verifyPasswordCommand(username: username,
-                              password: password,
-                              method: method)
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            let username = await BaseParseUser.current()?.username ?? ""
+            let method: API.Method = usingPost ? .POST : .GET
+            await verifyPasswordCommand(username: username,
+                                        password: password,
+                                        method: method)
             .executeAsync(options: options,
                           callbackQueue: callbackQueue,
                           completion: completion)
+        }
     }
 
     internal static func verifyPasswordCommand(username: String,
@@ -622,15 +550,15 @@ extension ParseUser {
                            path: .verifyPassword,
                            params: params,
                            body: loginBody) { (data) -> Self in
-            var sessionToken = BaseParseUser.current?.sessionToken ?? ""
+            var sessionToken = await BaseParseUser.current()?.sessionToken() ?? ""
             if let decodedSessionToken = try? ParseCoding.jsonDecoder()
                 .decode(LoginSignupResponse.self, from: data).sessionToken {
                 sessionToken = decodedSessionToken
             }
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
-            Self.currentContainer = .init(currentUser: user,
-                                          sessionToken: sessionToken)
-            Self.saveCurrentContainerToKeychain()
+            await Self.setCurrentContainer(.init(currentUser: user,
+                                           sessionToken: sessionToken))
+            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -638,24 +566,6 @@ extension ParseUser {
 
 // MARK: Verification Email Request
 extension ParseUser {
-
-    /**
-     Requests *synchronously* a verification email be sent to the specified email address
-     associated with the user account.
-        - parameter email: The email address associated with the user.
-        - parameter options: A set of header options sent to the server. Defaults to an empty set.
-        - throws: An error of `ParseError` type.
-        - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-        desires a different policy, it should be inserted in `options`.
-    */
-    public static func verificationEmail(email: String,
-                                         options: API.Options = []) throws {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if let error = try verificationEmailCommand(email: email).execute(options: options) {
-            throw error
-        }
-    }
 
     /**
      Requests *asynchronously* a verification email be sent to the specified email address
@@ -671,20 +581,22 @@ extension ParseUser {
                                          options: API.Options = [],
                                          callbackQueue: DispatchQueue = .main,
                                          completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        verificationEmailCommand(email: email)
-            .executeAsync(options: options, callbackQueue: callbackQueue) { result in
-                switch result {
-
-                case .success(let error):
-                    if let error = error {
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await verificationEmailCommand(email: email)
+                .executeAsync(options: options, callbackQueue: callbackQueue) { result in
+                    switch result {
+                        
+                    case .success(let error):
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    case .failure(let error):
                         completion(.failure(error))
-                    } else {
-                        completion(.success(()))
                     }
-                case .failure(let error):
-                    completion(.failure(error))
                 }
         }
     }
@@ -701,57 +613,6 @@ extension ParseUser {
 
 // MARK: Signing Up
 extension ParseUser {
-    /**
-     Signs up the user *synchronously*.
-
-     This will also enforce that the username is not already taken.
-
-     - warning: Make sure that password and username are set before calling this method.
-     - parameter username: The username of the user.
-     - parameter password: The password of the user.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: Returns whether the sign up was successful.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public static func signup(username: String,
-                              password: String,
-                              options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let body = SignupLoginBody(username: username,
-                                   password: password)
-        if let current = Self.current {
-            return try current.linkCommand(body: body)
-                .execute(options: options)
-        } else {
-            return try signupCommand(body: body)
-                .execute(options: options)
-        }
-    }
-
-    /**
-     Signs up the user *synchronously*.
-
-     This will also enforce that the username is not already taken.
-
-     - warning: Make sure that password and username are set before calling this method.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: Returns whether the sign up was successful.
-     - throws: An error of `ParseError` type.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public func signup(options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if Self.current != nil {
-            return try self.linkCommand()
-                .execute(options: options)
-        } else {
-            return try signupCommand().execute(options: options)
-        }
-    }
 
     /**
      Signs up the user *asynchronously*.
@@ -768,34 +629,36 @@ extension ParseUser {
     */
     public func signup(options: API.Options = [], callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if Self.current != nil {
-            do {
-                try self.linkCommand()
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            if await Self.current() != nil {
+                do {
+                    try await self.linkCommand()
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
-            }
-        } else {
-            do {
-                try signupCommand()
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
+            } else {
+                do {
+                    try await signupCommand()
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -816,34 +679,35 @@ extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    public static func signup(
-        username: String,
-        password: String,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void) {
+    public static func signup(username: String,
+                              password: String,
+                              options: API.Options = [],
+                              callbackQueue: DispatchQueue = .main,
+                              completion: @escaping (Result<Self, ParseError>) -> Void) {
 
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let body = SignupLoginBody(username: username, password: password)
-        if let current = Self.current {
-            current.linkCommand(body: body)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue) { result in
-                    completion(result)
-                }
-        } else {
-            do {
-                try signupCommand(body: body)
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            let body = SignupLoginBody(username: username, password: password)
+            if let current = await Self.current() {
+                await current.linkCommand(body: body)
                     .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
+                                  callbackQueue: callbackQueue) { result in
+                        completion(result)
+                    }
+            } else {
+                do {
+                    try await signupCommand(body: body)
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -868,9 +732,9 @@ extension ParseUser {
                     user.authData = authData
                 }
             }
-            Self.currentContainer = .init(currentUser: user,
-                                              sessionToken: sessionToken)
-            Self.saveCurrentContainerToKeychain()
+            await Self.setCurrentContainer(.init(currentUser: user,
+                                                 sessionToken: sessionToken))
+            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -884,11 +748,11 @@ extension ParseUser {
             let response = try ParseCoding.jsonDecoder()
                 .decode(LoginSignupResponse.self, from: data)
             let user = response.applySignup(to: self)
-            Self.currentContainer = .init(
+            await Self.setCurrentContainer(.init(
                 currentUser: user,
                 sessionToken: response.sessionToken
-            )
-            Self.saveCurrentContainerToKeychain()
+            ))
+            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -896,8 +760,8 @@ extension ParseUser {
 
 // MARK: Fetchable
 extension ParseUser {
-    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) throws {
-        guard let currentUser = Self.current else {
+    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+        guard let currentUser = await Self.current() else {
             return
         }
 
@@ -912,33 +776,12 @@ extension ParseUser {
         })
         if let foundCurrentUser = foundCurrentUserObjects.first {
             if !deleting {
-                Self.current = foundCurrentUser
-                Self.saveCurrentContainerToKeychain()
+                await Self.setCurrent(foundCurrentUser)
+                await Self.saveCurrentContainerToKeychain()
             } else {
-                Self.deleteCurrentContainerFromKeychain()
+                await Self.deleteCurrentContainerFromKeychain()
             }
         }
-    }
-
-    /**
-     Fetches the `ParseUser` *synchronously* with the current data from the server.
-     - parameter includeKeys: The name(s) of the key(s) to include that are
-     `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
-     `includeAll` for `Query`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of `ParseError` type.
-     - important: If an object fetched has the same objectId as current, it will automatically update the current.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public func fetch(includeKeys: [String]? = nil,
-                      options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let result: Self = try fetchCommand(include: includeKeys)
-            .execute(options: options)
-        try Self.updateKeychainIfNeeded([result])
-        return result
     }
 
     /**
@@ -961,36 +804,40 @@ extension ParseUser {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try fetchCommand(include: includeKeys)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue) { result in
-                    if case .success(let foundResult) = result {
-                        do {
-                            try Self.updateKeychainIfNeeded([foundResult])
-                            completion(.success(foundResult))
-                        } catch {
-                            let defaultError = ParseError(code: .otherCause,
-                                                          message: error.localizedDescription)
-                            let parseError = error as? ParseError ?? defaultError
-                            completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await fetchCommand(include: includeKeys)
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue) { result in
+                        if case .success(let foundResult) = result {
+                            Task {
+                                do {
+                                    try await Self.updateKeychainIfNeeded([foundResult])
+                                    completion(.success(foundResult))
+                                } catch {
+                                    let defaultError = ParseError(code: .otherCause,
+                                                                  message: error.localizedDescription)
+                                    let parseError = error as? ParseError ?? defaultError
+                                    completion(.failure(parseError))
+                                }
+                            }
+                        } else {
+                            completion(result)
                         }
+                    }
+            } catch {
+                callbackQueue.async {
+                    if let error = error as? ParseError {
+                        completion(.failure(error))
                     } else {
-                        completion(result)
+                        completion(.failure(ParseError(code: .otherCause,
+                                                       message: error.localizedDescription)))
                     }
                 }
-         } catch {
-            callbackQueue.async {
-                if let error = error as? ParseError {
-                    completion(.failure(error))
-                } else {
-                    completion(.failure(ParseError(code: .otherCause,
-                                                   message: error.localizedDescription)))
-                }
             }
-         }
+        }
     }
 
     func fetchCommand(include: [String]?) throws -> API.Command<Self, Self> {
@@ -1014,71 +861,6 @@ extension ParseUser {
 
 // MARK: Savable
 extension ParseUser {
-
-    /**
-     Saves the `ParseUser` *synchronously* and throws an error if there is an issue.
-
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: Returns saved `ParseUser`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-    */
-    @discardableResult
-    public func save(options: API.Options = []) throws -> Self {
-        try save(ignoringCustomObjectIdConfig: false, options: options)
-    }
-
-    /**
-     Saves the `ParseUser` *synchronously* and throws an error if there is an issue.
-
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: Returns saved `ParseUser`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    @discardableResult
-    public func save(ignoringCustomObjectIdConfig: Bool,
-                     options: API.Options = []) throws -> Self {
-        var childObjects: [String: PointerType]?
-        var childFiles: [UUID: ParseFile]?
-        var error: ParseError?
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let group = DispatchGroup()
-        group.enter()
-        self.ensureDeepSave(options: options) { (savedChildObjects, savedChildFiles, parseError) in
-            childObjects = savedChildObjects
-            childFiles = savedChildFiles
-            error = parseError
-            group.leave()
-        }
-        group.wait()
-
-        if let error = error {
-            throw error
-        }
-
-        let result: Self = try saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-            .execute(options: options,
-                     childObjects: childObjects,
-                     childFiles: childFiles)
-        try Self.updateKeychainIfNeeded([result])
-        return result
-    }
 
     /**
      Saves the `ParseUser` *asynchronously* and executes the given callback block.
@@ -1260,55 +1042,6 @@ extension ParseUser {
         #endif
     }
 
-    func command(
-        method: Method,
-        ignoringCustomObjectIdConfig: Bool = false,
-        options: API.Options,
-        callbackQueue: DispatchQueue,
-        completion: @escaping (Result<Self, ParseError>) -> Void
-    ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        self.ensureDeepSave(options: options) { (savedChildObjects, savedChildFiles, error) in
-            guard let parseError = error else {
-                do {
-                    let command: API.Command<Self, Self>!
-                    switch method {
-                    case .save:
-                        command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-                    case .create:
-                        command = self.createCommand()
-                    case .replace:
-                        command = try self.replaceCommand()
-                    case .update:
-                        command = try self.updateCommand()
-                    }
-                    command
-                        .executeAsync(options: options,
-                                      callbackQueue: callbackQueue,
-                                      childObjects: savedChildObjects,
-                                      childFiles: savedChildFiles) { result in
-                            if case .success(let foundResult) = result {
-                                try? Self.updateKeychainIfNeeded([foundResult])
-                            }
-                            completion(result)
-                    }
-                } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
-                    callbackQueue.async {
-                        completion(.failure(parseError))
-                    }
-                }
-                return
-            }
-            callbackQueue.async {
-                completion(.failure(parseError))
-            }
-        }
-    }
-
     func saveCommand(ignoringCustomObjectIdConfig: Bool = false) throws -> API.Command<Self, Self> {
         if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
@@ -1320,10 +1053,10 @@ extension ParseUser {
     }
 
     // MARK: Saving ParseObjects - private
-    func createCommand() -> API.Command<Self, Self> {
+    func createCommand() async -> API.Command<Self, Self> {
         var object = self
         if object.ACL == nil,
-            let acl = try? ParseACL.defaultACL() {
+            let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
         let mapper = { (data) -> Self in
@@ -1335,17 +1068,17 @@ extension ParseUser {
                                        mapper: mapper)
     }
 
-    func replaceCommand() throws -> API.Command<Self, Self> {
+    func replaceCommand() async throws -> API.Command<Self, Self> {
         guard self.objectId != nil else {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
         var mutableSelf = self
-        if let currentUser = Self.current,
+        if let currentUser = await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // swiftlint:disable:next line_length
-            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                currentUserContainerInKeychain.currentUser?.email == mutableSelf.email {
                 mutableSelf.email = nil
             }
@@ -1375,17 +1108,17 @@ extension ParseUser {
                                  mapper: mapper)
     }
 
-    func updateCommand() throws -> API.Command<Self, Self> {
+    func updateCommand() async throws -> API.Command<Self, Self> {
         guard self.objectId != nil else {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
         var mutableSelf = self
-        if let currentUser = Self.current,
+        if let currentUser = await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // swiftlint:disable:next line_length
-            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                currentUserContainerInKeychain.currentUser?.email == mutableSelf.email {
                 mutableSelf.email = nil
             }
@@ -1417,21 +1150,6 @@ extension ParseUser {
 
 // MARK: Deletable
 extension ParseUser {
-    /**
-     Deletes the `ParseUser` *synchronously* with the current data from the server.
-
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of `ParseError` type.
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    public func delete(options: API.Options = []) throws {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        _ = try deleteCommand().execute(options: options)
-        try Self.updateKeychainIfNeeded([self], deleting: true)
-    }
 
     /**
      Deletes the `ParseUser` *asynchronously* and executes the given callback block.
@@ -1450,31 +1168,35 @@ extension ParseUser {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Void, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-         do {
-            try deleteCommand().executeAsync(options: options,
-                                             callbackQueue: callbackQueue) { result in
-                switch result {
-
-                case .success:
-                    try? Self.updateKeychainIfNeeded([self], deleting: true)
-                    completion(.success(()))
-                case .failure(let error):
-                    callbackQueue.async {
-                        completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await deleteCommand().executeAsync(options: options,
+                                                       callbackQueue: callbackQueue) { result in
+                    switch result {
+                        
+                    case .success:
+                        Task {
+                            try? await Self.updateKeychainIfNeeded([self], deleting: true)
+                            completion(.success(()))
+                        }
+                    case .failure(let error):
+                        callbackQueue.async {
+                            completion(.failure(error))
+                        }
                     }
                 }
+            } catch let error as ParseError {
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+            } catch {
+                callbackQueue.async {
+                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                }
             }
-         } catch let error as ParseError {
-            callbackQueue.async {
-                completion(.failure(error))
-            }
-         } catch {
-            callbackQueue.async {
-                completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
-            }
-         }
+        }
     }
 
     func deleteCommand() throws -> API.NonParseBodyCommand<NoBody, NoBody> {
@@ -1498,106 +1220,6 @@ extension ParseUser {
 
 // MARK: Batch Support
 public extension Sequence where Element: ParseUser {
-
-    /**
-     Saves a collection of users *synchronously* all at once and throws an error if necessary.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-
-     - returns: Returns a Result enum with the object if a save was successful or a `ParseError` if it failed.
-     - throws: An error of type `ParseError`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func saveAll(batchLimit limit: Int? = nil, // swiftlint:disable:this function_body_length
-                 transaction: Bool = configuration.isUsingTransactions,
-                 ignoringCustomObjectIdConfig: Bool = false,
-                 options: API.Options = []) throws -> [(Result<Self.Element, ParseError>)] {
-        var childObjects = [String: PointerType]()
-        var childFiles = [UUID: ParseFile]()
-        var error: ParseError?
-        var commands = [API.Command<Self.Element, Self.Element>]()
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-
-        try forEach {
-            let user = $0
-            let group = DispatchGroup()
-            group.enter()
-            user.ensureDeepSave(options: options,
-                                // swiftlint:disable:next line_length
-                                isShouldReturnIfChildObjectsFound: transaction) { (savedChildObjects, savedChildFiles, parseError) -> Void in
-                // If an error occurs, everything should be skipped
-                if parseError != nil {
-                    error = parseError
-                }
-                savedChildObjects.forEach {(key, value) in
-                    if error != nil {
-                        return
-                    }
-                    if childObjects[key] == nil {
-                        childObjects[key] = value
-                    } else {
-                        error = ParseError(code: .otherCause, message: "circular dependency")
-                        return
-                    }
-                }
-                savedChildFiles.forEach {(key, value) in
-                    if error != nil {
-                        return
-                    }
-                    if childFiles[key] == nil {
-                        childFiles[key] = value
-                    } else {
-                        error = ParseError(code: .otherCause, message: "circular dependency")
-                        return
-                    }
-                }
-                group.leave()
-            }
-            group.wait()
-            if let error = error {
-                throw error
-            }
-            commands.append(try user.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig))
-        }
-
-        var returnBatch = [(Result<Self.Element, ParseError>)]()
-        let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
-        try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-        let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-        try batches.forEach {
-            let currentBatch = try API.Command<Self.Element, Self.Element>
-                .batch(commands: $0, transaction: transaction)
-                .execute(options: options,
-                         batching: true,
-                         childObjects: childObjects,
-                         childFiles: childFiles)
-            returnBatch.append(contentsOf: currentBatch)
-        }
-        try Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
-        return returnBatch
-    }
 
     /**
      Saves a collection of users all at once *asynchronously* and executes the completion block when done.
@@ -1837,176 +1459,6 @@ public extension Sequence where Element: ParseUser {
         #endif
     }
 
-    // swiftlint:disable:next function_body_length cyclomatic_complexity
-    internal func batchCommand( // swiftlint:disable:this function_parameter_count
-        method: Method,
-        batchLimit limit: Int?,
-        transaction: Bool,
-        ignoringCustomObjectIdConfig: Bool = false,
-        options: API.Options,
-        callbackQueue: DispatchQueue,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let uuid = UUID()
-        let queue = DispatchQueue(label: "com.parse.batch.\(uuid)",
-                                  qos: .default,
-                                  attributes: .concurrent,
-                                  autoreleaseFrequency: .inherit,
-                                  target: nil)
-        let users = map { $0 }
-        queue.sync {
-            var childObjects = [String: PointerType]()
-            var childFiles = [UUID: ParseFile]()
-            var error: ParseError?
-            var commands = [API.Command<Self.Element, Self.Element>]()
-
-            for user in users {
-                let group = DispatchGroup()
-                group.enter()
-                user.ensureDeepSave(options: options,
-                                    // swiftlint:disable:next line_length
-                                    isShouldReturnIfChildObjectsFound: transaction) { (savedChildObjects, savedChildFiles, parseError) -> Void in
-                    // If an error occurs, everything should be skipped
-                    if let parseError = parseError {
-                        error = parseError
-                    }
-                    savedChildObjects.forEach {(key, value) in
-                        guard error == nil else {
-                            return
-                        }
-                        guard childObjects[key] == nil else {
-                            error = ParseError(code: .otherCause, message: "circular dependency")
-                            return
-                        }
-                        childObjects[key] = value
-                    }
-                    savedChildFiles.forEach {(key, value) in
-                        guard error == nil else {
-                            return
-                        }
-                        guard childFiles[key] == nil else {
-                            error = ParseError(code: .otherCause, message: "circular dependency")
-                            return
-                        }
-                        childFiles[key] = value
-                    }
-                    group.leave()
-                }
-                group.wait()
-                if let error = error {
-                    callbackQueue.async {
-                        completion(.failure(error))
-                    }
-                    return
-                }
-                do {
-                    switch method {
-                    case .save:
-                        commands.append(
-                            try user.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-                        )
-                    case .create:
-                        commands.append(user.createCommand())
-                    case .replace:
-                        commands.append(try user.replaceCommand())
-                    case .update:
-                        commands.append(try user.updateCommand())
-                    }
-                } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
-                    callbackQueue.async {
-                        completion(.failure(parseError))
-                    }
-                    return
-                }
-            }
-
-            do {
-                var returnBatch = [(Result<Self.Element, ParseError>)]()
-                let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
-                try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-                let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-                var completed = 0
-                for batch in batches {
-                    API.Command<Self.Element, Self.Element>
-                            .batch(commands: batch, transaction: transaction)
-                            .executeAsync(options: options,
-                                          batching: true,
-                                          callbackQueue: callbackQueue,
-                                          childObjects: childObjects,
-                                          childFiles: childFiles) { results in
-                        switch results {
-
-                        case .success(let saved):
-                            returnBatch.append(contentsOf: saved)
-                            if completed == (batches.count - 1) {
-                                try? Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
-                                completion(.success(returnBatch))
-                            }
-                            completed += 1
-                        case .failure(let error):
-                            completion(.failure(error))
-                            return
-                        }
-                    }
-                }
-            } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
-    /**
-     Fetches a collection of users *synchronously* all at once and throws an error if necessary.
-     - parameter includeKeys: The name(s) of the key(s) to include that are
-     `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
-     `includeAll` for `Query`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-
-     - returns: Returns a Result enum with the object if a fetch was successful or a `ParseError` if it failed.
-     - throws: An error of `ParseError` type.
-     - important: If an object fetched has the same objectId as current, it will automatically update the current.
-     - warning: The order in which users are returned are not guarenteed. You should not expect results in
-     any particular order.
-    */
-    func fetchAll(includeKeys: [String]? = nil,
-                  options: API.Options = []) throws -> [(Result<Self.Element, ParseError>)] {
-
-        if (allSatisfy { $0.className == Self.Element.className}) {
-            let uniqueObjectIds = Set(self.compactMap { $0.objectId })
-            var query = Self.Element.query(containedIn(key: "objectId", array: [uniqueObjectIds]))
-                .limit(uniqueObjectIds.count)
-            if let include = includeKeys {
-                query = query.include(include)
-            }
-            let fetchedObjects = try query.find(options: options)
-            var fetchedObjectsToReturn = [(Result<Self.Element, ParseError>)]()
-
-            uniqueObjectIds.forEach {
-                let uniqueObjectId = $0
-                if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
-                    fetchedObjectsToReturn.append(.success(fetchedObject))
-                } else {
-                    fetchedObjectsToReturn.append(.failure(ParseError(code: .objectNotFound,
-                                                                      // swiftlint:disable:next line_length
-                                                                      message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
-                }
-            }
-            try Self.Element.updateKeychainIfNeeded(fetchedObjects)
-            return fetchedObjectsToReturn
-        } else {
-            throw ParseError(code: .otherCause, message: "all items to fetch must be of the same class")
-        }
-    }
-
     /**
      Fetches a collection of users all at once *asynchronously* and executes the completion block when done.
      - parameter includeKeys: The name(s) of the key(s) to include that are
@@ -2036,20 +1488,23 @@ public extension Sequence where Element: ParseUser {
                 switch result {
 
                 case .success(let fetchedObjects):
-                    var fetchedObjectsToReturn = [(Result<Self.Element, ParseError>)]()
+                    var fetchedObjectsToReturnMutable = [(Result<Self.Element, ParseError>)]()
 
                     uniqueObjectIds.forEach {
                         let uniqueObjectId = $0
                         if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
-                            fetchedObjectsToReturn.append(.success(fetchedObject))
+                            fetchedObjectsToReturnMutable.append(.success(fetchedObject))
                         } else {
-                            fetchedObjectsToReturn.append(.failure(ParseError(code: .objectNotFound,
-                                                                              // swiftlint:disable:next line_length
-                                                                              message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
+                            fetchedObjectsToReturnMutable.append(.failure(ParseError(code: .objectNotFound,
+                                                                                     // swiftlint:disable:next line_length
+                                                                                     message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
                         }
                     }
-                    try? Self.Element.updateKeychainIfNeeded(fetchedObjects)
-                    completion(.success(fetchedObjectsToReturn))
+                    let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
+                    Task {
+                        try? await Self.Element.updateKeychainIfNeeded(fetchedObjects)
+                        completion(.success(fetchedObjectsToReturn))
+                    }
                 case .failure(let error):
                     callbackQueue.async {
                         completion(.failure(error))
@@ -2062,52 +1517,6 @@ public extension Sequence where Element: ParseUser {
                                                message: "all items to fetch must be of the same class")))
             }
         }
-    }
-
-    /**
-     Deletes a collection of users *synchronously* all at once and throws an error if necessary.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-
-     - returns: Returns `nil` if the delete successful or a `ParseError` if it failed.
-        1. A `ParseError.Code.aggregateError`. This object's "errors" property is an
-        array of other Parse.Error objects. Each error object in this array
-        has an "object" property that references the object that could not be
-        deleted (for instance, because that object could not be found).
-        2. A non-aggregate Parse.Error. This indicates a serious error that
-        caused the delete operation to be aborted partway through (for
-        instance, a connection failure in the middle of the delete).
-     - throws: An error of `ParseError` type.
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func deleteAll(batchLimit limit: Int? = nil,
-                   transaction: Bool = configuration.isUsingTransactions,
-                   options: API.Options = []) throws -> [(Result<Void, ParseError>)] {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        var returnBatch = [(Result<Void, ParseError>)]()
-        let commands = try map { try $0.deleteCommand() }
-        let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
-        try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-        let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-        try batches.forEach {
-            let currentBatch = try API.Command<Self.Element, ParseError?>
-                .batch(commands: $0, transaction: transaction)
-                .execute(options: options)
-            returnBatch.append(contentsOf: currentBatch)
-        }
-        try Self.Element.updateKeychainIfNeeded(compactMap {$0},
-                                                deleting: true)
-        return returnBatch
     }
 
     /**
@@ -2143,42 +1552,47 @@ public extension Sequence where Element: ParseUser {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            var returnBatch = [(Result<Void, ParseError>)]()
-            let commands = try map({ try $0.deleteCommand() })
-            let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
-            try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-            let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-            var completed = 0
-            for batch in batches {
-                API.Command<Self.Element, ParseError?>
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                var returnBatch = [(Result<Void, ParseError>)]()
+                let commands = try map({ try $0.deleteCommand() })
+                let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
+                try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
+                let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
+                var completed = 0
+                for batch in batches {
+                    await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
                         .executeAsync(options: options,
                                       callbackQueue: callbackQueue) { results in
-                    switch results {
-
-                    case .success(let saved):
-                        returnBatch.append(contentsOf: saved)
-                        if completed == (batches.count - 1) {
-                            try? Self.Element.updateKeychainIfNeeded(self.compactMap {$0},
-                                                                     deleting: true)
-                            completion(.success(returnBatch))
+                            switch results {
+                                
+                            case .success(let saved):
+                                returnBatch.append(contentsOf: saved)
+                                if completed == (batches.count - 1) {
+                                    let returnBatchImmutable = returnBatch
+                                    Task {
+                                        try? await Self.Element.updateKeychainIfNeeded(self.compactMap {$0},
+                                                                                       deleting: true)
+                                        completion(.success(returnBatchImmutable))
+                                    }
+                                }
+                                completed += 1
+                            case .failure(let error):
+                                completion(.failure(error))
+                                return
+                            }
                         }
-                        completed += 1
-                    case .failure(let error):
-                        completion(.failure(error))
-                        return
-                    }
                 }
-            }
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            callbackQueue.async {
-                completion(.failure(parseError))
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }

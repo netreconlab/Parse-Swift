@@ -19,20 +19,6 @@ public protocol ParseConfig: ParseTypeable {}
 extension ParseConfig {
 
     /**
-     Fetch the Config *synchronously*.
-        - parameter options: A set of header options sent to the server. Defaults to an empty set.
-        - returns: Returns `Self`.
-        - throws: An error of type `ParseError`.
-        - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-        desires a different policy, it should be inserted in `options`.
-    */
-    /* public func fetch(options: API.Options = []) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        return try fetchCommand().execute(options: options)
-    } */
-
-    /**
      Fetch the Config *asynchronously*.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
         - parameter callbackQueue: The queue to return to after completion. Default value of .main.
@@ -67,19 +53,6 @@ extension ParseConfig {
 
 // MARK: Update
 extension ParseConfig {
-
-    /**
-     Update the Config *synchronously*.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: Returns **true** if updated, **false** otherwise.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    /* public func save(options: API.Options = []) throws -> Bool {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        return try updateCommand().execute(options: options)
-    } */
 
     /**
      Update the Config *asynchronously*.

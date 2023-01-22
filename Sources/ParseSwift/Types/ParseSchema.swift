@@ -262,13 +262,15 @@ extension ParseSchema {
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        fetchCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await fetchCommand()
+                .executeAsync(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func fetchCommand() -> API.NonParseBodyCommand<Self, Self> {
@@ -299,13 +301,15 @@ extension ParseSchema {
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        createCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await createCommand()
+                .executeAsync(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     /**
@@ -330,13 +334,16 @@ extension ParseSchema {
         } else {
             mutableSchema.indexes = nil
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        mutableSchema.updateCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        let schema = mutableSchema
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await schema.updateCommand()
+                .executeAsync(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func createCommand() -> API.NonParseBodyCommand<Self, Self> {
@@ -379,17 +386,19 @@ extension ParseSchema {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Void, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        purgeCommand().executeAsync(options: options,
-                                    callbackQueue: callbackQueue) { result in
-            switch result {
-
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await purgeCommand().executeAsync(options: options,
+                                              callbackQueue: callbackQueue) { result in
+                switch result {
+                    
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -415,17 +424,19 @@ extension ParseSchema {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Void, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        deleteCommand().executeAsync(options: options,
-                                     callbackQueue: callbackQueue) { result in
-            switch result {
-
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await deleteCommand().executeAsync(options: options,
+                                               callbackQueue: callbackQueue) { result in
+                switch result {
+                    
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }

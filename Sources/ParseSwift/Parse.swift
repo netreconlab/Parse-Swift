@@ -136,9 +136,9 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
-        if let currentInstallation = BaseParseInstallation.current {
+        if let currentInstallation = await BaseParseInstallation.current() {
             if currentInstallation.objectId == nil {
-                BaseParseInstallation.deleteCurrentContainerFromKeychain()
+                await BaseParseInstallation.deleteCurrentContainerFromKeychain()
                 // Prepare installation
                 await BaseParseInstallation.createNewInstallationIfNeeded()
             }
@@ -151,15 +151,16 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
 
     // Migrate installations with installationId, but missing
     // currentInstallation, ParseSwift < 1.9.10
-    if let installationId = BaseParseInstallation.currentContainer.installationId,
-       BaseParseInstallation.currentContainer.currentInstallation == nil {
+    let currentInstallationContainer = await BaseParseInstallation.currentContainer()
+    if let installationId = currentInstallationContainer.installationId,
+       currentInstallationContainer.currentInstallation == nil {
         if let foundInstallation = try? await BaseParseInstallation
             .query("installationId" == installationId)
             .first(options: [.cachePolicy(.reloadIgnoringLocalCacheData)]) {
             let newContainer = CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: foundInstallation,
                                                                                    installationId: installationId)
-            BaseParseInstallation.currentContainer = newContainer
-            BaseParseInstallation.saveCurrentContainerToKeychain()
+            await BaseParseInstallation.setCurrentContainer(newContainer)
+            await BaseParseInstallation.saveCurrentContainerToKeychain()
         }
     }
     await BaseParseInstallation.createNewInstallationIfNeeded()
@@ -168,14 +169,16 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     if configuration.isMigratingFromObjcSDK {
         if let objcParseKeychain = KeychainStore.objectiveC {
             guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
-                  BaseParseInstallation.current?.installationId != installationId else {
+                  await BaseParseInstallation.current()?.installationId != installationId else {
                 return
             }
-            var updatedInstallation = BaseParseInstallation.current
+            var updatedInstallation = await BaseParseInstallation.current()
             updatedInstallation?.installationId = installationId
-            BaseParseInstallation.currentContainer.installationId = installationId
-            BaseParseInstallation.currentContainer.currentInstallation = updatedInstallation
-            BaseParseInstallation.saveCurrentContainerToKeychain()
+            var currentInstallationContainer = await BaseParseInstallation.currentContainer()
+            currentInstallationContainer.installationId = installationId
+            currentInstallationContainer.currentInstallation = updatedInstallation
+            await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
+            await BaseParseInstallation.saveCurrentContainerToKeychain()
         }
     }
     #endif

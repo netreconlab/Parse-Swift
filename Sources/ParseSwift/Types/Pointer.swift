@@ -97,28 +97,6 @@ public extension Pointer {
     }
 
     /**
-     Fetches the `ParseObject` *synchronously* with the current data from the server.
-     - parameter includeKeys: The name(s) of the key(s) to include that are
-     `ParseObject`s. Use `["*"]` to include all keys. This is similar to `include` and
-     `includeAll` for `Query`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: The `ParseObject` with respect to the `Pointer`.
-     - throws: An error of `ParseError` type.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func fetch(includeKeys: [String]? = nil,
-               options: API.Options = []) throws -> T {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let path = API.Endpoint.object(className: className, objectId: objectId)
-        return try API.NonParseBodyCommand<NoBody, T>(method: .GET,
-                                      path: path) { (data) -> T in
-                    try ParseCoding.jsonDecoder().decode(T.self, from: data)
-        }.execute(options: options)
-    }
-
-    /**
      Fetches the `ParseObject` *asynchronously* and executes the given callback block.
      - parameter includeKeys: The name(s) of the key(s) to include. Use `["*"]` to include
      all keys.
@@ -134,15 +112,17 @@ public extension Pointer {
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
                completion: @escaping (Result<T, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let path = API.Endpoint.object(className: className, objectId: objectId)
-        API.NonParseBodyCommand<NoBody, T>(method: .GET,
-                                      path: path) { (data) -> T in
-                    try ParseCoding.jsonDecoder().decode(T.self, from: data)
-        }.executeAsync(options: options,
-                       callbackQueue: callbackQueue,
-                       completion: completion)
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            let path = API.Endpoint.object(className: className, objectId: objectId)
+            await API.NonParseBodyCommand<NoBody, T>(method: .GET,
+                                               path: path) { (data) -> T in
+                try ParseCoding.jsonDecoder().decode(T.self, from: data)
+            }.executeAsync(options: options,
+                           callbackQueue: callbackQueue,
+                           completion: completion)
+        }
     }
 }
 
