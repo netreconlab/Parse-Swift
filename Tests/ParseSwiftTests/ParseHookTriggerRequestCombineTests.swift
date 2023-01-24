@@ -91,18 +91,18 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
-        let requestHydrated = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                  user: server,
-                                                                  installationId: installationId,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
+        let requestHydrated = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                        user: server,
+                                                                        installationId: installationId,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
 
         let publisher = triggerRequest.hydrateUserPublisher()
             .sink(receiveCompletion: { result in
@@ -133,12 +133,12 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
         let publisher = triggerRequest.hydrateUserPublisher()
             .sink(receiveCompletion: { result in
 
