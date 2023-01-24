@@ -246,6 +246,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/query",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/subscriptions",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/triggerName",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/user"
       ],
       "title" : "Instance Properties"
@@ -1508,6 +1509,47 @@
   "title" : "subscriptions",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/subscriptions"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/triggerName": {
+  "abstract" : [
+    {
+      "text" : "The types of Parse Hook Trigger.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "triggerName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/triggerName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "triggerName",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/triggername"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/user": {
   "abstract" : [

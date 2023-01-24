@@ -553,13 +553,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       }
                     ],
@@ -7644,6 +7644,11 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/functionname",
+                "title" : "var functionName: String?",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/headers",
                 "title" : "var headers: [String : String]?",
                 "type" : "property"
@@ -8082,6 +8087,11 @@
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/subscriptions",
                 "title" : "var subscriptions: Int?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/triggername",
+                "title" : "var triggerName: String?",
                 "type" : "property"
               },
               {
