@@ -14,6 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable:next type_body_length
 class ParseHookTriggerRequestTests: XCTestCase {
 
     struct User: ParseCloudUser {
@@ -74,40 +75,93 @@ class ParseHookTriggerRequestTests: XCTestCase {
     }
 
     func testCoding() async throws {
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           triggerName: "beforeDelete",
+                                                           file: ParseFile(data: Data()),
+                                                           fileSize: 0)
+        // swiftlint:disable:next line_length
+        let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
+        XCTAssertEqual(triggerRequest.description, expected)
+    }
+
+    func testCodingObject() async throws {
         let object = User(objectId: "geez")
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 triggerName: "beforeDelete",
-                                                                 object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       triggerName: "beforeDelete",
+                                                                       object: object)
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
-        let triggerRequest2 = ParseHookTriggerRequest<User, User>(ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest2 = ParseHookTriggerObjectRequest<User, User>(ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let expected2 = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"object\":{\"objectId\":\"geez\"}}"
         XCTAssertEqual(triggerRequest2.description, expected2)
     }
 
+    func testGetLogObject() async throws {
+        let object = User(objectId: "geez")
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       log: AnyCodable("peace"))
+        let log: String = try triggerRequest.getLog()
+        XCTAssertEqual(log, "peace")
+    }
+
+    func testGetLogErrorObject() async throws {
+        let object = User(objectId: "geez")
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       log: AnyCodable("peace"))
+        do {
+            let _: Double = try triggerRequest.getLog()
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("inferred"))
+        }
+    }
+
+    func testGetContextObject() async throws {
+        let object = User(objectId: "geez")
+        let context = ["peace": "out"]
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       context: AnyCodable(context))
+        let requestContext: [String: String] = try triggerRequest.getContext()
+        XCTAssertEqual(requestContext, context)
+    }
+
     func testGetLog() async throws {
         let object = User(objectId: "geez")
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object,
-                                                                 log: AnyCodable("peace"))
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       log: AnyCodable("peace"))
         let log: String = try triggerRequest.getLog()
         XCTAssertEqual(log, "peace")
     }
 
     func testGetLogError() async throws {
-        let object = User(objectId: "geez")
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object,
-                                                                 log: AnyCodable("peace"))
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           log: AnyCodable("peace"))
         do {
             let _: Double = try triggerRequest.getLog()
             XCTFail("Should have failed")
@@ -123,11 +177,11 @@ class ParseHookTriggerRequestTests: XCTestCase {
     func testGetContext() async throws {
         let object = User(objectId: "geez")
         let context = ["peace": "out"]
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object,
-                                                                 context: AnyCodable(context))
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           context: AnyCodable(context))
         let requestContext: [String: String] = try triggerRequest.getContext()
         XCTAssertEqual(requestContext, context)
     }
@@ -135,11 +189,31 @@ class ParseHookTriggerRequestTests: XCTestCase {
     func testGetContextError() async throws {
         let object = User(objectId: "geez")
         let context = ["peace": "out"]
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object,
-                                                                 context: AnyCodable(context))
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           context: AnyCodable(context))
+        do {
+            let _: Double = try triggerRequest.getContext()
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("inferred"))
+        }
+    }
+
+    func testGetContextErrorObject() async throws {
+        let object = User(objectId: "geez")
+        let context = ["peace": "out"]
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       context: AnyCodable(context))
         do {
             let _: Double = try triggerRequest.getContext()
             XCTFail("Should have failed")
@@ -157,45 +231,45 @@ class ParseHookTriggerRequestTests: XCTestCase {
         let sessionToken = "dog"
         let installationId = "cat"
         let user = User(sessionToken: sessionToken)
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
         let options = API.Options([.usePrimaryKey])
         let requestOptions = triggerRequest.options()
         XCTAssertEqual(requestOptions, options)
-        let triggerRequest2 = ParseHookTriggerRequest<User, User>(primaryKey: false,
-                                                                   user: user,
-                                                                   installationId: installationId,
-                                                                   ipAddress: "1.1.1.1",
-                                                                   headers: ["yolo": "me"],
-                                                                   object: object)
+        let triggerRequest2 = ParseHookTriggerObjectRequest<User, User>(primaryKey: false,
+                                                                        user: user,
+                                                                        installationId: installationId,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let options2 = API.Options([.sessionToken(sessionToken),
             .installationId(installationId)])
         let requestOptions2 = triggerRequest2.options()
         XCTAssertEqual(requestOptions2, options2)
-        let triggerRequest3 = ParseHookTriggerRequest<User, User>(primaryKey: false,
-                                                                  user: user,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest3 = ParseHookTriggerObjectRequest<User, User>(primaryKey: false,
+                                                                        user: user,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let options3 = API.Options([.sessionToken(sessionToken)])
         let requestOptions3 = triggerRequest3.options()
         XCTAssertEqual(requestOptions3, options3)
-        let triggerRequest4 = ParseHookTriggerRequest<User, User>(primaryKey: false,
-                                                                  installationId: installationId,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest4 = ParseHookTriggerObjectRequest<User, User>(primaryKey: false,
+                                                                        installationId: installationId,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let options4 = API.Options([.installationId(installationId)])
         let requestOptions4 = triggerRequest4.options()
         XCTAssertEqual(requestOptions4, options4)
-        let triggerRequest5 = ParseHookTriggerRequest<User, User>(primaryKey: false,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest5 = ParseHookTriggerObjectRequest<User, User>(primaryKey: false,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let options5 = API.Options()
         let requestOptions5 = triggerRequest5.options()
         XCTAssertEqual(requestOptions5, options5)
@@ -218,18 +292,18 @@ class ParseHookTriggerRequestTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
-        let requestHydrated = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                  user: server,
-                                                                  installationId: installationId,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
+        let requestHydrated = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                        user: server,
+                                                                        installationId: installationId,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
         let hydrated = try await triggerRequest.hydrateUser()
         XCTAssertEqual(hydrated, requestHydrated)
     }
@@ -246,12 +320,12 @@ class ParseHookTriggerRequestTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
         do {
             _ = try await triggerRequest.hydrateUser()
             XCTFail("Should have thrown error")

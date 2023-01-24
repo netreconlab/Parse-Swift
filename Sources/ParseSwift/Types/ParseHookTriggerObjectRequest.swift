@@ -2,8 +2,8 @@
 //  ParseHookTriggerRequest.swift
 //  ParseSwift
 //
-//  Created by Corey Baker on 1/24/23.
-//  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
+//  Created by Corey Baker on 6/14/22.
+//  Copyright © 2022 Parse Community. All rights reserved.
 //
 
 import Foundation
@@ -14,19 +14,34 @@ import Foundation
  use the master key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
-public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerRequestable {
+public struct ParseHookTriggerObjectRequest<U: ParseCloudUser, T: ParseObject>: ParseHookTriggerRequestable {
     public typealias UserType = U
-    public var user: U?
     public var primaryKey: Bool?
+    public var user: U?
     public var installationId: String?
     public var ipAddress: String?
     public var headers: [String: String]?
     public var triggerName: String?
     public var clients: Int?
-    /// The  from the hook call.
-    public var file: ParseFile?
-    /// The size of the file in bytes.
-    public var fileSize: Int?
+    /// An object from the hook call.
+    public var object: T?
+    /// The results the query yielded..
+    public var objects: [T]?
+    /// If set, the object, as currently stored.
+    public var original: T?
+    /// The query from the hook call.
+    public var query: Query<T>?
+    /// Whether the query a **get** or a **find**.
+    public var isGet: Bool?
+    /// The number of subscriptions connected.
+    public var subscriptions: Int?
+    /**
+     If the LiveQuery event should be sent to the client. Set to false to prevent
+     LiveQuery from pushing to the client.
+     */
+    public var sendEvent: Bool?
+    /// The live query event that triggered the request.
+    public var event: String?
     var log: AnyCodable?
     var context: AnyCodable?
 
@@ -34,12 +49,14 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
         case primaryKey = "master"
         case ipAddress = "ip"
         case user, installationId, headers,
-             log, context, file, fileSize,
-             clients, triggerName
+             log, context, triggerName,
+             object, objects, original, query,
+             isGet, clients, subscriptions,
+             sendEvent
     }
 }
 
-extension ParseHookTriggerRequest {
+extension ParseHookTriggerObjectRequest {
 
     /**
      Get the Parse Server logger using any type that conforms to `Codable`.
