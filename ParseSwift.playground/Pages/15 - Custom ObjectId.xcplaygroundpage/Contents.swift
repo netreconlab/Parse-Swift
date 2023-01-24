@@ -14,7 +14,7 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 /*:
  Start parse-server with:
- npm start -- --appId applicationId --clientKey clientKey --masterKey primaryKey --mountPath /1
+ npm start -- --appId applicationId --clientKey clientKey --masterKey primaryKey --mountPath /parse
 */
 
 do {
