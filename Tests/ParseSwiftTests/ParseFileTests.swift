@@ -24,7 +24,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -229,7 +229,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
                                   tags: ["Hey": "now"])
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -257,7 +257,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(data: sampleData, mimeType: "application/txt")
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
             XCTFail("Should create URL")
             return
         }
@@ -288,7 +288,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.txt", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -320,7 +320,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.data", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -352,7 +352,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.data", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -388,7 +388,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.data", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -439,7 +439,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.data", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -469,7 +469,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.txt", data: sampleData)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -508,7 +508,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.txt", data: sampleData)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -550,7 +550,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.txt", data: sampleData)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -595,7 +595,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(data: sampleData, mimeType: "application/txt")
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
             XCTFail("Should create URL")
             return
         }
@@ -638,7 +638,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "sampleData.txt", localURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -695,7 +695,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     #if compiler(<5.5.2)
     func testParseURLSessionDelegates() throws {
         // swiftlint:disable:next line_length
-        let dowloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
+        let dowloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = dowloadTask as URLSessionTask
         // swiftlint:disable:next line_length
         let uploadCompletion: ((URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, _: Int64, _: Int64) -> Void in }
@@ -725,7 +725,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testParseURLSessionDelegateUpload() throws {
         // swiftlint:disable:next line_length
-        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
+        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
         let queue = DispatchQueue.global(qos: .utility)
 
@@ -765,7 +765,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testParseURLSessionDelegateDownload() throws {
         // swiftlint:disable:next line_length
-        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
+        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
         let queue = DispatchQueue.global(qos: .utility)
         guard let fileManager = ParseFileManager(),
@@ -812,7 +812,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testParseURLSessionDelegateStream() throws {
         // swiftlint:disable:next line_length
-        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
+        let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
         let queue = DispatchQueue.global(qos: .utility)
 
@@ -849,7 +849,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     // URL Mocker is not able to mock this in linux and tests fail, so do not run.
     func testFetchFileCancelAsync() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/7793939a2e59b98138c1bbf2412a060c_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/7793939a2e59b98138c1bbf2412a060c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -894,7 +894,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testFetchFileAysnc() throws {
 
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/7793939a2e59b98138c1bbf2412a060c_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/7793939a2e59b98138c1bbf2412a060c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -933,7 +933,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileProgressAsync() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/6f9988ab5faa28f7247664c6ffd9fd85_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/6f9988ab5faa28f7247664c6ffd9fd85_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -983,7 +983,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "logo.svg", cloudURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1029,7 +1029,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "logo.svg", cloudURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1071,7 +1071,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "logo.svg", cloudURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1096,7 +1096,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFile() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1129,7 +1129,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileLoadFromRemote() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1162,7 +1162,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileLoadFromCacheNoCache() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1183,7 +1183,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileWithDirectoryInName() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1220,7 +1220,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileProgress() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1260,7 +1260,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileProgressLoadFromRemote() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1300,7 +1300,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testFetchFileProgressFromCacheNoCache() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1325,7 +1325,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testDeleteFileAysnc() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/1b0683d529463e173cbf8046d7d9a613_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/1b0683d529463e173cbf8046d7d9a613_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1358,7 +1358,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testDeleteFileAysncError() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/1b0683d529463e173cbf8046d7d9a613_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/1b0683d529463e173cbf8046d7d9a613_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1390,7 +1390,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testDeleteFile() throws {
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1422,7 +1422,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "logo.svg", cloudURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -1457,7 +1457,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let parseFile = ParseFile(name: "logo.svg", cloudURL: tempFilePath)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }

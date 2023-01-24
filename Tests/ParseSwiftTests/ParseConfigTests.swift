@@ -71,7 +71,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }

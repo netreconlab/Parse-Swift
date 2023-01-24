@@ -39,7 +39,7 @@ class ParsePointerTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             throw ParseError(code: .otherCause, message: "Should create valid URL")
         }
         try ParseSwift.initialize(applicationId: "applicationId",

@@ -206,7 +206,7 @@ extension ParseFile {
 extension ParseFile {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        url = try values.decode(URL.self, forKey: .url)
+        url = try values.decodeIfPresent(URL.self, forKey: .url)
         name = try values.decode(String.self, forKey: .name)
         id = UUID()
     }

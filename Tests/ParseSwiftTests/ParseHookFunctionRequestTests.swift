@@ -57,7 +57,7 @@ class ParseHookFunctionRequestTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -82,9 +82,10 @@ class ParseHookFunctionRequestTests: XCTestCase {
         let functionRequest = ParseHookFunctionRequest<User, Parameters>(primaryKey: true,
                                                                          ipAddress: "1.1.1.1",
                                                                          headers: ["yolo": "me"],
+                                                                         functionName: "wow",
                                                                          parameters: parameters)
         // swiftlint:disable:next line_length
-        let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"params\":{\"hello\":\"world\"}}"
+        let expected = "{\"functionName\":\"wow\",\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"params\":{\"hello\":\"world\"}}"
         XCTAssertEqual(functionRequest.description, expected)
     }
 

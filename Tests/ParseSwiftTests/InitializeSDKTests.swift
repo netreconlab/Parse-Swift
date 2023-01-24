@@ -40,7 +40,7 @@ class InitializeSDKTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -153,7 +153,7 @@ class InitializeSDKTests: XCTestCase {
     #endif
 
     func testCreateParseInstallationOnInit() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -219,7 +219,7 @@ class InitializeSDKTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Wait")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 
-            guard let url = URL(string: "http://localhost:1337/1") else {
+            guard let url = URL(string: "http://localhost:1337/parse") else {
                 XCTFail("Should create valid URL")
                 expectation1.fulfill()
                 return
@@ -265,7 +265,7 @@ class InitializeSDKTests: XCTestCase {
     #endif
 
     func testUpdateAuthChallenge() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -284,7 +284,7 @@ class InitializeSDKTests: XCTestCase {
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testDontOverwriteMigratedInstallation() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -313,7 +313,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testDontOverwriteOldInstallationBecauseVersionLess() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -349,7 +349,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testDontOverwriteOldInstallationBecauseVersionEqual() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -385,7 +385,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testDontOverwriteOldInstallationBecauseVersionGreater() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -423,7 +423,7 @@ class InitializeSDKTests: XCTestCase {
     #endif
 
     func testOverwriteOldInstallation() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -457,7 +457,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testMigrateObjcKeychainMissing() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -507,7 +507,7 @@ class InitializeSDKTests: XCTestCase {
         try? KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
         let expectation1 = XCTestExpectation(description: "Wait")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            guard let url = URL(string: "http://localhost:1337/1") else {
+            guard let url = URL(string: "http://localhost:1337/parse") else {
                 XCTFail("Should create valid URL")
                 expectation1.fulfill()
                 return
@@ -539,7 +539,7 @@ class InitializeSDKTests: XCTestCase {
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -560,7 +560,7 @@ class InitializeSDKTests: XCTestCase {
     #if !os(macOS)
     func testInitializeSDKNoTest() throws {
 
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -595,7 +595,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertNil(retrievedInstallationId2)
 
         // This is needed for tear down
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -616,7 +616,7 @@ class InitializeSDKTests: XCTestCase {
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "anotherPlace")
 
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
