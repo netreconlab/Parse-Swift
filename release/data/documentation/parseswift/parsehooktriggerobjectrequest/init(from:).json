@@ -1,30 +1,12 @@
 {
   "abstract" : [
     {
-      "text" : "Whether the query a ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "inlineContent" : [
-        {
-          "text" : "get",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " or a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "find",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
+      "code" : "Decodable.init(from:)",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -35,29 +17,29 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/isGet"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/init(from:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A18HookTriggerRequestV5isGetSbSgvp",
+    "externalID" : "s:10ParseSwift0A24HookTriggerObjectRequestV4fromACyxq_Gs7Decoder_p_tKcfc",
     "fragments" : [
       {
-        "kind" : "keyword",
-        "text" : "var"
+        "kind" : "identifier",
+        "text" : "init"
       },
       {
         "kind" : "text",
-        "text" : " "
+        "text" : "("
       },
       {
-        "kind" : "identifier",
-        "text" : "isGet"
+        "kind" : "externalParam",
+        "text" : "from"
       },
       {
         "kind" : "text",
@@ -65,12 +47,16 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:Sb",
-        "text" : "Bool"
+        "preciseIdentifier" : "s:s7DecoderP",
+        "text" : "Decoder"
       },
       {
         "kind" : "text",
-        "text" : "?"
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
       }
     ],
     "modules" : [
@@ -79,9 +65,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Instance Property",
-    "symbolKind" : "property",
-    "title" : "isGet"
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(from:)"
   },
   "primaryContentSections" : [
     {
@@ -96,15 +82,23 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "from"
             },
             {
               "kind" : "text",
               "text" : " "
             },
             {
-              "kind" : "identifier",
-              "text" : "isGet"
+              "kind" : "internalParam",
+              "text" : "decoder"
             },
             {
               "kind" : "text",
@@ -112,12 +106,16 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:Sb",
-              "text" : "Bool"
+              "preciseIdentifier" : "s:s7DecoderP",
+              "text" : "Decoder"
             },
             {
               "kind" : "text",
-              "text" : "?"
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
             }
           ]
         }
@@ -136,7 +134,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktriggerrequest\/isget"
+        "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/init(from:)"
       ],
       "traits" : [
         {
@@ -158,7 +156,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest": {
   "abstract" : [
     {
       "text" : "A type that can decode requests when ",
@@ -184,67 +182,38 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookTriggerRequest",
+  "title" : "ParseHookTriggerObjectRequest",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/isGet": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Whether the query a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "get",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " or a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "find",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
-      "kind" : "keyword",
-      "text" : "var"
+      "kind" : "identifier",
+      "text" : "init"
     },
     {
       "kind" : "text",
-      "text" : " "
+      "text" : "("
     },
     {
-      "kind" : "identifier",
-      "text" : "isGet"
+      "kind" : "externalParam",
+      "text" : "from"
     },
     {
       "kind" : "text",
@@ -252,20 +221,24 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/isGet",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "isGet",
+  "title" : "init(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/isget"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/init(from:)"
 }
 }
 }

@@ -7,7 +7,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "masterKey",
+          "text" : "primaryKey",
           "type" : "text"
         }
       ],
@@ -204,7 +204,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "masterKey",
+          "text" : "primaryKey",
           "type" : "text"
         }
       ],

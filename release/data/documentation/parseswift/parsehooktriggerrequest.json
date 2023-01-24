@@ -90,14 +90,6 @@
             },
             {
               "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "genericParameter",
-              "text" : "T"
-            },
-            {
-              "kind" : "text",
               "text" : "> "
             },
             {
@@ -121,24 +113,6 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A9CloudUserP",
               "text" : "ParseCloudUser"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "text" : "T"
-            },
-            {
-              "kind" : "text",
-              "text" : " : "
-            },
-            {
-              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
-              "text" : "ParseObject"
             }
           ]
         }
@@ -201,6 +175,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
@@ -231,21 +206,12 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/clients",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/contentLength",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/event",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/file",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/fileSize",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/headers",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/installationId",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/ipAddress",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/isGet",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/object",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/objects",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/original",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/primaryKey",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/query",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/subscriptions",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/triggerName",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/user"
       ],
@@ -365,15 +331,7 @@
       "type" : "text"
     },
     {
-      "text" : "can decode requests when ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseHookFunctionable",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " functions are called.",
+      "text" : "can decode requests.",
       "type" : "text"
     }
   ],
@@ -562,88 +520,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/clients"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/contentLength": {
-  "abstract" : [
-    {
-      "text" : "The value from Content-Length header.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "contentLength"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/contentLength",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "contentLength",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/contentlength"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/event": {
-  "abstract" : [
-    {
-      "text" : "The live query event that triggered the request.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "event"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/event",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "event",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/event"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/file": {
   "abstract" : [
     {
@@ -768,22 +644,6 @@
         "type" : "codeVoice"
       },
       {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
         "text" : ".",
         "type" : "text"
       }
@@ -874,22 +734,6 @@
       },
       {
         "code" : "ParseCloudUser",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
         "type" : "codeVoice"
       },
       {
@@ -1118,196 +962,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/ipaddress"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/isGet": {
-  "abstract" : [
-    {
-      "text" : "Whether the query a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "get",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : " or a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "find",
-          "type" : "text"
-        }
-      ],
-      "type" : "strong"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "isGet"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/isGet",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "isGet",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/isget"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/object": {
-  "abstract" : [
-    {
-      "text" : "An object from the hook call.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "object"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/object",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "object",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/object"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/objects": {
-  "abstract" : [
-    {
-      "text" : "The results the query yielded..",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "objects"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/objects",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "objects",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/objects"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/original": {
-  "abstract" : [
-    {
-      "text" : "If set, the object, as currently stored.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "original"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/original",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "original",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/original"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/primaryKey": {
   "abstract" : [
     {
@@ -1317,7 +971,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "masterKey",
+          "text" : "primaryKey",
           "type" : "text"
         }
       ],
@@ -1369,146 +1023,6 @@
   "title" : "primaryKey",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/primarykey"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/query": {
-  "abstract" : [
-    {
-      "text" : "The query from the hook call.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "query"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV",
-      "text" : "Query"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/query",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "query",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/query"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/sendEvent": {
-  "abstract" : [
-    {
-      "text" : "If the LiveQuery event should be sent to the client. Set to false to prevent",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "LiveQuery from pushing to the client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "sendEvent"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "sendEvent",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/sendevent"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/subscriptions": {
-  "abstract" : [
-    {
-      "text" : "The number of subscriptions connected.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "subscriptions"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/subscriptions",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscriptions",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/subscriptions"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/triggerName": {
   "abstract" : [
@@ -1629,18 +1143,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/user"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequestable": {
   "abstract" : [
     {
-      "text" : "Objects that conform to the ",
+      "text" : "Conforming to ",
       "type" : "text"
     },
     {
-      "code" : "ParseObject",
+      "code" : "ParseHookTriggerRequestable",
       "type" : "codeVoice"
     },
     {
-      "text" : " protocol have a local representation of data persisted to the Parse Server.",
+      "text" : " allows you to create types that",
       "type" : "text"
     },
     {
@@ -1648,7 +1162,15 @@
       "type" : "text"
     },
     {
-      "text" : "This is the main protocol that is used to interact with objects in your app.",
+      "text" : "can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " triggers are called.",
       "type" : "text"
     }
   ],
@@ -1663,21 +1185,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseObject"
+      "text" : "ParseHookTriggerRequestable"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseObject"
+      "text" : "ParseHookTriggerRequestable"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseObject",
+  "title" : "ParseHookTriggerRequestable",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequestable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [

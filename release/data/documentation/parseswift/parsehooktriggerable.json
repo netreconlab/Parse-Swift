@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "ParseHookFunctionable",
+      "code" : "ParseHookTriggerable",
       "type" : "codeVoice"
     },
     {
@@ -269,7 +269,7 @@
       "type" : "text"
     },
     {
-      "code" : "ParseHookFunctionable",
+      "code" : "ParseHookTriggerable",
       "type" : "codeVoice"
     },
     {

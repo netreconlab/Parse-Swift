@@ -419,7 +419,7 @@
       "type" : "text"
     },
     {
-      "code" : "ParseHookFunctionable",
+      "code" : "ParseHookTriggerable",
       "type" : "codeVoice"
     },
     {

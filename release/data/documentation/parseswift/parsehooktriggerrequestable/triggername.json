@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "If set, the object, as currently stored.",
+      "text" : "The types of Parse Hook Trigger.",
       "type" : "text"
     }
   ],
@@ -9,17 +9,17 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/original"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable\/triggerName"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A18HookTriggerRequestV8originalq_Sgvp",
+    "externalID" : "s:10ParseSwift0A22HookTriggerRequestableP11triggerNameSSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -31,7 +31,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "original"
+        "text" : "triggerName"
       },
       {
         "kind" : "text",
@@ -39,8 +39,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-        "text" : "T"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       },
       {
         "kind" : "text",
@@ -52,10 +52,11 @@
         "name" : "ParseSwift"
       }
     ],
+    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "original"
+    "title" : "triggerName"
   },
   "primaryContentSections" : [
     {
@@ -78,7 +79,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "original"
+              "text" : "triggerName"
             },
             {
               "kind" : "text",
@@ -86,12 +87,20 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-              "text" : "T"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : "?"
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -110,7 +119,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktriggerrequest\/original"
+        "\/documentation\/parseswift\/parsehooktriggerrequestable\/triggername"
       ],
       "traits" : [
         {
@@ -132,10 +141,26 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequestable": {
   "abstract" : [
     {
-      "text" : "A type that can decode requests when ",
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerRequestable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows you to create types that",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "can decode requests when ",
       "type" : "text"
     },
     {
@@ -150,7 +175,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "protocol"
     },
     {
       "kind" : "text",
@@ -158,26 +183,26 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerRequestable"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerRequestable"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookTriggerRequest",
+  "title" : "ParseHookTriggerRequestable",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequestable"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/original": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequestable/triggerName": {
   "abstract" : [
     {
-      "text" : "If set, the object, as currently stored.",
+      "text" : "The types of Parse Hook Trigger.",
       "type" : "text"
     }
   ],
@@ -192,7 +217,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "original"
+      "text" : "triggerName"
     },
     {
       "kind" : "text",
@@ -200,20 +225,21 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
-      "text" : "T"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/original",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable\/triggerName",
   "kind" : "symbol",
+  "required" : true,
   "role" : "symbol",
-  "title" : "original",
+  "title" : "triggerName",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/original"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequestable\/triggername"
 }
 }
 }

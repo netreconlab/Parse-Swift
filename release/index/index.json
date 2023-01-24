@@ -553,13 +553,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       }
                     ],
@@ -677,13 +677,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
-                        "title" : "var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.type.property-499yb",
+                        "title" : "static var className: String",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.type.property-499yb",
-                        "title" : "static var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
+                        "title" : "var className: String",
                         "type" : "property"
                       }
                     ],
@@ -1365,6 +1365,27 @@
             ],
             "path" : "\/documentation\/parseswift\/parsehookrequestable",
             "title" : "ParseHookRequestable",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerrequestable\/clients",
+                "title" : "var clients: Int?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerrequestable\/triggername",
+                "title" : "var triggerName: String?",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parsehooktriggerrequestable",
+            "title" : "ParseHookTriggerRequestable",
             "type" : "protocol"
           },
           {
@@ -8001,6 +8022,207 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/clients",
+                "title" : "var clients: Int?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/event",
+                "title" : "var event: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/headers",
+                "title" : "var headers: [String : String]?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/installationid",
+                "title" : "var installationId: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/ipaddress",
+                "title" : "var ipAddress: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/isget",
+                "title" : "var isGet: Bool?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/object",
+                "title" : "var object: T?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/objects",
+                "title" : "var objects: [T]?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/original",
+                "title" : "var original: T?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/primarykey",
+                "title" : "var primaryKey: Bool?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/query",
+                "title" : "var query: Query<T>?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/sendevent",
+                "title" : "var sendEvent: Bool?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/subscriptions",
+                "title" : "var subscriptions: Int?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/triggername",
+                "title" : "var triggerName: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/user",
+                "title" : "var user: U?",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/getcontext()",
+                "title" : "func getContext<V>() throws -> V",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/getlog()",
+                "title" : "func getLog<V>() throws -> V",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Aliases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/usertype",
+                "title" : "ParseHookTriggerObjectRequest.UserType",
+                "type" : "typealias"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/hydrateuser(options:)",
+                    "title" : "func hydrateUser(options: API.Options) async throws -> Self",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/hydrateuser(options:callbackqueue:completion:)",
+                    "title" : "func hydrateUser(options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Self, ParseError>) -> Void)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/hydrateuserpublisher(options:)",
+                    "title" : "func hydrateUserPublisher(options: API.Options) -> Future<Self, ParseError>",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/options()",
+                    "title" : "func options() -> API.Options",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/parsehookrequestable-implementations",
+                "title" : "ParseHookRequestable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest",
+            "title" : "ParseHookTriggerObjectRequest",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/init(from:)",
                 "title" : "init(from: Decoder) throws",
                 "type" : "init"
@@ -8012,16 +8234,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/clients",
                 "title" : "var clients: Int?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/contentlength",
-                "title" : "var contentLength: Int?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/event",
-                "title" : "var event: String?",
                 "type" : "property"
               },
               {
@@ -8050,43 +8262,8 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/isget",
-                "title" : "var isGet: Bool?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/object",
-                "title" : "var object: T?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/objects",
-                "title" : "var objects: [T]?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/original",
-                "title" : "var original: T?",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/primarykey",
                 "title" : "var primaryKey: Bool?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/query",
-                "title" : "var query: Query<T>?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/sendevent",
-                "title" : "var sendEvent: Bool?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/subscriptions",
-                "title" : "var subscriptions: Int?",
                 "type" : "property"
               },
               {

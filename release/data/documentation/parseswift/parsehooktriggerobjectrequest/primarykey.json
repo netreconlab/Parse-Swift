@@ -1,7 +1,20 @@
 {
   "abstract" : [
     {
-      "text" : "If the LiveQuery event should be sent to the client. Set to false to prevent",
+      "text" : "Specifies if the ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "primaryKey",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " was used in the",
       "type" : "text"
     },
     {
@@ -9,7 +22,7 @@
       "type" : "text"
     },
     {
-      "text" : "LiveQuery from pushing to the client.",
+      "text" : "Parse hook call.",
       "type" : "text"
     }
   ],
@@ -17,17 +30,17 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/primaryKey"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A18HookTriggerRequestV9sendEventSbSgvp",
+    "externalID" : "s:10ParseSwift0A24HookTriggerObjectRequestV10primaryKeySbSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -39,7 +52,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "sendEvent"
+        "text" : "primaryKey"
       },
       {
         "kind" : "text",
@@ -63,7 +76,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "sendEvent"
+    "title" : "primaryKey"
   },
   "primaryContentSections" : [
     {
@@ -86,7 +99,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "sendEvent"
+              "text" : "primaryKey"
             },
             {
               "kind" : "text",
@@ -118,7 +131,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktriggerrequest\/sendevent"
+        "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/primarykey"
       ],
       "traits" : [
         {
@@ -140,7 +153,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest": {
   "abstract" : [
     {
       "text" : "A type that can decode requests when ",
@@ -166,26 +179,39 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookTriggerRequest",
+  "title" : "ParseHookTriggerObjectRequest",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/sendEvent": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest/primaryKey": {
   "abstract" : [
     {
-      "text" : "If the LiveQuery event should be sent to the client. Set to false to prevent",
+      "text" : "Specifies if the ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "primaryKey",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " was used in the",
       "type" : "text"
     },
     {
@@ -193,7 +219,7 @@
       "type" : "text"
     },
     {
-      "text" : "LiveQuery from pushing to the client.",
+      "text" : "Parse hook call.",
       "type" : "text"
     }
   ],
@@ -208,7 +234,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "sendEvent"
+      "text" : "primaryKey"
     },
     {
       "kind" : "text",
@@ -224,12 +250,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/sendEvent",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/primaryKey",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "sendEvent",
+  "title" : "primaryKey",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/sendevent"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/primarykey"
 }
 }
 }

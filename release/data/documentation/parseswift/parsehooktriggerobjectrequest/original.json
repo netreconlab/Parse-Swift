@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "An object from the hook call.",
+      "text" : "If set, the object, as currently stored.",
       "type" : "text"
     }
   ],
@@ -9,17 +9,17 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/object"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/original"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A18HookTriggerRequestV6objectq_Sgvp",
+    "externalID" : "s:10ParseSwift0A24HookTriggerObjectRequestV8originalq_Sgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -31,7 +31,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "object"
+        "text" : "original"
       },
       {
         "kind" : "text",
@@ -39,7 +39,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A24HookTriggerObjectRequestV1Tq_mfp",
         "text" : "T"
       },
       {
@@ -55,7 +55,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "object"
+    "title" : "original"
   },
   "primaryContentSections" : [
     {
@@ -78,7 +78,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "object"
+              "text" : "original"
             },
             {
               "kind" : "text",
@@ -86,7 +86,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A24HookTriggerObjectRequestV1Tq_mfp",
               "text" : "T"
             },
             {
@@ -110,7 +110,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktriggerrequest\/object"
+        "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/original"
       ],
       "traits" : [
         {
@@ -132,7 +132,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest": {
   "abstract" : [
     {
       "text" : "A type that can decode requests when ",
@@ -158,26 +158,26 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerRequest"
+      "text" : "ParseHookTriggerObjectRequest"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookTriggerRequest",
+  "title" : "ParseHookTriggerObjectRequest",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/object": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest/original": {
   "abstract" : [
     {
-      "text" : "An object from the hook call.",
+      "text" : "If set, the object, as currently stored.",
       "type" : "text"
     }
   ],
@@ -192,7 +192,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "object"
+      "text" : "original"
     },
     {
       "kind" : "text",
@@ -200,7 +200,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A18HookTriggerRequestV1Tq_mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A24HookTriggerObjectRequestV1Tq_mfp",
       "text" : "T"
     },
     {
@@ -208,12 +208,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/object",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest\/original",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "object",
+  "title" : "original",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/object"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/original"
 }
 }
 }

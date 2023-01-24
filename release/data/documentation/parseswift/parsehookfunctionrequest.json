@@ -947,7 +947,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "masterKey",
+          "text" : "primaryKey",
           "type" : "text"
         }
       ],
@@ -1155,15 +1155,7 @@
       "type" : "text"
     },
     {
-      "text" : "can decode requests when ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseHookFunctionable",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " functions are called.",
+      "text" : "can decode requests.",
       "type" : "text"
     }
   ],
