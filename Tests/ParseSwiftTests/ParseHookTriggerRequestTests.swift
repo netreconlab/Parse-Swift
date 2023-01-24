@@ -78,9 +78,10 @@ class ParseHookTriggerRequestTests: XCTestCase {
         let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
                                                                  ipAddress: "1.1.1.1",
                                                                  headers: ["yolo": "me"],
+                                                                 triggerName: .beforeDelete,
                                                                  object: object)
         // swiftlint:disable:next line_length
-        let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"}}"
+        let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
         let triggerRequest2 = ParseHookTriggerRequest<User, User>(ipAddress: "1.1.1.1",
                                                                   headers: ["yolo": "me"],
