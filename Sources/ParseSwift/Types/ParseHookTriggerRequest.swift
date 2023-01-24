@@ -22,7 +22,7 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser, T: ParseObject>: ParseH
     public var ipAddress: String?
     public var headers: [String: String]?
     /// The types of Parse Hook Trigger.
-    public var triggerName: ParseHookTriggerType?
+    public var triggerName: String?
     /// An object from the hook call.
     public var object: T?
     /// The results the query yielded..
