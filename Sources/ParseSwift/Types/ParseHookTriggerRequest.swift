@@ -38,3 +38,32 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
              clients, triggerName
     }
 }
+
+extension ParseHookTriggerRequest {
+
+    /**
+     Get the Parse Server logger using any type that conforms to `Codable`.
+     - returns: The sound casted to the inferred type.
+     - throws: An error of type `ParseError`.
+     */
+    public func getLog<V>() throws -> V where V: Codable {
+        guard let log = log?.value as? V else {
+            throw ParseError(code: .otherCause,
+                             message: "Cannot be casted to the inferred type")
+        }
+        return log
+    }
+
+    /**
+     Get the context using any type that conforms to `Codable`.
+     - returns: The sound casted to the inferred type.
+     - throws: An error of type `ParseError`.
+     */
+    public func getContext<V>() throws -> V where V: Codable {
+        guard let context = context?.value as? V else {
+            throw ParseError(code: .otherCause,
+                             message: "Cannot be casted to the inferred type")
+        }
+        return context
+    }
+}

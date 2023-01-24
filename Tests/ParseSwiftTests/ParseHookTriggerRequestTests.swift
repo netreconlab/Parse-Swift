@@ -14,6 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable:next type_body_length
 class ParseHookTriggerRequestTests: XCTestCase {
 
     struct User: ParseCloudUser {
@@ -102,7 +103,7 @@ class ParseHookTriggerRequestTests: XCTestCase {
         XCTAssertEqual(triggerRequest2.description, expected2)
     }
 
-    func testGetLog() async throws {
+    func testGetLogObject() async throws {
         let object = User(objectId: "geez")
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
                                                                        ipAddress: "1.1.1.1",
@@ -113,7 +114,7 @@ class ParseHookTriggerRequestTests: XCTestCase {
         XCTAssertEqual(log, "peace")
     }
 
-    func testGetLogError() async throws {
+    func testGetLogErrorObject() async throws {
         let object = User(objectId: "geez")
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
                                                                        ipAddress: "1.1.1.1",
@@ -132,7 +133,7 @@ class ParseHookTriggerRequestTests: XCTestCase {
         }
     }
 
-    func testGetContext() async throws {
+    func testGetContextObject() async throws {
         let object = User(objectId: "geez")
         let context = ["peace": "out"]
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
@@ -144,7 +145,68 @@ class ParseHookTriggerRequestTests: XCTestCase {
         XCTAssertEqual(requestContext, context)
     }
 
+    func testGetLog() async throws {
+        let object = User(objectId: "geez")
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object,
+                                                                       log: AnyCodable("peace"))
+        let log: String = try triggerRequest.getLog()
+        XCTAssertEqual(log, "peace")
+    }
+
+    func testGetLogError() async throws {
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           log: AnyCodable("peace"))
+        do {
+            let _: Double = try triggerRequest.getLog()
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("inferred"))
+        }
+    }
+
+    func testGetContext() async throws {
+        let object = User(objectId: "geez")
+        let context = ["peace": "out"]
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           context: AnyCodable(context))
+        let requestContext: [String: String] = try triggerRequest.getContext()
+        XCTAssertEqual(requestContext, context)
+    }
+
     func testGetContextError() async throws {
+        let object = User(objectId: "geez")
+        let context = ["peace": "out"]
+        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
+                                                           ipAddress: "1.1.1.1",
+                                                           headers: ["yolo": "me"],
+                                                           file: ParseFile(data: Data()),
+                                                           context: AnyCodable(context))
+        do {
+            let _: Double = try triggerRequest.getContext()
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("inferred"))
+        }
+    }
+
+    func testGetContextErrorObject() async throws {
         let object = User(objectId: "geez")
         let context = ["peace": "out"]
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
