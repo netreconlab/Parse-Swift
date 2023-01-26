@@ -49,7 +49,7 @@ class ParseLiveQueryTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -74,7 +74,7 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testWebsocketURL() throws {
-        guard let originalURL = URL(string: "http://localhost:1337/1"),
+        guard let originalURL = URL(string: "http://localhost:1337/parse"),
             var components = URLComponents(url: originalURL,
                                              resolvingAgainstBaseURL: false) else {
             XCTFail("Should have retrieved URL components")
@@ -101,7 +101,7 @@ class ParseLiveQueryTests: XCTestCase {
     }
 
     func testInitializeWithNewURL() throws {
-        guard let originalURL = URL(string: "http://parse:1337/1"),
+        guard let originalURL = URL(string: "http://parse:1337/parse"),
             var components = URLComponents(url: originalURL,
                                              resolvingAgainstBaseURL: false) else {
             XCTFail("Should have retrieved URL components")

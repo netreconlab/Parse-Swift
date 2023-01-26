@@ -92,7 +92,7 @@ class ParseFileTransferableTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -139,7 +139,7 @@ class ParseFileTransferableTests: XCTestCase {
     }
 
     func testSDKInitializers() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -162,7 +162,7 @@ class ParseFileTransferableTests: XCTestCase {
     }
 
     func testMakeSuccessfulUploadResponse() throws {
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -192,7 +192,7 @@ class ParseFileTransferableTests: XCTestCase {
                                   tags: ["Hey": "now"])
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -222,7 +222,7 @@ class ParseFileTransferableTests: XCTestCase {
         let fileName = "sampleData.txt"
         let parseFile = ParseFile(name: fileName, localURL: tempFilePath)
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -254,7 +254,7 @@ class ParseFileTransferableTests: XCTestCase {
                                   tags: ["Hey": "now"])
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -283,7 +283,7 @@ class ParseFileTransferableTests: XCTestCase {
         let fileName = "sampleData.txt"
         let parseFile = ParseFile(name: fileName, localURL: tempFilePath)
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }

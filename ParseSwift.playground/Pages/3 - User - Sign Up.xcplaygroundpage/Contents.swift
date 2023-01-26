@@ -54,7 +54,7 @@ struct User: ParseUser {
     queue and returns to specified callbackQueue.
     If no callbackQueue is specified it returns to main queue.
 */
-User.signup(username: "hello", password: "world") { results in
+User.signup(username: "hello", password: "TestMePass123^") { results in
 
     switch results {
     case .success(let user):
@@ -77,7 +77,7 @@ User.signup(username: "hello", password: "world") { results in
 
 //: You can verify the password of the user.
 //: Note that usingPost should be set to **true** on newer servers.
-User.verifyPassword(password: "world", usingPost: false) { results in
+User.verifyPassword(password: "TestMePass123^", usingPost: false) { results in
 
     switch results {
     case .success(let user):

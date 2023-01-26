@@ -10,7 +10,7 @@ import Foundation
 
 /**
  Conforming to `ParseHookRequestable` allows you to create types that
- can decode requests when `ParseHookFunctionable` functions are called.
+ can decode requests.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
  use the master key in server-side applications where the key is kept secure and not
  exposed to the public.
@@ -18,7 +18,7 @@ import Foundation
 public protocol ParseHookRequestable: ParseTypeable {
     associatedtype UserType: ParseCloudUser
     /**
-     Specifies if the **masterKey** was used in the
+     Specifies if the **primaryKey** was used in the
      Parse hook call.
      */
     var primaryKey: Bool? { get }

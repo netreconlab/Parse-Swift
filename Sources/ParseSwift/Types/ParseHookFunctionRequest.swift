@@ -21,6 +21,8 @@ public struct ParseHookFunctionRequest<U: ParseCloudUser, P: ParseHookParametabl
     public var installationId: String?
     public var ipAddress: String?
     public var headers: [String: String]?
+    /// The name of Parse Hook Function.
+    public var functionName: String?
     /**
      The `ParseHookParametable` object containing the parameters passed
      to the function.
@@ -33,7 +35,7 @@ public struct ParseHookFunctionRequest<U: ParseCloudUser, P: ParseHookParametabl
         case primaryKey = "master"
         case parameters = "params"
         case ipAddress = "ip"
-        case user, installationId,
+        case user, installationId, functionName,
              headers, log, context
     }
 }
@@ -65,4 +67,5 @@ extension ParseHookFunctionRequest {
         }
         return context
     }
+
 }

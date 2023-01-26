@@ -30,7 +30,11 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
         var emailVerified: Bool?
         var password: String?
         var authData: [String: [String: String]?]?
+
+        // These are required by ParseCloudUser
         var sessionToken: String?
+        var _failed_login_count: Int?
+        var _account_lockout_expires_at: Date?
 
         // Your custom keys
         var customKey: String?
@@ -48,7 +52,7 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -87,18 +91,18 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
-        let requestHydrated = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                  user: server,
-                                                                  installationId: installationId,
-                                                                  ipAddress: "1.1.1.1",
-                                                                  headers: ["yolo": "me"],
-                                                                  object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
+        let requestHydrated = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                        user: server,
+                                                                        installationId: installationId,
+                                                                        ipAddress: "1.1.1.1",
+                                                                        headers: ["yolo": "me"],
+                                                                        object: object)
 
         let publisher = triggerRequest.hydrateUserPublisher()
             .sink(receiveCompletion: { result in
@@ -129,12 +133,12 @@ class ParseHookTriggerRequestCombineTests: XCTestCase {
 
         let object = User(objectId: "geez")
         let installationId = "cat"
-        let triggerRequest = ParseHookTriggerRequest<User, User>(primaryKey: true,
-                                                                 user: user,
-                                                                 installationId: installationId,
-                                                                 ipAddress: "1.1.1.1",
-                                                                 headers: ["yolo": "me"],
-                                                                 object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
+                                                                       user: user,
+                                                                       installationId: installationId,
+                                                                       ipAddress: "1.1.1.1",
+                                                                       headers: ["yolo": "me"],
+                                                                       object: object)
         let publisher = triggerRequest.hydrateUserPublisher()
             .sink(receiveCompletion: { result in
 

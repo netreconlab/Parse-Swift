@@ -30,7 +30,7 @@ class APICommandTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -126,7 +126,7 @@ class APICommandTests: XCTestCase {
     func testSetServerURLOption() throws {
         let serverURL1 = API.serverURL(options: [])
         XCTAssertEqual(Parse.configuration.serverURL, serverURL1)
-        let newServerURLString = "http://parse:1337/1"
+        let newServerURLString = "http://parse:1337/parse"
         let serverURL2 = API.serverURL(options: [.serverURL(newServerURLString)])
         XCTAssertNotEqual(Parse.configuration.serverURL, serverURL2)
         XCTAssertEqual(serverURL2, URL(string: newServerURLString))

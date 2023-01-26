@@ -24,7 +24,7 @@ class ParseFileCombineTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -73,7 +73,7 @@ class ParseFileCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -117,7 +117,7 @@ class ParseFileCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
@@ -168,7 +168,7 @@ class ParseFileCombineTests: XCTestCase {
         let parseFile = ParseFile(name: "sampleData.txt", data: sampleData)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -212,7 +212,7 @@ class ParseFileCombineTests: XCTestCase {
         let parseFile = ParseFile(name: "sampleData.txt", data: sampleData)
 
         // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_sampleData.txt") else {
             XCTFail("Should create URL")
             return
         }
@@ -253,7 +253,7 @@ class ParseFileCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
-        guard let parseFileURL = URL(string: "http://localhost:1337/1/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
+        guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
             return
         }

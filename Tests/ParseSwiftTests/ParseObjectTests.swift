@@ -317,7 +317,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let url = URL(string: "http://localhost:1337/1") else {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
@@ -1995,7 +1995,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         guard let cloudPath = URL(string: "https://parseplatform.org/img/logo.svg"),
               // swiftlint:disable:next line_length
-              let parseURL = URL(string: "http://localhost:1337/1/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
+              let parseURL = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
             XCTFail("Should create URL")
             return
         }
