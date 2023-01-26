@@ -119,7 +119,7 @@ public struct ParseConfiguration {
      Create a Parse Swift configuration.
      - parameter applicationId: The application id for your Parse application.
      - parameter clientKey: The client key for your Parse application.
-     - parameter primaryKey: The master key for your Parse application. This key should only be
+     - parameter primaryKey: The primary key for your Parse application. This key should only be
      specified when using the SDK on a server.
      - parameter serverURL: The server URL to connect to a Parse Server.
      - parameter liveQueryServerURL: The live query server URL to connect to a Parse LiveQuery Server.

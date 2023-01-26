@@ -64,7 +64,7 @@ public protocol QueryObservable: ObservableObject {
     /**
       Executes an aggregate query *asynchronously* and updates the view model when complete.
         - requires: `.usePrimaryKey` has to be available. It is recommended to only
-        use the master key in server-side applications where the key is kept secure and not
+        use the primary key in server-side applications where the key is kept secure and not
         exposed to the public.
         - parameter pipeline: A pipeline of stages to process query.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.

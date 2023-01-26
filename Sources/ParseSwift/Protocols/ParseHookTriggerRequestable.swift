@@ -12,7 +12,7 @@ import Foundation
  Conforming to `ParseHookTriggerRequestable` allows you to create types that
  can decode requests when `ParseHookTriggerable` triggers are called.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public protocol ParseHookTriggerRequestable: ParseHookRequestable {

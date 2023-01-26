@@ -12,7 +12,7 @@ import Foundation
  The PushStatus on the Parse Server.
  - warning: These objects are only read-only.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public struct ParsePushStatus<V: ParsePushPayloadable>: ParsePushStatusable {
