@@ -14,25 +14,25 @@ import XCTest
 
 class ParseACLTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url, testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url, testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     struct User: ParseUser {
@@ -100,8 +100,13 @@ class ParseACLTests: XCTestCase {
         var name: String?
     }
 
-    func testCantSetDefaultACLWhenNotLoggedIn() throws {
-        XCTAssertThrowsError(try ParseACL.defaultACL())
+    func testCantSetDefaultACLWhenNotLoggedIn() async throws {
+        do {
+            try await ParseACL.defaultACL()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
     }
 
     func testPublicAccess() {
@@ -246,14 +251,14 @@ class ParseACLTests: XCTestCase {
         XCTAssertTrue(acl.description.contains("\"d\":{\"write\":true}"))
     }
 
-    func testDefaultACLNoUser() {
+    func testDefaultACLNoUser() async throws {
         var newACL = ParseACL()
         let userId = "someUserID"
         newACL.setReadAccess(objectId: userId, value: true)
         do {
-            var defaultACL = try ParseACL.defaultACL()
+            var defaultACL = try await ParseACL.defaultACL()
             XCTAssertNotEqual(newACL, defaultACL)
-            defaultACL = try ParseACL.setDefaultACL(defaultACL, withAccessForCurrentUser: true)
+            defaultACL = try await ParseACL.setDefaultACL(defaultACL, withAccessForCurrentUser: true)
             if defaultACL.getReadAccess(objectId: userId) {
                 XCTFail("Should not have set read access because there is no current user")
             }
@@ -262,8 +267,8 @@ class ParseACLTests: XCTestCase {
         }
 
         do {
-            _ = try ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: true)
-            let defaultACL = try ParseACL.defaultACL()
+            _ = try await ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: true)
+            let defaultACL = try await ParseACL.defaultACL()
             if !defaultACL.getReadAccess(objectId: userId) {
                 XCTFail("Should have set defaultACL with read access even though there is no current user")
             }
@@ -272,11 +277,7 @@ class ParseACLTests: XCTestCase {
         }
     }
 
-    func testNoDefaultACL() {
-        XCTAssertThrowsError(try ParseACL.defaultACL())
-    }
-
-    func testDefaultACL() {
+    func testDefaultACL() async {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -291,12 +292,12 @@ class ParseACLTests: XCTestCase {
         }
 
         do {
-            _ = try User.signup(username: loginUserName, password: loginPassword)
+            _ = try await User.signup(username: loginUserName, password: loginPassword)
         } catch {
             XCTFail("Could not signUp user: \(error)")
         }
 
-        guard let userObjectId = User.current?.objectId else {
+        guard let userObjectId = await User.current()?.objectId else {
             XCTFail("Could not get objectId of currentUser")
             return
         }
@@ -305,20 +306,25 @@ class ParseACLTests: XCTestCase {
         newACL.publicRead = true
         newACL.publicWrite = true
         do {
-            _ = try ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: true)
-            let defaultACL = try ParseACL.defaultACL()
+            _ = try await ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: true)
+            let defaultACL = try await ParseACL.defaultACL()
             XCTAssertEqual(newACL.publicRead, defaultACL.publicRead)
             XCTAssertEqual(newACL.publicWrite, defaultACL.publicWrite)
             XCTAssertTrue(defaultACL.getReadAccess(objectId: userObjectId))
             XCTAssertTrue(defaultACL.getWriteAccess(objectId: userObjectId))
-            try User.logout()
-            XCTAssertThrowsError(try ParseACL.defaultACL())
+            try await User.logout()
+            do {
+                _ = try await ParseACL.defaultACL()
+                XCTFail("Should have thrown error")
+            } catch {
+                XCTAssertTrue(error.containedIn([.otherCause]))
+            }
         } catch {
             XCTFail("Should have set new ACL. Error \(error)")
         }
     }
 
-    func testDefaultACLDontUseCurrentUser() {
+    func testDefaultACLDontUseCurrentUser() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -332,12 +338,12 @@ class ParseACLTests: XCTestCase {
             }
         }
         do {
-            _ = try User.signup(username: loginUserName, password: loginPassword)
+            _ = try await User.signup(username: loginUserName, password: loginPassword)
         } catch {
             XCTFail("Could not signUp user: \(error.localizedDescription)")
         }
 
-        guard let userObjectId = User.current?.objectId else {
+        guard let userObjectId = await User.current()?.objectId else {
             XCTFail("Could not get objectId of currentUser")
             return
         }
@@ -345,8 +351,8 @@ class ParseACLTests: XCTestCase {
         var newACL = ParseACL()
         newACL.setReadAccess(objectId: "someUserID", value: true)
         do {
-            _ = try ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: false)
-            let defaultACL = try ParseACL.defaultACL()
+            _ = try await ParseACL.setDefaultACL(newACL, withAccessForCurrentUser: false)
+            let defaultACL = try await ParseACL.defaultACL()
             XCTAssertTrue(defaultACL.getReadAccess(objectId: "someUserID"))
             XCTAssertFalse(defaultACL.getReadAccess(objectId: userObjectId))
             XCTAssertFalse(defaultACL.getWriteAccess(objectId: userObjectId))

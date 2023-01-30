@@ -120,26 +120,26 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     let loginUserName = "hello10"
     let loginPassword = "world"
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testOriginalDataNeverSavesToKeychain() async throws {
@@ -323,7 +323,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = User.current else {
+        guard let user = await User.current() else {
             XCTFail("Should unwrap")
             return
         }
@@ -727,7 +727,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = User.current else {
+        guard let user = await User.current() else {
             XCTFail("Should unwrap")
             return
         }
@@ -1134,7 +1134,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = User.current else {
+        guard let user = await User.current() else {
             XCTFail("Should unwrap")
             return
         }
@@ -1162,7 +1162,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = User.current else {
+        guard let user = await User.current() else {
             XCTFail("Should unwrap")
             return
         }
@@ -1538,7 +1538,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         login()
         MockURLProtocol.removeAll()
 
-        guard let user = User.current else {
+        guard let user = await User.current() else {
             XCTFail("Should unwrap dates")
             return
         }

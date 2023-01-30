@@ -62,30 +62,30 @@ class ParseAppleTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
 
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func loginNormally() throws -> User {
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -96,7 +96,7 @@ class ParseAppleTests: XCTestCase {
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
     func testAuthenticationKeys() throws {
@@ -119,7 +119,7 @@ class ParseAppleTests: XCTestCase {
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-    func testLogin() throws {
+    func testLogin() async throws {
         var serverResponse = LoginSignupResponse()
         guard let tokenData = "this".data(using: .utf8) else {
             XCTFail("Could not convert token data to string")
@@ -175,7 +175,7 @@ class ParseAppleTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthData() throws {
+    func testLoginAuthData() async throws {
         var serverResponse = LoginSignupResponse()
         guard let tokenData = "this".data(using: .utf8) else {
             XCTFail("Could not convert token data to string")
@@ -277,12 +277,12 @@ class ParseAppleTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let user = try User.anonymous.login()
+        let user = try await User.anonymous.login()
         XCTAssertEqual(user, User.current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
     func testReplaceAnonymousWithApple() throws {
@@ -333,7 +333,7 @@ class ParseAppleTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
                 XCTAssertTrue(user.apple.isLinked)
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -379,7 +379,7 @@ class ParseAppleTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
                 XCTAssertTrue(user.apple.isLinked)
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -427,7 +427,7 @@ class ParseAppleTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
                 XCTAssertTrue(user.apple.isLinked)
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 XCTAssertEqual(User.current?.sessionToken, "myToken")
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -480,7 +480,7 @@ class ParseAppleTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
                 XCTAssertTrue(user.apple.isLinked)
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 XCTAssertEqual(User.current?.sessionToken, "myToken")
             case .failure(let error):
                 XCTFail(error.localizedDescription)

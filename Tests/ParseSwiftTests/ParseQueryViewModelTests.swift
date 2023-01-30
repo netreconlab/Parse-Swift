@@ -33,8 +33,8 @@ class ParseQueryViewModelTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -47,11 +47,11 @@ class ParseQueryViewModelTests: XCTestCase {
                                   testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
-        try KeychainStore.shared.deleteAll()
-        try ParseStorage.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testFind() {

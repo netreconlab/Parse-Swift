@@ -64,26 +64,26 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
     func testLimitedLogin() {
         var subscriptions = Set<AnyCancellable>()
@@ -184,7 +184,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthData() throws {
+    func testLoginAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         var serverResponse = LoginSignupResponse()
@@ -238,7 +238,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginNormally() throws -> User {
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -249,7 +249,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
     func testLinkLimitedLogin() throws {
@@ -291,7 +291,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
             XCTAssertTrue(user.facebook.isLinked)
-            XCTAssertFalse(user.anonymous.isLinked)
+            XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
@@ -338,7 +338,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
             XCTAssertTrue(user.facebook.isLinked)
-            XCTAssertFalse(user.anonymous.isLinked)
+            XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
@@ -389,7 +389,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
             XCTAssertTrue(user.facebook.isLinked)
-            XCTAssertFalse(user.anonymous.isLinked)
+            XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 

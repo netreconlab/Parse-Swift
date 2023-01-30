@@ -64,26 +64,26 @@ class ParseAppleAsyncTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     @MainActor
@@ -119,11 +119,12 @@ class ParseAppleAsyncTests: XCTestCase {
         }
 
         let user = try await User.apple.login(user: "testing", identityToken: tokenData)
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.apple.isLinked)
+        XCTAssertTrue(ParseApple<User>.isLinked(with: user))
     }
 
     @MainActor
@@ -155,11 +156,12 @@ class ParseAppleAsyncTests: XCTestCase {
 
         let user = try await User.apple.login(authData: ["id": "testing",
                                                          "token": "test"])
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.apple.isLinked)
+        XCTAssertTrue(ParseApple<User>.isLinked(with: user))
     }
 
     func loginNormally() async throws -> User {
@@ -205,12 +207,13 @@ class ParseAppleAsyncTests: XCTestCase {
         }
 
         let user = try await User.apple.link(user: "testing", identityToken: tokenData)
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.apple.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertTrue(ParseApple<User>.isLinked(with: user))
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
@@ -238,17 +241,18 @@ class ParseAppleAsyncTests: XCTestCase {
 
         let user = try await User.apple.link(authData: ["id": "testing",
                                                         "token": "test"])
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.apple.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertTrue(ParseApple<User>.isLinked(with: user))
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testUnlink() async throws {
-        _ = try await loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
 
         guard let tokenData = "this".data(using: .utf8) else {
@@ -259,8 +263,9 @@ class ParseAppleAsyncTests: XCTestCase {
         let authData = try ParseApple<User>
             .AuthenticationKeys.id.makeDictionary(user: "testing",
                                                   identityToken: tokenData)
-        User.current?.authData = [User.apple.__type: authData]
-        XCTAssertTrue(User.apple.isLinked)
+        user.authData = [User.apple.__type: authData]
+        await User.setCurrent(user)
+        XCTAssertTrue(ParseApple.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -280,12 +285,13 @@ class ParseAppleAsyncTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let user = try await User.apple.unlink()
-        XCTAssertEqual(user, User.current)
-        XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-        XCTAssertEqual(user.username, "hello10")
-        XCTAssertNil(user.password)
-        XCTAssertFalse(user.apple.isLinked)
+        let updatedUser = try await User.apple.unlink()
+        let currentUser = await User.current()
+        XCTAssertEqual(updatedUser, currentUser)
+        XCTAssertEqual(updatedUser.updatedAt, userOnServer.updatedAt)
+        XCTAssertEqual(updatedUser.username, "hello10")
+        XCTAssertNil(updatedUser.password)
+        XCTAssertFalse(ParseApple<User>.isLinked(with: updatedUser))
     }
 }
 #endif

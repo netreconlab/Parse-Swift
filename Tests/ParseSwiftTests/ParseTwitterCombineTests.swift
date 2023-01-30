@@ -64,26 +64,26 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testLogin() {
@@ -127,11 +127,10 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.twitter.isLinked)
+            XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
@@ -185,18 +184,17 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.twitter.isLinked)
+            XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginNormally() throws -> User {
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -207,14 +205,14 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
-    func testLink() throws {
+    func testLink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -250,23 +248,22 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.twitter.isLinked)
-            XCTAssertFalse(user.anonymous.isLinked)
+            XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
+            XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkAuthData() throws {
+    func testLinkAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -304,23 +301,22 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.twitter.isLinked)
-            XCTAssertFalse(user.anonymous.isLinked)
+            XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
+            XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlink() throws {
+    func testUnlink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
-        _ = try loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseTwitter<User>
@@ -330,8 +326,9 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
                                                   consumerSecret: "consumerSecret",
                                                   authToken: "tokenData",
                                                   authTokenSecret: "authTokenSecret")
-        User.current?.authData = [User.twitter.__type: authData]
-        XCTAssertTrue(User.twitter.isLinked)
+        user.authData = [User.twitter.__type: authData]
+        await User.setCurrent(user)
+        XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -351,7 +348,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.twitter.unlinkPublisher()
+        let publisher = User.twitter.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -361,11 +358,10 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.twitter.isLinked)
+            XCTAssertFalse(ParseTwitter<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
 

@@ -190,45 +190,45 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertNil(URLSession.liveQuery.authenticationDelegate)
     }
 
-    func testStandardMessageEncoding() throws {
-        guard let installationId = BaseParseInstallation.currentContainer.installationId else {
+    func testStandardMessageEncoding() async throws {
+        guard let installationId = await BaseParseInstallation.currentContainer().installationId else {
             XCTFail("Should have installationId")
             return
         }
         // swiftlint:disable:next line_length
         let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
-        let message = StandardMessage(operation: .connect, additionalProperties: true)
+        let message = await StandardMessage(operation: .connect, additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSubscribeMessageFieldsEncoding() throws {
+    func testSubscribeMessageFieldsEncoding() async throws {
         // swiftlint:disable:next line_length
         let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
             .fields(["hello", "points"])
             .select(["hello", "talk"])
-        let message = SubscribeMessage(operation: .subscribe,
-                                       requestId: RequestId(value: 1),
-                                       query: query,
-                                       additionalProperties: true)
+        let message = await SubscribeMessage(operation: .subscribe,
+                                             requestId: RequestId(value: 1),
+                                             query: query,
+                                             additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSubscribeMessageSelectEncoding() throws {
+    func testSubscribeMessageSelectEncoding() async throws {
         // swiftlint:disable:next line_length
         let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
             .select(["hello", "points"])
-        let message = SubscribeMessage(operation: .subscribe,
-                                       requestId: RequestId(value: 1),
-                                       query: query,
-                                       additionalProperties: true)
+        let message = await SubscribeMessage(operation: .subscribe,
+                                             requestId: RequestId(value: 1),
+                                             query: query,
+                                             additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
@@ -261,15 +261,15 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(query2.fields, ["yolo", "hello", "wow"])
     }
 
-    func testSubscribeMessageListenEncoding() throws {
+    func testSubscribeMessageListenEncoding() async throws {
         // swiftlint:disable:next line_length
         let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"watch\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
         let query = GameScore.query("points" > 9)
             .watch(["hello", "points"])
-        let message = SubscribeMessage(operation: .subscribe,
-                                       requestId: RequestId(value: 1),
-                                       query: query,
-                                       additionalProperties: true)
+        let message = await SubscribeMessage(operation: .subscribe,
+                                             requestId: RequestId(value: 1),
+                                             query: query,
+                                             additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

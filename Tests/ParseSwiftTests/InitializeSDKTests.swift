@@ -38,8 +38,8 @@ class InitializeSDKTests: XCTestCase {
         var winningNumber: Int?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -50,15 +50,15 @@ class InitializeSDKTests: XCTestCase {
         Parse.configuration.isTestingSDK = true
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         try KeychainStore.objectiveC?.deleteAllObjectiveC()
         try KeychainStore.old.deleteAll()
         URLSession.shared.configuration.urlCache?.removeAllCachedResponses()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -158,11 +158,11 @@ class InitializeSDKTests: XCTestCase {
             return
         }
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true) { (_, credential) in
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true) { (_, credential) in
             credential(.performDefaultHandling, nil)
         }
 
@@ -270,11 +270,11 @@ class InitializeSDKTests: XCTestCase {
             return
         }
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true) { (_, credential) in
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true) { (_, credential) in
             credential(.performDefaultHandling, nil)
         }
         XCTAssertNotNil(Parse.sessionDelegate.authentication)
@@ -599,11 +599,11 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
     func testMigrateObjcSDKMissingInstallation() throws {

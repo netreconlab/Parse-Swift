@@ -63,26 +63,26 @@ class ParseAnonymousAsyncTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     @MainActor
@@ -114,11 +114,13 @@ class ParseAnonymousAsyncTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        let isLinked = await user.anonymous.isLinked()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(isLinked)
     }
 
     @MainActor
@@ -150,11 +152,13 @@ class ParseAnonymousAsyncTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login(authData: .init())
-        XCTAssertEqual(user, User.current)
+        let currentUser = await User.current()
+        let isLinked = await user.anonymous.isLinked()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(isLinked)
     }
 
     @MainActor

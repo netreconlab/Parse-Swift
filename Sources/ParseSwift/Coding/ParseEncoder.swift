@@ -107,7 +107,7 @@ public struct ParseEncoder {
     }
 
     func encode(_ value: Encodable,
-                acl: ParseACL?,
+                acl: ParseACL? = nil,
                 batching: Bool = false,
                 objectsSavedBeforeThisOne: [String: PointerType]? = nil,
                 filesSavedBeforeThisOne: [UUID: ParseFile]? = nil) throws -> Data {
@@ -137,7 +137,7 @@ public struct ParseEncoder {
      - parameter skipKeys: The set of keys to skip during encoding.
      */
     public func encode<T: ParseEncodable>(_ value: T,
-                                          acl: ParseACL?,
+                                          acl: ParseACL? = nil,
                                           skipKeys: SkipKeys) throws -> Data {
         let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: skipKeys.keys())
         if let dateEncodingStrategy = dateEncodingStrategy {
@@ -156,7 +156,7 @@ public struct ParseEncoder {
 
     // swiftlint:disable large_tuple
     internal func encode<T: ParseObject>(_ value: T,
-                                         acl: ParseACL?,
+                                         acl: ParseACL? = nil,
                                          collectChildren: Bool,
                                          objectsSavedBeforeThisOne: [String: PointerType]?,
                                          filesSavedBeforeThisOne: [UUID: ParseFile]?) throws -> (encoded: Data,
@@ -183,9 +183,8 @@ public struct ParseEncoder {
                                         filesSavedBeforeThisOne: filesSavedBeforeThisOne)
     }
 
-    // swiftlint:disable:next function_parameter_count
     internal func encode(_ value: ParseEncodable,
-                         acl: ParseACL?,
+                         acl: ParseACL? = nil,
                          batching: Bool,
                          collectChildren: Bool,
                          objectsSavedBeforeThisOne: [String: PointerType]?,
@@ -275,9 +274,8 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
                          message: "This method should not be used. Either use the JSONEncoder or if you are encoding a ParseObject use \"encodeObject\"")
     }
 
-    // swiftlint:disable:next function_parameter_count
     func encodeObject(_ value: Encodable,
-                      acl: ParseACL?,
+                      acl: ParseACL? = nil,
                       batching: Bool = false,
                       collectChildren: Bool,
                       uniquePointer: PointerType?,

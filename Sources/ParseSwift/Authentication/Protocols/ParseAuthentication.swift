@@ -61,7 +61,7 @@ public protocol ParseAuthentication: Codable {
      - returns: **true** if the `ParseUser` is logged in via the repective
      authentication type. **false** if the user is not.
      */
-    func isLinked(with user: AuthenticatedUser) -> Bool
+    static func isLinked(with user: AuthenticatedUser) -> Bool
 
     /**
      Unlink the `ParseUser` *asynchronously* from the respective authentication type.
@@ -176,7 +176,7 @@ public extension ParseAuthentication {
         return current.isLinked(with: __type)
     }
 
-    func isLinked(with user: AuthenticatedUser) -> Bool {
+    static func isLinked(with user: AuthenticatedUser) -> Bool {
         user.isLinked(with: __type)
     }
 
@@ -214,7 +214,7 @@ public extension ParseAuthentication {
     }
 
     func strip(_ user: AuthenticatedUser) -> AuthenticatedUser {
-        if isLinked(with: user) {
+        if Self.isLinked(with: user) {
             var user = user
             user.authData?.updateValue(nil, forKey: __type)
             return user
