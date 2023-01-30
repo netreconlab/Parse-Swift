@@ -31,7 +31,7 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.
     */
-    static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil,
+    static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                at date: Date? = nil,
                                options: API.Options = []) async throws {
         let result = try await withCheckedThrowingContinuation { continuation in

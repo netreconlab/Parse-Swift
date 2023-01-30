@@ -99,7 +99,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil,
+    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                       at date: Date? = nil,
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
@@ -107,7 +107,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         var userInfo: [String: String]?
-        if let remoteOptions = launchOptions?[.remoteNotification] as? [String: String] {
+        if let remoteOptions = launchOptions[.remoteNotification] as? [String: String] {
             userInfo = remoteOptions
         }
         let appOppened = ParseAnalytics(name: "AppOpened",
