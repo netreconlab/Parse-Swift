@@ -48,7 +48,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A9AnalyticsV14trackAppOpened13launchOptions2at7options13callbackQueue10completionySDySo019UIApplicationLaunchH3KeyaypGSg_10Foundation4DateVSgShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyytAA0A5ErrorVGctFZ",
+    "externalID" : "s:10ParseSwift0A9AnalyticsV14trackAppOpened13launchOptions2at7options13callbackQueue10completionySDySo019UIApplicationLaunchH3KeyaypG_10Foundation4DateVSgShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyytAA0A5ErrorVGctFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -106,7 +106,7 @@
       },
       {
         "kind" : "text",
-        "text" : "]?, "
+        "text" : "], "
       },
       {
         "kind" : "externalParam",
@@ -290,7 +290,7 @@
             },
             {
               "kind" : "text",
-              "text" : "]? = nil, "
+              "text" : "], "
             },
             {
               "kind" : "externalParam",
@@ -831,7 +831,7 @@
     },
     {
       "kind" : "text",
-      "text" : "]?, "
+      "text" : "], "
     },
     {
       "kind" : "externalParam",

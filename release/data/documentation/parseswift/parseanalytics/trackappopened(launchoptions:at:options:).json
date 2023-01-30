@@ -49,7 +49,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A9AnalyticsV14trackAppOpened13launchOptions2at7optionsySDySo019UIApplicationLaunchH3KeyaypGSg_10Foundation4DateVSgShyAA3APIV6OptionOGtYaKFZ",
+    "externalID" : "s:10ParseSwift0A9AnalyticsV14trackAppOpened13launchOptions2at7optionsySDySo019UIApplicationLaunchH3KeyaypG_10Foundation4DateVSgShyAA3APIV6OptionOGtYaKFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -107,7 +107,7 @@
       },
       {
         "kind" : "text",
-        "text" : "]?, "
+        "text" : "], "
       },
       {
         "kind" : "externalParam",
@@ -242,7 +242,7 @@
             },
             {
               "kind" : "text",
-              "text" : "]? = nil, "
+              "text" : "], "
             },
             {
               "kind" : "externalParam",
@@ -665,7 +665,7 @@
     },
     {
       "kind" : "text",
-      "text" : "]?, "
+      "text" : "], "
     },
     {
       "kind" : "externalParam",

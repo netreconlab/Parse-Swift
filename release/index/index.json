@@ -553,13 +553,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
-                        "title" : "func delete(options: API.Options) async throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
+                        "title" : "func delete(options: API.Options) throws",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq",
-                        "title" : "func delete(options: API.Options) throws",
+                        "path" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       }
                     ],
@@ -614,13 +614,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) throws -> Self",
+                        "path" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
                       }
                     ],
@@ -1803,13 +1803,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -4198,12 +4198,12 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseanalytics\/trackappopened(launchoptions:at:options:)",
-                "title" : "static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey : Any]?, at: Date?, options: API.Options) async throws",
+                "title" : "static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey : Any], at: Date?, options: API.Options) async throws",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/parseanalytics\/trackappopened(launchoptions:at:options:callbackqueue:completion:)",
-                "title" : "static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey : Any]?, at: Date?, options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Void, ParseError>) -> Void)",
+                "title" : "static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey : Any], at: Date?, options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Void, ParseError>) -> Void)",
                 "type" : "method"
               },
               {
@@ -4213,7 +4213,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseanalytics\/trackappopenedpublisher(launchoptions:at:options:)",
-                "title" : "static func trackAppOpenedPublisher(launchOptions: [UIApplication.LaunchOptionsKey : Any]?, at: Date?, options: API.Options) -> Future<Void, ParseError>",
+                "title" : "static func trackAppOpenedPublisher(launchOptions: [UIApplication.LaunchOptionsKey : Any], at: Date?, options: API.Options) -> Future<Void, ParseError>",
                 "type" : "method"
               },
               {
