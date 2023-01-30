@@ -19,6 +19,7 @@ public extension ParseAnalytics {
     // MARK: Combine
 
     #if os(iOS)
+
     /**
      Tracks *asynchronously* this application being launched. If this happened as the result of the
      user opening a push notification, this method sends along information to
@@ -35,6 +36,7 @@ public extension ParseAnalytics {
     static func trackAppOpenedPublisher(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                         at date: Date? = nil,
                                         options: API.Options = []) -> Future<Void, ParseError> {
+
         Future { promise in
             Self.trackAppOpened(launchOptions: launchOptions,
                                 at: date,
@@ -42,6 +44,7 @@ public extension ParseAnalytics {
                                 completion: promise)
         }
     }
+
     #endif
 
     /**

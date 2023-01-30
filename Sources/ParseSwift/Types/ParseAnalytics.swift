@@ -82,6 +82,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
     // MARK: Intents
 
     #if os(iOS)
+
     /**
      Tracks *asynchronously* this application being launched. If this happened as the result of the
      user opening a push notification, this method sends along information to
@@ -104,11 +105,15 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
                                       completion: @escaping (Result<Void, ParseError>) -> Void) {
+
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        var userInfo: [String: String]?
-        if let remoteOptions = launchOptions[.remoteNotification] as? [String: String] {
-            userInfo = remoteOptions
+        var userInfo = [String: String]()
+        launchOptions.forEach { (key, value) in
+            guard let value = value as? String else {
+                return
+            }
+            userInfo[key.rawValue] = value
         }
         let appOppened = ParseAnalytics(name: "AppOpened",
                                         dimensions: userInfo,
