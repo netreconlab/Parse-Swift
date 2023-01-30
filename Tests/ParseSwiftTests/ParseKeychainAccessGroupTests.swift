@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable unused_optional_binding function_body_length type_body_length
+// swiftlint:disable line_length unused_optional_binding function_body_length type_body_length
 
 class ParseKeychainAccessGroupTests: XCTestCase {
 
@@ -127,12 +127,12 @@ class ParseKeychainAccessGroupTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        _ = KeychainStore.shared.removeAllObjects()
+        _ = await KeychainStore.shared.removeAllObjects()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() throws {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -145,51 +145,61 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                 return nil
             }
         }
-        _ = try User.login(username: loginUserName, password: loginPassword)
+        _ = try await User.login(username: loginUserName, password: loginPassword)
         MockURLProtocol.removeAll()
     }
 
-    func testKeychainAccessGroupCreatedOnServerInit() throws {
-        XCTAssertNotNil(ParseKeychainAccessGroup.current)
+    func testKeychainAccessGroupCreatedOnServerInit() async throws {
+        var currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertNotNil(currentAccessGroup)
         XCTAssertNil(ParseSwift.configuration.keychainAccessGroup.accessGroup)
         XCTAssertFalse(ParseSwift.configuration.keychainAccessGroup.isSyncingKeychainAcrossDevices)
-        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, ParseKeychainAccessGroup.current)
+        currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
     }
 
-    func testUpdateKeychainAccessGroup() throws {
-        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, ParseKeychainAccessGroup.current)
-        ParseKeychainAccessGroup.current = keychainAccessGroupSync
-        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, ParseKeychainAccessGroup.current)
-        ParseKeychainAccessGroup.current = nil
-        XCTAssertEqual(ParseKeychainAccessGroup.current, noKeychainAccessGroup)
+    func testUpdateKeychainAccessGroup() async throws {
+        var currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
+        await ParseKeychainAccessGroup.setCurrent(keychainAccessGroupSync)
+        currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
+        await ParseKeychainAccessGroup.setCurrent(nil)
+        currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(currentAccessGroup, noKeychainAccessGroup)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
-        ParseKeychainAccessGroup.current = keychainAccessGroupSync
-        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, ParseKeychainAccessGroup.current)
+        await ParseKeychainAccessGroup.setCurrent(keychainAccessGroupSync)
+        currentAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
     }
 
-    func testCanGetKeychainAccessGroupFromKeychain() throws {
-        guard let currentAccessGroup = ParseKeychainAccessGroup.current else {
+    func testCanGetKeychainAccessGroupFromKeychain() async throws {
+        guard let currentAccessGroup = await ParseKeychainAccessGroup.current() else {
             XCTFail("Should have unwrapped")
             return
         }
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
-        XCTAssertEqual(currentAccessGroup, ParseKeychainAccessGroup.current)
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
+        let updatedAccessGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(currentAccessGroup, updatedAccessGroup)
     }
 
-    func testDeleteKeychainAccessGroup() throws {
-        XCTAssertEqual(ParseKeychainAccessGroup.current, noKeychainAccessGroup)
+    func testDeleteKeychainAccessGroup() async throws {
+        var currentGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(currentGroup, noKeychainAccessGroup)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
-        ParseKeychainAccessGroup.deleteCurrentContainerFromKeychain()
+        await ParseKeychainAccessGroup.deleteCurrentContainerFromKeychain()
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
-        XCTAssertNil(ParseKeychainAccessGroup.current)
-        ParseKeychainAccessGroup.current = keychainAccessGroup
-        XCTAssertEqual(ParseKeychainAccessGroup.current, keychainAccessGroup)
+        currentGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertNil(currentGroup)
+        await ParseKeychainAccessGroup.setCurrent(keychainAccessGroup)
+        currentGroup = await ParseKeychainAccessGroup.current()
+        XCTAssertEqual(currentGroup, keychainAccessGroup)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, keychainAccessGroup)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func testCanCopyEntireKeychain() throws {
-        try userLogin()
+    func testCanCopyEntireKeychain() async throws {
+        try await userLogin()
         Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)
         _ = try ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
         guard let user: CurrentUserContainer<User> =
@@ -265,8 +275,8 @@ class ParseKeychainAccessGroupTests: XCTestCase {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func testRemoveOldObjectsFromKeychain() throws {
-        try userLogin()
+    func testRemoveOldObjectsFromKeychain() async throws {
+        try await userLogin()
         Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)
         _ = try ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
 
@@ -331,7 +341,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         }
     }
 
-    func testNoUserNoAccessGroupNoSync() throws {
+    func testNoUserNoAccessGroupNoSync() async throws {
         XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
                                                accessGroup: noKeychainAccessGroup))
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
@@ -340,8 +350,8 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                                                   accessGroup: noKeychainAccessGroup))
     }
 
-    func testUserNoAccessGroupNoSync() throws {
-        try userLogin()
+    func testUserNoAccessGroupNoSync() async throws {
+        try await userLogin()
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
                                                   accessGroup: noKeychainAccessGroup))
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
@@ -350,8 +360,8 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                                                   accessGroup: noKeychainAccessGroup))
     }
 
-    func testSetAccessGroupWithNoSync() throws {
-        try userLogin()
+    func testSetAccessGroupWithNoSync() async throws {
+        try await userLogin()
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
                                                   accessGroup: noKeychainAccessGroup))
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
@@ -385,8 +395,8 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                                                   accessGroup: noKeychainAccessGroup))
     }
 
-    func testSetAccessGroupWithSync() throws {
-        try userLogin()
+    func testSetAccessGroupWithSync() async throws {
+        try await userLogin()
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
                                                   accessGroup: noKeychainAccessGroup))
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
@@ -420,8 +430,8 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                                                   accessGroup: noKeychainAccessGroup))
     }
 
-    func testSetAccessNilGroupWithSync() throws {
-        try userLogin()
+    func testSetAccessNilGroupWithSync() async throws {
+        try await userLogin()
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
                                                   accessGroup: noKeychainAccessGroup))
         XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
@@ -455,11 +465,11 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                                                   accessGroup: noKeychainAccessGroup))
     }
 
-    func testSetAccessGroupWhenNotInit() throws {
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
-        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
+    func testSetAccessGroupWhenNotInit() async throws {
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
+        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
         do {
-            try ParseSwift.setAccessGroup("hello", synchronizeAcrossDevices: true)
+            try await ParseSwift.setAccessGroup("hello", synchronizeAcrossDevices: true)
             XCTFail("Should have thrown error")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -471,19 +481,19 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         }
     }
 
-    func testSetAccessGroupNoChangeInAccessGroup() throws {
-        ParseKeychainAccessGroup.current = noKeychainAccessGroup
-        try userLogin()
-        try ParseSwift.setAccessGroup(noKeychainAccessGroup.accessGroup,
-                                      synchronizeAcrossDevices: noKeychainAccessGroup.isSyncingKeychainAcrossDevices)
+    func testSetAccessGroupNoChangeInAccessGroup() async throws {
+        await ParseKeychainAccessGroup.setCurrent(noKeychainAccessGroup)
+        try await userLogin()
+        try await ParseSwift.setAccessGroup(noKeychainAccessGroup.accessGroup,
+                                            synchronizeAcrossDevices: noKeychainAccessGroup.isSyncingKeychainAcrossDevices)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
     }
 
-    func testSetAccessGroupChangeInAccessGroup() throws {
-        try userLogin()
-        ParseKeychainAccessGroup.current = keychainAccessGroup
-        try ParseSwift.setAccessGroup(helloKeychainAccessGroup.accessGroup,
-                                      synchronizeAcrossDevices: helloKeychainAccessGroup.isSyncingKeychainAcrossDevices)
+    func testSetAccessGroupChangeInAccessGroup() async throws {
+        try await userLogin()
+        await ParseKeychainAccessGroup.setCurrent(keychainAccessGroup)
+        try await ParseSwift.setAccessGroup(helloKeychainAccessGroup.accessGroup,
+                                            synchronizeAcrossDevices: helloKeychainAccessGroup.isSyncingKeychainAcrossDevices)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, helloKeychainAccessGroup)
     }
 }
