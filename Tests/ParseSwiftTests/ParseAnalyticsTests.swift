@@ -152,6 +152,32 @@ class ParseAnalyticsTests: XCTestCase {
         }
 
         let expectation = XCTestExpectation(description: "Analytics save")
+        let options = [UIApplication.LaunchOptionsKey.remoteNotification: "stop"]
+        ParseAnalytics.trackAppOpened(launchOptions: options) { result in
+
+            if case .failure(let error) = result {
+                XCTFail(error.localizedDescription)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+    func testTrackAppOpenedUIKitNotStringValue() {
+        let serverResponse = NoBody()
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation = XCTestExpectation(description: "Analytics save")
         let options = [UIApplication.LaunchOptionsKey.remoteNotification: ["stop": "drop"]]
         ParseAnalytics.trackAppOpened(launchOptions: options) { result in
 

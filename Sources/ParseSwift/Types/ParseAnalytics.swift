@@ -82,6 +82,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
     // MARK: Intents
 
     #if os(iOS)
+
     /**
      Tracks *asynchronously* this application being launched. If this happened as the result of the
      user opening a push notification, this method sends along information to
@@ -99,16 +100,20 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil,
+    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                       at date: Date? = nil,
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
                                       completion: @escaping (Result<Void, ParseError>) -> Void) {
+
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        var userInfo: [String: String]?
-        if let remoteOptions = launchOptions?[.remoteNotification] as? [String: String] {
-            userInfo = remoteOptions
+        var userInfo = [String: String]()
+        launchOptions.forEach { (key, value) in
+            guard let value = value as? String else {
+                return
+            }
+            userInfo[key.rawValue] = value
         }
         let appOppened = ParseAnalytics(name: "AppOpened",
                                         dimensions: userInfo,

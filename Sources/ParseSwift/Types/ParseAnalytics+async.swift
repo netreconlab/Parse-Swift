@@ -18,6 +18,7 @@ public extension ParseAnalytics {
     // MARK: Aysnc/Await
 
     #if os(iOS)
+
     /**
      Tracks *asynchronously* this application being launched. If this happened as the result of the
      user opening a push notification, this method sends along information to
@@ -31,9 +32,10 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.
     */
-    static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil,
+    static func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                at date: Date? = nil,
                                options: API.Options = []) async throws {
+
         let result = try await withCheckedThrowingContinuation { continuation in
             Self.trackAppOpened(launchOptions: launchOptions,
                                 at: date,
@@ -43,7 +45,9 @@ public extension ParseAnalytics {
         if case let .failure(error) = result {
             throw error
         }
+
     }
+
     #endif
 
     /**
