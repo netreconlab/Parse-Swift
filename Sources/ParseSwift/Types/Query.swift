@@ -464,48 +464,6 @@ extension Query: Queryable {
     public typealias ResultType = T
 
     /**
-      Finds objects *synchronously* based on the constructed query and sets an error if there was one.
-
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-
-      - returns: Returns an array of `ParseObject`s that were found.
-    */
-    public func find(options: API.Options = []) throws -> [ResultType] {
-        if limit == 0 {
-            return [ResultType]()
-        }
-        return try findCommand().execute(options: options)
-    }
-
-    /**
-      Query plan information for finding objects *synchronously* based on the constructed query and
-        sets an error if there was one.
-      - note: An explain query will have many different underlying types. Since Swift is a strongly
-      typed language, a developer should specify the type expected to be decoded which will be
-      different for MongoDB and PostgreSQL. One way around this is to use a type-erased wrapper
-      such as the [AnyCodable](https://github.com/Flight-School/AnyCodable) package.
-      - parameter usingMongoDB: Set to **true** if your Parse Server uses MongoDB. Defaults to **false**.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - returns: Returns a response of `Decodable` type.
-      - warning: MongoDB's **explain** does not conform to the traditional Parse Server response, so the
-      `usingMongoDB` flag needs to be set for MongoDB users. See more
-      [here](https://github.com/parse-community/parse-server/pull/7440).
-    */
-    public func findExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                          options: API.Options = []) throws -> [U] {
-        if limit == 0 {
-            return [U]()
-        }
-        if !usingMongoDB {
-            return try findExplainCommand().execute(options: options)
-        } else {
-            return try findExplainMongoCommand().execute(options: options)
-        }
-    }
-
-    /**
       Finds objects *asynchronously* and returns a completion block with the results.
 
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -522,15 +480,17 @@ extension Query: Queryable {
             }
             return
         }
-        do {
-            try findCommand().executeAsync(options: options,
-                                           callbackQueue: callbackQueue,
-                                           completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            do {
+                try await findCommand().executeAsync(options: options,
+                                                     callbackQueue: callbackQueue,
+                                                     completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -560,28 +520,30 @@ extension Query: Queryable {
             }
             return
         }
-        if !usingMongoDB {
-            do {
-                try findExplainCommand().executeAsync(options: options,
-                                                      callbackQueue: callbackQueue,
-                                                      completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            if !usingMongoDB {
+                do {
+                    try await findExplainCommand().executeAsync(options: options,
+                                                                callbackQueue: callbackQueue,
+                                                                completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
-            }
-        } else {
-            do {
-                try findExplainMongoCommand().executeAsync(options: options,
-                                                           callbackQueue: callbackQueue,
-                                                           completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+            } else {
+                do {
+                    try await findExplainMongoCommand().executeAsync(options: options,
+                                                                     callbackQueue: callbackQueue,
+                                                                     completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -696,53 +658,6 @@ extension Query: Queryable {
     }
 
     /**
-      Gets an object *synchronously* based on the constructed query and sets an error if any occurred.
-
-      - warning: This method mutates the query. It will reset the limit to `1`.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-
-      - returns: Returns a `ParseObject`.
-    */
-    public func first(options: API.Options = []) throws -> ResultType {
-        if limit == 0 {
-            throw ParseError(code: .objectNotFound,
-                             message: "Object not found on the server.")
-        }
-        return try firstCommand().execute(options: options)
-    }
-
-    /**
-     Query plan information for getting an object *synchronously* based on the
-     constructed query and sets an error if any occurred.
-
-      - warning: This method mutates the query. It will reset the limit to `1`.
-      - note: An explain query will have many different underlying types. Since Swift is a strongly
-      typed language, a developer should specify the type expected to be decoded which will be
-      different for MongoDB and PostgreSQL. One way around this is to use a type-erased wrapper
-      such as the [AnyCodable](https://github.com/Flight-School/AnyCodable) package.
-      - parameter usingMongoDB: Set to **true** if your Parse Server uses MongoDB. Defaults to **false**.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - returns: Returns a response of `Decodable` type.
-      - warning: MongoDB's **explain** does not conform to the traditional Parse Server response, so the
-      `usingMongoDB` flag needs to be set for MongoDB users. See more
-      [here](https://github.com/parse-community/parse-server/pull/7440).
-    */
-    public func firstExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                           options: API.Options = []) throws -> U {
-        if limit == 0 {
-            throw ParseError(code: .objectNotFound,
-                             message: "Object not found on the server.")
-        }
-        if !usingMongoDB {
-            return try firstExplainCommand().execute(options: options)
-        } else {
-            return try firstExplainMongoCommand().execute(options: options)
-        }
-    }
-
-    /**
       Gets an object *asynchronously* and calls the given block with the result.
 
       - warning: This method mutates the query. It will reset the limit to `1`.
@@ -762,15 +677,17 @@ extension Query: Queryable {
             }
             return
         }
-        do {
-            try firstCommand().executeAsync(options: options,
-                                            callbackQueue: callbackQueue,
-                                            completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            do {
+                try await firstCommand().executeAsync(options: options,
+                                                      callbackQueue: callbackQueue,
+                                                      completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -804,71 +721,32 @@ extension Query: Queryable {
             }
             return
         }
-        if !usingMongoDB {
-            do {
-                try firstExplainCommand().executeAsync(options: options,
-                                                       callbackQueue: callbackQueue,
-                                                       completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            if !usingMongoDB {
+                do {
+                    try await firstExplainCommand().executeAsync(options: options,
+                                                                 callbackQueue: callbackQueue,
+                                                                 completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                }
+            } else {
+                do {
+                    try await firstExplainMongoCommand().executeAsync(options: options,
+                                                                      callbackQueue: callbackQueue,
+                                                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
-        } else {
-            do {
-                try firstExplainMongoCommand().executeAsync(options: options,
-                                                            callbackQueue: callbackQueue,
-                                                            completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
-
-    /**
-      Counts objects *synchronously* based on the constructed query and sets an error if there was one.
-
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - returns: Returns the number of `ParseObject`s that match the query, or `-1` if there is an error.
-    */
-    public func count(options: API.Options = []) throws -> Int {
-        if limit == 0 {
-            return 0
-        }
-        return try countCommand().execute(options: options)
-    }
-
-    /**
-     Query plan information for counting objects *synchronously* based on the
-     constructed query and sets an error if there was one.
-      - note: An explain query will have many different underlying types. Since Swift is a strongly
-      typed language, a developer should specify the type expected to be decoded which will be
-      different for MongoDB and PostgreSQL. One way around this is to use a type-erased wrapper
-      such as the [AnyCodable](https://github.com/Flight-School/AnyCodable) package.
-      - parameter usingMongoDB: Set to **true** if your Parse Server uses MongoDB. Defaults to **false**.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - returns: Returns a response of `Decodable` type.
-      - warning: MongoDB's **explain** does not conform to the traditional Parse Server response, so the
-      `usingMongoDB` flag needs to be set for MongoDB users. See more
-      [here](https://github.com/parse-community/parse-server/pull/7440).
-    */
-    public func countExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                           options: API.Options = []) throws -> [U] {
-        if limit == 0 {
-            return [U]()
-        }
-        if !usingMongoDB {
-            return try countExplainCommand().execute(options: options)
-        } else {
-            return try countExplainMongoCommand().execute(options: options)
         }
     }
 
@@ -889,15 +767,17 @@ extension Query: Queryable {
             }
             return
         }
-        do {
-            try countCommand().executeAsync(options: options,
-                                            callbackQueue: callbackQueue,
-                                            completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            do {
+                try await countCommand().executeAsync(options: options,
+                                                      callbackQueue: callbackQueue,
+                                                      completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -927,28 +807,30 @@ extension Query: Queryable {
             }
             return
         }
-        if !usingMongoDB {
-            do {
-                try countExplainCommand().executeAsync(options: options,
-                                                       callbackQueue: callbackQueue,
-                                                       completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            if !usingMongoDB {
+                do {
+                    try await countExplainCommand().executeAsync(options: options,
+                                                                 callbackQueue: callbackQueue,
+                                                                 completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
-            }
-        } else {
-            do {
-                try countExplainMongoCommand().executeAsync(options: options,
-                                                            callbackQueue: callbackQueue,
-                                                            completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+            } else {
+                do {
+                    try await countExplainMongoCommand().executeAsync(options: options,
+                                                                      callbackQueue: callbackQueue,
+                                                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -972,15 +854,17 @@ extension Query: Queryable {
             }
             return
         }
-        do {
-            try withCountCommand().executeAsync(options: options,
-                                                callbackQueue: callbackQueue,
-                                                completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            do {
+                try await withCountCommand().executeAsync(options: options,
+                                                          callbackQueue: callbackQueue,
+                                                          completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -1010,73 +894,33 @@ extension Query: Queryable {
             }
             return
         }
-        if !usingMongoDB {
-            do {
-                try withCountExplainCommand().executeAsync(options: options,
-                                                           callbackQueue: callbackQueue,
-                                                           completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            if !usingMongoDB {
+                do {
+                    try await withCountExplainCommand().executeAsync(options: options,
+                                                                     callbackQueue: callbackQueue,
+                                                                     completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                }
+            } else {
+                do {
+                    try await withCountExplainMongoCommand().executeAsync(options: options,
+                                                                          callbackQueue: callbackQueue,
+                                                                          completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
-        } else {
-            do {
-                try withCountExplainMongoCommand().executeAsync(options: options,
-                                                                callbackQueue: callbackQueue,
-                                                                completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
         }
-    }
-
-    /**
-     Executes an aggregate query *synchronously*.
-      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-        use the primary key in server-side applications where the key is kept secure and not
-        exposed to the public.
-      - parameter pipeline: A pipeline of stages to process query.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - warning: This has not been tested thoroughly.
-      - returns: Returns the `ParseObject`s that match the query.
-    */
-    public func aggregate(_ pipeline: [[String: Encodable]],
-                          options: API.Options = []) throws -> [ResultType] {
-        if limit == 0 {
-            return [ResultType]()
-        }
-        var options = options
-        options.insert(.usePrimaryKey)
-
-        var updatedPipeline = [[String: AnyCodable]]()
-        pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
-
-        guard let encoded = try? ParseCoding.jsonEncoder()
-                .encode(self.`where`),
-            let whereString = String(data: encoded, encoding: .utf8) else {
-            throw ParseError(code: .otherCause, message: "Cannot decode where to String.")
-        }
-        var query = self
-        query.`where` = QueryWhere()
-
-        if whereString != "{}" {
-            var finishedPipeline = [["match": AnyCodable(whereString)]]
-            finishedPipeline.append(contentsOf: updatedPipeline)
-            query.pipeline = finishedPipeline
-        } else {
-            query.pipeline = updatedPipeline
-        }
-
-        return try query.aggregateCommand()
-            .execute(options: options)
     }
 
     /**
@@ -1101,97 +945,46 @@ extension Query: Queryable {
             }
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
 
-        var updatedPipeline = [[String: AnyCodable]]()
-        pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
+            var updatedPipeline = [[String: AnyCodable]]()
+            pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
 
-        guard let encoded = try? ParseCoding.jsonEncoder()
-                .encode(self.`where`),
-            let whereString = String(data: encoded, encoding: .utf8) else {
-            let error = ParseError(code: .otherCause, message: "Cannot decode where to String.")
-            callbackQueue.async {
-                completion(.failure(error))
+            guard let encoded = try? ParseCoding.jsonEncoder()
+                    .encode(self.`where`),
+                let whereString = String(data: encoded, encoding: .utf8) else {
+                let error = ParseError(code: .otherCause, message: "Cannot decode where to String.")
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+                return
             }
-            return
-        }
 
-        var query = self
-        query.`where` = QueryWhere()
+            var query = self
+            query.`where` = QueryWhere()
 
-        if whereString != "{}" {
-            var finishedPipeline = [["match": AnyCodable(whereString)]]
-            finishedPipeline.append(contentsOf: updatedPipeline)
-            query.pipeline = finishedPipeline
-        } else {
-            query.pipeline = updatedPipeline
-        }
-        do {
-            try query.aggregateCommand()
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+            if whereString != "{}" {
+                var finishedPipeline = [["match": AnyCodable(whereString)]]
+                finishedPipeline.append(contentsOf: updatedPipeline)
+                query.pipeline = finishedPipeline
+            } else {
+                query.pipeline = updatedPipeline
             }
-        }
-    }
 
-    /**
-     Query plan information for  executing an aggregate query *synchronously*.
-      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-      use the primary key in server-side applications where the key is kept secure and not
-      exposed to the public.
-      - note: An explain query will have many different underlying types. Since Swift is a strongly
-      typed language, a developer should specify the type expected to be decoded which will be
-      different for MongoDB and PostgreSQL. One way around this is to use a type-erased wrapper
-      such as the [AnyCodable](https://github.com/Flight-School/AnyCodable) package.
-      - parameter pipeline: A pipeline of stages to process query.
-      - parameter usingMongoDB: Set to **true** if your Parse Server uses MongoDB. Defaults to **false**.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - returns: Returns the `ParseObject`s that match the query.
-      - warning: MongoDB's **explain** does not conform to the traditional Parse Server response, so the
-      `usingMongoDB` flag needs to be set for MongoDB users. See more
-      [here](https://github.com/parse-community/parse-server/pull/7440).
-    */
-    public func aggregateExplain<U: Decodable>(_ pipeline: [[String: Encodable]],
-                                               usingMongoDB: Bool = false,
-                                               options: API.Options = []) throws -> [U] {
-        if limit == 0 {
-            return [U]()
-        }
-        var options = options
-        options.insert(.usePrimaryKey)
-
-        var updatedPipeline = [[String: AnyCodable]]()
-        pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
-
-        guard let encoded = try? ParseCoding.jsonEncoder()
-                .encode(self.`where`),
-            let whereString = String(data: encoded, encoding: .utf8) else {
-            throw ParseError(code: .otherCause, message: "Cannot decode where to String.")
-        }
-        var query = self
-        query.`where` = QueryWhere()
-
-        if whereString != "{}" {
-            var finishedPipeline = [["match": AnyCodable(whereString)]]
-            finishedPipeline.append(contentsOf: updatedPipeline)
-            query.pipeline = finishedPipeline
-        } else {
-            query.pipeline = updatedPipeline
-        }
-        if !usingMongoDB {
-            return try query.aggregateExplainCommand()
-                .execute(options: options)
-        } else {
-            return try query.aggregateExplainMongoCommand()
-                .execute(options: options)
+            do {
+                try await query.aggregateCommand()
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue,
+                                  completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
+            }
         }
     }
 
@@ -1225,81 +1018,61 @@ extension Query: Queryable {
             }
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
 
-        var updatedPipeline = [[String: AnyCodable]]()
-        pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
+            var updatedPipeline = [[String: AnyCodable]]()
+            pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
 
-        guard let encoded = try? ParseCoding.jsonEncoder()
+            guard let encoded = try? ParseCoding.jsonEncoder()
                 .encode(self.`where`),
-            let whereString = String(data: encoded, encoding: .utf8) else {
-            let error = ParseError(code: .otherCause, message: "Cannot decode where to String.")
-            callbackQueue.async {
-                completion(.failure(error))
-            }
-            return
-        }
-
-        var query = self
-        query.`where` = QueryWhere()
-
-        if whereString != "{}" {
-            var finishedPipeline = [["match": AnyCodable(whereString)]]
-            finishedPipeline.append(contentsOf: updatedPipeline)
-            query.pipeline = finishedPipeline
-        } else {
-            query.pipeline = updatedPipeline
-        }
-        if !usingMongoDB {
-            do {
-                try query.aggregateExplainCommand()
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
+                  let whereString = String(data: encoded, encoding: .utf8) else {
+                let error = ParseError(code: .otherCause, message: "Cannot decode where to String.")
                 callbackQueue.async {
-                    completion(.failure(parseError))
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            var query = self
+            query.`where` = QueryWhere()
+
+            if whereString != "{}" {
+                var finishedPipeline = [["match": AnyCodable(whereString)]]
+                finishedPipeline.append(contentsOf: updatedPipeline)
+                query.pipeline = finishedPipeline
+            } else {
+                query.pipeline = updatedPipeline
+            }
+            if !usingMongoDB {
+                do {
+                    try await query.aggregateExplainCommand()
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                }
+            } else {
+                do {
+                    try await query.aggregateExplainMongoCommand()
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
-        } else {
-            do {
-                try query.aggregateExplainMongoCommand()
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
         }
-    }
-
-    /**
-     Executes an aggregate query *synchronously* and calls the given.
-      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-      use the primary key in server-side applications where the key is kept secure and not
-      exposed to the public.
-      - parameter key: A field to find distinct values.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - warning: This has not been tested thoroughly.
-      - returns: Returns the `ParseObject`s that match the query.
-    */
-    public func distinct(_ key: String,
-                         options: API.Options = []) throws -> [ResultType] {
-        if limit == 0 {
-            return [ResultType]()
-        }
-        var options = options
-        options.insert(.usePrimaryKey)
-        return try distinctCommand(key: key)
-            .execute(options: options)
     }
 
     /**
@@ -1324,55 +1097,21 @@ extension Query: Queryable {
             }
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        do {
-            try distinctCommand(key: key)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
-        } catch {
-            let parseError = ParseError(code: .otherCause,
-                                        message: error.localizedDescription)
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            do {
+                try await distinctCommand(key: key)
+                    .executeAsync(options: options,
+                                  callbackQueue: callbackQueue,
+                                  completion: completion)
+            } catch {
+                let parseError = ParseError(code: .otherCause,
+                                            message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
-        }
-    }
-
-    /**
-     Query plan information for executing an aggregate query *synchronously* and calls the given.
-      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-      use the primary key in server-side applications where the key is kept secure and not
-      exposed to the public.
-      - note: An explain query will have many different underlying types. Since Swift is a strongly
-      typed language, a developer should specify the type expected to be decoded which will be
-      different for MongoDB and PostgreSQL. One way around this is to use a type-erased wrapper
-      such as the [AnyCodable](https://github.com/Flight-School/AnyCodable) package.
-      - parameter key: A field to find distinct values.
-      - parameter usingMongoDB: Set to **true** if your Parse Server uses MongoDB. Defaults to **false**.
-      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-      - throws: An error of type `ParseError`.
-      - warning: This has not been tested thoroughly.
-      - returns: Returns the `ParseObject`s that match the query.
-      - warning: MongoDB's **explain** does not conform to the traditional Parse Server response, so the
-      `usingMongoDB` flag needs to be set for MongoDB users. See more
-       [here](https://github.com/parse-community/parse-server/pull/7440).
-    */
-    public func distinctExplain<U: Decodable>(_ key: String,
-                                              usingMongoDB: Bool = false,
-                                              options: API.Options = []) throws -> [U] {
-        if limit == 0 {
-            return [U]()
-        }
-        var options = options
-        options.insert(.usePrimaryKey)
-        if !usingMongoDB {
-            return try distinctExplainCommand(key: key)
-                .execute(options: options)
-        } else {
-            return try distinctExplainMongoCommand(key: key)
-                .execute(options: options)
         }
     }
 
@@ -1406,32 +1145,34 @@ extension Query: Queryable {
             }
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        if !usingMongoDB {
-            do {
-                try distinctExplainCommand(key: key)
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            if !usingMongoDB {
+                do {
+                    try await distinctExplainCommand(key: key)
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
-            }
-        } else {
-            do {
-                try distinctExplainMongoCommand(key: key)
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
+            } else {
+                do {
+                    try await distinctExplainMongoCommand(key: key)
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue,
+                                      completion: completion)
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }

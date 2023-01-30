@@ -217,7 +217,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                options: API.Options = [],
                                callbackQueue: DispatchQueue = .main,
                                completion: @escaping (Result<Void, ParseError>) -> Void) {
-        
+
         var mutableOptions = options
         mutableOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         self.dimensionsAnyCodable = convertToAnyCodable(dimensions)

@@ -16,19 +16,19 @@ import Combine
 
 class ParseLiveQueryCombineTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() await throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  liveQueryMaxConnectionAttempts: 1,
-                                  testing: true,
-                                  testLiveQueryDontCloseSocket: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        liveQueryMaxConnectionAttempts: 1,
+                                        testing: true,
+                                        testLiveQueryDontCloseSocket: true)
         ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
     }
 

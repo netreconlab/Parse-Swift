@@ -25,7 +25,6 @@ public struct ParseVersion: ParseTypeable, Hashable {
             // Handle Memory migrations from String to ParseVersion
             guard let versionStringFromMemoryToMigrate: String =
                     try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
-                    // swiftlint:disable:next line_length
                     let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
                 #if !os(Linux) && !os(Android) && !os(Windows)
                 guard let versionFromKeychain: Self =

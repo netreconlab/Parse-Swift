@@ -26,7 +26,7 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
         }
         return versionInMemory
     }
-    
+
     static func setCurrent(_ newValue: Self?) async {
         guard let updatedKeychainAccessGroup = newValue else {
             let defaultKeychainAccessGroup = Self()

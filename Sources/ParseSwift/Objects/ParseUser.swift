@@ -124,7 +124,7 @@ public extension ParseUser {
         }
         return currentUserInMemory
     }
-    
+
     internal static func setCurrentContainer(_ newValue: CurrentUserContainer<Self>?) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentUser)
     }
@@ -140,7 +140,7 @@ public extension ParseUser {
     internal static func deleteCurrentContainerFromKeychain() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows)
-        URLSession.liveQuery.closeAll()
+        await URLSession.liveQuery.closeAll()
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #endif
         await Self.setCurrentContainer(nil)
@@ -155,7 +155,7 @@ public extension ParseUser {
     static func current() async -> Self? {
         await Self.currentContainer()?.currentUser
     }
-    
+
     internal static func setCurrent(_ newValue: Self?) async {
         var currentContainer = await Self.currentContainer()
         currentContainer?.currentUser = newValue
@@ -335,7 +335,7 @@ extension ParseUser {
                                               completion: @escaping (Result<Self, ParseError>) -> Void) {
         Task {
             let objcParseKeychain = KeychainStore.objectiveC
-            
+            // swiftlint:disable:next line_length
             guard let objcParseUser: [String: String] = await objcParseKeychain?.objectObjectiveC(forKey: "currentUser"),
                   let sessionToken: String = objcParseUser["sessionToken"] ??
                     objcParseUser["session_token"] else {
@@ -346,7 +346,7 @@ extension ParseUser {
                 }
                 return
             }
-            
+
             guard let currentUser = await Self.current() else {
                 become(sessionToken: sessionToken,
                        options: options,
@@ -354,7 +354,7 @@ extension ParseUser {
                        completion: completion)
                 return
             }
-            
+
             guard await currentUser.sessionToken() == sessionToken else {
                 let error = ParseError(code: .otherCause,
                                        message: """
@@ -381,7 +381,8 @@ extension ParseUser {
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
             if let current = await Self.current() {
-                if !current.hasSameObjectId(as: user) && self.anonymous.isLinked {
+                let isAnonymous = await self.anonymous.isLinked()
+                if !current.hasSameObjectId(as: user) && isAnonymous {
                     await Self.deleteCurrentContainerFromKeychain()
                 }
             }
@@ -421,9 +422,9 @@ extension ParseUser {
                 Task {
                     // Always let user logout locally, no matter the error.
                     await deleteCurrentKeychain()
-                    
+
                     switch result {
-                        
+
                     case .success(let error):
                         if let error = error {
                             completion(.failure(error))
@@ -472,7 +473,7 @@ extension ParseUser {
             await passwordResetCommand(email: email).executeAsync(options: options,
                                                                   callbackQueue: callbackQueue) { result in
                 switch result {
-                    
+
                 case .success(let error):
                     if let error = error {
                         completion(.failure(error))
@@ -587,7 +588,7 @@ extension ParseUser {
             await verificationEmailCommand(email: email)
                 .executeAsync(options: options, callbackQueue: callbackQueue) { result in
                     switch result {
-                        
+
                     case .success(let error):
                         if let error = error {
                             completion(.failure(error))
@@ -690,11 +691,20 @@ extension ParseUser {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             let body = SignupLoginBody(username: username, password: password)
             if let current = await Self.current() {
-                await current.linkCommand(body: body)
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue) { result in
-                        completion(result)
+                do {
+                    try await current.linkCommand(body: body)
+                        .executeAsync(options: options,
+                                      callbackQueue: callbackQueue) { result in
+                            completion(result)
+                        }
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
                     }
+                }
             } else {
                 do {
                     try await signupCommand(body: body)
@@ -1042,14 +1052,14 @@ extension ParseUser {
         #endif
     }
 
-    func saveCommand(ignoringCustomObjectIdConfig: Bool = false) throws -> API.Command<Self, Self> {
+    func saveCommand(ignoringCustomObjectIdConfig: Bool = false) async throws -> API.Command<Self, Self> {
         if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
         if isSaved {
-            return try replaceCommand() // MARK: Should be switched to "updateCommand" when server supports PATCH.
+            return try await replaceCommand() // MARK: Should be switched to "updateCommand" when server supports PATCH.
         }
-        return createCommand()
+        return await createCommand()
     }
 
     // MARK: Saving ParseObjects - private
@@ -1175,7 +1185,7 @@ extension ParseUser {
                 try await deleteCommand().executeAsync(options: options,
                                                        callbackQueue: callbackQueue) { result in
                     switch result {
-                        
+
                     case .success:
                         Task {
                             try? await Self.updateKeychainIfNeeded([self], deleting: true)
@@ -1495,9 +1505,10 @@ public extension Sequence where Element: ParseUser {
                         if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
                             fetchedObjectsToReturnMutable.append(.success(fetchedObject))
                         } else {
-                            fetchedObjectsToReturnMutable.append(.failure(ParseError(code: .objectNotFound,
-                                                                                     // swiftlint:disable:next line_length
-                                                                                     message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
+                            let error = ParseError(code: .objectNotFound,
+                                                   // swiftlint:disable:next line_length
+                                                   message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")
+                            fetchedObjectsToReturnMutable.append(.failure(error))
                         }
                     }
                     let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
@@ -1568,7 +1579,7 @@ public extension Sequence where Element: ParseUser {
                         .executeAsync(options: options,
                                       callbackQueue: callbackQueue) { results in
                             switch results {
-                                
+
                             case .success(let saved):
                                 returnBatch.append(contentsOf: saved)
                                 if completed == (batches.count - 1) {

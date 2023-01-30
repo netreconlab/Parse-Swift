@@ -13,16 +13,15 @@ import Foundation
 /// The payload data for an Apple push notification.
 public struct ParsePushPayloadApple: ParsePushApplePayloadable {
     /**
-     If you are a writing an app using the Remote Notification
+     The background notification flag. If you are a writing an app using the Remote Notification
      Background Mode introduced in iOS7 (a.k.a. “Background Push”), set this value to
-     1 to trigger a background download.
+     1 to trigger a background update. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app).
      - warning: For Apple OS's only. You also have to set `pushType` starting iOS 13
      and watchOS 6.
      */
     public var contentAvailable: Int?
     /**
-     If you are a writing an app using the Remote Notification Background Mode introduced
-     in iOS7 (a.k.a. “Background Push”), set this value to 1 to trigger a background download.
+     The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
      - warning: You also have to set `pushType` starting iOS 13
      and watchOS 6.
      */

@@ -114,7 +114,7 @@ public extension ParseConfig {
         }
         return configInMemory
     }
-    
+
     internal static func setCurrentContainer(_ newValue: CurrentConfigContainer<Self>?) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
@@ -145,7 +145,7 @@ public extension ParseConfig {
     static func current() async -> Self? {
         await Self.currentContainer()?.currentConfig
     }
-    
+
     internal static func setCurrent(_ current: Self?) async {
         if await Self.currentContainer() == nil {
             await Self.setCurrentContainer(CurrentConfigContainer<Self>())

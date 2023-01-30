@@ -220,7 +220,7 @@ actor KeychainStore: SecureStorable {
             }
             return
         }
-        
+
         var updateStatus = SecItemUpdate(query as CFDictionary, update as CFDictionary)
         if updateStatus == errSecDuplicateItem {
             if SecItemDelete(mergedQuery as CFDictionary) == errSecSuccess {

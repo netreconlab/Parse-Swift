@@ -305,9 +305,12 @@ internal extension API {
 
             var urlRequest = URLRequest(url: urlComponents)
             urlRequest.allHTTPHeaderFields = headers
+            let defaultACL = try? await ParseACL.defaultACL()
             if let urlBody = body {
                 if (urlBody as? ParseCloudTypeable) != nil {
-                    guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody, skipKeys: .cloud) else {
+                    guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody,
+                                                                                acl: defaultACL,
+                                                                                skipKeys: .cloud) else {
                         return .failure(ParseError(code: .otherCause,
                                                        message: "Could not encode body \(urlBody)"))
                     }
@@ -316,6 +319,7 @@ internal extension API {
                     guard let bodyData = try? ParseCoding
                             .parseEncoder()
                             .encode(urlBody,
+                                    acl: defaultACL,
                                     batching: batching,
                                     collectChildren: false,
                                     objectsSavedBeforeThisOne: childObjects,

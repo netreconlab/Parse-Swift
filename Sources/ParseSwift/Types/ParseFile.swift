@@ -233,7 +233,7 @@ extension ParseFile {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             options = options.union(self.options)
-            
+
             await deleteFileCommand().executeAsync(options: options, callbackQueue: callbackQueue) { result in
                 switch result {
                 case .success:

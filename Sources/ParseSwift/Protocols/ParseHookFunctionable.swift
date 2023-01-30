@@ -253,7 +253,7 @@ extension ParseHookFunctionable {
                 try await deleteCommand().executeAsync(options: options,
                                                        callbackQueue: callbackQueue) { result in
                     switch result {
-                        
+
                     case .success:
                         completion(.success(()))
                     case .failure(let error):

@@ -10,9 +10,9 @@ import Foundation
 public protocol Queryable {
     associatedtype ResultType
 
-    func find(options: API.Options) throws -> [ResultType]
-    func first(options: API.Options) throws -> ResultType
-    func count(options: API.Options) throws -> Int
+    func find(options: API.Options) async throws -> [ResultType]
+    func first(options: API.Options) async throws -> ResultType
+    func count(options: API.Options) async throws -> Int
     func find(options: API.Options, callbackQueue: DispatchQueue,
               completion: @escaping (Result<[ResultType], ParseError>) -> Void)
     func first(options: API.Options, callbackQueue: DispatchQueue,
@@ -22,40 +22,6 @@ public protocol Queryable {
 }
 
 extension Queryable {
-    /**
-      Finds objects *synchronously* based on the constructed query and sets an error if there was one.
-
-      - throws: An error of type `ParseError`.
-
-      - returns: Returns an array of `ParseObject`s that were found.
-    */
-    func find() throws -> [ResultType] {
-        try find(options: [])
-    }
-
-    /**
-       Gets an object *synchronously* based on the constructed query and sets an error if any occurred.
-
-       - warning: This method mutates the query. It will reset the limit to `1`.
-
-       - throws: An error of type `ParseError`.
-
-       - returns: Returns a `ParseObject`, or `nil` if none was found.
-     */
-    func first() throws -> ResultType? {
-        try first(options: [])
-    }
-
-    /**
-      Counts objects *synchronously* based on the constructed query and sets an error if there was one.
-
-      - throws: An error of type `ParseError`.
-
-      - returns: Returns the number of `ParseObject`s that match the query, or `-1` if there is an error.
-    */
-    func count() throws -> Int {
-        try count(options: [])
-    }
 
     /**
       Finds objects *asynchronously* and returns a completion block with the results.

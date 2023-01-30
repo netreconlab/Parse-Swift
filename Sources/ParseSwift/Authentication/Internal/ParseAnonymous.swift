@@ -47,31 +47,6 @@ public struct ParseAnonymous<AuthenticatedUser: ParseUser>: ParseAuthentication 
 public extension ParseAnonymous {
 
     /**
-     Login a `ParseUser` *synchronously* using the respective authentication type.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: the linked `ParseUser`.
-     */
-    func login(options: API.Options = []) throws -> AuthenticatedUser {
-        try self.login(authData: AuthenticationKeys.id.makeDictionary(),
-                       options: options)
-    }
-
-    /**
-     Login a `ParseUser` *synchronously* using the respective authentication type.
-     - parameter authData: The authData for the respective authentication type. This will be ignored.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: the linked `ParseUser`.
-     */
-    func login(authData: [String: String],
-               options: API.Options = []) throws -> AuthenticatedUser {
-        try AuthenticatedUser.login(__type,
-                                    authData: authData,
-                                    options: options)
-    }
-
-    /**
      Login a `ParseUser` *asynchronously* using the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.

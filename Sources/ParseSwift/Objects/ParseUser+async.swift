@@ -515,7 +515,7 @@ internal extension ParseUser {
             let command: API.Command<Self, Self>!
             switch method {
             case .save:
-                command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
                 command = await self.createCommand()
             case .replace:
@@ -574,7 +574,7 @@ internal extension Sequence where Element: ParseUser {
                 switch method {
                 case .save:
                     commands.append(
-                        try object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                        try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
                     commands.append(await object.createCommand())

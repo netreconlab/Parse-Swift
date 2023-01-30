@@ -253,7 +253,7 @@ public extension ParseInstallation {
         }
         return installationInMemory
     }
-    
+
     internal static func setCurrentContainer(_ newValue: CurrentInstallationContainer<Self>) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentInstallation)
     }
@@ -301,7 +301,7 @@ public extension ParseInstallation {
     static func current() async -> Self? {
         await Self.currentContainer().currentInstallation
     }
-    
+
     internal static func setCurrent(_ newValue: Self?) async {
         var currentContainer = await Self.currentContainer()
         currentContainer.currentInstallation = newValue
@@ -325,7 +325,7 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func become(_ objectId: String,
+    static func become(_ objectId: String, // swiftlint:disable:this function_body_length
                        copyEntireInstallation: Bool = true,
                        options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
@@ -559,7 +559,7 @@ extension ParseInstallation {
                             completion(result)
                         }
                     }
-                
+
             } catch {
                 callbackQueue.async {
                     if let error = error as? ParseError {
@@ -596,20 +596,6 @@ extension ParseInstallation {
 extension ParseInstallation {
 
     /**
-     Saves the `ParseInstallation` *synchronously* and throws an error if there is an issue.
-
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: Returns saved `ParseInstallation`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-    */
-    @discardableResult
-    public func save(options: API.Options = []) throws -> Self {
-        try save(ignoringCustomObjectIdConfig: false,
-                 options: options)
-    }
-
-    /**
      Saves the `ParseInstallation` *asynchronously* and executes the given callback block.
 
      - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
@@ -638,11 +624,9 @@ extension ParseInstallation {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
-        let method = Method.save
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
-                let object = try await command(method: method,
+                let object = try await command(method: Method.save,
                                                ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
                                                options: options,
                                                callbackQueue: callbackQueue)
@@ -658,13 +642,6 @@ extension ParseInstallation {
                 }
             }
         }
-        #else
-        command(method: method,
-                ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                options: options,
-                callbackQueue: callbackQueue,
-                completion: completion)
-        #endif
     }
 
     /**
@@ -795,14 +772,14 @@ extension ParseInstallation {
         #endif
     }
 
-    func saveCommand(ignoringCustomObjectIdConfig: Bool = false) throws -> API.Command<Self, Self> {
+    func saveCommand(ignoringCustomObjectIdConfig: Bool = false) async throws -> API.Command<Self, Self> {
         if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
         if isSaved {
             return try replaceCommand() // MARK: Should be switched to "updateCommand" when server supports PATCH.
         }
-        return createCommand()
+        return await createCommand()
     }
 
     // MARK: Saving ParseObjects - private
@@ -899,7 +876,7 @@ extension ParseInstallation {
                     .executeAsync(options: options,
                                   callbackQueue: callbackQueue) { result in
                         switch result {
-                            
+
                         case .success:
                             Task {
                                 do {
@@ -1224,9 +1201,10 @@ public extension Sequence where Element: ParseInstallation {
                         if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
                             fetchedObjectsToReturnMutable.append(.success(fetchedObject))
                         } else {
-                            fetchedObjectsToReturnMutable.append(.failure(ParseError(code: .objectNotFound,
-                                                                                     // swiftlint:disable:next line_length
-                                                                                     message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
+                            let error = ParseError(code: .objectNotFound,
+                                                   // swiftlint:disable:next line_length
+                                                   message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")
+                            fetchedObjectsToReturnMutable.append(.failure(error))
                         }
                     }
                     let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
@@ -1297,7 +1275,7 @@ public extension Sequence where Element: ParseInstallation {
                         .executeAsync(options: options,
                                       callbackQueue: callbackQueue) { results in
                             switch results {
-                                
+
                             case .success(let saved):
                                 returnBatch.append(contentsOf: saved)
                                 if completed == (batches.count - 1) {
@@ -1351,6 +1329,7 @@ public extension ParseInstallation {
                                    completion: @escaping (Result<Void, ParseError>) -> Void) {
         Task {
             guard let objcParseKeychain = KeychainStore.objectiveC,
+                  // swiftlint:disable:next line_length
                   let oldInstallationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
                 let error = ParseError(code: .otherCause,
                                        message: "Could not find Installation in the Objective-C SDK Keychain")
