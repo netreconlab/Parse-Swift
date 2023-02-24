@@ -130,6 +130,20 @@ query.first { results in
 //: Query first asynchronously (preferred way) - Performs work on background
 //: queue and returns to specified callbackQueue.
 //: If no callbackQueue is specified it returns to main queue.
+query.count { results in
+    switch results {
+    case .success(let count):
+        print("Found total scores: \(count)")
+
+    case .failure(let error):
+        if error.containedIn([.objectNotFound, .invalidQuery]) {
+            assertionFailure("The query is invalid or the object is not found.")
+        } else {
+            assertionFailure("Error querying: \(error)")
+        }
+    }
+}
+
 query.withCount { results in
     switch results {
     case .success(let (score, count)):

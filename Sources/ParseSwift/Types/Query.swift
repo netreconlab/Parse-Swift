@@ -1462,7 +1462,7 @@ extension Query {
         if !Parse.configuration.isUsingPostForQuery {
             return API.NonParseBodyCommand(method: .GET,
                                            path: query.endpoint,
-                                           params: try getQueryParameters()) {
+                                           params: try query.getQueryParameters()) {
                 if let decoded = try ParseCoding.jsonDecoder().decode(QueryResponse<T>.self, from: $0).results.first {
                     return decoded
                 }
@@ -1482,12 +1482,12 @@ extension Query {
 
     func countCommand() throws -> API.NonParseBodyCommand<Query<ResultType>, Int> {
         var query = self
-        query.limit = 1
+        query.limit = 0
         query.isCount = true
         if !Parse.configuration.isUsingPostForQuery {
             return API.NonParseBodyCommand(method: .GET,
                                            path: query.endpoint,
-                                           params: try getQueryParameters()) {
+                                           params: try query.getQueryParameters()) {
                 try ParseCoding.jsonDecoder().decode(QueryResponse<T>.self, from: $0).count ?? 0
             }
         } else {
@@ -1505,7 +1505,7 @@ extension Query {
         if !Parse.configuration.isUsingPostForQuery {
             return API.NonParseBodyCommand(method: .GET,
                                            path: query.endpoint,
-                                           params: try getQueryParameters()) {
+                                           params: try query.getQueryParameters()) {
                 let decoded = try ParseCoding.jsonDecoder().decode(QueryResponse<T>.self, from: $0)
                 return (decoded.results, decoded.count ?? 0)
             }
