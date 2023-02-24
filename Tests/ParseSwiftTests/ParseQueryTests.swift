@@ -1018,7 +1018,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let query = GameScore.query()
         let command = try query.countCommand()
         // swiftlint:disable:next line_length
-        let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
+        let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"limit\":0,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

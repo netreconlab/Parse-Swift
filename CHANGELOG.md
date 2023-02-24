@@ -37,6 +37,7 @@ __New features__
 * The max connection attempts for LiveQuery can now be changed when initializing the SDK ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
+* Fixed query count and withCount returning 0 when the SDK is configured to use GET for queries ([#61](https://github.com/netreconlab/Parse-Swift/pull/61)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Fixed ambiguous ParseAnalytics trackAppOpenned ([#55](https://github.com/netreconlab/Parse-Swift/pull/55)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Refactored playground mount to be "/parse" instead "/1". Also do not require url when decoding a ParseFile ([#52](https://github.com/netreconlab/Parse-Swift/pull/52)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Fixed issues that can cause cache misses when querying ([#46](https://github.com/netreconlab/Parse-Swift/pull/46)), thanks to [Corey Baker](https://github.com/cbaker6).
