@@ -54,8 +54,8 @@ class InitializeSDKTests: XCTestCase {
         try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows)
         try await KeychainStore.shared.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
-        try KeychainStore.old.deleteAll()
+        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try await KeychainStore.old.deleteAll()
         URLSession.shared.configuration.urlCache?.removeAllCachedResponses()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -86,7 +86,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertTrue(currentCache.currentMemoryUsage > 0)
     }
 /*
-    func testDeleteKeychainOnFirstRun() throws {
+    func testDeleteKeychainOnFirstRun() async throws {
         let memory = InMemoryKeyValueStore()
         ParseStorage.shared.use(memory)
         guard let server = URL(string: "http://parse.com") else {
@@ -152,7 +152,7 @@ class InitializeSDKTests: XCTestCase {
     }*/
     #endif
 
-    func testCreateParseInstallationOnInit() throws {
+    func testCreateParseInstallationOnInit() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -166,14 +166,14 @@ class InitializeSDKTests: XCTestCase {
             credential(.performDefaultHandling, nil)
         }
 
-        guard let currentInstallation = Installation.current else {
+        guard let currentInstallation = await Installation.current() else {
             XCTFail("Should unwrap current Installation")
             return
         }
 
         // Should be in Keychain
         guard let memoryInstallation: CurrentInstallationContainer<Installation>
-            = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -182,7 +182,7 @@ class InitializeSDKTests: XCTestCase {
         #if !os(Linux) && !os(Android) && !os(Windows)
         // Should be in Keychain
         guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -191,15 +191,15 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testFetchMissingCurrentInstallation() throws {
+    func testFetchMissingCurrentInstallation() async throws {
         let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         let installationId = "testMe"
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
                                                                       installationId: installationId)
-        Installation.currentContainer = badContainer
-        Installation.saveCurrentContainerToKeychain()
-        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
+        await Installation.setCurrentContainer(badContainer)
+        await Installation.saveCurrentContainerToKeychain()
+        await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
 
         var foundInstallation = Installation()
         foundInstallation.updateAutomaticInfo()
@@ -251,7 +251,7 @@ class InitializeSDKTests: XCTestCase {
 
             // Should be in Keychain
             guard let keychainInstallation: CurrentInstallationContainer<Installation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                     XCTFail("Should get object from Keychain")
                     expectation1.fulfill()
                 return
@@ -264,7 +264,7 @@ class InitializeSDKTests: XCTestCase {
     }
     #endif
 
-    func testUpdateAuthChallenge() throws {
+    func testUpdateAuthChallenge() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -283,7 +283,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testDontOverwriteMigratedInstallation() throws {
+    func testDontOverwriteMigratedInstallation() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -294,8 +294,9 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.updateAutomaticInfo()
         newInstallation.objectId = "yarr"
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
+        await Installation.setCurrentContainer(newInstallation)
+            // .installationId = newInstallation.installationId
+        Installation.currentContainer.currentInstallation =
         Installation.saveCurrentContainerToKeychain()
 
         try ParseSwift.initialize(applicationId: "applicationId",
@@ -312,7 +313,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionLess() throws {
+    func testDontOverwriteOldInstallationBecauseVersionLess() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -348,7 +349,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionEqual() throws {
+    func testDontOverwriteOldInstallationBecauseVersionEqual() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -384,7 +385,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertEqual(ParseVersion.current, try ParseVersion(string: ParseConstants.version))
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionGreater() throws {
+    func testDontOverwriteOldInstallationBecauseVersionGreater() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -422,7 +423,7 @@ class InitializeSDKTests: XCTestCase {
     }
     #endif
 
-    func testOverwriteOldInstallation() throws {
+    func testOverwriteOldInstallation() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -456,7 +457,7 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
     }
 
-    func testMigrateObjcKeychainMissing() throws {
+    func testMigrateObjcKeychainMissing() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -475,7 +476,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testMigrateOldKeychainToNew() throws {
+    func testMigrateOldKeychainToNew() async throws {
         var user = BaseParseUser()
         user.objectId = "wow"
         var userContainer = CurrentUserContainer<BaseParseUser>()
@@ -529,7 +530,7 @@ class InitializeSDKTests: XCTestCase {
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testMigrateObjcSDK() throws {
+    func testMigrateObjcSDK() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -558,7 +559,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(macOS)
-    func testInitializeSDKNoTest() throws {
+    func testInitializeSDKNoTest() async throws {
 
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
@@ -575,7 +576,7 @@ class InitializeSDKTests: XCTestCase {
     }
     #endif
 
-    func testDeleteObjcSDKKeychain() throws {
+    func testDeleteObjcSDKKeychain() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -606,7 +607,7 @@ class InitializeSDKTests: XCTestCase {
                                         testing: true)
     }
 
-    func testMigrateObjcSDKMissingInstallation() throws {
+    func testMigrateObjcSDKMissingInstallation() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {

@@ -130,7 +130,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
         try await KeychainStore.shared.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
         #endif
         try await ParseStorage.shared.deleteAll()
     }

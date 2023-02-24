@@ -108,22 +108,23 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            var userInfo: [String: String]?
-            if let remoteOptions = launchOptions?[.remoteNotification] as? [String: String] {
-                userInfo = remoteOptions
+            var userInfo = [String: String]()
+            launchOptions.forEach { (key, value) in
+                guard let value = value as? String else {
+                    return
+                }
+                userInfo[key.rawValue] = value
             }
             let appOppened = ParseAnalytics(name: "AppOpened",
                                             dimensions: userInfo,
                                             at: date)
             await appOppened.saveCommand().executeAsync(options: options,
                                                         callbackQueue: callbackQueue) { result in
-                callbackQueue.async {
-                    switch result {
-                    case .success:
-                        completion(.success(()))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
             }
         }
