@@ -28,7 +28,7 @@ class KeychainStoreTests: XCTestCase {
 
     override func tearDown() async throws {
         try await super.tearDown()
-        _ = testStore.removeAllObjects()
+        _ = await testStore.removeAllObjects()
         #if !os(Linux) && !os(Android) && !os(Windows)
         try await KeychainStore.shared.deleteAll()
         try? await KeychainStore.objectiveC?.deleteAllObjectiveC()
@@ -36,75 +36,37 @@ class KeychainStoreTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testSetObject() {
-        XCTAssertTrue(testStore.set(object: "yarr", forKey: "blah"), "Set should succeed")
+    func testSetObject() async throws {
+        let isSet = await testStore.set(object: "yarr", forKey: "blah")
+        XCTAssertTrue(isSet, "Set should succeed")
     }
 
-    func testGetObject() {
+    func testGetObject() async throws {
         let key = "yarrKey"
         let value = "yarrValue"
-        testStore[key] = value
-        guard let storedValue: String = testStore.object(forKey: key) else {
+        _ = await testStore.set(object: value, forKey: key)
+        guard let storedValue: String = await testStore.object(forKey: key) else {
             XCTFail("Should unwrap to String")
             return
         }
         XCTAssertEqual(storedValue, value, "Values should be equal after get")
     }
 
-    func testGetObjectSubscript() {
-        let key = "yarrKey"
-        let value = "yarrValue"
-        testStore[key] = value
-        guard let storedValue: String = testStore[key] else {
-            XCTFail("Should unwrap to String")
-            return
-        }
-        XCTAssertEqual(storedValue, value, "Values should be equal after get")
-    }
-
-    func testGetObjectStringTypedSubscript() {
-        let key = "yarrKey"
-        let value = "yarrValue"
-        testStore[key] = value
-        XCTAssertEqual(testStore[string: key], value, "Values should be equal after get")
-    }
-
-    func testGetObjectWrongStringTypedSubscript() {
-        let key = "yarrKey"
-        let value = 1
-        testStore[key] = value
-        XCTAssertNil(testStore[string: key], "Values should be nil after get")
-    }
-
-    func testGetObjectBoolTypedSubscript() {
-        let key = "yarrKey"
-        let value = true
-        testStore[bool: key] = value
-        XCTAssertEqual(testStore[bool: key], true, "Values should be equal after get")
-    }
-
-    func testGetObjectWrongBoolTypedSubscript() {
-        let key = "yarrKey"
-        let value = "Yo!"
-        testStore[key] = value
-        XCTAssertNil(testStore[bool: key], "Values should be nil after get")
-    }
-
-    func testGetAnyCodableObject() {
+    func testGetAnyCodableObject() async throws {
         let key = "yarrKey"
         let value: AnyCodable = "yarrValue"
-        testStore[key] = value
-        guard let storedValue: AnyCodable = testStore.object(forKey: key) else {
+        _ = await testStore.set(object: value, forKey: key)
+        guard let storedValue: AnyCodable = await testStore.object(forKey: key) else {
             XCTFail("Should unwrap to AnyCodable")
             return
         }
         XCTAssertEqual(storedValue, value, "Values should be equal after get")
     }
 
-    func testSetComplextObject() {
+    func testSetComplextObject() async throws {
         let complexObject: [AnyCodable] = [["key": "value"], "string2", 1234]
-        testStore["complexObject"] = complexObject
-        guard let retrievedObject: [AnyCodable] = testStore["complexObject"] else {
+        _ = await testStore.set(object: complexObject, forKey: "complexObject")
+        guard let retrievedObject: [AnyCodable] = try await testStore.get(valueFor: "complexObject") else {
             return XCTFail("Should retrieve the object")
         }
         XCTAssertTrue(retrievedObject.count == 3)
@@ -134,67 +96,84 @@ class KeychainStoreTests: XCTestCase {
         }
     }
 
-    func testRemoveObject() {
-        testStore["key1"] = "value1"
-        XCTAssertNotNil(testStore[string: "key1"], "The value should be set")
-        _ = testStore.removeObject(forKey: "key1")
-        let key1Val: String? = testStore["key1"]
-        XCTAssertNil(key1Val, "There should be no value after removal")
+    func testRemoveObject() async throws {
+        let key = "key1"
+        let value = "value1"
+        _ = await testStore.set(object: value, forKey: key)
+        var retrievedObject: String? = try await testStore.get(valueFor: key)
+        XCTAssertEqual(retrievedObject, value)
+        _ = await testStore.removeObject(forKey: key)
+        retrievedObject = try await testStore.get(valueFor: key)
+        XCTAssertNil(retrievedObject, "There should be no value after removal")
     }
 
-    func testRemoveObjectSubscript() {
-        testStore["key1"] = "value1"
-        XCTAssertNotNil(testStore[string: "key1"], "The value should be set")
-        testStore[string: "key1"] = nil
-        let key1Val: String? = testStore["key1"]
-        XCTAssertNil(key1Val, "There should be no value after removal")
-    }
-
-    func testRemoveAllObjects() {
-        testStore["key1"] = "value1"
-        testStore["key2"] = "value2"
-        XCTAssertNotNil(testStore[string: "key1"], "The value should be set")
-        XCTAssertNotNil(testStore[string: "key2"], "The value should be set")
-        _ = testStore.removeAllObjects()
-        let key1Val: String? = testStore["key1"]
-        let key2Val: String? = testStore["key1"]
-        XCTAssertNil(key1Val, "There should be no value after removal")
-        XCTAssertNil(key2Val, "There should be no value after removal")
+    func testRemoveAllObjects() async throws {
+        let key = "key1"
+        let value = "value1"
+        let key2 = "key2"
+        let value2 = "value2"
+        let isSet1 = await testStore.set(object: value, forKey: key)
+        let isSet2 = await testStore.set(object: value2, forKey: key2)
+        XCTAssertTrue(isSet1)
+        XCTAssertTrue(isSet2)
+        var retrievedObject: String? = try await testStore.get(valueFor: key)
+        XCTAssertEqual(retrievedObject, value)
+        retrievedObject = try await testStore.get(valueFor: key2)
+        XCTAssertEqual(retrievedObject, value2)
+        _ = await testStore.removeAllObjects()
+        retrievedObject = try await testStore.get(valueFor: key)
+        XCTAssertNil(retrievedObject, "There should be no value after removal")
+        retrievedObject = try await testStore.get(valueFor: key2)
+        XCTAssertNil(retrievedObject, "There should be no value after removal")
     }
 
     func testThreadSafeSet() {
         DispatchQueue.concurrentPerform(iterations: 100) { _ in
-            XCTAssertTrue(testStore.set(object: "yarr", forKey: "pirate"), "Should set value")
+            Task {
+                let setObject = await testStore.set(object: "yarr", forKey: "pirate")
+                XCTAssertTrue(setObject, "Should set value")
+            }
         }
     }
 
     func testThreadSafeRemoveObject() {
         DispatchQueue.concurrentPerform(iterations: 100) { (index) in
-            XCTAssertTrue(testStore.set(object: "yarr", forKey: "\(index)"), "Should set value")
-            XCTAssertTrue(testStore.removeObject(forKey: "\(index)"), "Should set value")
+            Task {
+                var isObject = await testStore.set(object: "yarr", forKey: "\(index)")
+                XCTAssertTrue(isObject, "Should set value")
+                isObject = await testStore.removeObject(forKey: "\(index)")
+                XCTAssertTrue(isObject, "Should set value")
+            }
         }
     }
 
     func testThreadSafeRemoveAllObjects() {
         DispatchQueue.concurrentPerform(iterations: 100) { _ in
-            XCTAssertTrue(testStore.set(object: "yarr", forKey: "pirate1"), "Should set value")
-            XCTAssertTrue(testStore.set(object: "yarr", forKey: "pirate2"), "Should set value")
-            XCTAssertTrue(testStore.removeAllObjects(), "Should set value")
+            Task {
+                var isObject = await testStore.set(object: "yarr", forKey: "pirate1")
+                XCTAssertTrue(isObject, "Should set value")
+                isObject = await testStore.set(object: "yarr", forKey: "pirate2")
+                XCTAssertTrue(isObject, "Should set value")
+                isObject = await testStore.removeAllObjects()
+                XCTAssertTrue(isObject, "Should set value")
+            }
         }
     }
 
-    func testQueryTemplate() throws {
-        let query = KeychainStore.shared.getKeychainQueryTemplate()
+    func testQueryTemplate() async throws {
+        let query = await KeychainStore.shared.getKeychainQueryTemplate()
         XCTAssertEqual(query.count, 2)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
     }
 
-    func testQueryNoAccessGroup() throws {
+    func testQueryNoAccessGroup() async throws {
         let accessGroup = ParseKeychainAccessGroup()
-        let query = KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
+        let query = await KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
         XCTAssertEqual(query.count, 5)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
         XCTAssertEqual(query[kSecAttrAccount as String] as? String, "hello")
         XCTAssertEqual(query[kSecAttrSynchronizable as String] as? Bool, kCFBooleanFalse as? Bool)
@@ -202,11 +181,12 @@ class KeychainStoreTests: XCTestCase {
                        kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as String)
     }
 
-    func testQueryAccessGroupSyncableKeyTrue() throws {
+    func testQueryAccessGroupSyncableKeyTrue() async throws {
         let accessGroup = ParseKeychainAccessGroup(accessGroup: "world", isSyncingKeychainAcrossDevices: true)
-        let query = KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
+        let query = await KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
         XCTAssertEqual(query.count, 6)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
         XCTAssertEqual(query[kSecAttrAccount as String] as? String, "hello")
         XCTAssertEqual(query[kSecAttrAccessGroup as String] as? String, "world")
@@ -215,11 +195,12 @@ class KeychainStoreTests: XCTestCase {
                        kSecAttrAccessibleAfterFirstUnlock as String)
     }
 
-    func testQueryAccessGroupSyncableKeyFalse() throws {
+    func testQueryAccessGroupSyncableKeyFalse() async throws {
         let accessGroup = ParseKeychainAccessGroup(accessGroup: "world", isSyncingKeychainAcrossDevices: false)
-        let query = KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
+        let query = await KeychainStore.shared.keychainQuery(forKey: "hello", accessGroup: accessGroup)
         XCTAssertEqual(query.count, 6)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
         XCTAssertEqual(query[kSecAttrAccount as String] as? String, "hello")
         XCTAssertEqual(query[kSecAttrAccessGroup as String] as? String, "world")
@@ -228,12 +209,13 @@ class KeychainStoreTests: XCTestCase {
                        kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as String)
     }
 
-    func testQueryAccessGroupNoSyncableKeyTrue() throws {
+    func testQueryAccessGroupNoSyncableKeyTrue() async throws {
         let key = ParseStorage.Keys.currentInstallation
         let accessGroup = ParseKeychainAccessGroup(accessGroup: "world", isSyncingKeychainAcrossDevices: true)
-        let query = KeychainStore.shared.keychainQuery(forKey: key, accessGroup: accessGroup)
+        let query = await KeychainStore.shared.keychainQuery(forKey: key, accessGroup: accessGroup)
         XCTAssertEqual(query.count, 6)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
         XCTAssertEqual(query[kSecAttrAccount as String] as? String, key)
         XCTAssertEqual(query[kSecAttrAccessGroup as String] as? String, "world")
@@ -242,12 +224,13 @@ class KeychainStoreTests: XCTestCase {
                        kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as String)
     }
 
-    func testQueryAccessGroupNoSyncableKeyFalse() throws {
+    func testQueryAccessGroupNoSyncableKeyFalse() async throws {
         let key = ParseStorage.Keys.currentInstallation
         let accessGroup = ParseKeychainAccessGroup(accessGroup: "world", isSyncingKeychainAcrossDevices: false)
-        let query = KeychainStore.shared.keychainQuery(forKey: key, accessGroup: accessGroup)
+        let query = await KeychainStore.shared.keychainQuery(forKey: key, accessGroup: accessGroup)
         XCTAssertEqual(query.count, 6)
-        XCTAssertEqual(query[kSecAttrService as String] as? String, KeychainStore.shared.service)
+        let service = await KeychainStore.shared.service
+        XCTAssertEqual(query[kSecAttrService as String] as? String, service)
         XCTAssertEqual(query[kSecClass as String] as? String, kSecClassGenericPassword as String)
         XCTAssertEqual(query[kSecAttrAccount as String] as? String, key)
         XCTAssertEqual(query[kSecAttrAccessGroup as String] as? String, "world")
@@ -256,23 +239,23 @@ class KeychainStoreTests: XCTestCase {
                        kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as String)
     }
 
-    func testSetObjectiveC() throws {
+    func testSetObjectiveC() async throws {
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")
             return
         }
         let objcInstallationId = "helloWorld"
-        _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
-        guard let retrievedValue: String = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
+        guard let retrievedValue: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
             XCTFail("Should have casted")
             return
         }
         XCTAssertEqual(retrievedValue, objcInstallationId)
         let newInstallationId: String? = nil
-        _ = objcParseKeychain.setObjectiveC(object: newInstallationId, forKey: "installationId")
-        let retrievedValue2: String? = objcParseKeychain.objectObjectiveC(forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: newInstallationId, forKey: "installationId")
+        let retrievedValue2: String? = await objcParseKeychain.objectObjectiveC(forKey: "installationId")
         XCTAssertNil(retrievedValue2)
     }
 }

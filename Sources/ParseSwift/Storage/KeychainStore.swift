@@ -355,27 +355,6 @@ extension KeychainStore {
     }
 }
 
-// MARK: TypedSubscript
-/* extension KeychainStore {
-    subscript(string key: String) -> String? {
-        get {
-            object(forKey: key)
-        }
-        set (object) {
-            _ = set(object: object, forKey: key)
-        }
-    }
-
-    subscript(bool key: String) -> Bool? {
-        get {
-            object(forKey: key)
-        }
-        set (object) {
-            _ = set(object: object, forKey: key)
-        }
-    }
-} */
-
 // MARK: Objective-C SDK Keychain
 extension KeychainStore {
     func objectObjectiveC<T>(forKey key: String) -> T? where T: Decodable {

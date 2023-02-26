@@ -62,7 +62,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
     }
 
-    func testErrorHTTP400JSON() throws {
+    func testErrorHTTP400JSON() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -87,10 +87,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait 1")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -115,7 +115,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTPReturns400NoDataFromServer() {
+    func testErrorHTTPReturns400NoDataFromServer() async throws {
         Parse.configuration.maxConnectionAttempts = 2
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
@@ -123,10 +123,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw originalError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -143,7 +143,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONInterval() throws {
+    func testErrorHTTP429JSONInterval() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -171,10 +171,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -199,7 +199,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONDate() throws {
+    func testErrorHTTP429JSONDate() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -235,10 +235,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -263,7 +263,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONNoHeader() throws {
+    func testErrorHTTP429JSONNoHeader() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -288,10 +288,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -316,7 +316,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONInterval() throws {
+    func testErrorHTTP503JSONInterval() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -344,10 +344,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -372,7 +372,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONDate() throws {
+    func testErrorHTTP503JSONDate() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -408,10 +408,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
@@ -436,7 +436,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONNoHeader() throws {
+    func testErrorHTTP503JSONNoHeader() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -461,10 +461,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
                         callbackQueue: .main,
