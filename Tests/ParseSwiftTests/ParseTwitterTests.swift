@@ -135,6 +135,7 @@ class ParseTwitterTests: XCTestCase {
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
+    // swiftlint:disable:next function_body_length
     func testLogin() async throws {
         var serverResponse = LoginSignupResponse()
 
@@ -176,23 +177,36 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
+
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.twitter.isLinked)
 
-                // Test stripping
-                user.twitter.strip()
-                XCTAssertFalse(user.twitter.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                        // Test stripping
+                        try await user.twitter.strip()
+                        currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertFalse(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
+
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testLoginAuthData() async throws {
         var serverResponse = LoginSignupResponse()
 
@@ -231,25 +245,35 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.twitter.isLinked)
 
-                // Test stripping
-                user.twitter.strip()
-                XCTAssertFalse(user.twitter.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                        // Test stripping
+                        try await user.twitter.strip()
+                        currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertFalse(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginWrongKeys() throws {
-        _ = try loginNormally()
+    func testLoginWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -266,7 +290,7 @@ class ParseTwitterTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -295,15 +319,17 @@ class ParseTwitterTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
-    func testReplaceAnonymousWithTwitter() throws {
-        try loginAnonymousUser()
+    // swiftlint:disable:next function_body_length
+    func testReplaceAnonymousWithTwitter() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
 
         let authData = ParseTwitter<User>
@@ -346,22 +372,31 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.twitter.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithLinkedTwitter() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLinkedTwitter() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -389,22 +424,31 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.twitter.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWithTwitter() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWithTwitter() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -434,23 +478,34 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.twitter.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let currentUserSessionToken = await user.sessionToken()
+                        XCTAssertEqual(currentUserSessionToken, "myToken")
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInAuthData() throws {
-        _ = try loginNormally()
+    // swiftlint:disable:next function_body_length
+    func testLinkLoggedInAuthData() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -485,13 +540,23 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.twitter.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let currentUserSessionToken = await user.sessionToken()
+                        XCTAssertEqual(currentUserSessionToken, "myToken")
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertTrue(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -500,8 +565,8 @@ class ParseTwitterTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkWrongKeys() throws {
-        _ = try loginNormally()
+    func testLinkWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -518,8 +583,9 @@ class ParseTwitterTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlink() throws {
-        _ = try loginNormally()
+    // swiftlint:disable:next function_body_length
+    func testUnlink() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseTwitter<User>
@@ -529,8 +595,10 @@ class ParseTwitterTests: XCTestCase {
                                                   consumerSecret: "consumerSecret",
                                                   authToken: "this",
                                                   authTokenSecret: "authTokenSecret")
-        User.current?.authData = [User.twitter.__type: authData]
-        XCTAssertTrue(User.twitter.isLinked)
+        var currentUser = try await User.current()
+        currentUser.authData = [User.twitter.__type: authData]
+        let currentLinkedUser = await User.twitter.isLinked()
+        XCTAssertTrue(currentLinkedUser)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -556,11 +624,20 @@ class ParseTwitterTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertFalse(user.twitter.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var currentLinkedUser = await user.twitter.isLinked()
+                        XCTAssertFalse(currentLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
