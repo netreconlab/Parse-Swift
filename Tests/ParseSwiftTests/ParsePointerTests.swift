@@ -120,37 +120,43 @@ class ParsePointerTests: XCTestCase {
         XCTAssertNotEqual(pointer, pointer2)
     }
 
-    func testDetectCircularDependency() throws {
+    func testDetectCircularDependency() async throws {
         var score = GameScore(points: 10)
         score.objectId = "nice"
         score.other = try score.toPointer()
 
-        score.ensureDeepSave { (_, _, parseError) in
-            guard let error = parseError else {
+        do {
+            _ = try await score.ensureDeepSave()
+            XCTFail("Should have thrown error")
+        } catch {
+            guard let parseError = error as? ParseError else {
                 XCTFail("Should have failed with an error of detecting a circular dependency")
                 return
             }
-            XCTAssertTrue(error.message.contains("circular"))
+            XCTAssertTrue(parseError.message.contains("circular"))
         }
     }
 
-    func testDetectCircularDependencyArray() throws {
+    func testDetectCircularDependencyArray() async throws {
         var score = GameScore(points: 10)
         score.objectId = "nice"
         let first = try score.toPointer()
         score.others = [first, first]
 
-        score.ensureDeepSave { (_, _, parseError) in
-            guard let error = parseError else {
+        do {
+            _ = try await score.ensureDeepSave()
+            XCTFail("Should have thrown error")
+        } catch {
+            guard let parseError = error as? ParseError else {
                 XCTFail("Should have failed with an error of detecting a circular dependency")
                 return
             }
-            XCTAssertTrue(error.message.contains("circular"))
+            XCTAssertTrue(parseError.message.contains("circular"))
         }
     }
 
     // swiftlint:disable:next function_body_length
-    func testFetch() throws {
+    func testFetch() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -174,7 +180,7 @@ class ParsePointerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let fetched = try pointer.fetch(options: [])
+            let fetched = try await pointer.fetch(options: [])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {
@@ -194,7 +200,7 @@ class ParsePointerTests: XCTestCase {
         }
 
         do {
-            let fetched = try pointer.fetch(options: [.usePrimaryKey])
+            let fetched = try await pointer.fetch(options: [.usePrimaryKey])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {

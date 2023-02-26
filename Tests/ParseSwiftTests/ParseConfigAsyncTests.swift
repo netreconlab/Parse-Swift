@@ -118,7 +118,7 @@ class ParseConfigAsyncTests: XCTestCase {
     @MainActor
     func testFetch() async throws {
 
-        userLogin()
+        await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -138,7 +138,8 @@ class ParseConfigAsyncTests: XCTestCase {
 
         let fetched = try await config.fetch()
         XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-        XCTAssertEqual(Config.current?.welcomeMessage, configOnServer.welcomeMessage)
+        let updatedConfig = try await Config.current()
+        XCTAssertEqual(updatedConfig.welcomeMessage, configOnServer.welcomeMessage)
 
         #if !os(Linux) && !os(Android) && !os(Windows)
         // Should be updated in Keychain
@@ -154,7 +155,7 @@ class ParseConfigAsyncTests: XCTestCase {
     @MainActor
     func testSave() async throws {
 
-        userLogin()
+        await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 
@@ -173,7 +174,8 @@ class ParseConfigAsyncTests: XCTestCase {
 
         let saved = try await config.save()
         XCTAssertTrue(saved)
-        XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)
+        let updatedConfig = try await Config.current()
+        XCTAssertEqual(updatedConfig.welcomeMessage, config.welcomeMessage)
 
         #if !os(Linux) && !os(Android) && !os(Windows)
         // Should be updated in Keychain
