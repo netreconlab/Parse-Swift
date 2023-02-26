@@ -118,7 +118,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
             let appOppened = ParseAnalytics(name: "AppOpened",
                                             dimensions: userInfo,
                                             at: date)
-            await appOppened.saveCommand().executeAsync(options: options,
+            await appOppened.saveCommand().execute(options: options,
                                                         callbackQueue: callbackQueue) { result in
                 switch result {
                 case .success:
@@ -156,7 +156,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
             let appOppened = ParseAnalytics(name: "AppOpened",
                                             dimensions: dimensions,
                                             at: date)
-            await appOppened.saveCommand().executeAsync(options: options,
+            await appOppened.saveCommand().execute(options: options,
                                                         callbackQueue: callbackQueue) { result in
                 callbackQueue.async {
                     switch result {
@@ -186,7 +186,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await self.saveCommand().executeAsync(options: options,
+            await self.saveCommand().execute(options: options,
                                             callbackQueue: callbackQueue) { result in
                 Task {
                     switch result {
@@ -227,7 +227,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
         let options = mutableOptions
         let immutableSelf = self
         Task {
-            await immutableSelf.saveCommand().executeAsync(options: options,
+            await immutableSelf.saveCommand().execute(options: options,
                                                            callbackQueue: callbackQueue) { result in
                 callbackQueue.async {
                     switch result {

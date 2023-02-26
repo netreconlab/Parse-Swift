@@ -119,7 +119,7 @@ class ParseAppleAsyncTests: XCTestCase {
         }
 
         let user = try await User.apple.login(user: "testing", identityToken: tokenData)
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
@@ -156,7 +156,7 @@ class ParseAppleAsyncTests: XCTestCase {
 
         let user = try await User.apple.login(authData: ["id": "testing",
                                                          "token": "test"])
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
@@ -207,7 +207,7 @@ class ParseAppleAsyncTests: XCTestCase {
         }
 
         let user = try await User.apple.link(user: "testing", identityToken: tokenData)
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
@@ -241,7 +241,7 @@ class ParseAppleAsyncTests: XCTestCase {
 
         let user = try await User.apple.link(authData: ["id": "testing",
                                                         "token": "test"])
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
@@ -286,7 +286,7 @@ class ParseAppleAsyncTests: XCTestCase {
         }
 
         let updatedUser = try await User.apple.unlink()
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(updatedUser, currentUser)
         XCTAssertEqual(updatedUser.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(updatedUser.username, "hello10")

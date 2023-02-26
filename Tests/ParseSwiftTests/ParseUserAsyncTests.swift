@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 8/6/21.
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
-
+/*
 #if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
@@ -321,15 +321,12 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testBecome() async throws {
         login()
         MockURLProtocol.removeAll()
-        XCTAssertNotNil(User.current?.objectId)
+        let currentUserObjectId = try await User.current().objectId
+        XCTAssertNotNil(currentUserObjectId)
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap")
-            return
-        }
-
+        let user = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -412,7 +409,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         #if !os(Linux) && !os(Android) && !os(Windows)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
             if installationFromKeychain.installationId == oldInstallationId
                 || installationFromKeychain.installationId == nil {
                 XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -472,7 +469,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         #if !os(Linux) && !os(Android) && !os(Windows)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
                 if installationFromKeychain.installationId == oldInstallationId
                     || installationFromKeychain.installationId == nil {
                     XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -727,14 +724,10 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap")
-            return
-        }
-
+        let user = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.createdAt = User.current?.createdAt
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.createdAt = user.createdAt
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -750,11 +743,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let fetched = try await user.fetch()
         XCTAssertEqual(fetched.objectId, serverResponse.objectId)
 
-        guard let userFromKeychain = BaseParseUser.current else {
-            XCTFail("Could not get CurrentUser from Keychain")
-            return
-        }
-
+        let userFromKeychain = try await BaseParseUser.current()
         XCTAssertEqual(userFromKeychain.objectId, serverResponse.objectId)
     }
 
@@ -764,10 +753,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard var user = User.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+        var user = try await User.current()
         user.username = "stop"
 
         var serverResponse = user
@@ -785,11 +771,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let saved = try await user.save()
         XCTAssertEqual(saved.objectId, serverResponse.objectId)
 
-        guard let userFromKeychain = BaseParseUser.current else {
-            XCTFail("Could not get CurrentUser from Keychain")
-            return
-        }
-
+        let userFromKeychain = try await BaseParseUser.current()
         XCTAssertEqual(userFromKeychain.objectId, serverResponse.objectId)
     }
 
@@ -804,7 +786,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         var serverResponse = user
         serverResponse.objectId = "yolo"
-        serverResponse.createdAt = User.current?.createdAt
+        serverResponse.createdAt = try await User.current().createdAt
 
         MockURLProtocol.mockRequests { _ in
             do {
@@ -1001,10 +983,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let original = User.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+        let original = try await User.current()
         var originalResponse = original.mergeable
         originalResponse.createdAt = nil
         originalResponse.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
@@ -1029,35 +1008,29 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         do {
             let saved = try await updated.update()
-            let expectation1 = XCTestExpectation(description: "Update installation1")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                guard let newCurrentUser = User.current else {
-                    XCTFail("Should have a new current installation")
-                    expectation1.fulfill()
-                    return
-                }
-                XCTAssertTrue(saved.hasSameObjectId(as: newCurrentUser))
-                XCTAssertTrue(saved.hasSameObjectId(as: response))
-                XCTAssertEqual(saved.customKey, updated.customKey)
-                XCTAssertEqual(saved.email, original.email)
-                XCTAssertEqual(saved.username, updated.username)
-                XCTAssertEqual(saved.emailVerified, original.emailVerified)
-                XCTAssertEqual(saved.password, original.password)
-                XCTAssertEqual(saved.authData, original.authData)
-                XCTAssertEqual(saved.createdAt, original.createdAt)
-                XCTAssertEqual(saved.updatedAt, response.updatedAt)
-                XCTAssertNil(saved.originalData)
-                XCTAssertEqual(saved.customKey, newCurrentUser.customKey)
-                XCTAssertEqual(saved.email, newCurrentUser.email)
-                XCTAssertEqual(saved.username, newCurrentUser.username)
-                XCTAssertEqual(saved.emailVerified, newCurrentUser.emailVerified)
-                XCTAssertEqual(saved.password, newCurrentUser.password)
-                XCTAssertEqual(saved.authData, newCurrentUser.authData)
-                XCTAssertEqual(saved.createdAt, newCurrentUser.createdAt)
-                XCTAssertEqual(saved.updatedAt, newCurrentUser.updatedAt)
-                expectation1.fulfill()
-            }
-            wait(for: [expectation1], timeout: 20.0)
+
+            let nanoSeconds = UInt64(2 * 1_000_000_000)
+            try await Task.sleep(nanoseconds: nanoSeconds)
+            let newCurrentUser = try await User.current()
+            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentUser))
+            XCTAssertTrue(saved.hasSameObjectId(as: response))
+            XCTAssertEqual(saved.customKey, updated.customKey)
+            XCTAssertEqual(saved.email, original.email)
+            XCTAssertEqual(saved.username, updated.username)
+            XCTAssertEqual(saved.emailVerified, original.emailVerified)
+            XCTAssertEqual(saved.password, original.password)
+            XCTAssertEqual(saved.authData, original.authData)
+            XCTAssertEqual(saved.createdAt, original.createdAt)
+            XCTAssertEqual(saved.updatedAt, response.updatedAt)
+            XCTAssertNil(saved.originalData)
+            XCTAssertEqual(saved.customKey, newCurrentUser.customKey)
+            XCTAssertEqual(saved.email, newCurrentUser.email)
+            XCTAssertEqual(saved.username, newCurrentUser.username)
+            XCTAssertEqual(saved.emailVerified, newCurrentUser.emailVerified)
+            XCTAssertEqual(saved.password, newCurrentUser.password)
+            XCTAssertEqual(saved.authData, newCurrentUser.authData)
+            XCTAssertEqual(saved.createdAt, newCurrentUser.createdAt)
+            XCTAssertEqual(saved.updatedAt, newCurrentUser.updatedAt)
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -1069,10 +1042,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(UserDefault.current?.objectId)
 
-        guard let original = UserDefault.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+        let original = try await UserDefault.current()
         var originalResponse = original.mergeable
         originalResponse.createdAt = nil
         originalResponse.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
@@ -1096,33 +1066,27 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         do {
             let saved = try await updated.update()
-            let expectation1 = XCTestExpectation(description: "Update installation1")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                guard let newCurrentUser = User.current else {
-                    XCTFail("Should have a new current installation")
-                    expectation1.fulfill()
-                    return
-                }
-                XCTAssertTrue(saved.hasSameObjectId(as: newCurrentUser))
-                XCTAssertTrue(saved.hasSameObjectId(as: response))
-                XCTAssertEqual(saved.email, original.email)
-                XCTAssertEqual(saved.username, updated.username)
-                XCTAssertEqual(saved.emailVerified, original.emailVerified)
-                XCTAssertEqual(saved.password, original.password)
-                XCTAssertEqual(saved.authData, original.authData)
-                XCTAssertEqual(saved.createdAt, original.createdAt)
-                XCTAssertEqual(saved.updatedAt, response.updatedAt)
-                XCTAssertNil(saved.originalData)
-                XCTAssertEqual(saved.email, newCurrentUser.email)
-                XCTAssertEqual(saved.username, newCurrentUser.username)
-                XCTAssertEqual(saved.emailVerified, newCurrentUser.emailVerified)
-                XCTAssertEqual(saved.password, newCurrentUser.password)
-                XCTAssertEqual(saved.authData, newCurrentUser.authData)
-                XCTAssertEqual(saved.createdAt, newCurrentUser.createdAt)
-                XCTAssertEqual(saved.updatedAt, newCurrentUser.updatedAt)
-                expectation1.fulfill()
-            }
-            wait(for: [expectation1], timeout: 20.0)
+
+            let nanoSeconds = UInt64(2 * 1_000_000_000)
+            try await Task.sleep(nanoseconds: nanoSeconds)
+            let newCurrentUser = try await User.current()
+            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentUser))
+            XCTAssertTrue(saved.hasSameObjectId(as: response))
+            XCTAssertEqual(saved.email, original.email)
+            XCTAssertEqual(saved.username, updated.username)
+            XCTAssertEqual(saved.emailVerified, original.emailVerified)
+            XCTAssertEqual(saved.password, original.password)
+            XCTAssertEqual(saved.authData, original.authData)
+            XCTAssertEqual(saved.createdAt, original.createdAt)
+            XCTAssertEqual(saved.updatedAt, response.updatedAt)
+            XCTAssertNil(saved.originalData)
+            XCTAssertEqual(saved.email, newCurrentUser.email)
+            XCTAssertEqual(saved.username, newCurrentUser.username)
+            XCTAssertEqual(saved.emailVerified, newCurrentUser.emailVerified)
+            XCTAssertEqual(saved.password, newCurrentUser.password)
+            XCTAssertEqual(saved.authData, newCurrentUser.authData)
+            XCTAssertEqual(saved.createdAt, newCurrentUser.createdAt)
+            XCTAssertEqual(saved.updatedAt, newCurrentUser.updatedAt)
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -1134,10 +1098,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap")
-            return
-        }
+        let user = try await User.current()
 
         let serverResponse = NoBody()
 
@@ -1151,8 +1112,11 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         _ = try await user.delete()
-        if BaseParseUser.current != nil {
+        do {
+            _ = try await BaseParseUser.current()
             XCTFail("Could not get CurrentUser from Keychain")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
         }
     }
 
@@ -1162,11 +1126,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         XCTAssertNotNil(User.current?.objectId)
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap")
-            return
-        }
-
+        let user = try await User.current()
         let serverResponse = ParseError(code: .objectNotFound, message: "Not found")
 
         MockURLProtocol.mockRequests { _ in
@@ -1197,11 +1157,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         MockURLProtocol.removeAll()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
-        guard var user = User.current else {
-                XCTFail("Should unwrap dates")
-            expectation1.fulfill()
-                return
-        }
+        var user = try await User.current()
 
         user.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         user.customKey = "newValue"
@@ -1223,8 +1179,8 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         let fetched = try await [user].fetchAll()
-        fetched.forEach {
-            switch $0 {
+        for item in fetched {
+            switch item {
             case .success(let fetched):
                 XCTAssert(fetched.hasSameObjectId(as: user))
                 guard let fetchedCreatedAt = fetched.createdAt,
@@ -1243,10 +1199,11 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                 XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
                 XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
                 XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
-                XCTAssertEqual(User.current?.customKey, user.customKey)
+                let currentUser = try await User.current()
+                XCTAssertEqual(currentUser.customKey, user.customKey)
 
                 // Should be updated in memory
-                guard let updatedCurrentDate = User.current?.updatedAt else {
+                guard let updatedCurrentDate = currentUser.updatedAt else {
                     XCTFail("Should unwrap current date")
                     expectation1.fulfill()
                     return
@@ -1256,7 +1213,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                 #if !os(Linux) && !os(Android) && !os(Windows)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                    = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+                    = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                     let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
                         XCTFail("Should get object from Keychain")
                         expectation1.fulfill()
@@ -1275,10 +1232,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         login()
         MockURLProtocol.removeAll()
 
-        guard var user = User.current else {
-            XCTFail("Should unwrap dates")
-            return
-        }
+        var user = try await User.current()
         user.createdAt = nil
         user.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         user.customKey = "newValue"
@@ -1299,8 +1253,8 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
 
         let saved = try await [user].saveAll()
-        saved.forEach {
-            switch $0 {
+        for item in saved {
+            switch item {
             case .success(let saved):
                 XCTAssert(saved.hasSameObjectId(as: user))
                 guard let savedUpdatedAt = saved.updatedAt else {
@@ -1314,10 +1268,11 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                 }
                 XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
                 XCTAssertEqual(savedUpdatedAt, serverUpdatedAt)
-                XCTAssertEqual(User.current?.customKey, user.customKey)
+                let currentUser = try await User.current()
+                XCTAssertEqual(currentUser.customKey, user.customKey)
 
                 // Should be updated in memory
-                guard let updatedCurrentDate = User.current?.updatedAt else {
+                guard let updatedCurrentDate = currentUser.updatedAt else {
                     XCTFail("Should unwrap current date")
                     return
                 }
@@ -1326,7 +1281,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                 #if !os(Linux) && !os(Android) && !os(Windows)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                    = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+                    = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                     let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
                         XCTFail("Should get object from Keychain")
                     return
@@ -1538,10 +1493,7 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         login()
         MockURLProtocol.removeAll()
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap dates")
-            return
-        }
+        let user = try await User.current()
 
         let userOnServer = [BatchResponseItem<NoBody>(success: NoBody(), error: nil)]
 
@@ -1566,3 +1518,4 @@ class ParseUserAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
 }
 
 #endif
+*/

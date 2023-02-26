@@ -43,7 +43,7 @@ public struct ParseHealth: ParseTypeable {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await healthCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               allowIntermediateResponses: allowIntermediateResponses,
                               completion: completion)

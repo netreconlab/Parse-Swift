@@ -296,10 +296,15 @@ public extension ParseInstallation {
     /**
      Gets/Sets properties of the current installation in the Keychain.
 
-     - returns: Returns a `ParseInstallation` that is the current device. If there is none, returns `nil`.
+     - returns: Returns a `ParseInstallation` that is the current device. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
     */
-    static func current() async -> Self? {
-        await Self.currentContainer().currentInstallation
+    static func current() async throws -> Self {
+        guard let installation = await Self.currentContainer().currentInstallation else {
+            throw ParseError(code: .otherCause,
+                             message: "There is no current Installation")
+        }
+        return installation
     }
 
     internal static func setCurrent(_ newValue: Self?) async {
@@ -331,59 +336,60 @@ public extension ParseInstallation {
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
         Task {
-            guard var currentInstallation = await Self.current() else {
+            do {
+                var currentInstallation = try await Self.current()
+                guard currentInstallation.objectId != objectId else {
+                    let currentInstallation = currentInstallation
+                    // If the installationId's are the same, assume successful replacement already occured.
+                    callbackQueue.async {
+                        completion(.success(currentInstallation))
+                    }
+                    return
+                }
+                currentInstallation.objectId = objectId
+                currentInstallation.fetch(options: options, callbackQueue: callbackQueue) { result in
+                    switch result {
+                    case .success(let updatedInstallation):
+                        Task {
+                            if copyEntireInstallation {
+                                var updatedInstallation = updatedInstallation
+                                updatedInstallation.updateAutomaticInfo()
+                                var currentContainer = await Self.currentContainer()
+                                currentContainer.installationId = updatedInstallation.installationId
+                                currentContainer.currentInstallation = updatedInstallation
+                                await Self.setCurrentContainer(currentContainer)
+                            } else {
+                                var current = try? await Self.current()
+                                current?.channels = updatedInstallation.channels
+                                if current?.deviceToken == nil {
+                                    current?.deviceToken = updatedInstallation.deviceToken
+                                }
+                                await Self.setCurrent(current)
+                            }
+                            await Self.saveCurrentContainerToKeychain()
+                            guard let latestInstallation = try? await Self.current() else {
+                                let error = ParseError(code: .otherCause,
+                                                       message: "Had trouble migrating the installation")
+                                callbackQueue.async {
+                                    completion(.failure(error))
+                                }
+                                return
+                            }
+                            latestInstallation.save(options: options,
+                                                    callbackQueue: callbackQueue,
+                                                    completion: completion)
+                        }
+                    case .failure(let error):
+                        callbackQueue.async {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            } catch {
                 let error = ParseError(code: .otherCause,
                                        message: "Current installation does not exist")
                 callbackQueue.async {
                     completion(.failure(error))
-                }
-                return
-            }
-            guard currentInstallation.objectId != objectId else {
-                let currentInstallation = currentInstallation
-                // If the installationId's are the same, assume successful replacement already occured.
-                callbackQueue.async {
-                    completion(.success(currentInstallation))
-                }
-                return
-            }
-            currentInstallation.objectId = objectId
-            currentInstallation.fetch(options: options, callbackQueue: callbackQueue) { result in
-                switch result {
-                case .success(let updatedInstallation):
-                    Task {
-                        if copyEntireInstallation {
-                            var updatedInstallation = updatedInstallation
-                            updatedInstallation.updateAutomaticInfo()
-                            var currentContainer = await Self.currentContainer()
-                            currentContainer.installationId = updatedInstallation.installationId
-                            currentContainer.currentInstallation = updatedInstallation
-                            await Self.setCurrentContainer(currentContainer)
-                        } else {
-                            var current = await Self.current()
-                            current?.channels = updatedInstallation.channels
-                            if current?.deviceToken == nil {
-                                current?.deviceToken = updatedInstallation.deviceToken
-                            }
-                            await Self.setCurrent(current)
-                        }
-                        await Self.saveCurrentContainerToKeychain()
-                        guard let latestInstallation = await Self.current() else {
-                            let error = ParseError(code: .otherCause,
-                                                   message: "Had trouble migrating the installation")
-                            callbackQueue.async {
-                                completion(.failure(error))
-                            }
-                            return
-                        }
-                        latestInstallation.save(options: options,
-                                                callbackQueue: callbackQueue,
-                                                completion: completion)
-                    }
-                case .failure(let error):
-                    callbackQueue.async {
-                        completion(.failure(error))
-                    }
                 }
             }
         }
@@ -492,10 +498,7 @@ extension ParseInstallation {
 // MARK: Fetchable
 extension ParseInstallation {
     internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
-        guard let currentInstallation = await Self.current() else {
-            return
-        }
-
+        let currentInstallation = try await Self.current()
         var foundCurrentInstallationObjects = results.filter { $0.hasSameInstallationId(as: currentInstallation) }
         foundCurrentInstallationObjects = try foundCurrentInstallationObjects.sorted(by: {
             guard let firstUpdatedAt = $0.updatedAt,
@@ -541,7 +544,7 @@ extension ParseInstallation {
         Task {
             do {
                 try await fetchCommand(include: includeKeys)
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
@@ -873,7 +876,7 @@ extension ParseInstallation {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await deleteCommand()
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue) { result in
                         switch result {
 
@@ -1272,7 +1275,7 @@ public extension Sequence where Element: ParseInstallation {
                 for batch in batches {
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue) { results in
                             switch results {
 
@@ -1338,34 +1341,35 @@ public extension ParseInstallation {
                 }
                 return
             }
-            guard var currentInstallation = await Self.current() else {
+            do {
+                var currentInstallation = try await Self.current()
+                currentInstallation.installationId = oldInstallationId
+                do {
+                    try await deleteObjectiveCKeychain()
+                    // Only delete the `ParseInstallation` on Parse Server if it is not current.
+                    guard currentInstallation.installationId == oldInstallationId else {
+                        currentInstallation.delete(options: options,
+                                                   callbackQueue: callbackQueue,
+                                                   completion: completion)
+                        return
+                    }
+                    callbackQueue.async {
+                        completion(.success(()))
+                    }
+                } catch {
+                    let parseError = ParseError(code: .otherCause,
+                                                message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                    return
+                }
+            } catch {
                 let error = ParseError(code: .otherCause,
                                        message: "Current installation does not exist")
                 callbackQueue.async {
                     completion(.failure(error))
                 }
-                return
-            }
-            currentInstallation.installationId = oldInstallationId
-            do {
-                try await deleteObjectiveCKeychain()
-                // Only delete the `ParseInstallation` on Parse Server if it is not current.
-                guard currentInstallation.installationId == oldInstallationId else {
-                    currentInstallation.delete(options: options,
-                                               callbackQueue: callbackQueue,
-                                               completion: completion)
-                    return
-                }
-                callbackQueue.async {
-                    completion(.success(()))
-                }
-            } catch {
-                let parseError = ParseError(code: .otherCause,
-                                            message: error.localizedDescription)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-                return
             }
         }
     }

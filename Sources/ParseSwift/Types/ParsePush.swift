@@ -190,7 +190,7 @@ extension ParsePush {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await sendCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }

@@ -433,7 +433,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         // Should be updated in Keychain
         guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -463,7 +463,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         // Should be updated in Keychain
         guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -500,7 +500,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        Installation.currentContainer.currentInstallation = nil
+        Installation.currentContainer().currentInstallation = nil
 
         do {
             _ = try await Installation.deleteObjCKeychain()

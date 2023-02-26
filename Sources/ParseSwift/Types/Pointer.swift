@@ -119,7 +119,7 @@ public extension Pointer {
             await API.NonParseBodyCommand<NoBody, T>(method: .GET,
                                                path: path) { (data) -> T in
                 try ParseCoding.jsonDecoder().decode(T.self, from: data)
-            }.executeAsync(options: options,
+            }.execute(options: options,
                            callbackQueue: callbackQueue,
                            completion: completion)
         }

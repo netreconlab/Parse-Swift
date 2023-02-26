@@ -40,7 +40,7 @@ extension ParseCloudable {
                             completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
         Task {
             await runFunctionCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -71,7 +71,7 @@ extension ParseCloudable {
                          completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
         Task {
             await startJobCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }

@@ -92,7 +92,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -128,7 +128,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw originalError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -176,7 +176,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -240,7 +240,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -293,7 +293,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -349,7 +349,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -413,7 +413,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -466,7 +466,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                 params: nil,
                                                 mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {

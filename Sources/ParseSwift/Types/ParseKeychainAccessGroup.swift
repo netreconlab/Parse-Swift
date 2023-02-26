@@ -14,13 +14,14 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
     var accessGroup: String?
     var isSyncingKeychainAcrossDevices = false
 
-    static func current() async -> Self? {
+    static func current() async throws -> Self {
         guard let versionInMemory: Self =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             guard let versionFromKeyChain: Self =
                     try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
             else {
-                return nil
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current Keychain access group")
             }
             return versionFromKeyChain
         }

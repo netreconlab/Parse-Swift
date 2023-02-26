@@ -18,8 +18,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
     var prereleaseName: PrereleaseName?
     var prereleaseVersion: Int?
 
-    /// Current version of the SDK.
-    public static func current() async -> Self? {
+    /**
+     Current version of the SDK.
+     
+     - returns: Returns the current `ParseVersion`. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
+     */
+    public static func current() async throws -> Self {
         guard let versionInMemory: Self =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             // Handle Memory migrations from String to ParseVersion
@@ -38,7 +43,8 @@ public struct ParseVersion: ParseTypeable, Hashable {
                                 try? await KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
                               // swiftlint:disable:next line_length
                               let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
-                            return nil
+                            throw ParseError(code: .otherCause,
+                                             message: "There is no current version")
                         }
                         try? await ParseStorage.shared.set(versionFromOldKeychainToMigrate,
                                                            for: ParseStorage.Keys.currentVersion)
@@ -54,7 +60,8 @@ public struct ParseVersion: ParseTypeable, Hashable {
                 }
                 return versionFromKeychain
                 #else
-                return nil
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current version")
                 #endif
             }
             try? await ParseStorage.shared.set(versionFromMemoryToMigrate,

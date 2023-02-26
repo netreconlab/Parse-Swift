@@ -102,7 +102,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func userLogin() {
+    func userLogin() async {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -116,7 +116,7 @@ class APICommandTests: XCTestCase {
             }
         }
         do {
-            _ = try User.login(username: loginUserName, password: loginPassword)
+            _ = try await User.login(username: loginUserName, password: loginPassword)
             MockURLProtocol.removeAll()
         } catch {
             XCTFail("Should login")
@@ -146,7 +146,7 @@ class APICommandTests: XCTestCase {
         XCTAssertTrue(options.contains(.usePrimaryKey))
     }
 
-    func testExecuteCorrectly() {
+    func testExecuteCorrectly() async {
         let originalObject = "test"
         MockURLProtocol.mockRequests { _ in
             do {
@@ -157,12 +157,13 @@ class APICommandTests: XCTestCase {
         }
         do {
             let returnedObject =
-                try API.NonParseBodyCommand<NoBody, String>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { (data) -> String in
+                try await API.NonParseBodyCommand<NoBody, String>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { (data) -> String in
                     return try JSONDecoder().decode(String.self, from: data)
-                }).execute(options: [])
+                }).execute(options: [],
+                           callbackQueue: .main)
             XCTAssertEqual(originalObject, returnedObject)
 
         } catch {
@@ -171,7 +172,7 @@ class APICommandTests: XCTestCase {
     }
 
     // This is how errors from the server should typically come in
-    func testErrorFromParseServer() {
+    func testErrorFromParseServer() async {
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
             do {
@@ -184,12 +185,13 @@ class APICommandTests: XCTestCase {
         }
 
         do {
-            _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { _ -> NoBody in
+            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { _ -> NoBody in
                 throw originalError
-            }).execute(options: [])
+            }).execute(options: [],
+                       callbackQueue: .main)
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
@@ -201,7 +203,7 @@ class APICommandTests: XCTestCase {
     }
 
     // This is how HTTP errors should typically come in
-    func testErrorHTTP400JSON() {
+    func testErrorHTTP400JSON() async {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -224,12 +226,13 @@ class APICommandTests: XCTestCase {
         }
 
         do {
-            _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { _ -> NoBody in
+            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { _ -> NoBody in
                 throw parseError
-            }).execute(options: [])
+            }).execute(options: [],
+                       callbackQueue: .main)
 
             XCTFail("Should have thrown an error")
         } catch {
@@ -241,19 +244,20 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testErrorHTTPReturns400NoDataFromServer() {
+    func testErrorHTTPReturns400NoDataFromServer() async {
         Parse.configuration.maxConnectionAttempts = 1
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(error: originalError) // Status code defaults to 400
         }
         do {
-            _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { _ -> NoBody in
+            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { _ -> NoBody in
                 throw originalError
-            }).execute(options: [])
+            }).execute(options: [],
+                       callbackQueue: .main)
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
@@ -265,7 +269,7 @@ class APICommandTests: XCTestCase {
     }
 
     // This is how errors HTTP errors should typically come in
-    func testErrorHTTP500JSON() {
+    func testErrorHTTP500JSON() async {
         Parse.configuration.maxConnectionAttempts = 1
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
@@ -288,12 +292,13 @@ class APICommandTests: XCTestCase {
         }
 
         do {
-            _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { _ -> NoBody in
+            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { _ -> NoBody in
                 throw parseError
-            }).execute(options: [])
+            }).execute(options: [],
+                       callbackQueue: .main)
 
             XCTFail("Should have thrown an error")
         } catch {
@@ -305,7 +310,7 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testErrorHTTPReturns500NoDataFromServer() {
+    func testErrorHTTPReturns500NoDataFromServer() async {
         Parse.configuration.maxConnectionAttempts = 1
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
@@ -314,12 +319,13 @@ class APICommandTests: XCTestCase {
             return response
         }
         do {
-            _ = try API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                            path: .login,
-                                                            params: nil,
-                                                            mapper: { _ -> NoBody in
+            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                                  path: .login,
+                                                                  params: nil,
+                                                                  mapper: { _ -> NoBody in
                 throw originalError
-            }).execute(options: [])
+            }).execute(options: [],
+                       callbackQueue: .main)
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
@@ -330,15 +336,15 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testApplicationIdHeader() {
-        let headers = API.getHeaders(options: [])
+    func testApplicationIdHeader() async {
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Application-Id"], ParseSwift.configuration.applicationId)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Application-Id"],
@@ -348,19 +354,19 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testClientKeyHeader() throws {
+    func testClientKeyHeader() async throws {
         guard let clientKey = ParseSwift.configuration.clientKey else {
             throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
         }
 
-        let headers = API.getHeaders(options: [])
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Key"], clientKey)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Client-Key"],
@@ -370,19 +376,19 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testPrimaryKeyHeader() throws {
+    func testPrimaryKeyHeader() async throws {
         guard let primaryKey = ParseSwift.configuration.primaryKey else {
             throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
         }
 
-        let headers = API.getHeaders(options: [])
+        let headers = await API.getHeaders(options: [])
         XCTAssertNil(headers["X-Parse-Master-Key"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.usePrimaryKey]) {
+        switch await post.prepareURLRequest(options: [.usePrimaryKey]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Master-Key"],
@@ -394,20 +400,20 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testSessionTokenHeader() throws {
-        userLogin()
-        guard let sessionToken = BaseParseUser.currentContainer?.sessionToken else {
+    func testSessionTokenHeader() async throws {
+        await userLogin()
+        guard let sessionToken = await BaseParseUser.currentContainer()?.sessionToken else {
             throw ParseError(code: .otherCause, message: "Parse current user should have session token")
         }
 
-        let headers = API.getHeaders(options: [])
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Session-Token"], sessionToken)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Session-Token"],
@@ -417,13 +423,13 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testReplaceSessionTokenHeader() throws {
+    func testReplaceSessionTokenHeader() async throws {
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.sessionToken("hello")]) {
+        switch await post.prepareURLRequest(options: [.sessionToken("hello")]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Session-Token"],
@@ -433,19 +439,19 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testInstallationIdHeader() throws {
-        guard let installationId = BaseParseInstallation.currentContainer.installationId else {
+    func testInstallationIdHeader() async throws {
+        guard let installationId = await BaseParseInstallation.currentContainer().installationId else {
             throw ParseError(code: .otherCause, message: "Parse current user should have session token")
         }
 
-        let headers = API.getHeaders(options: [])
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Installation-Id"], installationId)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Installation-Id"],
@@ -455,12 +461,12 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testReplaceInstallationIdHeader() throws {
+    func testReplaceInstallationIdHeader() async throws {
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.installationId("hello")]) {
+        switch await post.prepareURLRequest(options: [.installationId("hello")]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Installation-Id"],
@@ -470,15 +476,15 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testContentHeader() {
-        let headers = API.getHeaders(options: [])
+    func testContentHeader() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["Content-Type"],
@@ -488,15 +494,15 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testReplaceContentHeader() {
-        let headers = API.getHeaders(options: [])
+    func testReplaceContentHeader() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.mimeType("application/html")]) {
+        switch await post.prepareURLRequest(options: [.mimeType("application/html")]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["Content-Type"],
@@ -506,12 +512,12 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testContentLengthHeader() {
+    func testContentLengthHeader() async throws {
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.fileSize("512")]) {
+        switch await post.prepareURLRequest(options: [.fileSize("512")]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["Content-Length"],
@@ -521,15 +527,15 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testRemoveContentHeader() {
-        let headers = API.getHeaders(options: [])
+    func testRemoveContentHeader() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.removeMimeType]) {
+        switch await post.prepareURLRequest(options: [.removeMimeType]) {
 
         case .success(let request):
             XCTAssertNil(request.allHTTPHeaderFields?["Content-Type"])
@@ -558,14 +564,14 @@ class APICommandTests: XCTestCase {
     }
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func testClientVersionHeader() {
-        let headers = API.getHeaders(options: [])
+    func testClientVersionHeader() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Version"], API.clientVersion())
 
         let post = API.Command<Level, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Client-Version"] != API.clientVersion() {
@@ -578,7 +584,7 @@ class APICommandTests: XCTestCase {
         let put = API.Command<Level, NoBody?>(method: .PUT, path: .login) { _ in
             return nil
         }
-        switch put.prepareURLRequest(options: []) {
+        switch await put.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Client-Version"] != API.clientVersion() {
@@ -591,7 +597,7 @@ class APICommandTests: XCTestCase {
         let patch = API.Command<Level, NoBody?>(method: .PATCH, path: .login) { _ in
             return nil
         }
-        switch patch.prepareURLRequest(options: []) {
+        switch await patch.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Client-Version"] != API.clientVersion() {
@@ -604,7 +610,7 @@ class APICommandTests: XCTestCase {
         let delete = API.Command<Level, NoBody?>(method: .DELETE, path: .login) { _ in
             return nil
         }
-        switch delete.prepareURLRequest(options: []) {
+        switch await delete.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Client-Version"] != API.clientVersion() {
@@ -617,7 +623,7 @@ class APICommandTests: XCTestCase {
         let get = API.Command<Level, NoBody?>(method: .GET, path: .login) { _ in
             return nil
         }
-        switch get.prepareURLRequest(options: []) {
+        switch await get.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Client-Version"] != API.clientVersion() {
@@ -629,14 +635,14 @@ class APICommandTests: XCTestCase {
     }
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func testIdempodency() {
-        let headers = API.getHeaders(options: [])
+    func testIdempodency() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
 
         let post = API.Command<Level, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -649,7 +655,7 @@ class APICommandTests: XCTestCase {
         let put = API.Command<Level, NoBody?>(method: .PUT, path: .login) { _ in
             return nil
         }
-        switch put.prepareURLRequest(options: []) {
+        switch await put.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -662,7 +668,7 @@ class APICommandTests: XCTestCase {
         let patch = API.Command<Level, NoBody?>(method: .PATCH, path: .login) { _ in
             return nil
         }
-        switch patch.prepareURLRequest(options: []) {
+        switch await patch.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -675,7 +681,7 @@ class APICommandTests: XCTestCase {
         let delete = API.Command<Level, NoBody?>(method: .DELETE, path: .login) { _ in
             return nil
         }
-        switch delete.prepareURLRequest(options: []) {
+        switch await delete.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
@@ -688,7 +694,7 @@ class APICommandTests: XCTestCase {
         let get = API.Command<Level, NoBody?>(method: .GET, path: .login) { _ in
             return nil
         }
-        switch get.prepareURLRequest(options: []) {
+        switch await get.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
@@ -700,14 +706,14 @@ class APICommandTests: XCTestCase {
     }
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func testIdempodencyNoParseBody() {
-        let headers = API.getHeaders(options: [])
+    func testIdempodencyNoParseBody() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
-        switch post.prepareURLRequest(options: []) {
+        switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -720,7 +726,7 @@ class APICommandTests: XCTestCase {
         let put = API.NonParseBodyCommand<NoBody, NoBody?>(method: .PUT, path: .login) { _ in
             return nil
         }
-        switch put.prepareURLRequest(options: []) {
+        switch await put.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -733,7 +739,7 @@ class APICommandTests: XCTestCase {
         let patch = API.NonParseBodyCommand<NoBody, NoBody?>(method: .PATCH, path: .login) { _ in
             return nil
         }
-        switch patch.prepareURLRequest(options: []) {
+        switch await patch.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] == nil {
@@ -746,7 +752,7 @@ class APICommandTests: XCTestCase {
         let delete = API.NonParseBodyCommand<NoBody, NoBody?>(method: .DELETE, path: .login) { _ in
             return nil
         }
-        switch delete.prepareURLRequest(options: []) {
+        switch await delete.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
@@ -759,7 +765,7 @@ class APICommandTests: XCTestCase {
         let get = API.NonParseBodyCommand<NoBody, NoBody?>(method: .GET, path: .login) { _ in
             return nil
         }
-        switch get.prepareURLRequest(options: []) {
+        switch await get.prepareURLRequest(options: []) {
 
         case .success(let request):
             if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
@@ -770,12 +776,12 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testMetaDataHeader() {
+    func testMetaDataHeader() async throws {
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.metadata(["hello": "world"])]) {
+        switch await post.prepareURLRequest(options: [.metadata(["hello": "world"])]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["hello"], "world")
@@ -784,12 +790,12 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testTagsHeader() {
+    func testTagsHeader() async throws {
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.tags(["hello": "world"])]) {
+        switch await post.prepareURLRequest(options: [.tags(["hello": "world"])]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["hello"], "world")
@@ -798,15 +804,15 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testContextHeader() {
-        let headers = API.getHeaders(options: [])
+    func testContextHeader() async throws {
+        let headers = await API.getHeaders(options: [])
         XCTAssertNil(headers["X-Parse-Cloud-Context"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
         }
 
-        switch post.prepareURLRequest(options: [.context(["hello": "world"])]) {
+        switch await post.prepareURLRequest(options: [.context(["hello": "world"])]) {
 
         case .success(let request):
             XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Cloud-Context"], "{\"hello\":\"world\"}")

@@ -234,7 +234,7 @@ extension ParseFile {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             options = options.union(self.options)
 
-            await deleteFileCommand().executeAsync(options: options, callbackQueue: callbackQueue) { result in
+            await deleteFileCommand().execute(options: options, callbackQueue: callbackQueue) { result in
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -365,7 +365,7 @@ extension ParseFile {
                     Task {
                         do {
                             try await fetched.uploadFileCommand()
-                                .executeAsync(options: options,
+                                .execute(options: options,
                                               callbackQueue: callbackQueue,
                                               uploadProgress: progress,
                                               completion: completion)
@@ -388,7 +388,7 @@ extension ParseFile {
             Task {
                 do {
                     try await uploadFileCommand()
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       uploadProgress: progress,
                                       completion: completion)
@@ -480,7 +480,7 @@ extension ParseFile {
             }
             Task {
                 await downloadFileCommand()
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   downloadProgress: progress,
                                   completion: completion)

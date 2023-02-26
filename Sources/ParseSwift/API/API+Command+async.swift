@@ -25,7 +25,7 @@ internal extension API.Command {
                  downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
             Task {
-                await self.executeAsync(options: options,
+                await self.execute(options: options,
                                         batching: batching,
                                         callbackQueue: callbackQueue,
                                         notificationQueue: notificationQueue,

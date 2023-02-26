@@ -94,7 +94,7 @@ class ParseConfigCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() {
+    func userLogin() async {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -108,7 +108,7 @@ class ParseConfigCombineTests: XCTestCase {
             }
         }
         do {
-            _ = try User.login(username: loginUserName, password: loginPassword)
+            _ = try await User.login(username: loginUserName, password: loginPassword)
             MockURLProtocol.removeAll()
         } catch {
             XCTFail("Should login")
@@ -153,7 +153,7 @@ class ParseConfigCombineTests: XCTestCase {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // Should be updated in Keychain
             guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                     XCTFail("Should get object from Keychain")
                 return
             }
@@ -202,7 +202,7 @@ class ParseConfigCombineTests: XCTestCase {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // Should be updated in Keychain
             guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                     XCTFail("Should get object from Keychain")
                 return
             }

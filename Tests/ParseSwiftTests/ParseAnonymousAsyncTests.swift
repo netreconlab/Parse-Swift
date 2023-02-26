@@ -114,7 +114,7 @@ class ParseAnonymousAsyncTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         let isLinked = await user.anonymous.isLinked()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
@@ -152,7 +152,7 @@ class ParseAnonymousAsyncTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login(authData: .init())
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         let isLinked = await user.anonymous.isLinked()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)

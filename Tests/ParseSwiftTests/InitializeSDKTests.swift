@@ -216,51 +216,44 @@ class InitializeSDKTests: XCTestCase {
             }
         }
 
-        let expectation1 = XCTestExpectation(description: "Wait")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
 
-            guard let url = URL(string: "http://localhost:1337/parse") else {
-                XCTFail("Should create valid URL")
-                expectation1.fulfill()
-                return
-            }
-
-            try? ParseSwift.initialize(applicationId: "applicationId",
-                                       clientKey: "clientKey",
-                                       primaryKey: "primaryKey",
-                                       serverURL: url,
-                                       primitiveStore: memory,
-                                       testing: true)
-
-            guard let currentInstallation = Installation.current else {
-                XCTFail("Should unwrap current Installation")
-                expectation1.fulfill()
-                return
-            }
-
-            XCTAssertEqual(currentInstallation.installationId, installationId)
-
-            // Should be in Keychain
-            guard let memoryInstallation: CurrentInstallationContainer<Installation>
-                = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(memoryInstallation.currentInstallation, currentInstallation)
-
-            // Should be in Keychain
-            guard let keychainInstallation: CurrentInstallationContainer<Installation>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                    expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(keychainInstallation.currentInstallation, currentInstallation)
-            MockURLProtocol.removeAll()
-            expectation1.fulfill()
+        guard let url = URL(string: "http://localhost:1337/parse") else {
+            XCTFail("Should create valid URL")
+            return
         }
-        wait(for: [expectation1], timeout: 20.0)
+
+        try? await ParseSwift.initialize(applicationId: "applicationId",
+                                         clientKey: "clientKey",
+                                         primaryKey: "primaryKey",
+                                         serverURL: url,
+                                         primitiveStore: memory,
+                                         testing: true)
+
+        guard let currentInstallation = await Installation.current() else {
+            XCTFail("Should unwrap current Installation")
+            return
+        }
+
+        XCTAssertEqual(currentInstallation.installationId, installationId)
+
+        // Should be in Keychain
+        guard let memoryInstallation: CurrentInstallationContainer<Installation>
+            = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        XCTAssertEqual(memoryInstallation.currentInstallation, currentInstallation)
+
+        // Should be in Keychain
+        guard let keychainInstallation: CurrentInstallationContainer<Installation>
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        XCTAssertEqual(keychainInstallation.currentInstallation, currentInstallation)
+        MockURLProtocol.removeAll()
     }
     #endif
 
@@ -296,7 +289,7 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrentContainer(newInstallation)
             // .installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation =
+        Installation.currentContainer().currentInstallation =
         Installation.saveCurrentContainerToKeychain()
 
         try ParseSwift.initialize(applicationId: "applicationId",
@@ -324,8 +317,8 @@ class InitializeSDKTests: XCTestCase {
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
+        Installation.currentContainer().installationId = newInstallation.installationId
+        Installation.currentContainer().currentInstallation = newInstallation
         Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
@@ -360,8 +353,8 @@ class InitializeSDKTests: XCTestCase {
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
+        Installation.currentContainer().installationId = newInstallation.installationId
+        Installation.currentContainer().currentInstallation = newInstallation
         Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
@@ -397,8 +390,8 @@ class InitializeSDKTests: XCTestCase {
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
+        Installation.currentContainer().installationId = newInstallation.installationId
+        Installation.currentContainer().currentInstallation = newInstallation
         Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
@@ -433,8 +426,8 @@ class InitializeSDKTests: XCTestCase {
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
+        Installation.currentContainer().installationId = newInstallation.installationId
+        Installation.currentContainer().currentInstallation = newInstallation
         Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
@@ -501,11 +494,11 @@ class InitializeSDKTests: XCTestCase {
                                       lastCurrentUserObjectId: user.objectId,
                                       useCurrentUser: true)
         let version = "1.9.7"
-        try? KeychainStore.old.set(version, for: ParseStorage.Keys.currentVersion)
-        try? KeychainStore.old.set(userContainer, for: ParseStorage.Keys.currentUser)
-        try? KeychainStore.old.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
-        try? KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
-        try? KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
+        try? await KeychainStore.old.set(version, for: ParseStorage.Keys.currentVersion)
+        try? await KeychainStore.old.set(userContainer, for: ParseStorage.Keys.currentUser)
+        try? await KeychainStore.old.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
+        try? await KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
+        try? await KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
         let expectation1 = XCTestExpectation(description: "Wait")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -555,7 +548,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         XCTAssertEqual(installation.installationId, objcInstallationId)
-        XCTAssertEqual(Installation.currentContainer.installationId, objcInstallationId)
+        XCTAssertEqual(Installation.currentContainer().installationId, objcInstallationId)
     }
 
     #if !os(macOS)
@@ -632,9 +625,9 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         XCTAssertNotNil(installation.installationId)
-        XCTAssertNotNil(Installation.currentContainer.installationId)
+        XCTAssertNotNil(Installation.currentContainer().installationId)
         XCTAssertNotEqual(installation.installationId, objcInstallationId)
-        XCTAssertNotEqual(Installation.currentContainer.installationId, objcInstallationId)
+        XCTAssertNotEqual(Installation.currentContainer().installationId, objcInstallationId)
     }
     #endif
 }

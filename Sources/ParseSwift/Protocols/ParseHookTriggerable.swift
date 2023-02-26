@@ -105,7 +105,7 @@ extension ParseHookTriggerable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                try await fetchCommand().executeAsync(options: options,
+                try await fetchCommand().execute(options: options,
                                                       callbackQueue: callbackQueue,
                                                       completion: completion)
             } catch {
@@ -164,7 +164,7 @@ extension ParseHookTriggerable {
             var options = options
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await fetchAllCommand().executeAsync(options: options,
+            await fetchAllCommand().execute(options: options,
                                                  callbackQueue: callbackQueue,
                                                  completion: completion)
         }
@@ -198,7 +198,7 @@ extension ParseHookTriggerable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                try await createCommand().executeAsync(options: options,
+                try await createCommand().execute(options: options,
                                                        callbackQueue: callbackQueue,
                                                        completion: completion)
             } catch {
@@ -242,7 +242,7 @@ extension ParseHookTriggerable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                try await updateCommand().executeAsync(options: options,
+                try await updateCommand().execute(options: options,
                                                        callbackQueue: callbackQueue,
                                                        completion: completion)
             } catch {
@@ -286,7 +286,7 @@ extension ParseHookTriggerable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                try await deleteCommand().executeAsync(options: options,
+                try await deleteCommand().execute(options: options,
                                                        callbackQueue: callbackQueue) { result in
                     switch result {
 

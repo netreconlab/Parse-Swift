@@ -368,7 +368,7 @@ extension ParseOperation {
             return
         }
         Task {
-            await self.saveCommand().executeAsync(options: options,
+            await self.saveCommand().execute(options: options,
                                                   callbackQueue: callbackQueue,
                                                   completion: completion)
         }

@@ -482,7 +482,7 @@ extension Query: Queryable {
         }
         Task {
             do {
-                try await findCommand().executeAsync(options: options,
+                try await findCommand().execute(options: options,
                                                      callbackQueue: callbackQueue,
                                                      completion: completion)
             } catch {
@@ -523,7 +523,7 @@ extension Query: Queryable {
         Task {
             if !usingMongoDB {
                 do {
-                    try await findExplainCommand().executeAsync(options: options,
+                    try await findExplainCommand().execute(options: options,
                                                                 callbackQueue: callbackQueue,
                                                                 completion: completion)
                 } catch {
@@ -535,7 +535,7 @@ extension Query: Queryable {
                 }
             } else {
                 do {
-                    try await findExplainMongoCommand().executeAsync(options: options,
+                    try await findExplainMongoCommand().execute(options: options,
                                                                      callbackQueue: callbackQueue,
                                                                      completion: completion)
                 } catch {
@@ -589,7 +589,7 @@ extension Query: Queryable {
             while !finished {
                 do {
                     let currentResults = try await query.findCommand().execute(options: options,
-                                                                                    callbackQueue: callbackQueue)
+                                                                               callbackQueue: callbackQueue)
                     results.append(contentsOf: currentResults)
                     if currentResults.count >= query.limit {
                         guard let lastObjectId = results[results.count - 1].objectId else {
@@ -679,7 +679,7 @@ extension Query: Queryable {
         }
         Task {
             do {
-                try await firstCommand().executeAsync(options: options,
+                try await firstCommand().execute(options: options,
                                                       callbackQueue: callbackQueue,
                                                       completion: completion)
             } catch {
@@ -724,7 +724,7 @@ extension Query: Queryable {
         Task {
             if !usingMongoDB {
                 do {
-                    try await firstExplainCommand().executeAsync(options: options,
+                    try await firstExplainCommand().execute(options: options,
                                                                  callbackQueue: callbackQueue,
                                                                  completion: completion)
                 } catch {
@@ -736,7 +736,7 @@ extension Query: Queryable {
                 }
             } else {
                 do {
-                    try await firstExplainMongoCommand().executeAsync(options: options,
+                    try await firstExplainMongoCommand().execute(options: options,
                                                                       callbackQueue: callbackQueue,
                                                                       completion: completion)
                 } catch {
@@ -769,7 +769,7 @@ extension Query: Queryable {
         }
         Task {
             do {
-                try await countCommand().executeAsync(options: options,
+                try await countCommand().execute(options: options,
                                                       callbackQueue: callbackQueue,
                                                       completion: completion)
             } catch {
@@ -810,7 +810,7 @@ extension Query: Queryable {
         Task {
             if !usingMongoDB {
                 do {
-                    try await countExplainCommand().executeAsync(options: options,
+                    try await countExplainCommand().execute(options: options,
                                                                  callbackQueue: callbackQueue,
                                                                  completion: completion)
                 } catch {
@@ -822,7 +822,7 @@ extension Query: Queryable {
                 }
             } else {
                 do {
-                    try await countExplainMongoCommand().executeAsync(options: options,
+                    try await countExplainMongoCommand().execute(options: options,
                                                                       callbackQueue: callbackQueue,
                                                                       completion: completion)
                 } catch {
@@ -856,7 +856,7 @@ extension Query: Queryable {
         }
         Task {
             do {
-                try await withCountCommand().executeAsync(options: options,
+                try await withCountCommand().execute(options: options,
                                                           callbackQueue: callbackQueue,
                                                           completion: completion)
             } catch {
@@ -897,7 +897,7 @@ extension Query: Queryable {
         Task {
             if !usingMongoDB {
                 do {
-                    try await withCountExplainCommand().executeAsync(options: options,
+                    try await withCountExplainCommand().execute(options: options,
                                                                      callbackQueue: callbackQueue,
                                                                      completion: completion)
                 } catch {
@@ -909,7 +909,7 @@ extension Query: Queryable {
                 }
             } else {
                 do {
-                    try await withCountExplainMongoCommand().executeAsync(options: options,
+                    try await withCountExplainMongoCommand().execute(options: options,
                                                                           callbackQueue: callbackQueue,
                                                                           completion: completion)
                 } catch {
@@ -975,7 +975,7 @@ extension Query: Queryable {
 
             do {
                 try await query.aggregateCommand()
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   completion: completion)
             } catch {
@@ -1048,7 +1048,7 @@ extension Query: Queryable {
             if !usingMongoDB {
                 do {
                     try await query.aggregateExplainCommand()
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -1061,7 +1061,7 @@ extension Query: Queryable {
             } else {
                 do {
                     try await query.aggregateExplainMongoCommand()
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -1102,7 +1102,7 @@ extension Query: Queryable {
             options.insert(.usePrimaryKey)
             do {
                 try await distinctCommand(key: key)
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   completion: completion)
             } catch {
@@ -1151,7 +1151,7 @@ extension Query: Queryable {
             if !usingMongoDB {
                 do {
                     try await distinctExplainCommand(key: key)
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -1164,7 +1164,7 @@ extension Query: Queryable {
             } else {
                 do {
                     try await distinctExplainMongoCommand(key: key)
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {

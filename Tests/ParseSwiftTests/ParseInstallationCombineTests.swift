@@ -475,7 +475,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     #if !os(Linux) && !os(Android) && !os(Windows)
                     // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                        = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+                        = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
                         let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
                             XCTFail("Should get object from Keychain")
                             expectation1.fulfill()
@@ -562,7 +562,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     #if !os(Linux) && !os(Android) && !os(Windows)
                     // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                        = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+                        = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
                         let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
                             XCTFail("Should get object from Keychain")
                             expectation1.fulfill()
@@ -960,7 +960,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             #if !os(Linux) && !os(Android) && !os(Windows)
             // Should be updated in Keychain
             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                     XCTFail("Should get object from Keychain")
                 expectation1.fulfill()
                 return
@@ -982,7 +982,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         #if !os(Linux) && !os(Android) && !os(Windows)
         try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
-        Installation.currentContainer.currentInstallation = nil
+        Installation.currentContainer().currentInstallation = nil
 
         let publisher = Installation.becomePublisher("wowsers")
             .sink(receiveCompletion: { result in

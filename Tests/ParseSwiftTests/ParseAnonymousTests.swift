@@ -151,7 +151,7 @@ class ParseAnonymousTests: XCTestCase {
         }
 
         let login1 = try await User.anonymous.login()
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
@@ -186,8 +186,8 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let login1 = await try User.anonymous.login(authData: .init())
-        let currentUser = await User.current()
+        let login1 = try await User.anonymous.login(authData: .init())
+        let currentUser = try await User.current()
         XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
@@ -285,8 +285,8 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUser() async throws {
         try await testLogin()
-        guard let user = await User.current(),
-              let updatedAt = user.updatedAt else {
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
@@ -311,10 +311,10 @@ class ParseAnonymousTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Login")
 
-        var current = await User.current()
-        current?.username = "hello"
-        current?.password = "world"
-        current?.signup { result in
+        var current = try await User.current()
+        current.username = "hello"
+        current.password = "world"
+        current.signup { result in
             switch result {
 
             case .success(let user):
@@ -331,8 +331,8 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserBody() async throws {
         try await testLogin()
-        guard let user = await User.current(),
-              let updatedAt = user.updatedAt else {
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
@@ -375,8 +375,8 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserSync() async throws {
         try await testLogin()
-        guard var user = await User.current(),
-              let updatedAt = user.updatedAt else {
+        var user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
@@ -402,7 +402,7 @@ class ParseAnonymousTests: XCTestCase {
         user.username = "hello"
         user.password = "world"
         let signedInUser = try await user.signup()
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
         XCTAssertEqual(signedInUser.password, "world")
@@ -411,8 +411,8 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserBodySync() async throws {
         try await testLogin()
-        guard let user = await User.current(),
-              let updatedAt = user.updatedAt else {
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
@@ -437,7 +437,7 @@ class ParseAnonymousTests: XCTestCase {
 
         let signedInUser = try await User.signup(username: "hello",
                                                  password: "world")
-        let currentUser = await User.current()
+        let currentUser = try await User.current()
         XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
         XCTAssertEqual(signedInUser.password, "world")
@@ -446,10 +446,7 @@ class ParseAnonymousTests: XCTestCase {
 
     func testCantReplaceAnonymousWithDifferentUser() async throws {
         try await testLogin()
-        guard let user = await User.current() else {
-            XCTFail("Shold have unwrapped")
-            return
-        }
+        let user = try await User.current()
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         let expectation1 = XCTestExpectation(description: "SignUp")
@@ -471,10 +468,7 @@ class ParseAnonymousTests: XCTestCase {
 
     func testCantReplaceAnonymousWithDifferentUserSync() async throws {
         try await testLogin()
-        guard let user = await User.current() else {
-            XCTFail("Shold have unwrapped")
-            return
-        }
+        let user = try await User.current()
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var differentUser = User()
@@ -490,23 +484,19 @@ class ParseAnonymousTests: XCTestCase {
     }
 
     func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
-        var currentUser = await User.current()
-        XCTAssertNil(currentUser?.objectId)
+        var currentUser = try await User.current()
+        XCTAssertNil(currentUser.objectId)
         try await testLogin()
         MockURLProtocol.removeAll()
-        currentUser = await User.current()
-        XCTAssertNotNil(currentUser?.objectId)
+        currentUser = try await User.current()
+        XCTAssertNotNil(currentUser.objectId)
         let isLinked = await User.anonymous.isLinked()
         XCTAssertTrue(isLinked)
 
-        guard let user = await User.current() else {
-            XCTFail("Should unwrap")
-            return
-        }
-
+        let user = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.createdAt = currentUser?.createdAt
-        serverResponse.updatedAt = currentUser?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.createdAt = currentUser.createdAt
+        serverResponse.updatedAt = currentUser.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
         serverResponse.password = "this"

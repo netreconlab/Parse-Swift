@@ -34,7 +34,7 @@ extension ParseConfig {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -71,7 +71,7 @@ extension ParseConfig {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await updateCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -140,10 +140,16 @@ public extension ParseConfig {
     /**
      Gets/Sets properties of the current config in the Keychain.
 
-     - returns: Returns the latest `ParseConfig` on this device. If there is none, returns `nil`.
+     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
     */
-    static func current() async -> Self? {
-        await Self.currentContainer()?.currentConfig
+    static func current() async throws -> Self {
+        guard let container = await Self.currentContainer(),
+                let config = container.currentConfig else {
+            throw ParseError(code: .otherCause,
+                             message: "There is no current Config")
+        }
+        return config
     }
 
     internal static func setCurrent(_ current: Self?) async {

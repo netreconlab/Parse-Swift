@@ -525,9 +525,9 @@ internal extension ParseUser {
             }
             let saved = try await command
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              childObjects: savedChildObjects,
-                              childFiles: savedChildFiles)
+                         callbackQueue: callbackQueue,
+                         childObjects: savedChildObjects,
+                         childFiles: savedChildFiles)
             try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
@@ -600,10 +600,10 @@ internal extension Sequence where Element: ParseUser {
                 let saved = try await API.Command<Self.Element, Self.Element>
                         .batch(commands: batch, transaction: transaction)
                         .execute(options: options,
-                                      batching: true,
-                                      callbackQueue: callbackQueue,
-                                      childObjects: childObjects,
-                                      childFiles: childFiles)
+                                 batching: true,
+                                 callbackQueue: callbackQueue,
+                                 childObjects: childObjects,
+                                 childFiles: childFiles)
                 returnBatch.append(contentsOf: saved)
             }
             try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})

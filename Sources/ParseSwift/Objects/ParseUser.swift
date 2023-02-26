@@ -147,13 +147,18 @@ public extension ParseUser {
     }
 
     /**
-     Gets the currently logged in user from the Keychain and returns an instance of it.
+     Gets the currently logged in user and returns an instance of it.
 
-     - returns: Returns a `ParseUser` that is the currently logged in user. If there is none, returns `nil`.
-     - warning: Only use `current` users on the main thread as as modifications to `current` have to be unique.
+     - returns: Returns a `ParseUser` that is the currently logged in user. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
     */
-    static func current() async -> Self? {
-        await Self.currentContainer()?.currentUser
+    static func current() async throws -> Self {
+        guard let container = await Self.currentContainer(),
+              let user = container.currentUser else {
+            throw ParseError(code: .otherCause,
+                             message: "There is no current user logged in")
+        }
+        return user
     }
 
     internal static func setCurrent(_ newValue: Self?) async {
@@ -221,7 +226,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await loginCommand(username: username, password: password)
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -296,7 +301,7 @@ extension ParseUser {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await newUser.meCommand(sessionToken: sessionToken)
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   completion: completion)
             } catch let error as ParseError {
@@ -347,7 +352,7 @@ extension ParseUser {
                 return
             }
 
-            guard let currentUser = await Self.current() else {
+            guard let currentUser = try? await Self.current() else {
                 become(sessionToken: sessionToken,
                        options: options,
                        callbackQueue: callbackQueue,
@@ -380,7 +385,7 @@ extension ParseUser {
                            path: endpoint) { (data) async throws -> Self in
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
-            if let current = await Self.current() {
+            if let current = try? await Self.current() {
                 let isAnonymous = await self.anonymous.isLinked()
                 if !current.hasSameObjectId(as: user) && isAnonymous {
                     await Self.deleteCurrentContainerFromKeychain()
@@ -417,7 +422,7 @@ extension ParseUser {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await logoutCommand().executeAsync(options: options,
+            await logoutCommand().execute(options: options,
                                                callbackQueue: callbackQueue) { result in
                 Task {
                     // Always let user logout locally, no matter the error.
@@ -470,7 +475,7 @@ extension ParseUser {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await passwordResetCommand(email: email).executeAsync(options: options,
+            await passwordResetCommand(email: email).execute(options: options,
                                                                   callbackQueue: callbackQueue) { result in
                 switch result {
 
@@ -521,12 +526,13 @@ extension ParseUser {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            let username = await BaseParseUser.current()?.username ?? ""
+            let currentUserName = try? await BaseParseUser.current().username
+            let username = currentUserName ?? ""
             let method: API.Method = usingPost ? .POST : .GET
             await verifyPasswordCommand(username: username,
                                         password: password,
                                         method: method)
-            .executeAsync(options: options,
+            .execute(options: options,
                           callbackQueue: callbackQueue,
                           completion: completion)
         }
@@ -551,7 +557,8 @@ extension ParseUser {
                            path: .verifyPassword,
                            params: params,
                            body: loginBody) { (data) -> Self in
-            var sessionToken = await BaseParseUser.current()?.sessionToken() ?? ""
+            let currentSessionToken = try? await BaseParseUser.current().sessionToken()
+            var sessionToken = currentSessionToken ?? ""
             if let decodedSessionToken = try? ParseCoding.jsonDecoder()
                 .decode(LoginSignupResponse.self, from: data).sessionToken {
                 sessionToken = decodedSessionToken
@@ -586,7 +593,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await verificationEmailCommand(email: email)
-                .executeAsync(options: options, callbackQueue: callbackQueue) { result in
+                .execute(options: options, callbackQueue: callbackQueue) { result in
                     switch result {
 
                     case .success(let error):
@@ -633,10 +640,11 @@ extension ParseUser {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            if await Self.current() != nil {
+            do {
+                _ = try await Self.current()
                 do {
                     try await self.linkCommand()
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -647,10 +655,10 @@ extension ParseUser {
                         completion(.failure(parseError))
                     }
                 }
-            } else {
+            } catch {
                 do {
                     try await signupCommand()
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -690,11 +698,12 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             let body = SignupLoginBody(username: username, password: password)
-            if let current = await Self.current() {
+            do {
+                let current = try await Self.current()
                 do {
                     try await current.linkCommand(body: body)
-                        .executeAsync(options: options,
-                                      callbackQueue: callbackQueue) { result in
+                        .execute(options: options,
+                                 callbackQueue: callbackQueue) { result in
                             completion(result)
                         }
                 } catch {
@@ -705,10 +714,10 @@ extension ParseUser {
                         completion(.failure(parseError))
                     }
                 }
-            } else {
+            } catch {
                 do {
                     try await signupCommand(body: body)
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
@@ -771,10 +780,7 @@ extension ParseUser {
 // MARK: Fetchable
 extension ParseUser {
     internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
-        guard let currentUser = await Self.current() else {
-            return
-        }
-
+        let currentUser = try await Self.current()
         var foundCurrentUserObjects = results.filter { $0.hasSameObjectId(as: currentUser) }
         foundCurrentUserObjects = try foundCurrentUserObjects.sorted(by: {
             guard let firstUpdatedAt = $0.updatedAt,
@@ -819,7 +825,7 @@ extension ParseUser {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await fetchCommand(include: includeKeys)
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
@@ -1084,7 +1090,7 @@ extension ParseUser {
                              message: "objectId must not be nil")
         }
         var mutableSelf = self
-        if let currentUser = await Self.current(),
+        if let currentUser = try? await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // swiftlint:disable:next line_length
@@ -1124,7 +1130,7 @@ extension ParseUser {
                              message: "objectId must not be nil")
         }
         var mutableSelf = self
-        if let currentUser = await Self.current(),
+        if let currentUser = try? await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
             #if !os(Linux) && !os(Android) && !os(Windows)
             // swiftlint:disable:next line_length
@@ -1182,7 +1188,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                try await deleteCommand().executeAsync(options: options,
+                try await deleteCommand().execute(options: options,
                                                        callbackQueue: callbackQueue) { result in
                     switch result {
 
@@ -1576,7 +1582,7 @@ public extension Sequence where Element: ParseUser {
                 for batch in batches {
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
-                        .executeAsync(options: options,
+                        .execute(options: options,
                                       callbackQueue: callbackQueue) { results in
                             switch results {
 

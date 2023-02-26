@@ -718,7 +718,7 @@ transactions for this call.
                 for batch in batches {
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
-                        .executeAsync(options: immutableOptions,
+                        .execute(options: immutableOptions,
                                       callbackQueue: callbackQueue) { results in
                             switch results {
 
@@ -791,7 +791,7 @@ extension ParseObject {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await fetchCommand(include: includeKeys)
-                    .executeAsync(options: options,
+                    .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   completion: completion)
             } catch {
@@ -1030,7 +1030,7 @@ extension ParseObject {
     ) {
         Task {
             do {
-                try await deleteCommand().executeAsync(options: options,
+                try await deleteCommand().execute(options: options,
                                                        callbackQueue: callbackQueue) { result in
                     switch result {
 

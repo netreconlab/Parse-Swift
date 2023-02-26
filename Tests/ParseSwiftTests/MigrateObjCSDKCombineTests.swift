@@ -521,7 +521,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
             // Should be updated in Keychain
             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                     XCTFail("Should get object from Keychain")
                 return
             }
@@ -564,7 +564,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
             // Should be updated in Keychain
             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                     XCTFail("Should get object from Keychain")
                 return
             }
@@ -615,7 +615,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
         try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        Installation.currentContainer.currentInstallation = nil
+        Installation.currentContainer().currentInstallation = nil
 
         let publisher = Installation.deleteObjCKeychainPublisher()
             .sink(receiveCompletion: { result in

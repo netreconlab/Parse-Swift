@@ -267,7 +267,7 @@ extension ParseSchema {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -306,7 +306,7 @@ extension ParseSchema {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await createCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -340,7 +340,7 @@ extension ParseSchema {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await schema.updateCommand()
-                .executeAsync(options: options,
+                .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
@@ -390,7 +390,7 @@ extension ParseSchema {
             var options = options
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await purgeCommand().executeAsync(options: options,
+            await purgeCommand().execute(options: options,
                                               callbackQueue: callbackQueue) { result in
                 switch result {
 
@@ -428,7 +428,7 @@ extension ParseSchema {
             var options = options
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await deleteCommand().executeAsync(options: options,
+            await deleteCommand().execute(options: options,
                                                callbackQueue: callbackQueue) { result in
                 switch result {
 

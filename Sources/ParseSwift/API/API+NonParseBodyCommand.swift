@@ -59,10 +59,10 @@ internal extension API {
         } */
 
         // MARK: Asynchronous Execution
-        func executeAsync(options: API.Options,
-                          callbackQueue: DispatchQueue,
-                          allowIntermediateResponses: Bool = false,
-                          completion: @escaping(Result<U, ParseError>) -> Void) async {
+        func execute(options: API.Options,
+                     callbackQueue: DispatchQueue,
+                     allowIntermediateResponses: Bool = false,
+                     completion: @escaping(Result<U, ParseError>) -> Void) async {
 
             switch await self.prepareURLRequest(options: options) {
             case .success(let urlRequest):

@@ -102,7 +102,7 @@ class ParseACLTests: XCTestCase {
 
     func testCantSetDefaultACLWhenNotLoggedIn() async throws {
         do {
-            try await ParseACL.defaultACL()
+            _ = try await ParseACL.defaultACL()
             XCTFail("Should have thrown error")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
@@ -277,7 +277,7 @@ class ParseACLTests: XCTestCase {
         }
     }
 
-    func testDefaultACL() async {
+    func testDefaultACL() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -297,7 +297,7 @@ class ParseACLTests: XCTestCase {
             XCTFail("Could not signUp user: \(error)")
         }
 
-        guard let userObjectId = await User.current()?.objectId else {
+        guard let userObjectId = try await User.current().objectId else {
             XCTFail("Could not get objectId of currentUser")
             return
         }
@@ -343,7 +343,7 @@ class ParseACLTests: XCTestCase {
             XCTFail("Could not signUp user: \(error.localizedDescription)")
         }
 
-        guard let userObjectId = await User.current()?.objectId else {
+        guard let userObjectId = try await User.current().objectId else {
             XCTFail("Could not get objectId of currentUser")
             return
         }

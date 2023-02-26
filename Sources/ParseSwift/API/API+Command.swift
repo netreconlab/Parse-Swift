@@ -121,16 +121,16 @@ internal extension API {
 
         // MARK: Asynchronous Execution
         // swiftlint:disable:next function_body_length cyclomatic_complexity
-        func executeAsync(options: API.Options,
-                          batching: Bool = false,
-                          callbackQueue: DispatchQueue,
-                          notificationQueue: DispatchQueue? = nil,
-                          childObjects: [String: PointerType]? = nil,
-                          childFiles: [UUID: ParseFile]? = nil,
-                          allowIntermediateResponses: Bool = false,
-                          uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                          downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                          completion: @escaping(Result<U, ParseError>) -> Void) async {
+        func execute(options: API.Options,
+                     batching: Bool = false,
+                     callbackQueue: DispatchQueue,
+                     notificationQueue: DispatchQueue? = nil,
+                     childObjects: [String: PointerType]? = nil,
+                     childFiles: [UUID: ParseFile]? = nil,
+                     allowIntermediateResponses: Bool = false,
+                     uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping(Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue

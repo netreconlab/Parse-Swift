@@ -200,69 +200,69 @@ class ParseKeychainAccessGroupTests: XCTestCase {
     // swiftlint:disable:next cyclomatic_complexity
     func testCanCopyEntireKeychain() async throws {
         try await userLogin()
-        Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)
-        _ = try ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
+        await Config.setCurrent(.init(welcomeMessage: "yolo", winningNumber: 1))
+        _ = try await ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
         guard let user: CurrentUserContainer<User> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let installation: CurrentInstallationContainer<Installation> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let version: ParseVersion =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let accessGroup: ParseKeychainAccessGroup =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let config: CurrentConfigContainer<Config> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let acl: DefaultACL =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) else {
             XCTFail("Should have unwrapped")
             return
         }
         let otherKeychain = KeychainStore(service: "other")
-        try otherKeychain.copy(KeychainStore.shared,
-                               oldAccessGroup: ParseSwift.configuration.keychainAccessGroup,
-                               newAccessGroup: ParseSwift.configuration.keychainAccessGroup)
+        try await otherKeychain.copy(KeychainStore.shared,
+                                     oldAccessGroup: ParseSwift.configuration.keychainAccessGroup,
+                                     newAccessGroup: ParseSwift.configuration.keychainAccessGroup)
         guard let otherUser: CurrentUserContainer<User> =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.currentUser) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.currentUser) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let otherInstallation: CurrentInstallationContainer<Installation> =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let otherVersion: ParseVersion =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let otherAccessGroup: ParseKeychainAccessGroup =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let otherConfig: CurrentConfigContainer<Config> =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.currentConfig) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let otherAcl: DefaultACL =
-                try? otherKeychain.get(valueFor: ParseStorage.Keys.defaultACL) else {
+                try? await otherKeychain.get(valueFor: ParseStorage.Keys.defaultACL) else {
             XCTFail("Should have unwrapped")
             return
         }
@@ -277,100 +277,110 @@ class ParseKeychainAccessGroupTests: XCTestCase {
     // swiftlint:disable:next cyclomatic_complexity
     func testRemoveOldObjectsFromKeychain() async throws {
         try await userLogin()
-        Config.current = .init(welcomeMessage: "yolo", winningNumber: 1)
-        _ = try ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
+        await Config.setCurrent(.init(welcomeMessage: "yolo", winningNumber: 1))
+        _ = try await ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
 
         guard let _: CurrentUserContainer<User> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: CurrentInstallationContainer<Installation> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: ParseVersion =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: ParseKeychainAccessGroup =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: CurrentConfigContainer<Config> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: DefaultACL =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) else {
             XCTFail("Should have unwrapped")
             return
         }
-        let deleted = KeychainStore.shared.removeOldObjects(accessGroup: ParseSwift.configuration.keychainAccessGroup)
+        let deleted = await KeychainStore.shared.removeOldObjects(accessGroup: ParseSwift.configuration.keychainAccessGroup)
         XCTAssertTrue(deleted)
         if let _: CurrentUserContainer<User> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) {
             XCTFail("Should be nil")
         }
         if let _: CurrentConfigContainer<Config> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) {
             XCTFail("Should be nil")
         }
         if let _: DefaultACL =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             XCTFail("Should be nil")
         }
         guard let _: CurrentInstallationContainer<Installation> =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: ParseVersion =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             XCTFail("Should have unwrapped")
             return
         }
         guard let _: ParseKeychainAccessGroup =
-                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+                try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             XCTFail("Should have unwrapped")
             return
         }
     }
 
     func testNoUserNoAccessGroupNoSync() async throws {
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                               accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        var data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                                   accessGroup: noKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNil(data)
     }
 
     func testUserNoAccessGroupNoSync() async throws {
         try await userLogin()
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        var data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                                   accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
     }
 
     func testSetAccessGroupWithNoSync() async throws {
         try await userLogin()
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        var data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                                   accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+
         #if !os(macOS)
         do {
-            try ParseSwift.setAccessGroup(group, synchronizeAcrossDevices: false)
+            try await ParseSwift.setAccessGroup(group, synchronizeAcrossDevices: false)
             XCTFail("Should have thrown error due to entitlements")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -379,32 +389,42 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             }
             XCTAssertTrue(parseError.message.contains("-34018"))
         }
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                               accessGroup: helloKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
         #endif
         // Since error was thrown, original Keychain should be left intact
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
     }
 
     func testSetAccessGroupWithSync() async throws {
         try await userLogin()
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        var data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                                   accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+
         do {
-            try ParseSwift.setAccessGroup(group, synchronizeAcrossDevices: true)
+            try await ParseSwift.setAccessGroup(group, synchronizeAcrossDevices: true)
             XCTFail("Should have thrown error due to entitlements")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -414,32 +434,41 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTAssertTrue(parseError.message.contains("-34018"))
         }
         #if !os(macOS)
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                               accessGroup: helloKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: helloKeychainAccessGroup)
         #endif
         // Since error was thrown, original Keychain should be left intact
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
     }
 
     func testSetAccessNilGroupWithSync() async throws {
         try await userLogin()
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        var data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                                   accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+
         do {
-            try ParseSwift.setAccessGroup(nil, synchronizeAcrossDevices: true)
+            try await ParseSwift.setAccessGroup(nil, synchronizeAcrossDevices: true)
             XCTFail("Should have thrown error")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -449,20 +478,25 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTAssertTrue(parseError.message.contains("must be set to a valid string"))
         }
         #if !os(macOS)
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                               accessGroup: helloKeychainAccessGroup))
-        XCTAssertNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                               accessGroup: helloKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: helloKeychainAccessGroup)
+        XCTAssertNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: helloKeychainAccessGroup)
         #endif
         // Since error was thrown, original Keychain should be left intact
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: noKeychainAccessGroup))
-        XCTAssertNotNil(KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
-                                                  accessGroup: noKeychainAccessGroup))
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentUser,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
+        data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
+                                               accessGroup: noKeychainAccessGroup)
+        XCTAssertNotNil(data)
     }
 
     func testSetAccessGroupWhenNotInit() async throws {
