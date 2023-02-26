@@ -39,12 +39,12 @@ class ParseQueryViewModelTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  usingPostForQuery: true,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        usingPostForQuery: true,
+                                        testing: true)
     }
 
     override func tearDown() async throws {
