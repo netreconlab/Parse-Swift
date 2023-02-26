@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 
 class ParseFacebookTests: XCTestCase {
     struct User: ParseUser {
@@ -204,19 +204,31 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
+
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
 
-                // Test stripping
-                user.facebook.strip()
-                XCTAssertFalse(user.facebook.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+
+                        // Test stripping
+                        try await user.facebook.strip()
+                        isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertFalse(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -257,19 +269,29 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
 
-                // Test stripping
-                user.facebook.strip()
-                XCTAssertFalse(user.facebook.isLinked)
+                        // Test stripping
+                        try await user.facebook.strip()
+                        isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertFalse(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -309,25 +331,35 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
 
-                // Test stripping
-                user.facebook.strip()
-                XCTAssertFalse(user.facebook.isLinked)
+                        // Test stripping
+                        try await user.facebook.strip()
+                        isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertFalse(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginWrongKeys() throws {
-        _ = try loginNormally()
+    func testLoginWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -346,7 +378,7 @@ class ParseFacebookTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -375,15 +407,16 @@ class ParseFacebookTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
-    func testReplaceAnonymousWithFacebookLimitedLogin() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithFacebookLimitedLogin() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
@@ -422,22 +455,31 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithFacebookGraphAPILogin() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithFacebookGraphAPILogin() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
@@ -476,22 +518,31 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithLinkedFacebookLimitedLogin() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLinkedFacebookLimitedLogin() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -518,22 +569,31 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithLinkedFacebookGraphAPILogin() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLinkedFacebookGraphAPILogin() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -559,22 +619,31 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWithFacebookLimitedLogin() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWithFacebookLimitedLogin() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         let expiresIn = 10
         var serverResponse = LoginSignupResponse()
@@ -603,23 +672,33 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let currentSessionToken = await currentUser.sessionToken()
+                        XCTAssertEqual(currentSessionToken, "myToken")
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWithFacebookGraphAPILogin() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWithFacebookGraphAPILogin() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         let expiresIn = 10
         var serverResponse = LoginSignupResponse()
@@ -647,23 +726,33 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let currentSessionToken = await currentUser.sessionToken()
+                        XCTAssertEqual(currentSessionToken, "myToken")
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInAuthData() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInAuthData() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.sessionToken = nil
@@ -695,23 +784,33 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.facebook.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let currentSessionToken = await currentUser.sessionToken()
+                        XCTAssertEqual(currentSessionToken, "myToken")
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkWrongKeys() throws {
-        _ = try loginNormally()
+    func testLinkWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -730,16 +829,19 @@ class ParseFacebookTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlinkLimitedLogin() throws {
-        _ = try loginNormally()
+    func testUnlinkLimitedLogin() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
             .AuthenticationKeys.id.makeDictionary(userId: "testing",
                                                   accessToken: nil,
                                                   authenticationToken: "authenticationToken")
-        User.current?.authData = [User.facebook.__type: authData]
-        XCTAssertTrue(User.facebook.isLinked)
+        var user = try await User.current()
+        user.authData = [User.facebook.__type: authData]
+        await User.setCurrent(user)
+        let isLinked = await User.facebook.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -765,29 +867,41 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertFalse(user.facebook.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertFalse(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlinkGraphAPILogin() throws {
-        _ = try loginNormally()
+    func testUnlinkGraphAPILogin() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
             .AuthenticationKeys.id.makeDictionary(userId: "testing",
                                                   accessToken: "accessToken",
                                                   authenticationToken: nil)
-        User.current?.authData = [User.facebook.__type: authData]
-        XCTAssertTrue(User.facebook.isLinked)
+        var user = try await User.current()
+        user.authData = [User.facebook.__type: authData]
+        await User.setCurrent(user)
+        let isLinked = await User.facebook.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -813,15 +927,24 @@ class ParseFacebookTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertFalse(user.facebook.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertFalse(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }

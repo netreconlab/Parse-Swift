@@ -99,7 +99,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         return try await User.login(username: "parse", password: "user")
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -127,7 +127,8 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
@@ -162,7 +163,6 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
     @MainActor
     func testLogin() async throws {
 
@@ -194,11 +194,13 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.login(id: "testing",
                                                idToken: "this",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.google.isLinked)
     }
 
     @MainActor
@@ -231,11 +233,13 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.google.login(authData: (["id": "testing",
                                                            "id_token": "this"]))
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.google.isLinked)
     }
 
     @MainActor
@@ -254,7 +258,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testReplaceAnonymousWithLoggedIn() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -278,17 +282,18 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.login(id: "testing",
                                                idToken: "this",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.google.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testReplaceAnonymousWithLinked() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -312,18 +317,19 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.link(id: "testing",
                                               idToken: "this",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.google.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLink() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -347,18 +353,19 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.link(id: "testing",
                                               idToken: "this",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.google.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInAuthData() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -384,17 +391,18 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
             .AuthenticationKeys.id.makeDictionary(id: "testing", accessToken: "accessToken")
 
         let user = try await User.google.link(authData: authData)
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.google.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInUserWrongKeys() async throws {
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         do {
             _ = try await User.google.link(authData: ["hello": "world"])
@@ -410,14 +418,17 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testUnlink() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGoogle<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   idToken: "this")
-        User.current?.authData = [User.google.__type: authData]
-        XCTAssertTrue(User.google.isLinked)
+        var initialUser = try await User.current()
+        initialUser.authData = [User.google.__type: authData]
+        await User.setCurrent(initialUser)
+        let initialUserLinked = await User.google.isLinked()
+        XCTAssertTrue(initialUserLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -438,11 +449,11 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.google.unlink()
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        let isLinked = await user.google.isLinked()
+        XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertFalse(user.google.isLinked)
     }
-#endif
 }

@@ -13,7 +13,9 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+// swiftlint:disable type_body_length function_body_length
+
+class ParseFacebookCombineTests: XCTestCase {
 
     struct User: ParseUser {
 
@@ -88,6 +90,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
     func testLimitedLogin() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -124,20 +127,30 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.facebook.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testGraphAPILogin() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -173,20 +186,30 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.facebook.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -227,15 +250,24 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.facebook.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -252,10 +284,11 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLinkLimitedLogin() throws {
+    func testLinkLimitedLogin() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
-        _ = try loginNormally()
+        let expectation2 = XCTestExpectation(description: "Update")
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -286,22 +319,32 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.facebook.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLinkGraphAPILogin() throws {
+    func testLinkGraphAPILogin() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
-        _ = try loginNormally()
+        let expectation2 = XCTestExpectation(description: "Update")
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -333,22 +376,32 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.facebook.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLinkAuthData() throws {
+    func testLinkAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
-        _ = try loginNormally()
+        let expectation2 = XCTestExpectation(description: "Update")
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -384,30 +437,42 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.facebook.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUnlinkLimitedLogin() throws {
+    func testUnlinkLimitedLogin() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
-        _ = try loginNormally()
+        let expectation2 = XCTestExpectation(description: "Update")
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
             .AuthenticationKeys.id.makeDictionary(userId: "testing",
                                                   accessToken: nil,
                                                   authenticationToken: "authenticationToken")
-        User.current?.authData = [User.facebook.__type: authData]
-        XCTAssertTrue(User.facebook.isLinked)
+        var user = try await User.current()
+        user.authData = [User.facebook.__type: authData]
+        let isLinked = await User.facebook.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -427,7 +492,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.facebook.unlinkPublisher()
+        let publisher = User.facebook.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -437,29 +502,41 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.facebook.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertFalse(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUnlinkGraphAPILogin() throws {
+    func testUnlinkGraphAPILogin() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
-        _ = try loginNormally()
+        let expectation2 = XCTestExpectation(description: "Update")
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseFacebook<User>
             .AuthenticationKeys.id.makeDictionary(userId: "testing",
                                                   accessToken: "accessToken",
                                                   authenticationToken: nil)
-        User.current?.authData = [User.facebook.__type: authData]
-        XCTAssertTrue(User.facebook.isLinked)
+        var user = try await User.current()
+        user.authData = [User.facebook.__type: authData]
+        let isLinked = await User.facebook.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -479,7 +556,7 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.facebook.unlinkPublisher()
+        let publisher = User.facebook.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -489,15 +566,24 @@ class ParseFacebookCombineTests: XCTestCase { // swiftlint:disable:this type_bod
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.facebook.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.facebook.isLinked()
+                    XCTAssertFalse(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 
