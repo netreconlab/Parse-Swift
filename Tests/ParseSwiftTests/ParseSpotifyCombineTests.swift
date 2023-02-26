@@ -89,6 +89,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
     func testLogin() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -125,20 +126,31 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.spotify.isLinked)
+
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.spotify.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -176,15 +188,24 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.spotify.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.spotify.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -201,11 +222,12 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLink() throws {
+    func testLink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -236,23 +258,33 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.spotify.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.spotify.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLinkAuthData() throws {
+    func testLinkAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -284,30 +316,45 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.spotify.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.spotify.isLinked()
+                    XCTAssertTrue(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
+
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUnlink() throws {
+    // swiftlint:disable:next function_body_length
+    func testUnlink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseSpotify<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "access_token")
-        User.current?.authData = [User.spotify.__type: authData]
-        XCTAssertTrue(User.spotify.isLinked)
+        var user = try await User.current()
+        user.authData = [User.spotify.__type: authData]
+        await User.setCurrent(user)
+        let isCurrentLinkedUser = await User.spotify.isLinked()
+        XCTAssertTrue(isCurrentLinkedUser)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -327,7 +374,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.spotify.unlinkPublisher()
+        let publisher = User.spotify.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -337,15 +384,25 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.spotify.isLinked)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                    let isLinkedUser = await user.spotify.isLinked()
+                    XCTAssertFalse(isLinkedUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
+
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

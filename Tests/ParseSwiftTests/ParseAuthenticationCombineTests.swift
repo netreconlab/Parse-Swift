@@ -144,6 +144,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
     func testLogin() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -181,15 +182,23 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
             XCTAssertEqual(user.authData, serverResponse.authData)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -206,11 +215,12 @@ class ParseAuthenticationCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLink() throws {
+    func testLink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let type = TestAuth<User>.__type
@@ -242,14 +252,22 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 
