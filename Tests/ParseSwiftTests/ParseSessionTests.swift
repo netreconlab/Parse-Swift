@@ -61,11 +61,11 @@ class ParseSessionTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: false) // Set to false for codecov
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: false) // Set to false for codecov
 
     }
 
@@ -127,17 +127,17 @@ class ParseSessionTests: XCTestCase {
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testParseURLSessionCustomCertificatePinning() throws {
+    func testParseURLSessionCustomCertificatePinning() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  // swiftlint:disable:next line_length
-                                  testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        // swiftlint:disable:next line_length
+                                        testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
             completion(.cancelAuthenticationChallenge, .none)
         }
         let expectation1 = XCTestExpectation(description: "Authentication")

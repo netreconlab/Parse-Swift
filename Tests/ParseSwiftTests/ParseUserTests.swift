@@ -2160,7 +2160,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testFetchAllAsyncMainQueueCurrent() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -2565,7 +2565,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length
     func testDeleteAllAsyncMainQueueCurrent() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()

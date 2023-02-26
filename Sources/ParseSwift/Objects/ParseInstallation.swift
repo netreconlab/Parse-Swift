@@ -259,7 +259,7 @@ public extension ParseInstallation {
     }
 
     internal static func updateInternalFieldsCorrectly() async {
-
+        /*
         if let currentContainerInstallationId = await Self.currentContainer().installationId,
             await Self.currentContainer().currentInstallation?.installationId !=
             currentContainerInstallationId {
@@ -268,7 +268,7 @@ public extension ParseInstallation {
             var currentContainer = await Self.currentContainer()
             currentContainer.currentInstallation?.installationId = currentContainerInstallationId
             await Self.setCurrentContainer(currentContainer)
-        }
+        } */
 
         // Always pull automatic info to ensure user made no changes to immutable values
         var currentContainer = await Self.currentContainer()
@@ -310,6 +310,7 @@ public extension ParseInstallation {
     internal static func setCurrent(_ newValue: Self?) async {
         var currentContainer = await Self.currentContainer()
         currentContainer.currentInstallation = newValue
+        currentContainer.installationId = newValue?.installationId
         await Self.setCurrentContainer(currentContainer)
         await Self.updateInternalFieldsCorrectly()
     }
