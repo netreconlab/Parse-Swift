@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 
 class ParseInstagramTests: XCTestCase {
     struct User: ParseUser {
@@ -166,19 +166,31 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.instagram.isLinked)
 
-                // Test stripping
-                user.instagram.strip()
-                XCTAssertFalse(user.instagram.isLinked)
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+
+                        // Test stripping
+                        try await user.instagram.strip()
+                        isLinked = await user.instagram.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
+
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -219,25 +231,35 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.instagram.isLinked)
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
 
-                // Test stripping
-                user.instagram.strip()
-                XCTAssertFalse(user.instagram.isLinked)
+                        // Test stripping
+                        try await user.instagram.strip()
+                        isLinked = await user.instagram.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginWrongKeys() throws {
-        _ = try loginNormally()
+    func testLoginWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -254,7 +276,7 @@ class ParseInstagramTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -283,15 +305,16 @@ class ParseInstagramTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
-    func testReplaceAnonymousWithInstagram() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithInstagram() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
 
         let authData = ParseInstagram<User>
@@ -330,22 +353,31 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.authData, userOnServer.authData)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.instagram.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithLinkedInstagram() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLinkedInstagram() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -371,22 +403,31 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.instagram.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWithInstagram() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWithInstagram() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -414,23 +455,33 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.instagram.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        let sessionToken = await current.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInAuthData() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInAuthData() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -463,23 +514,33 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.instagram.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        let sessionToken = await current.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWrongKeys() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -496,16 +557,19 @@ class ParseInstagramTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlink() throws {
-        _ = try loginNormally()
+    func testUnlink() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseInstagram<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "access_token",
                                                   apiURL: "apiURL")
-        User.current?.authData = [User.instagram.__type: authData]
-        XCTAssertTrue(User.instagram.isLinked)
+        var current = try await User.current()
+        current.authData = [User.instagram.__type: authData]
+        try await User.setCurrent(current)
+        let isLinked = await User.instagram.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -531,15 +595,24 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertFalse(user.instagram.isLinked)
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }

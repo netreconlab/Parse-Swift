@@ -28,7 +28,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
                                         liveQueryMaxConnectionAttempts: 1,
                                         testing: true,
                                         testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
+        ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     }
 
     override func tearDown() async throws {
@@ -38,7 +38,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
-        URLSession.liveQuery.closeAll()
+        await URLSession.liveQuery.closeAll()
     }
 
     @MainActor
@@ -47,7 +47,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
         do {
             _ = try await client.open(isUserWantsToConnect: true)
@@ -63,7 +63,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
         do {
             _ = try await client.sendPing()
