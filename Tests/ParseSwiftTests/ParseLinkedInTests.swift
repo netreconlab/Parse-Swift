@@ -449,7 +449,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         }
 
         let user = try await User.linkedin.unlink()
-        let updatedCurrentUser = try await User.current()
+        _ = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")

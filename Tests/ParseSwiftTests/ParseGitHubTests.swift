@@ -99,7 +99,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         return try await User.login(username: "parse", password: "user")
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -127,7 +127,8 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
@@ -150,7 +151,6 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
     @MainActor
     func testLogin() async throws {
 
@@ -181,11 +181,13 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(id: "testing",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.github.isLinked)
     }
 
     @MainActor
@@ -218,11 +220,13 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(authData: (["id": "testing",
                                                            "access_token": "this"]))
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.github.isLinked)
     }
 
     @MainActor
@@ -241,7 +245,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testReplaceAnonymousWithLoggedIn() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -264,17 +268,19 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(id: "testing",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testReplaceAnonymousWithLinked() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -297,18 +303,20 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.link(id: "testing",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLink() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -331,18 +339,20 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.link(id: "testing",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInAuthData() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -368,17 +378,19 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             .AuthenticationKeys.id.makeDictionary(id: "testing", accessToken: "accessToken")
 
         let user = try await User.github.link(authData: authData)
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInUserWrongKeys() async throws {
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         do {
             _ = try await User.github.link(authData: ["hello": "world"])
@@ -394,14 +406,17 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testUnlink() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGitHub<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "this")
-        User.current?.authData = [User.github.__type: authData]
-        XCTAssertTrue(User.github.isLinked)
+        var initialUser = try await User.current()
+        initialUser.authData = [User.github.__type: authData]
+        try await User.setCurrent(initialUser)
+        let initialIsLinked = await User.github.isLinked()
+        XCTAssertTrue(initialIsLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -422,11 +437,12 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.github.unlink()
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertFalse(user.github.isLinked)
     }
-#endif
 }

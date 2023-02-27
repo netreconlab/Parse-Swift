@@ -282,7 +282,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.login(id: "testing",
                                                idToken: "this",
                                                accessToken: "that")
-        let currentUser = try await User.current()
+        _ = try await User.current()
         let isLinked = await user.google.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
@@ -317,7 +317,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.link(id: "testing",
                                               idToken: "this",
                                               accessToken: "that")
-        let currentUser = try await User.current()
+        _ = try await User.current()
         let isLinked = await user.google.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
@@ -353,7 +353,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.google.link(id: "testing",
                                               idToken: "this",
                                               accessToken: "that")
-        let currentUser = try await User.current()
+        _ = try await User.current()
         let isLinked = await user.google.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
@@ -391,7 +391,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
             .AuthenticationKeys.id.makeDictionary(id: "testing", accessToken: "accessToken")
 
         let user = try await User.google.link(authData: authData)
-        let currentUser = try await User.current()
+        _ = try await User.current()
         let isLinked = await user.google.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
@@ -449,7 +449,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.google.unlink()
-        let currentUser = try await User.current()
+        _ = try await User.current()
         let isLinked = await user.google.isLinked()
         XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)

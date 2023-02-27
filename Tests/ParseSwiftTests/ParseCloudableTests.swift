@@ -132,7 +132,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(command.body?.customKey, "parse")
     }
 
-    func testFunction() {
+    func testFunction() async throws {
         let response = AnyResultResponse<String?>(result: nil)
 
         MockURLProtocol.mockRequests { _ in
@@ -145,14 +145,14 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud(functionJobName: "test")
-            let functionResponse = try cloud.runFunction()
+            let functionResponse = try await cloud.runFunction()
             XCTAssertNil(functionResponse)
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testFunction2() {
+    func testFunction2() async throws {
         var result = ["hello": "world"]
         let response = AnyResultResponse(result: result)
 
@@ -168,14 +168,14 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud3(functionJobName: "test")
-            let functionResponse = try cloud.runFunction()
+            let functionResponse = try await cloud.runFunction()
             XCTAssertEqual(functionResponse, ["hello": "world"])
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testFunctionError() {
+    func testFunctionError() async throws {
 
         let parseError = ParseError(code: .scriptFailed, message: "Error: Invalid function")
 
@@ -192,7 +192,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud(functionJobName: "test")
-            _ = try cloud.runFunction()
+            _ = try await cloud.runFunction()
             XCTFail("Should have thrown ParseError")
         } catch {
             if let error = error as? ParseError {
@@ -292,7 +292,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(command.body?.customKey, "parse")
     }
 
-    func testJob() {
+    func testJob() async throws {
         let response = AnyResultResponse<String?>(result: nil)
 
         MockURLProtocol.mockRequests { _ in
@@ -305,14 +305,14 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud(functionJobName: "test")
-            let functionResponse = try cloud.startJob()
+            let functionResponse = try await cloud.startJob()
             XCTAssertNil(functionResponse)
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testJob2() {
+    func testJob2() async throws {
         let response = AnyResultResponse(result: ["hello": "world"])
 
         MockURLProtocol.mockRequests { _ in
@@ -325,14 +325,14 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud3(functionJobName: "test")
-            let functionResponse = try cloud.startJob()
+            let functionResponse = try await cloud.startJob()
             XCTAssertEqual(functionResponse, response.result)
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testJobError() {
+    func testJobError() async throws {
 
         let parseError = ParseError(code: .scriptFailed, message: "Error: Invalid function")
 
@@ -349,7 +349,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud(functionJobName: "test")
-            _ = try cloud.startJob()
+            _ = try await cloud.startJob()
             XCTFail("Should have thrown ParseError")
         } catch {
             if let error = error as? ParseError {
@@ -360,7 +360,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
     }
 
-    func testCustomError() {
+    func testCustomError() async throws {
 
         guard let encoded: Data = "{\"error\":\"Error: Custom Error\",\"code\":2000}".data(using: .utf8) else {
             XCTFail("Could not unwrap encoded data")
@@ -372,7 +372,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
         do {
             let cloud = Cloud(functionJobName: "test")
-            _ = try cloud.runFunction()
+            _ = try await cloud.runFunction()
             XCTFail("Should have thrown ParseError")
         } catch {
             if let error = error as? ParseError {
