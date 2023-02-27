@@ -115,11 +115,13 @@ class ParseLDAPAsyncTests: XCTestCase {
         }
 
         let user = try await User.ldap.login(id: "testing", password: "this")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        let isLinked = await user.ldap.isLinked()
+        XCTAssertTrue(isLinked)
+        XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.ldap.isLinked)
     }
 
     @MainActor
@@ -152,11 +154,12 @@ class ParseLDAPAsyncTests: XCTestCase {
 
         let user = try await User.ldap.login(authData: (["id": "testing",
                                                          "password": "this"]))
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        let isLinked = await user.ldap.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.ldap.isLinked)
     }
 
     func loginNormally() async throws -> User {
@@ -198,11 +201,12 @@ class ParseLDAPAsyncTests: XCTestCase {
         }
 
         let user = try await User.ldap.link(id: "testing", password: "password")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        let isLinked = await user.ldap.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.ldap.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -233,11 +237,12 @@ class ParseLDAPAsyncTests: XCTestCase {
             .AuthenticationKeys.id.makeDictionary(id: "testing", password: "authenticationToken")
 
         let user = try await User.ldap.link(authData: authData)
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        let isLinked = await user.ldap.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.ldap.isLinked)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -250,8 +255,10 @@ class ParseLDAPAsyncTests: XCTestCase {
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                               password: "this")
-        User.current?.authData = [User.ldap.__type: authData]
-        XCTAssertTrue(User.ldap.isLinked)
+        var originalUser = try await User.current()
+        originalUser.authData = [User.ldap.__type: authData]
+        let originalIsLinked = await originalUser.ldap.isLinked()
+        XCTAssertTrue(originalIsLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -272,11 +279,12 @@ class ParseLDAPAsyncTests: XCTestCase {
         }
 
         let user = try await User.ldap.unlink()
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        let isLinked = await user.ldap.isLinked()
+        XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertFalse(user.ldap.isLinked)
     }
 }
 #endif

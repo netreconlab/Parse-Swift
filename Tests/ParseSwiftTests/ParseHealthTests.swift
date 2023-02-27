@@ -41,7 +41,7 @@ class ParseHealthTests: XCTestCase {
         XCTAssertNil(command.body)
     }
 
-    func testCheck() {
+    func testCheck() async throws {
 
         let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -57,7 +57,7 @@ class ParseHealthTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let health = try ParseHealth.check()
+            let health = try await ParseHealth.check()
             XCTAssertEqual(health, healthOfServer)
 
         } catch {

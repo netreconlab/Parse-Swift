@@ -131,7 +131,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
-            await ParseVersion.setCurrent(currentSDKVersion)
+            try? await ParseVersion.setCurrent(currentSDKVersion)
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
@@ -145,7 +145,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
             // Prepare installation
             await BaseParseInstallation.createNewInstallationIfNeeded()
         }
-        await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
+        try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
     // Migrate installations with installationId, but missing

@@ -33,13 +33,15 @@ class ParseVersionTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testGetSet() throws {
-        XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
-        ParseVersion.current = try ParseVersion(string: "1.0.0")
-        XCTAssertEqual(ParseVersion.current?.description, "1.0.0")
+    func testGetSet() async throws {
+        var current = try await ParseVersion.current()
+        XCTAssertEqual(current.description, ParseConstants.version)
+        try await ParseVersion.setCurrent(try ParseVersion(string: "1.0.0"))
+        current = try await ParseVersion.current()
+        XCTAssertEqual(current.description, "1.0.0")
     }
 
-    func testDebug() throws {
+    func testDebug() async throws {
         let version = try ParseVersion(string: "1.0.0")
         XCTAssertEqual(version.debugDescription, "1.0.0")
         XCTAssertEqual(version.description, "1.0.0")
@@ -47,7 +49,7 @@ class ParseVersionTests: XCTestCase {
         XCTAssertEqual((try ParseVersion(string: "1.0.0-beta.1")).description, "1.0.0-beta.1")
     }
 
-    func testInitializers() throws {
+    func testInitializers() async throws {
         let version1 = ParseVersion(major: 1, minor: 0, patch: 0)
         XCTAssertEqual(version1, try ParseVersion(string: "1.0.0"))
         let version1alpha = try ParseVersion(major: 1,
@@ -74,7 +76,7 @@ class ParseVersionTests: XCTestCase {
                                               prereleaseVersion: 1))
     }
 
-    func testCantInitializeWithBadStrings() throws {
+    func testCantInitializeWithBadStrings() async throws {
         XCTAssertThrowsError(try ParseVersion(string: "1"))
         XCTAssertThrowsError(try ParseVersion(string: "1.0"))
         XCTAssertThrowsError(try ParseVersion(string: "1.0.0.0"))
@@ -85,33 +87,38 @@ class ParseVersionTests: XCTestCase {
         XCTAssertThrowsError(try ParseVersion(string: "1.0.alpha"))
     }
 
-    func testDeleteFromKeychain() throws {
-        XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
-        ParseVersion.deleteCurrentContainerFromKeychain()
-        XCTAssertNil(ParseVersion.current)
-        ParseVersion.current = try ParseVersion(string: "1.0.0")
-        XCTAssertEqual(ParseVersion.current?.description, "1.0.0")
+    func testDeleteFromKeychain() async throws {
+        var current = try await ParseVersion.current()
+        XCTAssertEqual(current.description, ParseConstants.version)
+        await ParseVersion.deleteCurrentContainerFromKeychain()
+        do {
+            _ = try await ParseVersion.current()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
+        try await ParseVersion.setCurrent(try ParseVersion(string: "1.0.0"))
+        current = try await ParseVersion.current()
+        XCTAssertEqual(current.description, "1.0.0")
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testCanRetrieveFromKeychain() throws {
-        guard let original = ParseVersion.current else {
-            XCTFail("Should have unwrapped")
-            return
-        }
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
-        XCTAssertEqual(ParseVersion.current, original)
+    func testCanRetrieveFromKeychain() async throws {
+        let original = try await ParseVersion.current()
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
+        let current = try await ParseVersion.current()
+        XCTAssertEqual(current, original)
     }
     #endif
 
-    func testEqualTo() throws {
+    func testEqualTo() async throws {
         let version1 = try ParseVersion(string: "1.0.0")
         let version2 = try ParseVersion(string: "0.9.0")
         XCTAssertTrue(version1 == version1)
         XCTAssertFalse(version1 == version2)
     }
 
-    func testLessThan() throws {
+    func testLessThan() async throws {
         let version1 = try ParseVersion(string: "1.0.0")
         var version2 = try ParseVersion(string: "2.0.0")
         XCTAssertFalse(version1 < version1)
@@ -141,7 +148,7 @@ class ParseVersionTests: XCTestCase {
         XCTAssertTrue(version5 < version2)
     }
 
-    func testLessThanEqual() throws {
+    func testLessThanEqual() async throws {
         let version1 = try ParseVersion(string: "1.0.0")
         var version2 = version1
         XCTAssertTrue(version1 <= version2)
@@ -169,7 +176,7 @@ class ParseVersionTests: XCTestCase {
         XCTAssertTrue(version5 <= version2)
     }
 
-    func testGreaterThan() throws {
+    func testGreaterThan() async throws {
         let version1 = try ParseVersion(string: "1.0.0")
         var version2 = try ParseVersion(string: "2.0.0")
         XCTAssertFalse(version1 > version1)
@@ -196,7 +203,7 @@ class ParseVersionTests: XCTestCase {
         XCTAssertTrue(version5 > version4)
     }
 
-    func testGreaterThanEqual() throws {
+    func testGreaterThanEqual() async throws {
         let version1 = try ParseVersion(string: "1.0.0")
         var version2 = version1
         XCTAssertTrue(version1 >= version2)

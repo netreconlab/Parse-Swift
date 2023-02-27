@@ -115,11 +115,12 @@ class ParseConfigCombineTests: XCTestCase {
         }
     }
 
-    func testFetch() {
+    func testFetch() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        userLogin()
+        await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -148,28 +149,35 @@ class ParseConfigCombineTests: XCTestCase {
         }, receiveValue: { fetched in
 
             XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-            XCTAssertEqual(Config.current?.welcomeMessage, configOnServer.welcomeMessage)
+            let config = configOnServer
+            Task {
+                do {
+                    let current = try await Config.current()
+                    XCTAssertEqual(current.welcomeMessage, config.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    // Should be updated in Keychain
+                    let keychainConfig: CurrentConfigContainer<Config>?
+                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, config.welcomeMessage)
+                    #endif
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, configOnServer.welcomeMessage)
-            #endif
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSave() {
+    func testSave() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        userLogin()
+        await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 
@@ -197,21 +205,26 @@ class ParseConfigCombineTests: XCTestCase {
         }, receiveValue: { saved in
 
             XCTAssertTrue(saved)
-            XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)
+            let immutableConfig = config
+            Task {
+                do {
+                    let current = try await Config.current()
+                    XCTAssertEqual(current.welcomeMessage, immutableConfig.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    // Should be updated in Keychain
+                    let keychainConfig: CurrentConfigContainer<Config>?
+                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
+                    #endif
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
-            #endif
         })
         publisher.store(in: &subscriptions)
-
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

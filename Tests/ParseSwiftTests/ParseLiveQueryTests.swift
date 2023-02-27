@@ -60,7 +60,7 @@ class ParseLiveQueryTests: XCTestCase {
                                         liveQueryMaxConnectionAttempts: 1,
                                         testing: true,
                                         testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try ParseLiveQuery()
+        ParseLiveQuery.defaultClient = try await ParseLiveQuery()
     }
 
     override func tearDown() async throws {
@@ -70,10 +70,10 @@ class ParseLiveQueryTests: XCTestCase {
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
-        URLSession.liveQuery.closeAll()
+        await URLSession.liveQuery.closeAll()
     }
 
-    func testWebsocketURL() throws {
+    func testWebsocketURL() async throws {
         guard let originalURL = URL(string: "http://localhost:1337/parse"),
             var components = URLComponents(url: originalURL,
                                              resolvingAgainstBaseURL: false) else {
@@ -100,7 +100,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInitializeWithNewURL() throws {
+    func testInitializeWithNewURL() async throws {
         guard let originalURL = URL(string: "http://parse:1337/parse"),
             var components = URLComponents(url: originalURL,
                                              resolvingAgainstBaseURL: false) else {
@@ -128,7 +128,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInitializeNewDefault() throws {
+    func testInitializeNewDefault() async throws {
 
         guard let client = try? ParseLiveQuery(isDefault: true),
               let defaultClient = ParseLiveQuery.defaultClient else {
@@ -147,7 +147,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testDeinitializingNewShouldNotEffectDefault() throws {
+    func testDeinitializingNewShouldNotEffectDefault() async throws {
         guard let defaultClient = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to initialize a new client")
             return
@@ -170,7 +170,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testBecomingSocketAuthDelegate() throws {
+    func testBecomingSocketAuthDelegate() async throws {
         let delegate = TestDelegate()
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should have unwrapped")
@@ -235,7 +235,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testFieldKeys() throws {
+    func testFieldKeys() async throws {
         let query = GameScore.query
         XCTAssertNil(query.keys)
 
@@ -248,7 +248,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(query2.fields, ["yolo", "hello", "wow"])
     }
 
-    func testFieldKeysVariadic() throws {
+    func testFieldKeysVariadic() async throws {
         let query = GameScore.query
         XCTAssertNil(query.keys)
 
@@ -276,7 +276,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testWatchKeys() throws {
+    func testWatchKeys() async throws {
         var query = GameScore.query.watch(["yolo"])
         XCTAssertEqual(query.watch?.count, 1)
         XCTAssertEqual(query.watch?.first, "yolo")
@@ -286,7 +286,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(query.watch, ["yolo", "hello", "wow"])
     }
 
-    func testWatchKeysVariadic() throws {
+    func testWatchKeysVariadic() async throws {
         var query = GameScore.query.watch("yolo")
         XCTAssertEqual(query.watch?.count, 1)
         XCTAssertEqual(query.watch?.first, "yolo")
@@ -296,7 +296,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(query.watch, ["yolo", "hello", "wow"])
     }
 
-    func testRedirectResponseDecoding() throws {
+    func testRedirectResponseDecoding() async throws {
         guard let url = URL(string: "http://parse.org") else {
             XCTFail("Should have url")
             return
@@ -309,7 +309,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testConnectionResponseDecoding() throws {
+    func testConnectionResponseDecoding() async throws {
         let expected = "{\"clientId\":\"yolo\",\"installationId\":\"naw\",\"op\":\"connected\"}"
         let message = ConnectionResponse(op: .connected, clientId: "yolo", installationId: "naw")
         let encoded = try ParseCoding.jsonEncoder()
@@ -318,7 +318,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUnsubscribeResponseDecoding() throws {
+    func testUnsubscribeResponseDecoding() async throws {
         let expected = "{\"clientId\":\"yolo\",\"installationId\":\"naw\",\"op\":\"connected\",\"requestId\":1}"
         let message = UnsubscribedResponse(op: .connected, requestId: 1, clientId: "yolo", installationId: "naw")
         let encoded = try ParseCoding.jsonEncoder()
@@ -327,7 +327,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testEventResponseDecoding() throws {
+    func testEventResponseDecoding() async throws {
         // swiftlint:disable:next line_length
         let expected = "{\"clientId\":\"yolo\",\"installationId\":\"naw\",\"object\":{\"points\":10},\"op\":\"connected\",\"requestId\":1}"
         let score = GameScore(points: 10)
@@ -342,7 +342,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testErrorResponseDecoding() throws {
+    func testErrorResponseDecoding() async throws {
         let expected = "{\"code\":1,\"error\":\"message\",\"op\":\"error\",\"reconnect\":true}"
         let message = ErrorResponse(op: .error, code: 1, message: "message", reconnect: true)
         let encoded = try ParseCoding.jsonEncoder()
@@ -351,7 +351,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testPreliminaryResponseDecoding() throws {
+    func testPreliminaryResponseDecoding() async throws {
         let expected = "{\"clientId\":\"message\",\"installationId\":\"naw\",\"op\":\"subscribed\",\"requestId\":1}"
         let message = PreliminaryMessageResponse(op: .subscribed,
                                                  requestId: 1,
@@ -363,7 +363,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSocketNotOpenState() throws {
+    func testSocketNotOpenState() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -375,7 +375,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(client.isConnected, false)
     }
 
-    func testConnectedState() throws {
+    func testConnectedState() async throws {
         guard let client = ParseLiveQuery.defaultClient,
               let task = client.task else {
             XCTFail("Should be able to get client and task")
@@ -411,7 +411,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(client.attempts, Parse.configuration.liveQueryMaxConnectionAttempts + 1)
     }
 
-    func testDisconnectedState() throws {
+    func testDisconnectedState() async throws {
         guard let client = ParseLiveQuery.defaultClient,
               let task = client.task else {
             XCTFail("Should be able to get client and task")
@@ -437,7 +437,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertNil(client.clientId)
     }
 
-    func testSocketDisconnectedState() throws {
+    func testSocketDisconnectedState() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -457,7 +457,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertNil(client.clientId)
     }
 
-    func testUserClosedConnectionState() throws {
+    func testUserClosedConnectionState() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -481,7 +481,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(client.isDisconnectedByUser, true)
     }
 
-    func testOpenSocket() throws {
+    func testOpenSocket() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -495,7 +495,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCloseFromServer() throws {
+    func testCloseFromServer() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             throw ParseError(code: .otherCause,
                              message: "Should be able to get client")
@@ -521,8 +521,8 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCloseExternal() throws {
-        let client = try ParseLiveQuery()
+    func testCloseExternal() async throws {
+        let client = try await ParseLiveQuery()
         guard let originalTask = client.task,
               client.task.state == .running else {
             throw XCTSkip("Skip this test when state is not running")
@@ -549,8 +549,8 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCloseInternalUseQueue() throws {
-        let client = try ParseLiveQuery()
+    func testCloseInternalUseQueue() async throws {
+        let client = try await ParseLiveQuery()
         guard let originalTask = client.task,
               client.task.state == .running else {
             throw XCTSkip("Skip this test when state is not running")
@@ -577,8 +577,8 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCloseInternalDoNotUseQueue() throws {
-        let client = try ParseLiveQuery()
+    func testCloseInternalDoNotUseQueue() async throws {
+        let client = try await ParseLiveQuery()
         guard let originalTask = client.task,
               client.task.state == .running else {
             throw XCTSkip("Skip this test when state is not running")
@@ -600,8 +600,8 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(URLSession.liveQuery.receivingTasks[client.task], true)
     }
 
-    func testCloseAll() throws {
-        let client = try ParseLiveQuery()
+    func testCloseAll() async throws {
+        let client = try await ParseLiveQuery()
         guard let originalTask = client.task,
               client.task.state == .running else {
             throw XCTSkip("Skip this test when state is not running")
@@ -628,7 +628,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPingSocketNotEstablished() throws {
+    func testPingSocketNotEstablished() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -650,7 +650,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPing() throws {
+    func testPing() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -669,7 +669,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testRandomIdGenerator() throws {
+    func testRandomIdGenerator() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -680,7 +680,7 @@ class ParseLiveQueryTests: XCTestCase {
         }
     }
 
-    func testSubscribeNotConnected() throws {
+    func testSubscribeNotConnected() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -699,7 +699,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(client.pendingSubscriptions.count, 0)
     }
 
-    func pretendToBeConnected() throws {
+    func pretendToBeConnected() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             throw ParseError(code: .otherCause,
                              message: "Should be able to get client")
@@ -717,7 +717,7 @@ class ParseLiveQueryTests: XCTestCase {
         }
     }
 
-    func testSubscribeConnected() throws {
+    func testSubscribeConnected() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -797,7 +797,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSubscribeCallbackConnected() throws {
+    func testSubscribeCallbackConnected() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -861,7 +861,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSubscribeCloseSubscribe() throws {
+    func testSubscribeCloseSubscribe() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         var subscription = try Query<GameScore>.subscribe(handler)
@@ -945,7 +945,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testServerRedirectResponse() throws {
+    func testServerRedirectResponse() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -962,7 +962,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(client.url, url)
     }
 
-    func testServerErrorResponse() throws {
+    func testServerErrorResponse() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -989,7 +989,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testServerErrorResponseNoReconnect() throws {
+    func testServerErrorResponseNoReconnect() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
@@ -1023,7 +1023,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testEventEnter() throws {
+    func testEventEnter() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1076,7 +1076,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventLeave() throws {
+    func testEventLeave() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1129,7 +1129,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventCreate() throws {
+    func testEventCreate() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1182,7 +1182,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventUpdate() throws {
+    func testEventUpdate() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1235,7 +1235,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventDelete() throws {
+    func testEventDelete() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1287,7 +1287,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSubscriptionUpdate() throws {
+    func testSubscriptionUpdate() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1375,7 +1375,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testResubscribing() throws {
+    func testResubscribing() async throws {
         let query = GameScore.query("points" > 9)
         guard let subscription = query.subscribe else {
             XCTFail("Should create subscription")
@@ -1463,7 +1463,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testEventEnterSubscriptionCallback() throws {
+    func testEventEnterSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1506,7 +1506,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventLeaveSubscriptioinCallback() throws {
+    func testEventLeaveSubscriptioinCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1549,7 +1549,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventCreateSubscriptionCallback() throws {
+    func testEventCreateSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1592,7 +1592,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventUpdateSubscriptionCallback() throws {
+    func testEventUpdateSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1635,7 +1635,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testEventDeleteSubscriptionCallback() throws {
+    func testEventDeleteSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1678,7 +1678,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSubscriptionUpdateSubscriptionCallback() throws {
+    func testSubscriptionUpdateSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)
@@ -1743,7 +1743,7 @@ class ParseLiveQueryTests: XCTestCase {
                                                            clientId: "yolo",
                                                            installationId: "naw")
         let encoded = try ParseCoding.jsonEncoder().encode(response)
-        client.received(encoded)
+        await client.received(encoded)
         XCTAssertTrue(try client.isSubscribed(query))
         XCTAssertFalse(try client.isPendingSubscription(query))
         XCTAssertEqual(client.subscriptions.count, 1)
@@ -1752,7 +1752,7 @@ class ParseLiveQueryTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testResubscribingSubscriptionCallback() throws {
+    func testResubscribingSubscriptionCallback() async throws {
         let query = GameScore.query("points" > 9)
         let handler = SubscriptionCallback(query: query)
         let subscription = try Query<GameScore>.subscribe(handler)

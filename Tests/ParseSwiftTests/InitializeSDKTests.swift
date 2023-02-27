@@ -190,7 +190,7 @@ class InitializeSDKTests: XCTestCase {
                                                                       installationId: installationId)
         await Installation.setCurrentContainer(badContainer)
         await Installation.saveCurrentContainerToKeychain()
-        await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
+        try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
 
         var foundInstallation = Installation()
         foundInstallation.updateAutomaticInfo()
@@ -290,7 +290,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
-        await ParseVersion.setCurrent(try ParseVersion(string: "0.0.0"))
+        try await ParseVersion.setCurrent(try ParseVersion(string: "0.0.0"))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
@@ -320,7 +320,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
-        await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
+        try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
@@ -351,7 +351,7 @@ class InitializeSDKTests: XCTestCase {
         let memory = InMemoryPrimitiveStore()
         ParseStorage.shared.use(memory)
         let newVersion = "1000.0.0"
-        await ParseVersion.setCurrent(try ParseVersion(string: newVersion))
+        try await ParseVersion.setCurrent(try ParseVersion(string: newVersion))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()

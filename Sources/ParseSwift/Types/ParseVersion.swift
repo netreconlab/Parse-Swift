@@ -71,7 +71,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
         return versionInMemory
     }
 
-    internal static func setCurrent(_ newValue: Self?) async {
+    internal static func setCurrent(_ newValue: Self?) async throws {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentVersion)

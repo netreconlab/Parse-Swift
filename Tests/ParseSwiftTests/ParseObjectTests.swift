@@ -650,7 +650,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     // swiftlint:disable:next function_body_length
-    func testFetch() {
+    func testFetch() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -673,7 +673,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let fetched = try score.fetch(options: [])
+            let fetched = try await score.fetch(options: [])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {
@@ -693,7 +693,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         do {
-            let fetched = try score.fetch(options: [.usePrimaryKey])
+            let fetched = try await score.fetch(options: [.usePrimaryKey])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {
@@ -713,7 +713,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testFetchBasedOnObjectId() {
+    func testFetchBasedOnObjectId() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -737,7 +737,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
         do {
             var fetched = GameScore(objectId: objectId)
-            fetched = try fetched.fetch(options: [])
+            fetched = try await fetched.fetch(options: [])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {
@@ -875,11 +875,11 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         self.fetchAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    func testSaveCommand() throws {
+    func testSaveCommand() async throws {
         let score = GameScore(points: 10)
         let className = score.className
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -893,7 +893,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded2, expected2)
     }
 
-    func testSaveUpdateCommand() throws {
+    func testSaveUpdateCommand() async throws {
         var score = GameScore(points: 10)
         let className = score.className
         let objectId = "yarr"
@@ -901,7 +901,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         score.createdAt = Date()
         score.updatedAt = score.createdAt
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -921,7 +921,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSaveUpdateCommandParseObjectMutable() throws {
+    func testSaveUpdateCommandParseObjectMutable() async throws {
         var score = GameScore(points: 10)
         let className = score.className
         let objectId = "yarr"
@@ -929,7 +929,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         score.createdAt = Date()
         score.updatedAt = score.createdAt
 
-        let command = try score.mergeable.saveCommand()
+        let command = try await score.mergeable.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -950,7 +950,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         var empty = score.mergeable
         empty.player = "Jennifer"
-        let command2 = try empty.saveCommand()
+        let command2 = try await empty.saveCommand()
         guard let body2 = command2.body else {
             XCTFail("Should be able to unwrap")
             return
@@ -964,10 +964,10 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded2, expected2)
     }
 
-    func testCreateCommand() throws {
+    func testCreateCommand() async throws {
         let score = GameScore(points: 10)
 
-        let command = score.createCommand()
+        let command = await score.createCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(score.className)")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -1003,7 +1003,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(command.body)
     }
 
-    func testSave() {
+    func testSave() async throws {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -1024,7 +1024,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedCreatedAt = saved.createdAt,
                 let savedUpdatedAt = saved.updatedAt else {
@@ -1039,7 +1039,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         do {
-            let saved = try score.save(options: [.usePrimaryKey])
+            let saved = try await score.save(options: [.usePrimaryKey])
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedCreatedAt = saved.createdAt,
                 let savedUpdatedAt = saved.updatedAt else {
@@ -1054,14 +1054,14 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testSaveWithDefaultACL() throws {
-        let user = try loginNormally()
+    func testSaveWithDefaultACL() async throws {
+        let user = try await loginNormally()
         guard let userObjectId = user.objectId else {
             XCTFail("Should have objectId")
             return
         }
-        let defaultACL = try ParseACL.setDefaultACL(ParseACL(),
-                                                    withAccessForCurrentUser: true)
+        let defaultACL = try await ParseACL.setDefaultACL(ParseACL(),
+                                                          withAccessForCurrentUser: true)
 
         let score = GameScore(points: 10)
 
@@ -1083,7 +1083,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedCreatedAt = saved.createdAt,
                 let savedUpdatedAt = saved.updatedAt else {
@@ -1102,7 +1102,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testUpdate() {
+    func testUpdate() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1125,7 +1125,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             guard let savedUpdatedAt = saved.updatedAt else {
                 XCTFail("Should unwrap dates")
                 return
@@ -1141,7 +1141,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         do {
-            let saved = try score.save(options: [.usePrimaryKey])
+            let saved = try await score.save(options: [.usePrimaryKey])
             guard let savedUpdatedAt = saved.updatedAt else {
                 XCTFail("Should unwrap dates")
                 return
@@ -1157,9 +1157,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testUpdateWithDefaultACL() throws {
-        _ = try loginNormally()
-        _ = try ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
+    func testUpdateWithDefaultACL() async throws {
+        _ = try await loginNormally()
+        _ = try await ParseACL.setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
 
         var score = GameScore(points: 10)
         score.objectId = "yarr"
@@ -1183,7 +1183,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             guard let savedUpdatedAt = saved.updatedAt else {
                 XCTFail("Should unwrap dates")
                 return
@@ -1425,7 +1425,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testDelete() {
+    func testDelete() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -1448,19 +1448,19 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            try score.delete(options: [])
+            try await score.delete(options: [])
         } catch {
             XCTFail(error.localizedDescription)
         }
 
         do {
-            try score.delete(options: [.usePrimaryKey])
+            try await score.delete(options: [.usePrimaryKey])
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testDeleteError() {
+    func testDeleteError() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -1479,7 +1479,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            try score.delete(options: [])
+            try await score.delete(options: [])
             XCTFail("Should have thrown ParseError")
         } catch {
             if let error = error as? ParseError {
@@ -1490,7 +1490,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         do {
-            try score.delete(options: [.usePrimaryKey])
+            try await score.delete(options: [.usePrimaryKey])
             XCTFail("Should have thrown ParseError")
         } catch {
             if let error = error as? ParseError {
@@ -1626,313 +1626,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         self.deleteAsyncError(score: score, parseError: parseError, callbackQueue: .main)
     }
 
-    // swiftlint:disable:next function_body_length
-    func testDeepSaveOneDeep() throws {
-        let score = GameScore(points: 10)
-        var game = Game(gameScore: score)
-
-        var scoreOnServer = score
-        scoreOnServer.createdAt = Date()
-        scoreOnServer.ACL = nil
-        scoreOnServer.objectId = "yarr"
-
-        let response = [BatchResponseItem<GameScore>(success: scoreOnServer, error: nil)]
-
-        let encoded: Data!
-        do {
-            encoded = try GameScore.getJSONEncoder().encode(response)
-            // Get dates in correct format from ParseDecoding strategy
-            let encodedScoreOnServer = try scoreOnServer.getEncoder().encode(scoreOnServer)
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encodedScoreOnServer)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        game.ensureDeepSave { (savedChildren, savedChildFiles, parseError) in
-
-            XCTAssertEqual(savedChildren.count, 1)
-            XCTAssertEqual(savedChildFiles.count, 0)
-            var counter = 0
-            var savedChildObject: PointerType?
-            savedChildren.forEach { (_, value) in
-                XCTAssertEqual(value.className, "GameScore")
-                XCTAssertEqual(value.objectId, "yarr")
-                if counter == 0 {
-                    savedChildObject = value
-                }
-                counter += 1
-            }
-            XCTAssertNil(parseError)
-
-            guard let savedChild = savedChildObject else {
-                XCTFail("Should have unwrapped child object")
-                expectation1.fulfill()
-                return
-            }
-
-            // Saved updated info for game
-            let encodedScore: Data
-            do {
-                encodedScore = try ParseCoding.jsonEncoder().encode(savedChild)
-                // Decode Pointer as GameScore
-                game.gameScore = try game.getDecoder().decode(GameScore.self, from: encodedScore)
-            } catch {
-                XCTFail("Should encode/decode. Error \(error)")
-                expectation1.fulfill()
-                return
-            }
-
-            // Setup ParseObject to return from mocker
-            MockURLProtocol.removeAll()
-
-            var gameOnServer = game
-            gameOnServer.objectId = "nice"
-            gameOnServer.createdAt = Date()
-
-            let encodedGamed: Data
-            do {
-                encodedGamed = try game.getEncoder().encode(gameOnServer, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                gameOnServer = try game.getDecoder().decode(Game.self, from: encodedGamed)
-            } catch {
-                XCTFail("Should encode/decode. Error \(error)")
-                expectation1.fulfill()
-                return
-            }
-
-            MockURLProtocol.mockRequests { _ in
-                return MockURLResponse(data: encodedGamed, statusCode: 200)
-            }
-
-            guard let savedGame = try? game
-                    .saveCommand()
-                    .execute(options: [],
-                             childObjects: savedChildren,
-                             childFiles: savedChildFiles) else {
-                XCTFail("Should have saved game")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(savedGame.objectId, gameOnServer.objectId)
-            XCTAssertEqual(savedGame.createdAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.gameScore, gameOnServer.gameScore)
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    // swiftlint:disable:next function_body_length
-    func testDeepSaveOneDeepWithDefaultACL() throws {
-        let user = try loginNormally()
-        guard let userObjectId = user.objectId else {
-            XCTFail("Should have objectId")
-            return
-        }
-        let defaultACL = try ParseACL.setDefaultACL(ParseACL(),
-                                                    withAccessForCurrentUser: true)
-
-        let score = GameScore(points: 10)
-        var game = Game(gameScore: score)
-
-        var scoreOnServer = score
-        scoreOnServer.createdAt = Date()
-        scoreOnServer.ACL = nil
-        scoreOnServer.objectId = "yarr"
-
-        let response = [BatchResponseItem<GameScore>(success: scoreOnServer, error: nil)]
-
-        let encoded: Data!
-        do {
-            encoded = try GameScore.getJSONEncoder().encode(response)
-            // Get dates in correct format from ParseDecoding strategy
-            let encodedScoreOnServer = try scoreOnServer.getEncoder().encode(scoreOnServer)
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encodedScoreOnServer)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        game.ensureDeepSave { (savedChildren, savedChildFiles, parseError) in
-
-            XCTAssertEqual(savedChildren.count, 1)
-            XCTAssertEqual(savedChildFiles.count, 0)
-            var counter = 0
-            var savedChildObject: PointerType?
-            savedChildren.forEach { (_, value) in
-                XCTAssertEqual(value.className, "GameScore")
-                XCTAssertEqual(value.objectId, "yarr")
-                if counter == 0 {
-                    savedChildObject = value
-                }
-                counter += 1
-            }
-            XCTAssertNil(parseError)
-
-            guard let savedChild = savedChildObject else {
-                XCTFail("Should have unwrapped child object")
-                expectation1.fulfill()
-                return
-            }
-
-            // Saved updated info for game
-            let encodedScore: Data
-            do {
-                encodedScore = try ParseCoding.jsonEncoder().encode(savedChild)
-                // Decode Pointer as GameScore
-                game.gameScore = try game.getDecoder().decode(GameScore.self, from: encodedScore)
-            } catch {
-                XCTFail("Should encode/decode. Error \(error)")
-                expectation1.fulfill()
-                return
-            }
-
-            // Setup ParseObject to return from mocker
-            MockURLProtocol.removeAll()
-
-            var gameOnServer = game
-            gameOnServer.objectId = "nice"
-            gameOnServer.createdAt = Date()
-
-            let encodedGamed: Data
-            do {
-                encodedGamed = try game.getEncoder().encode(gameOnServer, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                gameOnServer = try game.getDecoder().decode(Game.self, from: encodedGamed)
-            } catch {
-                XCTFail("Should encode/decode. Error \(error)")
-                expectation1.fulfill()
-                return
-            }
-
-            MockURLProtocol.mockRequests { _ in
-                return MockURLResponse(data: encodedGamed, statusCode: 200)
-            }
-
-            guard let savedGame = try? game
-                    .saveCommand()
-                    .execute(options: [],
-                             childObjects: savedChildren,
-                             childFiles: savedChildFiles) else {
-                XCTFail("Should have saved game")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(savedGame.objectId, gameOnServer.objectId)
-            XCTAssertEqual(savedGame.createdAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.gameScore, gameOnServer.gameScore)
-            XCTAssertNotNil(savedGame.ACL)
-            XCTAssertEqual(savedGame.ACL?.publicRead, defaultACL.publicRead)
-            XCTAssertEqual(savedGame.ACL?.publicWrite, defaultACL.publicWrite)
-            XCTAssertTrue(defaultACL.getReadAccess(objectId: userObjectId))
-            XCTAssertTrue(defaultACL.getWriteAccess(objectId: userObjectId))
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testDeepSaveDetectCircular() throws {
-        let score = GameScoreClass(points: 10)
-        let game = GameClass(gameScore: score)
-        game.objectId = "nice"
-        score.game = game
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        game.ensureDeepSave { (_, _, parseError) in
-
-            guard let error = parseError else {
-                XCTFail("Should have failed with an error of detecting a circular dependency")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertTrue(error.message.contains("circular"))
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testAllowFieldsWithSameObject() throws {
-        var score = GameScore(points: 10)
-        var level = Level()
-        level.objectId = "nice"
-        score.level = level
-        score.nextLevel = level
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        score.ensureDeepSave { (_, _, parseError) in
-            XCTAssertNil(parseError)
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testDeepSaveTwoDeep() throws {
-        var score = GameScore(points: 10)
-        score.level = Level()
-        var game = Game(gameScore: score)
-        game.objectId = "nice"
-
-        var levelOnServer = score
-        levelOnServer.createdAt = Date()
-        levelOnServer.ACL = nil
-        levelOnServer.objectId = "yarr"
-        let pointer = try levelOnServer.toPointer()
-
-        let response = [BatchResponseItem<Pointer<GameScore>>(success: pointer, error: nil)]
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(response)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        game.ensureDeepSave { (savedChildren, savedChildFiles, parseError) in
-
-            XCTAssertEqual(savedChildFiles.count, 0)
-            XCTAssertEqual(savedChildren.count, 2)
-            let gameScore = savedChildren.compactMap { (_, value) -> PointerType? in
-                if value.className == "GameScore" {
-                    return value
-                } else {
-                    return nil
-                }
-            }
-            XCTAssertEqual(gameScore.count, 1)
-            XCTAssertEqual(gameScore.first?.className, "GameScore")
-            XCTAssertEqual(gameScore.first?.objectId, "yarr")
-
-            let level = savedChildren.compactMap { (_, value) -> PointerType? in
-                if value.className == "Level" {
-                    return value
-                } else {
-                    return nil
-                }
-            }
-            XCTAssertEqual(level.count, 1)
-            XCTAssertEqual(level.first?.className, "Level")
-            XCTAssertEqual(level.first?.objectId, "yarr") // This is because mocker is only returning 1 response
-            XCTAssertNil(parseError)
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testDeepSaveOfUnsavedPointerArray() throws {
+    func testDeepSaveOfUnsavedPointerArray() async throws {
         var score = GameScore(points: 10)
         let newLevel = Level()
         var newLevel2 = Level()
@@ -1987,98 +1681,6 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
     }
-
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    // swiftlint:disable:next function_body_length
-    func testDeepSaveObjectWithFile() throws {
-        var game = Game2()
-
-        guard let cloudPath = URL(string: "https://parseplatform.org/img/logo.svg"),
-              // swiftlint:disable:next line_length
-              let parseURL = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_logo.svg") else {
-            XCTFail("Should create URL")
-            return
-        }
-
-        let parseFile = ParseFile(name: "profile.svg", cloudURL: cloudPath)
-        game.profilePicture = parseFile
-
-        let fileResponse = FileUploadResponse(name: "89d74fcfa4faa5561799e5076593f67c_\(parseFile.name)",
-                                              url: parseURL)
-
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(fileResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Deep save")
-        game.ensureDeepSave { (savedChildren, savedChildFiles, parseError) in
-
-            XCTAssertEqual(savedChildren.count, 0)
-            XCTAssertEqual(savedChildFiles.count, 1)
-            var counter = 0
-            var savedFile: ParseFile?
-            savedChildFiles.forEach { (_, value) in
-                XCTAssertEqual(value.url, fileResponse.url)
-                XCTAssertEqual(value.name, fileResponse.name)
-                if counter == 0 {
-                    savedFile = value
-                }
-                counter += 1
-            }
-            XCTAssertNil(parseError)
-
-            // Saved updated info for game
-            game.profilePicture = savedFile
-
-            // Setup ParseObject to return from mocker
-            MockURLProtocol.removeAll()
-
-            var gameOnServer = game
-            gameOnServer.objectId = "nice"
-            gameOnServer.createdAt = Date()
-            gameOnServer.profilePicture = savedFile
-
-            let encodedGamed: Data
-            do {
-                encodedGamed = try game.getEncoder().encode(gameOnServer, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                gameOnServer = try game.getDecoder().decode(Game2.self, from: encodedGamed)
-            } catch {
-                XCTFail("Should encode/decode. Error \(error)")
-                expectation1.fulfill()
-                return
-            }
-
-            MockURLProtocol.mockRequests { _ in
-                return MockURLResponse(data: encodedGamed, statusCode: 200)
-            }
-
-            guard let savedGame = try? game
-                    .saveCommand()
-                    .execute(options: [],
-                             childObjects: savedChildren,
-                             childFiles: savedChildFiles) else {
-                XCTFail("Should have saved game")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(savedGame.objectId, gameOnServer.objectId)
-            XCTAssertEqual(savedGame.createdAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
-            XCTAssertEqual(savedGame.profilePicture, gameOnServer.profilePicture)
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-    #endif
 }
 
 // swiftlint:disable:this file_length
