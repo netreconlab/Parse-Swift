@@ -29,7 +29,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                                         liveQueryMaxConnectionAttempts: 1,
                                         testing: true,
                                         testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
+        ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     }
 
     override func tearDown() async throws {
@@ -39,15 +39,15 @@ class ParseLiveQueryCombineTests: XCTestCase {
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
-        URLSession.liveQuery.closeAll()
+        await URLSession.liveQuery.closeAll()
     }
 
-    func testOpen() throws {
+    func testOpen() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
@@ -70,12 +70,12 @@ class ParseLiveQueryCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPingSocketNotEstablished() throws {
+    func testPingSocketNotEstablished() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.sendPingPublisher()

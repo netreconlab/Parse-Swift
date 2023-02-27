@@ -155,10 +155,10 @@ class ParseAuthenticationTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLinkCommand() throws {
+    func testLinkCommand() async throws {
         let user = User()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
-        let command = user.linkCommand(body: body)
+        let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -166,11 +166,11 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
-    func testLinkCommandParseBody() throws {
+    func testLinkCommandParseBody() async throws {
         var user = User()
         user.username = "hello"
         user.password = "world"
-        let command = try user.linkCommand()
+        let command = try await user.linkCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -178,10 +178,10 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertNil(command.body?.authData)
     }
 
-    func testLinkCommandLoggedIn() throws {
-        let user = try loginNormally()
+    func testLinkCommandLoggedIn() async throws {
+        let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
-        let command = user.linkCommand(body: body)
+        let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\("yarr")")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -189,9 +189,9 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
-    func testLinkCommandNoBodyLoggedIn() throws {
-        let user = try loginNormally()
-        let command = try user.linkCommand()
+    func testLinkCommandNoBodyLoggedIn() async throws {
+        let user = try await loginNormally()
+        let command = try await user.linkCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\("yarr")")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -199,7 +199,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertNil(command.body?.authData)
     }
 
-    func testIsLinkedWithString() throws {
+    func testIsLinkedWithString() async throws {
 
         let expectedAuth = ["id": "yolo"]
         var user = User()
@@ -209,7 +209,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertTrue(user.isLinked(with: "test"))
     }
 
-    func testAuthStrip() throws {
+    func testAuthStrip() async throws {
 
         let expectedAuth = ["id": "yolo"]
         var user = User()

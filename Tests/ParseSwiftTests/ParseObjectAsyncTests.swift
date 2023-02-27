@@ -1551,9 +1551,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
@@ -1572,8 +1573,8 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have objectId")
             return
         }
-        let defaultACL = try ParseACL.setDefaultACL(ParseACL(),
-                                                    withAccessForCurrentUser: true)
+        let defaultACL = try await ParseACL.setDefaultACL(ParseACL(),
+                                                          withAccessForCurrentUser: true)
 
         let score = GameScore(points: 10)
         var game = Game(gameScore: score)
@@ -1652,9 +1653,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
@@ -1824,9 +1826,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
