@@ -171,7 +171,8 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         }
 
         let user = try await User.login(type, authData: ["id": "yolo"])
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
@@ -218,7 +219,8 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         }
 
         let user = try await User.link(type, authData: ["id": "yolo"])
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)

@@ -264,7 +264,7 @@ class ParseAppleAsyncTests: XCTestCase {
             .AuthenticationKeys.id.makeDictionary(user: "testing",
                                                   identityToken: tokenData)
         user.authData = [User.apple.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         XCTAssertTrue(ParseApple.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()

@@ -581,7 +581,7 @@ class ParseAppleTests: XCTestCase {
                                                   identityToken: tokenData)
         var user = try await User.current()
         user.authData = [User.apple.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isLinkedUser = await User.apple.isLinked()
         XCTAssertTrue(isLinkedUser)
 

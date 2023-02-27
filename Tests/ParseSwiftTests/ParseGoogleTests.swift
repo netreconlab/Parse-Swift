@@ -426,7 +426,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
                                                   idToken: "this")
         var initialUser = try await User.current()
         initialUser.authData = [User.google.__type: authData]
-        await User.setCurrent(initialUser)
+        try await User.setCurrent(initialUser)
         let initialUserLinked = await User.google.isLinked()
         XCTAssertTrue(initialUserLinked)
 

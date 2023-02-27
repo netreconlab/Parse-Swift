@@ -206,7 +206,7 @@ public extension ParseAuthentication {
     func strip() async throws -> AuthenticatedUser {
         let user = try await AuthenticatedUser.current()
         let strippedUser = strip(user)
-        await AuthenticatedUser.setCurrent(strippedUser)
+        try await AuthenticatedUser.setCurrent(strippedUser)
         return strippedUser
     }
 
@@ -432,7 +432,7 @@ public extension ParseUser {
                                                   body: body) { (data) -> Self in
             var currentUser = try await Self.current()
             currentUser.authData = originalAuthData
-            await Self.setCurrent(currentUser)
+            try await Self.setCurrent(currentUser)
             let user = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: data)
             currentUser.updatedAt = user.updatedAt
             currentUser.authData = body.authData

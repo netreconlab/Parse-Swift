@@ -352,7 +352,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
                                                   accessToken: "access_token")
         var user = try await User.current()
         user.authData = [User.spotify.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isCurrentLinkedUser = await User.spotify.isLinked()
         XCTAssertTrue(isCurrentLinkedUser)
 

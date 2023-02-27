@@ -161,8 +161,14 @@ public extension ParseUser {
         return user
     }
 
-    internal static func setCurrent(_ newValue: Self?) async {
+    internal static func setCurrent(_ newValue: Self?) async throws {
         var currentContainer = await Self.currentContainer()
+        if let newValue = newValue,
+            let currentUser = currentContainer?.currentUser {
+            guard currentUser.hasSameObjectId(as: newValue) else {
+                throw ParseError(code: .otherCause, message: "objectId's must match to update current user")
+            }
+        }
         currentContainer?.currentUser = newValue
         await Self.setCurrentContainer(currentContainer)
     }
@@ -792,7 +798,7 @@ extension ParseUser {
         })
         if let foundCurrentUser = foundCurrentUserObjects.first {
             if !deleting {
-                await Self.setCurrent(foundCurrentUser)
+                try await Self.setCurrent(foundCurrentUser)
                 await Self.saveCurrentContainerToKeychain()
             } else {
                 await Self.deleteCurrentContainerFromKeychain()

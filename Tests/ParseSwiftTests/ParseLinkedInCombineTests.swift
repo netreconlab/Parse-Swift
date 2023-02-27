@@ -312,7 +312,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
                                                   accessToken: "this",
                                                   isMobileSDK: true)
         user.authData = [User.linkedin.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isLinked = await User.linkedin.isLinked()
         XCTAssertTrue(isLinked)
 

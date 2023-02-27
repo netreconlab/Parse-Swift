@@ -716,7 +716,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
         let email = "peace@parse.com"
         user.email = email
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let command = try await User.current().saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\(objectId)")
@@ -735,7 +735,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
         let email = "peace@parse.com"
         user.email = email
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let command = try await User.current().saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\(objectId)")
@@ -2004,7 +2004,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let customField = "Changed"
         var user = try await User.current()
         user.customKey = customField
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         await User.saveCurrentContainerToKeychain()
         #if !os(Linux) && !os(Android) && !os(Windows)
         let keychainUser: CurrentUserContainer<User>?

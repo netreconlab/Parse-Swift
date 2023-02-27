@@ -839,7 +839,7 @@ class ParseFacebookTests: XCTestCase {
                                                   authenticationToken: "authenticationToken")
         var user = try await User.current()
         user.authData = [User.facebook.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isLinked = await User.facebook.isLinked()
         XCTAssertTrue(isLinked)
 
@@ -899,7 +899,7 @@ class ParseFacebookTests: XCTestCase {
                                                   authenticationToken: nil)
         var user = try await User.current()
         user.authData = [User.facebook.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isLinked = await User.facebook.isLinked()
         XCTAssertTrue(isLinked)
 

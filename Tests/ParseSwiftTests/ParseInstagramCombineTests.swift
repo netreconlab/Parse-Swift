@@ -355,7 +355,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                                                   apiURL: "apiURL")
         var user = try await User.current()
         user.authData = [User.instagram.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         let isLinked = await User.instagram.isLinked()
         XCTAssertTrue(isLinked)
 

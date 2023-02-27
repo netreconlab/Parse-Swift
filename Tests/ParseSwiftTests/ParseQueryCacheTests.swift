@@ -61,13 +61,13 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  usingEqualQueryConstraint: false,
-                                  usingPostForQuery: false,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        usingEqualQueryConstraint: false,
+                                        usingPostForQuery: false,
+                                        testing: true)
     }
 
     override func tearDown() async throws {

@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 
 class MigrateObjCSDKCombineTests: XCTestCase {
     struct User: ParseUser {
@@ -140,7 +140,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
     func setupObjcKeychainSDK(useOldObjCToken: Bool = false,
                               useBothTokens: Bool = false,
-                              installationId: String) {
+                              installationId: String) async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -152,17 +152,17 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         let currentUserDictionary2 = ["session_token": objcSessionToken2]
         let currentUserDictionary3 = ["sessionToken": objcSessionToken,
                                       "session_token": objcSessionToken2]
-        _ = objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
         if useBothTokens {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
         } else if !useOldObjCToken {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
         } else {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
         }
     }
 
-    func loginNormally(sessionToken: String) throws -> User {
+    func loginNormally(sessionToken: String) async throws -> User {
         var loginResponse = LoginSignupResponse()
         loginResponse.sessionToken = sessionToken
 
@@ -177,14 +177,16 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLoginUsingObjCKeychain() {
+    func testLoginUsingObjCKeychain() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
+        let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -212,39 +214,46 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertEqual(loggedIn.username, self.loginUserName)
             XCTAssertNil(loggedIn.password)
             XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-            XCTAssertEqual(loggedIn.sessionToken, self.objcSessionToken)
+
             XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
             XCTAssertNil(loggedIn.ACL)
 
-            guard let userFromKeychain = User.current else {
-                XCTFail("Could not get CurrentUser from Keychain")
-                expectation1.fulfill()
-                return
+            Task {
+                let sessionToken = await loggedIn.sessionToken()
+                XCTAssertEqual(sessionToken, self.objcSessionToken)
+                do {
+                    let userFromKeychain = try await User.current()
+                    XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
+                    XCTAssertEqual(loggedIn.email, userFromKeychain.email)
+                    XCTAssertEqual(userFromKeychain.username, self.loginUserName)
+                    XCTAssertNil(userFromKeychain.password)
+                    XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+                    let sessionToken = await userFromKeychain.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken)
+                    XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
+                    XCTAssertNil(userFromKeychain.ACL)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-
-            XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-            XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-            XCTAssertEqual(userFromKeychain.username, self.loginUserName)
-            XCTAssertNil(userFromKeychain.password)
-            XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-            XCTAssertEqual(userFromKeychain.sessionToken, self.objcSessionToken)
-            XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-            XCTAssertNil(userFromKeychain.ACL)
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLoginUsingObjCKeychainOldSessionTokenKey() {
+    func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        setupObjcKeychainSDK(useOldObjCToken: true,
-                             installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(useOldObjCToken: true,
+                                       installationId: objcInstallationId)
+
+        let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
@@ -272,39 +281,45 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertEqual(loggedIn.username, self.loginUserName)
             XCTAssertNil(loggedIn.password)
             XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-            XCTAssertEqual(loggedIn.sessionToken, self.objcSessionToken2)
             XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
             XCTAssertNil(loggedIn.ACL)
 
-            guard let userFromKeychain = User.current else {
-                XCTFail("Could not get CurrentUser from Keychain")
-                expectation1.fulfill()
-                return
+            Task {
+                let sessionToken = await loggedIn.sessionToken()
+                XCTAssertEqual(sessionToken, self.objcSessionToken2)
+                do {
+                    let userFromKeychain = try await User.current()
+                    XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
+                    XCTAssertEqual(loggedIn.email, userFromKeychain.email)
+                    XCTAssertEqual(userFromKeychain.username, self.loginUserName)
+                    XCTAssertNil(userFromKeychain.password)
+                    XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+                    let sessionToken = await userFromKeychain.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken2)
+                    XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
+                    XCTAssertNil(userFromKeychain.ACL)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-
-            XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-            XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-            XCTAssertEqual(userFromKeychain.username, self.loginUserName)
-            XCTAssertNil(userFromKeychain.password)
-            XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-            XCTAssertEqual(userFromKeychain.sessionToken, self.objcSessionToken2)
-            XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-            XCTAssertNil(userFromKeychain.ACL)
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLoginUsingObjCKeychainUseNewOverOld() {
+    func testLoginUsingObjCKeychainUseNewOverOld() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        setupObjcKeychainSDK(useBothTokens: true,
-                             installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(useBothTokens: true,
+                                       installationId: objcInstallationId)
+
+        let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -332,28 +347,31 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertEqual(loggedIn.username, self.loginUserName)
             XCTAssertNil(loggedIn.password)
             XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-            XCTAssertEqual(loggedIn.sessionToken, self.objcSessionToken)
             XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
             XCTAssertNil(loggedIn.ACL)
 
-            guard let userFromKeychain = User.current else {
-                XCTFail("Could not get CurrentUser from Keychain")
-                expectation1.fulfill()
-                return
+            Task {
+                let sessionToken = await loggedIn.sessionToken()
+                XCTAssertEqual(sessionToken, self.objcSessionToken)
+                do {
+                    let userFromKeychain = try await User.current()
+                    XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
+                    XCTAssertEqual(loggedIn.email, userFromKeychain.email)
+                    XCTAssertEqual(userFromKeychain.username, self.loginUserName)
+                    XCTAssertNil(userFromKeychain.password)
+                    XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+                    let sessionToken = await userFromKeychain.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken)
+                    XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
+                    XCTAssertNil(userFromKeychain.ACL)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-
-            XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-            XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-            XCTAssertEqual(userFromKeychain.username, self.loginUserName)
-            XCTAssertNil(userFromKeychain.password)
-            XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-            XCTAssertEqual(userFromKeychain.sessionToken, self.objcSessionToken)
-            XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-            XCTAssertNil(userFromKeychain.ACL)
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainNoKeychain() {
@@ -378,12 +396,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginUsingObjCKeychainAlreadyLoggedIn() throws {
+    func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
-        let currentUser = try loginNormally(sessionToken: objcSessionToken)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
+        let currentUser = try await loginNormally(sessionToken: objcSessionToken)
         MockURLProtocol.removeAll()
 
         let publisher = User.loginUsingObjCKeychainPublisher()
@@ -396,19 +415,23 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
         }, receiveValue: { returnedUser in
             XCTAssertTrue(currentUser.hasSameObjectId(as: returnedUser))
-            XCTAssertEqual(currentUser.sessionToken, returnedUser.sessionToken)
-            expectation1.fulfill()
+            Task {
+                let sessionToken = await currentUser.sessionToken()
+                let returnedSessionToken = await returnedUser.sessionToken()
+                XCTAssertEqual(sessionToken, returnedSessionToken)
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() throws {
+    func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
-        _ = try loginNormally(sessionToken: objcSessionToken2)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
+        _ = try await loginNormally(sessionToken: objcSessionToken2)
         MockURLProtocol.removeAll()
 
         let publisher = User.loginUsingObjCKeychainPublisher()
@@ -429,11 +452,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func saveCurrentInstallation() throws {
-        guard var installation = Installation.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+    func saveCurrentInstallation() async throws {
+        let currentInstallation = try await Installation.current()
+        var installation = currentInstallation
         installation.objectId = testInstallationObjectId
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         installation.ACL = nil
@@ -454,11 +475,8 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         }
 
         do {
-            guard let saved = try Installation.current?.save(),
-                let newCurrentInstallation = Installation.current else {
-                XCTFail("Should have a new current installation")
-                return
-            }
+            let saved = try await currentInstallation.save()
+            let newCurrentInstallation = try await Installation.current()
             XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
             XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
             XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
@@ -469,22 +487,23 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         }
     }
 
-    func testDeleteObjCKeychain() throws {
+    func testDeleteObjCKeychain() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-              let savedObjectId = installation.objectId,
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId,
               let savedInstallationId = installation.installationId else {
                 XCTFail("Should unwrap")
                 return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
 
         var installationOnServer = installation
         installationOnServer.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
@@ -515,39 +534,44 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in
-            // Should be updated in memory
-            XCTAssertEqual(Installation.current?.installationId, savedInstallationId)
-            XCTAssertEqual(Installation.current?.customKey, installation.customKey)
+            Task {
+                do {
+                    // Should be updated in memory
+                    let updatedInstallation = try await Installation.current()
+                    XCTAssertEqual(updatedInstallation.installationId, savedInstallationId)
+                    XCTAssertEqual(updatedInstallation.customKey, installation.customKey)
 
-            // Should be updated in Keychain
-            guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    // Should be updated in Keychain
+                    let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
+                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-            XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, savedInstallationId)
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testDeleteObjCKeychainAlreadyMigrated() throws {
+    func testDeleteObjCKeychainAlreadyMigrated() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-              let savedObjectId = installation.objectId,
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId,
               let savedInstallationId = installation.installationId else {
                 XCTFail("Should unwrap")
                 return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
-        setupObjcKeychainSDK(installationId: savedInstallationId)
+        try await setupObjcKeychainSDK(installationId: savedInstallationId)
 
         let publisher = Installation.deleteObjCKeychainPublisher()
             .sink(receiveCompletion: { result in
@@ -559,33 +583,37 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
         }, receiveValue: { _ in
             // Should be updated in memory
-            XCTAssertEqual(Installation.current?.installationId, savedInstallationId)
-            XCTAssertEqual(Installation.current?.customKey, installation.customKey)
+            Task {
+                do {
+                    let currentInstallation = try await Installation.current()
+                    XCTAssertEqual(currentInstallation.installationId, savedInstallationId)
+                    XCTAssertEqual(currentInstallation.customKey, installation.customKey)
 
-            // Should be updated in Keychain
-            guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    // Should be updated in Keychain
+                    let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
+                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-            XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, savedInstallationId)
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testDeleteObjCKeychainNoObjcKeychain() throws {
+    func testDeleteObjCKeychainNoObjcKeychain() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
 
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                return
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
@@ -607,15 +635,15 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testDeleteObjCKeychainNoCurrentInstallation() throws {
+    func testDeleteObjCKeychainNoCurrentInstallation() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
 
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        Installation.currentContainer().currentInstallation = nil
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        await Installation.setCurrent(nil)
 
         let publisher = Installation.deleteObjCKeychainPublisher()
             .sink(receiveCompletion: { result in

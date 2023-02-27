@@ -327,7 +327,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
                                                   authToken: "tokenData",
                                                   authTokenSecret: "authTokenSecret")
         user.authData = [User.twitter.__type: authData]
-        await User.setCurrent(user)
+        try await User.setCurrent(user)
         XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()

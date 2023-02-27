@@ -426,7 +426,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
                                                   isMobileSDK: true)
         var currentUser = try await User.current()
         currentUser.authData = [User.linkedin.__type: authData]
-        await User.setCurrent(currentUser)
+        try await User.setCurrent(currentUser)
         let currentLinkedUser = await User.linkedin.isLinked()
         XCTAssertTrue(currentLinkedUser)
 

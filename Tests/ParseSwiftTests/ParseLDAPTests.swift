@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 
 class ParseLDAPTests: XCTestCase {
     struct User: ParseUser {
@@ -149,15 +149,25 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.ldap.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertTrue(isLinked)
 
-                // Test stripping
-                user.ldap.strip()
-                XCTAssertFalse(user.ldap.isLinked)
+                        // Test stripping
+                        try await user.ldap.strip()
+                        isLinked = await user.ldap.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -166,8 +176,8 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLoginWrongKeys() throws {
-        _ = try loginNormally()
+    func testLoginWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -184,7 +194,7 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -213,15 +223,16 @@ class ParseLDAPTests: XCTestCase {
         }
 
         let user = try await User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
-    func testReplaceAnonymousWithLDAP() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLDAP() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
@@ -258,22 +269,31 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.authData, userOnServer.authData)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.ldap.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousWithLinkedLDAP() throws {
-        try loginAnonymousUser()
+    func testReplaceAnonymousWithLinkedLDAP() async throws {
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -299,22 +319,31 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.ldap.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWithLDAP() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWithLDAP() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -342,23 +371,33 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.ldap.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let sessionToken = await user.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInAuthData() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInAuthData() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -387,23 +426,33 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertTrue(user.ldap.isLinked)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                XCTAssertEqual(User.current?.sessionToken, "myToken")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let sessionToken = await user.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInUserWrongKeys() throws {
-        _ = try loginNormally()
+    func testLinkLoggedInUserWrongKeys() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let expectation1 = XCTestExpectation(description: "Login")
@@ -420,14 +469,17 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUnlink() throws {
-        _ = try loginNormally()
+    func testUnlink() async throws {
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                               password: "this")
-        User.current?.authData = [User.ldap.__type: authData]
-        XCTAssertTrue(User.ldap.isLinked)
+        var user = try await User.current()
+        user.authData = [User.ldap.__type: authData]
+        try await User.setCurrent(user)
+        let isLinked = await User.ldap.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -453,15 +505,24 @@ class ParseLDAPTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
-                XCTAssertFalse(user.ldap.isLinked)
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.ldap.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    expectation1.fulfill()
+                }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
+                expectation1.fulfill()
             }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
