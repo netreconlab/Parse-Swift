@@ -145,7 +145,7 @@ class ParseRoleTests: XCTestCase {
         XCTAssertEqual(role.endpoint.urlComponent, "/roles/me")
     }
 
-    func testSaveUpdateCommandParseObjectMutable() throws {
+    func testSaveUpdateCommandParseObjectMutable() async throws {
         var role = try Role<User>(name: "Administrator")
         let className = role.className
         let objectId = "yarr"
@@ -153,7 +153,7 @@ class ParseRoleTests: XCTestCase {
         role.createdAt = Date()
         role.updatedAt = role.createdAt
 
-        let command = try role.mergeable.saveCommand()
+        let command = try await role.mergeable.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -174,7 +174,7 @@ class ParseRoleTests: XCTestCase {
 
         var empty = role.mergeable
         empty.title = "hello"
-        let command2 = try empty.saveCommand()
+        let command2 = try await empty.saveCommand()
         guard let body2 = command2.body else {
             XCTFail("Should be able to unwrap")
             return
@@ -434,7 +434,7 @@ class ParseRoleTests: XCTestCase {
         XCTAssertEqual(decoded2, expected2)
     }
 
-    func testRoleAddOperationSaveSynchronous() throws {
+    func testRoleAddOperationSaveSynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -471,12 +471,12 @@ class ParseRoleTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let updatedRole = try operation.save()
+        let updatedRole = try await operation.save()
         XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
         XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
-    func testRoleUpdateMergeSynchronous() throws {
+    func testRoleUpdateMergeSynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -515,14 +515,14 @@ class ParseRoleTests: XCTestCase {
 
         let changedRole = role
             .set(\.title, to: "peace")
-        let updatedRole = try changedRole.save()
+        let updatedRole = try await changedRole.save()
         XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
         XCTAssertEqual(updatedRole.name, serverResponse.name)
         XCTAssertEqual(updatedRole.title, changedRole.title)
         XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
-    func testRoleAddOperationSaveSynchronousError() throws {
+    func testRoleAddOperationSaveSynchronousError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -543,14 +543,14 @@ class ParseRoleTests: XCTestCase {
         operation.target.objectId = nil
 
         do {
-            _ = try operation.save()
+            _ = try await operation.save()
             XCTFail("Should have failed")
         } catch {
             XCTAssertTrue(error.containedIn([.missingObjectId]))
         }
     }
 
-    func testRoleAddOperationSaveSynchronousCustomObjectId() throws {
+    func testRoleAddOperationSaveSynchronousCustomObjectId() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -588,12 +588,12 @@ class ParseRoleTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let updatedRole = try operation.save()
+        let updatedRole = try await operation.save()
         XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
         XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
-    func testRoleAddOperationSaveSynchronousCustomObjectIdError() throws {
+    func testRoleAddOperationSaveSynchronousCustomObjectIdError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -615,7 +615,7 @@ class ParseRoleTests: XCTestCase {
         operation.target.objectId = nil
 
         do {
-            _ = try operation.save()
+            _ = try await operation.save()
             XCTFail("Should have failed")
         } catch {
             XCTAssertTrue(error.containedIn([.missingObjectId]))

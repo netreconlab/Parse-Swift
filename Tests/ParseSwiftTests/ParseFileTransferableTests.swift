@@ -138,7 +138,7 @@ class ParseFileTransferableTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSDKInitializers() throws {
+    func testSDKInitializers() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -147,17 +147,17 @@ class ParseFileTransferableTests: XCTestCase {
         let fileTransferAdapterOther = try TestFileTransfer(name: "test", url: url)
         XCTAssertTrue(fileTransferAdapter !== fileTransferAdapterOther)
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer !== fileTransferAdapter)
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  parseFileTransfer: fileTransferAdapter)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        parseFileTransfer: fileTransferAdapter)
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer === fileTransferAdapter)
-        try ParseSwift.initialize(configuration: .init(applicationId: "applicationId",
-                                                       clientKey: "clientKey",
-                                                       primaryKey: "primaryKey",
-                                                       serverURL: url,
-                                                       parseFileTransfer: fileTransferAdapterOther))
+        try await ParseSwift.initialize(configuration: .init(applicationId: "applicationId",
+                                                             clientKey: "clientKey",
+                                                             primaryKey: "primaryKey",
+                                                             serverURL: url,
+                                                             parseFileTransfer: fileTransferAdapterOther))
         XCTAssertTrue(ParseSwift.configuration.parseFileTransfer === fileTransferAdapterOther)
     }
 

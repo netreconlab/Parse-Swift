@@ -89,6 +89,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     func testLogin() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -125,20 +126,30 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.ldap.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -176,15 +187,24 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.ldap.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -201,11 +221,12 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLink() throws {
+    func testLink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -236,23 +257,33 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.ldap.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLinkAuthData() throws {
+    func testLinkAuthData() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -285,30 +316,44 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.ldap.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUnlink() throws {
+    // swiftlint:disable:next function_body_length
+    func testUnlink() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                               password: "this")
-        User.current?.authData = [User.ldap.__type: authData]
-        XCTAssertTrue(User.ldap.isLinked)
+        var user = try await User.current()
+        user.authData = [User.ldap.__type: authData]
+        try await User.setCurrent(user)
+        let isLinked = await User.ldap.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -328,7 +373,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.ldap.unlinkPublisher()
+        let publisher = User.ldap.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -338,15 +383,24 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.ldap.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertFalse(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 
