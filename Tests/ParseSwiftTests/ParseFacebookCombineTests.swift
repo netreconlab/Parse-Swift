@@ -471,6 +471,7 @@ class ParseFacebookCombineTests: XCTestCase {
                                                   authenticationToken: "authenticationToken")
         var user = try await User.current()
         user.authData = [User.facebook.__type: authData]
+        await User.setCurrent(user)
         let isLinked = await User.facebook.isLinked()
         XCTAssertTrue(isLinked)
 
@@ -535,6 +536,7 @@ class ParseFacebookCombineTests: XCTestCase {
                                                   authenticationToken: nil)
         var user = try await User.current()
         user.authData = [User.facebook.__type: authData]
+        await User.setCurrent(user)
         let isLinked = await User.facebook.isLinked()
         XCTAssertTrue(isLinked)
 
