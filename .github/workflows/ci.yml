@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_12.5.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_13.2.1.app/Contents/Developer'
   CI_XCODE_13: '/Applications/Xcode_13.4.1.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_14.2.app/Contents/Developer'
 
@@ -159,10 +159,10 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-tvos-5_4:
+  xcode-test-tvos-5_5:
     timeout-minutes: 20
     needs: xcode-build-watchos
-    runs-on: macos-11
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
     - name: Build-Test
