@@ -183,10 +183,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         let expectation2 = XCTestExpectation(description: "Update")
 
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
-        let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -250,10 +249,8 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         try await setupObjcKeychainSDK(useOldObjCToken: true,
                                        installationId: objcInstallationId)
 
-        let user = try await User.current()
-
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
@@ -316,10 +313,8 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         try await setupObjcKeychainSDK(useBothTokens: true,
                                        installationId: objcInstallationId)
 
-        let user = try await User.current()
-
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 

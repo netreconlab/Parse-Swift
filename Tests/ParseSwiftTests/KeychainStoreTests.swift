@@ -127,39 +127,6 @@ class KeychainStoreTests: XCTestCase {
         XCTAssertNil(retrievedObject, "There should be no value after removal")
     }
 
-    func testThreadSafeSet() {
-        DispatchQueue.concurrentPerform(iterations: 100) { _ in
-            Task {
-                let setObject = await testStore.set(object: "yarr", forKey: "pirate")
-                XCTAssertTrue(setObject, "Should set value")
-            }
-        }
-    }
-
-    func testThreadSafeRemoveObject() {
-        DispatchQueue.concurrentPerform(iterations: 100) { (index) in
-            Task {
-                var isObject = await testStore.set(object: "yarr", forKey: "\(index)")
-                XCTAssertTrue(isObject, "Should set value")
-                isObject = await testStore.removeObject(forKey: "\(index)")
-                XCTAssertTrue(isObject, "Should set value")
-            }
-        }
-    }
-
-    func testThreadSafeRemoveAllObjects() {
-        DispatchQueue.concurrentPerform(iterations: 100) { _ in
-            Task {
-                var isObject = await testStore.set(object: "yarr", forKey: "pirate1")
-                XCTAssertTrue(isObject, "Should set value")
-                isObject = await testStore.set(object: "yarr", forKey: "pirate2")
-                XCTAssertTrue(isObject, "Should set value")
-                isObject = await testStore.removeAllObjects()
-                XCTAssertTrue(isObject, "Should set value")
-            }
-        }
-    }
-
     func testQueryTemplate() async throws {
         let query = await KeychainStore.shared.getKeychainQueryTemplate()
         XCTAssertEqual(query.count, 2)

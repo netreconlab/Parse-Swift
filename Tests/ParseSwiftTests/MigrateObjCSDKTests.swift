@@ -6,7 +6,7 @@
 //  Copyright © 2022 Parse Community. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency) && !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
 import XCTest
 @testable import ParseSwift
@@ -178,9 +178,8 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testLoginUsingObjCKeychain() async throws {
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
 
-        let currentUser = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = currentUser.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -223,9 +222,8 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         try await setupObjcKeychainSDK(useOldObjCToken: true,
                                        installationId: objcInstallationId)
 
-        let currentUser = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = currentUser.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
@@ -268,9 +266,8 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         try await setupObjcKeychainSDK(useBothTokens: true,
                                        installationId: objcInstallationId)
 
-        let currentUser = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = currentUser.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 

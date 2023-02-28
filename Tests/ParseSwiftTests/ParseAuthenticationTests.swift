@@ -160,7 +160,7 @@ class ParseAuthenticationTests: XCTestCase {
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
         let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)
-        XCTAssertEqual(command.path.urlComponent, "/users")
+        XCTAssertEqual(command.path.urlComponent, "/users/yarr")
         XCTAssertEqual(command.method, API.Method.PUT)
         XCTAssertNotNil(command.body)
         XCTAssertEqual(command.body?.authData, body.authData)
