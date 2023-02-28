@@ -132,15 +132,15 @@ Not attempting to open ParseLiveQuery socket anymore
                         Task {
                             // Resubscribe to all subscriptions by moving them in front of pending
                             var tempPendingSubscriptions = [(RequestId, SubscriptionRecord)]()
-                            let subscriptions = await self.subscriptions.getSubscriptions()
+                            let subscriptions = await self.subscriptions.getCurrent()
                             subscriptions.forEach { (key, value) -> Void in
                                 tempPendingSubscriptions.append((key, value))
                             }
-                            await self.subscriptions.removeAllSubscriptions()
-                            let pendingSubscriptions = await self.subscriptions.getPendingSubscriptions()
-                            tempPendingSubscriptions.append(contentsOf: pendingSubscriptions)
-                            await self.subscriptions.removeAllPendingSubscriptions()
-                            await self.subscriptions.updatePendingSubscriptions(tempPendingSubscriptions)
+                            await self.subscriptions.removeAll()
+                            let pending = await self.subscriptions.getPending()
+                            tempPendingSubscriptions.append(contentsOf: pending)
+                            await self.subscriptions.removeAllPending()
+                            await self.subscriptions.updatePending(tempPendingSubscriptions)
 
                             // Send all pending messages in order
                             for tempPendingSubscription in tempPendingSubscriptions {
@@ -194,18 +194,6 @@ Not attempting to open ParseLiveQuery socket anymore
      */
     public init(serverURL: URL? = nil, isDefault: Bool = false, notificationQueue: DispatchQueue = .main) async throws {
         self.notificationQueue = notificationQueue
-        /* synchronizationQueue = DispatchQueue(label: "com.parse.liveQuery.\(UUID().uuidString)",
-                                             qos: .default,
-                                             attributes: .concurrent,
-                                             autoreleaseFrequency: .inherit,
-                                             target: nil)
-        */
-        // Simple incrementing generator
-        /* var currentRequestId = 0
-        requestIdGenerator = {
-            currentRequestId += 1
-            return RequestId(value: currentRequestId)
-        } */
         super.init()
         if let serverURL = serverURL {
             url = serverURL
@@ -268,14 +256,14 @@ extension ParseLiveQuery {
     }
 
     func removePendingSubscription(_ requestId: Int) async {
-        await subscriptions.removePendingSubscriptions([RequestId(value: requestId)])
+        await subscriptions.removePending([RequestId(value: requestId)])
         await closeWebsocketIfNoSubscriptions()
     }
 
     func closeWebsocketIfNoSubscriptions() async {
-        let isSubscriptionsEmpty = await self.subscriptions.isSubscriptionsEmpty()
-        let isPendingSubscriptionsEmpty = await self.subscriptions.isPendingSubscriptionsEmpty()
-        if isSubscriptionsEmpty && isPendingSubscriptionsEmpty {
+        let isEmpty = await self.subscriptions.isEmpty()
+        let isPendingEmpty = await self.subscriptions.isPendingEmpty()
+        if isEmpty && isPendingEmpty {
             await self.close()
         }
     }
@@ -297,7 +285,7 @@ extension ParseLiveQuery {
     /// - throws: An error of type `ParseError`.
     public func isSubscribed<T: ParseObject>(_ query: Query<T>) async throws -> Bool {
         let queryData = try ParseCoding.jsonEncoder().encode(query)
-        let subscriptions = await self.subscriptions.getSubscriptions()
+        let subscriptions = await self.subscriptions.getCurrent()
         return subscriptions.contains(where: { (_, value) -> Bool in
             if queryData == value.queryData {
                 return true
@@ -313,8 +301,8 @@ extension ParseLiveQuery {
     /// - throws: An error of type `ParseError`.
     public func isPendingSubscription<T: ParseObject>(_ query: Query<T>) async throws -> Bool {
         let queryData = try ParseCoding.jsonEncoder().encode(query)
-        let pendingSubscriptions = await self.subscriptions.getPendingSubscriptions()
-        return pendingSubscriptions.contains(where: { (_, value) -> Bool in
+        let pending = await self.subscriptions.getPending()
+        return pending.contains(where: { (_, value) -> Bool in
             if queryData == value.queryData {
                 return true
             } else {
@@ -328,15 +316,15 @@ extension ParseLiveQuery {
     /// - throws: An error of type `ParseError`.
     public func removePendingSubscription<T: ParseObject>(_ query: Query<T>) async throws {
         let queryData = try ParseCoding.jsonEncoder().encode(query)
-        let pendingSubscriptions = await self.subscriptions.getPendingSubscriptions()
-        let pendingToRemove = pendingSubscriptions.compactMap { (requestId, value) -> RequestId? in
+        let pending = await self.subscriptions.getPending()
+        let pendingToRemove = pending.compactMap { (requestId, value) -> RequestId? in
             if queryData == value.queryData {
                 return requestId
             } else {
                 return nil
             }
         }
-        await self.subscriptions.removeSubscriptions(pendingToRemove)
+        await self.subscriptions.removeCurrent(pendingToRemove)
         await self.closeWebsocketIfNoSubscriptions()
     }
 }
@@ -450,11 +438,11 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                     }
                 }
 
-                let subscriptions = await self.subscriptions.getSubscriptions()
-                let pendingSubscriptions = await self.subscriptions.getPendingSubscriptions()
+                let subscriptions = await self.subscriptions.getCurrent()
+                let pending = await self.subscriptions.getPending()
                 switch preliminaryMessage.op {
                 case .subscribed:
-                    if let subscribed = pendingSubscriptions
+                    if let subscribed = pending
                         .first(where: { $0.0.value == preliminaryMessage.requestId }) {
                         let requestId = RequestId(value: preliminaryMessage.requestId)
                         let isNew: Bool!
@@ -463,8 +451,8 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                         } else {
                             isNew = true
                         }
-                        await self.subscriptions.updateSubscriptions([subscribed.0: subscribed.1])
-                        await self.subscriptions.removePendingSubscriptions([subscribed.0])
+                        await self.subscriptions.updateCurrent([subscribed.0: subscribed.1])
+                        await self.subscriptions.removePending([subscribed.0])
                         self.notificationQueue.async {
                             subscribed.1.subscribeHandlerClosure?(isNew)
                         }
@@ -474,8 +462,8 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                     guard let subscription = subscriptions[requestId] else {
                         return
                     }
-                    await self.subscriptions.removeSubscriptions([requestId])
-                    await self.subscriptions.removePendingSubscriptions([requestId])
+                    await self.subscriptions.removeCurrent([requestId])
+                    await self.subscriptions.removePending([requestId])
                     self.notificationQueue.async {
                         subscription.unsubscribeHandlerClosure?()
                     }
@@ -708,7 +696,7 @@ extension ParseLiveQuery {
     } */
 
     func send(record: SubscriptionRecord, requestId: RequestId) async throws {
-        await self.subscriptions.updatePendingSubscriptions([(requestId, record)])
+        await self.subscriptions.updatePending([(requestId, record)])
         if self.isConnected {
             try await URLSession.liveQuery.send(record.messageData, task: self.task)
         } else {
@@ -820,7 +808,7 @@ extension ParseLiveQuery {
     }
 
     func unsubscribe(matching matcher: @escaping (SubscriptionRecord) -> Bool) async throws {
-        let subscriptions = await self.subscriptions.getSubscriptions()
+        let subscriptions = await self.subscriptions.getCurrent()
         for (key, value) in subscriptions {
             // swiftlint:disable:next for_where
             if matcher(value) {
@@ -841,7 +829,7 @@ extension ParseLiveQuery {
 extension ParseLiveQuery {
 
     func update<T>(_ handler: T) async throws where T: QuerySubscribable {
-        let subscriptions = await self.subscriptions.getSubscriptions()
+        let subscriptions = await self.subscriptions.getCurrent()
         for (key, value) in subscriptions {
             // swiftlint:disable:next for_where
             if value.subscriptionHandler === handler {
@@ -860,8 +848,23 @@ extension ParseLiveQuery {
 
 // MARK: ParseLiveQuery - Subscribe
 public extension Query {
-    /*
+
     #if canImport(Combine)
+
+    /**
+     Registers the query for live updates, using the default subscription handler,
+     and the default `ParseLiveQuery` client. Suitable for `ObjectObserved`
+     as the subscription can be used as a SwiftUI publisher. Meaning it can serve
+     indepedently as a ViewModel in MVVM.
+     - returns: The subscription that has just been registered.
+     - throws: An error of type `ParseError`.
+     */
+    func subscribe() async throws -> Subscription<ResultType> {
+        guard let client = ParseLiveQuery.client else {
+            throw ParseError(code: .otherCause, message: "Missing LiveQuery client")
+        }
+        return try await client.subscribe(self)
+    }
 
     /**
      Registers the query for live updates, using the default subscription handler,
@@ -872,11 +875,10 @@ public extension Query {
      - returns: The subscription that has just been registered.
      - throws: An error of type `ParseError`.
      */
-    func subscribe(_ client: ParseLiveQuery) throws -> Subscription<ResultType> {
-        try client.subscribe(Subscription(query: self))
+    func subscribe(_ client: ParseLiveQuery) async throws -> Subscription<ResultType> {
+        try await client.subscribe(Subscription(query: self))
     }
     #endif
-    */
 
     /**
      Registers a query for live updates, using a custom subscription handler.

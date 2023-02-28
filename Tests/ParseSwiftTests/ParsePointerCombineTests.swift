@@ -67,7 +67,7 @@ class ParsePointerCombineTests: XCTestCase {
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         let encoded: Data!
@@ -109,7 +109,7 @@ class ParsePointerCombineTests: XCTestCase {
             XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
             XCTAssertNil(fetched.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

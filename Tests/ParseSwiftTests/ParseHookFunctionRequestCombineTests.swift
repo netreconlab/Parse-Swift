@@ -76,7 +76,7 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
     }
 
     func testHydrateUser() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User")
 
         let sessionToken = "dog"
@@ -118,12 +118,12 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
         }, receiveValue: { hydrated in
             XCTAssertEqual(hydrated, requestHydrated)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testHydrateUserError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User Error")
 
         let sessionToken = "dog"
@@ -154,7 +154,7 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

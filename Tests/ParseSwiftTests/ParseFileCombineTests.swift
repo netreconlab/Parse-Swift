@@ -69,7 +69,7 @@ class ParseFileCombineTests: XCTestCase {
     }
 
     func testFetch() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
@@ -107,13 +107,13 @@ class ParseFileCombineTests: XCTestCase {
             XCTAssertEqual(fetched.url, response.url)
             XCTAssertNotNil(fetched.localURL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetchFileProgress() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
@@ -153,13 +153,13 @@ class ParseFileCombineTests: XCTestCase {
             XCTAssertEqual(fetched.url, response.url)
             XCTAssertNotNil(fetched.localURL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSave() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -197,13 +197,13 @@ class ParseFileCombineTests: XCTestCase {
             XCTAssertEqual(fetched.name, response.name)
             XCTAssertEqual(fetched.url, response.url)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSaveFileProgress() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -243,13 +243,13 @@ class ParseFileCombineTests: XCTestCase {
             XCTAssertEqual(fetched.name, response.name)
             XCTAssertEqual(fetched.url, response.url)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDelete() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         // swiftlint:disable:next line_length
@@ -284,7 +284,7 @@ class ParseFileCombineTests: XCTestCase {
         }, receiveValue: { _ in
 
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

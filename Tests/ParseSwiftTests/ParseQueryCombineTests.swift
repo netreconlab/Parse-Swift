@@ -71,7 +71,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
     }
 
     func testFind() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Find")
 
         var scoreOnServer = GameScore(points: 10)
@@ -109,13 +109,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }
             XCTAssert(object.hasSameObjectId(as: scoreOnServer))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testWithCount() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Find")
 
         var scoreOnServer = GameScore(points: 10)
@@ -154,13 +154,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             XCTAssert(object.hasSameObjectId(as: scoreOnServer))
             XCTAssertEqual(found.1, 1)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFindAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FindAll")
 
         var scoreOnServer = GameScore(points: 10)
@@ -195,13 +195,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }
             XCTAssert(object.hasSameObjectId(as: scoreOnServer))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFindExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -231,13 +231,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [[String: String]]) in
                 XCTAssertEqual(queryResult, json.results)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testWithCountExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -267,13 +267,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [[String: String]]) in
                 XCTAssertEqual(queryResult, json.results)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFirst() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var scoreOnServer = GameScore(points: 10)
@@ -307,13 +307,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
             XCTAssert(found.hasSameObjectId(as: scoreOnServer))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFirstExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -343,13 +343,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [String: String]) in
                 XCTAssertEqual(queryResult, json.results.first)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCount() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var scoreOnServer = GameScore(points: 10)
@@ -383,13 +383,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
             XCTAssertEqual(found, 1)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCountExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -419,13 +419,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [[String: String]]) in
                 XCTAssertEqual(queryResult, json.results)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testAggregate() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var scoreOnServer = GameScore(points: 10)
@@ -462,13 +462,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }
             XCTAssert(object.hasSameObjectId(as: scoreOnServer))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testAggregateExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -498,13 +498,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [[String: String]]) in
                 XCTAssertEqual(queryResult, json.results)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDistinct() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var scoreOnServer = GameScore(points: 10)
@@ -540,13 +540,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }
             XCTAssert(object.hasSameObjectId(as: scoreOnServer))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDistinctExplain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
@@ -575,7 +575,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
             }, receiveValue: { (queryResult: [[String: String]]) in
                 XCTAssertEqual(queryResult, json.results)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

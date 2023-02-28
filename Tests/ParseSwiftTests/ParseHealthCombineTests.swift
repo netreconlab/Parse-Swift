@@ -37,7 +37,7 @@ class ParseHealthCombineTests: XCTestCase {
     }
 
     func testCheckOk() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
@@ -65,13 +65,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCheckError() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
@@ -99,13 +99,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCheckInitialized() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.initialized
@@ -133,13 +133,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCheckStarting() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.starting
@@ -167,7 +167,7 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

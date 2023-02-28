@@ -65,7 +65,7 @@ class ParseOperationCombineTests: XCTestCase {
     }
 
     func testSave() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var score = GameScore(points: 10)
@@ -114,7 +114,7 @@ class ParseOperationCombineTests: XCTestCase {
             XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
             XCTAssertNil(saved.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

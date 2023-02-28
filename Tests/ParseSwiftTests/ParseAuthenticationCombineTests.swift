@@ -142,7 +142,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
     }
 
     func testLogin() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -196,7 +196,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
@@ -216,7 +216,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
     }
 
     func testLink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -265,7 +265,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }

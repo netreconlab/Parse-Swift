@@ -87,7 +87,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testLogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -141,13 +141,13 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updaate")
 
@@ -202,7 +202,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
@@ -222,7 +222,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testLink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updaate")
 
@@ -274,13 +274,13 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updaate")
 
@@ -333,13 +333,13 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUnlink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updaate")
 
@@ -397,7 +397,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }

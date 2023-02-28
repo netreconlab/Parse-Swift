@@ -87,7 +87,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testLogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var serverResponse = LoginSignupResponse()
@@ -132,13 +132,13 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             XCTAssertEqual(user.password, "world")
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testLoginAuthData() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var serverResponse = LoginSignupResponse()
@@ -189,7 +189,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             XCTAssertEqual(user.password, "world")
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -209,7 +209,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
     }
 
     func testLink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         _ = try await loginNormally()
@@ -254,13 +254,13 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         _ = try await loginNormally()
@@ -307,13 +307,13 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUnlink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var user = try await loginNormally()
@@ -363,7 +363,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
             XCTAssertNil(user.password)
             XCTAssertFalse(ParseTwitter<User>.isLinked(with: user))
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

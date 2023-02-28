@@ -832,18 +832,11 @@ extension ParseUser {
             do {
                 try await fetchCommand(include: includeKeys)
                     .execute(options: options,
-                                  callbackQueue: callbackQueue) { result in
+                             callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                do {
-                                    try await Self.updateKeychainIfNeeded([foundResult])
-                                    completion(.success(foundResult))
-                                } catch {
-                                    let defaultError = ParseError(code: .otherCause,
-                                                                  message: error.localizedDescription)
-                                    let parseError = error as? ParseError ?? defaultError
-                                    completion(.failure(parseError))
-                                }
+                                try? await Self.updateKeychainIfNeeded([foundResult])
+                                completion(.success(foundResult))
                             }
                         } else {
                             completion(result)

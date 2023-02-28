@@ -22,7 +22,6 @@ import Security
  */
 actor KeychainStore: SecureStorable {
 
-    let synchronizationQueue: DispatchQueue
     let service: String
     static var objectiveCService: String {
         guard let identifier = Bundle.main.bundleIdentifier else {
@@ -47,11 +46,6 @@ actor KeychainStore: SecureStorable {
             keychainService = "com\(keychainService)"
         }
         self.service = keychainService
-        synchronizationQueue = DispatchQueue(label: "\(keychainService).keychain",
-                                             qos: .default,
-                                             attributes: .concurrent,
-                                             autoreleaseFrequency: .inherit,
-                                             target: nil)
     }
 
     func getKeychainQueryTemplate() -> [String: Any] {
@@ -236,7 +230,6 @@ actor KeychainStore: SecureStorable {
     private func removeObject(forKey key: String,
                               useObjectiveCKeychain: Bool = false,
                               accessGroup: ParseKeychainAccessGroup) -> Bool {
-        dispatchPrecondition(condition: .onQueue(synchronizationQueue))
         let query = keychainQuery(forKey: key,
                                   useObjectiveCKeychain: useObjectiveCKeychain,
                                   accessGroup: accessGroup) as CFDictionary

@@ -156,7 +156,7 @@ class ParseAuthenticationTests: XCTestCase {
     }
 
     func testLinkCommand() async throws {
-        let user = User()
+        let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
         let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)

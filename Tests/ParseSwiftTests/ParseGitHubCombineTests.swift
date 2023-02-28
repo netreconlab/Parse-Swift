@@ -87,8 +87,9 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testLogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -125,20 +126,30 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.github.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    let isLinked = await user.github.isLinked()
+                    XCTAssertEqual(user, current)
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -176,15 +187,24 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
-            XCTAssertTrue(user.github.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    let isLinked = await user.github.isLinked()
+                    XCTAssertEqual(user, current)
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -201,11 +221,12 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLink() throws {
-        var subscriptions = Set<AnyCancellable>()
+    func testLink() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -237,23 +258,33 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.github.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let current = try await User.current()
+                    let isLinked = await user.github.isLinked()
+                    XCTAssertEqual(user, current)
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLinkAuthData() throws {
-        var subscriptions = Set<AnyCancellable>()
+    func testLinkAuthData() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -286,30 +317,44 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertTrue(user.github.isLinked)
             XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+            Task {
+                do {
+                    let current = try await User.current()
+                    let isLinked = await user.github.isLinked()
+                    XCTAssertEqual(user, current)
+                    XCTAssertTrue(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUnlink() throws {
-        var subscriptions = Set<AnyCancellable>()
+    // swiftlint:disable:next function_body_length
+    func testUnlink() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGitHub<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "this")
-        User.current?.authData = [User.github.__type: authData]
-        XCTAssertTrue(User.github.isLinked)
+        var user = try await User.current()
+        user.authData = [User.github.__type: authData]
+        try await User.setCurrent(user)
+        let isLinked = await User.github.isLinked()
+        XCTAssertTrue(isLinked)
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -329,7 +374,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = User.github.unlinkPublisher()
+        let publisher = User.github.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
@@ -339,15 +384,24 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
-            XCTAssertFalse(user.github.isLinked)
+            Task {
+                do {
+                    let current = try await User.current()
+                    let isLinked = await user.github.isLinked()
+                    XCTAssertEqual(user, current)
+                    XCTAssertFalse(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

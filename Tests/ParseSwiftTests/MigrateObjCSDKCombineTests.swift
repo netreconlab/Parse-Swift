@@ -178,7 +178,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
     }
 
     func testLoginUsingObjCKeychain() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -238,12 +238,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -304,12 +304,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainUseNewOverOld() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -370,12 +370,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainNoKeychain() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
 
         let publisher = User.loginUsingObjCKeychainPublisher()
@@ -392,12 +392,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTFail("Should have thrown error")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -422,12 +422,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
 
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
@@ -448,7 +448,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTFail("Should have thrown error")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
@@ -488,7 +488,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
     }
 
     func testDeleteObjCKeychain() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -551,12 +551,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainAlreadyMigrated() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -599,12 +599,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainNoObjcKeychain() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
 
         try await saveCurrentInstallation()
@@ -631,12 +631,12 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTFail("Should have thrown error")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete ObjC Installation")
 
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
@@ -659,7 +659,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTFail("Should have thrown error")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

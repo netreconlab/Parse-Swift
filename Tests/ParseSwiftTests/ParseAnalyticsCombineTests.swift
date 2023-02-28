@@ -39,7 +39,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
 
     #if os(iOS)
     func testTrackAppOpenedUIKit() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -64,13 +64,13 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
     #endif
 
     func testTrackAppOpened() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -95,12 +95,12 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testTrackEvent() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -125,12 +125,12 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testTrackEventMutated() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -155,7 +155,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

@@ -49,7 +49,7 @@ class ParseCloudableCombineTests: XCTestCase {
     }
 
     func testFunction() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let response = AnyResultResponse<String?>(result: nil)
@@ -76,13 +76,13 @@ class ParseCloudableCombineTests: XCTestCase {
 
             XCTAssertNil(functionResponse)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testJob() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let response = AnyResultResponse<String?>(result: nil)
@@ -109,7 +109,7 @@ class ParseCloudableCombineTests: XCTestCase {
 
             XCTAssertNil(functionResponse)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

@@ -71,7 +71,7 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testCreate() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         var serverResponse = schema
@@ -104,12 +104,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(saved.className, serverResponse.className)
             XCTAssertTrue(saved.pendingIndexes.isEmpty)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCreateError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         let parseError = ParseError(code: .invalidSchemaOperation,
@@ -137,12 +137,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUpdate() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         var serverResponse = schema
@@ -175,12 +175,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(saved.className, serverResponse.className)
             XCTAssertTrue(saved.pendingIndexes.isEmpty)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUpdateError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         let parseError = ParseError(code: .invalidSchemaOperation,
@@ -208,12 +208,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetch() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         var serverResponse = schema
@@ -246,12 +246,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(saved.className, serverResponse.className)
             XCTAssertTrue(saved.pendingIndexes.isEmpty)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetchError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         let parseError = ParseError(code: .invalidSchemaOperation,
@@ -279,12 +279,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testPurge() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         var serverResponse = schema
@@ -312,12 +312,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }, receiveValue: { _ in
 
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testPurgeError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         let parseError = ParseError(code: .invalidSchemaOperation,
@@ -345,12 +345,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDelete() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         var serverResponse = schema
@@ -378,12 +378,12 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }, receiveValue: { _ in
 
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDeleteError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let schema = createDummySchema()
 
         let parseError = ParseError(code: .invalidSchemaOperation,
@@ -411,7 +411,7 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

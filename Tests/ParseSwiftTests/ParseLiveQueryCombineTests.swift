@@ -49,7 +49,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }
         await client.close()
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.openPublisher(isUserWantsToConnect: true)
             .sink(receiveCompletion: { result in
@@ -66,7 +66,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
@@ -76,7 +76,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
             return
         }
         await client.close()
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.sendPingPublisher()
             .sink(receiveCompletion: { result in
@@ -101,7 +101,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
@@ -115,7 +115,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         client.isConnected = true
         client.clientId = "yolo"
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.sendPingPublisher()
             .sink(receiveCompletion: { result in
@@ -133,7 +133,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

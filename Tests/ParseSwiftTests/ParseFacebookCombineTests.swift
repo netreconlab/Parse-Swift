@@ -88,7 +88,7 @@ class ParseFacebookCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
     func testLimitedLogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
@@ -142,13 +142,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testGraphAPILogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
@@ -201,13 +201,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
@@ -265,7 +265,7 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
@@ -285,7 +285,7 @@ class ParseFacebookCombineTests: XCTestCase {
     }
 
     func testLinkLimitedLogin() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -335,13 +335,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkGraphAPILogin() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -392,13 +392,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -453,13 +453,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUnlinkLimitedLogin() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -518,13 +518,13 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUnlinkGraphAPILogin() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -583,7 +583,7 @@ class ParseFacebookCombineTests: XCTestCase {
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }

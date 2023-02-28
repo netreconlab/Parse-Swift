@@ -11,8 +11,8 @@ import Foundation
 
 actor Subscriptions {
     let requestIdGenerator: () -> RequestId
-    var subscriptions = [RequestId: ParseLiveQuery.SubscriptionRecord]()
-    var pendingSubscriptions = [(RequestId, ParseLiveQuery.SubscriptionRecord)]()
+    var current = [RequestId: ParseLiveQuery.SubscriptionRecord]()
+    var pending = [(RequestId, ParseLiveQuery.SubscriptionRecord)]()
 
     init() {
         // Simple incrementing generator
@@ -34,54 +34,54 @@ extension Subscriptions {
 // MARK: Subscriptions
 extension Subscriptions {
 
-    func isSubscriptionsEmpty() -> Bool {
-        subscriptions.isEmpty
+    func isEmpty() -> Bool {
+        current.isEmpty
     }
 
-    func getSubscriptions() -> [RequestId: ParseLiveQuery.SubscriptionRecord] {
-        subscriptions
+    func getCurrent() -> [RequestId: ParseLiveQuery.SubscriptionRecord] {
+        current
     }
 
-    func updateSubscriptions(_ subscriptions: [RequestId: ParseLiveQuery.SubscriptionRecord]) {
-        for (url, function) in subscriptions {
-            self.subscriptions[url] = function
+    func updateCurrent(_ current: [RequestId: ParseLiveQuery.SubscriptionRecord]) {
+        for (url, function) in current {
+            self.current[url] = function
         }
     }
 
-    func removeSubscriptions(_ requestIds: [RequestId]) {
+    func removeCurrent(_ requestIds: [RequestId]) {
         for requestId in requestIds {
-            self.subscriptions.removeValue(forKey: requestId)
+            self.current.removeValue(forKey: requestId)
         }
     }
 
-    func removeAllSubscriptions() {
-        self.subscriptions.removeAll()
+    func removeAll() {
+        self.current.removeAll()
     }
 }
 
 // MARK: PendingSubscriptions
 extension Subscriptions {
 
-    func isPendingSubscriptionsEmpty() -> Bool {
-        pendingSubscriptions.isEmpty
+    func isPendingEmpty() -> Bool {
+        pending.isEmpty
     }
 
-    func getPendingSubscriptions() -> [(RequestId, ParseLiveQuery.SubscriptionRecord)] {
-        pendingSubscriptions
+    func getPending() -> [(RequestId, ParseLiveQuery.SubscriptionRecord)] {
+        pending
     }
 
-    func updatePendingSubscriptions(_ pendingSubscriptions: [(RequestId, ParseLiveQuery.SubscriptionRecord)]) {
-        self.pendingSubscriptions.append(contentsOf: pendingSubscriptions)
+    func updatePending(_ pending: [(RequestId, ParseLiveQuery.SubscriptionRecord)]) {
+        self.pending.append(contentsOf: pending)
     }
 
-    func removePendingSubscriptions(_ pendingSubscriptionsRequestIds: [RequestId]) {
-        pendingSubscriptionsRequestIds.forEach { pendingToRemove in
-            pendingSubscriptions.removeAll(where: { $0.0 == pendingToRemove })
+    func removePending(_ requestIds: [RequestId]) {
+        requestIds.forEach { pendingToRemove in
+            pending.removeAll(where: { $0.0 == pendingToRemove })
         }
     }
 
-    func removeAllPendingSubscriptions() {
-        self.pendingSubscriptions.removeAll()
+    func removeAllPending() {
+        self.pending.removeAll()
     }
 }
 

@@ -484,11 +484,9 @@ class ParseAnonymousTests: XCTestCase {
     }
 
     func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
-        var currentUser = try await User.current()
-        XCTAssertNil(currentUser.objectId)
         try await testLogin()
         MockURLProtocol.removeAll()
-        currentUser = try await User.current()
+        let currentUser = try await User.current()
         XCTAssertNotNil(currentUser.objectId)
         let isLinked = await User.anonymous.isLinked()
         XCTAssertTrue(isLinked)

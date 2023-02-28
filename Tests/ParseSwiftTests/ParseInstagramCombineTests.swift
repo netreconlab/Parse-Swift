@@ -87,7 +87,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
     }
 
     func testLogin() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
@@ -143,13 +143,13 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         var serverResponse = LoginSignupResponse()
@@ -204,7 +204,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
@@ -224,7 +224,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
     }
 
     func testLink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -276,13 +276,13 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -336,14 +336,14 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
     func testUnlink() async throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
         _ = try await loginNormally()
@@ -402,7 +402,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
                 expectation2.fulfill()
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }

@@ -69,7 +69,7 @@ class ParsePushCombineTests: XCTestCase {
     }
 
     func testSend() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -100,13 +100,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTAssertEqual(pushStatus, objectId)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSendErrorServerReturnedFalse() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -139,13 +139,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTFail("Should have thrown ParseError")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSendErrorTimeAndIntervalSet() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -179,13 +179,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTFail("Should have thrown ParseError")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSendErrorQueryAndChannelsSet() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -220,13 +220,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTFail("Should have thrown ParseError")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSendErrorServerReturnedWrongType() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -259,13 +259,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTFail("Should have thrown ParseError")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSendErrorServerMissingHeader() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let appleAlert = ParsePushAppleAlert(body: "hello world")
@@ -296,13 +296,13 @@ class ParsePushCombineTests: XCTestCase {
 
             XCTFail("Should have thrown ParseError")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetch() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let objectId = "yolo"
@@ -340,7 +340,7 @@ class ParsePushCombineTests: XCTestCase {
             XCTAssert(found.hasSameObjectId(as: statusOnServer))
             XCTAssertEqual(found.payload, anyPayload.convertToApple())
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

@@ -175,7 +175,6 @@ class ParseHookTriggerRequestTests: XCTestCase {
     }
 
     func testGetContext() async throws {
-        let object = User(objectId: "geez")
         let context = ["peace": "out"]
         let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
                                                            ipAddress: "1.1.1.1",
@@ -187,7 +186,6 @@ class ParseHookTriggerRequestTests: XCTestCase {
     }
 
     func testGetContextError() async throws {
-        let object = User(objectId: "geez")
         let context = ["peace": "out"]
         let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
                                                            ipAddress: "1.1.1.1",
