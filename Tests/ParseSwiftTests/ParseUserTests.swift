@@ -881,7 +881,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let saved = try await updated.save()
-            let expectation1 = XCTestExpectation(description: "Update installation1")
             let nanoSeconds = UInt64(2 * 1_000_000_000)
             try await Task.sleep(nanoseconds: nanoSeconds)
 
@@ -1657,7 +1656,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let oldInstallationId = try await BaseParseInstallation.current().installationId
         try await User.logout()
         do {
-            let userFromKeychain = try await BaseParseUser.current()
+            _ = try await BaseParseUser.current()
             XCTFail("User was not deleted from Keychain during logout")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
@@ -1688,7 +1687,12 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             case .success:
                 Task {
                     do {
-                        let userFromKeychain = try await BaseParseUser.current()
+                        do {
+                            _ = try await BaseParseUser.current()
+                            XCTFail("Should have thrown error")
+                        } catch {
+                            XCTAssertTrue(error.containedIn([.otherCause]))
+                        }
                         let nanoSeconds = UInt64(3 * 1_000_000_000)
                         try await Task.sleep(nanoseconds: nanoSeconds)
 
@@ -2033,18 +2037,28 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testDeleteCurrent() async throws {
         try await testLogin()
-        let expectation1 = XCTestExpectation(description: "Delete user")
         let user = try await User.current()
 
         do {
             try await user.delete(options: [])
-            XCTAssertNil(User.current)
+            do {
+                _ = try await User.current()
+                XCTFail("Should have thrown error")
+            } catch {
+                XCTAssertTrue(error.containedIn([.otherCause]))
+            }
         } catch {
             XCTFail(error.localizedDescription)
         }
 
         do {
             try await user.delete(options: [.usePrimaryKey])
+            do {
+                _ = try await User.current()
+                XCTFail("Should have thrown error")
+            } catch {
+                XCTAssertTrue(error.containedIn([.otherCause]))
+            }
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -2078,8 +2092,15 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             if case let .failure(error) = result {
                 XCTFail(error.localizedDescription)
             }
-            XCTAssertNil(User.current)
-            expectation1.fulfill()
+            Task {
+                do {
+                    _ = try await User.current()
+                    XCTFail("Should have thrown error")
+                } catch {
+                    XCTAssertTrue(error.containedIn([.otherCause]))
+                }
+                expectation1.fulfill()
+            }
         }
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -2523,6 +2544,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testDeleteAllCurrent() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -2541,13 +2563,23 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
+        let expectation1 = XCTestExpectation(description: "Delete user1")
+        let expectation2 = XCTestExpectation(description: "Delete user2")
         do {
             let deleted = try await [user].deleteAll()
             deleted.forEach {
                 if case let .failure(error) = $0 {
                     XCTFail("Should have deleted: \(error.localizedDescription)")
                 }
-                XCTAssertNil(User.current)
+                Task {
+                    do {
+                        _ = try await User.current()
+                        XCTFail("Should have thrown error")
+                    } catch {
+                        XCTAssertTrue(error.containedIn([.otherCause]))
+                    }
+                    expectation1.fulfill()
+                }
             }
         } catch {
             XCTFail(error.localizedDescription)
@@ -2559,12 +2591,25 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 if case let .failure(error) = $0 {
                     XCTFail("Should have deleted: \(error.localizedDescription)")
                 }
+                Task {
+                    do {
+                        _ = try await User.current()
+                        XCTFail("Should have thrown error")
+                    } catch {
+                        XCTAssertTrue(error.containedIn([.otherCause]))
+                    }
+                    expectation2.fulfill()
+                }
             }
         } catch {
             XCTFail(error.localizedDescription)
+            expectation1.fulfill()
+            expectation2.fulfill()
         }
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testDeleteAllAsyncMainQueueCurrent() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -2589,33 +2634,52 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             switch results {
 
             case .success(let deleted):
+                XCTAssertTrue(Thread.isMainThread)
                 deleted.forEach {
                     if case let .failure(error) = $0 {
                         XCTFail("Should have deleted: \(error.localizedDescription)")
                     }
-                    XCTAssertNil(User.current)
+                    Task {
+                        do {
+                            _ = try await User.current()
+                            XCTFail("Should have thrown error")
+                        } catch {
+                            XCTAssertTrue(error.containedIn([.otherCause]))
+                        }
+                        expectation1.fulfill()
+                    }
                 }
-                XCTAssertTrue(Thread.isMainThread)
             case .failure(let error):
                 XCTFail("Should have deleted: \(error.localizedDescription)")
+                XCTAssertTrue(Thread.isMainThread)
+                expectation1.fulfill()
             }
-            XCTAssertTrue(Thread.isMainThread)
-            expectation1.fulfill()
         }
 
         [user].deleteAll(transaction: true) { results in
             switch results {
 
             case .success(let deleted):
+                XCTAssertTrue(Thread.isMainThread)
                 deleted.forEach {
                     if case let .failure(error) = $0 {
                         XCTFail("Should have deleted: \(error.localizedDescription)")
                     }
+                    Task {
+                        do {
+                            _ = try await User.current()
+                            XCTFail("Should have thrown error")
+                        } catch {
+                            XCTAssertTrue(error.containedIn([.otherCause]))
+                        }
+                        expectation2.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail("Should have deleted: \(error.localizedDescription)")
+                XCTAssertTrue(Thread.isMainThread)
+                expectation2.fulfill()
             }
-            expectation2.fulfill()
         }
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }

@@ -1519,7 +1519,9 @@ public extension Sequence where Element: ParseUser {
                     let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
                     Task {
                         try? await Self.Element.updateKeychainIfNeeded(fetchedObjects)
-                        completion(.success(fetchedObjectsToReturn))
+                        callbackQueue.async {
+                            completion(.success(fetchedObjectsToReturn))
+                        }
                     }
                 case .failure(let error):
                     callbackQueue.async {
@@ -1592,7 +1594,9 @@ public extension Sequence where Element: ParseUser {
                                     Task {
                                         try? await Self.Element.updateKeychainIfNeeded(self.compactMap {$0},
                                                                                        deleting: true)
-                                        completion(.success(returnBatchImmutable))
+                                        callbackQueue.async {
+                                            completion(.success(returnBatchImmutable))
+                                        }
                                     }
                                 }
                                 completed += 1
