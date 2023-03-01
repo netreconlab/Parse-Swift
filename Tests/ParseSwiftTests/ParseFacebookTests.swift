@@ -213,13 +213,13 @@ class ParseFacebookTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.facebook.strip()
-                        isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertFalse(isLinkedUser)
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -276,13 +276,13 @@ class ParseFacebookTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.facebook.strip()
-                        isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertFalse(isLinkedUser)
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -338,13 +338,13 @@ class ParseFacebookTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.facebook.strip()
-                        isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertFalse(isLinkedUser)
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }

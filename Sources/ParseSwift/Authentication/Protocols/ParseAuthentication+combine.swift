@@ -18,16 +18,13 @@ public extension ParseAuthentication {
                          options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         user.unlinkPublisher(__type, options: options)
     }
-/*
+
     func unlinkPublisher(options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
-        guard let current = await AuthenticatedUser.current() else {
-            let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
-            return Future { promise in
-                promise(.failure(error))
-            }
+        Future { promise in
+            self.unlink(options: options,
+                        completion: promise)
         }
-        return unlinkPublisher(current, options: options)
-    } */
+    }
 }
 
 public extension ParseUser {

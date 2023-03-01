@@ -418,20 +418,18 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testUnlink() async throws {
 
-        _ = try await loginNormally()
+        var initialUser = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGoogle<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   idToken: "this")
-        var initialUser = try await User.current()
         initialUser.authData = [User.google.__type: authData]
         try await User.setCurrent(initialUser)
-        let initialUserLinked = await User.google.isLinked()
-        XCTAssertTrue(initialUserLinked)
+        XCTAssertTrue(ParseGoogle.isLinked(with: initialUser))
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
+        serverResponse.updatedAt = initialUser.updatedAt
 
         var userOnServer: User!
 

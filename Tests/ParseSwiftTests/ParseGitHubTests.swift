@@ -406,20 +406,18 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testUnlink() async throws {
 
-        _ = try await loginNormally()
+        var initialUser = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGitHub<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "this")
-        var initialUser = try await User.current()
         initialUser.authData = [User.github.__type: authData]
         try await User.setCurrent(initialUser)
-        let initialIsLinked = await User.github.isLinked()
-        XCTAssertTrue(initialIsLinked)
+        XCTAssertTrue(ParseGitHub.isLinked(with: initialUser))
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
+        serverResponse.updatedAt = initialUser.updatedAt
 
         var userOnServer: User!
 

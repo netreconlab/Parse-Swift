@@ -178,8 +178,8 @@ class ParseInstagramTests: XCTestCase {
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.instagram.strip()
-                        isLinked = await user.instagram.isLinked()
+                        let strippedUser = try await user.instagram.strip()
+                        isLinked = ParseInstagram.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -242,8 +242,8 @@ class ParseInstagramTests: XCTestCase {
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.instagram.strip()
-                        isLinked = await user.instagram.isLinked()
+                        let strippedUser = try await user.instagram.strip()
+                        isLinked = ParseInstagram.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -361,7 +361,7 @@ class ParseInstagramTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.instagram.isLinked()
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -411,7 +411,7 @@ class ParseInstagramTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.instagram.isLinked()
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -465,7 +465,7 @@ class ParseInstagramTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let sessionToken = await current.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.instagram.isLinked()
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -524,7 +524,7 @@ class ParseInstagramTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let sessionToken = await current.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.instagram.isLinked()
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -558,18 +558,16 @@ class ParseInstagramTests: XCTestCase {
     }
 
     func testUnlink() async throws {
-        _ = try await loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseInstagram<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "access_token",
                                                   apiURL: "apiURL")
-        var current = try await User.current()
-        current.authData = [User.instagram.__type: authData]
-        try await User.setCurrent(current)
-        let isLinked = await User.instagram.isLinked()
-        XCTAssertTrue(isLinked)
+        user.authData = [User.instagram.__type: authData]
+        try await User.setCurrent(user)
+        XCTAssertTrue(ParseInstagram.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -602,7 +600,7 @@ class ParseInstagramTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.instagram.isLinked()
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)

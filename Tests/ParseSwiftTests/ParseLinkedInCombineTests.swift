@@ -313,8 +313,60 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
                                                   isMobileSDK: true)
         user.authData = [User.linkedin.__type: authData]
         try await User.setCurrent(user)
-        let isLinked = await User.linkedin.isLinked()
-        XCTAssertTrue(isLinked)
+        XCTAssertTrue(ParseLinkedIn.isLinked(with: user))
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let publisher = user.linkedin.unlinkPublisher()
+            .sink(receiveCompletion: { result in
+
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation1.fulfill()
+
+        }, receiveValue: { user in
+
+            XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+            XCTAssertEqual(user.username, "hello10")
+            XCTAssertNil(user.password)
+            XCTAssertFalse(ParseLinkedIn<User>.isLinked(with: user))
+        })
+        publisher.store(in: &current)
+
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testUnlinkPassUser() async throws {
+        var current = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Save")
+
+        var user = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        let authData = ParseLinkedIn<User>
+            .AuthenticationKeys.id.makeDictionary(id: "testing",
+                                                  accessToken: "this",
+                                                  isMobileSDK: true)
+        user.authData = [User.linkedin.__type: authData]
+        try await User.setCurrent(user)
+        XCTAssertTrue(ParseLinkedIn.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()

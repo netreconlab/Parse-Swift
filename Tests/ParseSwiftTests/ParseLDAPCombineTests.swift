@@ -337,23 +337,83 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    // swiftlint:disable:next function_body_length
     func testUnlink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try await loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                               password: "this")
-        var user = try await User.current()
         user.authData = [User.ldap.__type: authData]
         try await User.setCurrent(user)
-        let isLinked = await User.ldap.isLinked()
-        XCTAssertTrue(isLinked)
+        XCTAssertTrue(ParseLDAP.isLinked(with: user))
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let publisher = User.ldap.unlinkPublisher()
+            .sink(receiveCompletion: { result in
+
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation1.fulfill()
+
+        }, receiveValue: { user in
+
+            XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+            XCTAssertEqual(user.username, "hello10")
+            XCTAssertNil(user.password)
+            Task {
+                do {
+                    let current = try await User.current()
+                    XCTAssertEqual(user, current)
+                    let isLinked = await user.ldap.isLinked()
+                    XCTAssertFalse(isLinked)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
+        })
+        publisher.store(in: &current)
+
+        wait(for: [expectation1, expectation2], timeout: 20.0)
+    }
+
+    func testUnlinkPassUser() async throws {
+        var current = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
+
+        var user = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        let authData = ParseLDAP<User>
+            .AuthenticationKeys.id.makeDictionary(id: "testing",
+                                              password: "this")
+        user.authData = [User.ldap.__type: authData]
+        try await User.setCurrent(user)
+        XCTAssertTrue(ParseLDAP.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()

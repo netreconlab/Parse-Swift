@@ -166,13 +166,13 @@ class ParseAppleTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var currentLinkedUser = await user.apple.isLinked()
-                        XCTAssertTrue(currentLinkedUser)
+                        var isLinked = await user.apple.isLinked()
+                        XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.apple.strip()
-                        currentLinkedUser = await user.apple.isLinked()
-                        XCTAssertFalse(currentLinkedUser)
+                        let strippedUser = try await user.apple.strip()
+                        isLinked = ParseApple.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -232,13 +232,13 @@ class ParseAppleTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var currentLinkedUser = await user.apple.isLinked()
-                        XCTAssertTrue(currentLinkedUser)
+                        var isLinked = await user.apple.isLinked()
+                        XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.apple.strip()
-                        currentLinkedUser = await user.apple.isLinked()
-                        XCTAssertFalse(currentLinkedUser)
+                        let strippedUser = try await user.apple.strip()
+                        isLinked = ParseApple.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -569,7 +569,7 @@ class ParseAppleTests: XCTestCase {
     }
 
     func testUnlink() async throws {
-        _ = try await loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
         guard let tokenData = "this".data(using: .utf8) else {
             XCTFail("Could not convert token data to string")
@@ -579,14 +579,12 @@ class ParseAppleTests: XCTestCase {
         let authData = try ParseApple<User>
             .AuthenticationKeys.id.makeDictionary(user: "testing",
                                                   identityToken: tokenData)
-        var user = try await User.current()
         user.authData = [User.apple.__type: authData]
         try await User.setCurrent(user)
-        let isLinkedUser = await User.apple.isLinked()
-        XCTAssertTrue(isLinkedUser)
+        XCTAssertTrue(ParseApple.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
+        serverResponse.updatedAt = user.updatedAt
 
         var userOnServer: User!
 

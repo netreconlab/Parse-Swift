@@ -177,8 +177,8 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.spotify.strip()
-                        isLinked = await user.spotify.isLinked()
+                        let strippedUser = try await user.spotify.strip()
+                        isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -239,8 +239,8 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.spotify.strip()
-                        isLinked = await user.spotify.isLinked()
+                        let strippedUser = try await user.spotify.strip()
+                        isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -357,13 +357,8 @@ class ParseSpotifyTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.spotify.isLinked()
+                        let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
-
-                        // Test stripping
-                        try await user.spotify.strip()
-                        isLinked = await user.spotify.isLinked()
-                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -412,7 +407,7 @@ class ParseSpotifyTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.spotify.isLinked()
+                        let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -466,7 +461,7 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let sessionToken = await current.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.spotify.isLinked()
+                        let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -524,7 +519,7 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let sessionToken = await current.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.spotify.isLinked()
+                        let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -558,17 +553,15 @@ class ParseSpotifyTests: XCTestCase {
     }
 
     func testUnlink() async throws {
-        _ = try await loginNormally()
+        var initialUser = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseSpotify<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "access_token")
-        var initialUser = try await User.current()
         initialUser.authData = [User.spotify.__type: authData]
         try await User.setCurrent(initialUser)
-        let isLinked = await User.spotify.isLinked()
-        XCTAssertTrue(isLinked)
+        XCTAssertTrue(ParseSpotify.isLinked(with: initialUser))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()

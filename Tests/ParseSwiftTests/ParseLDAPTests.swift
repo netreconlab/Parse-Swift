@@ -160,8 +160,8 @@ class ParseLDAPTests: XCTestCase {
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        try await user.ldap.strip()
-                        isLinked = await user.ldap.isLinked()
+                        let strippedUser = try await user.ldap.strip()
+                        isLinked = ParseLDAP.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -277,7 +277,7 @@ class ParseLDAPTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.ldap.isLinked()
+                        let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -327,7 +327,7 @@ class ParseLDAPTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.ldap.isLinked()
+                        let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -381,7 +381,7 @@ class ParseLDAPTests: XCTestCase {
                         XCTAssertEqual(user, currentUser)
                         let sessionToken = await user.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.ldap.isLinked()
+                        let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -436,7 +436,7 @@ class ParseLDAPTests: XCTestCase {
                         XCTAssertEqual(user, currentUser)
                         let sessionToken = await user.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
-                        var isLinked = await user.ldap.isLinked()
+                        let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -470,16 +470,14 @@ class ParseLDAPTests: XCTestCase {
     }
 
     func testUnlink() async throws {
-        _ = try await loginNormally()
+        var user = try await loginNormally()
         MockURLProtocol.removeAll()
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                               password: "this")
-        var user = try await User.current()
         user.authData = [User.ldap.__type: authData]
         try await User.setCurrent(user)
-        let isLinked = await User.ldap.isLinked()
-        XCTAssertTrue(isLinked)
+        XCTAssertTrue(ParseLDAP.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -512,7 +510,7 @@ class ParseLDAPTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.ldap.isLinked()
+                        let isLinked = await user.ldap.isLinked()
                         XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)

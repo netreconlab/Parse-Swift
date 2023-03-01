@@ -268,7 +268,7 @@ class ParseAppleAsyncTests: XCTestCase {
         XCTAssertTrue(ParseApple.isLinked(with: user))
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
+        serverResponse.updatedAt = user.updatedAt
 
         var userOnServer: User!
 
