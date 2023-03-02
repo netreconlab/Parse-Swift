@@ -213,6 +213,11 @@ internal extension URLSession {
                 }
 
                 callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
+                    // Update requestId in header for Idempotency
+                    var request = request
+                    if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
+                        request.allHTTPHeaderFields?["X-Parse-Request-Id"] = API.createUniqueRequestId()
+                    }
                     self.dataTask(with: request,
                                   callbackQueue: callbackQueue,
                                   attempts: attempts,
