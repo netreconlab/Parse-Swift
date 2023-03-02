@@ -186,8 +186,12 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
         await ParseKeychainAccessGroup.deleteCurrentContainerFromKeychain()
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
-        currentGroup = try await ParseKeychainAccessGroup.current()
-        XCTAssertNil(currentGroup)
+        do {
+            currentGroup = try await ParseKeychainAccessGroup.current()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
         await ParseKeychainAccessGroup.setCurrent(keychainAccessGroup)
         currentGroup = try await ParseKeychainAccessGroup.current()
         XCTAssertEqual(currentGroup, keychainAccessGroup)

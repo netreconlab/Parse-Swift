@@ -481,9 +481,9 @@ extension ParseFile {
             Task {
                 await downloadFileCommand()
                     .execute(options: options,
-                                  callbackQueue: callbackQueue,
-                                  downloadProgress: progress,
-                                  completion: completion)
+                             callbackQueue: callbackQueue,
+                             downloadProgress: progress,
+                             completion: completion)
             }
         }
     }
