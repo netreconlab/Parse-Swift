@@ -8,7 +8,6 @@
 
 import Foundation
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 // MARK: Fetch
 public extension ParseHookTriggerable {
     /**
@@ -97,4 +96,3 @@ public extension ParseHookTriggerable {
          }
      }
 }
-#endif

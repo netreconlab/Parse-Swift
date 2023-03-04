@@ -8,7 +8,6 @@
 
 import Foundation
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 public extension ParseHookRequestable {
    /**
     Fetches the complete `ParseUser` *aynchronously*  from the server.
@@ -25,4 +24,3 @@ public extension ParseHookRequestable {
         }
     }
 }
-#endif

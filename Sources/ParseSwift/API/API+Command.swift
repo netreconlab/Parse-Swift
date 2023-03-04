@@ -49,77 +49,45 @@ internal extension API {
             self.params = params
         }
 
-        // MARK: Synchronous Execution
+        // MARK: Asynchronous Execution
         func executeStream(options: API.Options,
                            callbackQueue: DispatchQueue,
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [UUID: ParseFile]? = nil,
                            uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                           stream: InputStream) async throws {
-            switch await self.prepareURLRequest(options: options,
-                                                batching: false,
-                                                childObjects: childObjects,
-                                                childFiles: childFiles) {
-
-            case .success(let urlRequest):
-                if method == .POST || method == .PUT || method == .PATCH {
+                           stream: InputStream,
+                           completion: @escaping (ParseError?) -> Void) {
+            guard method == .POST || method == .PUT || method == .PATCH else {
+                callbackQueue.async {
+                    completion(nil)
+                }
+                return
+            }
+            self.prepareURLRequest(options: options,
+                                   batching: false,
+                                   childObjects: childObjects,
+                                   childFiles: childFiles) { result in
+                switch result {
+                case .success(let urlRequest):
                     let task = URLSession.parse.uploadTask(withStreamedRequest: urlRequest)
                     Parse.sessionDelegate.streamDelegates[task] = stream
-                    #if compiler(>=5.5.2) && canImport(_Concurrency)
                     Task {
                         await Parse.sessionDelegate.delegates.updateUpload(task, callback: uploadProgress)
                         await Parse.sessionDelegate.delegates.updateTask(task, queue: callbackQueue)
                         task.resume()
+                        callbackQueue.async {
+                            completion(nil)
+                        }
                     }
-                    #else
-                    Parse.sessionDelegate.uploadDelegates[task] = uploadProgress
-                    Parse.sessionDelegate.taskCallbackQueues[task] = callbackQueue
-                    task.resume()
-                    #endif
                     return
+                case .failure(let error):
+                    callbackQueue.async {
+                        completion(error)
+                    }
                 }
-            case .failure(let error):
-                throw error
             }
         }
-/*
-        func execute(options: API.Options,
-                     batching: Bool = false,
-                     notificationQueue: DispatchQueue? = nil,
-                     childObjects: [String: PointerType]? = nil,
-                     childFiles: [UUID: ParseFile]? = nil,
-                     uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) throws -> U {
-            var responseResult: Result<U, ParseError>?
-            let synchronizationQueue = DispatchQueue(label: "com.parse.Command.sync.\(UUID().uuidString)",
-                                                     qos: .default,
-                                                     attributes: .concurrent,
-                                                     autoreleaseFrequency: .inherit,
-                                                     target: nil)
-            let group = DispatchGroup()
-            group.enter()
-            self.executeAsync(options: options,
-                              batching: batching,
-                              callbackQueue: synchronizationQueue,
-                              notificationQueue: notificationQueue,
-                              childObjects: childObjects,
-                              childFiles: childFiles,
-                              allowIntermediateResponses: false,
-                              uploadProgress: uploadProgress,
-                              downloadProgress: downloadProgress) { result in
-                responseResult = result
-                group.leave()
-            }
-            group.wait()
 
-            guard let response = responseResult else {
-                throw ParseError(code: .otherCause,
-                                 message: "Could not unrwrap server response")
-            }
-            return try response.get()
-        } */
-
-        // MARK: Asynchronous Execution
         // swiftlint:disable:next function_body_length cyclomatic_complexity
         func execute(options: API.Options,
                      batching: Bool = false,
@@ -280,59 +248,68 @@ internal extension API {
         }
 
         // MARK: URL Preperation
+        // swiftlint:disable:next function_body_length
         func prepareURLRequest(options: API.Options,
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
-                               childFiles: [UUID: ParseFile]? = nil) async -> Result<URLRequest, ParseError> {
+                               childFiles: [UUID: ParseFile]? = nil,
+                               completion: @escaping(Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
-            var headers = await API.getHeaders(options: options)
-            if method == .GET || method == .DELETE {
-                headers.removeValue(forKey: "X-Parse-Request-Id")
-            }
-            let url = parseURL == nil ?
+            Task {
+                var headers = await API.getHeaders(options: options)
+                if method == .GET || method == .DELETE {
+                    headers.removeValue(forKey: "X-Parse-Request-Id")
+                }
+                let url = parseURL == nil ?
                 API.serverURL(options: options).appendingPathComponent(path.urlComponent) : parseURL!
 
-            guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not unrwrap url components for \(url)"))
-            }
-            components.queryItems = params
+                guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+                    let error = ParseError(code: .otherCause,
+                                           message: "Could not unrwrap url components for \(url)")
+                    completion(.failure(error))
+                    return
+                }
+                components.queryItems = params
 
-            guard let urlComponents = components.url else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not create url from components for \(components)"))
-            }
+                guard let urlComponents = components.url else {
+                    let error = ParseError(code: .otherCause,
+                                           message: "Could not create url from components for \(components)")
+                    completion(.failure(error))
+                    return
+                }
 
-            var urlRequest = URLRequest(url: urlComponents)
-            urlRequest.allHTTPHeaderFields = headers
-            let defaultACL = try? await ParseACL.defaultACL()
-            if let urlBody = body {
-                if (urlBody as? ParseCloudTypeable) != nil {
-                    guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody,
-                                                                                acl: defaultACL,
-                                                                                skipKeys: .cloud) else {
-                        return .failure(ParseError(code: .otherCause,
-                                                       message: "Could not encode body \(urlBody)"))
-                    }
-                    urlRequest.httpBody = bodyData
-                } else {
-                    guard let bodyData = try? ParseCoding
+                var urlRequest = URLRequest(url: urlComponents)
+                urlRequest.allHTTPHeaderFields = headers
+                if let urlBody = body {
+                    if (urlBody as? ParseCloudTypeable) != nil {
+                        guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody, skipKeys: .cloud) else {
+                            let error = ParseError(code: .otherCause,
+                                                   message: "Could not encode body \(urlBody)")
+                            completion(.failure(error))
+                            return
+                        }
+                        urlRequest.httpBody = bodyData
+                    } else {
+                        guard let bodyData = try? ParseCoding
                             .parseEncoder()
                             .encode(urlBody,
-                                    acl: defaultACL,
                                     batching: batching,
                                     collectChildren: false,
                                     objectsSavedBeforeThisOne: childObjects,
                                     filesSavedBeforeThisOne: childFiles) else {
-                            return .failure(ParseError(code: .otherCause,
-                                                       message: "Could not encode body \(urlBody)"))
+                            let error = ParseError(code: .otherCause,
+                                                   message: "Could not encode body \(urlBody)")
+                            completion(.failure(error))
+                            return
+                        }
+                        urlRequest.httpBody = bodyData.encoded
                     }
-                    urlRequest.httpBody = bodyData.encoded
                 }
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.cachePolicy = requestCachePolicy(options: options)
+                completion(.success(urlRequest))
+                return
             }
-            urlRequest.httpMethod = method.rawValue
-            urlRequest.cachePolicy = requestCachePolicy(options: options)
-            return .success(urlRequest)
         }
 
         enum CodingKeys: String, CodingKey { // swiftlint:disable:this nesting

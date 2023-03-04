@@ -6,7 +6,6 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -105,7 +104,6 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         }
         #endif
 
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         func login(authData: [String: String],
                    options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
@@ -115,7 +113,6 @@ class ParseAuthenticationAsyncTests: XCTestCase {
                   options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
         }
-        #endif
     }
 
     override func setUp() async throws {
@@ -226,4 +223,3 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         XCTAssertNil(user.password)
     }
 }
-#endif

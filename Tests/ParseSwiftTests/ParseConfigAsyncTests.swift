@@ -6,7 +6,6 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -188,4 +187,3 @@ class ParseConfigAsyncTests: XCTestCase {
         #endif
     }
 }
-#endif

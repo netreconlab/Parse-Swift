@@ -298,14 +298,14 @@ extension ParseFile {
     public func save(options: API.Options = [],
                      stream: InputStream,
                      callbackQueue: DispatchQueue = .main,
-                     progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil) throws {
-        Task {
-            try await uploadFileCommand()
-                .executeStream(options: setDefaultOptions(options),
-                               callbackQueue: callbackQueue,
-                               uploadProgress: progress,
-                               stream: stream)
-        }
+                     progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping (ParseError?) -> Void) throws {
+        try uploadFileCommand()
+            .executeStream(options: setDefaultOptions(options),
+                           callbackQueue: callbackQueue,
+                           uploadProgress: progress,
+                           stream: stream,
+                           completion: completion)
     }
 
     /**

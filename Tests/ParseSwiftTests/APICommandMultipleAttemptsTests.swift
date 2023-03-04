@@ -6,7 +6,6 @@
 //  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -489,4 +488,3 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 }
-#endif

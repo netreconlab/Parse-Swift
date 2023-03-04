@@ -308,17 +308,11 @@ internal extension URLSession {
         guard let task = task else {
             return
         }
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             await Parse.sessionDelegate.delegates.updateUpload(task, callback: progress)
             await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
             task.resume()
         }
-        #else
-        Parse.sessionDelegate.uploadDelegates[task] = progress
-        Parse.sessionDelegate.taskCallbackQueues[task] = notificationQueue
-        task.resume()
-        #endif
     }
 
     func downloadTask<U>(

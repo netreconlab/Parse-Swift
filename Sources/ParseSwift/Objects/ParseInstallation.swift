@@ -664,7 +664,6 @@ extension ParseInstallation {
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.create
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let object = try await command(method: method,
@@ -682,12 +681,6 @@ extension ParseInstallation {
                 }
             }
         }
-        #else
-        command(method: method,
-                options: options,
-                callbackQueue: callbackQueue,
-                completion: completion)
-        #endif
     }
 
     /**
@@ -707,7 +700,6 @@ extension ParseInstallation {
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.replace
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let object = try await command(method: method,
@@ -725,12 +717,6 @@ extension ParseInstallation {
                 }
             }
         }
-        #else
-        command(method: method,
-                options: options,
-                callbackQueue: callbackQueue,
-                completion: completion)
-        #endif
     }
 
     /**
@@ -750,7 +736,6 @@ extension ParseInstallation {
         completion: @escaping (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.update
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let object = try await command(method: method,
@@ -768,12 +753,6 @@ extension ParseInstallation {
                 }
             }
         }
-        #else
-        command(method: method,
-                options: options,
-                callbackQueue: callbackQueue,
-                completion: completion)
-        #endif
     }
 
     func saveCommand(ignoringCustomObjectIdConfig: Bool = false) async throws -> API.Command<Self, Self> {
@@ -970,7 +949,6 @@ public extension Sequence where Element: ParseInstallation {
         completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.save
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let objects = try await batchCommand(method: method,
@@ -991,15 +969,6 @@ public extension Sequence where Element: ParseInstallation {
                 }
             }
         }
-        #else
-        batchCommand(method: method,
-                     batchLimit: limit,
-                     transaction: transaction,
-                     ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                     options: options,
-                     callbackQueue: callbackQueue,
-                     completion: completion)
-        #endif
     }
 
     /**
@@ -1027,7 +996,6 @@ public extension Sequence where Element: ParseInstallation {
         completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.create
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let objects = try await batchCommand(method: method,
@@ -1047,14 +1015,6 @@ public extension Sequence where Element: ParseInstallation {
                 }
             }
         }
-        #else
-        batchCommand(method: method,
-                     batchLimit: limit,
-                     transaction: transaction,
-                     options: options,
-                     callbackQueue: callbackQueue,
-                     completion: completion)
-        #endif
     }
 
     /**
@@ -1083,7 +1043,6 @@ public extension Sequence where Element: ParseInstallation {
         completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.replace
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let objects = try await batchCommand(method: method,
@@ -1103,14 +1062,6 @@ public extension Sequence where Element: ParseInstallation {
                 }
             }
         }
-        #else
-        batchCommand(method: method,
-                     batchLimit: limit,
-                     transaction: transaction,
-                     options: options,
-                     callbackQueue: callbackQueue,
-                     completion: completion)
-        #endif
     }
 
     /**
@@ -1139,7 +1090,6 @@ public extension Sequence where Element: ParseInstallation {
         completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.update
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             do {
                 let objects = try await batchCommand(method: method,
@@ -1159,14 +1109,6 @@ public extension Sequence where Element: ParseInstallation {
                 }
             }
         }
-        #else
-        batchCommand(method: method,
-                     batchLimit: limit,
-                     transaction: transaction,
-                     options: options,
-                     callbackQueue: callbackQueue,
-                     completion: completion)
-        #endif
     }
 
     /**

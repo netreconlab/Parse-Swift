@@ -142,7 +142,6 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         XCTAssertTrue(readPreferenceParameter.contains("\"now\""))
     }
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
     @MainActor
     func testFind() async throws {
 
@@ -774,5 +773,4 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
                                                                                options: [.cachePolicy(.returnCacheDataDontLoad)])
         XCTAssertEqual(queryResult2, [json.results])
     }
-#endif
 }

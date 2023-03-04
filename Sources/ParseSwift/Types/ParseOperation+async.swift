@@ -6,7 +6,6 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseOperation {
@@ -27,5 +26,3 @@ public extension ParseOperation {
         }
     }
 }
-
-#endif

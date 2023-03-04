@@ -6,7 +6,6 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 #if os(iOS)
@@ -116,5 +115,3 @@ public extension ParseAnalytics {
         }
     }
 }
-
-#endif

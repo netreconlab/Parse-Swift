@@ -154,7 +154,6 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
     @MainActor
     func testLogin() async throws {
 
@@ -455,5 +454,4 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let updatedCurrentLinkedUser = await user.linkedin.isLinked()
         XCTAssertFalse(updatedCurrentLinkedUser)
     }
-#endif
 }

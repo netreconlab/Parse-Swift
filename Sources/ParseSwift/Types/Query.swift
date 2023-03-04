@@ -562,7 +562,7 @@ extension Query: Queryable {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
-    public func findAll(batchLimit limit: Int? = nil, // swiftlint:disable:this function_body_length
+    public func findAll(batchLimit limit: Int? = nil,
                         options: API.Options = [],
                         callbackQueue: DispatchQueue = .main,
                         completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
@@ -579,7 +579,6 @@ extension Query: Queryable {
             return
         }
 
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             var query = self
                 .order([.ascending("objectId")])
@@ -614,47 +613,6 @@ extension Query: Queryable {
                 completion(.success(finalResults))
             }
         }
-        #else
-        var query = self
-            .order([.ascending("objectId")])
-        query.limit = limit ?? ParseConstants.batchLimit
-        var results = [ResultType]()
-        var finished = false
-        let uuid = UUID()
-        let queue = DispatchQueue(label: "com.parse.findAll.\(uuid)",
-                                  qos: .default,
-                                  attributes: .concurrent,
-                                  autoreleaseFrequency: .inherit,
-                                  target: nil)
-        queue.sync {
-            while !finished {
-                do {
-                    let currentResults = try query.findCommand().execute(options: options)
-                    results.append(contentsOf: currentResults)
-                    if currentResults.count >= query.limit {
-                        guard let lastObjectId = results[results.count - 1].objectId else {
-                            throw ParseError(code: .otherCause, message: "Last object should have an id.")
-                        }
-                        query.where.add("objectId" > lastObjectId)
-                    } else {
-                        finished = true
-                    }
-                } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
-                    callbackQueue.async {
-                        completion(.failure(parseError))
-                    }
-                    return
-                }
-            }
-
-            callbackQueue.async {
-                completion(.success(results))
-            }
-        }
-        #endif
     }
 
     /**
