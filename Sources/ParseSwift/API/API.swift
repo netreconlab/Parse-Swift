@@ -219,7 +219,7 @@ public struct API {
         }
 
         headers["X-Parse-Client-Version"] = clientVersion()
-        headers["X-Parse-Request-Id"] = UUID().uuidString.lowercased()
+        headers["X-Parse-Request-Id"] = Self.createUniqueRequestId()
 
         options.forEach { (option) in
             switch option {
@@ -255,6 +255,10 @@ public struct API {
         }
 
         return headers
+    }
+
+    internal static func createUniqueRequestId() -> String {
+        UUID().uuidString.lowercased()
     }
 
     internal static func clientVersion() -> String {

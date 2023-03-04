@@ -69,7 +69,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             _ = try await client.sendPing()
             XCTFail("Should have produced error")
         } catch {
-            XCTAssertEqual(client.isSocketEstablished, false)
+            XCTAssertEqual(client.status, .socketNotEstablished)
             guard let urlError = error as? URLError else {
                 throw XCTSkip("Skip this test when error cannot be unwrapped")
             }
@@ -85,16 +85,14 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.isSocketEstablished = true // Socket needs to be true
-        client.isConnecting = true
-        client.isConnected = true
+        await client.setStatus(.connected)
         client.clientId = "yolo"
 
         do {
             _ = try await client.sendPing()
             XCTFail("Should have produced error")
         } catch {
-            XCTAssertEqual(client.isSocketEstablished, true)
+            XCTAssertEqual(client.status, .socketEstablished)
             XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
         }
     }

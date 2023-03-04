@@ -143,7 +143,7 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func dataTask<U>(
         with request: URLRequest,
         callbackQueue: DispatchQueue,
@@ -214,16 +214,20 @@ internal extension URLSession {
                     delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
                 }
 
-                callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
-                    Task {
-                        await self.dataTask(with: request,
-                                            callbackQueue: callbackQueue,
-                                            attempts: attempts,
-                                            allowIntermediateResponses: allowIntermediateResponses,
-                                            mapper: mapper,
-                                            completion: completion)
-                    }
+                let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
+                try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
+
+                // Update requestId in header for Idempotency
+                var request = request
+                if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
+                    request.allHTTPHeaderFields?["X-Parse-Request-Id"] = API.createUniqueRequestId()
                 }
+                await self.dataTask(with: request,
+                                    callbackQueue: callbackQueue,
+                                    attempts: attempts,
+                                    allowIntermediateResponses: allowIntermediateResponses,
+                                    mapper: mapper,
+                                    completion: completion)
                 return
             }
             let result = await self.makeResult(request: request,

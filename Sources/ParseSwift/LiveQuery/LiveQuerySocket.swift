@@ -28,7 +28,7 @@ final class LiveQuerySocket: NSObject {
         return task
     }
 
-    func removeTaskFromDelegates(_ task: URLSessionWebSocketTask) async {
+    func removeTask(_ task: URLSessionWebSocketTask) async {
         await tasks.removeReceivers([task])
         await tasks.removeDelegates([task])
     }
@@ -51,44 +51,27 @@ extension LiveQuerySocket {
 
 // MARK: Connect
 extension LiveQuerySocket {
-    func connect(_ task: URLSessionWebSocketTask,
-                 completion: @escaping (Error?) -> Void) {
-        Task {
-            do {
-                let encoded = try ParseCoding.jsonEncoder()
-                    .encode(await StandardMessage(operation: .connect,
-                                                  additionalProperties: true))
-                guard let encodedAsString = String(data: encoded, encoding: .utf8) else {
-                    let error = ParseError(code: .otherCause,
-                                           message: "Could not encode connect message: \(encoded)")
-                    completion(error)
-                    return
-                }
-                task.send(.string(encodedAsString)) { error in
-                    if error == nil {
-                        Task {
-                            await self.receive(task)
-                        }
-                    }
-                    completion(error)
-                }
-            } catch {
-                completion(error)
-            }
+    func connect(_ task: URLSessionWebSocketTask) async throws {
+        let encoded = try ParseCoding.jsonEncoder()
+            .encode(await StandardMessage(operation: .connect,
+                                          additionalProperties: true))
+        guard let encodedAsString = String(data: encoded, encoding: .utf8) else {
+            throw ParseError(code: .otherCause,
+                             message: "Could not encode connect message: \(encoded)")
         }
+        try await task.send(.string(encodedAsString))
+        await self.receive(task)
     }
 }
 
 // MARK: Send
 extension LiveQuerySocket {
-    func send(_ data: Data, task: URLSessionWebSocketTask, completion: @escaping (Error?) -> Void) {
+    func send(_ data: Data, task: URLSessionWebSocketTask) async throws {
         guard let encodedAsString = String(data: data, encoding: .utf8) else {
-            completion(nil)
-            return
+            throw ParseError(code: .otherCause,
+                             message: "Could not encode data as string: \(data)")
         }
-        task.send(.string(encodedAsString)) { error in
-            completion(error)
-        }
+        try await task.send(.string(encodedAsString))
     }
 }
 

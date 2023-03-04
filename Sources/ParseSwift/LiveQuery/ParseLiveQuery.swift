@@ -48,47 +48,6 @@ import FoundationNetworking
  */
 public final class ParseLiveQuery: NSObject {
 
-    // Queues
-    // let synchronizationQueue: DispatchQueue
-    let notificationQueue: DispatchQueue
-
-    // Task
-    var task: URLSessionWebSocketTask! {
-        willSet {
-            if newValue == nil && isSocketEstablished {
-                isSocketEstablished = false
-            }
-        }
-    }
-    var url: URL!
-    var clientId: String!
-    var attempts: Int = 1 {
-        willSet {
-            if newValue >= Parse.configuration.liveQueryMaxConnectionAttempts + 1 &&
-                !Parse.configuration.isTestingLiveQueryDontCloseSocket {
-                let error = ParseError(code: .otherCause,
-                                       message: """
-ParseLiveQuery Error: Reached max attempts of
-\(Parse.configuration.liveQueryMaxConnectionAttempts).
-Not attempting to open ParseLiveQuery socket anymore
-""")
-                notificationQueue.async {
-                    self.receiveDelegate?.received(error)
-                }
-                Task {
-                    await close() // Quit trying to reconnect
-                }
-            }
-        }
-    }
-    var isDisconnectedByUser = false {
-        willSet {
-            if newValue {
-                isConnected = false
-            }
-        }
-    }
-
     /// Have all `ParseLiveQuery` authentication challenges delegated to you. There can only
     /// be one of these for all `ParseLiveQuery` connections. The default is to
     /// delegate to the `authentication` call block passed to `ParseSwift.initialize`
@@ -111,77 +70,57 @@ Not attempting to open ParseLiveQuery socket anymore
     /// can be assigned to individual connections. Conforms to `ParseLiveQueryDelegate`.
     public weak var receiveDelegate: ParseLiveQueryDelegate?
 
-    /// True if the connection to the url is up and available. False otherwise.
-    public internal(set) var isSocketEstablished = false { // URLSession has an established socket
-        willSet {
-            if !newValue {
-                isConnected = newValue
-            }
+    /// The connection status of LiveQuery
+    public enum ConnectionStatus: Comparable {
+        /// The socket is not established.
+        case socketNotEstablished
+        /// The socket is established, but neither connecting or connected.
+        case socketEstablished
+        /// The socket is currently disconnected.
+        case disconnected
+        /// The socket is currently connecting.
+        case connecting
+        /// The socket is currently connected.
+        case connected
+
+        public static func < (lhs: Self, rhs: Self) -> Bool {
+            lhs == .socketNotEstablished && rhs != .socketNotEstablished ||
+            lhs == .socketEstablished && (rhs != .socketEstablished && rhs != .socketNotEstablished) ||
+            // swiftlint:disable:next line_length
+            lhs == .disconnected && (rhs != .disconnected && rhs != .socketEstablished && rhs != .socketNotEstablished) ||
+            // swiftlint:disable:next line_length
+            lhs == .connecting && (rhs != .connecting && rhs != .disconnected && rhs != .socketEstablished && rhs != .socketNotEstablished)
         }
     }
 
-    /// True if this client is connected. False otherwise.
-    public internal(set) var isConnected = false {
+    /// The current status of the LiveQuery socket.
+    public internal(set) var status: ConnectionStatus = .socketNotEstablished
+
+    let notificationQueue: DispatchQueue
+    var task: URLSessionWebSocketTask!
+    var url: URL!
+    var clientId: String!
+    var attempts: Int = 1 {
         willSet {
-            isConnecting = false
-            if newValue {
-                if isSocketEstablished {
-                    if let task = self.task {
-                        attempts = 1
-
-                        Task {
-                            // Resubscribe to all subscriptions by moving them in front of pending
-                            var tempPendingSubscriptions = [(RequestId, SubscriptionRecord)]()
-                            let subscriptions = await self.subscriptions.getCurrent()
-                            subscriptions.forEach { (key, value) -> Void in
-                                tempPendingSubscriptions.append((key, value))
-                            }
-                            await self.subscriptions.removeAll()
-                            let pending = await self.subscriptions.getPending()
-                            tempPendingSubscriptions.append(contentsOf: pending)
-                            await self.subscriptions.removeAllPending()
-                            await self.subscriptions.updatePending(tempPendingSubscriptions)
-
-                            // Send all pending messages in order
-                            for tempPendingSubscription in tempPendingSubscriptions {
-                                let messageToSend = tempPendingSubscription
-                                try? await URLSession.liveQuery.send(messageToSend.1.messageData, task: task)
-                            }
-                        }
-                    }
+            if newValue >= Parse.configuration.liveQueryMaxConnectionAttempts + 1 &&
+                !Parse.configuration.isTestingLiveQueryDontCloseSocket {
+                let error = ParseError(code: .otherCause,
+                                       message: """
+ParseLiveQuery Error: Reached max attempts of
+\(Parse.configuration.liveQueryMaxConnectionAttempts).
+Not attempting to open ParseLiveQuery socket anymore
+""")
+                notificationQueue.async {
+                    self.receiveDelegate?.received(error)
                 }
-            } else {
-                clientId = nil
-            }
-        }
-        didSet {
-            if !isSocketEstablished {
-                self.isConnected = false
+                Task {
+                    await close() // Quit trying to reconnect
+                }
             }
         }
     }
-
-    /// True if this client is connecting. False otherwise.
-    public internal(set) var isConnecting = false {
-        didSet {
-            if !isSocketEstablished {
-                self.isConnecting = false
-            }
-        }
-    }
-
-    // Subscription
+    var isDisconnectedByUser = false
     let subscriptions = Subscriptions()
-    /* let requestIdGenerator: () -> RequestId
-    var subscriptions = [RequestId: SubscriptionRecord]()
-    var pendingSubscriptions = [(RequestId, SubscriptionRecord)]() // Behave as FIFO to maintain sending order
-    */
-
-    static func inititialize() {
-        Task {
-            Self.client = try? await self.init()
-        }
-    }
 
     /**
      - parameter serverURL: The URL of the `ParseLiveQuery` Server to connect to.
@@ -227,6 +166,55 @@ Not attempting to open ParseLiveQuery socket anymore
         authenticationDelegate = nil
         receiveDelegate = nil
     }
+
+    func setStatus(_ status: ConnectionStatus) async {
+        switch status {
+        case .socketNotEstablished:
+            clientId = nil
+            self.status = .socketNotEstablished
+        case .socketEstablished:
+            self.status = .socketEstablished
+        case .disconnected:
+            clientId = nil
+            if status >= self.status {
+                self.status = status
+            } else {
+                self.status = .socketNotEstablished
+            }
+        case .connecting:
+            if status >= self.status {
+                self.status = status
+            } else {
+                self.status = .socketNotEstablished
+            }
+        case .connected:
+            if status >= self.status,
+               let task = self.task {
+                attempts = 1
+
+                // Resubscribe to all subscriptions by moving them in front of pending
+                var tempPendingSubscriptions = [(RequestId, SubscriptionRecord)]()
+                let subscriptions = await self.subscriptions.getCurrent()
+                subscriptions.forEach { (key, value) -> Void in
+                    tempPendingSubscriptions.append((key, value))
+                }
+                await self.subscriptions.removeAll()
+                let pending = await self.subscriptions.getPending()
+                tempPendingSubscriptions.append(contentsOf: pending)
+                await self.subscriptions.removeAllPending()
+                await self.subscriptions.updatePending(tempPendingSubscriptions)
+
+                // Send all pending messages in order
+                for tempPendingSubscription in tempPendingSubscriptions {
+                    let messageToSend = tempPendingSubscription
+                    try? await URLSession.liveQuery.send(messageToSend.1.messageData, task: task)
+                }
+                self.status = status
+            } else {
+                self.status = .socketNotEstablished
+            }
+        }
+    }
 }
 
 // MARK: Client Intents
@@ -246,7 +234,7 @@ extension ParseLiveQuery {
                                                               taskDelegate: self)
             self.task.resume()
             if let oldTask = oldTask {
-                await URLSession.liveQuery.removeTaskFromDelegates(oldTask)
+                await URLSession.liveQuery.removeTask(oldTask)
             }
         case .running:
             try await self.open(isUserWantsToConnect: false)
@@ -324,7 +312,7 @@ extension ParseLiveQuery {
                 return nil
             }
         }
-        await self.subscriptions.removeCurrent(pendingToRemove)
+        await self.subscriptions.removePending(pendingToRemove)
         await self.closeWebsocketIfNoSubscriptions()
     }
 }
@@ -338,16 +326,16 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
         switch status {
 
         case .open:
-            self.isSocketEstablished = true
-            try? await self.open(isUserWantsToConnect: false)
+            await self.setStatus(.socketEstablished)
+            self.open(isUserWantsToConnect: false) { _ in }
         case .closed:
             self.notificationQueue.async {
                 self.receiveDelegate?.closedSocket(closeCode, reason: reason)
             }
-            self.isSocketEstablished = false
+            await self.setStatus(.socketNotEstablished)
             if !self.isDisconnectedByUser {
                 // Try to reconnect
-                try? await self.open(isUserWantsToConnect: false)
+                self.open(isUserWantsToConnect: false) { _ in }
             }
         }
     }
@@ -357,7 +345,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
         if let redirect = try? ParseCoding.jsonDecoder().decode(RedirectResponse.self, from: data) {
             if redirect.op == .redirect {
                 self.url = redirect.url
-                if self.isConnected {
+                if self.status == .connected {
                     await self.close()
                     // Try to reconnect
                     try? await self.resumeTask()
@@ -386,7 +374,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                 self.receiveDelegate?.received(parseError)
             }
             return
-        } else if !self.isConnected {
+        } else if self.status != .connected {
             // Check if this is a connected response
             guard let response = try? ParseCoding.jsonDecoder().decode(ConnectionResponse.self, from: data),
                   response.op == .connected else {
@@ -411,7 +399,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                 return
             }
             self.clientId = response.clientId
-            self.isConnected = true
+            await self.setStatus(.connected)
         } else {
 
             if let preliminaryMessage = try? ParseCoding.jsonDecoder()
@@ -425,6 +413,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                     self.notificationQueue.async {
                         self.receiveDelegate?.received(error)
                     }
+                    return
                 }
 
                 if let installationId = try? await BaseParseInstallation.current().installationId {
@@ -435,6 +424,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                         self.notificationQueue.async {
                             self.receiveDelegate?.received(error)
                         }
+                        return
                     }
                 }
 
@@ -442,20 +432,27 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                 let pending = await self.subscriptions.getPending()
                 switch preliminaryMessage.op {
                 case .subscribed:
-                    if let subscribed = pending
-                        .first(where: { $0.0.value == preliminaryMessage.requestId }) {
-                        let requestId = RequestId(value: preliminaryMessage.requestId)
-                        let isNew: Bool!
-                        if subscriptions[requestId] != nil {
-                            isNew = false
-                        } else {
-                            isNew = true
-                        }
-                        await self.subscriptions.updateCurrent([subscribed.0: subscribed.1])
-                        await self.subscriptions.removePending([subscribed.0])
+                    guard let subscribed = pending
+                        .first(where: { $0.0.value == preliminaryMessage.requestId }) else {
+                        let error = ParseError(code: .otherCause,
+                                               // swiftlint:disable:next line_length
+                                               message: "ParseLiveQuery Error: Received a subscription with requestId: \(preliminaryMessage.requestId) from a server, but this is not a pending subscription.")
                         self.notificationQueue.async {
-                            subscribed.1.subscribeHandlerClosure?(isNew)
+                            self.receiveDelegate?.received(error)
                         }
+                        return
+                    }
+                    let requestId = RequestId(value: preliminaryMessage.requestId)
+                    let isNew: Bool!
+                    if subscriptions[requestId] != nil {
+                        isNew = false
+                    } else {
+                        isNew = true
+                    }
+                    await self.subscriptions.updateCurrent([subscribed.0: subscribed.1])
+                    await self.subscriptions.removePending([subscribed.0])
+                    self.notificationQueue.async {
+                        subscribed.1.subscribeHandlerClosure?(isNew)
                     }
                 case .unsubscribed:
                     let requestId = RequestId(value: preliminaryMessage.requestId)
@@ -513,7 +510,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
             return false
         }
         if posixError.code == .ENOTCONN {
-            isSocketEstablished = false
+            await self.setStatus(.socketNotEstablished)
             do {
                 try await open(isUserWantsToConnect: false)
             } catch {
@@ -537,7 +534,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
             return false
         }
         if [-1001, -1005, -1011].contains(urlError.errorCode) {
-            isSocketEstablished = false
+            await self.setStatus(.socketNotEstablished)
             do {
                 try await open(isUserWantsToConnect: false)
             } catch {
@@ -593,23 +590,25 @@ extension ParseLiveQuery {
         if isUserWantsToConnect {
             self.isDisconnectedByUser = false
         }
-        if self.isConnected || self.isDisconnectedByUser {
+        if self.status == .connected || self.isDisconnectedByUser {
             completion(nil)
             return
         }
-        if self.isConnecting {
+        if self.status == .connecting {
             completion(nil)
             return
         }
 
-        if isSocketEstablished {
+        if self.status == .socketEstablished {
             Task {
                 do {
                     try await URLSession.liveQuery.connect(self.task)
-                    self.isConnecting = true
+                    await self.setStatus(.connecting)
+                    completion(nil)
                 } catch {
                     completion(error)
                 }
+                return
             }
         } else {
             self.attempts += 1
@@ -628,16 +627,16 @@ extension ParseLiveQuery {
 
     /// Manually disconnect from the `ParseLiveQuery` Server.
     public func close() async {
-        if self.isConnected {
+        if self.status == .connected {
             self.task.cancel(with: .goingAway, reason: nil)
             self.isDisconnectedByUser = true
             let oldTask = self.task
-            isSocketEstablished = false
+            await self.setStatus(.socketNotEstablished)
             // Prepare new task for future use.
             self.task = await URLSession.liveQuery.createTask(self.url,
                                                               taskDelegate: self)
             if let oldTask = oldTask {
-                await URLSession.liveQuery.removeTaskFromDelegates(oldTask)
+                await URLSession.liveQuery.removeTask(oldTask)
             }
         }
     }
@@ -664,43 +663,14 @@ extension ParseLiveQuery {
         }
     }
 
-    /*
-    func close(useDedicatedQueue: Bool) {
-        if useDedicatedQueue {
-            synchronizationQueue.async {
-                if self.isConnected {
-                    self.task.cancel(with: .goingAway, reason: nil)
-                    let oldTask = self.task
-                    self.isSocketEstablished = false
-                    // Prepare new task for future use.
-                    self.task = URLSession.liveQuery.createTask(self.url,
-                                                                taskDelegate: self)
-                    if let oldTask = oldTask {
-                        URLSession.liveQuery.removeTaskFromDelegates(oldTask)
-                    }
-                }
-            }
-        } else {
-            if self.isConnected {
-                self.task.cancel(with: .goingAway, reason: nil)
-                let oldTask = task
-                isSocketEstablished = false
-                // Prepare new task for future use.
-                self.task = URLSession.liveQuery.createTask(self.url,
-                                                            taskDelegate: self)
-                if let oldTask = oldTask {
-                    URLSession.liveQuery.removeTaskFromDelegates(oldTask)
-                }
-            }
-        }
-    } */
-
     func send(record: SubscriptionRecord, requestId: RequestId) async throws {
         await self.subscriptions.updatePending([(requestId, record)])
-        if self.isConnected {
-            try await URLSession.liveQuery.send(record.messageData, task: self.task)
-        } else {
-            try await self.open()
+        Task {
+            if self.status == .connected {
+                try? await URLSession.liveQuery.send(record.messageData, task: self.task)
+            } else {
+                try await self.open()
+            }
         }
     }
 }
@@ -789,7 +759,7 @@ extension ParseLiveQuery {
             throw ParseError(code: .otherCause, message: "ParseLiveQuery Error: Could not create subscription.")
         }
 
-        try await self.send(record: subscriptionRecord, requestId: requestId)
+        try? await self.send(record: subscriptionRecord, requestId: requestId)
         return handler
     }
 }
@@ -842,7 +812,6 @@ extension ParseLiveQuery {
                 break
             }
         }
-
     }
 }
 

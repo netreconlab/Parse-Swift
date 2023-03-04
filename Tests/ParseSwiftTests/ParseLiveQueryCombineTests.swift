@@ -86,7 +86,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertEqual(client.isSocketEstablished, false)
+                    XCTAssertEqual(client.status, .socketNotEstablished)
                     guard let urlError = error as? URLError else {
                         _ = XCTSkip("Skip this test when error cannot be unwrapped")
                         expectation1.fulfill()
@@ -105,14 +105,12 @@ class ParseLiveQueryCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPing() throws {
+    func testPing() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.isSocketEstablished = true // Socket needs to be true
-        client.isConnecting = true
-        client.isConnected = true
+        await client.setStatus(.connected)
         client.clientId = "yolo"
 
         var current = Set<AnyCancellable>()
@@ -125,7 +123,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertEqual(client.isSocketEstablished, true)
+                    XCTAssertEqual(client.status, .socketNotEstablished)
                     XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
                 }
                 expectation1.fulfill()
