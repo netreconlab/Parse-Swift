@@ -186,11 +186,11 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.twitter.isLinked()
+                        var isLinked = ParseTwitter.isLinked(with: currentUser)
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        let strippedUser = try await user.twitter.strip()
+                        let strippedUser = user.twitter.strip(currentUser)
                         isLinked = ParseTwitter.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
@@ -256,11 +256,11 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.twitter.isLinked()
+                        var isLinked = ParseTwitter.isLinked(with: currentUser)
                         XCTAssertTrue(isLinked)
 
                         // Test stripping
-                        let strippedUser = try await user.twitter.strip()
+                        let strippedUser = user.twitter.strip(currentUser)
                         isLinked = ParseTwitter.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {
@@ -386,8 +386,8 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentLinkedUser = await user.twitter.isLinked()
-                        XCTAssertTrue(currentLinkedUser)
+                        let isLinked = ParseTwitter.isLinked(with: currentUser)
+                        XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -440,8 +440,8 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentLinkedUser = await user.twitter.isLinked()
-                        XCTAssertTrue(currentLinkedUser)
+                        let isLinked = ParseTwitter.isLinked(with: currentUser)
+                        XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -500,8 +500,8 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentLinkedUser = await user.twitter.isLinked()
-                        XCTAssertTrue(currentLinkedUser)
+                        let isLinked = ParseTwitter.isLinked(with: currentUser)
+                        XCTAssertTrue(isLinked)
                         let currentUserSessionToken = try await User.sessionToken()
                         XCTAssertEqual(currentUserSessionToken, "myToken")
                     } catch {
@@ -560,6 +560,8 @@ class ParseTwitterTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                let currentLinkedUser = ParseTwitter.isLinked(with: user)
+                XCTAssertTrue(currentLinkedUser)
                 Task {
                     do {
                         let currentUser = try await User.current()
@@ -567,7 +569,7 @@ class ParseTwitterTests: XCTestCase {
                         if let sessionToken = try? await User.sessionToken() {
                             XCTAssertEqual(sessionToken, "myToken")
                         }
-                        let currentLinkedUser = await user.twitter.isLinked()
+                        let currentLinkedUser = ParseTwitter.isLinked(with: currentUser)
                         XCTAssertTrue(currentLinkedUser)
                     } catch {
                         XCTFail(error.localizedDescription)
