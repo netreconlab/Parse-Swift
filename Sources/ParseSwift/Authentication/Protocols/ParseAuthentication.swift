@@ -257,8 +257,8 @@ public extension ParseUser {
                 do {
                     try await signupCommand(body: body)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let defaultError = ParseError(code: .otherCause,
                                                   message: error.localizedDescription)

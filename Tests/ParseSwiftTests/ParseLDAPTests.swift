@@ -115,7 +115,6 @@ class ParseLDAPTests: XCTestCase {
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-    @MainActor
     func testLogin() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseLDAP<User>
@@ -167,7 +166,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -177,7 +178,6 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testLoginWrongKeys() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
@@ -234,7 +234,6 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
-    @MainActor
     func testReplaceAnonymousWithLDAP() async throws {
         try await loginAnonymousUser()
         MockURLProtocol.removeAll()
@@ -286,7 +285,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -296,7 +297,6 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testReplaceAnonymousWithLinkedLDAP() async throws {
         try await loginAnonymousUser()
         MockURLProtocol.removeAll()
@@ -337,7 +337,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -347,7 +349,6 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testLinkLoggedInUserWithLDAP() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
@@ -392,7 +393,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -402,7 +405,6 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testLinkLoggedInAuthData() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
@@ -448,7 +450,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -458,7 +462,6 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testLinkLoggedInUserWrongKeys() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
@@ -477,13 +480,12 @@ class ParseLDAPTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    @MainActor
     func testUnlink() async throws {
         var user = try await loginNormally()
         MockURLProtocol.removeAll()
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
-                                              password: "this")
+                                                  password: "this")
         user.authData = [User.ldap.__type: authData]
         try await User.setCurrent(user)
         XCTAssertTrue(ParseLDAP.isLinked(with: user))
@@ -524,7 +526,9 @@ class ParseLDAPTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)

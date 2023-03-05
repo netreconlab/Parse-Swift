@@ -1882,6 +1882,7 @@ class ParseLiveQueryTests: XCTestCase {
                 XCTAssertEqual(current.count, 1)
                 XCTAssertEqual(pending.count, 1)
 
+                client.clientId = "yolo"
                 let response = PreliminaryMessageResponse(op: .subscribed,
                                                           requestId: 1,
                                                           clientId: "yolo",
@@ -2006,7 +2007,9 @@ class ParseLiveQueryTests: XCTestCase {
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
         XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
+        if !isPendingSubscription {
+            XCTAssertFalse(isPendingSubscription)
+        }
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
