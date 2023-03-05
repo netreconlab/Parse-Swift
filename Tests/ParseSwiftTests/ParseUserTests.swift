@@ -333,6 +333,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testFetchAndUpdateCurrentUser() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
