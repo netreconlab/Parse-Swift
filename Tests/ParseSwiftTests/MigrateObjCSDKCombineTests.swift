@@ -234,7 +234,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -298,7 +300,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -362,7 +366,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -538,7 +544,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -586,7 +594,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)

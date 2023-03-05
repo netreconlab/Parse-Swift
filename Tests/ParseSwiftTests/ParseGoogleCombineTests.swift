@@ -138,7 +138,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -146,6 +148,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testLoginAuthData() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -199,7 +202,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -271,7 +276,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -330,7 +337,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -338,6 +347,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testUnlink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -393,7 +403,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -401,6 +413,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testUnlinkPassUser() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -456,7 +469,9 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)

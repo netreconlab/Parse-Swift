@@ -176,7 +176,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -242,7 +244,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -363,7 +367,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -418,7 +424,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -477,7 +485,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -621,7 +631,9 @@ class ParseAppleTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)

@@ -248,7 +248,8 @@ public extension ParseUser {
         Task {
             do {
                 _ = try await Self.current()
-                Self.link(type, authData: authData,
+                Self.link(type,
+                          authData: authData,
                           options: options,
                           callbackQueue: callbackQueue,
                           completion: completion)

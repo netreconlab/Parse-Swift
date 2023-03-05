@@ -183,7 +183,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -245,7 +247,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -362,7 +366,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -412,7 +418,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -465,7 +473,9 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertTrue(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
-                        expectation1.fulfill()
+                        DispatchQueue.main.async {
+                            expectation1.fulfill()
+                        }
                     }
                 }
             case .failure(let error):
@@ -524,7 +534,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -599,7 +611,9 @@ class ParseSpotifyTests: XCTestCase {
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)

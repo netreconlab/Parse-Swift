@@ -388,7 +388,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                             let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                             XCTAssertEqual(uploadCount, 0)
                             XCTAssertEqual(taskCount, 0)
-                            expectation2.fulfill()
+                            DispatchQueue.main.async {
+                                expectation2.fulfill()
+                            }
                         }
                     }
                 }
@@ -440,7 +442,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                             let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                             XCTAssertEqual(downloadCount, 0)
                             XCTAssertEqual(taskCount, 0)
-                            expectation2.fulfill()
+                            DispatchQueue.main.async {
+                                expectation2.fulfill()
+                            }
                         }
                     }
                 }
@@ -484,7 +488,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                         let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                         XCTAssertEqual(streamCount, 0)
                         XCTAssertEqual(taskCount, 0)
-                        expectation2.fulfill()
+                        DispatchQueue.main.async {
+                            expectation2.fulfill()
+                        }
                     }
                 }
             }

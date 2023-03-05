@@ -191,7 +191,9 @@ class ParseAuthenticationCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
@@ -260,7 +262,9 @@ class ParseAuthenticationCombineTests: XCTestCase {
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
-                expectation2.fulfill()
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
         })
         publisher.store(in: &current)
