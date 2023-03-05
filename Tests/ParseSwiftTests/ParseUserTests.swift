@@ -881,7 +881,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let saved = try await updated.save()
-            let nanoSeconds = UInt64(2 * 1_000_000_000)
+            let nanoSeconds = UInt64(1 * 1_000_000_000)
             try await Task.sleep(nanoseconds: nanoSeconds)
 
             let newCurrentUser = try await User.current()
@@ -1662,7 +1662,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        let nanoSeconds = UInt64(3 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
         let installationFromKeychain = try await BaseParseInstallation.current()
         if installationFromKeychain.installationId == oldInstallationId
@@ -1693,7 +1693,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         } catch {
                             XCTAssertTrue(error.containedIn([.otherCause]))
                         }
-                        let nanoSeconds = UInt64(3 * 1_000_000_000)
+                        let nanoSeconds = UInt64(1 * 1_000_000_000)
                         try await Task.sleep(nanoseconds: nanoSeconds)
 
                         if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>

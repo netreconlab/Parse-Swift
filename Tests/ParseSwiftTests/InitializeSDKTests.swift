@@ -207,7 +207,7 @@ class InitializeSDKTests: XCTestCase {
             }
         }
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -449,7 +449,7 @@ class InitializeSDKTests: XCTestCase {
         try? await KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
         try? await KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")

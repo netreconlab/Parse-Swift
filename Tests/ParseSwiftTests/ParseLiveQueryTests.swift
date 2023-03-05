@@ -464,7 +464,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(receivingTask, true)
         await client.status(.closed, closeCode: .goingAway, reason: nil)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         XCTAssertEqual(delegate.code, .goingAway)
@@ -492,7 +492,7 @@ class ParseLiveQueryTests: XCTestCase {
         await client.setStatus(.connected)
         await client.close()
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         XCTAssertTrue(client.task.state == .suspended)
@@ -519,7 +519,7 @@ class ParseLiveQueryTests: XCTestCase {
         await client.setStatus(.connected)
         await client.closeAll()
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         XCTAssertTrue(client.task.state == .suspended)
@@ -668,7 +668,7 @@ class ParseLiveQueryTests: XCTestCase {
         pending = await client.subscriptions.pending
         XCTAssertEqual(pending.count, 0)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         guard let subscribed = subscription.subscribed else {
@@ -939,7 +939,7 @@ class ParseLiveQueryTests: XCTestCase {
                     return
                 }
                 await client.received(encoded2)
-                let nanoSeconds = UInt64(2 * 1_000_000_000)
+                let nanoSeconds = UInt64(1 * 1_000_000_000)
                 try await Task.sleep(nanoseconds: nanoSeconds)
                 guard let receivedError = delegate.error else {
                     XCTFail("Should have received error")
@@ -998,7 +998,7 @@ class ParseLiveQueryTests: XCTestCase {
                     return
                 }
                 await client.received(encoded2)
-                let nanoSeconds = UInt64(2 * 1_000_000_000)
+                let nanoSeconds = UInt64(1 * 1_000_000_000)
                 try await Task.sleep(nanoseconds: nanoSeconds)
                 guard let receivedError = delegate.error else {
                     XCTFail("Should have received error")
@@ -1058,7 +1058,7 @@ class ParseLiveQueryTests: XCTestCase {
                     return
                 }
                 await client.received(encoded2)
-                let nanoSeconds = UInt64(2 * 1_000_000_000)
+                let nanoSeconds = UInt64(1 * 1_000_000_000)
                 try await Task.sleep(nanoseconds: nanoSeconds)
                 guard let receivedError = delegate.error else {
                     XCTFail("Should have received error")
@@ -1132,7 +1132,7 @@ class ParseLiveQueryTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         XCTAssertNotNil(delegate.error)
@@ -1158,7 +1158,7 @@ class ParseLiveQueryTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         XCTAssertNotNil(delegate.error)
@@ -1198,7 +1198,7 @@ class ParseLiveQueryTests: XCTestCase {
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         // Only continue test if this is not nil, otherwise skip
@@ -1460,7 +1460,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         guard let subscribed = subscription.subscribed else {
@@ -1550,7 +1550,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
 
         guard let subscribed = subscription.subscribed else {
