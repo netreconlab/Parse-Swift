@@ -328,7 +328,7 @@ extension ParseACL {
                              message: "Default ACL cannot be found in Keychain. You should `setDefaultACL` first")
         }
         #else
-        if let controller: DefaultACL = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
+        if let controller: DefaultACL = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             aclController = controller
         } else {
             throw ParseError(code: .otherCause,
@@ -394,7 +394,7 @@ extension ParseACL {
         #if !os(Linux) && !os(Android) && !os(Windows)
         try await KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #else
-        try ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
+        try await ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #endif
         return aclController.defaultACL
     }

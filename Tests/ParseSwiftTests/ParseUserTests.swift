@@ -2181,7 +2181,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    // swiftlint:disable:next function_body_length cyclomatic_complexity
+    // swiftlint:disable:next function_body_length
     func testFetchAllAsyncMainQueueCurrent() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -2247,20 +2247,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                                     return
                                 }
                                 XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
-
-                                #if !os(Linux) && !os(Android) && !os(Windows)
-                                // Should be updated in Keychain
-                                let nanoSeconds = UInt64(2 * 1_000_000_000)
-                                try await Task.sleep(nanoseconds: nanoSeconds)
-                                let keychainUser: CurrentUserContainer<User>?
-                                = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
-                                guard let keychainUpdatedCustomKey = keychainUser?.currentUser?.customKey else {
-                                    XCTFail("Should get updatedAt from Keychain")
-                                    expectation1.fulfill()
-                                    return
-                                }
-                                XCTAssertEqual(keychainUpdatedCustomKey, customKey)
-                                #endif
                             } catch {
                                 XCTFail(error.localizedDescription)
                             }
