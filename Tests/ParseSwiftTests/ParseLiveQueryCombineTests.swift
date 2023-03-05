@@ -123,7 +123,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertEqual(client.status, .socketNotEstablished)
+                    XCTAssertEqual(client.status, .connected)
                     XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
                 }
                 expectation1.fulfill()

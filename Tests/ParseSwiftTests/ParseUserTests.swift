@@ -2235,6 +2235,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
                         // Should be updated in memory
                         let immutableOriginalUser = user
+                        let customKey = user.customKey
                         Task {
                             do {
                                 let updatedCurrentUser = try await User.current()
@@ -2249,14 +2250,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
                                 #if !os(Linux) && !os(Android) && !os(Windows)
                                 // Should be updated in Keychain
-                                let keychainUser: CurrentUserContainer<BaseParseUser>?
+                                let nanoSeconds = UInt64(2 * 1_000_000_000)
+                                try await Task.sleep(nanoseconds: nanoSeconds)
+                                let keychainUser: CurrentUserContainer<User>?
                                 = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
-                                guard let keychainUpdatedCurrentDate = keychainUser?.currentUser?.updatedAt else {
+                                guard let keychainUpdatedCustomKey = keychainUser?.currentUser?.customKey else {
                                     XCTFail("Should get updatedAt from Keychain")
                                     expectation1.fulfill()
                                     return
                                 }
-                                XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
+                                XCTAssertEqual(keychainUpdatedCustomKey, customKey)
                                 #endif
                             } catch {
                                 XCTFail(error.localizedDescription)

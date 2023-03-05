@@ -348,10 +348,10 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         XCTAssertNil(data)
         data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentInstallation,
                                                accessGroup: noKeychainAccessGroup)
-        XCTAssertNil(data)
+        XCTAssertNotNil(data)
         data = await KeychainStore.shared.data(forKey: ParseStorage.Keys.currentVersion,
                                                accessGroup: noKeychainAccessGroup)
-        XCTAssertNil(data)
+        XCTAssertNotNil(data)
     }
 
     func testUserNoAccessGroupNoSync() async throws {

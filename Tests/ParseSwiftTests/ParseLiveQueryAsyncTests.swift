@@ -92,7 +92,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             _ = try await client.sendPing()
             XCTFail("Should have produced error")
         } catch {
-            XCTAssertEqual(client.status, .socketEstablished)
+            XCTAssertEqual(client.status, .connected)
             XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
         }
     }

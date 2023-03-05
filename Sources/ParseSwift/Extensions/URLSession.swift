@@ -342,7 +342,26 @@ internal extension URLSession {
         mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
-        downloadTask(with: request) { (location, urlResponse, responseError) in
+        Task {
+            do {
+                let response = try await downloadTask(for: request)
+                let result = await self.makeResult(request: request,
+                                                   location: response.0,
+                                                   urlResponse: response.1,
+                                                   responseError: nil,
+                                                   mapper: mapper)
+                completion(result)
+            } catch {
+                let result = await self.makeResult(request: request,
+                                                   location: nil,
+                                                   urlResponse: nil,
+                                                   responseError: error,
+                                                   mapper: mapper)
+                completion(result)
+            }
+        }
+        /*downloadTask(with: request) { (location, urlResponse, responseError) in
+            print(location)
             Task {
                 let result = await self.makeResult(request: request,
                                                    location: location,
@@ -352,5 +371,49 @@ internal extension URLSession {
                 completion(result)
             }
         }.resume()
+        */
+    }
+
+    func downloadTask(for request: URLRequest,
+                      delegate: URLSessionTaskDelegate? = nil) async throws -> (URL, URLResponse) {
+        try await withCheckedThrowingContinuation { continuation in
+            self.downloadTask(with: request,
+                              completionHandler: continuation.resume).resume()
+        }
+    }
+
+    func downloadTask(with request: URLRequest,
+                      completionHandler: @escaping (Result<(URL, URLResponse),
+                                                    Error>) -> Void) -> URLSessionDownloadTask {
+        return downloadTask(with: request) { (location, response, error) in
+            guard let location = location,
+                  let response = response else {
+                guard let error = error else {
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    completionHandler(.failure(parseError))
+                    return
+                }
+                completionHandler(.failure(error))
+                return
+            }
+            do {
+                let downloadDirectoryPath = try ParseFileManager.downloadDirectory()
+                guard let fileManager = ParseFileManager() else {
+                    throw ParseError(code: .otherCause,
+                                     message: "Cannot create fileManager")
+                }
+                try fileManager.createDirectoryIfNeeded(downloadDirectoryPath.relativePath)
+                let fileNameURL = URL(fileURLWithPath: location.lastPathComponent)
+                let fileLocation = downloadDirectoryPath.appendingPathComponent(fileNameURL.lastPathComponent)
+                try? FileManager.default.removeItem(at: fileLocation) // Remove file if it is already present
+                try FileManager.default.moveItem(at: location, to: fileLocation)
+                completionHandler(.success((fileLocation, response)))
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = (error as? ParseError) ?? defaultError
+                completionHandler(.failure(parseError))
+            }
+        }
     }
 }
