@@ -189,7 +189,6 @@ class InitializeSDKTests: XCTestCase {
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
                                                                       installationId: installationId)
         await Installation.setCurrentContainer(badContainer)
-        await Installation.saveCurrentContainerToKeychain()
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
 
         var foundInstallation = Installation()
@@ -270,7 +269,6 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.objectId = "yarr"
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrent(newInstallation)
-        await Installation.saveCurrentContainerToKeychain()
 
         try await ParseSwift.initialize(applicationId: "applicationId",
                                         clientKey: "clientKey",
@@ -295,7 +293,6 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrent(newInstallation)
-        await Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
         let oldInstallation = try await Installation.current()
@@ -325,7 +322,6 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrent(newInstallation)
-        await Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
         let oldInstallation = try await Installation.current()
@@ -356,7 +352,6 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrent(newInstallation)
-        await Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
         let oldInstallation = try await Installation.current()
@@ -386,7 +381,6 @@ class InitializeSDKTests: XCTestCase {
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
         await Installation.setCurrent(newInstallation)
-        await Installation.saveCurrentContainerToKeychain()
 
         XCTAssertNil(newInstallation.objectId)
         let oldInstallation = try await Installation.current()

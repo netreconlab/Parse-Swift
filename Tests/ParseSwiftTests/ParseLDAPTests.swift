@@ -164,7 +164,7 @@ class ParseLDAPTests: XCTestCase {
                         }
 
                         // Test stripping
-                        let strippedUser = try await user.ldap.strip()
+                        let strippedUser = user.ldap.strip(user)
                         isLinked = ParseLDAP.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
                     } catch {

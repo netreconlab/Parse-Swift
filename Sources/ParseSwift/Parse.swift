@@ -160,7 +160,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
             let newContainer = CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: foundInstallation,
                                                                                    installationId: installationId)
             await BaseParseInstallation.setCurrentContainer(newContainer)
-            await BaseParseInstallation.saveCurrentContainerToKeychain()
         }
     }
     await BaseParseInstallation.createNewInstallationIfNeeded()
@@ -178,7 +177,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
             currentInstallationContainer.installationId = installationId
             currentInstallationContainer.currentInstallation = updatedInstallation
             await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
-            await BaseParseInstallation.saveCurrentContainerToKeychain()
         }
     }
     #endif

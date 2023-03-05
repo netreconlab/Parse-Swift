@@ -502,12 +502,8 @@ class ParseTwitterTests: XCTestCase {
                         XCTAssertEqual(user, currentUser)
                         let currentLinkedUser = await user.twitter.isLinked()
                         XCTAssertTrue(currentLinkedUser)
-                        do {
-                            let currentUserSessionToken = try await User.sessionToken()
-                            XCTAssertEqual(currentUserSessionToken, "myToken")
-                        } catch {
-                            _ = XCTSkip("Should have session token")
-                        }
+                        let currentUserSessionToken = try await User.sessionToken()
+                        XCTAssertEqual(currentUserSessionToken, "myToken")
                     } catch {
                         XCTFail(error.localizedDescription)
                     }

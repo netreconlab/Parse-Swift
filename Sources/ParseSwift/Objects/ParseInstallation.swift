@@ -255,33 +255,19 @@ public extension ParseInstallation {
     }
 
     internal static func setCurrentContainer(_ newValue: CurrentInstallationContainer<Self>) async {
-        try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentInstallation)
+        var currentContainer = newValue
+        currentContainer.currentInstallation?.originalData = nil
+        try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
+        #endif
     }
 
     internal static func updateInternalFieldsCorrectly() async {
-        /*
-        if let currentContainerInstallationId = await Self.currentContainer().installationId,
-            await Self.currentContainer().currentInstallation?.installationId !=
-            currentContainerInstallationId {
-
-            // If the user made changes, set back to the original
-            var currentContainer = await Self.currentContainer()
-            currentContainer.currentInstallation?.installationId = currentContainerInstallationId
-            await Self.setCurrentContainer(currentContainer)
-        } */
-
         // Always pull automatic info to ensure user made no changes to immutable values
         var currentContainer = await Self.currentContainer()
         currentContainer.currentInstallation?.updateAutomaticInfo()
         await Self.setCurrentContainer(currentContainer)
-    }
-
-    internal static func saveCurrentContainerToKeychain() async {
-        var currentContainer = await Self.currentContainer()
-        currentContainer.currentInstallation?.originalData = nil
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
-        #endif
     }
 
     internal static func deleteCurrentContainerFromKeychain() async {
@@ -367,7 +353,6 @@ public extension ParseInstallation {
                                 }
                                 await Self.setCurrent(current)
                             }
-                            await Self.saveCurrentContainerToKeychain()
                             guard let latestInstallation = try? await Self.current() else {
                                 let error = ParseError(code: .otherCause,
                                                        message: "Had trouble migrating the installation")
@@ -512,7 +497,6 @@ extension ParseInstallation {
         if let foundCurrentInstallation = foundCurrentInstallationObjects.first {
             if !deleting {
                 await Self.setCurrent(foundCurrentInstallation)
-                await Self.saveCurrentContainerToKeychain()
             } else {
                 await Self.deleteCurrentContainerFromKeychain()
             }

@@ -715,7 +715,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(command.body?.email, email)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
     func testUpdateCommandCurrentUserModifiedEmail() async throws {
         try await userSignUp()
         var user = try await User.current()
@@ -725,8 +724,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
         let email = "peace@parse.com"
         user.email = email
-        try await User.setCurrent(user)
-        let command = try await User.current().saveCommand()
+        let command = try await user.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -744,8 +742,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
         let email = "peace@parse.com"
         user.email = email
-        try await User.setCurrent(user)
-        let command = try await User.current().saveCommand()
+        let command = try await user.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -753,7 +750,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(command.body)
         XCTAssertEqual(command.body?.email, email)
     }
-    #endif
 
     func testSaveAndUpdateCurrentUser() async throws {
         try await userSignUp()
@@ -2035,7 +2031,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var user = try await User.current()
         user.customKey = customField
         try await User.setCurrent(user)
-        await User.saveCurrentContainerToKeychain()
         #if !os(Linux) && !os(Android) && !os(Windows)
         let keychainUser: CurrentUserContainer<User>?
             = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)

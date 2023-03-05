@@ -398,8 +398,9 @@ public extension ParseUser {
             if let sessionToken = user.sessionToken {
                 await Self.setCurrentContainer(.init(currentUser: mutableSelf,
                                                      sessionToken: sessionToken))
+            } else {
+                try await Self.setCurrent(mutableSelf)
             }
-            await Self.saveCurrentContainerToKeychain()
             return mutableSelf
         }
     }
@@ -429,7 +430,6 @@ public extension ParseUser {
             } else {
                 try await Self.setCurrent(currentUser)
             }
-            await Self.saveCurrentContainerToKeychain()
             return currentUser
         }
     }

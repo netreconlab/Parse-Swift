@@ -139,12 +139,9 @@ public extension ParseUser {
     }
 
     internal static func setCurrentContainer(_ newValue: CurrentUserContainer<Self>?) async {
-        try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentUser)
-    }
-
-    internal static func saveCurrentContainerToKeychain() async {
-        var currentContainer = await Self.currentContainer()
+        var currentContainer = newValue
         currentContainer?.currentUser?.originalData = nil
+        try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #endif
@@ -256,7 +253,6 @@ extension ParseUser {
                 currentUser: user,
                 sessionToken: sessionToken
             ))
-            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -407,7 +403,6 @@ extension ParseUser {
                 currentUser: user,
                 sessionToken: sessionToken
             ))
-            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -576,7 +571,6 @@ extension ParseUser {
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
             await Self.setCurrentContainer(.init(currentUser: user,
                                            sessionToken: sessionToken))
-            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -763,7 +757,6 @@ extension ParseUser {
             }
             await Self.setCurrentContainer(.init(currentUser: user,
                                                  sessionToken: sessionToken))
-            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -781,7 +774,6 @@ extension ParseUser {
                 currentUser: user,
                 sessionToken: response.sessionToken
             ))
-            await Self.saveCurrentContainerToKeychain()
             return user
         }
     }
@@ -803,7 +795,6 @@ extension ParseUser {
         if let foundCurrentUser = foundCurrentUserObjects.first {
             if !deleting {
                 try await Self.setCurrent(foundCurrentUser)
-                await Self.saveCurrentContainerToKeychain()
             } else {
                 await Self.deleteCurrentContainerFromKeychain()
             }
@@ -1066,17 +1057,9 @@ extension ParseUser {
         var mutableSelf = self
         if let currentUser = try? await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // swiftlint:disable:next line_length
-            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
-               currentUserContainerInKeychain.currentUser?.email == mutableSelf.email {
-                mutableSelf.email = nil
-            }
-            #else
             if currentUser.email == mutableSelf.email {
                 mutableSelf.email = nil
             }
-            #endif
         }
         let mapper = { (data: Data) -> Self in
             var updatedObject = self
@@ -1106,17 +1089,9 @@ extension ParseUser {
         var mutableSelf = self
         if let currentUser = try? await Self.current(),
            currentUser.hasSameObjectId(as: mutableSelf) {
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // swiftlint:disable:next line_length
-            if let currentUserContainerInKeychain: CurrentUserContainer<BaseParseUser> = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
-               currentUserContainerInKeychain.currentUser?.email == mutableSelf.email {
-                mutableSelf.email = nil
-            }
-            #else
             if currentUser.email == mutableSelf.email {
                 mutableSelf.email = nil
             }
-            #endif
         }
         let mapper = { (data: Data) -> Self in
             var updatedObject = self
