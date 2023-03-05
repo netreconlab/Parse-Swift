@@ -511,7 +511,6 @@ class ParseKeychainAccessGroupTests: XCTestCase {
                 XCTFail("Should have casted to ParseError")
                 return
             }
-            print(parseError)
             XCTAssertTrue(parseError.message.contains("initialize the SDK"))
         }
     }
