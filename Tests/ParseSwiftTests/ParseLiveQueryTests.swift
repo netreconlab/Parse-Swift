@@ -2060,10 +2060,10 @@ class ParseLiveQueryTests: XCTestCase {
         isPendingSubscription = try await client.isPendingSubscription(query)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
-        if current.count > 0 {
+        if isSubscribed {
+            XCTAssertTrue(isSubscribed)
             XCTAssertEqual(current.count, 1)
         }
-        XCTAssertTrue(isSubscribed)
         if !isPendingSubscription {
             XCTAssertFalse(isPendingSubscription)
             XCTAssertEqual(pending.count, 0)

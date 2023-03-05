@@ -14,21 +14,22 @@ PlaygroundPage.current.needsIndefiniteExecution = true
  Start your parse-server with:
  npm start -- --appId applicationId --clientKey clientKey --masterKey primaryKey --mountPath /parse
 */
-
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Get current SDK version
-if let version = ParseVersion.current {
-    print("Current Swift SDK version is \"\(version)\"")
-}
+let version = try await ParseVersion.current()
+print("Current Swift SDK version is \"\(version)\"")
+
 
 //: Check the health of your Parse Server.
 do {
-    print("Server health is: \(try ParseHealth.check())")
+    print("Server health is: \(try await ParseHealth.check())")
 } catch {
     assertionFailure("Error checking the server health: \(error)")
 }
@@ -219,7 +220,7 @@ var score2ForFetchedLater: GameScore?
 //: Save synchronously (not preferred - all operations on current queue).
 let savedScore: GameScore?
 do {
-    savedScore = try score.save()
+    savedScore = try await score.save()
 } catch {
     savedScore = nil
     fatalError("Error saving: \(error)")
@@ -246,7 +247,7 @@ changedScore = changedScore.set(\.points, to: 200)
 
 let savedChangedScore: GameScore?
 do {
-    savedChangedScore = try changedScore.save()
+    savedChangedScore = try await changedScore.save()
     print("Updated score: \(String(describing: savedChangedScore))")
 } catch {
     savedChangedScore = nil
@@ -259,7 +260,7 @@ assert(savedScore!.objectId == savedChangedScore!.objectId)
 
 let otherResults: [(Result<GameScore, ParseError>)]?
 do {
-    otherResults = try [score, score2].saveAll()
+    otherResults = try await [score, score2].saveAll()
 } catch {
     otherResults = nil
     fatalError("Error saving: \(error)")
@@ -281,7 +282,7 @@ let score3 = GameScore(points: 30)
 //: Save the score and store it in "scoreToDelete".
 var scoreToDelete: GameScore!
 do {
-    scoreToDelete = try score3.save()
+    scoreToDelete = try await score3.save()
     print("Successfully saved: \(scoreToDelete!)")
 } catch {
     assertionFailure("Error deleting: \(error)")
@@ -289,7 +290,7 @@ do {
 
 //: Delete the score from parse-server synchronously.
 do {
-    try scoreToDelete.delete()
+    try await scoreToDelete.delete()
     print("Successfully deleted: \(scoreToDelete!)")
 } catch {
     assertionFailure("Error deleting: \(error)")
@@ -310,7 +311,7 @@ scoreToFetch.fetch { result in
 
 //: Synchronously fetch this GameScore based on it is objectId alone.
 do {
-    let fetchedScore = try scoreToFetch.fetch()
+    let fetchedScore = try await scoreToFetch.fetch()
     print("Successfully fetched: \(fetchedScore)")
 } catch {
     assertionFailure("Error fetching: \(error)")
@@ -341,7 +342,7 @@ var fetchedScore: GameScore!
 
 //: Synchronously fetchAll GameScore's based on it is objectId's alone.
 do {
-    let fetchedScores = try [scoreToFetch, score2ToFetch].fetchAll()
+    let fetchedScores = try await [scoreToFetch, score2ToFetch].fetchAll()
     fetchedScores.forEach { result in
         switch result {
         case .success(let fetched):
@@ -401,7 +402,7 @@ do {
     let polygon = try ParsePolygon(points)
     let bytes = ParseBytes(data: "hello world".data(using: .utf8)!)
     var gameData = GameData(bytes: bytes, polygon: polygon)
-    gameData = try gameData.save()
+    gameData = try await gameData.save()
     print("Successfully saved: \(gameData)")
 } catch {
     print("Error saving: \(error.localizedDescription)")
