@@ -111,7 +111,7 @@ extension GameScore {
     }
 }
 
-//: Logging out - synchronously
+//: Logging out - async/await
 do {
     try User.logout()
     print("Successfully logged out")
@@ -190,7 +190,7 @@ User.current?.fetch(includeKeys: ["*"]) { result in
     }
 }
 
-//: Logging out - synchronously.
+//: Logging out - async/await.
 do {
     try User.logout()
     print("Successfully logged out")
@@ -220,7 +220,7 @@ newUser.signup { result in
     }
 }
 
-//: Logging out - synchronously.
+//: Logging out - async/await.
 do {
     try User.logout()
     print("Successfully logged out")
@@ -228,7 +228,7 @@ do {
     print("Error logging out: \(error)")
 }
 
-//: Verification Email - synchronously.
+//: Verification Email - async/await.
 do {
     try User.verificationEmail(email: "hello@parse.org")
     print("Successfully requested verification email be sent")
@@ -236,7 +236,7 @@ do {
     print("Error requesting verification email be sent: \(error)")
 }
 
-//: Password Reset Request - synchronously.
+//: Password Reset Request - async/await.
 do {
     try User.passwordReset(email: "hello@parse.org")
     print("Successfully requested password reset")

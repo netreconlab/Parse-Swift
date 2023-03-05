@@ -66,7 +66,7 @@ extension GameScore {
 var score = GameScore(points: 40)
 
 /*:
- Save asynchronously (preferred way) - Performs work on background
+ Save asynchronously with completion block - Performs work on background
  queue and returns to specified callbackQueue. If no callbackQueue
  is specified it returns to main queue.
 */

@@ -63,9 +63,10 @@ extension GameScore {
 //: customObjectId has to be enabled on the server for this to work.
 var score = GameScore(objectId: "myObjectId", points: 10)
 
-/*: Save asynchronously (preferred way) - Performs work on background
-    queue and returns to specified callbackQueue.
-    If no callbackQueue is specified it returns to main queue.
+/*:
+ Save asynchronously with completion block - Performs work on background
+ queue and returns to specified callbackQueue.
+ If no callbackQueue is specified it returns to main queue.
 */
 score.save { result in
     switch result {
@@ -127,7 +128,7 @@ query.first { result in
 //: Now we will attempt to fetch a ParseObject that is not saved.
 let scoreToFetch = GameScore(objectId: "hello")
 
-//: Asynchronously (preferred way) fetch this GameScore based on it is objectId alone.
+//: Asynchronously with completion block fetch this GameScore based on it is objectId alone.
 scoreToFetch.fetch { result in
     switch result {
     case .success(let fetchedScore):

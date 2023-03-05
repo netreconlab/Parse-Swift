@@ -175,7 +175,7 @@ extension GameScore {
 //: Define a GameScore.
 let score = GameScore(points: 10)
 
-//: Save asynchronously (preferred way) with the context option.
+//: Save asynchronously with completion block with the context option.
 score.save(options: [.context(["hello": "world"])]) { result in
     switch result {
     case .success(let savedScore):

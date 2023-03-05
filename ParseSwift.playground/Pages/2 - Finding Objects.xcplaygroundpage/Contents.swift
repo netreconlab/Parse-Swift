@@ -72,7 +72,7 @@ var query = GameScore.query("points" > 50,
                             "createdAt" > afterDate)
     .order([.descending("points")])
 
-//: Query asynchronously (preferred way) - Performs work on background
+//: Query asynchronously with completion block - Performs work on background
 //: queue and returns to specified callbackQueue.
 //: If no callbackQueue is specified it returns to main queue.
 query.limit(2)
@@ -106,7 +106,7 @@ results.forEach { score in
     print("Found score: \(score)")
 }
 
-//: Query first asynchronously (preferred way) - Performs work on background
+//: Query first asynchronously with completion block - Performs work on background
 //: queue and returns to specified callbackQueue.
 //: If no callbackQueue is specified it returns to main queue.
 query.first { results in
@@ -127,7 +127,7 @@ query.first { results in
     }
 }
 
-//: Query first asynchronously (preferred way) - Performs work on background
+//: Query first asynchronously with completion block - Performs work on background
 //: queue and returns to specified callbackQueue.
 //: If no callbackQueue is specified it returns to main queue.
 query.count { results in

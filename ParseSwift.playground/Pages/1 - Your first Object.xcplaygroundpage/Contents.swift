@@ -20,18 +20,17 @@ Task {
     } catch {
         assertionFailure("Error initializing Parse-Swift: \(error)")
     }
-}
 
-//: Get current SDK version
-let version = try await ParseVersion.current()
-print("Current Swift SDK version is \"\(version)\"")
+    //: Get current SDK version
+    let version = try await ParseVersion.current()
+    print("Current Swift SDK version is \"\(version)\"")
 
-
-//: Check the health of your Parse Server.
-do {
-    print("Server health is: \(try await ParseHealth.check())")
-} catch {
-    assertionFailure("Error checking the server health: \(error)")
+    //: Check the health of your Parse Server.
+    do {
+        print("Server health is: \(try await ParseHealth.check())")
+    } catch {
+        assertionFailure("Error checking the server health: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.
@@ -119,9 +118,10 @@ extension GameData {
 let score = GameScore(points: 10)
 let score2 = GameScore(points: 3)
 
-/*: Save asynchronously (preferred way) - Performs work on background
-    queue and returns to specified callbackQueue.
-    If no callbackQueue is specified it returns to main queue.
+/*:
+ Save asynchronously with completion block - Performs work on background
+ queue and returns to specified callbackQueue.
+ If no callbackQueue is specified it returns to main queue.
 */
 score.save { result in
     switch result {
@@ -217,89 +217,91 @@ var score2ForFetchedLater: GameScore?
     }
 }*/
 
-//: Save synchronously (not preferred - all operations on current queue).
-let savedScore: GameScore?
-do {
-    savedScore = try await score.save()
-} catch {
-    savedScore = nil
-    fatalError("Error saving: \(error)")
-}
+Task {
+    //: Save using async/await.
+    let savedScore: GameScore?
+    do {
+        savedScore = try await score.save()
+    } catch {
+        savedScore = nil
+        fatalError("Error saving: \(error)")
+    }
 
-assert(savedScore != nil)
-assert(savedScore?.objectId != nil)
-assert(savedScore?.createdAt != nil)
-assert(savedScore?.updatedAt != nil)
-assert(savedScore?.points == 10)
+    assert(savedScore != nil)
+    assert(savedScore?.objectId != nil)
+    assert(savedScore?.createdAt != nil)
+    assert(savedScore?.updatedAt != nil)
+    assert(savedScore?.points == 10)
 
-/*:
- To modify, you need to make a mutable copy of `savedScore`.
- Instead of using `.mergeable` this time, we will use the `set()`
- method which allows us to accomplish the same thing
- as `.mergeable`. You can choose to use `.set()` or
- `.mergeable` as long as you use either before you begin
- your first mutation of your `ParseObject`.
-*/
-guard var changedScore = savedScore else {
-    fatalError("Should have produced mutable changedScore")
-}
-changedScore = changedScore.set(\.points, to: 200)
+    /*:
+     To modify, you need to make a mutable copy of `savedScore`.
+     Instead of using `.mergeable` this time, we will use the `set()`
+     method which allows us to accomplish the same thing
+     as `.mergeable`. You can choose to use `.set()` or
+     `.mergeable` as long as you use either before you begin
+     your first mutation of your `ParseObject`.
+     */
+    guard var changedScore = savedScore else {
+        fatalError("Should have produced mutable changedScore")
+    }
+    changedScore = changedScore.set(\.points, to: 200)
 
-let savedChangedScore: GameScore?
-do {
-    savedChangedScore = try await changedScore.save()
-    print("Updated score: \(String(describing: savedChangedScore))")
-} catch {
-    savedChangedScore = nil
-    fatalError("Error saving: \(error)")
-}
+    let savedChangedScore: GameScore?
+    do {
+        savedChangedScore = try await changedScore.save()
+        print("Updated score: \(String(describing: savedChangedScore))")
+    } catch {
+        savedChangedScore = nil
+        fatalError("Error saving: \(error)")
+    }
 
-assert(savedChangedScore != nil)
-assert(savedChangedScore!.points == 200)
-assert(savedScore!.objectId == savedChangedScore!.objectId)
+    assert(savedChangedScore != nil)
+    assert(savedChangedScore!.points == 200)
+    assert(savedScore!.objectId == savedChangedScore!.objectId)
 
-let otherResults: [(Result<GameScore, ParseError>)]?
-do {
-    otherResults = try await [score, score2].saveAll()
-} catch {
-    otherResults = nil
-    fatalError("Error saving: \(error)")
-}
-assert(otherResults != nil)
+    let otherResults: [(Result<GameScore, ParseError>)]?
+    do {
+        otherResults = try await [score, score2].saveAll()
+    } catch {
+        otherResults = nil
+        fatalError("Error saving: \(error)")
+    }
+    assert(otherResults != nil)
 
-otherResults!.forEach { result in
-    switch result {
-    case .success(let savedScore):
-        print("Saved \"\(savedScore.className)\" with points \(String(describing: savedScore.points)) successfully")
-    case .failure(let error):
-        assertionFailure("Error saving: \(error)")
+    otherResults!.forEach { result in
+        switch result {
+        case .success(let savedScore):
+            print("Saved \"\(savedScore.className)\" with points \(String(describing: savedScore.points)) successfully")
+        case .failure(let error):
+            assertionFailure("Error saving: \(error)")
+        }
+    }
+
+    //: Now we will create another object and delete it.
+    let score3 = GameScore(points: 30)
+
+    //: Save the score and store it in "scoreToDelete".
+    var scoreToDelete: GameScore!
+    do {
+        scoreToDelete = try await score3.save()
+        print("Successfully saved: \(scoreToDelete!)")
+    } catch {
+        assertionFailure("Error deleting: \(error)")
+    }
+
+    //: Delete the score from parse-server synchronously.
+    do {
+        try await scoreToDelete.delete()
+        print("Successfully deleted: \(scoreToDelete!)")
+    } catch {
+        assertionFailure("Error deleting: \(error)")
     }
 }
 
-//: Now we will create another object and delete it.
-let score3 = GameScore(points: 30)
-
-//: Save the score and store it in "scoreToDelete".
-var scoreToDelete: GameScore!
-do {
-    scoreToDelete = try await score3.save()
-    print("Successfully saved: \(scoreToDelete!)")
-} catch {
-    assertionFailure("Error deleting: \(error)")
-}
-
-//: Delete the score from parse-server synchronously.
-do {
-    try await scoreToDelete.delete()
-    print("Successfully deleted: \(scoreToDelete!)")
-} catch {
-    assertionFailure("Error deleting: \(error)")
-}
-
 //: Now we will fetch a ParseObject that has already been saved based on its' objectId.
-let scoreToFetch = GameScore(objectId: savedScore?.objectId)
+let scoreToFetch = GameScore(objectId: score2ForFetchedLater?.objectId)
 
-//: Asynchronously (preferred way) fetch this GameScore based on it is objectId alone.
+//: Asynchronous completion block fetch this GameScore based on it is objectId alone.
 scoreToFetch.fetch { result in
     switch result {
     case .success(let fetchedScore):
@@ -309,18 +311,20 @@ scoreToFetch.fetch { result in
     }
 }
 
-//: Synchronously fetch this GameScore based on it is objectId alone.
-do {
-    let fetchedScore = try await scoreToFetch.fetch()
-    print("Successfully fetched: \(fetchedScore)")
-} catch {
-    assertionFailure("Error fetching: \(error)")
+Task {
+    //: Async/await fetch this GameScore based on it is objectId alone.
+    do {
+        let fetchedScore = try await scoreToFetch.fetch()
+        print("Successfully fetched: \(fetchedScore)")
+    } catch {
+        assertionFailure("Error fetching: \(error)")
+    }
 }
 
 //: Now we will fetch `ParseObject`'s in batch that have already been saved based on its' objectId.
 let score2ToFetch = GameScore(objectId: score2ForFetchedLater?.objectId)
 
-//: Asynchronously (preferred way) fetch GameScores based on it is objectId alone.
+//: Asynchronous completion block fetch GameScores based on it is objectId alone.
 [scoreToFetch, score2ToFetch].fetchAll { result in
     switch result {
     case .success(let fetchedScores):
@@ -338,25 +342,24 @@ let score2ToFetch = GameScore(objectId: score2ForFetchedLater?.objectId)
     }
 }
 
-var fetchedScore: GameScore!
-
-//: Synchronously fetchAll GameScore's based on it is objectId's alone.
-do {
-    let fetchedScores = try await [scoreToFetch, score2ToFetch].fetchAll()
-    fetchedScores.forEach { result in
-        switch result {
-        case .success(let fetched):
-            fetchedScore = fetched
-            print("Successfully fetched: \(fetched)")
-        case .failure(let error):
-            print("Error fetching: \(error)")
+Task {
+    //: Async/Await fetchAll GameScore's based on it is objectId's alone.
+    do {
+        let fetchedScores = try await [scoreToFetch, score2ToFetch].fetchAll()
+        fetchedScores.forEach { result in
+            switch result {
+            case .success(let fetched):
+                print("Successfully fetched: \(fetched)")
+            case .failure(let error):
+                print("Error fetching: \(error)")
+            }
         }
+    } catch {
+        assertionFailure("Error fetching: \(error)")
     }
-} catch {
-    assertionFailure("Error fetching: \(error)")
 }
 
-//: Asynchronously (preferred way) deleteAll GameScores based on it is objectId alone.
+//: Asynchronous completion block deleteAll GameScores based on it is objectId alone.
 [scoreToFetch, score2ToFetch].deleteAll { result in
     switch result {
     case .success(let deletedScores):
@@ -373,39 +376,43 @@ do {
     }
 }
 
-//: Synchronously deleteAll GameScore's based on it is objectId's alone.
+//: Async/await deleteAll GameScore's based on it is objectId's alone.
 //: Commented out because the async above deletes the items already.
-/* do {
-    let fetchedScores = try [scoreToFetch, score2ToFetch].deleteAll()
-    fetchedScores.forEach { result in
-        switch result {
-        case .success(let fetched):
-            print("Successfully deleted: \(fetched)")
-        case .failure(let error):
-            print("Error deleted: \(error)")
+/* Task {
+     do {
+        let fetchedScores = try await [scoreToFetch, score2ToFetch].deleteAll()
+        fetchedScores.forEach { result in
+            switch result {
+            case .success(let fetched):
+                print("Successfully deleted: \(fetched)")
+            case .failure(let error):
+                print("Error deleted: \(error)")
+            }
         }
+    } catch {
+        assertionFailure("Error deleting: \(error)")
     }
-} catch {
-    assertionFailure("Error deleting: \(error)")
 }*/
 
-//: How to add `ParseBytes` and `ParsePolygon` to objects.
-let points = [
-    try ParseGeoPoint(latitude: 0, longitude: 0),
-    try ParseGeoPoint(latitude: 0, longitude: 1),
-    try ParseGeoPoint(latitude: 1, longitude: 1),
-    try ParseGeoPoint(latitude: 1, longitude: 0),
-    try ParseGeoPoint(latitude: 0, longitude: 0)
-]
+Task {
+    //: How to add `ParseBytes` and `ParsePolygon` to objects.
+    let points = [
+        try ParseGeoPoint(latitude: 0, longitude: 0),
+        try ParseGeoPoint(latitude: 0, longitude: 1),
+        try ParseGeoPoint(latitude: 1, longitude: 1),
+        try ParseGeoPoint(latitude: 1, longitude: 0),
+        try ParseGeoPoint(latitude: 0, longitude: 0)
+    ]
 
-do {
-    let polygon = try ParsePolygon(points)
-    let bytes = ParseBytes(data: "hello world".data(using: .utf8)!)
-    var gameData = GameData(bytes: bytes, polygon: polygon)
-    gameData = try await gameData.save()
-    print("Successfully saved: \(gameData)")
-} catch {
-    print("Error saving: \(error.localizedDescription)")
+    do {
+        let polygon = try ParsePolygon(points)
+        let bytes = ParseBytes(data: "hello world".data(using: .utf8)!)
+        var gameData = GameData(bytes: bytes, polygon: polygon)
+        gameData = try await gameData.save()
+        print("Successfully saved: \(gameData)")
+    } catch {
+        print("Error saving: \(error.localizedDescription)")
+    }
 }
 
 PlaygroundPage.current.finishExecution()

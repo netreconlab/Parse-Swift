@@ -61,7 +61,7 @@ do {
 }
 
 /*:
- Save asynchronously (preferred way) - performs work on background
+ Save asynchronously with completion block - performs work on background
  queue and returns to specified callbackQueue.
  If no callbackQueue is specified it returns to main queue.
 */
