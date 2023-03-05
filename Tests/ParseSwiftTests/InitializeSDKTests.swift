@@ -88,7 +88,7 @@ class InitializeSDKTests: XCTestCase {
 /*
     func testDeleteKeychainOnFirstRun() async throws {
         let memory = InMemoryKeyValueStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         guard let server = URL(string: "http://parse.com") else {
             XCTFail("Should have unwrapped")
             return
@@ -184,7 +184,7 @@ class InitializeSDKTests: XCTestCase {
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testFetchMissingCurrentInstallation() async throws {
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         let installationId = "testMe"
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
                                                                       installationId: installationId)
@@ -264,7 +264,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.objectId = "yarr"
@@ -289,7 +289,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         try await ParseVersion.setCurrent(try ParseVersion(string: "0.0.0"))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
@@ -319,7 +319,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
@@ -349,7 +349,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         let newVersion = "1000.0.0"
         try await ParseVersion.setCurrent(try ParseVersion(string: newVersion))
         var newInstallation = Installation()
@@ -381,7 +381,7 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()

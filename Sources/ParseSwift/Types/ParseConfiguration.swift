@@ -99,6 +99,7 @@ public struct ParseConfiguration {
     /// Defaults to 20.
     public internal(set) var liveQueryMaxConnectionAttempts: Int = 20
 
+    public internal(set) var primitiveStore: ParsePrimitiveStorable
     /**
      Override the default transfer behavior for `ParseFile`'s.
      Allows for direct uploads to other file storage providers.
@@ -207,6 +208,6 @@ public struct ParseConfiguration {
         self.maxConnectionAttempts = maxConnectionAttempts
         self.liveQueryMaxConnectionAttempts = liveQueryMaxConnectionAttempts
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
-        ParseStorage.shared.use(primitiveStore ?? InMemoryPrimitiveStore())
+        self.primitiveStore = primitiveStore ?? InMemoryPrimitiveStore()
     }
 }
