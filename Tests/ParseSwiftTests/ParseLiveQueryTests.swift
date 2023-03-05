@@ -471,9 +471,10 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertNil(delegate.reason)
 
         let receivers = await URLSession.liveQuery.tasks.receivers[client.task]
-        if client.task.state == .running {
+        switch client.task.state {
+        case .running, .suspended:
             XCTAssertNotNil(receivers)
-        } else {
+        default:
             XCTAssertNil(receivers)
         }
     }
@@ -626,6 +627,7 @@ class ParseLiveQueryTests: XCTestCase {
                                           installationId: installationId)
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
+        await URLSession.liveQuery.tasks.updateReceivers([client.task: true])
         // Only continue test if this is not nil, otherwise skip
         guard let receivingTask = await URLSession.liveQuery.tasks.receivers[client.task],
             receivingTask == true else {
@@ -739,7 +741,7 @@ class ParseLiveQueryTests: XCTestCase {
             // Unsubscribe
             subscription.handleUnsubscribe { query in
                 XCTAssertEqual(query, subscribedQuery)
-                XCTAssertEqual(client.status, .socketNotEstablished)
+                XCTAssertEqual(client.status, .connected)
                 Task {
                     let current = await client.subscriptions.current
                     let pending = await client.subscriptions.pending
@@ -1573,7 +1575,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(pending.count, 0)
 
         // Connect moving to true should move to pending
-        client.clientId = "naw"
+        client.clientId = "yolo"
         await client.setStatus(.connected)
         try await Task.sleep(nanoseconds: nanoSeconds)
         current = await client.subscriptions.current
@@ -1852,7 +1854,7 @@ class ParseLiveQueryTests: XCTestCase {
                 XCTAssertFalse(isNew)
                 Task {
                     let current = await client.subscriptions.current
-                    let pending = await client.subscriptions.current
+                    let pending = await client.subscriptions.pending
                     XCTAssertEqual(current.count, 1)
                     XCTAssertEqual(pending.count, 0)
                     expectation2.fulfill()
@@ -1876,7 +1878,7 @@ class ParseLiveQueryTests: XCTestCase {
                 }
 
                 let current = await client.subscriptions.current
-                let pending = await client.subscriptions.current
+                let pending = await client.subscriptions.pending
                 XCTAssertEqual(current.count, 1)
                 XCTAssertEqual(pending.count, 1)
 
@@ -1962,7 +1964,7 @@ class ParseLiveQueryTests: XCTestCase {
                 XCTAssertEqual(pending.count, 0)
 
                 // Connect moving to true should move to pending
-                client.clientId = "naw"
+                client.clientId = "yolo"
                 await client.setStatus(.connected)
                 current = await client.subscriptions.current
                 pending = await client.subscriptions.pending
@@ -1999,6 +2001,8 @@ class ParseLiveQueryTests: XCTestCase {
                                                   installationId: installationId)
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
         XCTAssertTrue(isSubscribed)

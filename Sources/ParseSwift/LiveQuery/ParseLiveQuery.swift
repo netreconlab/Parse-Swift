@@ -207,7 +207,9 @@ Not attempting to open ParseLiveQuery socket anymore
                 // Send all pending messages in order
                 for tempPendingSubscription in tempPendingSubscriptions {
                     let messageToSend = tempPendingSubscription
-                    try? await URLSession.liveQuery.send(messageToSend.1.messageData, task: task)
+                    Task {
+                        try? await URLSession.liveQuery.send(messageToSend.1.messageData, task: task)
+                    }
                 }
                 self.status = status
             } else {
@@ -327,7 +329,9 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
 
         case .open:
             await self.setStatus(.socketEstablished)
-            self.open(isUserWantsToConnect: false) { _ in }
+            Task {
+                try? await self.open(isUserWantsToConnect: false)
+            }
         case .closed:
             self.notificationQueue.async {
                 self.receiveDelegate?.closedSocket(closeCode, reason: reason)
@@ -335,7 +339,9 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
             await self.setStatus(.socketNotEstablished)
             if !self.isDisconnectedByUser {
                 // Try to reconnect
-                self.open(isUserWantsToConnect: false) { _ in }
+                Task {
+                    try? await self.open(isUserWantsToConnect: false)
+                }
             }
         }
     }
