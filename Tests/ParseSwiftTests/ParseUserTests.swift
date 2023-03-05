@@ -2235,7 +2235,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
                         // Should be updated in memory
                         let immutableOriginalUser = user
-                        let customKey = user.customKey
                         Task {
                             do {
                                 let updatedCurrentUser = try await User.current()

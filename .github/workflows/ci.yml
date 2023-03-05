@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   xcode-test-ios:
-    timeout-minutes: 30
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -46,7 +46,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-test-macos:
-    timeout-minutes: 30
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -80,7 +80,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-test-tvos:
-    timeout-minutes: 30
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -108,7 +108,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-build-watchos:
-    timeout-minutes: 15
+    timeout-minutes: 10
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -126,7 +126,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   spm-test:
-    timeout-minutes: 30
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -160,7 +160,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-test-tvos-5_5:
-    timeout-minutes: 30
+    timeout-minutes: 20
     needs: xcode-build-watchos
     runs-on: macos-12
     steps:

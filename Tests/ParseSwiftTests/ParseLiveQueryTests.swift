@@ -662,12 +662,12 @@ class ParseLiveQueryTests: XCTestCase {
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
-        XCTAssertTrue(isSubscribed)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isPendingSubscription)
         subscriptions = await client.subscriptions.current
-        XCTAssertEqual(subscriptions.count, 1)
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
+        XCTAssertEqual(subscriptions.count, 1)
         XCTAssertEqual(pending.count, 0)
 
         let nanoSeconds = UInt64(1 * 1_000_000_000)
@@ -782,10 +782,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -797,10 +797,10 @@ class ParseLiveQueryTests: XCTestCase {
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -869,10 +869,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -884,10 +884,10 @@ class ParseLiveQueryTests: XCTestCase {
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
@@ -1074,10 +1074,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -1089,10 +1089,10 @@ class ParseLiveQueryTests: XCTestCase {
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
@@ -1440,10 +1440,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -1455,10 +1455,10 @@ class ParseLiveQueryTests: XCTestCase {
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
@@ -1530,10 +1530,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -1545,10 +1545,10 @@ class ParseLiveQueryTests: XCTestCase {
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
@@ -1898,25 +1898,25 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
         let response = PreliminaryMessageResponse(op: .subscribed,
-                                                           requestId: 1,
-                                                           clientId: "yolo",
-                                                           installationId: installationId)
+                                                  requestId: 1,
+                                                  clientId: "yolo",
+                                                  installationId: installationId)
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
@@ -1988,10 +1988,10 @@ class ParseLiveQueryTests: XCTestCase {
 
         var isSubscribed = try await client.isSubscribed(query)
         var isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertFalse(isSubscribed)
-        XCTAssertTrue(isPendingSubscription)
         var current = await client.subscriptions.current
         var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
         XCTAssertEqual(current.count, 0)
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
@@ -2001,14 +2001,12 @@ class ParseLiveQueryTests: XCTestCase {
                                                   installationId: installationId)
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
-        let nanoSeconds = UInt64(1 * 1_000_000_000)
-        try await Task.sleep(nanoseconds: nanoSeconds)
         isSubscribed = try await client.isSubscribed(query)
         isPendingSubscription = try await client.isPendingSubscription(query)
-        XCTAssertTrue(isSubscribed)
-        XCTAssertFalse(isPendingSubscription)
         current = await client.subscriptions.current
         pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
