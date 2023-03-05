@@ -190,7 +190,7 @@ internal extension URLSession {
                     completion(result)
                 }
 
-                let delayInterval: TimeInterval!
+                var delayInterval = TimeInterval()
 
                 // Check for constant delays in header information.
                 switch statusCode {
@@ -199,7 +199,9 @@ internal extension URLSession {
                        let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                        if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                            delayInterval = interval
+                        }
                     }
 
                 case 503:
@@ -207,13 +209,20 @@ internal extension URLSession {
                        let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                        if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                            delayInterval = interval
+                        }
                     }
 
                 default:
-                    delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                    if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                        delayInterval = interval
+                    }
                 }
 
+                if delayInterval < 1.0 {
+                    delayInterval = 1.0
+                }
                 let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
                 try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
 

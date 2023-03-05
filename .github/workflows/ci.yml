@@ -205,7 +205,7 @@ jobs:
           env_vars: LINUX
           fail_ci_if_error: true
           
-  windows-latest:
+  windows:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
@@ -216,7 +216,7 @@ jobs:
           tag: 5.7.3-RELEASE
       - name: Build
         run: |
-          swift test --enable-test-discovery --enable-code-coverage -v
+          swift build -v
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
