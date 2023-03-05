@@ -68,7 +68,7 @@ public extension ParseHookTriggerable {
     }
 }
 
-internal struct TriggerRequest: Encodable {
+public struct TriggerRequest: Encodable {
     let className: String
     let triggerName: ParseHookTriggerType
     let url: URL?

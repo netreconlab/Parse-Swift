@@ -76,6 +76,19 @@ public extension ParseUser {
             return try mergeParse(with: object)
         }
     }
+
+    /**
+     The session token for the `ParseUser`.
+
+     This is set by the server upon successful authentication.
+    */
+    static func sessionToken() async throws -> String {
+        guard let sessionToken = await Self.currentContainer()?.sessionToken else {
+            throw ParseError(code: .otherCause,
+                             message: "Missing sessionToken, be sure you are logged in")
+        }
+        return sessionToken
+    }
 }
 
 // MARK: Convenience
@@ -171,15 +184,6 @@ public extension ParseUser {
         }
         currentContainer?.currentUser = newValue
         await Self.setCurrentContainer(currentContainer)
-    }
-
-    /**
-     The session token for the `ParseUser`.
-
-     This is set by the server upon successful authentication.
-    */
-    func sessionToken() async -> String? {
-        await Self.currentContainer()?.sessionToken
     }
 }
 
@@ -358,7 +362,8 @@ extension ParseUser {
                 return
             }
 
-            guard let currentUser = try? await Self.current() else {
+            guard let currentContainer = await Self.currentContainer(),
+                  let currentUser = currentContainer.currentUser else {
                 become(sessionToken: sessionToken,
                        options: options,
                        callbackQueue: callbackQueue,
@@ -366,7 +371,7 @@ extension ParseUser {
                 return
             }
 
-            guard await currentUser.sessionToken() == sessionToken else {
+            guard currentContainer.sessionToken == sessionToken else {
                 let error = ParseError(code: .otherCause,
                                        message: """
                                    Currently logged in as a ParseUser who has a different
@@ -563,8 +568,7 @@ extension ParseUser {
                            path: .verifyPassword,
                            params: params,
                            body: loginBody) { (data) -> Self in
-            let currentSessionToken = try? await BaseParseUser.current().sessionToken()
-            var sessionToken = currentSessionToken ?? ""
+            var sessionToken = await Self.currentContainer()?.sessionToken
             if let decodedSessionToken = try? ParseCoding.jsonDecoder()
                 .decode(LoginSignupResponse.self, from: data).sessionToken {
                 sessionToken = decodedSessionToken

@@ -24,7 +24,7 @@ struct StandardMessage: LiveQueryable, Codable {
             self.applicationId = Parse.configuration.applicationId
             self.primaryKey = Parse.configuration.primaryKey
             self.clientKey = Parse.configuration.clientKey
-            self.sessionToken = try? await BaseParseUser.current().sessionToken()
+            self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
             self.installationId = await BaseParseInstallation.currentContainer().installationId
         }
     }
@@ -73,7 +73,7 @@ struct SubscribeMessage<T: ParseObject>: LiveQueryable, Encodable {
                                         fields: query.fields?.sorted() ?? query.keys?.sorted(),
                                         watch: query.watch?.sorted())
         }
-        self.sessionToken = try? await BaseParseUser.current().sessionToken()
+        self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
     }
 }
 

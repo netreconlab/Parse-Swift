@@ -218,16 +218,16 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertNil(loggedIn.ACL)
 
             Task {
-                let sessionToken = await loggedIn.sessionToken()
-                XCTAssertEqual(sessionToken, self.objcSessionToken)
                 do {
+                    var sessionToken = try await User.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken)
                     let userFromKeychain = try await User.current()
                     XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
                     XCTAssertEqual(loggedIn.email, userFromKeychain.email)
                     XCTAssertEqual(userFromKeychain.username, self.loginUserName)
                     XCTAssertNil(userFromKeychain.password)
                     XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-                    let sessionToken = await userFromKeychain.sessionToken()
+                    sessionToken = try await User.sessionToken()
                     XCTAssertEqual(sessionToken, self.objcSessionToken)
                     XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
                     XCTAssertNil(userFromKeychain.ACL)
@@ -282,16 +282,16 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertNil(loggedIn.ACL)
 
             Task {
-                let sessionToken = await loggedIn.sessionToken()
-                XCTAssertEqual(sessionToken, self.objcSessionToken2)
                 do {
+                    var sessionToken = try await User.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken2)
                     let userFromKeychain = try await User.current()
                     XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
                     XCTAssertEqual(loggedIn.email, userFromKeychain.email)
                     XCTAssertEqual(userFromKeychain.username, self.loginUserName)
                     XCTAssertNil(userFromKeychain.password)
                     XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-                    let sessionToken = await userFromKeychain.sessionToken()
+                    sessionToken = try await User.sessionToken()
                     XCTAssertEqual(sessionToken, self.objcSessionToken2)
                     XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
                     XCTAssertNil(userFromKeychain.ACL)
@@ -346,16 +346,16 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             XCTAssertNil(loggedIn.ACL)
 
             Task {
-                let sessionToken = await loggedIn.sessionToken()
-                XCTAssertEqual(sessionToken, self.objcSessionToken)
                 do {
+                    var sessionToken = try await User.sessionToken()
+                    XCTAssertEqual(sessionToken, self.objcSessionToken)
                     let userFromKeychain = try await User.current()
                     XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
                     XCTAssertEqual(loggedIn.email, userFromKeychain.email)
                     XCTAssertEqual(userFromKeychain.username, self.loginUserName)
                     XCTAssertNil(userFromKeychain.password)
                     XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-                    let sessionToken = await userFromKeychain.sessionToken()
+                    sessionToken = try await User.sessionToken()
                     XCTAssertEqual(sessionToken, self.objcSessionToken)
                     XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
                     XCTAssertNil(userFromKeychain.ACL)
@@ -410,12 +410,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
         }, receiveValue: { returnedUser in
             XCTAssertTrue(currentUser.hasSameObjectId(as: returnedUser))
-            Task {
-                let sessionToken = await currentUser.sessionToken()
-                let returnedSessionToken = await returnedUser.sessionToken()
-                XCTAssertEqual(sessionToken, returnedSessionToken)
-                expectation2.fulfill()
-            }
+            expectation2.fulfill()
         })
         publisher.store(in: &current)
         wait(for: [expectation1, expectation2], timeout: 20.0)

@@ -35,6 +35,11 @@ public protocol Objectable: ParseEncodable, Decodable {
     The ACL for this object.
     */
     var ACL: ParseACL? { get set }
+
+    /**
+     The Parse Server endpoint for this ParseObject.
+     */
+    var endpoint: API.Endpoint { get }
 }
 
 extension Objectable {
@@ -66,7 +71,7 @@ extension Objectable {
 
 // MARK: Convenience
 extension Objectable {
-    var endpoint: API.Endpoint {
+    public var endpoint: API.Endpoint {
         if let objectId = objectId {
             return .object(className: className, objectId: objectId)
         }

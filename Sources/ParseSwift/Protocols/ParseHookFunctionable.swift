@@ -36,7 +36,7 @@ public extension ParseHookFunctionable {
     }
 }
 
-internal struct FunctionRequest: Encodable {
+public struct FunctionRequest: Encodable {
     let functionName: String
     let url: URL?
 

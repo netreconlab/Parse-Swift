@@ -20,7 +20,7 @@ public struct API {
         case GET, POST, PUT, PATCH, DELETE
     }
 
-    internal enum Endpoint: Encodable {
+    public enum Endpoint: Encodable {
         case batch
         case objects(className: String)
         case object(className: String, objectId: String)
@@ -210,7 +210,7 @@ public struct API {
             headers["X-Parse-Client-Key"] = clientKey
         }
 
-        if let token = try? await BaseParseUser.current().sessionToken() {
+        if let token = await BaseParseUser.currentContainer()?.sessionToken {
             headers["X-Parse-Session-Token"] = token
         }
 

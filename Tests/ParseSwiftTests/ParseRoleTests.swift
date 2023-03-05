@@ -147,7 +147,6 @@ class ParseRoleTests: XCTestCase {
 
     func testSaveUpdateCommandParseObjectMutable() async throws {
         var role = try Role<User>(name: "Administrator")
-        let className = role.className
         let objectId = "yarr"
         role.objectId = objectId
         role.createdAt = Date()
@@ -155,7 +154,7 @@ class ParseRoleTests: XCTestCase {
 
         let command = try await role.mergeable.saveCommand()
         XCTAssertNotNil(command)
-        XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
+        XCTAssertEqual(command.path.urlComponent, "/roles/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
         XCTAssertNil(command.params)
 

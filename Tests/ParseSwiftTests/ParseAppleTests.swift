@@ -470,7 +470,7 @@ class ParseAppleTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentSessionToken = await currentUser.sessionToken()
+                        let currentSessionToken = try await User.sessionToken()
                         XCTAssertEqual(currentSessionToken, "myToken")
                         let currentLinkedUser = await user.apple.isLinked()
                         XCTAssertTrue(currentLinkedUser)
@@ -533,14 +533,16 @@ class ParseAppleTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentSessionToken = await currentUser.sessionToken()
+                        let currentSessionToken = try await User.sessionToken()
                         XCTAssertEqual(currentSessionToken, "myToken")
                         let currentLinkedUser = await user.apple.isLinked()
                         XCTAssertTrue(currentLinkedUser)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)

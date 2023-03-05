@@ -386,7 +386,7 @@ class ParseLDAPTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let sessionToken = await user.sessionToken()
+                        let sessionToken = try await User.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
                         let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)
@@ -443,7 +443,7 @@ class ParseLDAPTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let sessionToken = await user.sessionToken()
+                        let sessionToken = try await User.sessionToken()
                         XCTAssertEqual(sessionToken, "myToken")
                         let isLinked = await user.ldap.isLinked()
                         XCTAssertTrue(isLinked)

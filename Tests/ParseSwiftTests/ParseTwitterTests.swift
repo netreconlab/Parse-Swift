@@ -488,14 +488,16 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentUserSessionToken = await user.sessionToken()
+                        let currentUserSessionToken = try await User.sessionToken()
                         XCTAssertEqual(currentUserSessionToken, "myToken")
                         let currentLinkedUser = await user.twitter.isLinked()
                         XCTAssertTrue(currentLinkedUser)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
-                    expectation1.fulfill()
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
                 }
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -550,7 +552,7 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentUserSessionToken = await user.sessionToken()
+                        let currentUserSessionToken = try await User.sessionToken()
                         XCTAssertEqual(currentUserSessionToken, "myToken")
                         let currentLinkedUser = await user.twitter.isLinked()
                         XCTAssertTrue(currentLinkedUser)
