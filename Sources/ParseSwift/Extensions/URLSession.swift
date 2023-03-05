@@ -153,7 +153,7 @@ internal extension URLSession {
         completion: @escaping(Result<U, ParseError>) -> Void
     ) async {
         do {
-            let (responseData, urlResponse) = try await data(for: request)
+            let (responseData, urlResponse) = try await dataTask(for: request)
             guard let httpResponse = urlResponse as? HTTPURLResponse else {
                 let result = await self.makeResult(request: request,
                                                    responseData: responseData,
@@ -243,6 +243,32 @@ internal extension URLSession {
                                                responseError: error,
                                                mapper: mapper)
             completion(result)
+        }
+    }
+}
+
+internal extension URLSession {
+    func dataTask(for request: URLRequest) async throws -> (Data, URLResponse) {
+        try await withCheckedThrowingContinuation { continuation in
+            self.dataTask(with: request,
+                          completionHandler: continuation.resume).resume()
+        }
+    }
+
+    func dataTask(with request: URLRequest,
+                  completionHandler: @escaping (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
+        return dataTask(with: request) { (data, response, error) in
+            guard let data = data,
+                  let response = response else {
+                guard let error = error else {
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    completionHandler(.failure(parseError))
+                    return
+                }
+                completionHandler(.failure(error))
+                return
+            }
+            completionHandler(.success((data, response)))
         }
     }
 }
@@ -360,18 +386,6 @@ internal extension URLSession {
                 completion(result)
             }
         }
-        /*downloadTask(with: request) { (location, urlResponse, responseError) in
-            print(location)
-            Task {
-                let result = await self.makeResult(request: request,
-                                                   location: location,
-                                                   urlResponse: urlResponse,
-                                                   responseError: responseError,
-                                                   mapper: mapper)
-                completion(result)
-            }
-        }.resume()
-        */
     }
 
     func downloadTask(for request: URLRequest,
