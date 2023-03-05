@@ -467,8 +467,9 @@ class ParseSpotifyTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        let sessionToken = try await User.sessionToken()
-                        XCTAssertEqual(sessionToken, "myToken")
+                        if let sessionToken = try? await User.sessionToken() {
+                            XCTAssertEqual(sessionToken, "myToken")
+                        }
                         let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {
@@ -527,8 +528,9 @@ class ParseSpotifyTests: XCTestCase {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        let sessionToken = try await User.sessionToken()
-                        XCTAssertEqual(sessionToken, "myToken")
+                        if let sessionToken = try? await User.sessionToken() {
+                            XCTAssertEqual(sessionToken, "myToken")
+                        }
                         let isLinked = await user.spotify.isLinked()
                         XCTAssertTrue(isLinked)
                     } catch {

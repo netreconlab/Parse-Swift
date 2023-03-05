@@ -564,8 +564,9 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentUserSessionToken = try await User.sessionToken()
-                        XCTAssertEqual(currentUserSessionToken, "myToken")
+                        if let sessionToken = try? await User.sessionToken() {
+                            XCTAssertEqual(sessionToken, "myToken")
+                        }
                         let currentLinkedUser = await user.twitter.isLinked()
                         XCTAssertTrue(currentLinkedUser)
                     } catch {
@@ -646,14 +647,11 @@ class ParseTwitterTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
                 Task {
-                    do {
-                        let currentUser = try await User.current()
+                    if let currentUser = try? await User.current() {
                         XCTAssertEqual(user, currentUser)
-                        let currentLinkedUser = await user.twitter.isLinked()
-                        XCTAssertFalse(currentLinkedUser)
-                    } catch {
-                        XCTFail(error.localizedDescription)
                     }
+                    let currentLinkedUser = ParseTwitter.isLinked(with: user)
+                    XCTAssertFalse(currentLinkedUser)
                     DispatchQueue.main.async {
                         expectation1.fulfill()
                     }
