@@ -192,8 +192,13 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        let currentLinkedUser = await user.linkedin.isLinked()
+        var currentLinkedUser = await user.linkedin.isLinked()
         XCTAssertTrue(currentLinkedUser)
+
+        // Test stripping
+        let strippedUser = user.linkedin.strip(currentUser)
+        currentLinkedUser = ParseLinkedIn.isLinked(with: strippedUser)
+        XCTAssertFalse(currentLinkedUser)
     }
 
     @MainActor

@@ -33,10 +33,10 @@ public extension ParseTwitter {
         try await withCheckedThrowingContinuation { continuation in
             self.login(userId: userId,
                        screenName: screenName,
-                       authToken: consumerKey,
-                       authTokenSecret: consumerSecret,
-                       consumerKey: authToken,
-                       consumerSecret: authTokenSecret,
+                       consumerKey: consumerKey,
+                       consumerSecret: consumerSecret,
+                       authToken: authToken,
+                       authTokenSecret: authTokenSecret,
                        options: options,
                        completion: continuation.resume)
         }

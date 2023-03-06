@@ -183,11 +183,16 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
                                                accessToken: "that")
         let current = try await User.current()
         XCTAssertEqual(user, current)
-        let isLinked = await user.github.isLinked()
+        var isLinked = await user.github.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
+
+        // Test stripping
+        let strippedUser = user.github.strip(current)
+        isLinked = ParseGitHub.isLinked(with: strippedUser)
+        XCTAssertFalse(isLinked)
     }
 
     @MainActor

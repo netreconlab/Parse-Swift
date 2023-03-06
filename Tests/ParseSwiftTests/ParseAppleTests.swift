@@ -200,6 +200,11 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseApple<User>.isLinked(with: user))
+
+        // Test stripping
+        let strippedUser = user.apple.strip(currentUser)
+        let isLinked = ParseApple.isLinked(with: strippedUser)
+        XCTAssertFalse(isLinked)
     }
 
     @MainActor

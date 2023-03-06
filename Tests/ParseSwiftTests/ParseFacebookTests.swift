@@ -557,10 +557,15 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
-        let isLinked = await user.facebook.isLinked()
+        var isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
+
+        // Test stripping
+        let strippedUser = user.facebook.strip(currentUser)
+        isLinked = ParseFacebook.isLinked(with: strippedUser)
+        XCTAssertFalse(isLinked)
     }
 
     @MainActor

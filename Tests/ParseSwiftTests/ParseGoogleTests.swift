@@ -197,12 +197,17 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
                                                idToken: "this",
                                                accessToken: "that")
         let currentUser = try await User.current()
-        let isLinked = await user.google.isLinked()
+        var isLinked = await user.google.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
+
+        // Test stripping
+        let strippedUser = user.google.strip(currentUser)
+        isLinked = ParseGoogle.isLinked(with: strippedUser)
+        XCTAssertFalse(isLinked)
     }
 
     @MainActor

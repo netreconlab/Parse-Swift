@@ -34,10 +34,10 @@ public extension ParseTwitter {
         Future { promise in
             self.login(userId: userId,
                        screenName: screenName,
-                       authToken: consumerKey,
-                       authTokenSecret: consumerSecret,
-                       consumerKey: authToken,
-                       consumerSecret: authTokenSecret,
+                       consumerKey: consumerKey,
+                       consumerSecret: consumerSecret,
+                       authToken: authToken,
+                       authTokenSecret: authTokenSecret,
                        options: options,
                        completion: promise)
         }
