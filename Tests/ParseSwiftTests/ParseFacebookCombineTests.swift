@@ -6,6 +6,7 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
+#if !os(iOS)
 #if canImport(Combine)
 
 import Foundation
@@ -605,4 +606,5 @@ class ParseFacebookCombineTests: XCTestCase {
     }
 }
 
+#endif
 #endif
