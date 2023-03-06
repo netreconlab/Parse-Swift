@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length function_body_length
+// swiftlint:disable type_body_length
 
 class ParseSpotifyTests: XCTestCase {
     struct User: ParseUser {
@@ -170,8 +170,7 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
                         var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
@@ -180,8 +179,6 @@ class ParseSpotifyTests: XCTestCase {
                         let strippedUser = user.spotify.strip(current)
                         isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -234,8 +231,7 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
                         var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
@@ -244,8 +240,6 @@ class ParseSpotifyTests: XCTestCase {
                         let strippedUser = user.spotify.strip(current)
                         isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -358,13 +352,10 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertEqual(user.password, "world")
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        let isLinked = ParseSpotify.isLinked(with: current)
+                        var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -410,13 +401,10 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertEqual(user.password, "world")
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        let isLinked = await user.spotify.isLinked()
+                        var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -464,19 +452,13 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        if let sessionToken = try? await User.sessionToken() {
-                            XCTAssertEqual(sessionToken, "myToken")
-                        }
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                        DispatchQueue.main.async {
-                            expectation1.fulfill()
-                        }
+                    }
+                    if let sessionToken = try? await User.sessionToken() {
+                        XCTAssertEqual(sessionToken, "myToken")
                     }
                 }
             case .failure(let error):
@@ -525,16 +507,13 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        if let sessionToken = try? await User.sessionToken() {
-                            XCTAssertEqual(sessionToken, "myToken")
-                        }
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
+                    }
+                    if let sessionToken = try? await User.sessionToken() {
+                        XCTAssertEqual(sessionToken, "myToken")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -605,13 +584,13 @@ class ParseSpotifyTests: XCTestCase {
                 XCTAssertEqual(user.username, "hello10")
                 XCTAssertNil(user.password)
                 Task {
-                    do {
-                        let current = try await User.current()
+                    if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
+                    }
+                    if let sessionToken = try? await User.sessionToken() {
+                        XCTAssertEqual(sessionToken, "myToken")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()

@@ -645,7 +645,6 @@ class ParseLiveQueryTests: XCTestCase {
         }
         XCTAssertEqual(subscription.query, query)
 
-        // Run before delay
         var isSubscribed = try await client.isSubscribed(query)
         XCTAssertFalse(isSubscribed)
         var isPendingSubscription = try await client.isPendingSubscription(query)
@@ -729,6 +728,185 @@ class ParseLiveQueryTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
+        XCTAssertEqual(subscription.query, query)
+
+        let expectation1 = XCTestExpectation(description: "Subscribe Handler")
+        let expectation2 = XCTestExpectation(description: "Unsubscribe Handler")
+        subscription.handleSubscribe { subscribedQuery, isNew in
+            XCTAssertEqual(query, subscribedQuery)
+            XCTAssertTrue(isNew)
+            expectation1.fulfill()
+
+            // Unsubscribe
+            subscription.handleUnsubscribe { query in
+                XCTAssertEqual(query, subscribedQuery)
+                XCTAssertEqual(client.status, .connected)
+                Task {
+                    let current = await client.subscriptions.current
+                    let pending = await client.subscriptions.pending
+                    XCTAssertTrue(current.isEmpty)
+                    XCTAssertTrue(pending.isEmpty)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
+                }
+            }
+
+            Task {
+                do {
+                    try await query.unsubscribe()
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                var current = await client.subscriptions.current
+                var pending = await client.subscriptions.pending
+                XCTAssertEqual(current.count, 1)
+                XCTAssertEqual(pending.count, 1)
+
+                // Received Unsubscribe
+                let response2 = PreliminaryMessageResponse(op: .unsubscribed,
+                                                           requestId: 1,
+                                                           clientId: "yolo",
+                                                           installationId: installationId)
+                guard let encoded2 = try? ParseCoding.jsonEncoder().encode(response2) else {
+                    XCTFail("Should have encoded second response")
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
+                    return
+                }
+                await client.received(encoded2)
+                current = await client.subscriptions.current
+                pending = await client.subscriptions.pending
+                XCTAssertEqual(current.count, 0)
+                XCTAssertEqual(pending.count, 0)
+            }
+        }
+
+        var isSubscribed = try await client.isSubscribed(query)
+        var isPendingSubscription = try await client.isPendingSubscription(query)
+        var current = await client.subscriptions.current
+        var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
+        XCTAssertEqual(current.count, 0)
+        XCTAssertEqual(pending.count, 1)
+        try await pretendToBeConnected()
+        let response = PreliminaryMessageResponse(op: .subscribed,
+                                                           requestId: 1,
+                                                           clientId: "yolo",
+                                                           installationId: installationId)
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
+        await client.received(encoded)
+        isSubscribed = try await client.isSubscribed(query)
+        isPendingSubscription = try await client.isPendingSubscription(query)
+        current = await client.subscriptions.current
+        pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
+        XCTAssertEqual(current.count, 1)
+        XCTAssertEqual(pending.count, 0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
+    }
+
+    func testSubscribeCallbackConnected2() async throws {
+        let query = GameScore.query("points" > 9)
+        let installationId = try await BaseParseInstallation.current().installationId
+        let subscription = try await query.subscribeCallback()
+
+        guard let client = ParseLiveQuery.defaultClient else {
+            XCTFail("Should be able to get client")
+            return
+        }
+        XCTAssertEqual(subscription.query, query)
+
+        let expectation1 = XCTestExpectation(description: "Subscribe Handler")
+        let expectation2 = XCTestExpectation(description: "Unsubscribe Handler")
+        subscription.handleSubscribe { subscribedQuery, isNew in
+            XCTAssertEqual(query, subscribedQuery)
+            XCTAssertTrue(isNew)
+            expectation1.fulfill()
+
+            // Unsubscribe
+            subscription.handleUnsubscribe { query in
+                XCTAssertEqual(query, subscribedQuery)
+                XCTAssertEqual(client.status, .connected)
+                Task {
+                    let current = await client.subscriptions.current
+                    let pending = await client.subscriptions.pending
+                    XCTAssertTrue(current.isEmpty)
+                    XCTAssertTrue(pending.isEmpty)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
+                }
+            }
+
+            Task {
+                do {
+                    try await query.unsubscribe()
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                var current = await client.subscriptions.current
+                var pending = await client.subscriptions.pending
+                XCTAssertEqual(current.count, 1)
+                XCTAssertEqual(pending.count, 1)
+
+                // Received Unsubscribe
+                let response2 = PreliminaryMessageResponse(op: .unsubscribed,
+                                                           requestId: 1,
+                                                           clientId: "yolo",
+                                                           installationId: installationId)
+                guard let encoded2 = try? ParseCoding.jsonEncoder().encode(response2) else {
+                    XCTFail("Should have encoded second response")
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
+                    return
+                }
+                await client.received(encoded2)
+                current = await client.subscriptions.current
+                pending = await client.subscriptions.pending
+                XCTAssertEqual(current.count, 0)
+                XCTAssertEqual(pending.count, 0)
+            }
+        }
+
+        var isSubscribed = try await client.isSubscribed(query)
+        var isPendingSubscription = try await client.isPendingSubscription(query)
+        var current = await client.subscriptions.current
+        var pending = await client.subscriptions.pending
+        XCTAssertFalse(isSubscribed)
+        XCTAssertTrue(isPendingSubscription)
+        XCTAssertEqual(current.count, 0)
+        XCTAssertEqual(pending.count, 1)
+        try await pretendToBeConnected()
+        let response = PreliminaryMessageResponse(op: .subscribed,
+                                                           requestId: 1,
+                                                           clientId: "yolo",
+                                                           installationId: installationId)
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
+        await client.received(encoded)
+        isSubscribed = try await client.isSubscribed(query)
+        isPendingSubscription = try await client.isPendingSubscription(query)
+        current = await client.subscriptions.current
+        pending = await client.subscriptions.pending
+        XCTAssertTrue(isSubscribed)
+        XCTAssertFalse(isPendingSubscription)
+        XCTAssertEqual(current.count, 1)
+        XCTAssertEqual(pending.count, 0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
+    }
+
+    func testSubscribeCallbackConnected3() async throws {
+        let query = GameScore.query("points" > 9)
+        let installationId = try await BaseParseInstallation.current().installationId
+        guard let client = ParseLiveQuery.defaultClient else {
+            XCTFail("Should be able to get client")
+            return
+        }
+        let subscription = try await query.subscribeCallback(client)
         XCTAssertEqual(subscription.query, query)
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
