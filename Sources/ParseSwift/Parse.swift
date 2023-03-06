@@ -163,6 +163,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
     }
     await BaseParseInstallation.createNewInstallationIfNeeded()
+    ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     if configuration.isMigratingFromObjcSDK {

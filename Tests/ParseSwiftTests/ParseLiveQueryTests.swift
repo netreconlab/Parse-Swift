@@ -60,7 +60,6 @@ class ParseLiveQueryTests: XCTestCase {
                                         liveQueryMaxConnectionAttempts: 1,
                                         testing: true,
                                         testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try await ParseLiveQuery()
     }
 
     override func tearDown() async throws {
@@ -71,6 +70,7 @@ class ParseLiveQueryTests: XCTestCase {
         #endif
         try await ParseStorage.shared.deleteAll()
         await URLSession.liveQuery.closeAll()
+        ParseLiveQuery.defaultClient = nil
     }
 
     func testWebsocketURL() async throws {

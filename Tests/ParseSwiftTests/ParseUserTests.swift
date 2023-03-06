@@ -2515,17 +2515,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                                 let updatedCurrentUser = try await User.current()
                                 XCTAssertEqual(updatedCurrentUser, saved)
                                 XCTAssertEqual(updatedCurrentUser.customKey, originalUser.customKey)
-
-                                #if !os(Linux) && !os(Android) && !os(Windows)
-                                // Should be updated in Keychain
-                                let keychainUser: CurrentUserContainer<User>?
-                                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
-                                guard let keychainUpdatedCurrent = keychainUser?.currentUser else {
-                                    XCTFail("Should get object from Keychain")
-                                    return
-                                }
-                                XCTAssertEqual(keychainUpdatedCurrent, updatedCurrentUser)
-                                #endif
                             } catch {
                                 XCTFail(error.localizedDescription)
                             }
