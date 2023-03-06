@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.

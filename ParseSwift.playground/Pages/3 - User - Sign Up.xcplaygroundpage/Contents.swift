@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 struct User: ParseUser {
@@ -59,15 +61,17 @@ User.signup(username: "hello", password: "TestMePass123^") { results in
     switch results {
     case .success(let user):
 
-        guard let currentUser = User.current else {
-            assertionFailure("Error: current user currently not stored locally")
-            return
-        }
-
-        if !currentUser.hasSameObjectId(as: user) {
-            assertionFailure("Error: these two objects should match")
-        } else {
-            print("Successfully signed up user \(user)")
+        Task {
+            do {
+                let currentUser = try await User.current()
+                if !currentUser.hasSameObjectId(as: user) {
+                    assertionFailure("Error: these two objects should match")
+                } else {
+                    print("Successfully signed up user \(user)")
+                }
+            } catch {
+                assertionFailure("Error: current user currently not stored locally")
+            }
         }
 
     case .failure(let error):

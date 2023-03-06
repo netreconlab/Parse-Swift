@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 struct GameScore: ParseObject {
@@ -57,14 +59,16 @@ struct GameScore: ParseObject {
     }
 }
 
-var score = GameScore()
-score.points = 200
-score.oldScore = 10
-score.isHighest = true
-do {
-    try score.save()
-} catch {
-    print(error)
+Task {
+    var score = GameScore()
+    score.points = 200
+    score.oldScore = 10
+    score.isHighest = true
+    do {
+        try await score.save()
+    } catch {
+        print(error)
+    }
 }
 
 let afterDate = Date().addingTimeInterval(-300)
@@ -97,13 +101,15 @@ query.limit(2)
     }
 }
 
-//: Query synchronously (not preferred - all operations on current queue).
-let results = try query.find()
-assert(results.count >= 1)
-results.forEach { score in
-    guard let createdAt = score.createdAt else { fatalError() }
-    assert(createdAt.timeIntervalSince1970 > afterDate.timeIntervalSince1970, "date should be ok")
-    print("Found score: \(score)")
+Task {
+    //: Query async/await.
+    let results = try await query.find()
+    assert(results.count >= 1)
+    results.forEach { score in
+        guard let createdAt = score.createdAt else { fatalError() }
+        assert(createdAt.timeIntervalSince1970 > afterDate.timeIntervalSince1970, "date should be ok")
+        print("Found score: \(score)")
+    }
 }
 
 //: Query first asynchronously with completion block - Performs work on background

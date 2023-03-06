@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.
@@ -156,7 +158,7 @@ let helloFile = ParseFile(name: "hello.txt", data: sampleData)
 var score2 = GameScore(points: 105)
 score2.myData = helloFile
 
-//: Save synchronously (not preferred - all operations on current queue).
+//: Save async/await.
 do {
     let savedScore = try score2.save()
     print("Your hello file has been successfully saved")
