@@ -186,6 +186,73 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     }
 
     @MainActor
+    func testSaveCommand() async throws {
+        let installation = Installation()
+        let command = try await installation.saveCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations")
+        XCTAssertEqual(command.method, API.Method.POST)
+        XCTAssertNil(command.params)
+        XCTAssertNotNil(command.body)
+    }
+
+    @MainActor
+    func testSaveUpdateCommand() async throws {
+        var installation = Installation()
+        let objectId = "yarr"
+        installation.objectId = objectId
+
+        let command = try await installation.saveCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+        XCTAssertEqual(command.method, API.Method.PUT)
+        XCTAssertNil(command.params)
+        XCTAssertNotNil(command.body)
+    }
+
+    @MainActor
+    func testCreateCommand() async throws {
+        let installation = Installation()
+
+        let command = await installation.createCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations")
+        XCTAssertEqual(command.method, API.Method.POST)
+        XCTAssertNil(command.params)
+        XCTAssertNotNil(command.body)
+    }
+
+    @MainActor
+    func testReplaceCommand() async throws {
+        var installation = Installation()
+        XCTAssertThrowsError(try installation.replaceCommand())
+        let objectId = "yarr"
+        installation.objectId = objectId
+
+        let command = try installation.replaceCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+        XCTAssertEqual(command.method, API.Method.PUT)
+        XCTAssertNil(command.params)
+        XCTAssertNotNil(command.body)
+    }
+
+    @MainActor
+    func testUpdateCommand() async throws {
+        var installation = Installation()
+        XCTAssertThrowsError(try installation.updateCommand())
+        let objectId = "yarr"
+        installation.objectId = objectId
+
+        let command = try installation.updateCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+        XCTAssertEqual(command.method, API.Method.PATCH)
+        XCTAssertNil(command.params)
+        XCTAssertNotNil(command.body)
+    }
+
+    @MainActor
     func testNewInstallationIdentifierIsLowercase() async throws {
         guard let installationIdFromContainer
             = await Installation.currentContainer().installationId else {
@@ -550,6 +617,148 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         let current = try await Installation.current()
         XCTAssertEqual(current, fetched)
         XCTAssertEqual(current.customKey, serverResponse.customKey)
+    }
+
+    @MainActor func testSaveMutableMergeCurrentInstallation() async throws {
+        // Save current Installation
+        try await testSave()
+        MockURLProtocol.removeAll()
+
+        let original = try await Installation.current()
+        var response = original.mergeable
+        response.createdAt = nil
+        response.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
+
+        let encoded: Data!
+        do {
+            encoded = try response.getEncoder().encode(response, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            response = try response.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+        var updated = original.mergeable
+        updated.customKey = "hello"
+        updated.deviceToken = "1234"
+
+        let saved = try await updated.save()
+        let newCurrentInstallation = try await Installation.current()
+        XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: response))
+        XCTAssertEqual(saved.customKey, updated.customKey)
+        XCTAssertEqual(saved.badge, original.badge)
+        XCTAssertEqual(saved.deviceType, original.deviceType)
+        XCTAssertEqual(saved.deviceToken, updated.deviceToken)
+        XCTAssertEqual(saved.channels, original.channels)
+        XCTAssertEqual(saved.installationId, original.installationId)
+        XCTAssertEqual(saved.timeZone, original.timeZone)
+        XCTAssertEqual(saved.appName, original.appName)
+        XCTAssertEqual(saved.appVersion, original.appVersion)
+        XCTAssertEqual(saved.appIdentifier, original.appIdentifier)
+        XCTAssertEqual(saved.parseVersion, original.parseVersion)
+        XCTAssertEqual(saved.localeIdentifier, original.localeIdentifier)
+        XCTAssertEqual(saved.createdAt, original.createdAt)
+        XCTAssertEqual(saved.updatedAt, response.updatedAt)
+        XCTAssertNil(saved.originalData)
+        XCTAssertEqual(saved.customKey, newCurrentInstallation.customKey)
+        XCTAssertEqual(saved.badge, newCurrentInstallation.badge)
+        XCTAssertEqual(saved.deviceType, newCurrentInstallation.deviceType)
+        XCTAssertEqual(saved.deviceToken, newCurrentInstallation.deviceToken)
+        XCTAssertEqual(saved.channels, newCurrentInstallation.channels)
+        XCTAssertEqual(saved.installationId, newCurrentInstallation.installationId)
+        XCTAssertEqual(saved.timeZone, newCurrentInstallation.timeZone)
+        XCTAssertEqual(saved.appName, newCurrentInstallation.appName)
+        XCTAssertEqual(saved.appVersion, newCurrentInstallation.appVersion)
+        XCTAssertEqual(saved.appIdentifier, newCurrentInstallation.appIdentifier)
+        XCTAssertEqual(saved.parseVersion, newCurrentInstallation.parseVersion)
+        XCTAssertEqual(saved.localeIdentifier, newCurrentInstallation.localeIdentifier)
+        XCTAssertEqual(saved.createdAt, newCurrentInstallation.createdAt)
+        XCTAssertEqual(saved.updatedAt, newCurrentInstallation.updatedAt)
+    }
+
+    @MainActor
+    func testSaveCurrentInstallationWithDefaultACL() async throws {
+        try await login()
+        guard let userObjectId = try await User.current().objectId else {
+            XCTFail("Should have objectId")
+            return
+        }
+        let defaultACL = try await ParseACL.setDefaultACL(ParseACL(),
+                                                          withAccessForCurrentUser: true)
+
+        let original = try await Installation.current()
+        var installation = original
+        installation.objectId = testInstallationObjectId
+        installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.ACL = nil
+
+        var installationOnServer = installation
+
+        let encoded: Data!
+        do {
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let saved = try await original.save()
+        let newCurrentInstallation = try await Installation.current()
+        XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+        XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+        XCTAssertNotNil(saved.ACL)
+        XCTAssertEqual(saved.ACL?.publicRead, defaultACL.publicRead)
+        XCTAssertEqual(saved.ACL?.publicWrite, defaultACL.publicWrite)
+        XCTAssertTrue(defaultACL.getReadAccess(objectId: userObjectId))
+        XCTAssertTrue(defaultACL.getWriteAccess(objectId: userObjectId))
+    }
+
+    @MainActor
+    func testUpdateWithDefaultACL() async throws {
+        try await login()
+        _ = try await ParseACL.setDefaultACL(ParseACL(),
+                                             withAccessForCurrentUser: true)
+
+        var installation = Installation()
+        installation.objectId = testInstallationObjectId
+        installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.ACL = nil
+        installation.installationId = "hello"
+
+        var installationOnServer = installation
+        installationOnServer.createdAt = nil
+        installationOnServer.updatedAt = Date()
+
+        let encoded: Data!
+        do {
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let saved = try await installation.save()
+        XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+        XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+        XCTAssertNil(saved.ACL)
     }
 
     @MainActor
@@ -1410,5 +1619,225 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
             }
             XCTAssertTrue(parseError.message.contains("does not exist"))
         }
+    }
+
+    func saveCurrentAsync(installation: Installation,
+                          installationOnServer: Installation,
+                          callbackQueue: DispatchQueue) {
+
+        let expectation1 = XCTestExpectation(description: "Update installation1")
+        installation.save(options: [], callbackQueue: callbackQueue) { result in
+
+            switch result {
+
+            case .success(let saved):
+                Task {
+                    do {
+                        let currentInstallation = try await Installation.current()
+                        XCTAssertTrue(saved.hasSameObjectId(as: currentInstallation))
+                        XCTAssertTrue(saved.hasSameInstallationId(as: currentInstallation))
+                        XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+                        XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+                        guard let savedUpdatedAt = saved.updatedAt else {
+                            XCTFail("Should unwrap dates")
+                            expectation1.fulfill()
+                            return
+                        }
+                        guard let serverUpdatedAt = installationOnServer.updatedAt else {
+                            XCTFail("Should unwrap dates")
+                            expectation1.fulfill()
+                            return
+                        }
+                        XCTAssertEqual(savedUpdatedAt, serverUpdatedAt)
+                        XCTAssertNil(saved.ACL)
+                        XCTAssertNil(currentInstallation.ACL)
+                        expectation1.fulfill()
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                        expectation1.fulfill()
+                    }
+                }
+
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testSaveCurrentAsyncMainQueue() async throws {
+        var installation = try await Installation.current()
+        installation.objectId = testInstallationObjectId
+        installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.ACL = nil
+
+        var installationOnServer = installation
+
+        let encoded: Data!
+        do {
+            let encodedOriginal = try ParseCoding.jsonEncoder().encode(installation)
+            // Get dates in correct format from ParseDecoding strategy
+            installation = try installation.getDecoder().decode(Installation.self, from: encodedOriginal)
+
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        self.saveCurrentAsync(installation: installation,
+                              installationOnServer: installationOnServer,
+                              callbackQueue: .main)
+    }
+
+    func testFetchCommand() {
+        var installation = Installation()
+        XCTAssertThrowsError(try installation.fetchCommand(include: nil))
+        let objectId = "yarr"
+        installation.objectId = objectId
+        do {
+            let command = try installation.fetchCommand(include: nil)
+            XCTAssertNotNil(command)
+            XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+            XCTAssertEqual(command.method, API.Method.GET)
+            XCTAssertNil(command.params)
+            XCTAssertNil(command.body)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+
+        let installation2 = Installation()
+        XCTAssertThrowsError(try installation2.fetchCommand(include: nil))
+    }
+
+    func testFetchIncludeCommand() {
+        var installation = Installation()
+        let objectId = "yarr"
+        installation.objectId = objectId
+        let includeExpected = ["include": "[\"yolo\", \"test\"]"]
+        do {
+            let command = try installation.fetchCommand(include: ["yolo", "test"])
+            XCTAssertNotNil(command)
+            XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+            XCTAssertEqual(command.method, API.Method.GET)
+            XCTAssertEqual(command.params?.keys.first, includeExpected.keys.first)
+            if let value = command.params?.values.first,
+                let includeValue = value {
+                XCTAssertTrue(includeValue.contains("\"yolo\""))
+            } else {
+                XCTFail("Should have unwrapped value")
+            }
+            XCTAssertNil(command.body)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+
+        let installation2 = Installation()
+        XCTAssertThrowsError(try installation2.fetchCommand(include: nil))
+    }
+
+    @MainActor
+    func testFetchUpdatedCurrentInstallation() async throws { // swiftlint:disable:this function_body_length
+        try await testSave()
+        MockURLProtocol.removeAll()
+
+        let installation = try await Installation.current()
+
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            return
+        }
+        XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
+
+        var installationOnServer = installation
+        installationOnServer.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
+        installationOnServer.customKey = "newValue"
+
+        let encoded: Data!
+        do {
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let fetched = try await installation.fetch()
+        let currentInstallation = try await Installation.current()
+        XCTAssertTrue(fetched.hasSameObjectId(as: currentInstallation))
+        XCTAssertTrue(fetched.hasSameInstallationId(as: currentInstallation))
+        XCTAssertTrue(fetched.hasSameObjectId(as: installationOnServer))
+        XCTAssertTrue(fetched.hasSameInstallationId(as: installationOnServer))
+        guard let fetchedCreatedAt = fetched.createdAt,
+            let fetchedUpdatedAt = fetched.updatedAt else {
+                XCTFail("Should unwrap dates")
+                return
+        }
+        guard let originalCreatedAt = installationOnServer.createdAt,
+            let originalUpdatedAt = installation.updatedAt,
+            let serverUpdatedAt = installationOnServer.updatedAt else {
+                XCTFail("Should unwrap dates")
+                return
+        }
+        XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
+        XCTAssertGreaterThan(fetchedUpdatedAt, originalUpdatedAt)
+        XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
+        XCTAssertEqual(currentInstallation.customKey, installationOnServer.customKey)
+
+        // Should be updated in memory
+        guard let updatedCurrentDate = currentInstallation.updatedAt else {
+            XCTFail("Should unwrap current date")
+            return
+        }
+        XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
+
+        // Should be updated in Keychain
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+            let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
+        #endif
+    }
+
+    @MainActor
+    func testDeleteCommand() async throws {
+        var installation = Installation()
+        let objectId = "yarr"
+        installation.objectId = objectId
+        let command = try installation.deleteCommand()
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
+        XCTAssertEqual(command.method, API.Method.DELETE)
+        XCTAssertNil(command.body)
+
+        let installation2 = Installation()
+        XCTAssertThrowsError(try installation2.deleteCommand())
+    }
+
+    func testDeleteCurrent() async throws {
+        try await testSave()
+
+        let installation = try await Installation.current()
+
+        try await installation.delete(options: [])
+        if let newInstallation = try? await Installation.current() {
+            XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
+        }
+
+        try await installation.delete(options: [.usePrimaryKey])
     }
 }
