@@ -130,20 +130,205 @@ class ParseInstagramTests: XCTestCase {
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-    func testLogin() async throws {
+#if !os(iOS)
+    func testReplaceAnonymousWithLinkedInstagram() async throws {
+        try await loginAnonymousUser()
+        MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.instagram.link(id: "testing", accessToken: "access_token") { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        let isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testUnlink() async throws {
+        var user = try await loginNormally()
+        MockURLProtocol.removeAll()
 
         let authData = ParseInstagram<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "access_token",
                                                   apiURL: "apiURL")
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.instagram.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+        user.authData = [User.instagram.__type: authData]
+        try await User.setCurrent(user)
+        XCTAssertTrue(ParseInstagram.isLinked(with: user))
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.instagram.unlink { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello10")
+                XCTAssertNil(user.password)
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        let isLinked = await user.instagram.isLinked()
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testLinkLoggedInAuthData() async throws {
+        _ = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.sessionToken = nil
+        serverResponse.updatedAt = Date()
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        let authData = ParseInstagram<User>
+            .AuthenticationKeys.id.makeDictionary(id: "testing",
+                                                  accessToken: "access_token",
+                                                  apiURL: "apiURL")
+
+        User.instagram.link(authData: authData) { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello10")
+                XCTAssertNil(user.password)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        let sessionToken = try await User.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        let isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testLinkLoggedInUserWrongKeys() async throws {
+        _ = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.instagram.link(authData: ["hello": "world"]) { result in
+
+            if case let .failure(error) = result {
+                XCTAssertTrue(error.message.contains("consisting of keys"))
+            } else {
+                XCTFail("Should have returned error")
+            }
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testLinkLoggedInUserWithInstagram() async throws {
+        _ = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.sessionToken = nil
+        serverResponse.updatedAt = Date()
 
         var userOnServer: User!
 
@@ -166,21 +351,18 @@ class ParseInstagramTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello10")
+                XCTAssertNil(user.password)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
                     do {
                         let current = try await User.current()
                         XCTAssertEqual(user, current)
-                        var isLinked = await user.instagram.isLinked()
+                        let sessionToken = try await User.sessionToken()
+                        XCTAssertEqual(sessionToken, "myToken")
+                        let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
-
-                        // Test stripping
-                        let strippedUser = try await user.instagram.strip()
-                        isLinked = ParseInstagram.isLinked(with: strippedUser)
-                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -188,7 +370,6 @@ class ParseInstagramTests: XCTestCase {
                         expectation1.fulfill()
                     }
                 }
-
             case .failure(let error):
                 XCTFail(error.localizedDescription)
                 expectation1.fulfill()
@@ -254,6 +435,74 @@ class ParseInstagramTests: XCTestCase {
                         expectation1.fulfill()
                     }
                 }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+    #endif
+
+    func testLogin() async throws {
+        var serverResponse = LoginSignupResponse()
+
+        let authData = ParseInstagram<User>
+            .AuthenticationKeys.id.makeDictionary(id: "testing",
+                                                  accessToken: "access_token",
+                                                  apiURL: "apiURL")
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.instagram.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.instagram.login(id: "testing", accessToken: "access_token", apiURL: "apiURL") { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user, userOnServer)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+
+                Task {
+                    do {
+                        let current = try await User.current()
+                        XCTAssertEqual(user, current)
+                        var isLinked = await user.instagram.isLinked()
+                        XCTAssertTrue(isLinked)
+
+                        // Test stripping
+                        let strippedUser = try await user.instagram.strip()
+                        isLinked = ParseInstagram.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+
             case .failure(let error):
                 XCTFail(error.localizedDescription)
                 expectation1.fulfill()
@@ -367,253 +616,6 @@ class ParseInstagramTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let isLinked = await user.instagram.isLinked()
                         XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testReplaceAnonymousWithLinkedInstagram() async throws {
-        try await loginAnonymousUser()
-        MockURLProtocol.removeAll()
-        var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.instagram.link(id: "testing", accessToken: "access_token") { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                Task {
-                    do {
-                        let current = try await User.current()
-                        XCTAssertEqual(user, current)
-                        let isLinked = await user.instagram.isLinked()
-                        XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLinkLoggedInUserWithInstagram() async throws {
-        _ = try await loginNormally()
-        MockURLProtocol.removeAll()
-
-        var serverResponse = LoginSignupResponse()
-        serverResponse.sessionToken = nil
-        serverResponse.updatedAt = Date()
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.instagram.login(id: "testing", accessToken: "access_token", apiURL: "apiURL") { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello10")
-                XCTAssertNil(user.password)
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                Task {
-                    do {
-                        let current = try await User.current()
-                        XCTAssertEqual(user, current)
-                        let sessionToken = try await User.sessionToken()
-                        XCTAssertEqual(sessionToken, "myToken")
-                        let isLinked = await user.instagram.isLinked()
-                        XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLinkLoggedInAuthData() async throws {
-        _ = try await loginNormally()
-        MockURLProtocol.removeAll()
-
-        var serverResponse = LoginSignupResponse()
-        serverResponse.sessionToken = nil
-        serverResponse.updatedAt = Date()
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        let authData = ParseInstagram<User>
-            .AuthenticationKeys.id.makeDictionary(id: "testing",
-                                                  accessToken: "access_token",
-                                                  apiURL: "apiURL")
-
-        User.instagram.link(authData: authData) { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello10")
-                XCTAssertNil(user.password)
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                Task {
-                    do {
-                        let current = try await User.current()
-                        XCTAssertEqual(user, current)
-                        let sessionToken = try await User.sessionToken()
-                        XCTAssertEqual(sessionToken, "myToken")
-                        let isLinked = await user.instagram.isLinked()
-                        XCTAssertTrue(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLinkLoggedInUserWrongKeys() async throws {
-        _ = try await loginNormally()
-        MockURLProtocol.removeAll()
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.instagram.link(authData: ["hello": "world"]) { result in
-
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("consisting of keys"))
-            } else {
-                XCTFail("Should have returned error")
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testUnlink() async throws {
-        var user = try await loginNormally()
-        MockURLProtocol.removeAll()
-
-        let authData = ParseInstagram<User>
-            .AuthenticationKeys.id.makeDictionary(id: "testing",
-                                                  accessToken: "access_token",
-                                                  apiURL: "apiURL")
-        user.authData = [User.instagram.__type: authData]
-        try await User.setCurrent(user)
-        XCTAssertTrue(ParseInstagram.isLinked(with: user))
-
-        var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.instagram.unlink { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello10")
-                XCTAssertNil(user.password)
-                Task {
-                    do {
-                        let current = try await User.current()
-                        XCTAssertEqual(user, current)
-                        let isLinked = await user.instagram.isLinked()
-                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }

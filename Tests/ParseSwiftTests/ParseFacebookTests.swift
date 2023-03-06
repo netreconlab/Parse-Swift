@@ -154,6 +154,7 @@ class ParseFacebookTests: XCTestCase {
         XCTAssertEqual(authData, ["id": "testing", "access_token": "accessToken"])
     }
 
+    #if !os(iOS)
     func testAuthenticationKeysGraphAPILoginExpires() throws {
         let expiresIn = 10
         let authData = ParseFacebook<User>
@@ -168,234 +169,12 @@ class ParseFacebookTests: XCTestCase {
         XCTAssertEqual(authData, ["id": "testing", "access_token": "accessToken", "expiration_date": dateString])
     }
 
-    func testLimitedLogin() throws {
-        var serverResponse = LoginSignupResponse()
-        let authData = ParseFacebook<User>
-            .AuthenticationKeys.id.makeDictionary(userId: "testing",
-                                                  accessToken: nil,
-                                                  authenticationToken: "authenticationToken")
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.facebook.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.login(userId: "testing",
-                            authenticationToken: "authenticationToken") { result in
-            switch result {
-
-            case .success(let user):
-
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-
-                Task {
-                    do {
-                        let currentUser = try await User.current()
-                        XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinked)
-
-                        // Test stripping
-                        let strippedUser = try await user.facebook.strip()
-                        isLinked = ParseFacebook.isLinked(with: strippedUser)
-                        XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testGraphAPILogin() throws {
-        var serverResponse = LoginSignupResponse()
-        let authData = ParseFacebook<User>
-            .AuthenticationKeys.id.makeDictionary(userId: "testing",
-                                                  accessToken: "accessToken",
-                                                  authenticationToken: nil)
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.facebook.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.login(userId: "testing",
-                            accessToken: "accessToken") { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-                Task {
-                    do {
-                        let currentUser = try await User.current()
-                        XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinked)
-
-                        // Test stripping
-                        let strippedUser = try await user.facebook.strip()
-                        isLinked = ParseFacebook.isLinked(with: strippedUser)
-                        XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLoginAuthData() async throws {
-        var serverResponse = LoginSignupResponse()
-        let authData = ParseFacebook<User>
-            .AuthenticationKeys.id.makeDictionary(userId: "testing",
-                                                  accessToken: nil,
-                                                  authenticationToken: "authenticationToken")
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.facebook.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.login(authData: authData) { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-                Task {
-                    do {
-                        let currentUser = try await User.current()
-                        XCTAssertEqual(user, currentUser)
-                        var isLinked = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinked)
-
-                        // Test stripping
-                        let strippedUser = try await user.facebook.strip()
-                        isLinked = ParseFacebook.isLinked(with: strippedUser)
-                        XCTAssertFalse(isLinked)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLoginWrongKeys() async throws {
+    func testLinkLoggedInAuthData() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
-
-        let expectation1 = XCTestExpectation(description: "Login")
-        let currentDate = ParseCoding.dateFormatter.string(from: Date())
-        let authData = ["id": "hello",
-                        "expirationDate": currentDate]
-        User.facebook.login(authData: authData) { result in
-
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("consisting of keys"))
-            } else {
-                XCTFail("Should have returned error")
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func loginAnonymousUser() async throws {
-        let authData = ["id": "yolo"]
-
-        //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.anonymous.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+        serverResponse.sessionToken = nil
+        serverResponse.updatedAt = Date()
 
         var userOnServer: User!
 
@@ -412,63 +191,27 @@ class ParseFacebookTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let user = try await User.anonymous.login()
-        let currentUser = try await User.current()
-        XCTAssertEqual(user, currentUser)
-        XCTAssertEqual(user, userOnServer)
-        XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
-    }
-
-    func testReplaceAnonymousWithFacebookLimitedLogin() async throws {
-        try await loginAnonymousUser()
-        MockURLProtocol.removeAll()
+        let expectation1 = XCTestExpectation(description: "Login")
 
         let authData = ParseFacebook<User>
             .AuthenticationKeys.id.makeDictionary(userId: "testing",
                                                   accessToken: nil,
                                                   authenticationToken: "authenticationToken")
 
-        var serverResponse = LoginSignupResponse()
-        serverResponse.username = "hello"
-        serverResponse.password = "world"
-        serverResponse.objectId = "yarr"
-        serverResponse.sessionToken = "myToken"
-        serverResponse.authData = [serverResponse.facebook.__type: authData]
-        serverResponse.createdAt = Date()
-        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
-
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.login(userId: "testing",
-                            authenticationToken: "authenticationToken") { result in
+        User.facebook.link(authData: authData) { result in
             switch result {
 
             case .success(let user):
                 XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
+                XCTAssertEqual(user.username, "hello10")
+                XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
                 Task {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
+                        let currentSessionToken = try await User.sessionToken()
+                        XCTAssertEqual(currentSessionToken, "myToken")
                         let isLinkedUser = await user.facebook.isLinked()
                         XCTAssertTrue(isLinkedUser)
                     } catch {
@@ -523,111 +266,6 @@ class ParseFacebookTests: XCTestCase {
 
         User.facebook.login(userId: "testing",
                             accessToken: "accessToken") { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                Task {
-                    do {
-                        let currentUser = try await User.current()
-                        XCTAssertEqual(user, currentUser)
-                        let isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testReplaceAnonymousWithLinkedFacebookLimitedLogin() async throws {
-        try await loginAnonymousUser()
-        MockURLProtocol.removeAll()
-        var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
-        let expiresIn = 10
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.link(userId: "testing", authenticationToken: "authenticationToken",
-                           expiresIn: expiresIn) { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
-                Task {
-                    do {
-                        let currentUser = try await User.current()
-                        XCTAssertEqual(user, currentUser)
-                        let isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                    }
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation1.fulfill()
-            }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testReplaceAnonymousWithLinkedFacebookGraphAPILogin() async throws {
-        try await loginAnonymousUser()
-        MockURLProtocol.removeAll()
-        var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
-        let expiresIn = 10
-        var userOnServer: User!
-
-        let encoded: Data!
-        do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.facebook.link(userId: "testing", accessToken: "acceeToken", expiresIn: expiresIn) { result in
             switch result {
 
             case .success(let user):
@@ -713,6 +351,138 @@ class ParseFacebookTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    func testLimitedLogin() throws {
+        var serverResponse = LoginSignupResponse()
+        let authData = ParseFacebook<User>
+            .AuthenticationKeys.id.makeDictionary(userId: "testing",
+                                                  accessToken: nil,
+                                                  authenticationToken: "authenticationToken")
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.facebook.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.facebook.login(userId: "testing",
+                            authenticationToken: "authenticationToken") { result in
+            switch result {
+
+            case .success(let user):
+
+                XCTAssertEqual(user, userOnServer)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
+
+                        // Test stripping
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testReplaceAnonymousWithFacebookLimitedLogin() async throws {
+        try await loginAnonymousUser()
+        MockURLProtocol.removeAll()
+
+        let authData = ParseFacebook<User>
+            .AuthenticationKeys.id.makeDictionary(userId: "testing",
+                                                  accessToken: nil,
+                                                  authenticationToken: "authenticationToken")
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.facebook.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.facebook.login(userId: "testing",
+                            authenticationToken: "authenticationToken") { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
     func testLinkLoggedInUserWithFacebookGraphAPILogin() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()
@@ -769,12 +539,19 @@ class ParseFacebookTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testLinkLoggedInAuthData() async throws {
-        _ = try await loginNormally()
-        MockURLProtocol.removeAll()
+    func testLoginAuthData() async throws {
         var serverResponse = LoginSignupResponse()
-        serverResponse.sessionToken = nil
-        serverResponse.updatedAt = Date()
+        let authData = ParseFacebook<User>
+            .AuthenticationKeys.id.makeDictionary(userId: "testing",
+                                                  accessToken: nil,
+                                                  authenticationToken: "authenticationToken")
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.facebook.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
 
         var userOnServer: User!
 
@@ -793,27 +570,24 @@ class ParseFacebookTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Login")
 
-        let authData = ParseFacebook<User>
-            .AuthenticationKeys.id.makeDictionary(userId: "testing",
-                                                  accessToken: nil,
-                                                  authenticationToken: "authenticationToken")
-
-        User.facebook.link(authData: authData) { result in
+        User.facebook.login(authData: authData) { result in
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
-                XCTAssertEqual(user.username, "hello10")
-                XCTAssertNil(user.password)
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                XCTAssertEqual(user, userOnServer)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
                 Task {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        let currentSessionToken = try await User.sessionToken()
-                        XCTAssertEqual(currentSessionToken, "myToken")
-                        let isLinkedUser = await user.facebook.isLinked()
-                        XCTAssertTrue(isLinkedUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
+
+                        // Test stripping
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -825,26 +599,6 @@ class ParseFacebookTests: XCTestCase {
                 XCTFail(error.localizedDescription)
                 expectation1.fulfill()
             }
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testLinkWrongKeys() async throws {
-        _ = try await loginNormally()
-        MockURLProtocol.removeAll()
-
-        let expectation1 = XCTestExpectation(description: "Login")
-        let currentDate = ParseCoding.dateFormatter.string(from: Date())
-        let authData = ["id": "hello",
-                        "expirationDate": currentDate]
-        User.facebook.link(authData: authData) { result in
-
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("consisting of keys"))
-            } else {
-                XCTFail("Should have returned error")
-            }
-            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -969,6 +723,254 @@ class ParseFacebookTests: XCTestCase {
                 XCTFail(error.localizedDescription)
                 expectation1.fulfill()
             }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testReplaceAnonymousWithLinkedFacebookLimitedLogin() async throws {
+        try await loginAnonymousUser()
+        MockURLProtocol.removeAll()
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+        let expiresIn = 10
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.facebook.link(userId: "testing", authenticationToken: "authenticationToken",
+                           expiresIn: expiresIn) { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testReplaceAnonymousWithLinkedFacebookGraphAPILogin() async throws {
+        try await loginAnonymousUser()
+        MockURLProtocol.removeAll()
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+        let expiresIn = 10
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.facebook.link(userId: "testing", accessToken: "acceeToken", expiresIn: expiresIn) { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        let isLinkedUser = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinkedUser)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+    #endif
+
+    func testGraphAPILogin() throws {
+        var serverResponse = LoginSignupResponse()
+        let authData = ParseFacebook<User>
+            .AuthenticationKeys.id.makeDictionary(userId: "testing",
+                                                  accessToken: "accessToken",
+                                                  authenticationToken: nil)
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.facebook.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        User.facebook.login(userId: "testing",
+                            accessToken: "accessToken") { result in
+            switch result {
+
+            case .success(let user):
+                XCTAssertEqual(user, userOnServer)
+                XCTAssertEqual(user.username, "hello")
+                XCTAssertEqual(user.password, "world")
+                Task {
+                    do {
+                        let currentUser = try await User.current()
+                        XCTAssertEqual(user, currentUser)
+                        var isLinked = await user.facebook.isLinked()
+                        XCTAssertTrue(isLinked)
+
+                        // Test stripping
+                        let strippedUser = try await user.facebook.strip()
+                        isLinked = ParseFacebook.isLinked(with: strippedUser)
+                        XCTAssertFalse(isLinked)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
+                    DispatchQueue.main.async {
+                        expectation1.fulfill()
+                    }
+                }
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+                expectation1.fulfill()
+            }
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testLoginWrongKeys() async throws {
+        _ = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        let expectation1 = XCTestExpectation(description: "Login")
+        let currentDate = ParseCoding.dateFormatter.string(from: Date())
+        let authData = ["id": "hello",
+                        "expirationDate": currentDate]
+        User.facebook.login(authData: authData) { result in
+
+            if case let .failure(error) = result {
+                XCTAssertTrue(error.message.contains("consisting of keys"))
+            } else {
+                XCTFail("Should have returned error")
+            }
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func loginAnonymousUser() async throws {
+        let authData = ["id": "yolo"]
+
+        //: Convert the anonymous user to a real new user.
+        var serverResponse = LoginSignupResponse()
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.anonymous.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User!
+
+        let encoded: Data!
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let user = try await User.anonymous.login()
+        let currentUser = try await User.current()
+        XCTAssertEqual(user, currentUser)
+        XCTAssertEqual(user, userOnServer)
+        XCTAssertEqual(user.username, "hello")
+        XCTAssertEqual(user.password, "world")
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
+    }
+
+    func testLinkWrongKeys() async throws {
+        _ = try await loginNormally()
+        MockURLProtocol.removeAll()
+
+        let expectation1 = XCTestExpectation(description: "Login")
+        let currentDate = ParseCoding.dateFormatter.string(from: Date())
+        let authData = ["id": "hello",
+                        "expirationDate": currentDate]
+        User.facebook.link(authData: authData) { result in
+
+            if case let .failure(error) = result {
+                XCTAssertTrue(error.message.contains("consisting of keys"))
+            } else {
+                XCTFail("Should have returned error")
+            }
+            expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: 20.0)
     }

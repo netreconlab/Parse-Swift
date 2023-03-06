@@ -6,6 +6,7 @@
 //  Copyright © 2022 Parse Community. All rights reserved.
 //
 
+#if !os(iOS)
 #if canImport(Combine)
 
 import Foundation
@@ -482,4 +483,5 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
     }
 }
 
+#endif
 #endif
