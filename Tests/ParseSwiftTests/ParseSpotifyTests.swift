@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 
 class ParseSpotifyTests: XCTestCase {
     struct User: ParseUser {
@@ -358,7 +358,7 @@ class ParseSpotifyTests: XCTestCase {
                 Task {
                     if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        var isLinked = ParseSpotify.isLinked(with: current)
+                        let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
                     } else {
                         _ = XCTSkip("Did not have current user")
@@ -409,7 +409,7 @@ class ParseSpotifyTests: XCTestCase {
                 Task {
                     if let current = try? await User.current() {
                         XCTAssertEqual(user, current)
-                        var isLinked = ParseSpotify.isLinked(with: current)
+                        let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
                     } else {
                         _ = XCTSkip("Did not have current user")

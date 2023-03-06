@@ -606,6 +606,7 @@ class ParseTwitterTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testUnlink() async throws {
         _ = try await loginNormally()
         MockURLProtocol.removeAll()

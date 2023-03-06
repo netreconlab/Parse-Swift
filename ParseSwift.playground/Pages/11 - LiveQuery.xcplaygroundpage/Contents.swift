@@ -84,11 +84,13 @@ if let socket = ParseLiveQuery.defaultClient {
 //: Create a query just as you normally would.
 var query = GameScore.query("points" < 11)
 
-//: This is how you subscribe to your created query using callbacks.
-do {
-    let subscription = try await query.subscribeCallback()
-} catch {
-    assertionFailure("Error subscribing: \(error)")
+Task {
+    //: This is how you subscribe to your created query using callbacks.
+    do {
+        let subscription = try await query.subscribeCallback()
+    } catch {
+        assertionFailure("Error subscribing: \(error)")
+    }
 }
 
 //: This is how you receive notifications about the success
