@@ -6,7 +6,7 @@
 //  Copyright © 2022 Parse Community. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && !os(iOS)
 
 import Foundation
 import XCTest

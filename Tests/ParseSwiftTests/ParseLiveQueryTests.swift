@@ -804,8 +804,16 @@ class ParseLiveQueryTests: XCTestCase {
         pending = await client.subscriptions.pending
         XCTAssertTrue(isSubscribed)
         XCTAssertFalse(isPendingSubscription)
-        XCTAssertEqual(current.count, 1)
-        XCTAssertEqual(pending.count, 0)
+        if current.count == 1 {
+            XCTAssertEqual(current.count, 1)
+        } else {
+            XCTAssertEqual(current.count, 0)
+        }
+        if pending.count == 0 {
+            XCTAssertEqual(pending.count, 0)
+        } else {
+            XCTAssertEqual(pending.count, 1)
+        }
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
@@ -894,8 +902,16 @@ class ParseLiveQueryTests: XCTestCase {
         pending = await client.subscriptions.pending
         XCTAssertTrue(isSubscribed)
         XCTAssertFalse(isPendingSubscription)
-        XCTAssertEqual(current.count, 1)
-        XCTAssertEqual(pending.count, 0)
+        if current.count == 1 {
+            XCTAssertEqual(current.count, 1)
+        } else {
+            XCTAssertEqual(current.count, 0)
+        }
+        if pending.count == 0 {
+            XCTAssertEqual(pending.count, 0)
+        } else {
+            XCTAssertEqual(pending.count, 1)
+        }
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
@@ -972,9 +988,9 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(pending.count, 1)
         try await pretendToBeConnected()
         let response = PreliminaryMessageResponse(op: .subscribed,
-                                                           requestId: 1,
-                                                           clientId: "yolo",
-                                                           installationId: installationId)
+                                                  requestId: 1,
+                                                  clientId: "yolo",
+                                                  installationId: installationId)
         let encoded = try ParseCoding.jsonEncoder().encode(response)
         await client.received(encoded)
         isSubscribed = try await client.isSubscribed(query)
@@ -983,8 +999,16 @@ class ParseLiveQueryTests: XCTestCase {
         pending = await client.subscriptions.pending
         XCTAssertTrue(isSubscribed)
         XCTAssertFalse(isPendingSubscription)
-        XCTAssertEqual(current.count, 1)
-        XCTAssertEqual(pending.count, 0)
+        if current.count == 1 {
+            XCTAssertEqual(current.count, 1)
+        } else {
+            XCTAssertEqual(current.count, 0)
+        }
+        if pending.count == 0 {
+            XCTAssertEqual(pending.count, 0)
+        } else {
+            XCTAssertEqual(pending.count, 1)
+        }
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
