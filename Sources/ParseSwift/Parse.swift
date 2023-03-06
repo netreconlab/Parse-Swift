@@ -163,9 +163,9 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
     }
     await BaseParseInstallation.createNewInstallationIfNeeded()
-    ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
 
     #if !os(Linux) && !os(Android) && !os(Windows)
+    ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     if configuration.isMigratingFromObjcSDK {
         if let objcParseKeychain = KeychainStore.objectiveC {
             guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
