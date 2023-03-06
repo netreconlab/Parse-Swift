@@ -566,11 +566,13 @@ class ParseTwitterTests: XCTestCase {
                     do {
                         let currentUser = try await User.current()
                         XCTAssertEqual(user, currentUser)
-                        if let sessionToken = try? await User.sessionToken() {
-                            XCTAssertEqual(sessionToken, "myToken")
-                        }
                         let currentLinkedUser = ParseTwitter.isLinked(with: currentUser)
                         XCTAssertTrue(currentLinkedUser)
+                        if let sessionToken = try? await User.sessionToken() {
+                            XCTAssertEqual(sessionToken, "myToken")
+                        } else {
+                            _ = XCTSkip("Did not have sessionToken")
+                        }
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
@@ -650,6 +652,8 @@ class ParseTwitterTests: XCTestCase {
                 Task {
                     if let currentUser = try? await User.current() {
                         XCTAssertEqual(user, currentUser)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     let currentLinkedUser = ParseTwitter.isLinked(with: user)
                     XCTAssertFalse(currentLinkedUser)

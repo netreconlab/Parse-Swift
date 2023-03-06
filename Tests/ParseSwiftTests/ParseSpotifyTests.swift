@@ -179,6 +179,8 @@ class ParseSpotifyTests: XCTestCase {
                         let strippedUser = user.spotify.strip(current)
                         isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -240,6 +242,8 @@ class ParseSpotifyTests: XCTestCase {
                         let strippedUser = user.spotify.strip(current)
                         isLinked = ParseSpotify.isLinked(with: strippedUser)
                         XCTAssertFalse(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -356,6 +360,8 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -405,6 +411,8 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         var isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -456,9 +464,13 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     if let sessionToken = try? await User.sessionToken() {
                         XCTAssertEqual(sessionToken, "myToken")
+                    } else {
+                        _ = XCTSkip("Did not have sessionToken")
                     }
                 }
             case .failure(let error):
@@ -511,9 +523,13 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertTrue(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     if let sessionToken = try? await User.sessionToken() {
                         XCTAssertEqual(sessionToken, "myToken")
+                    } else {
+                        _ = XCTSkip("Did not have sessionToken")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
@@ -588,9 +604,13 @@ class ParseSpotifyTests: XCTestCase {
                         XCTAssertEqual(user, current)
                         let isLinked = ParseSpotify.isLinked(with: current)
                         XCTAssertFalse(isLinked)
+                    } else {
+                        _ = XCTSkip("Did not have current user")
                     }
                     if let sessionToken = try? await User.sessionToken() {
                         XCTAssertEqual(sessionToken, "myToken")
+                    } else {
+                        _ = XCTSkip("Did not have sessionToken")
                     }
                     DispatchQueue.main.async {
                         expectation1.fulfill()
