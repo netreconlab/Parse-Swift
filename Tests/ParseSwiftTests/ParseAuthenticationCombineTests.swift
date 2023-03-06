@@ -6,7 +6,6 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if !os(iOS)
 #if canImport(Combine)
 
 import Foundation
@@ -140,6 +139,21 @@ class ParseAuthenticationCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
+    @MainActor
+    func loginNormally() async throws -> User {
+        let loginResponse = LoginSignupResponse()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+        return try await User.login(username: "parse", password: "user")
+    }
+
     func testLogin() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -202,20 +216,6 @@ class ParseAuthenticationCombineTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func loginNormally() async throws -> User {
-        let loginResponse = LoginSignupResponse()
-
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
-        }
-        return try await User.login(username: "parse", password: "user")
-    }
-
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -274,5 +274,4 @@ class ParseAuthenticationCombineTests: XCTestCase {
     }
 }
 
-#endif
 #endif

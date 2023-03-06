@@ -6,9 +6,12 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if canImport(Combine) && !os(iOS)
+#if canImport(Combine)
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import XCTest
 import Combine
 @testable import ParseSwift
@@ -219,6 +222,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    @MainActor
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 

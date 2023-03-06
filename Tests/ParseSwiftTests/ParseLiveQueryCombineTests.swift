@@ -6,7 +6,7 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows) && !os(iOS)
+#if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
 import XCTest
 @testable import ParseSwift

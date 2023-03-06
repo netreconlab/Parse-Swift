@@ -6,10 +6,12 @@
 //  Copyright © 2021 Parse Community. All rights reserved.
 //
 
-#if !os(iOS)
 #if canImport(Combine)
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import XCTest
 import Combine
 @testable import ParseSwift
@@ -88,6 +90,22 @@ class ParseFacebookCombineTests: XCTestCase {
         #endif
         try await ParseStorage.shared.deleteAll()
     }
+
+    @MainActor
+    func loginNormally() async throws -> User {
+        let loginResponse = LoginSignupResponse()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+        return try await User.login(username: "parse", password: "user")
+    }
+
     func testLimitedLogin() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -275,20 +293,6 @@ class ParseFacebookCombineTests: XCTestCase {
         publisher.store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
-    }
-
-    func loginNormally() async throws -> User {
-        let loginResponse = LoginSignupResponse()
-
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
-        }
-        return try await User.login(username: "parse", password: "user")
     }
 
     func testLinkLimitedLogin() async throws {
@@ -606,5 +610,4 @@ class ParseFacebookCombineTests: XCTestCase {
     }
 }
 
-#endif
 #endif

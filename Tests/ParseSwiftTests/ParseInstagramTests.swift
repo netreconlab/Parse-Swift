@@ -130,7 +130,6 @@ class ParseInstagramTests: XCTestCase {
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-#if !os(iOS)
     func testReplaceAnonymousWithLinkedInstagram() async throws {
         try await loginAnonymousUser()
         MockURLProtocol.removeAll()
@@ -442,7 +441,6 @@ class ParseInstagramTests: XCTestCase {
         }
         wait(for: [expectation1], timeout: 20.0)
     }
-    #endif
 
     func testLogin() async throws {
         var serverResponse = LoginSignupResponse()

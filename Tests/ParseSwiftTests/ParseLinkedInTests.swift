@@ -85,6 +85,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         try await ParseStorage.shared.deleteAll()
     }
 
+    @MainActor
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
@@ -99,6 +100,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         return try await User.login(username: "parse", password: "user")
     }
 
+    @MainActor
     func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 

@@ -85,6 +85,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         try await ParseStorage.shared.deleteAll()
     }
 
+    @MainActor
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
@@ -99,6 +100,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         return try await User.login(username: "parse", password: "user")
     }
 
+    @MainActor
     func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 

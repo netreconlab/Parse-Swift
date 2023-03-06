@@ -176,6 +176,7 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         XCTAssertEqual(user.authData, serverResponse.authData)
     }
 
+    @MainActor
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 

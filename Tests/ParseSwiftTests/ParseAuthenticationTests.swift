@@ -139,6 +139,7 @@ class ParseAuthenticationTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
+    @MainActor
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
@@ -153,6 +154,7 @@ class ParseAuthenticationTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
+    @MainActor
     func testLinkCommand() async throws {
         let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
@@ -164,6 +166,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
+    @MainActor
     func testLinkCommandParseBody() async throws {
         var user = User()
         user.username = "hello"
@@ -176,6 +179,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertNil(command.body?.authData)
     }
 
+    @MainActor
     func testLinkCommandLoggedIn() async throws {
         let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
@@ -187,6 +191,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
+    @MainActor
     func testLinkCommandNoBodyLoggedIn() async throws {
         let user = try await loginNormally()
         let command = try await user.linkCommand()
