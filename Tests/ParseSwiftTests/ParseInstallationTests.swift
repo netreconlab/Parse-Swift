@@ -186,6 +186,246 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     }
 
     @MainActor
+    func testNewInstallationIdentifierIsLowercase() async throws {
+        guard let installationIdFromContainer
+            = await Installation.currentContainer().installationId else {
+            XCTFail("Should have retreived installationId from container")
+            return
+        }
+
+        XCTAssertEqual(installationIdFromContainer, installationIdFromContainer.lowercased())
+
+        guard let installationIdFromCurrent = try? await Installation.current().installationId else {
+            XCTFail("Should have retreived installationId from container")
+            return
+        }
+
+        XCTAssertEqual(installationIdFromCurrent, installationIdFromCurrent.lowercased())
+        XCTAssertEqual(installationIdFromContainer, installationIdFromCurrent)
+    }
+
+    func testDeviceTokenAsString() async throws {
+        let data = Data([0, 1, 127, 128, 255])
+        XCTAssertEqual(data.hexEncodedString(), "00017f80ff")
+        XCTAssertEqual(data.hexEncodedString(options: .upperCase), "00017F80FF")
+    }
+
+    @MainActor
+    func testInstallationMutableValuesCanBeChangedInMemory() async throws {
+        let originalInstallation = try await Installation.current()
+        var mutated = originalInstallation
+        mutated.customKey = "Changed"
+        mutated.setDeviceToken(Data([0, 1, 127, 128, 255]))
+        await Installation.setCurrent(mutated)
+        let current = try await Installation.current()
+        XCTAssertNotEqual(originalInstallation.customKey, current.customKey)
+        XCTAssertNotEqual(originalInstallation.deviceToken, current.customKey)
+    }
+
+    #if !os(Linux) && !os(Android) && !os(Windows)
+    @MainActor
+    func testInstallationImmutableFieldsCannotBeChangedInMemory() async throws {
+        let originalInstallation = try await Installation.current()
+        guard let originalDeviceType = originalInstallation.deviceType,
+            let originalTimeZone = originalInstallation.timeZone,
+            let originalAppName = originalInstallation.appName,
+            let originalAppIdentifier = originalInstallation.appIdentifier,
+            let originalAppVersion = originalInstallation.appVersion,
+            let originalParseVersion = originalInstallation.parseVersion,
+            let originalLocaleIdentifier = originalInstallation.localeIdentifier
+            else {
+                XCTFail("All of these Installation values should have unwraped")
+            return
+        }
+
+        var mutated = originalInstallation
+        mutated.installationId = "changed"
+        mutated.deviceType = "changed"
+        mutated.badge = 500
+        mutated.timeZone = "changed"
+        mutated.appName = "changed"
+        mutated.appIdentifier = "changed"
+        mutated.appVersion = "changed"
+        mutated.parseVersion = "changed"
+        mutated.localeIdentifier = "changed"
+        await Installation.setCurrent(mutated)
+
+        let current = try await Installation.current()
+        XCTAssertEqual(mutated.installationId, current.installationId)
+        XCTAssertEqual(originalDeviceType, current.deviceType)
+        XCTAssertEqual(500, current.badge)
+        XCTAssertEqual(originalTimeZone, current.timeZone)
+        XCTAssertEqual(originalAppName, current.appName)
+        XCTAssertEqual(originalAppIdentifier, current.appIdentifier)
+        XCTAssertEqual(originalAppVersion, current.appVersion)
+        XCTAssertEqual(originalParseVersion, current.parseVersion)
+        XCTAssertEqual(originalLocaleIdentifier, current.localeIdentifier)
+    }
+
+    @MainActor
+    func testInstallationCustomValuesSavedToKeychain() async throws {
+        let customField = "Changed"
+        var mutated = try await Installation.current()
+        mutated.customKey = customField
+        await Installation.setCurrent(mutated)
+        guard let keychainInstallation: CurrentInstallationContainer<Installation>
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            XCTFail("Should have pulled from Keychain")
+            return
+        }
+        XCTAssertEqual(keychainInstallation.currentInstallation?.customKey, customField)
+    }
+
+    @MainActor
+    func testInstallationImmutableFieldsCannotBeChangedInKeychain() async throws {
+        let originalInstallation = try await Installation.current()
+        guard let originalDeviceType = originalInstallation.deviceType,
+            let originalTimeZone = originalInstallation.timeZone,
+            let originalAppName = originalInstallation.appName,
+            let originalAppIdentifier = originalInstallation.appIdentifier,
+            let originalAppVersion = originalInstallation.appVersion,
+            let originalParseVersion = originalInstallation.parseVersion,
+            let originalLocaleIdentifier = originalInstallation.localeIdentifier
+            else {
+                XCTFail("All of these Installation values should have unwraped")
+            return
+        }
+
+        var mutated = originalInstallation
+        mutated.installationId = "changed"
+        mutated.deviceType = "changed"
+        mutated.badge = 500
+        mutated.timeZone = "changed"
+        mutated.appName = "changed"
+        mutated.appIdentifier = "changed"
+        mutated.appVersion = "changed"
+        mutated.parseVersion = "changed"
+        mutated.localeIdentifier = "changed"
+
+        await Installation.setCurrent(mutated)
+
+        guard let keychainInstallation: CurrentInstallationContainer<Installation>
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssertEqual(mutated.installationId, keychainInstallation.currentInstallation?.installationId)
+        XCTAssertEqual(originalDeviceType, keychainInstallation.currentInstallation?.deviceType)
+        XCTAssertEqual(500, keychainInstallation.currentInstallation?.badge)
+        XCTAssertEqual(originalTimeZone, keychainInstallation.currentInstallation?.timeZone)
+        XCTAssertEqual(originalAppName, keychainInstallation.currentInstallation?.appName)
+        XCTAssertEqual(originalAppIdentifier, keychainInstallation.currentInstallation?.appIdentifier)
+        XCTAssertEqual(originalAppVersion, keychainInstallation.currentInstallation?.appVersion)
+        XCTAssertEqual(originalParseVersion, keychainInstallation.currentInstallation?.parseVersion)
+        XCTAssertEqual(originalLocaleIdentifier, keychainInstallation.currentInstallation?.localeIdentifier)
+    }
+    #endif
+
+    @MainActor
+    func testMerge() async throws {
+        var original = try await Installation.current()
+        original.objectId = "yolo"
+        original.createdAt = Date()
+        original.updatedAt = Date()
+        original.badge = 10
+        var acl = ParseACL()
+        acl.publicRead = true
+        original.ACL = acl
+
+        var updated = original.mergeable
+        updated.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
+        updated.badge = 1
+        updated.deviceToken = "12345"
+        updated.customKey = "newKey"
+        let merged = try updated.merge(with: original)
+        XCTAssertEqual(merged.customKey, updated.customKey)
+        XCTAssertEqual(merged.badge, updated.badge)
+        XCTAssertEqual(merged.deviceType, original.deviceType)
+        XCTAssertEqual(merged.deviceToken, updated.deviceToken)
+        XCTAssertEqual(merged.channels, original.channels)
+        XCTAssertEqual(merged.installationId, original.installationId)
+        XCTAssertEqual(merged.timeZone, original.timeZone)
+        XCTAssertEqual(merged.appName, original.appName)
+        XCTAssertEqual(merged.appVersion, original.appVersion)
+        XCTAssertEqual(merged.appIdentifier, original.appIdentifier)
+        XCTAssertEqual(merged.parseVersion, original.parseVersion)
+        XCTAssertEqual(merged.localeIdentifier, original.localeIdentifier)
+        XCTAssertEqual(merged.ACL, original.ACL)
+        XCTAssertEqual(merged.createdAt, original.createdAt)
+        XCTAssertEqual(merged.updatedAt, updated.updatedAt)
+    }
+
+    @MainActor
+    func testMerge2() async throws {
+        var original = try await Installation.current()
+        original.objectId = "yolo"
+        original.createdAt = Date()
+        original.updatedAt = Date()
+        original.badge = 10
+        original.deviceToken = "bruh"
+        original.channels = ["halo"]
+        var acl = ParseACL()
+        acl.publicRead = true
+        original.ACL = acl
+
+        var updated = original.mergeable
+        updated.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
+        updated.customKey = "newKey"
+        let merged = try updated.merge(with: original)
+        XCTAssertEqual(merged.customKey, updated.customKey)
+        XCTAssertEqual(merged.badge, original.badge)
+        XCTAssertEqual(merged.deviceType, original.deviceType)
+        XCTAssertEqual(merged.deviceToken, original.deviceToken)
+        XCTAssertEqual(merged.channels, original.channels)
+        XCTAssertEqual(merged.installationId, original.installationId)
+        XCTAssertEqual(merged.timeZone, original.timeZone)
+        XCTAssertEqual(merged.appName, original.appName)
+        XCTAssertEqual(merged.appVersion, original.appVersion)
+        XCTAssertEqual(merged.appIdentifier, original.appIdentifier)
+        XCTAssertEqual(merged.parseVersion, original.parseVersion)
+        XCTAssertEqual(merged.localeIdentifier, original.localeIdentifier)
+        XCTAssertEqual(merged.ACL, original.ACL)
+        XCTAssertEqual(merged.createdAt, original.createdAt)
+        XCTAssertEqual(merged.updatedAt, updated.updatedAt)
+    }
+
+    @MainActor
+    func testMergeDefaultImplementation() async throws {
+        let currentInstallation = try await Installation.current()
+        var original = InstallationDefaultMerge()
+        original.installationId = currentInstallation.installationId
+        original.objectId = "yolo"
+        original.createdAt = Date()
+        original.updatedAt = Date()
+        original.badge = 10
+        original.deviceToken = "bruh"
+        original.channels = ["halo"]
+        var acl = ParseACL()
+        acl.publicRead = true
+        original.ACL = acl
+
+        var updated = original.set(\.customKey, to: "newKey")
+        updated.updatedAt = Calendar.current.date(byAdding: .init(day: 1), to: Date())
+        original.updatedAt = updated.updatedAt
+        original.customKey = updated.customKey
+        var merged = try updated.merge(with: original)
+        merged.originalData = nil
+        // Get dates in correct format from ParseDecoding strategy
+        let encoded = try ParseCoding.jsonEncoder().encode(original)
+        original = try ParseCoding.jsonDecoder().decode(InstallationDefaultMerge.self, from: encoded)
+        XCTAssertEqual(merged, original)
+    }
+
+    @MainActor
+    func testMergeDifferentObjectId() async throws {
+        var installation = Installation()
+        installation.objectId = "yolo"
+        var installation2 = installation
+        installation2.objectId = "nolo"
+        XCTAssertThrowsError(try installation2.merge(with: installation))
+    }
+
+    @MainActor
     func saveCurrentInstallation() async throws {
         let installation = try await Installation.current()
 
