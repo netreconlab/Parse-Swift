@@ -285,7 +285,7 @@ class ParseLDAPTests: XCTestCase {
                 Task {
                     if let currentUser = try? await User.current() {
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = ParseLDAP.isLinked(with: currentUser)
+                        let isLinked = ParseLDAP.isLinked(with: currentUser)
                         XCTAssertTrue(isLinked)
                     } else {
                         _ = XCTSkip("Did not have current user")
@@ -336,7 +336,7 @@ class ParseLDAPTests: XCTestCase {
                 Task {
                     if let currentUser = try? await User.current() {
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = ParseLDAP.isLinked(with: currentUser)
+                        let isLinked = ParseLDAP.isLinked(with: currentUser)
                         XCTAssertTrue(isLinked)
                     } else {
                         _ = XCTSkip("Did not have current user")
@@ -538,7 +538,7 @@ class ParseLDAPTests: XCTestCase {
                 Task {
                     if let currentUser = try? await User.current() {
                         XCTAssertEqual(user, currentUser)
-                        var isLinked = ParseLDAP.isLinked(with: currentUser)
+                        let isLinked = ParseLDAP.isLinked(with: currentUser)
                         XCTAssertFalse(isLinked)
                     } else {
                         _ = XCTSkip("Did not have current user")
