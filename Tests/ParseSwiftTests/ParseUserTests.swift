@@ -2513,15 +2513,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                         Task {
                             do {
                                 let updatedCurrentUser = try await User.current()
+                                XCTAssertEqual(updatedCurrentUser, saved)
                                 XCTAssertEqual(updatedCurrentUser.customKey, originalUser.customKey)
-
-                                // Should be updated in memory
-                                guard let updatedCurrentDate = updatedCurrentUser.updatedAt else {
-                                    XCTFail("Should unwrap current date")
-                                    expectation2.fulfill()
-                                    return
-                                }
-                                XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
                                 #if !os(Linux) && !os(Android) && !os(Windows)
                                 // Should be updated in Keychain

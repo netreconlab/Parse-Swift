@@ -166,7 +166,6 @@ Task {
         .set(\.targetScore, to: GameScore(points: 100))
     currentUser?.allScores = [GameScore(points: 5), GameScore(points: 8)]
     currentUser?.save { result in
-        
         switch result {
         case .success(let updatedUser):
             print("Successfully saved custom fields of User to ParseServer: \(updatedUser)")
@@ -296,7 +295,6 @@ Task {
     currentUser2.password = "HelloMePass123^"
     currentUser2.signup { result in
         switch result {
-            
         case .success(let user):
             print("Parse signup successful: \(user)")
             Task {
