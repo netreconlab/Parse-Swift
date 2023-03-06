@@ -881,7 +881,20 @@ public extension Query {
     }
 
     /**
-     Registers the query for live updates, using the default subscription handler,
+     Registers the query for live updates, using the default subscription handler
+     and the default `ParseLiveQuery` client.
+     - returns: The subscription that has just been registered.
+     - throws: An error of type `ParseError`.
+     */
+    func subscribeCallback() async throws -> SubscriptionCallback<ResultType> {
+        guard let client = ParseLiveQuery.client else {
+            throw ParseError(code: .otherCause, message: "Missing LiveQuery client")
+        }
+        return try await client.subscribe(SubscriptionCallback(query: self))
+    }
+
+    /**
+     Registers the query for live updates, using the default subscription handler
      and a specific `ParseLiveQuery` client.
      - parameter client: A specific client.
      - returns: The subscription that has just been registered.

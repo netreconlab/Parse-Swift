@@ -73,7 +73,14 @@ config.fetch { result in
 }
 
 //: Anytime you fetch or update your Config successfully, it is automatically saved to your Keychain.
-print(Config.current ?? "No config")
+Task {
+    do {
+        let config = try await Config.current()
+        print(config)
+    } catch {
+        assertionFailure("Error with current config: \(error)")
+    }
+}
 
 PlaygroundPage.current.finishExecution()
 //: [Next](@next)

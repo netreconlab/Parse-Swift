@@ -62,13 +62,15 @@ extension GameScore {
 //: You can have the server do operations on your `ParseObject`'s for you.
 
 //: First lets create another GameScore.
-let savedScore: GameScore!
-do {
-    let score = GameScore(points: 102, name: "player1")
-    savedScore = try score.save()
-} catch {
-    savedScore = nil
-    assertionFailure("Error saving: \(error)")
+var savedScore = GameScore(points: 102, name: "player1")
+savedScore.save { result in
+    switch result {
+    case .success(let score):
+        savedScore = score
+        print("Saved score: \(score)")
+    case .failure(let error):
+        assertionFailure("Error saving: \(error)")
+    }
 }
 
 //: Then we will increment the points.
@@ -84,65 +86,79 @@ incrementOperation.save { result in
     }
 }
 
-//: You can increment the score again syncronously.
-do {
-    _ = try incrementOperation.save()
-    print("Original score: \(String(describing: savedScore)). Check the new score on Parse Dashboard.")
-} catch {
-    print(error)
+Task {
+    //: You can increment the score again using async/await.
+    do {
+        _ = try await incrementOperation.save()
+        print("Original score: \(String(describing: savedScore)). Check the new score on Parse Dashboard.")
+    } catch {
+        print(error)
+    }
 }
 
-//: Query all scores whose name is null or undefined.
-let query1 = GameScore.query(isNotNull(key: "name"))
-let results1 = try query1.find()
-print("Total found: \(results1.count)")
-results1.forEach { score in
-    print("Found score with a name: \(score)")
+Task {
+    //: Query all scores whose name is null or undefined.
+    let query1 = GameScore.query(isNotNull(key: "name"))
+    let results1 = try await query1.find()
+    print("Total found: \(results1.count)")
+    results1.forEach { score in
+        print("Found score with a name: \(score)")
+    }
 }
 
-//: Query all scores whose name is undefined.
-let query2 = GameScore.query(exists(key: "name"))
-let results2 = try query2.find()
-print("Total found: \(results2.count)")
-results2.forEach { score in
-    print("Found score with a name: \(score)")
+Task {
+    //: Query all scores whose name is undefined.
+    let query2 = GameScore.query(exists(key: "name"))
+    let results2 = try await query2.find()
+    print("Total found: \(results2.count)")
+    results2.forEach { score in
+        print("Found score with a name: \(score)")
+    }
 }
 
-//: You can also remove a value for a property using unset.
-let unsetOperation = savedScore
-    .operation.unset(("points", \.points))
-do {
-    let updatedScore = try unsetOperation.save()
-    print("Updated score: \(updatedScore). Check the new score on Parse Dashboard.")
-} catch {
-    print(error)
+Task {
+    //: You can also remove a value for a property using unset.
+    let unsetOperation = savedScore
+        .operation.unset(("points", \.points))
+    do {
+        let updatedScore = try await unsetOperation.save()
+        print("Updated score: \(updatedScore). Check the new score on Parse Dashboard.")
+    } catch {
+        print(error)
+    }
 }
 
-//: There may be cases where you want to set/forceSet a value to null
-//: instead of unsetting
-let setToNullOperation = savedScore
-    .operation.set(("name", \.name), to: nil)
-do {
-    let updatedScore = try setToNullOperation.save()
-    print("Updated score: \(updatedScore). Check the new score on Parse Dashboard.")
-} catch {
-    print(error)
+Task {
+    //: There may be cases where you want to set/forceSet a value to null
+    //: instead of unsetting
+    let setToNullOperation = savedScore
+        .operation.set(("name", \.name), to: nil)
+    do {
+        let updatedScore = try await setToNullOperation.save()
+        print("Updated score: \(updatedScore). Check the new score on Parse Dashboard.")
+    } catch {
+        print(error)
+    }
 }
 
-//: Query all scores whose name is null or undefined.
-let query3 = GameScore.query(isNull(key: "name"))
-let results3 = try query3.find()
-print("Total found: \(results3.count)")
-results3.forEach { score in
-    print("Found score with name is null: \(score)")
+Task {
+    //: Query all scores whose name is null or undefined.
+    let query3 = GameScore.query(isNull(key: "name"))
+    let results3 = try await query3.find()
+    print("Total found: \(results3.count)")
+    results3.forEach { score in
+        print("Found score with name is null: \(score)")
+    }
 }
 
-//: Query all scores whose name is undefined.
-let query4 = GameScore.query(doesNotExist(key: "name"))
-let results4 = try query4.find()
-print("Total found: \(results4.count)")
-results4.forEach { score in
-    print("Found score with name does not exist: \(score)")
+Task {
+    //: Query all scores whose name is undefined.
+    let query4 = GameScore.query(doesNotExist(key: "name"))
+    let results4 = try await query4.find()
+    print("Total found: \(results4.count)")
+    results4.forEach { score in
+        print("Found score with name does not exist: \(score)")
+    }
 }
 
 //: There are other operations: set/forceSet/unset/add/remove, etc. objects from `ParseObject`s.

@@ -58,54 +58,61 @@ struct Installation: ParseInstallation {
     }
 }
 
-/*: Save your first `customKey` value to your `ParseInstallation`.
-    Performs work on background queue and returns to designated on
-    designated callbackQueue. If no callbackQueue is specified it
-    returns to main queue. Note that this may be the first time you
-    are saving your Installation.
- */
-let currentInstallation = Installation.current
-currentInstallation?.save { results in
+Task {
+    /*: Save your first `customKey` value to your `ParseInstallation`.
+     Performs work on background queue and returns to designated on
+     designated callbackQueue. If no callbackQueue is specified it
+     returns to main queue. Note that this may be the first time you
+     are saving your Installation.
+     */
+    let currentInstallation = try? await Installation.current()
+    currentInstallation?.save { results in
 
-    switch results {
-    case .success(let updatedInstallation):
-        print("Successfully saved Installation to ParseServer: \(updatedInstallation)")
-    case .failure(let error):
-        print("Failed to update installation: \(error)")
+        switch results {
+        case .success(let updatedInstallation):
+            print("Successfully saved Installation to ParseServer: \(updatedInstallation)")
+        case .failure(let error):
+            print("Failed to update installation: \(error)")
+        }
     }
 }
 
-/*:
- Update your `ParseInstallation` `customKey` and `channels` values.
- Performs work on background queue and returns to designated on
- designated callbackQueue. If no callbackQueue is specified it
- returns to main queue. Using `.mergeable` or `set()`
- allows you to only send the updated keys to the
- parse server as opposed to the whole object.
- */
-var installationToUpdate = Installation.current?.mergeable
-installationToUpdate?.customKey = "myCustomInstallationKey2"
-installationToUpdate?.channels = ["newDevices"]
-installationToUpdate?.save { results in
+Task {
+    /*:
+     Update your `ParseInstallation` `customKey` and `channels` values.
+     Performs work on background queue and returns to designated on
+     designated callbackQueue. If no callbackQueue is specified it
+     returns to main queue. Using `.mergeable` or `set()`
+     allows you to only send the updated keys to the
+     parse server as opposed to the whole object.
+     */
+    var installationToUpdate = try? await Installation.current()
+    installationToUpdate = installationToUpdate?.mergeable
+    installationToUpdate?.customKey = "myCustomInstallationKey2"
+    installationToUpdate?.channels = ["newDevices"]
+    installationToUpdate?.save { results in
 
-    switch results {
-    case .success(let updatedInstallation):
-        print("Successfully saved myCustomInstallationKey to ParseServer: \(updatedInstallation)")
-    case .failure(let error):
-        print("Failed to update installation: \(error)")
+        switch results {
+        case .success(let updatedInstallation):
+            print("Successfully saved myCustomInstallationKey to ParseServer: \(updatedInstallation)")
+        case .failure(let error):
+            print("Failed to update installation: \(error)")
+        }
     }
 }
 
-//: You can fetch your installation at anytime.
-Installation.current?.fetch { results in
+Task {
+    //: You can fetch your installation at anytime.
+    try? await Installation.current().fetch { results in
 
-    switch results {
-    case .success(let fetchedInstallation):
-        print("Successfully fetched installation from ParseServer: \(fetchedInstallation)")
-    case .failure(let error):
-        print("Failed to fetch installation: \(error)")
+        switch results {
+        case .success(let fetchedInstallation):
+            print("Successfully fetched installation from ParseServer: \(fetchedInstallation)")
+        case .failure(let error):
+            print("Failed to fetch installation: \(error)")
+        }
+
     }
-
 }
 
 PlaygroundPage.current.finishExecution()

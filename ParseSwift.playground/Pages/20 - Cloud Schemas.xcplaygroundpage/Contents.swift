@@ -230,17 +230,19 @@ gameScoreSchema.update { result in
     }
 }
 
-//: Now lets save a new object to the new schema.
-var gameScore = GameScore2()
-gameScore.points = 120
-gameScore.owner = User.current
+Task {
+    //: Now lets save a new object to the new schema.
+    var gameScore = GameScore2()
+    gameScore.points = 120
+    gameScore.owner = try? await User.current()
 
-gameScore.save { result in
-    switch result {
-    case .success(let savedGameScore):
-        print("The saved GameScore is: \(savedGameScore)")
-    case .failure(let error):
-        print("Could not save schema: \(error)")
+    gameScore.save { result in
+        switch result {
+        case .success(let savedGameScore):
+            print("The saved GameScore is: \(savedGameScore)")
+        case .failure(let error):
+            print("Could not save schema: \(error)")
+        }
     }
 }
 

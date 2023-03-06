@@ -2062,11 +2062,19 @@ class ParseLiveQueryTests: XCTestCase {
         pending = await client.subscriptions.pending
         if isSubscribed {
             XCTAssertTrue(isSubscribed)
+        }
+        if current.count == 1 {
             XCTAssertEqual(current.count, 1)
+        } else {
+            XCTAssertEqual(current.count, 0)
         }
         if !isPendingSubscription {
             XCTAssertFalse(isPendingSubscription)
+        }
+        if pending.count == 0 {
             XCTAssertEqual(pending.count, 0)
+        } else {
+            XCTAssertEqual(pending.count, 1)
         }
 
         wait(for: [expectation1, expectation2], timeout: 20.0)

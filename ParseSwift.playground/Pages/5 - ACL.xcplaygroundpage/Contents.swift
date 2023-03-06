@@ -18,15 +18,16 @@ Task {
     } catch {
         assertionFailure("Error initializing Parse-Swift: \(error)")
     }
-}
 
-do {
-    var acl = ParseACL()
-    acl.publicRead = true
-    acl.publicWrite = false
-    try ParseACL.setDefaultACL(acl, withAccessForCurrentUser: true)
-} catch {
-    assertionFailure("Error storing default ACL to Keychain: \(error)")
+    // Set default ACL for all ParseObjects.
+    do {
+        var acl = ParseACL()
+        acl.publicRead = true
+        acl.publicWrite = false
+        try await ParseACL.setDefaultACL(acl, withAccessForCurrentUser: true)
+    } catch {
+        assertionFailure("Error storing default ACL to Keychain: \(error)")
+    }
 }
 
 //: Create your own value typed ParseObject.

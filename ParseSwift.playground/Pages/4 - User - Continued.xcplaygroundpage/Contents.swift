@@ -306,7 +306,7 @@ Task {
                 }
             }
         case .failure(let error):
-            print("Error logging in: \(error)")
+            print("Error converting user: \(error)")
         }
     }
 }

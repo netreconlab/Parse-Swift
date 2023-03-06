@@ -66,7 +66,7 @@ struct Role<RoleUser: ParseUser>: ParseRole {
     var name: String?
 
     //: Custom properties.
-    var subtitle: String
+    var subtitle: String?
 
     /*:
      Optional - implement your own version of merge
@@ -122,35 +122,38 @@ extension GameScore {
 //: This variable will store the saved role.
 var savedRole: Role<User>?
 
-//: Now we will create the Role.
-guard let currentUser = User.current else {
-    fatalError("User currently is not signed in")
-}
+Task {
+    //: Now we will create the Role.
+    do {
+        let currentUser = try await User.current()
+        //: Every Role requires an ACL that cannot be changed after saving.
+        var acl = ParseACL()
+        acl.setReadAccess(user: currentUser, value: true)
+        acl.setWriteAccess(user: currentUser, value: true)
 
-//: Every Role requires an ACL that cannot be changed after saving.
-var acl = ParseACL()
-acl.setReadAccess(user: currentUser, value: true)
-acl.setWriteAccess(user: currentUser, value: true)
+        do {
+            //: Create the actual Role with a name and ACL.
+            var adminRole = try Role<User>(name: "Administrator", acl: acl)
+            adminRole.subtitle = "staff"
+            adminRole.save { result in
+                switch result {
+                case .success(let saved):
+                    print("The role saved successfully: \(saved)")
+                    print("Check your \"Role\" class in Parse Dashboard.")
 
-do {
-    //: Create the actual Role with a name and ACL.
-    var adminRole = try Role<User>(name: "Administrator", acl: acl)
-    adminRole.subtitle = "staff"
-    adminRole.save { result in
-        switch result {
-        case .success(let saved):
-            print("The role saved successfully: \(saved)")
-            print("Check your \"Role\" class in Parse Dashboard.")
+                    //: Store the saved role so we can use it later...
+                    savedRole = saved
 
-            //: Store the saved role so we can use it later...
-            savedRole = saved
-
-        case .failure(let error):
-            print("Error saving role: \(error)")
+                case .failure(let error):
+                    print("Error saving role: \(error)")
+                }
+            }
+        } catch {
+            print("Error: \(error)")
         }
+    } catch {
+        fatalError("User currently is not signed in")
     }
-} catch {
-    print("Error: \(error)")
 }
 
 //: Lets check to see if our Role has saved.
@@ -158,23 +161,26 @@ if savedRole != nil {
     print("We have a saved Role")
 }
 
-//: Users can be added to our previously saved Role.
-do {
-    //: `ParseRoles` have `ParseRelations` that relate them either `ParseUser` and `ParseRole` objects.
-    //: The `ParseUser` relations can be accessed using `users`. We can then add `ParseUser`'s to the relation.
-    try savedRole!.users?.add([User.current!]).save { result in
-        switch result {
-        case .success(let saved):
-            print("The role saved successfully: \(saved)")
-            print("Check \"users\" field in your \"Role\" class in Parse Dashboard.")
+Task {
+    //: Users can be added to our previously saved Role.
+    do {
+        //: `ParseRoles` have `ParseRelations` that relate them either `ParseUser` and `ParseRole` objects.
+        //: The `ParseUser` relations can be accessed using `users`. We can then add `ParseUser`'s to the relation.
+        let currentUser = try await User.current()
+        try savedRole!.users?.add([currentUser]).save { result in
+            switch result {
+            case .success(let saved):
+                print("The role saved successfully: \(saved)")
+                print("Check \"users\" field in your \"Role\" class in Parse Dashboard.")
 
-        case .failure(let error):
-            print("Error saving role: \(error)")
+            case .failure(let error):
+                print("Error saving role: \(error)")
+            }
         }
-    }
 
-} catch {
-    print("Error: \(error)")
+    } catch {
+        print("Error: \(error)")
+    }
 }
 
 /*:
@@ -199,20 +205,23 @@ do {
     print(error)
 }
 
-//: Of course, you can remove users from the roles as well.
-do {
-    try savedRole!.users?.remove([User.current!]).save { result in
-        switch result {
-        case .success(let saved):
-            print("The role removed successfully: \(saved)")
-            print("Check \"users\" field in your \"Role\" class in Parse Dashboard.")
+Task {
+    //: Of course, you can remove users from the roles as well.
+    do {
+        let currentUser = try await User.current()
+        try savedRole!.users?.remove([currentUser]).save { result in
+            switch result {
+            case .success(let saved):
+                print("The role removed successfully: \(saved)")
+                print("Check \"users\" field in your \"Role\" class in Parse Dashboard.")
 
-        case .failure(let error):
-            print("Error saving role: \(error)")
+            case .failure(let error):
+                print("Error saving role: \(error)")
+            }
         }
+    } catch {
+        print(error)
     }
-} catch {
-    print(error)
 }
 
 /*:
@@ -222,24 +231,31 @@ do {
 //: This variable will store the saved role.
 var savedRoleModerator: Role<User>?
 
-do {
-    //: Create the actual Role with a name and ACL.
-    let memberRole = try Role<User>(name: "Member", acl: acl)
-    memberRole.save { result in
-        switch result {
-        case .success(let saved):
-            print("The role saved successfully: \(saved)")
-            print("Check your \"Role\" class in Parse Dashboard.")
+Task {
+    do {
+        let currentUser = try await User.current()
+        var acl = ParseACL()
+        acl.setReadAccess(user: currentUser, value: true)
+        acl.setWriteAccess(user: currentUser, value: true)
 
-            //: Store the saved role so we can use it later...
-            savedRoleModerator = saved
+        //: Create the actual Role with a name and ACL.
+        let memberRole = try Role<User>(name: "Member", acl: acl)
+        memberRole.save { result in
+            switch result {
+            case .success(let saved):
+                print("The role saved successfully: \(saved)")
+                print("Check your \"Role\" class in Parse Dashboard.")
 
-        case .failure(let error):
-            print("Error saving role: \(error)")
+                //: Store the saved role so we can use it later...
+                savedRoleModerator = saved
+
+            case .failure(let error):
+                print("Error saving role: \(error)")
+            }
         }
+    } catch {
+        print("Error: \(error)")
     }
-} catch {
-    print("Error: \(error)")
 }
 
 //: Lets check to see if our Role has saved
@@ -307,99 +323,110 @@ do {
     print(error)
 }
 
-/*:
- Using this relation, you can create one-to-many relationships
- with other `ParseObjecs`, similar to `users` and `roles`. All
- `ParseObject`s have a `ParseRelation` attribute that be used on
- instances. For example, the User has:
- */
-var relation = User.current!.relation
-let score1 = GameScore(points: 53)
-let score2 = GameScore(points: 57)
+Task {
 
-//: Add new child relationships.
-[score1, score2].saveAll { result in
-    switch result {
-    case .success(let savedScores):
-        //: Make an array of all scores that were properly saved.
-        let scores = savedScores.compactMap { try? $0.get() }
-        do {
-            guard let newRelations = try relation?.add("scores", objects: scores) else {
-                print("Error: should have unwrapped relation")
-                return
-            }
-            newRelations.save { result in
-                switch result {
-                case .success(let saved):
-                    print("The relation saved successfully: \(saved)")
-                    print("Check \"points\" field in your \"_User\" class in Parse Dashboard.")
+    do {
+        let currentUser = try await User.current()
+        /*:
+         Using this relation, you can create one-to-many relationships
+         with other `ParseObjecs`, similar to `users` and `roles`. All
+         `ParseObject`s have a `ParseRelation` attribute that be used on
+         instances. For example, the User has:
+         */
+        var relation = currentUser.relation
+        let score1 = GameScore(points: 53)
+        let score2 = GameScore(points: 57)
 
-                case .failure(let error):
-                    print("Error saving role: \(error)")
+        //: Add new child relationships.
+        [score1, score2].saveAll { result in
+            switch result {
+            case .success(let savedScores):
+                //: Make an array of all scores that were properly saved.
+                let scores = savedScores.compactMap { try? $0.get() }
+                do {
+                    guard let newRelations = try relation?.add("scores", objects: scores) else {
+                        print("Error: should have unwrapped relation")
+                        return
+                    }
+                    newRelations.save { result in
+                        switch result {
+                        case .success(let saved):
+                            print("The relation saved successfully: \(saved)")
+                            print("Check \"points\" field in your \"_User\" class in Parse Dashboard.")
+
+                        case .failure(let error):
+                            print("Error saving role: \(error)")
+                        }
+                    }
+                } catch {
+                    print(error)
                 }
+            case .failure(let error):
+                print("Could not save scores. \(error)")
             }
-        } catch {
-            print(error)
         }
-    case .failure(let error):
-        print("Could not save scores. \(error)")
+    } catch {
+        assertionFailure("Error: \(error)")
     }
 }
 
-//: You can also do
-// let specificRelation = User.current!.relation("scores", className: "GameScore")
-do {
-    let specificRelation = try User.current!.relation("scores", child: score1)
-    try (specificRelation.query() as Query<GameScore>).find { result in
-        switch result {
-        case .success(let scores):
-            print("Found related scores: \(scores)")
-        case .failure(let error):
-            print("Error querying scores: \(error)")
+Task {
+    let score1 = GameScore(points: 53)
+    //: You can also do
+    // let specificRelation = try await User.current().relation("scores", className: "GameScore")
+    do {
+        let currentUser = try await User.current()
+        let specificRelation = try currentUser.relation("scores", child: score1)
+        try (specificRelation.query() as Query<GameScore>).find { result in
+            switch result {
+            case .success(let scores):
+                print("Found related scores: \(scores)")
+            case .failure(let error):
+                print("Error querying scores: \(error)")
+            }
         }
+    } catch {
+        print(error)
     }
-} catch {
-    print(error)
 }
 
-//: In addition, you can leverage the child to find scores related to the parent.
-do {
-    try GameScore.queryRelations("scores", parent: User.current!).find { result in
-        switch result {
-        case .success(let scores):
-            print("Found related scores from child: \(scores)")
-        case .failure(let error):
-            print("Error querying scores from child: \(error)")
+Task {
+    //: In addition, you can leverage the child to find scores related to the parent.
+    do {
+        let currentUser = try await User.current()
+        try GameScore.queryRelations("scores", parent: currentUser).find { result in
+            switch result {
+            case .success(let scores):
+                print("Found related scores from child: \(scores)")
+            case .failure(let error):
+                print("Error querying scores from child: \(error)")
+            }
         }
+    } catch {
+        print(error)
     }
-} catch {
-    print(error)
 }
 
-//: Now we will see how to use the stored `ParseRelation on` property in User to create query
-//: all of the relations to `scores`.
-var updatedCurrentUser: User
-do {
-    //: Fetch the updated user since the previous relations were created on the server.
-    updatedCurrentUser = try User.current!.fetch()
-    print("Updated current user with relation: \(updatedCurrentUser)")
-} catch {
-    updatedCurrentUser = User.current!
-    print("\(error.localizedDescription)")
-}
-
-do {
-    let usableStoredRelation = try updatedCurrentUser.relation(updatedCurrentUser.scores, key: "scores")
-    try (usableStoredRelation.query() as Query<GameScore>).find { result in
-        switch result {
-        case .success(let scores):
-            print("Found related scores from stored ParseRelation: \(scores)")
-        case .failure(let error):
-            print("Error querying scores from stored ParseRelation: \(error)")
+Task {
+    do {
+        //: Now we will see how to use the stored `ParseRelation on` property in User to create query
+        //: all of the relations to `scores`.
+        var currentUser = try await User.current()
+        //: Fetch the updated user since the previous relations were created on the server.
+        currentUser = try await currentUser.fetch()
+        print("Updated current user with relation: \(currentUser)")
+        let usableStoredRelation = try currentUser.relation(currentUser.scores, key: "scores")
+        try (usableStoredRelation.query() as Query<GameScore>).find { result in
+            switch result {
+            case .success(let scores):
+                print("Found related scores from stored ParseRelation: \(scores)")
+            case .failure(let error):
+                print("Error querying scores from stored ParseRelation: \(error)")
+            }
         }
+    } catch {
+        print("\(error.localizedDescription)")
     }
-} catch {
-    print("\(error.localizedDescription)")
 }
 
 PlaygroundPage.current.finishExecution()

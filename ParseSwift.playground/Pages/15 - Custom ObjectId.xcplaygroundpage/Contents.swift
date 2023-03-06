@@ -17,10 +17,12 @@ PlaygroundPage.current.needsIndefiniteExecution = true
  npm start -- --appId applicationId --clientKey clientKey --masterKey primaryKey --mountPath /parse
 */
 
-do {
-    try initializeParse(customObjectId: true)
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse(customObjectId: true)
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.
