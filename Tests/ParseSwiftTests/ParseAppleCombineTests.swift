@@ -130,6 +130,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -195,6 +198,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -237,6 +243,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         return try await User.login(username: "parse", password: "user")
     }
 
+    // swiftlint:disable:next function_body_length
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -273,6 +280,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -333,6 +343,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -405,6 +418,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -476,6 +492,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 

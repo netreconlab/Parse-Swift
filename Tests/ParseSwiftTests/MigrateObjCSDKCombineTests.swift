@@ -204,8 +204,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
-                expectation1.fulfill()
+                DispatchQueue.main.async {
+                    expectation1.fulfill()
+                }
 
         }, receiveValue: { loggedIn in
             XCTAssertEqual(loggedIn.updatedAt, serverResponse.updatedAt)
@@ -271,8 +276,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
-                expectation1.fulfill()
+                DispatchQueue.main.async {
+                    expectation1.fulfill()
+                }
 
         }, receiveValue: { loggedIn in
             XCTAssertEqual(loggedIn.updatedAt, serverResponse.updatedAt)
@@ -337,8 +347,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
-                expectation1.fulfill()
+                DispatchQueue.main.async {
+                    expectation1.fulfill()
+                }
 
         }, receiveValue: { loggedIn in
             XCTAssertEqual(loggedIn.updatedAt, serverResponse.updatedAt)
@@ -411,8 +426,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
-                expectation1.fulfill()
+                DispatchQueue.main.async {
+                    expectation1.fulfill()
+                }
 
         }, receiveValue: { returnedUser in
             XCTAssertTrue(currentUser.hasSameObjectId(as: returnedUser))
@@ -526,6 +546,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -576,6 +599,9 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 

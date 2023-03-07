@@ -86,6 +86,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
         try await ParseStorage.shared.deleteAll()
     }
 
+    // swiftlint:disable:next function_body_length
     func testLogin() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -121,6 +122,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -186,6 +190,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -258,6 +265,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -318,6 +328,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -386,6 +399,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -453,6 +469,9 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 

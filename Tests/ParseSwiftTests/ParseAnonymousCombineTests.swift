@@ -200,6 +200,7 @@ class ParseAnonymousCombineTests: XCTestCase {
         }, receiveValue: { _ in
 
             XCTFail("Should have returned error")
+            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
 

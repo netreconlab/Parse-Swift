@@ -154,6 +154,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
+    // swiftlint:disable:next function_body_length
     func testLogin() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -190,6 +191,9 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -248,6 +252,9 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 

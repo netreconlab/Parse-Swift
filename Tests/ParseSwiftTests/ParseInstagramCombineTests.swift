@@ -139,6 +139,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -203,6 +206,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -230,6 +236,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -262,6 +269,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -290,6 +300,7 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testLinkAuthData() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -324,6 +335,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -391,6 +405,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
@@ -457,6 +474,9 @@ class ParseInstagramCombineTests: XCTestCase { // swiftlint:disable:this type_bo
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
