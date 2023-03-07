@@ -4,7 +4,7 @@
 //
 //  Original file, URLSession+sync.swift, created by Florent Vilmart on 17-09-24.
 //  Name change to URLSession.swift and support for sync/async by Corey Baker on 7/25/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation

@@ -3,7 +3,7 @@
 //  Parse
 //
 //  Created by Florent Vilmart on 17-07-23.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation

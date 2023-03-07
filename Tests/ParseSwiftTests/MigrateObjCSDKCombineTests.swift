@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 8/21/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine) && !os(Linux) && !os(Android) && !os(Windows)

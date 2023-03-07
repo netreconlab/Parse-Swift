@@ -3,7 +3,7 @@
 //  ParseSwiftTests
 //
 //  Created by Corey Baker on 7/19/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
