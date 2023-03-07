@@ -262,6 +262,7 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
+        await KeychainStore.createShared()
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
         var newInstallation = Installation()
@@ -413,6 +414,7 @@ class InitializeSDKTests: XCTestCase {
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testMigrateOldKeychainToNew() async throws {
+        await KeychainStore.createOld()
         var user = BaseParseUser()
         user.objectId = "wow"
         var userContainer = CurrentUserContainer<BaseParseUser>()
@@ -468,7 +470,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testMigrateObjcSDK() async throws {
-
+        await KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")
@@ -509,7 +511,7 @@ class InitializeSDKTests: XCTestCase {
     #endif
 
     func testDeleteObjcSDKKeychain() async throws {
-
+        await KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")

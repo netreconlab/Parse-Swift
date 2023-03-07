@@ -23,7 +23,7 @@ class KeychainStoreTests: XCTestCase {
                                         clientKey: "clientKey",
                                         primaryKey: "primaryKey",
                                         serverURL: url, testing: true)
-        testStore = KeychainStore(service: "test")
+        testStore = await KeychainStore(service: "test")
     }
 
     override func tearDown() async throws {
@@ -39,6 +39,17 @@ class KeychainStoreTests: XCTestCase {
     func testSetObject() async throws {
         let isSet = await testStore.set(object: "yarr", forKey: "blah")
         XCTAssertTrue(isSet, "Set should succeed")
+    }
+
+    func testGetObjectSubscript() async throws {
+        let key = "yarrKey"
+        let value = "yarrValue"
+        _ = await testStore.set(object: value, forKey: key)
+        guard let storedValue: String = await testStore.object(forKey: key) else {
+            XCTFail("Should unwrap to String")
+            return
+        }
+        XCTAssertEqual(storedValue, value, "Values should be equal after get")
     }
 
     func testGetObject() async throws {
@@ -207,6 +218,7 @@ class KeychainStoreTests: XCTestCase {
     }
 
     func testSetObjectiveC() async throws {
+        await KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")

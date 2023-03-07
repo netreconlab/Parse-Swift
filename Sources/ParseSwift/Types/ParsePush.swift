@@ -176,13 +176,17 @@ extension ParsePush {
         if expirationTime != nil && expirationInterval != nil {
             let error =  ParseError(code: .otherCause,
                                     message: "expirationTime and expirationInterval cannot both be set.")
-            completion(.failure(error))
+            callbackQueue.async {
+                completion(.failure(error))
+            }
             return
         }
         if `where` != nil && channels != nil {
             let error =  ParseError(code: .otherCause,
                                     message: "query and channels cannot both be set.")
-            completion(.failure(error))
+            callbackQueue.async {
+                completion(.failure(error))
+            }
             return
         }
         Task {
@@ -191,8 +195,8 @@ extension ParsePush {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await sendCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 

@@ -310,13 +310,10 @@ extension ParseUser {
                     .execute(options: options,
                                   callbackQueue: callbackQueue,
                                   completion: completion)
-            } catch let error as ParseError {
-                callbackQueue.async {
-                    completion(.failure(error))
-                }
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -652,9 +649,7 @@ extension ParseUser {
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -666,9 +661,7 @@ extension ParseUser {
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -711,9 +704,7 @@ extension ParseUser {
                             completion(result)
                         }
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -725,9 +716,7 @@ extension ParseUser {
                                       callbackQueue: callbackQueue,
                                       completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -838,13 +827,9 @@ extension ParseUser {
                         }
                     }
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    if let error = error as? ParseError {
-                        completion(.failure(error))
-                    } else {
-                        completion(.failure(ParseError(code: .otherCause,
-                                                       message: error.localizedDescription)))
-                    }
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -912,9 +897,7 @@ extension ParseUser {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -945,9 +928,7 @@ extension ParseUser {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -979,9 +960,7 @@ extension ParseUser {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1013,9 +992,7 @@ extension ParseUser {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1152,13 +1129,10 @@ extension ParseUser {
                         }
                     }
                 }
-            } catch let error as ParseError {
-                callbackQueue.async {
-                    completion(.failure(error))
-                }
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -1237,9 +1211,7 @@ public extension Sequence where Element: ParseUser {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1283,9 +1255,7 @@ public extension Sequence where Element: ParseUser {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1330,9 +1300,7 @@ public extension Sequence where Element: ParseUser {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1377,9 +1345,7 @@ public extension Sequence where Element: ParseUser {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1520,9 +1486,7 @@ public extension Sequence where Element: ParseUser {
                         }
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }

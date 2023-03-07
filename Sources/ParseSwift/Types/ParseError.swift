@@ -18,6 +18,8 @@ public struct ParseError: ParseTypeable, Swift.Error {
     public let message: String
     /// An error value representing a custom error from the Parse Server.
     public let otherCode: Int?
+    /// The Swift error provided by the OS.
+    public let swift: Swift.Error?
     let error: String?
 
     enum CodingKeys: String, CodingKey {
@@ -456,6 +458,7 @@ public extension ParseError {
         self.message = message
         self.otherCode = nil
         self.error = nil
+        self.swift = nil
     }
 
     /**
@@ -468,6 +471,23 @@ public extension ParseError {
         self.message = message
         self.otherCode = otherCode
         self.error = nil
+        self.swift = nil
+    }
+
+    /**
+     Create an error with a with a Swift.Error.
+     - parameter code: The known Parse code. Defaults to **.otherCause**.
+     - parameter message: The custom message. Defaults to a default message.
+     - parameter swift: The error provided by the OS.
+     */
+    init(code: Code = .otherCause,
+         message: String = "A non ParseSwift error",
+         swift: Swift.Error) {
+        self.code = .otherCause
+        self.message = message
+        self.otherCode = nil
+        self.error = nil
+        self.swift = swift
     }
 }
 
@@ -496,6 +516,7 @@ extension ParseError {
             message = try values.decode(String.self, forKey: .error)
         }
         self.error = nil
+        self.swift = nil
     }
 }
 
@@ -503,7 +524,10 @@ extension ParseError {
 extension ParseError: CustomDebugStringConvertible {
     public var debugDescription: String {
         guard let otherCode = otherCode else {
-            return "ParseError code=\(code.rawValue) error=\(message)"
+            guard let swift = swift else {
+                return "ParseError code=\(code.rawValue) error=\(message)"
+            }
+            return "ParseError code=\(code.rawValue) error=\(message) swift=\(swift)"
         }
         return "ParseError code=\(code.rawValue) error=\(message) otherCode=\(otherCode)"
     }
@@ -513,6 +537,16 @@ extension ParseError: CustomDebugStringConvertible {
 extension ParseError: LocalizedError {
     public var errorDescription: String? {
         debugDescription
+    }
+}
+
+// MARK: 
+extension ParseError: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.code == rhs.code &&
+        lhs.message == rhs.message &&
+        lhs.error == rhs.error &&
+        lhs.swift?.localizedDescription == rhs.swift?.localizedDescription
     }
 }
 

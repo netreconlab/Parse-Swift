@@ -39,6 +39,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
                             try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
                             // swiftlint:disable:next line_length
                             let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
+                        await KeychainStore.createOld()
                         guard let versionStringFromOldKeychainToMigrate: String =
                                 try? await KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
                               // swiftlint:disable:next line_length

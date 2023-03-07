@@ -355,10 +355,7 @@ internal extension ParseInstallation {
             try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }
@@ -408,10 +405,7 @@ internal extension Sequence where Element: ParseInstallation {
                     commands.append(try object.updateCommand())
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                throw parseError
+                throw error as? ParseError ?? ParseError(swift: error)
             }
         }
 
@@ -433,10 +427,7 @@ internal extension Sequence where Element: ParseInstallation {
             try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }

@@ -99,6 +99,7 @@ public var configuration: ParseConfiguration {
  */
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
+    await KeychainStore.createShared()
     await ParseStorage.shared.use(configuration.primitiveStore)
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
@@ -123,7 +124,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         #if !os(Linux) && !os(Android) && !os(Windows)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            _ = KeychainStore.old
+            await KeychainStore.createOld()
             try? await KeychainStore.shared.copy(KeychainStore.old,
                                                  oldAccessGroup: configuration.keychainAccessGroup,
                                                  newAccessGroup: configuration.keychainAccessGroup)
@@ -167,6 +168,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     #if !os(Linux) && !os(Android) && !os(Windows)
     ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     if configuration.isMigratingFromObjcSDK {
+        await KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
             guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
                   try await BaseParseInstallation.current().installationId != installationId else {

@@ -233,7 +233,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let otherKeychain = KeychainStore(service: "other")
+        let otherKeychain = await KeychainStore(service: "other")
         try await otherKeychain.copy(KeychainStore.shared,
                                      oldAccessGroup: ParseSwift.configuration.keychainAccessGroup,
                                      newAccessGroup: ParseSwift.configuration.keychainAccessGroup)
