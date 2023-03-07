@@ -13,6 +13,7 @@
 [![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/netreconlab/Parse-Swift/branches)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/403b74d0f2514e288b0a1b2e52b6d841)](https://www.codacy.com/gh/netreconlab/Parse-Swift/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=netreconlab/Parse-Swift&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)][license-link]
+![Xcode 13.3+](https://img.shields.io/badge/xcode-13.3%2B-blue.svg)
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fnetreconlab%2FParse-Swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/netreconlab/Parse-Swift)
 
