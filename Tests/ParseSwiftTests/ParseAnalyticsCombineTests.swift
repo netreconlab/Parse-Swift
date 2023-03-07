@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 5/22/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -15,31 +15,31 @@ import Combine
 
 class ParseAnalyticsCombineTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     #if os(iOS)
     func testTrackAppOpenedUIKit() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -64,13 +64,13 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
     #endif
 
     func testTrackAppOpened() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -95,12 +95,12 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testTrackEvent() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -125,12 +125,12 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testTrackEventMutated() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let serverResponse = NoBody()
@@ -155,7 +155,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

@@ -9,6 +9,7 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.16.2...5.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.0.0/documentation/parseswift)
 
 __Breaking Changes__
+* Current objects such as ParseObject, ParseUser, ParseVersion, etc. now require try async/await. All synchronous networking and local storage calls have been removed. Please look at the updated Swift Playgrounds for examples ([#62](https://github.com/netreconlab/Parse-Swift/pull/62)), thanks to [Corey Baker](https://github.com/cbaker6).
 * ParseHookTriggerRequest has been renamed to ParseHookTriggerObjectRequest as it is used for decoding triggers related to ParseObjects. The new ParseHookTriggerRequest is similar but used for decoding requests not related to ParseObjects like ParseFile ([#53](https://github.com/netreconlab/Parse-Swift/pull/53)), thanks to [Corey Baker](https://github.com/cbaker6).
 * ParseVersion now supports pre-release versions of the SDK ([#49](https://github.com/netreconlab/Parse-Swift/pull/49)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Added a new ParseHealth.Status enum to support new feature in Parse Server 6.0.0. 

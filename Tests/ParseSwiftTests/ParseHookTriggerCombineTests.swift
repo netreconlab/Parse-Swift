@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/20/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -22,30 +22,30 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var url: URL?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testCreate() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -70,12 +70,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
         }, receiveValue: { created in
             XCTAssertEqual(created, server)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCreateError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -101,12 +101,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUpdate() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -131,12 +131,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
         }, receiveValue: { updated in
             XCTAssertEqual(updated, server)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUpdateError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -162,12 +162,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetch() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -192,12 +192,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
         }, receiveValue: { fetched in
             XCTAssertEqual(fetched, server)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetchError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -223,12 +223,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetchAll() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -253,12 +253,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
         }, receiveValue: { fetched in
             XCTAssertEqual(fetched, server)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testFetchAllError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -284,12 +284,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDelete() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -312,12 +312,12 @@ class ParseHookTriggerCombineTests: XCTestCase {
                 expectation1.fulfill()
 
         }, receiveValue: { _ in })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDeleteError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
         let hookTrigger = TestTrigger(className: "foo",
@@ -343,7 +343,7 @@ class ParseHookTriggerCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/25/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if !os(Linux) && !os(Android) && !os(Windows)
@@ -16,40 +16,40 @@ import Combine
 
 class ParseLiveQueryCombineTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  liveQueryMaxConnectionAttempts: 1,
-                                  testing: true,
-                                  testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        liveQueryMaxConnectionAttempts: 1,
+                                        testing: true,
+                                        testLiveQueryDontCloseSocket: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
-        URLSession.liveQuery.closeAll()
+        try await ParseStorage.shared.deleteAll()
+        await URLSession.liveQuery.closeAll()
+        ParseLiveQuery.defaultClient = nil
     }
 
-    func testOpen() throws {
+    func testOpen() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.openPublisher(isUserWantsToConnect: true)
             .sink(receiveCompletion: { result in
@@ -66,17 +66,17 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPingSocketNotEstablished() throws {
+    func testPingSocketNotEstablished() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
-        var subscriptions = Set<AnyCancellable>()
+        await client.close()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.sendPingPublisher()
             .sink(receiveCompletion: { result in
@@ -86,7 +86,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertEqual(client.isSocketEstablished, false)
+                    XCTAssertEqual(client.status, .socketNotEstablished)
                     guard let urlError = error as? URLError else {
                         _ = XCTSkip("Skip this test when error cannot be unwrapped")
                         expectation1.fulfill()
@@ -101,21 +101,19 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testPing() throws {
+    func testPing() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
             return
         }
-        client.isSocketEstablished = true // Socket needs to be true
-        client.isConnecting = true
-        client.isConnected = true
+        await client.setStatus(.connected)
         client.clientId = "yolo"
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send Ping")
         let publisher = client.sendPingPublisher()
             .sink(receiveCompletion: { result in
@@ -125,7 +123,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                 case .finished:
                     XCTFail("Should have produced failure")
                 case .failure(let error):
-                    XCTAssertEqual(client.isSocketEstablished, true)
+                    XCTAssertEqual(client.status, .connected)
                     XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
                 }
                 expectation1.fulfill()
@@ -133,7 +131,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
         }, receiveValue: { _ in
             XCTFail("Should have produced error")
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

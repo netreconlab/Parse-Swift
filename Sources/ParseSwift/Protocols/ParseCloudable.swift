@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 12/29/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -29,16 +29,6 @@ public protocol ParseCloudable: ParseCloudTypeable, Hashable {
 extension ParseCloudable {
 
     /**
-     Calls a Cloud Code function *synchronously* and returns a result of its execution.
-        - parameter options: A set of header options sent to the server. Defaults to an empty set.
-        - returns: Returns a `Decodable` type.
-        - throws: An error of type `ParseError`.
-    */
-    public func runFunction(options: API.Options = []) throws -> ReturnType {
-        try runFunctionCommand().execute(options: options)
-    }
-
-    /**
      Calls a Cloud Code function *asynchronously* and returns a result of its execution.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
         - parameter callbackQueue: The queue to return to after completion. Default value of .main.
@@ -48,10 +38,12 @@ extension ParseCloudable {
     public func runFunction(options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
                             completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
-        runFunctionCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            await runFunctionCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     internal func runFunctionCommand() -> API.Command<Self, ReturnType> {
@@ -66,14 +58,6 @@ extension ParseCloudable {
 
 // MARK: Jobs
 extension ParseCloudable {
-    /**
-     Starts a Cloud Code Job *synchronously* and returns a result with the jobStatusId of the job.
-          - parameter options: A set of header options sent to the server. Defaults to an empty set.
-          - returns: Returns a `Decodable` type.
-    */
-    public func startJob(options: API.Options = []) throws -> ReturnType {
-        try startJobCommand().execute(options: options)
-    }
 
     /**
      Starts a Cloud Code Job *asynchronously* and returns a result with the jobStatusId of the job.
@@ -85,10 +69,12 @@ extension ParseCloudable {
     public func startJob(options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
                          completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
-        startJobCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            await startJobCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     internal func startJobCommand() -> API.Command<Self, ReturnType> {

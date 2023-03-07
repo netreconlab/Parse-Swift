@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 8/23/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if !os(Linux) && !os(Android) && !os(Windows)
@@ -14,42 +14,36 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
     var accessGroup: String?
     var isSyncingKeychainAcrossDevices = false
 
-    static var current: Self? {
-        get {
-            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.getCurrent")
-            return synchronizationQueue.sync(execute: { () -> Self? in
-                guard let versionInMemory: Self =
-                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
-                    guard let versionFromKeyChain: Self =
-                            try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
-                    else {
-                        return nil
-                    }
-                    return versionFromKeyChain
-                }
-                return versionInMemory
-            })
-        }
-        set {
-            let synchronizationQueue = createSynchronizationQueue("ParseKeychainAccessGroup.setCurrent")
-            synchronizationQueue.sync {
-                guard let updatedKeychainAccessGroup = newValue else {
-                    let defaultKeychainAccessGroup = Self()
-                    try? ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                    try? KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                    Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
-                    return
-                }
-                try? ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                try? KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
-                Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
+    static func current() async throws -> Self {
+        guard let versionInMemory: Self =
+                try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
+            guard let versionFromKeyChain: Self =
+                    try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup)
+            else {
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current Keychain access group")
             }
+            return versionFromKeyChain
         }
+        return versionInMemory
     }
 
-    static func deleteCurrentContainerFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
+    static func setCurrent(_ newValue: Self?) async {
+        guard let updatedKeychainAccessGroup = newValue else {
+            let defaultKeychainAccessGroup = Self()
+            try? await ParseStorage.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+            try? await KeychainStore.shared.set(defaultKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+            Parse.configuration.keychainAccessGroup = defaultKeychainAccessGroup
+            return
+        }
+        try? await ParseStorage.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+        try? await KeychainStore.shared.set(updatedKeychainAccessGroup, for: ParseStorage.Keys.currentAccessGroup)
+        Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
+    }
+
+    static func deleteCurrentContainerFromKeychain() async {
+        try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
+        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
         Parse.configuration.keychainAccessGroup = Self()
     }
 }

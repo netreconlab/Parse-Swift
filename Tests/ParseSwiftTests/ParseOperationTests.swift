@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/17/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -61,26 +61,26 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testSaveCommand() throws {
@@ -109,7 +109,7 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSave() {
+    func testSave() async throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -134,7 +134,7 @@ class ParseOperationTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try operations.save()
+            let saved = try await operations.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedUpdatedAt = saved.updatedAt else {
                     XCTFail("Should unwrap dates")
@@ -153,14 +153,14 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveNoObjectId() {
+    func testSaveNoObjectId() async throws {
         var score = GameScore()
         score.points = 10
         let operations = score.operation
             .increment("points", by: 1)
 
         do {
-            try operations.save()
+            try await operations.save()
             XCTFail("Should have thrown error")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -171,7 +171,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPath() throws {
+    func testSaveKeyPath() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -197,7 +197,7 @@ class ParseOperationTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try operations.save()
+            let saved = try await operations.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             XCTAssertEqual(saved, scoreOnServer)
         } catch {
@@ -205,7 +205,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathOtherTypeOperationsExist() throws {
+    func testSaveKeyPathOtherTypeOperationsExist() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -213,7 +213,7 @@ class ParseOperationTests: XCTestCase {
             .set(("levels", \.levels), to: ["hello"])
 
         do {
-            try operations.save()
+            try await operations.save()
             XCTFail("Should have failed")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -224,7 +224,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveKeyPathNilOperationsExist() throws {
+    func testSaveKeyPathNilOperationsExist() async throws {
         var score = GameScore()
         score.objectId = "yarr"
         let operations = try score.operation
@@ -232,7 +232,7 @@ class ParseOperationTests: XCTestCase {
             .set(("points", \.points), to: nil)
 
         do {
-            try operations.save()
+            try await operations.save()
             XCTFail("Should have failed")
         } catch {
             guard let parseError = error as? ParseError else {
@@ -298,7 +298,7 @@ class ParseOperationTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSaveSet() throws {
+    func testSaveSet() async throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -323,7 +323,7 @@ class ParseOperationTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try operations.save()
+            let saved = try await operations.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedUpdatedAt = saved.updatedAt else {
                     XCTFail("Should unwrap dates")
@@ -341,7 +341,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveSetToNull() throws {
+    func testSaveSetToNull() async throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -366,7 +366,7 @@ class ParseOperationTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try operations.save()
+            let saved = try await operations.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
             guard let savedUpdatedAt = saved.updatedAt else {
                     XCTFail("Should unwrap dates")

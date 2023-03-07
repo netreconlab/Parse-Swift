@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/30/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -72,29 +72,29 @@ class ParseConfigCombineTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() {
+    func userLogin() async {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
@@ -108,18 +108,19 @@ class ParseConfigCombineTests: XCTestCase {
             }
         }
         do {
-            _ = try User.login(username: loginUserName, password: loginPassword)
+            _ = try await User.login(username: loginUserName, password: loginPassword)
             MockURLProtocol.removeAll()
         } catch {
             XCTFail("Should login")
         }
     }
 
-    func testFetch() {
-        var subscriptions = Set<AnyCancellable>()
+    func testFetch() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        userLogin()
+        await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -142,34 +143,46 @@ class ParseConfigCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { fetched in
 
             XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-            XCTAssertEqual(Config.current?.welcomeMessage, configOnServer.welcomeMessage)
+            let config = configOnServer
+            Task {
+                do {
+                    let current = try await Config.current()
+                    XCTAssertEqual(current.welcomeMessage, config.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    // Should be updated in Keychain
+                    let keychainConfig: CurrentConfigContainer<Config>?
+                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, config.welcomeMessage)
+                    #endif
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, configOnServer.welcomeMessage)
-            #endif
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSave() {
-        var subscriptions = Set<AnyCancellable>()
+    func testSave() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        userLogin()
+        await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 
@@ -191,27 +204,37 @@ class ParseConfigCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { saved in
 
             XCTAssertTrue(saved)
-            XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)
+            let immutableConfig = config
+            Task {
+                do {
+                    let current = try await Config.current()
+                    XCTAssertEqual(current.welcomeMessage, immutableConfig.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    // Should be updated in Keychain
+                    let keychainConfig: CurrentConfigContainer<Config>?
+                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
+                    #endif
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
-            #endif
         })
-        publisher.store(in: &subscriptions)
-
-        wait(for: [expectation1], timeout: 20.0)
+        publisher.store(in: &current)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

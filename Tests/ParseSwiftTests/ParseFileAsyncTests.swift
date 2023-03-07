@@ -3,10 +3,9 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 9/28/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -22,30 +21,30 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let url: URL
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
         }
         try fileManager.createDirectoryIfNeeded(temporaryDirectory)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
 
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manager")
@@ -360,7 +359,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(downloadCount2, 0)
     }
 
-    #if !os(iOS)
     func testParseURLSessionDelegateUpload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
@@ -389,7 +387,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                             let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                             XCTAssertEqual(uploadCount, 0)
                             XCTAssertEqual(taskCount, 0)
-                            expectation2.fulfill()
+                            DispatchQueue.main.async {
+                                expectation2.fulfill()
+                            }
                         }
                     }
                 }
@@ -441,7 +441,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                             let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                             XCTAssertEqual(downloadCount, 0)
                             XCTAssertEqual(taskCount, 0)
-                            expectation2.fulfill()
+                            DispatchQueue.main.async {
+                                expectation2.fulfill()
+                            }
                         }
                     }
                 }
@@ -485,7 +487,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                         let taskCount = await Parse.sessionDelegate.delegates.taskCallbackQueues.count
                         XCTAssertEqual(streamCount, 0)
                         XCTAssertEqual(taskCount, 0)
-                        expectation2.fulfill()
+                        DispatchQueue.main.async {
+                            expectation2.fulfill()
+                        }
                     }
                 }
             }
@@ -498,6 +502,4 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
-    #endif
 }
-#endif

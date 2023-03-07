@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Abdulaziz Alhomaidhi on 3/17/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -90,10 +90,10 @@ public extension ParseTwitter {
      */
     func login(userId: String,
                screenName: String? = nil,
-               authToken: String,
-               authTokenSecret: String,
                consumerKey: String,
                consumerSecret: String,
+               authToken: String,
+               authTokenSecret: String,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
                completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
@@ -142,10 +142,10 @@ public extension ParseTwitter {
      Link the *current* `ParseUser` *asynchronously* using Twitter authentication.
      - parameter user: The **id** from **Twitter**.
      - parameter screenName: The `user screenName` from **Twitter**.
-     - parameter consumerKey: The `consumerKey` from **Twitter**.
-     - parameter consumerSecret: The `consumerSecret` from **Twitter**.
      - parameter authToken: The Twitter `authToken` obtained from Twitter.
      - parameter authTokenSecret: The Twitter `authSecretToken` obtained from Twitter.
+     - parameter consumerKey: The `consumerKey` from **Twitter**.
+     - parameter consumerSecret: The `consumerSecret` from **Twitter**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter completion: The block to execute.
      */

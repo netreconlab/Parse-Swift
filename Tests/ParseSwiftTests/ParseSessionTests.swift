@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/17/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -55,27 +55,27 @@ class ParseSessionTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: false) // Set to false for codecov
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: false) // Set to false for codecov
 
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
         Parse.configuration = nil
     }
 
@@ -87,7 +87,7 @@ class ParseSessionTests: XCTestCase {
             let command = try session.fetchCommand(include: nil)
             XCTAssertNotNil(command)
             // Generates this component because fetchCommand is at the Objective protocol level
-            XCTAssertEqual(command.path.urlComponent, "/classes/_Session/me")
+            XCTAssertEqual(command.path.urlComponent, "/sessions/me")
             XCTAssertEqual(command.method, API.Method.GET)
             XCTAssertNil(command.params)
             XCTAssertNil(command.body)
@@ -127,17 +127,17 @@ class ParseSessionTests: XCTestCase {
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testParseURLSessionCustomCertificatePinning() throws {
+    func testParseURLSessionCustomCertificatePinning() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  // swiftlint:disable:next line_length
-                                  testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        // swiftlint:disable:next line_length
+                                        testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
             completion(.cancelAuthenticationChallenge, .none)
         }
         let expectation1 = XCTestExpectation(description: "Authentication")

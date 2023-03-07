@@ -3,12 +3,11 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/14/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 public extension ParseHookRequestable {
    /**
     Fetches the complete `ParseUser` *aynchronously*  from the server.
@@ -25,4 +24,3 @@ public extension ParseHookRequestable {
         }
     }
 }
-#endif

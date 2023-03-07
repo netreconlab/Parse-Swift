@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/28/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -14,30 +14,30 @@ import Combine
 @testable import ParseSwift
 
 class ParseHealthCombineTests: XCTestCase {
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testCheckOk() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
@@ -65,13 +65,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCheckError() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
@@ -99,13 +99,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCheckInitialized() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.initialized
@@ -133,13 +133,13 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCheckStarting() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
         let healthOfServer = ParseHealth.Status.starting
@@ -167,7 +167,7 @@ class ParseHealthCombineTests: XCTestCase {
                 XCTAssertEqual(health, healthOfServer)
                 expectation1.fulfill()
             })
-            .store(in: &subscriptions)
+            .store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

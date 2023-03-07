@@ -14,12 +14,12 @@ import Combine
 public protocol Fetchable: Decodable {
     associatedtype FetchingType
 
-    func fetch(includeKeys: [String]?, options: API.Options) throws -> FetchingType
-    func fetch() throws -> FetchingType
+    func fetch(includeKeys: [String]?, options: API.Options) async throws -> FetchingType
+    func fetch() async throws -> FetchingType
 }
 
 public extension Fetchable {
-    func fetch() throws -> FetchingType {
-        try fetch(includeKeys: nil, options: [])
+    func fetch() async throws -> FetchingType {
+        try await fetch(includeKeys: nil, options: [])
     }
 }

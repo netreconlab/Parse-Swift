@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/20/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -53,30 +53,30 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testHydrateUser() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User")
 
         let sessionToken = "dog"
@@ -118,12 +118,12 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
         }, receiveValue: { hydrated in
             XCTAssertEqual(hydrated, requestHydrated)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testHydrateUserError() throws {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User Error")
 
         let sessionToken = "dog"
@@ -154,7 +154,7 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
             XCTFail("Should have thrown ParseError")
             expectation1.fulfill()
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
         wait(for: [expectation1], timeout: 20.0)
     }
 }

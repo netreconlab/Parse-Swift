@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/3/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import XCTest
@@ -38,8 +38,8 @@ class InitializeSDKTests: XCTestCase {
         var winningNumber: Int?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
@@ -50,15 +50,15 @@ class InitializeSDKTests: XCTestCase {
         Parse.configuration.isTestingSDK = true
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
-        try KeychainStore.old.deleteAll()
+        try await KeychainStore.shared.deleteAll()
+        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try await KeychainStore.old.deleteAll()
         URLSession.shared.configuration.urlCache?.removeAllCachedResponses()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -86,9 +86,9 @@ class InitializeSDKTests: XCTestCase {
         XCTAssertTrue(currentCache.currentMemoryUsage > 0)
     }
 /*
-    func testDeleteKeychainOnFirstRun() throws {
+    func testDeleteKeychainOnFirstRun() async throws {
         let memory = InMemoryKeyValueStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         guard let server = URL(string: "http://parse.com") else {
             XCTFail("Should have unwrapped")
             return
@@ -152,54 +152,44 @@ class InitializeSDKTests: XCTestCase {
     }*/
     #endif
 
-    func testCreateParseInstallationOnInit() throws {
+    func testCreateParseInstallationOnInit() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true) { (_, credential) in
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true) { (_, credential) in
             credential(.performDefaultHandling, nil)
         }
 
-        guard let currentInstallation = Installation.current else {
-            XCTFail("Should unwrap current Installation")
-            return
-        }
+        let currentInstallation = try await Installation.current()
 
         // Should be in Keychain
-        guard let memoryInstallation: CurrentInstallationContainer<Installation>
-            = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                XCTFail("Should get object from Keychain")
-            return
-        }
-        XCTAssertEqual(memoryInstallation.currentInstallation, currentInstallation)
+        let memoryInstallation: CurrentInstallationContainer<Installation>?
+            = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(memoryInstallation?.currentInstallation, currentInstallation)
 
         #if !os(Linux) && !os(Android) && !os(Windows)
         // Should be in Keychain
-        guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                XCTFail("Should get object from Keychain")
-            return
-        }
-        XCTAssertEqual(keychainInstallation.currentInstallation, currentInstallation)
+        let keychainInstallation: CurrentInstallationContainer<Installation>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(keychainInstallation?.currentInstallation, currentInstallation)
         #endif
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testFetchMissingCurrentInstallation() throws {
+    func testFetchMissingCurrentInstallation() async throws {
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         let installationId = "testMe"
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
                                                                       installationId: installationId)
-        Installation.currentContainer = badContainer
-        Installation.saveCurrentContainerToKeychain()
-        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
+        await Installation.setCurrentContainer(badContainer)
+        try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
 
         var foundInstallation = Installation()
         foundInstallation.updateAutomaticInfo()
@@ -216,65 +206,49 @@ class InitializeSDKTests: XCTestCase {
             }
         }
 
-        let expectation1 = XCTestExpectation(description: "Wait")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
 
-            guard let url = URL(string: "http://localhost:1337/parse") else {
-                XCTFail("Should create valid URL")
-                expectation1.fulfill()
-                return
-            }
-
-            try? ParseSwift.initialize(applicationId: "applicationId",
-                                       clientKey: "clientKey",
-                                       primaryKey: "primaryKey",
-                                       serverURL: url,
-                                       primitiveStore: memory,
-                                       testing: true)
-
-            guard let currentInstallation = Installation.current else {
-                XCTFail("Should unwrap current Installation")
-                expectation1.fulfill()
-                return
-            }
-
-            XCTAssertEqual(currentInstallation.installationId, installationId)
-
-            // Should be in Keychain
-            guard let memoryInstallation: CurrentInstallationContainer<Installation>
-                = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(memoryInstallation.currentInstallation, currentInstallation)
-
-            // Should be in Keychain
-            guard let keychainInstallation: CurrentInstallationContainer<Installation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                    expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(keychainInstallation.currentInstallation, currentInstallation)
-            MockURLProtocol.removeAll()
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-    #endif
-
-    func testUpdateAuthChallenge() throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true) { (_, credential) in
+        try? await ParseSwift.initialize(applicationId: "applicationId",
+                                         clientKey: "clientKey",
+                                         primaryKey: "primaryKey",
+                                         serverURL: url,
+                                         primitiveStore: memory,
+                                         testing: true)
+
+        let currentInstallation = try await Installation.current()
+
+        XCTAssertEqual(currentInstallation.installationId, installationId)
+
+        // Should be in Keychain
+        let memoryInstallation: CurrentInstallationContainer<Installation>?
+            = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(memoryInstallation?.currentInstallation, currentInstallation)
+
+        // Should be in Keychain
+        let keychainInstallation: CurrentInstallationContainer<Installation>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(keychainInstallation?.currentInstallation, currentInstallation)
+        MockURLProtocol.removeAll()
+    }
+    #endif
+
+    func testUpdateAuthChallenge() async throws {
+        guard let url = URL(string: "http://localhost:1337/parse") else {
+            XCTFail("Should create valid URL")
+            return
+        }
+
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true) { (_, credential) in
             credential(.performDefaultHandling, nil)
         }
         XCTAssertNotNil(Parse.sessionDelegate.authentication)
@@ -283,199 +257,162 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testDontOverwriteMigratedInstallation() throws {
+    func testDontOverwriteMigratedInstallation() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.objectId = "yarr"
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
-        Installation.saveCurrentContainerToKeychain()
+        await Installation.setCurrent(newInstallation)
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  primitiveStore: memory,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        primitiveStore: memory,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertTrue(installation.hasSameObjectId(as: newInstallation))
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionLess() throws {
+    func testDontOverwriteOldInstallationBecauseVersionLess() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
-        ParseVersion.current = try ParseVersion(string: "0.0.0")
+        await ParseStorage.shared.use(memory)
+        try await ParseVersion.setCurrent(try ParseVersion(string: "0.0.0"))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
-        Installation.saveCurrentContainerToKeychain()
+        await Installation.setCurrent(newInstallation)
 
         XCTAssertNil(newInstallation.objectId)
-        guard let oldInstallation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        let oldInstallation = try await Installation.current()
         XCTAssertTrue(oldInstallation.hasSameInstallationId(as: newInstallation))
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  primitiveStore: memory,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        primitiveStore: memory,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
-        XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
+        let currentVersion = try await ParseVersion.current()
+        XCTAssertEqual(currentVersion.description, ParseConstants.version)
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionEqual() throws {
+    func testDontOverwriteOldInstallationBecauseVersionEqual() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
-        ParseVersion.current = try ParseVersion(string: ParseConstants.version)
+        await ParseStorage.shared.use(memory)
+        try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
-        Installation.saveCurrentContainerToKeychain()
+        await Installation.setCurrent(newInstallation)
 
         XCTAssertNil(newInstallation.objectId)
-        guard let oldInstallation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        let oldInstallation = try await Installation.current()
         XCTAssertTrue(oldInstallation.hasSameInstallationId(as: newInstallation))
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  primitiveStore: memory,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        primitiveStore: memory,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
-        XCTAssertEqual(ParseVersion.current, try ParseVersion(string: ParseConstants.version))
+        let currentVersion = try await ParseVersion.current()
+        XCTAssertEqual(currentVersion, try ParseVersion(string: ParseConstants.version))
     }
 
-    func testDontOverwriteOldInstallationBecauseVersionGreater() throws {
+    func testDontOverwriteOldInstallationBecauseVersionGreater() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         let newVersion = "1000.0.0"
-        ParseVersion.current = try ParseVersion(string: newVersion)
+        try await ParseVersion.setCurrent(try ParseVersion(string: newVersion))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
-        Installation.saveCurrentContainerToKeychain()
+        await Installation.setCurrent(newInstallation)
 
         XCTAssertNil(newInstallation.objectId)
-        guard let oldInstallation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        let oldInstallation = try await Installation.current()
         XCTAssertTrue(oldInstallation.hasSameInstallationId(as: newInstallation))
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  primitiveStore: memory,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        primitiveStore: memory,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertTrue(installation.hasSameInstallationId(as: newInstallation))
-        XCTAssertEqual(ParseVersion.current?.description, newVersion)
+        let currentVersion = try await ParseVersion.current()
+        XCTAssertEqual(currentVersion.description, newVersion)
     }
     #endif
 
-    func testOverwriteOldInstallation() throws {
+    func testOverwriteOldInstallation() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
         let memory = InMemoryPrimitiveStore()
-        ParseStorage.shared.use(memory)
+        await ParseStorage.shared.use(memory)
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
-        Installation.currentContainer.installationId = newInstallation.installationId
-        Installation.currentContainer.currentInstallation = newInstallation
-        Installation.saveCurrentContainerToKeychain()
+        await Installation.setCurrent(newInstallation)
 
         XCTAssertNil(newInstallation.objectId)
-        guard let oldInstallation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        let oldInstallation = try await Installation.current()
         XCTAssertTrue(oldInstallation.hasSameInstallationId(as: newInstallation))
 
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  primitiveStore: memory,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        primitiveStore: memory,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
     }
 
-    func testMigrateObjcKeychainMissing() throws {
+    func testMigrateObjcKeychainMissing() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  migratingFromObjcSDK: true,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        migratingFromObjcSDK: true,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertNotNil(installation.installationId)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testMigrateOldKeychainToNew() throws {
+    func testMigrateOldKeychainToNew() async throws {
         var user = BaseParseUser()
         user.objectId = "wow"
         var userContainer = CurrentUserContainer<BaseParseUser>()
@@ -500,36 +437,37 @@ class InitializeSDKTests: XCTestCase {
                                       lastCurrentUserObjectId: user.objectId,
                                       useCurrentUser: true)
         let version = "1.9.7"
-        try? KeychainStore.old.set(version, for: ParseStorage.Keys.currentVersion)
-        try? KeychainStore.old.set(userContainer, for: ParseStorage.Keys.currentUser)
-        try? KeychainStore.old.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
-        try? KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
-        try? KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
-        let expectation1 = XCTestExpectation(description: "Wait")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            guard let url = URL(string: "http://localhost:1337/parse") else {
-                XCTFail("Should create valid URL")
-                expectation1.fulfill()
-                return
-            }
-            try? ParseSwift.initialize(applicationId: "applicationId",
-                                       clientKey: "clientKey",
-                                       primaryKey: "primaryKey",
-                                       serverURL: url,
-                                       testing: true)
-            XCTAssertEqual(ParseVersion.current?.description, ParseConstants.version)
-            XCTAssertEqual(BaseParseUser.current, user)
-            XCTAssertEqual(Installation.current, installation)
-            XCTAssertEqual(Config.current?.welcomeMessage, config.welcomeMessage)
-            XCTAssertEqual(Config.current?.winningNumber, config.winningNumber)
-            let defaultACL = try? ParseACL.defaultACL()
-            XCTAssertEqual(defaultACL, acl)
-            expectation1.fulfill()
+        try? await KeychainStore.old.set(version, for: ParseStorage.Keys.currentVersion)
+        try? await KeychainStore.old.set(userContainer, for: ParseStorage.Keys.currentUser)
+        try? await KeychainStore.old.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
+        try? await KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
+        try? await KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
+
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
+        guard let url = URL(string: "http://localhost:1337/parse") else {
+            XCTFail("Should create valid URL")
+            return
         }
-        wait(for: [expectation1], timeout: 10.0)
+        try? await ParseSwift.initialize(applicationId: "applicationId",
+                                         clientKey: "clientKey",
+                                         primaryKey: "primaryKey",
+                                         serverURL: url,
+                                         testing: true)
+        let currentVersion = try await ParseVersion.current()
+        XCTAssertEqual(currentVersion.description, ParseConstants.version)
+        let currentUser = try await BaseParseUser.current()
+        XCTAssertEqual(currentUser, user)
+        let currentInstallation = try await Installation.current()
+        XCTAssertEqual(currentInstallation, installation)
+        let currentConfig = try await Config.current()
+        XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
+        XCTAssertEqual(currentConfig.winningNumber, config.winningNumber)
+        let defaultACL = try? await ParseACL.defaultACL()
+        XCTAssertEqual(defaultACL, acl)
     }
 
-    func testMigrateObjcSDK() throws {
+    func testMigrateObjcSDK() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -537,45 +475,40 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let objcInstallationId = "helloWorld"
-        _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  migratingFromObjcSDK: true,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        migratingFromObjcSDK: true,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertEqual(installation.installationId, objcInstallationId)
-        XCTAssertEqual(Installation.currentContainer.installationId, objcInstallationId)
+        let installationContainer = await Installation.currentContainer()
+        XCTAssertEqual(installationContainer.installationId, objcInstallationId)
     }
 
     #if !os(macOS)
-    func testInitializeSDKNoTest() throws {
+    func testInitializeSDKNoTest() async throws {
 
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url)
-        guard Installation.current != nil else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url)
+        _ = try await Installation.current()
     }
     #endif
 
-    func testDeleteObjcSDKKeychain() throws {
+    func testDeleteObjcSDKKeychain() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -583,15 +516,16 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let objcInstallationId = "helloWorld"
-        _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
-        guard let retrievedInstallationId: String? = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
-            XCTFail("Should have unwrapped")
-            return
-        }
+        let retrievedInstallationId: String? = await objcParseKeychain.objectObjectiveC(forKey: "installationId")
         XCTAssertEqual(retrievedInstallationId, objcInstallationId)
-        XCTAssertNoThrow(try ParseSwift.deleteObjectiveCKeychain())
-        let retrievedInstallationId2: String? = objcParseKeychain.objectObjectiveC(forKey: "installationId")
+        do {
+            try await ParseSwift.deleteObjectiveCKeychain()
+        } catch {
+            XCTFail("Should not have thrown error: \(error.localizedDescription)")
+        }
+        let retrievedInstallationId2: String? = await objcParseKeychain.objectObjectiveC(forKey: "installationId")
         XCTAssertNil(retrievedInstallationId2)
 
         // This is needed for tear down
@@ -599,14 +533,14 @@ class InitializeSDKTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    func testMigrateObjcSDKMissingInstallation() throws {
+    func testMigrateObjcSDKMissingInstallation() async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -614,26 +548,24 @@ class InitializeSDKTests: XCTestCase {
             return
         }
         let objcInstallationId = "helloWorld"
-        _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "anotherPlace")
+        _ = await objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "anotherPlace")
 
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  migratingFromObjcSDK: true,
-                                  testing: true)
-        guard let installation = Installation.current else {
-            XCTFail("Should have installation")
-            return
-        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        migratingFromObjcSDK: true,
+                                        testing: true)
+        let installation = try await Installation.current()
         XCTAssertNotNil(installation.installationId)
-        XCTAssertNotNil(Installation.currentContainer.installationId)
+        let currentInstallationId = await Installation.currentContainer().installationId
+        XCTAssertNotNil(currentInstallationId)
         XCTAssertNotEqual(installation.installationId, objcInstallationId)
-        XCTAssertNotEqual(Installation.currentContainer.installationId, objcInstallationId)
+        XCTAssertNotEqual(currentInstallationId, objcInstallationId)
     }
     #endif
 }

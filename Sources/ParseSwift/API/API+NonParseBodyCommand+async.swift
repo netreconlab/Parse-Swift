@@ -3,10 +3,9 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 9/17/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -18,11 +17,12 @@ extension API.NonParseBodyCommand {
                  callbackQueue: DispatchQueue,
                  allowIntermediateResponses: Bool = false) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
-            self.executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              allowIntermediateResponses: allowIntermediateResponses,
-                              completion: continuation.resume)
+            Task {
+                await self.execute(options: options,
+                                        callbackQueue: callbackQueue,
+                                        allowIntermediateResponses: allowIntermediateResponses,
+                                        completion: continuation.resume)
+            }
         }
     }
 }
-#endif

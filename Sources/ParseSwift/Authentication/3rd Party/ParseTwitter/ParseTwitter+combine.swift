@@ -3,7 +3,7 @@
 //  ParseTwitter+combine
 //
 //  Created by Corey Baker on 8/7/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -34,10 +34,10 @@ public extension ParseTwitter {
         Future { promise in
             self.login(userId: userId,
                        screenName: screenName,
-                       authToken: consumerKey,
-                       authTokenSecret: consumerSecret,
-                       consumerKey: authToken,
-                       consumerSecret: authTokenSecret,
+                       consumerKey: consumerKey,
+                       consumerSecret: consumerSecret,
+                       authToken: authToken,
+                       authTokenSecret: authTokenSecret,
                        options: options,
                        completion: promise)
         }

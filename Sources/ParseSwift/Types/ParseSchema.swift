@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 5/21/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Foundation
 /**
  `ParseSchema` is used for handeling your schemas.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public struct ParseSchema<SchemaObject: ParseObject>: ParseTypeable, Decodable, Equatable {
@@ -256,19 +256,21 @@ extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        fetchCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await fetchCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func fetchCommand() -> API.NonParseBodyCommand<Self, Self> {
@@ -293,19 +295,21 @@ extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        createCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await createCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     /**
@@ -318,7 +322,7 @@ extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     public func update(options: API.Options = [],
@@ -330,13 +334,16 @@ extension ParseSchema {
         } else {
             mutableSchema.indexes = nil
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        mutableSchema.updateCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        let schema = mutableSchema
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await schema.updateCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func createCommand() -> API.NonParseBodyCommand<Self, Self> {
@@ -371,7 +378,7 @@ extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     public func purge(
@@ -379,17 +386,19 @@ extension ParseSchema {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Void, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        purgeCommand().executeAsync(options: options,
-                                    callbackQueue: callbackQueue) { result in
-            switch result {
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await purgeCommand().execute(options: options,
+                                              callbackQueue: callbackQueue) { result in
+                switch result {
 
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -407,7 +416,7 @@ extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     public func delete(
@@ -415,17 +424,19 @@ extension ParseSchema {
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Void, ParseError>) -> Void
     ) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        deleteCommand().executeAsync(options: options,
-                                     callbackQueue: callbackQueue) { result in
-            switch result {
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await deleteCommand().execute(options: options,
+                                               callbackQueue: callbackQueue) { result in
+                switch result {
 
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }

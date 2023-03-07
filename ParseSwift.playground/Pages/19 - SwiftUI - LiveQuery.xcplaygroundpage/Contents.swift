@@ -15,12 +15,6 @@ import SwiftUI
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
-}
-
 //: Create your own value typed ParseObject.
 struct GameScore: ParseObject {
     //: These are required by `ParseObject`.
@@ -76,7 +70,7 @@ var query = GameScore.query("points" < 11)
 struct ContentView: View {
 
     //: A LiveQuery subscription can be used as a view model in SwiftUI
-    @StateObject var subscription = query.subscribe!
+    @StateObject var subscription: Subscription<GameScore>
 
     var body: some View {
         VStack {
@@ -108,7 +102,9 @@ struct ContentView: View {
             Text("Update GameScore in Parse Dashboard to see changes here:")
 
             Button(action: {
-                try? query.unsubscribe()
+                Task {
+                    try? await query.unsubscribe()
+                }
             }, label: {
                 Text("Unsubscribe")
                     .font(.headline)
@@ -122,7 +118,20 @@ struct ContentView: View {
     }
 }
 
-PlaygroundPage.current.setLiveView(ContentView())
+@MainActor
+func startView() async throws {
+    let subscribe = try await query.subscribe()
+    PlaygroundPage.current.setLiveView(ContentView(subscription: subscribe))
+}
+
+Task {
+    do {
+        try await initializeParse()
+        try await startView()
+    } catch {
+        print("Error subscribing: \(error)")
+    }
+}
 
 PlaygroundPage.current.finishExecution()
 //: [Next](@next)

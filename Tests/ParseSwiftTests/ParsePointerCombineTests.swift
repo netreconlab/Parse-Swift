@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/20/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -35,25 +35,25 @@ class ParsePointerCombineTests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             throw ParseError(code: .otherCause, message: "Should create valid URL")
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testFetch() throws {
@@ -67,7 +67,7 @@ class ParsePointerCombineTests: XCTestCase {
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         let encoded: Data!
@@ -109,7 +109,7 @@ class ParsePointerCombineTests: XCTestCase {
             XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
             XCTAssertNil(fetched.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }

@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/14/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -26,7 +26,7 @@ public protocol ParseAuthentication: Codable {
     static var __type: String { get } // swiftlint:disable:this identifier_name
 
     /// Returns **true** if the *current* user is linked to the respective authentication type.
-    var isLinked: Bool { get }
+    func isLinked() async -> Bool
 
     /// The default initializer for this authentication type.
     init()
@@ -61,7 +61,7 @@ public protocol ParseAuthentication: Codable {
      - returns: **true** if the `ParseUser` is logged in via the repective
      authentication type. **false** if the user is not.
      */
-    func isLinked(with user: AuthenticatedUser) -> Bool
+    static func isLinked(with user: AuthenticatedUser) -> Bool
 
     /**
      Unlink the `ParseUser` *asynchronously* from the respective authentication type.
@@ -90,7 +90,7 @@ public protocol ParseAuthentication: Codable {
     /**
      Strips the *current* user of a respective authentication type.
      */
-    func strip()
+    func strip() async throws -> AuthenticatedUser
 
     /**
      Strips the `ParseUser`of a respective authentication type.
@@ -140,7 +140,6 @@ public protocol ParseAuthentication: Codable {
     func unlinkPublisher(options: API.Options) -> Future<AuthenticatedUser, ParseError>
     #endif
 
-    #if compiler(>=5.5.2) && canImport(_Concurrency)
     // MARK: Async/Await
 
     /**
@@ -168,7 +167,6 @@ public protocol ParseAuthentication: Codable {
      - parameter returns: An instance of the unlinked `AuthenticatedUser`.
      */
     func unlink(options: API.Options) async throws -> AuthenticatedUser
-    #endif
 }
 
 // MARK: Convenience Implementations
@@ -178,14 +176,14 @@ public extension ParseAuthentication {
         Self.__type
     }
 
-    var isLinked: Bool {
-        guard let current = AuthenticatedUser.current else {
+    func isLinked() async -> Bool {
+        guard let current = try? await AuthenticatedUser.current() else {
             return false
         }
         return current.isLinked(with: __type)
     }
 
-    func isLinked(with user: AuthenticatedUser) -> Bool {
+    static func isLinked(with user: AuthenticatedUser) -> Bool {
         user.isLinked(with: __type)
     }
 
@@ -199,25 +197,26 @@ public extension ParseAuthentication {
     func unlink(options: API.Options = [],
                 callbackQueue: DispatchQueue = .main,
                 completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
-        guard let current = AuthenticatedUser.current else {
-            let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
-            callbackQueue.async {
-                completion(.failure(error))
+        Task {
+            guard let current = try? await AuthenticatedUser.current() else {
+                let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
+                callbackQueue.async {
+                    completion(.failure(error))
+                }
+                return
             }
-            return
+            unlink(current, options: options, callbackQueue: callbackQueue, completion: completion)
         }
-        unlink(current, options: options, callbackQueue: callbackQueue, completion: completion)
     }
 
-    func strip() {
-        guard let user = AuthenticatedUser.current else {
-            return
-        }
-        AuthenticatedUser.current = strip(user)
+    @discardableResult
+    func strip() async throws -> AuthenticatedUser {
+        let user = try await AuthenticatedUser.current()
+        return strip(user)
     }
 
     func strip(_ user: AuthenticatedUser) -> AuthenticatedUser {
-        if isLinked(with: user) {
+        if Self.isLinked(with: user) {
             var user = user
             user.authData?.updateValue(nil, forKey: __type)
             return user
@@ -227,36 +226,6 @@ public extension ParseAuthentication {
 }
 
 public extension ParseUser {
-
-    // MARK: 3rd Party Authentication - Login
-    /**
-     Makes a *synchronous* request to login a user with specified credentials.
-
-     Returns an instance of the successfully logged in `ParseUser`.
-     This also caches the user locally so that calls to *current* will use the latest logged in user.
-
-     - parameter type: The authentication type.
-     - parameter authData: The data that represents the authentication.
-     See [supported 3rd party authentications](https://docs.parseplatform.org/parse-server/guide/#supported-3rd-party-authentications) for more information.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: An instance of the logged in `ParseUser`.
-     If login failed due to either an incorrect password or incorrect username, it throws a `ParseError`.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    static func login(_ type: String,
-                      authData: [String: String],
-                      options: API.Options) throws -> Self {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if Self.current != nil {
-            return try Self.link(type, authData: authData, options: options)
-        } else {
-            let body = SignupLoginBody(authData: [type: authData])
-            return try signupCommand(body: body).execute(options: options)
-        }
-    }
 
     /**
      Makes an *asynchronous* request to log in a user with specified credentials.
@@ -276,24 +245,28 @@ public extension ParseUser {
                       options: API.Options,
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Self, ParseError>) -> Void) {
-        if Self.current != nil {
-            Self.link(type, authData: authData,
-                      options: options,
-                      callbackQueue: callbackQueue,
-                      completion: completion)
-        } else {
-            let body = SignupLoginBody(authData: [type: authData])
+        Task {
             do {
-                try signupCommand(body: body)
-                    .executeAsync(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
+                _ = try await Self.current()
+                Self.link(type,
+                          authData: authData,
+                          options: options,
+                          callbackQueue: callbackQueue,
+                          completion: completion)
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                callbackQueue.async {
-                    completion(.failure(parseError))
+                let body = SignupLoginBody(authData: [type: authData])
+                do {
+                    try await signupCommand(body: body)
+                        .execute(options: options,
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
+                } catch {
+                    let defaultError = ParseError(code: .otherCause,
+                                                  message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? defaultError
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
                 }
             }
         }
@@ -338,18 +311,11 @@ public extension ParseUser {
                 options: API.Options = [],
                 callbackQueue: DispatchQueue = .main,
                 completion: @escaping (Result<Self, ParseError>) -> Void) {
-        guard let current = Self.current,
-              current.authData != nil else {
-            let error = ParseError(code: .otherCause, message: "Must be logged in to unlink user")
-            callbackQueue.async {
-                completion(.failure(error))
-            }
-            return
-        }
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        if current.isLinked(with: type) {
-            guard let authData = current.strip(type).authData else {
+        let immutableOptions = options
+        if self.isLinked(with: type) {
+            guard let authData = self.strip(type).authData else {
                 let error = ParseError(code: .otherCause, message: "Missing authData.")
                 callbackQueue.async {
                     completion(.failure(error))
@@ -357,43 +323,24 @@ public extension ParseUser {
                 return
             }
             let body = SignupLoginBody(authData: authData)
-            current.linkCommand(body: body)
-                .executeAsync(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+            Task {
+                do {
+                    try await self.linkCommand(body: body)
+                        .execute(options: immutableOptions,
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
+                } catch {
+                    let parseError = error as? ParseError ?? ParseError(code: .otherCause, message: error.localizedDescription)
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                }
+            }
         } else {
             callbackQueue.async {
                 completion(.success(self))
             }
         }
-    }
-
-    /**
-     Makes a *synchronous* request to link a user with specified credentials. The user should already be logged in.
-
-     Returns an instance of the successfully linked `ParseUser`.
-     This also caches the user locally so that calls to *current* will use the latest logged in user.
-
-     - parameter type: The authentication type.
-     - parameter authData: The data that represents the authentication.
-     See [supported 3rd party authentications](https://docs.parseplatform.org/parse-server/guide/#supported-3rd-party-authentications) for more information.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - throws: An error of type `ParseError`.
-     - returns: An instance of the logged in `ParseUser`.
-     If login failed due to either an incorrect password or incorrect username, it throws a `ParseError`.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    static func link(_ type: String,
-                     authData: [String: String],
-                     options: API.Options) throws -> Self {
-        guard let current = Self.current else {
-            throw ParseError(code: .otherCause, message: "Must be logged in to link user")
-        }
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let body = SignupLoginBody(authData: [type: authData])
-        return try current.linkCommand(body: body).execute(options: options)
     }
 
     /**
@@ -416,25 +363,27 @@ public extension ParseUser {
                      options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
                      completion: @escaping (Result<Self, ParseError>) -> Void) {
-        guard let current = Self.current else {
-            let error = ParseError(code: .otherCause, message: "Must be logged in to link user")
-            callbackQueue.async {
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            let body = SignupLoginBody(authData: [type: authData])
+            do {
+                try await Self.current().linkCommand(body: body)
+                    .execute(options: options,
+                             callbackQueue: callbackQueue,
+                             completion: completion)
+            } catch {
+                let parseError = error as? ParseError ?? ParseError(code: .otherCause, message: error.localizedDescription)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
-            return
         }
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let body = SignupLoginBody(authData: [type: authData])
-        current.linkCommand(body: body)
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
     }
 
-    internal func linkCommand() throws -> API.Command<Self, Self> {
+    internal func linkCommand() async throws -> API.Command<Self, Self> {
         var mutableSelf = self.anonymous.strip(self)
-        if let current = Self.current {
+        if let current = try? await Self.current() {
             guard current.hasSameObjectId(as: mutableSelf) else {
                 let error = ParseError(code: .otherCause,
                                        message: "Cannot signup a user with a different objectId than the current user")
@@ -447,19 +396,19 @@ public extension ParseUser {
             let user = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: data)
             mutableSelf.updatedAt = user.updatedAt
             if let sessionToken = user.sessionToken {
-                Self.currentContainer = .init(currentUser: mutableSelf,
-                                              sessionToken: sessionToken)
+                await Self.setCurrentContainer(.init(currentUser: mutableSelf,
+                                                     sessionToken: sessionToken))
+            } else {
+                try await Self.setCurrent(mutableSelf)
             }
-            Self.saveCurrentContainerToKeychain()
             return mutableSelf
         }
     }
 
-    internal func linkCommand(body: SignupLoginBody) -> API.Command<SignupLoginBody, Self> {
-        let originalAuthData = Self.current?.authData
-        Self.current?.anonymous.strip()
+    internal func linkCommand(body: SignupLoginBody) async throws -> API.Command<SignupLoginBody, Self> {
+        let currentStrippedUser = try await self.anonymous.strip()
         var body = body
-        if var currentAuthData = Self.current?.authData {
+        if var currentAuthData = currentStrippedUser.authData {
             if let bodyAuthData = body.authData {
                 bodyAuthData.forEach { (key, value) in
                     currentAuthData[key] = value
@@ -471,19 +420,17 @@ public extension ParseUser {
         return API.Command<SignupLoginBody, Self>(method: .PUT,
                                                   path: endpoint,
                                                   body: body) { (data) -> Self in
-            Self.current?.authData = originalAuthData
             let user = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: data)
-            Self.current?.updatedAt = user.updatedAt
-            Self.current?.authData = body.authData
-            guard let current = Self.current else {
-                throw ParseError(code: .otherCause, message: "Should have a current user.")
-            }
+            var currentUser = currentStrippedUser
+            currentUser.updatedAt = user.updatedAt
+            currentUser.authData = body.authData
             if let sessionToken = user.sessionToken {
-                Self.currentContainer = .init(currentUser: current,
-                                              sessionToken: sessionToken)
+                await Self.setCurrentContainer(.init(currentUser: currentUser,
+                                                     sessionToken: sessionToken))
+            } else {
+                try await Self.setCurrent(currentUser)
             }
-            Self.saveCurrentContainerToKeychain()
-            return current
+            return currentUser
         }
     }
 }

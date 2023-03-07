@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/16/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -105,7 +105,6 @@ class ParseAuthenticationTests: XCTestCase {
         }
         #endif
 
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         func login(authData: [String: String],
                    options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
@@ -115,33 +114,33 @@ class ParseAuthenticationTests: XCTestCase {
                   options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
         }
-        #endif
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
 
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func loginNormally() throws -> User {
+    @MainActor
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -152,25 +151,27 @@ class ParseAuthenticationTests: XCTestCase {
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
-    func testLinkCommand() throws {
-        let user = User()
+    @MainActor
+    func testLinkCommand() async throws {
+        let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
-        let command = user.linkCommand(body: body)
+        let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)
-        XCTAssertEqual(command.path.urlComponent, "/users")
+        XCTAssertEqual(command.path.urlComponent, "/users/yarr")
         XCTAssertEqual(command.method, API.Method.PUT)
         XCTAssertNotNil(command.body)
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
-    func testLinkCommandParseBody() throws {
+    @MainActor
+    func testLinkCommandParseBody() async throws {
         var user = User()
         user.username = "hello"
         user.password = "world"
-        let command = try user.linkCommand()
+        let command = try await user.linkCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -178,10 +179,11 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertNil(command.body?.authData)
     }
 
-    func testLinkCommandLoggedIn() throws {
-        let user = try loginNormally()
+    @MainActor
+    func testLinkCommandLoggedIn() async throws {
+        let user = try await loginNormally()
         let body = SignupLoginBody(authData: ["test": ["id": "yolo"]])
-        let command = user.linkCommand(body: body)
+        let command = try await user.linkCommand(body: body)
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\("yarr")")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -189,9 +191,10 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertEqual(command.body?.authData, body.authData)
     }
 
-    func testLinkCommandNoBodyLoggedIn() throws {
-        let user = try loginNormally()
-        let command = try user.linkCommand()
+    @MainActor
+    func testLinkCommandNoBodyLoggedIn() async throws {
+        let user = try await loginNormally()
+        let command = try await user.linkCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\("yarr")")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -199,7 +202,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertNil(command.body?.authData)
     }
 
-    func testIsLinkedWithString() throws {
+    func testIsLinkedWithString() async throws {
 
         let expectedAuth = ["id": "yolo"]
         var user = User()
@@ -209,7 +212,7 @@ class ParseAuthenticationTests: XCTestCase {
         XCTAssertTrue(user.isLinked(with: "test"))
     }
 
-    func testAuthStrip() throws {
+    func testAuthStrip() async throws {
 
         let expectedAuth = ["id": "yolo"]
         var user = User()

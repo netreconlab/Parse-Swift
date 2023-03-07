@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 9/12/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -18,14 +18,14 @@ internal extension API {
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) throws -> U)
+        let mapper: ((Data) async throws -> U)
         let params: [String: String?]?
 
         init(method: API.Method,
              path: API.Endpoint,
              params: [String: String]? = nil,
              body: T? = nil,
-             mapper: @escaping ((Data) throws -> U)) {
+             mapper: @escaping ((Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.params = params
@@ -33,6 +33,7 @@ internal extension API {
             self.mapper = mapper
         }
 
+        /*
         func execute(options: API.Options) throws -> U {
             var responseResult: Result<U, ParseError>?
             let synchronizationQueue = DispatchQueue(label: "com.parse.NonParseBodyCommand.sync.\(UUID().uuidString)",
@@ -55,20 +56,20 @@ internal extension API {
                                  message: "Could not unrwrap server response")
             }
             return try response.get()
-        }
+        } */
 
         // MARK: Asynchronous Execution
-        func executeAsync(options: API.Options,
-                          callbackQueue: DispatchQueue,
-                          allowIntermediateResponses: Bool = false,
-                          completion: @escaping(Result<U, ParseError>) -> Void) {
+        func execute(options: API.Options,
+                     callbackQueue: DispatchQueue,
+                     allowIntermediateResponses: Bool = false,
+                     completion: @escaping(Result<U, ParseError>) -> Void) async {
 
-            switch self.prepareURLRequest(options: options) {
+            switch await self.prepareURLRequest(options: options) {
             case .success(let urlRequest):
-                URLSession.parse.dataTask(with: urlRequest,
-                                          callbackQueue: callbackQueue,
-                                          allowIntermediateResponses: allowIntermediateResponses,
-                                          mapper: mapper) { result in
+                await URLSession.parse.dataTask(with: urlRequest,
+                                                callbackQueue: callbackQueue,
+                                                allowIntermediateResponses: allowIntermediateResponses,
+                                                mapper: mapper) { result in
                     callbackQueue.async {
                         switch result {
 
@@ -87,9 +88,9 @@ internal extension API {
         }
 
         // MARK: URL Preperation
-        func prepareURLRequest(options: API.Options) -> Result<URLRequest, ParseError> {
+        func prepareURLRequest(options: API.Options) async -> Result<URLRequest, ParseError> {
             let params = self.params?.getURLQueryItems()
-            var headers = API.getHeaders(options: options)
+            var headers = await API.getHeaders(options: options)
             if method == .GET || method == .DELETE {
                 headers.removeValue(forKey: "X-Parse-Request-Id")
             }
@@ -159,7 +160,8 @@ internal extension API.NonParseBodyCommand {
                       transaction: Bool,
                       objectsSavedBeforeThisOne: [String: PointerType]?,
                       // swiftlint:disable:next line_length
-                      filesSavedBeforeThisOne: [UUID: ParseFile]?) throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
+                      filesSavedBeforeThisOne: [UUID: ParseFile]?) async throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
+        let defaultACL = try? await ParseACL.defaultACL()
         let batchCommands = try objects.compactMap { (object) -> API.BatchCommand<AnyCodable, PointerType>? in
             guard var objectable = object as? Objectable else {
                 return nil
@@ -178,6 +180,7 @@ internal extension API.NonParseBodyCommand {
 
             let path = Parse.configuration.mountPath + objectable.endpoint.urlComponent
             let encoded = try ParseCoding.parseEncoder().encode(object,
+                                                                acl: defaultACL,
                                                                 batching: true,
                                                                 objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
                                                                 filesSavedBeforeThisOne: filesSavedBeforeThisOne)

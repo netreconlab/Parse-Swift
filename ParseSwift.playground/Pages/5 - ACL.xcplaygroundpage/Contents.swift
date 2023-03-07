@@ -12,19 +12,22 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
-}
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 
-do {
-    var acl = ParseACL()
-    acl.publicRead = true
-    acl.publicWrite = false
-    try ParseACL.setDefaultACL(acl, withAccessForCurrentUser: true)
-} catch {
-    assertionFailure("Error storing default ACL to Keychain: \(error)")
+    // Set default ACL for all ParseObjects.
+    do {
+        var acl = ParseACL()
+        acl.publicRead = true
+        acl.publicWrite = false
+        try await ParseACL.setDefaultACL(acl, withAccessForCurrentUser: true)
+    } catch {
+        assertionFailure("Error storing default ACL to Keychain: \(error)")
+    }
 }
 
 //: Create your own value typed ParseObject.
@@ -66,7 +69,7 @@ extension GameScore {
 var score = GameScore(points: 40)
 
 /*:
- Save asynchronously (preferred way) - Performs work on background
+ Save asynchronously with completion block - Performs work on background
  queue and returns to specified callbackQueue. If no callbackQueue
  is specified it returns to main queue.
 */

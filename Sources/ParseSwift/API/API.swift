@@ -20,7 +20,7 @@ public struct API {
         case GET, POST, PUT, PATCH, DELETE
     }
 
-    internal enum Endpoint: Encodable {
+    public enum Endpoint: Encodable {
         case batch
         case objects(className: String)
         case object(className: String, objectId: String)
@@ -203,18 +203,18 @@ public struct API {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    internal static func getHeaders(options: API.Options) -> [String: String] {
+    internal static func getHeaders(options: API.Options) async -> [String: String] {
         var headers: [String: String] = ["X-Parse-Application-Id": Parse.configuration.applicationId,
                                          "Content-Type": "application/json"]
         if let clientKey = Parse.configuration.clientKey {
             headers["X-Parse-Client-Key"] = clientKey
         }
 
-        if let token = BaseParseUser.current?.sessionToken {
+        if let token = await BaseParseUser.currentContainer()?.sessionToken {
             headers["X-Parse-Session-Token"] = token
         }
 
-        if let installationId = BaseParseInstallation.current?.installationId {
+        if let installationId = try? await BaseParseInstallation.current().installationId {
             headers["X-Parse-Installation-Id"] = installationId
         }
 

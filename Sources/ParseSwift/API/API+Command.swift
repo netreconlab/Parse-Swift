@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Florent Vilmart on 17-09-24.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +19,7 @@ internal extension API {
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) throws -> U)
+        let mapper: ((Data) async throws -> U)
         let params: [String: String?]?
         let uploadData: Data?
         let uploadFile: URL?
@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping ((Data) throws -> U)) {
+             mapper: @escaping ((Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body
@@ -49,88 +49,56 @@ internal extension API {
             self.params = params
         }
 
-        // MARK: Synchronous Execution
+        // MARK: Asynchronous Execution
         func executeStream(options: API.Options,
                            callbackQueue: DispatchQueue,
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [UUID: ParseFile]? = nil,
                            uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                           stream: InputStream) throws {
-            switch self.prepareURLRequest(options: options,
-                                          batching: false,
-                                          childObjects: childObjects,
-                                          childFiles: childFiles) {
-
-            case .success(let urlRequest):
-                if method == .POST || method == .PUT || method == .PATCH {
+                           stream: InputStream,
+                           completion: @escaping (ParseError?) -> Void) {
+            guard method == .POST || method == .PUT || method == .PATCH else {
+                callbackQueue.async {
+                    completion(nil)
+                }
+                return
+            }
+            self.prepareURLRequest(options: options,
+                                   batching: false,
+                                   childObjects: childObjects,
+                                   childFiles: childFiles) { result in
+                switch result {
+                case .success(let urlRequest):
                     let task = URLSession.parse.uploadTask(withStreamedRequest: urlRequest)
                     Parse.sessionDelegate.streamDelegates[task] = stream
-                    #if compiler(>=5.5.2) && canImport(_Concurrency)
                     Task {
                         await Parse.sessionDelegate.delegates.updateUpload(task, callback: uploadProgress)
                         await Parse.sessionDelegate.delegates.updateTask(task, queue: callbackQueue)
                         task.resume()
+                        callbackQueue.async {
+                            completion(nil)
+                        }
                     }
-                    #else
-                    Parse.sessionDelegate.uploadDelegates[task] = uploadProgress
-                    Parse.sessionDelegate.taskCallbackQueues[task] = callbackQueue
-                    task.resume()
-                    #endif
                     return
+                case .failure(let error):
+                    callbackQueue.async {
+                        completion(error)
+                    }
                 }
-            case .failure(let error):
-                throw error
             }
         }
 
+        // swiftlint:disable:next function_body_length cyclomatic_complexity
         func execute(options: API.Options,
                      batching: Bool = false,
+                     callbackQueue: DispatchQueue,
                      notificationQueue: DispatchQueue? = nil,
                      childObjects: [String: PointerType]? = nil,
                      childFiles: [UUID: ParseFile]? = nil,
+                     allowIntermediateResponses: Bool = false,
                      uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) throws -> U {
-            var responseResult: Result<U, ParseError>?
-            let synchronizationQueue = DispatchQueue(label: "com.parse.Command.sync.\(UUID().uuidString)",
-                                                     qos: .default,
-                                                     attributes: .concurrent,
-                                                     autoreleaseFrequency: .inherit,
-                                                     target: nil)
-            let group = DispatchGroup()
-            group.enter()
-            self.executeAsync(options: options,
-                              batching: batching,
-                              callbackQueue: synchronizationQueue,
-                              notificationQueue: notificationQueue,
-                              childObjects: childObjects,
-                              childFiles: childFiles,
-                              allowIntermediateResponses: false,
-                              uploadProgress: uploadProgress,
-                              downloadProgress: downloadProgress) { result in
-                responseResult = result
-                group.leave()
-            }
-            group.wait()
-
-            guard let response = responseResult else {
-                throw ParseError(code: .otherCause,
-                                 message: "Could not unrwrap server response")
-            }
-            return try response.get()
-        }
-
-        // MARK: Asynchronous Execution
-        // swiftlint:disable:next function_body_length cyclomatic_complexity
-        func executeAsync(options: API.Options,
-                          batching: Bool = false,
-                          callbackQueue: DispatchQueue,
-                          notificationQueue: DispatchQueue? = nil,
-                          childObjects: [String: PointerType]? = nil,
-                          childFiles: [UUID: ParseFile]? = nil,
-                          allowIntermediateResponses: Bool = false,
-                          uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                          downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                          completion: @escaping(Result<U, ParseError>) -> Void) {
+                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping(Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue
@@ -139,15 +107,15 @@ internal extension API {
             }
             if !path.urlComponent.contains("/files/") {
                 // All ParseObjects use the shared URLSession
-                switch self.prepareURLRequest(options: options,
-                                              batching: batching,
-                                              childObjects: childObjects,
-                                              childFiles: childFiles) {
+                switch await self.prepareURLRequest(options: options,
+                                                    batching: batching,
+                                                    childObjects: childObjects,
+                                                    childFiles: childFiles) {
                 case .success(let urlRequest):
-                    URLSession.parse.dataTask(with: urlRequest,
-                                              callbackQueue: callbackQueue,
-                                              allowIntermediateResponses: allowIntermediateResponses,
-                                              mapper: mapper) { result in
+                    await URLSession.parse.dataTask(with: urlRequest,
+                                                    callbackQueue: callbackQueue,
+                                                    allowIntermediateResponses: allowIntermediateResponses,
+                                                    mapper: mapper) { result in
                         callbackQueue.async {
                             switch result {
 
@@ -166,10 +134,10 @@ internal extension API {
             } else {
                 // ParseFiles are handled with a dedicated URLSession
                 if method == .POST || method == .PUT || method == .PATCH {
-                    switch self.prepareURLRequest(options: options,
-                                                  batching: batching,
-                                                  childObjects: childObjects,
-                                                  childFiles: childFiles) {
+                    switch await self.prepareURLRequest(options: options,
+                                                        batching: batching,
+                                                        childObjects: childObjects,
+                                                        childFiles: childFiles) {
 
                     case .success(let urlRequest):
 
@@ -198,15 +166,15 @@ internal extension API {
                     }
                 } else if method == .DELETE {
 
-                    switch self.prepareURLRequest(options: options,
-                                                  batching: batching,
-                                                  childObjects: childObjects,
-                                                  childFiles: childFiles) {
+                    switch await self.prepareURLRequest(options: options,
+                                                        batching: batching,
+                                                        childObjects: childObjects,
+                                                        childFiles: childFiles) {
                     case .success(let urlRequest):
-                        URLSession.parse.dataTask(with: urlRequest,
-                                                  callbackQueue: callbackQueue,
-                                                  allowIntermediateResponses: allowIntermediateResponses,
-                                                  mapper: mapper) { result in
+                        await URLSession.parse.dataTask(with: urlRequest,
+                                                        callbackQueue: callbackQueue,
+                                                        allowIntermediateResponses: allowIntermediateResponses,
+                                                        mapper: mapper) { result in
                             callbackQueue.async {
                                 switch result {
 
@@ -226,13 +194,13 @@ internal extension API {
                 } else {
 
                     if parseURL != nil {
-                        switch self.prepareURLRequest(options: options,
-                                                      batching: batching,
-                                                      childObjects: childObjects,
-                                                      childFiles: childFiles) {
+                        switch await self.prepareURLRequest(options: options,
+                                                            batching: batching,
+                                                            childObjects: childObjects,
+                                                            childFiles: childFiles) {
 
                         case .success(let urlRequest):
-                            URLSession
+                            await URLSession
                                 .parse
                                 .downloadTask(notificationQueue: currentNotificationQueue,
                                               with: urlRequest,
@@ -280,55 +248,68 @@ internal extension API {
         }
 
         // MARK: URL Preperation
+        // swiftlint:disable:next function_body_length
         func prepareURLRequest(options: API.Options,
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
-                               childFiles: [UUID: ParseFile]? = nil) -> Result<URLRequest, ParseError> {
+                               childFiles: [UUID: ParseFile]? = nil,
+                               completion: @escaping(Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
-            var headers = API.getHeaders(options: options)
-            if method == .GET || method == .DELETE {
-                headers.removeValue(forKey: "X-Parse-Request-Id")
-            }
-            let url = parseURL == nil ?
+            Task {
+                var headers = await API.getHeaders(options: options)
+                if method == .GET || method == .DELETE {
+                    headers.removeValue(forKey: "X-Parse-Request-Id")
+                }
+                let url = parseURL == nil ?
                 API.serverURL(options: options).appendingPathComponent(path.urlComponent) : parseURL!
 
-            guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not unrwrap url components for \(url)"))
-            }
-            components.queryItems = params
+                guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+                    let error = ParseError(code: .otherCause,
+                                           message: "Could not unrwrap url components for \(url)")
+                    completion(.failure(error))
+                    return
+                }
+                components.queryItems = params
 
-            guard let urlComponents = components.url else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not create url from components for \(components)"))
-            }
+                guard let urlComponents = components.url else {
+                    let error = ParseError(code: .otherCause,
+                                           message: "Could not create url from components for \(components)")
+                    completion(.failure(error))
+                    return
+                }
 
-            var urlRequest = URLRequest(url: urlComponents)
-            urlRequest.allHTTPHeaderFields = headers
-            if let urlBody = body {
-                if (urlBody as? ParseCloudTypeable) != nil {
-                    guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody, skipKeys: .cloud) else {
-                        return .failure(ParseError(code: .otherCause,
-                                                       message: "Could not encode body \(urlBody)"))
-                    }
-                    urlRequest.httpBody = bodyData
-                } else {
-                    guard let bodyData = try? ParseCoding
+                var urlRequest = URLRequest(url: urlComponents)
+                urlRequest.allHTTPHeaderFields = headers
+                if let urlBody = body {
+                    if (urlBody as? ParseCloudTypeable) != nil {
+                        guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody, skipKeys: .cloud) else {
+                            let error = ParseError(code: .otherCause,
+                                                   message: "Could not encode body \(urlBody)")
+                            completion(.failure(error))
+                            return
+                        }
+                        urlRequest.httpBody = bodyData
+                    } else {
+                        guard let bodyData = try? ParseCoding
                             .parseEncoder()
                             .encode(urlBody,
                                     batching: batching,
                                     collectChildren: false,
                                     objectsSavedBeforeThisOne: childObjects,
                                     filesSavedBeforeThisOne: childFiles) else {
-                            return .failure(ParseError(code: .otherCause,
-                                                       message: "Could not encode body \(urlBody)"))
+                            let error = ParseError(code: .otherCause,
+                                                   message: "Could not encode body \(urlBody)")
+                            completion(.failure(error))
+                            return
+                        }
+                        urlRequest.httpBody = bodyData.encoded
                     }
-                    urlRequest.httpBody = bodyData.encoded
                 }
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.cachePolicy = requestCachePolicy(options: options)
+                completion(.success(urlRequest))
+                return
             }
-            urlRequest.httpMethod = method.rawValue
-            urlRequest.cachePolicy = requestCachePolicy(options: options)
-            return .success(urlRequest)
         }
 
         enum CodingKeys: String, CodingKey { // swiftlint:disable:this nesting
@@ -412,7 +393,7 @@ internal extension API.Command {
     static func save<T>(_ object: T,
                         original data: Data?,
                         ignoringCustomObjectIdConfig: Bool,
-                        batching: Bool = false) throws -> API.Command<T, T> where T: ParseObject {
+                        batching: Bool = false) async throws -> API.Command<T, T> where T: ParseObject {
         if Parse.configuration.isRequiringCustomObjectIds
             && object.objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
@@ -422,13 +403,13 @@ internal extension API.Command {
             return try replace(object,
                                original: data)
         }
-        return create(object)
+        return await create(object)
     }
 
-    static func create<T>(_ object: T) -> API.Command<T, T> where T: ParseObject {
+    static func create<T>(_ object: T) async -> API.Command<T, T> where T: ParseObject {
         var object = object
         if object.ACL == nil,
-            let acl = try? ParseACL.defaultACL() {
+            let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
         let mapper = { (data) -> T in

@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.
@@ -61,7 +63,7 @@ do {
 }
 
 /*:
- Save asynchronously (preferred way) - performs work on background
+ Save asynchronously with completion block - performs work on background
  queue and returns to specified callbackQueue.
  If no callbackQueue is specified it returns to main queue.
 */

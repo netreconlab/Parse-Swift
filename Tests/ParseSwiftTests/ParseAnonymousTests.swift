@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/16/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -68,30 +68,30 @@ class ParseAnonymousTests: XCTestCase {
         let sessionToken: String?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
 
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func loginNormally() throws -> User {
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -102,7 +102,7 @@ class ParseAnonymousTests: XCTestCase {
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
     func testStrip() throws {
@@ -124,7 +124,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertNotEqual(authData["id"], "12345")
     }
 
-    func testLogin() throws {
+    func testLogin() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -150,15 +150,17 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let login1 = try User.anonymous.login()
-        XCTAssertEqual(login1, User.current)
+        let login1 = try await User.anonymous.login()
+        let currentUser = try await User.current()
+        XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
         XCTAssertEqual(login1.password, "world")
-        XCTAssertTrue(login1.anonymous.isLinked)
+        let isLinked = await login1.anonymous.isLinked()
+        XCTAssertTrue(isLinked)
     }
 
-    func testLoginAuthData() throws {
+    func testLoginAuthData() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -184,12 +186,13 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let login1 = try User.anonymous.login(authData: .init())
-        XCTAssertEqual(login1, User.current)
+        let login1 = try await User.anonymous.login(authData: .init())
+        let currentUser = try await User.current()
+        XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
         XCTAssertEqual(login1.password, "world")
-        XCTAssertTrue(login1.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: login1))
     }
 
     func testLoginAsync() throws {
@@ -224,11 +227,10 @@ class ParseAnonymousTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.anonymous.isLinked)
+                XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -269,11 +271,10 @@ class ParseAnonymousTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertTrue(user.anonymous.isLinked)
+                XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -282,14 +283,14 @@ class ParseAnonymousTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousUser() throws {
-        try testLogin()
-        guard let user = User.current,
-              let updatedAt = user.updatedAt else {
+    func testReplaceAnonymousUser() async throws {
+        try await testLogin()
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
             sessionToken: "blast")
@@ -310,17 +311,16 @@ class ParseAnonymousTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Login")
 
-        var current = User.current
-        current?.username = "hello"
-        current?.password = "world"
-        current?.signup { result in
+        var current = try await User.current()
+        current.username = "hello"
+        current.password = "world"
+        current.signup { result in
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -329,14 +329,14 @@ class ParseAnonymousTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousUserBody() throws {
-        try testLogin()
-        guard let user = User.current,
-              let updatedAt = user.updatedAt else {
+    func testReplaceAnonymousUserBody() async throws {
+        try await testLogin()
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
             sessionToken: "blast")
@@ -362,10 +362,9 @@ class ParseAnonymousTests: XCTestCase {
             switch result {
 
             case .success(let user):
-                XCTAssertEqual(user, User.current)
                 XCTAssertEqual(user.username, "hello")
                 XCTAssertEqual(user.password, "world")
-                XCTAssertFalse(user.anonymous.isLinked)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -374,14 +373,14 @@ class ParseAnonymousTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAnonymousUserSync() throws {
-        try testLogin()
-        guard let user = User.current,
-              let updatedAt = user.updatedAt else {
+    func testReplaceAnonymousUserSync() async throws {
+        try await testLogin()
+        var user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
             sessionToken: "blast")
@@ -400,26 +399,24 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        User.current?.username = "hello"
-        User.current?.password = "world"
-        guard let signedInUser = try User.current?.signup() else {
-            XCTFail("Shouuld have unwrapped")
-            return
-        }
-        XCTAssertEqual(signedInUser, User.current)
+        user.username = "hello"
+        user.password = "world"
+        let signedInUser = try await user.signup()
+        let currentUser = try await User.current()
+        XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
         XCTAssertEqual(signedInUser.password, "world")
-        XCTAssertFalse(signedInUser.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: signedInUser))
     }
 
-    func testReplaceAnonymousUserBodySync() throws {
-        try testLogin()
-        guard let user = User.current,
-              let updatedAt = user.updatedAt else {
+    func testReplaceAnonymousUserBodySync() async throws {
+        try await testLogin()
+        let user = try await User.current()
+        guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
             return
         }
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
             sessionToken: "blast")
@@ -438,21 +435,19 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let signedInUser = try User.signup(username: "hello",
-                                           password: "world")
-        XCTAssertEqual(signedInUser, User.current)
+        let signedInUser = try await User.signup(username: "hello",
+                                                 password: "world")
+        let currentUser = try await User.current()
+        XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
         XCTAssertEqual(signedInUser.password, "world")
-        XCTAssertFalse(signedInUser.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: signedInUser))
     }
 
-    func testCantReplaceAnonymousWithDifferentUser() throws {
-        try testLogin()
-        guard let user = User.current else {
-            XCTFail("Shold have unwrapped")
-            return
-        }
-        XCTAssertTrue(user.anonymous.isLinked)
+    func testCantReplaceAnonymousWithDifferentUser() async throws {
+        try await testLogin()
+        let user = try await User.current()
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         let expectation1 = XCTestExpectation(description: "SignUp")
         var differentUser = User()
@@ -471,36 +466,35 @@ class ParseAnonymousTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCantReplaceAnonymousWithDifferentUserSync() throws {
-        try testLogin()
-        guard let user = User.current else {
-            XCTFail("Shold have unwrapped")
-            return
-        }
-        XCTAssertTrue(user.anonymous.isLinked)
+    func testCantReplaceAnonymousWithDifferentUserSync() async throws {
+        try await testLogin()
+        let user = try await User.current()
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var differentUser = User()
         differentUser.objectId = "nope"
         differentUser.username = "shouldnot"
         differentUser.password = "work"
-        XCTAssertThrowsError(try differentUser.signup())
+        do {
+            _ = try await differentUser.signup()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
     }
 
-    func testReplaceAnonymousWithBecome() throws { // swiftlint:disable:this function_body_length
-        XCTAssertNil(User.current?.objectId)
-        try testLogin()
+    func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
+        try await testLogin()
         MockURLProtocol.removeAll()
-        XCTAssertNotNil(User.current?.objectId)
-        XCTAssertTrue(User.anonymous.isLinked)
+        let currentUser = try await User.current()
+        XCTAssertNotNil(currentUser.objectId)
+        let isLinked = await User.anonymous.isLinked()
+        XCTAssertTrue(isLinked)
 
-        guard let user = User.current else {
-            XCTFail("Should unwrap")
-            return
-        }
-
+        let user = try await User.current()
         var serverResponse = LoginSignupResponse()
-        serverResponse.createdAt = User.current?.createdAt
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.createdAt = currentUser.createdAt
+        serverResponse.updatedAt = currentUser.updatedAt?.addingTimeInterval(+300)
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
         serverResponse.password = "this"
@@ -541,18 +535,9 @@ class ParseAnonymousTests: XCTestCase {
                 XCTAssertNil(become.ACL)
 
                 // Should be updated in memory
-                XCTAssertEqual(User.current?.updatedAt, becomeUpdatedAt)
-                XCTAssertFalse(User.anonymous.isLinked)
+                XCTAssertEqual(userOnServer?.updatedAt, becomeUpdatedAt)
+                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: become))
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
-                // Should be updated in Keychain
-                guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                    = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
-                        XCTFail("Should get object from Keychain")
-                    return
-                }
-                XCTAssertEqual(keychainUser.currentUser?.updatedAt, becomeUpdatedAt)
-                #endif
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

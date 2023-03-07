@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/14/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import Foundation
  Conforming to `ParseHookTriggerable` allows the creation of hooks which
  are Cloud Code triggers.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public protocol ParseHookTriggerable: ParseHookable {
@@ -68,7 +68,7 @@ public extension ParseHookTriggerable {
     }
 }
 
-internal struct TriggerRequest: Encodable {
+public struct TriggerRequest: Encodable {
     let className: String
     let triggerName: ParseHookTriggerType
     let url: URL?
@@ -100,19 +100,21 @@ extension ParseHookTriggerable {
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try fetchCommand().executeAsync(options: options,
-                                            callbackQueue: callbackQueue,
-                                            completion: completion)
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await fetchCommand().execute(options: options,
+                                                      callbackQueue: callbackQueue,
+                                                      completion: completion)
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -158,12 +160,14 @@ extension ParseHookTriggerable {
     public static func fetchAll(options: API.Options = [],
                                 callbackQueue: DispatchQueue = .main,
                                 completion: @escaping (Result<[Self], ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        fetchAllCommand().executeAsync(options: options,
-                                       callbackQueue: callbackQueue,
-                                       completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await fetchAllCommand().execute(options: options,
+                                                 callbackQueue: callbackQueue,
+                                                 completion: completion)
+        }
     }
 
     static func fetchAllCommand() -> API.NonParseBodyCommand<Self, [Self]> {
@@ -189,19 +193,21 @@ extension ParseHookTriggerable {
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try createCommand().executeAsync(options: options,
-                                             callbackQueue: callbackQueue,
-                                             completion: completion)
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await createCommand().execute(options: options,
+                                                       callbackQueue: callbackQueue,
+                                                       completion: completion)
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -231,19 +237,21 @@ extension ParseHookTriggerable {
     public func update(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Self, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try updateCommand().executeAsync(options: options,
-                                             callbackQueue: callbackQueue,
-                                             completion: completion)
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            callbackQueue.async {
-                completion(.failure(parseError))
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await updateCommand().execute(options: options,
+                                                       callbackQueue: callbackQueue,
+                                                       completion: completion)
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }
@@ -273,26 +281,28 @@ extension ParseHookTriggerable {
     public func delete(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
                        completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        do {
-            try deleteCommand().executeAsync(options: options,
-                                             callbackQueue: callbackQueue) { result in
-                switch result {
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await deleteCommand().execute(options: options,
+                                                       callbackQueue: callbackQueue) { result in
+                    switch result {
 
-                case .success:
-                    completion(.success(()))
-                case .failure(let error):
-                    completion(.failure(error))
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
-            }
-        } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            callbackQueue.async {
-                completion(.failure(parseError))
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
             }
         }
     }

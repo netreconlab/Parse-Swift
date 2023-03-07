@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 10/4/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -35,6 +35,11 @@ public protocol Objectable: ParseEncodable, Decodable {
     The ACL for this object.
     */
     var ACL: ParseACL? { get set }
+
+    /**
+     The Parse Server endpoint for this ParseObject.
+     */
+    var endpoint: API.Endpoint { get }
 }
 
 extension Objectable {
@@ -55,6 +60,7 @@ extension Objectable {
 
     static func createHash(_ object: Encodable) throws -> String {
         let encoded = try ParseCoding.parseEncoder().encode(object,
+                                                            acl: nil,
                                                             batching: false)
         guard let hashString = String(data: encoded, encoding: .utf8) else {
             throw ParseError(code: .otherCause, message: "Could not create hash")
@@ -65,7 +71,7 @@ extension Objectable {
 
 // MARK: Convenience
 extension Objectable {
-    var endpoint: API.Endpoint {
+    public var endpoint: API.Endpoint {
         if let objectId = objectId {
             return .object(className: className, objectId: objectId)
         }

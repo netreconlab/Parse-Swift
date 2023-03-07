@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/30/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -13,8 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-// swiftlint:disable function_body_length
-
+// swiftlint:disable function_body_length line_length
 class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
@@ -94,30 +93,30 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
     let loginUserName = "hello10"
     let loginPassword = "world"
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
-        login()
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func login() {
+    @MainActor
+    func login() async throws {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -128,19 +127,12 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                 return nil
             }
         }
-        do {
-            _ = try User.login(username: loginUserName, password: loginPassword)
-
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        _ = try await User.login(username: loginUserName, password: loginPassword)
     }
 
-    func saveCurrentInstallation() throws {
-        guard let installation = Installation.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+    @MainActor
+    func saveCurrentInstallation() async throws {
+        let installation = try await Installation.current()
 
         var installationOnServer = installation
         installationOnServer.objectId = testInstallationObjectId
@@ -159,34 +151,28 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        do {
-            guard let saved = try Installation.current?.save(),
-                let newCurrentInstallation = Installation.current else {
-                XCTFail("Should have a new current installation")
-                return
-            }
-            XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
-            XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
-            XCTAssertNil(saved.ACL)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let saved = try await installation.save()
+        let newCurrentInstallation = try await Installation.current()
+        XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+        XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+        XCTAssertNil(saved.ACL)
     }
 
-    func testFetch() throws {
-        try saveCurrentInstallation()
+    func testFetch() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update installation1")
+        let expectation2 = XCTestExpectation(description: "Update installation2")
 
-        guard let installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                expectation1.fulfill()
-                return
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            expectation1.fulfill()
+            return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
@@ -203,11 +189,13 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         }
 
+        let response = serverResponse
         let publisher = installation.fetchPublisher()
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
@@ -215,23 +203,33 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
             XCTAssert(fetched.hasSameObjectId(as: serverResponse))
             XCTAssert(fetched.hasSameInstallationId(as: serverResponse))
-            XCTAssertEqual(Installation.current?.customKey, serverResponse.customKey)
+            Task {
+                do {
+                    let current = try await Installation.current()
+                    XCTAssertEqual(current.customKey, response.customKey)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSave() throws {
-        try saveCurrentInstallation()
+    func testSave() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update installation1")
-        guard var installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                expectation1.fulfill()
-                return
+        let expectation2 = XCTestExpectation(description: "Update installation2")
+
+        var installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            expectation1.fulfill()
+            return
         }
         installation.customKey = "newValue"
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
@@ -248,11 +246,13 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         }
 
+        let response = serverResponse
         let publisher = installation.savePublisher()
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
@@ -260,14 +260,22 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
             XCTAssert(fetched.hasSameObjectId(as: serverResponse))
             XCTAssert(fetched.hasSameInstallationId(as: serverResponse))
-            XCTAssertEqual(Installation.current?.customKey, serverResponse.customKey)
+            Task {
+                do {
+                    let current = try await Installation.current()
+                    XCTAssertEqual(current.customKey, response.customKey)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCreate() throws {
-        try saveCurrentInstallation()
+    func testCreate() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
         var subscriptions = Set<AnyCancellable>()
@@ -312,8 +320,8 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdate() throws {
-        try saveCurrentInstallation()
+    func testUpdate() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
         var subscriptions = Set<AnyCancellable>()
@@ -357,17 +365,17 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testDelete() throws {
-        try saveCurrentInstallation()
+    func testDelete() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update installation1")
-        guard let installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                expectation1.fulfill()
-                return
+        let expectation2 = XCTestExpectation(description: "Update installation2")
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
@@ -389,29 +397,30 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { _ in
-            if let newInstallation = Installation.current {
-                XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
+            Task {
+                if let newInstallation = try? await Installation.current() {
+                    XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
+                }
+                expectation2.fulfill()
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testFetchAll() throws {
-        try saveCurrentInstallation()
+    func testFetchAll() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
+        let expectation2 = XCTestExpectation(description: "Fetch 2")
 
-        guard var installation = Installation.current else {
-                XCTFail("Should unwrap dates")
-            expectation1.fulfill()
-                return
-        }
+        var installation = try await Installation.current()
 
         installation.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         installation.customKey = "newValue"
@@ -432,77 +441,84 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = [installation].fetchAllPublisher()
+        let installationToFetch = installation
+        let publisher = [installationToFetch].fetchAllPublisher()
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { fetched in
 
-            fetched.forEach {
-                switch $0 {
-                case .success(let fetched):
-                    XCTAssert(fetched.hasSameObjectId(as: installation))
-                    guard let fetchedCreatedAt = fetched.createdAt,
-                        let fetchedUpdatedAt = fetched.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
-                    }
-                    guard let originalCreatedAt = installation.createdAt,
-                        let originalUpdatedAt = installation.updatedAt,
-                        let serverUpdatedAt = installation.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
-                    }
-                    XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
-                    XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
-                    XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
-                    XCTAssertEqual(Installation.current?.customKey, installation.customKey)
-
-                    // Should be updated in memory
-                    guard let updatedCurrentDate = Installation.current?.updatedAt else {
+            Task {
+                do {
+                    let current = try await Installation.current()
+                    guard let updatedCurrentDate = current.updatedAt else {
                         XCTFail("Should unwrap current date")
-                        expectation1.fulfill()
+                        expectation2.fulfill()
                         return
                     }
-                    XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
+                    for object in fetched {
+                        switch object {
+                        case .success(let fetched):
+                            XCTAssert(fetched.hasSameObjectId(as: installationToFetch))
+                            guard let fetchedCreatedAt = fetched.createdAt,
+                                  let fetchedUpdatedAt = fetched.updatedAt else {
+                                XCTFail("Should unwrap dates")
+                                expectation2.fulfill()
+                                return
+                            }
+                            guard let originalCreatedAt = installationToFetch.createdAt,
+                                  let originalUpdatedAt = installationToFetch.updatedAt,
+                                  let serverUpdatedAt = installationToFetch.updatedAt else {
+                                XCTFail("Should unwrap dates")
+                                expectation2.fulfill()
+                                return
+                            }
+                            XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
+                            XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
+                            XCTAssertEqual(fetchedUpdatedAt, serverUpdatedAt)
+                            XCTAssertEqual(current.customKey, installationToFetch.customKey)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    // Should be updated in Keychain
-                    guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                        = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
-                        let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
-                            XCTFail("Should get object from Keychain")
-                            expectation1.fulfill()
-                        return
+                            // Should be updated in memory
+                            XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
+
+                            #if !os(Linux) && !os(Android) && !os(Windows)
+                            // Should be updated in Keychain
+                            guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
+                                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+                                  let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
+                                XCTFail("Should get object from Keychain")
+                                expectation2.fulfill()
+                                return
+                            }
+                            XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
+                            #endif
+                        case .failure(let error):
+                            XCTFail("Should have fetched: \(error.localizedDescription)")
+                        }
                     }
-                    XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
-                    #endif
-                case .failure(let error):
-                    XCTFail("Should have fetched: \(error.localizedDescription)")
+                } catch {
+                    XCTFail(error.localizedDescription)
                 }
+                expectation2.fulfill()
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSaveAll() throws {
-        try saveCurrentInstallation()
+    func testSaveAll() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Save 2")
 
-        guard var installation = Installation.current else {
-                XCTFail("Should unwrap dates")
-            expectation1.fulfill()
-                return
-        }
+        var installation = try await Installation.current()
         installation.createdAt = nil
         installation.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         installation.customKey = "newValue"
@@ -516,71 +532,81 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             installation = try installation.getDecoder().decode(Installation.self, from: encoded1)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
-            expectation1.fulfill()
             return
         }
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let publisher = [installation].saveAllPublisher()
+        let installationToSave = installation
+        let publisher = [installationToSave].saveAllPublisher()
             .sink(receiveCompletion: { result in
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { saved in
 
-            saved.forEach {
-                switch $0 {
-                case .success(let saved):
-                    XCTAssert(saved.hasSameObjectId(as: installation))
-                    XCTAssert(saved.hasSameInstallationId(as: installation))
-                    guard let savedUpdatedAt = saved.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
-                    }
-                    guard let originalUpdatedAt = installation.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
-                    }
-                    XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
-                    XCTAssertEqual(Installation.current?.customKey, installation.customKey)
-
-                    // Should be updated in memory
-                    guard let updatedCurrentDate = Installation.current?.updatedAt else {
+            Task {
+                do {
+                    let current = try await Installation.current()
+                    guard let updatedCurrentDate = current.updatedAt else {
                         XCTFail("Should unwrap current date")
-                        expectation1.fulfill()
+                        expectation2.fulfill()
                         return
                     }
-                    XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
+                    for object in saved {
+                        switch object {
+                        case .success(let saved):
+                            XCTAssert(saved.hasSameObjectId(as: installationToSave))
+                            XCTAssert(saved.hasSameInstallationId(as: installationToSave))
+                            guard let savedUpdatedAt = saved.updatedAt else {
+                                XCTFail("Should unwrap dates")
+                                expectation2.fulfill()
+                                return
+                            }
+                            guard let originalUpdatedAt = installationToSave.updatedAt else {
+                                XCTFail("Should unwrap dates")
+                                expectation2.fulfill()
+                                return
+                            }
+                            XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
+                            XCTAssertEqual(current.customKey, installationToSave.customKey)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    // Should be updated in Keychain
-                    guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                        = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
-                        let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
-                            XCTFail("Should get object from Keychain")
-                            expectation1.fulfill()
-                        return
+                            // Should be updated in memory
+                            XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
+
+                            #if !os(Linux) && !os(Android) && !os(Windows)
+                            // Should be updated in Keychain
+                            guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
+                                = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+                                let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
+                                    XCTFail("Should get object from Keychain")
+                                expectation2.fulfill()
+                                return
+                            }
+                            XCTAssertEqual(keychainUpdatedCurrentDate, originalUpdatedAt)
+                            #endif
+                        case .failure(let error):
+                            XCTFail("Should have fetched: \(error.localizedDescription)")
+                        }
                     }
-                    XCTAssertEqual(keychainUpdatedCurrentDate, originalUpdatedAt)
-                    #endif
-                case .failure(let error):
-                    XCTFail("Should have fetched: \(error.localizedDescription)")
+                } catch {
+                    XCTFail(error.localizedDescription)
                 }
+                expectation2.fulfill()
             }
+
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCreateAll() throws {
-        try saveCurrentInstallation()
+    func testCreateAll() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -647,8 +673,8 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAllCreate() throws {
-        try saveCurrentInstallation()
+    func testReplaceAllCreate() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -704,8 +730,8 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAllUpdate() throws {
-        try saveCurrentInstallation()
+    func testReplaceAllUpdate() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -770,8 +796,8 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateAll() throws {
-        try saveCurrentInstallation()
+    func testUpdateAll() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -816,14 +842,14 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertTrue(saved.hasSameObjectId(as: serverResponse))
                     XCTAssertTrue(saved.hasSameInstallationId(as: serverResponse))
                     guard let savedUpdatedAt = saved.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
+                        XCTFail("Should unwrap dates")
+                        expectation1.fulfill()
+                        return
                     }
                     guard let originalUpdatedAt = serverResponse.updatedAt else {
-                            XCTFail("Should unwrap dates")
-                            expectation1.fulfill()
-                            return
+                        XCTFail("Should unwrap dates")
+                        expectation1.fulfill()
+                        return
                     }
                     XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
 
@@ -836,17 +862,14 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testDeleteAll() throws {
-        try saveCurrentInstallation()
+    func testDeleteAll() async throws {
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Save 2")
 
-        guard let installation = Installation.current else {
-                XCTFail("Should unwrap dates")
-            expectation1.fulfill()
-                return
-        }
+        let installation = try await Installation.current()
 
         let installationOnServer = [BatchResponseItem<NoBody>(success: NoBody(), error: nil)]
 
@@ -855,7 +878,6 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
         } catch {
             XCTFail("Should encode/decode. Error \(error)")
-            expectation1.fulfill()
             return
         }
         MockURLProtocol.mockRequests { _ in
@@ -867,6 +889,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
@@ -874,27 +897,32 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             deleted.forEach {
                 if case let .failure(error) = $0 {
                     XCTFail("Should have deleted: \(error.localizedDescription)")
+                    expectation2.fulfill()
                 }
-                if let newInstallation = Installation.current {
-                    XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
+                Task {
+                    if let newInstallation = try? await Installation.current() {
+                        XCTAssertFalse(installation.hasSameInstallationId(as: newInstallation))
+                    }
+                    expectation2.fulfill()
                 }
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testBecome() throws {
+    func testBecome() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Become Installation")
+        let expectation2 = XCTestExpectation(description: "Become Installation 2")
 
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                return
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
@@ -920,69 +948,73 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
+        let response = installationOnServer
         let publisher = Installation.becomePublisher("wowsers")
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { saved in
-            guard let currentInstallation = Installation.current else {
-                XCTFail("Should have current installation")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertTrue(installationOnServer.hasSameObjectId(as: saved))
-            XCTAssertTrue(installationOnServer.hasSameInstallationId(as: saved))
-            XCTAssertTrue(installationOnServer.hasSameObjectId(as: currentInstallation))
-            XCTAssertTrue(installationOnServer.hasSameInstallationId(as: currentInstallation))
-            guard let savedCreatedAt = saved.createdAt else {
-                XCTFail("Should unwrap dates")
-                expectation1.fulfill()
-                return
-            }
-            guard let originalCreatedAt = installationOnServer.createdAt else {
-                XCTFail("Should unwrap dates")
-                expectation1.fulfill()
-                return
-            }
-            XCTAssertEqual(savedCreatedAt, originalCreatedAt)
-            XCTAssertEqual(saved.channels, installationOnServer.channels)
-            XCTAssertEqual(saved.deviceToken, installationOnServer.deviceToken)
+            Task {
+                do {
+                    let currentInstallation = try await Installation.current()
+                    XCTAssertTrue(response.hasSameObjectId(as: saved))
+                    XCTAssertTrue(response.hasSameInstallationId(as: saved))
+                    XCTAssertTrue(response.hasSameObjectId(as: currentInstallation))
+                    XCTAssertTrue(response.hasSameInstallationId(as: currentInstallation))
+                    guard let savedCreatedAt = saved.createdAt else {
+                        XCTFail("Should unwrap dates")
+                        expectation2.fulfill()
+                        return
+                    }
+                    guard let originalCreatedAt = response.createdAt else {
+                        XCTFail("Should unwrap dates")
+                        expectation2.fulfill()
+                        return
+                    }
+                    XCTAssertEqual(savedCreatedAt, originalCreatedAt)
+                    XCTAssertEqual(saved.channels, response.channels)
+                    XCTAssertEqual(saved.deviceToken, response.deviceToken)
 
-            // Should be updated in memory
-            XCTAssertEqual(Installation.current?.installationId, "wowsers")
-            XCTAssertEqual(Installation.current?.customKey, installationOnServer.customKey)
-            XCTAssertEqual(Installation.current?.channels, installationOnServer.channels)
-            XCTAssertEqual(Installation.current?.deviceToken, installationOnServer.deviceToken)
+                    // Should be updated in memory
+                    XCTAssertEqual(currentInstallation.installationId, "wowsers")
+                    XCTAssertEqual(currentInstallation.customKey, response.customKey)
+                    XCTAssertEqual(currentInstallation.channels, response.channels)
+                    XCTAssertEqual(currentInstallation.deviceToken, response.deviceToken)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                    XCTFail("Should get object from Keychain")
-                expectation1.fulfill()
-                return
+                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    // Should be updated in Keychain
+                    guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
+                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                            XCTFail("Should get object from Keychain")
+                        expectation2.fulfill()
+                        return
+                    }
+                    XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, "wowsers")
+                    XCTAssertEqual(keychainInstallation.currentInstallation?.channels, response.channels)
+                    XCTAssertEqual(keychainInstallation.currentInstallation?.deviceToken, response.deviceToken)
+                    #endif
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
             }
-            XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, "wowsers")
-            XCTAssertEqual(keychainInstallation.currentInstallation?.channels, installationOnServer.channels)
-            XCTAssertEqual(keychainInstallation.currentInstallation?.deviceToken, installationOnServer.deviceToken)
-            #endif
-            expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testBecomeMissingObjectId() throws {
+    func testBecomeMissingObjectId() async throws {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Become Installation")
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
-        Installation.currentContainer.currentInstallation = nil
+        await Installation.setCurrent(nil)
 
         let publisher = Installation.becomePublisher("wowsers")
             .sink(receiveCompletion: { result in

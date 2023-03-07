@@ -3,7 +3,7 @@
 //  ParseSwiftTests
 //
 //  Created by Corey Baker on 7/26/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -53,28 +53,28 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let results: U
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  usingEqualQueryConstraint: false,
-                                  usingPostForQuery: true,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        usingEqualQueryConstraint: false,
+                                        usingPostForQuery: true,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     // MARK: Initialization
@@ -445,7 +445,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     // MARK: Querying Parse Server
-    func testFind() {
+    func testFind() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -463,28 +463,18 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-
-            guard let score = try query.find(options: []).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-        } catch {
-            XCTFail(error.localizedDescription)
+        guard let score = try await query.find(options: []).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
-
+        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testFindLimit() {
+    func testFindLimit() async throws {
         let query = GameScore.query()
             .limit(0)
-        do {
-            let scores = try query.find(options: [])
-            XCTAssert(scores.isEmpty)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let scores = try await query.find(options: [])
+        XCTAssert(scores.isEmpty)
     }
 
     // MARK: Querying Parse Server
@@ -790,7 +780,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testFirst() {
+    func testFirst() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -808,15 +798,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let score = try query.first(options: [])
-            XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let score = try await query.first(options: [])
+        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testFirstThrowDecodingError() {
+    func testFirstThrowDecodingError() async throws {
         var scoreOnServer = GameScoreBroken()
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -835,7 +821,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query()
         do {
-            _ = try query.first(options: [])
+            _ = try await query.first(options: [])
             XCTFail("Should have thrown error")
         } catch {
             guard let error = error as? ParseError else {
@@ -848,10 +834,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertEqual(error.code, .otherCause)
             #endif
         }
-        XCTAssertThrowsError(try query.first(options: []))
+        do {
+            _ = try await query.first(options: [])
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
     }
 
-    func testFirstNoObjectFound() {
+    func testFirstNoObjectFound() async throws {
 
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
         MockURLProtocol.mockRequests { _ in
@@ -865,7 +856,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query()
         do {
-            _ = try query.first(options: [])
+            _ = try await query.first(options: [])
             XCTFail("Should have thrown error")
         } catch {
             guard let error = error as? ParseError else {
@@ -874,13 +865,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             XCTAssertEqual(error.code, .objectNotFound)
         }
-
     }
 
-    func testFirstLimit() {
+    func testFirstLimit() async throws {
         let query = GameScore.query()
             .limit(0)
-        XCTAssertThrowsError(try query.first())
+        do {
+            _ = try await query.first()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.objectNotFound]))
+        }
     }
 
     func firstAsyncNoObjectFound(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
@@ -1037,7 +1032,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testCount() {
+    func testCount() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -1055,20 +1050,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-
-            let scoreCount = try query.count(options: [])
-            XCTAssertEqual(scoreCount, 1)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-
+        let scoreCount = try await query.count(options: [])
+        XCTAssertEqual(scoreCount, 1)
     }
 
-    func testCountLimit() throws {
+    func testCountLimit() async throws {
         let query = GameScore.query()
             .limit(0)
-        let count = try query.count()
+        let count = try await query.count()
         XCTAssertEqual(count, 0)
     }
 
@@ -3015,7 +3004,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     // MARK: JSON Responses
-    func testExplainFindSynchronous() {
+    func testExplainFindSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3031,15 +3020,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [[String: String]] = try query.findExplain()
-            XCTAssertEqual(queryResult, json.results)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.findExplain()
+        XCTAssertEqual(queryResult, json.results)
     }
 
-    func testExplainMongoFindSynchronous() {
+    func testExplainMongoFindSynchronous() async throws {
         let json = AnyResultsMongoResponse(results: ["yolo": "yarr"])
 
         let encoded: Data!
@@ -3055,23 +3040,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [[String: String]] = try query.findExplain(usingMongoDB: true)
-            XCTAssertEqual(queryResult, [json.results])
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.findExplain(usingMongoDB: true)
+        XCTAssertEqual(queryResult, [json.results])
     }
 
-    func testExplainFindLimitSynchronous() {
+    func testExplainFindLimitSynchronous() async throws {
         let query = GameScore.query()
             .limit(0)
-        do {
-            let queryResult: [[String: String]] = try query.findExplain()
-            XCTAssertTrue(queryResult.isEmpty)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.findExplain()
+        XCTAssertTrue(queryResult.isEmpty)
     }
 
     func testExplainFindAsynchronous() {
@@ -3122,7 +3099,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testExplainFirstSynchronous() {
+    func testExplainFirstSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3138,15 +3115,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [String: String] = try query.firstExplain()
-            XCTAssertEqual(queryResult, json.results.first)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [String: String] = try await query.firstExplain()
+        XCTAssertEqual(queryResult, json.results.first)
     }
 
-    func testExplainMongoFirstSynchronous() {
+    func testExplainMongoFirstSynchronous() async throws {
         let json = AnyResultsMongoResponse(results: ["yolo": "yarr"])
 
         let encoded: Data!
@@ -3162,19 +3135,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [String: String] = try query.firstExplain(usingMongoDB: true)
-            XCTAssertEqual(queryResult, json.results)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [String: String] = try await query.firstExplain(usingMongoDB: true)
+        XCTAssertEqual(queryResult, json.results)
     }
 
-    func testExplainFirstLimitSynchronous() {
+    func testExplainFirstLimitSynchronous() async throws {
         let query = GameScore.query()
             .limit(0)
         do {
-            let _: [[String: String]] = try query.firstExplain()
+            let _: [[String: String]] = try await query.firstExplain()
             XCTFail("Should have produced error")
         } catch {
             guard let error = error as? ParseError else {
@@ -3233,7 +3202,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testExplainCountSynchronous() {
+    func testExplainCountSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3249,15 +3218,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [[String: String]] = try query.countExplain()
-            XCTAssertEqual(queryResult, json.results)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.countExplain()
+        XCTAssertEqual(queryResult, json.results)
     }
 
-    func testExplainMongoCountSynchronous() {
+    func testExplainMongoCountSynchronous() async throws {
         let json = AnyResultsMongoResponse(results: ["yolo": "yarr"])
 
         let encoded: Data!
@@ -3273,24 +3238,16 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let queryResult: [[String: String]] = try query.countExplain(usingMongoDB: true)
-            XCTAssertEqual(queryResult, [json.results])
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.countExplain(usingMongoDB: true)
+        XCTAssertEqual(queryResult, [json.results])
     }
 
-    func testExplainCountLimitSynchronous() {
+    func testExplainCountLimitSynchronous() async throws {
 
         let query = GameScore.query()
             .limit(0)
-        do {
-            let queryResult: [[String: String]] = try query.countExplain()
-            XCTAssertTrue(queryResult.isEmpty)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.countExplain()
+        XCTAssertTrue(queryResult.isEmpty)
     }
 
     func testExplainCountAsynchronous() {
@@ -3341,7 +3298,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testHintFindSynchronous() {
+    func testHintFindSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3358,12 +3315,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query()
             .hint("_id_")
-        do {
-            let queryResult: [[String: String]] = try query.findExplain()
-            XCTAssertEqual(queryResult, json.results)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.findExplain()
+        XCTAssertEqual(queryResult, json.results)
     }
 
     func testHintFindAsynchronous() {
@@ -3397,7 +3350,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testHintFirstSynchronous() {
+    func testHintFirstSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3414,12 +3367,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query()
             .hint("_id_")
-        do {
-            let queryResult: [String: String] = try query.firstExplain()
-            XCTAssertEqual(queryResult, json.results.first)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [String: String] = try await query.firstExplain()
+        XCTAssertEqual(queryResult, json.results.first)
     }
 
     func testHintFirstAsynchronous() {
@@ -3453,7 +3402,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testHintCountSynchronous() {
+    func testHintCountSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3470,12 +3419,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query()
             .hint("_id_")
-        do {
-            let queryResult: [[String: String]] = try query.countExplain()
-            XCTAssertEqual(queryResult, json.results)
-        } catch {
-            XCTFail("Error: \(error)")
-        }
+        let queryResult: [[String: String]] = try await query.countExplain()
+        XCTAssertEqual(queryResult, json.results)
     }
 
     func testHintCountAsynchronous() {
@@ -3555,7 +3500,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testAggregate() {
+    func testAggregate() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3573,19 +3518,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query()
-        do {
-            let pipeline = [["hello": "world"]]
-            guard let score = try query.aggregate(pipeline).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-        } catch {
-            XCTFail(error.localizedDescription)
+        let pipeline = [["hello": "world"]]
+        guard let score = try await query.aggregate(pipeline).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testAggregateWithWhere() {
+    func testAggregateWithWhere() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3603,32 +3544,24 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            let pipeline = [[String: String]]()
-            guard let score = try query.aggregate(pipeline).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-        } catch {
-            XCTFail(error.localizedDescription)
+        let pipeline = [[String: String]]()
+        guard let score = try await query.aggregate(pipeline).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testAggregateLimit() {
+    func testAggregateLimit() async throws {
 
         let query = GameScore.query()
             .limit(0)
-        do {
-            let pipeline = [["hello": "world"]]
-            let scores = try query.aggregate(pipeline)
-            XCTAssertTrue(scores.isEmpty)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let pipeline = [["hello": "world"]]
+        let scores = try await query.aggregate(pipeline)
+        XCTAssertTrue(scores.isEmpty)
     }
 
-    func testAggregateExplainWithWhere() {
+    func testAggregateExplainWithWhere() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3644,19 +3577,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            let pipeline = [[String: String]]()
-            guard let score: [String: String] = try query.aggregateExplain(pipeline).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssertEqual(score, json.results.first)
-        } catch {
-            XCTFail(error.localizedDescription)
+        let pipeline = [[String: String]]()
+        guard let score: [String: String] = try await query.aggregateExplain(pipeline).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssertEqual(score, json.results.first)
     }
 
-    func testAggregateExplainMongoWithWhere() {
+    func testAggregateExplainMongoWithWhere() async throws {
         let json = AnyResultsMongoResponse(results: ["yolo": "yarr"])
 
         let encoded: Data!
@@ -3672,30 +3601,22 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            let pipeline = [[String: String]]()
-            guard let score: [String: String] = try query.aggregateExplain(pipeline,
-                                                                           usingMongoDB: true).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssertEqual(score, json.results)
-        } catch {
-            XCTFail(error.localizedDescription)
+        let pipeline = [[String: String]]()
+        guard let score: [String: String] = try await query.aggregateExplain(pipeline,
+                                                                             usingMongoDB: true).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssertEqual(score, json.results)
     }
 
-    func testAggregateExplainWithWhereLimit() {
+    func testAggregateExplainWithWhereLimit() async throws {
 
         let query = GameScore.query("points" > 9)
             .limit(0)
-        do {
-            let pipeline = [[String: String]]()
-            let scores: [[String: String]] = try query.aggregateExplain(pipeline)
-            XCTAssertTrue(scores.isEmpty)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let pipeline = [[String: String]]()
+        let scores: [[String: String]] = try await query.aggregateExplain(pipeline)
+        XCTAssertTrue(scores.isEmpty)
     }
 
     func testAggregateAsyncMainQueue() {
@@ -3854,7 +3775,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testDistinct() {
+    func testDistinct() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3872,30 +3793,22 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            guard let score = try query.distinct("hello").first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-        } catch {
-            XCTFail(error.localizedDescription)
+        guard let score = try await query.distinct("hello").first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testDistinctLimit() {
+    func testDistinctLimit() async throws {
 
         let query = GameScore.query("points" > 9)
             .limit(0)
-        do {
-            let scores = try query.distinct("hello")
-            XCTAssertTrue(scores.isEmpty)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let scores = try await query.distinct("hello")
+        XCTAssertTrue(scores.isEmpty)
     }
 
-    func testDistinctExplain() {
+    func testDistinctExplain() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3911,18 +3824,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            guard let score: [String: String] = try query.distinctExplain("hello").first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssertEqual(score, json.results.first)
-        } catch {
-            XCTFail(error.localizedDescription)
+        guard let score: [String: String] = try await query.distinctExplain("hello").first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssertEqual(score, json.results.first)
     }
 
-    func testDistinctExplainMongo() {
+    func testDistinctExplainMongo() async throws {
         let json = AnyResultsMongoResponse(results: ["yolo": "yarr"])
 
         let encoded: Data!
@@ -3938,28 +3847,20 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        do {
-            guard let score: [String: String] = try query.distinctExplain("hello",
-                                                                          usingMongoDB: true).first else {
-                XCTFail("Should unwrap first object found")
-                return
-            }
-            XCTAssertEqual(score, json.results)
-        } catch {
-            XCTFail(error.localizedDescription)
+        guard let score: [String: String] = try await query.distinctExplain("hello",
+                                                                            usingMongoDB: true).first else {
+            XCTFail("Should unwrap first object found")
+            return
         }
+        XCTAssertEqual(score, json.results)
     }
 
-    func testDistinctExplainLimit() {
+    func testDistinctExplainLimit() async throws {
 
         let query = GameScore.query("points" > 9)
             .limit(0)
-        do {
-            let scores: [[String: String]] = try query.distinctExplain("hello")
-            XCTAssertTrue(scores.isEmpty)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let scores: [[String: String]] = try await query.distinctExplain("hello")
+        XCTAssertTrue(scores.isEmpty)
     }
 
     func testDistinctAsyncMainQueue() {

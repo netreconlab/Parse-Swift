@@ -3,10 +3,9 @@
 //  ParseLDAP+async
 //
 //  Created by Corey Baker on 8/7/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseLDAP {
@@ -83,5 +82,3 @@ public extension ParseLDAP {
         }
     }
 }
-
-#endif

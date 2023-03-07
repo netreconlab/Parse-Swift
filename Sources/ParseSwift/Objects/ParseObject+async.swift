@@ -3,10 +3,9 @@
 //  ParseObject+async
 //
 //  Created by Corey Baker on 8/6/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseObject {
@@ -30,6 +29,16 @@ public extension ParseObject {
                        options: options,
                        completion: continuation.resume)
         }
+    }
+
+    /**
+     Saves the `ParseObject` *asynchronously*.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+     - returns: Returns the saved `ParseObject`.
+     - throws: An error of type `ParseError`.
+    */
+    @discardableResult func save(options: API.Options = []) async throws -> Self {
+        try await save(ignoringCustomObjectIdConfig: false, options: options)
     }
 
     /**
@@ -294,9 +303,11 @@ internal extension ParseObject {
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         var objectsFinishedSaving = [String: PointerType]()
         var filesFinishedSaving = [UUID: ParseFile]()
+        let defaultACL = try? await ParseACL.defaultACL()
         do {
             let object = try ParseCoding.parseEncoder()
                 .encode(self,
+                        acl: defaultACL,
                         collectChildren: true,
                         objectsSavedBeforeThisOne: nil,
                         filesSavedBeforeThisOne: nil)
@@ -323,6 +334,7 @@ or disable transactions for this call.
                         let waitingObjectInfo = try ParseCoding
                             .parseEncoder()
                             .encode(parseObject,
+                                    acl: defaultACL,
                                     batching: false,
                                     collectChildren: true,
                                     objectsSavedBeforeThisOne: objectsFinishedSaving,
@@ -374,9 +386,9 @@ or disable transactions for this call.
             let command: API.Command<Self, Self>!
             switch method {
             case .save:
-                command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = self.createCommand()
+                command = await self.createCommand()
             case .replace:
                 command = try self.replaceCommand()
             case .update:
@@ -431,10 +443,10 @@ internal extension Sequence where Element: ParseObject {
                 switch method {
                 case .save:
                     commands.append(
-                        try object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                        try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(object.createCommand())
+                    commands.append(await object.createCommand())
                 case .replace:
                     commands.append(try object.replaceCommand())
                 case .update:
@@ -490,4 +502,3 @@ internal extension ParseEncodable {
                      callbackQueue: callbackQueue)
     }
 }
-#endif

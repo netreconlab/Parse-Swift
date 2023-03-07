@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 struct User: ParseUser {
@@ -111,12 +113,14 @@ extension GameScore {
     }
 }
 
-//: Logging out - synchronously
-do {
-    try User.logout()
-    print("Successfully logged out")
-} catch let error {
-    print("Error logging out: \(error)")
+Task {
+    //: Logging out - async/await
+    do {
+        try await User.logout()
+        print("Successfully logged out")
+    } catch let error {
+        print("Error logging out: \(error)")
+    }
 }
 
 /*:
@@ -129,12 +133,15 @@ User.login(username: "hello", password: "TestMePass123^") { result in
     switch result {
     case .success(let user):
 
-        guard let currentUser = User.current else {
-            assertionFailure("Error: current user not stored locally")
-            return
+        Task {
+            do {
+                let currentUser = try await User.current()
+                assert(currentUser.hasSameObjectId(as: user))
+                print("Successfully logged in as user: \(user)")
+            } catch {
+                assertionFailure("Error: current user not stored locally")
+            }
         }
-        assert(currentUser.hasSameObjectId(as: user))
-        print("Successfully logged in as user: \(user)")
 
     case .failure(let error):
         print("Error logging in: \(error)")
@@ -152,55 +159,64 @@ User.login(username: "hello", password: "TestMePass123^") { result in
  `set()` in combination with mutating the `ParseObject`
  directly.
 */
-var currentUser = User.current?
-    .set(\.customKey, to: "myCustom")
-    .set(\.gameScore, to: GameScore(points: 12))
-    .set(\.targetScore, to: GameScore(points: 100))
-currentUser?.allScores = [GameScore(points: 5), GameScore(points: 8)]
-currentUser?.save { result in
-
-    switch result {
-    case .success(let updatedUser):
-        print("Successfully saved custom fields of User to ParseServer: \(updatedUser)")
-    case .failure(let error):
-        print("Failed to update user: \(error)")
+Task {
+    var currentUser = try? await User.current()
+        .set(\.customKey, to: "myCustom")
+        .set(\.gameScore, to: GameScore(points: 12))
+        .set(\.targetScore, to: GameScore(points: 100))
+    currentUser?.allScores = [GameScore(points: 5), GameScore(points: 8)]
+    currentUser?.save { result in
+        switch result {
+        case .success(let updatedUser):
+            print("Successfully saved custom fields of User to ParseServer: \(updatedUser)")
+        case .failure(let error):
+            print("Failed to update user: \(error)")
+        }
     }
 }
 
 //: Looking at the output of user from the previous login, it only has
 //: a pointer to the `gameScore` and `targetScore` fields. You can
 //: fetch using `include` to get the gameScore.
-User.current?.fetch(includeKeys: ["gameScore"]) { result in
-    switch result {
-    case .success:
-        print("Successfully fetched user with gameScore key: \(String(describing: User.current))")
-    case .failure(let error):
-        print("Error fetching User: \(error)")
+Task {
+    let currentUser = try? await User.current()
+    currentUser?.fetch(includeKeys: ["gameScore"]) { result in
+        switch result {
+        case .success:
+            print("Successfully fetched user with gameScore key: \(String(describing: User.current))")
+        case .failure(let error):
+            print("Error fetching User: \(error)")
+        }
     }
 }
 
 //: The `target` gameScore is still missing. You can get all pointer fields at
 //: once by including `["*"]`.
-User.current?.fetch(includeKeys: ["*"]) { result in
-    switch result {
-    case .success:
-        print("Successfully fetched user with all keys: \(String(describing: User.current))")
-    case .failure(let error):
-        print("Error fetching User: \(error)")
+Task {
+    let currentUser = try? await User.current()
+    currentUser?.fetch(includeKeys: ["*"]) { result in
+        switch result {
+        case .success:
+            print("Successfully fetched user with all keys: \(String(describing: User.current))")
+        case .failure(let error):
+            print("Error fetching User: \(error)")
+        }
     }
 }
 
-//: Logging out - synchronously.
-do {
-    try User.logout()
-    print("Successfully logged out")
-} catch let error {
-    print("Error logging out: \(error)")
+Task {
+    //: Logging out - async/await.
+    do {
+        try await User.logout()
+        print("Successfully logged out")
+    } catch let error {
+        print("Error logging out: \(error)")
+    }
 }
 
 //: To add additional information when signing up a user,
 //: you should create an instance of your user first.
-var newUser = User(username: "parse", password: "aPassword*", email: "parse@parse.com")
+var newUser = User(username: "parse", password: "aPassword123*", email: "parse@parse.com")
 //: Add any other additional information.
 newUser.customKey = "mind"
 newUser.signup { result in
@@ -208,65 +224,90 @@ newUser.signup { result in
     switch result {
     case .success(let user):
 
-        guard let currentUser = User.current else {
-            assertionFailure("Error: current user not stored locally")
-            return
+        Task {
+            do {
+                let currentUser = try await User.current()
+                assert(currentUser.hasSameObjectId(as: user))
+                print("Successfully signed up as user: \(user)")
+            } catch {
+                assertionFailure("Error: current user not stored locally")
+            }
         }
-        assert(currentUser.hasSameObjectId(as: user))
-        print("Successfully signed up as user: \(user)")
 
     case .failure(let error):
         print("Error logging in: \(error)")
     }
 }
 
-//: Logging out - synchronously.
-do {
-    try User.logout()
-    print("Successfully logged out")
-} catch let error {
-    print("Error logging out: \(error)")
+Task {
+    //: Logging out - async/await.
+    do {
+        try await User.logout()
+        print("Successfully logged out")
+    } catch let error {
+        print("Error logging out: \(error)")
+    }
 }
 
-//: Verification Email - synchronously.
-do {
-    try User.verificationEmail(email: "hello@parse.org")
-    print("Successfully requested verification email be sent")
-} catch let error {
-    print("Error requesting verification email be sent: \(error)")
+Task {
+    //: Verification Email - async/await.
+    do {
+        try await User.verificationEmail(email: "hello@parse.org")
+        print("Successfully requested verification email be sent")
+    } catch let error {
+        print("Error requesting verification email be sent: \(error)")
+    }
 }
 
-//: Password Reset Request - synchronously.
-do {
-    try User.passwordReset(email: "hello@parse.org")
-    print("Successfully requested password reset")
-} catch let error {
-    print("Error requesting password reset: \(error)")
+Task {
+    //: Password Reset Request - async/await.
+    do {
+        try await User.passwordReset(email: "hello@parse.org")
+        print("Successfully requested password reset")
+    } catch let error {
+        print("Error requesting password reset: \(error)")
+    }
 }
 
 //: Logging in anonymously.
 User.anonymous.login { result in
     switch result {
     case .success:
-        print("Successfully logged in \(String(describing: User.current))")
-        print("Session token: \(String(describing: User.current?.sessionToken))")
+        Task {
+            do {
+                let currentUser = try await User.current()
+                print("Successfully logged in \(currentUser)")
+                let sessionToken = try await User.sessionToken()
+                print("Session token: \(sessionToken))")
+            } catch {
+                assertionFailure("Error: \(error)")
+            }
+        }
     case .failure(let error):
         print("Error logging in: \(error)")
     }
 }
 
-//: Convert the anonymous user to a real new user.
-var currentUser2 = User.current
-currentUser2?.username = "bye"
-currentUser2?.password = "HelloMePass123^"
-currentUser2?.signup { result in
-    switch result {
-
-    case .success(let user):
-        print("Parse signup successful: \(user)")
-        print("Session token: \(String(describing: User.current?.sessionToken))")
-    case .failure(let error):
-        print("Error logging in: \(error)")
+Task {
+    //: Convert the anonymous user to a real new user.
+    var currentUser2 = try await User.current()
+    currentUser2.username = "bye"
+    currentUser2.password = "HelloMePass123^"
+    currentUser2.signup { result in
+        switch result {
+        case .success(let user):
+            print("Parse signup successful: \(user)")
+            Task {
+                do {
+                    let sessionToken = try await User.sessionToken()
+                    print("Session token: \(sessionToken))")
+                } catch {
+                    assertionFailure("Error: \(error)")
+                }
+            }
+        case .failure(let error):
+            print("Error converting user: \(error)")
+        }
     }
 }
 

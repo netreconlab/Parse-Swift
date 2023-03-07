@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 7/1/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -18,65 +18,64 @@ public struct ParseVersion: ParseTypeable, Hashable {
     var prereleaseName: PrereleaseName?
     var prereleaseVersion: Int?
 
-    /// Current version of the SDK.
-    public internal(set) static var current: Self? {
-        get {
-            let synchronizationQueue = createSynchronizationQueue("ParseVersion.getCurrent")
-            return synchronizationQueue.sync(execute: { () -> Self? in
-                guard let versionInMemory: Self =
-                        try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
-                    // Handle Memory migrations from String to ParseVersion
-                    guard let versionStringFromMemoryToMigrate: String =
-                            try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
-                            // swiftlint:disable:next line_length
-                            let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
-                        #if !os(Linux) && !os(Android) && !os(Windows)
-                        guard let versionFromKeychain: Self =
-                                try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
-                            // Handle Keychain migrations from String to ParseVersion
-                            guard let versionStringFromKeychainToMigrate: String =
-                                    try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
-                                    // swiftlint:disable:next line_length
-                                    let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
-                                guard let versionStringFromOldKeychainToMigrate: String =
-                                        try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
-                                      // swiftlint:disable:next line_length
-                                      let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
-                                    return nil
-                                }
-                                try? ParseStorage.shared.set(versionFromOldKeychainToMigrate,
-                                                             for: ParseStorage.Keys.currentVersion)
-                                try? KeychainStore.shared.set(versionFromOldKeychainToMigrate,
-                                                              for: ParseStorage.Keys.currentVersion)
-                                return versionFromOldKeychainToMigrate
-                            }
-                            try? ParseStorage.shared.set(versionFromKeychainToMigrate,
-                                                         for: ParseStorage.Keys.currentVersion)
-                            try? KeychainStore.shared.set(versionFromKeychainToMigrate,
-                                                          for: ParseStorage.Keys.currentVersion)
-                            return versionFromKeychainToMigrate
-                        }
-                        return versionFromKeychain
-                        #else
-                        return nil
-                        #endif
-                    }
-                    try? ParseStorage.shared.set(versionFromMemoryToMigrate,
-                                                 for: ParseStorage.Keys.currentVersion)
-                    return versionFromMemoryToMigrate
-                }
-                return versionInMemory
-            })
-        }
-        set {
-            let synchronizationQueue = createSynchronizationQueue("ParseVersion.setCurrent")
-            synchronizationQueue.sync {
-                try? ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+    /**
+     Current version of the SDK.
+     
+     - returns: Returns the current `ParseVersion`. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
+     */
+    public static func current() async throws -> Self {
+        guard let versionInMemory: Self =
+                try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+            // Handle Memory migrations from String to ParseVersion
+            guard let versionStringFromMemoryToMigrate: String =
+                    try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                    let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                try? KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+                guard let versionFromKeychain: Self =
+                        try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
+                    // Handle Keychain migrations from String to ParseVersion
+                    guard let versionStringFromKeychainToMigrate: String =
+                            try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
+                            // swiftlint:disable:next line_length
+                            let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
+                        guard let versionStringFromOldKeychainToMigrate: String =
+                                try? await KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
+                              // swiftlint:disable:next line_length
+                              let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
+                            throw ParseError(code: .otherCause,
+                                             message: "There is no current version")
+                        }
+                        try? await ParseStorage.shared.set(versionFromOldKeychainToMigrate,
+                                                           for: ParseStorage.Keys.currentVersion)
+                        try? await KeychainStore.shared.set(versionFromOldKeychainToMigrate,
+                                                            for: ParseStorage.Keys.currentVersion)
+                        return versionFromOldKeychainToMigrate
+                    }
+                    try? await ParseStorage.shared.set(versionFromKeychainToMigrate,
+                                                       for: ParseStorage.Keys.currentVersion)
+                    try? await KeychainStore.shared.set(versionFromKeychainToMigrate,
+                                                        for: ParseStorage.Keys.currentVersion)
+                    return versionFromKeychainToMigrate
+                }
+                return versionFromKeychain
+                #else
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current version")
                 #endif
             }
+            try? await ParseStorage.shared.set(versionFromMemoryToMigrate,
+                                               for: ParseStorage.Keys.currentVersion)
+            return versionFromMemoryToMigrate
         }
+        return versionInMemory
+    }
+
+    internal static func setCurrent(_ newValue: Self?) async throws {
+        try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        try? await KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentVersion)
+        #endif
     }
 
     enum PrereleaseName: String, Codable, Comparable {
@@ -114,10 +113,10 @@ public struct ParseVersion: ParseTypeable, Hashable {
         self.prereleaseVersion = prereleaseVersion
     }
 
-    static func deleteCurrentContainerFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
+    static func deleteCurrentContainerFromKeychain() async {
+        try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
+        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
         #endif
     }
 

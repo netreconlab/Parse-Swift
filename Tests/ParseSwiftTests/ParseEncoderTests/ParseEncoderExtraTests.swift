@@ -3,7 +3,7 @@
 //  ParseSwiftTests
 //
 //  Created by Pranjal Satija on 8/7/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import XCTest

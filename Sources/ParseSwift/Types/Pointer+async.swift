@@ -3,10 +3,9 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 11/1/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 // MARK: Async/Await
@@ -30,5 +29,3 @@ public extension Pointer {
         }
     }
 }
-
-#endif

@@ -3,18 +3,18 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 9/27/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 public protocol Deletable: Codable {
     associatedtype DeletingType
 
-    func delete(options: API.Options) throws -> DeletingType
-    func delete() throws -> DeletingType
+    func delete(options: API.Options) async throws -> DeletingType
+    func delete() async throws -> DeletingType
 }
 
 extension Deletable {
-    public func delete() throws -> DeletingType {
-        try delete(options: [])
+    public func delete() async throws -> DeletingType {
+        try await delete(options: [])
     }
 }

@@ -3,10 +3,9 @@
 //  ParseUser+async
 //
 //  Created by Corey Baker on 8/6/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseUser {
@@ -515,20 +514,20 @@ internal extension ParseUser {
             let command: API.Command<Self, Self>!
             switch method {
             case .save:
-                command = try self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = self.createCommand()
+                command = await self.createCommand()
             case .replace:
-                command = try self.replaceCommand()
+                command = try await self.replaceCommand()
             case .update:
-                command = try self.updateCommand()
+                command = try await self.updateCommand()
             }
             let saved = try await command
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              childObjects: savedChildObjects,
-                              childFiles: savedChildFiles)
-            try? Self.updateKeychainIfNeeded([saved])
+                         callbackQueue: callbackQueue,
+                         childObjects: savedChildObjects,
+                         childFiles: savedChildFiles)
+            try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
             let defaultError = ParseError(code: .otherCause,
@@ -574,14 +573,14 @@ internal extension Sequence where Element: ParseUser {
                 switch method {
                 case .save:
                     commands.append(
-                        try object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                        try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(object.createCommand())
+                    commands.append(await object.createCommand())
                 case .replace:
-                    commands.append(try object.replaceCommand())
+                    commands.append(try await object.replaceCommand())
                 case .update:
-                    commands.append(try object.updateCommand())
+                    commands.append(try await object.updateCommand())
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -600,13 +599,13 @@ internal extension Sequence where Element: ParseUser {
                 let saved = try await API.Command<Self.Element, Self.Element>
                         .batch(commands: batch, transaction: transaction)
                         .execute(options: options,
-                                      batching: true,
-                                      callbackQueue: callbackQueue,
-                                      childObjects: childObjects,
-                                      childFiles: childFiles)
+                                 batching: true,
+                                 callbackQueue: callbackQueue,
+                                 childObjects: childObjects,
+                                 childFiles: childFiles)
                 returnBatch.append(contentsOf: saved)
             }
-            try? Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
+            try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
             let defaultError = ParseError(code: .otherCause,
@@ -616,4 +615,3 @@ internal extension Sequence where Element: ParseUser {
         }
     }
 }
-#endif

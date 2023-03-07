@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 3/20/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -117,27 +117,27 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         var customKey: String?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  requiringCustomObjectIds: true,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        requiringCustomObjectIds: true,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
 
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
@@ -151,13 +151,13 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation2], timeout: 20.0)
     }
 
-    func testSaveCommand() throws {
+    func testSaveCommand() async throws {
         let objectId = "yarr"
         var score = GameScore(points: 10)
         score.objectId = objectId
         let className = score.className
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -177,7 +177,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSaveUpdateCommand() throws {
+    func testSaveUpdateCommand() async throws {
         var score = GameScore(points: 10)
         let className = score.className
         let objectId = "yarr"
@@ -185,7 +185,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         score.createdAt = Date()
         score.updatedAt = score.createdAt
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -205,14 +205,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSaveAllCommand() throws {
+    func testSaveAllCommand() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         var score2 = GameScore(points: 20)
         score2.objectId = "yolo"
 
         let objects = [score, score2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<GameScore, GameScore>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\",\"player\":\"Jen\",\"points\":10},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"},{\"body\":{\"objectId\":\"yolo\",\"player\":\"Jen\",\"points\":20},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}],\"transaction\":false}"
@@ -226,7 +230,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUpdateAllCommand() throws {
+    func testUpdateAllCommand() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.createdAt = Date()
@@ -235,7 +239,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         score2.createdAt = Date()
 
         let objects = [score, score2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<GameScore, GameScore>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\",\"player\":\"Jen\",\"points\":10},\"method\":\"PUT\",\"path\":\"\\/classes\\/GameScore\\/yarr\"},{\"body\":{\"objectId\":\"yolo\",\"player\":\"Jen\",\"points\":20},\"method\":\"PUT\",\"path\":\"\\/classes\\/GameScore\\/yolo\"}],\"transaction\":false}"
@@ -249,12 +257,12 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUserSaveCommand() throws {
+    func testUserSaveCommand() async throws {
         let objectId = "yarr"
         var user = User()
         user.objectId = objectId
 
-        let command = try user.saveCommand()
+        let command = try await user.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -274,13 +282,13 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUserUpdateCommand() throws {
+    func testUserUpdateCommand() async throws {
         let objectId = "yarr"
         var user = User()
         user.objectId = objectId
         user.createdAt = Date()
 
-        let command = try user.saveCommand()
+        let command = try await user.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -300,14 +308,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUserSaveAllCommand() throws {
+    func testUserSaveAllCommand() async throws {
         var user = User()
         user.objectId = "yarr"
         var user2 = User()
         user2.objectId = "yolo"
 
         let objects = [user, user2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<User, User>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\"},\"method\":\"POST\",\"path\":\"\\/users\"},{\"body\":{\"objectId\":\"yolo\"},\"method\":\"POST\",\"path\":\"\\/users\"}],\"transaction\":false}"
@@ -321,7 +333,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUserUpdateAllCommand() throws {
+    func testUserUpdateAllCommand() async throws {
         var user = User()
         user.objectId = "yarr"
         user.createdAt = Date()
@@ -330,7 +342,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         user2.createdAt = Date()
 
         let objects = [user, user2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<User, User>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\"},\"method\":\"PUT\",\"path\":\"\\/users\\/yarr\"},{\"body\":{\"objectId\":\"yolo\"},\"method\":\"PUT\",\"path\":\"\\/users\\/yolo\"}],\"transaction\":false}"
@@ -344,12 +360,12 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testInstallationSaveCommand() throws {
+    func testInstallationSaveCommand() async throws {
         let objectId = "yarr"
         var installation = Installation()
         installation.objectId = objectId
 
-        let command = try installation.saveCommand()
+        let command = try await installation.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/installations")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -369,13 +385,13 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testInstallationUpdateCommand() throws {
+    func testInstallationUpdateCommand() async throws {
         let objectId = "yarr"
         var installation = Installation()
         installation.objectId = objectId
         installation.createdAt = Date()
 
-        let command = try installation.saveCommand()
+        let command = try await installation.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)
@@ -395,14 +411,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testInstallationSaveAllCommand() throws {
+    func testInstallationSaveAllCommand() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
         var installation2 = Installation()
         installation2.objectId = "yolo"
 
         let objects = [installation, installation2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<Installation, Installation>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\"},\"method\":\"POST\",\"path\":\"\\/installations\"},{\"body\":{\"objectId\":\"yolo\"},\"method\":\"POST\",\"path\":\"\\/installations\"}],\"transaction\":false}"
@@ -416,7 +436,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testInstallationUpdateAllCommand() throws {
+    func testInstallationUpdateAllCommand() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.createdAt = Date()
@@ -425,7 +445,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         installation2.createdAt = Date()
 
         let objects = [installation, installation2]
-        let commands = try objects.map { try $0.saveCommand() }
+        var commands = [API.Command<Installation, Installation>]()
+        for object in objects {
+            let command = try await object.saveCommand()
+            commands.append(command)
+        }
         let body = BatchCommand(requests: commands, transaction: false)
         // swiftlint:disable:next line_length
         let expected = "{\"requests\":[{\"body\":{\"objectId\":\"yarr\"},\"method\":\"PUT\",\"path\":\"\\/installations\\/yarr\"},{\"body\":{\"objectId\":\"yolo\"},\"method\":\"PUT\",\"path\":\"\\/installations\\/yolo\"}],\"transaction\":false}"
@@ -439,121 +463,181 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         XCTAssertEqual(decoded, expected)
     }
 
-    func testSaveCommandNoObjectId() throws {
+    func testSaveCommandNoObjectId() async throws {
         let score = GameScore(points: 10)
-        XCTAssertThrowsError(try score.saveCommand())
+        do {
+            _ = try await score.saveCommand()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.missingObjectId]))
+        }
     }
 
-    func testSaveCommandNoObjectIdIgnoreConfig() throws {
+    func testSaveCommandNoObjectIdIgnoreConfig() async throws {
         let score = GameScore(points: 10)
-        _ = try score.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await score.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testUpdateCommandNoObjectId() throws {
+    func testUpdateCommandNoObjectId() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
-        XCTAssertThrowsError(try score.saveCommand())
+        do {
+            _ = try await score.saveCommand()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.missingObjectId]))
+        }
     }
 
-    func testUpdateCommandNoObjectIdIgnoreConfig() throws {
+    func testUpdateCommandNoObjectIdIgnoreConfig() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
-        _ = try score.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await score.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testSaveAllNoObjectIdCommand() throws {
+    func testSaveAllNoObjectIdCommand() async throws {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
         let objects = [score, score2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUpdateAllNoObjectIdCommand() throws {
+    func testUpdateAllNoObjectIdCommand() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
         var score2 = GameScore(points: 20)
         score2.createdAt = Date()
         let objects = [score, score2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserSaveCommandNoObjectId() throws {
+    func testUserSaveCommandNoObjectId() async throws {
         let user = User()
-        XCTAssertThrowsError(try user.saveCommand())
+        do {
+            _ = try await user.saveCommand()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserSaveCommandNoObjectIdIgnoreConfig() throws {
+    func testUserSaveCommandNoObjectIdIgnoreConfig() async throws {
         let user = User()
-        _ = try user.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await user.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testUserUpdateCommandNoObjectId() throws {
+    func testUserUpdateCommandNoObjectId() async throws {
         var user = User()
         user.createdAt = Date()
-        XCTAssertThrowsError(try user.saveCommand())
+        do {
+            _ = try await user.saveCommand()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserUpdateCommandNoObjectIdIgnoreConfig() throws {
+    func testUserUpdateCommandNoObjectIdIgnoreConfig() async throws {
         var user = User()
         user.createdAt = Date()
-        _ = try user.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await user.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testUserSaveAllNoObjectIdCommand() throws {
+    func testUserSaveAllNoObjectIdCommand() async throws {
         let user = User()
         let user2 = User()
         let objects = [user, user2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserUpdateAllNoObjectIdCommand() throws {
+    func testUserUpdateAllNoObjectIdCommand() async throws {
         var user = GameScore(points: 10)
         user.createdAt = Date()
         var user2 = GameScore(points: 20)
         user2.createdAt = Date()
         let objects = [user, user2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationSaveCommandNoObjectId() throws {
+    func testInstallationSaveCommandNoObjectId() async throws {
         let installation = Installation()
-        XCTAssertThrowsError(try installation.saveCommand())
+        do {
+            _ = try await installation.saveCommand()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationSaveCommandNoObjectIdIgnoreConfig() throws {
+    func testInstallationSaveCommandNoObjectIdIgnoreConfig() async throws {
         let installation = Installation()
-        _ = try installation.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await installation.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testInstallationUpdateCommandNoObjectId() throws {
+    func testInstallationUpdateCommandNoObjectId() async throws {
         var installation = Installation()
         installation.createdAt = Date()
-        XCTAssertThrowsError(try installation.saveCommand())
+        do {
+            _ = try await installation.saveCommand()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationUpdateCommandNoObjectIdIgnoreConfig() throws {
+    func testInstallationUpdateCommandNoObjectIdIgnoreConfig() async throws {
         var installation = Installation()
         installation.createdAt = Date()
-        _ = try installation.saveCommand(ignoringCustomObjectIdConfig: true)
+        _ = try await installation.saveCommand(ignoringCustomObjectIdConfig: true)
     }
 
-    func testInstallationSaveAllNoObjectIdCommand() throws {
+    func testInstallationSaveAllNoObjectIdCommand() async throws {
         let installation = Installation()
         let installation2 = Installation()
         let objects = [installation, installation2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationUpdateAllNoObjectIdCommand() throws {
+    func testInstallationUpdateAllNoObjectIdCommand() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
         var score2 = GameScore(points: 20)
         score2.createdAt = Date()
         let objects = [score, score2]
-        XCTAssertThrowsError(try objects.map { try $0.saveCommand() })
+        do {
+            try await objects.saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testSave() {
+    func testSave() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
 
@@ -574,19 +658,24 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testSaveNoObjectId() throws {
+    func testSaveNoObjectId() async throws {
         let score = GameScore(points: 10)
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testSaveNoObjectIdIgnoreConfig() {
+    func testSaveNoObjectIdIgnoreConfig() async throws {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -607,14 +696,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await score.save(ignoringCustomObjectIdConfig: true)
             XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testUpdate() {
+    func testUpdate() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -638,20 +727,25 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save()
+            let saved = try await score.save()
             XCTAssertTrue(saved.hasSameObjectId(as: scoreOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testUpdateNoObjectId() throws {
+    func testUpdateNoObjectId() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUpdateNoObjectIdIgnoreConfig() {
+    func testUpdateNoObjectIdIgnoreConfig() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         score.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -675,7 +769,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try score.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await score.save(ignoringCustomObjectIdConfig: true)
             XCTAssertTrue(saved.hasSameObjectId(as: scoreOnServer))
         } catch {
             XCTFail(error.localizedDescription)
@@ -744,9 +838,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    func testSaveNoObjectIdAsyncMainQueue() throws {
+    func testSaveNoObjectIdAsyncMainQueue() async throws {
         let score = GameScore(points: 10)
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         score.save { result in
@@ -851,10 +950,15 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    func testUpdateNoObjectIdAsyncMainQueue() throws {
+    func testUpdateNoObjectIdAsyncMainQueue() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         score.save { result in
@@ -894,7 +998,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                          callbackQueue: .main)
     }
 
-    func testSaveAll() {
+    func testSaveAll() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         var score2 = GameScore(points: 20)
@@ -929,7 +1033,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [score, score2].saveAll()
+            let saved = try await [score, score2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -953,13 +1057,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testSaveAllNoObjectId() throws {
+    func testSaveAllNoObjectId() async throws {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
-        XCTAssertThrowsError(try [score, score2].saveAll())
+        do {
+            try await [score, score2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testSaveAllNoObjectIdIgnoreConfig() {
+    func testSaveAllNoObjectIdIgnoreConfig() async throws {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -994,7 +1103,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [score, score2].saveAll(ignoringCustomObjectIdConfig: true)
+            let saved = try await [score, score2].saveAll(ignoringCustomObjectIdConfig: true)
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -1018,7 +1127,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testSaveAllNoObjectIdAsync() throws {
+    func testSaveAllNoObjectIdAsync() async throws {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -1034,7 +1143,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateAll() {
+    func testUpdateAll() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.createdAt = Date()
@@ -1071,7 +1180,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [score, score2].saveAll()
+            let saved = try await [score, score2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -1095,15 +1204,20 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testUpdateAllNoObjectId() throws {
+    func testUpdateAllNoObjectId() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
         var score2 = GameScore(points: 20)
         score2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try [score, score2].saveAll())
+        do {
+            try await [score, score2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUpdateAllNoObjectIdAsync() throws {
+    func testUpdateAllNoObjectIdAsync() async throws {
         var score = GameScore(points: 10)
         score.createdAt = Date()
         var score2 = GameScore(points: 20)
@@ -1121,7 +1235,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserSave() {
+    func testUserSave() async throws {
         var user = User()
         user.objectId = "yarr"
         user.ACL = nil
@@ -1143,19 +1257,24 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try user.save()
+            let saved = try await user.save()
             XCTAssert(saved.hasSameObjectId(as: userOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testUserSaveNoObjectId() throws {
+    func testUserSaveNoObjectId() async throws {
         let score = GameScore(points: 10)
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserSaveNoObjectIdIgnoreConfig() {
+    func testUserSaveNoObjectIdIgnoreConfig() async throws {
         var user = User()
         user.ACL = nil
 
@@ -1177,14 +1296,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try user.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await user.save(ignoringCustomObjectIdConfig: true)
             XCTAssert(saved.hasSameObjectId(as: userOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testUserUpdate() {
+    func testUserUpdate() async throws {
         var user = User()
         user.objectId = "yarr"
         user.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1208,20 +1327,25 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try user.save()
+            let saved = try await user.save()
             XCTAssertTrue(saved.hasSameObjectId(as: userOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testUserUpdateNoObjectId() throws {
+    func testUserUpdateNoObjectId() async throws {
         var user = User()
         user.createdAt = Date()
-        XCTAssertThrowsError(try user.save())
+        do {
+            _ = try await user.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserUpdateNoObjectIdIgnoreConfig() {
+    func testUserUpdateNoObjectIdIgnoreConfig() async throws {
         var user = User()
         user.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         user.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1245,7 +1369,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try user.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await user.save(ignoringCustomObjectIdConfig: true)
             XCTAssertTrue(saved.hasSameObjectId(as: userOnServer))
         } catch {
             XCTFail(error.localizedDescription)
@@ -1296,9 +1420,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         self.saveUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
     }
 
-    func testUserSaveNoObjectIdAsyncMainQueue() throws {
+    func testUserSaveNoObjectIdAsyncMainQueue() async throws {
         let user = User()
-        XCTAssertThrowsError(try user.save())
+        do {
+            _ = try await user.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         user.save { result in
@@ -1381,10 +1510,15 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         self.updateUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
     }
 
-    func testUserUpdateNoObjectIdAsyncMainQueue() throws {
+    func testUserUpdateNoObjectIdAsyncMainQueue() async throws {
         var user = User()
         user.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try user.save())
+        do {
+            _ = try await user.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         user.save { result in
@@ -1398,7 +1532,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserSaveAll() {
+    func testUserSaveAll() async throws {
         var user = User()
         user.objectId = "yarr"
 
@@ -1434,7 +1568,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [user, user2].saveAll()
+            let saved = try await [user, user2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -1458,13 +1592,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testUserSaveAllNoObjectId() throws {
+    func testUserSaveAllNoObjectId() async throws {
         let user = User()
         let user2 = User()
-        XCTAssertThrowsError(try [user, user2].saveAll())
+        do {
+            try await [user, user2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserSaveAllNoObjectIdAsync() throws {
+    func testUserSaveAllNoObjectIdAsync() async throws {
         let user = User()
         let user2 = User()
 
@@ -1480,7 +1619,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testUserUpdateAll() {
+    func testUserUpdateAll() async throws {
         var user = User()
         user.objectId = "yarr"
         user.createdAt = Date()
@@ -1517,7 +1656,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [user, user2].saveAll()
+            let saved = try await [user, user2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -1541,15 +1680,20 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testUserUpdateAllNoObjectId() throws {
+    func testUserUpdateAllNoObjectId() async throws {
         var user = User()
         user.createdAt = Date()
         var user2 = User()
         user2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try [user, user2].saveAll())
+        do {
+            try await [user, user2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testUserUpdateAllNoObjectIdIgnoreConfig() {
+    func testUserUpdateAllNoObjectIdIgnoreConfig() async throws {
         var user = User()
         user.createdAt = Date()
         var user2 = User()
@@ -1586,7 +1730,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [user, user2].saveAll(ignoringCustomObjectIdConfig: true)
+            let saved = try await [user, user2].saveAll(ignoringCustomObjectIdConfig: true)
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -1610,7 +1754,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testUserUpdateAllNoObjectIdAsync() throws {
+    func testUserUpdateAllNoObjectIdAsync() async throws {
         var user = User()
         user.createdAt = Date()
         var user2 = User()
@@ -1628,7 +1772,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationSave() {
+    func testInstallationSave() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.ACL = nil
@@ -1650,19 +1794,24 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try installation.save()
+            let saved = try await installation.save()
             XCTAssert(saved.hasSameObjectId(as: installationOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testInstallationSaveNoObjectId() throws {
+    func testInstallationSaveNoObjectId() async throws {
         let score = GameScore(points: 10)
-        XCTAssertThrowsError(try score.save())
+        do {
+            _ = try await score.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationSaveNoObjectIdIgnoreConfig() {
+    func testInstallationSaveNoObjectIdIgnoreConfig() async throws {
         var installation = Installation()
         installation.ACL = nil
 
@@ -1684,14 +1833,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try installation.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await installation.save(ignoringCustomObjectIdConfig: true)
             XCTAssert(saved.hasSameObjectId(as: installationOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testInstallationUpdate() {
+    func testInstallationUpdate() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1715,20 +1864,25 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try installation.save()
+            let saved = try await installation.save()
             XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
         } catch {
             XCTFail(error.localizedDescription)
         }
     }
 
-    func testInstallationUpdateNoObjectId() throws {
+    func testInstallationUpdateNoObjectId() async throws {
         var installation = Installation()
         installation.createdAt = Date()
-        XCTAssertThrowsError(try installation.save())
+        do {
+            _ = try await installation.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationUpdateNoObjectIdIgnoreConfig() {
+    func testInstallationUpdateNoObjectIdIgnoreConfig() async throws {
         var installation = Installation()
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1752,7 +1906,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let saved = try installation.save(ignoringCustomObjectIdConfig: true)
+            let saved = try await installation.save(ignoringCustomObjectIdConfig: true)
             XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
         } catch {
             XCTFail(error.localizedDescription)
@@ -1822,9 +1976,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                                    callbackQueue: .main)
     }
 
-    func testInstallationSaveNoObjectIdAsyncMainQueue() throws {
+    func testInstallationSaveNoObjectIdAsyncMainQueue() async throws {
         let installation = Installation()
-        XCTAssertThrowsError(try installation.save())
+        do {
+            _ = try await installation.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         installation.save { result in
@@ -1912,10 +2071,15 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                                      callbackQueue: .main)
     }
 
-    func testInstallationUpdateNoObjectIdAsyncMainQueue() throws {
+    func testInstallationUpdateNoObjectIdAsyncMainQueue() async throws {
         var installation = Installation()
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try installation.save())
+        do {
+            _ = try await installation.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
 
         let expectation1 = XCTestExpectation(description: "Save object2")
         installation.save { result in
@@ -1956,7 +2120,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                                      callbackQueue: .main)
     }
 
-    func testInstallationSaveAll() { // swiftlint:disable:this function_body_length
+    func testInstallationSaveAll() async throws { // swiftlint:disable:this function_body_length
         var installation = Installation()
         installation.objectId = "yarr"
 
@@ -1992,7 +2156,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [installation, installation2].saveAll()
+            let saved = try await [installation, installation2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -2024,13 +2188,18 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testInstallationSaveAllNoObjectId() throws {
+    func testInstallationSaveAllNoObjectId() async throws {
         let installation = Installation()
         let installation2 = Installation()
-        XCTAssertThrowsError(try [installation, installation2].saveAll())
+        do {
+            try await [installation, installation2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationSaveAllIgnoreConfig() { // swiftlint:disable:this function_body_length
+    func testInstallationSaveAllIgnoreConfig() async throws { // swiftlint:disable:this function_body_length
         let installation = Installation()
 
         let installation2 = Installation()
@@ -2066,7 +2235,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [installation, installation2].saveAll(ignoringCustomObjectIdConfig: true)
+            let saved = try await [installation, installation2].saveAll(ignoringCustomObjectIdConfig: true)
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -2098,7 +2267,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testInstallationSaveAllNoObjectIdAsync() throws {
+    func testInstallationSaveAllNoObjectIdAsync() async throws {
         let installation = Installation()
         let installation2 = Installation()
 
@@ -2114,7 +2283,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationUpdateAll() {
+    func testInstallationUpdateAll() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.createdAt = Date()
@@ -2151,7 +2320,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [installation, installation2].saveAll()
+            let saved = try await [installation, installation2].saveAll()
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -2175,15 +2344,20 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testInstallationUpdateAllNoObjectId() throws {
+    func testInstallationUpdateAllNoObjectId() async throws {
         var installation = Installation()
         installation.createdAt = Date()
         var installation2 = Installation()
         installation2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        XCTAssertThrowsError(try [installation, installation2].saveAll())
+        do {
+            try await [installation, installation2].saveAll()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn(.missingObjectId))
+        }
     }
 
-    func testInstallationUpdateAllNoObjectIdIgnoreConfig() {
+    func testInstallationUpdateAllNoObjectIdIgnoreConfig() async throws {
         var installation = Installation()
         installation.createdAt = Date()
         var installation2 = Installation()
@@ -2220,7 +2394,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
         do {
 
-            let saved = try [installation, installation2].saveAll(ignoringCustomObjectIdConfig: true)
+            let saved = try await [installation, installation2].saveAll(ignoringCustomObjectIdConfig: true)
 
             XCTAssertEqual(saved.count, 2)
             switch saved[0] {
@@ -2244,7 +2418,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testInstallationUpdateAllNoObjectIdAsync() throws {
+    func testInstallationUpdateAllNoObjectIdAsync() async throws {
         var installation = Installation()
         installation.createdAt = Date()
         var installation2 = Installation()
@@ -2262,7 +2436,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testFetch() {
+    func testFetch() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -2285,7 +2459,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let fetched = try score.fetch(options: [])
+            let fetched = try await score.fetch(options: [])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {
@@ -2305,7 +2479,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
-    func testFetchUser() {
+    func testFetchUser() async throws {
         var user = User()
         let objectId = "yarr"
         user.objectId = objectId
@@ -2328,7 +2502,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         do {
-            let fetched = try user.fetch()
+            let fetched = try await user.fetch()
             XCTAssert(fetched.hasSameObjectId(as: userOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
                 let fetchedUpdatedAt = fetched.updatedAt else {

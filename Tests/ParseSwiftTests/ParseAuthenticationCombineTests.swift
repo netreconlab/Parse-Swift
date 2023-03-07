@@ -3,7 +3,7 @@
 //  ParseAuthenticationCombineTests
 //
 //  Created by Corey Baker on 8/21/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -105,7 +105,6 @@ class ParseAuthenticationCombineTests: XCTestCase {
         }
         #endif
 
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         func login(authData: [String: String],
                    options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
@@ -115,35 +114,51 @@ class ParseAuthenticationCombineTests: XCTestCase {
                   options: API.Options) async throws -> AuthenticatedUser {
             throw ParseError(code: .otherCause, message: "Not implemented")
         }
-        #endif
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
 
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func testLogin() throws {
-        var subscriptions = Set<AnyCancellable>()
+    @MainActor
+    func loginNormally() async throws -> User {
+        let loginResponse = LoginSignupResponse()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+        return try await User.login(username: "parse", password: "user")
+    }
+
+    // swiftlint:disable:next function_body_length
+    func testLogin() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -176,41 +191,41 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
             XCTAssertEqual(user.password, "world")
             XCTAssertEqual(user.authData, serverResponse.authData)
-        })
-        publisher.store(in: &subscriptions)
-
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func loginNormally() throws -> User {
-        let loginResponse = LoginSignupResponse()
-
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
             }
-        }
-        return try User.login(username: "parse", password: "user")
+        })
+        publisher.store(in: &current)
+
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLink() throws {
-        var subscriptions = Set<AnyCancellable>()
+    func testLink() async throws {
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
+        let expectation2 = XCTestExpectation(description: "Update")
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let type = TestAuth<User>.__type
@@ -237,19 +252,32 @@ class ParseAuthenticationCombineTests: XCTestCase {
 
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        expectation2.fulfill()
+                    }
                 }
                 expectation1.fulfill()
 
         }, receiveValue: { user in
 
-            XCTAssertEqual(user, User.current)
             XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
             XCTAssertEqual(user.username, "hello10")
             XCTAssertNil(user.password)
+            Task {
+                do {
+                    let currentUser = try await User.current()
+                    XCTAssertEqual(user, currentUser)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
+            }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

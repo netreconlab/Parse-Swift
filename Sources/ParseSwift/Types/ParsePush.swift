@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/4/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Foundation
 /**
  Send and check the status of push notificaitons.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
@@ -78,7 +78,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      - parameter pushTime: When to send the notification.  Defaults to **nil**.
      - parameter expirationDate: The date to expire the notification. Defaults to **nil**.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - warning: `expirationTime` and `expirationInterval` cannot be set at the same time.
     */
@@ -96,7 +96,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      - parameter pushTime: When to send the notification.  Defaults to **nil**.
      - parameter expirationInterval: How many seconds to expire the notification after now.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - warning: `expirationTime` and `expirationInterval` cannot be set at the same time.
     */
@@ -116,7 +116,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      - parameter pushTime: When to send the notification.  Defaults to **nil**.
      - parameter expirationDate: The date to expire the notification. Defaults to **nil**.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - warning: `expirationTime` and `expirationInterval` cannot be set at the same time.
     */
@@ -138,7 +138,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      - parameter pushTime: When to send the notification.  Defaults to **nil**.
      - parameter expirationInterval: How many seconds to expire the notification after now.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - warning: `expirationTime` and `expirationInterval` cannot be set at the same time.
     */
@@ -166,7 +166,7 @@ extension ParsePush {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - warning: expirationTime and expirationInterval cannot be set at the same time.
     */
@@ -185,13 +185,15 @@ extension ParsePush {
             completion(.failure(error))
             return
         }
-        var options = options
-        options.insert(.usePrimaryKey)
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        sendCommand()
-            .executeAsync(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await sendCommand()
+                .execute(options: options,
+                              callbackQueue: callbackQueue,
+                              completion: completion)
+        }
     }
 
     func sendCommand() -> API.NonParseBodyCommand<Self, String> {
@@ -230,7 +232,7 @@ public extension ParsePush {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func fetchStatus(_ statusId: String,

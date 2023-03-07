@@ -3,10 +3,9 @@
 //  ParseSwift
 //
 //  Created by Ulaş Sancak on 06/20/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseSpotify {
@@ -96,4 +95,3 @@ public extension ParseSpotify {
         }
     }
 }
-#endif

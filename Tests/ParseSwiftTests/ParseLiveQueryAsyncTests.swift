@@ -3,10 +3,10 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 9/28/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency) && !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -15,30 +15,30 @@ import XCTest
 @testable import ParseSwift
 
 class ParseLiveQueryAsyncTests: XCTestCase {
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  liveQueryMaxConnectionAttempts: 1,
-                                  testing: true,
-                                  testLiveQueryDontCloseSocket: true)
-        ParseLiveQuery.defaultClient = try ParseLiveQuery(isDefault: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        liveQueryMaxConnectionAttempts: 1,
+                                        testing: true,
+                                        testLiveQueryDontCloseSocket: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
-        URLSession.liveQuery.closeAll()
+        try await ParseStorage.shared.deleteAll()
+        await URLSession.liveQuery.closeAll()
+        ParseLiveQuery.defaultClient = nil
     }
 
     @MainActor
@@ -47,7 +47,7 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
         do {
             _ = try await client.open(isUserWantsToConnect: true)
@@ -63,13 +63,13 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.close()
+        await client.close()
 
         do {
             _ = try await client.sendPing()
             XCTFail("Should have produced error")
         } catch {
-            XCTAssertEqual(client.isSocketEstablished, false)
+            XCTAssertEqual(client.status, .socketNotEstablished)
             guard let urlError = error as? URLError else {
                 throw XCTSkip("Skip this test when error cannot be unwrapped")
             }
@@ -85,16 +85,14 @@ class ParseLiveQueryAsyncTests: XCTestCase {
             XCTFail("Should be able to get client")
             return
         }
-        client.isSocketEstablished = true // Socket needs to be true
-        client.isConnecting = true
-        client.isConnected = true
+        await client.setStatus(.connected)
         client.clientId = "yolo"
 
         do {
             _ = try await client.sendPing()
             XCTFail("Should have produced error")
         } catch {
-            XCTAssertEqual(client.isSocketEstablished, true)
+            XCTAssertEqual(client.status, .connected)
             XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
         }
     }

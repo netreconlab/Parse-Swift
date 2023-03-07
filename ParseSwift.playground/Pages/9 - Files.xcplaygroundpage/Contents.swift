@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create your own value typed `ParseObject`.
@@ -98,7 +100,7 @@ photo.image = profilePic
 score.otherPhoto = photo
 
 /*:
- Save asynchronously (preferred way) - Performs work on background
+ Save asynchronously with completion block - Performs work on background
  queue and returns to specified callbackQueue.
  If no callbackQueue is specified it returns to main queue.
 */
@@ -152,57 +154,59 @@ score.save { result in
 let sampleData = "Hello World".data(using: .utf8)!
 let helloFile = ParseFile(name: "hello.txt", data: sampleData)
 
-//: Define another GameScore.
-var score2 = GameScore(points: 105)
-score2.myData = helloFile
+Task {
+    //: Define another GameScore.
+    var score2 = GameScore(points: 105)
+    score2.myData = helloFile
 
-//: Save synchronously (not preferred - all operations on current queue).
-do {
-    let savedScore = try score2.save()
-    print("Your hello file has been successfully saved")
+    //: Save async/await.
+    do {
+        let savedScore = try await score2.save()
+        print("Your hello file has been successfully saved")
 
-    //: To get the contents updated `ParseFile`, you need to fetch your GameScore.
-    let fetchedScore = try savedScore.fetch()
-    if let myData = fetchedScore.myData {
+        //: To get the contents updated `ParseFile`, you need to fetch your GameScore.
+        let fetchedScore = try await savedScore.fetch()
+        if let myData = fetchedScore.myData {
 
-        guard let url = myData.url else {
-            fatalError("Error: file should have url.")
-        }
-        print("The new name of your saved data is: \(myData.name)")
-        print("The file is saved to your Parse Server at: \(url)")
-        print("The full details of your data file are: \(myData)")
-
-        //: If you need to download your file.
-        let fetchedFile = try myData.fetch()
-        if fetchedFile.localURL != nil {
-            print("The file is now saved at: \(fetchedFile.localURL!)")
-            print("The full details of your data ParseFile are: \(fetchedFile)")
-
-            /*:
-             If you want to use the data from the file to display the text file or image, you need to retreive
-             the data from the file.
-            */
-            guard let dataFromParseFile = try? Data(contentsOf: fetchedFile.localURL!) else {
-                fatalError("Error: Could not get data from file.")
+            guard let url = myData.url else {
+                fatalError("Error: file should have url.")
             }
+            print("The new name of your saved data is: \(myData.name)")
+            print("The file is saved to your Parse Server at: \(url)")
+            print("The full details of your data file are: \(myData)")
 
-            //: Checking to make sure the data saved on the Parse Server is the same as the original
-            if dataFromParseFile != sampleData {
-                assertionFailure("Data is not the same. Something went wrong.")
-            }
+            //: If you need to download your file.
+            let fetchedFile = try await myData.fetch()
+            if fetchedFile.localURL != nil {
+                print("The file is now saved at: \(fetchedFile.localURL!)")
+                print("The full details of your data ParseFile are: \(fetchedFile)")
 
-            guard let parseFileString = String(data: dataFromParseFile, encoding: .utf8) else {
-                fatalError("Error: Could not create String from data.")
+                /*:
+                 If you want to use the data from the file to display the text file or image, you need to retreive
+                 the data from the file.
+                 */
+                guard let dataFromParseFile = try? Data(contentsOf: fetchedFile.localURL!) else {
+                    fatalError("Error: Could not get data from file.")
+                }
+
+                //: Checking to make sure the data saved on the Parse Server is the same as the original
+                if dataFromParseFile != sampleData {
+                    assertionFailure("Data is not the same. Something went wrong.")
+                }
+
+                guard let parseFileString = String(data: dataFromParseFile, encoding: .utf8) else {
+                    fatalError("Error: Could not create String from data.")
+                }
+                print("The data saved on parse is: \"\(parseFileString)\"")
+            } else {
+                assertionFailure("Error fetching: there should be a localURL")
             }
-            print("The data saved on parse is: \"\(parseFileString)\"")
         } else {
             assertionFailure("Error fetching: there should be a localURL")
         }
-    } else {
-        assertionFailure("Error fetching: there should be a localURL")
+    } catch {
+        fatalError("Error saving: \(error)")
     }
-} catch {
-    fatalError("Error saving: \(error)")
 }
 
 /*:

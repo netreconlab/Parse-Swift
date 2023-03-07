@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 8/30/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -99,6 +99,7 @@ public struct ParseConfiguration {
     /// Defaults to 20.
     public internal(set) var liveQueryMaxConnectionAttempts: Int = 20
 
+    public internal(set) var primitiveStore: ParsePrimitiveStorable
     /**
      Override the default transfer behavior for `ParseFile`'s.
      Allows for direct uploads to other file storage providers.
@@ -119,7 +120,7 @@ public struct ParseConfiguration {
      Create a Parse Swift configuration.
      - parameter applicationId: The application id for your Parse application.
      - parameter clientKey: The client key for your Parse application.
-     - parameter primaryKey: The master key for your Parse application. This key should only be
+     - parameter primaryKey: The primary key for your Parse application. This key should only be
      specified when using the SDK on a server.
      - parameter serverURL: The server URL to connect to a Parse Server.
      - parameter liveQueryServerURL: The live query server URL to connect to a Parse LiveQuery Server.
@@ -207,6 +208,6 @@ public struct ParseConfiguration {
         self.maxConnectionAttempts = maxConnectionAttempts
         self.liveQueryMaxConnectionAttempts = liveQueryMaxConnectionAttempts
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
-        ParseStorage.shared.use(primitiveStore ?? InMemoryPrimitiveStore())
+        self.primitiveStore = primitiveStore ?? InMemoryPrimitiveStore()
     }
 }

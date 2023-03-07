@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 6/14/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import Foundation
  Conforming to `ParseHookRequestable` allows you to create types that
  can decode requests.
  - requires: `.usePrimaryKey` has to be available. It is recommended to only
- use the master key in server-side applications where the key is kept secure and not
+ use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
 public protocol ParseHookRequestable: ParseTypeable {

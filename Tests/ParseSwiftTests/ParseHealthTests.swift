@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/28/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -12,26 +12,26 @@ import XCTest
 
 class ParseHealthTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testCheckCommand() throws {
@@ -41,7 +41,7 @@ class ParseHealthTests: XCTestCase {
         XCTAssertNil(command.body)
     }
 
-    func testCheck() {
+    func testCheck() async throws {
 
         let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -57,7 +57,7 @@ class ParseHealthTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let health = try ParseHealth.check()
+            let health = try await ParseHealth.check()
             XCTAssertEqual(health, healthOfServer)
 
         } catch {

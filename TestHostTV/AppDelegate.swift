@@ -3,7 +3,7 @@
 //  TestHostTV
 //
 //  Created by Corey Baker on 11/8/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import UIKit

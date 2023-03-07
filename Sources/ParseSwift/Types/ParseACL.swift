@@ -316,19 +316,19 @@ extension ParseACL {
      - returns: Returns the default ACL.
      - throws: An error of type `ParseError`.
     */
-    public static func defaultACL() throws -> Self {
+    public static func defaultACL() async throws -> Self {
 
         let aclController: DefaultACL!
 
         #if !os(Linux) && !os(Android) && !os(Windows)
-        if let controller: DefaultACL = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
+        if let controller: DefaultACL = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             aclController = controller
         } else {
             throw ParseError(code: .otherCause,
                              message: "Default ACL cannot be found in Keychain. You should `setDefaultACL` first")
         }
         #else
-        if let controller: DefaultACL = try? ParseStorage.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
+        if let controller: DefaultACL = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             aclController = controller
         } else {
             throw ParseError(code: .otherCause,
@@ -339,13 +339,13 @@ extension ParseACL {
         if !aclController.useCurrentUser {
             return aclController.defaultACL
         } else {
-            guard let userObjectId = BaseParseUser.current?.objectId else {
+            guard let userObjectId = try? await BaseParseUser.current().objectId else {
                 return aclController.defaultACL
             }
 
             guard let lastCurrentUserObjectId = aclController.lastCurrentUserObjectId,
                 userObjectId == lastCurrentUserObjectId else {
-                return try setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
+                return try await setDefaultACL(ParseACL(), withAccessForCurrentUser: true)
             }
 
             return aclController.defaultACL
@@ -366,10 +366,9 @@ extension ParseACL {
      - returns: Updated default ACL.
      - throws: An error of type `ParseError`.
     */
-    public static func setDefaultACL(_ acl: ParseACL, withAccessForCurrentUser: Bool) throws -> ParseACL {
-
-        guard let currentUser = BaseParseUser.current,
-            let currentUserObjectId = currentUser.objectId else {
+    public static func setDefaultACL(_ acl: ParseACL, withAccessForCurrentUser: Bool) async throws -> ParseACL {
+        let currentUser = try await BaseParseUser.current()
+        guard let currentUserObjectId = currentUser.objectId else {
             throw ParseError(code: .missingObjectId, message: "Cannot set defaultACL with no current user")
         }
 
@@ -393,9 +392,9 @@ extension ParseACL {
         }
 
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
+        try await KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #else
-        try ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
+        try await ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #endif
         return aclController.defaultACL
     }
@@ -408,10 +407,10 @@ extension ParseACL {
         return modifiedACL
     }
 
-    internal static func deleteDefaultFromKeychain() {
-        try? ParseStorage.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
+    internal static func deleteDefaultFromKeychain() async {
+        try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
+        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #endif
     }
 }

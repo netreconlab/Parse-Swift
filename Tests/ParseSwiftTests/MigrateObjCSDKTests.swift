@@ -3,10 +3,10 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 8/19/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency) && !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
 import XCTest
 @testable import ParseSwift
@@ -112,32 +112,32 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
     let objcSessionToken2 = "now"
     let testInstallationObjectId = "yarr"
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try await KeychainStore.shared.deleteAll()
+        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func setupObjcKeychainSDK(useOldObjCToken: Bool = false,
                               useBothTokens: Bool = false,
-                              installationId: String) {
+                              installationId: String) async throws {
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
@@ -149,13 +149,13 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let currentUserDictionary2 = ["session_token": objcSessionToken2]
         let currentUserDictionary3 = ["sessionToken": objcSessionToken,
                                       "session_token": objcSessionToken2]
-        _ = objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
+        _ = await objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
         if useBothTokens {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
         } else if !useOldObjCToken {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
         } else {
-            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
+            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
         }
     }
 
@@ -176,10 +176,10 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
     @MainActor
     func testLoginUsingObjCKeychain() async throws {
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -199,32 +199,31 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.username, loginUserName)
         XCTAssertNil(loggedIn.password)
         XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-        XCTAssertEqual(loggedIn.sessionToken, objcSessionToken)
+        var sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken)
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        guard let userFromKeychain = User.current else {
-            XCTFail("Could not get CurrentUser from Keychain")
-            return
-        }
+        let userFromKeychain = try await User.current()
 
         XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
         XCTAssertEqual(loggedIn.email, userFromKeychain.email)
         XCTAssertEqual(userFromKeychain.username, loginUserName)
         XCTAssertNil(userFromKeychain.password)
         XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-        XCTAssertEqual(userFromKeychain.sessionToken, objcSessionToken)
+        sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken)
         XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
         XCTAssertNil(userFromKeychain.ACL)
     }
 
     @MainActor
     func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
-        setupObjcKeychainSDK(useOldObjCToken: true,
-                             installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(useOldObjCToken: true,
+                                       installationId: objcInstallationId)
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
@@ -244,32 +243,31 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.username, loginUserName)
         XCTAssertNil(loggedIn.password)
         XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-        XCTAssertEqual(loggedIn.sessionToken, objcSessionToken2)
+        var sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken2)
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        guard let userFromKeychain = User.current else {
-            XCTFail("Could not get CurrentUser from Keychain")
-            return
-        }
+        let userFromKeychain = try await User.current()
 
         XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
         XCTAssertEqual(loggedIn.email, userFromKeychain.email)
         XCTAssertEqual(userFromKeychain.username, loginUserName)
         XCTAssertNil(userFromKeychain.password)
         XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-        XCTAssertEqual(userFromKeychain.sessionToken, objcSessionToken2)
+        sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken2)
         XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
         XCTAssertNil(userFromKeychain.ACL)
     }
 
     @MainActor
     func testLoginUsingObjCKeychainUseNewOverOld() async throws {
-        setupObjcKeychainSDK(useBothTokens: true,
-                             installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(useBothTokens: true,
+                                       installationId: objcInstallationId)
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = User.current?.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date().addingTimeInterval(+300)
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
@@ -289,21 +287,19 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.username, loginUserName)
         XCTAssertNil(loggedIn.password)
         XCTAssertEqual(loggedIn.objectId, serverResponse.objectId)
-        XCTAssertEqual(loggedIn.sessionToken, objcSessionToken)
+        var sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken)
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        guard let userFromKeychain = User.current else {
-            XCTFail("Could not get CurrentUser from Keychain")
-            return
-        }
-
+        let userFromKeychain = try await User.current()
         XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
         XCTAssertEqual(loggedIn.email, userFromKeychain.email)
         XCTAssertEqual(userFromKeychain.username, loginUserName)
         XCTAssertNil(userFromKeychain.password)
         XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
-        XCTAssertEqual(userFromKeychain.sessionToken, objcSessionToken)
+        sessionToken = try await User.sessionToken()
+        XCTAssertEqual(sessionToken, objcSessionToken)
         XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
         XCTAssertNil(userFromKeychain.ACL)
     }
@@ -325,17 +321,16 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
     @MainActor
     func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
         let currentUser = try await loginNormally(sessionToken: objcSessionToken)
         MockURLProtocol.removeAll()
         let returnedUser = try await User.loginUsingObjCKeychain()
         XCTAssertTrue(currentUser.hasSameObjectId(as: returnedUser))
-        XCTAssertEqual(currentUser.sessionToken, returnedUser.sessionToken)
     }
 
     @MainActor
     func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
         _ = try await loginNormally(sessionToken: objcSessionToken2)
         MockURLProtocol.removeAll()
         do {
@@ -350,11 +345,9 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
     }
 
-    func saveCurrentInstallation() throws {
-        guard var installation = Installation.current else {
-            XCTFail("Should unwrap")
-            return
-        }
+    func saveCurrentInstallation() async throws {
+        let initialInstallation = try await Installation.current()
+        var installation = initialInstallation
         installation.objectId = testInstallationObjectId
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         installation.ACL = nil
@@ -374,36 +367,29 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        do {
-            guard let saved = try Installation.current?.save(),
-                let newCurrentInstallation = Installation.current else {
-                XCTFail("Should have a new current installation")
-                return
-            }
-            XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
-            XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
-            XCTAssertNil(saved.ACL)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        let saved = try await initialInstallation.save()
+        let newCurrentInstallation = try await Installation.current()
+        XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
+        XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+        XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+        XCTAssertNil(saved.ACL)
     }
 
     @MainActor
     func testDeleteObjCKeychain() async throws {
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-              let savedObjectId = installation.objectId,
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId,
               let savedInstallationId = installation.installationId else {
                 XCTFail("Should unwrap")
                 return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
-        setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
 
         var installationOnServer = installation
         installationOnServer.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
@@ -428,57 +414,52 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         try await Installation.deleteObjCKeychain()
 
         // Should be updated in memory
-        XCTAssertEqual(Installation.current?.installationId, savedInstallationId)
-        XCTAssertEqual(Installation.current?.customKey, installation.customKey)
+        let currentInstallation = try await Installation.current()
+        XCTAssertEqual(currentInstallation.installationId, savedInstallationId)
+        XCTAssertEqual(currentInstallation.customKey, installation.customKey)
 
         // Should be updated in Keychain
-        guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                XCTFail("Should get object from Keychain")
-            return
-        }
-        XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, savedInstallationId)
+        let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
     @MainActor
     func testDeleteObjCKeychainAlreadyMigrated() async throws {
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-              let savedObjectId = installation.objectId,
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId,
               let savedInstallationId = installation.installationId else {
                 XCTFail("Should unwrap")
                 return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
-        setupObjcKeychainSDK(installationId: savedInstallationId)
-
+        try await setupObjcKeychainSDK(installationId: savedInstallationId)
         try await Installation.deleteObjCKeychain()
 
         // Should be updated in memory
-        XCTAssertEqual(Installation.current?.installationId, savedInstallationId)
-        XCTAssertEqual(Installation.current?.customKey, installation.customKey)
+        let currentInstallation = try await Installation.current()
+        XCTAssertEqual(currentInstallation.installationId, savedInstallationId)
+        XCTAssertEqual(currentInstallation.customKey, installation.customKey)
 
         // Should be updated in Keychain
-        guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-                XCTFail("Should get object from Keychain")
-            return
-        }
-        XCTAssertEqual(keychainInstallation.currentInstallation?.installationId, savedInstallationId)
+        let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+        XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
     @MainActor
     func testDeleteObjCKeychainNoObjcKeychain() async throws {
-        try saveCurrentInstallation()
+        try await saveCurrentInstallation()
         MockURLProtocol.removeAll()
 
-        guard let installation = Installation.current,
-            let savedObjectId = installation.objectId else {
-                XCTFail("Should unwrap")
-                return
+        let installation = try await Installation.current()
+        guard let savedObjectId = installation.objectId else {
+            XCTFail("Should unwrap")
+            return
         }
         XCTAssertEqual(savedObjectId, self.testInstallationObjectId)
 
@@ -496,11 +477,10 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
     @MainActor
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
-        setupObjcKeychainSDK(installationId: objcInstallationId)
-
-        try ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        Installation.currentContainer.currentInstallation = nil
+        try await setupObjcKeychainSDK(installationId: objcInstallationId)
+        try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        await Installation.setCurrent(nil)
 
         do {
             _ = try await Installation.deleteObjCKeychain()

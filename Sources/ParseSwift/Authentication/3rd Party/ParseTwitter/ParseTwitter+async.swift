@@ -3,10 +3,9 @@
 //  ParseTwitter+async
 //
 //  Created by Corey Baker on 8/7/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseTwitter {
@@ -34,10 +33,10 @@ public extension ParseTwitter {
         try await withCheckedThrowingContinuation { continuation in
             self.login(userId: userId,
                        screenName: screenName,
-                       authToken: consumerKey,
-                       authTokenSecret: consumerSecret,
-                       consumerKey: authToken,
-                       consumerSecret: authTokenSecret,
+                       consumerKey: consumerKey,
+                       consumerSecret: consumerSecret,
+                       authToken: authToken,
+                       authTokenSecret: authTokenSecret,
                        options: options,
                        completion: continuation.resume)
         }
@@ -109,5 +108,3 @@ public extension ParseTwitter {
         }
     }
 }
-
-#endif

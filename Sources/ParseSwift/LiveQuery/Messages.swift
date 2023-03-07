@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/2/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -18,19 +18,19 @@ struct StandardMessage: LiveQueryable, Codable {
     var installationId: String?
     var requestId: Int?
 
-    init(operation: ClientOperation, additionalProperties: Bool = false) {
+    init(operation: ClientOperation, additionalProperties: Bool = false) async {
         self.op = operation
         if additionalProperties {
             self.applicationId = Parse.configuration.applicationId
             self.primaryKey = Parse.configuration.primaryKey
             self.clientKey = Parse.configuration.clientKey
-            self.sessionToken = BaseParseUser.currentContainer?.sessionToken
-            self.installationId = BaseParseInstallation.currentContainer.installationId
+            self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
+            self.installationId = await BaseParseInstallation.currentContainer().installationId
         }
     }
 
-    init(operation: ClientOperation, requestId: RequestId) {
-        self.init(operation: operation)
+    init(operation: ClientOperation, requestId: RequestId) async {
+        await self.init(operation: operation)
         self.requestId = requestId.value
     }
 
@@ -64,7 +64,7 @@ struct SubscribeMessage<T: ParseObject>: LiveQueryable, Encodable {
     init(operation: ClientOperation,
          requestId: RequestId,
          query: Query<T>? = nil,
-         additionalProperties: Bool = false) {
+         additionalProperties: Bool = false) async {
         self.op = operation
         self.requestId = requestId.value
         if let query = query {
@@ -73,7 +73,7 @@ struct SubscribeMessage<T: ParseObject>: LiveQueryable, Encodable {
                                         fields: query.fields?.sorted() ?? query.keys?.sorted(),
                                         watch: query.watch?.sorted())
         }
-        self.sessionToken = BaseParseUser.currentContainer?.sessionToken
+        self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
     }
 }
 

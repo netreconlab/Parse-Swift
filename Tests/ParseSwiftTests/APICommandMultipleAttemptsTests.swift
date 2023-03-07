@@ -6,7 +6,6 @@
 //  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -32,26 +31,26 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         var originalData: Data?
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     actor Result: Sendable {
@@ -62,7 +61,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
     }
 
-    func testErrorHTTP400JSON() throws {
+    func testErrorHTTP400JSON() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -87,12 +86,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait 1")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -115,7 +114,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTPReturns400NoDataFromServer() {
+    func testErrorHTTPReturns400NoDataFromServer() async throws {
         Parse.configuration.maxConnectionAttempts = 2
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
@@ -123,12 +122,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw originalError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -143,7 +142,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONInterval() throws {
+    func testErrorHTTP429JSONInterval() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -171,12 +170,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -199,7 +198,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONDate() throws {
+    func testErrorHTTP429JSONDate() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -235,12 +234,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -263,7 +262,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP429JSONNoHeader() throws {
+    func testErrorHTTP429JSONNoHeader() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -288,12 +287,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -316,7 +315,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONInterval() throws {
+    func testErrorHTTP503JSONInterval() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -344,12 +343,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -372,7 +371,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONDate() throws {
+    func testErrorHTTP503JSONDate() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -408,12 +407,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -436,7 +435,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testErrorHTTP503JSONNoHeader() throws {
+    func testErrorHTTP503JSONNoHeader() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -461,12 +460,12 @@ class APICommandMultipleAttemptsTests: XCTestCase {
 
         let expectation1 = XCTestExpectation(description: "Wait")
 
-        API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                path: .login,
-                                                params: nil,
-                                                mapper: { _ -> NoBody in
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
             throw parseError
-        }).executeAsync(options: [],
+        }).execute(options: [],
                         callbackQueue: .main,
                         allowIntermediateResponses: true) { result in
             switch result {
@@ -489,4 +488,3 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 }
-#endif

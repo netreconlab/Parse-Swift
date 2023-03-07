@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 5/20/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -105,26 +105,27 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
                                       completion: @escaping (Result<Void, ParseError>) -> Void) {
-
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        var userInfo = [String: String]()
-        launchOptions.forEach { (key, value) in
-            guard let value = value as? String else {
-                return
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            var userInfo = [String: String]()
+            launchOptions.forEach { (key, value) in
+                guard let value = value as? String else {
+                    return
+                }
+                userInfo[key.rawValue] = value
             }
-            userInfo[key.rawValue] = value
-        }
-        let appOppened = ParseAnalytics(name: "AppOpened",
-                                        dimensions: userInfo,
-                                        at: date)
-        appOppened.saveCommand().executeAsync(options: options,
-                                              callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+            let appOppened = ParseAnalytics(name: "AppOpened",
+                                            dimensions: userInfo,
+                                            at: date)
+            await appOppened.saveCommand().execute(options: options,
+                                                        callbackQueue: callbackQueue) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -149,18 +150,22 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
                                       completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        let appOppened = ParseAnalytics(name: "AppOpened",
-                                        dimensions: dimensions,
-                                        at: date)
-        appOppened.saveCommand().executeAsync(options: options,
-                                              callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            let appOppened = ParseAnalytics(name: "AppOpened",
+                                            dimensions: dimensions,
+                                            at: date)
+            await appOppened.saveCommand().execute(options: options,
+                                                        callbackQueue: callbackQueue) { result in
+                callbackQueue.async {
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }
@@ -178,15 +183,19 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
     public func track(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        self.saveCommand().executeAsync(options: options,
-                                        callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        Task {
+            var options = options
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            await self.saveCommand().execute(options: options,
+                                            callbackQueue: callbackQueue) { result in
+                Task {
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }
@@ -210,17 +219,24 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                options: API.Options = [],
                                callbackQueue: DispatchQueue = .main,
                                completion: @escaping (Result<Void, ParseError>) -> Void) {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+
+        var mutableOptions = options
+        mutableOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         self.dimensionsAnyCodable = convertToAnyCodable(dimensions)
         self.date = date
-        self.saveCommand().executeAsync(options: options,
-                                        callbackQueue: callbackQueue) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        let options = mutableOptions
+        let immutableSelf = self
+        Task {
+            await immutableSelf.saveCommand().execute(options: options,
+                                                           callbackQueue: callbackQueue) { result in
+                callbackQueue.async {
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }

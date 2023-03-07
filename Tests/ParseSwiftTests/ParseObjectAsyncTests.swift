@@ -3,10 +3,9 @@
 //  ParseObjectAsyncTests
 //
 //  Created by Corey Baker on 8/6/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -322,26 +321,26 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func loginNormally() async throws -> User {
@@ -1551,9 +1550,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
@@ -1572,8 +1572,8 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have objectId")
             return
         }
-        let defaultACL = try ParseACL.setDefaultACL(ParseACL(),
-                                                    withAccessForCurrentUser: true)
+        let defaultACL = try await ParseACL.setDefaultACL(ParseACL(),
+                                                          withAccessForCurrentUser: true)
 
         let score = GameScore(points: 10)
         var game = Game(gameScore: score)
@@ -1652,9 +1652,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
@@ -1824,9 +1825,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return MockURLResponse(data: encodedGamed, statusCode: 200)
         }
 
-        guard let savedGame = try? game
+        guard let savedGame = try? await game
                 .saveCommand()
                 .execute(options: [],
+                         callbackQueue: .main,
                          childObjects: savedChildren,
                          childFiles: savedChildFiles) else {
             XCTFail("Should have saved game")
@@ -1839,4 +1841,3 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
     #endif
 }
-#endif

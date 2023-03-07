@@ -3,10 +3,9 @@
 //  ParseFile+async
 //
 //  Created by Corey Baker on 8/6/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -93,7 +92,7 @@ public extension ParseFile {
     /**
      Deletes the file from the Parse Server.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.
@@ -107,5 +106,3 @@ public extension ParseFile {
         }
     }
 }
-
-#endif

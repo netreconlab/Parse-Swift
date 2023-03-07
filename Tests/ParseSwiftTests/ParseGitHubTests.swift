@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/1/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -63,29 +63,29 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
-    func loginNormally() throws -> User {
+    func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
         MockURLProtocol.mockRequests { _ in
@@ -96,10 +96,10 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
                 return nil
             }
         }
-        return try User.login(username: "parse", password: "user")
+        return try await User.login(username: "parse", password: "user")
     }
 
-    func loginAnonymousUser() throws {
+    func loginAnonymousUser() async throws {
         let authData = ["id": "yolo"]
 
         //: Convert the anonymous user to a real new user.
@@ -126,12 +126,13 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let user = try User.anonymous.login()
-        XCTAssertEqual(user, User.current)
+        let user = try await User.anonymous.login()
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.anonymous.isLinked)
+        XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
     func testAuthenticationKeys() throws {
@@ -150,7 +151,6 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
                         .AuthenticationKeys.id.verifyMandatoryKeys(authData: authDataWrong))
     }
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
     @MainActor
     func testLogin() async throws {
 
@@ -181,11 +181,18 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(id: "testing",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        var isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.github.isLinked)
+
+        // Test stripping
+        let strippedUser = user.github.strip(current)
+        isLinked = ParseGitHub.isLinked(with: strippedUser)
+        XCTAssertFalse(isLinked)
     }
 
     @MainActor
@@ -218,11 +225,13 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(authData: (["id": "testing",
                                                            "access_token": "this"]))
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
         XCTAssertEqual(user.password, "world")
-        XCTAssertTrue(user.github.isLinked)
     }
 
     @MainActor
@@ -241,7 +250,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testReplaceAnonymousWithLoggedIn() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -264,17 +273,19 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.login(id: "testing",
                                                accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testReplaceAnonymousWithLinked() async throws {
-        try loginAnonymousUser()
+        try await loginAnonymousUser()
         MockURLProtocol.removeAll()
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -297,18 +308,20 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.link(id: "testing",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLink() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -331,18 +344,20 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let user = try await User.github.link(id: "testing",
                                               accessToken: "that")
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInAuthData() async throws {
 
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
 
         var serverResponse = LoginSignupResponse()
@@ -368,17 +383,19 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
             .AuthenticationKeys.id.makeDictionary(id: "testing", accessToken: "accessToken")
 
         let user = try await User.github.link(authData: authData)
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertTrue(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertTrue(user.github.isLinked)
-        XCTAssertFalse(user.anonymous.isLinked)
+        XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
     @MainActor
     func testLinkLoggedInUserWrongKeys() async throws {
-        _ = try loginNormally()
+        _ = try await loginNormally()
         MockURLProtocol.removeAll()
         do {
             _ = try await User.github.link(authData: ["hello": "world"])
@@ -394,17 +411,18 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testUnlink() async throws {
 
-        _ = try loginNormally()
+        var initialUser = try await loginNormally()
         MockURLProtocol.removeAll()
 
         let authData = ParseGitHub<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   accessToken: "this")
-        User.current?.authData = [User.github.__type: authData]
-        XCTAssertTrue(User.github.isLinked)
+        initialUser.authData = [User.github.__type: authData]
+        try await User.setCurrent(initialUser)
+        XCTAssertTrue(ParseGitHub.isLinked(with: initialUser))
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = Date()
+        serverResponse.updatedAt = initialUser.updatedAt
 
         var userOnServer: User!
 
@@ -422,11 +440,12 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let user = try await User.github.unlink()
-        XCTAssertEqual(user, User.current)
+        let current = try await User.current()
+        XCTAssertEqual(user, current)
+        let isLinked = await user.github.isLinked()
+        XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
-        XCTAssertFalse(user.github.isLinked)
     }
-#endif
 }

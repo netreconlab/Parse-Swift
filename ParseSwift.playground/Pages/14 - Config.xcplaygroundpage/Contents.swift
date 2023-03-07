@@ -12,10 +12,12 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-do {
-    try initializeParse()
-} catch {
-    assertionFailure("Error initializing Parse-Swift: \(error)")
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
 }
 
 //: Create a value typed `ParseConfig` that matches your server config.
@@ -71,7 +73,14 @@ config.fetch { result in
 }
 
 //: Anytime you fetch or update your Config successfully, it is automatically saved to your Keychain.
-print(Config.current ?? "No config")
+Task {
+    do {
+        let config = try await Config.current()
+        print(config)
+    } catch {
+        assertionFailure("Error with current config: \(error)")
+    }
+}
 
 PlaygroundPage.current.finishExecution()
 //: [Next](@next)

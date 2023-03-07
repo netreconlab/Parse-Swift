@@ -4,7 +4,7 @@
 //
 //  Original file, URLSession+sync.swift, created by Florent Vilmart on 17-09-24.
 //  Name change to URLSession.swift and support for sync/async by Corey Baker on 7/25/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -40,7 +40,7 @@ internal extension URLSession {
                        responseData: Data?,
                        urlResponse: URLResponse?,
                        responseError: Error?,
-                       mapper: @escaping (Data) throws -> U) -> Result<U, ParseError> {
+                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         if let responseError = responseError {
             guard let parseError = responseError as? ParseError else {
                 return .failure(ParseError(code: .otherCause,
@@ -77,7 +77,7 @@ internal extension URLSession {
                 }
             }
             do {
-                return try .success(mapper(responseData))
+                return try await .success(mapper(responseData))
             } catch {
                 URLSession.parse.configuration.urlCache?.removeCachedResponse(for: request)
                 guard let parseError = error as? ParseError else {
@@ -110,7 +110,7 @@ internal extension URLSession {
                        location: URL?,
                        urlResponse: URLResponse?,
                        responseError: Error?,
-                       mapper: @escaping (Data) throws -> U) -> Result<U, ParseError> {
+                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         guard let response = urlResponse else {
             guard let parseError = responseError as? ParseError else {
                 return .failure(ParseError(code: .otherCause,
@@ -129,7 +129,7 @@ internal extension URLSession {
         if let location = location {
             do {
                 let data = try ParseCoding.jsonEncoder().encode(location)
-                return try .success(mapper(data))
+                return try await .success(mapper(data))
             } catch {
                 let defaultError = ParseError(code: .otherCause,
                                               // swiftlint:disable:next line_length
@@ -143,23 +143,24 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(response)."))
     }
 
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length cyclomatic_complexity
     func dataTask<U>(
         with request: URLRequest,
         callbackQueue: DispatchQueue,
         attempts: Int = 1,
         allowIntermediateResponses: Bool,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
-    ) {
-
-        dataTask(with: request) { (responseData, urlResponse, responseError) in
+    ) async {
+        do {
+            let (responseData, urlResponse) = try await dataTask(for: request)
             guard let httpResponse = urlResponse as? HTTPURLResponse else {
-                completion(self.makeResult(request: request,
-                                           responseData: responseData,
-                                           urlResponse: urlResponse,
-                                           responseError: responseError,
-                                           mapper: mapper))
+                let result = await self.makeResult(request: request,
+                                                   responseData: responseData,
+                                                   urlResponse: urlResponse,
+                                                   responseError: nil,
+                                                   mapper: mapper)
+                completion(result)
                 return
             }
             let statusCode = httpResponse.statusCode
@@ -170,25 +171,26 @@ internal extension URLSession {
                 // Retry if max attempts have not been reached.
                 guard attempts <= Parse.configuration.maxConnectionAttempts else {
                     // If max attempts have been reached update the client now.
-                    completion(self.makeResult(request: request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
                     return
                 }
 
                 // If there is current response data, update the client now.
-                if allowIntermediateResponses,
-                    let responseData = responseData {
-                    completion(self.makeResult(request: request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                if allowIntermediateResponses {
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
                 }
 
-                let delayInterval: TimeInterval!
+                var delayInterval = TimeInterval()
 
                 // Check for constant delays in header information.
                 switch statusCode {
@@ -197,7 +199,9 @@ internal extension URLSession {
                        let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                        if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                            delayInterval = interval
+                        }
                     }
 
                 case 503:
@@ -205,34 +209,76 @@ internal extension URLSession {
                        let constantDelay = Utility.computeDelay(delayString) {
                         delayInterval = constantDelay
                     } else {
-                        delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                        if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                            delayInterval = interval
+                        }
                     }
 
                 default:
-                    delayInterval = Utility.computeDelay(Utility.reconnectInterval(2))
+                    if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
+                        delayInterval = interval
+                    }
                 }
 
-                callbackQueue.asyncAfter(deadline: .now() + delayInterval) {
-                    // Update requestId in header for Idempotency
-                    var request = request
-                    if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
-                        request.allHTTPHeaderFields?["X-Parse-Request-Id"] = API.createUniqueRequestId()
-                    }
-                    self.dataTask(with: request,
-                                  callbackQueue: callbackQueue,
-                                  attempts: attempts,
-                                  allowIntermediateResponses: allowIntermediateResponses,
-                                  mapper: mapper,
-                                  completion: completion)
+                if delayInterval < 1.0 {
+                    delayInterval = 1.0
                 }
+                let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
+                try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
+
+                // Update requestId in header for Idempotency
+                var request = request
+                if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
+                    request.allHTTPHeaderFields?["X-Parse-Request-Id"] = API.createUniqueRequestId()
+                }
+                await self.dataTask(with: request,
+                                    callbackQueue: callbackQueue,
+                                    attempts: attempts,
+                                    allowIntermediateResponses: allowIntermediateResponses,
+                                    mapper: mapper,
+                                    completion: completion)
                 return
             }
-            completion(self.makeResult(request: request,
-                                       responseData: responseData,
-                                       urlResponse: urlResponse,
-                                       responseError: responseError,
-                                       mapper: mapper))
-        }.resume()
+            let result = await self.makeResult(request: request,
+                                               responseData: responseData,
+                                               urlResponse: urlResponse,
+                                               responseError: nil,
+                                               mapper: mapper)
+            completion(result)
+        } catch {
+            let result = await self.makeResult(request: request,
+                                               responseData: nil,
+                                               urlResponse: nil,
+                                               responseError: error,
+                                               mapper: mapper)
+            completion(result)
+        }
+    }
+}
+
+internal extension URLSession {
+    func dataTask(for request: URLRequest) async throws -> (Data, URLResponse) {
+        try await withCheckedThrowingContinuation { continuation in
+            self.dataTask(with: request,
+                          completionHandler: continuation.resume).resume()
+        }
+    }
+
+    func dataTask(with request: URLRequest,
+                  completionHandler: @escaping (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
+        return dataTask(with: request) { (data, response, error) in
+            guard let data = data,
+                  let response = response else {
+                guard let error = error else {
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    completionHandler(.failure(parseError))
+                    return
+                }
+                completionHandler(.failure(error))
+                return
+            }
+            completionHandler(.success((data, response)))
+        }
     }
 }
 
@@ -243,7 +289,7 @@ internal extension URLSession {
         from data: Data?,
         from file: URL?,
         progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
         var task: URLSessionTask?
@@ -254,11 +300,14 @@ internal extension URLSession {
                     .parseFileTransfer
                     .upload(with: request,
                             from: data) { (responseData, urlResponse, updatedRequest, responseError) in
-                    completion(self.makeResult(request: updatedRequest ?? request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                        Task {
+                            let result = await self.makeResult(request: updatedRequest ?? request,
+                                                               responseData: responseData,
+                                                               urlResponse: urlResponse,
+                                                               responseError: responseError,
+                                                               mapper: mapper)
+                            completion(result)
+                        }
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -273,11 +322,14 @@ internal extension URLSession {
                     .parseFileTransfer
                     .upload(with: request,
                             fromFile: file) { (responseData, urlResponse, updatedRequest, responseError) in
-                    completion(self.makeResult(request: updatedRequest ?? request,
-                                               responseData: responseData,
-                                               urlResponse: urlResponse,
-                                               responseError: responseError,
-                                               mapper: mapper))
+                        Task {
+                            let result = await self.makeResult(request: updatedRequest ?? request,
+                                                               responseData: responseData,
+                                                               urlResponse: urlResponse,
+                                                               responseError: responseError,
+                                                               mapper: mapper)
+                            completion(result)
+                        }
                 }
             } catch {
                 let defaultError = ParseError(code: .otherCause,
@@ -291,57 +343,100 @@ internal extension URLSession {
         guard let task = task else {
             return
         }
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
         Task {
             await Parse.sessionDelegate.delegates.updateUpload(task, callback: progress)
             await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
             task.resume()
         }
-        #else
-        Parse.sessionDelegate.uploadDelegates[task] = progress
-        Parse.sessionDelegate.taskCallbackQueues[task] = notificationQueue
-        task.resume()
-        #endif
     }
 
     func downloadTask<U>(
         notificationQueue: DispatchQueue,
         with request: URLRequest,
         progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
-    ) {
+    ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
-            let result = self.makeResult(request: request,
-                                         location: location,
-                                         urlResponse: urlResponse,
-                                         responseError: responseError, mapper: mapper)
-            completion(result)
+            Task {
+                let result = await self.makeResult(request: request,
+                                                   location: location,
+                                                   urlResponse: urlResponse,
+                                                   responseError: responseError,
+                                                   mapper: mapper)
+                completion(result)
+            }
         }
-        #if compiler(>=5.5.2) && canImport(_Concurrency)
-        Task {
-            await Parse.sessionDelegate.delegates.updateDownload(task, callback: progress)
-            await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
-            task.resume()
-        }
-        #else
-        Parse.sessionDelegate.downloadDelegates[task] = progress
-        Parse.sessionDelegate.taskCallbackQueues[task] = notificationQueue
+        await Parse.sessionDelegate.delegates.updateDownload(task, callback: progress)
+        await Parse.sessionDelegate.delegates.updateTask(task, queue: notificationQueue)
         task.resume()
-        #endif
     }
 
     func downloadTask<U>(
         with request: URLRequest,
-        mapper: @escaping (Data) throws -> U,
+        mapper: @escaping (Data) async throws -> U,
         completion: @escaping(Result<U, ParseError>) -> Void
     ) {
-        downloadTask(with: request) { (location, urlResponse, responseError) in
-            completion(self.makeResult(request: request,
-                                       location: location,
-                                       urlResponse: urlResponse,
-                                       responseError: responseError,
-                                       mapper: mapper))
-        }.resume()
+        Task {
+            do {
+                let response = try await downloadTask(for: request)
+                let result = await self.makeResult(request: request,
+                                                   location: response.0,
+                                                   urlResponse: response.1,
+                                                   responseError: nil,
+                                                   mapper: mapper)
+                completion(result)
+            } catch {
+                let result = await self.makeResult(request: request,
+                                                   location: nil,
+                                                   urlResponse: nil,
+                                                   responseError: error,
+                                                   mapper: mapper)
+                completion(result)
+            }
+        }
+    }
+
+    func downloadTask(for request: URLRequest,
+                      delegate: URLSessionTaskDelegate? = nil) async throws -> (URL, URLResponse) {
+        try await withCheckedThrowingContinuation { continuation in
+            self.downloadTask(with: request,
+                              completionHandler: continuation.resume).resume()
+        }
+    }
+
+    func downloadTask(with request: URLRequest,
+                      completionHandler: @escaping (Result<(URL, URLResponse),
+                                                    Error>) -> Void) -> URLSessionDownloadTask {
+        return downloadTask(with: request) { (location, response, error) in
+            guard let location = location,
+                  let response = response else {
+                guard let error = error else {
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    completionHandler(.failure(parseError))
+                    return
+                }
+                completionHandler(.failure(error))
+                return
+            }
+            do {
+                let downloadDirectoryPath = try ParseFileManager.downloadDirectory()
+                guard let fileManager = ParseFileManager() else {
+                    throw ParseError(code: .otherCause,
+                                     message: "Cannot create fileManager")
+                }
+                try fileManager.createDirectoryIfNeeded(downloadDirectoryPath.relativePath)
+                let fileNameURL = URL(fileURLWithPath: location.lastPathComponent)
+                let fileLocation = downloadDirectoryPath.appendingPathComponent(fileNameURL.lastPathComponent)
+                try? FileManager.default.removeItem(at: fileLocation) // Remove file if it is already present
+                try FileManager.default.moveItem(at: location, to: fileLocation)
+                completionHandler(.success((fileLocation, response)))
+            } catch {
+                let defaultError = ParseError(code: .otherCause,
+                                              message: error.localizedDescription)
+                let parseError = (error as? ParseError) ?? defaultError
+                completionHandler(.failure(parseError))
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 12/31/20.
-//  Copyright © 2020 Parse Community. All rights reserved.
+//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 #if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
@@ -13,25 +13,7 @@ import FoundationNetworking
 
 final class LiveQuerySocket: NSObject {
     private var session: URLSession!
-    let synchronizationQueue = DispatchQueue(label: "parse.LiveQuerySocket.\(UUID().uuidString)",
-                                             qos: .default,
-                                             attributes: .concurrent,
-                                             autoreleaseFrequency: .inherit,
-                                             target: nil)
-    var delegates: [URLSessionWebSocketTask: LiveQuerySocketDelegate] {
-        get {
-            synchronizationQueue.sync(execute: { () -> [URLSessionWebSocketTask: LiveQuerySocketDelegate] in
-                delegateTasks
-            })
-        }
-        set {
-            synchronizationQueue.sync(flags: .barrier) {
-                delegateTasks = newValue
-            }
-        }
-    }
-    var delegateTasks = [URLSessionWebSocketTask: LiveQuerySocketDelegate]()
-    var receivingTasks = [URLSessionWebSocketTask: Bool]()
+    var tasks = SocketTasks()
     weak var authenticationDelegate: LiveQuerySocketDelegate?
 
     override init() {
@@ -39,21 +21,22 @@ final class LiveQuerySocket: NSObject {
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
     }
 
-    func createTask(_ url: URL, taskDelegate: LiveQuerySocketDelegate) -> URLSessionWebSocketTask {
+    func createTask(_ url: URL, taskDelegate: LiveQuerySocketDelegate) async -> URLSessionWebSocketTask {
         let task = session.webSocketTask(with: url)
-        delegates[task] = taskDelegate
-        receive(task)
+        await tasks.updateDelegates([task: taskDelegate])
+        await receive(task)
         return task
     }
 
-    func removeTaskFromDelegates(_ task: URLSessionWebSocketTask) {
-        receivingTasks.removeValue(forKey: task)
-        delegates.removeValue(forKey: task)
+    func removeTask(_ task: URLSessionWebSocketTask) async {
+        await tasks.removeReceivers([task])
+        await tasks.removeDelegates([task])
     }
 
-    func closeAll() {
-        delegates.forEach { (_, client) -> Void in
-            client.close(useDedicatedQueue: false)
+    func closeAll() async {
+        let delegates = await tasks.getDelegates()
+        for (_, client) in delegates {
+            await client.close()
         }
     }
 }
@@ -68,68 +51,65 @@ extension LiveQuerySocket {
 
 // MARK: Connect
 extension LiveQuerySocket {
-    func connect(task: URLSessionWebSocketTask,
-                 completion: @escaping (Error?) -> Void) throws {
+    func connect(_ task: URLSessionWebSocketTask) async throws {
         let encoded = try ParseCoding.jsonEncoder()
-            .encode(StandardMessage(operation: .connect,
-                                    additionalProperties: true))
+            .encode(await StandardMessage(operation: .connect,
+                                          additionalProperties: true))
         guard let encodedAsString = String(data: encoded, encoding: .utf8) else {
-            let error = ParseError(code: .otherCause,
-                                   message: "Could not encode connect message: \(encoded)")
-            completion(error)
-            return
+            throw ParseError(code: .otherCause,
+                             message: "Could not encode connect message: \(encoded)")
         }
-        task.send(.string(encodedAsString)) { error in
-            if error == nil {
-                self.receive(task)
-            }
-            completion(error)
-        }
+        try await task.send(.string(encodedAsString))
+        await self.receive(task)
     }
 }
 
 // MARK: Send
 extension LiveQuerySocket {
-    func send(_ data: Data, task: URLSessionWebSocketTask, completion: @escaping (Error?) -> Void) {
+    func send(_ data: Data, task: URLSessionWebSocketTask) async throws {
         guard let encodedAsString = String(data: data, encoding: .utf8) else {
-            completion(nil)
-            return
+            throw ParseError(code: .otherCause,
+                             message: "Could not encode data as string: \(data)")
         }
-        task.send(.string(encodedAsString)) { error in
-            completion(error)
-        }
+        try await task.send(.string(encodedAsString))
     }
 }
 
 // MARK: Receive
 extension LiveQuerySocket {
 
-    func receive(_ task: URLSessionWebSocketTask) {
-        if receivingTasks[task] != nil {
+    func receive(_ task: URLSessionWebSocketTask) async {
+        let receivers = await tasks.getReceivers()
+        guard receivers[task] == nil else {
             // Receive has already been called for this task
             return
         }
-        receivingTasks[task] = true
+        await tasks.updateReceivers([task: true])
         task.receive { result in
-            self.receivingTasks.removeValue(forKey: task)
-            switch result {
-            case .success(.string(let message)):
-                if let data = message.data(using: .utf8) {
-                    self.delegates[task]?.received(data)
-                } else {
-                    let parseError = ParseError(code: .otherCause,
-                                                message: "Could not encode LiveQuery string as data")
-                    self.delegates[task]?.receivedError(parseError)
+            Task {
+                await self.tasks.removeReceivers([task])
+                let delegates = await self.tasks.getDelegates()
+                switch result {
+                case .success(.string(let message)):
+                    if let data = message.data(using: .utf8) {
+                        Task {
+                            await delegates[task]?.received(data)
+                        }
+                    } else {
+                        let parseError = ParseError(code: .otherCause,
+                                                    message: "Could not encode LiveQuery string as data")
+                        delegates[task]?.receivedError(parseError)
+                    }
+                    await self.receive(task)
+                case .success(.data(let data)):
+                    delegates[task]?.receivedUnsupported(data, socketMessage: nil)
+                    await self.receive(task)
+                case .success(let message):
+                    delegates[task]?.receivedUnsupported(nil, socketMessage: message)
+                    await self.receive(task)
+                case .failure(let error):
+                    delegates[task]?.receivedError(error)
                 }
-                self.receive(task)
-            case .success(.data(let data)):
-                self.delegates[task]?.receivedUnsupported(data, socketMessage: nil)
-                self.receive(task)
-            case .success(let message):
-                self.delegates[task]?.receivedUnsupported(nil, socketMessage: message)
-                self.receive(task)
-            case .failure(let error):
-                self.delegates[task]?.receivedError(error)
             }
         }
     }
@@ -153,18 +133,24 @@ extension LiveQuerySocket: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession,
                     webSocketTask: URLSessionWebSocketTask,
                     didOpenWithProtocol protocol: String?) {
-        delegates[webSocketTask]?.status(.open,
-                                         closeCode: nil,
-                                         reason: nil)
+        Task {
+            let delegates = await tasks.getDelegates()
+            await delegates[webSocketTask]?.status(.open,
+                                                   closeCode: nil,
+                                                   reason: nil)
+        }
     }
 
     func urlSession(_ session: URLSession,
                     webSocketTask: URLSessionWebSocketTask,
                     didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
                     reason: Data?) {
-        delegates[webSocketTask]?.status(.closed,
-                                         closeCode: closeCode,
-                                         reason: reason)
+        Task {
+            let delegates = await tasks.getDelegates()
+            await delegates[webSocketTask]?.status(.closed,
+                                                   closeCode: closeCode,
+                                                   reason: reason)
+        }
     }
 
     func urlSession(_ session: URLSession,
@@ -183,7 +169,10 @@ extension LiveQuerySocket: URLSessionWebSocketDelegate {
                     didFinishCollecting metrics: URLSessionTaskMetrics) {
         if let socketTask = task as? URLSessionWebSocketTask,
            let transactionMetrics = metrics.transactionMetrics.last {
+            Task {
+                let delegates = await tasks.getDelegates()
                 delegates[socketTask]?.received(transactionMetrics)
+            }
         }
     }
     #endif

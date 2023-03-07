@@ -3,10 +3,9 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 5/21/22.
-//  Copyright © 2022 Parse Community. All rights reserved.
+//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if compiler(>=5.5.2) && canImport(_Concurrency)
 import Foundation
 
 public extension ParseSchema {
@@ -18,7 +17,7 @@ public extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func fetch(options: API.Options = []) async throws -> Self {
@@ -36,7 +35,7 @@ public extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func create(options: API.Options = []) async throws -> Self {
@@ -54,7 +53,7 @@ public extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func update(options: API.Options = []) async throws -> Self {
@@ -73,7 +72,7 @@ public extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func purge(options: API.Options = []) async throws {
@@ -96,7 +95,7 @@ public extension ParseSchema {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
      - requires: `.usePrimaryKey` has to be available. It is recommended to only
-     use the master key in server-side applications where the key is kept secure and not
+     use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
     func delete(options: API.Options = []) async throws {
@@ -109,5 +108,3 @@ public extension ParseSchema {
         }
     }
 }
-
-#endif

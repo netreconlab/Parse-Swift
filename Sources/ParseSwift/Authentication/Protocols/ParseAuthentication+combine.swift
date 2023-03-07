@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/30/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -20,13 +20,10 @@ public extension ParseAuthentication {
     }
 
     func unlinkPublisher(options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
-        guard let current = AuthenticatedUser.current else {
-            let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
-            return Future { promise in
-                promise(.failure(error))
-            }
+        Future { promise in
+            self.unlink(options: options,
+                        completion: promise)
         }
-        return unlinkPublisher(current, options: options)
     }
 }
 

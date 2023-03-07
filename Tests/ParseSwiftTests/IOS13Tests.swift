@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 7/2/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
@@ -55,26 +55,26 @@ class IOS13Tests: XCTestCase {
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
 
         guard let fileManager = ParseFileManager() else {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
@@ -88,11 +88,11 @@ class IOS13Tests: XCTestCase {
         wait(for: [expectation2], timeout: 20.0)
     }
 
-    func testSaveCommand() throws {
+    func testSaveCommand() async throws {
         let score = GameScore(points: 10)
         let className = score.className
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -103,7 +103,7 @@ class IOS13Tests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
-    func testUpdateCommand() throws {
+    func testUpdateCommand() async throws {
         var score = GameScore(points: 10)
         let className = score.className
         let objectId = "yarr"
@@ -111,7 +111,7 @@ class IOS13Tests: XCTestCase {
         score.createdAt = Date()
         score.updatedAt = score.createdAt
 
-        let command = try score.saveCommand()
+        let command = try await score.saveCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(className)/\(objectId)")
         XCTAssertEqual(command.method, API.Method.PUT)

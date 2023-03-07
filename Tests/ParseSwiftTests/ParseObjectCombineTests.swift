@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/30/21.
-//  Copyright © 2021 Parse Community. All rights reserved.
+//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
 #if canImport(Combine)
@@ -44,26 +44,26 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }
     }
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() async throws {
+        try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try ParseSwift.initialize(applicationId: "applicationId",
-                                  clientKey: "clientKey",
-                                  primaryKey: "primaryKey",
-                                  serverURL: url,
-                                  testing: true)
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        testing: true)
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() async throws {
+        try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared.deleteAll()
         #endif
-        try ParseStorage.shared.deleteAll()
+        try await ParseStorage.shared.deleteAll()
     }
 
     func testFetch() {
@@ -76,7 +76,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         let encoded: Data!
@@ -118,7 +118,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
             XCTAssertNil(fetched.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -131,7 +131,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         scoreOnServer.createdAt = Date()
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let encoded: Data!
@@ -168,7 +168,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(savedUpdatedAt, scoreOnServer.createdAt)
             XCTAssertNil(saved.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -181,7 +181,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         scoreOnServer.createdAt = Date()
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let encoded: Data!
@@ -222,7 +222,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(savedUpdatedAt, originalCreatedAt)
             XCTAssertNil(saved.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -235,7 +235,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         scoreOnServer.updatedAt = Date()
         scoreOnServer.ACL = nil
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let encoded: Data!
@@ -274,7 +274,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
             XCTAssertNil(saved.ACL)
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
@@ -285,7 +285,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
         let scoreOnServer = NoBody()
 
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let encoded: Data!
@@ -311,14 +311,14 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         }, receiveValue: { _ in
 
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
     func testFetchAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
         let score = GameScore(points: 10)
@@ -415,13 +415,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testSaveAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let score = GameScore(points: 10)
@@ -499,13 +499,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testCreateAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let score = GameScore(points: 10)
@@ -587,13 +587,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllCreate() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var score = GameScore(points: 10)
@@ -665,13 +665,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllUpdate() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var score = GameScore(points: 10)
@@ -749,13 +749,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testUpdateAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         var score = GameScore(points: 10)
@@ -833,13 +833,13 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
 
     func testDeleteAll() {
-        var subscriptions = Set<AnyCancellable>()
+        var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let response = [BatchResponseItem<NoBody>(success: NoBody(), error: nil),
@@ -884,7 +884,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
                 XCTFail(error.localizedDescription)
             }
         })
-        publisher.store(in: &subscriptions)
+        publisher.store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
     }
