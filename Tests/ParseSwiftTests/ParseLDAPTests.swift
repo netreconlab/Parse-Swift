@@ -141,7 +141,7 @@ class ParseLDAPTests: XCTestCase {
     }
 
     @MainActor
-    func testAuthenticationKeys() throws {
+    func testAuthenticationKeys() async throws {
         let authData = ParseLDAP<User>
             .AuthenticationKeys.id.makeDictionary(id: "testing",
                                                   password: "this")
@@ -149,7 +149,7 @@ class ParseLDAPTests: XCTestCase {
     }
 
     @MainActor
-    func testVerifyMandatoryKeys() throws {
+    func testVerifyMandatoryKeys() async throws {
         let authData = ["id": "testing", "password": "this"]
         let authDataWrong = ["id": "testing", "hello": "test"]
         XCTAssertTrue(ParseLDAP<User>
