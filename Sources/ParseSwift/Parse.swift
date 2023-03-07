@@ -99,14 +99,14 @@ public var configuration: ParseConfiguration {
  */
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
-    await KeychainStore.createShared()
     await ParseStorage.shared.use(configuration.primitiveStore)
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
     Utility.updateParseURLSession()
-    await deleteKeychainIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
+    await KeychainStore.createShared()
+    await deleteKeychainIfNeeded()
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
         Parse.configuration.keychainAccessGroup = keychainAccessGroup
