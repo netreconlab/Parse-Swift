@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol SecureStorable {
-    init(service: String?)
-    func object<T>(forKey key: String) async -> T? where T: Decodable
-    func set<T>(object: T?, forKey: String) async -> Bool where T: Encodable
-    // subscript <T>(key: String) -> T? where T: Codable { get }
-    func removeObject(forKey: String) async -> Bool
-    func removeAllObjects() async -> Bool
+protocol SecureStorable: Actor {
+    init(service: String?) async
+    func object<T>(forKey key: String) -> T? where T: Decodable
+    func set<T>(object: T?, forKey: String) -> Bool where T: Encodable
+    subscript <T>(key: String) -> T? where T: Codable { get }
+    func removeObject(forKey: String) -> Bool
+    func removeAllObjects() -> Bool
 }

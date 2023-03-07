@@ -75,7 +75,7 @@ public extension ParseApple {
         guard let appleAuthData = try? AuthenticationKeys.id.makeDictionary(user: user, identityToken: identityToken) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Could not create authData.")))
+                                          message: "Could not create \"authData\".")))
             }
             return
         }
@@ -92,7 +92,7 @@ public extension ParseApple {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Should have authData in consisting of keys \"id\" and \"token\".")))
+                                          message: "Should have \"authData\" in consisting of keys \"id\" and \"token\".")))
             }
             return
         }
@@ -123,7 +123,7 @@ public extension ParseApple {
         guard let appleAuthData = try? AuthenticationKeys.id.makeDictionary(user: user, identityToken: identityToken) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Could not create authData.")))
+                                          message: "Could not create \"authData\".")))
             }
             return
         }
@@ -139,7 +139,7 @@ public extension ParseApple {
               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             let error = ParseError(code: .otherCause,
-                                   message: "Should have authData in consisting of keys \"id\" and \"token\".")
+                                   message: "Should have \"authData\" in consisting of keys \"id\" and \"token\".")
             callbackQueue.async {
                 completion(.failure(error))
             }

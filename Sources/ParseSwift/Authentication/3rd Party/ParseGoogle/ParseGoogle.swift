@@ -100,7 +100,7 @@ public extension ParseGoogle {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Should have authData in consisting of keys \"id\", \"idToken\" or \"accessToken\".")))
+                                          message: "Should have \"authData\" in consisting of keys \"id\", \"idToken\" or \"accessToken\".")))
             }
             return
         }
@@ -147,7 +147,7 @@ public extension ParseGoogle {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Should have authData in consisting of keys \"id\", \"idToken\" or \"accessToken\".")))
+                                          message: "Should have \"authData\" in consisting of keys \"id\", \"idToken\" or \"accessToken\".")))
             }
             return
         }

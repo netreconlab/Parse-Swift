@@ -391,7 +391,7 @@ extension ParseSchema {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await purgeCommand().execute(options: options,
-                                              callbackQueue: callbackQueue) { result in
+                                         callbackQueue: callbackQueue) { result in
                 switch result {
 
                 case .success:
@@ -429,7 +429,7 @@ extension ParseSchema {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await deleteCommand().execute(options: options,
-                                               callbackQueue: callbackQueue) { result in
+                                          callbackQueue: callbackQueue) { result in
                 switch result {
 
                 case .success:

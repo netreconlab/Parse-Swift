@@ -199,7 +199,8 @@ public extension ParseAuthentication {
                 completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
         Task {
             guard let current = try? await AuthenticatedUser.current() else {
-                let error = ParseError(code: .invalidLinkedSession, message: "No current ParseUser.")
+                let error = ParseError(code: .invalidLinkedSession,
+                                       message: "No current ParseUser.")
                 callbackQueue.async {
                     completion(.failure(error))
                 }
@@ -261,9 +262,7 @@ public extension ParseUser {
                                  callbackQueue: callbackQueue,
                                  completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -316,7 +315,8 @@ public extension ParseUser {
         let immutableOptions = options
         if self.isLinked(with: type) {
             guard let authData = self.strip(type).authData else {
-                let error = ParseError(code: .otherCause, message: "Missing authData.")
+                let error = ParseError(code: .otherCause,
+                                       message: "Missing \"authData\".")
                 callbackQueue.async {
                     completion(.failure(error))
                 }
@@ -330,7 +330,7 @@ public extension ParseUser {
                                  callbackQueue: callbackQueue,
                                  completion: completion)
                 } catch {
-                    let parseError = error as? ParseError ?? ParseError(code: .otherCause, message: error.localizedDescription)
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -373,7 +373,7 @@ public extension ParseUser {
                              callbackQueue: callbackQueue,
                              completion: completion)
             } catch {
-                let parseError = error as? ParseError ?? ParseError(code: .otherCause, message: error.localizedDescription)
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }

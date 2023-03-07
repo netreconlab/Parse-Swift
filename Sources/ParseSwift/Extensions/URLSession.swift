@@ -43,8 +43,8 @@ internal extension URLSession {
                        mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         if let responseError = responseError {
             guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Unable to connect with parse-server: \(responseError)"))
+                return .failure(ParseError(message: "Unable to connect with parse-server",
+                                           swift: responseError))
             }
             return .failure(parseError)
         }
@@ -72,7 +72,7 @@ internal extension URLSession {
                         responseData = try ParseCoding.jsonEncoder().encode(pushStatus)
                     } catch {
                         URLSession.parse.configuration.urlCache?.removeCachedResponse(for: request)
-                        return .failure(ParseError(code: .otherCause, message: error.localizedDescription))
+                        return .failure(ParseError(swift: error))
                     }
                 }
             }
@@ -88,15 +88,15 @@ internal extension URLSession {
                         let nsError = error as NSError
                         if nsError.code == 4865,
                           let description = nsError.userInfo["NSDebugDescription"] {
-                            return .failure(ParseError(code: .otherCause, message: "Invalid struct: \(description)"))
+                            return .failure(ParseError(message: "Invalid struct: \(description)",
+                                                       swift: error))
                         }
-                        return .failure(ParseError(code: .otherCause,
-                                                   // swiftlint:disable:next line_length
-                                                   message: "Error decoding parse-server response: \(response) with error: \(String(describing: error)) Format: \(String(describing: String(data: responseData, encoding: .utf8)))"))
+                        return .failure(ParseError(message: "Error decoding parse-server response: \(response)",
+                                                   swift: error))
                     }
-                    return .failure(ParseError(code: .otherCause,
-                                               // swiftlint:disable:next line_length
-                                               message: "Error decoding parse-server response: \(response) with error: \(String(describing: error)) Format: \(String(describing: String(data: json, encoding: .utf8)))"))
+                    // swiftlint:disable:next line_length
+                    return .failure(ParseError(message: "Error decoding parse-server response: \(response) with error: \(String(describing: error)) Format: \(String(describing: String(data: json, encoding: .utf8)))",
+                                               swift: error))
                 }
                 return .failure(parseError)
             }
@@ -120,8 +120,8 @@ internal extension URLSession {
         }
         if let responseError = responseError {
             guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Unable to connect with parse-server: \(responseError)"))
+                return .failure(ParseError(message: "Unable to connect with parse-server",
+                                           swift: responseError))
             }
             return .failure(parseError)
         }
@@ -131,9 +131,8 @@ internal extension URLSession {
                 let data = try ParseCoding.jsonEncoder().encode(location)
                 return try await .success(mapper(data))
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              // swiftlint:disable:next line_length
-                                              message: "Error decoding parse-server response: \(response) with error: \(String(describing: error))")
+                let defaultError = ParseError(message: "Error decoding parse-server response: \(response)",
+                                              swift: error)
                 let parseError = error as? ParseError ?? defaultError
                 return .failure(parseError)
             }
@@ -310,8 +309,8 @@ internal extension URLSession {
                         }
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: "Error uploading file: \(String(describing: error))")
+                let defaultError = ParseError(message: "Error uploading file",
+                                              swift: error)
                 let parseError = error as? ParseError ?? defaultError
                 completion(.failure(parseError))
             }
@@ -332,13 +331,14 @@ internal extension URLSession {
                         }
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: "Error uploading file: \(String(describing: error))")
+                let defaultError = ParseError(message: "Error uploading file",
+                                              swift: error)
                 let parseError = error as? ParseError ?? defaultError
                 completion(.failure(parseError))
             }
         } else {
-            completion(.failure(ParseError(code: .otherCause, message: "data and file both cannot be nil")))
+            completion(.failure(ParseError(code: .otherCause,
+                                           message: "\"data\" and \"file\" both cannot be nil")))
         }
         guard let task = task else {
             return
@@ -432,9 +432,7 @@ internal extension URLSession {
                 try FileManager.default.moveItem(at: location, to: fileLocation)
                 completionHandler(.success((fileLocation, response)))
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = (error as? ParseError) ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 completionHandler(.failure(parseError))
             }
         }

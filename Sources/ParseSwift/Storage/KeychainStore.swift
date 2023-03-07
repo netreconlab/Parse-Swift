@@ -29,14 +29,12 @@ actor KeychainStore: SecureStorable {
         }
         return "\(identifier).com.parse.sdk"
     }
-    static var shared = KeychainStore()
-    static var objectiveC: KeychainStore? {
-        KeychainStore(service: objectiveCService)
-    }
+    static var shared: KeychainStore!
+    static var objectiveC: KeychainStore!
     // This Keychain was used by SDK <= 1.9.7
-    static var old = KeychainStore(service: "shared")
+    static var old: KeychainStore!
 
-    init(service: String? = nil) {
+    init(service: String? = nil) async {
         var keychainService = ".parseSwift.sdk"
         if let service = service {
             keychainService = service
@@ -46,6 +44,24 @@ actor KeychainStore: SecureStorable {
             keychainService = "com\(keychainService)"
         }
         self.service = keychainService
+    }
+
+    static func createShared() async {
+        if KeychainStore.shared == nil {
+            KeychainStore.shared = await KeychainStore()
+        }
+    }
+
+    static func createObjectiveC() async {
+        if KeychainStore.objectiveC == nil {
+            KeychainStore.objectiveC = await KeychainStore(service: objectiveCService)
+        }
+    }
+
+    static func createOld() async {
+        if KeychainStore.old == nil {
+            KeychainStore.old = await KeychainStore(service: "shared")
+        }
     }
 
     func getKeychainQueryTemplate() -> [String: Any] {
@@ -206,7 +222,7 @@ actor KeychainStore: SecureStorable {
 
         let mergedQuery = query.merging(update) { (_, otherValue) -> Any in otherValue }
         guard self.data(forKey: key,
-                     accessGroup: newAccessGroup) != nil else {
+                        accessGroup: newAccessGroup) != nil else {
             let status = SecItemAdd(mergedQuery as CFDictionary, nil)
             guard status == errSecSuccess else {
                 throw ParseError(code: .otherCause,
@@ -301,7 +317,7 @@ actor KeychainStore: SecureStorable {
 
 // MARK: SecureStorage
 extension KeychainStore {
-    func object<T>(forKey key: String) async -> T? where T: Decodable {
+    func object<T>(forKey key: String) -> T? where T: Decodable {
         guard let data = self.data(forKey: key,
                                    accessGroup: Parse.configuration.keychainAccessGroup) else {
             return nil
@@ -313,9 +329,9 @@ extension KeychainStore {
         }
     }
 
-    func set<T>(object: T?, forKey key: String) async -> Bool where T: Encodable {
+    func set<T>(object: T?, forKey key: String) -> Bool where T: Encodable {
         guard let object = object else {
-            return await removeObject(forKey: key)
+            return removeObject(forKey: key)
         }
         do {
             let data = try ParseCoding.jsonEncoder().encode(object)
@@ -328,7 +344,7 @@ extension KeychainStore {
             return false
         }
     }
-/*
+
     subscript<T>(key: String) -> T? where T: Codable {
         get {
             object(forKey: key)
@@ -336,14 +352,14 @@ extension KeychainStore {
         set (object) {
             _ = set(object: object, forKey: key)
         }
-    } */
+    }
 
-    func removeObject(forKey key: String) async -> Bool {
+    func removeObject(forKey key: String) -> Bool {
         removeObject(forKey: key,
                      accessGroup: Parse.configuration.keychainAccessGroup)
     }
 
-    func removeAllObjects() async -> Bool {
+    func removeAllObjects() -> Bool {
         removeAllObjects(useObjectiveCKeychain: false)
     }
 }

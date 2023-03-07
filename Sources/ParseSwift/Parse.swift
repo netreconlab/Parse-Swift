@@ -103,9 +103,10 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
     Utility.updateParseURLSession()
-    await deleteKeychainIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
+    await KeychainStore.createShared()
+    await deleteKeychainIfNeeded()
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
         Parse.configuration.keychainAccessGroup = keychainAccessGroup
@@ -123,7 +124,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         #if !os(Linux) && !os(Android) && !os(Windows)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            _ = KeychainStore.old
+            await KeychainStore.createOld()
             try? await KeychainStore.shared.copy(KeychainStore.old,
                                                  oldAccessGroup: configuration.keychainAccessGroup,
                                                  newAccessGroup: configuration.keychainAccessGroup)
@@ -167,6 +168,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     #if !os(Linux) && !os(Android) && !os(Windows)
     ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     if configuration.isMigratingFromObjcSDK {
+        await KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
             guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
                   try await BaseParseInstallation.current().installationId != installationId else {

@@ -530,16 +530,14 @@ extension ParseInstallation {
             do {
                 try await fetchCommand(include: includeKeys)
                     .execute(options: options,
-                                  callbackQueue: callbackQueue) { result in
+                             callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
                                 do {
                                     try await Self.updateKeychainIfNeeded([foundResult])
                                     completion(.success(foundResult))
                                 } catch {
-                                    let defaultError = ParseError(code: .otherCause,
-                                                                  message: error.localizedDescription)
-                                    let parseError = error as? ParseError ?? defaultError
+                                    let parseError = error as? ParseError ?? ParseError(swift: error)
                                     completion(.failure(parseError))
                                 }
                             }
@@ -550,12 +548,8 @@ extension ParseInstallation {
 
             } catch {
                 callbackQueue.async {
-                    if let error = error as? ParseError {
-                        completion(.failure(error))
-                    } else {
-                        completion(.failure(ParseError(code: .otherCause,
-                                                       message: error.localizedDescription)))
-                    }
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -622,9 +616,7 @@ extension ParseInstallation {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -657,9 +649,7 @@ extension ParseInstallation {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -693,9 +683,7 @@ extension ParseInstallation {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -729,9 +717,7 @@ extension ParseInstallation {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -841,7 +827,7 @@ extension ParseInstallation {
             do {
                 try await deleteCommand()
                     .execute(options: options,
-                                  callbackQueue: callbackQueue) { result in
+                             callbackQueue: callbackQueue) { result in
                         switch result {
 
                         case .success:
@@ -850,9 +836,7 @@ extension ParseInstallation {
                                     try await Self.updateKeychainIfNeeded([self], deleting: true)
                                     completion(.success(()))
                                 } catch {
-                                    let defaultError = ParseError(code: .otherCause,
-                                                                  message: error.localizedDescription)
-                                    let parseError = error as? ParseError ?? defaultError
+                                    let parseError = error as? ParseError ?? ParseError(swift: error)
                                     completion(.failure(parseError))
                                 }
                             }
@@ -860,13 +844,10 @@ extension ParseInstallation {
                             completion(.failure(error))
                         }
                     }
-            } catch let error as ParseError {
-                callbackQueue.async {
-                    completion(.failure(error))
-                }
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -945,9 +926,7 @@ public extension Sequence where Element: ParseInstallation {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -991,9 +970,7 @@ public extension Sequence where Element: ParseInstallation {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1038,9 +1015,7 @@ public extension Sequence where Element: ParseInstallation {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1085,9 +1060,7 @@ public extension Sequence where Element: ParseInstallation {
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1224,9 +1197,7 @@ public extension Sequence where Element: ParseInstallation {
                         }
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -1284,10 +1255,8 @@ public extension ParseInstallation {
                         completion(.success(()))
                     }
                 } catch {
-                    let parseError = ParseError(code: .otherCause,
-                                                message: error.localizedDescription)
                     callbackQueue.async {
-                        completion(.failure(parseError))
+                        completion(.failure(ParseError(swift: error)))
                     }
                     return
                 }

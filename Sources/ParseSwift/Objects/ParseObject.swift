@@ -432,9 +432,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -478,9 +476,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -524,9 +520,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -570,9 +564,7 @@ transactions for this call.
                     completion(.success(objects))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -699,9 +691,7 @@ transactions for this call.
                 }
             }
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
+            let parseError = error as? ParseError ?? ParseError(swift: error)
             callbackQueue.async {
                 completion(.failure(parseError))
             }
@@ -758,13 +748,9 @@ extension ParseObject {
                                   callbackQueue: callbackQueue,
                                   completion: completion)
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    if let error = error as? ParseError {
-                        completion(.failure(error))
-                    } else {
-                        completion(.failure(ParseError(code: .otherCause,
-                                                       message: error.localizedDescription)))
-                    }
+                    completion(.failure(parseError))
                 }
             }
         }
@@ -815,9 +801,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -848,9 +832,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -881,9 +863,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -914,9 +894,7 @@ extension ParseObject {
                     completion(.success(object))
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
                     completion(.failure(parseError))
                 }
@@ -974,13 +952,10 @@ extension ParseObject {
                         completion(.failure(error))
                     }
                 }
-            } catch let error as ParseError {
-                callbackQueue.async {
-                    completion(.failure(error))
-                }
             } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
-                    completion(.failure(ParseError(code: .otherCause, message: error.localizedDescription)))
+                    completion(.failure(parseError))
                 }
             }
         }

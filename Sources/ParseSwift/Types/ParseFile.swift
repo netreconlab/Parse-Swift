@@ -370,9 +370,7 @@ extension ParseFile {
                                               uploadProgress: progress,
                                               completion: completion)
                         } catch {
-                            let defaultError = ParseError(code: .otherCause,
-                                                          message: error.localizedDescription)
-                            let parseError = error as? ParseError ?? defaultError
+                            let parseError = error as? ParseError ?? ParseError(swift: error)
                             callbackQueue.async {
                                 completion(.failure(parseError))
                             }
@@ -393,9 +391,7 @@ extension ParseFile {
                                       uploadProgress: progress,
                                       completion: completion)
                 } catch {
-                    let defaultError = ParseError(code: .otherCause,
-                                                  message: error.localizedDescription)
-                    let parseError = error as? ParseError ?? defaultError
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
                         completion(.failure(parseError))
                     }
@@ -469,9 +465,7 @@ extension ParseFile {
                 completion(.success(file))
             }
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
+            let parseError = error as? ParseError ?? ParseError(swift: error)
             guard parseError.code != .unsavedFileFailure else {
                 callbackQueue.async {
                     completion(.failure(parseError))

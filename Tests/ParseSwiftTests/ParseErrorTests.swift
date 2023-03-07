@@ -41,6 +41,28 @@ class ParseErrorTests: XCTestCase {
         let error2 = ParseError(otherCode: 593, message: "yolo")
         let expected2 = "error=yolo otherCode=593"
         XCTAssertTrue(error2.description.contains(expected2))
+        let error3 = ParseError(swift: error)
+        let expected3 = "ParseError code=-1 error=A non ParseSwift error swift=ParseError code=208 error=hello"
+        XCTAssertEqual(error3.description, expected3)
+        let error4 = ParseError(code: .clientDisconnected,
+                                message: "whoa",
+                                swift: error)
+        let expected4 = "ParseError code=-1 error=whoa swift=ParseError code=208 error=hello"
+        XCTAssertEqual(error4.description, expected4)
+    }
+
+    func testEquatable() throws {
+        let error = ParseError(code: .accountAlreadyLinked, message: "hello")
+        let error2 = ParseError(swift: error)
+        let error3 = ParseError(code: .clientDisconnected,
+                                message: "whoa",
+                                swift: error)
+        XCTAssertEqual(error, error)
+        XCTAssertEqual(error2, error2)
+        XCTAssertEqual(error3, error3)
+        XCTAssertNotEqual(error, error2)
+        XCTAssertNotEqual(error2, error3)
+        XCTAssertNotEqual(error, error3)
     }
 
     func testDecode() throws {

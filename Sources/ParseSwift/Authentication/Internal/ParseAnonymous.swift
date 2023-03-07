@@ -88,7 +88,8 @@ public extension ParseAnonymous {
               callbackQueue: DispatchQueue = .main,
               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
         callbackQueue.async {
-            completion(.failure(ParseError(code: .otherCause, message: "Not supported")))
+            completion(.failure(ParseError(code: .otherCause,
+                                           message: "Not supported")))
         }
     }
 }

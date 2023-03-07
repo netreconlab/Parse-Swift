@@ -35,8 +35,8 @@ actor ParseStorage {
     }
 }
 
-// MARK: ParsePrimitiveStorable
-extension ParseStorage: ParsePrimitiveStorable {
+// MARK: Act as a proxy for ParsePrimitiveStorable
+extension ParseStorage {
 
     public func delete(valueFor key: String) async throws {
         try requireBackingStore()

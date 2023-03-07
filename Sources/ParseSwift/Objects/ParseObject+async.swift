@@ -370,10 +370,7 @@ or disable transactions for this call.
             }
             return (objectsFinishedSaving, filesFinishedSaving)
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 
@@ -400,10 +397,7 @@ or disable transactions for this call.
                          childObjects: savedChildObjects,
                          childFiles: savedChildFiles)
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }
@@ -453,10 +447,7 @@ internal extension Sequence where Element: ParseObject {
                     commands.append(try object.updateCommand())
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                throw parseError
+                throw error as? ParseError ?? ParseError(swift: error)
             }
         }
 
@@ -477,10 +468,7 @@ internal extension Sequence where Element: ParseObject {
             }
             return returnBatch
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }

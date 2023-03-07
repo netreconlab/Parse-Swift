@@ -120,7 +120,7 @@ public extension ParseTwitter {
                 completion(.failure(.init(code: .otherCause,
                                           message:
                                            """
-                                           Should have authData consisting of keys \"id,\"
+                                           Should have \"authData\" consisting of keys \"id,\"
                                            \"screenName,\" \"consumerKey,\" \"consumerSecret,\"
                                            \"authToken,\" and \"authTokenSecret\".
                                            """)))
@@ -179,7 +179,7 @@ public extension ParseTwitter {
             let error = ParseError(code: .otherCause,
                                    message:
                                     """
-                                    Should have authData consisting of keys \"id,\"
+                                    Should have \"authData\" consisting of keys \"id,\"
                                     \"screenName,\" \"consumerKey,\" \"consumerSecret,\"
                                     \"authToken,\" and \"authTokenSecret\".
                                     """)

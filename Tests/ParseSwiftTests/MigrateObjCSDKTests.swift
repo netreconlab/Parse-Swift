@@ -139,6 +139,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
                               useBothTokens: Bool = false,
                               installationId: String) async throws {
 
+        await KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")

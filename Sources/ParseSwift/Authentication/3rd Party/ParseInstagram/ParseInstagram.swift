@@ -99,7 +99,7 @@ public extension ParseInstagram {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Should have authData in consisting of keys \"id\", \"accessToken\", and \"isMobileSDK\".")))
+                                          message: "Should have \"authData\" in consisting of keys \"id\", \"accessToken\", and \"isMobileSDK\".")))
             }
             return
         }
@@ -146,7 +146,7 @@ public extension ParseInstagram {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
-                                          message: "Should have authData in consisting of keys \"id\", \"accessToken\", and \"isMobileSDK\".")))
+                                          message: "Should have \"authData\" in consisting of keys \"id\", \"accessToken\", and \"isMobileSDK\".")))
             }
             return
         }

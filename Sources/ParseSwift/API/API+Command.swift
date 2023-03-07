@@ -528,8 +528,7 @@ internal extension API.Command where T: ParseObject {
                             return .success(updatedObject)
                         } catch {
                             guard let parseError = error as? ParseError else {
-                                return .failure(ParseError(code: .otherCause,
-                                                           message: error.localizedDescription))
+                                return .failure(ParseError(swift: error))
                             }
                             return .failure(parseError)
                         }

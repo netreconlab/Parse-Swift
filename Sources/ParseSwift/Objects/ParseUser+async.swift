@@ -530,10 +530,7 @@ internal extension ParseUser {
             try? await Self.updateKeychainIfNeeded([saved])
             return saved
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }
@@ -583,10 +580,7 @@ internal extension Sequence where Element: ParseUser {
                     commands.append(try await object.updateCommand())
                 }
             } catch {
-                let defaultError = ParseError(code: .otherCause,
-                                              message: error.localizedDescription)
-                let parseError = error as? ParseError ?? defaultError
-                throw parseError
+                throw error as? ParseError ?? ParseError(swift: error)
             }
         }
 
@@ -608,10 +602,7 @@ internal extension Sequence where Element: ParseUser {
             try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
-            let defaultError = ParseError(code: .otherCause,
-                                          message: error.localizedDescription)
-            let parseError = error as? ParseError ?? defaultError
-            throw parseError
+            throw error as? ParseError ?? ParseError(swift: error)
         }
     }
 }

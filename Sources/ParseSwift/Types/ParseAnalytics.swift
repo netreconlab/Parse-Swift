@@ -119,7 +119,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                             dimensions: userInfo,
                                             at: date)
             await appOppened.saveCommand().execute(options: options,
-                                                        callbackQueue: callbackQueue) { result in
+                                                   callbackQueue: callbackQueue) { result in
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -187,14 +187,12 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await self.saveCommand().execute(options: options,
-                                            callbackQueue: callbackQueue) { result in
-                Task {
-                    switch result {
-                    case .success:
-                        completion(.success(()))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+                                             callbackQueue: callbackQueue) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
             }
         }
@@ -228,7 +226,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
         let immutableSelf = self
         Task {
             await immutableSelf.saveCommand().execute(options: options,
-                                                           callbackQueue: callbackQueue) { result in
+                                                      callbackQueue: callbackQueue) { result in
                 callbackQueue.async {
                     switch result {
                     case .success:
