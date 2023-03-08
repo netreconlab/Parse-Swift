@@ -13,6 +13,19 @@ import XCTest
 
 class InitializeSDKTests: XCTestCase {
 
+    struct User: ParseUser {
+        var username: String?
+        var email: String?
+        var emailVerified: Bool?
+        var password: String?
+        var authData: [String: [String: String]?]?
+        var originalData: Data?
+        var objectId: String?
+        var createdAt: Date?
+        var updatedAt: Date?
+        var ACL: ParseSwift.ParseACL?
+    }
+
     struct Installation: ParseInstallation {
         var installationId: String?
         var deviceType: String?
@@ -53,15 +66,96 @@ class InitializeSDKTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        try await KeychainStore.shared?.deleteAll()
         try await KeychainStore.objectiveC?.deleteAllObjectiveC()
-        try await KeychainStore.old.deleteAll()
+        try await KeychainStore.old?.deleteAll()
+        KeychainStore.shared = nil
+        KeychainStore.objectiveC = nil
+        KeychainStore.old = nil
         URLSession.shared.configuration.urlCache?.removeAllCachedResponses()
         #endif
         try await ParseStorage.shared.deleteAll()
+        await ParseStorage.shared.setBackingStoreToNil()
+    }
+
+    func pretendToBeInitialized() async {
+        Parse.configuration.isInitialized = true
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        await KeychainStore.createShared()
+        #endif
+    }
+
+    func initializeAfter() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            Task {
+                guard let url = URL(string: "http://localhost:1337/parse") else {
+                    XCTFail("Should create valid URL")
+                    return
+                }
+
+                try await ParseSwift.initialize(applicationId: "applicationId",
+                                                clientKey: "clientKey",
+                                                primaryKey: "primaryKey",
+                                                serverURL: url,
+                                                testing: true) { (_, credential) in
+                    credential(.performDefaultHandling, nil)
+                }
+            }
+        }
+    }
+
+    func testUserWaitsForSDKInitialization() async throws {
+        initializeAfter()
+        do {
+            _ = try await User.current()
+            XCTFail("Should have thrown error")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("current user"))
+        }
+    }
+
+    func testInstallationWaitsForSDKInitialization() async throws {
+        initializeAfter()
+        _ = try await Installation.current()
+    }
+
+    func testVersionWaitsForSDKInitialization() async throws {
+        initializeAfter()
+        do {
+            _ = try await ParseVersion.current()
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("no current"))
+        }
+    }
+
+    func testConfigWaitsForSDKInitialization() async throws {
+        initializeAfter()
+        do {
+            _ = try await Config.current()
+            XCTFail("Should have thrown error")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("no current"))
+        }
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
+    func testKeychainAccessGroupWaitsForSDKInitialization() async throws {
+        initializeAfter()
+        _ = try await ParseKeychainAccessGroup.current()
+    }
+
     func addCachedResponse() {
         if URLSession.parse.configuration.urlCache == nil {
             URLSession.parse.configuration.urlCache = .init()
@@ -185,6 +279,7 @@ class InitializeSDKTests: XCTestCase {
     func testFetchMissingCurrentInstallation() async throws {
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         let installationId = "testMe"
         let badContainer = CurrentInstallationContainer<Installation>(currentInstallation: nil,
                                                                       installationId: installationId)
@@ -265,6 +360,7 @@ class InitializeSDKTests: XCTestCase {
         await KeychainStore.createShared()
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.objectId = "yarr"
@@ -289,6 +385,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         try await ParseVersion.setCurrent(try ParseVersion(string: "0.0.0"))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
@@ -318,6 +415,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
@@ -347,6 +445,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         let newVersion = "1000.0.0"
         try await ParseVersion.setCurrent(try ParseVersion(string: newVersion))
         var newInstallation = Installation()
@@ -378,6 +477,7 @@ class InitializeSDKTests: XCTestCase {
         }
         let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
+        await pretendToBeInitialized()
         var newInstallation = Installation()
         newInstallation.updateAutomaticInfo()
         newInstallation.installationId = UUID().uuidString.lowercased()
@@ -543,6 +643,7 @@ class InitializeSDKTests: XCTestCase {
     }
 
     func testMigrateObjcSDKMissingInstallation() async throws {
+        await KeychainStore.createObjectiveC()
 
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {

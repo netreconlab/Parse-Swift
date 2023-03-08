@@ -7,9 +7,9 @@
 
 // MARK: ParseStorage
 actor ParseStorage {
-    public static var shared = ParseStorage()
+    static var shared = ParseStorage()
 
-    private var backingStore: ParsePrimitiveStorable!
+    var backingStore: ParsePrimitiveStorable!
 
     func use(_ store: ParsePrimitiveStorable) {
         self.backingStore = store
@@ -33,27 +33,31 @@ actor ParseStorage {
         static let currentVersion = "_currentVersion"
         static let currentAccessGroup = "_currentAccessGroup"
     }
+
+    func setBackingStoreToNil() {
+        backingStore = nil
+    }
 }
 
 // MARK: Act as a proxy for ParsePrimitiveStorable
 extension ParseStorage {
 
-    public func delete(valueFor key: String) async throws {
+    func delete(valueFor key: String) async throws {
         try requireBackingStore()
         return try await backingStore.delete(valueFor: key)
     }
 
-    public func deleteAll() async throws {
+    func deleteAll() async throws {
         try requireBackingStore()
         return try await backingStore.deleteAll()
     }
 
-    public func get<T>(valueFor key: String) async throws -> T? where T: Decodable {
+    func get<T>(valueFor key: String) async throws -> T? where T: Decodable {
         try requireBackingStore()
         return try await backingStore.get(valueFor: key)
     }
 
-    public func set<T>(_ object: T, for key: String) async throws where T: Encodable {
+    func set<T>(_ object: T, for key: String) async throws where T: Encodable {
         try requireBackingStore()
         return try await backingStore.set(object, for: key)
     }

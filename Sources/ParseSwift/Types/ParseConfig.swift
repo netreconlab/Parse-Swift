@@ -104,6 +104,7 @@ struct CurrentConfigContainer<T: ParseConfig>: Codable, Equatable {
 public extension ParseConfig {
 
     internal static func currentContainer() async -> CurrentConfigContainer<Self>? {
+        await yieldIfNotInitialized()
         guard let configInMemory: CurrentConfigContainer<Self> =
             try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             #if !os(Linux) && !os(Android) && !os(Windows)

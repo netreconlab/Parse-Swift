@@ -127,6 +127,7 @@ struct CurrentUserContainer<T: ParseUser>: Codable, Hashable {
 // MARK: Current User Support
 public extension ParseUser {
     internal static func currentContainer() async -> CurrentUserContainer<Self>? {
+        await yieldIfNotInitialized()
         guard let currentUserInMemory: CurrentUserContainer<Self>
                 = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
             #if !os(Linux) && !os(Android) && !os(Windows)

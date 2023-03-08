@@ -205,6 +205,7 @@ struct CurrentInstallationContainer<T: ParseInstallation>: Codable, Hashable {
 // MARK: Current Installation Support
 public extension ParseInstallation {
     internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
+        await yieldIfNotInitialized()
         guard let installationInMemory: CurrentInstallationContainer<Self> =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             #if !os(Linux) && !os(Android) && !os(Windows)

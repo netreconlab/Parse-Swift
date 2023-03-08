@@ -15,6 +15,7 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
     var isSyncingKeychainAcrossDevices = false
 
     static func current() async throws -> Self {
+        await yieldIfNotInitialized()
         guard let versionInMemory: Self =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentAccessGroup) else {
             guard let versionFromKeyChain: Self =

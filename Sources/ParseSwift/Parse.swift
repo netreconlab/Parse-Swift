@@ -61,6 +61,14 @@ internal func initialize(applicationId: String,
     try await initialize(configuration: configuration)
 }
 
+internal func yieldIfNotInitialized() async {
+    guard ParseConfiguration.checkIfConfigured() else {
+        await Task.yield()
+        await yieldIfNotInitialized()
+        return
+    }
+}
+
 internal func deleteKeychainIfNeeded() async {
     #if !os(Linux) && !os(Android) && !os(Windows)
     // Clear items out of the Keychain on app first run.
@@ -107,12 +115,15 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     #if !os(Linux) && !os(Android) && !os(Windows)
     await KeychainStore.createShared()
     await deleteKeychainIfNeeded()
+    Parse.configuration.isInitialized = true
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
         Parse.configuration.keychainAccessGroup = keychainAccessGroup
     } catch {
         await ParseKeychainAccessGroup.setCurrent(ParseKeychainAccessGroup())
     }
+    #else
+    Parse.configuration.isInitialized = true
     #endif
 
     do {
@@ -166,7 +177,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     await BaseParseInstallation.createNewInstallationIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     if configuration.isMigratingFromObjcSDK {
         await KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
