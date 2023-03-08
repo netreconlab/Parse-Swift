@@ -74,7 +74,7 @@ internal func deleteKeychainIfNeeded() async {
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? await KeychainStore.old.deleteAll()
+            try? await KeychainStore.old?.deleteAll()
             try? await KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
