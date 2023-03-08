@@ -223,7 +223,6 @@ public extension ParseInstallation {
     }
 
     internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
-        await yieldIfNotInitialized()
         guard let installationInMemory: CurrentInstallationContainer<Self> =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             #if !os(Linux) && !os(Android) && !os(Windows)
@@ -287,6 +286,7 @@ public extension ParseInstallation {
      - throws: An error of `ParseError` type.
     */
     static func current() async throws -> Self {
+        await yieldIfNotInitialized()
         guard let installation = await Self.currentContainer().currentInstallation else {
             throw ParseError(code: .otherCause,
                              message: "There is no current Installation")

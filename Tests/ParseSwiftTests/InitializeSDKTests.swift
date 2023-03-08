@@ -131,20 +131,6 @@ class InitializeSDKTests: XCTestCase {
         _ = try await Installation.current()
     }
 
-    func testVersionWaitsForSDKInitialization() async throws {
-        try await setupInitialStorage()
-        initializeAfter()
-        do {
-            _ = try await ParseVersion.current()
-        } catch {
-            guard let parseError = error as? ParseError else {
-                XCTFail("Should have casted")
-                return
-            }
-            XCTAssertTrue(parseError.message.contains("no current"))
-        }
-    }
-
     func testConfigWaitsForSDKInitialization() async throws {
         try await setupInitialStorage()
         initializeAfter()
@@ -161,12 +147,6 @@ class InitializeSDKTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testKeychainAccessGroupWaitsForSDKInitialization() async throws {
-        try await setupInitialStorage()
-        initializeAfter()
-        _ = try await ParseKeychainAccessGroup.current()
-    }
-
     func addCachedResponse() {
         if URLSession.parse.configuration.urlCache == nil {
             URLSession.parse.configuration.urlCache = .init()

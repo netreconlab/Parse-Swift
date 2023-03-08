@@ -25,7 +25,6 @@ public struct ParseVersion: ParseTypeable, Hashable {
      - throws: An error of `ParseError` type.
      */
     public static func current() async throws -> Self {
-        await yieldIfNotInitialized()
         guard let versionInMemory: Self =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
             // Handle Memory migrations from String to ParseVersion
