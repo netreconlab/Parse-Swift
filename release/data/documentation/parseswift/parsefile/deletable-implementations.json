@@ -34,7 +34,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)-4jlth"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)"
       ],
       "title" : "Instance Methods"
     }
@@ -137,6 +137,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -156,10 +164,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/delete()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:)-4jlth": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:)": {
   "abstract" : [
     {
-      "text" : "Deletes the file from the Parse cloud.",
+      "text" : "Deletes the file from the Parse Server.",
       "type" : "text"
     }
   ],
@@ -208,15 +216,23 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)-4jlth",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/delete(options:)-4jlth"
+  "url" : "\/documentation\/parseswift\/parsefile\/delete(options:)"
 }
 }
 }

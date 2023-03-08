@@ -261,6 +261,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/maxConnectionAttempts",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/parseFileTransfer",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/primaryKey",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/primitiveStore",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/requestCachePolicy",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/serverURL"
       ],
@@ -1664,6 +1665,40 @@
   "title" : "primaryKey",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfiguration\/primarykey"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/primitiveStore": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "primitiveStore"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP",
+      "text" : "ParsePrimitiveStorable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/primitiveStore",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "primitiveStore",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseconfiguration\/primitivestore"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/requestCachePolicy": {
   "abstract" : [

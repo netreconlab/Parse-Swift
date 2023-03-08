@@ -2,8 +2,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)-9iop9",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)-2hvwx"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)"
       ],
       "title" : "ParseObject Implementations"
     }
@@ -22,7 +21,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift9FetchableP5fetch11includeKeys7options12FetchingTypeQzSaySSGSg_ShyAA3APIV6OptionOGtKF",
+    "externalID" : "s:10ParseSwift9FetchableP5fetch11includeKeys7options12FetchingTypeQzSaySSGSg_ShyAA3APIV6OptionOGtYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -82,6 +81,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -179,6 +186,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -362,7 +377,7 @@
   "abstract" : [
 
   ],
-  "defaultImplementations" : 2,
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -422,6 +437,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -445,115 +468,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/fetch(includeKeys:options:)-2hvwx": {
-  "abstract" : [
-    {
-      "text" : "Fetches the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)-2hvwx",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(includeKeys:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-2hvwx"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/fetch(includeKeys:options:)-9iop9": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/fetch(includeKeys:options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -662,12 +577,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)-9iop9",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/fetch(includeKeys:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)-9iop9"
+  "url" : "\/documentation\/parseswift\/parseobject\/fetch(includekeys:options:)"
 }
 }
 }

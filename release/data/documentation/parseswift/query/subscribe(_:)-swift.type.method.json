@@ -52,7 +52,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ",
+    "externalID" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -88,12 +88,20 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
         "text" : "T"
       },
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -105,7 +113,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
         "text" : "T"
       }
     ],
@@ -180,12 +188,20 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
               "text" : "T"
             },
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -197,7 +213,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -463,12 +479,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -480,7 +504,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     }
   ],

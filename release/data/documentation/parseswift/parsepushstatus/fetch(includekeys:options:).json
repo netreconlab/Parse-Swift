@@ -15,7 +15,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "aynchronously",
           "type" : "text"
         }
       ],
@@ -42,7 +42,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE5fetch11includeKeys7optionsxSaySSGSg_ShyAA3APIV6OptionOGtKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE5fetch11includeKeys7optionsxSaySSGSg_ShyAA3APIV6OptionOGtYaKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -105,6 +105,14 @@
       },
       {
         "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
         "text" : "throws"
       },
       {
@@ -137,6 +145,14 @@
             "iOS"
           ],
           "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@discardableResult"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
             {
               "kind" : "keyword",
               "text" : "func"
@@ -197,6 +213,14 @@
             {
               "kind" : "text",
               "text" : " = []) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -337,7 +361,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An error of ",
+                  "text" : "An error of type ",
                   "type" : "text"
                 },
                 {
@@ -345,7 +369,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " type.",
+                  "text" : ".",
                   "type" : "text"
                 }
               ],
@@ -563,7 +587,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "aynchronously",
           "type" : "text"
         }
       ],
@@ -633,6 +657,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

@@ -1,0 +1,223 @@
+{
+  "abstract" : [
+    {
+      "text" : "The socket is not established.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/socketNotEstablished"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10ParseSwift0A9LiveQueryC16ConnectionStatusO20socketNotEstablishedyA2EmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "socketNotEstablished"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ParseSwift"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "ParseLiveQuery.ConnectionStatus.socketNotEstablished"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "socketNotEstablished"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/parseswift\/parselivequery\/connectionstatus\/socketnotestablished"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ParseSwift",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseLiveQuery",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " class enables two-way communication to a Parse Live Query",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseLiveQuery"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseLiveQuery"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseLiveQuery",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parselivequery"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/ConnectionStatus": {
+  "abstract" : [
+    {
+      "text" : "The connection status of LiveQuery",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ConnectionStatus"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ConnectionStatus"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseLiveQuery.ConnectionStatus",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parselivequery\/connectionstatus"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/ConnectionStatus/socketNotEstablished": {
+  "abstract" : [
+    {
+      "text" : "The socket is not established.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "socketNotEstablished"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/socketNotEstablished",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ParseLiveQuery.ConnectionStatus.socketNotEstablished",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parselivequery\/connectionstatus\/socketnotestablished"
+}
+}
+}

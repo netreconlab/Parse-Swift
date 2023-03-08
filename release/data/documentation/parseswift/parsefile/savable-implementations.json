@@ -34,7 +34,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)-9u9ws"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)"
       ],
       "title" : "Instance Methods"
     }
@@ -137,6 +137,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -156,7 +164,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/save()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:)-9u9ws": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:)": {
   "abstract" : [
     {
       "text" : "Creates a file with given data ",
@@ -165,14 +173,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : ". A name will be assigned to it by the server.",
+      "text" : " and executes the given callback block.",
       "type" : "text"
     },
     {
@@ -180,7 +188,15 @@
       "type" : "text"
     },
     {
-      "text" : "If the file has not been downloaded, it will automatically be downloaded before saved.",
+      "text" : "A name will be assigned to it by the server. If the file has not been downloaded, it will automatically",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "be downloaded before saved.",
       "type" : "text"
     }
   ],
@@ -229,6 +245,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -241,12 +265,12 @@
       "text" : "ParseFile"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)-9u9ws",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/save(options:)-9u9ws"
+  "url" : "\/documentation\/parseswift\/parsefile\/save(options:)"
 }
 }
 }

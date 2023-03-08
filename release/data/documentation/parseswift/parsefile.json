@@ -98,7 +98,6 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable",
@@ -149,23 +148,16 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)-7ukf",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:callbackQueue:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/deletePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(includeKeys:options:callbackQueue:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:callbackQueue:progress:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:callbackQueue:progress:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:progress:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:stream:callbackQueue:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetchPublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetchPublisher(options:progress:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)-4umwf",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:callbackQueue:progress:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:callbackQueue:progress:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:progress:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:stream:callbackQueue:progress:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:stream:callbackQueue:progress:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/savePublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/savePublisher(options:progress:)"
       ],
@@ -179,7 +171,6 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Decodable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Deletable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Equatable-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Fetchable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Identifiable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/ParseEncodable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Savable-Implementations"
@@ -262,37 +253,6 @@
   "title" : "Deletable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/deletable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Fetchable"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Fetchable"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Fetchable",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/fetchable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncodable": {
   "abstract" : [
@@ -458,17 +418,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/equatable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/Fetchable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Fetchable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Fetchable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/fetchable-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/Identifiable-Implementations": {
   "abstract" : [
 
@@ -583,155 +532,6 @@
   "title" : "data",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/data"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:)-7ukf": {
-  "abstract" : [
-    {
-      "text" : "Deletes the file from the Parse Server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:)-7ukf",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "delete(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/delete(options:)-7ukf"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:callbackQueue:)": {
-  "abstract" : [
-    {
-      "text" : "Deletes the file from the Parse cloud.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "callbackQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)OS_dispatch_queue",
-      "text" : "DispatchQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/delete(options:callbackQueue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "delete(options:callbackQueue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/delete(options:callbackqueue:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -945,124 +745,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/deletepublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetch(includeKeys:options:callbackQueue:)": {
-  "abstract" : [
-    {
-      "text" : "Fetches a file with given url ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "callbackQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)OS_dispatch_queue",
-      "text" : "DispatchQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A4FileV",
-      "text" : "ParseFile"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(includeKeys:options:callbackQueue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(includeKeys:options:callbackQueue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/fetch(includekeys:options:callbackqueue:)"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetch(options:)": {
   "abstract" : [
     {
@@ -1154,160 +836,6 @@
   "title" : "fetch(options:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/fetch(options:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetch(options:callbackQueue:progress:)": {
-  "abstract" : [
-    {
-      "text" : "Fetches a file with given url ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "callbackQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)OS_dispatch_queue",
-      "text" : "DispatchQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "progress"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSessionDownloadTask",
-      "text" : "URLSessionDownloadTask"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A4FileV",
-      "text" : "ParseFile"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:callbackQueue:progress:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(options:callbackQueue:progress:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/fetch(options:callbackqueue:progress:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetch(options:callbackQueue:progress:completion:)": {
   "abstract" : [
@@ -1654,115 +1182,6 @@
   "title" : "fetch(options:progress:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/fetch(options:progress:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetch(options:stream:callbackQueue:)": {
-  "abstract" : [
-    {
-      "text" : "Fetches a file with given url ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "stream"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSInputStream",
-      "text" : "InputStream"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "callbackQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)OS_dispatch_queue",
-      "text" : "DispatchQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/fetch(options:stream:callbackQueue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(options:stream:callbackQueue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/fetch(options:stream:callbackqueue:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/fetchPublisher(options:)": {
   "abstract" : [
@@ -2693,276 +2112,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/options"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:)-4umwf": {
-  "abstract" : [
-    {
-      "text" : "Creates a file with given data ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "asynchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and executes the given callback block.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "A name will be assigned to it by the server. If the file has not been downloaded, it will automatically",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "be downloaded before saved.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A4FileV",
-      "text" : "ParseFile"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:)-4umwf",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/save(options:)-4umwf"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:callbackQueue:progress:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a file with given data ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ". A name will be assigned to it by the server.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "If the file has not been downloaded, it will automatically be downloaded before saved.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "callbackQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)OS_dispatch_queue",
-      "text" : "DispatchQueue"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "progress"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSessionTask",
-      "text" : "URLSessionTask"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5Int64V",
-      "text" : "Int64"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A4FileV",
-      "text" : "ParseFile"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:callbackQueue:progress:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(options:callbackQueue:progress:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/save(options:callbackqueue:progress:)"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:callbackQueue:progress:completion:)": {
   "abstract" : [
     {
@@ -3320,7 +2469,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile\/save(options:progress:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:stream:callbackQueue:progress:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:stream:callbackQueue:progress:completion:)": {
   "abstract" : [
     {
       "text" : "Creates a file with given stream ",
@@ -3468,19 +2617,45 @@
     },
     {
       "kind" : "text",
-      "text" : ")?) "
+      "text" : ")?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
+      "text" : "ParseError"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
     },
     {
       "kind" : "keyword",
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:stream:callbackQueue:progress:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/save(options:stream:callbackQueue:progress:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "save(options:stream:callbackQueue:progress:)",
+  "title" : "save(options:stream:callbackQueue:progress:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/save(options:stream:callbackqueue:progress:)"
+  "url" : "\/documentation\/parseswift\/parsefile\/save(options:stream:callbackqueue:progress:completion:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/savePublisher(options:)": {
   "abstract" : [

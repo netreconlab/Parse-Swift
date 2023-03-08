@@ -163,12 +163,10 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)-3xyp9",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)-584mt",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunctionPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)-9px5c",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)-9skq9",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJobPublisher(options:)"
       ],
@@ -387,91 +385,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudable\/functionjobname"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/runFunction(options:)-3xyp9": {
-  "abstract" : [
-    {
-      "text" : "Calls a Cloud Code function ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and returns a result of its execution.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "runFunction"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9CloudableP10ReturnTypeQa",
-      "text" : "ReturnType"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)-3xyp9",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "runFunction(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsecloudable\/runfunction(options:)-3xyp9"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/runFunction(options:)-584mt": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/runFunction(options:)": {
   "abstract" : [
     {
       "text" : "Calls a Cloud Code function ",
@@ -556,12 +470,12 @@
       "text" : "ReturnType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)-584mt",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/runFunction(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "runFunction(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsecloudable\/runfunction(options:)-584mt"
+  "url" : "\/documentation\/parseswift\/parsecloudable\/runfunction(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/runFunction(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -801,7 +715,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudable\/runfunctionpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/startJob(options:)-9px5c": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/startJob(options:)": {
   "abstract" : [
     {
       "text" : "Starts a Cloud Code Job ",
@@ -886,120 +800,12 @@
       "text" : "ReturnType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)-9px5c",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "startJob(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsecloudable\/startjob(options:)-9px5c"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/startJob(options:)-9skq9": {
-  "abstract" : [
-    {
-      "text" : "Starts a Cloud Code Job ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and returns a result with the jobStatusId of the job.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "- parameter options: A set of header options sent to the server. Defaults to an empty set.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "- returns: Returns a ",
-      "type" : "text"
-    },
-    {
-      "code" : "Decodable",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "startJob"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9CloudableP10ReturnTypeQa",
-      "text" : "ReturnType"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable\/startJob(options:)-9skq9",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "startJob(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsecloudable\/startjob(options:)-9skq9"
+  "url" : "\/documentation\/parseswift\/parsecloudable\/startjob(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudable/startJob(options:callbackQueue:completion:)": {
   "abstract" : [

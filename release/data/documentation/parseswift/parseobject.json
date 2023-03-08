@@ -815,8 +815,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/replacePublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/revert()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/revert(_:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)-6rol8",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)-n7lr",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/savePublisher(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/set(_:to:)",
@@ -4998,7 +4997,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/revert(_:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/save(ignoringCustomObjectIdConfig:options:)-6rol8": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/save(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -5107,120 +5106,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)-6rol8",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(ignoringCustomObjectIdConfig:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/save(ignoringcustomobjectidconfig:options:)-6rol8"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/save(ignoringCustomObjectIdConfig:options:)-n7lr": {
-  "abstract" : [
-    {
-      "text" : "Saves the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and throws an error if there is an issue.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "ignoringCustomObjectIdConfig"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/save(ignoringCustomObjectIdConfig:options:)-n7lr",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(ignoringCustomObjectIdConfig:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/save(ignoringcustomobjectidconfig:options:)-n7lr"
+  "url" : "\/documentation\/parseswift\/parseobject\/save(ignoringcustomobjectidconfig:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)": {
   "abstract" : [

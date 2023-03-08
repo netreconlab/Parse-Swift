@@ -940,7 +940,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The master key for your Parse application. This key should only be",
+                  "text" : "The primary key for your Parse application. This key should only be",
                   "type" : "text"
                 },
                 {

@@ -79,11 +79,32 @@
             {
               "kind" : "identifier",
               "text" : "ParsePrimitiveStorable"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:ScA",
+              "text" : "Actor"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/ScA",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/12_Concurrency8AnyActorP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
     }
   ],
   "schemaVersion" : {
@@ -119,6 +140,16 @@
   ]
 , 
 "references": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/12_Concurrency8AnyActorP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/12_Concurrency8AnyActorP",
+  "title" : "_Concurrency.AnyActor",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/ScA": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/ScA",
+  "title" : "_Concurrency.Actor",
+  "type" : "unresolvable"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
 
@@ -424,6 +455,11 @@
   "title" : "set(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable\/set(_:for:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

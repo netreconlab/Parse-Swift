@@ -34,7 +34,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE5stripyyF::SYNTHESIZED::s:10ParseSwift0A8LinkedInV",
+    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE5strip17AuthenticatedUserQzyYaKF::SYNTHESIZED::s:10ParseSwift0A8LinkedInV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -50,7 +50,28 @@
       },
       {
         "kind" : "text",
-        "text" : "()"
+        "text" : "() "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10ParseSwift0A14AuthenticationP17AuthenticatedUserQa",
+        "text" : "AuthenticatedUser"
       }
     ],
     "modules" : [
@@ -75,6 +96,14 @@
           ],
           "tokens" : [
             {
+              "kind" : "attribute",
+              "text" : "@discardableResult"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
               "kind" : "keyword",
               "text" : "func"
             },
@@ -88,7 +117,29 @@
             },
             {
               "kind" : "text",
-              "text" : "()"
+              "text" : "() "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/AuthenticatedUser",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift0A14AuthenticationP17AuthenticatedUserQa",
+              "text" : "AuthenticatedUser"
             }
           ]
         }
@@ -128,6 +179,41 @@
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAuthentication/AuthenticatedUser": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatedUser"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A4UserP",
+      "text" : "ParseUser"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/AuthenticatedUser",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "AuthenticatedUser",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseauthentication\/authenticateduser"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLinkedIn": {
   "abstract" : [
@@ -259,7 +345,28 @@
     },
     {
       "kind" : "text",
-      "text" : "()"
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A14AuthenticationP17AuthenticatedUserQa",
+      "text" : "AuthenticatedUser"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn\/strip()",

@@ -68,7 +68,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV6updateyyqd__KAA0C12SubscribableRd__lF",
+    "externalID" : "s:10ParseSwift5QueryV6updateyyqd__YaKAA0C12SubscribableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -96,12 +96,20 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__KAA0C12SubscribableRd__lF1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__YaKAA0C12SubscribableRd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -171,12 +179,20 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__KAA0C12SubscribableRd__lF1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__YaKAA0C12SubscribableRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -433,12 +449,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__KAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__YaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

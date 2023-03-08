@@ -33,14 +33,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked"
-      ],
-      "title" : "Instance Properties"
-    },
-    {
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked(with:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/link(authData:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/link(authData:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/linkPublisher(authData:options:)",
@@ -56,6 +49,13 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/unlinkPublisher(options:)"
       ],
       "title" : "Instance Methods"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked(with:)"
+      ],
+      "title" : "Type Methods"
     }
   ],
   "variants" : [
@@ -167,14 +167,43 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseapple"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseApple/isLinked": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseApple/isLinked()": {
   "abstract" : [
-
+    {
+      "text" : "Returns ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "true",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " if the ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "current",
+          "type" : "text"
+        }
+      ],
+      "type" : "emphasis"
+    },
+    {
+      "text" : " user is linked to the respective authentication type.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -186,7 +215,15 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -194,12 +231,12 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/isLinked()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "isLinked",
+  "title" : "isLinked()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseapple\/islinked"
+  "url" : "\/documentation\/parseswift\/parseapple\/islinked()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseApple/isLinked(with:)": {
   "abstract" : [
@@ -217,6 +254,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -1219,7 +1264,28 @@
     },
     {
       "kind" : "text",
-      "text" : "()"
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A14AuthenticationP17AuthenticatedUserQa",
+      "text" : "AuthenticatedUser"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple\/strip()",

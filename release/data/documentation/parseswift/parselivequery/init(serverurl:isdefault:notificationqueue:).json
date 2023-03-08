@@ -13,7 +13,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A9LiveQueryC9serverURL9isDefault17notificationQueueAC10Foundation0F0VSg_SbSo17OS_dispatch_queueCtKcfc",
+    "externalID" : "s:10ParseSwift0A9LiveQueryC9serverURL9isDefault17notificationQueueAC10Foundation0F0VSg_SbSo17OS_dispatch_queueCtYaKcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -73,6 +73,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -158,6 +166,14 @@
             {
               "kind" : "text",
               "text" : " = .main) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -422,6 +438,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

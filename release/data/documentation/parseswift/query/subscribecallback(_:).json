@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Registers the query for live updates, using the default subscription handler,",
+      "text" : "Registers the query for live updates, using the default subscription handler",
       "type" : "text"
     },
     {
@@ -68,7 +68,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV17subscribeCallbackyAA012SubscriptionE0CyxGAA0a4LiveC0CKF",
+    "externalID" : "s:10ParseSwift5QueryV17subscribeCallbackyAA012SubscriptionE0CyxGAA0a4LiveC0CYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -94,6 +94,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -184,6 +192,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -492,7 +508,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribeCallback(_:)": {
   "abstract" : [
     {
-      "text" : "Registers the query for live updates, using the default subscription handler,",
+      "text" : "Registers the query for live updates, using the default subscription handler",
       "type" : "text"
     },
     {
@@ -569,6 +585,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

@@ -14,7 +14,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF",
+    "externalID" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -42,12 +42,20 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+        "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
         "text" : "T"
       },
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -59,7 +67,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+        "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
         "text" : "T"
       }
     ],
@@ -126,12 +134,20 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+              "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
               "text" : "T"
             },
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -143,7 +159,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+              "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
               "text" : "T"
             },
             {
@@ -292,12 +308,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -309,7 +333,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxKAA0D12SubscribableRzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9LiveQueryC9subscribeyxxYaKAA0D12SubscribableRzlF1TL_xmfp",
       "text" : "T"
     }
   ],

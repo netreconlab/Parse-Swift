@@ -114,8 +114,7 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7gul1",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7id9f",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:callbackQueue:allowIntermediateResponses:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/checkPublisher(options:)"
       ],
@@ -282,7 +281,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehealth\/status"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-7gul1": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)": {
   "abstract" : [
     {
       "text" : "Calls the health check function ",
@@ -375,104 +374,12 @@
       "text" : "Status"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7gul1",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "check(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7gul1"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:)-7id9f": {
-  "abstract" : [
-    {
-      "text" : "Calls the health check function ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and returns a result of its execution.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "check"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6HealthV6StatusO",
-      "text" : "Status"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth\/check(options:)-7id9f",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "check(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)-7id9f"
+  "url" : "\/documentation\/parseswift\/parsehealth\/check(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth/check(options:callbackQueue:allowIntermediateResponses:completion:)": {
   "abstract" : [

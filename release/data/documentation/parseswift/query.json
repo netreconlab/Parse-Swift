@@ -163,33 +163,25 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/className-swift.property",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribe",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribeCallback",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/viewModel"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)-128p2",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)-4ycg9",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)-28oui",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)-7k6n3",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplainPublisher(_:usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregatePublisher(_:options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/count(options:)-25obg",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)-4fdb9",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)-97wa2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplainPublisher(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)-783te",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)-8r7nh",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)-4h769",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)-5q4cg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplainPublisher(_:usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctPublisher(_:options:)",
@@ -197,18 +189,14 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/exclude(_:)-717l0",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-2q1ez",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/fields(_:)-71x3d",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/find(options:)-8vz5e",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findAll(batchLimit:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findAll(batchLimit:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findAllPublisher(batchLimit:options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)-58al",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)-ret0",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplainPublisher(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/first(options:)-53w8y",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)-7sns5",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)-ie81",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplainPublisher(usingMongoDB:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstPublisher(options:)",
@@ -224,7 +212,9 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/select(_:)-689ic",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/skip(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/sortByTextScore()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribe()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribe(_:)-swift.method",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribeCallback()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribeCallback(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/unsubscribe()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/unsubscribe(_:)",
@@ -552,145 +542,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/queryable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregate(_:options:)-128p2": {
-  "abstract" : [
-    {
-      "text" : "Executes an aggregate query ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "aggregate"
-    },
-    {
-      "kind" : "text",
-      "text" : "([["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SE",
-      "text" : "Encodable"
-    },
-    {
-      "kind" : "text",
-      "text" : "]], "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV10ResultTypea",
-      "text" : "ResultType"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)-128p2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "aggregate(_:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/aggregate(_:options:)-128p2"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregate(_:options:)-4ycg9": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregate(_:options:)": {
   "abstract" : [
     {
       "text" : "Executes an aggregate query ",
@@ -829,12 +681,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)-4ycg9",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregate(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "aggregate(_:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/aggregate(_:options:)-4ycg9"
+  "url" : "\/documentation\/parseswift\/query\/aggregate(_:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregate(_:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -1018,7 +870,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/aggregate(_:options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregateExplain(_:usingMongoDB:options:)-28oui": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregateExplain(_:usingMongoDB:options:)": {
   "abstract" : [
     {
       "text" : "Query plan information for executing an aggregate query ",
@@ -1182,175 +1034,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)-28oui",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "aggregateExplain(_:usingMongoDB:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/aggregateexplain(_:usingmongodb:options:)-28oui"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregateExplain(_:usingMongoDB:options:)-7k6n3": {
-  "abstract" : [
-    {
-      "text" : "Query plan information for  executing an aggregate query ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "aggregateExplain"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : ">([["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SE",
-      "text" : "Encodable"
-    },
-    {
-      "kind" : "text",
-      "text" : "]], "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingMongoDB"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7optionsSayqd__GSaySDySSSE_pGG_SbShyAA3APIV6OptionOGtKSeRd__lF1UL_qd__mfp",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/aggregateExplain(_:usingMongoDB:options:)-7k6n3",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "aggregateExplain(_:usingMongoDB:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/aggregateexplain(_:usingmongodb:options:)-7k6n3"
+  "url" : "\/documentation\/parseswift\/query\/aggregateexplain(_:usingmongodb:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/aggregateExplain(_:usingMongoDB:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -1978,131 +1667,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/classname-swift.type.property"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/count(options:)-25obg": {
-  "abstract" : [
-    {
-      "text" : "Count objects ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "asynchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "count"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/count(options:)-25obg",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "count(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/count(options:)-25obg"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/countExplain(usingMongoDB:options:)-4fdb9": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/countExplain(usingMongoDB:options:)": {
   "abstract" : [
     {
       "text" : "Query plan information for counting objects ",
@@ -2248,165 +1813,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)-4fdb9",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "countExplain(usingMongoDB:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/countexplain(usingmongodb:options:)-4fdb9"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/countExplain(usingMongoDB:options:)-97wa2": {
-  "abstract" : [
-    {
-      "text" : "Query plan information for counting objects ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " based on the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "constructed query and sets an error if there was one.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "countExplain"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingMongoDB"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12countExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtKSeRd__lF1UL_qd__mfp",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/countExplain(usingMongoDB:options:)-97wa2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "countExplain(usingMongoDB:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/countexplain(usingmongodb:options:)-97wa2"
+  "url" : "\/documentation\/parseswift\/query\/countexplain(usingmongodb:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/countExplain(usingMongoDB:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -2882,136 +2294,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/countpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinct(_:options:)-783te": {
-  "abstract" : [
-    {
-      "text" : "Executes an aggregate query ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and calls the given.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "distinct"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV10ResultTypea",
-      "text" : "ResultType"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)-783te",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "distinct(_:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/distinct(_:options:)-783te"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinct(_:options:)-8r7nh": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinct(_:options:)": {
   "abstract" : [
     {
       "text" : "Executes a distinct query ",
@@ -3141,12 +2424,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)-8r7nh",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinct(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "distinct(_:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/distinct(_:options:)-8r7nh"
+  "url" : "\/documentation\/parseswift\/query\/distinct(_:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinct(_:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -3321,7 +2604,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/distinct(_:options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinctExplain(_:usingMongoDB:options:)-4h769": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinctExplain(_:usingMongoDB:options:)": {
   "abstract" : [
     {
       "text" : "Query plan information for executing a distinct query ",
@@ -3476,166 +2759,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)-4h769",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "distinctExplain(_:usingMongoDB:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/distinctexplain(_:usingmongodb:options:)-4h769"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinctExplain(_:usingMongoDB:options:)-5q4cg": {
-  "abstract" : [
-    {
-      "text" : "Query plan information for executing an aggregate query ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and calls the given.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "distinctExplain"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingMongoDB"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV15distinctExplain_12usingMongoDB7optionsSayqd__GSS_SbShyAA3APIV6OptionOGtKSeRd__lF1UL_qd__mfp",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/distinctExplain(_:usingMongoDB:options:)-5q4cg",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "distinctExplain(_:usingMongoDB:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/distinctexplain(_:usingmongodb:options:)-5q4cg"
+  "url" : "\/documentation\/parseswift\/query\/distinctexplain(_:usingmongodb:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/distinctExplain(_:usingMongoDB:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -4446,134 +3575,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/fields(_:)-71x3d"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/find(options:)-8vz5e": {
-  "abstract" : [
-    {
-      "text" : "Finds objects ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "asynchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "find"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV10ResultTypea",
-      "text" : "ResultType"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/find(options:)-8vz5e",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "find(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/find(options:)-8vz5e"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/findAll(batchLimit:options:)": {
   "abstract" : [
     {
@@ -5079,7 +4080,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/findallpublisher(batchlimit:options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/findExplain(usingMongoDB:options:)-58al": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/findExplain(usingMongoDB:options:)": {
   "abstract" : [
     {
       "text" : "Query plan information for finding objects ",
@@ -5225,165 +4226,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)-58al",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "findExplain(usingMongoDB:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/findexplain(usingmongodb:options:)-58al"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/findExplain(usingMongoDB:options:)-ret0": {
-  "abstract" : [
-    {
-      "text" : "Query plan information for finding objects ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " based on the constructed query and",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "sets an error if there was one.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "findExplain"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingMongoDB"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtKSeRd__lF1UL_qd__mfp",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/findExplain(usingMongoDB:options:)-ret0",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "findExplain(usingMongoDB:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/findexplain(usingmongodb:options:)-ret0"
+  "url" : "\/documentation\/parseswift\/query\/findexplain(usingmongodb:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/findExplain(usingMongoDB:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -5859,280 +4707,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/findpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/first(options:)-53w8y": {
-  "abstract" : [
-    {
-      "text" : "Gets an object ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "asynchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "first"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV10ResultTypea",
-      "text" : "ResultType"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/first(options:)-53w8y",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "first(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/first(options:)-53w8y"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/firstExplain(usingMongoDB:options:)-7sns5": {
-  "abstract" : [
-    {
-      "text" : "Query plan information for getting an object ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " based on the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "constructed query and sets an error if any occurred.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "T",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ParseObject",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "firstExplain"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "U"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingMongoDB"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12firstExplain12usingMongoDB7optionsqd__Sb_ShyAA3APIV6OptionOGtKSeRd__lF1UL_qd__mfp",
-      "text" : "U"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)-7sns5",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "firstExplain(usingMongoDB:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/firstexplain(usingmongodb:options:)-7sns5"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/firstExplain(usingMongoDB:options:)-ie81": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/firstExplain(usingMongoDB:options:)": {
   "abstract" : [
     {
       "text" : "Query plan information for getting an object ",
@@ -6274,12 +4849,12 @@
       "text" : "U"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)-ie81",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/firstExplain(usingMongoDB:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "firstExplain(usingMongoDB:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/firstexplain(usingmongodb:options:)-ie81"
+  "url" : "\/documentation\/parseswift\/query\/firstexplain(usingmongodb:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/firstExplain(usingMongoDB:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -7705,7 +6280,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/sortbytextscore()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribe": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribe()": {
   "abstract" : [
     {
       "text" : "Registers the query for live updates, using the default subscription handler,",
@@ -7783,7 +6358,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -7795,7 +6370,23 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -7813,15 +6404,15 @@
     },
     {
       "kind" : "text",
-      "text" : ">?"
+      "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribe",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribe()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "subscribe",
+  "title" : "subscribe()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/subscribe"
+  "url" : "\/documentation\/parseswift\/query\/subscribe()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribe(_:)-swift.method": {
   "abstract" : [
@@ -7923,6 +6514,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8032,12 +6631,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8049,7 +6656,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__KAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribeyqd__qd__YaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     }
   ],
@@ -8134,7 +6741,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribe_6clientqd__qd___AA0a4LiveC0CtKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribe_6clientqd__qd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -8160,6 +6767,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -8168,7 +6783,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribe_6clientqd__qd___AA0a4LiveC0CtKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV9subscribe_6clientqd__qd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lFZ1TL_qd__mfp",
       "text" : "T"
     }
   ],
@@ -8179,10 +6794,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/subscribe(_:client:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribeCallback": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribeCallback()": {
   "abstract" : [
     {
-      "text" : "Registers the query for live updates, using the default subscription handler,",
+      "text" : "Registers the query for live updates, using the default subscription handler",
       "type" : "text"
     },
     {
@@ -8237,7 +6852,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -8249,7 +6864,23 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -8267,20 +6898,20 @@
     },
     {
       "kind" : "text",
-      "text" : ">?"
+      "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribeCallback",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/subscribeCallback()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "subscribeCallback",
+  "title" : "subscribeCallback()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/subscribecallback"
+  "url" : "\/documentation\/parseswift\/query\/subscribecallback()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/subscribeCallback(_:)": {
   "abstract" : [
     {
-      "text" : "Registers the query for live updates, using the default subscription handler,",
+      "text" : "Registers the query for live updates, using the default subscription handler",
       "type" : "text"
     },
     {
@@ -8357,6 +6988,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8462,6 +7101,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -8550,12 +7197,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11unsubscribeyyqd__KAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV11unsubscribeyyqd__YaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8647,7 +7302,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11unsubscribe_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV11unsubscribe_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -8670,6 +7325,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8770,6 +7433,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -8862,12 +7533,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__KAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV6updateyyqd__YaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -8963,7 +7642,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -8986,6 +7665,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

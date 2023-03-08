@@ -64,7 +64,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV11unsubscribeyyKF",
+    "externalID" : "s:10ParseSwift5QueryV11unsubscribeyyYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -81,6 +81,14 @@
       {
         "kind" : "text",
         "text" : "() "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -123,6 +131,14 @@
             {
               "kind" : "text",
               "text" : "() "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -319,6 +335,14 @@
     {
       "kind" : "text",
       "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

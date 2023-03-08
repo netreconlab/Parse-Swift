@@ -68,7 +68,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF",
+    "externalID" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -96,7 +96,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -119,6 +119,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -188,7 +196,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -212,6 +220,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -532,7 +548,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtKAA0C12SubscribableRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV6update_6clientyqd___AA0a4LiveC0CtYaKAA0C12SubscribableRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -555,6 +571,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

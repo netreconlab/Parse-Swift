@@ -30,7 +30,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift10initialize13applicationId9clientKey07primaryG09serverURL015liveQueryServerJ024requiringCustomObjectIds17usingTransactions0r5EqualL10Constraint0r7PostForL014primitiveStore18requestCachePolicy19cacheMemoryCapacity17cacheDiskCapacity0R22DataProtectionKeychain24deletingKeychainIfNeeded21httpAdditionalHeaders21maxConnectionAttempts0kL21MaxConnectionAttempts17parseFileTransfer14authenticationySS_SSSgAW10Foundation0J0VAZSgS4bAA0A17PrimitiveStorable_pSgSo23NSURLRequestCachePolicyVS2iS2bSDys11AnyHashableVypGSgS2iAA0A16FileTransferable_pSgySo28NSURLAuthenticationChallengeC_ySo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtXEtcSgtKF",
+    "externalID" : "s:10ParseSwift10initialize13applicationId9clientKey07primaryG09serverURL015liveQueryServerJ024requiringCustomObjectIds17usingTransactions0r5EqualL10Constraint0r7PostForL014primitiveStore18requestCachePolicy19cacheMemoryCapacity17cacheDiskCapacity0R22DataProtectionKeychain24deletingKeychainIfNeeded21httpAdditionalHeaders21maxConnectionAttempts0kL21MaxConnectionAttempts17parseFileTransfer14authenticationySS_SSSgAW10Foundation0J0VAZSgS4bAA0A17PrimitiveStorable_pSgSo23NSURLRequestCachePolicyVS2iS2bSDys11AnyHashableVypGSgS2iAA0A16FileTransferable_pSgySo28NSURLAuthenticationChallengeC_ySo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtXEtcSgtYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -449,6 +449,14 @@
       {
         "kind" : "text",
         "text" : ")?) "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -895,6 +903,14 @@
             {
               "kind" : "text",
               "text" : ")? = nil) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -1937,6 +1953,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -2387,6 +2411,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -2449,6 +2481,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -2536,6 +2576,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

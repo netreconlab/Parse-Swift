@@ -526,14 +526,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " with the current data from the server.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -579,6 +579,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -855,7 +863,7 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "aynchronously",
           "type" : "text"
         }
       ],
@@ -925,6 +933,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -3796,14 +3812,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " and throws an error if there is an issue.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -3866,6 +3882,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -4060,14 +4084,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " and throws an error if there is an issue.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -4113,6 +4137,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

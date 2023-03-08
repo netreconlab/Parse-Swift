@@ -542,7 +542,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/contentAvailable": {
   "abstract" : [
     {
-      "text" : "If you are a writing an app using the Remote Notification",
+      "text" : "The background notification flag. If you are a writing an app using the Remote Notification",
       "type" : "text"
     },
     {
@@ -558,7 +558,16 @@
       "type" : "text"
     },
     {
-      "text" : "1 to trigger a background download.",
+      "text" : "1 to trigger a background update. For more informaiton, see ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/pushing_background_updates_to_your_app",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -980,15 +989,16 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mutableContent": {
   "abstract" : [
     {
-      "text" : "If you are a writing an app using the Remote Notification Background Mode introduced",
+      "text" : "The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : "in iOS7 (a.k.a. “Background Push”), set this value to 1 to trigger a background download.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -1789,6 +1799,30 @@
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
+},
+"https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications",
+  "title" : "Apple’s documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Apple’s documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications"
+},
+"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/pushing_background_updates_to_your_app",
+  "title" : "Apple’s documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Apple’s documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/pushing_background_updates_to_your_app"
 },
 "https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/sending_notification_requests_to_apns",

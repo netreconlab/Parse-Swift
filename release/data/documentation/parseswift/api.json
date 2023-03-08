@@ -95,6 +95,7 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Option"
       ],
       "title" : "Enumerations"
@@ -158,6 +159,37 @@
   "title" : "API",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Endpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Endpoint"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "API.Endpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/api\/endpoint"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Option": {
   "abstract" : [

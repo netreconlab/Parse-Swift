@@ -15,14 +15,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " and throws an error if there is an issue.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -42,7 +42,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE4save7optionsxShyAA3APIV6OptionOG_tKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE4save7optionsxShyAA3APIV6OptionOG_tYaKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -85,6 +85,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -174,6 +182,14 @@
             },
             {
               "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "throws"
             },
             {
@@ -200,7 +216,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "Returns saved ",
+              "text" : "Returns the saved ",
               "type" : "text"
             },
             {
@@ -435,14 +451,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " and throws an error if there is an issue.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -488,6 +504,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

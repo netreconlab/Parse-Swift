@@ -2,8 +2,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)-2crgq",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)-u8rk"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)"
       ],
       "title" : "ParseObject Implementations"
     }
@@ -22,7 +21,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift9DeletableP6delete7options12DeletingTypeQzShyAA3APIV6OptionOG_tKF",
+    "externalID" : "s:10ParseSwift9DeletableP6delete7options12DeletingTypeQzShyAA3APIV6OptionOG_tYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -65,6 +64,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -145,6 +152,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -328,7 +343,7 @@
   "abstract" : [
 
   ],
-  "defaultImplementations" : 2,
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -371,6 +386,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -394,90 +417,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/deletable\/delete(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/delete(options:)-2crgq": {
-  "abstract" : [
-    {
-      "text" : "Deletes the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)-2crgq",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "delete(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/delete(options:)-2crgq"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/delete(options:)-u8rk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/delete(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -561,12 +501,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)-u8rk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/delete(options:)-u8rk"
+  "url" : "\/documentation\/parseswift\/parseobject\/delete(options:)"
 }
 }
 }

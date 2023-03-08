@@ -148,7 +148,7 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "use the master key in server-side applications where the key is kept secure and not",
+                  "text" : "use the primary key in server-side applications where the key is kept secure and not",
                   "type" : "text"
                 },
                 {

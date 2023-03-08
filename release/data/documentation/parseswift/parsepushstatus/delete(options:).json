@@ -15,14 +15,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " with the current data from the server.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -42,7 +42,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE6delete7optionsyShyAA3APIV6OptionOG_tKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A6ObjectPAAE6delete7optionsyShyAA3APIV6OptionOG_tYaKF::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -85,6 +85,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -158,6 +166,14 @@
             },
             {
               "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "throws"
             }
           ]
@@ -197,7 +213,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An error of ",
+                  "text" : "An error of type ",
                   "type" : "text"
                 },
                 {
@@ -205,7 +221,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " type.",
+                  "text" : ".",
                   "type" : "text"
                 }
               ],
@@ -383,14 +399,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " with the current data from the server.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -436,6 +452,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

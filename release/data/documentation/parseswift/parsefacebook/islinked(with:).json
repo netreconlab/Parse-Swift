@@ -29,8 +29,16 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE8isLinked4withSb17AuthenticatedUserQz_tF::SYNTHESIZED::s:10ParseSwift0A8FacebookV",
+    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE8isLinked4withSb17AuthenticatedUserQz_tFZ::SYNTHESIZED::s:10ParseSwift0A8FacebookV",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "keyword",
         "text" : "func"
@@ -76,7 +84,7 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Instance Method",
+    "roleHeading" : "Type Method",
     "symbolKind" : "method",
     "title" : "isLinked(with:)"
   },
@@ -91,6 +99,14 @@
             "iOS"
           ],
           "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
             {
               "kind" : "keyword",
               "text" : "func"
@@ -412,6 +428,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"

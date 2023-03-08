@@ -1,15 +1,16 @@
 {
   "abstract" : [
     {
-      "text" : "If you are a writing an app using the Remote Notification Background Mode introduced",
+      "text" : "The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : "in iOS7 (a.k.a. “Background Push”), set this value to 1 to trigger a background download.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -220,15 +221,16 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/mutableContent": {
   "abstract" : [
     {
-      "text" : "If you are a writing an app using the Remote Notification Background Mode introduced",
+      "text" : "The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : "in iOS7 (a.k.a. “Background Push”), set this value to 1 to trigger a background download.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -265,6 +267,18 @@
   "title" : "mutableContent",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/mutablecontent"
+},
+"https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications",
+  "title" : "Apple’s documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Apple’s documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/modifying_content_in_newly_delivered_notifications"
 }
 }
 }

@@ -21,7 +21,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift7SavableP4save7options10SavingTypeQzShyAA3APIV6OptionOG_tKF",
+    "externalID" : "s:10ParseSwift7SavableP4save7options10SavingTypeQzShyAA3APIV6OptionOG_tYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -64,6 +64,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -144,6 +152,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -283,14 +299,14 @@
     {
       "inlineContent" : [
         {
-          "text" : "synchronously",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " and throws an error if there is an issue.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -336,6 +352,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -461,6 +485,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

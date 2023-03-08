@@ -17,7 +17,8 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/LiveQuerySocketDelegate-Implementations"
       ]
     ]
   },
@@ -28,7 +29,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A9LiveQueryC5closeyyF",
+    "externalID" : "s:10ParseSwift0A9LiveQueryC5closeyyYaF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -44,7 +45,11 @@
       },
       {
         "kind" : "text",
-        "text" : "()"
+        "text" : "() "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
       }
     ],
     "modules" : [
@@ -82,7 +87,11 @@
             },
             {
               "kind" : "text",
-              "text" : "()"
+              "text" : "() "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
             }
           ]
         }
@@ -173,6 +182,17 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/LiveQuerySocketDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/LiveQuerySocketDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LiveQuerySocketDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parselivequery\/livequerysocketdelegate-implementations"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/close()": {
   "abstract" : [
     {
@@ -203,7 +223,11 @@
     },
     {
       "kind" : "text",
-      "text" : "()"
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/close()",

@@ -393,6 +393,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/FunctionRequest",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseACL",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
@@ -436,7 +437,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Pointer",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/TriggerRequest"
       ],
       "title" : "Structures"
     },
@@ -1270,6 +1272,37 @@
   "title" : "Fetchable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/FunctionRequest": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "FunctionRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/FunctionRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "FunctionRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "FunctionRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/functionrequest"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable": {
   "abstract" : [
@@ -5555,6 +5588,37 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/subscriptioncallback"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/TriggerRequest": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TriggerRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/TriggerRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TriggerRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TriggerRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/triggerrequest"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-35vq2": {
   "abstract" : [
     {
@@ -6742,6 +6806,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -7844,6 +7916,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -7906,6 +7986,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -9682,6 +9770,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

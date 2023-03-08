@@ -185,7 +185,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder\/encode(_:skipKeys:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder\/encode(_:acl:skipKeys:)"
       ],
       "title" : "Instance Methods"
     },
@@ -289,7 +289,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseencoder\/skipkeys"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncoder/encode(_:skipKeys:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncoder/encode(_:acl:skipKeys:)": {
   "abstract" : [
     {
       "text" : "Encodes an instance of the indicated ",
@@ -331,12 +331,29 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7EncoderV6encode_8skipKeys10Foundation4DataVx_AC04SkipF0OtKAA0A9EncodableRzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A7EncoderV6encode_3acl8skipKeys10Foundation4DataVx_AA0A3ACLVSgAC04SkipG0OtKAA0A9EncodableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
       "kind" : "text",
       "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "acl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A3ACLV",
+      "text" : "ParseACL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
     },
     {
       "kind" : "externalParam",
@@ -369,12 +386,12 @@
       "text" : "Data"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder\/encode(_:skipKeys:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncoder\/encode(_:acl:skipKeys:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "encode(_:skipKeys:)",
+  "title" : "encode(_:acl:skipKeys:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseencoder\/encode(_:skipkeys:)"
+  "url" : "\/documentation\/parseswift\/parseencoder\/encode(_:acl:skipkeys:)"
 },
 "https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift": {
   "identifier" : "https:\/\/github.com\/apple\/swift\/blob\/main\/stdlib\/public\/Darwin\/Foundation\/JSONEncoder.swift",

@@ -426,21 +426,17 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/create(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/create(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/createPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)-4mmu1",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)-6rpv",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/deletePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)-33xzq",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)-556ma",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetchPublisher(includeKeys:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/replace(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/replace(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/replacePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)-1somq",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)-2rxbm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/savePublisher(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/setDeviceToken(_:)"
       ],
@@ -448,15 +444,10 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/current"
-      ],
-      "title" : "Type Properties"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/become(_:copyEntireInstallation:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/become(_:copyEntireInstallation:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/becomePublisher(_:copyEntireInstallation:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/current()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/deleteObjCKeychain(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/deleteObjCKeychain(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/deleteObjCKeychainPublisher(options:)"
@@ -1949,7 +1940,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation\/createpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/current": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/current()": {
   "abstract" : [
     {
       "text" : "Gets\/Sets properties of the current installation in the Keychain.",
@@ -1967,7 +1958,7 @@
     },
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -1979,108 +1970,37 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
     },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/current",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "current",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/current"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/delete(options:)-4mmu1": {
-  "abstract" : [
-    {
-      "text" : "Deletes the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseInstallation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "func"
+      "text" : "async"
     },
     {
       "kind" : "text",
       "text" : " "
     },
     {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
       "kind" : "keyword",
       "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)-4mmu1",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/current()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "delete(options:)",
+  "title" : "current()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/delete(options:)-4mmu1"
+  "url" : "\/documentation\/parseswift\/parseinstallation\/current()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/delete(options:)-6rpv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/delete(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -2164,12 +2084,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)-6rpv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/delete(options:)-6rpv"
+  "url" : "\/documentation\/parseswift\/parseinstallation\/delete(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/delete(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -2890,7 +2810,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation\/devicetype"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/fetch(includeKeys:options:)-33xzq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/fetch(includeKeys:options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -2999,120 +2919,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)-33xzq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/fetch(includekeys:options:)-33xzq"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/fetch(includeKeys:options:)-556ma": {
-  "abstract" : [
-    {
-      "text" : "Fetches the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseInstallation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/fetch(includeKeys:options:)-556ma",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(includeKeys:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/fetch(includekeys:options:)-556ma"
+  "url" : "\/documentation\/parseswift\/parseinstallation\/fetch(includekeys:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/fetch(includeKeys:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -3893,7 +3705,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation\/replacepublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/save(ignoringCustomObjectIdConfig:options:)-1somq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/save(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -4002,120 +3814,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)-1somq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(ignoringCustomObjectIdConfig:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/save(ignoringcustomobjectidconfig:options:)-1somq"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/save(ignoringCustomObjectIdConfig:options:)-2rxbm": {
-  "abstract" : [
-    {
-      "text" : "Saves the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseInstallation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and throws an error if there is an issue.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "ignoringCustomObjectIdConfig"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(ignoringCustomObjectIdConfig:options:)-2rxbm",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(ignoringCustomObjectIdConfig:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/save(ignoringcustomobjectidconfig:options:)-2rxbm"
+  "url" : "\/documentation\/parseswift\/parseinstallation\/save(ignoringcustomobjectidconfig:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -4272,97 +3976,6 @@
   "title" : "save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation\/save(ignoringcustomobjectidconfig:options:callbackqueue:completion:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/save(options:)": {
-  "abstract" : [
-    {
-      "text" : "Saves the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseInstallation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and throws an error if there is an issue.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/save(options:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/save(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/savePublisher(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [

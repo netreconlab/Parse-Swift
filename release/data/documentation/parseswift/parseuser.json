@@ -190,7 +190,6 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/ldap-swift.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/linkedin-swift.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/password",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/sessionToken",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/spotify-swift.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/twitter-swift.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/username"
@@ -199,32 +198,26 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-1naqv",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-1s96n",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:callbackQueue:completion:)-swift.method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/becomePublisher(sessionToken:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/create(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/create(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/createPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)-3vgtv",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)-64lxm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/deletePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)-12t7t",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)-6evh2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetchPublisher(includeKeys:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/isLinked(with:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/replace(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/replace(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/replacePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)-36qoi",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)-46n25",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/savePublisher(options:ignoringCustomObjectIdConfig:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)-1tz6b",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)-8x6w8",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signupPublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/strip(_:)",
@@ -238,7 +231,6 @@
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/anonymous-swift.type.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/apple-swift.type.property",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/current",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/facebook-swift.type.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/github-swift.type.property",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/google-swift.type.property",
@@ -253,35 +245,30 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:callbackQueue:completion:)-swift.type.method",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)-3utca",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)-cniv",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/current()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/linkPublisher(_:authData:options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)-44ibt",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)-7qe5w",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)-6vn6t",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)-8l8z5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginPublisher(_:authData:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginPublisher(username:password:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginUsingObjCKeychain(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginUsingObjCKeychain(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginUsingObjCKeychainPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)-4ot9b",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)-5l3vm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logoutPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)-6zwm1",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)-8stvt",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordResetPublisher(email:options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)-1v5qq",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)-8x6os",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/sessionToken()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signupPublisher(username:password:options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)-1ya7v",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)-3e3gg",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmailPublisher(email:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verifyPassword(password:usingPost:options:)",
@@ -1046,7 +1033,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/authdata"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)-1naqv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)": {
   "abstract" : [
     {
       "text" : "Logs in a ",
@@ -1200,149 +1187,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-1naqv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "become(sessionToken:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-1naqv"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)-1s96n": {
-  "abstract" : [
-    {
-      "text" : "Logs in a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with a session token. On success, this saves the logged in",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "with this session to the keychain, so you can retrieve the currently logged in user using",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "current",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "become"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "sessionToken"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-1s96n",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "become(sessionToken:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-1s96n"
+  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:callbackQueue:completion:)-swift.method": {
   "abstract" : [
@@ -2232,10 +2082,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/createpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/current": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/current()": {
   "abstract" : [
     {
-      "text" : "Gets the currently logged in user from the Keychain and returns an instance of it.",
+      "text" : "Gets the currently logged in user and returns an instance of it.",
       "type" : "text"
     }
   ],
@@ -2250,7 +2100,7 @@
     },
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -2262,25 +2112,37 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
       "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/current",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/current()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "current",
+  "title" : "current()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/current"
+  "url" : "\/documentation\/parseswift\/parseuser\/current()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/delete(options:)-3vgtv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/delete(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -2364,95 +2226,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)-3vgtv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/delete(options:)-3vgtv"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/delete(options:)-64lxm": {
-  "abstract" : [
-    {
-      "text" : "Deletes the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/delete(options:)-64lxm",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "delete(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/delete(options:)-64lxm"
+  "url" : "\/documentation\/parseswift\/parseuser\/delete(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/delete(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -2922,7 +2701,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/facebook-swift.type.property"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/fetch(includeKeys:options:)-12t7t": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/fetch(includeKeys:options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -3031,120 +2810,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)-12t7t",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/fetch(includekeys:options:)-12t7t"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/fetch(includeKeys:options:)-6evh2": {
-  "abstract" : [
-    {
-      "text" : "Fetches the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " with the current data from the server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/fetch(includeKeys:options:)-6evh2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(includeKeys:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/fetch(includekeys:options:)-6evh2"
+  "url" : "\/documentation\/parseswift\/parseuser\/fetch(includekeys:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/fetch(includeKeys:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -3982,133 +3653,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/ldap-swift.type.property"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/link(_:authData:options:)-3utca": {
-  "abstract" : [
-    {
-      "text" : "Makes a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronous",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " request to link a user with specified credentials. The user should already be logged in.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "link"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authData"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "], "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)-3utca",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "link(_:authData:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/link(_:authdata:options:)-3utca"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/link(_:authData:options:)-cniv": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/link(_:authData:options:)": {
   "abstract" : [
     {
       "text" : "Makes an ",
@@ -4251,12 +3796,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)-cniv",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "link(_:authData:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/link(_:authdata:options:)-cniv"
+  "url" : "\/documentation\/parseswift\/parseuser\/link(_:authdata:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/link(_:authData:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -4726,7 +4271,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/linkedin-swift.type.property"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(_:authData:options:)-44ibt": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(_:authData:options:)": {
   "abstract" : [
     {
       "text" : "Makes an ",
@@ -4869,138 +4414,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)-44ibt",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "login(_:authData:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/login(_:authdata:options:)-44ibt"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(_:authData:options:)-7qe5w": {
-  "abstract" : [
-    {
-      "text" : "Makes a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronous",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " request to login a user with specified credentials.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "login"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authData"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "], "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(_:authData:options:)-7qe5w",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "login(_:authData:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/login(_:authdata:options:)-7qe5w"
+  "url" : "\/documentation\/parseswift\/parseuser\/login(_:authdata:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(_:authData:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -5192,132 +4611,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/login(_:authdata:options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(username:password:options:)-6vn6t": {
-  "abstract" : [
-    {
-      "text" : "Makes a ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronous",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " request to login a user with specified credentials.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "login"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "username"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "password"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)-6vn6t",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "login(username:password:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/login(username:password:options:)-6vn6t"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(username:password:options:)-8l8z5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(username:password:options:)": {
   "abstract" : [
     {
       "text" : "Makes an ",
@@ -5459,12 +4753,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)-8l8z5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "login(username:password:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/login(username:password:options:)-8l8z5"
+  "url" : "\/documentation\/parseswift\/parseuser\/login(username:password:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(username:password:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -6429,90 +5723,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/loginusingobjckeychainpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/logout(options:)-4ot9b": {
-  "abstract" : [
-    {
-      "text" : "Logs out the currently logged in user in Keychain ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "logout"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)-4ot9b",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "logout(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/logout(options:)-4ot9b"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/logout(options:)-5l3vm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/logout(options:)": {
   "abstract" : [
     {
       "text" : "Logs out the currently logged in user ",
@@ -6596,12 +5807,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)-5l3vm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/logout(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "logout(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/logout(options:)-5l3vm"
+  "url" : "\/documentation\/parseswift\/parseuser\/logout(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/logout(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -6899,115 +6110,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/password"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/passwordReset(email:options:)-6zwm1": {
-  "abstract" : [
-    {
-      "text" : "Requests ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " a password reset email to be sent to the specified email address",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "associated with the user account. This email allows the user to securely reset their password on the web.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "passwordReset"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "email"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)-6zwm1",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "passwordReset(email:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/passwordreset(email:options:)-6zwm1"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/passwordReset(email:options:)-8stvt": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/passwordReset(email:options:)": {
   "abstract" : [
     {
       "text" : "Requests ",
@@ -7116,12 +6219,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)-8stvt",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/passwordReset(email:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "passwordReset(email:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/passwordreset(email:options:)-8stvt"
+  "url" : "\/documentation\/parseswift\/parseuser\/passwordreset(email:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/passwordReset(email:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -7770,115 +6873,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/replacepublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/save(ignoringCustomObjectIdConfig:options:)-36qoi": {
-  "abstract" : [
-    {
-      "text" : "Saves the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and throws an error if there is an issue.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "ignoringCustomObjectIdConfig"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)-36qoi",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(ignoringCustomObjectIdConfig:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/save(ignoringcustomobjectidconfig:options:)-36qoi"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/save(ignoringCustomObjectIdConfig:options:)-46n25": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/save(ignoringCustomObjectIdConfig:options:)": {
   "abstract" : [
     {
       "text" : "Saves the ",
@@ -7987,12 +6982,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)-46n25",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(ignoringCustomObjectIdConfig:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(ignoringCustomObjectIdConfig:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/save(ignoringcustomobjectidconfig:options:)-46n25"
+  "url" : "\/documentation\/parseswift\/parseuser\/save(ignoringcustomobjectidconfig:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/save(ignoringCustomObjectIdConfig:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -8150,97 +7145,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/save(ignoringcustomobjectidconfig:options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/save(options:)": {
-  "abstract" : [
-    {
-      "text" : "Saves the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " and throws an error if there is an issue.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/save(options:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/save(options:)"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/savePublisher(options:ignoringCustomObjectIdConfig:)": {
   "abstract" : [
     {
@@ -8363,7 +7267,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/savepublisher(options:ignoringcustomobjectidconfig:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/sessionToken": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/sessionToken()": {
   "abstract" : [
     {
       "text" : "The session token for the ",
@@ -8381,7 +7285,15 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -8393,26 +7305,38 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/sessionToken",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/sessionToken()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "sessionToken",
+  "title" : "sessionToken()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/sessiontoken"
+  "url" : "\/documentation\/parseswift\/parseuser\/sessiontoken()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(options:)-1tz6b": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(options:)": {
   "abstract" : [
     {
       "text" : "Signs up the user ",
@@ -8496,95 +7420,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)-1tz6b",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "signup(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/signup(options:)-1tz6b"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(options:)-8x6w8": {
-  "abstract" : [
-    {
-      "text" : "Signs up the user ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "signup"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(options:)-8x6w8",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "signup(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/signup(options:)-8x6w8"
+  "url" : "\/documentation\/parseswift\/parseuser\/signup(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -8717,132 +7558,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/signup(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(username:password:options:)-1v5qq": {
-  "abstract" : [
-    {
-      "text" : "Signs up the user ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "signup"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "username"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "password"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)-1v5qq",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "signup(username:password:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/signup(username:password:options:)-1v5qq"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(username:password:options:)-8x6os": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(username:password:options:)": {
   "abstract" : [
     {
       "text" : "Signs up the user ",
@@ -8968,12 +7684,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)-8x6os",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/signup(username:password:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "signup(username:password:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/signup(username:password:options:)-8x6os"
+  "url" : "\/documentation\/parseswift\/parseuser\/signup(username:password:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/signup(username:password:options:callbackQueue:completion:)": {
   "abstract" : [
@@ -10082,7 +8798,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/username"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/verificationEmail(email:options:)-1ya7v": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/verificationEmail(email:options:)": {
   "abstract" : [
     {
       "text" : "Requests ",
@@ -10191,120 +8907,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)-1ya7v",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "verificationEmail(email:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/verificationemail(email:options:)-1ya7v"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/verificationEmail(email:options:)-3e3gg": {
-  "abstract" : [
-    {
-      "text" : "Requests ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " a verification email be sent to the specified email address",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "associated with the user account.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "verificationEmail"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "email"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/verificationEmail(email:options:)-3e3gg",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "verificationEmail(email:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/verificationemail(email:options:)-3e3gg"
+  "url" : "\/documentation\/parseswift\/parseuser\/verificationemail(email:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/verificationEmail(email:options:callbackQueue:completion:)": {
   "abstract" : [

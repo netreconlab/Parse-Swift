@@ -124,9 +124,9 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/current"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/current()"
       ],
-      "title" : "Type Properties"
+      "title" : "Type Methods"
     },
     {
       "generated" : true,
@@ -313,7 +313,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseversion\/equatable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion/current": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion/current()": {
   "abstract" : [
     {
       "text" : "Current version of the SDK.",
@@ -331,7 +331,7 @@
     },
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -343,19 +343,36 @@
     },
     {
       "kind" : "text",
-      "text" : ": `Self`"
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A7VersionV",
+      "text" : "ParseVersion"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/current",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion\/current()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "current",
+  "title" : "current()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseversion\/current"
+  "url" : "\/documentation\/parseswift\/parseversion\/current()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion/init(from:)": {
   "abstract" : [

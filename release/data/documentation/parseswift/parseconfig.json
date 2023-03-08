@@ -154,12 +154,10 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)-1i1bl",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)-6cjty",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetchPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)-1dzaf",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)-6mata",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/savePublisher(options:)"
       ],
@@ -167,9 +165,9 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current()"
       ],
-      "title" : "Type Properties"
+      "title" : "Type Methods"
     }
   ],
   "variants" : [
@@ -286,7 +284,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfig"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/current": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/current()": {
   "abstract" : [
     {
       "text" : "Gets\/Sets properties of the current config in the Keychain.",
@@ -304,7 +302,7 @@
     },
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -316,25 +314,37 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
       "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "current",
+  "title" : "current()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/current"
+  "url" : "\/documentation\/parseswift\/parseconfig\/current()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:)-1i1bl": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:)": {
   "abstract" : [
     {
       "text" : "Fetch the Config ",
@@ -418,95 +428,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)-1i1bl",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/fetch(options:)-1i1bl"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:)-6cjty": {
-  "abstract" : [
-    {
-      "text" : "Fetch the Config ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)-6cjty",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "fetch(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/fetch(options:)-6cjty"
+  "url" : "\/documentation\/parseswift\/parseconfig\/fetch(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:callbackQueue:completion:)": {
   "abstract" : [
@@ -736,7 +663,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfig\/fetchpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:)-1dzaf": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:)": {
   "abstract" : [
     {
       "text" : "Update the Config ",
@@ -821,96 +748,12 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)-1dzaf",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "save(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/save(options:)-1dzaf"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:)-6mata": {
-  "abstract" : [
-    {
-      "text" : "Update the Config ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "synchronously",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "save"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)-6mata",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "save(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/save(options:)-6mata"
+  "url" : "\/documentation\/parseswift\/parseconfig\/save(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:callbackQueue:completion:)": {
   "abstract" : [
