@@ -127,8 +127,10 @@ class InitializeSDKTests: XCTestCase {
 
     func testInstallationWaitsForSDKInitialization() async throws {
         try await setupInitialStorage()
+        XCTAssertFalse(ParseConfiguration.checkIfConfigured())
         initializeAfter()
         _ = try await Installation.current()
+        XCTAssertTrue(ParseConfiguration.checkIfConfigured())
     }
 
     func testConfigWaitsForSDKInitialization() async throws {
