@@ -29,6 +29,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                                         liveQueryMaxConnectionAttempts: 1,
                                         testing: true,
                                         testLiveQueryDontCloseSocket: true)
+        try await ParseLiveQuery.configure()
     }
 
     override func tearDown() async throws {

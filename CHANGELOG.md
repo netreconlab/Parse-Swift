@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.0.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.0...5.0.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.0.1/documentation/parseswift)
+
+__Fixes__
+* Access to all ParseStorage (.current() objects) yields until SDK has completed initialization ([#63](https://github.com/netreconlab/Parse-Swift/pull/63)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.0.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.16.2...5.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.0.0/documentation/parseswift)
@@ -11,7 +17,6 @@
 __Breaking Changes__
 * Current objects such as ParseObject, ParseUser, ParseVersion, etc. now require try async/await. All synchronous networking and local storage calls have been removed. Please look at the updated Swift Playgrounds for examples ([#62](https://github.com/netreconlab/Parse-Swift/pull/62)), thanks to [Corey Baker](https://github.com/cbaker6).
 * ParseHookTriggerRequest has been renamed to ParseHookTriggerObjectRequest as it is used for decoding triggers related to ParseObjects. The new ParseHookTriggerRequest is similar but used for decoding requests not related to ParseObjects like ParseFile ([#53](https://github.com/netreconlab/Parse-Swift/pull/53)), thanks to [Corey Baker](https://github.com/cbaker6).
-* ParseVersion now supports pre-release versions of the SDK ([#49](https://github.com/netreconlab/Parse-Swift/pull/49)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Added a new ParseHealth.Status enum to support new feature in Parse Server 6.0.0. 
 Developers can now receive intermediate status updates (Status.initialized, Status.starting) 
 using the ParseHealth.check callback or Combine methods. Status.initialized and 
@@ -39,7 +44,7 @@ __New features__
 * The max connection attempts for LiveQuery can now be changed when initializing the SDK ([#43](https://github.com/netreconlab/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
-* Fixed "Duplicate request" error when resending requests related to ipempotency ([#63](https://github.com/netreconlab/Parse-Swift/pull/63)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Fixed "Duplicate request" error when resending requests related to idempotency ([#63](https://github.com/netreconlab/Parse-Swift/pull/63)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Fixed query count and withCount returning 0 when the SDK is configured to use GET for queries ([#61](https://github.com/netreconlab/Parse-Swift/pull/61)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Fixed ambiguous ParseAnalytics trackAppOpenned ([#55](https://github.com/netreconlab/Parse-Swift/pull/55)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Refactored playground mount to be "/parse" instead "/1". Also do not require url when decoding a ParseFile ([#52](https://github.com/netreconlab/Parse-Swift/pull/52)), thanks to [Corey Baker](https://github.com/cbaker6).

@@ -61,12 +61,20 @@ internal func initialize(applicationId: String,
     try await initialize(configuration: configuration)
 }
 
+internal func yieldIfNotInitialized() async {
+    guard ParseConfiguration.checkIfConfigured() else {
+        await Task.yield()
+        await yieldIfNotInitialized()
+        return
+    }
+}
+
 internal func deleteKeychainIfNeeded() async {
     #if !os(Linux) && !os(Android) && !os(Windows)
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? await KeychainStore.old.deleteAll()
+            try? await KeychainStore.old?.deleteAll()
             try? await KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
@@ -137,7 +145,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
     } catch {
         // Migrate old installations made with ParseSwift < 1.3.0
-        if let currentInstallation = try? await BaseParseInstallation.current() {
+        if let currentInstallation = await BaseParseInstallation.currentContainer().currentInstallation {
             if currentInstallation.objectId == nil {
                 await BaseParseInstallation.deleteCurrentContainerFromKeychain()
                 // Prepare installation
@@ -166,23 +174,22 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     await BaseParseInstallation.createNewInstallationIfNeeded()
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    ParseLiveQuery.defaultClient = try await ParseLiveQuery(isDefault: true)
     if configuration.isMigratingFromObjcSDK {
         await KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
             guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
-                  try await BaseParseInstallation.current().installationId != installationId else {
+                  currentInstallationContainer.installationId != installationId else {
+                Parse.configuration.isInitialized = true
                 return
             }
-            var updatedInstallation = try await BaseParseInstallation.current()
-            updatedInstallation.installationId = installationId
             var currentInstallationContainer = await BaseParseInstallation.currentContainer()
             currentInstallationContainer.installationId = installationId
-            currentInstallationContainer.currentInstallation = updatedInstallation
+            currentInstallationContainer.currentInstallation?.installationId = installationId
             await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
         }
     }
     #endif
+    Parse.configuration.isInitialized = true
 }
 
 /**
@@ -340,6 +347,7 @@ public func deleteObjectiveCKeychain() async throws {
         throw ParseError(code: .otherCause,
                          message: "\"accessGroup\" must be set to a valid string when \"synchronizeAcrossDevices == true\"")
     }
+    await yieldIfNotInitialized()
     guard let currentAccessGroup = try? await ParseKeychainAccessGroup.current() else {
         throw ParseError(code: .otherCause,
                          message: "Problem unwrapping the current access group. Did you initialize the SDK before calling this method?")

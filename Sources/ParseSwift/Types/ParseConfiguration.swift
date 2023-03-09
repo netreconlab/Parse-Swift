@@ -110,6 +110,7 @@ public struct ParseConfiguration {
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
+    internal var isInitialized = false
     internal var isTestingSDK = false
     internal var isTestingLiveQueryDontCloseSocket = false
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -210,4 +211,12 @@ public struct ParseConfiguration {
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
         self.primitiveStore = primitiveStore ?? InMemoryPrimitiveStore()
     }
+
+    internal static func checkIfConfigured() -> Bool {
+        guard Parse.configuration != nil else {
+            return false
+        }
+        return Parse.configuration.isInitialized
+    }
+
 }

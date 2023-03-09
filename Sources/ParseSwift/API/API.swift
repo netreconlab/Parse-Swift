@@ -214,7 +214,7 @@ public struct API {
             headers["X-Parse-Session-Token"] = token
         }
 
-        if let installationId = try? await BaseParseInstallation.current().installationId {
+        if let installationId = await BaseParseInstallation.currentContainer().installationId {
             headers["X-Parse-Installation-Id"] = installationId
         }
 

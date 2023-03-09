@@ -20,7 +20,7 @@ import FoundationNetworking
  ```swift
  // If "Message" is a "ParseObject"
  let myQuery = Message.query("from" == "parse")
- guard let subscription = myQuery.subscribe else {
+ guard let subscription = try await myQuery.subscribe() else {
      "Error subscribing..."
      return
  }
@@ -93,8 +93,13 @@ public final class ParseLiveQuery: NSObject {
         }
     }
 
+    /// Current LiveQuery client.
+    public private(set) static var client: ParseLiveQuery?
+
     /// The current status of the LiveQuery socket.
     public internal(set) var status: ConnectionStatus = .socketNotEstablished
+
+    static var isConfiguring: Bool = false
 
     let notificationQueue: DispatchQueue
     var task: URLSessionWebSocketTask!
@@ -155,6 +160,7 @@ Not attempting to open ParseLiveQuery socket anymore
         try await self.resumeTask()
         if isDefault {
             Self.defaultClient = self
+            Self.isConfiguring = false
         }
     }
 
@@ -165,6 +171,38 @@ Not attempting to open ParseLiveQuery socket anymore
         }
         authenticationDelegate = nil
         receiveDelegate = nil
+        if Self.client == self {
+            Self.isConfiguring = false
+        }
+    }
+
+    static func yieldIfNotConfigured() async {
+        guard !isConfiguring else {
+            await Task.yield()
+            await yieldIfNotConfigured()
+            return
+        }
+    }
+
+    static func configure() async throws {
+        guard Self.client == nil else {
+            return
+        }
+        guard !isConfiguring else {
+            await yieldIfNotConfigured()
+            return
+        }
+        isConfiguring = true
+        await yieldIfNotInitialized()
+        Self.defaultClient = try await Self(isDefault: true)
+    }
+
+    static func client() async throws -> ParseLiveQuery {
+        try await configure()
+        guard let client = Self.client else {
+            throw ParseError(code: .otherCause, message: "Missing LiveQuery client")
+        }
+        return client
     }
 
     func setStatus(_ status: ConnectionStatus) async {
@@ -221,9 +259,6 @@ Not attempting to open ParseLiveQuery socket anymore
 
 // MARK: Client Intents
 extension ParseLiveQuery {
-
-    /// Current LiveQuery client.
-    public private(set) static var client: ParseLiveQuery?
 
     func resumeTask() async throws {
         switch self.task.state {
@@ -835,10 +870,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
      */
     func subscribe() async throws -> Subscription<ResultType> {
-        guard let client = ParseLiveQuery.client else {
-            throw ParseError(code: .otherCause, message: "Missing LiveQuery client")
-        }
-        return try await client.subscribe(self)
+        try await ParseLiveQuery.client().subscribe(self)
     }
 
     /**
@@ -862,11 +894,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
     */
     static func subscribe<T: QuerySubscribable>(_ handler: T) async throws -> T {
-        if let client = ParseLiveQuery.client {
-            return try await client.subscribe(handler)
-        } else {
-            throw ParseError(code: .otherCause, message: "ParseLiveQuery Error: Not able to initialize client.")
-        }
+        try await ParseLiveQuery.client().subscribe(handler)
     }
 
     /**
@@ -877,7 +905,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
     */
     static func subscribe<T: QuerySubscribable>(_ handler: T, client: ParseLiveQuery) async throws -> T {
-        try await client.subscribe(handler)
+        try await ParseLiveQuery.client().subscribe(handler)
     }
 
     /**
@@ -887,10 +915,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
      */
     func subscribeCallback() async throws -> SubscriptionCallback<ResultType> {
-        guard let client = ParseLiveQuery.client else {
-            throw ParseError(code: .otherCause, message: "Missing LiveQuery client")
-        }
-        return try await client.subscribe(SubscriptionCallback(query: self))
+        try await ParseLiveQuery.client().subscribe(SubscriptionCallback(query: self))
     }
 
     /**
@@ -913,7 +938,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
      */
     func unsubscribe() async throws {
-        try await ParseLiveQuery.client?.unsubscribe(self)
+        try await ParseLiveQuery.client().unsubscribe(self)
     }
 
     /**
@@ -933,7 +958,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
      */
     func unsubscribe<T: QuerySubscribable>(_ handler: T) async throws {
-        try await ParseLiveQuery.client?.unsubscribe(handler)
+        try await ParseLiveQuery.client().unsubscribe(handler)
     }
 
     /**
@@ -957,7 +982,7 @@ public extension Query {
      - throws: An error of type `ParseError`.
      */
     func update<T: QuerySubscribable>(_ handler: T) async throws {
-        try await ParseLiveQuery.client?.update(handler)
+        try await ParseLiveQuery.client().update(handler)
     }
 
     /**

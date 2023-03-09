@@ -204,6 +204,24 @@ struct CurrentInstallationContainer<T: ParseInstallation>: Codable, Hashable {
 
 // MARK: Current Installation Support
 public extension ParseInstallation {
+
+    internal static func create() async throws {
+        let newInstallationId = UUID().uuidString.lowercased()
+        var newInstallation = BaseParseInstallation()
+        newInstallation.installationId = newInstallationId
+        newInstallation.createInstallationId(newId: newInstallationId)
+        newInstallation.updateAutomaticInfo()
+        let newBaseInstallationContainer =
+            CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
+                                                                installationId: newInstallationId)
+        try await ParseStorage.shared.set(newBaseInstallationContainer,
+                                          for: ParseStorage.Keys.currentInstallation)
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        try? await KeychainStore.shared.set(newBaseInstallationContainer,
+                                      for: ParseStorage.Keys.currentInstallation)
+        #endif
+    }
+
     internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
         guard let installationInMemory: CurrentInstallationContainer<Self> =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
@@ -211,16 +229,7 @@ public extension ParseInstallation {
             guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
                     try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
             else {
-                let newInstallationId = UUID().uuidString.lowercased()
-                var newInstallation = BaseParseInstallation()
-                newInstallation.installationId = newInstallationId
-                newInstallation.createInstallationId(newId: newInstallationId)
-                newInstallation.updateAutomaticInfo()
-                let newBaseInstallationContainer =
-                    CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
-                                                                        installationId: newInstallationId)
-                try? await KeychainStore.shared.set(newBaseInstallationContainer,
-                                              for: ParseStorage.Keys.currentInstallation)
+                try? await create()
                 guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
                         try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 else {
@@ -232,16 +241,7 @@ public extension ParseInstallation {
             }
             return installationFromKeyChain
             #else
-            let newInstallationId = UUID().uuidString.lowercased()
-            var newInstallation = BaseParseInstallation()
-            newInstallation.installationId = newInstallationId
-            newInstallation.createInstallationId(newId: newInstallationId)
-            newInstallation.updateAutomaticInfo()
-            let newBaseInstallationContainer =
-                CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: newInstallation,
-                                                                    installationId: newInstallationId)
-            try? await ParseStorage.shared.set(newBaseInstallationContainer,
-                                          for: ParseStorage.Keys.currentInstallation)
+            try? await create()
             guard let installationFromMemory: CurrentInstallationContainer<Self> =
                     try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
             else {
@@ -286,6 +286,7 @@ public extension ParseInstallation {
      - throws: An error of `ParseError` type.
     */
     static func current() async throws -> Self {
+        await yieldIfNotInitialized()
         guard let installation = await Self.currentContainer().currentInstallation else {
             throw ParseError(code: .otherCause,
                              message: "There is no current Installation")
