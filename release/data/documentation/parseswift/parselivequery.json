@@ -138,7 +138,7 @@
           "code" : [
             "\/\/ If \"Message\" is a \"ParseObject\"",
             "let myQuery = Message.query(\"from\" == \"parse\")",
-            "guard let subscription = myQuery.subscribe else {",
+            "guard let subscription = try await myQuery.subscribe() else {",
             "    \"Error subscribing...\"",
             "    return",
             "}",
