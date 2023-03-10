@@ -2,8 +2,11 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.1.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.1.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.1...5.1.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.1.0/documentation/parseswift)
 
 __New features__
 * Add ParseConfigCodable type that allows access to the Parse Server Config as a dictionary. ParseConfigCodable and types that conform to ParseConfig are interoperable ([#68](https://github.com/netreconlab/Parse-Swift/pull/68)), thanks to [Corey Baker](https://github.com/cbaker6).
