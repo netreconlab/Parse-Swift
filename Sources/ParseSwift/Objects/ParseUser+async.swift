@@ -60,20 +60,27 @@ public extension ParseUser {
      Returns an instance of the successfully logged in `ParseUser`.
 
      This also caches the user locally so that calls to *current* will use the latest logged in user.
-     - parameter username: The username of the user.
+     - parameter username: The username of the user. Defauilts to **nil**.
+     - parameter email: The email address associated with the user that forgot their password.
+     Defauilts to **nil**.
      - parameter password: The password of the user.
+     - parameter authData: The authentication data for the `ParseUser`. Defauilts to **nil**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: Returns the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    @discardableResult static func login(username: String,
+    @discardableResult static func login(username: String? = nil,
+                                         email: String? = nil,
                                          password: String,
+                                         authData: [String: [String: String]?]? = nil,
                                          options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             Self.login(username: username,
+                       email: email,
                        password: password,
+                       authData: authData,
                        options: options,
                        completion: continuation.resume)
         }
