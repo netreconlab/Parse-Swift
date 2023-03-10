@@ -22,7 +22,6 @@ public extension ParseConfigCodable {
      desires a different policy, it should be inserted in `options`.
     */
     static func fetchPublisher(options: API.Options = []) -> Future<[String: V], ParseError> {
-
         Future { promise in
             Self.fetch(options: options,
                        completion: promise)
@@ -37,7 +36,6 @@ public extension ParseConfigCodable {
     */
     static func savePublisher(_ config: [String: V],
                               options: API.Options = []) -> Future<Bool, ParseError> {
-
         Future { promise in
             Self.save(config,
                       options: options,

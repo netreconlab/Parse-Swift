@@ -32,7 +32,6 @@ extension ParseConfigCodable {
     public static func fetch(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
                              completion: @escaping (Result<[String: V], ParseError>) -> Void) {
-
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -44,7 +43,6 @@ extension ParseConfigCodable {
     }
 
     internal static func fetchCommand() async -> API.NonParseBodyCommand<[String: V], [String: V]> {
-
         return API.NonParseBodyCommand(method: .GET,
                                        path: .config) { (data) -> [String: V] in
             let fetched = try ParseCoding
@@ -54,6 +52,7 @@ extension ParseConfigCodable {
             return fetched
         }
     }
+
 }
 
 // MARK: Update
@@ -73,7 +72,6 @@ extension ParseConfigCodable {
                             options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
                             completion: @escaping (Result<Bool, ParseError>) -> Void) {
-
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -87,7 +85,6 @@ extension ParseConfigCodable {
 
     // swiftlint:disable:next line_length
     internal static func updateCommand(_ config: [String: V]) async -> API.NonParseBodyCommand<ConfigCodableUpdateBody<[String: V]>, Bool> {
-
         let body = ConfigCodableUpdateBody(params: config)
         return API.NonParseBodyCommand(method: .PUT, // MARK: Should be switched to ".PATCH" when server supports PATCH.
                                        path: .config,
@@ -100,6 +97,7 @@ extension ParseConfigCodable {
             return updated
         }
     }
+
 }
 
 // MARK: Current
