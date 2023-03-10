@@ -1,15 +1,11 @@
 {
   "abstract" : [
     {
-      "text" : "Objects that conform to the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseConfig",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
-      "text" : " protocol are able to access the Config on the Parse Server.",
+      "text" : " allows access to the Config on the Parse Server as a",
       "type" : "text"
     },
     {
@@ -17,15 +13,33 @@
       "type" : "text"
     },
     {
-      "text" : "When conforming to ",
+      "text" : "dictionary where the keys are ",
       "type" : "text"
     },
     {
-      "code" : "ParseConfig",
-      "type" : "codeVoice"
+      "inlineContent" : [
+        {
+          "text" : "strings",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
     },
     {
-      "text" : ", any properties added can be retrieved by the client or updated on",
+      "text" : " and the values are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "Codable",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     },
     {
@@ -33,11 +47,11 @@
       "type" : "text"
     },
     {
-      "text" : "the server. The current ",
+      "text" : "The current ",
       "type" : "text"
     },
     {
-      "code" : "ParseConfig",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
@@ -54,15 +68,15 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A6ConfigP",
+    "externalID" : "s:10ParseSwift0A13ConfigCodableV",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "protocol"
+        "text" : "struct"
       },
       {
         "kind" : "text",
@@ -70,7 +84,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "ParseConfig"
+        "text" : "ParseConfigCodable"
       }
     ],
     "modules" : [
@@ -81,13 +95,13 @@
     "navigatorTitle" : [
       {
         "kind" : "identifier",
-        "text" : "ParseConfig"
+        "text" : "ParseConfigCodable"
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Protocol",
-    "symbolKind" : "protocol",
-    "title" : "ParseConfig"
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "ParseConfigCodable"
   },
   "primaryContentSections" : [
     {
@@ -102,7 +116,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "protocol"
+              "text" : "struct"
             },
             {
               "kind" : "text",
@@ -110,17 +124,57 @@
             },
             {
               "kind" : "identifier",
-              "text" : "ParseConfig"
+              "text" : "ParseConfigCodable"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "V"
+            },
+            {
+              "kind" : "text",
+              "text" : "> "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "V"
             },
             {
               "kind" : "text",
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A8TypeableP",
-              "text" : "ParseTypeable"
+              "preciseIdentifier" : "s:Se",
+              "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "V"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SE",
+              "text" : "Encodable"
             }
           ]
         }
@@ -175,21 +229,6 @@
       "kind" : "content"
     }
   ],
-  "relationshipsSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
-      ],
-      "kind" : "relationships",
-      "title" : "Inherits From",
-      "type" : "inheritsFrom"
-    }
-  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -201,18 +240,13 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetchPublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/savePublisher(options:)"
-      ],
-      "title" : "Instance Methods"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current()"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/current()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetch(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetch(options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetchPublisher(options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/save(_:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/save(_:options:callbackQueue:completion:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/savePublisher(_:options:)"
       ],
       "title" : "Type Methods"
     }
@@ -220,7 +254,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseconfig"
+        "\/documentation\/parseswift\/parseconfigcodable"
       ],
       "traits" : [
         {
@@ -231,21 +265,6 @@
   ]
 , 
 "references": {
-"doc://edu.uky.cs.netreconlab.ParseSwift/SE": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
-  "title" : "Swift.Encodable",
-  "type" : "unresolvable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/SQ": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
-  "title" : "Swift.Equatable",
-  "type" : "unresolvable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/Se": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
-  "title" : "Swift.Decodable",
-  "type" : "unresolvable"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
 
@@ -257,18 +276,14 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable": {
   "abstract" : [
     {
-      "text" : "Objects that conform to the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseConfig",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
-      "text" : " protocol are able to access the Config on the Parse Server.",
+      "text" : " allows access to the Config on the Parse Server as a",
       "type" : "text"
     },
     {
@@ -276,15 +291,33 @@
       "type" : "text"
     },
     {
-      "text" : "When conforming to ",
+      "text" : "dictionary where the keys are ",
       "type" : "text"
     },
     {
-      "code" : "ParseConfig",
-      "type" : "codeVoice"
+      "inlineContent" : [
+        {
+          "text" : "strings",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
     },
     {
-      "text" : ", any properties added can be retrieved by the client or updated on",
+      "text" : " and the values are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "Codable",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     },
     {
@@ -292,11 +325,11 @@
       "type" : "text"
     },
     {
-      "text" : "the server. The current ",
+      "text" : "The current ",
       "type" : "text"
     },
     {
-      "code" : "ParseConfig",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
@@ -307,7 +340,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "protocol"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -315,29 +348,69 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseConfig"
+      "text" : "ParseConfigCodable"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseConfig"
+      "text" : "ParseConfigCodable"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseConfig",
+  "title" : "ParseConfigCodable",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/current()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/current()": {
   "abstract" : [
     {
       "text" : "Gets\/Sets properties of the current config in the Keychain.",
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
     {
       "kind" : "keyword",
@@ -377,21 +450,35 @@
     },
     {
       "kind" : "text",
-      "text" : " -> "
+      "text" : " -> ["
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/current()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/current()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "current()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/current()"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/current()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/fetch(options:)": {
   "abstract" : [
     {
       "text" : "Fetch the Config ",
@@ -411,7 +498,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -468,21 +603,35 @@
     },
     {
       "kind" : "text",
-      "text" : " -> "
+      "text" : " -> ["
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetch(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/fetch(options:)"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/fetch(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetch(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/fetch(options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Fetch the Config ",
@@ -502,7 +651,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -577,15 +774,25 @@
     },
     {
       "kind" : "text",
-      "text" : "<"
+      "text" : "<["
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
     },
     {
       "kind" : "typeIdentifier",
@@ -606,14 +813,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetch(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetch(options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetch(options:callbackQueue:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/fetch(options:callbackqueue:completion:)"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/fetch(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/fetchPublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/fetchPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Fetch the Config ",
@@ -633,7 +840,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -683,15 +938,25 @@
     },
     {
       "kind" : "text",
-      "text" : "<"
+      "text" : "<["
     },
     {
       "kind" : "typeIdentifier",
-      "text" : "Self"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
     },
     {
       "kind" : "typeIdentifier",
@@ -703,14 +968,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/fetchPublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/fetchPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "fetchPublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/fetchpublisher(options:)"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/fetchpublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/save(_:options:)": {
   "abstract" : [
     {
       "text" : "Update the Config ",
@@ -730,7 +995,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -745,7 +1058,25 @@
     },
     {
       "kind" : "text",
-      "text" : "("
+      "text" : "(["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
     },
     {
       "kind" : "externalParam",
@@ -795,14 +1126,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/save(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "save(options:)",
+  "title" : "save(_:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/save(options:)"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/save(_:options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/save(options:callbackQueue:completion:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/save(_:options:callbackQueue:completion:)": {
   "abstract" : [
     {
       "text" : "Update the Config ",
@@ -822,7 +1153,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -837,7 +1216,25 @@
     },
     {
       "kind" : "text",
-      "text" : "("
+      "text" : "(["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
     },
     {
       "kind" : "externalParam",
@@ -927,14 +1324,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/save(options:callbackQueue:completion:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/save(_:options:callbackQueue:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "save(options:callbackQueue:completion:)",
+  "title" : "save(_:options:callbackQueue:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/save(options:callbackqueue:completion:)"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/save(_:options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig/savePublisher(options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/savePublisher(_:options:)": {
   "abstract" : [
     {
       "text" : "Update the Config ",
@@ -954,7 +1351,55 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "func"
@@ -969,7 +1414,25 @@
     },
     {
       "kind" : "text",
-      "text" : "("
+      "text" : "(["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
     },
     {
       "kind" : "externalParam",
@@ -1025,56 +1488,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig\/savePublisher(options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/savePublisher(_:options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "savePublisher(options:)",
+  "title" : "savePublisher(_:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfig\/savepublisher(options:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
-  "abstract" : [
-    {
-      "text" : "A special type that is considered a Parse type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseTypeable"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseTypeable"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseTypeable",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsetypeable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
-  "title" : "Swift.CustomStringConvertible",
-  "type" : "unresolvable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
-  "title" : "Swift.CustomDebugStringConvertible",
-  "type" : "unresolvable"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/savepublisher(_:options:)"
 }
 }
 }

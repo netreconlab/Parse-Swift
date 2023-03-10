@@ -1,20 +1,28 @@
 {
   "abstract" : [
     {
-      "text" : "Makes an ",
+      "text" : "Logs in a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
       "type" : "text"
     },
     {
       "inlineContent" : [
         {
-          "text" : "asynchronous",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " request to log in a user with specified credentials.",
+      "text" : " with a session token. On success, this saves the logged in",
       "type" : "text"
     },
     {
@@ -22,12 +30,25 @@
       "type" : "text"
     },
     {
-      "text" : "Publishes an instance of the successfully logged in ",
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "with this session to the keychain, so you can retrieve the currently logged in user using",
       "type" : "text"
     },
     {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "current",
+          "type" : "text"
+        }
+      ],
+      "type" : "emphasis"
     },
     {
       "text" : ".",
@@ -44,12 +65,12 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginPublisher(username:password:options:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-swift.type.method"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A4UserPAAE14loginPublisher8username8password7options7Combine6FutureCyxAA0A5ErrorVGSS_SSShyAA3APIV6OptionOGtFZ",
+    "externalID" : "s:10ParseSwift0A4UserPAAE6become12sessionToken7optionsxSS_ShyAA3APIV6OptionOGtYaKFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -69,7 +90,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "loginPublisher"
+        "text" : "become"
       },
       {
         "kind" : "text",
@@ -77,24 +98,7 @@
       },
       {
         "kind" : "externalParam",
-        "text" : "username"
-      },
-      {
-        "kind" : "text",
-        "text" : ": "
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:SS",
-        "text" : "String"
-      },
-      {
-        "kind" : "text",
-        "text" : ", "
-      },
-      {
-        "kind" : "externalParam",
-        "text" : "password"
+        "text" : "sessionToken"
       },
       {
         "kind" : "text",
@@ -133,33 +137,27 @@
       },
       {
         "kind" : "text",
-        "text" : ") -> "
+        "text" : ") "
       },
       {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:7Combine6FutureC",
-        "text" : "Future"
+        "kind" : "keyword",
+        "text" : "async"
       },
       {
         "kind" : "text",
-        "text" : "<"
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
       },
       {
         "kind" : "typeIdentifier",
         "text" : "Self"
-      },
-      {
-        "kind" : "text",
-        "text" : ", "
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
-        "text" : "ParseError"
-      },
-      {
-        "kind" : "text",
-        "text" : ">"
       }
     ],
     "modules" : [
@@ -170,7 +168,7 @@
     "role" : "symbol",
     "roleHeading" : "Type Method",
     "symbolKind" : "method",
-    "title" : "loginPublisher(username:password:options:)"
+    "title" : "become(sessionToken:options:)"
   },
   "primaryContentSections" : [
     {
@@ -183,6 +181,14 @@
             "iOS"
           ],
           "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@discardableResult"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
             {
               "kind" : "keyword",
               "text" : "static"
@@ -201,7 +207,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "loginPublisher"
+              "text" : "become"
             },
             {
               "kind" : "text",
@@ -209,24 +215,7 @@
             },
             {
               "kind" : "externalParam",
-              "text" : "username"
-            },
-            {
-              "kind" : "text",
-              "text" : ": "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SS",
-              "text" : "String"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "externalParam",
-              "text" : "password"
+              "text" : "sessionToken"
             },
             {
               "kind" : "text",
@@ -267,34 +256,27 @@
             },
             {
               "kind" : "text",
-              "text" : " = []) -> "
+              "text" : " = []) "
             },
             {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:7Combine6FutureC",
-              "text" : "Future"
+              "kind" : "keyword",
+              "text" : "async"
             },
             {
               "kind" : "text",
-              "text" : "<"
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
             },
             {
               "kind" : "typeIdentifier",
               "text" : "Self"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
-              "text" : "ParseError"
-            },
-            {
-              "kind" : "text",
-              "text" : ">"
             }
           ]
         }
@@ -312,7 +294,15 @@
         {
           "inlineContent" : [
             {
-              "text" : "A publisher that eventually produces a single value and then finishes or fails.",
+              "text" : "Returns the logged in ",
+              "type" : "text"
+            },
+            {
+              "code" : "ParseUser",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
               "type" : "text"
             }
           ],
@@ -329,28 +319,14 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The username of the user.",
+                  "text" : "The sessionToken of the user to login.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "username"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The password of the user.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "password"
+          "name" : "sessionToken"
         },
         {
           "content" : [
@@ -377,26 +353,28 @@
           "type" : "heading"
         },
         {
-          "inlineContent" : [
-            {
-              "text" : "This also caches the user locally so that calls to ",
-              "type" : "text"
-            },
+          "content" : [
             {
               "inlineContent" : [
                 {
-                  "text" : "current",
+                  "text" : "An error of type ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseError",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
                   "type" : "text"
                 }
               ],
-              "type" : "emphasis"
-            },
-            {
-              "text" : " will use the latest logged in user.",
-              "type" : "text"
+              "type" : "paragraph"
             }
           ],
-          "type" : "paragraph"
+          "name" : "Throws",
+          "style" : "note",
+          "type" : "aside"
         },
         {
           "content" : [
@@ -453,7 +431,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseuser\/loginpublisher(username:password:options:)"
+        "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-swift.type.method"
       ],
       "traits" : [
         {
@@ -543,40 +521,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/options"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
-  "abstract" : [
-    {
-      "text" : "An object with a Parse code and message.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseError"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseError",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseerror"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
   "abstract" : [
     {
@@ -659,23 +603,31 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/loginPublisher(username:password:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)-swift.type.method": {
   "abstract" : [
     {
-      "text" : "Makes an ",
+      "text" : "Logs in a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
       "type" : "text"
     },
     {
       "inlineContent" : [
         {
-          "text" : "asynchronous",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " request to log in a user with specified credentials.",
+      "text" : " with a session token. On success, this saves the logged in",
       "type" : "text"
     },
     {
@@ -683,12 +635,25 @@
       "type" : "text"
     },
     {
-      "text" : "Publishes an instance of the successfully logged in ",
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "with this session to the keychain, so you can retrieve the currently logged in user using",
       "type" : "text"
     },
     {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "current",
+          "type" : "text"
+        }
+      ],
+      "type" : "emphasis"
     },
     {
       "text" : ".",
@@ -714,7 +679,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "loginPublisher"
+      "text" : "become"
     },
     {
       "kind" : "text",
@@ -722,24 +687,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "username"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "password"
+      "text" : "sessionToken"
     },
     {
       "kind" : "text",
@@ -778,41 +726,35 @@
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : ") "
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:7Combine6FutureC",
-      "text" : "Future"
+      "kind" : "keyword",
+      "text" : "async"
     },
     {
       "kind" : "text",
-      "text" : "<"
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
       "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
-      "text" : "ParseError"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/loginPublisher(username:password:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-swift.type.method",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "loginPublisher(username:password:options:)",
+  "title" : "become(sessionToken:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/loginpublisher(username:password:options:)"
+  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-swift.type.method"
 }
 }
 }

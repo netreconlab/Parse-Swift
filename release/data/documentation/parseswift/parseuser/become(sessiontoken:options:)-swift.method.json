@@ -81,7 +81,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-swift.method"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -431,7 +431,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)"
+        "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-swift.method"
       ],
       "traits" : [
         {
@@ -603,7 +603,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/become(sessionToken:options:)-swift.method": {
   "abstract" : [
     {
       "text" : "Logs in a ",
@@ -757,12 +757,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:)-swift.method",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "become(sessionToken:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)"
+  "url" : "\/documentation\/parseswift\/parseuser\/become(sessiontoken:options:)-swift.method"
 }
 }
 }

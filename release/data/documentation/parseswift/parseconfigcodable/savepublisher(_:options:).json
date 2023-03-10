@@ -1,36 +1,20 @@
 {
   "abstract" : [
     {
-      "text" : "Makes an ",
+      "text" : "Update the Config ",
       "type" : "text"
     },
     {
       "inlineContent" : [
         {
-          "text" : "asynchronous",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " request to log in a user with specified credentials.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Returns an instance of the successfully logged in ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : ". Publishes when complete.",
       "type" : "text"
     }
   ],
@@ -38,18 +22,58 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/savePublisher(_:options:)"
   },
   "kind" : "symbol",
   "metadata" : {
+    "conformance" : {
+      "availabilityPrefix" : [
+        {
+          "text" : "Available when",
+          "type" : "text"
+        }
+      ],
+      "conformancePrefix" : [
+        {
+          "text" : "Conforms when",
+          "type" : "text"
+        }
+      ],
+      "constraints" : [
+        {
+          "code" : "V",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : " conforms to ",
+          "type" : "text"
+        },
+        {
+          "code" : "Decodable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : " and ",
+          "type" : "text"
+        },
+        {
+          "code" : "Encodable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : ".",
+          "type" : "text"
+        }
+      ]
+    },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A4UserPAAE5login8username8password7optionsxSS_SSShyAA3APIV6OptionOGtYaKFZ",
+    "externalID" : "s:10ParseSwift0A13ConfigCodableV13savePublisher_7options7Combine6FutureCySbAA0A5ErrorVGSDySSxG_ShyAA3APIV6OptionOGtFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -69,19 +93,11 @@
       },
       {
         "kind" : "identifier",
-        "text" : "login"
+        "text" : "savePublisher"
       },
       {
         "kind" : "text",
-        "text" : "("
-      },
-      {
-        "kind" : "externalParam",
-        "text" : "username"
-      },
-      {
-        "kind" : "text",
-        "text" : ": "
+        "text" : "(["
       },
       {
         "kind" : "typeIdentifier",
@@ -90,24 +106,16 @@
       },
       {
         "kind" : "text",
-        "text" : ", "
-      },
-      {
-        "kind" : "externalParam",
-        "text" : "password"
-      },
-      {
-        "kind" : "text",
-        "text" : ": "
+        "text" : " : "
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:SS",
-        "text" : "String"
+        "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+        "text" : "V"
       },
       {
         "kind" : "text",
-        "text" : ", "
+        "text" : "], "
       },
       {
         "kind" : "externalParam",
@@ -133,27 +141,34 @@
       },
       {
         "kind" : "text",
-        "text" : ") "
-      },
-      {
-        "kind" : "keyword",
-        "text" : "async"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
-      {
-        "kind" : "keyword",
-        "text" : "throws"
-      },
-      {
-        "kind" : "text",
-        "text" : " -> "
+        "text" : ") -> "
       },
       {
         "kind" : "typeIdentifier",
-        "text" : "Self"
+        "preciseIdentifier" : "s:7Combine6FutureC",
+        "text" : "Future"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
+        "text" : "ParseError"
+      },
+      {
+        "kind" : "text",
+        "text" : ">"
       }
     ],
     "modules" : [
@@ -164,7 +179,7 @@
     "role" : "symbol",
     "roleHeading" : "Type Method",
     "symbolKind" : "method",
-    "title" : "login(username:password:options:)"
+    "title" : "savePublisher(_:options:)"
   },
   "primaryContentSections" : [
     {
@@ -177,14 +192,6 @@
             "iOS"
           ],
           "tokens" : [
-            {
-              "kind" : "attribute",
-              "text" : "@discardableResult"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "static"
@@ -203,7 +210,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "login"
+              "text" : "savePublisher"
             },
             {
               "kind" : "text",
@@ -211,11 +218,19 @@
             },
             {
               "kind" : "externalParam",
-              "text" : "username"
+              "text" : "_"
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "config"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
             },
             {
               "kind" : "typeIdentifier",
@@ -224,24 +239,16 @@
             },
             {
               "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "externalParam",
-              "text" : "password"
-            },
-            {
-              "kind" : "text",
-              "text" : ": "
+              "text" : " : "
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SS",
-              "text" : "String"
+              "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+              "text" : "V"
             },
             {
               "kind" : "text",
-              "text" : ", "
+              "text" : "], "
             },
             {
               "kind" : "externalParam",
@@ -269,27 +276,35 @@
             },
             {
               "kind" : "text",
-              "text" : " = []) "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "async"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "throws"
-            },
-            {
-              "kind" : "text",
-              "text" : " -> "
+              "text" : " = []) -> "
             },
             {
               "kind" : "typeIdentifier",
-              "text" : "Self"
+              "preciseIdentifier" : "s:7Combine6FutureC",
+              "text" : "Future"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
+              "text" : "ParseError"
+            },
+            {
+              "kind" : "text",
+              "text" : ">"
             }
           ]
         }
@@ -307,15 +322,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "Returns the logged in ",
-              "type" : "text"
-            },
-            {
-              "code" : "ParseUser",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ".",
+              "text" : "A publisher that eventually produces a single value and then finishes or fails.",
               "type" : "text"
             }
           ],
@@ -332,28 +339,14 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The username of the user.",
+                  "text" : "The Config to update on the server.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "username"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The password of the user.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "password"
+          "name" : "config"
         },
         {
           "content" : [
@@ -370,103 +363,6 @@
           "name" : "options"
         }
       ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "This also caches the user locally so that calls to ",
-              "type" : "text"
-            },
-            {
-              "inlineContent" : [
-                {
-                  "text" : "current",
-                  "type" : "text"
-                }
-              ],
-              "type" : "emphasis"
-            },
-            {
-              "text" : " will use the latest logged in user.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "An error of type ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseError",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Throws",
-          "style" : "note",
-          "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The default cache policy for this method is ",
-                  "type" : "text"
-                },
-                {
-                  "code" : ".reloadIgnoringLocalCacheData",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". If a developer",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "desires a different policy, it should be inserted in ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "options",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Note",
-          "style" : "note",
-          "type" : "aside"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -480,7 +376,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseuser\/login(username:password:options:)"
+        "\/documentation\/parseswift\/parseconfigcodable\/savepublisher(_:options:)"
       ],
       "traits" : [
         {
@@ -570,18 +466,14 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/options"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable": {
   "abstract" : [
     {
-      "text" : "Objects that conform to the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
-      "text" : " protocol have a local representation of a user persisted to the",
+      "text" : " allows access to the Config on the Parse Server as a",
       "type" : "text"
     },
     {
@@ -589,15 +481,33 @@
       "type" : "text"
     },
     {
-      "text" : "Keychain and Parse Server. This protocol inherits from the ",
+      "text" : "dictionary where the keys are ",
       "type" : "text"
     },
     {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
+      "inlineContent" : [
+        {
+          "text" : "strings",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
     },
     {
-      "text" : " protocol, and retains the same",
+      "text" : " and the values are ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "Codable",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     },
     {
@@ -605,30 +515,22 @@
       "type" : "text"
     },
     {
-      "text" : "functionality of a ",
+      "text" : "The current ",
       "type" : "text"
     },
     {
-      "code" : "ParseObject",
+      "code" : "ParseConfigCodable",
       "type" : "codeVoice"
     },
     {
-      "text" : ", but also extends it with various user specific methods, like",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "authentication, signing up, and validation uniqueness.",
+      "text" : " is persisted to the Keychain and Parse Server.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "protocol"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -636,58 +538,82 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseUser"
+      "text" : "ParseConfigCodable"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseUser"
+      "text" : "ParseConfigCodable"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseUser",
+  "title" : "ParseConfigCodable",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser"
+  "url" : "\/documentation\/parseswift\/parseconfigcodable"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/login(username:password:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfigCodable/savePublisher(_:options:)": {
   "abstract" : [
     {
-      "text" : "Makes an ",
+      "text" : "Update the Config ",
       "type" : "text"
     },
     {
       "inlineContent" : [
         {
-          "text" : "asynchronous",
+          "text" : "asynchronously",
           "type" : "text"
         }
       ],
       "type" : "emphasis"
     },
     {
-      "text" : " request to log in a user with specified credentials.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Returns an instance of the successfully logged in ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : ". Publishes when complete.",
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "V",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
     {
       "kind" : "keyword",
@@ -707,19 +633,11 @@
     },
     {
       "kind" : "identifier",
-      "text" : "login"
+      "text" : "savePublisher"
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "username"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
+      "text" : "(["
     },
     {
       "kind" : "typeIdentifier",
@@ -728,24 +646,16 @@
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "password"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
+      "text" : " : "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigCodableV1Vxmfp",
+      "text" : "V"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : "], "
     },
     {
       "kind" : "externalParam",
@@ -771,35 +681,76 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
+      "text" : ") -> "
     },
     {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7Combine6FutureC",
+      "text" : "Future"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A5ErrorV",
+      "text" : "ParseError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfigCodable\/savePublisher(_:options:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "savePublisher(_:options:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseconfigcodable\/savepublisher(_:options:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
+  "abstract" : [
+    {
+      "text" : "An object with a Parse code and message.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
       "kind" : "keyword",
-      "text" : "async"
+      "text" : "struct"
     },
     {
       "kind" : "text",
       "text" : " "
     },
     {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
+      "kind" : "identifier",
+      "text" : "ParseError"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/login(username:password:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
   "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseError"
+    }
+  ],
   "role" : "symbol",
-  "title" : "login(username:password:options:)",
+  "title" : "ParseError",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseuser\/login(username:password:options:)"
+  "url" : "\/documentation\/parseswift\/parseerror"
 }
 }
 }
