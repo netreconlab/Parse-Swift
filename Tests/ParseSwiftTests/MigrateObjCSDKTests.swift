@@ -205,17 +205,17 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        let userFromKeychain = try await User.current()
+        let userFromStorage = try await User.current()
 
-        XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-        XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-        XCTAssertEqual(userFromKeychain.username, loginUserName)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+        XCTAssertEqual(loggedIn.updatedAt, userFromStorage.updatedAt)
+        XCTAssertEqual(loggedIn.email, userFromStorage.email)
+        XCTAssertEqual(userFromStorage.username, loginUserName)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertEqual(loggedIn.objectId, userFromStorage.objectId)
         sessionToken = try await User.sessionToken()
         XCTAssertEqual(sessionToken, objcSessionToken)
-        XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertEqual(loggedIn.customKey, userFromStorage.customKey)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -249,17 +249,17 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        let userFromKeychain = try await User.current()
+        let userFromStorage = try await User.current()
 
-        XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-        XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-        XCTAssertEqual(userFromKeychain.username, loginUserName)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+        XCTAssertEqual(loggedIn.updatedAt, userFromStorage.updatedAt)
+        XCTAssertEqual(loggedIn.email, userFromStorage.email)
+        XCTAssertEqual(userFromStorage.username, loginUserName)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertEqual(loggedIn.objectId, userFromStorage.objectId)
         sessionToken = try await User.sessionToken()
         XCTAssertEqual(sessionToken, objcSessionToken2)
-        XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertEqual(loggedIn.customKey, userFromStorage.customKey)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -293,16 +293,16 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(loggedIn.customKey, serverResponse.customKey)
         XCTAssertNil(loggedIn.ACL)
 
-        let userFromKeychain = try await User.current()
-        XCTAssertEqual(loggedIn.updatedAt, userFromKeychain.updatedAt)
-        XCTAssertEqual(loggedIn.email, userFromKeychain.email)
-        XCTAssertEqual(userFromKeychain.username, loginUserName)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertEqual(loggedIn.objectId, userFromKeychain.objectId)
+        let userFromStorage = try await User.current()
+        XCTAssertEqual(loggedIn.updatedAt, userFromStorage.updatedAt)
+        XCTAssertEqual(loggedIn.email, userFromStorage.email)
+        XCTAssertEqual(userFromStorage.username, loginUserName)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertEqual(loggedIn.objectId, userFromStorage.objectId)
         sessionToken = try await User.sessionToken()
         XCTAssertEqual(sessionToken, objcSessionToken)
-        XCTAssertEqual(loggedIn.customKey, userFromKeychain.customKey)
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertEqual(loggedIn.customKey, userFromStorage.customKey)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor

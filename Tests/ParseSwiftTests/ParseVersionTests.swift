@@ -87,10 +87,10 @@ class ParseVersionTests: XCTestCase {
         XCTAssertThrowsError(try ParseVersion(string: "1.0.alpha"))
     }
 
-    func testDeleteFromKeychain() async throws {
+    func testDeleteFromStorage() async throws {
         var current = try await ParseVersion.current()
         XCTAssertEqual(current.description, ParseConstants.version)
-        await ParseVersion.deleteCurrentContainerFromKeychain()
+        await ParseVersion.deleteCurrentContainerFromStorage()
         do {
             _ = try await ParseVersion.current()
             XCTFail("Should have failed")

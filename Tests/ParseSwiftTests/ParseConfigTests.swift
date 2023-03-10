@@ -112,7 +112,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testUpdateKeyChainIfNeeded() async throws {
+    func testUpdateStorageIfNeeded() async throws {
         await userLogin()
         let config = Config()
         do {
@@ -122,7 +122,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateKeychainIfNeeded(config, deleting: true)
+        await Config.updateStorageIfNeeded(config, deleting: true)
         do {
             _ = try await Config.current()
             XCTFail("Should have thrown error")
@@ -131,7 +131,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testDeleteFromKeychainOnLogout() async throws {
+    func testDeleteFromStorageOnLogout() async throws {
         await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
@@ -142,7 +142,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateKeychainIfNeeded(config)
+        await Config.updateStorageIfNeeded(config)
 
         let currentConfig = try await Config.current()
         XCTAssertEqual(config.welcomeMessage, currentConfig.welcomeMessage)
@@ -207,25 +207,21 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        do {
-            let fetched = try await config.fetch()
-            XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-            let currentConfig = try await Config.current()
-            XCTAssertEqual(currentConfig.welcomeMessage, configOnServer.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>?
-                = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
-            }
-            XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, configOnServer.welcomeMessage)
-            #endif
+        let fetched = try await config.fetch()
+        XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
+        let currentConfig = try await Config.current()
+        XCTAssertEqual(currentConfig.welcomeMessage, configOnServer.welcomeMessage)
 
-        } catch {
-            XCTFail(error.localizedDescription)
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        // Should be updated in Keychain
+        guard let keychainConfig: CurrentConfigContainer<Config>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                XCTFail("Should get object from Keychain")
+            return
         }
+        XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, configOnServer.welcomeMessage)
+        #endif
     }
 
     func testFetchAsync() async throws {
@@ -301,24 +297,21 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        do {
-            let saved = try await config.save()
-            let currentConfig = try await Config.current()
-            XCTAssertTrue(saved)
-            XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
 
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
-            }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
-            #endif
-        } catch {
-            XCTFail(error.localizedDescription)
+        let saved = try await config.save()
+        let currentConfig = try await Config.current()
+        XCTAssertTrue(saved)
+        XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
+
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        // Should be updated in Keychain
+        guard let keychainConfig: CurrentConfigContainer<Config>
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                XCTFail("Should get object from Keychain")
+            return
         }
+        XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
+        #endif
     }
 
     func testSaveAsync() async throws {

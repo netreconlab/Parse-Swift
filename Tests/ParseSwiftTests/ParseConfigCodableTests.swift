@@ -14,7 +14,6 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
 
     struct Config: ParseConfig {
         var welcomeMessage: String?
-        var winningNumber: Int?
     }
 
     struct User: ParseUser {
@@ -112,40 +111,51 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         }
     }
 
-    func testUpdateKeyChainIfNeeded() async throws {
+    func testUpdateStorageIfNeeded() async throws {
         await userLogin()
-        let config = Config()
+        let key = "welcomeMessage"
+        let value = "Hello"
+        var configDictionary = [String: AnyCodable]()
+        configDictionary[key] = AnyCodable(value)
+
         do {
-            _ = try await Config.current()
+            _ = try await ParseConfigCodable<[String: AnyCodable]>.current()
             XCTFail("Should have thrown error")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateKeychainIfNeeded(config, deleting: true)
+        await ParseConfigCodable.updateStorageIfNeeded(configDictionary, deleting: true)
         do {
-            _ = try await Config.current()
+            _ = try await ParseConfigCodable<[String: AnyCodable]>.current()
             XCTFail("Should have thrown error")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
     }
 
-    func testDeleteFromKeychainOnLogout() async throws {
+    func testDeleteFromStorageOnLogout() async throws {
         await userLogin()
-        var config = Config()
-        config.welcomeMessage = "Hello"
+        let key = "welcomeMessage"
+        let value = "Hello"
+        var configDictionary = [String: AnyCodable]()
+        configDictionary[key] = AnyCodable(value)
+
         do {
-            _ = try await Config.current()
+            _ = try await ParseConfigCodable<[String: AnyCodable]>.current()
             XCTFail("Should have thrown error")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateKeychainIfNeeded(config)
+        await ParseConfigCodable.setCurrent(configDictionary)
 
-        let currentConfig = try await Config.current()
-        XCTAssertEqual(config.welcomeMessage, currentConfig.welcomeMessage)
+        let configCodable: [String: AnyCodable] = try await ParseConfigCodable.current()
+        guard let codableValue = configCodable[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssertEqual(codableValue, value)
 
         let logoutResponse = NoBody()
 
@@ -159,7 +169,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         }
         try await User.logout()
         do {
-            _ = try await Config.current()
+            _ = try await ParseConfigCodable<[String: AnyCodable]>.current()
             XCTFail("Should have thrown error")
         } catch {
             XCTAssertTrue(error.containedIn([.otherCause]))
@@ -175,13 +185,13 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         XCTAssertNil(command.body)
     }
 
-    func testEncoding() throws {
+    func testUpdateCommand() async throws {
         var configDictionary = [String: AnyCodable]()
         configDictionary["welcomeMessage"] = AnyCodable("Hello")
-        let expected = "{\"welcomeMessage\":\"Hello\"}"
-        let encoded = try ParseCoding.jsonEncoder().encode(configDictionary)
-        let decoded = String(data: encoded, encoding: .utf8)
-        XCTAssertEqual(decoded, expected)
+        let command = await ParseConfigCodable.updateCommand(configDictionary)
+        XCTAssertEqual(command.path.urlComponent, "/config")
+        XCTAssertEqual(command.method, API.Method.PUT)
+        XCTAssertNotNil(command.body)
     }
 
     func testCanRetrieveFromParseConfig() async throws {
@@ -196,8 +206,6 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
             return
         }
         XCTAssertEqual(codableValue, value)
-        
-        // Test deletingKeychain
     }
 
     func testCanSetParseConfig() async throws {
@@ -207,58 +215,21 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         configDictionary[key] = AnyCodable(value)
         await ParseConfigCodable.setCurrent(configDictionary)
 
-        let configFromKeychain = try await Config.current()
+        let configFromStorage = try await Config.current()
         var config = Config()
         config.welcomeMessage = "Hello"
-        XCTAssertEqual(configFromKeychain, config)
+        XCTAssertEqual(configFromStorage, config)
     }
 
     func testFetch() async throws {
         await userLogin()
-        let config = Config()
 
-        var configOnServer = config
-        configOnServer.welcomeMessage = "Hello"
-        let serverResponse = ConfigFetchResponse(params: configOnServer)
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
+        let key = "welcomeMessage"
+        let value = "Hello"
+        var configOnServer = [String: AnyCodable]()
+        configOnServer[key] = AnyCodable(value)
 
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-        do {
-            let fetched = try await config.fetch()
-            XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-            let currentConfig = try await Config.current()
-            XCTAssertEqual(currentConfig.welcomeMessage, configOnServer.welcomeMessage)
-
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>?
-                = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
-            }
-            XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, configOnServer.welcomeMessage)
-            #endif
-
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-    }
-
-    func testFetchAsync() async throws {
-        await userLogin()
-        let config = Config()
-
-        var configOnServer = config
-        configOnServer.welcomeMessage = "Hello"
-        let serverResponse = ConfigFetchResponse(params: configOnServer)
+        let serverResponse = ConfigCodableFetchResponse(params: configOnServer)
         let encoded: Data!
         do {
             encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
@@ -271,84 +242,38 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Config save")
-        config.fetch { result in
-            switch result {
+        let fetched: [String: AnyCodable] = try await ParseConfigCodable.fetch()
 
-            case .success(let fetched):
-                XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-                let immutableConfigOnServer = configOnServer
-                Task {
-                    let currentConfig = try await Config.current()
-                    XCTAssertEqual(currentConfig.welcomeMessage, immutableConfigOnServer.welcomeMessage)
-
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    // Should be updated in Keychain
-                    let keychainConfig: CurrentConfigContainer<Config>?
-                    = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
-                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage,
-                                   immutableConfigOnServer.welcomeMessage)
-                    #endif
-                    expectation.fulfill()
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation.fulfill()
-            }
+        guard let fetchedValue = fetched[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
         }
-        wait(for: [expectation], timeout: 10.0)
-    }
+        XCTAssertEqual(fetchedValue, value)
 
-    func testUpdateCommand() async throws {
-        var config = Config()
-        config.welcomeMessage = "Hello"
-        let command = await config.updateCommand()
-        XCTAssertEqual(command.path.urlComponent, "/config")
-        XCTAssertEqual(command.method, API.Method.PUT)
-        XCTAssertNotNil(command.body)
+        let configCodable: [String: AnyCodable] = try await ParseConfigCodable.current()
+        guard let codableValue = configCodable[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssertEqual(codableValue, value)
+
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        // Should be updated in Keychain
+        guard let keychainConfig: CurrentConfigDictionaryContainer<AnyCodable>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        guard let keychainValue = keychainConfig?.currentConfig?[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssertEqual(codableValue, keychainValue)
+        #endif
     }
 
     func testSave() async throws {
         await userLogin()
-        var config = Config()
-        config.welcomeMessage = "Hello"
-
-        let serverResponse = BooleanResponse(result: true)
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-        do {
-            let saved = try await config.save()
-            let currentConfig = try await Config.current()
-            XCTAssertTrue(saved)
-            XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
-
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            // Should be updated in Keychain
-            guard let keychainConfig: CurrentConfigContainer<Config>
-                = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                    XCTFail("Should get object from Keychain")
-                return
-            }
-            XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
-            #endif
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-    }
-
-    func testSaveAsync() async throws {
-        await userLogin()
-        var config = Config()
-        config.welcomeMessage = "Hello"
 
         let serverResponse = BooleanResponse(result: true)
         let encoded: Data!
@@ -363,31 +288,32 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Config save")
-        config.save { result in
-            switch result {
+        let key = "welcomeMessage"
+        let value = "Hello"
+        var config = [String: AnyCodable]()
+        config[key] = AnyCodable(value)
 
-            case .success(let saved):
-                XCTAssertTrue(saved)
-                let immutableConfig = config
-                Task {
-                    let currentConfig = try await Config.current()
-                    XCTAssertEqual(currentConfig.welcomeMessage, immutableConfig.welcomeMessage)
-
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    // Should be updated in Keychain
-                    let keychainConfig: CurrentConfigContainer<Config>?
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
-                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
-                    #endif
-                    expectation.fulfill()
-                }
-
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation.fulfill()
-            }
+        let saved = try await ParseConfigCodable.save(config)
+        XCTAssertTrue(saved)
+        let configCodable: [String: AnyCodable] = try await ParseConfigCodable.current()
+        guard let codableValue = configCodable[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
         }
-        wait(for: [expectation], timeout: 10.0)
+        XCTAssertEqual(codableValue, value)
+
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        // Should be updated in Keychain
+        guard let keychainConfig: CurrentConfigDictionaryContainer<AnyCodable>?
+            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        guard let keychainValue = keychainConfig?.currentConfig?[key]?.value as? String else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        XCTAssertEqual(codableValue, keychainValue)
+        #endif
     }
 }

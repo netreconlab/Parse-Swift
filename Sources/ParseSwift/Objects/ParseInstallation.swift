@@ -270,7 +270,7 @@ public extension ParseInstallation {
         await Self.setCurrentContainer(currentContainer)
     }
 
-    internal static func deleteCurrentContainerFromKeychain() async {
+    internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
@@ -484,7 +484,7 @@ extension ParseInstallation {
 
 // MARK: Fetchable
 extension ParseInstallation {
-    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+    internal static func updateStorageIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
         let currentInstallation = try await Self.current()
         var foundCurrentInstallationObjects = results.filter { $0.hasSameInstallationId(as: currentInstallation) }
         foundCurrentInstallationObjects = try foundCurrentInstallationObjects.sorted(by: {
@@ -499,7 +499,7 @@ extension ParseInstallation {
             if !deleting {
                 await Self.setCurrent(foundCurrentInstallation)
             } else {
-                await Self.deleteCurrentContainerFromKeychain()
+                await Self.deleteCurrentContainerFromStorage()
             }
         }
     }
@@ -535,7 +535,7 @@ extension ParseInstallation {
                         if case .success(let foundResult) = result {
                             Task {
                                 do {
-                                    try await Self.updateKeychainIfNeeded([foundResult])
+                                    try await Self.updateStorageIfNeeded([foundResult])
                                     completion(.success(foundResult))
                                 } catch {
                                     let parseError = error as? ParseError ?? ParseError(swift: error)
@@ -834,7 +834,7 @@ extension ParseInstallation {
                         case .success:
                             Task {
                                 do {
-                                    try await Self.updateKeychainIfNeeded([self], deleting: true)
+                                    try await Self.updateStorageIfNeeded([self], deleting: true)
                                     completion(.success(()))
                                 } catch {
                                     let parseError = error as? ParseError ?? ParseError(swift: error)
@@ -1113,7 +1113,7 @@ public extension Sequence where Element: ParseInstallation {
                     }
                     let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
                     Task {
-                        try? await Self.Element.updateKeychainIfNeeded(fetchedObjects)
+                        try? await Self.Element.updateStorageIfNeeded(fetchedObjects)
                         completion(.success(fetchedObjectsToReturn))
                     }
                 case .failure(let error):
@@ -1185,7 +1185,7 @@ public extension Sequence where Element: ParseInstallation {
                                 if completed == (batches.count - 1) {
                                     let returnBatchImmutable = returnBatch
                                     Task {
-                                        try? await Self.Element.updateKeychainIfNeeded(self.compactMap {$0},
+                                        try? await Self.Element.updateStorageIfNeeded(self.compactMap {$0},
                                                                                        deleting: true)
                                         completion(.success(returnBatchImmutable))
                                     }

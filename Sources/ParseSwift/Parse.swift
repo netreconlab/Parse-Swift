@@ -147,7 +147,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         // Migrate old installations made with ParseSwift < 1.3.0
         if let currentInstallation = await BaseParseInstallation.currentContainer().currentInstallation {
             if currentInstallation.objectId == nil {
-                await BaseParseInstallation.deleteCurrentContainerFromKeychain()
+                await BaseParseInstallation.deleteCurrentContainerFromStorage()
                 // Prepare installation
                 await BaseParseInstallation.createNewInstallationIfNeeded()
             }

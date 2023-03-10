@@ -11,9 +11,9 @@ import Foundation
 /**
  `ParseConfigCodable` allows access to the Config on the Parse Server as a
  dictionary where the keys are **strings** and the values are **Codable**.
- The current `ParseConfig` is persisted to the Keychain and Parse Server.
- - note: `ParseConfigCodable` or created types that conform
- `ParseConfigCodable` both access the same Config.
+ The current `ParseConfigCodable` is persisted to the Keychain and Parse Server.
+ - note: Stored and fetched versions `ParseConfigCodable` and types that conform
+ `ParseConfig`are interoperable and access the same Config.
 */
 public struct ParseConfigCodable<V: Codable> {}
 
@@ -25,7 +25,7 @@ extension ParseConfigCodable {
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
         - parameter callbackQueue: The queue to return to after completion. Default value of .main.
         - parameter completion: A block that will be called when retrieving the config completes or fails.
-        It should have the following argument signature: `(Result<Self, ParseError>)`.
+        It should have the following argument signature: `(Result<[String: V], ParseError>)`.
         - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
         desires a different policy, it should be inserted in `options`.
     */
@@ -48,8 +48,8 @@ extension ParseConfigCodable {
                                        path: .config) { (data) -> [String: V] in
             let fetched = try ParseCoding
                 .jsonDecoder()
-                .decode(ParseConfigCodableFetchResponse<V>.self, from: data).params
-            await Self.updateKeychainIfNeeded(fetched)
+                .decode(ConfigCodableFetchResponse<V>.self, from: data).params
+            await Self.updateStorageIfNeeded(fetched)
             return fetched
         }
     }
@@ -60,6 +60,7 @@ extension ParseConfigCodable {
 
     /**
      Update the Config *asynchronously*.
+     - parameter config: The Config to update on the server.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: A block that will be called when retrieving the config completes or fails.
@@ -83,15 +84,15 @@ extension ParseConfigCodable {
     }
 
     // swiftlint:disable:next line_length
-    internal static func updateCommand(_ config: [String: V]) async -> API.NonParseBodyCommand<ParseConfigCodableUpdateBody<[String: V]>, Bool> {
-        let body = ParseConfigCodableUpdateBody(params: config)
+    internal static func updateCommand(_ config: [String: V]) async -> API.NonParseBodyCommand<ConfigCodableUpdateBody<[String: V]>, Bool> {
+        let body = ConfigCodableUpdateBody(params: config)
         return API.NonParseBodyCommand(method: .PUT, // MARK: Should be switched to ".PATCH" when server supports PATCH.
                                        path: .config,
                                        body: body) { (data) -> Bool in
             let updated = try ParseCoding.jsonDecoder().decode(BooleanResponse.self, from: data).result
 
             if updated {
-                await Self.updateKeychainIfNeeded(config)
+                await Self.updateStorageIfNeeded(config)
             }
             return updated
         }
@@ -104,7 +105,7 @@ extension ParseConfigCodable {
     /**
      Gets/Sets properties of the current config in the Keychain.
 
-     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
+     - returns: Returns the latest `ParseConfigCodable` on this device. If there is none, throws an error.
      - throws: An error of `ParseError` type.
     */
     public static func current() async throws -> [String: V] {
@@ -136,15 +137,15 @@ extension ParseConfigCodable {
         #endif
     }
 
-    static func updateKeychainIfNeeded(_ result: [String: V], deleting: Bool = false) async {
+    static func updateStorageIfNeeded(_ result: [String: V], deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {
-            await Self.deleteCurrentContainerFromKeychain()
+            await Self.deleteCurrentContainerFromStorage()
         }
     }
 
-    internal static func deleteCurrentContainerFromKeychain() async {
+    internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
@@ -165,12 +166,12 @@ struct CurrentConfigDictionaryContainer<T: Codable>: Codable {
     var currentConfig: [String: T]?
 }
 
-// MARK: ParseConfigCodableUpdateBody
-internal struct ParseConfigCodableUpdateBody<T>: Codable where T: Codable {
+// MARK: ConfigCodableUpdateBody
+internal struct ConfigCodableUpdateBody<T>: Codable where T: Codable {
     let params: T
 }
 
-// MARK: ParseConfigCodableFetchResponse
-internal struct ParseConfigCodableFetchResponse<T>: Codable where T: Codable {
+// MARK: ConfigCodableFetchResponse
+internal struct ConfigCodableFetchResponse<T>: Codable where T: Codable {
     let params: [String: T]
 }

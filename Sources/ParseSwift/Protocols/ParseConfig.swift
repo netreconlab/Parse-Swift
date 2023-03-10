@@ -12,8 +12,8 @@ import Foundation
  Objects that conform to the `ParseConfig` protocol are able to access the Config on the Parse Server.
  When conforming to `ParseConfig`, any properties added can be retrieved by the client or updated on
  the server. The current `ParseConfig` is persisted to the Keychain and Parse Server.
- - note: `ParseConfigCodable` or created types that conform
- `ParseConfigCodable` both access the same Config.
+ - note: Stored and fetched versions `ParseConfigCodable` and types that conform
+ `ParseConfig`are interoperable and access the same Config.
 */
 public protocol ParseConfig: ParseTypeable {}
 
@@ -47,7 +47,7 @@ extension ParseConfig {
         return API.NonParseBodyCommand(method: .GET,
                                        path: .config) { (data) -> Self in
             let fetched = try ParseCoding.jsonDecoder().decode(ConfigFetchResponse<Self>.self, from: data).params
-            await Self.updateKeychainIfNeeded(fetched)
+            await Self.updateStorageIfNeeded(fetched)
             return fetched
         }
     }
@@ -87,7 +87,7 @@ extension ParseConfig {
             let updated = try ParseCoding.jsonDecoder().decode(BooleanResponse.self, from: data).result
 
             if updated {
-                await Self.updateKeychainIfNeeded(self)
+                await Self.updateStorageIfNeeded(self)
             }
             return updated
         }
@@ -125,15 +125,15 @@ public extension ParseConfig {
         #endif
     }
 
-    internal static func updateKeychainIfNeeded(_ result: Self, deleting: Bool = false) async {
+    internal static func updateStorageIfNeeded(_ result: Self, deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {
-            await Self.deleteCurrentContainerFromKeychain()
+            await Self.deleteCurrentContainerFromStorage()
         }
     }
 
-    internal static func deleteCurrentContainerFromKeychain() async {
+    internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
