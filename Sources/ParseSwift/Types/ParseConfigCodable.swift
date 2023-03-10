@@ -1,22 +1,24 @@
 //
-//  ParseConfig.swift
+//  ParseConfigCodable.swift
 //  ParseSwift
 //
-//  Created by Corey Baker on 1/22/21.
-//  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
+//  Created by Corey Baker on 3/10/23.
+//  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
 
 /**
- Objects that conform to the `ParseConfig` protocol are able to access the Config on the Parse Server.
- When conforming to `ParseConfig`, any properties added can be retrieved by the client or updated on
- the server. The current `ParseConfig` is persisted to the Keychain and Parse Server.
+ `ParseConfigCodable` allows access to the Config on the Parse Server as a
+ dictionary where the keys are **strings** and the values are **Codable**.
+ The current `ParseConfig` is persisted to the Keychain and Parse Server.
+ - note: `ParseConfigCodable` or created types that conform
+ `ParseConfigCodable` both access the same Config.
 */
-public protocol ParseConfig: ParseTypeable {}
+public struct ParseConfigCodable<V: Codable> {}
 
 // MARK: Update
-extension ParseConfig {
+extension ParseConfigCodable {
 
     /**
      Fetch the Config *asynchronously*.
@@ -27,9 +29,9 @@ extension ParseConfig {
         - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
         desires a different policy, it should be inserted in `options`.
     */
-    public func fetch(options: API.Options = [],
-                      callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+    public static func fetch(options: API.Options = [],
+                             callbackQueue: DispatchQueue = .main,
+                             completion: @escaping (Result<[String: V], ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -40,11 +42,13 @@ extension ParseConfig {
         }
     }
 
-    internal func fetchCommand() async -> API.NonParseBodyCommand<Self, Self> {
+    internal static func fetchCommand() async -> API.NonParseBodyCommand<[String: V], [String: V]> {
 
         return API.NonParseBodyCommand(method: .GET,
-                                       path: .config) { (data) -> Self in
-            let fetched = try ParseCoding.jsonDecoder().decode(ConfigFetchResponse<Self>.self, from: data).params
+                                       path: .config) { (data) -> [String: V] in
+            let fetched = try ParseCoding
+                .jsonDecoder()
+                .decode(ParseConfigCodableFetchResponse<V>.self, from: data).params
             await Self.updateKeychainIfNeeded(fetched)
             return fetched
         }
@@ -52,7 +56,7 @@ extension ParseConfig {
 }
 
 // MARK: Update
-extension ParseConfig {
+extension ParseConfigCodable {
 
     /**
      Update the Config *asynchronously*.
@@ -63,49 +67,58 @@ extension ParseConfig {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    public func save(options: API.Options = [],
-                     callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<Bool, ParseError>) -> Void) {
+    public static func save(_ config: [String: V],
+                            options: API.Options = [],
+                            callbackQueue: DispatchQueue = .main,
+                            completion: @escaping (Result<Bool, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await updateCommand()
+            await updateCommand(config)
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
-    internal func updateCommand() async -> API.NonParseBodyCommand<ConfigUpdateBody<Self>, Bool> {
-        let body = ConfigUpdateBody(params: self)
+    // swiftlint:disable:next line_length
+    internal static func updateCommand(_ config: [String: V]) async -> API.NonParseBodyCommand<ParseConfigCodableUpdateBody<[String: V]>, Bool> {
+        let body = ParseConfigCodableUpdateBody(params: config)
         return API.NonParseBodyCommand(method: .PUT, // MARK: Should be switched to ".PATCH" when server supports PATCH.
                                        path: .config,
                                        body: body) { (data) -> Bool in
             let updated = try ParseCoding.jsonDecoder().decode(BooleanResponse.self, from: data).result
 
             if updated {
-                await Self.updateKeychainIfNeeded(self)
+                await Self.updateKeychainIfNeeded(config)
             }
             return updated
         }
     }
 }
 
-internal struct ConfigUpdateBody<T>: ParseTypeable, Decodable where T: ParseConfig {
-    let params: T
-}
-
 // MARK: Current
-struct CurrentConfigContainer<T: ParseConfig>: Codable, Equatable {
-    var currentConfig: T?
-}
+extension ParseConfigCodable {
 
-public extension ParseConfig {
+    /**
+     Gets/Sets properties of the current config in the Keychain.
 
-    internal static func currentContainer() async -> CurrentConfigContainer<Self>? {
+     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
+    */
+    public static func current() async throws -> [String: V] {
+        guard let container = await Self.currentContainer(),
+                let config = container.currentConfig else {
+            throw ParseError(code: .otherCause,
+                             message: "There is no current Config")
+        }
+        return config
+    }
+
+    static func currentContainer() async -> CurrentConfigDictionaryContainer<V>? {
         await yieldIfNotInitialized()
-        guard let configInMemory: CurrentConfigContainer<Self> =
+        guard let configInMemory: CurrentConfigDictionaryContainer<V> =
             try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             #if !os(Linux) && !os(Android) && !os(Windows)
                 return try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
@@ -116,14 +129,14 @@ public extension ParseConfig {
         return configInMemory
     }
 
-    internal static func setCurrentContainer(_ newValue: CurrentConfigContainer<Self>?) async {
+    static func setCurrentContainer(_ newValue: CurrentConfigDictionaryContainer<V>?) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #endif
     }
 
-    internal static func updateKeychainIfNeeded(_ result: Self, deleting: Bool = false) async {
+    static func updateKeychainIfNeeded(_ result: [String: V], deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {
@@ -138,27 +151,26 @@ public extension ParseConfig {
         #endif
     }
 
-    /**
-     Gets/Sets properties of the current config in the Keychain.
-
-     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
-     - throws: An error of `ParseError` type.
-    */
-    static func current() async throws -> Self {
-        guard let container = await Self.currentContainer(),
-                let config = container.currentConfig else {
-            throw ParseError(code: .otherCause,
-                             message: "There is no current Config")
-        }
-        return config
-    }
-
-    internal static func setCurrent(_ current: Self?) async {
+    static func setCurrent(_ current: [String: V]?) async {
         if await Self.currentContainer() == nil {
-            await Self.setCurrentContainer(CurrentConfigContainer<Self>())
+            await Self.setCurrentContainer(CurrentConfigDictionaryContainer<V>())
         }
         var currentContainer = await Self.currentContainer()
         currentContainer?.currentConfig = current
         await Self.setCurrentContainer(currentContainer)
     }
+}
+
+struct CurrentConfigDictionaryContainer<T: Codable>: Codable {
+    var currentConfig: [String: T]?
+}
+
+// MARK: ParseConfigCodableUpdateBody
+internal struct ParseConfigCodableUpdateBody<T>: Codable where T: Codable {
+    let params: T
+}
+
+// MARK: ParseConfigCodableFetchResponse
+internal struct ParseConfigCodableFetchResponse<T>: Codable where T: Codable {
+    let params: [String: T]
 }

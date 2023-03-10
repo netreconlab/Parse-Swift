@@ -131,6 +131,13 @@
 		7028373A26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
 		7028373B26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
 		7028373C26BD8C89007688C9 /* ParseUser+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028373826BD8C89007688C9 /* ParseUser+async.swift */; };
+		7030E07E29BB8CDC0021970D /* ParseConfigCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */; };
+		7030E07F29BB8CDC0021970D /* ParseConfigCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */; };
+		7030E08029BB8CDC0021970D /* ParseConfigCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */; };
+		7030E08129BB8CDC0021970D /* ParseConfigCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */; };
+		7030E08729BBAF650021970D /* ParseConfigCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E08229BBAF250021970D /* ParseConfigCodableTests.swift */; };
+		7030E08829BBAF660021970D /* ParseConfigCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E08229BBAF250021970D /* ParseConfigCodableTests.swift */; };
+		7030E08929BBAF670021970D /* ParseConfigCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E08229BBAF250021970D /* ParseConfigCodableTests.swift */; };
 		7031F356296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
 		7031F357296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
 		7031F358296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
@@ -1195,6 +1202,8 @@
 		7023800E2747FCCD00EFC443 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		7028373326BD8883007688C9 /* ParseObject+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseObject+async.swift"; sourceTree = "<group>"; };
 		7028373826BD8C89007688C9 /* ParseUser+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseUser+async.swift"; sourceTree = "<group>"; };
+		7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConfigCodable.swift; sourceTree = "<group>"; };
+		7030E08229BBAF250021970D /* ParseConfigCodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConfigCodableTests.swift; sourceTree = "<group>"; };
 		7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICommandMultipleAttemptsTests.swift; sourceTree = "<group>"; };
 		7033ECB025584A83009770F3 /* TestHostTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHostTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7033ECB225584A83009770F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1623,6 +1632,7 @@
 				917BA4312703E36800F8D747 /* ParseConfigAsyncTests.swift */,
 				7044C21F25C5E0160011F6E7 /* ParseConfigCombineTests.swift */,
 				70D1BE0625BB2BF400A42E7C /* ParseConfigTests.swift */,
+				7030E08229BBAF250021970D /* ParseConfigCodableTests.swift */,
 				91B40650267A66ED00B129CD /* ParseErrorTests.swift */,
 				89899DB426045DC4002E2043 /* ParseFacebookCombineTests.swift */,
 				89899CF32603CE9D002E2043 /* ParseFacebookTests.swift */,
@@ -1805,6 +1815,9 @@
 				916786E1259B7DDA00BB5B4E /* ParseCloudable.swift */,
 				703B090626BD9764005A112F /* ParseCloudable+async.swift */,
 				7044C17425C4ECFF0011F6E7 /* ParseCloudable+combine.swift */,
+				70D1BDB925BB17A600A42E7C /* ParseConfig.swift */,
+				703B090B26BD984D005A112F /* ParseConfig+async.swift */,
+				7044C18225C4EFC10011F6E7 /* ParseConfig+combine.swift */,
 				70647E9B259E3A9A004C1004 /* ParseEncodable.swift */,
 				704E781628CFD8A00075F952 /* ParseFileTransferable.swift */,
 				70CE0AB6285A83B100DAEA86 /* ParseHookable.swift */,
@@ -2133,9 +2146,7 @@
 				70170A482656E2FE0070C905 /* ParseAnalytics+combine.swift */,
 				91285B122698DBF20051B544 /* ParseBytes.swift */,
 				709A149F2839CABD00BF85E5 /* ParseCLP.swift */,
-				70D1BDB925BB17A600A42E7C /* ParseConfig.swift */,
-				703B090B26BD984D005A112F /* ParseConfig+async.swift */,
-				7044C18225C4EFC10011F6E7 /* ParseConfig+combine.swift */,
+				7030E07D29BB8CDC0021970D /* ParseConfigCodable.swift */,
 				704C886B28BE69A8008E6B01 /* ParseConfiguration.swift */,
 				F97B45BF24D9C6F200F4A88B /* ParseError.swift */,
 				709A148628396B1C00BF85E5 /* ParseField.swift */,
@@ -2734,6 +2745,7 @@
 				70A98D822794AB3C009B58F2 /* ParseQueryScorable.swift in Sources */,
 				70385E852858F9750084D306 /* ParseHookParametable.swift in Sources */,
 				70F79A192639CE6F00731C46 /* ParseHealth.swift in Sources */,
+				7030E07E29BB8CDC0021970D /* ParseConfigCodable.swift in Sources */,
 				70212D132854C82B00386163 /* ParsePushFirebaseNotification.swift in Sources */,
 				7044C19F25C4FA870011F6E7 /* ParseOperation+combine.swift in Sources */,
 				F97B461E24D9C6F200F4A88B /* ParseStorage.swift in Sources */,
@@ -2895,6 +2907,7 @@
 				70F03A622780EADD00E5AFB4 /* ParseLinkedInCombineTests.swift in Sources */,
 				89899D9F26045998002E2043 /* ParseTwitterCombineTests.swift in Sources */,
 				70212D2B2855266400386163 /* ParsePushPayloadAppleTests.swift in Sources */,
+				7030E08729BBAF650021970D /* ParseConfigCodableTests.swift in Sources */,
 				917BA43A2703E6D800F8D747 /* ParseHealthAsyncTests.swift in Sources */,
 				917BA4462703EEA700F8D747 /* ParseAnonymousAsyncTests.swift in Sources */,
 				70F79A672639DE9700731C46 /* ParseHealthCombineTests.swift in Sources */,
@@ -3046,6 +3059,7 @@
 				70A98D832794AB3C009B58F2 /* ParseQueryScorable.swift in Sources */,
 				70385E862858F9750084D306 /* ParseHookParametable.swift in Sources */,
 				F97B461F24D9C6F200F4A88B /* ParseStorage.swift in Sources */,
+				7030E07F29BB8CDC0021970D /* ParseConfigCodable.swift in Sources */,
 				70212D142854C82B00386163 /* ParsePushFirebaseNotification.swift in Sources */,
 				7044C1AE25C4FC080011F6E7 /* Query+combine.swift in Sources */,
 				F97B45D324D9C6F200F4A88B /* AnyDecodable.swift in Sources */,
@@ -3216,6 +3230,7 @@
 				70F03A642780EADD00E5AFB4 /* ParseLinkedInCombineTests.swift in Sources */,
 				89899DA126045998002E2043 /* ParseTwitterCombineTests.swift in Sources */,
 				70212D332855266600386163 /* ParsePushPayloadAppleTests.swift in Sources */,
+				7030E08929BBAF670021970D /* ParseConfigCodableTests.swift in Sources */,
 				917BA43C2703E6D800F8D747 /* ParseHealthAsyncTests.swift in Sources */,
 				917BA4482703EEA700F8D747 /* ParseAnonymousAsyncTests.swift in Sources */,
 				70F79A692639DE9700731C46 /* ParseHealthCombineTests.swift in Sources */,
@@ -3333,6 +3348,7 @@
 				70F03A632780EADD00E5AFB4 /* ParseLinkedInCombineTests.swift in Sources */,
 				89899DA026045998002E2043 /* ParseTwitterCombineTests.swift in Sources */,
 				70212D2F2855266500386163 /* ParsePushPayloadAppleTests.swift in Sources */,
+				7030E08829BBAF660021970D /* ParseConfigCodableTests.swift in Sources */,
 				917BA43B2703E6D800F8D747 /* ParseHealthAsyncTests.swift in Sources */,
 				917BA4472703EEA700F8D747 /* ParseAnonymousAsyncTests.swift in Sources */,
 				70F79A682639DE9700731C46 /* ParseHealthCombineTests.swift in Sources */,
@@ -3484,6 +3500,7 @@
 				70A98D852794AB3C009B58F2 /* ParseQueryScorable.swift in Sources */,
 				70385E882858F9750084D306 /* ParseHookParametable.swift in Sources */,
 				7044C1A225C4FA870011F6E7 /* ParseOperation+combine.swift in Sources */,
+				7030E08129BB8CDC0021970D /* ParseConfigCodable.swift in Sources */,
 				70212D162854C82B00386163 /* ParsePushFirebaseNotification.swift in Sources */,
 				F97B465124D9C78C00F4A88B /* Add.swift in Sources */,
 				7044C1B025C4FC080011F6E7 /* Query+combine.swift in Sources */,
@@ -3679,6 +3696,7 @@
 				70A98D842794AB3C009B58F2 /* ParseQueryScorable.swift in Sources */,
 				70385E872858F9750084D306 /* ParseHookParametable.swift in Sources */,
 				7044C1A125C4FA870011F6E7 /* ParseOperation+combine.swift in Sources */,
+				7030E08029BB8CDC0021970D /* ParseConfigCodable.swift in Sources */,
 				70212D152854C82B00386163 /* ParsePushFirebaseNotification.swift in Sources */,
 				F97B465024D9C78B00F4A88B /* Add.swift in Sources */,
 				7044C1AF25C4FC080011F6E7 /* Query+combine.swift in Sources */,
