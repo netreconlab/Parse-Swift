@@ -110,10 +110,10 @@ extension ParseUser {
     }
 
     static func deleteCurrentKeychain() async {
-        await deleteCurrentContainerFromKeychain()
-        await BaseParseInstallation.deleteCurrentContainerFromKeychain()
-        await ParseACL.deleteDefaultFromKeychain()
-        await BaseConfig.deleteCurrentContainerFromKeychain()
+        await deleteCurrentContainerFromStorage()
+        await BaseParseInstallation.deleteCurrentContainerFromStorage()
+        await ParseACL.deleteDefaultFromStorage()
+        await BaseConfig.deleteCurrentContainerFromStorage()
         clearCache()
     }
 }
@@ -147,7 +147,7 @@ public extension ParseUser {
         #endif
     }
 
-    internal static func deleteCurrentContainerFromKeychain() async {
+    internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows)
         await URLSession.liveQuery.closeAll()
@@ -399,7 +399,7 @@ extension ParseUser {
             if let current = try? await Self.current() {
                 let isAnonymous = await self.anonymous.isLinked()
                 if !current.hasSameObjectId(as: user) && isAnonymous {
-                    await Self.deleteCurrentContainerFromKeychain()
+                    await Self.deleteCurrentContainerFromStorage()
                 }
             }
 
@@ -777,7 +777,7 @@ extension ParseUser {
 
 // MARK: Fetchable
 extension ParseUser {
-    internal static func updateKeychainIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+    internal static func updateStorageIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
         let currentUser = try await Self.current()
         var foundCurrentUserObjects = results.filter { $0.hasSameObjectId(as: currentUser) }
         foundCurrentUserObjects = try foundCurrentUserObjects.sorted(by: {
@@ -792,7 +792,7 @@ extension ParseUser {
             if !deleting {
                 try await Self.setCurrent(foundCurrentUser)
             } else {
-                await Self.deleteCurrentContainerFromKeychain()
+                await Self.deleteCurrentContainerFromStorage()
             }
         }
     }
@@ -826,7 +826,7 @@ extension ParseUser {
                              callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                try? await Self.updateKeychainIfNeeded([foundResult])
+                                try? await Self.updateStorageIfNeeded([foundResult])
                                 completion(.success(foundResult))
                             }
                         } else {
@@ -1127,7 +1127,7 @@ extension ParseUser {
 
                     case .success:
                         Task {
-                            try? await Self.updateKeychainIfNeeded([self], deleting: true)
+                            try? await Self.updateStorageIfNeeded([self], deleting: true)
                             completion(.success(()))
                         }
                     case .failure(let error):
@@ -1404,7 +1404,7 @@ public extension Sequence where Element: ParseUser {
                     }
                     let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
                     Task {
-                        try? await Self.Element.updateKeychainIfNeeded(fetchedObjects)
+                        try? await Self.Element.updateStorageIfNeeded(fetchedObjects)
                         callbackQueue.async {
                             completion(.success(fetchedObjectsToReturn))
                         }
@@ -1478,7 +1478,7 @@ public extension Sequence where Element: ParseUser {
                                 if completed == (batches.count - 1) {
                                     let returnBatchImmutable = returnBatch
                                     Task {
-                                        try? await Self.Element.updateKeychainIfNeeded(self.compactMap {$0},
+                                        try? await Self.Element.updateStorageIfNeeded(self.compactMap {$0},
                                                                                        deleting: true)
                                         callbackQueue.async {
                                             completion(.success(returnBatchImmutable))

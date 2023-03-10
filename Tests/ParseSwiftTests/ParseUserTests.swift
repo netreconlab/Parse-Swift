@@ -340,15 +340,15 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        let userFromStorage = try await BaseParseUser.current()
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -381,15 +381,15 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -421,16 +421,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -465,16 +465,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -539,16 +539,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -586,16 +586,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(signedUp.customKey)
         XCTAssertNil(signedUp.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -849,16 +849,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(currentUser.customKey)
         XCTAssertNil(currentUser.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     func testVerifyPasswordLoggedInGET() async throws {
@@ -888,16 +888,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(currentUser.customKey)
         XCTAssertNil(currentUser.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -924,16 +924,16 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(currentUser.customKey)
         XCTAssertNil(currentUser.ACL)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertNotNil(userFromKeychain.createdAt)
-        XCTAssertNotNil(userFromKeychain.updatedAt)
-        XCTAssertNotNil(userFromKeychain.email)
-        XCTAssertNotNil(userFromKeychain.username)
-        XCTAssertNil(userFromKeychain.password)
-        XCTAssertNotNil(userFromKeychain.objectId)
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromKeychain.ACL)
+        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -1069,9 +1069,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let fetched = try await user.fetch()
         XCTAssertEqual(fetched.objectId, serverResponse.objectId)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertEqual(userFromKeychain.objectId, serverResponse.objectId)
+        XCTAssertEqual(userFromStorage.objectId, serverResponse.objectId)
     }
 
     func testFetchAndUpdateCurrentUser() async throws {
@@ -1329,9 +1329,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let saved = try await user.save()
         XCTAssertEqual(saved.objectId, serverResponse.objectId)
 
-        let userFromKeychain = try await BaseParseUser.current()
+        let userFromStorage = try await BaseParseUser.current()
 
-        XCTAssertEqual(userFromKeychain.objectId, serverResponse.objectId)
+        XCTAssertEqual(userFromStorage.objectId, serverResponse.objectId)
     }
 
     @MainActor

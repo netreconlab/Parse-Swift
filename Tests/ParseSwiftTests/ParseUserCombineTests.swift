@@ -130,14 +130,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -191,14 +191,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -247,14 +247,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -329,14 +329,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -396,14 +396,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -445,8 +445,8 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
                     XCTFail(error.localizedDescription)
                 }
                 Task {
-                    if let userFromKeychain = try? await BaseParseUser.current() {
-                        XCTFail("\(userFromKeychain) was not deleted from Keychain during logout")
+                    if let userFromStorage = try? await BaseParseUser.current() {
+                        XCTFail("\(userFromStorage) was not deleted from Keychain during logout")
                     }
                     if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>
                         = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
@@ -506,8 +506,8 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
                 }
 
                 Task {
-                    if let userFromKeychain = try? await BaseParseUser.current() {
-                        XCTFail("\(userFromKeychain) was not deleted from Keychain during logout")
+                    if let userFromStorage = try? await BaseParseUser.current() {
+                        XCTFail("\(userFromStorage) was not deleted from Keychain during logout")
                     }
                     if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>
                         = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
@@ -636,14 +636,14 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromKeychain.createdAt)
-                    XCTAssertNotNil(userFromKeychain.updatedAt)
-                    XCTAssertNotNil(userFromKeychain.email)
-                    XCTAssertNotNil(userFromKeychain.username)
-                    XCTAssertNil(userFromKeychain.password)
-                    XCTAssertNotNil(userFromKeychain.objectId)
-                    XCTAssertNil(userFromKeychain.ACL)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -784,8 +784,8 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             let response = serverResponse
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertEqual(userFromKeychain.objectId, response.objectId)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertEqual(userFromStorage.objectId, response.objectId)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }
@@ -838,8 +838,8 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             let response = serverResponse
             Task {
                 do {
-                    let userFromKeychain = try await BaseParseUser.current()
-                    XCTAssertEqual(userFromKeychain.objectId, response.objectId)
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertEqual(userFromStorage.objectId, response.objectId)
                 } catch {
                     XCTFail(error.localizedDescription)
                 }

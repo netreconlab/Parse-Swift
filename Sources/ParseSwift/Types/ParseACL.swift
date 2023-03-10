@@ -407,12 +407,13 @@ extension ParseACL {
         return modifiedACL
     }
 
-    internal static func deleteDefaultFromKeychain() async {
+    internal static func deleteDefaultFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #endif
     }
+
 }
 
 // Encoding and decoding

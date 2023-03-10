@@ -32,13 +32,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
                     try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentVersion),
                     let versionFromMemoryToMigrate = try? ParseVersion(string: versionStringFromMemoryToMigrate) else {
                 #if !os(Linux) && !os(Android) && !os(Windows)
-                guard let versionFromKeychain: Self =
+                guard let versionFromStorage: Self =
                         try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion) else {
                     // Handle Keychain migrations from String to ParseVersion
-                    guard let versionStringFromKeychainToMigrate: String =
+                    guard let versionStringFromStorageToMigrate: String =
                             try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
                             // swiftlint:disable:next line_length
-                            let versionFromKeychainToMigrate = try? ParseVersion(string: versionStringFromKeychainToMigrate) else {
+                            let versionFromStorageToMigrate = try? ParseVersion(string: versionStringFromStorageToMigrate) else {
                         await KeychainStore.createOld()
                         guard let versionStringFromOldKeychainToMigrate: String =
                                 try? await KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
@@ -53,13 +53,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
                                                             for: ParseStorage.Keys.currentVersion)
                         return versionFromOldKeychainToMigrate
                     }
-                    try? await ParseStorage.shared.set(versionFromKeychainToMigrate,
+                    try? await ParseStorage.shared.set(versionFromStorageToMigrate,
                                                        for: ParseStorage.Keys.currentVersion)
-                    try? await KeychainStore.shared.set(versionFromKeychainToMigrate,
+                    try? await KeychainStore.shared.set(versionFromStorageToMigrate,
                                                         for: ParseStorage.Keys.currentVersion)
-                    return versionFromKeychainToMigrate
+                    return versionFromStorageToMigrate
                 }
-                return versionFromKeychain
+                return versionFromStorage
                 #else
                 throw ParseError(code: .otherCause,
                                  message: "There is no current version")
@@ -114,7 +114,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
         self.prereleaseVersion = prereleaseVersion
     }
 
-    static func deleteCurrentContainerFromKeychain() async {
+    static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentVersion)

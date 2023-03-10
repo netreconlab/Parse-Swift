@@ -41,7 +41,7 @@ struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
         Parse.configuration.keychainAccessGroup = updatedKeychainAccessGroup
     }
 
-    static func deleteCurrentContainerFromKeychain() async {
+    static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentAccessGroup)
         Parse.configuration.keychainAccessGroup = Self()

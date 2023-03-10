@@ -553,7 +553,7 @@ internal extension ParseUser {
                          callbackQueue: callbackQueue,
                          childObjects: savedChildObjects,
                          childFiles: savedChildFiles)
-            try? await Self.updateKeychainIfNeeded([saved])
+            try? await Self.updateStorageIfNeeded([saved])
             return saved
         } catch {
             throw error as? ParseError ?? ParseError(swift: error)
@@ -625,7 +625,7 @@ internal extension Sequence where Element: ParseUser {
                                  childFiles: childFiles)
                 returnBatch.append(contentsOf: saved)
             }
-            try? await Self.Element.updateKeychainIfNeeded(returnBatch.compactMap {try? $0.get()})
+            try? await Self.Element.updateStorageIfNeeded(returnBatch.compactMap {try? $0.get()})
             return returnBatch
         } catch {
             throw error as? ParseError ?? ParseError(swift: error)

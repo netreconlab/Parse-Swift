@@ -158,7 +158,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
     }
 
-    func testUpdateKeychainAccessGroup() async throws {
+    func testUpdateStorageAccessGroup() async throws {
         var currentAccessGroup = try await ParseKeychainAccessGroup.current()
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, currentAccessGroup)
         await ParseKeychainAccessGroup.setCurrent(keychainAccessGroupSync)
@@ -184,7 +184,7 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         var currentGroup = try await ParseKeychainAccessGroup.current()
         XCTAssertEqual(currentGroup, noKeychainAccessGroup)
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
-        await ParseKeychainAccessGroup.deleteCurrentContainerFromKeychain()
+        await ParseKeychainAccessGroup.deleteCurrentContainerFromStorage()
         XCTAssertEqual(ParseSwift.configuration.keychainAccessGroup, noKeychainAccessGroup)
         do {
             currentGroup = try await ParseKeychainAccessGroup.current()
