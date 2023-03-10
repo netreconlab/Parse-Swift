@@ -167,6 +167,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
                 return nil
             }
         }
+
         try await User.logout()
         do {
             _ = try await ParseConfigCodable<[String: AnyCodable]>.current()

@@ -32,6 +32,7 @@ extension ParseConfigCodable {
     public static func fetch(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
                              completion: @escaping (Result<[String: V], ParseError>) -> Void) {
+
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -72,6 +73,7 @@ extension ParseConfigCodable {
                             options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
                             completion: @escaping (Result<Bool, ParseError>) -> Void) {
+
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -85,6 +87,7 @@ extension ParseConfigCodable {
 
     // swiftlint:disable:next line_length
     internal static func updateCommand(_ config: [String: V]) async -> API.NonParseBodyCommand<ConfigCodableUpdateBody<[String: V]>, Bool> {
+
         let body = ConfigCodableUpdateBody(params: config)
         return API.NonParseBodyCommand(method: .PUT, // MARK: Should be switched to ".PATCH" when server supports PATCH.
                                        path: .config,
@@ -160,6 +163,7 @@ extension ParseConfigCodable {
         currentContainer?.currentConfig = current
         await Self.setCurrentContainer(currentContainer)
     }
+
 }
 
 struct CurrentConfigDictionaryContainer<T: Codable>: Codable {
