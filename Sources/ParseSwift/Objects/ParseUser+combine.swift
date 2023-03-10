@@ -96,6 +96,24 @@ public extension ParseUser {
         }
     }
 
+    /**
+     Logs in a `ParseUser` *asynchronously* with a session token. On success, this saves the logged in
+     `ParseUser`with this session to the keychain, so you can retrieve the currently logged in user using
+     *current*.
+
+     - parameter sessionToken: The sessionToken of the user to login.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+     - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+     desires a different policy, it should be inserted in `options`.
+    */
+    static func becomePublisher(sessionToken: String,
+                                options: API.Options = []) -> Future<Self, ParseError> {
+        Future { promise in
+            Self.become(sessionToken: sessionToken, options: options, completion: promise)
+        }
+    }
+
 #if !os(Linux) && !os(Android) && !os(Windows)
     /**
      Logs in a `ParseUser` *asynchronously* using the session token from the Parse Objective-C SDK Keychain.

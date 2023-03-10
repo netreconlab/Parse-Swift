@@ -552,6 +552,53 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     @MainActor
+    func testBecomeTypeMethod() async throws {
+        try await login()
+        MockURLProtocol.removeAll()
+
+        let user = try await User.current()
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.sessionToken = "newValue"
+        serverResponse.username = "stop"
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        guard let sessionToken = serverResponse.sessionToken else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let signedUp = try await User.become(sessionToken: sessionToken)
+        XCTAssertNotNil(signedUp)
+        XCTAssertNotNil(signedUp.updatedAt)
+        XCTAssertNotNil(signedUp.email)
+        XCTAssertNotNil(signedUp.username)
+        XCTAssertNil(signedUp.password)
+        XCTAssertNotNil(signedUp.objectId)
+        XCTAssertNotNil(signedUp.customKey)
+        XCTAssertNil(signedUp.ACL)
+
+        let userFromKeychain = try await BaseParseUser.current()
+
+        XCTAssertNotNil(userFromKeychain.createdAt)
+        XCTAssertNotNil(userFromKeychain.updatedAt)
+        XCTAssertNotNil(userFromKeychain.email)
+        XCTAssertNotNil(userFromKeychain.username)
+        XCTAssertNil(userFromKeychain.password)
+        XCTAssertNotNil(userFromKeychain.objectId)
+        _ = try await BaseParseUser.sessionToken()
+        XCTAssertNil(userFromKeychain.ACL)
+    }
+
+    @MainActor
     func testLogutCommand() async throws {
         let command = User.logoutCommand()
         XCTAssertNotNil(command)

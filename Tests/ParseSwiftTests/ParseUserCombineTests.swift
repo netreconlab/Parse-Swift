@@ -349,6 +349,73 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    func testBecomeTypeMethod() async throws {
+        try await login()
+        MockURLProtocol.removeAll()
+
+        let user = try await User.current()
+        XCTAssertNotNil(user.objectId)
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.createdAt = user.createdAt
+        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.sessionToken = "newValue"
+        serverResponse.username = "stop"
+
+        var subscriptions = Set<AnyCancellable>()
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Become user1")
+        let expectation2 = XCTestExpectation(description: "Become user2")
+        let publisher = User.becomePublisher(sessionToken: serverResponse.sessionToken)
+            .sink(receiveCompletion: { result in
+
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
+                }
+                expectation1.fulfill()
+
+        }, receiveValue: { signedUp in
+            XCTAssertNotNil(signedUp)
+            XCTAssertNotNil(signedUp.createdAt)
+            XCTAssertNotNil(signedUp.updatedAt)
+            XCTAssertNotNil(signedUp.email)
+            XCTAssertNotNil(signedUp.username)
+            XCTAssertNil(signedUp.password)
+            XCTAssertNotNil(signedUp.objectId)
+            XCTAssertNotNil(signedUp.customKey)
+            XCTAssertNil(signedUp.ACL)
+
+            Task {
+                do {
+                    let userFromKeychain = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromKeychain.createdAt)
+                    XCTAssertNotNil(userFromKeychain.updatedAt)
+                    XCTAssertNotNil(userFromKeychain.email)
+                    XCTAssertNotNil(userFromKeychain.username)
+                    XCTAssertNil(userFromKeychain.password)
+                    XCTAssertNotNil(userFromKeychain.objectId)
+                    XCTAssertNil(userFromKeychain.ACL)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
+            }
+        })
+        publisher.store(in: &subscriptions)
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
     func testLogout() async throws {
         try await login()
         MockURLProtocol.removeAll()
