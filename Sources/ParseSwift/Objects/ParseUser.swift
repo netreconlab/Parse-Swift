@@ -188,17 +188,9 @@ public extension ParseUser {
 // MARK: SignupLoginBody
 struct SignupLoginBody: ParseEncodable {
     var username: String?
+    var email: String?
     var password: String?
     var authData: [String: [String: String]?]?
-
-    init(username: String, password: String) {
-        self.username = username
-        self.password = password
-    }
-
-    init(authData: [String: [String: String]?]) {
-        self.authData = authData
-    }
 }
 
 // MARK: EmailBody
@@ -213,9 +205,12 @@ extension ParseUser {
      Makes an *asynchronous* request to log in a user with specified credentials.
      Returns an instance of the successfully logged in `ParseUser`.
 
-     This also caches the user locally so that calls to *current* will use the latest logged in user.
-     - parameter username: The username of the user.
+     This also stores the user locally so that calls to *current* will use the latest logged in user.
+     - parameter username: The username of the user. Defauilts to **nil**.
+     - parameter email: The email address associated with the user that forgot their password.
+     Defauilts to **nil**.
      - parameter password: The password of the user.
+     - parameter authData: The authentication data for the `ParseUser`. Defauilts to **nil**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
@@ -224,8 +219,10 @@ extension ParseUser {
      desires a different policy, it should be inserted in `options`.
     */
     public static func login(
-        username: String,
+        username: String? = nil,
+        email: String? = nil,
         password: String,
+        authData: [String: [String: String]?]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<Self, ParseError>) -> Void
@@ -233,17 +230,26 @@ extension ParseUser {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            await loginCommand(username: username, password: password)
+            await loginCommand(username: username,
+                               email: email,
+                               password: password,
+                               authData: authData)
                 .execute(options: options,
                               callbackQueue: callbackQueue,
                               completion: completion)
         }
     }
 
-    internal static func loginCommand(username: String,
-                                      password: String) -> API.Command<SignupLoginBody, Self> {
+    internal static func loginCommand(username: String? = nil,
+                                      email: String? = nil,
+                                      password: String,
+                                      // swiftlint:disable:next line_length
+                                      authData: [String: [String: String]?]? = nil) -> API.Command<SignupLoginBody, Self> {
 
-        let body = SignupLoginBody(username: username, password: password)
+        let body = SignupLoginBody(username: username,
+                                   email: email,
+                                   password: password,
+                                   authData: authData)
         return API.Command<SignupLoginBody, Self>(method: .POST,
                                                   path: .login,
                                                   body: body) { (data) async throws -> Self in

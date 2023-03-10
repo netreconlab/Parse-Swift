@@ -6,6 +6,7 @@
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
 __New features__
+* Make it easier to login with email or authData ([#67](https://github.com/netreconlab/Parse-Swift/pull/67)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Add missing async/await and Combine ParseUser.become() type methods ([#66](https://github.com/netreconlab/Parse-Swift/pull/66)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.0.1

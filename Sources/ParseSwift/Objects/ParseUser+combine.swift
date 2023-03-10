@@ -18,11 +18,11 @@ public extension ParseUser {
 
      This will also enforce that the username is not already taken.
 
-     - warning: Make sure that password and username are set before calling this method.
      - parameter username: The username of the user.
      - parameter password: The password of the user.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - warning: Make sure that password and username are set before calling this method.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
@@ -42,9 +42,9 @@ public extension ParseUser {
 
      This will also enforce that the username is not already taken.
 
-     - warning: Make sure that password and username are set before calling this method.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - warning: Make sure that password and username are set before calling this method.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
@@ -60,19 +60,26 @@ public extension ParseUser {
      Publishes an instance of the successfully logged in `ParseUser`.
 
      This also caches the user locally so that calls to *current* will use the latest logged in user.
-     - parameter username: The username of the user.
+     - parameter username: The username of the user. Defauilts to **nil**.
+     - parameter email: The email address associated with the user that forgot their password.
+     Defauilts to **nil**.
      - parameter password: The password of the user.
+     - parameter authData: The authentication data for the `ParseUser`. Defauilts to **nil**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func loginPublisher(username: String,
+    static func loginPublisher(username: String? = nil,
+                               email: String? = nil,
                                password: String,
+                               authData: [String: [String: String]?]? = nil,
                                options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             Self.login(username: username,
+                       email: email,
                        password: password,
+                       authData: authData,
                        options: options,
                        completion: promise)
         }
