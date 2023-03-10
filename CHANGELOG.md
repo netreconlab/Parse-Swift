@@ -5,6 +5,9 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+__New features__
+* Add missing async/await and Combine ParseUser.become() type methods ([#66](https://github.com/netreconlab/Parse-Swift/pull/66)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.0.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.0.0...5.0.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.0.1/documentation/parseswift)
 
