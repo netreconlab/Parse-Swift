@@ -204,6 +204,7 @@ public struct API {
 
     // swiftlint:disable:next cyclomatic_complexity
     internal static func getHeaders(options: API.Options) async throws -> [String: String] {
+
         try await yieldIfNotInitialized()
         var headers: [String: String] = ["X-Parse-Application-Id": Parse.configuration.applicationId,
                                          "Content-Type": "application/json"]
@@ -254,7 +255,6 @@ public struct API {
                 break
             }
         }
-
         return headers
     }
 
