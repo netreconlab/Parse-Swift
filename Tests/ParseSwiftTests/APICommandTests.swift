@@ -336,8 +336,8 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func testApplicationIdHeader() async {
-        let headers = await API.getHeaders(options: [])
+    func testApplicationIdHeader() async throws {
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Application-Id"], ParseSwift.configuration.applicationId)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -359,7 +359,7 @@ class APICommandTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
         }
 
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Key"], clientKey)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -381,7 +381,7 @@ class APICommandTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
         }
 
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertNil(headers["X-Parse-Master-Key"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -406,7 +406,7 @@ class APICommandTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Parse current user should have session token")
         }
 
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Session-Token"], sessionToken)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -444,7 +444,7 @@ class APICommandTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Parse current user should have session token")
         }
 
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Installation-Id"], installationId)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -477,7 +477,7 @@ class APICommandTests: XCTestCase {
     }
 
     func testContentHeader() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -495,7 +495,7 @@ class APICommandTests: XCTestCase {
     }
 
     func testReplaceContentHeader() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -528,7 +528,7 @@ class APICommandTests: XCTestCase {
     }
 
     func testRemoveContentHeader() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["Content-Type"], "application/json")
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -565,7 +565,7 @@ class APICommandTests: XCTestCase {
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testClientVersionHeader() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertEqual(headers["X-Parse-Client-Version"], API.clientVersion())
 
         let post = API.Command<Level, NoBody?>(method: .POST, path: .login) { _ in
@@ -636,7 +636,7 @@ class APICommandTests: XCTestCase {
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodency() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
 
         let post = API.Command<Level, NoBody?>(method: .POST, path: .login) { _ in
@@ -707,7 +707,7 @@ class APICommandTests: XCTestCase {
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     func testIdempodencyNoParseBody() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertNotNil(headers["X-Parse-Request-Id"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
@@ -805,7 +805,7 @@ class APICommandTests: XCTestCase {
     }
 
     func testContextHeader() async throws {
-        let headers = await API.getHeaders(options: [])
+        let headers = try await API.getHeaders(options: [])
         XCTAssertNil(headers["X-Parse-Cloud-Context"])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in

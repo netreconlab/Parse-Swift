@@ -103,10 +103,25 @@ struct CurrentConfigContainer<T: ParseConfig>: Codable, Equatable {
     var currentConfig: T?
 }
 
-public extension ParseConfig {
+extension ParseConfig {
 
-    internal static func currentContainer() async -> CurrentConfigContainer<Self>? {
-        await yieldIfNotInitialized()
+    /**
+     Gets/Sets properties of the current config in the Keychain.
+
+     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
+     - throws: An error of `ParseError` type.
+    */
+    public static func current() async throws -> Self {
+        try await yieldIfNotInitialized()
+        guard let container = await Self.currentContainer(),
+                let config = container.currentConfig else {
+            throw ParseError(code: .otherCause,
+                             message: "There is no current Config")
+        }
+        return config
+    }
+
+    static func currentContainer() async -> CurrentConfigContainer<Self>? {
         guard let configInMemory: CurrentConfigContainer<Self> =
             try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             #if !os(Linux) && !os(Android) && !os(Windows)
@@ -118,14 +133,14 @@ public extension ParseConfig {
         return configInMemory
     }
 
-    internal static func setCurrentContainer(_ newValue: CurrentConfigContainer<Self>?) async {
+    static func setCurrentContainer(_ newValue: CurrentConfigContainer<Self>?) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #endif
     }
 
-    internal static func updateStorageIfNeeded(_ result: Self, deleting: Bool = false) async {
+    static func updateStorageIfNeeded(_ result: Self, deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {
@@ -133,29 +148,14 @@ public extension ParseConfig {
         }
     }
 
-    internal static func deleteCurrentContainerFromStorage() async {
+    static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
         #if !os(Linux) && !os(Android) && !os(Windows)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
         #endif
     }
 
-    /**
-     Gets/Sets properties of the current config in the Keychain.
-
-     - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
-     - throws: An error of `ParseError` type.
-    */
-    static func current() async throws -> Self {
-        guard let container = await Self.currentContainer(),
-                let config = container.currentConfig else {
-            throw ParseError(code: .otherCause,
-                             message: "There is no current Config")
-        }
-        return config
-    }
-
-    internal static func setCurrent(_ current: Self?) async {
+    static func setCurrent(_ current: Self?) async {
         if await Self.currentContainer() == nil {
             await Self.setCurrentContainer(CurrentConfigContainer<Self>())
         }

@@ -256,59 +256,70 @@ internal extension API {
                                completion: @escaping(Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
             Task {
-                var headers = await API.getHeaders(options: options)
-                if method == .GET || method == .DELETE {
-                    headers.removeValue(forKey: "X-Parse-Request-Id")
-                }
-                let url = parseURL == nil ?
-                API.serverURL(options: options).appendingPathComponent(path.urlComponent) : parseURL!
-
-                guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-                    let error = ParseError(code: .otherCause,
-                                           message: "Could not unrwrap url components for \(url)")
-                    completion(.failure(error))
-                    return
-                }
-                components.queryItems = params
-
-                guard let urlComponents = components.url else {
-                    let error = ParseError(code: .otherCause,
-                                           message: "Could not create url from components for \(components)")
-                    completion(.failure(error))
-                    return
-                }
-
-                var urlRequest = URLRequest(url: urlComponents)
-                urlRequest.allHTTPHeaderFields = headers
-                if let urlBody = body {
-                    if (urlBody as? ParseCloudTypeable) != nil {
-                        guard let bodyData = try? ParseCoding.parseEncoder().encode(urlBody, skipKeys: .cloud) else {
-                            let error = ParseError(code: .otherCause,
-                                                   message: "Could not encode body \(urlBody)")
-                            completion(.failure(error))
-                            return
-                        }
-                        urlRequest.httpBody = bodyData
-                    } else {
-                        guard let bodyData = try? ParseCoding
-                            .parseEncoder()
-                            .encode(urlBody,
-                                    batching: batching,
-                                    collectChildren: false,
-                                    objectsSavedBeforeThisOne: childObjects,
-                                    filesSavedBeforeThisOne: childFiles) else {
-                            let error = ParseError(code: .otherCause,
-                                                   message: "Could not encode body \(urlBody)")
-                            completion(.failure(error))
-                            return
-                        }
-                        urlRequest.httpBody = bodyData.encoded
+                do {
+                    var headers = try await API.getHeaders(options: options)
+                    if method == .GET || method == .DELETE {
+                        headers.removeValue(forKey: "X-Parse-Request-Id")
                     }
+                    let url = parseURL == nil ?
+                    API.serverURL(options: options).appendingPathComponent(path.urlComponent) : parseURL!
+
+                    guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+                        let error = ParseError(code: .otherCause,
+                                               message: "Could not unrwrap url components for \(url)")
+                        completion(.failure(error))
+                        return
+                    }
+                    components.queryItems = params
+
+                    guard let urlComponents = components.url else {
+                        let error = ParseError(code: .otherCause,
+                                               message: "Could not create url from components for \(components)")
+                        completion(.failure(error))
+                        return
+                    }
+
+                    var urlRequest = URLRequest(url: urlComponents)
+                    urlRequest.allHTTPHeaderFields = headers
+                    if let urlBody = body {
+                        if (urlBody as? ParseCloudTypeable) != nil {
+                            do {
+                                let bodyData = try ParseCoding.parseEncoder().encode(urlBody,
+                                                                                     skipKeys: .cloud)
+                                urlRequest.httpBody = bodyData
+                            } catch {
+                                let defaultError = ParseError(code: .otherCause,
+                                                              message: "Could not encode body \(urlBody)",
+                                                              swift: error)
+                                let parseError = error as? ParseError ?? defaultError
+                                completion(.failure(parseError))
+                                return
+                            }
+                        } else {
+                            guard let bodyData = try? ParseCoding
+                                .parseEncoder()
+                                .encode(urlBody,
+                                        batching: batching,
+                                        collectChildren: false,
+                                        objectsSavedBeforeThisOne: childObjects,
+                                        filesSavedBeforeThisOne: childFiles) else {
+                                let error = ParseError(code: .otherCause,
+                                                       message: "Could not encode body \(urlBody)")
+                                completion(.failure(error))
+                                return
+                            }
+                            urlRequest.httpBody = bodyData.encoded
+                        }
+                    }
+                    urlRequest.httpMethod = method.rawValue
+                    urlRequest.cachePolicy = requestCachePolicy(options: options)
+                    completion(.success(urlRequest))
+                    return
+                } catch {
+                    let parseError = error as? ParseError ?? ParseError(swift: error)
+                    completion(.failure(parseError))
+                    return
                 }
-                urlRequest.httpMethod = method.rawValue
-                urlRequest.cachePolicy = requestCachePolicy(options: options)
-                completion(.success(urlRequest))
-                return
             }
         }
 
@@ -527,23 +538,19 @@ internal extension API.Command where T: ParseObject {
                                                                   method: object.element.method)
                             return .success(updatedObject)
                         } catch {
-                            guard let parseError = error as? ParseError else {
-                                return .failure(ParseError(swift: error))
-                            }
+                            let parseError = error as? ParseError ?? ParseError(swift: error)
                             return .failure(parseError)
                         }
                     } else {
-                        guard let parseError = response.error else {
-                            return .failure(ParseError(code: .otherCause, message: "unknown error"))
-                        }
-
+                        let parseError = response.error ?? ParseError(code: .otherCause,
+                                                                      message: "Unknown error")
                         return .failure(parseError)
                     }
                 })
             } catch {
-                guard let parseError = error as? ParseError else {
-                    return [(.failure(ParseError(code: .otherCause, message: "decoding error: \(error)")))]
-                }
+                let parseError = error as? ParseError ?? ParseError(code: .otherCause,
+                                                                    message: "Decoding error",
+                                                                    swift: error)
                 return [(.failure(parseError))]
             }
         }
@@ -572,17 +579,15 @@ internal extension API.Command where T: ParseObject {
                     if response.success != nil {
                         return .success(())
                     } else {
-                        guard let parseError = response.error else {
-                            return .failure(ParseError(code: .otherCause, message: "unknown error"))
-                        }
-
+                        let parseError = response.error ?? ParseError(code: .otherCause,
+                                                                      message: "Unknown error")
                         return .failure(parseError)
                     }
                 })
             } catch {
-                guard let parseError = error as? ParseError else {
-                    return [(.failure(ParseError(code: .otherCause, message: "decoding error: \(error)")))]
-                }
+                let parseError = error as? ParseError ?? ParseError(code: .otherCause,
+                                                                    message: "Decoding error",
+                                                                    swift: error)
                 return [(.failure(parseError))]
             }
         }

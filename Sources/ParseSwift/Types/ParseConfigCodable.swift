@@ -110,6 +110,7 @@ extension ParseConfigCodable {
      - throws: An error of `ParseError` type.
     */
     public static func current() async throws -> [String: V] {
+        try await yieldIfNotInitialized()
         guard let container = await Self.currentContainer(),
                 let config = container.currentConfig else {
             throw ParseError(code: .otherCause,
@@ -119,7 +120,6 @@ extension ParseConfigCodable {
     }
 
     static func currentContainer() async -> CurrentConfigDictionaryContainer<V>? {
-        await yieldIfNotInitialized()
         guard let configInMemory: CurrentConfigDictionaryContainer<V> =
             try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
             #if !os(Linux) && !os(Android) && !os(Windows)

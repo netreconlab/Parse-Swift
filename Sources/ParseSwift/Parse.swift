@@ -61,10 +61,15 @@ internal func initialize(applicationId: String,
     try await initialize(configuration: configuration)
 }
 
-internal func yieldIfNotInitialized() async {
+internal func yieldIfNotInitialized(_ iteration: Int = 0) async throws {
     guard ParseConfiguration.checkIfConfigured() else {
-        await Task.yield()
-        await yieldIfNotInitialized()
+        guard iteration < 5 else {
+            throw ParseError(code: .otherCause,
+                             message: "The SDK needs to be initialized")
+        }
+        let nanoSeconds = UInt64(1 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
+        try await yieldIfNotInitialized(iteration + 1)
         return
     }
 }
@@ -158,21 +163,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
-    // Migrate installations with installationId, but missing
-    // currentInstallation, ParseSwift < 1.9.10
     let currentInstallationContainer = await BaseParseInstallation.currentContainer()
-    if let installationId = currentInstallationContainer.installationId,
-       currentInstallationContainer.currentInstallation == nil {
-        if let foundInstallation = try? await BaseParseInstallation
-            .query("installationId" == installationId)
-            .first(options: [.cachePolicy(.reloadIgnoringLocalCacheData)]) {
-            let newContainer = CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: foundInstallation,
-                                                                                   installationId: installationId)
-            await BaseParseInstallation.setCurrentContainer(newContainer)
-        }
-    }
-    await BaseParseInstallation.createNewInstallationIfNeeded()
-
     #if !os(Linux) && !os(Android) && !os(Windows)
     if configuration.isMigratingFromObjcSDK {
         await KeychainStore.createObjectiveC()
@@ -189,7 +180,24 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         }
     }
     #endif
-    Parse.configuration.isInitialized = true
+
+    // Migrate installations with installationId, but missing
+    // currentInstallation, ParseSwift < 1.9.10
+    if let installationId = currentInstallationContainer.installationId,
+       currentInstallationContainer.currentInstallation == nil {
+        Parse.configuration.isInitialized = true
+        if let foundInstallation = try? await BaseParseInstallation
+            .query("installationId" == installationId)
+            .first(options: [.cachePolicy(.reloadIgnoringLocalCacheData)]) {
+            let newContainer = CurrentInstallationContainer<BaseParseInstallation>(currentInstallation: foundInstallation,
+                                                                                   installationId: installationId)
+            await BaseParseInstallation.setCurrentContainer(newContainer)
+        }
+    }
+    await BaseParseInstallation.createNewInstallationIfNeeded()
+    if !Parse.configuration.isInitialized {
+        Parse.configuration.isInitialized = true
+    }
 }
 
 /**
@@ -347,7 +355,7 @@ public func deleteObjectiveCKeychain() async throws {
         throw ParseError(code: .otherCause,
                          message: "\"accessGroup\" must be set to a valid string when \"synchronizeAcrossDevices == true\"")
     }
-    await yieldIfNotInitialized()
+    try await yieldIfNotInitialized()
     guard let currentAccessGroup = try? await ParseKeychainAccessGroup.current() else {
         throw ParseError(code: .otherCause,
                          message: "Problem unwrapping the current access group. Did you initialize the SDK before calling this method?")

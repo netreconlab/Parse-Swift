@@ -286,7 +286,7 @@ public extension ParseInstallation {
      - throws: An error of `ParseError` type.
     */
     static func current() async throws -> Self {
-        await yieldIfNotInitialized()
+        try await yieldIfNotInitialized()
         guard let installation = await Self.currentContainer().currentInstallation else {
             throw ParseError(code: .otherCause,
                              message: "There is no current Installation")
