@@ -163,7 +163,7 @@ public extension ParseUser {
      - throws: An error of `ParseError` type.
     */
     static func current() async throws -> Self {
-        await yieldIfNotInitialized()
+        try await yieldIfNotInitialized()
         guard let container = await Self.currentContainer(),
               let user = container.currentUser else {
             throw ParseError(code: .otherCause,

@@ -42,17 +42,13 @@ internal extension URLSession {
                        responseError: Error?,
                        mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         if let responseError = responseError {
-            guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(message: "Unable to connect with parse-server",
-                                           swift: responseError))
-            }
+            let parseError = responseError as? ParseError ?? ParseError(message: "Unable to connect with parse-server",
+                                                                        swift: responseError)
             return .failure(parseError)
         }
         guard let response = urlResponse else {
-            guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "No response from server"))
-            }
+            let parseError = responseError as? ParseError ?? ParseError(code: .otherCause,
+                                                                        message: "No response from server")
             return .failure(parseError)
         }
         if var responseData = responseData {
@@ -112,17 +108,14 @@ internal extension URLSession {
                        responseError: Error?,
                        mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
         guard let response = urlResponse else {
-            guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "No response from server"))
-            }
+            let parseError = responseError as? ParseError ?? ParseError(code: .otherCause,
+                                                                        message: "No response from server")
             return .failure(parseError)
         }
         if let responseError = responseError {
-            guard let parseError = responseError as? ParseError else {
-                return .failure(ParseError(message: "Unable to connect with parse-server",
-                                           swift: responseError))
-            }
+            let defaultError = ParseError(message: "Unable to connect with parse-server",
+                                          swift: responseError)
+            let parseError = responseError as? ParseError ?? defaultError
             return .failure(parseError)
         }
 

@@ -90,35 +90,43 @@ internal extension API {
         // MARK: URL Preperation
         func prepareURLRequest(options: API.Options) async -> Result<URLRequest, ParseError> {
             let params = self.params?.getURLQueryItems()
-            var headers = await API.getHeaders(options: options)
-            if method == .GET || method == .DELETE {
-                headers.removeValue(forKey: "X-Parse-Request-Id")
-            }
-            let url = API.serverURL(options: options).appendingPathComponent(path.urlComponent)
-
-            guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not unrwrap url components for \(url)"))
-            }
-            components.queryItems = params
-
-            guard let urlComponents = components.url else {
-                return .failure(ParseError(code: .otherCause,
-                                           message: "Could not create url from components for \(components)"))
-            }
-
-            var urlRequest = URLRequest(url: urlComponents)
-            urlRequest.allHTTPHeaderFields = headers
-            if let urlBody = body {
-                guard let bodyData = try? ParseCoding.jsonEncoder().encode(urlBody) else {
-                    return .failure(ParseError(code: .otherCause,
-                                                   message: "Could not encode body \(urlBody)"))
+            do {
+                var headers = try await API.getHeaders(options: options)
+                if method == .GET || method == .DELETE {
+                    headers.removeValue(forKey: "X-Parse-Request-Id")
                 }
-                urlRequest.httpBody = bodyData
+                let url = API.serverURL(options: options).appendingPathComponent(path.urlComponent)
+
+                guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+                    return .failure(ParseError(code: .otherCause,
+                                               message: "Could not unrwrap url components for \(url)"))
+                }
+                components.queryItems = params
+
+                guard let urlComponents = components.url else {
+                    return .failure(ParseError(code: .otherCause,
+                                               message: "Could not create url from components for \(components)"))
+                }
+
+                var urlRequest = URLRequest(url: urlComponents)
+                urlRequest.allHTTPHeaderFields = headers
+                if let urlBody = body {
+                    do {
+                        let bodyData = try ParseCoding.jsonEncoder().encode(urlBody)
+                        urlRequest.httpBody = bodyData
+                    } catch {
+                        return .failure(ParseError(code: .otherCause,
+                                                   message: "Could not encode body \(urlBody)",
+                                                   swift: error))
+                    }
+                }
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.cachePolicy = requestCachePolicy(options: options)
+                return .success(urlRequest)
+            } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
+                return .failure(parseError)
             }
-            urlRequest.httpMethod = method.rawValue
-            urlRequest.cachePolicy = requestCachePolicy(options: options)
-            return .success(urlRequest)
         }
 
         enum CodingKeys: String, CodingKey { // swiftlint:disable:this nesting
@@ -199,20 +207,19 @@ internal extension API.NonParseBodyCommand {
                     let response = responses[object.offset]
                     if let success = response.success {
                         guard let successfulResponse = try? object.element.mapper(success) else {
-                            return.failure(ParseError(code: .otherCause, message: "unknown error"))
+                            return .failure(ParseError(code: .otherCause, message: "Unknown error"))
                         }
                         return .success(successfulResponse)
                     } else {
-                        guard let parseError = response.error else {
-                            return .failure(ParseError(code: .otherCause, message: "unknown error"))
-                        }
+                        let parseError = response.error ?? ParseError(code: .otherCause,
+                                                                      message: "Unknown error")
                         return .failure(parseError)
                     }
                 })
             } catch {
-                guard let parseError = error as? ParseError else {
-                    return [(.failure(ParseError(code: .otherCause, message: "decoding error: \(error)")))]
-                }
+                let parseError = error as? ParseError ?? ParseError(code: .otherCause,
+                                                                    message: "Decoding error",
+                                                                    swift: error)
                 return [(.failure(parseError))]
             }
         }

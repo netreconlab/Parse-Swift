@@ -193,7 +193,7 @@ Not attempting to open ParseLiveQuery socket anymore
             return
         }
         isConfiguring = true
-        await yieldIfNotInitialized()
+        try await yieldIfNotInitialized()
         Self.defaultClient = try await Self(isDefault: true)
     }
 
