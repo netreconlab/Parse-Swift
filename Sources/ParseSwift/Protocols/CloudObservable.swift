@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 7/11/21.
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 
 /**
@@ -27,12 +27,14 @@ public protocol CloudObservable: ObservableObject {
      when the result of its execution.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    func runFunction(options: API.Options)
+    @MainActor
+    func runFunction(options: API.Options) async
 
     /**
      Starts a Cloud Code Job *asynchronously* and updates the view model with the result and jobStatusId of the job.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    func startJob(options: API.Options)
+    @MainActor
+    func startJob(options: API.Options) async
 }
 #endif

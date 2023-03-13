@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 
 /**
@@ -24,9 +24,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
     open var results = [Object]() {
         willSet {
             count = newValue.count
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
+            self.objectWillChange.send()
         }
     }
 
@@ -35,9 +33,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
         willSet {
             error = nil
             if newValue != results.count {
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
     }
@@ -48,9 +44,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
             if newValue != nil {
                 results.removeAll()
                 count = results.count
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
     }
@@ -59,62 +53,52 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
         self.query = query
     }
 
-    open func find(options: API.Options = []) {
-        query.find(options: options) { result in
-            switch result {
-            case .success(let results):
-                self.results = results
-            case .failure(let error):
-                self.error = error
-            }
+    @MainActor
+    open func find(options: API.Options = []) async {
+        do {
+            self.results = try await query.find(options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 
+    @MainActor
     open func findAll(batchLimit: Int? = nil,
-                      options: API.Options = []) {
-
-        query.findAll(batchLimit: batchLimit,
-                      options: options) { result in
-            switch result {
-            case .success(let results):
-                self.results = results
-            case .failure(let error):
-                self.error = error
-            }
+                      options: API.Options = []) async {
+        do {
+            self.results = try await query.findAll(batchLimit: batchLimit,
+                                                   options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 
-    open func first(options: API.Options = []) {
-        query.first(options: options) { result in
-            switch result {
-            case .success(let result):
-                self.results = [result]
-            case .failure(let error):
-                self.error = error
-            }
+    @MainActor
+    open func first(options: API.Options = []) async {
+        do {
+            let result = try await query.first(options: options)
+            self.results = [result]
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 
-    open func count(options: API.Options = []) {
-        query.count(options: options) { result in
-            switch result {
-            case .success(let count):
-                self.count = count
-            case .failure(let error):
-                self.error = error
-            }
+    @MainActor
+    open func count(options: API.Options = []) async {
+        do {
+            self.count = try await query.count(options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 
+    @MainActor
     open func aggregate(_ pipeline: [[String: Encodable]],
-                        options: API.Options = []) {
-        query.aggregate(pipeline, options: options) { result in
-            switch result {
-            case .success(let results):
-                self.results = results
-            case .failure(let error):
-                self.error = error
-            }
+                        options: API.Options = []) async {
+        do {
+            self.results = try await query.aggregate(pipeline, options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 }

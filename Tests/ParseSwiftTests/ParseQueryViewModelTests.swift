@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 import XCTest
 @testable import ParseSwift
@@ -54,7 +54,7 @@ class ParseQueryViewModelTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFind() {
+    func testFind() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -73,24 +73,18 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.find()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.find()
 
-            guard let score = viewModel.results.first else {
-                XCTFail("Should unwrap score count")
-                expectation.fulfill()
-                return
-            }
-            XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
+        guard let score = viewModel.results.first else {
+            XCTFail("Should unwrap score count")
+            return
         }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testFindError() {
+    func testFindError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
         MockURLProtocol.mockRequests { _ in
@@ -105,19 +99,14 @@ class ParseQueryViewModelTests: XCTestCase {
             .viewModel
         viewModel.results = [GameScore(points: 10)]
         viewModel.count = 1
-        viewModel.find()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.find()
 
-            XCTAssertTrue(viewModel.results.isEmpty)
-            XCTAssertEqual(viewModel.count, 0)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(viewModel.results.isEmpty)
+        XCTAssertEqual(viewModel.count, 0)
+        XCTAssertNotNil(viewModel.error)
     }
 
-    func testViewModelStatic() {
+    func testViewModelStatic() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -136,24 +125,18 @@ class ParseQueryViewModelTests: XCTestCase {
         let query = GameScore.query
         let viewModel = Query.viewModel(query)
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.find()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.find()
 
-            guard let score = viewModel.results.first else {
-                XCTFail("Should unwrap score count")
-                expectation.fulfill()
-                return
-            }
-            XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
+        guard let score = viewModel.results.first else {
+            XCTFail("Should unwrap score count")
+            return
         }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testFindAll() {
+    func testFindAll() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -172,24 +155,18 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.findAll()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.findAll()
 
-            guard let score = viewModel.results.first else {
-                XCTFail("Should unwrap score count")
-                expectation.fulfill()
-                return
-            }
-            XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
+        guard let score = viewModel.results.first else {
+            XCTFail("Should unwrap score count")
+            return
         }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testFindAllError() {
+    func testFindAllError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
         MockURLProtocol.mockRequests { _ in
@@ -204,19 +181,14 @@ class ParseQueryViewModelTests: XCTestCase {
             .viewModel
         viewModel.results = [GameScore(points: 10)]
         viewModel.count = 1
-        viewModel.findAll()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.findAll()
 
-            XCTAssertTrue(viewModel.results.isEmpty)
-            XCTAssertEqual(viewModel.count, 0)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(viewModel.results.isEmpty)
+        XCTAssertEqual(viewModel.count, 0)
+        XCTAssertNotNil(viewModel.error)
     }
 
-    func testFirst() {
+    func testFirst() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -235,24 +207,18 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.first()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.first()
 
-            guard let score = viewModel.results.first else {
-                XCTFail("Should unwrap score count")
-                expectation.fulfill()
-                return
-            }
-            XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
+        guard let score = viewModel.results.first else {
+            XCTFail("Should unwrap score count")
+            return
         }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testFirstError() {
+    func testFirstError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
         MockURLProtocol.mockRequests { _ in
@@ -267,19 +233,14 @@ class ParseQueryViewModelTests: XCTestCase {
             .viewModel
         viewModel.results = [GameScore(points: 10)]
         viewModel.count = 1
-        viewModel.first()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.first()
 
-            XCTAssertTrue(viewModel.results.isEmpty)
-            XCTAssertEqual(viewModel.count, 0)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(viewModel.results.isEmpty)
+        XCTAssertEqual(viewModel.count, 0)
+        XCTAssertNotNil(viewModel.error)
     }
 
-    func testCount() {
+    func testCount() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -298,19 +259,14 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query
             .viewModel
         viewModel.results = [GameScore(points: 10), GameScore(points: 12)]
-        viewModel.count()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.count()
 
-            XCTAssertEqual(viewModel.results.count, 2)
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results.count, 2)
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testCountError() {
+    func testCountError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
         MockURLProtocol.mockRequests { _ in
@@ -325,19 +281,14 @@ class ParseQueryViewModelTests: XCTestCase {
             .viewModel
         viewModel.results = [GameScore(points: 10)]
         viewModel.count = 1
-        viewModel.count()
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.count()
 
-            XCTAssertTrue(viewModel.results.isEmpty)
-            XCTAssertEqual(viewModel.count, 0)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(viewModel.results.isEmpty)
+        XCTAssertEqual(viewModel.count, 0)
+        XCTAssertNotNil(viewModel.error)
     }
 
-    func testAggregate() {
+    func testAggregate() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -356,24 +307,18 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.aggregate([["hello": "world"]])
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.aggregate([["hello": "world"]])
 
-            guard let score = viewModel.results.first else {
-                XCTFail("Should unwrap score count")
-                expectation.fulfill()
-                return
-            }
-            XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(viewModel.count, 1)
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
+        guard let score = viewModel.results.first else {
+            XCTFail("Should unwrap score count")
+            return
         }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(score.hasSameObjectId(as: scoreOnServer))
+        XCTAssertEqual(viewModel.count, 1)
+        XCTAssertNil(viewModel.error)
     }
 
-    func testAggregateError() {
+    func testAggregateError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
         MockURLProtocol.mockRequests { _ in
@@ -387,16 +332,11 @@ class ParseQueryViewModelTests: XCTestCase {
         let viewModel = GameScore.query.viewModel
         viewModel.results = [GameScore(points: 10)]
         viewModel.count = 1
-        viewModel.aggregate([["hello": "world"]])
-        let expectation = XCTestExpectation(description: "Find objects")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        await viewModel.aggregate([["hello": "world"]])
 
-            XCTAssertTrue(viewModel.results.isEmpty)
-            XCTAssertEqual(viewModel.count, 0)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertTrue(viewModel.results.isEmpty)
+        XCTAssertEqual(viewModel.count, 0)
+        XCTAssertNotNil(viewModel.error)
     }
 }
 #endif

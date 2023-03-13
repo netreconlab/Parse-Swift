@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 7/11/21.
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 
 /**
@@ -24,9 +24,7 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable {
         willSet {
             if newValue != nil {
                 self.error = nil
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
     }
@@ -36,9 +34,7 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable {
         willSet {
             if newValue != nil {
                 self.results = nil
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
     }
@@ -47,27 +43,21 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable {
         self.cloudCode = cloudCode
     }
 
-    public func runFunction(options: API.Options = []) {
-        cloudCode.runFunction(options: options) { results in
-            switch results {
-
-            case .success(let results):
-                self.results = results
-            case .failure(let error):
-                self.error = error
-            }
+    @MainActor
+    public func runFunction(options: API.Options = []) async {
+        do {
+            self.results = try await cloudCode.runFunction(options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 
-    public func startJob(options: API.Options = []) {
-        cloudCode.startJob(options: options) { results in
-            switch results {
-
-            case .success(let results):
-                self.results = results
-            case .failure(let error):
-                self.error = error
-            }
+    @MainActor
+    public func startJob(options: API.Options = []) async {
+        do {
+            self.results = try await cloudCode.startJob(options: options)
+        } catch {
+            self.error = error as? ParseError ?? ParseError(swift: error)
         }
     }
 }

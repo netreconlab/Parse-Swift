@@ -259,6 +259,6 @@ You are not limited to a single Live Query Client - you can create multiple inst
 ## Migrating from Older Versions and SDKs
 
 1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) to learn how to migrate from Parse-Swift<sup>OG</sup> 4.15.0+ to 5.1.1+
-1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/70) to learn how to migrate from the [Parse-Swift](https://github.com/parse-community/Parse-Swift)
-1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/71) to learn how to migrate from the [Parse-SDK-iOS-OSX](https://github.com/parse-community/Parse-SDK-iOS-OSX)
+1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/70) to learn how to migrate from [parse-community/Parse-Swift](https://github.com/parse-community/Parse-Swift)
+1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/71) to learn how to migrate from [Parse-SDK-iOS-OSX](https://github.com/parse-community/Parse-SDK-iOS-OSX)
 

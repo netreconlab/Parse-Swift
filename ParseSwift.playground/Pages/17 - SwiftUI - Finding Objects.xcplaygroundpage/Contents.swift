@@ -95,6 +95,8 @@ struct ContentView: View {
                 TextField("Name", text: $name)
                 TextField("Points", text: $points)
                 Button(action: {
+                    //: Code below should normally be in a ViewModel
+                    //: This is just a simple example...
                     guard let pointsValue = Int(points),
                           let linkToFile = URL(string: "https://parseplatform.org/img/logo.svg") else {
                         return
@@ -111,7 +113,9 @@ struct ContentView: View {
                         switch result {
                         case .success:
                             savedLabel = "Saved score"
-                            self.viewModel.find()
+                            Task {
+                                await self.viewModel.find()
+                            }
                         case .failure(let error):
                             savedLabel = "Error: \(error.message)"
                         }
@@ -136,14 +140,14 @@ struct ContentView: View {
                 }
             }
             Spacer()
-        }.onAppear(perform: {
-            viewModel.find()
-        }).alert(isPresented: $isShowingAction, content: {
+        }.task {
+            await viewModel.find()
+        }.alert(isPresented: $isShowingAction) {
             Alert(title: Text("GameScore"),
                   message: Text(savedLabel),
                   dismissButton: .default(Text("Ok"), action: {
             }))
-        })
+        }
     }
 }
 

@@ -677,6 +677,8 @@ class ParseLiveQueryTests: XCTestCase {
             XCTFail("Should unwrap subscribed.")
             return
         }
+        XCTAssertTrue(subscription.isSubscribed)
+        XCTAssertFalse(subscription.isUnsubscribed)
         XCTAssertEqual(query, subscribed.query)
         XCTAssertTrue(subscribed.isNew)
         XCTAssertNil(subscription.unsubscribed)
@@ -714,6 +716,8 @@ class ParseLiveQueryTests: XCTestCase {
             XCTFail("Should unwrap unsubscribed.")
             return
         }
+        XCTAssertFalse(subscription.isSubscribed)
+        XCTAssertTrue(subscription.isUnsubscribed)
         XCTAssertEqual(query, unsubscribed)
         XCTAssertNil(subscription.subscribed)
         XCTAssertNil(subscription.event)
