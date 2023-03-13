@@ -48,7 +48,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift15QueryObservableP7findAll10batchLimit7optionsySiSg_ShyAA3APIV6OptionOGtF",
+    "externalID" : "s:10ParseSwift15QueryObservableP7findAll10batchLimit7optionsySiSg_ShyAA3APIV6OptionOGtYaF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -107,7 +107,11 @@
       },
       {
         "kind" : "text",
-        "text" : ")"
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
       }
     ],
     "modules" : [
@@ -191,7 +195,11 @@
             },
             {
               "kind" : "text",
-              "text" : ")"
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
             }
           ]
         }
@@ -520,7 +528,11 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryObservable\/findAll(batchLimit:options:)",

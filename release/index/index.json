@@ -82,12 +82,12 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/cloudviewmodel\/runfunction(options:)",
-                "title" : "func runFunction(options: API.Options)",
+                "title" : "func runFunction(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/cloudviewmodel\/startjob(options:)",
-                "title" : "func startJob(options: API.Options)",
+                "title" : "func startJob(options: API.Options) async",
                 "type" : "method"
               },
               {
@@ -413,27 +413,27 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/queryviewmodel\/aggregate(_:options:)",
-                "title" : "func aggregate([[String : Encodable]], options: API.Options)",
+                "title" : "func aggregate([[String : Encodable]], options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryviewmodel\/count(options:)",
-                "title" : "func count(options: API.Options)",
+                "title" : "func count(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryviewmodel\/find(options:)",
-                "title" : "func find(options: API.Options)",
+                "title" : "func find(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryviewmodel\/findall(batchlimit:options:)",
-                "title" : "func findAll(batchLimit: Int?, options: API.Options)",
+                "title" : "func findAll(batchLimit: Int?, options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryviewmodel\/first(options:)",
-                "title" : "func first(options: API.Options)",
+                "title" : "func first(options: API.Options) async",
                 "type" : "method"
               },
               {
@@ -488,6 +488,16 @@
               {
                 "path" : "\/documentation\/parseswift\/subscription\/event",
                 "title" : "var event: (query: Query<T>, event: Event<T>)?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/subscription\/issubscribed",
+                "title" : "var isSubscribed: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/subscription\/isunsubscribed",
+                "title" : "var isUnsubscribed: Bool",
                 "type" : "property"
               },
               {
@@ -627,12 +637,12 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/cloudobservable\/runfunction(options:)",
-                "title" : "func runFunction(options: API.Options)",
+                "title" : "func runFunction(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/cloudobservable\/startjob(options:)",
-                "title" : "func startJob(options: API.Options)",
+                "title" : "func startJob(options: API.Options) async",
                 "type" : "method"
               }
             ],
@@ -810,13 +820,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.type.property-499yb",
-                        "title" : "static var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
+                        "title" : "var className: String",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
-                        "title" : "var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.type.property-499yb",
+                        "title" : "static var className: String",
                         "type" : "property"
                       }
                     ],
@@ -1915,13 +1925,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -3487,27 +3497,27 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/queryobservable\/aggregate(_:options:)",
-                "title" : "func aggregate([[String : Encodable]], options: API.Options)",
+                "title" : "func aggregate([[String : Encodable]], options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryobservable\/count(options:)",
-                "title" : "func count(options: API.Options)",
+                "title" : "func count(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryobservable\/find(options:)",
-                "title" : "func find(options: API.Options)",
+                "title" : "func find(options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryobservable\/findall(batchlimit:options:)",
-                "title" : "func findAll(batchLimit: Int?, options: API.Options)",
+                "title" : "func findAll(batchLimit: Int?, options: API.Options) async",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/parseswift\/queryobservable\/first(options:)",
-                "title" : "func first(options: API.Options)",
+                "title" : "func first(options: API.Options) async",
                 "type" : "method"
               }
             ],

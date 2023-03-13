@@ -32,7 +32,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift14QueryViewModelC5first7optionsyShyAA3APIV6OptionOG_tF",
+    "externalID" : "s:10ParseSwift14QueryViewModelC5first7optionsyShyAA3APIV6OptionOG_tYaF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -74,7 +74,11 @@
       },
       {
         "kind" : "text",
-        "text" : ")"
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
       }
     ],
     "modules" : [
@@ -140,7 +144,11 @@
             },
             {
               "kind" : "text",
-              "text" : " = [])"
+              "text" : " = []) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
             }
           ]
         }
@@ -435,7 +443,11 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
     }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel\/first(options:)",
