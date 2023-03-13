@@ -75,9 +75,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
 
-            if subscription.subscribed != nil {
+            if subscription.isSubscribed {
                 Text("Subscribed to query!")
-            } else if subscription.unsubscribed != nil {
+            } else if subscription.isUnsubscribed {
                 Text("Unsubscribed from query!")
             } else if let event = subscription.event {
 

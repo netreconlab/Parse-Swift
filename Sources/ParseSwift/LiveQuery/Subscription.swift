@@ -25,11 +25,15 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
             if newValue != nil {
                 subscribed = nil
                 unsubscribed = nil
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
+    }
+
+    /// If **true** the LiveQuery subscription is currently active,
+    /// **false** otherwise.
+    open var isSubscribed: Bool {
+        subscribed != nil
     }
 
     /// Updates and notifies when a subscription request has been fulfilled and if it is new.
@@ -38,11 +42,15 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
             if newValue != nil {
                 unsubscribed = nil
                 event = nil
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
+    }
+
+    /// If **true** the LiveQuery subscription is currently inactive,
+    /// **false** otherwise.
+    open var isUnsubscribed: Bool {
+        unsubscribed != nil
     }
 
     /// Updates and notifies when an unsubscribe request has been fulfilled.
@@ -51,9 +59,7 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
             if newValue != nil {
                 subscribed = nil
                 event = nil
-                DispatchQueue.main.async {
-                    self.objectWillChange.send()
-                }
+                self.objectWillChange.send()
             }
         }
     }
@@ -69,7 +75,7 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
     }
 
     // MARK: QuerySubscribable
-
+    @MainActor
     open func didReceive(_ eventData: Data) throws {
         // Need to decode the event with respect to the `ParseObject`.
         let eventMessage = try ParseCoding.jsonDecoder().decode(EventResponse<T>.self, from: eventData)
@@ -79,10 +85,12 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
         self.event = (query, event)
     }
 
+    @MainActor
     open func didSubscribe(_ new: Bool) {
         self.subscribed = (query, new)
     }
 
+    @MainActor
     open func didUnsubscribe() {
         self.unsubscribed = query
     }

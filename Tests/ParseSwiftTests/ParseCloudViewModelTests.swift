@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 import XCTest
 @testable import ParseSwift
@@ -43,7 +43,7 @@ class ParseCloudViewModelTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFunction() {
+    func testFunction() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
         MockURLProtocol.mockRequests { _ in
@@ -57,18 +57,13 @@ class ParseCloudViewModelTests: XCTestCase {
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.runFunction()
+        await viewModel.runFunction()
 
-        let expectation = XCTestExpectation(description: "Run Function")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            XCTAssertEqual(viewModel.results, "hello")
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results, "hello")
+        XCTAssertNil(viewModel.error)
     }
 
-    func testFunctionError() {
+    func testFunctionError() async throws {
         let response = ParseError(code: .otherCause, message: "Custom error")
 
         MockURLProtocol.mockRequests { _ in
@@ -82,18 +77,13 @@ class ParseCloudViewModelTests: XCTestCase {
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
         viewModel.results = "Test"
-        viewModel.runFunction()
+        await viewModel.runFunction()
 
-        let expectation = XCTestExpectation(description: "Run Function")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            XCTAssertEqual(viewModel.results, nil)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results, nil)
+        XCTAssertNotNil(viewModel.error)
     }
 
-    func testJob() {
+    func testJob() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
         MockURLProtocol.mockRequests { _ in
@@ -107,18 +97,13 @@ class ParseCloudViewModelTests: XCTestCase {
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.startJob()
+        await viewModel.startJob()
 
-        let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            XCTAssertEqual(viewModel.results, "hello")
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results, "hello")
+        XCTAssertNil(viewModel.error)
     }
 
-    func testViewModelStatic() {
+    func testViewModelStatic() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
         MockURLProtocol.mockRequests { _ in
@@ -132,18 +117,13 @@ class ParseCloudViewModelTests: XCTestCase {
         let cloud = Cloud(functionJobName: "test")
         let viewModel = Cloud.viewModel(cloud)
         viewModel.error = ParseError(code: .otherCause, message: "error")
-        viewModel.startJob()
+        await viewModel.startJob()
 
-        let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            XCTAssertEqual(viewModel.results, "hello")
-            XCTAssertNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results, "hello")
+        XCTAssertNil(viewModel.error)
     }
 
-    func testJobError() {
+    func testJobError() async throws {
         let response = ParseError(code: .otherCause, message: "Custom error")
 
         MockURLProtocol.mockRequests { _ in
@@ -157,15 +137,10 @@ class ParseCloudViewModelTests: XCTestCase {
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
         viewModel.results = "Test"
-        viewModel.startJob()
+        await viewModel.startJob()
 
-        let expectation = XCTestExpectation(description: "Start Job")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            XCTAssertEqual(viewModel.results, nil)
-            XCTAssertNotNil(viewModel.error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        XCTAssertEqual(viewModel.results, nil)
+        XCTAssertNotNil(viewModel.error)
     }
 }
 #endif

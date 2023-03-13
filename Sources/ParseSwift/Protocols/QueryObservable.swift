@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(SwiftUI)
+#if canImport(Combine)
 import Foundation
 
 /**
@@ -32,7 +32,8 @@ public protocol QueryObservable: ObservableObject {
 
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    func find(options: API.Options)
+    @MainActor
+    func find(options: API.Options) async
 
     /**
      Retrieves *asynchronously* a complete list of `ParseObject`'s  that satisfy this query
@@ -42,8 +43,9 @@ public protocol QueryObservable: ObservableObject {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
+    @MainActor
     func findAll(batchLimit: Int?,
-                 options: API.Options)
+                 options: API.Options) async
 
     /**
       Gets an object *asynchronously* and updates the view model when complete.
@@ -51,7 +53,8 @@ public protocol QueryObservable: ObservableObject {
       - warning: This method mutates the query. It will reset the limit to `1`.
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    func first(options: API.Options)
+    @MainActor
+    func first(options: API.Options) async
 
     /**
       Counts objects *synchronously* based on the constructed query and updates the view model
@@ -59,7 +62,8 @@ public protocol QueryObservable: ObservableObject {
 
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    func count(options: API.Options)
+    @MainActor
+    func count(options: API.Options) async
 
     /**
       Executes an aggregate query *asynchronously* and updates the view model when complete.
@@ -70,7 +74,8 @@ public protocol QueryObservable: ObservableObject {
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
         - warning: This has not been tested thoroughly.
     */
+    @MainActor
     func aggregate(_ pipeline: [[String: Encodable]],
-                   options: API.Options)
+                   options: API.Options) async
 }
 #endif
