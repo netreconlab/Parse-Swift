@@ -29,18 +29,15 @@ A pure Swift library that gives you access to the powerful Parse Server backend.
 
 The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) and though some of it may feel familiar, it is not backwards compatible and is designed using [protocol oriented programming (POP)](https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift) and [value types](https://www.youtube.com/watch?v=A_b2oCBmm2Y) instead of OOP and reference types. You can learn more about POP by watching [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) or [Protocol and Value Oriented Programming in UIKit Apps](https://developer.apple.com/videos/play/wwdc2016/419/) videos from previous WWDC's. For more details about ParseSwift, visit the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
 
-## Test Drive Parse-Swift
-To learn how to use or experiment with Parse-Swift, you can run and edit the [ParseSwift.playground](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). You can use the parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which has docker compose files (`docker-compose up` gives you a working server) configured to connect with the playground files, has [Parse Dashboard](https://github.com/parse-community/parse-dashboard), and can be used with MongoDB or PostgreSQL. You can also configure the Swift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19). To learn more, see this [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) or [CONTRIBUTING.md](https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds).
-
 ---
 
 - [Why use Parse-Swift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
+- [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Test Drive Parse-Swift](#test-drive-parse-swift)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [CocoaPods](#cocoapods)
   - [Carthage](#carthage)
-- [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Usage Guide](#usage-guide)
 - [LiveQuery](#livequery)
   - [Setup Server](#setup-server)
@@ -49,6 +46,18 @@ To learn how to use or experiment with Parse-Swift, you can run and edit the [Pa
     - [Traditional Callbacks](#traditional-callbacks)
   - [Advanced Usage](#advanced-usage)
 - [Migrating from Older Versions and SDKs](#migrating-from-older-versions-and-sdks)
+
+## Example Apps and Frameworks
+Below is a list of apps and frameworks that use Parse-Swift to help developers take advantage of the framework:
+- [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) - Write Parse Cloud Code in Swift using Parse-Swift
+- [ParseServerAnyAnalytics](https://github.com/netreconlab/parse-server-any-analytics-adapter) - Analytics adapter to connect Parse Server analytics to any 3rd party analytics tool
+- [CarekitSampe-ParseCareKit](https://github.com/netreconlab/CareKitSample-ParseCareKit) - An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit)
+- [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using Parse-Swift
+- [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift SDK
+- [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain) - A sample app that demonstrates how to migrate an app written with the Parse [Objective-C SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) to the Parse-Swift SDK
+
+## Test Drive Parse-Swift
+To learn how to use or experiment with Parse-Swift, you can run and edit the [ParseSwift.playground](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). You can use the parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which has docker compose files (`docker-compose up` gives you a working server) configured to connect with the playground files, has [Parse Dashboard](https://github.com/parse-community/parse-dashboard), and can be used with MongoDB or PostgreSQL. You can also configure the Swift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19). To learn more, see this [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) or [CONTRIBUTING.md](https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds).
 
 ## Installation
 
@@ -88,15 +97,6 @@ Add the following line to your Cartfile:
 github "netreconlab/Parse-Swift"
 ```
 Run `carthage update`, and you should now have the latest version of ParseSwift SDK in your Carthage folder.
-
-## Example Apps and Frameworks
-Below is a list of apps and frameworks that use Parse-Swift to help developers take advantage of the framework:
-- [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) - Write Parse Cloud Code in Swift using Parse-Swift
-- [ParseServerAnyAnalytics](https://github.com/netreconlab/parse-server-any-analytics-adapter) - Analytics adapter to connect Parse Server analytics to any 3rd party analytics tool
-- [CarekitSampe-ParseCareKit](https://github.com/netreconlab/CareKitSample-ParseCareKit) - An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit)
-- [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using Parse-Swift
-- [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift SDK
-- [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain) - A sample app that demonstrates how to migrate an app written with the Parse [Objective-C SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) to the Parse-Swift SDK
 
 ## Usage Guide
 
