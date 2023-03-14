@@ -19,21 +19,21 @@
 
 ---
 
-> :information_source: **Why Parse-Swift<sup>OG</sup>?** <br>
-> This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2 of the original developers of Parse-Swift](https://github.com/parse-community/Parse-Swift/graphs/contributors). Corey was responsible for the direction and development of all parse-community releases of Parse-Swift from [1.0.0](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2) to [4.14.2](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2). Parse-Swift<sup>OG</sup> has the most up-to-date features and bug fixes to develop client and server-side applications. It is the most flexible Parse Client SDK to date, can be used to write [Cloud Code](https://github.com/netreconlab/parse-server-swift), and is developed with zero dependencies. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit [questions](https://github.com/netreconlab/Parse-Swift/discussions), [issues](https://github.com/netreconlab/Parse-Swift/issues), and [pull requests](https://github.com/netreconlab/Parse-Swift/pulls) to [NetReconLab Parse-Swift](https://github.com/netreconlab/Parse-Swift) instead of the parse-community Parse-Swift to support it's development. [Get more info](https://github.com/netreconlab/Parse-Swift/discussions/7). If you benefit from Parse-Swift and would like to show monetary support, feel free to: <br>
+> :information_source: **Why ParseSwift<sup>OG</sup>? Instead of parse-community/Parse-Swift** <br>
+> This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2 of the original developers of ParseSwift](https://github.com/parse-community/Parse-Swift/graphs/contributors). Corey was responsible for the direction and development of all parse-community releases of ParseSwift from [1.0.0](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2) to [4.14.2](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2). ParseSwift<sup>OG</sup> has the most up-to-date features and bug fixes to develop client and server-side applications. It is the most flexible Parse Client SDK to date, can be used to write [Cloud Code](https://github.com/netreconlab/parse-server-swift), and is developed with zero dependencies. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit [questions](https://github.com/netreconlab/Parse-Swift/discussions), [issues](https://github.com/netreconlab/Parse-Swift/issues), and [pull requests](https://github.com/netreconlab/Parse-Swift/pulls) to [NetReconLab ParseSwift<sup>OG</sup>](https://github.com/netreconlab/Parse-Swift) instead of the parse-community ParseSwift to support it's development. [Get more info](https://github.com/netreconlab/Parse-Swift/discussions/7). If you benefit from ParseSwift and would like to show monetary support, feel free to: <br>
 <a href="https://www.buymeacoffee.com/cbaker6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ---
 
-A pure Swift library that gives you access to the powerful Parse Server backend. See why Parse-Swift<sup>OG</sup> is better than all of the other Parse SDK's by looking at the [feature comparison tables](https://github.com/netreconlab/Parse-Swift/discussions/72). 
+A pure Swift library that gives you access to the powerful Parse Server backend. See why ParseSwift<sup>OG</sup> is better than all of the other Parse SDK's by looking at the [feature comparison tables](https://github.com/netreconlab/Parse-Swift/discussions/72). 
 
-The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) and though some of it may feel familiar, it is not backwards compatible and is designed using [protocol oriented programming (POP)](https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift) and [value types](https://www.youtube.com/watch?v=A_b2oCBmm2Y) instead of OOP and reference types. You can learn more about POP by watching [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) or [Protocol and Value Oriented Programming in UIKit Apps](https://developer.apple.com/videos/play/wwdc2016/419/) videos from previous WWDC's. For more details about ParseSwift, visit the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
+The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) and though some of it may feel familiar, it is not backwards compatible and is designed using [protocol oriented programming (POP)](https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift) and [value types](https://www.youtube.com/watch?v=A_b2oCBmm2Y) instead of OOP and reference types. You can learn more about POP by watching [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) or [Protocol and Value Oriented Programming in UIKit Apps](https://developer.apple.com/videos/play/wwdc2016/419/) videos from previous WWDC's. For more details about ParseSwift<sup>OG</sup>, visit the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
 
 ---
 
-- [Why use Parse-Swift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
+- [Why use ParseSwift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
 - [Example Apps and Frameworks](#example-apps-and-frameworks)
-- [Test Drive Parse-Swift](#test-drive-parse-swift)
+- [Test Drive ParseSwift](#test-drive-parseswift)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [CocoaPods](#cocoapods)
@@ -48,22 +48,22 @@ The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](htt
 - [Migrating from Older Versions and SDKs](#migrating-from-older-versions-and-sdks)
 
 ## Example Apps and Frameworks
-Below is a list of apps and frameworks that use Parse-Swift to help developers take advantage of the framework:
-- [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) - Write Parse Cloud Code in Swift using Parse-Swift
+Below is a list of apps and frameworks that use ParseSwift<sup>OG</sup> to help developers take advantage of the framework:
+- [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) - Write Parse Cloud Code in Swift using ParseSwift<sup>OG</sup>
 - [ParseServerAnyAnalytics](https://github.com/netreconlab/parse-server-any-analytics-adapter) - Analytics adapter to connect Parse Server analytics to any 3rd party analytics tool
 - [CarekitSampe-ParseCareKit](https://github.com/netreconlab/CareKitSample-ParseCareKit) - An example application of [CareKit](https://github.com/carekit-apple/CareKit)'s OCKSample synchronizing CareKit data to the Cloud via [ParseCareKit](https://github.com/netreconlab/ParseCareKit)
-- [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using Parse-Swift
-- [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift SDK
-- [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain) - A sample app that demonstrates how to migrate an app written with the Parse [Objective-C SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) to the Parse-Swift SDK
+- [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using ParseSwift<sup>OG</sup>
+- [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift<sup>OG</sup> SDK
+- [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain) - A sample app that demonstrates how to migrate an app written with the Parse [Objective-C SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) to the ParseSwift<sup>OG</sup> SDK
 
 ## Test Drive Parse-Swift
-To learn how to use or experiment with Parse-Swift, you can run and edit the [ParseSwift.playground](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). You can use the parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which has docker compose files (`docker-compose up` gives you a working server) configured to connect with the playground files, has [Parse Dashboard](https://github.com/parse-community/parse-dashboard), and can be used with MongoDB or PostgreSQL. You can also configure the Swift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19). To learn more, see this [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) or [CONTRIBUTING.md](https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds).
+To learn how to use or experiment with ParseSwift<sup>OG</sup>, you can run and edit the [ParseSwift.playground](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). You can use the parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which has docker compose files (`docker-compose up` gives you a working server) configured to connect with the playground files, has [Parse Dashboard](https://github.com/parse-community/parse-dashboard), and can be used with MongoDB or PostgreSQL. You can also configure the Swift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19). To learn more, see this [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) or [CONTRIBUTING.md](https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds).
 
 ## Installation
 
 ### [Swift Package Manager](https://swift.org/package-manager/)
 
-You can use The Swift Package Manager (SPM) to install ParseSwift by adding the following description to your `Package.swift` file:
+You can use The Swift Package Manager (SPM) to install ParseSwift<sup>OG</sup> by adding the following description to your `Package.swift` file:
 
 ```swift
 // swift-tools-version:5.5.2
@@ -96,11 +96,11 @@ Add the following line to your Cartfile:
 ```
 github "netreconlab/Parse-Swift"
 ```
-Run `carthage update`, and you should now have the latest version of ParseSwift SDK in your Carthage folder.
+Run `carthage update`, and you should now have the latest version of ParseSwift<sup>OG</sup> SDK in your Carthage folder.
 
 ## Usage Guide
 
-After installing ParseSwift, to use it first `import ParseSwift` in your AppDelegate.swift and then add the following code in your `application:didFinishLaunchingWithOptions:` method:
+After installing ParseSwift<sup>OG</sup>, to use it first `import ParseSwift` in your AppDelegate.swift and then add the following code in your `application:didFinishLaunchingWithOptions:` method:
 ```swift
 try await ParseSwift.initialize(applicationId: "xxxxxxxxxx", clientKey: "xxxxxxxxxx", serverURL: URL(string: "https://example.com")!)
 ```
@@ -258,7 +258,7 @@ You are not limited to a single Live Query Client - you can create multiple inst
 
 ## Migrating from Older Versions and SDKs
 
-1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) to learn how to migrate from Parse-Swift<sup>OG</sup> 4.15.0+ to 5.1.1+
+1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) to learn how to migrate from ParseSwift<sup>OG</sup> 4.15.0+ to 5.1.1+
 1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/70) to learn how to migrate from [parse-community/Parse-Swift](https://github.com/parse-community/Parse-Swift)
 1. See the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/71) to learn how to migrate from [Parse-SDK-iOS-OSX](https://github.com/parse-community/Parse-SDK-iOS-OSX)
 
