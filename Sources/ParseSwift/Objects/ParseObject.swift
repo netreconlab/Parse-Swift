@@ -60,7 +60,7 @@ public protocol ParseObject: ParseTypeable,
      - note: It is recommended to use this to create a mergeable copy of your `ParseObject`.
      - warning: `.mergeable` should only be used on `ParseObject`'s that have already
      been saved at least once to a Parse Server and have a valid `objectId`. In addition,
-     the developer should have implemented added all of their properties to `merge`.
+     the developer should have implemented and added all of their properties to `merge`.
     */
     var mergeable: Self { get }
 
@@ -312,7 +312,7 @@ public extension ParseObject {
      - attention: If you are using the `set()` method, you do not need to implement `merge()`. Using `set()`
      may perform slower than implementing `merge()` after saving the updated `ParseObject` to a Parse Server.
      This is due to neccesary overhead required to determine what keys have been updated. If a developer finds decoding
-     updated `ParseObjects`'s to be slow, implementing `merge()` may speed up the process.
+     updated `ParseObjects`'s to be slow, implementing `merge()` should speed up the process.
      - warning: This method should always be used when making the very first update/mutation to your `ParseObject`.
      Any subsequent mutations can modify the `ParseObject` property directly or use the `set()` method.
      */
@@ -331,7 +331,7 @@ public extension ParseObject {
      - important: In order for a `KeyPath` to be considered dirty, the respective `ParseObject` needs to
      first be saved to a Parse Server and fetched locally.
      - note: This method should only be used after updating a `ParseObject` using `.set()` or
-     `.mergeable` otherwide it will always return **false**.
+     `.mergeable` otherwise it will always return **false**.
      */
     func isDirtyForKey<W>(_ keyPath: KeyPath<Self, W?>) throws -> Bool where W: Equatable {
         guard let originalData = originalData else {
