@@ -292,6 +292,47 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     @MainActor
+    func testCantGetSessionTokenIfNotLoggedIn() async throws {
+        do {
+            _ = try await User.sessionToken()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
+        try await userSignUp()
+        
+        // Remove sessionToken from Keychain
+        _ = try await User.sessionToken()
+        var container = await User.currentContainer()
+        container?.sessionToken = nil
+        await User.setCurrentContainer(container)
+        
+        do {
+            _ = try await User.sessionToken()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
+    }
+
+    @MainActor
+    func testShouldThrowIfDifferentUser() async throws {
+        try await userSignUp()
+        var fakeUser = User()
+        fakeUser.objectId = "dislike"
+        do {
+            _ = try await User.setCurrent(fakeUser)
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("must match"))
+        }
+    }
+
+    @MainActor
     func testSignupCommandWithBody() async throws {
         let body = SignupLoginBody(username: "test", password: "user")
         let command = try User.signupCommand(body: body)
@@ -605,6 +646,28 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     @MainActor
+    func testBecomeError() async throws {
+        let serverResponse = ParseError(code: .internalServer,
+                                        message: "Object not found")
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        do {
+            try await User.become(sessionToken: "hello")
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.internalServer]))
+        }
+    }
+
+    @MainActor
     func testLoginAs() async throws {
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
@@ -642,6 +705,28 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
         XCTAssertNil(userFromStorage.ACL)
+    }
+
+    @MainActor
+    func testLoginAsError() async throws {
+        let serverResponse = ParseError(code: .internalServer,
+                                        message: "Object not found")
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        do {
+            try await User.loginAs(objectId: "objectId")
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.internalServer]))
+        }
     }
 
     @MainActor

@@ -83,6 +83,7 @@ public extension ParseUser {
      This is set by the server upon successful authentication.
     */
     static func sessionToken() async throws -> String {
+        _ = try await Self.current()
         guard let sessionToken = await Self.currentContainer()?.sessionToken else {
             throw ParseError(code: .otherCause,
                              message: "Missing sessionToken, be sure you are logged in")
@@ -177,7 +178,8 @@ public extension ParseUser {
         if let newValue = newValue,
             let currentUser = currentContainer?.currentUser {
             guard currentUser.hasSameObjectId(as: newValue) else {
-                throw ParseError(code: .otherCause, message: "objectId's must match to update current user")
+                throw ParseError(code: .otherCause,
+                                 message: "objectId's must match to update current user")
             }
         }
         currentContainer?.currentUser = newValue
@@ -495,7 +497,8 @@ extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    public static func logout(options: API.Options = [], callbackQueue: DispatchQueue = .main,
+    public static func logout(options: API.Options = [],
+                              callbackQueue: DispatchQueue = .main,
                               completion: @escaping (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
@@ -505,17 +508,17 @@ extension ParseUser {
                 Task {
                     // Always let user logout locally, no matter the error.
                     await deleteCurrentKeychain()
-
-                    switch result {
-
-                    case .success(let error):
-                        if let error = error {
+                    callbackQueue.async {
+                        switch result {
+                        case .success(let error):
+                            if let error = error {
+                                completion(.failure(error))
+                            } else {
+                                completion(.success(()))
+                            }
+                        case .failure(let error):
                             completion(.failure(error))
-                        } else {
-                            completion(.success(()))
                         }
-                    case .failure(let error):
-                        completion(.failure(error))
                     }
                 }
             }
