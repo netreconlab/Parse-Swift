@@ -350,15 +350,10 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
 
     func testBecomeTypeMethod() async throws {
-        try await login()
-        MockURLProtocol.removeAll()
-
-        let user = try await User.current()
-        XCTAssertNotNil(user.objectId)
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.createdAt = user.createdAt
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = Date()
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -393,6 +388,72 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertNotNil(signedUp.objectId)
             XCTAssertNotNil(signedUp.customKey)
             XCTAssertNil(signedUp.ACL)
+
+            Task {
+                do {
+                    let userFromStorage = try await BaseParseUser.current()
+                    XCTAssertNotNil(userFromStorage.createdAt)
+                    XCTAssertNotNil(userFromStorage.updatedAt)
+                    XCTAssertNotNil(userFromStorage.email)
+                    XCTAssertNotNil(userFromStorage.username)
+                    XCTAssertNil(userFromStorage.password)
+                    XCTAssertNotNil(userFromStorage.objectId)
+                    XCTAssertNil(userFromStorage.ACL)
+                } catch {
+                    XCTFail(error.localizedDescription)
+                }
+                DispatchQueue.main.async {
+                    expectation2.fulfill()
+                }
+            }
+        })
+        publisher.store(in: &subscriptions)
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testLoginAs() async throws {
+
+        var serverResponse = LoginSignupResponse()
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = Date()
+        serverResponse.sessionToken = "newValue"
+        serverResponse.username = "stop"
+
+        var subscriptions = Set<AnyCancellable>()
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "LoginAs user1")
+        let expectation2 = XCTestExpectation(description: "LoginAs user2")
+        guard let objectId = serverResponse.objectId else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let publisher = User.loginAsPublisher(objectId: objectId)
+            .sink(receiveCompletion: { result in
+
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                    expectation2.fulfill()
+                }
+                expectation1.fulfill()
+
+        }, receiveValue: { loggedIn in
+            XCTAssertNotNil(loggedIn)
+            XCTAssertNotNil(loggedIn.createdAt)
+            XCTAssertNotNil(loggedIn.updatedAt)
+            XCTAssertNotNil(loggedIn.email)
+            XCTAssertNotNil(loggedIn.username)
+            XCTAssertNil(loggedIn.password)
+            XCTAssertNotNil(loggedIn.objectId)
+            XCTAssertNotNil(loggedIn.customKey)
+            XCTAssertNil(loggedIn.ACL)
 
             Task {
                 do {

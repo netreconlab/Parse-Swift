@@ -285,6 +285,7 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUser() async throws {
         try await testLogin()
+        MockURLProtocol.removeAll()
         let user = try await User.current()
         guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
@@ -304,7 +305,6 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
-        MockURLProtocol.removeAll()
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
@@ -331,6 +331,7 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserBody() async throws {
         try await testLogin()
+        MockURLProtocol.removeAll()
         let user = try await User.current()
         guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
@@ -350,7 +351,6 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
-        MockURLProtocol.removeAll()
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
@@ -375,6 +375,8 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserSync() async throws {
         try await testLogin()
+        MockURLProtocol.removeAll()
+
         var user = try await User.current()
         guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
@@ -383,7 +385,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
-            sessionToken: "blast")
+                                                  sessionToken: "blast")
 
         let encoded: Data!
         do {
@@ -394,7 +396,6 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
-        MockURLProtocol.removeAll()
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
@@ -411,6 +412,7 @@ class ParseAnonymousTests: XCTestCase {
 
     func testReplaceAnonymousUserBodySync() async throws {
         try await testLogin()
+        MockURLProtocol.removeAll()
         let user = try await User.current()
         guard let updatedAt = user.updatedAt else {
             XCTFail("Shold have unwrapped")
@@ -419,7 +421,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
 
         var response = UpdateSessionTokenResponse(updatedAt: updatedAt.addingTimeInterval(+300),
-            sessionToken: "blast")
+                                                  sessionToken: "blast")
 
         let encoded: Data!
         do {
@@ -430,7 +432,7 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
-        MockURLProtocol.removeAll()
+
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }

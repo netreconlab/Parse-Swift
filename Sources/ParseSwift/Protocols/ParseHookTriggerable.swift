@@ -106,8 +106,8 @@ extension ParseHookTriggerable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await fetchCommand().execute(options: options,
-                                                      callbackQueue: callbackQueue,
-                                                      completion: completion)
+                                                 callbackQueue: callbackQueue,
+                                                 completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -163,8 +163,8 @@ extension ParseHookTriggerable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchAllCommand().execute(options: options,
-                                                 callbackQueue: callbackQueue,
-                                                 completion: completion)
+                                            callbackQueue: callbackQueue,
+                                            completion: completion)
         }
     }
 
@@ -197,8 +197,8 @@ extension ParseHookTriggerable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await createCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue,
-                                                       completion: completion)
+                                                  callbackQueue: callbackQueue,
+                                                  completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -239,8 +239,8 @@ extension ParseHookTriggerable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await updateCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue,
-                                                       completion: completion)
+                                                  callbackQueue: callbackQueue,
+                                                  completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -281,7 +281,7 @@ extension ParseHookTriggerable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await deleteCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue) { result in
+                                                  callbackQueue: callbackQueue) { result in
                     switch result {
 
                     case .success:

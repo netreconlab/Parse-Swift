@@ -234,7 +234,8 @@ extension ParseFile {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             options = options.union(self.options)
 
-            await deleteFileCommand().execute(options: options, callbackQueue: callbackQueue) { result in
+            await deleteFileCommand().execute(options: options,
+                                              callbackQueue: callbackQueue) { result in
                 switch result {
                 case .success:
                     completion(.success(()))
@@ -366,9 +367,9 @@ extension ParseFile {
                         do {
                             try await fetched.uploadFileCommand()
                                 .execute(options: options,
-                                              callbackQueue: callbackQueue,
-                                              uploadProgress: progress,
-                                              completion: completion)
+                                         callbackQueue: callbackQueue,
+                                         uploadProgress: progress,
+                                         completion: completion)
                         } catch {
                             let parseError = error as? ParseError ?? ParseError(swift: error)
                             callbackQueue.async {
@@ -387,9 +388,9 @@ extension ParseFile {
                 do {
                     try await uploadFileCommand()
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      uploadProgress: progress,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 uploadProgress: progress,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {

@@ -44,9 +44,9 @@ public struct ParseHealth: ParseTypeable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await healthCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              allowIntermediateResponses: allowIntermediateResponses,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         allowIntermediateResponses: allowIntermediateResponses,
+                         completion: completion)
         }
     }
 

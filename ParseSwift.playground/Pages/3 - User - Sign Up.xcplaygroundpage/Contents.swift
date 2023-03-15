@@ -52,9 +52,10 @@ struct User: ParseUser {
     }
 }
 
-/*: Sign up user asynchronously - Performs work on background
-    queue and returns to specified callbackQueue.
-    If no callbackQueue is specified it returns to main queue.
+/*:
+ Sign up user asynchronously - Performs work on background
+ queue and returns to specified callbackQueue.
+ If no callbackQueue is specified it returns to main queue.
 */
 User.signup(username: "hello", password: "TestMePass123^") { results in
 

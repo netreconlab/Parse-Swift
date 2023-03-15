@@ -37,8 +37,8 @@ extension ParseConfigCodable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 

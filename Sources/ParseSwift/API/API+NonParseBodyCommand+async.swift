@@ -19,9 +19,9 @@ extension API.NonParseBodyCommand {
         try await withCheckedThrowingContinuation { continuation in
             Task {
                 await self.execute(options: options,
-                                        callbackQueue: callbackQueue,
-                                        allowIntermediateResponses: allowIntermediateResponses,
-                                        completion: continuation.resume)
+                                   callbackQueue: callbackQueue,
+                                   allowIntermediateResponses: allowIntermediateResponses,
+                                   completion: continuation.resume)
             }
         }
     }

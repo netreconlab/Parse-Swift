@@ -41,8 +41,8 @@ extension ParseCloudable {
         Task {
             await runFunctionCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
@@ -72,8 +72,8 @@ extension ParseCloudable {
         Task {
             await startJobCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 

@@ -92,8 +92,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -128,8 +128,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw originalError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -176,8 +176,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -240,8 +240,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -293,8 +293,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -349,8 +349,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -413,8 +413,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")
@@ -466,8 +466,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                                       mapper: { _ -> NoBody in
             throw parseError
         }).execute(options: [],
-                        callbackQueue: .main,
-                        allowIntermediateResponses: true) { result in
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
             switch result {
             case .success:
                 XCTFail("Should have thrown an error")

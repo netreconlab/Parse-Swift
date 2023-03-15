@@ -40,15 +40,15 @@ internal extension API.Command {
         try await withCheckedThrowingContinuation { continuation in
             Task {
                 await self.execute(options: options,
-                                        batching: batching,
-                                        callbackQueue: callbackQueue,
-                                        notificationQueue: notificationQueue,
-                                        childObjects: childObjects,
-                                        childFiles: childFiles,
-                                        allowIntermediateResponses: allowIntermediateResponses,
-                                        uploadProgress: uploadProgress,
-                                        downloadProgress: downloadProgress,
-                                        completion: continuation.resume)
+                                   batching: batching,
+                                   callbackQueue: callbackQueue,
+                                   notificationQueue: notificationQueue,
+                                   childObjects: childObjects,
+                                   childFiles: childFiles,
+                                   allowIntermediateResponses: allowIntermediateResponses,
+                                   uploadProgress: uploadProgress,
+                                   downloadProgress: downloadProgress,
+                                   completion: continuation.resume)
             }
         }
     }

@@ -292,6 +292,47 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     @MainActor
+    func testCantGetSessionTokenIfNotLoggedIn() async throws {
+        do {
+            _ = try await User.sessionToken()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
+        try await userSignUp()
+
+        // Remove sessionToken from Keychain
+        _ = try await User.sessionToken()
+        var container = await User.currentContainer()
+        container?.sessionToken = nil
+        await User.setCurrentContainer(container)
+
+        do {
+            _ = try await User.sessionToken()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.otherCause]))
+        }
+    }
+
+    @MainActor
+    func testShouldThrowIfDifferentUser() async throws {
+        try await userSignUp()
+        var fakeUser = User()
+        fakeUser.objectId = "dislike"
+        do {
+            _ = try await User.setCurrent(fakeUser)
+            XCTFail("Should have failed")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted")
+                return
+            }
+            XCTAssertTrue(parseError.message.contains("must match"))
+        }
+    }
+
+    @MainActor
     func testSignupCommandWithBody() async throws {
         let body = SignupLoginBody(username: "test", password: "user")
         let command = try User.signupCommand(body: body)
@@ -512,7 +553,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date()
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -553,13 +594,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testBecomeTypeMethod() async throws {
-        try await login()
-        MockURLProtocol.removeAll()
-
-        let user = try await User.current()
-
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date()
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -596,6 +632,101 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(userFromStorage.objectId)
         _ = try await BaseParseUser.sessionToken()
         XCTAssertNil(userFromStorage.ACL)
+    }
+
+    @MainActor
+    func testLoginAsCommand() async throws {
+        let expectedBody = LoginAsBody(userId: "yolo")
+        let command = try User.loginAsCommand(objectId: expectedBody.userId)
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/loginAs")
+        XCTAssertEqual(command.method, API.Method.POST)
+        XCTAssertNil(command.params)
+        XCTAssertEqual(command.body, expectedBody)
+    }
+
+    @MainActor
+    func testBecomeError() async throws {
+        let serverResponse = ParseError(code: .internalServer,
+                                        message: "Object not found")
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        do {
+            try await User.become(sessionToken: "hello")
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.internalServer]))
+        }
+    }
+
+    @MainActor
+    func testLoginAs() async throws {
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        guard let objectId = serverResponse.objectId else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let loggedIn = try await User.loginAs(objectId: objectId)
+        XCTAssertNotNil(loggedIn)
+        XCTAssertNotNil(loggedIn.updatedAt)
+        XCTAssertNotNil(loggedIn.email)
+        XCTAssertNotNil(loggedIn.username)
+        XCTAssertNil(loggedIn.password)
+        XCTAssertNotNil(loggedIn.objectId)
+        XCTAssertNotNil(loggedIn.customKey)
+        XCTAssertNil(loggedIn.ACL)
+
+        let userFromStorage = try await BaseParseUser.current()
+
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
+        _ = try await BaseParseUser.sessionToken()
+        XCTAssertNil(userFromStorage.ACL)
+    }
+
+    @MainActor
+    func testLoginAsError() async throws {
+        let serverResponse = ParseError(code: .internalServer,
+                                        message: "Object not found")
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        do {
+            try await User.loginAs(objectId: "objectId")
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.internalServer]))
+        }
     }
 
     @MainActor

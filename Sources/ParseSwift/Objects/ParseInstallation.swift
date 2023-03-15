@@ -1177,7 +1177,7 @@ public extension Sequence where Element: ParseInstallation {
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue) { results in
+                                 callbackQueue: callbackQueue) { results in
                             switch results {
 
                             case .success(let saved):
