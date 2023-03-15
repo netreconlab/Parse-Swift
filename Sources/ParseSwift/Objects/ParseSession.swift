@@ -43,10 +43,7 @@ public extension ParseSession {
     static var className: String {
         "_Session"
     }
-}
 
-// MARK: Convenience
-extension ParseSession {
     var endpoint: API.Endpoint {
         if let objectId = objectId {
             return .session(objectId: objectId)
