@@ -468,11 +468,8 @@ extension ParseUser {
         return API.Command(method: .POST,
                            path: .loginAs,
                            body: body) { (data) async throws -> Self in
-            var sessionToken = await Self.currentContainer()?.sessionToken
-            if let decodedSessionToken = try? ParseCoding.jsonDecoder()
-                .decode(LoginSignupResponse.self, from: data).sessionToken {
-                sessionToken = decodedSessionToken
-            }
+            let sessionToken = try ParseCoding.jsonDecoder()
+                .decode(LoginSignupResponse.self, from: data).sessionToken
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
             await Self.setCurrentContainer(.init(
                 currentUser: user,
