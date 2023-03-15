@@ -445,9 +445,9 @@ extension ParseUser {
 #endif
 
     internal func meCommand(sessionToken: String) throws -> API.Command<Self, Self> {
-
+        // BAKER: path endpoint isn't working here for some reason
         return API.Command(method: .GET,
-                           path: endpoint) { (data) async throws -> Self in
+                           path: .user(objectId: "me")) { (data) async throws -> Self in
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
             if let current = try? await Self.current() {

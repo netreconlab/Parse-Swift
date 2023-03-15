@@ -52,18 +52,10 @@ struct User: ParseUser {
     }
 }
 
-Task {
-    do {
-        let user = try await User.become(sessionToken: "r:4a9c3abeb9272a98897f6bae28ba0163")
-        print(user)
-    } catch {
-        print(error)
-    }
-}
-
-/*: Sign up user asynchronously - Performs work on background
-    queue and returns to specified callbackQueue.
-    If no callbackQueue is specified it returns to main queue.
+/*:
+ Sign up user asynchronously - Performs work on background
+ queue and returns to specified callbackQueue.
+ If no callbackQueue is specified it returns to main queue.
 */
 User.signup(username: "hello", password: "TestMePass123^") { results in
 
