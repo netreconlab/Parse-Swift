@@ -650,11 +650,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                let currentUser = try await Self.current()
-                guard hasSameObjectId(as: currentUser) else {
-                    throw ParseError(code: .otherCause,
-                                     message: "The user objectId does not match the logged in user")
-                }
+                _ = try await Self.current()
                 do {
                     try await self.linkCommand()
                         .execute(options: options,
