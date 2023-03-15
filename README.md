@@ -25,7 +25,7 @@
 
 ---
 
-A pure Swift library that gives you access to the powerful Parse Server backend. See why ParseSwift<sup>OG</sup> is better than all of the other Parse SDK's by looking at the [feature comparison tables](https://github.com/netreconlab/Parse-Swift/discussions/72). 
+A pure Swift library that gives you access to the powerful Parse Server backend. See why ParseSwift<sup>OG</sup> is better than all of the other Parse SDK's by reviewing the [feature comparison tables](https://github.com/netreconlab/Parse-Swift/discussions/72). 
 
 :star: ParseSwift was highlighted in [issue #560](https://iosdevweekly.com/issues/560#start) of [iOS Dev Weekly](https://iosdevweekly.com) and discussed in [episode 5](https://blog.swiftpackageindex.com/posts/swift-package-indexing-episode-5/) of [Swift Package Index Twitter Spaces](https://swiftpackageindexing.transistor.fm)
 
