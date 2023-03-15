@@ -300,13 +300,13 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
         try await userSignUp()
-        
+
         // Remove sessionToken from Keychain
         _ = try await User.sessionToken()
         var container = await User.currentContainer()
         container?.sessionToken = nil
         await User.setCurrentContainer(container)
-        
+
         do {
             _ = try await User.sessionToken()
             XCTFail("Should have failed")
