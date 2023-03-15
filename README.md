@@ -19,7 +19,7 @@
 
 ---
 
-> :information_source: **Why ParseSwift<sup>OG</sup>? Instead of parse-community/Parse-Swift** <br>
+> :information_source: **Why Choose ParseSwift<sup>OG</sup> Over parse-community/Parse-Swift?** <br>
 > This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2 of the original developers of ParseSwift](https://github.com/parse-community/Parse-Swift/graphs/contributors). Corey was responsible for the direction and development of all parse-community releases of ParseSwift from [1.0.0](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2) to [4.14.2](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2). ParseSwift<sup>OG</sup> has the most up-to-date features and bug fixes to develop client and server-side applications. It is the most flexible Parse Client SDK to date, can be used to write [Cloud Code](https://github.com/netreconlab/parse-server-swift), and is developed with zero dependencies. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit [questions](https://github.com/netreconlab/Parse-Swift/discussions), [issues](https://github.com/netreconlab/Parse-Swift/issues), and [pull requests](https://github.com/netreconlab/Parse-Swift/pulls) to [NetReconLab ParseSwift<sup>OG</sup>](https://github.com/netreconlab/Parse-Swift) instead of the parse-community ParseSwift to support it's development. [Get more info](https://github.com/netreconlab/Parse-Swift/discussions/7). If you benefit from ParseSwift and would like to show monetary support, feel free to: <br>
 <a href="https://www.buymeacoffee.com/cbaker6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
