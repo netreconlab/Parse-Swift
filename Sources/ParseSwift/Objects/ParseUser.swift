@@ -193,6 +193,11 @@ struct SignupLoginBody: ParseEncodable {
     var authData: [String: [String: String]?]?
 }
 
+// MARK: LoginAsBody
+struct LoginAsBody: ParseEncodable, Hashable {
+    var userId: String
+}
+
 // MARK: EmailBody
 struct EmailBody: ParseEncodable {
     let email: String
@@ -326,6 +331,53 @@ extension ParseUser {
         }
     }
 
+    /**
+     Logs in a `ParseUser` *asynchronously* with a given `objectId` allowing the impersonation of a User.
+     On success, this saves the logged in `ParseUser`with this session to the keychain, so you can retrieve
+     the currently logged in user using *current*.
+
+     - parameter objectId: The objectId of the user to login.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+     - parameter callbackQueue: The queue to return to after completion. Default
+     value of .main.
+     - parameter completion: The block to execute when completed.
+     It should have the following argument signature: `(Result<Self, ParseError>)`.
+     - important: The Parse Keychain currently only supports one(1) user at a time. This means
+     if you use `loginAs()`, the current logged in user will be replaced. If you would like to revert
+     back to the previous user, you should capture the `sesionToken` of the previous user before
+     calling `loginAs()`. When you are ready to revert, 1) `logout()`, then `become()` with
+     the sessionToken.
+     - note: Calling this endpoint does not invoke session triggers such as beforeLogin and
+     afterLogin. This action will always succeed if the supplied user exists in the database, regardless
+     of whether the user is currently locked out.
+     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+     desires a different policy, it should be inserted in `options`.
+     - requires: `.usePrimaryKey` has to be available. It is recommended to only
+     use the primary key in server-side applications where the key is kept secure and not
+     exposed to the public.
+    */
+    public static func loginAs(objectId: String,
+                               options: API.Options = [],
+                               callbackQueue: DispatchQueue = .main,
+                               completion: @escaping (Result<Self, ParseError>) -> Void) {
+        Task {
+            var options = options
+            options.insert(.usePrimaryKey)
+            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            do {
+                try await loginAsCommand(objectId: objectId)
+                    .execute(options: options,
+                             callbackQueue: callbackQueue,
+                             completion: completion)
+            } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
+            }
+        }
+    }
+
 #if !os(Linux) && !os(Android) && !os(Windows)
     /**
      Logs in a `ParseUser` *asynchronously* using the session token from the Parse Objective-C SDK Keychain.
@@ -403,6 +455,25 @@ extension ParseUser {
                 }
             }
 
+            await Self.setCurrentContainer(.init(
+                currentUser: user,
+                sessionToken: sessionToken
+            ))
+            return user
+        }
+    }
+
+    internal static func loginAsCommand(objectId: String) throws -> API.Command<LoginAsBody, Self> {
+        let body = LoginAsBody(userId: objectId)
+        return API.Command(method: .POST,
+                           path: .loginAs,
+                           body: body) { (data) async throws -> Self in
+            var sessionToken = await Self.currentContainer()?.sessionToken
+            if let decodedSessionToken = try? ParseCoding.jsonDecoder()
+                .decode(LoginSignupResponse.self, from: data).sessionToken {
+                sessionToken = decodedSessionToken
+            }
+            let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
             await Self.setCurrentContainer(.init(
                 currentUser: user,
                 sessionToken: sessionToken

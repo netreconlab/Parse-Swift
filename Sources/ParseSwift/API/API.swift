@@ -34,6 +34,7 @@ public struct API {
         case roles
         case role(objectId: String)
         case login
+        case loginAs
         case logout
         case file(fileName: String)
         case passwordReset
@@ -84,6 +85,8 @@ public struct API {
                 return "/roles/\(objectId)"
             case .login:
                 return "/login"
+            case .loginAs:
+                return "/loginAs"
             case .logout:
                 return "/logout"
             case .file(let fileName):

@@ -594,6 +594,57 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     @MainActor
+    func testLoginAsCommand() async throws {
+        let expectedBody = LoginAsBody(userId: "yolo")
+        let command = try User.loginAsCommand(objectId: expectedBody.userId)
+        XCTAssertNotNil(command)
+        XCTAssertEqual(command.path.urlComponent, "/loginAs")
+        XCTAssertEqual(command.method, API.Method.POST)
+        XCTAssertNil(command.params)
+        XCTAssertEqual(command.body, expectedBody)
+    }
+
+    @MainActor
+    func testLoginAs() async throws {
+        var serverResponse = LoginSignupResponse()
+        serverResponse.updatedAt = Date()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        guard let objectId = serverResponse.objectId else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let loggedIn = try await User.loginAs(objectId: objectId)
+        XCTAssertNotNil(loggedIn)
+        XCTAssertNotNil(loggedIn.updatedAt)
+        XCTAssertNotNil(loggedIn.email)
+        XCTAssertNotNil(loggedIn.username)
+        XCTAssertNil(loggedIn.password)
+        XCTAssertNotNil(loggedIn.objectId)
+        XCTAssertNotNil(loggedIn.customKey)
+        XCTAssertNil(loggedIn.ACL)
+
+        let userFromStorage = try await BaseParseUser.current()
+
+        XCTAssertNotNil(userFromStorage.createdAt)
+        XCTAssertNotNil(userFromStorage.updatedAt)
+        XCTAssertNotNil(userFromStorage.email)
+        XCTAssertNotNil(userFromStorage.username)
+        XCTAssertNil(userFromStorage.password)
+        XCTAssertNotNil(userFromStorage.objectId)
+        _ = try await BaseParseUser.sessionToken()
+        XCTAssertNil(userFromStorage.ACL)
+    }
+
+    @MainActor
     func testLogutCommand() async throws {
         let command = User.logoutCommand()
         XCTAssertNotNil(command)
