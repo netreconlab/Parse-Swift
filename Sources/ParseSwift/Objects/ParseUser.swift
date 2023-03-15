@@ -235,8 +235,8 @@ extension ParseUser {
                                password: password,
                                authData: authData)
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
@@ -315,8 +315,8 @@ extension ParseUser {
             do {
                 try await newUser.meCommand(sessionToken: sessionToken)
                     .execute(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
+                             callbackQueue: callbackQueue,
+                             completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -433,7 +433,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await logoutCommand().execute(options: options,
-                                               callbackQueue: callbackQueue) { result in
+                                          callbackQueue: callbackQueue) { result in
                 Task {
                     // Always let user logout locally, no matter the error.
                     await deleteCurrentKeychain()
@@ -486,7 +486,7 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await passwordResetCommand(email: email).execute(options: options,
-                                                                  callbackQueue: callbackQueue) { result in
+                                                             callbackQueue: callbackQueue) { result in
                 switch result {
 
                 case .success(let error):
@@ -543,8 +543,8 @@ extension ParseUser {
                                         password: password,
                                         method: method)
             .execute(options: options,
-                          callbackQueue: callbackQueue,
-                          completion: completion)
+                     callbackQueue: callbackQueue,
+                     completion: completion)
         }
     }
 
@@ -601,7 +601,8 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await verificationEmailCommand(email: email)
-                .execute(options: options, callbackQueue: callbackQueue) { result in
+                .execute(options: options,
+                         callbackQueue: callbackQueue) { result in
                     switch result {
 
                     case .success(let error):
@@ -649,12 +650,16 @@ extension ParseUser {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
-                _ = try await Self.current()
+                let currentUser = try await Self.current()
+                guard hasSameObjectId(as: currentUser) else {
+                    throw ParseError(code: .otherCause,
+                                     message: "The user objectId does not match the logged in user")
+                }
                 do {
                     try await self.linkCommand()
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -665,8 +670,8 @@ extension ParseUser {
                 do {
                     try await signupCommand()
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -720,8 +725,8 @@ extension ParseUser {
                 do {
                     try await signupCommand(body: body)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -1122,7 +1127,7 @@ extension ParseUser {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await deleteCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue) { result in
+                                                  callbackQueue: callbackQueue) { result in
                     switch result {
 
                     case .success:
@@ -1470,7 +1475,7 @@ public extension Sequence where Element: ParseUser {
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue) { results in
+                                 callbackQueue: callbackQueue) { results in
                             switch results {
 
                             case .success(let saved):

@@ -674,7 +674,7 @@ transactions for this call.
                     await API.Command<Self.Element, ParseError?>
                         .batch(commands: batch, transaction: transaction)
                         .execute(options: immutableOptions,
-                                      callbackQueue: callbackQueue) { results in
+                                 callbackQueue: callbackQueue) { results in
                             switch results {
 
                             case .success(let saved):
@@ -745,8 +745,8 @@ extension ParseObject {
             do {
                 try await fetchCommand(include: includeKeys)
                     .execute(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
+                             callbackQueue: callbackQueue,
+                             completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -943,7 +943,7 @@ extension ParseObject {
         Task {
             do {
                 try await deleteCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue) { result in
+                                                  callbackQueue: callbackQueue) { result in
                     switch result {
 
                     case .success:

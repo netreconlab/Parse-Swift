@@ -120,8 +120,8 @@ public extension Pointer {
                                                path: path) { (data) -> T in
                 try ParseCoding.jsonDecoder().decode(T.self, from: data)
             }.execute(options: options,
-                           callbackQueue: callbackQueue,
-                           completion: completion)
+                      callbackQueue: callbackQueue,
+                      completion: completion)
         }
     }
 }

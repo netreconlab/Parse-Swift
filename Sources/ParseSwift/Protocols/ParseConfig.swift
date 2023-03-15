@@ -37,8 +37,8 @@ extension ParseConfig {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
@@ -74,8 +74,8 @@ extension ParseConfig {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await updateCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 

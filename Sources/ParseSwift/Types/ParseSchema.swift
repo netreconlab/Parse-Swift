@@ -268,8 +268,8 @@ extension ParseSchema {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
@@ -307,8 +307,8 @@ extension ParseSchema {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await createCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 
@@ -341,8 +341,8 @@ extension ParseSchema {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await schema.updateCommand()
                 .execute(options: options,
-                              callbackQueue: callbackQueue,
-                              completion: completion)
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 

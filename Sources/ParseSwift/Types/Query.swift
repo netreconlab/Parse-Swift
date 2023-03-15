@@ -483,8 +483,8 @@ extension Query: Queryable {
         Task {
             do {
                 try await findCommand().execute(options: options,
-                                                     callbackQueue: callbackQueue,
-                                                     completion: completion)
+                                                callbackQueue: callbackQueue,
+                                                completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -635,8 +635,8 @@ extension Query: Queryable {
         Task {
             do {
                 try await firstCommand().execute(options: options,
-                                                      callbackQueue: callbackQueue,
-                                                      completion: completion)
+                                                 callbackQueue: callbackQueue,
+                                                 completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -679,8 +679,8 @@ extension Query: Queryable {
             if !usingMongoDB {
                 do {
                     try await firstExplainCommand().execute(options: options,
-                                                                 callbackQueue: callbackQueue,
-                                                                 completion: completion)
+                                                            callbackQueue: callbackQueue,
+                                                            completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -690,8 +690,8 @@ extension Query: Queryable {
             } else {
                 do {
                     try await firstExplainMongoCommand().execute(options: options,
-                                                                      callbackQueue: callbackQueue,
-                                                                      completion: completion)
+                                                                 callbackQueue: callbackQueue,
+                                                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -722,8 +722,8 @@ extension Query: Queryable {
         Task {
             do {
                 try await countCommand().execute(options: options,
-                                                      callbackQueue: callbackQueue,
-                                                      completion: completion)
+                                                 callbackQueue: callbackQueue,
+                                                 completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -762,8 +762,8 @@ extension Query: Queryable {
             if !usingMongoDB {
                 do {
                     try await countExplainCommand().execute(options: options,
-                                                                 callbackQueue: callbackQueue,
-                                                                 completion: completion)
+                                                            callbackQueue: callbackQueue,
+                                                            completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -773,8 +773,8 @@ extension Query: Queryable {
             } else {
                 do {
                     try await countExplainMongoCommand().execute(options: options,
-                                                                      callbackQueue: callbackQueue,
-                                                                      completion: completion)
+                                                                 callbackQueue: callbackQueue,
+                                                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -806,8 +806,8 @@ extension Query: Queryable {
         Task {
             do {
                 try await withCountCommand().execute(options: options,
-                                                          callbackQueue: callbackQueue,
-                                                          completion: completion)
+                                                     callbackQueue: callbackQueue,
+                                                     completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -846,8 +846,8 @@ extension Query: Queryable {
             if !usingMongoDB {
                 do {
                     try await withCountExplainCommand().execute(options: options,
-                                                                     callbackQueue: callbackQueue,
-                                                                     completion: completion)
+                                                                callbackQueue: callbackQueue,
+                                                                completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -857,8 +857,8 @@ extension Query: Queryable {
             } else {
                 do {
                     try await withCountExplainMongoCommand().execute(options: options,
-                                                                          callbackQueue: callbackQueue,
-                                                                          completion: completion)
+                                                                     callbackQueue: callbackQueue,
+                                                                     completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -923,8 +923,8 @@ extension Query: Queryable {
             do {
                 try await query.aggregateCommand()
                     .execute(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
+                             callbackQueue: callbackQueue,
+                             completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -996,8 +996,8 @@ extension Query: Queryable {
                 do {
                     try await query.aggregateExplainCommand()
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -1008,8 +1008,8 @@ extension Query: Queryable {
                 do {
                     try await query.aggregateExplainMongoCommand()
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -1048,8 +1048,8 @@ extension Query: Queryable {
             do {
                 try await distinctCommand(key: key)
                     .execute(options: options,
-                                  callbackQueue: callbackQueue,
-                                  completion: completion)
+                             callbackQueue: callbackQueue,
+                             completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
@@ -1096,8 +1096,8 @@ extension Query: Queryable {
                 do {
                     try await distinctExplainCommand(key: key)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {
@@ -1108,8 +1108,8 @@ extension Query: Queryable {
                 do {
                     try await distinctExplainMongoCommand(key: key)
                         .execute(options: options,
-                                      callbackQueue: callbackQueue,
-                                      completion: completion)
+                                 callbackQueue: callbackQueue,
+                                 completion: completion)
                 } catch {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
                     callbackQueue.async {

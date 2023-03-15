@@ -512,7 +512,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.current()
 
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date()
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
@@ -553,13 +553,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testBecomeTypeMethod() async throws {
-        try await login()
-        MockURLProtocol.removeAll()
-
-        let user = try await User.current()
-
         var serverResponse = LoginSignupResponse()
-        serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
+        serverResponse.updatedAt = Date()
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 

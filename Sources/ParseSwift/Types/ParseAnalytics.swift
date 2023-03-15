@@ -157,7 +157,7 @@ public struct ParseAnalytics: ParseTypeable, Hashable {
                                             dimensions: dimensions,
                                             at: date)
             await appOppened.saveCommand().execute(options: options,
-                                                        callbackQueue: callbackQueue) { result in
+                                                   callbackQueue: callbackQueue) { result in
                 callbackQueue.async {
                     switch result {
                     case .success:

@@ -126,8 +126,8 @@ extension ParseHookFunctionable {
             options.insert(.usePrimaryKey)
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             await fetchAllCommand().execute(options: options,
-                                                 callbackQueue: callbackQueue,
-                                                 completion: completion)
+                                            callbackQueue: callbackQueue,
+                                            completion: completion)
         }
     }
 
@@ -203,8 +203,8 @@ extension ParseHookFunctionable {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await updateCommand().execute(options: options,
-                                                       callbackQueue: callbackQueue,
-                                                       completion: completion)
+                                                  callbackQueue: callbackQueue,
+                                                  completion: completion)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {
