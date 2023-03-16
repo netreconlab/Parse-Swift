@@ -169,7 +169,7 @@ extension ParseFile {
     }
 
     func checkDownloadsForFile(options: API.Options) throws -> ParseFile? {
-        var cachePolicy: URLRequest.CachePolicy = ParseSwift.configuration.requestCachePolicy
+        var cachePolicy: URLRequest.CachePolicy = Parse.configuration.requestCachePolicy
         var shouldBreak = false
         for option in options {
             switch option {

@@ -250,7 +250,7 @@ jobs:
       - name: CocoaPods
         run: pod lib lint --allow-warnings
         env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_13 }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   carthage:
    timeout-minutes: 25
