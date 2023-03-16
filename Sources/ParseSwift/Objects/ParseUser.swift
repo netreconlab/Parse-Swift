@@ -44,6 +44,13 @@ public extension ParseUser {
         "_User"
     }
 
+    var endpoint: API.Endpoint {
+        if let objectId = objectId {
+            return .user(objectId: objectId)
+        }
+        return .users
+    }
+
     func mergeParse(with object: Self) throws -> Self {
         guard hasSameObjectId(as: object) else {
             throw ParseError(code: .otherCause,
@@ -94,13 +101,6 @@ public extension ParseUser {
 
 // MARK: Convenience
 extension ParseUser {
-    var endpoint: API.Endpoint {
-        if let objectId = objectId {
-            return .user(objectId: objectId)
-        }
-
-        return .users
-    }
 
     func endpoint(_ method: API.Method) -> API.Endpoint {
         if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
@@ -445,9 +445,8 @@ extension ParseUser {
 #endif
 
     internal func meCommand(sessionToken: String) throws -> API.Command<Self, Self> {
-        // BAKER: path endpoint isn't working here for some reason
         return API.Command(method: .GET,
-                           path: .user(objectId: "me")) { (data) async throws -> Self in
+                           path: endpoint) { (data) async throws -> Self in
             let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
 
             if let current = try? await Self.current() {

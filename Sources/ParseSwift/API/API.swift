@@ -55,7 +55,7 @@ public struct API {
         case hookTrigger(request: TriggerRequest)
         case any(String)
 
-        var urlComponent: String {
+        public var urlComponent: String {
             switch self {
             case .batch:
                 return "/batch"

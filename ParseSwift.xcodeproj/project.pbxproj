@@ -462,6 +462,9 @@
 		70732C5A2606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70732C592606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift */; };
 		70732C5B2606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70732C592606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift */; };
 		70732C5C2606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70732C592606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift */; };
+		7073842B29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073842A29C2910E00E21055 /* ObjectEndpointTests.swift */; };
+		7073842C29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073842A29C2910E00E21055 /* ObjectEndpointTests.swift */; };
+		7073842D29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7073842A29C2910E00E21055 /* ObjectEndpointTests.swift */; };
 		707A3BF125B0A4F0000D215C /* ParseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A3BF025B0A4F0000D215C /* ParseAuthentication.swift */; };
 		707A3BF225B0A4F0000D215C /* ParseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A3BF025B0A4F0000D215C /* ParseAuthentication.swift */; };
 		707A3BF325B0A4F0000D215C /* ParseAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A3BF025B0A4F0000D215C /* ParseAuthentication.swift */; };
@@ -1308,6 +1311,7 @@
 		706436A827341FD0007C6461 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		70647E9B259E3A9A004C1004 /* ParseEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseEncodable.swift; sourceTree = "<group>"; };
 		70732C592606CCAD000CAB81 /* ParseObjectCustomObjectIdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseObjectCustomObjectIdTests.swift; sourceTree = "<group>"; };
+		7073842A29C2910E00E21055 /* ObjectEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectEndpointTests.swift; sourceTree = "<group>"; };
 		707A3BF025B0A4F0000D215C /* ParseAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAuthentication.swift; sourceTree = "<group>"; };
 		707A3C1025B0A8E8000D215C /* ParseAnonymous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAnonymous.swift; sourceTree = "<group>"; };
 		707A3C1F25B14BCF000D215C /* ParseApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseApple.swift; sourceTree = "<group>"; };
@@ -1625,6 +1629,7 @@
 				4AA8076E1F794C1C008CD551 /* KeychainStoreTests.swift */,
 				70D41D6A28B294C100613510 /* MigrateObjCSDKCombineTests.swift */,
 				70D41D6628B0235100613510 /* MigrateObjCSDKTests.swift */,
+				7073842A29C2910E00E21055 /* ObjectEndpointTests.swift */,
 				9194657724F16E330070296B /* ParseACLTests.swift */,
 				917BA4292703E03F00F8D747 /* ParseAnalyticsAsyncTests.swift */,
 				91CB9536265966DF0043E5D6 /* ParseAnalyticsCombineTests.swift */,
@@ -2973,6 +2978,7 @@
 				70C7DC2224D20F190050419B /* ParseObjectBatchTests.swift in Sources */,
 				7044C1BB25C52E410011F6E7 /* ParseInstallationCombineTests.swift in Sources */,
 				917BA45A2703FD2200F8D747 /* ParseAuthenticationAsyncTests.swift in Sources */,
+				7073842B29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */,
 				7FFF552F2217E72A007C3B4E /* AnyCodableTests.swift in Sources */,
 				70212D2D2855266400386163 /* ParsePushAsyncTests.swift in Sources */,
 				70F03A5E2780EAC700E5AFB4 /* ParseGitHubTests.swift in Sources */,
@@ -3299,6 +3305,7 @@
 				709B984E2556ECAA00507778 /* ParseGeoPointTests.swift in Sources */,
 				7044C1BD25C52E410011F6E7 /* ParseInstallationCombineTests.swift in Sources */,
 				917BA45C2703FD2200F8D747 /* ParseAuthenticationAsyncTests.swift in Sources */,
+				7073842D29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */,
 				709B984B2556ECAA00507778 /* MockURLProtocol.swift in Sources */,
 				70212D352855266600386163 /* ParsePushAsyncTests.swift in Sources */,
 				70F03A602780EAC700E5AFB4 /* ParseGitHubTests.swift in Sources */,
@@ -3418,6 +3425,7 @@
 				70F2E2C0254F283000B2EA5C /* MockURLResponse.swift in Sources */,
 				7044C1BC25C52E410011F6E7 /* ParseInstallationCombineTests.swift in Sources */,
 				917BA45B2703FD2200F8D747 /* ParseAuthenticationAsyncTests.swift in Sources */,
+				7073842C29C2910E00E21055 /* ObjectEndpointTests.swift in Sources */,
 				70F2E2BE254F283000B2EA5C /* ParseObjectBatchTests.swift in Sources */,
 				70212D312855266500386163 /* ParsePushAsyncTests.swift in Sources */,
 				70F03A5F2780EAC700E5AFB4 /* ParseGitHubTests.swift in Sources */,

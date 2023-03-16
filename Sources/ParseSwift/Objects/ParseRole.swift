@@ -76,6 +76,13 @@ public extension ParseRole {
         "_Role"
     }
 
+    var endpoint: API.Endpoint {
+        if let objectId = objectId {
+            return .role(objectId: objectId)
+        }
+        return .roles
+    }
+
     var users: ParseRelation<Self>? {
         try? ParseRelation(parent: self, key: "users", className: RoleUser.className)
     }
@@ -130,12 +137,6 @@ public extension ParseRole {
 
 // MARK: Convenience
 extension ParseRole {
-    var endpoint: API.Endpoint {
-        if let objectId = objectId {
-            return .role(objectId: objectId)
-        }
-        return .roles
-    }
 
     static func checkName(_ name: String) throws {
         // swiftlint:disable:next line_length

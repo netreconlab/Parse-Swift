@@ -95,6 +95,13 @@ public extension ParseInstallation {
         "_Installation"
     }
 
+    var endpoint: API.Endpoint {
+        if let objectId = objectId {
+            return .installation(objectId: objectId)
+        }
+        return .installations
+    }
+
     // swiftlint:disable:next cyclomatic_complexity function_body_length
     func mergeParse(with object: Self) throws -> Self {
         guard hasSameObjectId(as: object) else {
@@ -164,13 +171,6 @@ public extension ParseInstallation {
 
 // MARK: Convenience
 extension ParseInstallation {
-    var endpoint: API.Endpoint {
-        if let objectId = objectId {
-            return .installation(objectId: objectId)
-        }
-
-        return .installations
-    }
 
     func endpoint(_ method: API.Method) -> API.Endpoint {
         if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
