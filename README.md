@@ -3,6 +3,9 @@
 
 <h3 align="center">iOS · macOS · watchOS · tvOS · Linux · Android · Windows</h3>
 
+<h4 align="center">
+⭐️ ParseSwift was highlighted in <a href="https://iosdevweekly.com/issues/560#start" target="_blank"> issue #560</a> of <a href="https://iosdevweekly.com" target="_blank"> iOS Dev Weekly</a> and discussed in <a href="https://blog.swiftpackageindex.com/posts/swift-package-indexing-episode-5/" target="_blank"> episode 5</a> of <a href="https://swiftpackageindexing.transistor.fm" target="_blank">Swift Package Index Twitter Spaces</a> </h3>
+
 ---
 
 [![Playgrounds](http://img.shields.io/badge/swift-playgrounds-2196f3.svg)](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages)
@@ -23,8 +26,6 @@
 <a href="https://www.buymeacoffee.com/cbaker6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 A pure Swift library that gives you access to the powerful Parse Server backend. See why ParseSwift<sup>OG</sup> is better than all of the other Parse SDK's by reviewing the [feature comparison tables](https://github.com/netreconlab/Parse-Swift/discussions/72). 
-
-:star: ParseSwift was highlighted in [issue #560](https://iosdevweekly.com/issues/560#start) of [iOS Dev Weekly](https://iosdevweekly.com) and discussed in [episode 5](https://blog.swiftpackageindex.com/posts/swift-package-indexing-episode-5/) of [Swift Package Index Twitter Spaces](https://swiftpackageindexing.transistor.fm)
 
 The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) and though some of it may feel familiar, it is not backwards compatible and is designed using [protocol oriented programming (POP)](https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift) and [value types](https://www.youtube.com/watch?v=A_b2oCBmm2Y) instead of OOP and reference types. You can learn more about POP by watching [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) or [Protocol and Value Oriented Programming in UIKit Apps](https://developer.apple.com/videos/play/wwdc2016/419/) videos from previous WWDC's. For more details about ParseSwift<sup>OG</sup>, visit the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
 
