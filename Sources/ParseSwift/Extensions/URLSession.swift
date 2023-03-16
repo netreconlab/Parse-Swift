@@ -287,7 +287,7 @@ internal extension URLSession {
         var task: URLSessionTask?
         if let data = data {
             do {
-                task = try ParseSwift
+                task = try Parse
                     .configuration
                     .parseFileTransfer
                     .upload(with: request,
@@ -309,7 +309,7 @@ internal extension URLSession {
             }
         } else if let file = file {
             do {
-                task = try ParseSwift
+                task = try Parse
                     .configuration
                     .parseFileTransfer
                     .upload(with: request,

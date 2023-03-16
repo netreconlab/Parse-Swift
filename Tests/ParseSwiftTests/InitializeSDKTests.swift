@@ -23,7 +23,7 @@ class InitializeSDKTests: XCTestCase {
         var objectId: String?
         var createdAt: Date?
         var updatedAt: Date?
-        var ACL: ParseSwift.ParseACL?
+        var ACL: ParseACL?
     }
 
     struct Installation: ParseInstallation {
