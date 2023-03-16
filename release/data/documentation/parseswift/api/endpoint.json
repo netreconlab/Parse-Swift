@@ -110,6 +110,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/installations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/jobs(name:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/login",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/loginAs",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/logout",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/object(className:objectId:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/objects(className:)",
@@ -128,6 +129,12 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/verifyPassword"
       ],
       "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/urlComponent"
+      ],
+      "title" : "Instance Properties"
     },
     {
       "identifiers" : [
@@ -157,7 +164,10 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -862,6 +872,31 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/endpoint\/login"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/loginAs": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "loginAs"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/loginAs",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "API.Endpoint.loginAs",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/api\/endpoint\/loginas"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/logout": {
   "abstract" : [
 
@@ -1304,6 +1339,40 @@
   "title" : "API.Endpoint.sessions",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/endpoint\/sessions"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/urlComponent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "urlComponent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/urlComponent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "urlComponent",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/api\/endpoint\/urlcomponent"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/user(objectId:)": {
   "abstract" : [

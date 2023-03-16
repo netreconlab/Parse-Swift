@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -27,21 +33,6 @@
     {
       "content" : [
         {
-          "anchor" : "overview",
-          "level" : 2,
-          "text" : "Overview",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
           "anchor" : "Overview",
           "level" : 2,
           "text" : "Overview",
@@ -58,11 +49,11 @@
               "type" : "text"
             },
             {
-              "text" : "For more information about the Parse Platform and its features, see the public ",
+              "text" : "See why ParseSwift is better than all of the other Parse SDK’s by reviewing the ",
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/docs.parseplatform.org",
+              "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/72",
               "isActive" : true,
               "type" : "reference"
             },
@@ -81,6 +72,15 @@
             },
             {
               "identifier" : "https:\/\/www.pluralsight.com\/guides\/protocol-oriented-programming-in-swift",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/www.youtube.com\/watch?v=A_b2oCBmm2Y",
               "isActive" : true,
               "type" : "reference"
             },
@@ -117,6 +117,53 @@
             }
           ],
           "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "⭐️ ParseSwift was highlighted in ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/iosdevweekly.com\/issues\/560#start",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " of ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/iosdevweekly.com",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and discussed in ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/blog.swiftpackageindex.com\/posts\/swift-package-indexing-episode-5\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " of ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/swiftpackageindexing.transistor.fm",
+              "isActive" : true,
+              "type" : "reference"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Test-Drive-ParseSwift",
+          "level" : 2,
+          "text" : "Test Drive ParseSwift",
+          "type" : "heading"
         },
         {
           "inlineContent" : [
@@ -165,7 +212,16 @@
               "type" : "reference"
             },
             {
-              "text" : ". To learn more, check out ",
+              "text" : ". To learn more, see this ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/74",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
               "type" : "text"
             },
             {
@@ -181,9 +237,9 @@
           "type" : "paragraph"
         },
         {
-          "anchor" : "Why-use-Parse-Swift-from-NetReconLab",
+          "anchor" : "Why-use-ParseSwift-from-NetReconLab",
           "level" : 2,
-          "text" : "Why use Parse-Swift from NetReconLab?",
+          "text" : "Why use ParseSwift from NetReconLab?",
           "type" : "heading"
         },
         {
@@ -207,7 +263,7 @@
               "type" : "reference"
             },
             {
-              "text" : ". Corey was responsible for the direction and development of all releases from ",
+              "text" : ". Corey was responsible for the direction and development of all parse-community releases of ParseSwift from ",
               "type" : "text"
             },
             {
@@ -232,7 +288,7 @@
               "type" : "reference"
             },
             {
-              "text" : ". This repo will remain aligned with the original core principals of a swifty framework that contains zero dependencies and takes advantage of all of the features the ",
+              "text" : ". The NetReconLab repo will remain aligned with the original core principals of a swifty framework that contains zero dependencies and takes advantage of all of the features the ",
               "type" : "text"
             },
             {
@@ -470,7 +526,10 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",
@@ -10592,6 +10651,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinradians(key:geopoint:distance:sorted:)"
 },
+"https://blog.swiftpackageindex.com/posts/swift-package-indexing-episode-5/": {
+  "identifier" : "https:\/\/blog.swiftpackageindex.com\/posts\/swift-package-indexing-episode-5\/",
+  "title" : "episode 5",
+  "titleInlineContent" : [
+    {
+      "text" : "episode 5",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/blog.swiftpackageindex.com\/posts\/swift-package-indexing-episode-5\/"
+},
 "https://developer.apple.com/documentation/authenticationservices/implementing_user_authentication_with_sign_in_with_apple": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/authenticationservices\/implementing_user_authentication_with_sign_in_with_apple",
   "title" : "Apple’s Documentation",
@@ -10747,18 +10818,6 @@
   ],
   "type" : "link",
   "url" : "https:\/\/docs.microsoft.com\/en-us\/linkedin\/shared\/authentication\/authentication?context=linkedin\/consumer\/context"
-},
-"https://docs.parseplatform.org": {
-  "identifier" : "https:\/\/docs.parseplatform.org",
-  "title" : "documentation",
-  "titleInlineContent" : [
-    {
-      "text" : "documentation",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "https:\/\/docs.parseplatform.org"
 },
 "https://docs.parseplatform.org/parse-server/guide/#configuring-parse-server-for-ldap": {
   "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-ldap",
@@ -10964,6 +11023,30 @@
   "type" : "link",
   "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/7"
 },
+"https://github.com/netreconlab/Parse-Swift/discussions/72": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/72",
+  "title" : "feature comparison tables",
+  "titleInlineContent" : [
+    {
+      "text" : "feature comparison tables",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/72"
+},
+"https://github.com/netreconlab/Parse-Swift/discussions/74": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/74",
+  "title" : "discussion",
+  "titleInlineContent" : [
+    {
+      "text" : "discussion",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/discussions\/74"
+},
 "https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages": {
   "identifier" : "https:\/\/github.com\/netreconlab\/Parse-Swift\/tree\/main\/ParseSwift.playground\/Pages",
   "title" : "ParseSwift.playground",
@@ -11002,10 +11085,10 @@
 },
 "https://github.com/parse-community/Parse-Swift/graphs/contributors": {
   "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/graphs\/contributors",
-  "title" : "1 of 2 of the original developers of Parse-Swift",
+  "title" : "1 of 2 of the original developers of ParseSwift",
   "titleInlineContent" : [
     {
-      "text" : "1 of 2 of the original developers of Parse-Swift",
+      "text" : "1 of 2 of the original developers of ParseSwift",
       "type" : "text"
     }
   ],
@@ -11048,6 +11131,30 @@
   "type" : "link",
   "url" : "https:\/\/github.com\/parse-community\/parse-server"
 },
+"https://iosdevweekly.com": {
+  "identifier" : "https:\/\/iosdevweekly.com",
+  "title" : "iOS Dev Weekly",
+  "titleInlineContent" : [
+    {
+      "text" : "iOS Dev Weekly",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/iosdevweekly.com"
+},
+"https://iosdevweekly.com/issues/560#start": {
+  "identifier" : "https:\/\/iosdevweekly.com\/issues\/560#start",
+  "title" : "issue #560",
+  "titleInlineContent" : [
+    {
+      "text" : "issue #560",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/iosdevweekly.com\/issues\/560#start"
+},
 "https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/": {
   "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
   "title" : "api documentation",
@@ -11060,17 +11167,41 @@
   "type" : "link",
   "url" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/"
 },
-"https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift": {
-  "identifier" : "https:\/\/www.pluralsight.com\/guides\/protocol-oriented-programming-in-swift",
-  "title" : "protocol oriented programming (POP) and value types",
+"https://swiftpackageindexing.transistor.fm": {
+  "identifier" : "https:\/\/swiftpackageindexing.transistor.fm",
+  "title" : "Swift Package Index Twitter Spaces",
   "titleInlineContent" : [
     {
-      "text" : "protocol oriented programming (POP) and value types",
+      "text" : "Swift Package Index Twitter Spaces",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/swiftpackageindexing.transistor.fm"
+},
+"https://www.pluralsight.com/guides/protocol-oriented-programming-in-swift": {
+  "identifier" : "https:\/\/www.pluralsight.com\/guides\/protocol-oriented-programming-in-swift",
+  "title" : "protocol oriented programming (POP)",
+  "titleInlineContent" : [
+    {
+      "text" : "protocol oriented programming (POP)",
       "type" : "text"
     }
   ],
   "type" : "link",
   "url" : "https:\/\/www.pluralsight.com\/guides\/protocol-oriented-programming-in-swift"
+},
+"https://www.youtube.com/watch?v=A_b2oCBmm2Y": {
+  "identifier" : "https:\/\/www.youtube.com\/watch?v=A_b2oCBmm2Y",
+  "title" : "value types",
+  "titleInlineContent" : [
+    {
+      "text" : "value types",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/www.youtube.com\/watch?v=A_b2oCBmm2Y"
 },
 "parse-swift.png": {
   "alt" : "Parse logo",

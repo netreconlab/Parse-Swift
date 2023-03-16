@@ -418,7 +418,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " otherwide it will always return ",
+                  "text" : " otherwise it will always return ",
                   "type" : "text"
                 },
                 {
@@ -470,7 +470,10 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
-
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
   "kind" : "symbol",

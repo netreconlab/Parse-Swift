@@ -1855,6 +1855,15 @@
               {
                 "children" : [
                   {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseinstallation\/endpoint",
+                    "title" : "var endpoint: API.Endpoint",
+                    "type" : "property"
+                  },
+                  {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
                   },
@@ -2873,6 +2882,15 @@
               {
                 "children" : [
                   {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parserole\/endpoint",
+                    "title" : "var endpoint: API.Endpoint",
+                    "type" : "property"
+                  },
+                  {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
                   },
@@ -2942,6 +2960,15 @@
               },
               {
                 "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsesession\/endpoint",
+                    "title" : "var endpoint: API.Endpoint",
+                    "type" : "property"
+                  },
                   {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
@@ -3333,6 +3360,21 @@
                 "type" : "method"
               },
               {
+                "path" : "\/documentation\/parseswift\/parseuser\/loginas(objectid:options:)",
+                "title" : "static func loginAs(objectId: String, options: API.Options) async throws -> Self",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseuser\/loginas(objectid:options:callbackqueue:completion:)",
+                "title" : "static func loginAs(objectId: String, options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Self, ParseError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseuser\/loginaspublisher(objectid:options:)",
+                "title" : "static func loginAsPublisher(objectId: String, options: API.Options) -> Future<Self, ParseError>",
+                "type" : "method"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parseuser\/loginpublisher(_:authdata:options:)",
                 "title" : "static func loginPublisher(String, authData: [String : String], options: API.Options) -> Future<Self, ParseError>",
                 "type" : "method"
@@ -3443,6 +3485,15 @@
               },
               {
                 "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseuser\/endpoint",
+                    "title" : "var endpoint: API.Endpoint",
+                    "type" : "property"
+                  },
                   {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
@@ -3790,6 +3841,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/api\/endpoint\/loginas",
+                    "title" : "case loginAs",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/api\/endpoint\/logout",
                     "title" : "case logout",
                     "type" : "case"
@@ -3868,6 +3924,15 @@
                     "path" : "\/documentation\/parseswift\/api\/endpoint\/verifypassword",
                     "title" : "case verifyPassword",
                     "type" : "case"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/endpoint\/urlcomponent",
+                    "title" : "var urlComponent: String",
+                    "type" : "property"
                   },
                   {
                     "title" : "Instance Methods",
