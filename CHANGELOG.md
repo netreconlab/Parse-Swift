@@ -11,6 +11,9 @@
 __New features__
 * Add ParseUser.loginAs(objectId: String) method to allow impersonating a user. This method requires the server primaryKey and is intended to run server-side ([#79](https://github.com/netreconlab/Parse-Swift/pull/79)), thanks to [Corey Baker](https://github.com/cbaker6).
 
+__Fixes__
+* Fix ParseUser.become(), ParseUser.linkCommand, and other calls that depend on a specific endpoint for specialized ParseObjects such as ParseUser, ParseInstallation, ParseRole, etc. ([#80](https://github.com/netreconlab/Parse-Swift/pull/80)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.2.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.1.1...5.2.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.2.0/documentation/parseswift)
 
