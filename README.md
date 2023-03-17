@@ -13,7 +13,7 @@
 [![Tuturiol](http://img.shields.io/badge/read_-tuturials-2196f3.svg)](https://netreconlab.github.io/Parse-Swift/release/tutorials/parseswift/)
 [![Build Status CI](https://github.com/netreconlab/Parse-Swift/workflows/ci/badge.svg?branch=main)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Aci+branch%3Amain)
 [![Build Status Release](https://github.com/netreconlab/Parse-Swift/workflows/release/badge.svg)](https://github.com/netreconlab/Parse-Swift/actions?query=workflow%3Arelease)
-[![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://codecov.io/gh/netreconlab/Parse-Swift/branches)
+[![Coverage](https://codecov.io/gh/netreconlab/Parse-Swift/branch/main/graph/badge.svg)](https://app.codecov.io/gh/netreconlab/Parse-Swift/branch/main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/403b74d0f2514e288b0a1b2e52b6d841)](https://www.codacy.com/gh/netreconlab/Parse-Swift/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=netreconlab/Parse-Swift&amp;utm_campaign=Badge_Grade)
 [![Pod](https://img.shields.io/cocoapods/v/ParseSwiftOG.svg)](https://cocoapods.org/pods/ParseSwiftOG)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)][license-link]
