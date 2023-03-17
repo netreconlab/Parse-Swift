@@ -172,16 +172,6 @@ internal extension URLSession {
                     return
                 }
 
-                // If there is current response data, update the client now.
-                if allowIntermediateResponses {
-                    let result = await self.makeResult(request: request,
-                                                       responseData: responseData,
-                                                       urlResponse: urlResponse,
-                                                       responseError: nil,
-                                                       mapper: mapper)
-                    completion(result)
-                }
-
                 var delayInterval = TimeInterval()
 
                 // Check for constant delays in header information.
@@ -206,10 +196,30 @@ internal extension URLSession {
                         }
                     }
 
-                default:
+                case 408, 425, 500, 504:
                     if let interval = Utility.computeDelay(Utility.reconnectInterval(2)) {
                         delayInterval = interval
                     }
+
+                default:
+                    // Don't retry based on error code.
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
+                    return
+                }
+
+                // If there is current response data, update the client now.
+                if allowIntermediateResponses {
+                    let result = await self.makeResult(request: request,
+                                                       responseData: responseData,
+                                                       urlResponse: urlResponse,
+                                                       responseError: nil,
+                                                       mapper: mapper)
+                    completion(result)
                 }
 
                 if delayInterval < 1.0 {
@@ -218,11 +228,6 @@ internal extension URLSession {
                 let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
                 try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
 
-                // Update requestId in header for Idempotency
-                var request = request
-                if request.allHTTPHeaderFields?["X-Parse-Request-Id"] != nil {
-                    request.allHTTPHeaderFields?["X-Parse-Request-Id"] = API.createUniqueRequestId()
-                }
                 await self.dataTask(with: request,
                                     callbackQueue: callbackQueue,
                                     attempts: attempts,

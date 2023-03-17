@@ -41,6 +41,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                                         clientKey: "clientKey",
                                         primaryKey: "primaryKey",
                                         serverURL: url,
+                                        maxConnectionAttempts: 2,
                                         testing: true)
     }
 
@@ -71,7 +72,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             errorKey: errorValue,
             codeKey: codeValue
         ]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -104,7 +104,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                     await currentAttempts.incrementAttempts()
                     let current = await currentAttempts.attempts
                     DispatchQueue.main.async {
-                        if current >= Parse.configuration.maxConnectionAttempts {
+                        if current == 1 {
                             expectation1.fulfill()
                         }
                     }
@@ -115,7 +115,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
     }
 
     func testErrorHTTPReturns400NoDataFromServer() async throws {
-        Parse.configuration.maxConnectionAttempts = 2
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(error: originalError) // Status code defaults to 400
@@ -155,7 +154,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerKey = "x-rate-limit-reset"
         let headerValue = "2"
         let headerFields = [headerKey: headerValue]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -219,7 +217,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
         let headerValue = dateFormatter.string(from: date)
         let headerFields = [headerKey: headerValue]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -272,7 +269,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             errorKey: errorValue,
             codeKey: codeValue
         ]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -328,7 +324,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerKey = "retry-after"
         let headerValue = "2"
         let headerFields = [headerKey: headerValue]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -392,7 +387,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
         let headerValue = dateFormatter.string(from: date)
         let headerFields = [headerKey: headerValue]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in
@@ -445,7 +439,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             errorKey: errorValue,
             codeKey: codeValue
         ]
-        Parse.configuration.maxConnectionAttempts = 2
         let currentAttempts = Result()
 
         MockURLProtocol.mockRequests { _ in

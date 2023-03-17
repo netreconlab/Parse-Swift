@@ -213,7 +213,6 @@ class APICommandTests: XCTestCase {
             errorKey: errorValue,
             codeKey: codeValue
         ]
-        Parse.configuration.maxConnectionAttempts = 1
 
         MockURLProtocol.mockRequests { _ in
             do {
@@ -245,7 +244,6 @@ class APICommandTests: XCTestCase {
     }
 
     func testErrorHTTPReturns400NoDataFromServer() async {
-        Parse.configuration.maxConnectionAttempts = 1
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(error: originalError) // Status code defaults to 400
@@ -270,7 +268,6 @@ class APICommandTests: XCTestCase {
 
     // This is how errors HTTP errors should typically come in
     func testErrorHTTP500JSON() async {
-        Parse.configuration.maxConnectionAttempts = 1
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -311,7 +308,6 @@ class APICommandTests: XCTestCase {
     }
 
     func testErrorHTTPReturns500NoDataFromServer() async {
-        Parse.configuration.maxConnectionAttempts = 1
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
         MockURLProtocol.mockRequests { _ in
             var response = MockURLResponse(error: originalError)
