@@ -5,8 +5,8 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
-### 5.3.2
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.2...5.3.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.3.2/documentation/parseswift)
+### 5.3.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.2...5.3.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.3.3/documentation/parseswift)
 
 __Fixes__
 * Only retry connections on specific codes ([#84](https://github.com/netreconlab/Parse-Swift/pull/84)), thanks to [Corey Baker](https://github.com/cbaker6).
