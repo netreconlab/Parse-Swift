@@ -110,7 +110,7 @@ public struct ParseEncoder {
                 acl: ParseACL? = nil,
                 batching: Bool = false,
                 objectsSavedBeforeThisOne: [String: PointerType]? = nil,
-                filesSavedBeforeThisOne: [UUID: ParseFile]? = nil) throws -> Data {
+                filesSavedBeforeThisOne: [String: ParseFile]? = nil) throws -> Data {
         var keysToSkip = SkipKeys.none.keys()
         if batching {
             keysToSkip = SkipKeys.object.keys()
@@ -159,9 +159,9 @@ public struct ParseEncoder {
                                          acl: ParseACL? = nil,
                                          collectChildren: Bool,
                                          objectsSavedBeforeThisOne: [String: PointerType]?,
-                                         filesSavedBeforeThisOne: [UUID: ParseFile]?) throws -> (encoded: Data,
-                                                                                                 unique: PointerType?,
-                                                                                                 unsavedChildren: [Encodable]) {
+                                         filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data,
+                                                                                                   unique: PointerType?,
+                                                                                                   unsavedChildren: [Encodable]) {
         let keysToSkip: Set<String>!
         if !Parse.configuration.isRequiringCustomObjectIds {
             keysToSkip = SkipKeys.object.keys()
@@ -188,7 +188,7 @@ public struct ParseEncoder {
                          batching: Bool,
                          collectChildren: Bool,
                          objectsSavedBeforeThisOne: [String: PointerType]?,
-                         filesSavedBeforeThisOne: [UUID: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
+                         filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
         let keysToSkip: Set<String>!
         if !Parse.configuration.isRequiringCustomObjectIds {
             keysToSkip = SkipKeys.object.keys()
@@ -218,12 +218,11 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     let dictionary: NSMutableDictionary
     let skippedKeys: Set<String>
     var uniquePointer: PointerType?
-    var uniqueFiles = Set<ParseFile>()
     var newObjects = [Encodable]()
     var collectChildren = false
     var batching = false
     var objectsSavedBeforeThisOne: [String: PointerType]?
-    var filesSavedBeforeThisOne: [UUID: ParseFile]?
+    var filesSavedBeforeThisOne: [String: ParseFile]?
     /// The encoder's storage.
     var storage: _ParseEncodingStorage
     var ignoreSkipKeys = false
@@ -280,7 +279,7 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
                       collectChildren: Bool,
                       uniquePointer: PointerType?,
                       objectsSavedBeforeThisOne: [String: PointerType]?,
-                      filesSavedBeforeThisOne: [UUID: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
+                      filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
         self.acl = acl
         let encoder = _ParseEncoder(codingPath: codingPath, dictionary: dictionary, skippingKeys: skippedKeys)
         encoder.outputFormatting = outputFormatting
@@ -364,7 +363,7 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
             if let uniquePointer = self.uniquePointer,
                uniquePointer.hasSameObjectId(as: pointer) {
                 throw ParseError(code: .otherCause,
-                                 message: "Found a circular dependency when encoding.")
+                                 message: "Found a circular dependency when encoding objects. The object: \(pointer) cannot have the same objectId as: \(uniquePointer)")
             }
             valueToEncode = pointer
         } else if let object = value as? Objectable {
@@ -373,7 +372,7 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
                 if let uniquePointer = self.uniquePointer,
                    uniquePointer.hasSameObjectId(as: pointer) {
                     throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency when encoding.")
+                                     message: "Found a circular dependency when encoding objects. The object: \(pointer) cannot have the same objectId as: \(uniquePointer)")
                 }
                 valueToEncode = pointer
             } else {
@@ -401,10 +400,6 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     func deepFindAndReplaceParseFiles(_ value: ParseFile) throws -> Encodable? {
         var valueToEncode: Encodable?
         if value.isSaved {
-            if self.uniqueFiles.contains(value) {
-                throw ParseError(code: .otherCause, message: "Found a circular dependency when encoding.")
-            }
-            self.uniqueFiles.insert(value)
             if !self.collectChildren {
                 valueToEncode = value
             }
@@ -413,13 +408,12 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
                 if let updatedFile = self.filesSavedBeforeThisOne?[value.id] {
                     valueToEncode = updatedFile
                 } else {
-                    // New object needs to be saved before it can be stored
+                    // New file needs to be saved before it can be stored
                     self.newObjects.append(value)
                 }
             } else if let currentFile = self.filesSavedBeforeThisOne?[value.id] {
                 valueToEncode = currentFile
             } else if dictionary.count > 0 {
-                // Only top level objects can be saved without a pointer
                 throw ParseError(code: .otherCause, message: "Error. Could not resolve unsaved file while encoding.")
             }
         }
@@ -1035,7 +1029,7 @@ private class _ParseReferencingEncoder: _ParseEncoder {
     // MARK: - Initialization
 
     /// Initializes `self` by referencing the given array container in the given encoder.
-    init(referencing encoder: _ParseEncoder, at index: Int, wrapping array: NSMutableArray, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [UUID: ParseFile]?) {
+    init(referencing encoder: _ParseEncoder, at index: Int, wrapping array: NSMutableArray, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [String: ParseFile]?) {
         self.encoder = encoder
         self.reference = .array(array, index)
         super.init(codingPath: encoder.codingPath, dictionary: NSMutableDictionary(), skippingKeys: skippingKeys)
@@ -1046,7 +1040,7 @@ private class _ParseReferencingEncoder: _ParseEncoder {
     }
 
     /// Initializes `self` by referencing the given dictionary container in the given encoder.
-    init(referencing encoder: _ParseEncoder, key: CodingKey, wrapping dictionary: NSMutableDictionary, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [UUID: ParseFile]?) {
+    init(referencing encoder: _ParseEncoder, key: CodingKey, wrapping dictionary: NSMutableDictionary, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [String: ParseFile]?) {
         self.encoder = encoder
         self.reference = .dictionary(dictionary, key.stringValue)
         super.init(codingPath: encoder.codingPath, dictionary: dictionary, skippingKeys: skippingKeys)

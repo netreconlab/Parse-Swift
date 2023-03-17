@@ -167,9 +167,10 @@ public extension ParseObject {
     }
 
     /**
-     A computed property that is the same value as `objectId` and makes it easy to use `ParseObject`'s
+     A computed property that is a unique identifier and makes it easy to use `ParseObject`'s
      as models in MVVM and SwiftUI.
-     - note: `id` allows `ParseObjects`'s to be used even when they are unsaved and do not have an `objectId`.
+     - note: `id` allows `ParseObject`'s to be used even when they are not saved and do not have an `objectId`.
+     - important: `id` will have the same value as `objectId` when a `ParseObject` is saved.
     */
     var id: String {
         objectId ?? UUID().uuidString

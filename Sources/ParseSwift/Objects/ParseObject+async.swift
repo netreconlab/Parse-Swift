@@ -294,7 +294,7 @@ internal extension ParseObject {
     // swiftlint:disable:next function_body_length
     func ensureDeepSave(options: API.Options = [],
                         isShouldReturnIfChildObjectsFound: Bool = false) async throws -> ([String: PointerType],
-                                                                                          [UUID: ParseFile]) {
+                                                                                          [String: ParseFile]) {
 
         var options = options
         // Remove any caching policy added by the developer as fresh data
@@ -302,7 +302,7 @@ internal extension ParseObject {
         options.remove(.cachePolicy(.reloadIgnoringLocalCacheData))
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         var objectsFinishedSaving = [String: PointerType]()
-        var filesFinishedSaving = [UUID: ParseFile]()
+        var filesFinishedSaving = [String: ParseFile]()
         let defaultACL = try? await ParseACL.defaultACL()
         do {
             let object = try ParseCoding.parseEncoder()
@@ -414,7 +414,7 @@ internal extension Sequence where Element: ParseObject {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         var childObjects = [String: PointerType]()
-        var childFiles = [UUID: ParseFile]()
+        var childFiles = [String: ParseFile]()
         var commands = [API.Command<Self.Element, Self.Element>]()
         let objects = map { $0 }
         for object in objects {
@@ -423,13 +423,15 @@ internal extension Sequence where Element: ParseObject {
                                 isShouldReturnIfChildObjectsFound: transaction)
             try savedChildObjects.forEach {(key, value) in
                 guard childObjects[key] == nil else {
-                    throw ParseError(code: .otherCause, message: "circular dependency")
+                    throw ParseError(code: .otherCause,
+                                     message: "Found a circular dependency in ParseObject.")
                 }
                 childObjects[key] = value
             }
             try savedChildFiles.forEach {(key, value) in
                 guard childFiles[key] == nil else {
-                    throw ParseError(code: .otherCause, message: "circular dependency")
+                    throw ParseError(code: .otherCause,
+                                     message: "Found a circular dependency in ParseObject.")
                 }
                 childFiles[key] = value
             }
@@ -478,7 +480,7 @@ internal extension ParseEncodable {
     func saveAll(objects: [ParseEncodable],
                  transaction: Bool = configuration.isUsingTransactions,
                  objectsSavedBeforeThisOne: [String: PointerType]?,
-                 filesSavedBeforeThisOne: [UUID: ParseFile]?,
+                 filesSavedBeforeThisOne: [String: ParseFile]?,
                  options: API.Options = [],
                  callbackQueue: DispatchQueue = .main) async throws -> [(Result<PointerType, ParseError>)] {
         try await API.NonParseBodyCommand<AnyCodable, PointerType>

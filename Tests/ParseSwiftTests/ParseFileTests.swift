@@ -164,8 +164,12 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
                        "localId should remain the same no matter how many times the getter is called")
     }
 
-    func testFileEquality() async throws {
+    func testFileHashable() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
+            throw ParseError(code: .otherCause, message: "Should have converted to data")
+        }
+
+        guard let sampleData2 = "Bye World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
         }
 
@@ -175,20 +179,38 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         var parseFile1 = ParseFile(name: "sampleData.txt", data: sampleData)
-        parseFile1.url = url1
         var parseFile2 = ParseFile(name: "sampleData2.txt", data: sampleData)
-        parseFile2.url = url2
         var parseFile3 = ParseFile(name: "sampleData3.txt", data: sampleData)
+        var parseFile4 = ParseFile(name: "sampleData.txt", data: sampleData2)
+        XCTAssertEqual(parseFile1.id, parseFile1.id, "no urls, but names and data should be the same")
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls, but names and data are different")
+        XCTAssertNotEqual(parseFile1.id, parseFile4.id, "no urls, but names are the same, data is different")
+        parseFile1.data = nil
+        parseFile2.data = nil
+        parseFile4.data = nil
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls or data, but are different")
+        XCTAssertEqual(parseFile1.id, parseFile4.id, "no urls or data, but names are the same")
+        parseFile1.data = sampleData
+        parseFile2.data = sampleData
+        parseFile3.data = sampleData2
+        parseFile1.url = url1
+        parseFile2.url = url2
         parseFile3.url = url1
-        XCTAssertNotEqual(parseFile1, parseFile2, "different urls, url takes precedence over localId")
-        XCTAssertEqual(parseFile1, parseFile3, "same urls")
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "different urls, url takes precedence over localId")
+        XCTAssertEqual(parseFile1.id, parseFile1.id, "same urls and same names")
+        XCTAssertNotEqual(parseFile1.id, parseFile3.id, "same urls, but different names")
         parseFile1.url = nil
         parseFile2.url = nil
-        XCTAssertNotEqual(parseFile1, parseFile2, "no urls, but localIds shoud be different")
-        let uuid = UUID()
-        parseFile1.id = uuid
-        parseFile2.id = uuid
-        XCTAssertEqual(parseFile1, parseFile2, "no urls, but localIds shoud be the same")
+        parseFile3.url = nil
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls, but localIds should be different")
+        parseFile1.cloudURL = url1
+        parseFile2.cloudURL = url2
+        parseFile3.cloudURL = url1
+        XCTAssertEqual(parseFile1.id, parseFile1.id, "no urls, but cloud urls and names are the same")
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls, cloud urls and name are different")
+        XCTAssertNotEqual(parseFile1.id, parseFile3.id, "no urls, but cloud urls are the same, but names are different")
+        parseFile4.cloudURL = url2
+        XCTAssertNotEqual(parseFile1.id, parseFile4.id, "no urls, cloud urls are different, but names are the same")
     }
 
     func testDebugString() async throws {
