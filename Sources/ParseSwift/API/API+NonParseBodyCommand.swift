@@ -168,7 +168,7 @@ internal extension API.NonParseBodyCommand {
                       transaction: Bool,
                       objectsSavedBeforeThisOne: [String: PointerType]?,
                       // swiftlint:disable:next line_length
-                      filesSavedBeforeThisOne: [UUID: ParseFile]?) async throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
+                      filesSavedBeforeThisOne: [String: ParseFile]?) async throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
         let defaultACL = try? await ParseACL.defaultACL()
         let batchCommands = try objects.compactMap { (object) -> API.BatchCommand<AnyCodable, PointerType>? in
             guard var objectable = object as? Objectable else {

@@ -511,10 +511,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
 
-        XCTAssertEqual(jsonSkip, parseSkip, "Parse shoud always match JSON")
-        XCTAssertEqual(jsonMethod, parseMethod, "Parse shoud always match JSON")
-        XCTAssertEqual(jsonLimit, parseLimit, "Parse shoud always match JSON")
-        XCTAssertEqual(jsonWhere, parseWhere, "Parse shoud always match JSON")
+        XCTAssertEqual(jsonSkip, parseSkip, "Parse should always match JSON")
+        XCTAssertEqual(jsonMethod, parseMethod, "Parse should always match JSON")
+        XCTAssertEqual(jsonLimit, parseLimit, "Parse should always match JSON")
+        XCTAssertEqual(jsonWhere, parseWhere, "Parse should always match JSON")
     }
 
     func findAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {

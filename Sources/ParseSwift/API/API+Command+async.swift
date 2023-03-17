@@ -17,7 +17,7 @@ internal extension API.Command {
     func prepareURLRequest(options: API.Options,
                            batching: Bool = false,
                            childObjects: [String: PointerType]? = nil,
-                           childFiles: [UUID: ParseFile]? = nil) async -> Result<URLRequest, ParseError> {
+                           childFiles: [String: ParseFile]? = nil) async -> Result<URLRequest, ParseError> {
         await withCheckedContinuation { continuation in
             self.prepareURLRequest(options: options,
                                          batching: batching,
@@ -33,7 +33,7 @@ internal extension API.Command {
                  callbackQueue: DispatchQueue,
                  notificationQueue: DispatchQueue? = nil,
                  childObjects: [String: PointerType]? = nil,
-                 childFiles: [UUID: ParseFile]? = nil,
+                 childFiles: [String: ParseFile]? = nil,
                  allowIntermediateResponses: Bool = false,
                  uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                  downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {

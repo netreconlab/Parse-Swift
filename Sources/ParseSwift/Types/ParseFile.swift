@@ -7,7 +7,7 @@ import FoundationNetworking
   A `ParseFile` object representes a file of binary data stored on the Parse server.
   This can be a image, video, or anything else that an application needs to reference in a non-relational way.
  */
-public struct ParseFile: Fileable, Savable, Deletable, Hashable {
+public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
 
     internal static var type: String {
         "File"
@@ -22,7 +22,24 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable {
             && data == nil
     }
 
-    public var id: UUID
+    /**
+     A computed property that is a unique identifier and makes it easy to use `ParseFile`'s
+     as models in MVVM and SwiftUI.
+     - note: `id` allows `ParseFile`'s to be used even when they are  not saved.
+     - important: `id` will have the same value as `name` when a `ParseFile` is saved.
+    */
+    public var id: String {
+        guard isSaved else {
+            guard let cloudURL = cloudURL else {
+                guard let localURL = localURL else {
+                    return name
+                }
+                return combineName(with: localURL)
+            }
+            return combineName(with: cloudURL)
+        }
+        return name
+    }
 
     /**
       The name of the file.
@@ -87,7 +104,6 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable {
         self.metadata = metadata
         self.tags = tags
         self.options = options
-        self.id = UUID()
     }
 
     /**
@@ -113,7 +129,6 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable {
         self.metadata = metadata
         self.tags = tags
         self.options = options
-        self.id = UUID()
     }
 
     /**
@@ -139,7 +154,10 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable {
         self.metadata = metadata
         self.tags = tags
         self.options = options
-        self.id = UUID()
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
     }
 
     enum CodingKeys: String, CodingKey {
@@ -151,6 +169,10 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable {
 
 // MARK: Helper Methods (internal)
 extension ParseFile {
+    func combineName(with url: URL) -> String {
+        "\(name)_\(url)"
+    }
+
     func setDefaultOptions(_ options: API.Options) -> API.Options {
         var options = options
         if let mimeType = mimeType {
@@ -208,7 +230,6 @@ extension ParseFile {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         url = try values.decodeIfPresent(URL.self, forKey: .url)
         name = try values.decode(String.self, forKey: .name)
-        id = UUID()
     }
 }
 

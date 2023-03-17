@@ -53,7 +53,7 @@ internal extension API {
         func executeStream(options: API.Options,
                            callbackQueue: DispatchQueue,
                            childObjects: [String: PointerType]? = nil,
-                           childFiles: [UUID: ParseFile]? = nil,
+                           childFiles: [String: ParseFile]? = nil,
                            uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                            stream: InputStream,
                            completion: @escaping (ParseError?) -> Void) {
@@ -94,7 +94,7 @@ internal extension API {
                      callbackQueue: DispatchQueue,
                      notificationQueue: DispatchQueue? = nil,
                      childObjects: [String: PointerType]? = nil,
-                     childFiles: [UUID: ParseFile]? = nil,
+                     childFiles: [String: ParseFile]? = nil,
                      allowIntermediateResponses: Bool = false,
                      uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                      downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
@@ -252,7 +252,7 @@ internal extension API {
         func prepareURLRequest(options: API.Options,
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
-                               childFiles: [UUID: ParseFile]? = nil,
+                               childFiles: [String: ParseFile]? = nil,
                                completion: @escaping(Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
             Task {

@@ -603,7 +603,7 @@ internal extension Sequence where Element: ParseUser {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         var childObjects = [String: PointerType]()
-        var childFiles = [UUID: ParseFile]()
+        var childFiles = [String: ParseFile]()
         var commands = [API.Command<Self.Element, Self.Element>]()
         let objects = map { $0 }
         for object in objects {
@@ -612,13 +612,15 @@ internal extension Sequence where Element: ParseUser {
                                 isShouldReturnIfChildObjectsFound: transaction)
             try savedChildObjects.forEach {(key, value) in
                 guard childObjects[key] == nil else {
-                    throw ParseError(code: .otherCause, message: "circular dependency")
+                    throw ParseError(code: .otherCause,
+                                     message: "Found a circular dependency in ParseUser.")
                 }
                 childObjects[key] = value
             }
             try savedChildFiles.forEach {(key, value) in
                 guard childFiles[key] == nil else {
-                    throw ParseError(code: .otherCause, message: "circular dependency")
+                    throw ParseError(code: .otherCause,
+                                     message: "Found a circular dependency in ParseUser.")
                 }
                 childFiles[key] = value
             }
