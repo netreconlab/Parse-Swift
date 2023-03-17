@@ -401,7 +401,7 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     func deepFindAndReplaceParseFiles(_ value: ParseFile) throws -> Encodable? {
         var valueToEncode: Encodable?
         if value.isSaved {
-            if self.uniqueFiles.contains(value) {
+            guard !self.uniqueFiles.contains(value) else {
                 throw ParseError(code: .otherCause,
                                  message: "Found a circular dependency when encoding ParseFiles. The file: \(value) is already in the unique set of: \(uniqueFiles)")
             }
