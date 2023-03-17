@@ -1,15 +1,23 @@
 {
   "abstract" : [
     {
-      "text" : "Inherited from ",
+      "text" : "A computed property that is a unique identifier and makes it easy to use ",
       "type" : "text"
     },
     {
-      "code" : "Identifiable.id",
+      "code" : "ParseFile",
       "type" : "codeVoice"
     },
     {
-      "text" : ".",
+      "text" : "’s",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "as models in MVVM and SwiftUI.",
       "type" : "text"
     }
   ],
@@ -23,11 +31,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/id-5kvj3"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/id-3kemr"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A4FileV2id10Foundation4UUIDVvp",
+    "externalID" : "s:10ParseSwift0A4FileV2idSSvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -47,8 +55,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10Foundation4UUIDV",
-        "text" : "UUID"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       }
     ],
     "modules" : [
@@ -90,13 +98,108 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10Foundation4UUIDV",
-              "text" : "UUID"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "code" : "id",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " allows ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseFile",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : "’s to be used even when they are  not saved.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "code" : "id",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " will have the same value as ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "name",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " when a ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseFile",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is saved.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Important",
+          "style" : "important",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -110,7 +213,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsefile\/id-5kvj3"
+        "\/documentation\/parseswift\/parsefile\/id-3kemr"
       ],
       "traits" : [
         {
@@ -185,9 +288,28 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/id-5kvj3": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/id-3kemr": {
   "abstract" : [
-
+    {
+      "text" : "A computed property that is a unique identifier and makes it easy to use ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "as models in MVVM and SwiftUI.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -208,16 +330,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4UUIDV",
-      "text" : "UUID"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/id-5kvj3",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/id-3kemr",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "id",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/id-5kvj3"
+  "url" : "\/documentation\/parseswift\/parsefile\/id-3kemr"
 }
 }
 }

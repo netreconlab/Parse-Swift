@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "A computed property that is the same value as ",
-      "type" : "text"
-    },
-    {
-      "code" : "objectId",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " and makes it easy to use ",
+      "text" : "A computed property that is a unique identifier and makes it easy to use ",
       "type" : "text"
     },
     {
@@ -152,11 +144,11 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "ParseObjects",
+                  "code" : "ParseObject",
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : "’s to be used even when they are unsaved and do not have an ",
+                  "text" : "’s to be used even when they are not saved and do not have an ",
                   "type" : "text"
                 },
                 {
@@ -173,6 +165,46 @@
           ],
           "name" : "Note",
           "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "code" : "id",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " will have the same value as ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "objectId",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " when a ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is saved.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Important",
+          "style" : "important",
           "type" : "aside"
         }
       ],
@@ -268,15 +300,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/id": {
   "abstract" : [
     {
-      "text" : "A computed property that is the same value as ",
-      "type" : "text"
-    },
-    {
-      "code" : "objectId",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " and makes it easy to use ",
+      "text" : "A computed property that is a unique identifier and makes it easy to use ",
       "type" : "text"
     },
     {

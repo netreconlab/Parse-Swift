@@ -1934,13 +1934,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -6968,8 +6968,8 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsefile\/id-5kvj3",
-                "title" : "var id: UUID",
+                "path" : "\/documentation\/parseswift\/parsefile\/id-3kemr",
+                "title" : "var id: String",
                 "type" : "property"
               },
               {
@@ -7044,6 +7044,11 @@
               {
                 "path" : "\/documentation\/parseswift\/parsefile\/fetchpublisher(options:progress:)",
                 "title" : "func fetchPublisher(options: API.Options, progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)) -> Future<`Self`, ParseError>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsefile\/hash(into:)",
+                "title" : "func hash(into: inout Hasher)",
                 "type" : "method"
               },
               {

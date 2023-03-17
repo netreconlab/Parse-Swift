@@ -1554,15 +1554,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/id-27z0a": {
   "abstract" : [
     {
-      "text" : "A computed property that is the same value as ",
-      "type" : "text"
-    },
-    {
-      "code" : "objectId",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " and makes it easy to use ",
+      "text" : "A computed property that is a unique identifier and makes it easy to use ",
       "type" : "text"
     },
     {
