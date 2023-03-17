@@ -222,23 +222,11 @@ internal extension URLSession {
                     completion(result)
                 }
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
-                if #available(iOS 16.0, macCatalyst 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *) {
-                    try await Task.sleep(for: .seconds(delayInterval))
-                } else {
-                    if delayInterval < 1.0 {
-                        delayInterval = 1.0
-                    }
-                    let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
-                    try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
-                }
-                #else
                 if delayInterval < 1.0 {
                     delayInterval = 1.0
                 }
                 let delayIntervalNanoSeconds = UInt64(delayInterval * 1_000_000_000)
                 try await Task.sleep(nanoseconds: delayIntervalNanoSeconds)
-                #endif
 
                 await self.dataTask(with: request,
                                     callbackQueue: callbackQueue,
