@@ -218,7 +218,6 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     let dictionary: NSMutableDictionary
     let skippedKeys: Set<String>
     var uniquePointer: PointerType?
-    var uniqueFiles = Set<ParseFile>()
     var newObjects = [Encodable]()
     var collectChildren = false
     var batching = false
@@ -401,9 +400,6 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     func deepFindAndReplaceParseFiles(_ value: ParseFile) throws -> Encodable? {
         var valueToEncode: Encodable?
         if value.isSaved {
-            if !self.uniqueFiles.contains(value) {
-                self.uniqueFiles.insert(value)
-            }
             if !self.collectChildren {
                 valueToEncode = value
             }
