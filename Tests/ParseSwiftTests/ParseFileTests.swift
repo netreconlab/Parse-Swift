@@ -169,17 +169,32 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             throw ParseError(code: .otherCause, message: "Should have converted to data")
         }
 
+        guard let sampleData2 = "Bye World".data(using: .utf8) else {
+            throw ParseError(code: .otherCause, message: "Should have converted to data")
+        }
+
         guard let url1 = URL(string: "https://parseplatform.org/img/logo.svg"),
               let url2 = URL(string: "https://parseplatform.org/img/logo2.svg") else {
             throw ParseError(code: .otherCause, message: "Should have created urls")
         }
 
         var parseFile1 = ParseFile(name: "sampleData.txt", data: sampleData)
-        XCTAssertEqual(parseFile1.id, parseFile1.id, "no urls, but names should be the same")
-        parseFile1.url = url1
         var parseFile2 = ParseFile(name: "sampleData2.txt", data: sampleData)
-        parseFile2.url = url2
         var parseFile3 = ParseFile(name: "sampleData3.txt", data: sampleData)
+        var parseFile4 = ParseFile(name: "sampleData.txt", data: sampleData2)
+        XCTAssertEqual(parseFile1.id, parseFile1.id, "no urls, but names and data should be the same")
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls, but names and data are different")
+        XCTAssertNotEqual(parseFile1.id, parseFile4.id, "no urls, but names are the same, data is different")
+        parseFile1.data = nil
+        parseFile2.data = nil
+        parseFile4.data = nil
+        XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls or data, but are different")
+        XCTAssertEqual(parseFile1.id, parseFile4.id, "no urls or data, but names are the same")
+        parseFile1.data = sampleData
+        parseFile2.data = sampleData
+        parseFile3.data = sampleData2
+        parseFile1.url = url1
+        parseFile2.url = url2
         parseFile3.url = url1
         XCTAssertNotEqual(parseFile1.id, parseFile2.id, "different urls, url takes precedence over localId")
         XCTAssertEqual(parseFile1.id, parseFile1.id, "same urls and same names")
@@ -194,7 +209,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(parseFile1.id, parseFile1.id, "no urls, but cloud urls and names are the same")
         XCTAssertNotEqual(parseFile1.id, parseFile2.id, "no urls, cloud urls and name are different")
         XCTAssertNotEqual(parseFile1.id, parseFile3.id, "no urls, but cloud urls are the same, but names are different")
-        var parseFile4 = parseFile1
         parseFile4.cloudURL = url2
         XCTAssertNotEqual(parseFile1.id, parseFile4.id, "no urls, cloud urls are different, but names are the same")
     }

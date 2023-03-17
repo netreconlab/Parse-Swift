@@ -32,7 +32,10 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
         guard isSaved else {
             guard let cloudURL = cloudURL else {
                 guard let localURL = localURL else {
-                    return name
+                    guard let data = data else {
+                        return name
+                    }
+                    return "\(name)_\(data)"
                 }
                 return combineName(with: localURL)
             }
