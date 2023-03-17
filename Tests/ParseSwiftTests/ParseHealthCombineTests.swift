@@ -86,7 +86,7 @@ class ParseHealthCombineTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            return MockURLResponse(data: encoded, statusCode: 503)
         }
 
         ParseHealth.checkPublisher()
@@ -119,7 +119,7 @@ class ParseHealthCombineTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            return MockURLResponse(data: encoded, statusCode: 429)
         }
 
         ParseHealth.checkPublisher()
@@ -153,7 +153,7 @@ class ParseHealthCombineTests: XCTestCase {
         }
 
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            return MockURLResponse(data: encoded, statusCode: 429)
         }
 
         ParseHealth.checkPublisher()

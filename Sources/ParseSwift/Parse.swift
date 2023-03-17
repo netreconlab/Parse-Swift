@@ -58,6 +58,9 @@ internal func initialize(applicationId: String,
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
+    if testing && maxConnectionAttempts == 5 {
+        configuration.maxConnectionAttempts = 1
+    }
     try await initialize(configuration: configuration)
 }
 
