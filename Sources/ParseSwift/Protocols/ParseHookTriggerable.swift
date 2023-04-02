@@ -299,11 +299,11 @@ extension ParseHookTriggerable {
         }
     }
 
-    func deleteCommand() throws -> API.NonParseBodyCommand<Delete, NoBody> {
+    func deleteCommand() throws -> API.NonParseBodyCommand<ParseDelete, NoBody> {
         let request = try TriggerRequest(trigger: self)
         return API.NonParseBodyCommand(method: .PUT,
                                        path: .hookTrigger(request: request),
-                                       body: Delete()) { (data) -> NoBody in
+                                       body: ParseDelete()) { (data) -> NoBody in
             try ParseCoding.jsonDecoder().decode(NoBody.self, from: data)
         }
     }

@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.3.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.3...5.4.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.0/documentation/parseswift)
+
+__New features__
+* Add batch and increment double operations ([#88](https://github.com/netreconlab/Parse-Swift/pull/88)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.3.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.2...5.3.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.3.3/documentation/parseswift)

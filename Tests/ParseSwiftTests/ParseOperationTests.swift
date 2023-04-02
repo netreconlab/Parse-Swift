@@ -23,6 +23,7 @@ class ParseOperationTests: XCTestCase {
 
         //: Your own properties
         var points: Int?
+        var otherPoints: Double?
         var members: [String]?
         var levels: [String]?
         var previous: [Level]?
@@ -34,6 +35,12 @@ class ParseOperationTests: XCTestCase {
         // custom initializers
         init(points: Int) {
             self.points = points
+            self.next = [Level(level: 5)]
+            self.members = [String]()
+        }
+
+        init(otherPoints: Double) {
+            self.otherPoints = otherPoints
             self.next = [Level(level: 5)]
             self.members = [String]()
         }
@@ -449,6 +456,18 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
+    func testIncrementDouble() throws {
+        let score = GameScore(otherPoints: 10.0)
+        let operations = score.operation
+            .increment("otherPoints", by: 1.1)
+        let expected = "{\"otherPoints\":{\"__op\":\"Increment\",\"amount\":1.1}}"
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertTrue(decoded.contains("otherPoints\":{\"__op\":\"Increment\",\"amount\":"))
+        XCTAssertTrue(decoded.contains("1.1"))
+    }
+
     func testAdd() throws {
         let score = GameScore(points: 10)
         let operations = score.operation
@@ -565,6 +584,36 @@ class ParseOperationTests: XCTestCase {
             .removeRelation(("previous", \.previous), objects: [level])
         // swiftlint:disable:next line_length
         let expected = "{\"previous\":{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"yolo\"}]}}"
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testBatch() throws {
+        let score = GameScore(points: 10)
+        let add = ParseAdd(objects: ["hello"])
+        let remove = ParseRemove(objects: ["world"])
+        let operations = score.operation
+            .batch("test", operations: [add, add])
+        // swiftlint:disable:next line_length
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"Add\",\"objects\":[\"hello\"]},{\"__op\":\"Add\",\"objects\":[\"hello\"]}]}}"
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testBatchRelations() throws {
+        let score = GameScore(points: 10)
+        var score2 = GameScore(points: 20)
+        score2.objectId = "yolo"
+        let add = try ParseAddRelation(objects: [score2])
+        let remove = try ParseRemoveRelation(objects: [score2])
+        let operations = score.operation
+            .batch("test", relations: [add, add])
+        // swiftlint:disable:next line_length
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]},{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]}]}}"
         let encoded = try ParseCoding.parseEncoder()
             .encode(operations)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

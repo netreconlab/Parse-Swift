@@ -1,5 +1,5 @@
 //
-//  Operation.swift
+//  ParseOperationType.swift
 //  ParseSwift
 //
 //  Created by Corey Baker on 5/21/22.
@@ -8,10 +8,11 @@
 
 import Foundation
 
-enum Operation: String, Codable {
+public enum ParseOperationCommand: String, Codable {
     case add = "Add"
     case addRelation = "AddRelation"
     case addUnique = "AddUnique"
+    case batch = "Batch"
     case delete = "Delete"
     case increment = "Increment"
     case remove = "Remove"
