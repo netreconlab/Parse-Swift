@@ -1,5 +1,5 @@
 //
-//  RemoveRelation.swift
+//  ParseOperationAddRelation.swift
 //  ParseSwift
 //
 //  Created by Corey Baker on 1/17/21.
@@ -9,18 +9,18 @@
 import Foundation
 
 /**
- An operation that removes a set of relations on an array field.
+ An operation that adds new relations to an array field.
  */
-public struct ParseRemoveRelation<T>: ParseRelationOperationable where T: ParseObject {
-    public var __op: ParseOperationCommand = .removeRelation // swiftlint:disable:this identifier_name
+public struct ParseOperationAddRelation<T>: ParseRelationOperationable where T: ParseObject {
+    public var __op: ParseOperationCommand = .addRelation // swiftlint:disable:this identifier_name
     /// The array of `ParseObject` pointers related to the operation.
     public var objects: [Pointer<T>]
 
     /**
      Create an instance with an array of `ParseObject`'s.
-     - parameter objects: The array of `ParseObject`'s to remove.
+     - parameter objects: The array of `ParseObject`'s to add.
      */
-    init(objects: [T]) throws {
+    public init(objects: [T]) throws {
         self.objects = try objects.compactMap { try $0.toPointer() }
     }
 }

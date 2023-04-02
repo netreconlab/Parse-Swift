@@ -456,11 +456,18 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
+    func testIncrementDescription() throws {
+        let score = GameScore(points: 10)
+        let operations = score.operation
+            .increment("points", by: 1)
+        let expected = "{\"points\":{\"__op\":\"Increment\",\"amount\":1}}"
+        XCTAssertEqual(operations.description, expected)
+    }
+
     func testIncrementDouble() throws {
         let score = GameScore(otherPoints: 10.0)
         let operations = score.operation
             .increment("otherPoints", by: 1.1)
-        let expected = "{\"otherPoints\":{\"__op\":\"Increment\",\"amount\":1.1}}"
         let encoded = try ParseCoding.parseEncoder()
             .encode(operations)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
@@ -590,14 +597,22 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
+    func testOperationAddDescription() throws {
+        let add = ParseOperationAdd(objects: ["hello"])
+        let expected = "{\"__op\":\"Add\",\"objects\":[\"hello\"]}"
+        XCTAssertEqual(add.description, expected)
+    }
+
     func testBatch() throws {
         let score = GameScore(points: 10)
-        let add = ParseAdd(objects: ["hello"])
-        let remove = ParseRemove(objects: ["world"])
+        let add = ParseOperationAdd(objects: ["hello"])
+        let remove = ParseOperationRemove(objects: ["world"])
+        let batch = ParseOperationBatch(operations: [add])
+            .appendOperations(operations: [remove])
         let operations = score.operation
-            .batch("test", operations: [add, add])
+            .batch("test", operations: batch)
         // swiftlint:disable:next line_length
-        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"Add\",\"objects\":[\"hello\"]},{\"__op\":\"Add\",\"objects\":[\"hello\"]}]}}"
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"Add\",\"objects\":[\"hello\"]},{\"__op\":\"Remove\",\"objects\":[\"world\"]}]}}"
         let encoded = try ParseCoding.parseEncoder()
             .encode(operations)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
@@ -608,12 +623,14 @@ class ParseOperationTests: XCTestCase {
         let score = GameScore(points: 10)
         var score2 = GameScore(points: 20)
         score2.objectId = "yolo"
-        let add = try ParseAddRelation(objects: [score2])
-        let remove = try ParseRemoveRelation(objects: [score2])
+        let add = try ParseOperationAddRelation(objects: [score2])
+        let remove = try ParseOperationRemoveRelation(objects: [score2])
+        let batch = ParseOperationBatch(operations: [add])
+            .appendOperations(operations: [remove])
         let operations = score.operation
-            .batch("test", relations: [add, add])
+            .batch("test", operations: batch)
         // swiftlint:disable:next line_length
-        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]},{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]}]}}"
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]},{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]}]}}"
         let encoded = try ParseCoding.parseEncoder()
             .encode(operations)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

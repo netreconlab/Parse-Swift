@@ -202,7 +202,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
      */
     public func incrementBadge() -> Self {
         var mutablePayload = self
-        mutablePayload.badge = AnyCodable(ParseIncrement(amount: 1))
+        mutablePayload.badge = AnyCodable(ParseOperationIncrement(amount: 1))
         return mutablePayload
     }
 }

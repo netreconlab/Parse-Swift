@@ -1,5 +1,5 @@
 //
-//  ParseAddUnique.swift
+//  ParseOperationAddUnique.swift
 //  Parse
 //
 //  Created by Florent Vilmart on 17-07-24.
@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that adds unique objects to an array field.
  */
-public struct ParseAddUnique<T>: ParseOperationable where T: Encodable {
+public struct ParseOperationAddUnique<T>: ParseOperationable where T: Codable {
     public var __op: ParseOperationCommand = .addUnique // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public var objects: [T]

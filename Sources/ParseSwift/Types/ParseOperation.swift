@@ -16,10 +16,12 @@ import Foundation
  In most cases, you do not need to create an instance of `ParseOperation` directly as it can be
  indirectly created from any `ParseObject` by using the respective `operation` property.
  */
-public struct ParseOperation<T>: Savable where T: ParseObject {
+public struct ParseOperation<T>: Savable,
+                                 CustomDebugStringConvertible,
+                                 CustomStringConvertible where T: ParseObject {
 
     var target: T
-    var operations = [String: Encodable]()
+    var operations = [String: Codable]()
     var keysToNull = Set<String>()
 
     public init(target: T) {
@@ -64,7 +66,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func set<W>(_ key: (String, WritableKeyPath<T, W?>),
-                       to value: W?) -> Self where W: Encodable & Equatable {
+                       to value: W?) -> Self where W: Codable & Equatable {
         var mutableOperation = self
         if value == nil && target[keyPath: key.1] != nil {
             mutableOperation.keysToNull.insert(key.0)
@@ -85,7 +87,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
-                            value: W?) -> Self where W: Encodable {
+                            value: W?) -> Self where W: Codable {
         forceSet(key, to: value)
     }
 
@@ -98,7 +100,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
-                            to value: W?) -> Self where W: Encodable {
+                            to value: W?) -> Self where W: Codable {
         var mutableOperation = self
         if value != nil {
             mutableOperation.operations[key.0] = value
@@ -119,7 +121,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      */
     public func increment(_ key: String, by amount: Int) -> Self {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseIncrement(amount: amount)
+        mutableOperation.operations[key] = ParseOperationIncrement(amount: amount)
         return mutableOperation
     }
 
@@ -133,7 +135,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      */
     public func increment(_ key: String, by amount: Double) -> Self {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseIncrementDouble(amount: amount)
+        mutableOperation.operations[key] = ParseOperationIncrementDouble(amount: amount)
         return mutableOperation
     }
 
@@ -145,9 +147,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func addUnique<W>(_ key: String, objects: [W]) -> Self where W: Encodable, W: Hashable {
+    public func addUnique<W>(_ key: String, objects: [W]) -> Self where W: Codable, W: Hashable {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseAddUnique(objects: objects)
+        mutableOperation.operations[key] = ParseOperationAddUnique(objects: objects)
         return mutableOperation
     }
 
@@ -160,9 +162,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - returns: The updated operations.
      */
     public func addUnique<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                             objects: [V]) -> Self where V: Encodable, V: Hashable {
+                             objects: [V]) -> Self where V: Codable, V: Hashable {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = ParseAddUnique(objects: objects)
+        mutableOperation.operations[key.0] = ParseOperationAddUnique(objects: objects)
         var values = target[keyPath: key.1] ?? []
         values.append(contentsOf: objects)
         mutableOperation.target[keyPath: key.1] = Array(Set<V>(values))
@@ -176,9 +178,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func add<W>(_ key: String, objects: [W]) -> Self where W: Encodable {
+    public func add<W>(_ key: String, objects: [W]) -> Self where W: Codable {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseAdd(objects: objects)
+        mutableOperation.operations[key] = ParseOperationAdd(objects: objects)
         return mutableOperation
     }
 
@@ -190,9 +192,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - returns: The updated operations.
      */
     public func add<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                       objects: [V]) -> Self where V: Encodable {
+                       objects: [V]) -> Self where V: Codable {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = ParseAdd(objects: objects)
+        mutableOperation.operations[key.0] = ParseOperationAdd(objects: objects)
         var values = target[keyPath: key.1] ?? []
         values.append(contentsOf: objects)
         mutableOperation.target[keyPath: key.1] = values
@@ -208,7 +210,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      */
     public func addRelation<W>(_ key: String, objects: [W]) throws -> Self where W: ParseObject {
         var mutableOperation = self
-        mutableOperation.operations[key] = try ParseAddRelation(objects: objects)
+        mutableOperation.operations[key] = try ParseOperationAddRelation(objects: objects)
         return mutableOperation
     }
 
@@ -222,7 +224,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
     public func addRelation<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                                objects: [V]) throws -> Self where V: ParseObject {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = try ParseAddRelation(objects: objects)
+        mutableOperation.operations[key.0] = try ParseOperationAddRelation(objects: objects)
         var values = target[keyPath: key.1] ?? []
         values.append(contentsOf: objects)
         mutableOperation.target[keyPath: key.1] = values
@@ -237,9 +239,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func remove<W>(_ key: String, objects: [W]) -> Self where W: Encodable {
+    public func remove<W>(_ key: String, objects: [W]) -> Self where W: Codable {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseRemove(objects: objects)
+        mutableOperation.operations[key] = ParseOperationRemove(objects: objects)
         return mutableOperation
     }
 
@@ -252,9 +254,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - returns: The updated operations.
      */
     public func remove<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                          objects: [V]) -> Self where V: Encodable, V: Hashable {
+                          objects: [V]) -> Self where V: Codable, V: Hashable {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = ParseRemove(objects: objects)
+        mutableOperation.operations[key.0] = ParseOperationRemove(objects: objects)
         let values = target[keyPath: key.1]
         var set = Set<V>(values ?? [])
         objects.forEach {
@@ -274,7 +276,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      */
     public func removeRelation<W>(_ key: String, objects: [W]) throws -> Self where W: ParseObject {
         var mutableOperation = self
-        mutableOperation.operations[key] = try ParseRemoveRelation(objects: objects)
+        mutableOperation.operations[key] = try ParseOperationRemoveRelation(objects: objects)
         return mutableOperation
     }
 
@@ -289,7 +291,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
     public func removeRelation<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                                   objects: [V]) throws -> Self where V: ParseObject {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = try ParseRemoveRelation(objects: objects)
+        mutableOperation.operations[key.0] = try ParseOperationRemoveRelation(objects: objects)
         let values = target[keyPath: key.1]
         var set = Set<V>(values ?? [])
         objects.forEach {
@@ -303,27 +305,17 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      An operation that batches an array of operations on a particular field.
      - Parameters:
         - key: The key of the object.
-        - operations: The array of operations.
+        - operations: The batch of operations to complete on the `key`.
         - returns: The updated operations.
      - warning: The developer must ensure that the respective Parse Server supports the
      set of batch operations and that the operations are compatable with the field type.
+     - note: It is known that `ParseOperationAddRelation` and
+     `ParseOperationRemoveRelation` are the only two types of operations that
+     can be batched together on Parse Server <= 6.0.0.
      */
-    public func batch<W>(_ key: String, operations: [W]) -> Self where W: ParseOperationable {
+    public func batch(_ key: String, operations batch: ParseOperationBatch) -> Self {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseBatch(operations: operations)
-        return mutableOperation
-    }
-
-    /**
-     An operation that batches an array of relation operations on a particular field.
-     - Parameters:
-        - key: The key of the object.
-        - relations: The array of relation operations.
-        - returns: The updated operations.
-     */
-    public func batch<W>(_ key: String, relations: [W]) -> Self where W: ParseRelationOperationable {
-        var mutableOperation = self
-        mutableOperation.operations[key] = ParseBatch(operations: relations)
+        mutableOperation.operations[key] = batch
         return mutableOperation
     }
 
@@ -334,7 +326,7 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
      */
     public func unset(_ key: String) -> Self {
         var mutableOperation = self
-        mutableOperation.operations[key] = ParseDelete()
+        mutableOperation.operations[key] = ParseOperationDelete()
         return mutableOperation
     }
 
@@ -344,9 +336,9 @@ public struct ParseOperation<T>: Savable where T: ParseObject {
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - returns: The updated operations.
      */
-    public func unset<V>(_ key: (String, WritableKeyPath<T, V?>)) -> Self where V: Encodable {
+    public func unset<V>(_ key: (String, WritableKeyPath<T, V?>)) -> Self where V: Codable {
         var mutableOperation = self
-        mutableOperation.operations[key.0] = ParseDelete()
+        mutableOperation.operations[key.0] = ParseOperationDelete()
         mutableOperation.target[keyPath: key.1] = nil
         return mutableOperation
     }
@@ -431,5 +423,24 @@ public extension ParseObject {
     /// Create a new operation.
     var operation: ParseOperation<Self> {
         return ParseOperation(target: self)
+    }
+}
+
+// MARK: CustomDebugStringConvertible
+public extension ParseOperation {
+    var debugDescription: String {
+        guard let descriptionData = try? ParseCoding.jsonEncoder().encode(self),
+            let descriptionString = String(data: descriptionData, encoding: .utf8) else {
+                return "()"
+        }
+
+        return "\(descriptionString)"
+    }
+}
+
+// MARK: CustomStringConvertible
+public extension ParseOperation {
+    var description: String {
+        debugDescription
     }
 }

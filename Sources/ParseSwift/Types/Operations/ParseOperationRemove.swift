@@ -1,5 +1,5 @@
 //
-//  ParseRemove.swift
+//  ParseOperationRemove.swift
 //  Parse
 //
 //  Created by Florent Vilmart on 17-07-24.
@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that removes a set of objects from a field.
  */
-public struct ParseRemove<T>: ParseOperationable where T: Encodable {
+public struct ParseOperationRemove<T>: ParseOperationable where T: Codable {
     public var __op: ParseOperationCommand = .remove // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public let objects: [T]

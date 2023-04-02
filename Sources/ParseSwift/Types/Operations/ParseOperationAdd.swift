@@ -1,5 +1,5 @@
 //
-//  ParseAdd.swift
+//  ParseOperationAdd.swift
 //  Parse
 //
 //  Created by Florent Vilmart on 17-07-24.
@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that adds new objects to an array field.
  */
-public struct ParseAdd<T>: ParseOperationable where T: Encodable {
+public struct ParseOperationAdd<T>: ParseOperationable where T: Codable {
     public var __op: ParseOperationCommand = .add // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public var objects: [T]

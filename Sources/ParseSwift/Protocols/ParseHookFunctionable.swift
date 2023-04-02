@@ -263,11 +263,11 @@ extension ParseHookFunctionable {
         }
     }
 
-    func deleteCommand() throws -> API.NonParseBodyCommand<ParseDelete, NoBody> {
+    func deleteCommand() throws -> API.NonParseBodyCommand<ParseOperationDelete, NoBody> {
         let request = try FunctionRequest(hookFunction: self)
         return API.NonParseBodyCommand(method: .PUT,
                                        path: .hookFunction(request: request),
-                                       body: ParseDelete()) { (data) -> NoBody in
+                                       body: ParseOperationDelete()) { (data) -> NoBody in
             try ParseCoding.jsonDecoder().decode(NoBody.self, from: data)
         }
     }
