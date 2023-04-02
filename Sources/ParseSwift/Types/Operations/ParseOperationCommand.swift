@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A number of commands used to fulfil a Parse operation.
+/// Represents all supported Parse operation commands.
 public enum ParseOperationCommand: String, Codable {
     /// The add command.
     case add = "Add"

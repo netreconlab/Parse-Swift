@@ -18,7 +18,7 @@ public struct ParseOperationIncrement: ParseOperationable {
     var amount: Int
 
     /**
-     Create an instance with an array of `ParseObject`'s.
+     Create an instance to increment/decrement a field.
      - parameter amount: The amount to increment/decrement by.
      */
     public init(amount: Int) {

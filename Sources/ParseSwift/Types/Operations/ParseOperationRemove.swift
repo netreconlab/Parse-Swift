@@ -17,7 +17,7 @@ public struct ParseOperationRemove<T>: ParseOperationable where T: Codable {
     public let objects: [T]
 
     /**
-     Create an instance with an array of `ParseObject`'s.
+     Create an instance with an array of objects.
      - parameter objects: The array of objects to remove.
      */
     public init(objects: [T]) {

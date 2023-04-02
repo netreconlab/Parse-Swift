@@ -74,7 +74,7 @@ import PackageDescription
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.3.3")),
+        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.4.0")),
     ]
 )
 ```

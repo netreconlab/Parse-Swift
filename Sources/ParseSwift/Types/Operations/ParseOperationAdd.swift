@@ -17,8 +17,8 @@ public struct ParseOperationAdd<T>: ParseOperationable where T: Codable {
     public var objects: [T]
 
     /**
-     Create an instance with an array of `ParseObject`'s.
-     - parameter objects: The array of `ParseObject`'s.
+     Create an instance with an array of objects.
+     - parameter objects: The array of objects to add
      */
     public init(objects: [T]) {
         self.objects = objects
