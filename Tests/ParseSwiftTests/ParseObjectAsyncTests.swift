@@ -47,7 +47,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             return updated
         }
 
-        init() { }
+        init() {}
 
         // custom initializers
         init (objectId: String?) {

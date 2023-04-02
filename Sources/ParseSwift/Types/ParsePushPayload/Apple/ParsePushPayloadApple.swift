@@ -95,7 +95,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
              urlArgs
     }
 
-    public init() { }
+    public init() {}
 
     /**
      Create an instance of `ParsePushPayloadApple` .

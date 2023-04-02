@@ -53,7 +53,7 @@ public struct ParsePushPayloadFirebase: ParsePushFirebasePayloadable {
         case high
     }
 
-    public init() { }
+    public init() {}
 
     /**
      Create a new instance of `ParsePushPayloadFirebase`.

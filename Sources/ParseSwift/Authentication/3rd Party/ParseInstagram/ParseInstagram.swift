@@ -60,7 +60,7 @@ public struct ParseInstagram<AuthenticatedUser: ParseUser>: ParseAuthentication 
         "instagram"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

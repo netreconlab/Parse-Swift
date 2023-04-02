@@ -61,7 +61,7 @@ internal struct ParsePushStatusResponse: ParseObject {
 
     var count: Int?
 
-    init() { }
+    init() {}
 
     func setQueryWhere(_ query: QueryWhere) throws -> Self {
         var mutatingResponse = self

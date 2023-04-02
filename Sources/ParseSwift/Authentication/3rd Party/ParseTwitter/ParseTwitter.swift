@@ -71,7 +71,7 @@ public struct ParseTwitter<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "twitter"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

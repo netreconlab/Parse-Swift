@@ -26,7 +26,7 @@ class ParseOperationAsyncTests: XCTestCase {
         var points: Int?
         var player: String?
 
-        init() { }
+        init() {}
         // custom initializers
         init (objectId: String?) {
             self.objectId = objectId

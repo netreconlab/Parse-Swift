@@ -10,7 +10,6 @@ import Foundation
 
 /**
  An operation that batches multiple operations on a field.
- 
  - warning: The developer must ensure that the respective Parse Server supports the
  set of batch operations and that the operations are compatable with the field type.
  - note: It is known that `ParseOperationAddRelation` and
