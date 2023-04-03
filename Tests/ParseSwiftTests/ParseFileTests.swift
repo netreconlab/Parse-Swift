@@ -832,6 +832,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     func testSaveAysnc() async throws {
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -1398,5 +1399,5 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
     #endif
-
+#endif
 } // swiftlint:disable:this file_length
