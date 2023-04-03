@@ -288,6 +288,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(savedFile.url, response.url)
     }
 
+    @MainActor
     func testSaveLocalFile() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.txt")
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -680,6 +681,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     #endif
 
+    @MainActor
     func testSaveFileStream() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.dat")
         guard let sampleData = "Hello World".data(using: .utf8) else {

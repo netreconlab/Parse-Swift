@@ -160,6 +160,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertTrue(isLinked)
     }
 
+    @MainActor
     func testLoginAuthData() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -283,6 +284,7 @@ class ParseAnonymousTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    @MainActor
     func testReplaceAnonymousUserSync() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -437,6 +439,7 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
+    @MainActor
     func testReplaceAnonymousUserBody() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -485,6 +488,7 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
+    @MainActor
     func testCantReplaceAnonymousWithDifferentUser() async throws {
         try await testLogin()
         let user = try await User.current()

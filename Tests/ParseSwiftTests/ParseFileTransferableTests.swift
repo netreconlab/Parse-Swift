@@ -199,6 +199,7 @@ class ParseFileTransferableTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
+    @MainActor
     func testSaveFromFile() throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.txt")
         guard let sampleData = "Hello World".data(using: .utf8) else {
