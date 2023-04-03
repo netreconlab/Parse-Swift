@@ -26,7 +26,7 @@ class ParseSchemaTests: XCTestCase { // swiftlint:disable:this type_body_length
         var points: Int?
 
         //: a custom initializer
-        init() { }
+        init() {}
         init(points: Int) {
             self.points = points
         }
@@ -45,7 +45,7 @@ class ParseSchemaTests: XCTestCase { // swiftlint:disable:this type_body_length
         var points: Int?
 
         //: Custom initializers
-        init() { }
+        init() {}
 
         init(points: Int) {
             self.points = points

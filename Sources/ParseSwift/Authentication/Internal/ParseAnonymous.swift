@@ -40,7 +40,7 @@ public struct ParseAnonymous<AuthenticatedUser: ParseUser>: ParseAuthentication 
         "anonymous"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

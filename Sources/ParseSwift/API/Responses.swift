@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Florent Vilmart on 17-08-20.
-//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
+//  Copyright © 2020 Parse. All rights reserved.
 //
 
 import Foundation

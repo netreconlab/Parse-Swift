@@ -225,7 +225,7 @@ public extension ParseSchema {
      - returns: A mutated instance of `ParseSchema` for easy chaining.
     */
     func deleteIndex(_ name: String) -> Self {
-        let index = ["__op": AnyCodable(Operation.delete.rawValue)]
+        let index = ["__op": AnyCodable(ParseOperationCommand.delete.rawValue)]
         var mutableSchema = self
         mutableSchema.pendingIndexes[name] = index
         return mutableSchema

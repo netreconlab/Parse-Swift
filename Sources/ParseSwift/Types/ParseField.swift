@@ -10,7 +10,7 @@ import Foundation
 
 /// A type used to create internal fields for `ParseSchema`.
 public struct ParseField: ParseTypeable {
-    var __op: Operation? // swiftlint:disable:this identifier_name
+    var __op: ParseOperationCommand? // swiftlint:disable:this identifier_name
     var type: FieldType?
     var required: Bool?
     var defaultValue: AnyCodable?
@@ -46,7 +46,7 @@ public struct ParseField: ParseTypeable {
         case acl = "ACL"
     }
 
-    init(operation: Operation) {
+    init(operation: ParseOperationCommand) {
         __op = operation
     }
 

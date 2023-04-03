@@ -47,7 +47,7 @@ public struct ParseLDAP<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "ldap"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

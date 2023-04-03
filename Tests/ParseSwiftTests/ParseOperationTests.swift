@@ -23,6 +23,7 @@ class ParseOperationTests: XCTestCase {
 
         //: Your own properties
         var points: Int?
+        var otherPoints: Double?
         var members: [String]?
         var levels: [String]?
         var previous: [Level]?
@@ -34,6 +35,12 @@ class ParseOperationTests: XCTestCase {
         // custom initializers
         init(points: Int) {
             self.points = points
+            self.next = [Level(level: 5)]
+            self.members = [String]()
+        }
+
+        init(otherPoints: Double) {
+            self.otherPoints = otherPoints
             self.next = [Level(level: 5)]
             self.members = [String]()
         }
@@ -449,6 +456,25 @@ class ParseOperationTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
+    func testIncrementDescription() throws {
+        let score = GameScore(points: 10)
+        let operations = score.operation
+            .increment("points", by: 1)
+        let expected = "{\"points\":{\"__op\":\"Increment\",\"amount\":1}}"
+        XCTAssertEqual(operations.description, expected)
+    }
+
+    func testIncrementDouble() throws {
+        let score = GameScore(otherPoints: 10.0)
+        let operations = score.operation
+            .increment("otherPoints", by: 1.1)
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertTrue(decoded.contains("otherPoints\":{\"__op\":\"Increment\",\"amount\":"))
+        XCTAssertTrue(decoded.contains("1.1"))
+    }
+
     func testAdd() throws {
         let score = GameScore(points: 10)
         let operations = score.operation
@@ -565,6 +591,46 @@ class ParseOperationTests: XCTestCase {
             .removeRelation(("previous", \.previous), objects: [level])
         // swiftlint:disable:next line_length
         let expected = "{\"previous\":{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"yolo\"}]}}"
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testOperationAddDescription() throws {
+        let add = ParseOperationAdd(objects: ["hello"])
+        let expected = "{\"__op\":\"Add\",\"objects\":[\"hello\"]}"
+        XCTAssertEqual(add.description, expected)
+    }
+
+    func testBatch() throws {
+        let score = GameScore(points: 10)
+        let add = ParseOperationAdd(objects: ["hello"])
+        let remove = ParseOperationRemove(objects: ["world"])
+        let batch = ParseOperationBatch(operations: [add])
+            .appendOperations(operations: [remove])
+        let operations = score.operation
+            .batch("test", operations: batch)
+        // swiftlint:disable:next line_length
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"Add\",\"objects\":[\"hello\"]},{\"__op\":\"Remove\",\"objects\":[\"world\"]}]}}"
+        let encoded = try ParseCoding.parseEncoder()
+            .encode(operations)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testBatchRelations() throws {
+        let score = GameScore(points: 10)
+        var score2 = GameScore(points: 20)
+        score2.objectId = "yolo"
+        let add = try ParseOperationAddRelation(objects: [score2])
+        let remove = try ParseOperationRemoveRelation(objects: [score2])
+        let batch = ParseOperationBatch(operations: [add])
+            .appendOperations(operations: [remove])
+        let operations = score.operation
+            .batch("test", operations: batch)
+        // swiftlint:disable:next line_length
+        let expected = "{\"test\":{\"__op\":\"Batch\",\"ops\":[{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]},{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yolo\"}]}]}}"
         let encoded = try ParseCoding.parseEncoder()
             .encode(operations)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

@@ -3,7 +3,7 @@
 //  ParseSwift
 //
 //  Created by Florent Vilmart on 17-09-25.
-//  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
+//  Copyright © 2020 Parse. All rights reserved.
 //
 
 #if !os(Linux) && !os(Android) && !os(Windows)

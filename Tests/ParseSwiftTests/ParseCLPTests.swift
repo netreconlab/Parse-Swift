@@ -31,7 +31,7 @@ class ParseCLPTests: XCTestCase { // swiftlint:disable:this type_body_length
         // Your custom keys
         var customKey: String?
 
-        init() { }
+        init() {}
     }
 
     struct Role<RoleUser: ParseUser>: ParseRole {
