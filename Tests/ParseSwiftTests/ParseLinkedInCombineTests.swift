@@ -203,11 +203,6 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         wait(for: [expectation1], timeout: 20.0)
     }
 
-#if compiler(>=5.8.0)
-
-#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-
-#endif
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")

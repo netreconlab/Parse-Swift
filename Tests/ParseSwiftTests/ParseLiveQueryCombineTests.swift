@@ -43,12 +43,6 @@ class ParseLiveQueryCombineTests: XCTestCase {
         ParseLiveQuery.defaultClient = nil
     }
 
-#if compiler(>=5.8.0)
-
-#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-
-#endif
-
     func testOpen() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")

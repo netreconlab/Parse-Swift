@@ -110,11 +110,6 @@ class ParseConfigCodableCombineTests: XCTestCase {
         }
     }
 
-#if compiler(>=5.8.0)
-
-#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-
-#endif
     // swiftlint:disable:next function_body_length
     func testFetch() async throws {
         var current = Set<AnyCancellable>()

@@ -224,11 +224,6 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-#if compiler(>=5.8.0)
-
-#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-
-#endif
     func testFetchAsync() async throws {
         await userLogin()
         let config = Config()

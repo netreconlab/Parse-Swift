@@ -154,12 +154,6 @@ class ParseAuthenticationCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
-#if compiler(>=5.8.0)
-
-#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-
-#endif
-
     // swiftlint:disable:next function_body_length
     func testLogin() async throws {
         var current = Set<AnyCancellable>()
