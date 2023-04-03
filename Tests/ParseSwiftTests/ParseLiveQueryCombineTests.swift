@@ -43,6 +43,12 @@ class ParseLiveQueryCombineTests: XCTestCase {
         ParseLiveQuery.defaultClient = nil
     }
 
+#if compiler(>=5.8.0)
+
+#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
+#endif
+
     func testOpen() async throws {
         guard let client = ParseLiveQuery.defaultClient else {
             XCTFail("Should be able to get client")
@@ -68,7 +74,11 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testPingSocketNotEstablished() async throws {
@@ -103,7 +113,11 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testPing() async throws {
@@ -133,7 +147,11 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 }
 #endif

@@ -347,6 +347,12 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(downloadCount2, 0)
     }
 
+#if compiler(>=5.8.0)
+
+#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
+#endif
+
     func testParseURLSessionDelegateUpload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
@@ -393,7 +399,11 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didSendBodyData: 0,
                                               totalBytesSent: 0,
                                               totalBytesExpectedToSend: 10)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testParseURLSessionDelegateDownload() async throws {
@@ -447,7 +457,11 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didWriteData: 0,
                                               totalBytesWritten: 0,
                                               totalBytesExpectedToWrite: 10)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testParseURLSessionDelegateStream() async throws {
@@ -488,6 +502,10 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         await Parse.sessionDelegate.delegates.updateTask(task, queue: queue)
 
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 }

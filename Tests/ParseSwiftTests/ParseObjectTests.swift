@@ -341,7 +341,6 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let directory2 = try ParseFileManager.downloadDirectory()
-        let expectation2 = XCTestExpectation(description: "Delete files2")
         try? fileManager.removeDirectoryContents(directory2)
     }
 

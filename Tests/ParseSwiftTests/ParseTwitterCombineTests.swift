@@ -211,6 +211,12 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         return try await User.login(username: "parse", password: "user")
     }
 
+#if compiler(>=5.8.0)
+
+#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
+#endif
+
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -259,7 +265,11 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testLinkAuthData() async throws {
@@ -312,7 +322,11 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUnlink() async throws {
@@ -368,7 +382,11 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUnlinkPassUser() async throws {
@@ -424,7 +442,11 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 }
 

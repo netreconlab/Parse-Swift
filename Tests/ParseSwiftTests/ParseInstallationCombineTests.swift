@@ -214,7 +214,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testSave() async throws {
@@ -271,7 +275,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testCreate() async throws {
@@ -317,7 +325,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUpdate() async throws {
@@ -362,7 +374,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testDelete() async throws {
@@ -410,7 +426,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testFetchAll() async throws {
@@ -508,7 +528,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testSaveAll() async throws {
@@ -602,7 +626,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testCreateAll() async throws {
@@ -670,7 +698,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testReplaceAllCreate() async throws {
@@ -727,7 +759,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testReplaceAllUpdate() async throws {
@@ -793,7 +829,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUpdateAll() async throws {
@@ -859,7 +899,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testDeleteAll() async throws {
@@ -908,7 +952,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testBecome() async throws {
@@ -1004,7 +1052,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testBecomeMissingObjectId() async throws {
@@ -1030,7 +1082,11 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 }
 

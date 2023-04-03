@@ -154,6 +154,12 @@ class ParseAuthenticationCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
+#if compiler(>=5.8.0)
+
+#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
+#endif
+
     // swiftlint:disable:next function_body_length
     func testLogin() async throws {
         var current = Set<AnyCancellable>()
@@ -217,9 +223,14 @@ class ParseAuthenticationCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
+    // swiftlint:disable:next function_body_length
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -277,7 +288,11 @@ class ParseAuthenticationCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 }
 

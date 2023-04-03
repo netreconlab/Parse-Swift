@@ -178,6 +178,63 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
+    func testLoginUsingObjCKeychainNoKeychain() {
+        var current = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Login")
+
+        let publisher = User.loginUsingObjCKeychainPublisher()
+            .sink(receiveCompletion: { result in
+
+                if case let .failure(error) = result {
+                    XCTAssertTrue(error.message.contains("Objective-C"))
+                } else {
+                    XCTFail("Should have thrown error")
+                }
+                expectation1.fulfill()
+
+        }, receiveValue: { _ in
+            XCTFail("Should have thrown error")
+            expectation1.fulfill()
+        })
+        publisher.store(in: &current)
+        wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func saveCurrentInstallation() async throws {
+        let currentInstallation = try await Installation.current()
+        var installation = currentInstallation
+        installation.objectId = testInstallationObjectId
+        installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.ACL = nil
+
+        var installationOnServer = installation
+
+        let encoded: Data!
+        do {
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        do {
+            let saved = try await currentInstallation.save()
+            let newCurrentInstallation = try await Installation.current()
+            XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
+            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
+            XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
+            XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
+            XCTAssertNil(saved.ACL)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
     func testLoginUsingObjCKeychain() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
@@ -246,7 +303,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
@@ -317,7 +378,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testLoginUsingObjCKeychainUseNewOverOld() async throws {
@@ -388,29 +453,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
-    }
-
-    func testLoginUsingObjCKeychainNoKeychain() {
-        var current = Set<AnyCancellable>()
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        let publisher = User.loginUsingObjCKeychainPublisher()
-            .sink(receiveCompletion: { result in
-
-                if case let .failure(error) = result {
-                    XCTAssertTrue(error.message.contains("Objective-C"))
-                } else {
-                    XCTFail("Should have thrown error")
-                }
-                expectation1.fulfill()
-
-        }, receiveValue: { _ in
-            XCTFail("Should have thrown error")
-            expectation1.fulfill()
-        })
-        publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
@@ -440,7 +487,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation2.fulfill()
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
@@ -466,42 +517,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func saveCurrentInstallation() async throws {
-        let currentInstallation = try await Installation.current()
-        var installation = currentInstallation
-        installation.objectId = testInstallationObjectId
-        installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        installation.ACL = nil
-
-        var installationOnServer = installation
-
-        let encoded: Data!
-        do {
-            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        do {
-            let saved = try await currentInstallation.save()
-            let newCurrentInstallation = try await Installation.current()
-            XCTAssertTrue(saved.hasSameInstallationId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: newCurrentInstallation))
-            XCTAssertTrue(saved.hasSameObjectId(as: installationOnServer))
-            XCTAssertTrue(saved.hasSameInstallationId(as: installationOnServer))
-            XCTAssertNil(saved.ACL)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        #endif
     }
 
     func testDeleteObjCKeychain() async throws {
@@ -574,7 +594,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testDeleteObjCKeychainAlreadyMigrated() async throws {
@@ -627,7 +651,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     func testDeleteObjCKeychainNoObjcKeychain() async throws {
@@ -659,7 +687,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
@@ -687,7 +719,11 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 }
 #endif

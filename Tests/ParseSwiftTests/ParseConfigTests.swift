@@ -224,6 +224,11 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
+#if compiler(>=5.8.0)
+
+#elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
+#endif
     func testFetchAsync() async throws {
         await userLogin()
         let config = Config()
@@ -268,7 +273,11 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
+        #endif
     }
 
     func testUpdateCommand() async throws {
@@ -357,6 +366,10 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
+        #endif
     }
 }

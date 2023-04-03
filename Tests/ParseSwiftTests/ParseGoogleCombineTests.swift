@@ -166,7 +166,6 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             }
         })
         publisher.store(in: &current)
-
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
@@ -233,10 +232,10 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
             }
         })
         publisher.store(in: &current)
-
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
+    // swiftlint:disable:next function_body_length
     func testLink() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -297,7 +296,11 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -362,7 +365,11 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -431,7 +438,11 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -500,7 +511,11 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 }
 
