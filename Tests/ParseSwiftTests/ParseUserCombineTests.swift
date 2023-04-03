@@ -147,7 +147,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSignupInstance() async throws {
@@ -208,7 +208,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLogin() async throws {
@@ -264,7 +264,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     @MainActor
@@ -346,7 +346,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testBecomeTypeMethod() async throws {
@@ -408,7 +408,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLoginAs() async throws {
@@ -474,7 +474,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLogout() async throws {
@@ -535,7 +535,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { _ in })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLogoutError() async throws {
@@ -598,7 +598,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testPasswordReset() async throws {
@@ -627,7 +627,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testPasswordResetError() async throws {
@@ -656,7 +656,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testVerifyPassword() async throws {
@@ -714,7 +714,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testVerifyPasswordError() async throws {
@@ -744,7 +744,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testVerificationEmail() async throws {
@@ -773,7 +773,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testVerificationEmailError() async throws {
@@ -802,7 +802,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testFetch() async throws {
@@ -856,7 +856,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSave() async throws {
@@ -910,7 +910,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCreate() async throws {
@@ -952,7 +952,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertEqual(saved.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdate() async throws {
@@ -993,7 +993,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertEqual(saved.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDelete() async throws {
@@ -1044,7 +1044,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testFetchAll() async throws {
@@ -1140,7 +1140,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSaveAll() async throws {
@@ -1234,7 +1234,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCreateAll() async throws {
@@ -1301,7 +1301,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllCreate() async throws {
@@ -1357,7 +1357,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllUpdate() async throws {
@@ -1422,7 +1422,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdateAll() async throws {
@@ -1487,7 +1487,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDeleteAll() async throws {
@@ -1529,7 +1529,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

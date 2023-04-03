@@ -41,7 +41,7 @@ class ParseHookFunctionCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testCreate() throws {
+    func testCreate() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
@@ -67,10 +67,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             XCTAssertEqual(created, server)
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testCreateError() throws {
+    func testCreateError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
@@ -97,10 +97,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUpdate() throws {
+    func testUpdate() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
@@ -126,10 +126,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             XCTAssertEqual(updated, server)
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateError() throws {
+    func testUpdateError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
@@ -156,10 +156,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetch() throws {
+    func testFetch() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
@@ -185,10 +185,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             XCTAssertEqual(fetched, server)
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetchError() throws {
+    func testFetchError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
@@ -215,10 +215,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetchAll() throws {
+    func testFetchAll() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
@@ -244,10 +244,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             XCTAssertEqual(fetched, server)
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetchAllError() throws {
+    func testFetchAllError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
@@ -274,10 +274,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDelete() throws {
+    func testDelete() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
@@ -301,10 +301,10 @@ class ParseHookFunctionCombineTests: XCTestCase {
 
         }, receiveValue: { _ in })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDeleteError() throws {
+    func testDeleteError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
@@ -331,7 +331,7 @@ class ParseHookFunctionCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

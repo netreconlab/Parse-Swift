@@ -250,7 +250,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveAsyncMainQueue() {
+    func testSaveAsyncMainQueue() async {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -302,7 +302,7 @@ class ParseOperationTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveSet() async throws {
@@ -391,7 +391,7 @@ class ParseOperationTests: XCTestCase {
         }
     }
 
-    func testSaveSetAsyncMainQueue() throws {
+    func testSaveSetAsyncMainQueue() async throws {
         var score = GameScore()
         score.points = 10
         score.objectId = "yarr"
@@ -442,7 +442,7 @@ class ParseOperationTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testIncrement() throws {

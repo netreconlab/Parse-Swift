@@ -186,7 +186,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
@@ -261,7 +261,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

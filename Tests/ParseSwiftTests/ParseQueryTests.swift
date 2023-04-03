@@ -517,7 +517,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(jsonWhere, parseWhere, "Parse should always match JSON")
     }
 
-    func findAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func findAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) async {
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
         query.find(options: [], callbackQueue: callbackQueue) { result in
@@ -536,7 +536,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -558,13 +558,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
+        let immutableScorerOnServer = scoreOnServer
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            findAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await findAsync(scoreOnServer: immutableScorerOnServer,
+                                callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testFindAsyncMainQueue() {
+    func testFindAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -580,10 +584,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 return nil
             }
         }
-        findAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await findAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    func testFindLimitAsync() {
+    func testFindLimitAsync() async {
         let query = GameScore.query()
             .limit(0)
         let expectation = XCTestExpectation(description: "Count object1")
@@ -597,10 +601,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsync() {
+    func testFindAllAsync() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -635,10 +639,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(Thread.isMainThread)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsyncErrorSkip() {
+    func testFindAllAsyncErrorSkip() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -669,10 +673,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(Thread.isMainThread)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsyncErrorOrder() {
+    func testFindAllAsyncErrorOrder() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -703,10 +707,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(Thread.isMainThread)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsyncErrorLimit() {
+    func testFindAllAsyncErrorLimit() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -737,10 +741,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertTrue(Thread.isMainThread)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testFindAllLimit() {
+    func testFindAllLimit() async {
         let query = GameScore.query()
             .limit(0)
         let expectation = XCTestExpectation(description: "Count object1")
@@ -754,7 +758,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testFirstCommand() throws {
@@ -878,7 +882,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func firstAsyncNoObjectFound(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func firstAsyncNoObjectFound(scoreOnServer: GameScore,
+                                 callbackQueue: DispatchQueue) async {
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
         query.first(options: [], callbackQueue: callbackQueue) { result in
@@ -893,10 +898,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func firstAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func firstAsync(scoreOnServer: GameScore,
+                    callbackQueue: DispatchQueue) async {
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
         query.first(options: [], callbackQueue: callbackQueue) { result in
@@ -911,7 +917,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -932,13 +938,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
+        let immutableScorerOnServer = scoreOnServer
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await firstAsync(scoreOnServer: immutableScorerOnServer,
+                                 callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testFirstAsyncMainQueue() {
+    func testFirstAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -954,11 +964,12 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 return nil
             }
         }
-        firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await firstAsync(scoreOnServer: scoreOnServer,
+                         callbackQueue: .main)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeFirstAsyncNoObjectFound() {
+    func testThreadSafeFirstAsyncNoObjectFound() async {
         let scoreOnServer = GameScore(points: 10)
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
         MockURLProtocol.mockRequests { _ in
@@ -972,12 +983,15 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await firstAsyncNoObjectFound(scoreOnServer: scoreOnServer,
+                                              callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testFirstAsyncNoObjectFoundMainQueue() {
+    func testFirstAsyncNoObjectFoundMainQueue() async {
         let scoreOnServer = GameScore(points: 10)
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
         MockURLProtocol.mockRequests { _ in
@@ -988,10 +1002,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 return nil
             }
         }
-        firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await firstAsyncNoObjectFound(scoreOnServer: scoreOnServer,
+                                      callbackQueue: .main)
     }
 
-    func testFirstAsyncLimit() {
+    func testFirstAsyncLimit() async {
         let query = GameScore.query()
             .limit(0)
         let expectation = XCTestExpectation(description: "Find object1")
@@ -1006,7 +1021,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testCountCommand() throws {
@@ -1061,7 +1076,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(count, 0)
     }
 
-    func countAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func countAsync(scoreOnServer: GameScore,
+                    callbackQueue: DispatchQueue) async {
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
         query.count(options: [], callbackQueue: callbackQueue) { result in
@@ -1075,11 +1091,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeCountAsync() {
+    func testThreadSafeCountAsync() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -1096,13 +1112,12 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            countAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
-        }
+        await countAsync(scoreOnServer: scoreOnServer,
+                         callbackQueue: .global(qos: .background))
     }
     #endif
 
-    func testCountAsyncMainQueue() {
+    func testCountAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -1118,10 +1133,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 return nil
             }
         }
-        countAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await countAsync(scoreOnServer: scoreOnServer,
+                         callbackQueue: .main)
     }
 
-    func testCountAsyncLimit() throws {
+    func testCountAsyncLimit() async throws {
         let query = GameScore.query()
             .limit(0)
         let expectation = XCTestExpectation(description: "Count object1")
@@ -1135,7 +1151,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     // MARK: Standard Conditions
@@ -1909,7 +1925,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$select": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ]
+                ] as [String : Any]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -1955,7 +1971,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$dontSelect": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ]
+                ] as [String : Any]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -2558,7 +2574,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     // MARK: GeoPoint
     func testWhereKeyNearGeoPoint() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"]]
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any]]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)
         let constraint = near(key: "yolo", geoPoint: geoPoint)
@@ -2597,7 +2613,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMiles() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$maxDistance": 1
             ]
         ]
@@ -2643,7 +2659,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMilesNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$geoWithin": 1
             ]
         ]
@@ -2692,7 +2708,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometers() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$maxDistance": 1
             ]
         ]
@@ -2738,7 +2754,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometersNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$geoWithin": 1
             ]
         ]
@@ -2787,7 +2803,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadians() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$maxDistance": 10
             ]
         ]
@@ -2833,7 +2849,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadiansNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                      "$geoWithin": 10
             ]
         ]
@@ -2880,7 +2896,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testWhereKeyNearGeoBox() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$within": ["$box": [
-                                    ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+                ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any],
                                     ["latitude": 20, "longitude": 30, "__type": "GeoPoint"]]
                                 ]
             ]
@@ -2961,7 +2977,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testWhereKeyPolygonContains() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$geoIntersects": ["$point":
-                                    ["latitude": 10, "longitude": 20, "__type": "GeoPoint"]
+                                            ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String : Any]
                                 ]
             ]
         ]
@@ -3051,7 +3067,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(queryResult.isEmpty)
     }
 
-    func testExplainFindAsynchronous() {
+    func testExplainFindAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3078,10 +3094,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testExplainFindLimitAsynchronous() {
+    func testExplainFindLimitAsynchronous() async {
 
         let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
@@ -3096,7 +3112,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testExplainFirstSynchronous() async throws {
@@ -3154,7 +3170,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testExplainFirstAsynchronous() {
+    func testExplainFirstAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3181,10 +3197,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testExplainFirstLimitAsynchronous() {
+    func testExplainFirstLimitAsynchronous() async {
 
         let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
@@ -3199,7 +3215,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testExplainCountSynchronous() async throws {
@@ -3250,7 +3266,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(queryResult.isEmpty)
     }
 
-    func testExplainCountAsynchronous() {
+    func testExplainCountAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3277,10 +3293,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testExplainCountLimitAsynchronous() {
+    func testExplainCountLimitAsynchronous() async {
 
         let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
@@ -3295,7 +3311,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testHintFindSynchronous() async throws {
@@ -3319,7 +3335,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results)
     }
 
-    func testHintFindAsynchronous() {
+    func testHintFindAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3347,7 +3363,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testHintFirstSynchronous() async throws {
@@ -3371,7 +3387,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results.first)
     }
 
-    func testHintFirstAsynchronous() {
+    func testHintFirstAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3399,7 +3415,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testHintCountSynchronous() async throws {
@@ -3423,7 +3439,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results)
     }
 
-    func testHintCountAsynchronous() {
+    func testHintCountAsynchronous() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3451,7 +3467,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testAggregateCommand() throws {
@@ -3619,7 +3635,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(scores.isEmpty)
     }
 
-    func testAggregateAsyncMainQueue() {
+    func testAggregateAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3654,10 +3670,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testAggregateWhereAsyncMainQueue() {
+    func testAggregateWhereAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3692,10 +3708,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testAggregateAsyncMainQueueLimit() {
+    func testAggregateAsyncMainQueueLimit() async {
 
         let query = GameScore.query()
             .limit(0)
@@ -3712,10 +3728,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testAggregateExplainAsyncMainQueue() {
+    func testAggregateExplainAsyncMainQueue() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3750,10 +3766,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testAggregateExplainAsyncMainQueueLimit() {
+    func testAggregateExplainAsyncMainQueueLimit() async {
 
         let expectation = XCTestExpectation(description: "Aggregate object1")
         let pipeline = [[String: String]]()
@@ -3772,7 +3788,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
     func testDistinct() async throws {
@@ -3863,7 +3879,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(scores.isEmpty)
     }
 
-    func testDistinctAsyncMainQueue() {
+    func testDistinctAsyncMainQueue() async {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -3897,10 +3913,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testDistinctAsyncMainQueueLimit() {
+    func testDistinctAsyncMainQueueLimit() async {
         let query = GameScore.query("points" > 9)
             .limit(0)
         let expectation = XCTestExpectation(description: "Distinct object1")
@@ -3915,10 +3931,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testDistinctExplainAsyncMainQueue() {
+    func testDistinctExplainAsyncMainQueue() async {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3952,10 +3968,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 
-    func testDistinctExplainAsyncMainQueueLimit() {
+    func testDistinctExplainAsyncMainQueueLimit() async {
         let expectation = XCTestExpectation(description: "Aggregate object1")
         let query = GameScore.query("points" > 9)
             .limit(0)
@@ -3972,7 +3988,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 20.0)
+        await fulfillment(of: [expectation], timeout: 20.0)
     }
 }
 // swiftlint:disable:this file_length

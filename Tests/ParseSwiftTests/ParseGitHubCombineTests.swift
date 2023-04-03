@@ -105,7 +105,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     // swiftlint:disable:next function_body_length
-    func testLogin() {
+    func testLogin() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
@@ -167,11 +167,11 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
-    func testLoginAuthData() {
+    func testLoginAuthData() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
@@ -234,7 +234,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLink() async throws {
@@ -297,7 +297,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
@@ -362,7 +362,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
@@ -431,7 +431,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     // swiftlint:disable:next function_body_length
@@ -500,7 +500,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

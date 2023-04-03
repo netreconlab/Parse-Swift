@@ -67,7 +67,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUploadCommand() async throws {
@@ -366,7 +366,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveFileStreamProgress() async throws {
@@ -408,7 +408,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveFileStreamCancel() async throws {
@@ -451,7 +451,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdateFileError() async throws {
@@ -509,7 +509,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveFileProgressAsync() async throws {
@@ -551,7 +551,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveFileCancelAsync() async throws {
@@ -595,7 +595,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveWithSpecifyingMimeAysnc() async throws {
@@ -635,7 +635,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveLocalFileAysnc() async throws {
@@ -678,7 +678,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdateErrorAysnc() async throws {
@@ -700,7 +700,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -747,7 +747,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testFetchFileAysnc() async throws {
@@ -787,7 +787,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testFetchFileProgressAsync() async throws {
@@ -829,7 +829,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveCloudFileProgressAysnc() async throws {
@@ -875,7 +875,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveCloudFileAysnc() async throws {
@@ -918,7 +918,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveCloudFile() async throws {
@@ -1212,7 +1212,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDeleteFileAysncError() async throws {
@@ -1244,7 +1244,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDeleteFile() async throws {

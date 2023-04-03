@@ -221,7 +221,9 @@ class ParsePointerTests: XCTestCase {
     }
 
     // swiftlint:disable:next function_body_length
-    func fetchAsync(score: Pointer<GameScore>, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func fetchAsync(score: Pointer<GameScore>,
+                    scoreOnServer: GameScore,
+                    callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Fetch object1")
         score.fetch(options: [], callbackQueue: callbackQueue) { result in
@@ -276,7 +278,7 @@ class ParsePointerTests: XCTestCase {
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testEncodeEmbeddedPointer() throws {
@@ -315,7 +317,7 @@ class ParsePointerTests: XCTestCase {
 
     // Thread tests randomly fail on linux
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeFetchAsync() throws {
+    func testThreadSafeFetchAsync() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -340,13 +342,13 @@ class ParsePointerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
-        }
+        await self.fetchAsync(score: pointer,
+                              scoreOnServer: scoreOnServer,
+                              callbackQueue: .global(qos: .background))
     }
     #endif
 
-    func testFetchAsyncMainQueue() throws {
+    func testFetchAsyncMainQueue() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -369,6 +371,8 @@ class ParsePointerTests: XCTestCase {
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.fetchAsync(score: pointer,
+                              scoreOnServer: scoreOnServer,
+                              callbackQueue: .main)
     }
 }

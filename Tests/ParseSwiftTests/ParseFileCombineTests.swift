@@ -65,10 +65,10 @@ class ParseFileCombineTests: XCTestCase {
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testFetch() {
+    func testFetch() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -109,10 +109,10 @@ class ParseFileCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetchFileProgress() {
+    func testFetchFileProgress() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -155,10 +155,10 @@ class ParseFileCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSave() throws {
+    func testSave() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -199,10 +199,10 @@ class ParseFileCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveFileProgress() throws {
+    func testSaveFileProgress() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -245,10 +245,10 @@ class ParseFileCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDelete() throws {
+    func testDelete() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -286,7 +286,7 @@ class ParseFileCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

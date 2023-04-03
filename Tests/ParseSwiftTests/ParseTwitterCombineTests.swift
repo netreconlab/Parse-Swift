@@ -86,7 +86,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testLogin() {
+    func testLogin() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -137,10 +137,10 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthData() {
+    func testLoginAuthData() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -194,7 +194,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func loginNormally() async throws -> User {
@@ -259,7 +259,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
@@ -312,7 +312,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUnlink() async throws {
@@ -368,7 +368,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUnlinkPassUser() async throws {
@@ -424,7 +424,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

@@ -148,7 +148,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation2], timeout: 20.0)
     }
 
     func testSaveCommand() async throws {
@@ -779,7 +779,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
     func saveAsync(score: GameScore,
                    scoreOnServer: GameScore,
                    callbackQueue: DispatchQueue,
-                   ignoringCustomObjectIdConfig: Bool = false) {
+                   ignoringCustomObjectIdConfig: Bool = false) async {
 
         let expectation1 = XCTestExpectation(description: "Save object1")
 
@@ -811,10 +811,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testSaveAsyncMainQueue() {
+    func testSaveAsyncMainQueue() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
 
@@ -835,7 +835,9 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.saveAsync(score: score,
+                             scoreOnServer: scoreOnServer,
+                             callbackQueue: .main)
     }
 
     func testSaveNoObjectIdAsyncMainQueue() async throws {
@@ -856,10 +858,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
+    func testSaveNoObjectIdIgnoreConfigAsyncMainQueue() async {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -880,16 +882,16 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        self.saveAsync(score: score,
-                       scoreOnServer: scoreOnServer,
-                       callbackQueue: .main,
-                       ignoringCustomObjectIdConfig: true)
+        await self.saveAsync(score: score,
+                             scoreOnServer: scoreOnServer,
+                             callbackQueue: .main,
+                             ignoringCustomObjectIdConfig: true)
     }
 
     func updateAsync(score: GameScore,
                      scoreOnServer: GameScore,
                      ignoringCustomObjectIdConfig: Bool = false,
-                     callbackQueue: DispatchQueue) {
+                     callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -924,10 +926,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testUpdateAsyncMainQueue() {
+    func testUpdateAsyncMainQueue() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -947,7 +949,9 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.updateAsync(score: score,
+                               scoreOnServer: scoreOnServer,
+                               callbackQueue: .main)
     }
 
     func testUpdateNoObjectIdAsyncMainQueue() async throws {
@@ -969,10 +973,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
+    func testUpdateNoObjectIdIgnoreConfigAsyncMainQueue() async {
         var score = GameScore(points: 10)
         score.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         score.ACL = nil
@@ -992,10 +996,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateAsync(score: score,
-                         scoreOnServer: scoreOnServer,
-                         ignoringCustomObjectIdConfig: true,
-                         callbackQueue: .main)
+        await self.updateAsync(score: score,
+                               scoreOnServer: scoreOnServer,
+                               ignoringCustomObjectIdConfig: true,
+                               callbackQueue: .main)
     }
 
     func testSaveAll() async throws {
@@ -1140,7 +1144,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdateAll() async throws {
@@ -1232,7 +1236,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUserSave() async throws {
@@ -1378,7 +1382,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 
     func saveUserAsync(user: User, userOnServer: User,
                        ignoringCustomObjectIdConfig: Bool = false,
-                       callbackQueue: DispatchQueue) {
+                       callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -1395,10 +1399,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUserSaveAsyncMainQueue() {
+    func testUserSaveAsyncMainQueue() async {
         var user = User()
         user.objectId = "yarr"
         user.ACL = nil
@@ -1417,7 +1421,9 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.saveUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
+        await self.saveUserAsync(user: user,
+                                 userOnServer: userOnServer,
+                                 callbackQueue: .main)
     }
 
     func testUserSaveNoObjectIdAsyncMainQueue() async throws {
@@ -1438,10 +1444,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUserSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
+    func testUserSaveNoObjectIdIgnoreConfigAsyncMainQueue() async {
         var user = User()
         user.ACL = nil
 
@@ -1460,15 +1466,15 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.saveUserAsync(user: user,
-                           userOnServer: userOnServer,
-                           ignoringCustomObjectIdConfig: true,
-                           callbackQueue: .main)
+        await self.saveUserAsync(user: user,
+                                 userOnServer: userOnServer,
+                                 ignoringCustomObjectIdConfig: true,
+                                 callbackQueue: .main)
     }
 
     func updateUserAsync(user: User, userOnServer: User,
                          ignoringCustomObjectIdConfig: Bool = false,
-                         callbackQueue: DispatchQueue) {
+                         callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -1483,10 +1489,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUserUpdateAsyncMainQueue() {
+    func testUserUpdateAsyncMainQueue() async {
         var user = User()
         user.objectId = "yarr"
         user.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1507,7 +1513,9 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateUserAsync(user: user, userOnServer: userOnServer, callbackQueue: .main)
+        await self.updateUserAsync(user: user,
+                                   userOnServer: userOnServer,
+                                   callbackQueue: .main)
     }
 
     func testUserUpdateNoObjectIdAsyncMainQueue() async throws {
@@ -1529,7 +1537,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUserSaveAll() async throws {
@@ -1616,7 +1624,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUserUpdateAll() async throws {
@@ -1769,7 +1777,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testInstallationSave() async throws {
@@ -1916,7 +1924,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
     func saveInstallationAsync(installation: Installation,
                                installationOnServer: Installation,
                                ignoringCustomObjectIdConfig: Bool = false,
-                               callbackQueue: DispatchQueue) {
+                               callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -1948,10 +1956,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testInstallationSaveAsyncMainQueue() {
+    func testInstallationSaveAsyncMainQueue() async {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.ACL = nil
@@ -1970,10 +1978,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.saveInstallationAsync(installation: installation,
-                                   installationOnServer: installationOnServer,
-                                   ignoringCustomObjectIdConfig: false,
-                                   callbackQueue: .main)
+        await self.saveInstallationAsync(installation: installation,
+                                         installationOnServer: installationOnServer,
+                                         ignoringCustomObjectIdConfig: false,
+                                         callbackQueue: .main)
     }
 
     func testInstallationSaveNoObjectIdAsyncMainQueue() async throws {
@@ -1994,10 +2002,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
+    func testInstallationSaveNoObjectIdIgnoreConfigAsyncMainQueue() async {
         var installation = Installation()
         installation.ACL = nil
 
@@ -2016,16 +2024,16 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.saveInstallationAsync(installation: installation,
-                                   installationOnServer: installationOnServer,
-                                   ignoringCustomObjectIdConfig: true,
-                                   callbackQueue: .main)
+        await self.saveInstallationAsync(installation: installation,
+                                         installationOnServer: installationOnServer,
+                                         ignoringCustomObjectIdConfig: true,
+                                         callbackQueue: .main)
     }
 
     func updateInstallationAsync(installation: Installation,
                                  installationOnServer: Installation,
                                  ignoringCustomObjectIdConfig: Bool = false,
-                                 callbackQueue: DispatchQueue) {
+                                 callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -2042,10 +2050,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationUpdateAsyncMainQueue() {
+    func testInstallationUpdateAsyncMainQueue() async {
         var installation = Installation()
         installation.objectId = "yarr"
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -2066,9 +2074,9 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateInstallationAsync(installation: installation,
-                                     installationOnServer: installationOnServer,
-                                     callbackQueue: .main)
+        await self.updateInstallationAsync(installation: installation,
+                                           installationOnServer: installationOnServer,
+                                           callbackQueue: .main)
     }
 
     func testInstallationUpdateNoObjectIdAsyncMainQueue() async throws {
@@ -2090,10 +2098,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testInstallationUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
+    func testInstallationUpdateNoObjectIdIgnoreConfigAsyncMainQueue() async {
         var installation = Installation()
         installation.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -2114,10 +2122,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateInstallationAsync(installation: installation,
-                                     installationOnServer: installationOnServer,
-                                     ignoringCustomObjectIdConfig: true,
-                                     callbackQueue: .main)
+        await self.updateInstallationAsync(installation: installation,
+                                           installationOnServer: installationOnServer,
+                                           ignoringCustomObjectIdConfig: true,
+                                           callbackQueue: .main)
     }
 
     func testInstallationSaveAll() async throws { // swiftlint:disable:this function_body_length
@@ -2280,7 +2288,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testInstallationUpdateAll() async throws {
@@ -2433,7 +2441,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testFetch() async throws {

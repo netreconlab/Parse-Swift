@@ -217,7 +217,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLink() async throws {
@@ -277,7 +277,7 @@ class ParseAuthenticationCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

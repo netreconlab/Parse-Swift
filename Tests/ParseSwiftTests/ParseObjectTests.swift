@@ -345,7 +345,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation2], timeout: 20.0)
     }
 
     func testIsEqualExtension() throws {
@@ -759,7 +759,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     // swiftlint:disable:next function_body_length
-    func fetchAsync(score: GameScore, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func fetchAsync(score: GameScore,
+                    scoreOnServer: GameScore,
+                    callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Fetch object1")
         score.fetch(options: [], callbackQueue: callbackQueue) { result in
@@ -816,7 +818,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -844,13 +846,19 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
+        let immutableScore = score
+        let immutableScoreOnServer = scoreOnServer
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await self.fetchAsync(score: immutableScore,
+                                      scoreOnServer: immutableScoreOnServer,
+                                      callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testFetchAsyncMainQueue() {
+    func testFetchAsyncMainQueue() async {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -872,7 +880,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.fetchAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.fetchAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
     func testSaveCommand() async throws {
@@ -1199,7 +1207,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func saveAsync(score: GameScore, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func saveAsync(score: GameScore,
+                   scoreOnServer: GameScore,
+                   callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Save object1")
 
@@ -1248,11 +1258,11 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeSaveAsync() {
+    func testThreadSafeSaveAsync() async {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -1272,13 +1282,13 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
-        }
+        await self.saveAsync(score: score,
+                             scoreOnServer: scoreOnServer,
+                             callbackQueue: .global(qos: .background))
     }
     #endif
 
-    func testSaveAsyncMainQueue() {
+    func testSaveAsyncMainQueue() async {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -1298,10 +1308,14 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.saveAsync(score: score,
+                             scoreOnServer: scoreOnServer,
+                             callbackQueue: .main)
     }
 
-    func updateAsync(score: GameScore, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func updateAsync(score: GameScore,
+                     scoreOnServer: GameScore,
+                     callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update object1")
 
@@ -1354,11 +1368,11 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeUpdateAsync() {
+    func testThreadSafeUpdateAsync() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1380,13 +1394,19 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
+        let immutableScore = score
+        let immutableScoreOnServer = scoreOnServer
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await self.updateAsync(score: immutableScore,
+                                       scoreOnServer: immutableScoreOnServer,
+                                       callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testUpdateAsyncMainQueue() {
+    func testUpdateAsyncMainQueue() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
@@ -1406,7 +1426,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.updateAsync(score: score,
+                               scoreOnServer: scoreOnServer,
+                               callbackQueue: .main)
     }
 
     func testDeleteCommand() {
@@ -1501,7 +1523,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func deleteAsync(score: GameScore, scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
+    func deleteAsync(score: GameScore,
+                     scoreOnServer: GameScore,
+                     callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Delete object1")
         score.delete(options: [], callbackQueue: callbackQueue) { result in
@@ -1520,11 +1544,11 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeDeleteAsync() {
+    func testThreadSafeDeleteAsync() async {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -1549,13 +1573,19 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
+        let immutableScore = score
+        let immutableScoreOnServer = scoreOnServer
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.deleteAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await self.deleteAsync(score: immutableScore,
+                                       scoreOnServer: immutableScoreOnServer,
+                                       callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif
 
-    func testDeleteAsyncMainQueue() {
+    func testDeleteAsyncMainQueue() async {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -1577,10 +1607,14 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.deleteAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .main)
+        await self.deleteAsync(score: score,
+                               scoreOnServer: scoreOnServer,
+                               callbackQueue: .main)
     }
 
-    func deleteAsyncError(score: GameScore, parseError: ParseError, callbackQueue: DispatchQueue) {
+    func deleteAsyncError(score: GameScore,
+                          parseError: ParseError,
+                          callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Delete object1")
         score.delete(options: [], callbackQueue: callbackQueue) { result in
@@ -1603,10 +1637,10 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testDeleteAsyncMainQueueError() {
+    func testDeleteAsyncMainQueueError() async {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -1623,7 +1657,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-        self.deleteAsyncError(score: score, parseError: parseError, callbackQueue: .main)
+        await self.deleteAsyncError(score: score,
+                                    parseError: parseError,
+                                    callbackQueue: .main)
     }
 
     func testDeepSaveOfUnsavedPointerArray() async throws {

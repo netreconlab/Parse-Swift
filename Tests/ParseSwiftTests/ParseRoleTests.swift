@@ -621,7 +621,7 @@ class ParseRoleTests: XCTestCase {
         }
     }
 
-    func testRoleAddOperationSaveAsynchronous() throws {
+    func testRoleAddOperationSaveAsynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -669,10 +669,10 @@ class ParseRoleTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testRoleAddOperationSaveAsynchronousError() throws {
+    func testRoleAddOperationSaveAsynchronousError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -703,10 +703,10 @@ class ParseRoleTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testRoleAddOperationSaveAsynchronousCustomObjectId() throws {
+    func testRoleAddOperationSaveAsynchronousCustomObjectId() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -757,10 +757,10 @@ class ParseRoleTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testRoleAddOperationSaveAsynchronousCustomObjectIdError() throws {
+    func testRoleAddOperationSaveAsynchronousCustomObjectIdError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -790,7 +790,7 @@ class ParseRoleTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testRoleAddOperationNoKey() throws {

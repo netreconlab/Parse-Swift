@@ -446,7 +446,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertNotNil(error) // Should always fail since WS is not intercepted.
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testCloseFromServer() async throws {
@@ -553,7 +553,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertTrue([-1004, -1022].contains(urlError.errorCode))
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testPing() async throws {
@@ -570,7 +570,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testRandomIdGenerator() async throws {
@@ -821,7 +821,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             XCTAssertEqual(pending.count, 1)
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSubscribeCallbackConnected2() async throws {
@@ -927,7 +927,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSubscribeCallbackConnected3() async throws {
@@ -1032,7 +1032,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSubscribeCloseSubscribe() async throws {
@@ -1124,7 +1124,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSubscribeCloseWrongClientId() async throws {
@@ -1374,7 +1374,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testServerRedirectResponse() async throws {
@@ -1547,7 +1547,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventCreate() async throws {
@@ -1598,7 +1598,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventUpdate() async throws {
@@ -1649,7 +1649,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventDelete() async throws {
@@ -1699,7 +1699,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSubscriptionUpdate() async throws {
@@ -1929,7 +1929,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventLeaveSubscriptioinCallback() async throws {
@@ -1973,7 +1973,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventCreateSubscriptionCallback() async throws {
@@ -2017,7 +2017,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventUpdateSubscriptionCallback() async throws {
@@ -2061,7 +2061,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testEventDeleteSubscriptionCallback() async throws {
@@ -2105,7 +2105,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSubscriptionUpdateSubscriptionCallback() async throws {
@@ -2207,7 +2207,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testResubscribingSubscriptionCallback() async throws {
@@ -2320,7 +2320,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
 #endif

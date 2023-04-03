@@ -135,7 +135,7 @@ class ParseFileTransferableTests: XCTestCase {
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSDKInitializers() async throws {
@@ -181,7 +181,7 @@ class ParseFileTransferableTests: XCTestCase {
         XCTAssertNoThrow(try ParseSwift.configuration.parseFileTransfer.makeDummyUploadTask())
     }
 
-    func testSaveFromData() throws {
+    func testSaveFromData() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
         }
@@ -210,10 +210,10 @@ class ParseFileTransferableTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveFromFile() throws {
+    func testSaveFromFile() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.txt")
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -240,10 +240,10 @@ class ParseFileTransferableTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveFromDataThrowError() throws {
+    func testSaveFromDataThrowError() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
         }
@@ -271,10 +271,10 @@ class ParseFileTransferableTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveFromFileThrowError() throws {
+    func testSaveFromFileThrowError() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.txt")
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -300,6 +300,6 @@ class ParseFileTransferableTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }

@@ -56,7 +56,7 @@ class ParsePointerCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFetch() throws {
+    func testFetch() async throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -111,7 +111,7 @@ class ParsePointerCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

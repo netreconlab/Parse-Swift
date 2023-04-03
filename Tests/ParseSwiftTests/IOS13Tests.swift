@@ -85,7 +85,7 @@ class IOS13Tests: XCTestCase {
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation2], timeout: 20.0)
     }
 
     func testSaveCommand() async throws {

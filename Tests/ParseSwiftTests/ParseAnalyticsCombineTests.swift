@@ -38,7 +38,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
     }
 
     #if os(iOS)
-    func testTrackAppOpenedUIKit() {
+    func testTrackAppOpenedUIKit() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -65,11 +65,11 @@ class ParseAnalyticsCombineTests: XCTestCase {
 
         }, receiveValue: { _ in })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
     #endif
 
-    func testTrackAppOpened() {
+    func testTrackAppOpened() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -96,10 +96,10 @@ class ParseAnalyticsCombineTests: XCTestCase {
 
         }, receiveValue: { _ in })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testTrackEvent() {
+    func testTrackEvent() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -126,10 +126,10 @@ class ParseAnalyticsCombineTests: XCTestCase {
 
         }, receiveValue: { _ in })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testTrackEventMutated() {
+    func testTrackEventMutated() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -156,7 +156,7 @@ class ParseAnalyticsCombineTests: XCTestCase {
 
         }, receiveValue: { _ in })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

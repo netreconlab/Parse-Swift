@@ -195,7 +195,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: login1))
     }
 
-    func testLoginAsync() throws {
+    func testLoginAsync() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -236,10 +236,10 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthDataAsync() throws {
+    func testLoginAuthDataAsync() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
@@ -280,7 +280,7 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAnonymousUser() async throws {
@@ -326,7 +326,7 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAnonymousUserBody() async throws {
@@ -370,7 +370,7 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAnonymousUserSync() async throws {
@@ -465,7 +465,7 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testCantReplaceAnonymousWithDifferentUserSync() async throws {
@@ -545,10 +545,10 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLink() throws {
+    func testLink() async throws {
 
         let expectation1 = XCTestExpectation(description: "Fetch user1")
         User.anonymous.link(authData: .init()) { result in
@@ -559,6 +559,6 @@ class ParseAnonymousTests: XCTestCase {
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }

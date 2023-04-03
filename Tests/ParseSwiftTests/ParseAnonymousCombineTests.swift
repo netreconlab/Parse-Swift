@@ -85,7 +85,7 @@ class ParseAnonymousCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testLogin() {
+    func testLogin() async {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -131,10 +131,10 @@ class ParseAnonymousCombineTests: XCTestCase {
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthData() {
+    func testLoginAuthData() async {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -180,10 +180,10 @@ class ParseAnonymousCombineTests: XCTestCase {
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLink() {
+    func testLink() async {
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -204,7 +204,7 @@ class ParseAnonymousCombineTests: XCTestCase {
         })
         publisher.store(in: &subscriptions)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

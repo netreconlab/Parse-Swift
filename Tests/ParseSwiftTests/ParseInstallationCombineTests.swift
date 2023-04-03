@@ -214,7 +214,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSave() async throws {
@@ -271,7 +271,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCreate() async throws {
@@ -317,7 +317,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdate() async throws {
@@ -362,7 +362,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDelete() async throws {
@@ -410,7 +410,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testFetchAll() async throws {
@@ -508,7 +508,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testSaveAll() async throws {
@@ -602,7 +602,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testCreateAll() async throws {
@@ -670,7 +670,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllCreate() async throws {
@@ -727,7 +727,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testReplaceAllUpdate() async throws {
@@ -793,7 +793,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUpdateAll() async throws {
@@ -859,7 +859,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDeleteAll() async throws {
@@ -908,7 +908,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testBecome() async throws {
@@ -1004,7 +1004,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testBecomeMissingObjectId() async throws {
@@ -1030,7 +1030,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

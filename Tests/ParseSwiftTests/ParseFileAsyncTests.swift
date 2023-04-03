@@ -64,7 +64,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
@@ -405,7 +405,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didSendBodyData: 0,
                                               totalBytesSent: 0,
                                               totalBytesExpectedToSend: 10)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testParseURLSessionDelegateDownload() async throws {
@@ -459,7 +459,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didWriteData: 0,
                                               totalBytesWritten: 0,
                                               totalBytesExpectedToWrite: 10)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testParseURLSessionDelegateStream() async throws {
@@ -500,6 +500,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         await Parse.sessionDelegate.delegates.updateTask(task, queue: queue)
 
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }

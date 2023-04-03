@@ -1623,7 +1623,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
 
     func saveCurrentAsync(installation: Installation,
                           installationOnServer: Installation,
-                          callbackQueue: DispatchQueue) {
+                          callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update installation1")
         installation.save(options: [], callbackQueue: callbackQueue) { result in
@@ -1663,7 +1663,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
                 expectation1.fulfill()
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testSaveCurrentAsyncMainQueue() async throws {
@@ -1691,9 +1691,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        self.saveCurrentAsync(installation: installation,
-                              installationOnServer: installationOnServer,
-                              callbackQueue: .main)
+        await self.saveCurrentAsync(installation: installation,
+                                    installationOnServer: installationOnServer,
+                                    callbackQueue: .main)
     }
 
     func testFetchCommand() {

@@ -203,7 +203,8 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
     }
 
-    func functionAsync(serverResponse: [String: String], callbackQueue: DispatchQueue) {
+    func functionAsync(serverResponse: [String: String],
+                       callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
         let cloud = Cloud3(functionJobName: "test")
@@ -218,10 +219,10 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
-    func testFunctionMainQueue() {
+    func testFunctionMainQueue() async {
         let response = AnyResultResponse(result: ["hello": "world"])
 
         MockURLProtocol.mockRequests { _ in
@@ -233,10 +234,12 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
         }
 
-        self.functionAsync(serverResponse: ["hello": "world"], callbackQueue: .main)
+        await self.functionAsync(serverResponse: ["hello": "world"],
+                                 callbackQueue: .main)
     }
 
-    func functionAsyncError(parseError: ParseError, callbackQueue: DispatchQueue) {
+    func functionAsyncError(parseError: ParseError,
+                            callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
         let cloud = Cloud(functionJobName: "test")
@@ -253,10 +256,10 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
-    func testFunctionMainQueueError() {
+    func testFunctionMainQueueError() async {
         let parseError = ParseError(code: .scriptFailed, message: "Error: Invalid function")
 
         MockURLProtocol.mockRequests { _ in
@@ -268,7 +271,8 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
         }
 
-        self.functionAsyncError(parseError: parseError, callbackQueue: .main)
+        await self.functionAsyncError(parseError: parseError,
+                                      callbackQueue: .main)
     }
 
     func testCallJobCommand() throws {
@@ -385,7 +389,8 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         }
     }
 
-    func jobAsync(serverResponse: [String: String], callbackQueue: DispatchQueue) {
+    func jobAsync(serverResponse: [String: String],
+                  callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
         let cloud = Cloud3(functionJobName: "test")
@@ -400,10 +405,10 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
-    func testJobMainQueue() {
+    func testJobMainQueue() async {
         let response = AnyResultResponse(result: ["hello": "world"])
 
         MockURLProtocol.mockRequests { _ in
@@ -415,10 +420,12 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
         }
 
-        self.jobAsync(serverResponse: ["hello": "world"], callbackQueue: .main)
+        await self.jobAsync(serverResponse: ["hello": "world"],
+                            callbackQueue: .main)
     }
 
-    func jobAsyncError(parseError: ParseError, callbackQueue: DispatchQueue) {
+    func jobAsyncError(parseError: ParseError,
+                       callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
         let cloud = Cloud(functionJobName: "test")
@@ -435,10 +442,10 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
-    func testJobMainQueueError() {
+    func testJobMainQueueError() async {
         let parseError = ParseError(code: .scriptFailed, message: "Error: Invalid function")
 
         MockURLProtocol.mockRequests { _ in
@@ -450,6 +457,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
             }
         }
 
-        self.jobAsyncError(parseError: parseError, callbackQueue: .main)
+        await self.jobAsyncError(parseError: parseError,
+                                 callbackQueue: .main)
     }
 } // swiftlint:disable:this file_length

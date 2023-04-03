@@ -65,7 +65,7 @@ class ParseHealthTests: XCTestCase {
         }
     }
 
-    func testCheckAsync() {
+    func testCheckAsync() async throws {
         let healthOfServer = ParseHealth.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
@@ -92,10 +92,10 @@ class ParseHealthTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testCheckErrorAsync() {
+    func testCheckErrorAsync() async throws {
         let healthOfServer = "Should throw error"
         let encoded: Data!
         do {
@@ -116,6 +116,6 @@ class ParseHealthTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 }

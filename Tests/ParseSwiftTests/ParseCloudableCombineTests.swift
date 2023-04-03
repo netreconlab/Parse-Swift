@@ -48,7 +48,7 @@ class ParseCloudableCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFunction() {
+    func testFunction() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -78,10 +78,10 @@ class ParseCloudableCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testJob() {
+    func testJob() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -111,7 +111,7 @@ class ParseCloudableCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

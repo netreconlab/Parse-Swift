@@ -68,7 +68,7 @@ class ParsePushCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testSend() {
+    func testSend() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -102,10 +102,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorServerReturnedFalse() {
+    func testSendErrorServerReturnedFalse() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -141,10 +141,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorTimeAndIntervalSet() {
+    func testSendErrorTimeAndIntervalSet() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -181,10 +181,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorQueryAndChannelsSet() {
+    func testSendErrorQueryAndChannelsSet() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -222,10 +222,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorServerReturnedWrongType() {
+    func testSendErrorServerReturnedWrongType() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -261,10 +261,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorServerMissingHeader() {
+    func testSendErrorServerMissingHeader() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -298,10 +298,10 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testFetch() {
+    func testFetch() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -342,7 +342,7 @@ class ParsePushCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

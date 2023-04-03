@@ -36,7 +36,7 @@ class ParseHealthCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testCheckOk() {
+    func testCheckOk() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
@@ -67,10 +67,10 @@ class ParseHealthCombineTests: XCTestCase {
             })
             .store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCheckError() {
+    func testCheckError() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
@@ -101,10 +101,10 @@ class ParseHealthCombineTests: XCTestCase {
             })
             .store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCheckInitialized() {
+    func testCheckInitialized() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
@@ -135,10 +135,10 @@ class ParseHealthCombineTests: XCTestCase {
             })
             .store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testCheckStarting() {
+    func testCheckStarting() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
@@ -169,7 +169,7 @@ class ParseHealthCombineTests: XCTestCase {
             })
             .store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

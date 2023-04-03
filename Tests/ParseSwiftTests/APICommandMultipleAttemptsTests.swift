@@ -111,7 +111,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTPReturns400NoDataFromServer() async throws {
@@ -138,7 +138,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 expectation1.fulfill()
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP429JSONInterval() async throws {
@@ -193,7 +193,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP429JSONDate() async throws {
@@ -256,7 +256,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP429JSONNoHeader() async throws {
@@ -308,7 +308,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP503JSONInterval() async throws {
@@ -363,7 +363,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP503JSONDate() async throws {
@@ -426,7 +426,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testErrorHTTP503JSONNoHeader() async throws {
@@ -478,6 +478,6 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }

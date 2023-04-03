@@ -75,7 +75,7 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testHydrateUser() throws {
+    func testHydrateUser() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User")
 
@@ -119,10 +119,10 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
             XCTAssertEqual(hydrated, requestHydrated)
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testHydrateUserError() throws {
+    func testHydrateUserError() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Hydrate User Error")
 
@@ -155,7 +155,7 @@ class ParseHookFunctionRequestCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

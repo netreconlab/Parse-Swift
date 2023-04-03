@@ -246,7 +246,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
@@ -317,7 +317,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainUseNewOverOld() async throws {
@@ -388,10 +388,10 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testLoginUsingObjCKeychainNoKeychain() {
+    func testLoginUsingObjCKeychainNoKeychain() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Login")
 
@@ -410,7 +410,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
@@ -440,7 +440,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation2.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
@@ -466,7 +466,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func saveCurrentInstallation() async throws {
@@ -574,7 +574,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainAlreadyMigrated() async throws {
@@ -627,7 +627,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainNoObjcKeychain() async throws {
@@ -659,7 +659,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
@@ -687,7 +687,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 #endif

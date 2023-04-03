@@ -116,7 +116,7 @@ class ParseSessionTests: XCTestCase {
         XCTAssertEqual(delegate, Parse.sessionDelegate)
     }
 
-    func testParseURLSessionDefaultCertificatePinning() throws {
+    func testParseURLSessionDefaultCertificatePinning() async throws {
         let expectation1 = XCTestExpectation(description: "Authentication")
         URLSession.parse.delegate?.urlSession?(URLSession.parse,
                                                didReceive: .init()) { (challenge, credential) -> Void in
@@ -124,7 +124,7 @@ class ParseSessionTests: XCTestCase {
             XCTAssertNil(credential)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
     func testParseURLSessionCustomCertificatePinning() async throws {
@@ -147,10 +147,10 @@ class ParseSessionTests: XCTestCase {
             XCTAssertEqual(credential, .none)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
 
-    func testParseURLSessionUpdateCertificatePinning() throws {
+    func testParseURLSessionUpdateCertificatePinning() async throws {
         // swiftlint:disable:next line_length
         ParseSwift.updateAuthentication({(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
             completion(.cancelAuthenticationChallenge, .none)
@@ -162,7 +162,7 @@ class ParseSessionTests: XCTestCase {
             XCTAssertEqual(credential, .none)
             expectation1.fulfill()
         }
-        wait(for: [expectation1], timeout: 10.0)
+        await fulfillment(of: [expectation1], timeout: 10.0)
     }
     #endif
 }

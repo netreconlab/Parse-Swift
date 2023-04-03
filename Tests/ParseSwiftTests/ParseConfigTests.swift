@@ -268,7 +268,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
     func testUpdateCommand() async throws {
@@ -357,6 +357,6 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 }

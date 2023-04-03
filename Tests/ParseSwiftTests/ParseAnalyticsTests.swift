@@ -137,7 +137,7 @@ class ParseAnalyticsTests: XCTestCase {
     }
 
     #if os(iOS)
-    func testTrackAppOpenedUIKit() {
+    func testTrackAppOpenedUIKit() async {
         let serverResponse = NoBody()
         let encoded: Data!
         do {
@@ -160,10 +160,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackAppOpenedUIKitNotStringValue() {
+    func testTrackAppOpenedUIKitNotStringValue() async {
         let serverResponse = NoBody()
         let encoded: Data!
         do {
@@ -186,10 +186,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackAppOpenedUIKitError() {
+    func testTrackAppOpenedUIKitError() async {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
         do {
@@ -212,11 +212,11 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
     #endif
 
-    func testTrackAppOpened() {
+    func testTrackAppOpened() async {
         let serverResponse = NoBody()
         let encoded: Data!
         do {
@@ -238,10 +238,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackAppOpenedError() {
+    func testTrackAppOpenedError() async {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
         do {
@@ -263,10 +263,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackEvent() {
+    func testTrackEvent() async {
         let serverResponse = NoBody()
         let encoded: Data!
         do {
@@ -289,10 +289,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackEventMutated() {
+    func testTrackEventMutated() async {
         let serverResponse = NoBody()
         let encoded: Data!
         do {
@@ -315,10 +315,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackEventError() {
+    func testTrackEventError() async {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
         do {
@@ -341,10 +341,10 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-    func testTrackEventErrorMutated() {
+    func testTrackEventErrorMutated() async {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
         do {
@@ -367,6 +367,6 @@ class ParseAnalyticsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 }

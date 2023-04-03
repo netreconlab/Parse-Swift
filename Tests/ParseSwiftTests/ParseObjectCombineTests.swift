@@ -66,7 +66,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFetch() {
+    func testFetch() async {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
@@ -120,10 +120,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSave() {
+    func testSave() async {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -170,10 +170,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testCreate() {
+    func testCreate() async {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
@@ -224,10 +224,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUpdate() {
+    func testUpdate() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
 
@@ -276,10 +276,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDelete() {
+    func testDelete() async {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
 
@@ -313,11 +313,11 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func testFetchAll() {
+    func testFetchAll() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch")
 
@@ -417,10 +417,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testSaveAll() {
+    func testSaveAll() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -501,10 +501,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testCreateAll() {
+    func testCreateAll() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -589,10 +589,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAllCreate() {
+    func testReplaceAllCreate() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -667,10 +667,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testReplaceAllUpdate() {
+    func testReplaceAllUpdate() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -751,10 +751,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testUpdateAll() {
+    func testUpdateAll() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -835,10 +835,10 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDeleteAll() {
+    func testDeleteAll() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -886,7 +886,7 @@ class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 

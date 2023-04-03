@@ -64,10 +64,10 @@ class ParseFileManagerTests: XCTestCase {
         fileManager.removeDirectoryContents(directory2) { _ in
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testWriteData() throws {
+    func testWriteData() async throws {
         guard let data = "Hello World".data(using: .utf8),
               let fileManager = ParseFileManager(),
               let filePath = fileManager.dataItemPathForPathComponent("test.txt") else {
@@ -89,10 +89,10 @@ class ParseFileManagerTests: XCTestCase {
             expectation1.fulfill()
         }
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testCopyItem() throws {
+    func testCopyItem() async throws {
         let dataAsString = "Hello World"
         guard let fileManager = ParseFileManager(),
               let filePath = fileManager.dataItemPathForPathComponent("test.txt"),
@@ -126,10 +126,10 @@ class ParseFileManagerTests: XCTestCase {
             expectation1.fulfill()
         }
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testMoveItem() throws {
+    func testMoveItem() async throws {
         let dataAsString = "Hello World"
         guard let fileManager = ParseFileManager(),
               let filePath = fileManager.dataItemPathForPathComponent("test.txt"),
@@ -161,10 +161,10 @@ class ParseFileManagerTests: XCTestCase {
             expectation1.fulfill()
         }
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testDontMoveSameItem() throws {
+    func testDontMoveSameItem() async throws {
         let dataAsString = "Hello World"
         guard let fileManager = ParseFileManager(),
               let filePath = fileManager.dataItemPathForPathComponent("test.txt"),
@@ -196,10 +196,10 @@ class ParseFileManagerTests: XCTestCase {
             expectation1.fulfill()
         }
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testMoveContentsOfDirectory() throws {
+    func testMoveContentsOfDirectory() async throws {
         let dataAsString = "Hello World"
         guard let fileManager = ParseFileManager(),
               let defaultFilePath = fileManager.defaultDataDirectoryPath else {
@@ -236,6 +236,6 @@ class ParseFileManagerTests: XCTestCase {
             expectation1.fulfill()
         }
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }

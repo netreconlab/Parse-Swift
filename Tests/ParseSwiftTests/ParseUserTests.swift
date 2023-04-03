@@ -2009,7 +2009,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNil(saved.ACL)
     }
 
-    func updateAsync(user: User, userOnServer: User, callbackQueue: DispatchQueue) {
+    func updateAsync(user: User,
+                     userOnServer: User,
+                     callbackQueue: DispatchQueue) async {
 
         let expectation1 = XCTestExpectation(description: "Update user1")
         user.save(options: [], callbackQueue: callbackQueue) { result in
@@ -2062,11 +2064,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation2.fulfill()
         }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeUpdateAsync() {
+    func testThreadSafeUpdateAsync() async {
         var user = User()
         let objectId = "yarr"
         user.objectId = objectId
@@ -2089,8 +2091,14 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
+        let immutableUser = user
+        let immutableUserOnServer = userOnServer
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(user: user, userOnServer: userOnServer, callbackQueue: .global(qos: .background))
+            Task {
+                await self.updateAsync(user: immutableUser,
+                                       userOnServer: immutableUserOnServer,
+                                       callbackQueue: .global(qos: .background))
+            }
         }
     }
     #endif

@@ -106,7 +106,7 @@ class ParseFacebookCombineTests: XCTestCase {
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLimitedLogin() {
+    func testLimitedLogin() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
@@ -168,10 +168,10 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testGraphAPILogin() {
+    func testGraphAPILogin() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
@@ -232,7 +232,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLoginAuthData() async throws {
@@ -301,7 +301,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkLimitedLogin() async throws {
@@ -362,7 +362,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkGraphAPILogin() async throws {
@@ -424,7 +424,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
@@ -490,7 +490,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUnlinkLimitedLogin() async throws {
@@ -560,7 +560,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 
     func testUnlinkGraphAPILogin() async throws {
@@ -630,7 +630,7 @@ class ParseFacebookCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
 

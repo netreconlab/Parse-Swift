@@ -101,7 +101,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         return try await User.login(username: "parse", password: "user")
     }
 
-    func testLogin() {
+    func testLogin() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -149,10 +149,10 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
-    func testLoginAuthData() {
+    func testLoginAuthData() async {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -200,7 +200,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLink() async throws {
@@ -248,7 +248,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testLinkAuthData() async throws {
@@ -298,7 +298,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUnlink() async throws {
@@ -351,7 +351,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testUnlinkPassUser() async throws {
@@ -404,7 +404,7 @@ class ParseLinkedInCombineTests: XCTestCase { // swiftlint:disable:this type_bod
         })
         publisher.store(in: &current)
 
-        wait(for: [expectation1], timeout: 20.0)
+        await fulfillment(of: [expectation1], timeout: 20.0)
     }
 }
 
