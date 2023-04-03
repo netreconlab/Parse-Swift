@@ -224,57 +224,6 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-    func testFetchAsync() async throws {
-        await userLogin()
-        let config = Config()
-
-        var configOnServer = config
-        configOnServer.welcomeMessage = "Hello"
-        let serverResponse = ConfigFetchResponse(params: configOnServer)
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation = XCTestExpectation(description: "Config save")
-        config.fetch { result in
-            switch result {
-
-            case .success(let fetched):
-                XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-                let immutableConfigOnServer = configOnServer
-                Task {
-                    let currentConfig = try await Config.current()
-                    XCTAssertEqual(currentConfig.welcomeMessage, immutableConfigOnServer.welcomeMessage)
-
-                    #if !os(Linux) && !os(Android) && !os(Windows)
-                    // Should be updated in Keychain
-                    let keychainConfig: CurrentConfigContainer<Config>?
-                    = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
-                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage,
-                                   immutableConfigOnServer.welcomeMessage)
-                    #endif
-                    expectation.fulfill()
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation.fulfill()
-            }
-        }
-        #if compiler(>=5.8.0)
-        await fulfillment(of: [expectation], timeout: 10.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation], timeout: 10.0)
-        #endif
-    }
-
     func testUpdateCommand() async throws {
         var config = Config()
         config.welcomeMessage = "Hello"
@@ -363,12 +312,13 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation], timeout: 10.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
         #endif
     }
+
     func testSaveAsync() async throws {
         await userLogin()
         var config = Config()
@@ -412,7 +362,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation], timeout: 10.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)

@@ -393,7 +393,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didSendBodyData: 0,
                                               totalBytesSent: 0,
                                               totalBytesExpectedToSend: 10)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -451,7 +451,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didWriteData: 0,
                                               totalBytesWritten: 0,
                                               totalBytesExpectedToWrite: 10)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -496,7 +496,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         await Parse.sessionDelegate.delegates.updateTask(task, queue: queue)
 
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)

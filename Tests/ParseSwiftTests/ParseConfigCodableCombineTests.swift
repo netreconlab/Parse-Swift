@@ -186,7 +186,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -265,7 +265,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)

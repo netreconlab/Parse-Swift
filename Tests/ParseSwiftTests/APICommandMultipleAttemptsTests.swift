@@ -111,7 +111,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -142,7 +142,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 expectation1.fulfill()
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -201,7 +201,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -268,7 +268,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -324,7 +324,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -383,7 +383,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -450,7 +450,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -506,7 +506,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)

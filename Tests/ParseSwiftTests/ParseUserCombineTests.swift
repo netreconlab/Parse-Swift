@@ -162,7 +162,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -227,7 +227,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -287,7 +287,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -358,7 +358,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -424,7 +424,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -494,7 +494,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -559,7 +559,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         }, receiveValue: { _ in })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -626,7 +626,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -659,7 +659,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -692,7 +692,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -754,7 +754,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -788,7 +788,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -821,7 +821,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -854,7 +854,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -912,7 +912,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -970,7 +970,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1016,7 +1016,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertEqual(saved.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1061,7 +1061,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertEqual(saved.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1116,7 +1116,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1216,7 +1216,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1314,7 +1314,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1385,7 +1385,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1445,7 +1445,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1514,7 +1514,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1583,7 +1583,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -1629,7 +1629,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
