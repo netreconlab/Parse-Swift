@@ -373,7 +373,7 @@ extension KeychainStore {
             return nil
         }
         do {
-            return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? T
+            return try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? T
         } catch {
             return nil
         }
