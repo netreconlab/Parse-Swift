@@ -190,22 +190,14 @@ extension ParseFileManager {
         }
     }
 
-    func removeDirectoryContents(_ path: URL, completion: @escaping(Error?) -> Void) {
-        synchronizationQueue.async {
-            do {
-                let contents = try FileManager.default.contentsOfDirectory(atPath: path.path)
-                if contents.count == 0 {
-                    completion(nil)
-                    return
-                }
-                try contents.forEach {
-                    let filePath = path.appendingPathComponent($0)
-                    try FileManager.default.removeItem(at: filePath)
-                }
-                completion(nil)
-            } catch {
-                completion(error)
-            }
+    func removeDirectoryContents(_ path: URL) throws {
+        let contents = try FileManager.default.contentsOfDirectory(atPath: path.path)
+        guard contents.count > 0 else {
+            return
+        }
+        try contents.forEach {
+            let filePath = path.appendingPathComponent($0)
+            try FileManager.default.removeItem(at: filePath)
         }
     }
 }

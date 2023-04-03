@@ -342,10 +342,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let directory2 = try ParseFileManager.downloadDirectory()
         let expectation2 = XCTestExpectation(description: "Delete files2")
-        fileManager.removeDirectoryContents(directory2) { _ in
-            expectation2.fulfill()
-        }
-        wait(for: [expectation2], timeout: 20.0)
+        try? fileManager.removeDirectoryContents(directory2)
     }
 
     func testIsEqualExtension() throws {

@@ -144,11 +144,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         let directory2 = try ParseFileManager.downloadDirectory()
-        let expectation2 = XCTestExpectation(description: "Delete files2")
-        fileManager.removeDirectoryContents(directory2) { _ in
-            expectation2.fulfill()
-        }
-        wait(for: [expectation2], timeout: 20.0)
+        try? fileManager.removeDirectoryContents(directory2)
     }
 
     func testSaveCommand() async throws {

@@ -13,8 +13,6 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
-
 class ParseFileTransferableTests: XCTestCase {
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 
@@ -121,21 +119,9 @@ class ParseFileTransferableTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
         }
         let directory = URL(fileURLWithPath: temporaryDirectory, isDirectory: true)
-        let expectation1 = XCTestExpectation(description: "Delete files1")
-        fileManager.removeDirectoryContents(directory) { error in
-            guard let error = error else {
-                expectation1.fulfill()
-                return
-            }
-            XCTFail(error.localizedDescription)
-            expectation1.fulfill()
-        }
+        try? fileManager.removeDirectoryContents(directory)
         let directory2 = try ParseFileManager.downloadDirectory()
-        let expectation2 = XCTestExpectation(description: "Delete files2")
-        fileManager.removeDirectoryContents(directory2) { _ in
-            expectation2.fulfill()
-        }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        try? fileManager.removeDirectoryContents(directory2)
     }
 
     func testSDKInitializers() async throws {

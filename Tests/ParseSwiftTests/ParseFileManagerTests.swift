@@ -49,22 +49,10 @@ class ParseFileManagerTests: XCTestCase {
             throw ParseError(code: .otherCause, message: "Should have initialized file manage")
         }
 
-        let expectation1 = XCTestExpectation(description: "Delete files1")
-        fileManager.removeDirectoryContents(defaultDirectoryPath) { error in
-            guard let error = error else {
-                expectation1.fulfill()
-                return
-            }
-            XCTFail(error.localizedDescription)
-            expectation1.fulfill()
-        }
+        try? fileManager.removeDirectoryContents(defaultDirectoryPath)
         let directory2 = defaultDirectoryPath
             .appendingPathComponent(ParseConstants.fileDownloadsDirectory, isDirectory: true)
-        let expectation2 = XCTestExpectation(description: "Delete files2")
-        fileManager.removeDirectoryContents(directory2) { _ in
-            expectation2.fulfill()
-        }
-        wait(for: [expectation1, expectation2], timeout: 20.0)
+        try? fileManager.removeDirectoryContents(directory2)
     }
 
     func testWriteData() throws {
