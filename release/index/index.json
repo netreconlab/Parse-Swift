@@ -1911,13 +1911,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -2433,6 +2433,49 @@
           {
             "children" : [
               {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationable\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationable\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationable\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationable\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationable",
+            "title" : "ParseOperationable",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
@@ -2742,6 +2785,31 @@
             ],
             "path" : "\/documentation\/parseswift\/parsequeryscorable",
             "title" : "ParseQueryScorable",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Associated Types",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parserelationoperationable\/object",
+                "title" : "Object",
+                "type" : "associatedtype"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parserelationoperationable\/objects",
+                "title" : "var objects: [Pointer<Object>]",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parserelationoperationable",
+            "title" : "ParseRelationOperationable",
             "type" : "protocol"
           },
           {
@@ -9163,12 +9231,12 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-35lsc",
+                "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-16zkg",
                 "title" : "func add<W>(String, objects: [W]) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-9ko4e",
+                "path" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-4or5w",
                 "title" : "func add<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) -> ParseOperation<T>",
                 "type" : "method"
               },
@@ -9183,13 +9251,18 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-2tfhg",
+                "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-3v3y",
+                "title" : "func addUnique<W>(String, objects: [W]) -> ParseOperation<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-9mi29",
                 "title" : "func addUnique<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-6zoa7",
-                "title" : "func addUnique<W>(String, objects: [W]) -> ParseOperation<T>",
+                "path" : "\/documentation\/parseswift\/parseoperation\/batch(_:operations:)",
+                "title" : "func batch(String, operations: ParseOperationBatch) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -9208,18 +9281,23 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/increment(_:by:)",
+                "path" : "\/documentation\/parseswift\/parseoperation\/increment(_:by:)-19wfq",
+                "title" : "func increment(String, by: Double) -> ParseOperation<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperation\/increment(_:by:)-2jfll",
                 "title" : "func increment(String, by: Int) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-3e0qg",
-                "title" : "func remove<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) -> ParseOperation<T>",
+                "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-290yc",
+                "title" : "func remove<W>(String, objects: [W]) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-ope6",
-                "title" : "func remove<W>(String, objects: [W]) -> ParseOperation<T>",
+                "path" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-9b7ai",
+                "title" : "func remove<V>((String, WritableKeyPath<T, [V]?>), objects: [V]) -> ParseOperation<T>",
                 "type" : "method"
               },
               {
@@ -9243,17 +9321,17 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-1t3ca",
-                "title" : "func set<W>((String, WritableKeyPath<T, W?>), to: W?) -> ParseOperation<T>",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-6e7l2",
                 "title" : "func set<W>(WritableKeyPath<T, W?>, to: W) throws -> ParseOperation<T>",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-1fmaa",
+                "path" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-88uvh",
+                "title" : "func set<W>((String, WritableKeyPath<T, W?>), to: W?) -> ParseOperation<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-1atuj",
                 "title" : "func unset<V>((String, WritableKeyPath<T, V?>)) -> ParseOperation<T>",
                 "type" : "method"
               },
@@ -9265,6 +9343,38 @@
               {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperation\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperation\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperation\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperation\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
               },
               {
                 "children" : [
@@ -9290,6 +9400,568 @@
             ],
             "path" : "\/documentation\/parseswift\/parseoperation",
             "title" : "ParseOperation",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationadd\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationadd\/init(objects:)",
+                "title" : "init(objects: [T])",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationadd\/objects",
+                "title" : "var objects: [T]",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationadd\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationadd\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationadd\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationadd\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationadd",
+            "title" : "ParseOperationAdd",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/init(objects:)",
+                "title" : "init(objects: [T]) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/objects",
+                "title" : "var objects: [Pointer<T>]",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationaddrelation",
+            "title" : "ParseOperationAddRelation",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddunique\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddunique\/init(objects:)",
+                "title" : "init(objects: [T])",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationaddunique\/objects",
+                "title" : "var objects: Set<T>",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationaddunique\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationaddunique\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationaddunique\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationaddunique\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationaddunique",
+            "title" : "ParseOperationAddUnique",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationbatch\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationbatch\/init(operations:)",
+                "title" : "init<T>(operations: [T])",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationbatch\/appendoperations(operations:)",
+                "title" : "func appendOperations<T>(operations: [T]) -> ParseOperationBatch",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationbatch\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationbatch\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationbatch\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationbatch\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationbatch",
+            "title" : "ParseOperationBatch",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationdelete\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationdelete\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationdelete\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationdelete\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationdelete\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationdelete\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationdelete",
+            "title" : "ParseOperationDelete",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationincrement\/init(amount:)",
+                "title" : "init(amount: Int)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationincrement\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationincrement\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationincrement\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationincrement\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationincrement\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationincrement",
+            "title" : "ParseOperationIncrement",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/init(amount:)",
+                "title" : "init(amount: Double)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationincrementdouble",
+            "title" : "ParseOperationIncrementDouble",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationremove\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationremove\/init(objects:)",
+                "title" : "init(objects: [T])",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationremove\/objects",
+                "title" : "let objects: [T]",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationremove\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationremove\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationremove\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationremove\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationremove",
+            "title" : "ParseOperationRemove",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/objects",
+                "title" : "var objects: [Pointer<T>]",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationremoverelation",
+            "title" : "ParseOperationRemoveRelation",
             "type" : "struct"
           },
           {
@@ -13484,6 +14156,125 @@
             ],
             "path" : "\/documentation\/parseswift\/parsehooktriggertype",
             "title" : "ParseHookTriggerType",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/add",
+                "title" : "case add",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/addrelation",
+                "title" : "case addRelation",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/addunique",
+                "title" : "case addUnique",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/batch",
+                "title" : "case batch",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/delete",
+                "title" : "case delete",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/increment",
+                "title" : "case increment",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/remove",
+                "title" : "case remove",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/removerelation",
+                "title" : "case removeRelation",
+                "type" : "case"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/init(rawvalue:)",
+                "title" : "init?(rawValue: String)",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationcommand\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationcommand\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationcommand\/hashvalue",
+                    "title" : "var hashValue: Int",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationcommand\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseoperationcommand\/hash(into:)",
+                    "title" : "func hash(into: inout Hasher)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseoperationcommand\/rawrepresentable-implementations",
+                "title" : "RawRepresentable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parseoperationcommand",
+            "title" : "ParseOperationCommand",
             "type" : "enum"
           },
           {

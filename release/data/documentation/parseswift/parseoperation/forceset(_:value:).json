@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF",
+    "externalID" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -74,7 +74,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
         "text" : "W"
       },
       {
@@ -91,7 +91,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
         "text" : "W"
       },
       {
@@ -206,7 +206,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
               "text" : "W"
             },
             {
@@ -223,7 +223,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
               "text" : "W"
             },
             {
@@ -255,6 +255,23 @@
             {
               "kind" : "text",
               "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "W"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Se",
+              "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
             },
             {
               "kind" : "typeIdentifier",
@@ -540,7 +557,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -557,7 +574,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
