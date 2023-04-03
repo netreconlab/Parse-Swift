@@ -62,6 +62,428 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
     }
 
+    #if compiler(>=5.8.0)
+    func testErrorHTTP400JSON() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 400)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait 1")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current == 1 {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTPReturns400NoDataFromServer() async throws {
+        let originalError = ParseError(code: .otherCause, message: "Could not decode")
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(error: originalError) // Status code defaults to 400
+        }
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw originalError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(originalError.code, error.code)
+                expectation1.fulfill()
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP429JSONInterval() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let headerKey = "x-rate-limit-reset"
+        let headerValue = "2"
+        let headerFields = [headerKey: headerValue]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP429JSONDate() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let headerKey = "x-rate-limit-reset"
+        guard let date = Calendar.current.date(byAdding: .second,
+                                               value: 2,
+                                               to: Date()) else {
+            XCTFail("Should have produced date")
+            return
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
+        let headerValue = dateFormatter.string(from: date)
+        let headerFields = [headerKey: headerValue]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP429JSONNoHeader() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 429)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP503JSONInterval() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let headerKey = "retry-after"
+        let headerValue = "2"
+        let headerFields = [headerKey: headerValue]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP503JSONDate() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let headerKey = "retry-after"
+        guard let date = Calendar.current.date(byAdding: .second,
+                                               value: 2,
+                                               to: Date()) else {
+            XCTFail("Should have produced date")
+            return
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss z"
+        let headerValue = dateFormatter.string(from: date)
+        let headerFields = [headerKey: headerValue]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    func testErrorHTTP503JSONNoHeader() async throws {
+        let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
+        let errorKey = "error"
+        let errorValue = "yarr"
+        let codeKey = "code"
+        let codeValue = 100
+        let responseDictionary: [String: Any] = [
+            errorKey: errorValue,
+            codeKey: codeValue
+        ]
+        let currentAttempts = Result()
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+                return MockURLResponse(data: json, statusCode: 503)
+            } catch {
+                XCTFail(error.localizedDescription)
+                return nil
+            }
+        }
+
+        let expectation1 = XCTestExpectation(description: "Wait")
+
+        await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+                                                      path: .login,
+                                                      params: nil,
+                                                      mapper: { _ -> NoBody in
+            throw parseError
+        }).execute(options: [],
+                   callbackQueue: .main,
+                   allowIntermediateResponses: true) { result in
+            switch result {
+            case .success:
+                XCTFail("Should have thrown an error")
+                expectation1.fulfill()
+            case .failure(let error):
+                XCTAssertEqual(parseError.code, error.code)
+                Task {
+                    await currentAttempts.incrementAttempts()
+                    let current = await currentAttempts.attempts
+                    DispatchQueue.main.async {
+                        if current >= Parse.configuration.maxConnectionAttempts {
+                            expectation1.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        await fulfillment(of: [expectation1], timeout: 20.0)
+    }
+
+    #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+
     func testErrorHTTP400JSON() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
@@ -480,4 +902,5 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         }
         wait(for: [expectation1], timeout: 20.0)
     }
+    #endif
 }
