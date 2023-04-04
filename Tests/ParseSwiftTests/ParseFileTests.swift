@@ -835,6 +835,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
 #if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
+    #if !os(Linux) && !os(Android) && !os(Windows)
     @MainActor
     func testSaveAysnc() async throws {
 
@@ -1020,6 +1021,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
         #endif
     }
+    #endif
 
     func testSaveLocalFileAysnc() async throws {
 
