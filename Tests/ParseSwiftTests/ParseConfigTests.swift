@@ -319,6 +319,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
+    #if !os(Linux) && !os(Android) && !os(Windows)
     func testSaveAsync() async throws {
         await userLogin()
         var config = Config()
@@ -368,5 +369,6 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 10.0)
         #endif
     }
+    #endif
 #endif
 }

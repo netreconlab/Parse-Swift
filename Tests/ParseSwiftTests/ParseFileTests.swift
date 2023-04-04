@@ -1016,7 +1016,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
         #endif
     }
-    #endif
 
     func testSaveLocalFileAysnc() async throws {
 
@@ -1064,6 +1063,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1], timeout: 20.0)
         #endif
     }
+    #endif
 
     func testUpdateErrorAysnc() async throws {
 

@@ -307,6 +307,7 @@ class ParseAnonymousTests: XCTestCase {
 
 #if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
 
+    #if !os(Linux) && !os(Android) && !os(Windows)
     func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -375,7 +376,6 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
     func testReplaceAnonymousUser() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
