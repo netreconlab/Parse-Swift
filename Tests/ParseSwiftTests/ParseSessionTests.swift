@@ -127,26 +127,35 @@ class ParseSessionTests: XCTestCase {
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testParseURLSessionCustomCertificatePinning() async throws {
+    func testParseURLSessionCustomCertificatePinning() throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        try await ParseSwift.initialize(applicationId: "applicationId",
-                                        clientKey: "clientKey",
-                                        primaryKey: "primaryKey",
-                                        serverURL: url,
-                                        // swiftlint:disable:next line_length
-                                        testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
-            completion(.cancelAuthenticationChallenge, .none)
-        }
         let expectation1 = XCTestExpectation(description: "Authentication")
-        URLSession.parse.delegate?.urlSession?(URLSession.parse,
-                                               didReceive: .init()) { (challenge, credential) -> Void in
-            XCTAssertEqual(challenge, .cancelAuthenticationChallenge)
-            XCTAssertEqual(credential, .none)
-            expectation1.fulfill()
+        Task {
+            do {
+                try await ParseSwift.initialize(applicationId: "applicationId",
+                                                clientKey: "clientKey",
+                                                primaryKey: "primaryKey",
+                                                serverURL: url,
+                                                // swiftlint:disable:next line_length
+                                                testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
+                    completion(.cancelAuthenticationChallenge, .none)
+                }
+
+                URLSession.parse.delegate?.urlSession?(URLSession.parse,
+                                                       didReceive: .init()) { (challenge, credential) -> Void in
+                    XCTAssertEqual(challenge, .cancelAuthenticationChallenge)
+                    XCTAssertEqual(credential, .none)
+                    expectation1.fulfill()
+                }
+            } catch {
+                XCTFail("Should not have thrown: \(error)")
+                expectation1.fulfill()
+            }
         }
+
         wait(for: [expectation1], timeout: 10.0)
     }
 

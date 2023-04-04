@@ -308,10 +308,14 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
-    func testLinkAuthData() async throws {
+    func testLinkAuthData() async throws { // swiftlint:disable:this function_body_length
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updated")
@@ -371,7 +375,11 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -445,7 +453,11 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -519,7 +531,11 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 }
 

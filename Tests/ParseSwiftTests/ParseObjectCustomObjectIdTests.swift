@@ -144,11 +144,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
 
         let directory2 = try ParseFileManager.downloadDirectory()
-        let expectation2 = XCTestExpectation(description: "Delete files2")
-        fileManager.removeDirectoryContents(directory2) { _ in
-            expectation2.fulfill()
-        }
-        wait(for: [expectation2], timeout: 20.0)
+        try? fileManager.removeDirectoryContents(directory2)
     }
 
     func testSaveCommand() async throws {
@@ -856,7 +852,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -969,7 +969,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1140,7 +1144,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUpdateAll() async throws {
@@ -1232,7 +1240,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUserSave() async throws {
@@ -1438,7 +1450,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUserSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1529,7 +1545,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUserSaveAll() async throws {
@@ -1616,7 +1636,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testUserUpdateAll() async throws {
@@ -1769,7 +1793,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testInstallationSave() async throws {
@@ -1994,7 +2022,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testInstallationSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -2090,7 +2122,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testInstallationUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -2280,7 +2316,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testInstallationUpdateAll() async throws {
@@ -2433,7 +2473,11 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testFetch() async throws {

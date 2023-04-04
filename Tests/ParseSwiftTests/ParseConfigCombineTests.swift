@@ -115,6 +115,7 @@ class ParseConfigCombineTests: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testFetch() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -174,9 +175,14 @@ class ParseConfigCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 
+    // swiftlint:disable:next function_body_length
     func testSave() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
@@ -234,7 +240,11 @@ class ParseConfigCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
+        #endif
     }
 }
 

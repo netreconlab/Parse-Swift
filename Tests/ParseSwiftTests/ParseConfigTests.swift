@@ -224,6 +224,50 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
+    func testUpdateCommand() async throws {
+        var config = Config()
+        config.welcomeMessage = "Hello"
+        let command = await config.updateCommand()
+        XCTAssertEqual(command.path.urlComponent, "/config")
+        XCTAssertEqual(command.method, API.Method.PUT)
+        XCTAssertNotNil(command.body)
+    }
+
+    func testSave() async throws {
+        await userLogin()
+        var config = Config()
+        config.welcomeMessage = "Hello"
+
+        let serverResponse = BooleanResponse(result: true)
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let saved = try await config.save()
+        let currentConfig = try await Config.current()
+        XCTAssertTrue(saved)
+        XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
+
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        // Should be updated in Keychain
+        guard let keychainConfig: CurrentConfigContainer<Config>
+            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+                XCTFail("Should get object from Keychain")
+            return
+        }
+        XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
+        #endif
+    }
+
+#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     func testFetchAsync() async throws {
         await userLogin()
         let config = Config()
@@ -268,52 +312,14 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation], timeout: 10.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
-    }
-
-    func testUpdateCommand() async throws {
-        var config = Config()
-        config.welcomeMessage = "Hello"
-        let command = await config.updateCommand()
-        XCTAssertEqual(command.path.urlComponent, "/config")
-        XCTAssertEqual(command.method, API.Method.PUT)
-        XCTAssertNotNil(command.body)
-    }
-
-    func testSave() async throws {
-        await userLogin()
-        var config = Config()
-        config.welcomeMessage = "Hello"
-
-        let serverResponse = BooleanResponse(result: true)
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let saved = try await config.save()
-        let currentConfig = try await Config.current()
-        XCTAssertTrue(saved)
-        XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
-
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        // Should be updated in Keychain
-        guard let keychainConfig: CurrentConfigContainer<Config>
-            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-                XCTFail("Should get object from Keychain")
-            return
-        }
-        XCTAssertEqual(keychainConfig.currentConfig?.welcomeMessage, config.welcomeMessage)
         #endif
     }
 
+    #if !os(Linux) && !os(Android) && !os(Windows)
     func testSaveAsync() async throws {
         await userLogin()
         var config = Config()
@@ -357,6 +363,12 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation], timeout: 10.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
+        #endif
     }
+    #endif
+#endif
 }

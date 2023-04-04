@@ -1666,36 +1666,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSaveCurrentAsyncMainQueue() async throws {
-        var installation = try await Installation.current()
-        installation.objectId = testInstallationObjectId
-        installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
-        installation.ACL = nil
-
-        var installationOnServer = installation
-
-        let encoded: Data!
-        do {
-            let encodedOriginal = try ParseCoding.jsonEncoder().encode(installation)
-            // Get dates in correct format from ParseDecoding strategy
-            installation = try installation.getDecoder().decode(Installation.self, from: encodedOriginal)
-
-            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        self.saveCurrentAsync(installation: installation,
-                              installationOnServer: installationOnServer,
-                              callbackQueue: .main)
-    }
-
     func testFetchCommand() {
         var installation = Installation()
         XCTAssertThrowsError(try installation.fetchCommand(include: nil))
@@ -1740,6 +1710,37 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
 
         let installation2 = Installation()
         XCTAssertThrowsError(try installation2.fetchCommand(include: nil))
+    }
+
+#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
+    func testSaveCurrentAsyncMainQueue() async throws {
+        var installation = try await Installation.current()
+        installation.objectId = testInstallationObjectId
+        installation.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
+        installation.ACL = nil
+
+        var installationOnServer = installation
+
+        let encoded: Data!
+        do {
+            let encodedOriginal = try ParseCoding.jsonEncoder().encode(installation)
+            // Get dates in correct format from ParseDecoding strategy
+            installation = try installation.getDecoder().decode(Installation.self, from: encodedOriginal)
+
+            encoded = try installationOnServer.getEncoder().encode(installationOnServer, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            installationOnServer = try installationOnServer.getDecoder().decode(Installation.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        self.saveCurrentAsync(installation: installation,
+                              installationOnServer: installationOnServer,
+                              callbackQueue: .main)
     }
 
     @MainActor
@@ -1812,6 +1813,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
         #endif
     }
+#endif
 
     @MainActor
     func testDeleteCommand() async throws {
