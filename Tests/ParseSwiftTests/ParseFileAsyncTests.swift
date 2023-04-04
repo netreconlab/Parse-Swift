@@ -347,7 +347,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(downloadCount2, 0)
     }
 
-    @MainActor
     func testParseURLSessionDelegateUpload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
@@ -406,7 +405,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     }
 
     // swiftlint:disable:next function_body_length
-    @MainActor func testParseURLSessionDelegateDownload() async throws {
+    func testParseURLSessionDelegateDownload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
@@ -468,7 +467,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         #endif
     }
 
-    @MainActor
     func testParseURLSessionDelegateStream() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
