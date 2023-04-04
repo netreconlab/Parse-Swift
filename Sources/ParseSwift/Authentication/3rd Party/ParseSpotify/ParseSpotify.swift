@@ -67,7 +67,7 @@ public struct ParseSpotify<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "spotify"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

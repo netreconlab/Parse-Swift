@@ -53,7 +53,7 @@ public struct ParseApple<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "apple"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

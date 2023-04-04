@@ -56,7 +56,7 @@ public struct ParseLinkedIn<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "linkedin"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

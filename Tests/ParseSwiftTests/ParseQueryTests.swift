@@ -1909,7 +1909,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$select": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ]
+                ] as [String: Any]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -1955,7 +1955,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$dontSelect": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ]
+                ] as [String: Any]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -2558,7 +2558,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     // MARK: GeoPoint
     func testWhereKeyNearGeoPoint() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"]]
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any]]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)
         let constraint = near(key: "yolo", geoPoint: geoPoint)
@@ -2597,7 +2597,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMiles() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$maxDistance": 1
             ]
         ]
@@ -2643,7 +2643,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMilesNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$geoWithin": 1
             ]
         ]
@@ -2692,7 +2692,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometers() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$maxDistance": 1
             ]
         ]
@@ -2738,7 +2738,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometersNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$geoWithin": 1
             ]
         ]
@@ -2787,7 +2787,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadians() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$maxDistance": 10
             ]
         ]
@@ -2833,7 +2833,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadiansNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                      "$geoWithin": 10
             ]
         ]
@@ -2880,7 +2880,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testWhereKeyNearGeoBox() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$within": ["$box": [
-                                    ["latitude": 10, "longitude": 20, "__type": "GeoPoint"],
+                ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
                                     ["latitude": 20, "longitude": 30, "__type": "GeoPoint"]]
                                 ]
             ]
@@ -2961,7 +2961,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testWhereKeyPolygonContains() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$geoIntersects": ["$point":
-                                    ["latitude": 10, "longitude": 20, "__type": "GeoPoint"]
+                                            ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any]
                                 ]
             ]
         ]

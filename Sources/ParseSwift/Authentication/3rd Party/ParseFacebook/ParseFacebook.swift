@@ -71,7 +71,7 @@ public struct ParseFacebook<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "facebook"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

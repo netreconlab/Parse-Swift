@@ -373,7 +373,11 @@ extension KeychainStore {
             return nil
         }
         do {
-            return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? T
+            do {
+                return try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? T
+            } catch {
+                return try NSKeyedUnarchiver.unarchivedObject(ofClass: NSDictionary.self, from: data) as? T
+            }
         } catch {
             return nil
         }
@@ -390,7 +394,16 @@ extension KeychainStore {
             return removeObjectObjectiveC(forKey: key)
         }
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
+            let data: Data!
+            if let stringObject = object as? String {
+                data = try NSKeyedArchiver.archivedData(withRootObject: stringObject as NSString,
+                                                        requiringSecureCoding: false)
+            } else if let dictionaryObject = object as? [String: String] {
+                data = try NSKeyedArchiver.archivedData(withRootObject: dictionaryObject as NSDictionary,
+                                                        requiringSecureCoding: false)
+            } else {
+                data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
+            }
             try set(data,
                     forKey: key,
                     useObjectiveCKeychain: true,

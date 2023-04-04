@@ -62,7 +62,7 @@ public struct ParsePushStatus<V: ParsePushPayloadable>: ParsePushStatusable {
 
     public var count: Int?
 
-    public init() { }
+    public init() {}
 
     enum CodingKeys: String, CodingKey {
         case expirationInterval = "expiration_interval"

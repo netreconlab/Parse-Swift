@@ -61,7 +61,7 @@ public struct ParseGoogle<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "google"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

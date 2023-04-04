@@ -45,7 +45,7 @@ public struct ParseACL: ParseTypeable,
     }
 
     /// The default initializer.
-    public init() { }
+    public init() {}
 
     static func getRoleAccessName<R>(_ role: R) throws -> String where R: ParseRole {
         guard let name = role.name else {

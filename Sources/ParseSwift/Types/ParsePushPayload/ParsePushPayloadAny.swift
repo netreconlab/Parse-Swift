@@ -88,7 +88,7 @@ public struct ParsePushPayloadAny: ParsePushApplePayloadable, ParsePushFirebaseP
         notification = try values.decodeIfPresent(ParsePushFirebaseNotification.self, forKey: .key("notification"))
     }
 
-    public init() { }
+    public init() {}
 
     /**
      Convert the current `ParsePushPayloadAny` to `ParsePushPayloadApple`.

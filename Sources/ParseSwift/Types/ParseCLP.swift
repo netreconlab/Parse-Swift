@@ -101,7 +101,7 @@ public struct ParseCLP: ParseTypeable {
     }
 
     /// Creates an empty instance of CLP.
-    public init() { }
+    public init() {}
 
     /**
      Creates an instance of CLP with particular access.

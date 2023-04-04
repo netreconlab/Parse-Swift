@@ -52,7 +52,7 @@ public struct ParseGitHub<AuthenticatedUser: ParseUser>: ParseAuthentication {
         "github"
     }
 
-    public init() { }
+    public init() {}
 }
 
 // MARK: Login

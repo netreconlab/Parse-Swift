@@ -111,7 +111,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTPReturns400NoDataFromServer() async throws {
@@ -138,7 +142,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 expectation1.fulfill()
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP429JSONInterval() async throws {
@@ -193,7 +201,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP429JSONDate() async throws {
@@ -256,7 +268,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP429JSONNoHeader() async throws {
@@ -308,7 +324,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP503JSONInterval() async throws {
@@ -363,7 +383,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP503JSONDate() async throws {
@@ -426,7 +450,11 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 
     func testErrorHTTP503JSONNoHeader() async throws {
@@ -478,6 +506,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
+        #endif
     }
 }

@@ -95,7 +95,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
              urlArgs
     }
 
-    public init() { }
+    public init() {}
 
     /**
      Create an instance of `ParsePushPayloadApple` .
@@ -202,7 +202,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
      */
     public func incrementBadge() -> Self {
         var mutablePayload = self
-        mutablePayload.badge = AnyCodable(Increment(amount: 1))
+        mutablePayload.badge = AnyCodable(ParseOperationIncrement(amount: 1))
         return mutablePayload
     }
 }

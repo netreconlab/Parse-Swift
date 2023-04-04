@@ -84,7 +84,7 @@ public struct ParsePushAppleAlert: ParseTypeable {
     public var actionLocKey: String?
 
     /// Create an empty alert.
-    public init() { }
+    public init() {}
 
     /// Create an alert with a body message.
     /// - parameter body: The message to send in the alert.

@@ -2,8 +2,20 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.4.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.0...5.4.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.1/documentation/parseswift)
+
+__Fixes__
+* Refactor test suite and code for Swift 5.8. Removes a number of warnings that show up in Xcode 14.3 ([#90](https://github.com/netreconlab/Parse-Swift/pull/90)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.4.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.3...5.4.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.0/documentation/parseswift)
+
+__New features__
+* Add batch and increment double operations. All operations have also been made public so developers can build batch operations with ParseOperationBatch ([#88](https://github.com/netreconlab/Parse-Swift/pull/88)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.3.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.3.2...5.3.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.3.3/documentation/parseswift)
