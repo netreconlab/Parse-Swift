@@ -260,34 +260,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(savedFile.url, response.url)
     }
 
-    func testSaveWithSpecifyingMime() async throws {
-        guard let sampleData = "Hello World".data(using: .utf8) else {
-            throw ParseError(code: .otherCause, message: "Should have converted to data")
-        }
-        let parseFile = ParseFile(data: sampleData, mimeType: "application/txt")
-
-        // swiftlint:disable:next line_length
-        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
-            XCTFail("Should create URL")
-            return
-        }
-        let response = FileUploadResponse(name: "89d74fcfa4faa5561799e5076593f67c_\(parseFile.name)", url: url)
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(response)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let savedFile = try await parseFile.save()
-        XCTAssertEqual(savedFile.name, response.name)
-        XCTAssertEqual(savedFile.url, response.url)
-    }
-
     @MainActor
     func testSaveLocalFile() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.txt")
@@ -322,6 +294,34 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
+    func testSaveWithSpecifyingMime() async throws {
+        guard let sampleData = "Hello World".data(using: .utf8) else {
+            throw ParseError(code: .otherCause, message: "Should have converted to data")
+        }
+        let parseFile = ParseFile(data: sampleData, mimeType: "application/txt")
+
+        // swiftlint:disable:next line_length
+        guard let url = URL(string: "http://localhost:1337/parse/files/applicationId/89d74fcfa4faa5561799e5076593f67c_file") else {
+            XCTFail("Should create URL")
+            return
+        }
+        let response = FileUploadResponse(name: "89d74fcfa4faa5561799e5076593f67c_\(parseFile.name)", url: url)
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(response)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let savedFile = try await parseFile.save()
+        XCTAssertEqual(savedFile.name, response.name)
+        XCTAssertEqual(savedFile.url, response.url)
+    }
+
     func testSaveCloudFile() async throws {
         guard let tempFilePath = URL(string: "https://parseplatform.org/img/logo.svg") else {
             XCTFail("Should create URL")

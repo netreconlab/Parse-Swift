@@ -196,7 +196,6 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: login1))
     }
 
-    @MainActor
     func testReplaceAnonymousUserSync() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -308,7 +307,6 @@ class ParseAnonymousTests: XCTestCase {
 
 #if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
 
-    @MainActor
     func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -378,7 +376,7 @@ class ParseAnonymousTests: XCTestCase {
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows)
-    @MainActor func testReplaceAnonymousUser() async throws {
+    func testReplaceAnonymousUser() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
         let user = try await User.current()
@@ -428,7 +426,6 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
-    @MainActor
     func testReplaceAnonymousUserBody() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
@@ -477,7 +474,6 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
-    @MainActor
     func testLoginAsync() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -526,7 +522,6 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
-    @MainActor
     func testLoginAuthDataAsync() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -575,7 +570,6 @@ class ParseAnonymousTests: XCTestCase {
         #endif
     }
 
-    @MainActor
     func testCantReplaceAnonymousWithDifferentUser() async throws {
         try await testLogin()
         let user = try await User.current()
