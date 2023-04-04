@@ -681,7 +681,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     #endif
 
-    @MainActor
     func testSaveFileStream() async throws {
         let tempFilePath = URL(fileURLWithPath: "\(temporaryDirectory)sampleData.dat")
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -836,7 +835,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
 
 #if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     #if !os(Linux) && !os(Android) && !os(Windows)
-    @MainActor
     func testSaveAysnc() async throws {
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -881,7 +879,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-    @MainActor
     func testSaveFileProgressAsync() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -928,7 +925,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-    @MainActor
     func testSaveFileCancelAsync() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -977,7 +973,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-    @MainActor
     func testSaveWithSpecifyingMimeAysnc() async throws {
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
