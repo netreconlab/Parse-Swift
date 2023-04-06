@@ -159,14 +159,20 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-tvos-5_5:
+  spm-test-5_5:
     timeout-minutes: 15
     needs: xcode-build-watchos
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v3
+    - name: Create and set the default keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary 
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(tvOS\) -destination platform\=tvOS\ Simulator,name\=Apple\ TV -derivedDataPath DerivedData clean test | xcpretty
+      run: swift test --enable-code-coverage -v
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov
@@ -174,12 +180,14 @@ jobs:
       id: coverage-files
       with:
         format: lcov
-        search-paths: ./DerivedData
+        search-paths: ./.build
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
-        env_vars: IOS_Earliest
+        env_vars: SPM_Earliest
         fail_ci_if_error: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
