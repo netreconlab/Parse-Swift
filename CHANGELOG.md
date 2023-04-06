@@ -9,7 +9,7 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.1...5.4.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.2/documentation/parseswift)
 
 __Fixes__
-* Add backwards compatability to Xcode 13.1 ([#90](https://github.com/netreconlab/Parse-Swift/pull/90)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Add backwards compatability to Xcode 13.1. Building on Xcode <13.3 only works for SPM ([#90](https://github.com/netreconlab/Parse-Swift/pull/90)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.4.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.0...5.4.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.1/documentation/parseswift)
