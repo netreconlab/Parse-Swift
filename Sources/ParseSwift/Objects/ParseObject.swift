@@ -909,8 +909,8 @@ extension ParseObject {
                                                ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
     }
 
-    internal func createCommand() async -> API.Command<Self, Self> {
-        await API.Command<Self, Self>.create(self)
+    internal func createCommand() async throws -> API.Command<Self, Self> {
+        try await API.Command<Self, Self>.create(self)
     }
 
     internal func replaceCommand() throws -> API.Command<Self, Self> {

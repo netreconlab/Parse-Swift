@@ -172,7 +172,8 @@ public extension ParseInstallation {
 // MARK: Convenience
 extension ParseInstallation {
 
-    func endpoint(_ method: API.Method) -> API.Endpoint {
+    func endpoint(_ method: API.Method) async throws -> API.Endpoint {
+        try await yieldIfNotInitialized()
         if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
             return endpoint
         } else {
@@ -727,17 +728,19 @@ extension ParseInstallation {
     }
 
     func saveCommand(ignoringCustomObjectIdConfig: Bool = false) async throws -> API.Command<Self, Self> {
+        try await yieldIfNotInitialized()
         if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
-        if isSaved {
+        if try await isSaved() {
             return try replaceCommand() // MARK: Should be switched to "updateCommand" when server supports PATCH.
         }
-        return await createCommand()
+        return try await createCommand()
     }
 
     // MARK: Saving ParseObjects - private
-    func createCommand() async -> API.Command<Self, Self> {
+    func createCommand() async throws -> API.Command<Self, Self> {
+        try await yieldIfNotInitialized()
         var object = self
         if object.ACL == nil,
             let acl = try? await ParseACL.defaultACL() {
@@ -747,7 +750,7 @@ extension ParseInstallation {
             try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
         }
         return API.Command<Self, Self>(method: .POST,
-                                       path: endpoint(.POST),
+                                       path: try await endpoint(.POST),
                                        body: object,
                                        mapper: mapper)
     }
@@ -854,8 +857,8 @@ extension ParseInstallation {
         }
     }
 
-    func deleteCommand() throws -> API.NonParseBodyCommand<NoBody, NoBody> {
-        guard isSaved else {
+    func deleteCommand() async throws -> API.NonParseBodyCommand<NoBody, NoBody> {
+        guard try await isSaved() else {
             throw ParseError(code: .otherCause, message: "Cannot Delete an object without id")
         }
 

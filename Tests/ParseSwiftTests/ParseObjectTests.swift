@@ -963,7 +963,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testCreateCommand() async throws {
         let score = GameScore(points: 10)
 
-        let command = await score.createCommand()
+        let command = try await score.createCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/classes/\(score.className)")
         XCTAssertEqual(command.method, API.Method.POST)
