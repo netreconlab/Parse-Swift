@@ -1123,7 +1123,8 @@ extension Query: Queryable {
 
 extension Query {
 
-    func findCommand() throws -> API.NonParseBodyCommand<Query<ResultType>, [ResultType]> {
+    func findCommand() async throws -> API.NonParseBodyCommand<Query<ResultType>, [ResultType]> {
+        try await yieldIfNotInitialized()
         if !Parse.configuration.isUsingPostForQuery {
             return API.NonParseBodyCommand(method: .GET,
                                            path: endpoint,
@@ -1139,7 +1140,8 @@ extension Query {
         }
     }
 
-    func firstCommand() throws -> API.NonParseBodyCommand<Query<ResultType>, ResultType> {
+    func firstCommand() async throws -> API.NonParseBodyCommand<Query<ResultType>, ResultType> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 1
         if !Parse.configuration.isUsingPostForQuery {
@@ -1163,7 +1165,8 @@ extension Query {
         }
     }
 
-    func countCommand() throws -> API.NonParseBodyCommand<Query<ResultType>, Int> {
+    func countCommand() async throws -> API.NonParseBodyCommand<Query<ResultType>, Int> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 0
         query.isCount = true
@@ -1182,7 +1185,8 @@ extension Query {
         }
     }
 
-    func withCountCommand() throws -> API.NonParseBodyCommand<Query<ResultType>, ([ResultType], Int)> {
+    func withCountCommand() async throws -> API.NonParseBodyCommand<Query<ResultType>, ([ResultType], Int)> {
+        try await yieldIfNotInitialized()
         var query = self
         query.isCount = true
         if !Parse.configuration.isUsingPostForQuery {
@@ -1202,7 +1206,8 @@ extension Query {
         }
     }
 
-    func aggregateCommand() throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [ResultType]> {
+    func aggregateCommand() async throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [ResultType]> {
+        try await yieldIfNotInitialized()
         let body = AggregateBody(query: self)
         if !Parse.configuration.isUsingPostForQuery {
             return API.NonParseBodyCommand(method: .GET,
@@ -1219,7 +1224,8 @@ extension Query {
         }
     }
 
-    func distinctCommand(key: String) throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [ResultType]> {
+    func distinctCommand(key: String) async throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [ResultType]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.distinct = key
         let body = DistinctBody(query: query)
@@ -1238,7 +1244,8 @@ extension Query {
         }
     }
 
-    func findExplainCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func findExplainCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         if !Parse.configuration.isUsingPostForQuery {
@@ -1256,7 +1263,8 @@ extension Query {
         }
     }
 
-    func firstExplainCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, U> {
+    func firstExplainCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, U> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 1
         query.explain = true
@@ -1289,7 +1297,8 @@ extension Query {
         }
     }
 
-    func countExplainCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func countExplainCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 1
         query.isCount = true
@@ -1309,7 +1318,8 @@ extension Query {
         }
     }
 
-    func withCountExplainCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func withCountExplainCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.isCount = true
         query.explain = true
@@ -1328,7 +1338,9 @@ extension Query {
         }
     }
 
-    func aggregateExplainCommand<U: Decodable>() throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [U]> {
+    // swiftlint:disable:next line_length
+    func aggregateExplainCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         let body = AggregateBody(query: query)
@@ -1348,7 +1360,8 @@ extension Query {
     }
 
     // swiftlint:disable:next line_length
-    func distinctExplainCommand<U: Decodable>(key: String) throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [U]> {
+    func distinctExplainCommand<U: Decodable>(key: String) async throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         query.distinct = key
@@ -1366,7 +1379,8 @@ extension Query {
         }
     }
 
-    func findExplainMongoCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func findExplainMongoCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         if !Parse.configuration.isUsingPostForQuery {
@@ -1384,7 +1398,8 @@ extension Query {
         }
     }
 
-    func firstExplainMongoCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, U> {
+    func firstExplainMongoCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, U> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 1
         query.explain = true
@@ -1413,7 +1428,8 @@ extension Query {
         }
     }
 
-    func countExplainMongoCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func countExplainMongoCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.limit = 1
         query.isCount = true
@@ -1433,7 +1449,8 @@ extension Query {
         }
     }
 
-    func withCountExplainMongoCommand<U: Decodable>() throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+    func withCountExplainMongoCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<Query<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.isCount = true
         query.explain = true
@@ -1453,7 +1470,8 @@ extension Query {
     }
 
     // swiftlint:disable:next line_length
-    func aggregateExplainMongoCommand<U: Decodable>() throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [U]> {
+    func aggregateExplainMongoCommand<U: Decodable>() async throws -> API.NonParseBodyCommand<AggregateBody<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         let body = AggregateBody(query: query)
@@ -1473,7 +1491,8 @@ extension Query {
     }
 
     // swiftlint:disable:next line_length
-    func distinctExplainMongoCommand<U: Decodable>(key: String) throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [U]> {
+    func distinctExplainMongoCommand<U: Decodable>(key: String) async throws -> API.NonParseBodyCommand<DistinctBody<ResultType>, [U]> {
+        try await yieldIfNotInitialized()
         var query = self
         query.explain = true
         query.distinct = key

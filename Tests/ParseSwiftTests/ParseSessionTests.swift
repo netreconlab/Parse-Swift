@@ -127,36 +127,29 @@ class ParseSessionTests: XCTestCase {
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testParseURLSessionCustomCertificatePinning() throws {
+    func testParseURLSessionCustomCertificatePinning() async throws {
         guard let url = URL(string: "http://localhost:1337/parse") else {
             XCTFail("Should create valid URL")
             return
         }
-        let expectation1 = XCTestExpectation(description: "Authentication")
-        Task {
-            do {
-                try await ParseSwift.initialize(applicationId: "applicationId",
-                                                clientKey: "clientKey",
-                                                primaryKey: "primaryKey",
-                                                serverURL: url,
-                                                // swiftlint:disable:next line_length
-                                                testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
-                    completion(.cancelAuthenticationChallenge, .none)
-                }
-
-                URLSession.parse.delegate?.urlSession?(URLSession.parse,
-                                                       didReceive: .init()) { (challenge, credential) -> Void in
-                    XCTAssertEqual(challenge, .cancelAuthenticationChallenge)
-                    XCTAssertEqual(credential, .none)
-                    expectation1.fulfill()
-                }
-            } catch {
-                XCTFail("Should not have thrown: \(error)")
-                expectation1.fulfill()
-            }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        // swiftlint:disable:next line_length
+                                        testing: false) {(_: URLAuthenticationChallenge, completion: (_: URLSession.AuthChallengeDisposition, _: URLCredential?) -> Void) in
+            completion(.cancelAuthenticationChallenge, .none)
         }
 
-        wait(for: [expectation1], timeout: 10.0)
+        guard let delegate = URLSession.parse.delegate else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let session = await delegate.urlSession!(URLSession.parse,
+                                                 didReceive: .init())
+        XCTAssertEqual(session.0, .cancelAuthenticationChallenge)
+        XCTAssertEqual(session.1, .none)
     }
 
     func testParseURLSessionUpdateCertificatePinning() throws {

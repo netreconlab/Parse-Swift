@@ -1293,7 +1293,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testCreateCommand() async throws {
         let user = User()
 
-        let command = await user.createCommand()
+        let command = try await user.createCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/users")
         XCTAssertEqual(command.method, API.Method.POST)
