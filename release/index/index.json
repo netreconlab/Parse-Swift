@@ -812,6 +812,15 @@
                 "type" : "property"
               },
               {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/objectable\/issaved()",
+                "title" : "func isSaved() async throws -> Bool",
+                "type" : "method"
+              },
+              {
                 "title" : "Type Properties",
                 "type" : "groupMarker"
               },
@@ -1934,13 +1943,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -11590,6 +11599,15 @@
                     "path" : "\/documentation\/parseswift\/parsepushstatus\/issaved",
                     "title" : "var isSaved: Bool",
                     "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsepushstatus\/issaved()",
+                    "title" : "func isSaved() async throws -> Bool",
+                    "type" : "method"
                   },
                   {
                     "title" : "Type Properties",
