@@ -65,14 +65,13 @@ public extension Objectable {
     }
 
     var className: String {
-        return Self.className
+        Self.className
     }
 
     var endpoint: API.Endpoint {
         if let objectId = objectId {
             return .object(className: className, objectId: objectId)
         }
-
         return .objects(className: className)
     }
 
@@ -120,7 +119,7 @@ extension Objectable {
     }
 
     func toPointer() throws -> PointerType {
-        return try PointerType(self)
+        try PointerType(self)
     }
 }
 

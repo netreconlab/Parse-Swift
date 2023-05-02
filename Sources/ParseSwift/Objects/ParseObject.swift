@@ -200,11 +200,11 @@ public extension ParseObject {
     }
 
     func hasSameObjectId<T: ParseObject>(as other: T) -> Bool {
-        return other.className == className && other.objectId == objectId && objectId != nil
+        other.className == className && other.objectId == objectId && objectId != nil
     }
 
     func toPointer() throws -> Pointer<Self> {
-        return try Pointer(self)
+        try Pointer(self)
     }
 
     func shouldRestoreKey<W>(_ keyPath: KeyPath<Self, W?>,
