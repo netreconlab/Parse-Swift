@@ -37,26 +37,66 @@ public protocol Objectable: ParseEncodable, Decodable {
     var ACL: ParseACL? { get set }
 
     /**
-     The Parse Server endpoint for this ParseObject.
+     The Parse Server endpoint for this object.
      */
     var endpoint: API.Endpoint { get }
+
+    /**
+     The Parse Server endpoint for this object.
+     - returns: Returns the `API.Endpoint` for this object.
+     - throws: An error of `ParseError` type.
+     */
+    func endpoint(_ method: API.Method) async throws -> API.Endpoint
+
+    /**
+     Specifies if this object has been saved.
+     - returns: Returns **true** if this object is saved, **false** otherwise.
+     - throws: An error of `ParseError` type.
+     */
+    func isSaved() async throws -> Bool
 }
 
-extension Objectable {
-    /**
-    The class name of the object.
-    */
-    public static var className: String {
+// MARK: Default Implementation
+public extension Objectable {
+
+    static var className: String {
         let classType = "\(type(of: self))"
         return classType.components(separatedBy: ".").first ?? "" // strip .Type
     }
 
-    /**
-    The class name of the object.
-    */
-    public var className: String {
+    var className: String {
         return Self.className
     }
+
+    var endpoint: API.Endpoint {
+        if let objectId = objectId {
+            return .object(className: className, objectId: objectId)
+        }
+
+        return .objects(className: className)
+    }
+
+    func isSaved() async throws -> Bool {
+        try await yieldIfNotInitialized()
+        if !Parse.configuration.isRequiringCustomObjectIds {
+            return objectId != nil
+        } else {
+            return objectId != nil && createdAt != nil
+        }
+    }
+
+    func endpoint(_ method: API.Method) async throws -> API.Endpoint {
+        try await yieldIfNotInitialized()
+        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
+            return endpoint
+        } else {
+            return .objects(className: className)
+        }
+    }
+}
+
+// MARK: Convenience
+extension Objectable {
 
     static func createHash(_ object: Encodable) throws -> String {
         let encoded = try ParseCoding.parseEncoder().encode(object,
@@ -66,17 +106,6 @@ extension Objectable {
             throw ParseError(code: .otherCause, message: "Could not create hash")
         }
         return hashString
-    }
-}
-
-// MARK: Convenience
-extension Objectable {
-    public var endpoint: API.Endpoint {
-        if let objectId = objectId {
-            return .object(className: className, objectId: objectId)
-        }
-
-        return .objects(className: className)
     }
 
     /// Specifies if a `ParseObject` has been saved.
@@ -90,27 +119,8 @@ extension Objectable {
         }
     }
 
-    /// Specifies if a `ParseObject` has been saved.
-    public func isSaved() async throws -> Bool {
-        try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds {
-            return objectId != nil
-        } else {
-            return objectId != nil && createdAt != nil
-        }
-    }
-
     func toPointer() throws -> PointerType {
         return try PointerType(self)
-    }
-
-    func endpoint(_ method: API.Method) async throws -> API.Endpoint {
-        try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
-            return endpoint
-        } else {
-            return .objects(className: className)
-        }
     }
 }
 
