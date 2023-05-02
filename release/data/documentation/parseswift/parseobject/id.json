@@ -148,7 +148,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : "’s to be used even when they are not saved and do not have an ",
+                  "text" : "’s to be used even if they have not been saved and\/or missing an ",
                   "type" : "text"
                 },
                 {
@@ -196,7 +196,15 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " is saved.",
+                  "text" : " contains an ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "objectId",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
                   "type" : "text"
                 }
               ],

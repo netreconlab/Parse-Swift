@@ -42,6 +42,7 @@
     {
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/endpoint(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/isSaved()"
       ],
       "title" : "Instance Methods"
@@ -246,10 +247,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/endpoint": {
   "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -289,6 +287,86 @@
   "title" : "endpoint",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus\/endpoint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/endpoint(_:)": {
+  "abstract" : [
+    {
+      "text" : "The Parse Server endpoint for this object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "endpoint"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV",
+      "text" : "API"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV6MethodO",
+      "text" : "Method"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV",
+      "text" : "API"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV8EndpointO",
+      "text" : "Endpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/endpoint(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "endpoint(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushstatus\/endpoint(_:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/isSaved": {
   "abstract" : [
@@ -338,15 +416,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/isSaved()": {
   "abstract" : [
     {
-      "text" : "Specifies if a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " has been saved.",
+      "text" : "Specifies if this object has been saved.",
       "type" : "text"
     }
   ],

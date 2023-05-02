@@ -774,7 +774,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-7sv7"
       ],
       "title" : "Initializers"
     },
@@ -801,7 +801,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/getDecoder()-swift.method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/getEncoder()-swift.method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/getJSONEncoder()-swift.method",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)-5gkd9",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/isDirtyForKey(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/merge(with:)-6romo",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeParse(with:)-9yft4",
@@ -820,7 +820,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/savePublisher(ignoringCustomObjectIdConfig:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/set(_:to:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/shouldRestoreKey(_:original:)-9ntkl",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-413zu"
       ],
       "title" : "Instance Methods"
     },
@@ -2561,13 +2561,14 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/getjsonencoder()-swift.type.method"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/hasSameObjectId(as:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/hasSameObjectId(as:)-5gkd9": {
   "abstract" : [
     {
       "text" : "Determines if two objects have the same objectId.",
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -2603,7 +2604,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6ObjectPAAE07hasSameC2Id2asSbqd___tAaBRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A6ObjectP07hasSameC2Id2asSbqd___tAaBRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -2616,12 +2617,13 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)-5gkd9",
   "kind" : "symbol",
+  "required" : true,
   "role" : "symbol",
   "title" : "hasSameObjectId(as:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)"
+  "url" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)-5gkd9"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/id": {
   "abstract" : [
@@ -2730,7 +2732,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/init()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)-7sv7": {
   "abstract" : [
     {
       "text" : "Creates a ",
@@ -2769,6 +2771,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "identifier",
@@ -2796,12 +2799,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-7sv7",
   "kind" : "symbol",
+  "required" : true,
   "role" : "symbol",
   "title" : "init(objectId:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)"
+  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)-7sv7"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/isDirtyForKey(_:)": {
   "abstract" : [
@@ -5610,7 +5614,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/shouldrestorekey(_:original:)-9ntkl"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/toPointer()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/toPointer()-413zu": {
   "abstract" : [
     {
       "text" : "Converts this ",
@@ -5625,6 +5629,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -5668,12 +5673,13 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-413zu",
   "kind" : "symbol",
+  "required" : true,
   "role" : "symbol",
   "title" : "toPointer()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/topointer()"
+  "url" : "\/documentation\/parseswift\/parseobject\/topointer()-413zu"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
   "abstract" : [

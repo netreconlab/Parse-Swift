@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "The Parse Server endpoint for this ParseObject.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Objectable.endpoint",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -273,10 +281,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/endpoint": {
   "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {

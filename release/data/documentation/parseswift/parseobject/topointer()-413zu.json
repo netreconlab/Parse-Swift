@@ -13,6 +13,14 @@
       "type" : "text"
     }
   ],
+  "defaultImplementationsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-4qih8"
+      ],
+      "title" : "ParseObject Implementations"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -23,12 +31,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-413zu"
   },
   "kind" : "symbol",
   "metadata" : {
-    "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE9toPointerAA0E0VyxGyKF",
+    "externalID" : "s:10ParseSwift0A6ObjectP9toPointerAA0E0VyxGyKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -77,6 +84,7 @@
         "name" : "ParseSwift"
       }
     ],
+    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
@@ -184,7 +192,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseobject\/topointer()"
+        "\/documentation\/parseswift\/parseobject\/topointer()-413zu"
       ],
       "traits" : [
         {
@@ -259,7 +267,74 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/toPointer()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/toPointer()-413zu": {
+  "abstract" : [
+    {
+      "text" : "Converts this ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " to a Parse Pointer.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toPointer"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift7PointerV",
+      "text" : "Pointer"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-413zu",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "toPointer()",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject\/topointer()-413zu"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/toPointer()-4qih8": {
   "abstract" : [
     {
       "text" : "Converts this ",
@@ -317,12 +392,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-4qih8",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "toPointer()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/topointer()"
+  "url" : "\/documentation\/parseswift\/parseobject\/topointer()-4qih8"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Pointer": {
   "abstract" : [

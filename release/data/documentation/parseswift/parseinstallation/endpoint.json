@@ -1,16 +1,9 @@
 {
-  "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/Objectable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation"
       ]
     ]
   },
@@ -312,23 +305,9 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseinstallation"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/Objectable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation\/Objectable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Objectable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseinstallation\/objectable-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation/endpoint": {
   "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {

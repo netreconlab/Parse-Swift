@@ -797,11 +797,6 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/objectable\/issaved",
-                "title" : "var isSaved: Bool",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/objectable\/objectid",
                 "title" : "var objectId: String?",
                 "type" : "property"
@@ -816,7 +811,43 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/objectable\/issaved()",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint(_:)-4acal",
+                        "title" : "func endpoint(API.Method) async throws -> API.Endpoint",
+                        "type" : "method"
+                      }
+                    ],
+                    "title" : "Objectable Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/objectable\/endpoint(_:)-26c5h",
+                "title" : "func endpoint(API.Method) async throws -> API.Endpoint",
+                "type" : "method"
+              },
+              {
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
+                        "title" : "func isSaved() async throws -> Bool",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/issaved",
+                        "title" : "var isSaved: Bool",
+                        "type" : "property"
+                      }
+                    ],
+                    "title" : "Objectable Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/objectable\/issaved()-2szlz",
                 "title" : "func isSaved() async throws -> Bool",
                 "type" : "method"
               },
@@ -1715,6 +1746,11 @@
                 "type" : "property"
               },
               {
+                "path" : "\/documentation\/parseswift\/parseinstallation\/endpoint",
+                "title" : "var endpoint: API.Endpoint",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parseinstallation\/installationid",
                 "title" : "var installationId: String?",
                 "type" : "property"
@@ -1864,15 +1900,6 @@
               {
                 "children" : [
                   {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseinstallation\/endpoint",
-                    "title" : "var endpoint: API.Endpoint",
-                    "type" : "property"
-                  },
-                  {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
                   },
@@ -1920,13 +1947,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -1943,13 +1970,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -2014,7 +2041,20 @@
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseobject\/init(objectid:)",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/init(objectid:)-6r6xq",
+                        "title" : "init(objectId: String)",
+                        "type" : "init"
+                      }
+                    ],
+                    "title" : "ParseObject Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseobject\/init(objectid:)-7sv7",
                 "title" : "init(objectId: String)",
                 "type" : "init"
               },
@@ -2120,7 +2160,20 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)-84qh",
+                        "title" : "func hasSameObjectId<T>(as: T) -> Bool",
+                        "type" : "method"
+                      }
+                    ],
+                    "title" : "ParseObject Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)-5gkd9",
                 "title" : "func hasSameObjectId<T>(as: T) -> Bool",
                 "type" : "method"
               },
@@ -2320,7 +2373,20 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseobject\/topointer()",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/topointer()-4qih8",
+                        "title" : "func toPointer() throws -> Pointer<Self>",
+                        "type" : "method"
+                      }
+                    ],
+                    "title" : "ParseObject Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseobject\/topointer()-413zu",
                 "title" : "func toPointer() throws -> Pointer<Self>",
                 "type" : "method"
               },
@@ -2882,6 +2948,11 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/parseswift\/parserole\/endpoint",
+                "title" : "var endpoint: API.Endpoint",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parserole\/name",
                 "title" : "var name: String?",
                 "type" : "property"
@@ -2959,15 +3030,6 @@
               {
                 "children" : [
                   {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parserole\/endpoint",
-                    "title" : "var endpoint: API.Endpoint",
-                    "type" : "property"
-                  },
-                  {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
                   },
@@ -3007,6 +3069,11 @@
                 "type" : "property"
               },
               {
+                "path" : "\/documentation\/parseswift\/parsesession\/endpoint",
+                "title" : "var endpoint: API.Endpoint",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parsesession\/expiresat",
                 "title" : "var expiresAt: Date",
                 "type" : "property"
@@ -3037,15 +3104,6 @@
               },
               {
                 "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parsesession\/endpoint",
-                    "title" : "var endpoint: API.Endpoint",
-                    "type" : "property"
-                  },
                   {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
@@ -3137,6 +3195,11 @@
               {
                 "path" : "\/documentation\/parseswift\/parseuser\/emailverified",
                 "title" : "var emailVerified: Bool?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parseuser\/endpoint",
+                "title" : "var endpoint: API.Endpoint",
                 "type" : "property"
               },
               {
@@ -3562,15 +3625,6 @@
               },
               {
                 "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseuser\/endpoint",
-                    "title" : "var endpoint: API.Endpoint",
-                    "type" : "property"
-                  },
                   {
                     "title" : "Type Properties",
                     "type" : "groupMarker"
@@ -4023,6 +4077,101 @@
                 ],
                 "path" : "\/documentation\/parseswift\/api\/endpoint",
                 "title" : "API.Endpoint",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/delete",
+                    "title" : "case DELETE",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/get",
+                    "title" : "case GET",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/patch",
+                    "title" : "case PATCH",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/post",
+                    "title" : "case POST",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/put",
+                    "title" : "case PUT",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/api\/method\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/api\/method\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/api\/method\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/api\/method\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/api\/method\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/api\/method\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/api\/method\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/api\/method",
+                "title" : "API.Method",
                 "type" : "enum"
               },
               {
@@ -11603,6 +11752,11 @@
                   {
                     "title" : "Instance Methods",
                     "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsepushstatus\/endpoint(_:)",
+                    "title" : "func endpoint(API.Method) async throws -> API.Endpoint",
+                    "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parsepushstatus\/issaved()",

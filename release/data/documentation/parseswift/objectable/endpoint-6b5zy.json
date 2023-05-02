@@ -1,10 +1,4 @@
 {
-  "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -271,7 +265,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint-65g5f": {
   "abstract" : [
     {
-      "text" : "The Parse Server endpoint for this ParseObject.",
+      "text" : "The Parse Server endpoint for this object.",
       "type" : "text"
     }
   ],
@@ -318,10 +312,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint-6b5zy": {
   "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this ParseObject.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {

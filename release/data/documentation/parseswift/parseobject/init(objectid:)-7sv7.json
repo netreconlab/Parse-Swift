@@ -37,6 +37,14 @@
       "type" : "text"
     }
   ],
+  "defaultImplementationsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-6r6xq"
+      ],
+      "title" : "ParseObject Implementations"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -47,12 +55,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-7sv7"
   },
   "kind" : "symbol",
   "metadata" : {
-    "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE8objectIdxSS_tcfc",
+    "externalID" : "s:10ParseSwift0A6ObjectP8objectIdxSS_tcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -85,6 +92,7 @@
         "name" : "ParseSwift"
       }
     ],
+    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Initializer",
     "symbolKind" : "init",
@@ -211,7 +219,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseobject\/init(objectid:)"
+        "\/documentation\/parseswift\/parseobject\/init(objectid:)-7sv7"
       ],
       "traits" : [
         {
@@ -286,7 +294,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)-6r6xq": {
   "abstract" : [
     {
       "text" : "Creates a ",
@@ -352,12 +360,87 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-6r6xq",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(objectId:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)"
+  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)-6r6xq"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/init(objectId:)-7sv7": {
+  "abstract" : [
+    {
+      "text" : "Creates a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " with a specified ",
+      "type" : "text"
+    },
+    {
+      "code" : "objectId",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". Can be used to create references or associations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "between ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "objectId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-7sv7",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "init(objectId:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject\/init(objectid:)-7sv7"
 },
 "https://github.com/parse-community/Parse-Swift/pull/315#issuecomment-1014701003": {
   "identifier" : "https:\/\/github.com\/parse-community\/Parse-Swift\/pull\/315#issuecomment-1014701003",

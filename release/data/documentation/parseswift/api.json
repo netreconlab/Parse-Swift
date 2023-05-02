@@ -96,6 +96,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Option"
       ],
       "title" : "Enumerations"
@@ -193,6 +194,37 @@
   "title" : "API.Endpoint",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/endpoint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Method": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Method"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Method",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Method"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "API.Method",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/api\/method"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Option": {
   "abstract" : [

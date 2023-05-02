@@ -1,16 +1,17 @@
 {
   "abstract" : [
     {
-      "text" : "Specifies if a ",
+      "text" : "Specifies if this object has been saved.",
       "type" : "text"
-    },
+    }
+  ],
+  "defaultImplementationsSections" : [
     {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " has been saved.",
-      "type" : "text"
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-9c65v",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved"
+      ],
+      "title" : "Objectable Implementations"
     }
   ],
   "hierarchy" : {
@@ -23,12 +24,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-2szlz"
   },
   "kind" : "symbol",
   "metadata" : {
-    "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift10ObjectablePAAE7isSavedSbyYaKF",
+    "externalID" : "s:10ParseSwift10ObjectableP7isSavedSbyYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -73,6 +73,7 @@
         "name" : "ParseSwift"
       }
     ],
+    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
@@ -130,6 +131,87 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Returns ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "true",
+                  "type" : "text"
+                }
+              ],
+              "type" : "strong"
+            },
+            {
+              "text" : " if this object is saved, ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "false",
+                  "type" : "text"
+                }
+              ],
+              "type" : "strong"
+            },
+            {
+              "text" : " otherwise.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "An error of ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseError",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " type.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Throws",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -143,7 +225,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/objectable\/issaved()"
+        "\/documentation\/parseswift\/objectable\/issaved()-2szlz"
       ],
       "traits" : [
         {
@@ -210,7 +292,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved()": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved": {
   "abstract" : [
     {
       "text" : "Specifies if a ",
@@ -222,6 +304,98 @@
     },
     {
       "text" : " has been saved.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isSaved"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isSaved",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/objectable\/issaved"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved()-2szlz": {
+  "abstract" : [
+    {
+      "text" : "Specifies if this object has been saved.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 2,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isSaved"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-2szlz",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "isSaved()",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/objectable\/issaved()-2szlz"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved()-9c65v": {
+  "abstract" : [
+    {
+      "text" : "Specifies if this object has been saved.",
       "type" : "text"
     }
   ],
@@ -264,12 +438,12 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-9c65v",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isSaved()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/issaved()"
+  "url" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v"
 }
 }
 }
