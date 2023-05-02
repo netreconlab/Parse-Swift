@@ -33,31 +33,6 @@ internal extension API {
             self.mapper = mapper
         }
 
-        /*
-        func execute(options: API.Options) throws -> U {
-            var responseResult: Result<U, ParseError>?
-            let synchronizationQueue = DispatchQueue(label: "com.parse.NonParseBodyCommand.sync.\(UUID().uuidString)",
-                                                     qos: .default,
-                                                     attributes: .concurrent,
-                                                     autoreleaseFrequency: .inherit,
-                                                     target: nil)
-            let group = DispatchGroup()
-            group.enter()
-            self.executeAsync(options: options,
-                              callbackQueue: synchronizationQueue,
-                              allowIntermediateResponses: false) { result in
-                responseResult = result
-                group.leave()
-            }
-            group.wait()
-
-            guard let response = responseResult else {
-                throw ParseError(code: .otherCause,
-                                 message: "Could not unrwrap server response")
-            }
-            return try response.get()
-        } */
-
         // MARK: Asynchronous Execution
         func execute(options: API.Options,
                      callbackQueue: DispatchQueue,

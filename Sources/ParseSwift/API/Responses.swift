@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal struct CreateResponse: Decodable {
+struct CreateResponse: Decodable {
     var objectId: String
     var createdAt: Date
     var updatedAt: Date {
@@ -24,7 +24,7 @@ internal struct CreateResponse: Decodable {
     }
 }
 
-internal struct ReplaceResponse: Decodable {
+struct ReplaceResponse: Decodable {
     var createdAt: Date?
     var updatedAt: Date?
 
@@ -45,7 +45,7 @@ internal struct ReplaceResponse: Decodable {
     }
 }
 
-internal struct UpdateResponse: Decodable {
+struct UpdateResponse: Decodable {
     var updatedAt: Date
 
     func apply<T>(to object: T) -> T where T: ParseObject {
@@ -55,18 +55,18 @@ internal struct UpdateResponse: Decodable {
     }
 }
 
-internal struct UpdateSessionTokenResponse: Decodable {
+struct UpdateSessionTokenResponse: Decodable {
     var updatedAt: Date
     let sessionToken: String?
 }
 
 // MARK: ParseObject Batch
-internal struct BatchResponseItem<T>: Codable where T: Codable {
+struct BatchResponseItem<T>: Codable where T: Codable {
     let success: T?
     let error: ParseError?
 }
 
-internal struct BatchResponse: Codable {
+struct BatchResponse: Codable {
     var objectId: String?
     var createdAt: Date?
     var updatedAt: Date?
@@ -112,13 +112,13 @@ internal struct BatchResponse: Codable {
 }
 
 // MARK: Query
-internal struct QueryResponse<T>: Codable where T: ParseObject {
+struct QueryResponse<T>: Codable where T: ParseObject {
     let results: [T]
     let count: Int?
 }
 
 // MARK: ParseUser
-internal struct LoginSignupResponse: Codable {
+struct LoginSignupResponse: Codable {
     let createdAt: Date
     let objectId: String
     let sessionToken: String
@@ -137,7 +137,7 @@ internal struct LoginSignupResponse: Codable {
 }
 
 // MARK: ParseFile
-internal struct FileUploadResponse: Codable {
+struct FileUploadResponse: Codable {
     let name: String
     let url: URL
 
@@ -150,35 +150,35 @@ internal struct FileUploadResponse: Codable {
 }
 
 // MARK: AnyResultResponse
-internal struct AnyResultResponse<U: Decodable>: Decodable {
+struct AnyResultResponse<U: Decodable>: Decodable {
     let result: U
 }
 
 // MARK: AnyResultsResponse
-internal struct AnyResultsResponse<U: Decodable>: Decodable {
+struct AnyResultsResponse<U: Decodable>: Decodable {
     let results: [U]
 }
 
-internal struct AnyResultsMongoResponse<U: Decodable>: Decodable {
+struct AnyResultsMongoResponse<U: Decodable>: Decodable {
     let results: U
 }
 
 // MARK: ConfigResponse
-internal struct ConfigFetchResponse<T>: Codable where T: ParseConfig {
+struct ConfigFetchResponse<T>: Codable where T: ParseConfig {
     let params: T
 }
 
-internal struct BooleanResponse: Codable {
+struct BooleanResponse: Codable {
     let result: Bool
 }
 
 // MARK: HealthResponse
-internal struct HealthResponse: Codable {
+struct HealthResponse: Codable {
     let status: ParseHealth.Status
 }
 
 // MARK: PushResponse
-internal struct PushResponse: Codable {
+struct PushResponse: Codable {
     let data: Data
     let statusId: String
 }

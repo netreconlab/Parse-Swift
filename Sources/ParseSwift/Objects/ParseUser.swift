@@ -1084,7 +1084,7 @@ extension ParseUser {
         if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
-        if isSaved {
+        if try await isSaved() {
             return try await replaceCommand() // MARK: Should be switched to "updateCommand" when server supports PATCH.
         }
         return try await createCommand()

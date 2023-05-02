@@ -34,15 +34,3 @@ extension ParseTypeable {
         debugDescription
     }
 }
-
-extension ParseTypeable {
-
-    static func createSynchronizationQueue(_ label: String) -> DispatchQueue {
-        DispatchQueue(label: "parse.\(label).\(UUID().uuidString)",
-                      qos: .default,
-                      attributes: .concurrent,
-                      autoreleaseFrequency: .inherit,
-                      target: nil)
-    }
-
-}

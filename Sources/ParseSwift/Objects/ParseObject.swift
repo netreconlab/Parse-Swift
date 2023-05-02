@@ -83,6 +83,30 @@ public protocol ParseObject: ParseTypeable,
     init()
 
     /**
+     Creates a `ParseObject` with a specified `objectId`. Can be used to create references or associations
+     between `ParseObject`'s.
+     - warning: It is required that all added properties be optional properties so they can eventually be used as
+     Parse `Pointer`'s. If a developer really wants to have a required key, they should require it on the server-side or
+     create methods to check the respective properties on the client-side before saving objects. See
+     [here](https://github.com/parse-community/Parse-Swift/pull/315#issuecomment-1014701003)
+     for more information.
+     */
+    init(objectId: String)
+
+    /**
+     Determines if two objects have the same objectId.
+     - parameter as: Object to compare.
+     - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
+    */
+    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool
+
+    /**
+     Converts this `ParseObject` to a Parse Pointer.
+     - returns: The pointer version of the `ParseObject`, Pointer<Self>.
+    */
+    func toPointer() throws -> Pointer<Self>
+
+    /**
      Determines if a `KeyPath` of the current `ParseObject` should be restored
      by comparing it to another `ParseObject`.
      - parameter keyPath: The `KeyPath` to check.
@@ -149,28 +173,10 @@ public protocol ParseObject: ParseTypeable,
 public extension ParseObject {
 
     /**
-     Creates a `ParseObject` with a specified `objectId`. Can be used to create references or associations
-     between `ParseObject`'s.
-     - warning: It is required that all added properties be optional properties so they can eventually be used as
-     Parse `Pointer`'s. If a developer really wants to have a required key, they should require it on the server-side or
-     create methods to check the respective properties on the client-side before saving objects. See
-     [here](https://github.com/parse-community/Parse-Swift/pull/315#issuecomment-1014701003)
-     for more information.
-     */
-    init(objectId: String) {
-        self.init()
-        self.objectId = objectId
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-
-    /**
      A computed property that is a unique identifier and makes it easy to use `ParseObject`'s
      as models in MVVM and SwiftUI.
-     - note: `id` allows `ParseObject`'s to be used even when they are not saved and do not have an `objectId`.
-     - important: `id` will have the same value as `objectId` when a `ParseObject` is saved.
+     - note: `id` allows `ParseObject`'s to be used even if they have not been saved and/or missing an `objectId`.
+     - important: `id` will have the same value as `objectId` when a `ParseObject` contains an `objectId`.
     */
     var id: String {
         objectId ?? UUID().uuidString
@@ -188,21 +194,17 @@ public extension ParseObject {
         return object
     }
 
-    /**
-     Determines if two objects have the same objectId.
-     - parameter as: Object to compare.
-     - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
-    */
-    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool {
-        return other.className == className && other.objectId == objectId && objectId != nil
+    init(objectId: String) {
+        self.init()
+        self.objectId = objectId
     }
 
-    /**
-     Converts this `ParseObject` to a Parse Pointer.
-     - returns: The pointer version of the `ParseObject`, Pointer<Self>.
-    */
+    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool {
+        other.className == className && other.objectId == objectId && objectId != nil
+    }
+
     func toPointer() throws -> Pointer<Self> {
-        return try Pointer(self)
+        try Pointer(self)
     }
 
     func shouldRestoreKey<W>(_ keyPath: KeyPath<Self, W?>,
@@ -237,6 +239,13 @@ extension ParseObject {
     func shouldRevertKey<W>(_ keyPath: KeyPath<Self, W?>,
                             original: Self) -> Bool where W: Equatable {
         original[keyPath: keyPath] != self[keyPath: keyPath]
+    }
+}
+
+// MARK: Hashable
+public extension ParseObject {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
     }
 }
 
