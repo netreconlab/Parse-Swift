@@ -214,7 +214,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     func testCreateCommand() async throws {
         let installation = Installation()
 
-        let command = await installation.createCommand()
+        let command = try await installation.createCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/installations")
         XCTAssertEqual(command.method, API.Method.POST)
@@ -1820,14 +1820,19 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var installation = Installation()
         let objectId = "yarr"
         installation.objectId = objectId
-        let command = try installation.deleteCommand()
+        let command = try await installation.deleteCommand()
         XCTAssertNotNil(command)
         XCTAssertEqual(command.path.urlComponent, "/installations/\(objectId)")
         XCTAssertEqual(command.method, API.Method.DELETE)
         XCTAssertNil(command.body)
 
         let installation2 = Installation()
-        XCTAssertThrowsError(try installation2.deleteCommand())
+        do {
+            _ = try await installation2.deleteCommand()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertNotNil(error as? ParseError)
+        }
     }
 
     func testDeleteCurrent() async throws {

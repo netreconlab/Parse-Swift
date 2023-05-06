@@ -193,7 +193,8 @@ extension ParseFile {
         return options
     }
 
-    func checkDownloadsForFile(options: API.Options) throws -> ParseFile? {
+    func checkDownloadsForFile(options: API.Options) async throws -> ParseFile? {
+        try await yieldIfNotInitialized()
         var cachePolicy: URLRequest.CachePolicy = Parse.configuration.requestCachePolicy
         var shouldBreak = false
         for option in options {
@@ -481,23 +482,23 @@ extension ParseFile {
                       progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
                       completion: @escaping (Result<Self, ParseError>) -> Void) {
         let options = setDefaultOptions(options)
-        do {
-            guard let file = try checkDownloadsForFile(options: options) else {
-                throw ParseError(code: .unsavedFileFailure,
-                                 message: "File not downloaded")
-            }
-            callbackQueue.async {
-                completion(.success(file))
-            }
-        } catch {
-            let parseError = error as? ParseError ?? ParseError(swift: error)
-            guard parseError.code != .unsavedFileFailure else {
-                callbackQueue.async {
-                    completion(.failure(parseError))
+        Task {
+            do {
+                guard let file = try await checkDownloadsForFile(options: options) else {
+                    throw ParseError(code: .unsavedFileFailure,
+                                     message: "File not downloaded")
                 }
-                return
-            }
-            Task {
+                callbackQueue.async {
+                    completion(.success(file))
+                }
+            } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
+                guard parseError.code != .unsavedFileFailure else {
+                    callbackQueue.async {
+                        completion(.failure(parseError))
+                    }
+                    return
+                }
                 await downloadFileCommand()
                     .execute(options: options,
                              callbackQueue: callbackQueue,

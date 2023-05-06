@@ -414,9 +414,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(query.`where`.constraints.values.count, 2)
     }
 
-    func testFindCommand() throws {
+    func testFindCommand() async throws {
         let query = GameScore.query
-        let command = try query.findCommand()
+        let command = try await query.findCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -432,10 +432,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(query.description, expected)
     }
 
-    func testFindExplainCommand() throws {
+    func testFindExplainCommand() async throws {
         let query = GameScore.query()
         let command: API.NonParseBodyCommand<Query<ParseQueryTests.GameScore>,
-                                             [GameScore]> = try query.findExplainCommand()
+                                             [GameScore]> = try await query.findExplainCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"explain\":true,\"limit\":100,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -757,9 +757,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testFirstCommand() throws {
+    func testFirstCommand() async throws {
         let query = GameScore.query()
-        let command = try query.firstCommand()
+        let command = try await query.firstCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -768,10 +768,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testFirstExplainCommand() throws {
+    func testFirstExplainCommand() async throws {
         let query = GameScore.query()
         let command: API.NonParseBodyCommand<Query<ParseQueryTests.GameScore>,
-                                             GameScore> = try query.firstExplainCommand()
+                                             GameScore> = try await query.firstExplainCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"explain\":true,\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -1009,9 +1009,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testCountCommand() throws {
+    func testCountCommand() async throws {
         let query = GameScore.query()
-        let command = try query.countCommand()
+        let command = try await query.countCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"limit\":0,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -1020,10 +1020,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testCountExplainCommand() throws {
+    func testCountExplainCommand() async throws {
         let query = GameScore.query()
         let command: API.NonParseBodyCommand<Query<ParseQueryTests.GameScore>,
-                                             [Int]> = try query.countExplainCommand()
+                                             [Int]> = try await query.countExplainCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"explain\":true,\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -3454,11 +3454,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testAggregateCommand() throws {
+    func testAggregateCommand() async throws {
         var query = GameScore.query()
         let value = AnyCodable("world")
         query.pipeline = [["hello": value]]
-        let aggregate = try query.aggregateCommand()
+        let aggregate = try await query.aggregateCommand()
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"pipeline\":[{\"hello\":\"\(value)\"}]},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
@@ -3467,10 +3467,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testAggregateExplainCommand() throws {
+    func testAggregateExplainCommand() async throws {
         let query = GameScore.query()
         let command: API.NonParseBodyCommand<Query<GameScore>.AggregateBody<GameScore>,
-                                             [String]> = try query.aggregateExplainCommand()
+                                             [String]> = try await query.aggregateExplainCommand()
         let expected = "{\"body\":{\"explain\":true},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
@@ -3478,9 +3478,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testDistinctCommand() throws {
+    func testDistinctCommand() async throws {
         let query = GameScore.query()
-        let aggregate = try query.distinctCommand(key: "hello")
+        let aggregate = try await query.distinctCommand(key: "hello")
         let expected = "{\"body\":{\"distinct\":\"hello\"},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(aggregate)
@@ -3488,10 +3488,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(decoded, expected)
     }
 
-    func testDistinctExplainCommand() throws {
+    func testDistinctExplainCommand() async throws {
         let query = GameScore.query()
         let command: API.NonParseBodyCommand<Query<GameScore>.DistinctBody<GameScore>,
-                                             [String]> = try query.distinctExplainCommand(key: "hello")
+                                             [String]> = try await query.distinctExplainCommand(key: "hello")
         // swiftlint:disable:next line_length
         let expected = "{\"body\":{\"distinct\":\"hello\",\"explain\":true},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()

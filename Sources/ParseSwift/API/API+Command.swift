@@ -409,15 +409,15 @@ internal extension API.Command {
             && object.objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
-        if object.isSaved {
+        if try await object.isSaved() {
             // MARK: Should be switched to "update" when server supports PATCH.
             return try replace(object,
                                original: data)
         }
-        return await create(object)
+        return try await create(object)
     }
 
-    static func create<T>(_ object: T) async -> API.Command<T, T> where T: ParseObject {
+    static func create<T>(_ object: T) async throws -> API.Command<T, T> where T: ParseObject {
         var object = object
         if object.ACL == nil,
             let acl = try? await ParseACL.defaultACL() {
@@ -427,7 +427,7 @@ internal extension API.Command {
             try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
         }
         return API.Command<T, T>(method: .POST,
-                                 path: object.endpoint(.POST),
+                                 path: try await object.endpoint(.POST),
                                  body: object,
                                  mapper: mapper)
     }

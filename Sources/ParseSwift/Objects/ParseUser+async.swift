@@ -572,7 +572,7 @@ internal extension ParseUser {
             case .save:
                 command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = await self.createCommand()
+                command = try await self.createCommand()
             case .replace:
                 command = try await self.replaceCommand()
             case .update:
@@ -631,7 +631,7 @@ internal extension Sequence where Element: ParseUser {
                         try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(await object.createCommand())
+                    commands.append(try await object.createCommand())
                 case .replace:
                     commands.append(try await object.replaceCommand())
                 case .update:

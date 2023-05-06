@@ -2,10 +2,20 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+### 5.4.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.2...5.4.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.3/documentation/parseswift)
+
 __Fixes__
+* Move some ParseObject methods and properties to required to leverage developer implementations ([#96](https://github.com/netreconlab/Parse-Swift/pull/96)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.4.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.1...5.4.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.4.2/documentation/parseswift)
+
+__Fixes__
+* Prevent crash when the developer makes query, fetch, etc. calls before the SDK is properly initialized ([#95](https://github.com/netreconlab/Parse-Swift/pull/95)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Add backwards compatability to Xcode 13.2. Building on Xcode <13.3 only works for SPM ([#92](https://github.com/netreconlab/Parse-Swift/pull/92)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.4.1

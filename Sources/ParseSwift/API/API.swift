@@ -16,7 +16,7 @@ import FoundationNetworking
 /// The REST API for communicating with a Parse Server.
 public struct API {
 
-    internal enum Method: String, Encodable {
+    public enum Method: String, Encodable {
         case GET, POST, PUT, PATCH, DELETE
     }
 

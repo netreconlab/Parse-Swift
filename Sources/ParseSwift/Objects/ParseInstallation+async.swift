@@ -341,7 +341,7 @@ internal extension ParseInstallation {
             case .save:
                 command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
             case .create:
-                command = await self.createCommand()
+                command = try await self.createCommand()
             case .replace:
                 command = try self.replaceCommand()
             case .update:
@@ -400,7 +400,7 @@ internal extension Sequence where Element: ParseInstallation {
                         try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
                     )
                 case .create:
-                    commands.append(await object.createCommand())
+                    commands.append(try await object.createCommand())
                 case .replace:
                     commands.append(try object.replaceCommand())
                 case .update:
