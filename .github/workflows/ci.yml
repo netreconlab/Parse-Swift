@@ -59,7 +59,7 @@ jobs:
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(macOS\) -destination platform\=macOS -derivedDataPath DerivedData -enableCodeCoverage YES clean test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift\ \(macOS\) -destination platform\=macOS -derivedDataPath DerivedData clean test | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -255,7 +255,7 @@ jobs:
   carthage:
    timeout-minutes: 25
    needs: xcode-build-watchos
-   runs-on: macos-latest
+   runs-on: macos-13
    steps:
      - uses: actions/checkout@v3
      - name: Use multiple cores
