@@ -27,7 +27,7 @@ Task {
 
     //: Check the health of your Parse Server.
     do {
-        print("Server health is: \(try await ParseHealth.check())")
+        print("Server health is: \(try await ParseServer.health())")
     } catch {
         assertionFailure("Error checking the server health: \(error)")
     }

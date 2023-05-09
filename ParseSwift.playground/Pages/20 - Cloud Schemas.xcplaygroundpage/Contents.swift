@@ -20,6 +20,19 @@ Task {
     }
 }
 
+Task {
+    //: Retrieve Parse Server information.
+    do {
+        guard let version = try await ParseServer.information().version else {
+            print("Could not retrieve any information from the Server")
+            return
+        }
+        print("Server version is: \(version)")
+    } catch {
+        assertionFailure("Error retrieving server information: \(error)")
+    }
+}
+
 //: Youe specific _User value type.
 struct User: ParseUser {
     //: These are required by `ParseObject`.
