@@ -168,8 +168,12 @@ public extension ParseUser {
         try await yieldIfNotInitialized()
         guard let container = await Self.currentContainer(),
               let user = container.currentUser else {
-            throw ParseError(code: .otherCause,
-                             message: "There is no current user logged in")
+            // User automatic login if configured
+            guard Parse.configuration.isUsingAutomaticUser else {
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current user logged in")
+            }
+            return try await Self.anonymous.login()
         }
         return user
     }
@@ -1573,4 +1577,26 @@ public extension Sequence where Element: ParseUser {
             }
         }
     }
+}
+
+// MARK: Automatic User
+public extension ParseObject {
+
+    /**
+     Enables/disables automatic creation of anonymous users. After calling this method,
+     `Self.current()` will always have a value or throw an error from the server.
+     When enabled, the user will only be created on the server once.
+     
+     - parameter enable: **true** enables if automatic user is not already enabled in
+     `ParseConfiguration`, **false** otherwise. Defaults to **true**.
+     - throws: An error of `ParseError` type.
+     */
+    func enableAutomaticUser(_ enable: Bool = true) async throws {
+        try await yieldIfNotInitialized()
+        guard Parse.configuration.isUsingAutomaticUser != enable else {
+            return
+        }
+        Parse.configuration.isUsingAutomaticUser = enable
+    }
+
 } // swiftlint:disable:this file_length
