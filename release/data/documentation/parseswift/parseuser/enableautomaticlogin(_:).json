@@ -29,19 +29,18 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/enableAutomaticLogin(_:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/enableAutomaticLogin(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE20enableAutomaticLoginyySbYaKFZ::SYNTHESIZED::s:10ParseSwift0A10PushStatusV",
+    "externalID" : "s:10ParseSwift0A4UserPAAE20enableAutomaticLoginyySbYaKFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -285,7 +284,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsepushstatus\/enableautomaticlogin(_:)"
+        "\/documentation\/parseswift\/parseuser\/enableautomaticlogin(_:)"
       ],
       "traits" : [
         {
@@ -310,17 +309,65 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
   "abstract" : [
     {
-      "text" : "The PushStatus on the Parse Server.",
+      "text" : "Objects that conform to the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol have a local representation of a user persisted to the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Keychain and Parse Server. This protocol inherits from the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol, and retains the same",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "functionality of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", but also extends it with various user specific methods, like",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "authentication, signing up, and validation uniqueness.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "protocol"
     },
     {
       "kind" : "text",
@@ -328,34 +375,23 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParsePushStatus"
+      "text" : "ParseUser"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParsePushStatus"
+      "text" : "ParseUser"
     }
   ],
   "role" : "symbol",
-  "title" : "ParsePushStatus",
+  "title" : "ParseUser",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus"
+  "url" : "\/documentation\/parseswift\/parseuser"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/ParseObject-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseObject Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/parseobject-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/enableAutomaticLogin(_:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/enableAutomaticLogin(_:)": {
   "abstract" : [
     {
       "text" : "Enables\/disables automatic creation of anonymous users. After calling this method,",
@@ -429,12 +465,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/enableAutomaticLogin(_:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/enableAutomaticLogin(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "enableAutomaticLogin(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/enableautomaticlogin(_:)"
+  "url" : "\/documentation\/parseswift\/parseuser\/enableautomaticlogin(_:)"
 }
 }
 }

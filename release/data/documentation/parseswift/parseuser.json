@@ -249,6 +249,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/become(sessionToken:options:callbackQueue:completion:)-swift.type.method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/becomePublisher(sessionToken:options:)-swift.type.method",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/current()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/enableAutomaticLogin(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/link(_:authData:options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/linkPublisher(_:authData:options:)",
@@ -2899,6 +2900,87 @@
   "title" : "emailVerified",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser\/emailverified"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/enableAutomaticLogin(_:)": {
+  "abstract" : [
+    {
+      "text" : "Enables\/disables automatic creation of anonymous users. After calling this method,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "Self.current()",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will always have a value or throw an error from the server.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "When enabled, the user will only be created on the server once.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "enableAutomaticLogin"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser\/enableAutomaticLogin(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "enableAutomaticLogin(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseuser\/enableautomaticlogin(_:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser/endpoint": {
   "abstract" : [
