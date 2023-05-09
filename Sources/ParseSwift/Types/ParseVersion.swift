@@ -174,6 +174,12 @@ public struct ParseVersion: ParseTypeable, Hashable {
 // MARK: Default Implementation
 public extension ParseVersion {
 
+    /**
+     Create an instance from `String`.
+     
+     - parameter string: A semver string to convert to a `ParseVersion`.
+     - throws: An error of `ParseError` type.
+     */
     init(string: String) throws {
         self = try Self.convertVersionString(string)
     }
