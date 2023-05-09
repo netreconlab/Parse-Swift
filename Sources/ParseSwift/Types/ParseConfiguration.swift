@@ -91,7 +91,7 @@ public struct ParseConfiguration {
     ///  apps do not have credentials to setup a Keychain.
     public internal(set) var isUsingDataProtectionKeychain: Bool = false
 
-    /// If **true**, automatic creation of anonymous users are enabled.
+    /// If **true**, automatic creation of anonymous users is enabled.
     /// When enabled, `User.current()` will always have a value or throw an error from the server.
     /// The user will only be created on the server once.
     /// Defaults to **false**.
@@ -153,7 +153,7 @@ public struct ParseConfiguration {
      - parameter httpAdditionalHeaders: A dictionary of additional headers to send with requests. See Apple's
      [documentation](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411532-httpadditionalheaders)
      for more info.
-     - parameter usingAutomaticLogin: If **true**, automatic creation of anonymous users are enabled.
+     - parameter usingAutomaticLogin: If **true**, automatic creation of anonymous users is enabled.
      When enabled, `User.current()` will always have a value or throw an error from the server. The user will only be created on
      the server once.
      - parameter maxConnectionAttempts: Maximum number of times to try to connect to a Parse Server.

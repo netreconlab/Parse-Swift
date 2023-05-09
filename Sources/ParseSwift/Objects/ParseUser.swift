@@ -1595,8 +1595,8 @@ public extension ParseObject {
      `Self.current()` will always have a value or throw an error from the server.
      When enabled, the user will only be created on the server once.
      
-     - parameter enable: **true** enables if automatic user is not already enabled in
-     `ParseConfiguration`, **false** otherwise. Defaults to **true**.
+     - parameter enable: **true** allows automatic user logins, **false**
+     disables automatic user logins. Defaults to **true**.
      - throws: An error of `ParseError` type.
      */
     static func enableAutomaticLogin(_ enable: Bool = true) async throws {
