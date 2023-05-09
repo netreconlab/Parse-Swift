@@ -172,7 +172,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
 }
 
 // MARK: Default Implementation
-extension ParseVersion {
+public extension ParseVersion {
 
     init(string: String) throws {
         self = try Self.convertVersionString(string)

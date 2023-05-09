@@ -9,6 +9,7 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.3...5.5.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.0/documentation/parseswift)
 
 __New features__
+* Adds a setting to enable automatic user login by calling User.current(). The setting can be enabled/disabled when initializing the SDK by setting "usingAutomaticLogin" or at anytime after initialization using User.enableAutomaticLogin() ([#98](https://github.com/netreconlab/Parse-Swift/pull/98)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Add ParseServer.information() to retrieve version and info from a Parse Server. Depracates ParseHealth and check() in favor of ParseServer and health() respectively ([#97](https://github.com/netreconlab/Parse-Swift/pull/97)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.4.3
