@@ -175,7 +175,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
 public extension ParseVersion {
 
     /**
-     Create an instance from `String`.
+     Create an instance from a `String`.
      
      - parameter string: A semver string to convert to a `ParseVersion`.
      - throws: An error of `ParseError` type.
