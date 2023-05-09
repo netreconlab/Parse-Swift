@@ -168,8 +168,14 @@ public extension ParseUser {
         try await yieldIfNotInitialized()
         guard let container = await Self.currentContainer(),
               let user = container.currentUser else {
-            throw ParseError(code: .otherCause,
-                             message: "There is no current user logged in")
+            // User automatic login if configured
+            guard Parse.configuration.isUsingAutomaticLogin else {
+                throw ParseError(code: .otherCause,
+                                 message: "There is no current user logged in")
+            }
+            let authData = ParseAnonymous<Self>.AuthenticationKeys.id.makeDictionary()
+            return try await Self.loginLazy(ParseAnonymous<Self>().__type,
+                                            authData: authData)
         }
         return user
     }
@@ -186,6 +192,12 @@ public extension ParseUser {
         currentContainer?.currentUser = newValue
         await Self.setCurrentContainer(currentContainer)
     }
+
+    internal static func loginLazy(_ type: String, authData: [String: String]) async throws -> Self {
+        try await Self.signupWithAuthData(type,
+                                          authData: authData)
+    }
+
 }
 
 // MARK: SignupLoginBody
@@ -1573,4 +1585,26 @@ public extension Sequence where Element: ParseUser {
             }
         }
     }
+}
+
+// MARK: Automatic User
+public extension ParseObject {
+
+    /**
+     Enables/disables automatic creation of anonymous users. After calling this method,
+     `Self.current()` will always have a value or throw an error from the server.
+     When enabled, the user will only be created on the server once.
+     
+     - parameter enable: **true** allows automatic user logins, **false**
+     disables automatic user logins. Defaults to **true**.
+     - throws: An error of `ParseError` type.
+     */
+    static func enableAutomaticLogin(_ enable: Bool = true) async throws {
+        try await yieldIfNotInitialized()
+        guard Parse.configuration.isUsingAutomaticLogin != enable else {
+            return
+        }
+        Parse.configuration.isUsingAutomaticLogin = enable
+    }
+
 } // swiftlint:disable:this file_length

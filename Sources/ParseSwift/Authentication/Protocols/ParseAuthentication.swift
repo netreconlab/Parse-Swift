@@ -255,17 +255,31 @@ public extension ParseUser {
                           callbackQueue: callbackQueue,
                           completion: completion)
             } catch {
-                let body = SignupLoginBody(authData: [type: authData])
-                do {
-                    try await signupCommand(body: body)
-                        .execute(options: options,
-                                 callbackQueue: callbackQueue,
-                                 completion: completion)
-                } catch {
-                    let parseError = error as? ParseError ?? ParseError(swift: error)
-                    callbackQueue.async {
-                        completion(.failure(parseError))
-                    }
+                signupWithAuthData(type,
+                                   authData: authData,
+                                   options: options,
+                                   callbackQueue: callbackQueue,
+                                   completion: completion)
+            }
+        }
+    }
+
+    internal static func signupWithAuthData(_ type: String,
+                                            authData: [String: String],
+                                            options: API.Options = [],
+                                            callbackQueue: DispatchQueue = .main,
+                                            completion: @escaping (Result<Self, ParseError>) -> Void) {
+        let body = SignupLoginBody(authData: [type: authData])
+        Task {
+            do {
+                try await signupCommand(body: body)
+                    .execute(options: options,
+                             callbackQueue: callbackQueue,
+                             completion: completion)
+            } catch {
+                let parseError = error as? ParseError ?? ParseError(swift: error)
+                callbackQueue.async {
+                    completion(.failure(parseError))
                 }
             }
         }

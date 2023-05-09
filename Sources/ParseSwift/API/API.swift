@@ -53,6 +53,7 @@ public struct API {
         case hookFunction(request: FunctionRequest)
         case hookTriggers
         case hookTrigger(request: TriggerRequest)
+        case serverInfo
         case any(String)
 
         public var urlComponent: String {
@@ -121,6 +122,8 @@ public struct API {
                 return "/hooks/triggers/"
             case .hookTrigger(let request):
                 return "/hooks/triggers/\(request.className)/\(request.triggerName)"
+            case .serverInfo:
+                return "/serverInfo"
             case .any(let path):
                 return path
             }

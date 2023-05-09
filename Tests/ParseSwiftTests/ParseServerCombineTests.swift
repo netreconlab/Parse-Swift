@@ -1,5 +1,5 @@
 //
-//  ParseHealthCombineTests.swift
+//  ParseServerCombineTests.swift
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/28/21.
@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseHealthCombineTests: XCTestCase {
+class ParseServerCombineTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -41,7 +41,7 @@ class ParseHealthCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
-        let healthOfServer = ParseHealth.Status.ok
+        let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -55,7 +55,7 @@ class ParseHealthCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        ParseHealth.checkPublisher()
+        ParseServer.checkPublisher()
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
@@ -75,7 +75,7 @@ class ParseHealthCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
 
-        let healthOfServer = ParseHealth.Status.error
+        let healthOfServer = ParseServer.Status.error
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -89,7 +89,7 @@ class ParseHealthCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 503)
         }
 
-        ParseHealth.checkPublisher()
+        ParseServer.healthPublisher()
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
@@ -108,7 +108,7 @@ class ParseHealthCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
-        let healthOfServer = ParseHealth.Status.initialized
+        let healthOfServer = ParseServer.Status.initialized
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -122,7 +122,7 @@ class ParseHealthCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 429)
         }
 
-        ParseHealth.checkPublisher()
+        ParseServer.healthPublisher()
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
@@ -142,7 +142,7 @@ class ParseHealthCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
-        let healthOfServer = ParseHealth.Status.starting
+        let healthOfServer = ParseServer.Status.starting
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -156,7 +156,7 @@ class ParseHealthCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 429)
         }
 
-        ParseHealth.checkPublisher()
+        ParseServer.healthPublisher()
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
@@ -170,6 +170,41 @@ class ParseHealthCombineTests: XCTestCase {
             .store(in: &current)
 
         wait(for: [expectation1], timeout: 20.0)
+    }
+
+    func testInformation() throws {
+        var current = Set<AnyCancellable>()
+        let expectation1 = XCTestExpectation(description: "Received Value")
+        let expectation2 = XCTestExpectation(description: "Received Complete")
+
+        let information = "6.0.0"
+        let serverResponse = ["parseServerVersion": information]
+        let encoded: Data!
+        do {
+            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let version = try ParseVersion(string: information)
+        ParseServer.informationPublisher()
+            .sink(receiveCompletion: { result in
+                if case let .failure(error) = result {
+                    XCTFail(error.localizedDescription)
+                }
+                expectation2.fulfill()
+            }, receiveValue: { info in
+                XCTAssertEqual(info.version, version)
+                expectation1.fulfill()
+            })
+            .store(in: &current)
+
+        wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 }
 #endif
