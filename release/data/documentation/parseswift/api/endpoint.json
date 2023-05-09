@@ -121,6 +121,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/roles",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/schema(className:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/schemas",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/serverInfo",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/session(objectId:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/sessions",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/user(objectId:)",
@@ -1268,6 +1269,31 @@
   "title" : "API.Endpoint.schemas",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/endpoint\/schemas"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/serverInfo": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serverInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/API\/Endpoint\/serverInfo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "API.Endpoint.serverInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/api\/endpoint\/serverinfo"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/API/Endpoint/session(objectId:)": {
   "abstract" : [
