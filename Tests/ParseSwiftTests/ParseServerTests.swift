@@ -1,5 +1,5 @@
 //
-//  ParseHealthTests.swift
+//  ParseServerTests.swift
 //  ParseSwift
 //
 //  Created by Corey Baker on 4/28/21.
@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseHealthTests: XCTestCase {
+class ParseServerTests: XCTestCase {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -35,7 +35,7 @@ class ParseHealthTests: XCTestCase {
     }
 
     func testCheckCommand() throws {
-        let command = ParseHealth.healthCommand()
+        let command = ParseServer.healthCommand()
         XCTAssertEqual(command.path.urlComponent, "/health")
         XCTAssertEqual(command.method, API.Method.POST)
         XCTAssertNil(command.body)
@@ -43,7 +43,7 @@ class ParseHealthTests: XCTestCase {
 
     func testCheck() async throws {
 
-        let healthOfServer = ParseHealth.Status.ok
+        let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -66,7 +66,7 @@ class ParseHealthTests: XCTestCase {
     }
 
     func testCheckAsync() {
-        let healthOfServer = ParseHealth.Status.ok
+        let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
         do {
@@ -81,7 +81,7 @@ class ParseHealthTests: XCTestCase {
         }
 
         let expectation = XCTestExpectation(description: "Health check")
-        ParseHealth.check { result in
+        ParseServer.health { result in
             switch result {
 
             case .success(let health):
@@ -110,7 +110,7 @@ class ParseHealthTests: XCTestCase {
         }
 
         let expectation = XCTestExpectation(description: "Health check")
-        ParseHealth.check { result in
+        ParseServer.health { result in
             if case .success = result {
                 XCTFail("Should have thrown error")
             }

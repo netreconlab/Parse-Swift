@@ -9,6 +9,7 @@
 import Foundation
 
 public extension ParseSchema {
+
     /**
      Fetches the `ParseSchema` *aynchronously* from the server.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
