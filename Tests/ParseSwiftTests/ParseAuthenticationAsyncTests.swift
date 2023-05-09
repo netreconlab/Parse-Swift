@@ -223,4 +223,5 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         XCTAssertEqual(user.username, "hello10")
         XCTAssertNil(user.password)
     }
+
 }

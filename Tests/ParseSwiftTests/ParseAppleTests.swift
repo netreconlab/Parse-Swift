@@ -520,4 +520,35 @@ class ParseAppleTests: XCTestCase {
         XCTAssertNil(updatedUser.password)
         XCTAssertFalse(ParseApple<User>.isLinked(with: updatedUser))
     }
+
+    @MainActor
+    func testUnlinkNotLoggedIn() async throws {
+        do {
+            _ = try await User.apple.unlink()
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.invalidLinkedSession]))
+            let isLinked = await User.apple.isLinked()
+            XCTAssertFalse(isLinked)
+        }
+    }
+
+    func testUnlinkNotLoggedInCompletion() async throws {
+        let expectation1 = XCTestExpectation(description: "Wait 1")
+        User.apple.unlink { result in
+            switch result {
+            case .success:
+                XCTFail("Should have produced error")
+            case .failure(let error):
+                XCTAssertEqual(error.code, .invalidLinkedSession)
+            }
+            expectation1.fulfill()
+        }
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        await fulfillment(of: [expectation1], timeout: 20.0)
+        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
+        wait(for: [expectation1], timeout: 20.0)
+        #endif
+    }
+
 }
