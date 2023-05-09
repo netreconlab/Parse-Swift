@@ -64,11 +64,13 @@ public struct ParseServer: ParseTypeable {
             }
             return currentFeatures
         }
+
     }
 }
 
 // MARK: Health
 extension ParseServer {
+
     /**
      Check the server health *asynchronously* and returns the result of its execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -121,10 +123,12 @@ extension ParseServer {
             return try ParseCoding.jsonDecoder().decode(HealthResponse.self, from: data).status
         }
     }
+
 }
 
 // MARK: Information
 extension ParseServer {
+
     /**
      Retrieves any information provided by the server *asynchronously* and returns the result of its execution.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -155,4 +159,5 @@ extension ParseServer {
             return try ParseCoding.jsonDecoder().decode(Information.self, from: data)
         }
     }
+
 }
