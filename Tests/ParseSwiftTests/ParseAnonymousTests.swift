@@ -124,6 +124,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertNotEqual(authData["id"], "12345")
     }
 
+    @MainActor
     func testLogin() async throws {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
@@ -158,6 +159,60 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertEqual(login1.password, "world")
         let isLinked = await login1.anonymous.isLinked()
         XCTAssertTrue(isLinked)
+    }
+
+    @MainActor
+    func testLoginAutomaticLogin() async throws {
+        try await User.enableAutomaticLogin()
+        XCTAssertTrue(Parse.configuration.isUsingAutomaticLogin)
+
+        var serverResponse = LoginSignupResponse()
+        let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
+        serverResponse.username = "hello"
+        serverResponse.password = "world"
+        serverResponse.objectId = "yarr"
+        serverResponse.sessionToken = "myToken"
+        serverResponse.authData = [serverResponse.anonymous.__type: authData]
+        serverResponse.createdAt = Date()
+        serverResponse.updatedAt = serverResponse.createdAt?.addingTimeInterval(+300)
+
+        var userOnServer: User
+
+        var encoded: Data
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let currentUser = try await User.current()
+        XCTAssertEqual(currentUser, userOnServer)
+        XCTAssertEqual(currentUser.username, "hello")
+        XCTAssertEqual(currentUser.password, "world")
+        let isLinked = await currentUser.anonymous.isLinked()
+        XCTAssertTrue(isLinked)
+
+        // User stays the same and does not access server when logged in already
+        serverResponse.objectId = "peace"
+        do {
+            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            // Get dates in correct format from ParseDecoding strategy
+            userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
+        } catch {
+            XCTFail("Should encode/decode. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+            return MockURLResponse(data: encoded, statusCode: 200)
+        }
+        let currentUser2 = try await User.current()
+        XCTAssertEqual(currentUser, currentUser2)
     }
 
     @MainActor

@@ -169,11 +169,13 @@ public extension ParseUser {
         guard let container = await Self.currentContainer(),
               let user = container.currentUser else {
             // User automatic login if configured
-            guard Parse.configuration.isUsingAutomaticUser else {
+            guard Parse.configuration.isUsingAutomaticLogin else {
                 throw ParseError(code: .otherCause,
                                  message: "There is no current user logged in")
             }
-            return try await Self.anonymous.login()
+            let authData = ParseAnonymous<Self>.AuthenticationKeys.id.makeDictionary()
+            return try await Self.loginLazy(ParseAnonymous<Self>().__type,
+                                            authData: authData)
         }
         return user
     }
@@ -190,6 +192,12 @@ public extension ParseUser {
         currentContainer?.currentUser = newValue
         await Self.setCurrentContainer(currentContainer)
     }
+
+    internal static func loginLazy(_ type: String, authData: [String: String]) async throws -> Self {
+        try await Self.signupWithAuthData(type,
+                                          authData: authData)
+    }
+
 }
 
 // MARK: SignupLoginBody
@@ -1591,12 +1599,12 @@ public extension ParseObject {
      `ParseConfiguration`, **false** otherwise. Defaults to **true**.
      - throws: An error of `ParseError` type.
      */
-    func enableAutomaticUser(_ enable: Bool = true) async throws {
+    static func enableAutomaticLogin(_ enable: Bool = true) async throws {
         try await yieldIfNotInitialized()
-        guard Parse.configuration.isUsingAutomaticUser != enable else {
+        guard Parse.configuration.isUsingAutomaticLogin != enable else {
             return
         }
-        Parse.configuration.isUsingAutomaticUser = enable
+        Parse.configuration.isUsingAutomaticLogin = enable
     }
 
 } // swiftlint:disable:this file_length

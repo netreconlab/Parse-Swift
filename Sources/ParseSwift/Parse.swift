@@ -29,7 +29,7 @@ internal func initialize(applicationId: String,
                          usingDataProtectionKeychain: Bool = false,
                          deletingKeychainIfNeeded: Bool = false,
                          httpAdditionalHeaders: [AnyHashable: Any]? = nil,
-                         usingAutomaticUser: Bool = false,
+                         usingAutomaticLogin: Bool = false,
                          maxConnectionAttempts: Int = 5,
                          liveQueryMaxConnectionAttempts: Int = 20,
                          testing: Bool = false,
@@ -53,7 +53,7 @@ internal func initialize(applicationId: String,
                                            usingDataProtectionKeychain: usingDataProtectionKeychain,
                                            deletingKeychainIfNeeded: deletingKeychainIfNeeded,
                                            httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticUser: usingAutomaticUser,
+                                           usingAutomaticLogin: usingAutomaticLogin,
                                            maxConnectionAttempts: maxConnectionAttempts,
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            authentication: authentication)
@@ -237,7 +237,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  - parameter httpAdditionalHeaders: A dictionary of additional headers to send with requests. See Apple's
  [documentation](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411532-httpadditionalheaders)
  for more info.
- - parameter isUsingAutomaticUser: If ** true**, automatic creation of anonymous users are enabled.
+ - parameter usingAutomaticLogin: If **true**, automatic creation of anonymous users are enabled.
  When enabled, `User.current()` will always have a value or throw an error from the server. The user will only be created on
  the server once.
  - parameter maxConnectionAttempts: Maximum number of times to try to connect to Parse Server.
@@ -275,7 +275,7 @@ public func initialize(
     usingDataProtectionKeychain: Bool = false,
     deletingKeychainIfNeeded: Bool = false,
     httpAdditionalHeaders: [AnyHashable: Any]? = nil,
-    usingAutomaticUser: Bool = false,
+    usingAutomaticLogin: Bool = false,
     maxConnectionAttempts: Int = 5,
     liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
@@ -299,7 +299,7 @@ public func initialize(
                                            usingDataProtectionKeychain: usingDataProtectionKeychain,
                                            deletingKeychainIfNeeded: deletingKeychainIfNeeded,
                                            httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticUser: usingAutomaticUser,
+                                           usingAutomaticLogin: usingAutomaticLogin,
                                            maxConnectionAttempts: maxConnectionAttempts,
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,

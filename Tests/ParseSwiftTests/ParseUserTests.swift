@@ -2543,5 +2543,14 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 }
         }
     }
+
+    func testEnableAutomaticLogin() async throws {
+        XCTAssertFalse(Parse.configuration.isUsingAutomaticLogin)
+        try await User.enableAutomaticLogin()
+        XCTAssertTrue(Parse.configuration.isUsingAutomaticLogin)
+        try await User.enableAutomaticLogin(false)
+        XCTAssertFalse(Parse.configuration.isUsingAutomaticLogin)
+    }
+
 }
 // swiftlint:disable:this file_length

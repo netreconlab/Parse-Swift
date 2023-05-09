@@ -89,4 +89,15 @@ public extension ParseUser {
         }
     }
 
+    internal static func signupWithAuthData(_ type: String,
+                                            authData: [String: String],
+                                            options: API.Options = []) async throws -> Self {
+        try await withCheckedThrowingContinuation { continuation in
+            Self.signupWithAuthData(type,
+                                    authData: authData,
+                                    options: options,
+                                    completion: continuation.resume)
+        }
+    }
+
 }
