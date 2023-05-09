@@ -6,7 +6,7 @@
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
 ### 5.5.0
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.0...5.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.0/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.3...5.5.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.0/documentation/parseswift)
 
 __New features__
 * Add ParseServer.information() to retrieve version and info from a Parse Server. Depracates ParseHealth and check() in favor of ParseServer and health() respectively ([#97](https://github.com/netreconlab/Parse-Swift/pull/97)), thanks to [Corey Baker](https://github.com/cbaker6).
