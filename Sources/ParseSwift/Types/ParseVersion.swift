@@ -177,7 +177,7 @@ public extension ParseVersion {
     /**
      Create an instance from a `String`.
      
-     - parameter string: A semver string to convert to a `ParseVersion`.
+     - parameter string: A semver string to convert to `ParseVersion`.
      - throws: An error of `ParseError` type.
      */
     init(string: String) throws {
