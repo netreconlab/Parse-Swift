@@ -39,7 +39,6 @@ The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](htt
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [CocoaPods](#cocoapods)
-  - [Carthage](#carthage)
 - [Usage Guide](#usage-guide)
 - [LiveQuery](#livequery)
   - [Setup Server](#setup-server)
@@ -103,14 +102,6 @@ In your projects, use:
 ```swift
 import ParseSwiftOG
 ```
-
-### [Carthage](https://github.com/carthage/carthage)
-
-Add the following line to your Cartfile:
-```
-github "netreconlab/Parse-Swift"
-```
-Run `carthage update`, and you should now have the latest version of ParseSwift<sup>OG</sup> SDK in your Carthage folder.
 
 ## Usage Guide
 

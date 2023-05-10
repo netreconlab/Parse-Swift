@@ -231,15 +231,3 @@ jobs:
         env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  carthage:
-   timeout-minutes: 25
-   needs: xcode-build-watchos
-   runs-on: macos-latest
-   steps:
-     - uses: actions/checkout@v3
-     - name: Use multiple cores
-       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
-     - name: Carthage 
-       run: ./Scripts/carthage.sh build --no-skip-current --use-xcframeworks
-       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
