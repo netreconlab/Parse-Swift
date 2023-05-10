@@ -18,6 +18,7 @@ docs/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+ParseSwift.xcodeproj/xcshareddata/
 
 ## Other
 .DS_Store
