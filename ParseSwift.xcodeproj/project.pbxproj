@@ -838,16 +838,15 @@
 		4AB8B4EA1F254AE10070F682 = {
 			isa = PBXGroup;
 			children = (
-				701D87802A0C1A7A00A12093 /* ParseSwift.xctestplan */,
 				70D1BDA525BA192700A42E7C /* CHANGELOG.md */,
 				70D1BDA625BA193500A42E7C /* CONTRIBUTING.md */,
 				9158916A256A07DD0024BE9A /* README.md */,
 				4ACFC2E21F3CA21F0046F3A3 /* ParseSwift.playground */,
-				701D88E42A0C251800A12093 /* TestHost */,
-				701D874B2A0C056800A12093 /* Frameworks */,
+				701D87802A0C1A7A00A12093 /* ParseSwift.xctestplan */,
 				4A65114E1F48E3CE005237DF /* ParseSwift */,
 				4AB8B4F51F254AE10070F682 /* Products */,
 				4A5EE45F1F49E9E000D3CAE3 /* Sources */,
+				701D88E42A0C251800A12093 /* TestHost */,
 				4A5EE4601F49EA0600D3CAE3 /* Tests */,
 			);
 			sourceTree = "<group>";
@@ -946,13 +945,6 @@
 				F97B45C724D9C6F200F4A88B /* Savable.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		701D874B2A0C056800A12093 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		701D88E42A0C251800A12093 /* TestHost */ = {
