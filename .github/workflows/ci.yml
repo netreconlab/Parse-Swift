@@ -34,7 +34,7 @@ jobs:
         format: lcov
         search-paths: ./DerivedData
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -42,7 +42,7 @@ jobs:
         env_vars: IOS
         fail_ci_if_error: true
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-test-macos:
     timeout-minutes: 15
@@ -68,7 +68,7 @@ jobs:
         format: lcov
         search-paths: ./DerivedData
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -76,7 +76,7 @@ jobs:
         env_vars: MACOS
         fail_ci_if_error: true
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-test-tvos:
     timeout-minutes: 15
@@ -96,7 +96,7 @@ jobs:
         format: lcov
         search-paths: ./DerivedData
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -104,7 +104,7 @@ jobs:
         env_vars: TVOS
         fail_ci_if_error: true
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OTHER }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   xcode-build-watchos:
     timeout-minutes: 10
