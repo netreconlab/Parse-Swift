@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.5.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.0...5.5.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.1/documentation/parseswift)
+
+__Fixes__
+* Move enableAutomaticLogin() to the appropriate ParseUser protocol ([#100](https://github.com/netreconlab/Parse-Swift/pull/100)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.5.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.4.3...5.5.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.0/documentation/parseswift)

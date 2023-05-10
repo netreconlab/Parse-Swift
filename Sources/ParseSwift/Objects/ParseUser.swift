@@ -1588,7 +1588,7 @@ public extension Sequence where Element: ParseUser {
 }
 
 // MARK: Automatic User
-public extension ParseObject {
+public extension ParseUser {
 
     /**
      Enables/disables automatic creation of anonymous users. After calling this method,
