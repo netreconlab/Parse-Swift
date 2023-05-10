@@ -474,7 +474,7 @@ extension Query: Queryable {
     public func find(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
                      completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
             }
@@ -513,7 +513,7 @@ extension Query: Queryable {
                                           options: API.Options = [],
                                           callbackQueue: DispatchQueue = .main,
                                           completion: @escaping (Result<[U], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
             }
@@ -624,7 +624,7 @@ extension Query: Queryable {
     public func first(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<ResultType, ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             let error = ParseError(code: .objectNotFound,
                                    message: "Object not found on the server.")
             callbackQueue.async {
@@ -667,7 +667,7 @@ extension Query: Queryable {
                                            options: API.Options = [],
                                            callbackQueue: DispatchQueue = .main,
                                            completion: @escaping (Result<U, ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             let error = ParseError(code: .objectNotFound,
                                    message: "Object not found on the server.")
             callbackQueue.async {
@@ -713,7 +713,7 @@ extension Query: Queryable {
     public func count(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
                       completion: @escaping (Result<Int, ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success(0))
             }
@@ -752,7 +752,7 @@ extension Query: Queryable {
                                            options: API.Options = [],
                                            callbackQueue: DispatchQueue = .main,
                                            completion: @escaping (Result<[U], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
             }
@@ -797,7 +797,7 @@ extension Query: Queryable {
     public func withCount(options: API.Options = [],
                           callbackQueue: DispatchQueue = .main,
                           completion: @escaping (Result<([ResultType], Int), ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success(([], 0)))
             }
@@ -836,7 +836,7 @@ extension Query: Queryable {
                                                options: API.Options = [],
                                                callbackQueue: DispatchQueue = .main,
                                                completion: @escaping (Result<[U], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
             }
@@ -885,7 +885,7 @@ extension Query: Queryable {
                           options: API.Options = [],
                           callbackQueue: DispatchQueue = .main,
                           completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
             }
@@ -958,7 +958,7 @@ extension Query: Queryable {
                                                options: API.Options = [],
                                                callbackQueue: DispatchQueue = .main,
                                                completion: @escaping (Result<[U], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
             }
@@ -1036,7 +1036,7 @@ extension Query: Queryable {
                          options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
                          completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
             }
@@ -1083,7 +1083,7 @@ extension Query: Queryable {
                                               options: API.Options = [],
                                               callbackQueue: DispatchQueue = .main,
                                               completion: @escaping (Result<[U], ParseError>) -> Void) {
-        if limit == 0 {
+        guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
             }

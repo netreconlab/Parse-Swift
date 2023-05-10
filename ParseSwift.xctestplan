@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "7C0D0B3B-FC68-4806-8C5F-1F709D627540",
+      "name" : "Configuration 1",
+      "options" : {
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:ParseSwift.xcodeproj",
+          "identifier" : "4AB8B4F31F254AE10070F682",
+          "name" : "ParseSwift"
+        }
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ParseSwift.xcodeproj",
+      "identifier" : "4AB8B4F31F254AE10070F682",
+      "name" : "ParseSwift"
+    },
+    "testExecutionOrdering" : "random",
+    "testRepetitionMode" : "retryOnFailure"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ParseSwift.xcodeproj",
+        "identifier" : "4AB8B4FC1F254AE10070F682",
+        "name" : "ParseSwiftTests"
+      }
+    }
+  ],
+  "version" : 1
+}

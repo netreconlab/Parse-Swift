@@ -5,6 +5,9 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+__Fixes__
+* Modernize Xcode project by using only one framework target. Also removes Carthage testing from CI ([#101](https://github.com/netreconlab/Parse-Swift/pull/101)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.5.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.0...5.5.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.5.1/documentation/parseswift)
 
