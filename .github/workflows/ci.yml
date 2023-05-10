@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_13.4.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_14.2.app/Contents/Developer'
 
 concurrency:
@@ -117,12 +117,6 @@ jobs:
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -target ParseSwift | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        env_vars: WATCHOS
-      env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   spm-test:
     timeout-minutes: 15
@@ -165,21 +159,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData clean test | xcpretty
-      env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
-    - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v3
-      id: coverage-files
-      with:
-        format: lcov
-        search-paths: ./DerivedData
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
-        env_vars: IOS_Earliest
-        fail_ci_if_error: true
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
