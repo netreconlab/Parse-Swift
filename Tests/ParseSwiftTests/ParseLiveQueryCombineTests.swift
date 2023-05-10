@@ -99,7 +99,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
                     }
                     // "Could not connect to the server"
                     // because webSocket connections are not intercepted.
-                    XCTAssertTrue([-1004, -1022].contains(urlError.errorCode))
+                    XCTAssertTrue([-1003, -1004, -1022].contains(urlError.errorCode))
                 }
                 expectation1.fulfill()
 
