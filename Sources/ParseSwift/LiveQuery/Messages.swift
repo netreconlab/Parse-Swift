@@ -20,12 +20,23 @@ struct StandardMessage: LiveQueryable, Codable {
 
     init(operation: ClientOperation, additionalProperties: Bool = false) async {
         self.op = operation
-        if additionalProperties {
+        switch operation {
+        case .connect:
             self.applicationId = Parse.configuration.applicationId
             self.primaryKey = Parse.configuration.primaryKey
             self.clientKey = Parse.configuration.clientKey
             self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
-            self.installationId = await BaseParseInstallation.currentContainer().installationId
+            if additionalProperties {
+                self.installationId = await BaseParseInstallation.currentContainer().installationId
+            }
+        default:
+            if additionalProperties {
+                self.applicationId = Parse.configuration.applicationId
+                self.primaryKey = Parse.configuration.primaryKey
+                self.clientKey = Parse.configuration.clientKey
+                self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
+                self.installationId = await BaseParseInstallation.currentContainer().installationId
+            }
         }
     }
 

@@ -1,15 +1,4 @@
 version: 1
 builder:
   configs:
-  - platform: ios
-    scheme: "ParseSwift (iOS)"
-  - platform: macos-spm
-    documentation_targets: [ParseSwift]
-  - platform: macos-xcodebuild
-    scheme: "ParseSwift (macOS)"
-  - platform: macos-xcodebuild-arm
-    scheme: "ParseSwift (macOS)"
-  - platform: tvos
-    scheme: "ParseSwift (tvOS)"
-  - platform: watchos
-    scheme: "ParseSwift (watchOS)"
+  - documentation_targets: [ParseSwift]
