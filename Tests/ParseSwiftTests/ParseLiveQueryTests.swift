@@ -213,6 +213,29 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(decoded, expected)
     }
 
+    func testStandardMessageNotConnectionEncoding() async throws {
+        guard let installationId = await BaseParseInstallation.currentContainer().installationId else {
+            XCTFail("Should have installationId")
+            return
+        }
+        // swiftlint:disable:next line_length
+        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"masterKey\":\"primaryKey\",\"op\":\"subscribe\"}"
+        let message = await StandardMessage(operation: .subscribe, additionalProperties: true)
+        let encoded = try ParseCoding.jsonEncoder()
+            .encode(message)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testStandardMessageNotConnectionNoAddEncoding() async throws {
+        let expected = "{\"op\":\"subscribe\"}"
+        let message = await StandardMessage(operation: .subscribe, additionalProperties: false)
+        let encoded = try ParseCoding.jsonEncoder()
+            .encode(message)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
     func testSubscribeMessageFieldsEncoding() async throws {
         // swiftlint:disable:next line_length
         let expected = "{\"op\":\"subscribe\",\"query\":{\"className\":\"GameScore\",\"fields\":[\"hello\",\"points\"],\"where\":{\"points\":{\"$gt\":9}}},\"requestId\":1}"
