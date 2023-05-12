@@ -154,12 +154,33 @@ jobs:
 
   xcode-test-tvos-5_5:
     timeout-minutes: 15
-    needs: xcode-build-watchos
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
+    - name: Create and set the default keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty
+      run: swift test --enable-code-coverage -v
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
+    - name: Prepare codecov
+      uses: sersoft-gmbh/swift-coverage-action@v3
+      id: coverage-files
+      with:
+        format: lcov
+        search-paths: ./.build
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
+        env_vars: SPM_5_5
+        fail_ci_if_error: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
