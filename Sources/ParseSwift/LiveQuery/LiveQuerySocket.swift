@@ -52,9 +52,11 @@ extension LiveQuerySocket {
 // MARK: Connect
 extension LiveQuerySocket {
     func connect(_ task: URLSessionWebSocketTask) async throws {
+        try await yieldIfNotInitialized()
         let encoded = try ParseCoding.jsonEncoder()
             .encode(await StandardMessage(operation: .connect,
-                                          additionalProperties: true))
+                                          // swiftlint:disable:next line_length
+                                          additionalProperties: Parse.configuration.liveQueryConnectionAdditionalProperties))
         guard let encodedAsString = String(data: encoded, encoding: .utf8) else {
             throw ParseError(code: .otherCause,
                              message: "Could not encode connect message: \(encoded)")

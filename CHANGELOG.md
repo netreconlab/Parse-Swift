@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.6.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.6.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.1...5.6.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.6.0/documentation/parseswift)
+
+__New features__
+* Adds liveQueryConnectionAdditionalProperties parameter to SDK configuration to prevent additional properties from being sent to LiveQuery servers. This is useful for Parse Servers < 4.0.0 ([#103](https://github.com/netreconlab/Parse-Swift/pull/103)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
 * Modernize Xcode project by using only one framework target. Also removes Carthage testing from CI ([#101](https://github.com/netreconlab/Parse-Swift/pull/101)), thanks to [Corey Baker](https://github.com/cbaker6).

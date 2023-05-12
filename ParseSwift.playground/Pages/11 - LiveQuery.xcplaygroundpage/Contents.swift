@@ -24,13 +24,6 @@ class LiveQueryDelegate: ParseLiveQueryDelegate {
 Task {
     do {
         try await initializeParse()
-        //: Set the delegate.
-        let delegate = LiveQueryDelegate()
-        if let client = ParseLiveQuery.defaultClient {
-            client.receiveDelegate = delegate
-        } else {
-            assertionFailure("LiveQuery should have a default client")
-        }
     } catch {
         assertionFailure("Error initializing Parse-Swift: \(error)")
     }
@@ -119,6 +112,14 @@ Task {
     } catch {
         assertionFailure("Error subscribing: \(error)")
     }
+}
+
+//: This is how you set a delegate for the default client.
+let delegate = LiveQueryDelegate()
+if let client = ParseLiveQuery.defaultClient {
+    client.receiveDelegate = delegate
+} else {
+    assertionFailure("LiveQuery should have a default client")
 }
 
 //: Ping the LiveQuery server
@@ -234,9 +235,13 @@ Task {
             print("Unsubscribed from \(query)")
         }
 
+        //: Delay for 2 seconds
+        let nanoSeconds = UInt64(2 * 1_000_000_000)
+        try await Task.sleep(nanoseconds: nanoSeconds)
+
         //: To unsubscribe from your query.
         do {
-            try await query2.unsubscribe()
+            try await query.unsubscribe()
         } catch {
             print(error)
         }
