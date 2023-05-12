@@ -501,14 +501,13 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
         let publisher = User.apple.unlinkPublisher(user)
             .sink(receiveCompletion: { result in
-
-                if case let .failure(error) = result {
-                    XCTFail(error.localizedDescription)
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if case let .failure(error) = result {
+                        XCTFail(error.localizedDescription)
                         expectation2.fulfill()
                     }
+                    expectation1.fulfill()
                 }
-                expectation1.fulfill()
 
         }, receiveValue: { user in
 

@@ -621,14 +621,13 @@ class MigrateObjCSDKCombineTests: XCTestCase {
 
         let publisher = Installation.deleteObjCKeychainPublisher()
             .sink(receiveCompletion: { result in
-
-                if case let .failure(error) = result {
-                    XCTFail(error.localizedDescription)
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if case let .failure(error) = result {
+                        XCTFail(error.localizedDescription)
                         expectation2.fulfill()
                     }
+                    expectation1.fulfill()
                 }
-                expectation1.fulfill()
 
         }, receiveValue: { _ in
             // Should be updated in memory
@@ -707,16 +706,20 @@ class MigrateObjCSDKCombineTests: XCTestCase {
         let publisher = Installation.deleteObjCKeychainPublisher()
             .sink(receiveCompletion: { result in
 
-                if case let .failure(error) = result {
-                    XCTAssertTrue(error.message.contains("Current installation"))
-                } else {
-                    XCTFail("Should have thrown error")
+                DispatchQueue.main.async {
+                    if case let .failure(error) = result {
+                        XCTAssertTrue(error.message.contains("Current installation"))
+                    } else {
+                        XCTFail("Should have thrown error")
+                    }
+                    expectation1.fulfill()
                 }
-                expectation1.fulfill()
 
         }, receiveValue: { _ in
             XCTFail("Should have thrown error")
-            expectation1.fulfill()
+            DispatchQueue.main.async {
+                expectation1.fulfill()
+            }
         })
         publisher.store(in: &current)
         #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
