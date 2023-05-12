@@ -101,6 +101,10 @@ public struct ParseConfiguration {
     /// Defaults to 5.
     public internal(set) var maxConnectionAttempts: Int = 5
 
+    /// Send additional information when establishing Parse LiveQuery connections.
+    /// Defaults to **true**.
+    public internal(set) var liveQueryConnectionAdditionalProperties: Bool = true
+
     /// Maximum number of times to try to connect to a Parse LiveQuery Server.
     /// Defaults to 20.
     public internal(set) var liveQueryMaxConnectionAttempts: Int = 20
@@ -158,6 +162,7 @@ public struct ParseConfiguration {
      the server once.
      - parameter maxConnectionAttempts: Maximum number of times to try to connect to a Parse Server.
      Defaults to 5.
+     - parameter liveQueryConnectionAdditionalProperties: Send additional information when establishing Parse LiveQuery connections.
      - parameter liveQueryMaxConnectionAttempts: Maximum number of times to try to connect to a Parse
      LiveQuery Server. Defaults to 20.
      - parameter parseFileTransfer: Override the default transfer behavior for `ParseFile`'s.
@@ -192,6 +197,7 @@ public struct ParseConfiguration {
                 httpAdditionalHeaders: [AnyHashable: Any]? = nil,
                 usingAutomaticLogin: Bool = false,
                 maxConnectionAttempts: Int = 5,
+                liveQueryConnectionAdditionalProperties: Bool = true,
                 liveQueryMaxConnectionAttempts: Int = 20,
                 parseFileTransfer: ParseFileTransferable? = nil,
                 authentication: ((URLAuthenticationChallenge,
@@ -218,6 +224,7 @@ public struct ParseConfiguration {
         self.httpAdditionalHeaders = httpAdditionalHeaders
         self.isUsingAutomaticLogin = usingAutomaticLogin
         self.maxConnectionAttempts = maxConnectionAttempts
+        self.liveQueryConnectionAdditionalProperties = liveQueryConnectionAdditionalProperties
         self.liveQueryMaxConnectionAttempts = liveQueryMaxConnectionAttempts
         self.parseFileTransfer = parseFileTransfer ?? ParseFileDefaultTransfer()
         self.primitiveStore = primitiveStore ?? InMemoryPrimitiveStore()

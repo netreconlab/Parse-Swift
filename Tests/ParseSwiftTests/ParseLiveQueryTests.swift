@@ -172,6 +172,23 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertNil(URLSession.liveQuery.authenticationDelegate)
     }
 
+    func testInitLiveQueryConnectionWithNoAdditional() async throws {
+        XCTAssertTrue(Parse.configuration.liveQueryConnectionAdditionalProperties)
+        guard let url = URL(string: "http://localhost:1337/parse") else {
+            XCTFail("Should create valid URL")
+            return
+        }
+        try await ParseSwift.initialize(applicationId: "applicationId",
+                                        clientKey: "clientKey",
+                                        primaryKey: "primaryKey",
+                                        serverURL: url,
+                                        liveQueryConnectionAdditionalProperties: false,
+                                        liveQueryMaxConnectionAttempts: 1,
+                                        testing: true,
+                                        testLiveQueryDontCloseSocket: true)
+        XCTAssertFalse(Parse.configuration.liveQueryConnectionAdditionalProperties)
+    }
+
     func testStandardMessageEncoding() async throws {
         guard let installationId = await BaseParseInstallation.currentContainer().installationId else {
             XCTFail("Should have installationId")
@@ -180,6 +197,16 @@ class ParseLiveQueryTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
         let message = await StandardMessage(operation: .connect, additionalProperties: true)
+        let encoded = try ParseCoding.jsonEncoder()
+            .encode(message)
+        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        XCTAssertEqual(decoded, expected)
+    }
+
+    func testStandardMessageNoAdditionalPropertiesEncoding() async throws {
+        // swiftlint:disable:next line_length
+        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
+        let message = await StandardMessage(operation: .connect)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
         let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))

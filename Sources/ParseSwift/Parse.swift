@@ -31,6 +31,7 @@ internal func initialize(applicationId: String,
                          httpAdditionalHeaders: [AnyHashable: Any]? = nil,
                          usingAutomaticLogin: Bool = false,
                          maxConnectionAttempts: Int = 5,
+                         liveQueryConnectionAdditionalProperties: Bool = true,
                          liveQueryMaxConnectionAttempts: Int = 20,
                          testing: Bool = false,
                          testLiveQueryDontCloseSocket: Bool = false,
@@ -55,6 +56,7 @@ internal func initialize(applicationId: String,
                                            httpAdditionalHeaders: httpAdditionalHeaders,
                                            usingAutomaticLogin: usingAutomaticLogin,
                                            maxConnectionAttempts: maxConnectionAttempts,
+                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            authentication: authentication)
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
@@ -242,6 +244,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  the server once.
  - parameter maxConnectionAttempts: Maximum number of times to try to connect to Parse Server.
  Defaults to 5.
+ - parameter liveQueryConnectionAdditionalProperties: Send additional information when establishing Parse LiveQuery connections.
  - parameter liveQueryMaxConnectionAttempts: Maximum number of times to try to connect to a Parse
  LiveQuery Server. Defaults to 20.
  - parameter parseFileTransfer: Override the default transfer behavior for `ParseFile`'s.
@@ -277,6 +280,7 @@ public func initialize(
     httpAdditionalHeaders: [AnyHashable: Any]? = nil,
     usingAutomaticLogin: Bool = false,
     maxConnectionAttempts: Int = 5,
+    liveQueryConnectionAdditionalProperties: Bool = true,
     liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
     authentication: ((URLAuthenticationChallenge,
@@ -301,6 +305,7 @@ public func initialize(
                                            httpAdditionalHeaders: httpAdditionalHeaders,
                                            usingAutomaticLogin: usingAutomaticLogin,
                                            maxConnectionAttempts: maxConnectionAttempts,
+                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
                                            liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
                                            parseFileTransfer: parseFileTransfer,
                                            authentication: authentication)
