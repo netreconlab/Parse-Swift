@@ -132,7 +132,7 @@ jobs:
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Build-Test
-      run: swift test --enable-code-coverage -v
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -154,6 +154,7 @@ jobs:
 
   xcode-test-tvos-5_5:
     timeout-minutes: 15
+    needs: xcode-build-watchos
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
@@ -164,7 +165,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: swift test --enable-code-coverage -v
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov
