@@ -1503,7 +1503,7 @@ public extension Sequence where Element: ParseUser {
         } else {
             callbackQueue.async {
                 completion(.failure(ParseError(code: .otherCause,
-                                               message: "all items to fetch must be of the same class")))
+                                               message: "All items to fetch must be of the same class")))
             }
         }
     }
