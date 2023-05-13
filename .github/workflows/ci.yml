@@ -152,7 +152,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-tvos-5_5:
+  xcode-test-5_5:
     timeout-minutes: 15
     needs: xcode-build-watchos
     runs-on: macos-12
