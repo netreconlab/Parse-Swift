@@ -67,7 +67,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let cloud = Cloud(functionJobName: "test")
         let encoded = try JSONEncoder().encode(cloud)
         let decoded = try JSONDecoder().decode([String: String].self, from: encoded)
-        XCTAssertEqual(decoded, expected, "all keys should show up in JSONEncoder")
+        XCTAssertEqual(decoded, expected, "All keys should show up in JSONEncoder")
     }
 
     func testJSONEncoding2() throws {
@@ -78,7 +78,7 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let cloud = Cloud2(functionJobName: "test", customKey: "parse")
         let encoded = try JSONEncoder().encode(cloud)
         let decoded = try JSONDecoder().decode([String: String].self, from: encoded)
-        XCTAssertEqual(decoded, expected, "all keys should show up in JSONEncoder")
+        XCTAssertEqual(decoded, expected, "All keys should show up in JSONEncoder")
     }
 
     func testParseEncoding() throws {
