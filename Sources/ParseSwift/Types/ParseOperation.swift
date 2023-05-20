@@ -79,6 +79,27 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that sets a field's value if it has changed from its previous value.
+     - Parameters:
+        - keyPath: The respective `KeyPath` of the object.
+        - value: The value to set the `KeyPath` to.
+        - returns: The updated operations.
+     - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
+     */
+    public func setKeyPath<W>(_ keyPath: WritableKeyPath<T, W?>,
+                              to value: W?) -> Self where W: Codable & Equatable {
+        var mutableOperation = self
+        if value == nil && target[keyPath: keyPath] != nil {
+            mutableOperation.keysToNull.insert(keyPath.string)
+            mutableOperation.target[keyPath: keyPath] = value
+        } else if target[keyPath: keyPath] != value {
+            mutableOperation.operations[keyPath.string] = value
+            mutableOperation.target[keyPath: keyPath] = value
+        }
+        return mutableOperation
+    }
+
+    /**
      An operation that force sets a field's value.
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
@@ -91,6 +112,19 @@ public struct ParseOperation<T>: Savable,
         forceSet(key, to: value)
     }
 
+    /**
+     An operation that force sets a field's value.
+     - Parameters:
+        - keyPath: The respective `KeyPath` of the object.
+        - value: The value to set the `keyPath` to.
+        - returns: The updated operations.
+     - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
+     */
+    public func forceSet<W>(_ keyPath: WritableKeyPath<T, W?>,
+                            value: W?) -> Self where W: Codable {
+        forceSet(keyPath, to: value)
+    }
+    
     /**
      An operation that force sets a field's value.
      - Parameters:
@@ -112,6 +146,26 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that force sets a field's value.
+     - Parameters:
+        - keyPath: The respective `KeyPath` of the object.
+        - value: The value to set the `keyPath` to.
+        - returns: The updated operations.
+     - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
+     */
+    public func forceSet<W>(_ keyPath: WritableKeyPath<T, W?>,
+                            to value: W?) -> Self where W: Codable {
+        var mutableOperation = self
+        if value != nil {
+            mutableOperation.operations[keyPath.string] = value
+        } else {
+            mutableOperation.keysToNull.insert(keyPath.string)
+        }
+        mutableOperation.target[keyPath: keyPath] = value
+        return mutableOperation
+    }
+    
+    /**
      An operation that increases a numeric field's value by a given amount.
      - Parameters:
         - key: The key of the object.
@@ -123,6 +177,18 @@ public struct ParseOperation<T>: Savable,
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationIncrement(amount: amount)
         return mutableOperation
+    }
+    
+    /**
+     An operation that increases a numeric field's value by a given amount.
+     - Parameters:
+        - key: The key of the object.
+        - amount: How much to increment/decrement by.
+        - returns: The updated operations.
+     - note: A field can be incremented/decremented by a positive/negative value.
+     */
+    public func increment<W>(_ keyPath: KeyPath<T, W?>, by amount: Int) -> Self where W: Codable {
+        increment(keyPath.string, by: amount)
     }
 
     /**
@@ -137,6 +203,18 @@ public struct ParseOperation<T>: Savable,
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationIncrementDouble(amount: amount)
         return mutableOperation
+    }
+
+    /**
+     An operation that increases a numeric field's value by a given amount.
+     - Parameters:
+        - key: The key of the object.
+        - amount: How much to increment/decrement by.
+        - returns: The updated operations.
+     - note: A field can be incremented/decremented by a positive/negative value.
+     */
+    public func increment<W>(_ keyPath: KeyPath<T, W?>, by amount: Double) -> Self where W: Codable {
+        increment(keyPath.string, by: amount)
     }
 
     /**
@@ -157,6 +235,18 @@ public struct ParseOperation<T>: Savable,
      An operation that adds a new element to an array field,
      only if it was not already present.
      - Parameters:
+        - key: The key of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func addUnique<W>(_ keyPath: KeyPath<T, W?>, objects: [W]) -> Self where W: Codable, W: Hashable {
+        addUnique(keyPath.string, objects: objects)
+    }
+    
+    /**
+     An operation that adds a new element to an array field,
+     only if it was not already present.
+     - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
         - returns: The updated operations.
@@ -172,6 +262,24 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that adds a new element to an array field,
+     only if it was not already present.
+     - Parameters:
+        - key: A tuple consisting of the key and the respective `KeyPath` of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func addUnique<V>(_ keyPath: WritableKeyPath<T, [V]?>,
+                             objects: [V]) -> Self where V: Codable, V: Hashable {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = ParseOperationAddUnique(objects: objects)
+        var values = target[keyPath: keyPath] ?? []
+        values.append(contentsOf: objects)
+        mutableOperation.target[keyPath: keyPath] = Array(Set<V>(values))
+        return mutableOperation
+    }
+
+    /**
      An operation that adds a new element to an array field.
      - Parameters:
         - key: The key of the object.
@@ -181,6 +289,19 @@ public struct ParseOperation<T>: Savable,
     public func add<W>(_ key: String, objects: [W]) -> Self where W: Codable {
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationAdd(objects: objects)
+        return mutableOperation
+    }
+
+    /**
+     An operation that adds a new element to an array field.
+     - Parameters:
+        - key: The key of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func add<W>(_ keyPath: KeyPath<T, W?>, objects: [W]) -> Self where W: Codable {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = ParseOperationAdd(objects: objects)
         return mutableOperation
     }
 
@@ -202,6 +323,23 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that adds a new element to an array field.
+     - Parameters:
+        - key: A tuple consisting of the key and the respective `KeyPath` of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func add<V>(_ keyPath: WritableKeyPath<T, [V]?>,
+                       objects: [V]) -> Self where V: Codable {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = ParseOperationAdd(objects: objects)
+        var values = target[keyPath: keyPath] ?? []
+        values.append(contentsOf: objects)
+        mutableOperation.target[keyPath: keyPath] = values
+        return mutableOperation
+    }
+
+    /**
      An operation that adds a new relation to an array field.
      - Parameters:
         - key: The key of the object.
@@ -214,6 +352,17 @@ public struct ParseOperation<T>: Savable,
         return mutableOperation
     }
 
+    /**
+     An operation that adds a new relation to an array field.
+     - Parameters:
+        - key: The key of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func addRelation<W>(_ keyPath: KeyPath<T, W?>, objects: [W]) throws -> Self where W: ParseObject {
+        try addRelation(keyPath.string, objects: objects)
+    }
+    
     /**
      An operation that adds a new relation to an array field.
      - Parameters:
@@ -232,6 +381,23 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that adds a new relation to an array field.
+     - Parameters:
+        - key: A tuple consisting of the key and the respective `KeyPath` of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func addRelation<V>(_ keyPath: WritableKeyPath<T, [V]?>,
+                               objects: [V]) throws -> Self where V: ParseObject {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = try ParseOperationAddRelation(objects: objects)
+        var values = target[keyPath: keyPath] ?? []
+        values.append(contentsOf: objects)
+        mutableOperation.target[keyPath: keyPath] = values
+        return mutableOperation
+    }
+    
+    /**
      An operation that removes every instance of an element from
      an array field.
      - Parameters:
@@ -245,6 +411,18 @@ public struct ParseOperation<T>: Savable,
         return mutableOperation
     }
 
+    /**
+     An operation that removes every instance of an element from
+     an array field.
+     - Parameters:
+        - key: The key of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func remove<W>(_ keyPath: KeyPath<T, W?>, objects: [W]) -> Self where W: Codable {
+        remove(keyPath.string, objects: objects)
+    }
+    
     /**
      An operation that removes every instance of an element from
      an array field.
@@ -267,6 +445,27 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that removes every instance of an element from
+     an array field.
+     - Parameters:
+        - key: A tuple consisting of the key and the respective `KeyPath` of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func remove<V>(_ keyPath: WritableKeyPath<T, [V]?>,
+                          objects: [V]) -> Self where V: Codable, V: Hashable {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = ParseOperationRemove(objects: objects)
+        let values = target[keyPath: keyPath]
+        var set = Set<V>(values ?? [])
+        objects.forEach {
+            set.remove($0)
+        }
+        mutableOperation.target[keyPath: keyPath] = Array(set)
+        return mutableOperation
+    }
+
+    /**
      An operation that removes every instance of a relation from
      an array field.
      - Parameters:
@@ -278,6 +477,18 @@ public struct ParseOperation<T>: Savable,
         var mutableOperation = self
         mutableOperation.operations[key] = try ParseOperationRemoveRelation(objects: objects)
         return mutableOperation
+    }
+
+    /**
+     An operation that removes every instance of a relation from
+     an array field.
+     - Parameters:
+        - key: The key of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func removeRelation<W>(_ keyPath: KeyPath<T, W?>, objects: [W]) throws -> Self where W: ParseObject {
+        try removeRelation(keyPath.string, objects: objects)
     }
 
     /**
@@ -302,6 +513,27 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     An operation that removes every instance of a relation from
+     an array field.
+     - Parameters:
+        - key: A tuple consisting of the key and the respective `KeyPath` of the object.
+        - objects: The field of objects.
+        - returns: The updated operations.
+     */
+    public func removeRelation<V>(_ keyPath: WritableKeyPath<T, [V]?>,
+                                  objects: [V]) throws -> Self where V: ParseObject {
+        var mutableOperation = self
+        mutableOperation.operations[keyPath.string] = try ParseOperationRemoveRelation(objects: objects)
+        let values = target[keyPath: keyPath]
+        var set = Set<V>(values ?? [])
+        objects.forEach {
+            set.remove($0)
+        }
+        mutableOperation.target[keyPath: keyPath] = Array(set)
+        return mutableOperation
+    }
+
+    /**
      An operation that batches an array of operations on a particular field.
      - Parameters:
         - key: The key of the object.
@@ -319,6 +551,22 @@ public struct ParseOperation<T>: Savable,
         return mutableOperation
     }
 
+    /**
+     An operation that batches an array of operations on a particular field.
+     - Parameters:
+        - key: The key of the object.
+        - operations: The batch of operations to complete on the `key`.
+        - returns: The updated operations.
+     - warning: The developer must ensure that the respective Parse Server supports the
+     set of batch operations and that the operations are compatable with the field type.
+     - note: It is known that `ParseOperationAddRelation` and
+     `ParseOperationRemoveRelation` are the only two types of operations that
+     can be batched together on Parse Server <= 6.0.0.
+     */
+    public func batch<W>(_ keyPath: KeyPath<T, W?>, operations batch: ParseOperationBatch) -> Self where W: Codable {
+        self.batch(keyPath.string, operations: operations)
+    }
+    
     /**
      An operation where a field is deleted from the object.
      - parameter key: The key of the object.
