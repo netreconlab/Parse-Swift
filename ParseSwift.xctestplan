@@ -18,8 +18,7 @@
       "identifier" : "4AB8B4F31F254AE10070F682",
       "name" : "ParseSwift"
     },
-    "testExecutionOrdering" : "random",
-    "testRepetitionMode" : "retryOnFailure"
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {
