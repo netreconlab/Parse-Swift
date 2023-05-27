@@ -13,6 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
+// swiftlint:disable:next type_body_length
 class ParseHookFunctionRequestTests: XCTestCase {
 
     struct Parameters: ParseHookParametable {
@@ -74,6 +75,28 @@ class ParseHookFunctionRequestTests: XCTestCase {
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
+    }
+
+    func testCloudUserCoding() async throws {
+        let sessionToken = "heel"
+        let failedLoginCount = 3
+        var accountLockoutExpiresAt = Date()
+        let encodedDate = try ParseCoding.jsonEncoder().encode(accountLockoutExpiresAt)
+        guard let encodeedDateString = String(data: encodedDate, encoding: .utf8) else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        accountLockoutExpiresAt = try ParseCoding.jsonDecoder().decode(Date.self, from: encodedDate)
+        // swiftlint:disable:next line_length
+        let encodedString = "{\"className\":\"_User\",\"sessionToken\":\"\(sessionToken)\",\"_failed_login_count\":\(failedLoginCount),\"_account_lockout_expires_at\":\(encodeedDateString)}"
+        guard let encoded = encodedString.data(using: .utf8) else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let decoded = try ParseCoding.jsonDecoder().decode(User.self, from: encoded)
+        XCTAssertEqual(decoded.sessionToken, sessionToken)
+        XCTAssertEqual(decoded.failedLoginCount, failedLoginCount)
+        XCTAssertEqual(decoded.accountLockoutExpiresAt, accountLockoutExpiresAt)
     }
 
     func testCoding() async throws {
