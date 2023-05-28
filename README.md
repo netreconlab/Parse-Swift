@@ -30,11 +30,19 @@ The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](htt
 > This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2 of the original developers of ParseSwift](https://github.com/parse-community/Parse-Swift/graphs/contributors). Corey was responsible for the direction and development of all parse-community releases of ParseSwift from [1.0.0](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2) to [4.14.2](https://github.com/parse-community/Parse-Swift/releases/tag/4.14.2). ParseSwift<sup>OG</sup> has the most up-to-date features and bug fixes to develop client and server-side applications. It is the most flexible Parse Client SDK to date, can be used to write [Cloud Code](https://github.com/netreconlab/parse-server-swift), and is developed with zero dependencies. This repo is aligned with the original core principals of a swifty framework. Star, watch, and submit [questions](https://github.com/netreconlab/Parse-Swift/discussions), [issues](https://github.com/netreconlab/Parse-Swift/issues), and [pull requests](https://github.com/netreconlab/Parse-Swift/pulls) to [NetReconLab ParseSwift<sup>OG</sup>](https://github.com/netreconlab/Parse-Swift) instead of the parse-community ParseSwift to support it's development. Learn how to seemlessly migrate your apps from parse-community to ParseSwift<sup>OG</sup> by reading the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/70). For more details about why ParseSwift<sup>OG</sup> exists, see the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/7). If you benefit from ParseSwift and would like to show monetary support, feel free to: <br>
 <a href="https://www.buymeacoffee.com/cbaker6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+## Contributors
+Developers who dedicate their time and effort are who make this repo possible!
+
+<a href="https://github.com/netreconlab/Parse-Swift/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=netreconlab/Parse-Swift" />
+</a>
+
 ---
 
 - [Why use ParseSwift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
 - [Example Apps and Frameworks](#example-apps-and-frameworks)
-- [Test Drive ParseSwift](#test-drive-parseswift)
+- [Contributors](#contributors)
+- [Test Drive Parse-Swift](#test-drive-parse-swift)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [CocoaPods](#cocoapods)
@@ -72,7 +80,7 @@ import PackageDescription
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.4.1")),
+        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.7.0")),
     ]
 )
 ```
