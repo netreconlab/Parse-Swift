@@ -34,7 +34,8 @@ The ParseSwift<sup>OG</sup> SDK is not a port of the [Parse-SDK-iOS-OSX SDK](htt
 
 - [Why use ParseSwift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
 - [Example Apps and Frameworks](#example-apps-and-frameworks)
-- [Test Drive ParseSwift](#test-drive-parseswift)
+- [Contributors](#contributors)
+- [Test Drive Parse-Swift](#test-drive-parse-swift)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
   - [CocoaPods](#cocoapods)
@@ -55,6 +56,13 @@ Below is a list of apps and frameworks that use ParseSwift<sup>OG</sup> to help 
 - [ParseCareKit](https://github.com/netreconlab/ParseCareKit) - Synchronize CareKit 2.1+ data with a parse-server using ParseSwift<sup>OG</sup>
 - [SnapCat](https://github.com/netreconlab/SnapCat) - SnapCat is a social media application for posting pictures, comments, and finding friends. SnapCat is designed using SwiftUI and the ParseSwift<sup>OG</sup> SDK
 - [ParseMigrateKeychain](https://github.com/netreconlab/ParseMigrateKeychain) - A sample app that demonstrates how to migrate an app written with the Parse [Objective-C SDK](https://github.com/parse-community/Parse-SDK-iOS-OSX) to the ParseSwift<sup>OG</sup> SDK. Learn more, see the [discussion](https://github.com/netreconlab/Parse-Swift/discussions/71).
+
+## Contributors
+Developers who dedicate their time and effort are who make this repo possible!
+
+<a href="https://github.com/netreconlab/Parse-Swift/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=netreconlab/Parse-Swift" />
+</a>
 
 ## Test Drive Parse-Swift
 To learn how to use or experiment with ParseSwift<sup>OG</sup>, you can run and edit the [ParseSwift.playground](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). You can use the parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which has docker compose files (`docker-compose up` gives you a working server) configured to connect with the playground files, has [Parse Dashboard](https://github.com/parse-community/parse-dashboard), and can be used with MongoDB or PostgreSQL. You can also configure the Swift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19). To learn more, see this [discussion](https://github.com/netreconlab/Parse-Swift/discussions/74) or [CONTRIBUTING.md](https://github.com/netreconlab/Parse-Swift/blob/main/CONTRIBUTING.md#swift-playgrounds).
