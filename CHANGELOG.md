@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.6.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.7.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.6.0...5.7.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.0/documentation/parseswift)
+
+__New features__
+* Add failedLoginCount and accountLockoutExpiresAt to ParseCloudUser protocol for better access ([#109](https://github.com/netreconlab/Parse-Swift/pull/109)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.6.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.5.1...5.6.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.6.0/documentation/parseswift)
@@ -172,7 +178,7 @@ __Fixes__
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.15.1...4.15.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/4.15.2/documentation/parseswift)
 
 __Fixes__
-- Fixed an issue that prevented nested ParseObjects and ParsFiles from saving correctly in some cases ([#8](https://github.com/netreconlab/Parse-Swift/pull/8)), thanks to [Corey Baker](https://github.com/cbaker6).
+- Fixed an issue that prevented nested ParseObjects and ParseFiles from saving correctly in some cases ([#8](https://github.com/netreconlab/Parse-Swift/pull/8)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 4.15.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/4.15.0...4.15.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/4.15.1/documentation/parseswift)
