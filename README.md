@@ -40,8 +40,8 @@ Developers who dedicate their time and effort are who make this repo possible!
 ---
 
 - [Why use ParseSwift<sup>OG</sup> from NetReconLab?](https://github.com/netreconlab/Parse-Swift/discussions/7)
-- [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Contributors](#contributors)
+- [Example Apps and Frameworks](#example-apps-and-frameworks)
 - [Test Drive Parse-Swift](#test-drive-parse-swift)
 - [Installation](#installation)
   - [Swift Package Manager](#swift-package-manager)
