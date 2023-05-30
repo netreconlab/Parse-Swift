@@ -43,7 +43,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -76,7 +76,7 @@ jobs:
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Build-Test
-      run: set -o pipefail && swift test --enable-code-coverage | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -103,7 +103,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build-Test
-      run: set -o pipefail && xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
