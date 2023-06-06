@@ -106,7 +106,7 @@ struct CurrentConfigContainer<T: ParseConfig>: Codable, Equatable {
 extension ParseConfig {
 
     /**
-     Gets the current config from the Keychain.
+     Get the current config from the Keychain.
 
      - returns: Returns the latest `ParseConfig` on this device. If there is none, throws an error.
      - throws: An error of `ParseError` type.

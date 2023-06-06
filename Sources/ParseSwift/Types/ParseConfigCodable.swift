@@ -104,7 +104,7 @@ extension ParseConfigCodable {
 extension ParseConfigCodable {
 
     /**
-     Gets the current config from the Keychain.
+     Get the current config from the Keychain.
 
      - returns: Returns the latest `ParseConfigCodable` on this device. If there is none, throws an error.
      - throws: An error of `ParseError` type.

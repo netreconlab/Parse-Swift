@@ -159,7 +159,7 @@ public extension ParseUser {
     }
 
     /**
-     Gets the current logged-in user from the Keychain.
+     Get the current logged-in user from the Keychain.
 
      - returns: Returns a `ParseUser` that is the currently logged in user. If there is none, throws an error.
      - throws: An error of `ParseError` type.
