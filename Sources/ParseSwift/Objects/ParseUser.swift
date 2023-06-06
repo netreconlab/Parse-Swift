@@ -159,10 +159,12 @@ public extension ParseUser {
     }
 
     /**
-     Gets the currently logged in user and returns an instance of it.
+     Gets the current logged-in user from the Keychain.
 
      - returns: Returns a `ParseUser` that is the currently logged in user. If there is none, throws an error.
      - throws: An error of `ParseError` type.
+     - note: If `enableAutomaticLogin()` has been used, the user will automatically be logged into the Parse Server
+     if no current user is in the Keychain.
     */
     static func current() async throws -> Self {
         try await yieldIfNotInitialized()

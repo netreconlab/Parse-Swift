@@ -281,7 +281,7 @@ public extension ParseInstallation {
     }
 
     /**
-     Gets/Sets properties of the current installation in the Keychain.
+     Gets the current installation from the Keychain.
 
      - returns: Returns a `ParseInstallation` that is the current device. If there is none, throws an error.
      - throws: An error of `ParseError` type.

@@ -51,7 +51,7 @@ public struct QueryConstraint: ParseTypeable, Hashable {
     var key: String
     var value: AnyCodable?
     var comparator: Comparator?
-    var isNull: Bool = false
+    var isNull = false
 
     init(key: String, value: Codable? = nil, comparator: Comparator? = nil, isNull: Bool = false) {
         self.key = key
