@@ -309,8 +309,9 @@ public struct ParseACL: ParseTypeable,
     }
 }
 
-// Default ACL
+// MARK: Default ACL
 extension ParseACL {
+
     /**
      Get the default ACL from the Keychain.
      - returns: Returns the default ACL.
@@ -318,6 +319,7 @@ extension ParseACL {
     */
     public static func defaultACL() async throws -> Self {
 
+        try await yieldIfNotInitialized()
         let aclController: DefaultACL!
 
         #if !os(Linux) && !os(Android) && !os(Windows)
