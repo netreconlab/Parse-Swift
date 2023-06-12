@@ -2,8 +2,18 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.7.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...5.7.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.1/documentation/parseswift)
+
+__Fixes__
+* ParsePolygon is encoded/decoded incorrectly. The latitude and longitude are swapped and should be 
+(latitude, longitude) instead of (longitude, latitude). If a developer used ParseSwift <= 5.7.0
+to save ParsePolygon's, they will need to update the respective ParseObjects by swapping the latitude 
+and longitude manually ([#116](https://github.com/netreconlab/Parse-Swift/pull/116)), thanks to 
+[Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.6.0...5.7.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.0/documentation/parseswift)

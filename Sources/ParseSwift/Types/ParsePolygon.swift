@@ -8,7 +8,7 @@
 
 /**
  `ParsePolygon` is used to create a polygon that represents the coordinates
- that may be associated with a key in a ParseObject or used as a reference point
+ that may be associated with a key in a `ParseObject` or used as a reference point
  for geo queries. This allows proximity-based queries on the key.
 */
 public struct ParsePolygon: ParseTypeable, Hashable {
@@ -98,19 +98,38 @@ public struct ParsePolygon: ParseTypeable, Hashable {
     }
 }
 
+// MARK: Encodable
+
 extension ParsePolygon {
+
+    public func encode(to encoder: Encoder) throws {
+        try validate()
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(__type, forKey: .__type)
+        var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
+        try coordinates.forEach {
+            try nestedUnkeyedContainer.encode([$0.latitude, $0.longitude])
+        }
+    }
+
+}
+
+// MARK: Decodable
+
+extension ParsePolygon {
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         var decodedCoordinates = [ParseGeoPoint]()
         let points = try values.decode([[Double]].self, forKey: .coordinates)
         try points.forEach {
             if $0.count == 2 {
-                guard let latitude = $0.last,
-                      let longitude = $0.first else {
+                guard let latitude = $0.first,
+                      let longitude = $0.last else {
                     throw ParseError(code: .otherCause, message: "Could not decode ParsePolygon: \(points)")
                 }
                 decodedCoordinates.append(try ParseGeoPoint(latitude: latitude,
-                                                 longitude: longitude))
+                                                            longitude: longitude))
             } else {
                 throw ParseError(code: .otherCause, message: "Could not decode ParsePolygon: \(points)")
             }
@@ -119,13 +138,4 @@ extension ParsePolygon {
         try validate()
     }
 
-    public func encode(to encoder: Encoder) throws {
-        try validate()
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(__type, forKey: .__type)
-        var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
-        try coordinates.forEach {
-            try nestedUnkeyedContainer.encode([$0.longitude, $0.latitude])
-        }
-    }
 }
