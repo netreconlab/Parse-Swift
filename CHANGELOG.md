@@ -9,6 +9,8 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...5.7.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.1/documentation/parseswift)
 
 __Fixes__
+* ParseACL.defaultACL() calls should yield until SDK has finished configuration ([#117](https://github.com/netreconlab/Parse-Swift/pull/117)), thanks to 
+[Corey Baker](https://github.com/cbaker6).
 * ParsePolygon.containsPoint() correctly uses longitude and latitude ([#116](https://github.com/netreconlab/Parse-Swift/pull/116)), thanks to 
 [Corey Baker](https://github.com/cbaker6).
 
