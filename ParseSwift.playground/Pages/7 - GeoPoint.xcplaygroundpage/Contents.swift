@@ -265,9 +265,9 @@ query8.findAll { result in
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
     let query9 = GameScore.query(withinPolygon(key: "location", points: points))
     query9.find { results in
@@ -291,9 +291,9 @@ do {
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
     let polygon = try ParsePolygon(points)
     let query10 = GameScore.query(withinPolygon(key: "location", polygon: polygon))

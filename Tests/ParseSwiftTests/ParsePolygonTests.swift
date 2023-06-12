@@ -16,6 +16,8 @@ class ParsePolygonTests: XCTestCase {
         public let coordinates: [[Double]]
     }
 
+    var points = [ParseGeoPoint]()
+
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -45,8 +47,6 @@ class ParsePolygonTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    var points = [ParseGeoPoint]()
-
     func testContainsPoint() throws {
         let polygon = try ParsePolygon(points)
         let inside = try ParseGeoPoint(latitude: 0.5, longitude: 0.5)
@@ -55,12 +55,36 @@ class ParsePolygonTests: XCTestCase {
         XCTAssertFalse(polygon.containsPoint(outside))
     }
 
+    func testContainsPoint2() throws {
+        let point = try ParseGeoPoint(latitude: 40, longitude: -30)
+        let points: [ParseGeoPoint] = [
+            try .init(latitude: 35.0, longitude: -30.0),
+            try .init(latitude: 42.0, longitude: -35.0),
+            try .init(latitude: 42.0, longitude: -20.0)
+        ]
+        let polygon = try ParsePolygon(points)
+        XCTAssertTrue(polygon.containsPoint(point))
+    }
+
     func testCheckInitializerRequiresMinPoints() throws {
         let point = try ParseGeoPoint(latitude: 0, longitude: 0)
         XCTAssertNoThrow(try ParsePolygon([point, point, point]))
         XCTAssertThrowsError(try ParsePolygon([point, point]))
         XCTAssertNoThrow(try ParsePolygon(point, point, point))
         XCTAssertThrowsError(try ParsePolygon(point, point))
+    }
+
+    func testEncode() throws {
+        let polygon = try ParsePolygon(points)
+        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[1,0],[1,1],[0,1],[0,0]]}"
+        XCTAssertEqual(polygon.debugDescription, expected)
+        guard polygon.coordinates.count == points.count else {
+            XCTAssertEqual(polygon.coordinates.count, points.count)
+            return
+        }
+        for (index, coordinates) in polygon.coordinates.enumerated() {
+            XCTAssertEqual(coordinates, points[index])
+        }
     }
 
     func testDecode() throws {
@@ -115,15 +139,9 @@ class ParsePolygonTests: XCTestCase {
         }
     }
 
-    func testDebugString() throws {
-        let polygon = try ParsePolygon(points)
-        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[0,1],[1,1],[1,0],[0,0]]}"
-        XCTAssertEqual(polygon.debugDescription, expected)
-    }
-
     func testDescription() throws {
         let polygon = try ParsePolygon(points)
-        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[0,1],[1,1],[1,0],[0,0]]}"
+        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[1,0],[1,1],[0,1],[0,0]]}"
         XCTAssertEqual(polygon.description, expected)
     }
 }
