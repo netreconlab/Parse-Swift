@@ -2,8 +2,15 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.7.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...5.7.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.1/documentation/parseswift)
+
+__Fixes__
+* ParsePolygon.containsPoint() correctly uses longitude and latitude ([#116](https://github.com/netreconlab/Parse-Swift/pull/116)), thanks to 
+[Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.6.0...5.7.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.0/documentation/parseswift)

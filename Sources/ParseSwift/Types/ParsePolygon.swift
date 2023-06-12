@@ -8,7 +8,7 @@
 
 /**
  `ParsePolygon` is used to create a polygon that represents the coordinates
- that may be associated with a key in a ParseObject or used as a reference point
+ that may be associated with a key in a `ParseObject` or used as a reference point
  for geo queries. This allows proximity-based queries on the key.
 */
 public struct ParsePolygon: ParseTypeable, Hashable {
@@ -51,25 +51,25 @@ public struct ParsePolygon: ParseTypeable, Hashable {
        - parameter point: The point to check.
      */
     public func containsPoint(_ point: ParseGeoPoint) -> Bool {
-        var minX = coordinates[0].latitude
-        var maxX = coordinates[0].latitude
-        var minY = coordinates[0].longitude
-        var maxY = coordinates[0].longitude
+        var minX = coordinates[0].longitude
+        var maxX = coordinates[0].longitude
+        var minY = coordinates[0].latitude
+        var maxY = coordinates[0].latitude
 
         var modifiedCoordinates = coordinates
         modifiedCoordinates.removeFirst()
         for coordinate in modifiedCoordinates {
-            minX = Swift.min(coordinate.latitude, minX)
-            maxX = Swift.max(coordinate.latitude, maxX)
-            minY = Swift.min(coordinate.longitude, minY)
-            maxY = Swift.max(coordinate.longitude, maxY)
+            minX = Swift.min(coordinate.longitude, minX)
+            maxX = Swift.max(coordinate.longitude, maxX)
+            minY = Swift.min(coordinate.latitude, minY)
+            maxY = Swift.max(coordinate.latitude, maxY)
         }
 
         // Check if outside of the polygon
-        if point.latitude < minX ||
-            point.latitude > maxX ||
-            point.longitude < minY ||
-            point.longitude > maxY {
+        if point.longitude < minX ||
+            point.longitude > maxX ||
+            point.latitude < minY ||
+            point.latitude > maxY {
             return false
         }
 
@@ -78,14 +78,14 @@ public struct ParsePolygon: ParseTypeable, Hashable {
         // Check if intersects polygon
         var otherIndex = coordinates.count - 1
         for (index, coordinate) in coordinates.enumerated() {
-            let startX = coordinate.latitude
-            let startY = coordinate.longitude
-            let endX = coordinates[otherIndex].latitude
-            let endY = coordinates[otherIndex].longitude
-            let startYComparison = startY > point.longitude
-            let endYComparison = endY > point.longitude
+            let startX = coordinate.longitude
+            let startY = coordinate.latitude
+            let endX = coordinates[otherIndex].longitude
+            let endY = coordinates[otherIndex].latitude
+            let startYComparison = startY > point.latitude
+            let endYComparison = endY > point.latitude
             if startYComparison != endYComparison &&
-                point.latitude < ((endX - startX) * (point.longitude - startY)) / (endY - startY) + startX {
+                point.longitude < ((endX - startX) * (point.latitude - startY)) / (endY - startY) + startX {
                 return true
             }
             if index == 0 {
@@ -98,7 +98,26 @@ public struct ParsePolygon: ParseTypeable, Hashable {
     }
 }
 
+// MARK: Encodable
+
 extension ParsePolygon {
+
+    public func encode(to encoder: Encoder) throws {
+        try validate()
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(__type, forKey: .__type)
+        var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
+        try coordinates.forEach {
+            try nestedUnkeyedContainer.encode([$0.longitude, $0.latitude])
+        }
+    }
+
+}
+
+// MARK: Decodable
+
+extension ParsePolygon {
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         var decodedCoordinates = [ParseGeoPoint]()
@@ -110,7 +129,7 @@ extension ParsePolygon {
                     throw ParseError(code: .otherCause, message: "Could not decode ParsePolygon: \(points)")
                 }
                 decodedCoordinates.append(try ParseGeoPoint(latitude: latitude,
-                                                 longitude: longitude))
+                                                            longitude: longitude))
             } else {
                 throw ParseError(code: .otherCause, message: "Could not decode ParsePolygon: \(points)")
             }
@@ -119,13 +138,4 @@ extension ParsePolygon {
         try validate()
     }
 
-    public func encode(to encoder: Encoder) throws {
-        try validate()
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(__type, forKey: .__type)
-        var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
-        try coordinates.forEach {
-            try nestedUnkeyedContainer.encode([$0.longitude, $0.latitude])
-        }
-    }
 }

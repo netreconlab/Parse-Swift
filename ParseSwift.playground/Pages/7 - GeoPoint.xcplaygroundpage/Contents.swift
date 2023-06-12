@@ -27,11 +27,12 @@ struct GameScore: ParseObject {
     var createdAt: Date?
     var updatedAt: Date?
     var ACL: ParseACL?
-    var location: ParseGeoPoint?
     var originalData: Data?
 
     //: Your own properties
     var points: Int?
+    var location: ParseGeoPoint?
+    var polygon: ParsePolygon?
 
     /*:
      Optional - implement your own version of merge
@@ -42,6 +43,14 @@ struct GameScore: ParseObject {
         if updated.shouldRestoreKey(\.points,
                                      original: object) {
             updated.points = object.points
+        }
+        if updated.shouldRestoreKey(\.location,
+                                     original: object) {
+            updated.location = object.location
+        }
+        if updated.shouldRestoreKey(\.polygon,
+                                     original: object) {
+            updated.polygon = object.polygon
         }
         return updated
     }
@@ -60,6 +69,12 @@ extension GameScore {
 var score = GameScore(points: 10)
 do {
     try score.location = ParseGeoPoint(latitude: 40.0, longitude: -30.0)
+    let points: [ParseGeoPoint] = [
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
+    ]
+    score.polygon = try ParsePolygon(points)
 }
 
 /*:
@@ -75,13 +90,22 @@ score.save { result in
         assert(savedScore.updatedAt != nil)
         assert(savedScore.points == 10)
         assert(savedScore.location != nil)
+        assert(savedScore.polygon != nil)
 
         guard let location = savedScore.location else {
             print("Something went wrong")
             return
         }
 
-        print(location)
+        print("Saved location: \(location)")
+
+        guard let polygon = savedScore.polygon else {
+            print("Something went wrong")
+            return
+        }
+
+        print("Saved polygon: \(polygon)")
+        print("Saved polygon geopoints: \(polygon.coordinates)")
 
     case .failure(let error):
         assertionFailure("Error saving: \(error)")
@@ -265,9 +289,9 @@ query8.findAll { result in
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
     let query9 = GameScore.query(withinPolygon(key: "location", points: points))
     query9.find { results in
@@ -291,9 +315,9 @@ do {
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
     let polygon = try ParsePolygon(points)
     let query10 = GameScore.query(withinPolygon(key: "location", polygon: polygon))
