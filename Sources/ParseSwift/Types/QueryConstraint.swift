@@ -587,8 +587,42 @@ public func withinGeoBox(key: String, fromSouthWest southwest: ParseGeoPoint,
  - warning: Requires Parse Server 2.5.0+.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func withinPolygon(key: String, points: [ParseGeoPoint]) -> QueryConstraint {
+public func geoPoint(_ key: String, within points: [ParseGeoPoint]) -> QueryConstraint {
     let dictionary = [QueryConstraint.Comparator.polygon.rawValue: points]
+    return .init(key: key, value: dictionary, comparator: .geoWithin)
+}
+
+/**
+ Add a constraint to the query that requires a particular key's
+ coordinates be contained within and on the bounds of a given polygon
+ Supports closed and open (last point is connected to first) paths.
+
+ Polygon must have at least 3 points.
+
+ - parameter key: The key to be constrained.
+ - parameter points: The polygon points as an Array of `ParseGeoPoint`'s.
+ - warning: Requires Parse Server 2.5.0+.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ */
+@available(*, deprecated, renamed: "geoPoint")
+public func withinPolygon(key: String, points: [ParseGeoPoint]) -> QueryConstraint {
+    geoPoint(key, within: points)
+}
+
+/**
+ Add a constraint to the query that requires a particular key's
+ coordinates be contained within and on the bounds of a given polygon
+ Supports closed and open (last point is connected to first) paths.
+
+ - parameter key: The key to be constrained.
+ - parameter polygon: The `ParsePolygon`.
+ - warning: Requires Parse Server 2.5.0+.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ */
+public func geoPoint(_ key: String, within polygon: ParsePolygon) -> QueryConstraint {
+    var polygon = polygon
+    polygon.isSwappingCoordinates = true
+    let dictionary = [QueryConstraint.Comparator.polygon.rawValue: polygon]
     return .init(key: key, value: dictionary, comparator: .geoWithin)
 }
 
@@ -602,9 +636,9 @@ public func withinPolygon(key: String, points: [ParseGeoPoint]) -> QueryConstrai
  - warning: Requires Parse Server 2.5.0+.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
+@available(*, deprecated, renamed: "geoPoint")
 public func withinPolygon(key: String, polygon: ParsePolygon) -> QueryConstraint {
-    let dictionary = [QueryConstraint.Comparator.polygon.rawValue: polygon]
-    return .init(key: key, value: dictionary, comparator: .geoWithin)
+    geoPoint(key, within: polygon)
 }
 
 /**
@@ -616,9 +650,23 @@ public func withinPolygon(key: String, polygon: ParsePolygon) -> QueryConstraint
  - warning: Requires Parse Server 2.6.0+.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func polygonContains(key: String, point: ParseGeoPoint) -> QueryConstraint {
+public func polygon(_ key: String, contains point: ParseGeoPoint) -> QueryConstraint {
     let dictionary = [QueryConstraint.Comparator.point.rawValue: point]
     return .init(key: key, value: dictionary, comparator: .geoIntersects)
+}
+
+/**
+ Add a constraint to the query that requires a particular key's
+ coordinates contains a `ParseGeoPoint`.
+
+ - parameter key: The key of the `ParsePolygon`.
+ - parameter point: The `ParseGeoPoint` to check for containment.
+ - warning: Requires Parse Server 2.6.0+.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ */
+@available(*, deprecated, renamed: "polygon")
+public func polygonContains(key: String, point: ParseGeoPoint) -> QueryConstraint {
+    polygon(key, contains: point)
 }
 
 /**

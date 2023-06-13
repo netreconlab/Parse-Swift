@@ -76,7 +76,7 @@ class ParsePolygonTests: XCTestCase {
 
     func testEncode() throws {
         let polygon = try ParsePolygon(points)
-        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[1,0],[1,1],[0,1],[0,0]]}"
+        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[0,1],[1,1],[1,0],[0,0]]}"
         XCTAssertEqual(polygon.debugDescription, expected)
         guard polygon.coordinates.count == points.count else {
             XCTAssertEqual(polygon.coordinates.count, points.count)
@@ -88,7 +88,8 @@ class ParsePolygonTests: XCTestCase {
     }
 
     func testDecode() throws {
-        let polygon = try ParsePolygon(points)
+        var polygon = try ParsePolygon(points)
+        polygon.isSwappingCoordinates = false
         let encoded = try ParseCoding.jsonEncoder().encode(polygon)
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePolygon.self, from: encoded)
         XCTAssertEqual(decoded, polygon)
@@ -141,7 +142,7 @@ class ParsePolygonTests: XCTestCase {
 
     func testDescription() throws {
         let polygon = try ParsePolygon(points)
-        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[1,0],[1,1],[0,1],[0,0]]}"
+        let expected = "{\"__type\":\"Polygon\",\"coordinates\":[[0,0],[0,1],[1,1],[1,0],[0,0]]}"
         XCTAssertEqual(polygon.description, expected)
     }
 }
