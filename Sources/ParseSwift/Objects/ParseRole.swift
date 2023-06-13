@@ -30,7 +30,7 @@ public protocol ParseRole: ParseObject {
     var name: String? { get set }
 
     /**
-     Gets the `ParseRelation` for the `ParseUser` objects that are direct children of this role.
+     Get the `ParseRelation` for the `ParseUser` objects that are direct children of this role.
      These users are granted any privileges that this role has been granted
      (e.g. read or write access through `ParseACL`s). You can add or remove users from
      the role through this relation.
@@ -38,7 +38,7 @@ public protocol ParseRole: ParseObject {
     var users: ParseRelation<Self>? { get }
 
     /**
-     Gets the `ParseRelation` for the `ParseRole` objects that are direct children of this role.
+     Get the `ParseRelation` for the `ParseRole` objects that are direct children of this role.
      These roles' users are granted any privileges that this role has been granted
      (e.g. read or write access through `ParseACL`s). You can add or remove child roles
      from this role through this relation.

@@ -19,7 +19,7 @@ public struct ParseVersion: ParseTypeable, Hashable {
     var prereleaseVersion: Int?
 
     /**
-     Current version of the SDK.
+     Get the current version of the SDK from the Keychain.
      
      - returns: Returns the current `ParseVersion`. If there is none, throws an error.
      - throws: An error of `ParseError` type.

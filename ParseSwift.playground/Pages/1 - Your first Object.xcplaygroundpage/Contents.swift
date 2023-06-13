@@ -81,7 +81,7 @@ struct GameData: ParseObject {
     var originalData: Data?
 
     //: Your own properties.
-    var polygon: ParsePolygon?
+    var fence: ParsePolygon?
     //: `ParseBytes` needs to be a part of the original schema
     //: or else you will need your primaryKey to force an upgrade.
     var bytes: ParseBytes?
@@ -92,9 +92,9 @@ struct GameData: ParseObject {
      */
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)
-        if shouldRestoreKey(\.polygon,
+        if shouldRestoreKey(\.fence,
                              original: object) {
-            updated.polygon = object.polygon
+            updated.fence = object.fence
         }
         if shouldRestoreKey(\.bytes,
                              original: object) {
@@ -108,9 +108,9 @@ struct GameData: ParseObject {
 //: to preserve the memberwise initializer.
 extension GameData {
 
-    init (bytes: ParseBytes?, polygon: ParsePolygon) {
+    init (bytes: ParseBytes?, fence: ParsePolygon) {
         self.bytes = bytes
-        self.polygon = polygon
+        self.fence = fence
     }
 }
 
@@ -396,18 +396,18 @@ Task {
 
 Task {
     //: How to add `ParseBytes` and `ParsePolygon` to objects.
-    let points = [
-        try ParseGeoPoint(latitude: 0, longitude: 0),
-        try ParseGeoPoint(latitude: 0, longitude: 1),
-        try ParseGeoPoint(latitude: 1, longitude: 1),
-        try ParseGeoPoint(latitude: 1, longitude: 0),
-        try ParseGeoPoint(latitude: 0, longitude: 0)
+    let detroitPoints = [
+        try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705),
+        try ParseGeoPoint(latitude: 42.633047793854814, longitude: -83.75333640366955),
+        try ParseGeoPoint(latitude: 42.61625254348911, longitude: -83.75149921669944),
+        try ParseGeoPoint(latitude: 42.61526926650296, longitude: -83.78161794858735),
+        try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705)
     ]
 
     do {
-        let polygon = try ParsePolygon(points)
+        let detroit = try ParsePolygon(detroitPoints)
         let bytes = ParseBytes(data: "hello world".data(using: .utf8)!)
-        var gameData = GameData(bytes: bytes, polygon: polygon)
+        var gameData = GameData(bytes: bytes, fence: detroit)
         gameData = try await gameData.save()
         print("Successfully saved: \(gameData)")
     } catch {

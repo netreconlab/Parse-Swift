@@ -27,11 +27,12 @@ struct GameScore: ParseObject {
     var createdAt: Date?
     var updatedAt: Date?
     var ACL: ParseACL?
-    var location: ParseGeoPoint?
     var originalData: Data?
 
     //: Your own properties
     var points: Int?
+    var location: ParseGeoPoint?
+    var fence: ParsePolygon?
 
     /*:
      Optional - implement your own version of merge
@@ -42,6 +43,14 @@ struct GameScore: ParseObject {
         if updated.shouldRestoreKey(\.points,
                                      original: object) {
             updated.points = object.points
+        }
+        if updated.shouldRestoreKey(\.location,
+                                     original: object) {
+            updated.location = object.location
+        }
+        if updated.shouldRestoreKey(\.fence,
+                                     original: object) {
+            updated.fence = object.fence
         }
         return updated
     }
@@ -60,6 +69,12 @@ extension GameScore {
 var score = GameScore(points: 10)
 do {
     try score.location = ParseGeoPoint(latitude: 40.0, longitude: -30.0)
+    let points: [ParseGeoPoint] = [
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
+    ]
+    score.fence = try ParsePolygon(points)
 }
 
 /*:
@@ -75,13 +90,22 @@ score.save { result in
         assert(savedScore.updatedAt != nil)
         assert(savedScore.points == 10)
         assert(savedScore.location != nil)
+        assert(savedScore.fence != nil)
 
         guard let location = savedScore.location else {
             print("Something went wrong")
             return
         }
 
-        print(location)
+        print("Saved location: \(location)")
+
+        guard let fence = savedScore.fence else {
+            print("Something went wrong")
+            return
+        }
+
+        print("Saved polygon: \(fence)")
+        print("Saved polygon geopoints: \(fence.coordinates)")
 
     case .failure(let error):
         assertionFailure("Error saving: \(error)")
@@ -265,11 +289,11 @@ query8.findAll { result in
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
-    let query9 = GameScore.query(withinPolygon(key: "location", points: points))
+    let query9 = GameScore.query(geoPoint("location", within: points))
     query9.find { results in
         switch results {
         case .success(let scores):
@@ -291,12 +315,12 @@ do {
 
 do {
     let points: [ParseGeoPoint] = [
-        try .init(latitude: 35.0, longitude: -28.0),
-        try .init(latitude: 45.0, longitude: -28.0),
-        try .init(latitude: 39.0, longitude: -35.0)
+        try .init(latitude: 35.0, longitude: -30.0),
+        try .init(latitude: 42.0, longitude: -35.0),
+        try .init(latitude: 42.0, longitude: -20.0)
     ]
     let polygon = try ParsePolygon(points)
-    let query10 = GameScore.query(withinPolygon(key: "location", polygon: polygon))
+    let query10 = GameScore.query(geoPoint("location", within: polygon))
     query10.find { results in
         switch results {
         case .success(let scores):
@@ -305,6 +329,27 @@ do {
                     Someone has a points value of \"\(String(describing: score.points))\"
                     with a geolocation \(String(describing: score.location)) within the
                     polygon: \(polygon)
+                """)
+            }
+        case .failure(let error):
+            assertionFailure("Error querying: \(error)")
+        }
+    }
+} catch {
+    print("Could not create geopoints: \(error)")
+}
+
+do {
+    let location = try ParseGeoPoint(latitude: 40.0, longitude: -30.0)
+    let query = GameScore.query(polygon("fence", contains: location))
+    query.find { results in
+        switch results {
+        case .success(let scores):
+            scores.forEach { (score) in
+                print("""
+                    Someone has a points value of \"\(String(describing: score.points))\"
+                    with a geolocation \(location) within the
+                    polygon: \(String(describing: score.location))
                 """)
             }
         case .failure(let error):
