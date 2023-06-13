@@ -14,6 +14,7 @@
 public struct ParsePolygon: ParseTypeable, Hashable {
     private let __type: String = "Polygon" // swiftlint:disable:this identifier_name
     public let coordinates: [ParseGeoPoint]
+    var flipEncodingCoordinates = false
 
     enum CodingKeys: String, CodingKey {
         case __type // swiftlint:disable:this identifier_name
@@ -108,6 +109,10 @@ extension ParsePolygon {
         try container.encode(__type, forKey: .__type)
         var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
         try coordinates.forEach {
+            guard flipEncodingCoordinates else {
+                try nestedUnkeyedContainer.encode([$0.latitude, $0.longitude])
+                return
+            }
             try nestedUnkeyedContainer.encode([$0.longitude, $0.latitude])
         }
     }
@@ -124,8 +129,8 @@ extension ParsePolygon {
         let points = try values.decode([[Double]].self, forKey: .coordinates)
         try points.forEach {
             if $0.count == 2 {
-                guard let latitude = $0.last,
-                      let longitude = $0.first else {
+                guard let latitude = $0.first,
+                      let longitude = $0.last else {
                     throw ParseError(code: .otherCause, message: "Could not decode ParsePolygon: \(points)")
                 }
                 decodedCoordinates.append(try ParseGeoPoint(latitude: latitude,
