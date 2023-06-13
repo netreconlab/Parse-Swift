@@ -14,7 +14,7 @@
 public struct ParsePolygon: ParseTypeable, Hashable {
     private let __type: String = "Polygon" // swiftlint:disable:this identifier_name
     public let coordinates: [ParseGeoPoint]
-    var flipEncodingCoordinates = false
+    var isSwappingCoordinates = false
 
     enum CodingKeys: String, CodingKey {
         case __type // swiftlint:disable:this identifier_name
@@ -109,7 +109,7 @@ extension ParsePolygon {
         try container.encode(__type, forKey: .__type)
         var nestedUnkeyedContainer = container.nestedUnkeyedContainer(forKey: .coordinates)
         try coordinates.forEach {
-            guard flipEncodingCoordinates else {
+            guard isSwappingCoordinates else {
                 try nestedUnkeyedContainer.encode([$0.latitude, $0.longitude])
                 return
             }

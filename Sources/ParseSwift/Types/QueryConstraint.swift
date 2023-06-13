@@ -621,7 +621,7 @@ public func withinPolygon(key: String, points: [ParseGeoPoint]) -> QueryConstrai
  */
 public func geoPoint(_ key: String, within polygon: ParsePolygon) -> QueryConstraint {
     var polygon = polygon
-    polygon.flipEncodingCoordinates = true
+    polygon.isSwappingCoordinates = true
     let dictionary = [QueryConstraint.Comparator.polygon.rawValue: polygon]
     return .init(key: key, value: dictionary, comparator: .geoWithin)
 }

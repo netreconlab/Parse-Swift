@@ -89,7 +89,7 @@ class ParsePolygonTests: XCTestCase {
 
     func testDecode() throws {
         var polygon = try ParsePolygon(points)
-        polygon.flipEncodingCoordinates = false
+        polygon.isSwappingCoordinates = false
         let encoded = try ParseCoding.jsonEncoder().encode(polygon)
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePolygon.self, from: encoded)
         XCTAssertEqual(decoded, polygon)
