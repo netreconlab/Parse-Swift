@@ -401,10 +401,10 @@ internal extension API.Command {
     }
 
     // MARK: Saving ParseObjects
-    static func save<T>(_ object: T,
+    static func save<V>(_ object: V,
                         original data: Data?,
                         ignoringCustomObjectIdConfig: Bool,
-                        batching: Bool = false) async throws -> API.Command<T, T> where T: ParseObject {
+                        batching: Bool = false) async throws -> API.Command<V, V> where V: ParseObject {
         if Parse.configuration.isRequiringCustomObjectIds
             && object.objectId == nil && !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
@@ -417,28 +417,28 @@ internal extension API.Command {
         return try await create(object)
     }
 
-    static func create<T>(_ object: T) async throws -> API.Command<T, T> where T: ParseObject {
+    static func create<V>(_ object: V) async throws -> API.Command<V, V> where V: ParseObject {
         var object = object
         if object.ACL == nil,
             let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
-        let mapper = { (data) -> T in
+        let mapper = { (data) -> V in
             try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
         }
-        return API.Command<T, T>(method: .POST,
+        return API.Command<V, V>(method: .POST,
                                  path: try await object.endpoint(.POST),
                                  body: object,
                                  mapper: mapper)
     }
 
-    static func replace<T>(_ object: T,
-                           original data: Data?) throws -> API.Command<T, T> where T: ParseObject {
+    static func replace<V>(_ object: V,
+                           original data: Data?) throws -> API.Command<V, V> where V: ParseObject {
         guard object.objectId != nil else {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> T in
+        let mapper = { (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -446,26 +446,26 @@ internal extension API.Command {
                 .decode(ReplaceResponse.self, from: mapperData)
                 .apply(to: updatedObject)
             guard let originalData = data,
-                  let original = try? ParseCoding.jsonDecoder().decode(T.self,
+                  let original = try? ParseCoding.jsonDecoder().decode(V.self,
                                                                        from: originalData),
                   original.hasSameObjectId(as: updatedObject) else {
                       return updatedObject
                   }
             return try updatedObject.merge(with: original)
         }
-        return API.Command<T, T>(method: .PUT,
+        return API.Command<V, V>(method: .PUT,
                                  path: object.endpoint,
                                  body: object,
                                  mapper: mapper)
     }
 
-    static func update<T>(_ object: T,
-                          original data: Data?) throws -> API.Command<T, T> where T: ParseObject {
+    static func update<V>(_ object: V,
+                          original data: Data?) throws -> API.Command<V, V> where V: ParseObject {
         guard object.objectId != nil else {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> T in
+        let mapper = { (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -473,21 +473,21 @@ internal extension API.Command {
                 .decode(UpdateResponse.self, from: mapperData)
                 .apply(to: updatedObject)
             guard let originalData = data,
-                  let original = try? ParseCoding.jsonDecoder().decode(T.self,
+                  let original = try? ParseCoding.jsonDecoder().decode(V.self,
                                                                        from: originalData),
                   original.hasSameObjectId(as: updatedObject) else {
                       return updatedObject
                   }
             return try updatedObject.merge(with: original)
         }
-        return API.Command<T, T>(method: .PATCH,
+        return API.Command<V, V>(method: .PATCH,
                                  path: object.endpoint,
                                  body: object,
                                  mapper: mapper)
     }
 
     // MARK: Fetching ParseObjects
-    static func fetch<T>(_ object: T, include: [String]?) throws -> API.Command<T, T> where T: ParseObject {
+    static func fetch<V>(_ object: V, include: [String]?) throws -> API.Command<V, V> where V: ParseObject {
         guard object.objectId != nil else {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
@@ -498,12 +498,12 @@ internal extension API.Command {
             params = ["include": "\(Set(includeParams))"]
         }
 
-        return API.Command<T, T>(
+        return API.Command<V, V>(
             method: .GET,
             path: object.endpoint,
             params: params
-        ) { (data) -> T in
-            try ParseCoding.jsonDecoder().decode(T.self, from: data)
+        ) { (data) -> V in
+            try ParseCoding.jsonDecoder().decode(V.self, from: data)
         }
     }
 }

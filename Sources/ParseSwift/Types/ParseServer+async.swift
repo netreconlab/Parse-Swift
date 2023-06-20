@@ -50,6 +50,9 @@ public extension ParseServer {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: Status of ParseServer.
      - throws: An error of type `ParseError`.
+     - requires: `.usePrimaryKey` has to be available. It is recommended to only
+     use the primary key in server-side applications where the key is kept secure and not
+     exposed to the public.
     */
     static func information(options: API.Options = []) async throws -> Information {
         try await withCheckedThrowingContinuation { continuation in
