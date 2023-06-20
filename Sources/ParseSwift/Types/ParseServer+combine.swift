@@ -49,6 +49,9 @@ public extension ParseServer {
      Retrieves any information provided by the server *asynchronously*. Publishes when complete.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - requires: `.usePrimaryKey` has to be available. It is recommended to only
+     use the primary key in server-side applications where the key is kept secure and not
+     exposed to the public.
     */
     static func informationPublisher(options: API.Options = []) -> Future<Information, ParseError> {
         Future { promise in

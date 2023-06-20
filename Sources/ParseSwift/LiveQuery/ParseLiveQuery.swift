@@ -893,7 +893,7 @@ public extension Query {
      - returns: Your subscription handler, for easy chaining.
      - throws: An error of type `ParseError`.
     */
-    static func subscribe<T: QuerySubscribable>(_ handler: T) async throws -> T {
+    static func subscribe<V: QuerySubscribable>(_ handler: V) async throws -> V {
         try await ParseLiveQuery.client().subscribe(handler)
     }
 
@@ -904,7 +904,7 @@ public extension Query {
      - returns: Your subscription handler, for easy chaining.
      - throws: An error of type `ParseError`.
     */
-    static func subscribe<T: QuerySubscribable>(_ handler: T, client: ParseLiveQuery) async throws -> T {
+    static func subscribe<V: QuerySubscribable>(_ handler: V, client: ParseLiveQuery) async throws -> V {
         try await ParseLiveQuery.client().subscribe(handler)
     }
 
@@ -957,7 +957,7 @@ public extension Query {
      - parameter handler: The specific handler to unsubscribe from.
      - throws: An error of type `ParseError`.
      */
-    func unsubscribe<T: QuerySubscribable>(_ handler: T) async throws {
+    func unsubscribe<V: QuerySubscribable>(_ handler: V) async throws {
         try await ParseLiveQuery.client().unsubscribe(handler)
     }
 
@@ -968,7 +968,7 @@ public extension Query {
      - parameter client: A specific client.
      - throws: An error of type `ParseError`.
      */
-    func unsubscribe<T: QuerySubscribable>(_ handler: T, client: ParseLiveQuery) async throws {
+    func unsubscribe<V: QuerySubscribable>(_ handler: V, client: ParseLiveQuery) async throws {
         try await client.unsubscribe(handler)
     }
 }
@@ -981,7 +981,7 @@ public extension Query {
      - parameter handler: The specific handler to update.
      - throws: An error of type `ParseError`.
      */
-    func update<T: QuerySubscribable>(_ handler: T) async throws {
+    func update<V: QuerySubscribable>(_ handler: V) async throws {
         try await ParseLiveQuery.client().update(handler)
     }
 
@@ -992,7 +992,7 @@ public extension Query {
      - parameter client: A specific client.
      - throws: An error of type `ParseError`.
      */
-    func update<T: QuerySubscribable>(_ handler: T, client: ParseLiveQuery) async throws {
+    func update<V: QuerySubscribable>(_ handler: V, client: ParseLiveQuery) async throws {
         try await client.update(handler)
     }
 }

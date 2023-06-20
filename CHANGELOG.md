@@ -2,19 +2,20 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.7.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.2...5.7.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.3/documentation/parseswift)
+
+__Fixes__
+* Remove all generic shadow warnings in Swift 5.9 ([#120](https://github.com/netreconlab/Parse-Swift/pull/120)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.1...5.7.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.2/documentation/parseswift)
 
 __Fixes__
-* ParsePolygon encoding during a save and decoding resulted in (longitude, latitude) when it should be
- (latitude, longitude). If a developer used ParseSwift <= 5.7.1
- to save/update ParsePolygon's, they will need to update the respective ParseObjects by swapping the latitude 
- and longitude manually. Deprecated withinPolygon() query constraint for geoPoint() and polygonContains() for 
- polygon() ([#118](https://github.com/netreconlab/Parse-Swift/pull/118)), thanks to 
-[Corey Baker](https://github.com/cbaker6).
+* ParsePolygon encoding during a save and decoding resulted in (longitude, latitude) when it should be (latitude, longitude). If a developer used ParseSwift <= 5.7.1 to save/update ParsePolygon's, they will need to update the respective ParseObjects by swapping the latitude and longitude manually. Deprecated withinPolygon() query constraint for geoPoint() and polygonContains() for polygon() ([#118](https://github.com/netreconlab/Parse-Swift/pull/118)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.0...5.7.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.1/documentation/parseswift)

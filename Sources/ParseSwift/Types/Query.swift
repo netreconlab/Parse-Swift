@@ -46,13 +46,13 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
         Self.className
     }
 
-    struct AggregateBody<T>: Codable where T: ParseObject {
+    struct AggregateBody<V>: Codable where V: ParseObject {
         let pipeline: [[String: AnyCodable]]?
         let hint: AnyCodable?
         let explain: Bool?
         let includeReadPreference: String?
 
-        init(query: Query<T>) {
+        init(query: Query<V>) {
             pipeline = query.pipeline
             hint = query.hint
             explain = query.explain
@@ -77,13 +77,13 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
         }
     }
 
-    struct DistinctBody<T>: Codable where T: ParseObject {
+    struct DistinctBody<V>: Codable where V: ParseObject {
         let hint: AnyCodable?
         let explain: Bool?
         let includeReadPreference: String?
         let distinct: String?
 
-        init(query: Query<T>) {
+        init(query: Query<V>) {
             distinct = query.distinct
             hint = query.hint
             explain = query.explain

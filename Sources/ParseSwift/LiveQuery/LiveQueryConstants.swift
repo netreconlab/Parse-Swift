@@ -43,7 +43,7 @@ public enum Event<T: ParseObject>: Equatable {
         }
     }
 
-    public static func == <T>(lhs: Event<T>, rhs: Event<T>) -> Bool {
+    public static func == <U>(lhs: Event<U>, rhs: Event<U>) -> Bool {
         switch (lhs, rhs) {
         case (.entered(let obj1), .entered(let obj2)): return obj1 == obj2
         case (.left(let obj1), .left(let obj2)):       return obj1 == obj2
