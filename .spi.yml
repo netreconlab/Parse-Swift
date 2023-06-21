@@ -2,5 +2,6 @@ version: 1
 builder:
   configs:
   - documentation_targets: [ParseSwift]
+    swift_version: 5.9
   - platform: watchos
     scheme: "ParseSwift"

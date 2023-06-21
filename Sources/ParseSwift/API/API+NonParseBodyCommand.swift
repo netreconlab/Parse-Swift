@@ -113,7 +113,7 @@ internal extension API {
 internal extension API.NonParseBodyCommand {
 
     // MARK: Deleting
-    static func delete<T>(_ object: T) throws -> API.NonParseBodyCommand<NoBody, NoBody> where T: ParseObject {
+    static func delete<V>(_ object: V) throws -> API.NonParseBodyCommand<NoBody, NoBody> where V: ParseObject {
         guard object.isSaved else {
             throw ParseError(code: .otherCause,
                              message: "Cannot delete an object without an objectId")
