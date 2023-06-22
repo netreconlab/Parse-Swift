@@ -52,13 +52,13 @@ extension ParseHookRequestable {
         if let primaryKey = primaryKey,
            primaryKey {
             options.insert(.usePrimaryKey)
-        } else if let sessionToken = user?.sessionToken {
-            options.insert(.sessionToken(sessionToken))
+        } else {
+            if let sessionToken = user?.sessionToken {
+                options.insert(.sessionToken(sessionToken))
+            }
             if let installationId = installationId {
                 options.insert(.installationId(installationId))
             }
-        } else if let installationId = installationId {
-            options.insert(.installationId(installationId))
         }
         return options
     }
@@ -83,8 +83,7 @@ extension ParseHookRequestable {
         }
         let request = self
         var updatedOptions = self.options()
-        updatedOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-        options.forEach { updatedOptions.insert($0) }
+        updatedOptions = options.union(updatedOptions)
         user.fetch(options: updatedOptions,
                    callbackQueue: callbackQueue) { result in
             switch result {

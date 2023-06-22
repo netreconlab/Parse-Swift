@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.7.4
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.3...5.7.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.4/documentation/parseswift)
+
+__Fixes__
+* hydrateUser() should not replace the options passed in ([#121](https://github.com/netreconlab/Parse-Swift/pull/121)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.2...5.7.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.3/documentation/parseswift)
