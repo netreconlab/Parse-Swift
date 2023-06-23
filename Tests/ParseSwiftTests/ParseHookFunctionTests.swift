@@ -14,10 +14,6 @@ import XCTest
 @testable import ParseSwift
 
 class ParseHookFunctionTests: XCTestCase {
-    struct TestFunction: ParseHookFunctionable {
-        var functionName: String?
-        var url: URL?
-    }
 
     override func setUp() async throws {
         try await super.setUp()
@@ -42,8 +38,8 @@ class ParseHookFunctionTests: XCTestCase {
     }
 
     func testCoding() throws {
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         let expected = "{\"functionName\":\"foo\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookFunction.description, expected)
     }
@@ -51,8 +47,8 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testCreate() async throws {
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -74,8 +70,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         do {
             _ = try await hookFunction.create()
             XCTFail("Should have thrown error")
@@ -87,7 +83,9 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testCreateError2() async throws {
 
-        let hookFunction = TestFunction(url: URL(string: "https://api.example.com/foo"))
+        var hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
+        hookFunction.functionName = nil
         do {
             _ = try await hookFunction.create()
             XCTFail("Should have thrown error")
@@ -99,8 +97,8 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testUpdate() async throws {
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -122,8 +120,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         do {
             _ = try await hookFunction.update()
             XCTFail("Should have thrown error")
@@ -135,7 +133,9 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testUpdateError2() async throws {
 
-        let hookFunction = TestFunction(url: URL(string: "https://api.example.com/foo"))
+        var hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
+        hookFunction.functionName = nil
         do {
             _ = try await hookFunction.update()
             XCTFail("Should have thrown error")
@@ -147,8 +147,8 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testFetch() async throws {
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -170,8 +170,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         do {
             _ = try await hookFunction.fetch()
             XCTFail("Should have thrown error")
@@ -183,7 +183,9 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testFetchError2() async throws {
 
-        let hookFunction = TestFunction(url: URL(string: "https://api.example.com/foo"))
+        var hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
+        hookFunction.functionName = nil
         do {
             _ = try await hookFunction.fetch()
             XCTFail("Should have thrown error")
@@ -195,8 +197,8 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testFetchAll() async throws {
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = [hookFunction]
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -218,8 +220,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         do {
             _ = try await hookFunction.fetchAll()
             XCTFail("Should have thrown error")
@@ -237,8 +239,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         try await hookFunction.delete()
     }
 
@@ -251,8 +253,8 @@ class ParseHookFunctionTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
         do {
             try await hookFunction.delete()
             XCTFail("Should have thrown error")
@@ -264,7 +266,9 @@ class ParseHookFunctionTests: XCTestCase {
     @MainActor
     func testDeleteError2() async throws {
 
-        let hookFunction = TestFunction(url: URL(string: "https://api.example.com/foo"))
+        var hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
+        hookFunction.functionName = nil
         do {
             _ = try await hookFunction.delete()
             XCTFail("Should have thrown error")

@@ -47,23 +47,13 @@ struct GameScore: ParseObject {
 }
 
 /*:
- Parse Hook Triggers can be created by conforming to
- `ParseHookFunctionable`.
- */
-struct HookTrigger: ParseHookTriggerable {
-    var className: String?
-    var triggerName: ParseHookTriggerType?
-    var url: URL?
-}
-
-/*:
  Lets create our first Hook trigger by first creating an instance
  with the name of the trigger and url for the hook.
  */
 let gameScore = GameScore()
-var myTrigger = HookTrigger(object: gameScore,
-                            triggerName: .afterSave,
-                            url: URL(string: "https://api.example.com/bar")!)
+var myTrigger = ParseHookTrigger(object: gameScore,
+                                 trigger: .afterSave,
+                                 url: URL(string: "https://api.example.com/bar")!)
 
 //: Then, create the trigger on the server.
 myTrigger.create { result in
@@ -130,7 +120,7 @@ myTrigger.delete { result in
  You can also use the fetchAll type method to fetch all of
  the current Hook triggers.
  */
-HookTrigger.fetchAll { result in
+ParseHookTrigger.fetchAll { result in
     switch result {
     case .success(let triggers):
         print("Current: \"\(triggers)\"")

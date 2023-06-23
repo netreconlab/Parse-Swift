@@ -16,11 +16,6 @@ import XCTest
 // swiftlint:disable type_body_length
 
 class ParseHookTriggerTests: XCTestCase {
-    struct TestTrigger: ParseHookTriggerable {
-        var className: String?
-        var triggerName: ParseHookTriggerType?
-        var url: URL?
-    }
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -74,9 +69,14 @@ class ParseHookTriggerTests: XCTestCase {
     }
 
     func testCoding() throws {
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = try ParseHookTrigger(className: "foo",
+                                               triggerName: .afterSave,
+                                               url: url)
         // swiftlint:disable:next line_length
         let expected = "{\"className\":\"foo\",\"triggerName\":\"afterSave\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger.description, expected)
@@ -85,22 +85,28 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let hookTrigger2 = TestTrigger(object: object,
-                                       triggerName: .afterSave,
-                                       url: url)
+        let hookTrigger2 = ParseHookTrigger(object: object,
+                                            trigger: .afterSave,
+                                            url: url)
         // swiftlint:disable:next line_length
         let expected2 = "{\"className\":\"GameScore\",\"triggerName\":\"afterSave\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger2.description, expected2)
-        let hookTrigger3 = try TestTrigger(triggerName: .afterSave,
-                                           url: url)
+        let hookTrigger3 = try ParseHookTrigger(trigger: .afterSave,
+                                                url: url)
         // swiftlint:disable:next line_length
         let expected3 = "{\"className\":\"@File\",\"triggerName\":\"afterSave\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger3.description, expected3)
-        let hookTrigger4 = try TestTrigger(triggerName: .beforeConnect,
-                                           url: url)
+        let hookTrigger4 = try ParseHookTrigger(trigger: .beforeConnect,
+                                                url: url)
         // swiftlint:disable:next line_length
         let expected4 = "{\"className\":\"@Connect\",\"triggerName\":\"beforeConnect\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger4.description, expected4)
+        let hookTrigger5 = ParseHookTrigger(object: GameScore.self,
+                                            trigger: .afterSave,
+                                            url: url)
+        // swiftlint:disable:next line_length
+        let expected5 = "{\"className\":\"GameScore\",\"triggerName\":\"afterSave\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
+        XCTAssertEqual(hookTrigger5.description, expected5)
     }
 
     func testInitializerError() throws {
@@ -108,16 +114,20 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        XCTAssertThrowsError(try TestTrigger(triggerName: .afterFind,
-                                             url: url))
+        XCTAssertThrowsError(try ParseHookTrigger(trigger: .afterFind,
+                                                  url: url))
     }
 
     @MainActor
     func testCreate() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -132,6 +142,10 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testCreateError() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -139,9 +153,9 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         do {
             _ = try await hookTrigger.create()
             XCTFail("Should have thrown error")
@@ -152,9 +166,12 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testCreateError2() async throws {
-
-        let hookTrigger = TestTrigger(triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
+                                               url: url)
         do {
             _ = try await hookTrigger.create()
             XCTFail("Should have thrown error")
@@ -165,10 +182,13 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testUpdate() async throws {
-
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           triggerName: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -183,6 +203,10 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testUpdateError() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -190,9 +214,9 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         do {
             _ = try await hookTrigger.update()
             XCTFail("Should have thrown error")
@@ -203,9 +227,12 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testUpdateError2() async throws {
-
-        let hookTrigger = TestTrigger(triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
+                                               url: url)
         do {
             _ = try await hookTrigger.update()
             XCTFail("Should have thrown error")
@@ -216,9 +243,14 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testUpdateError3() async throws {
-
-        let hookTrigger = TestTrigger(className: "foo",
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        var hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterDelete,
+                                           url: url)
+        hookTrigger.triggerName = nil
         do {
             _ = try await hookTrigger.update()
             XCTFail("Should have thrown error")
@@ -229,10 +261,13 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testFetch() async throws {
-
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -247,6 +282,10 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testFetchError() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -254,9 +293,9 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         do {
             _ = try await hookTrigger.fetch()
             XCTFail("Should have thrown error")
@@ -267,9 +306,12 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testFetchError2() async throws {
-
-        let hookTrigger = TestTrigger(triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
+                                               url: url)
         do {
             _ = try await hookTrigger.fetch()
             XCTFail("Should have thrown error")
@@ -280,10 +322,13 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testFetchAll() async throws {
-
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = [hookTrigger]
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -298,6 +343,10 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testFetchAllError() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -305,9 +354,9 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         do {
             _ = try await hookTrigger.fetchAll()
             XCTFail("Should have thrown error")
@@ -318,6 +367,10 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testDelete() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = NoBody()
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -325,14 +378,18 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         try await hookTrigger.delete()
     }
 
     @MainActor
     func testDeleteError() async throws {
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
 
@@ -340,9 +397,9 @@ class ParseHookTriggerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
         do {
             try await hookTrigger.delete()
             XCTFail("Should have thrown error")
@@ -353,9 +410,12 @@ class ParseHookTriggerTests: XCTestCase {
 
     @MainActor
     func testDeleteError2() async throws {
-
-        let hookTrigger = TestTrigger(triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
+                                               url: url)
         do {
             _ = try await hookTrigger.delete()
             XCTFail("Should have thrown error")

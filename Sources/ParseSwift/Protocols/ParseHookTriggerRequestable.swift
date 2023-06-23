@@ -16,7 +16,7 @@ import Foundation
  exposed to the public.
  */
 public protocol ParseHookTriggerRequestable: ParseHookRequestable {
-    /// The types of Parse Hook Trigger.
+    /// The type of Parse Hook Trigger.
     var triggerName: String? { get }
     /// The number of clients connected.
     var clients: Int? { get }

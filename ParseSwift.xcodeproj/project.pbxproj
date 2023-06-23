@@ -52,6 +52,8 @@
 		7030E09029BBBFFA0021970D /* ParseConfigCodable+combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E08F29BBBFFA0021970D /* ParseConfigCodable+combine.swift */; };
 		7030E09529BBC5740021970D /* ParseConfigCodableCombineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7030E09429BBC5740021970D /* ParseConfigCodableCombineTests.swift */; };
 		7031F356296F553200E077CC /* APICommandMultipleAttemptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */; };
+		7034B9FD2A46380B00395CBC /* ParseHookTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034B9FC2A46380B00395CBC /* ParseHookTrigger.swift */; };
+		7034B9FF2A46391200395CBC /* ParseHookFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034B9FE2A46391200395CBC /* ParseHookFunction.swift */; };
 		7037DAB226384DE1005D7E62 /* TestParseEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037DAB126384DE1005D7E62 /* TestParseEncoder.swift */; };
 		70385E6428563FD10084D306 /* ParsePushPayloadFirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70385E6328563FD10084D306 /* ParsePushPayloadFirebaseTests.swift */; };
 		70385E68285640A30084D306 /* ParsePushPayloadAnyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70385E67285640A30084D306 /* ParsePushPayloadAnyTests.swift */; };
@@ -394,6 +396,8 @@
 		7030E08F29BBBFFA0021970D /* ParseConfigCodable+combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseConfigCodable+combine.swift"; sourceTree = "<group>"; };
 		7030E09429BBC5740021970D /* ParseConfigCodableCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConfigCodableCombineTests.swift; sourceTree = "<group>"; };
 		7031F355296F553200E077CC /* APICommandMultipleAttemptsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICommandMultipleAttemptsTests.swift; sourceTree = "<group>"; };
+		7034B9FC2A46380B00395CBC /* ParseHookTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHookTrigger.swift; sourceTree = "<group>"; };
+		7034B9FE2A46391200395CBC /* ParseHookFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHookFunction.swift; sourceTree = "<group>"; };
 		7037DAB126384DE1005D7E62 /* TestParseEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestParseEncoder.swift; sourceTree = "<group>"; };
 		70385E6328563FD10084D306 /* ParsePushPayloadFirebaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePushPayloadFirebaseTests.swift; sourceTree = "<group>"; };
 		70385E67285640A30084D306 /* ParsePushPayloadAnyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePushPayloadAnyTests.swift; sourceTree = "<group>"; };
@@ -1226,8 +1230,10 @@
 				7044C19025C4F5B60011F6E7 /* ParseFile+combine.swift */,
 				704E781B28CFFAF80075F952 /* ParseFileDefaultTransfer.swift */,
 				F97B45BC24D9C6F200F4A88B /* ParseGeoPoint.swift */,
+				7034B9FE2A46391200395CBC /* ParseHookFunction.swift */,
 				70385E7F2858EAA90084D306 /* ParseHookFunctionRequest.swift */,
 				70CE0A9328590A0A00DAEA86 /* ParseHookResponse.swift */,
+				7034B9FC2A46380B00395CBC /* ParseHookTrigger.swift */,
 				70CE0AB1285963A300DAEA86 /* ParseHookTriggerObjectRequest.swift */,
 				70B412B329801AFB00F706EA /* ParseHookTriggerRequest.swift */,
 				70D41D7F28B520E200613510 /* ParseKeychainAccessGroup.swift */,
@@ -1530,6 +1536,7 @@
 				70385E712858D2DD0084D306 /* ParseHookTriggerable.swift in Sources */,
 				91679D64268E596300F71809 /* ParseVersion.swift in Sources */,
 				91285B1C26990D7F0051B544 /* ParsePolygon.swift in Sources */,
+				7034B9FD2A46380B00395CBC /* ParseHookTrigger.swift in Sources */,
 				91BB8FCA2690AC99005A6BA5 /* QueryViewModel.swift in Sources */,
 				70B412B429801AFB00F706EA /* ParseHookTriggerRequest.swift in Sources */,
 				7085DD9426CBF3A70033B977 /* Documentation.docc in Sources */,
@@ -1595,6 +1602,7 @@
 				F97B465A24D9C78C00F4A88B /* ParseOperationIncrement.swift in Sources */,
 				7045769326BD8F8100F86F71 /* ParseInstallation+async.swift in Sources */,
 				7C55F9E72860CD6B002A352D /* ParseSpotify.swift in Sources */,
+				7034B9FF2A46391200395CBC /* ParseHookFunction.swift in Sources */,
 				7003960925A184EF0052CB31 /* ParseLiveQuery.swift in Sources */,
 				7044C17525C4ECFF0011F6E7 /* ParseCloudable+combine.swift in Sources */,
 				705025B32845C302008D6624 /* ParsePushStatus.swift in Sources */,

@@ -133,6 +133,7 @@ class ParseRelationTests: XCTestCase {
 
         // Should not produce a relation without an objectId.
         XCTAssertThrowsError(try score.relation("yolo", child: level))
+        XCTAssertThrowsError(try score.relation("yolo", object: Level.self))
 
         let objectId = "hello"
         score.objectId = objectId
@@ -161,6 +162,11 @@ class ParseRelationTests: XCTestCase {
         let encoded4 = try ParseCoding.jsonEncoder().encode(relation2)
         let decoded4 = try XCTUnwrap(String(data: encoded4, encoding: .utf8))
         XCTAssertEqual(decoded4, expected4)
+
+        let relation4 = try score.relation("yolo", object: Level.self)
+        let encoded5 = try ParseCoding.jsonEncoder().encode(relation4)
+        let decoded5 = try XCTUnwrap(String(data: encoded5, encoding: .utf8))
+        XCTAssertEqual(decoded5, expected)
     }
 
     func testInitWithChild() throws {

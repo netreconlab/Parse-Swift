@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.8.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.4...5.8.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.8.0/documentation/parseswift)
+
+__Fixes__
+* Add concrete types: ParseHookTrigger and ParseHookFunction to reduce code developers need to create. Deprecate triggerName in favor of trigger where possible ([#122](https://github.com/netreconlab/Parse-Swift/pull/122)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.7.4
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.3...5.7.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.4/documentation/parseswift)

@@ -90,7 +90,7 @@ class ParseHookTriggerRequestTests: XCTestCase {
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
                                                                        ipAddress: "1.1.1.1",
                                                                        headers: ["yolo": "me"],
-                                                                       triggerName: "beforeDelete",
+                                                                       trigger: ParseHookTriggerType.beforeDelete,
                                                                        object: object)
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
