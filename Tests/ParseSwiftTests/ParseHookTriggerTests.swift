@@ -74,9 +74,9 @@ class ParseHookTriggerTests: XCTestCase {
             return
         }
 
-        let hookTrigger = try ParseHookTrigger(className: "foo",
-                                               triggerName: .afterSave,
-                                               url: url)
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           triggerName: .afterSave,
+                                           url: url)
         // swiftlint:disable:next line_length
         let expected = "{\"className\":\"foo\",\"triggerName\":\"afterSave\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger.description, expected)
@@ -170,12 +170,15 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
-                                               url: url)
+        var hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
+        hookTrigger.className = nil
         do {
             _ = try await hookTrigger.create()
             XCTFail("Should have thrown error")
         } catch {
+            print(error)
             XCTAssertTrue(error.equalsTo(.otherCause))
         }
     }
@@ -231,8 +234,10 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
-                                               url: url)
+        var hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
+        hookTrigger.className = nil
         do {
             _ = try await hookTrigger.update()
             XCTFail("Should have thrown error")
@@ -310,8 +315,10 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
-                                               url: url)
+        var hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
+        hookTrigger.className = nil
         do {
             _ = try await hookTrigger.fetch()
             XCTFail("Should have thrown error")
@@ -414,8 +421,10 @@ class ParseHookTriggerTests: XCTestCase {
             XCTFail("Should have unwrapped")
             return
         }
-        let hookTrigger = try ParseHookTrigger(trigger: .afterSave,
-                                               url: url)
+        var hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
+        hookTrigger.className = nil
         do {
             _ = try await hookTrigger.delete()
             XCTFail("Should have thrown error")

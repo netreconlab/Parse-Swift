@@ -119,12 +119,12 @@ public struct TriggerRequest: Encodable {
 
     init<T>(trigger: T) throws where T: ParseHookTriggerable {
         guard let className = trigger.className,
-              let triggerName = trigger.triggerName else {
+              let triggerType = trigger.triggerName else {
             throw ParseError(code: .otherCause,
                              message: "The \"className\" and \"triggerName\" needs to be set: \(trigger)")
         }
         self.className = className
-        self.trigger = triggerName
+        self.trigger = triggerType
         self.url = trigger.url
     }
 
