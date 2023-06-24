@@ -192,6 +192,13 @@ class ParseRelationTests: XCTestCase {
         _ = try ParseRelation<GameScore>(parent: score,
                                          key: "yolo",
                                          child: try level.toPointer())
+
+        var relation2 = try ParseRelation<GameScore>(parent: score.toPointer(), object: Level.self)
+
+        let expected3 = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
+        let encoded3 = try ParseCoding.jsonEncoder().encode(relation2)
+        let decoded3 = try XCTUnwrap(String(data: encoded3, encoding: .utf8))
+        XCTAssertEqual(decoded3, expected3)
     }
 
     func testAddIncorrectClassError() throws {
