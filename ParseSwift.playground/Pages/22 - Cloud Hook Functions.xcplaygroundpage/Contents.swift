@@ -21,20 +21,11 @@ Task {
 }
 
 /*:
- Parse Hook Functions can be created by conforming to
- `ParseHookFunctionable`.
- */
-struct HookFunction: ParseHookFunctionable {
-    var functionName: String?
-    var url: URL?
-}
-
-/*:
  Lets create our first Hook function by first creating an instance
  with the name of the function and url for the hook.
  */
-var myFunction = HookFunction(name: "foo",
-                              url: URL(string: "https://api.example.com/foo"))
+var myFunction = ParseHookFunction(name: "foo",
+                                   url: URL(string: "https://api.example.com/foo"))
 
 //: Then, create the function on the server.
 myFunction.create { result in
@@ -101,7 +92,7 @@ myFunction.delete { result in
  You can also use the fetchAll type method to fetch all of
  the current Hook functions.
  */
-HookFunction.fetchAll { result in
+ParseHookFunction.fetchAll { result in
     switch result {
     case .success(let functions):
         print("Current: \"\(functions)\"")

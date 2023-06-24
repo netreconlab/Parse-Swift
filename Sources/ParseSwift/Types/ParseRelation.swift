@@ -50,6 +50,17 @@ public struct ParseRelation<T>: ParseTypeable, Hashable where T: ParseObject {
     }
 
     /**
+     Create a `ParseRelation` with a specific parent, key, and object.
+     - parameters:
+        - parent: The parent `ParseObject` Pointer.
+        - key: The key for the relation.
+        - object: The type of child for the relation.
+     */
+    public init<V: ParseObject>(parent: Pointer<T>, key: String? = nil, object: V.Type) {
+        self.init(parent: parent, key: key, className: object.className)
+    }
+
+    /**
      Create a `ParseRelation` with a specific parent, key, and child object.
      - parameters:
         - parent: The parent `ParseObject` Pointer.
@@ -92,6 +103,17 @@ public struct ParseRelation<T>: ParseTypeable, Hashable where T: ParseObject {
      */
     public init(parent: T, key: String? = nil, className: String) throws {
         self.init(parent: try parent.toPointer(), key: key, className: className)
+    }
+
+    /**
+     Create a `ParseRelation` with a specific parent, key, and object.
+     - parameters:
+        - parent: The parent `ParseObject`.
+        - key: The key for the relation.
+        - object: The type of child for the relation.
+     */
+    public init<V: ParseObject>(parent: T, key: String? = nil, object: V.Type) throws {
+        self.init(parent: try parent.toPointer(), key: key, className: object.className)
     }
 
     /**
@@ -420,6 +442,16 @@ public extension ParseObject {
      */
     func relation(_ key: String, className: String) throws -> ParseRelation<Self> {
         try ParseRelation(parent: self, key: key, className: className)
+    }
+
+    /**
+     Create a new relation with a specific key.
+     - parameter key: The key for the relation.
+     - parameter className: The name of the child class for the relation.
+     - returns: A new `ParseRelation`.
+     */
+    func relation<V: ParseObject>(_ key: String, object: V.Type) throws -> ParseRelation<Self> {
+        try ParseRelation(parent: self, key: key, className: object.className)
     }
 
     /**

@@ -24,17 +24,49 @@ public protocol ParseHookTriggerable: ParseHookable {
 
 // MARK: Default Implementation
 public extension ParseHookTriggerable {
+
+    /**
+     Creates a new Parse hook trigger.
+     - parameter className: The name of the `ParseObject` the trigger should act on.
+     - parameter trigger: The `ParseHookTriggerType` type.
+     - parameter url: The endpoint of the hook.
+     */
+    init(className: String, trigger: ParseHookTriggerType, url: URL) {
+        self.init()
+        self.className = className
+        self.triggerName = trigger
+        self.url = url
+    }
+
     /**
      Creates a new Parse hook trigger.
      - parameter className: The name of the `ParseObject` the trigger should act on.
      - parameter triggerName: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
+    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
     init(className: String, triggerName: ParseHookTriggerType, url: URL) {
-        self.init()
-        self.className = className
-        self.triggerName = triggerName
-        self.url = url
+        self.init(className: className, trigger: triggerName, url: url)
+    }
+
+    /**
+     Creates a new Parse hook trigger.
+     - parameter object: The `ParseObject` the trigger should act on.
+     - parameter trigger: The `ParseHookTriggerType` type.
+     - parameter url: The endpoint of the hook.
+     */
+    init<T>(object: T.Type, trigger: ParseHookTriggerType, url: URL) where T: ParseObject {
+        self.init(className: object.className, trigger: trigger, url: url)
+    }
+
+    /**
+     Creates a new Parse hook trigger.
+     - parameter object: The `ParseObject` the trigger should act on.
+     - parameter trigger: The `ParseHookTriggerType` type.
+     - parameter url: The endpoint of the hook.
+     */
+    init<T>(object: T, trigger: ParseHookTriggerType, url: URL) where T: ParseObject {
+        self.init(className: T.className, trigger: trigger, url: url)
     }
 
     /**
@@ -43,18 +75,19 @@ public extension ParseHookTriggerable {
      - parameter triggerName: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
+    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
     init<T>(object: T, triggerName: ParseHookTriggerType, url: URL) where T: ParseObject {
-        self.init(className: T.className, triggerName: triggerName, url: url)
+        self.init(object: object, trigger: triggerName, url: url)
     }
 
     /**
      Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
-     - parameter triggerName: The `ParseHookTriggerType` type.
+     - parameter trigger: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
-    init(triggerName: ParseHookTriggerType, url: URL) throws {
+    init(trigger: ParseHookTriggerType, url: URL) throws {
         self.init()
-        self.triggerName = triggerName
+        self.triggerName = trigger
         self.url = url
         switch triggerName {
         case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
@@ -66,22 +99,45 @@ public extension ParseHookTriggerable {
                              message: "This initializer should only be used for \"ParseFile\" and \"beforeConnect\"")
         }
     }
+
+    /**
+     Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
+     - parameter triggerName: The `ParseHookTriggerType` type.
+     - parameter url: The endpoint of the hook.
+     */
+    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
+    init(triggerName: ParseHookTriggerType, url: URL) throws {
+        try self.init(trigger: triggerName, url: url)
+    }
+
 }
 
+/// A type of request for Parse Hook Triggers.
 public struct TriggerRequest: Encodable {
     let className: String
-    let triggerName: ParseHookTriggerType
+    let trigger: ParseHookTriggerType
     let url: URL?
 
-    init<T>(trigger: T) throws where T: ParseHookTriggerable {
+    /**
+     Creates an instance.
+     - parameter trigger: A type that conforms to `ParseHookTriggerable`.
+     - throws: An error of `ParseError` type.
+     */
+    public init<T>(trigger: T) throws where T: ParseHookTriggerable {
         guard let className = trigger.className,
-              let triggerName = trigger.triggerName else {
+              let triggerType = trigger.triggerName else {
             throw ParseError(code: .otherCause,
                              message: "The \"className\" and \"triggerName\" needs to be set: \(trigger)")
         }
         self.className = className
-        self.triggerName = triggerName
+        self.trigger = triggerType
         self.url = trigger.url
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case className
+        case trigger = "triggerName"
+        case url
     }
 }
 

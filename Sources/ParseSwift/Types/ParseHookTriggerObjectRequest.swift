@@ -21,7 +21,12 @@ public struct ParseHookTriggerObjectRequest<U: ParseCloudUser, T: ParseObject>: 
     public var installationId: String?
     public var ipAddress: String?
     public var headers: [String: String]?
-    public var triggerName: String?
+    /// The type of Parse Hook Trigger.
+    public var trigger: ParseHookTriggerType?
+    @available(*, deprecated, message: "Use \"trigger\" instead.")
+    public var triggerName: String? {
+        trigger?.rawValue
+    }
     public var clients: Int?
     /// An object from the hook call.
     public var object: T?
@@ -48,11 +53,11 @@ public struct ParseHookTriggerObjectRequest<U: ParseCloudUser, T: ParseObject>: 
     enum CodingKeys: String, CodingKey {
         case primaryKey = "master"
         case ipAddress = "ip"
+        case trigger = "triggerName"
         case user, installationId, headers,
-             log, context, triggerName,
-             object, objects, original, query,
-             isGet, clients, subscriptions,
-             sendEvent
+             log, context, object, objects,
+             original, query, isGet,
+             clients, subscriptions, sendEvent
     }
 }
 

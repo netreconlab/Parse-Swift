@@ -373,7 +373,7 @@ Task {
 Task {
     let score1 = GameScore(points: 53)
     //: You can also do
-    // let specificRelation = try await User.current().relation("scores", className: "GameScore")
+    // let specificRelation = try await User.current().relation("scores", object: GameScore.self)
     do {
         let currentUser = try await User.current()
         let specificRelation = try currentUser.relation("scores", child: score1)

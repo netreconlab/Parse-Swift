@@ -84,11 +84,11 @@ public extension ParseRole {
     }
 
     var users: ParseRelation<Self>? {
-        try? ParseRelation(parent: self, key: "users", className: RoleUser.className)
+        try? ParseRelation(parent: self, key: "users", object: RoleUser.self)
     }
 
     var roles: ParseRelation<Self>? {
-        try? ParseRelation(parent: self, key: "roles", className: Self.className)
+        try? ParseRelation(parent: self, key: "roles", object: Self.self)
     }
 
     init(name: String) throws {

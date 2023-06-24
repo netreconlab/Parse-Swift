@@ -70,11 +70,11 @@ internal func initialize(applicationId: String,
 
 internal func yieldIfNotInitialized(_ iteration: Int = 0) async throws {
     guard ParseConfiguration.checkIfConfigured() else {
-        guard iteration < 5 else {
+        guard iteration < 10 else {
             throw ParseError(code: .otherCause,
                              message: "The SDK needs to be initialized")
         }
-        let nanoSeconds = UInt64(1 * 1_000_000_000)
+        let nanoSeconds = UInt64(1 * 500_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
         try await yieldIfNotInitialized(iteration + 1)
         return
