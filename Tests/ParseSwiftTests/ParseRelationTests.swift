@@ -193,7 +193,7 @@ class ParseRelationTests: XCTestCase {
                                          key: "yolo",
                                          child: try level.toPointer())
 
-        var relation2 = try ParseRelation<GameScore>(parent: score.toPointer(), object: Level.self)
+        let relation2 = try ParseRelation<GameScore>(parent: score.toPointer(), object: Level.self)
 
         let expected3 = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
         let encoded3 = try ParseCoding.jsonEncoder().encode(relation2)
@@ -490,6 +490,16 @@ class ParseRelationTests: XCTestCase {
             let encoded3 = try ParseCoding.jsonEncoder().encode(query3)
             let decoded3 = try XCTUnwrap(String(data: encoded3, encoding: .utf8))
             XCTAssertEqual(decoded3, expected3)
+
+            guard let query4 = try level.relation?.query("levels", parent: score.toPointer()) else {
+                XCTFail("Should have unwrapped")
+                return
+            }
+            // swiftlint:disable:next line_length
+            let expected4 = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
+            let encoded4 = try ParseCoding.jsonEncoder().encode(query4)
+            let decoded4 = try XCTUnwrap(String(data: encoded4, encoding: .utf8))
+            XCTAssertEqual(decoded4, expected4)
         } catch {
             XCTFail("Should not have thrown error")
         }
