@@ -357,6 +357,10 @@ public extension ParseObject {
 extension ParseObject {
 
     func mergeAutomatically(_ originalObject: Self) throws -> Self {
+        guard hasSameObjectId(as: originalObject) else {
+            throw ParseError(code: .otherCause,
+                             message: "objectId's of objects do not match")
+        }
         let updatedEncoded = try ParseCoding.jsonEncoder().encode(self)
         let originalData = try ParseCoding.jsonEncoder().encode(originalObject)
         guard let updated = try JSONSerialization.jsonObject(with: updatedEncoded) as? [String: AnyObject],

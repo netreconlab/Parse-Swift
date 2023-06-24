@@ -11,6 +11,9 @@
 __New features__
 * Add concrete types: ParseHookTrigger and ParseHookFunction to reduce code developers need to create. Deprecate triggerName in favor of trigger where possible. The SDK also yields for 0.5 second as oppose to 1 second, which can lead to faster app starts ([#122](https://github.com/netreconlab/Parse-Swift/pull/122)), thanks to [Corey Baker](https://github.com/cbaker6).
 
+__Fixes__
+* A problem when the developer did not impement merge() on a ParseObject and depended on the internal mergeAutomatically() to merge. If the developer used mergeAutomatically() indirectly for objects with different objectId's, the method allowed the merge. Now the method throws an error ([#122](https://github.com/netreconlab/Parse-Swift/pull/122)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.7.4
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.7.3...5.7.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.7.4/documentation/parseswift)
 

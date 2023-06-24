@@ -81,6 +81,22 @@ class ParseRoleTests: XCTestCase {
         }
     }
 
+    struct Role2<RoleUser: ParseUser>: ParseRole {
+
+        // required by ParseObject
+        var objectId: String?
+        var createdAt: Date?
+        var updatedAt: Date?
+        var ACL: ParseACL?
+        var originalData: Data?
+
+        // provided by Role
+        var name: String?
+
+        // custom
+        var title: String?
+    }
+
     struct Level: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -145,6 +161,12 @@ class ParseRoleTests: XCTestCase {
         role2.objectId = "world"
         XCTAssertThrowsError(try role1.merge(with: role2))
         XCTAssertThrowsError(try role1.mergeParse(with: role2))
+        var role3 = try Role2<User>(name: "Hello9_- ")
+        role3.objectId = "hello"
+        var role4 = try Role2<User>(name: "Hello9_- ")
+        role4.objectId = "world"
+        XCTAssertThrowsError(try role3.merge(with: role4))
+        XCTAssertThrowsError(try role3.mergeParse(with: role4))
     }
 
     func testEndPoint() throws {
