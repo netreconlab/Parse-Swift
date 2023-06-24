@@ -172,27 +172,45 @@ class InitializeSDKTests: XCTestCase {
         }
         XCTAssertTrue(currentCache.currentMemoryUsage > 0)
     }
-/*
+
+    func testYieldIfNotInitialized() async throws {
+        Parse.configuration = nil
+        let memory = InMemoryPrimitiveStore()
+        await ParseStorage.shared.use(memory)
+        do {
+            try await ParseSwift.yieldIfNotInitialized()
+            XCTFail("Should have thrown error")
+        } catch {
+            guard let parseError = error as? ParseError else {
+                XCTFail("Should have casted to ParseError")
+                return
+            }
+            XCTAssertEqual(parseError.code, .otherCause)
+            XCTAssertTrue(parseError.message.contains("initialized"))
+        }
+    }
+
     func testDeleteKeychainOnFirstRun() async throws {
-        let memory = InMemoryKeyValueStore()
+        await KeychainStore.createShared()
+        let memory = InMemoryPrimitiveStore()
         await ParseStorage.shared.use(memory)
         guard let server = URL(string: "http://parse.com") else {
             XCTFail("Should have unwrapped")
             return
         }
         Parse.configuration = ParseConfiguration(applicationId: "yo",
-                                                      serverURL: server,
-                                                      isDeletingKeychainIfNeeded: false)
+                                                 serverURL: server,
+                                                 deletingKeychainIfNeeded: false)
         let key = "Hello"
         let value = "World"
-        try KeychainStore.shared.set(value, for: key)
+        try await KeychainStore.shared.set(value, for: key)
         addCachedResponse()
 
         // Keychain should contain value on first run
-        ParseSwift.deleteKeychainIfNeeded()
+        await ParseSwift.deleteKeychainIfNeeded()
 
         do {
-            let storedValue: String? = try KeychainStore.shared.get(valueFor: key)
+            let storedValue: String? = try await KeychainStore.shared.get(valueFor: key)
             XCTAssertEqual(storedValue, value)
             guard let firstRun = UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) as? String else {
                 XCTFail("Should have unwrapped")
@@ -201,9 +219,9 @@ class InitializeSDKTests: XCTestCase {
             XCTAssertEqual(firstRun, ParseConstants.bundlePrefix)
 
             // Keychain should remain unchanged on 2+ runs
-            ParseSwift.configuration.isDeletingKeychainIfNeeded = true
-            ParseSwift.deleteKeychainIfNeeded()
-            let storedValue2: String? = try KeychainStore.shared.get(valueFor: key)
+            Parse.configuration.isDeletingKeychainIfNeeded = true
+            await ParseSwift.deleteKeychainIfNeeded()
+            let storedValue2: String? = try await KeychainStore.shared.get(valueFor: key)
             XCTAssertEqual(storedValue2, value)
             guard let firstRun2 = UserDefaults.standard
                     .object(forKey: ParseConstants.bundlePrefix) as? String else {
@@ -218,8 +236,8 @@ class InitializeSDKTests: XCTestCase {
             let firstRun3 = UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) as? String
             XCTAssertNil(firstRun3)
             addCachedResponse()
-            ParseSwift.deleteKeychainIfNeeded()
-            let storedValue3: String? = try KeychainStore.shared.get(valueFor: key)
+            await ParseSwift.deleteKeychainIfNeeded()
+            let storedValue3: String? = try await KeychainStore.shared.get(valueFor: key)
             XCTAssertNil(storedValue3)
             guard let firstRun4 = UserDefaults.standard
                     .object(forKey: ParseConstants.bundlePrefix) as? String else {
@@ -236,7 +254,7 @@ class InitializeSDKTests: XCTestCase {
         } catch {
             XCTFail("\(error)")
         }
-    }*/
+    }
     #endif
 
     func testCreateParseInstallationOnInit() async throws {

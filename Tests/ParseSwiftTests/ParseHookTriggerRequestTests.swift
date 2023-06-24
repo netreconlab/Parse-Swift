@@ -77,12 +77,13 @@ class ParseHookTriggerRequestTests: XCTestCase {
         let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
                                                            ipAddress: "1.1.1.1",
                                                            headers: ["yolo": "me"],
-                                                           triggerName: "beforeDelete",
+                                                           trigger: .beforeDelete,
                                                            file: ParseFile(data: Data()),
                                                            fileSize: 0)
         // swiftlint:disable:next line_length
         let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
+        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
     }
 
     func testCodingObject() async throws {
@@ -90,11 +91,12 @@ class ParseHookTriggerRequestTests: XCTestCase {
         let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
                                                                        ipAddress: "1.1.1.1",
                                                                        headers: ["yolo": "me"],
-                                                                       triggerName: "beforeDelete",
+                                                                       trigger: .beforeDelete,
                                                                        object: object)
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
+        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
         let triggerRequest2 = ParseHookTriggerObjectRequest<User, User>(ipAddress: "1.1.1.1",
                                                                         headers: ["yolo": "me"],
                                                                         object: object)

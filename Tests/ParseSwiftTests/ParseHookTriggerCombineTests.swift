@@ -16,11 +16,6 @@ import Combine
 // swiftlint:disable type_body_length
 
 class ParseHookTriggerCombineTests: XCTestCase {
-    struct TestTrigger: ParseHookTriggerable {
-        var className: String?
-        var triggerName: ParseHookTriggerType?
-        var url: URL?
-    }
 
     override func setUp() async throws {
         try await super.setUp()
@@ -48,9 +43,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -78,9 +78,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -109,9 +114,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -139,9 +149,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -170,9 +185,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -200,9 +220,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -231,9 +256,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = [hookTrigger]
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -261,9 +291,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -292,9 +327,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = hookTrigger
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -320,9 +360,14 @@ class ParseHookTriggerCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
-        let hookTrigger = TestTrigger(className: "foo",
-                                      triggerName: .afterSave,
-                                      url: URL(string: "https://api.example.com/foo"))
+        guard let url = URL(string: "https://api.example.com/foo") else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        let hookTrigger = ParseHookTrigger(className: "foo",
+                                           trigger: .afterSave,
+                                           url: url)
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)

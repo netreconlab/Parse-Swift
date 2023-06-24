@@ -348,16 +348,16 @@ extension ParseSchema {
 
     func createCommand() -> API.NonParseBodyCommand<Self, Self> {
         API.NonParseBodyCommand(method: .POST,
-                                       path: endpoint,
-                                       body: self) { (data) -> Self in
+                                path: endpoint,
+                                body: self) { (data) -> Self in
             try ParseCoding.jsonDecoder().decode(Self.self, from: data)
         }
     }
 
     func updateCommand() -> API.NonParseBodyCommand<Self, Self> {
         API.NonParseBodyCommand(method: .PUT,
-                    path: endpoint,
-                    body: self) { (data) -> Self in
+                                path: endpoint,
+                                body: self) { (data) -> Self in
             try ParseCoding.jsonDecoder().decode(Self.self, from: data)
         }
     }

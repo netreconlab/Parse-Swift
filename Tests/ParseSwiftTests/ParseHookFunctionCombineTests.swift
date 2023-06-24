@@ -14,10 +14,6 @@ import Combine
 @testable import ParseSwift
 
 class ParseHookFunctionCombineTests: XCTestCase {
-    struct TestFunction: ParseHookFunctionable {
-        var functionName: String?
-        var url: URL?
-    }
 
     override func setUp() async throws {
         try await super.setUp()
@@ -45,8 +41,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -74,8 +70,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Create hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -104,8 +100,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -133,8 +129,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Update hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -163,8 +159,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -192,8 +188,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Fetch hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -222,8 +218,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = [hookFunction]
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -251,8 +247,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FetchAll hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -281,8 +277,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = hookFunction
         let encoded = try ParseCoding.jsonEncoder().encode(server)
@@ -308,8 +304,8 @@ class ParseHookFunctionCombineTests: XCTestCase {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Delete hook")
 
-        let hookFunction = TestFunction(name: "foo",
-                                        url: URL(string: "https://api.example.com/foo"))
+        let hookFunction = ParseHookFunction(name: "foo",
+                                             url: URL(string: "https://api.example.com/foo"))
 
         let server = ParseError(code: .commandUnavailable, message: "no delete")
         let encoded = try ParseCoding.jsonEncoder().encode(server)

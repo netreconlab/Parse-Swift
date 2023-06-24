@@ -121,7 +121,7 @@ public struct API {
             case .hookTriggers:
                 return "/hooks/triggers/"
             case .hookTrigger(let request):
-                return "/hooks/triggers/\(request.className)/\(request.triggerName)"
+                return "/hooks/triggers/\(request.className)/\(request.trigger)"
             case .serverInfo:
                 return "/serverInfo"
             case .any(let path):
