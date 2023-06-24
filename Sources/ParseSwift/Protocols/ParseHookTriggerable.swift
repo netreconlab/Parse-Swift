@@ -112,12 +112,18 @@ public extension ParseHookTriggerable {
 
 }
 
+/// A type of request for Parse Hook Triggers.
 public struct TriggerRequest: Encodable {
     let className: String
     let trigger: ParseHookTriggerType
     let url: URL?
 
-    init<T>(trigger: T) throws where T: ParseHookTriggerable {
+    /**
+     Creates an instance.
+     - parameter trigger: A type that conforms to `ParseHookTriggerable`.
+     - throws: An error of `ParseError` type.
+     */
+    public init<T>(trigger: T) throws where T: ParseHookTriggerable {
         guard let className = trigger.className,
               let triggerType = trigger.triggerName else {
             throw ParseError(code: .otherCause,

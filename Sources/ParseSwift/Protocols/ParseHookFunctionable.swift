@@ -36,11 +36,17 @@ public extension ParseHookFunctionable {
     }
 }
 
+/// A type of request for Parse Hook Functions.
 public struct FunctionRequest: Encodable {
     let functionName: String
     let url: URL?
 
-    init<F>(hookFunction: F) throws where F: ParseHookFunctionable {
+    /**
+     Creates an instance.
+     - parameter hookFunction: A type that conforms to `ParseHookFunctionable`.
+     - throws: An error of `ParseError` type.
+     */
+    public init<F>(hookFunction: F) throws where F: ParseHookFunctionable {
         guard let functionName = hookFunction.functionName else {
             throw ParseError(code: .otherCause,
                              message: "The \"functionName\" needs to be set: \(hookFunction)")

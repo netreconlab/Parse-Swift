@@ -138,6 +138,15 @@ class ParseRoleTests: XCTestCase {
         XCTAssertThrowsError(try Role<User>(name: "Hello10!", acl: ParseACL()))
     }
 
+    func testMergeError() throws {
+        var role1 = try Role<User>(name: "Hello9_- ")
+        role1.objectId = "hello"
+        var role2 = try Role<User>(name: "Hello9_- ")
+        role2.objectId = "world"
+        XCTAssertThrowsError(try role1.merge(with: role2))
+        XCTAssertThrowsError(try role1.mergeParse(with: role2))
+    }
+
     func testEndPoint() throws {
         var role = try Role<User>(name: "Administrator")
         XCTAssertEqual(role.endpoint.urlComponent, "/roles")

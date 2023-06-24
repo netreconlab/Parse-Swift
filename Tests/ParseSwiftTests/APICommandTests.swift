@@ -136,6 +136,10 @@ class APICommandTests: XCTestCase {
         XCTAssertEqual(serverURL4, serverURL1)
     }
 
+    func testAPISchemasURL() throws {
+        XCTAssertEqual(API.Endpoint.schemas.urlComponent, "/schemas")
+    }
+
     func testOptionCacheHasher() throws {
         var options = API.Options()
         options.insert(.cachePolicy(.returnCacheDataDontLoad))
