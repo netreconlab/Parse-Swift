@@ -15,14 +15,15 @@ import Foundation
  exposed to the public.
  */
 public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
+
     /**
      The query that determines what installations should receive the notification.
-     - warning: Cannot send a notification with this valuel and `channels` both set.
+     - warning: Cannot send a notification with this value and `channels` both set.
      */
     public var `where`: QueryWhere?
     /**
      An Array of channels to push to.
-     - warning: Cannot send a notification with this valuel and `where` both set.
+     - warning: Cannot send a notification with this value and `where` both set.
      */
     public var channels: Set<String>?
     /// The payload to send.
@@ -249,4 +250,5 @@ public extension ParsePush {
         let query = ParsePushStatus<V>.query("objectId" == statusId)
         query.first(options: options, completion: completion)
     }
+
 }
