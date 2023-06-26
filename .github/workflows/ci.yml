@@ -47,7 +47,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@main
+      uses: sersoft-gmbh/swift-coverage-action@v3
       id: coverage-files
       with:
         format: lcov
@@ -80,7 +80,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@main
+      uses: sersoft-gmbh/swift-coverage-action@v3
       id: coverage-files
       with:
         format: lcov
