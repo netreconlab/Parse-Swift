@@ -9,7 +9,7 @@ on:
 
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_14.2.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_14.3.1.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 15
-    runs-on: macos-latest
+    runs-on: macos-13
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)', 'platform=macOS']
@@ -64,7 +64,7 @@ jobs:
 
   spm-test:
     timeout-minutes: 15
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v3
     - name: Create and set the default keychain
@@ -149,7 +149,7 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: Use multiple cores
@@ -161,7 +161,7 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: Use multiple cores
