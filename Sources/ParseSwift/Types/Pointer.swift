@@ -115,13 +115,20 @@ public extension Pointer {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
+            
+            let method = API.Method.GET
             let path = API.Endpoint.object(className: className, objectId: objectId)
-            await API.NonParseBodyCommand<NoBody, T>(method: .GET,
-                                               path: path) { (data) -> T in
+            let params: [String: String]? = {
+                guard let includeKeys else { return nil }
+                return ["include": "\(Set(includeKeys))"]
+            }()
+            let mapper = { (data) -> T in
                 try ParseCoding.jsonDecoder().decode(T.self, from: data)
-            }.execute(options: options,
-                      callbackQueue: callbackQueue,
-                      completion: completion)
+            }
+            await API.NonParseBodyCommand<NoBody, T>(method: method, path: path, params: params, mapper: mapper)
+                .execute(options: options,
+                         callbackQueue: callbackQueue,
+                         completion: completion)
         }
     }
 }
