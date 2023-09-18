@@ -119,7 +119,9 @@ public extension Pointer {
             let method = API.Method.GET
             let path = API.Endpoint.object(className: className, objectId: objectId)
             let params: [String: String]? = {
-                guard let includeKeys else { return nil }
+                guard let includeKeys = includeKeys else {
+                    return nil
+                }
                 return ["include": "\(Set(includeKeys))"]
             }()
             let mapper = { (data) -> T in
