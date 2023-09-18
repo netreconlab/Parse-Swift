@@ -115,7 +115,7 @@ public extension Pointer {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            
+
             let method = API.Method.GET
             let path = API.Endpoint.object(className: className, objectId: objectId)
             let params: [String: String]? = {
