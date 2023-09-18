@@ -12,6 +12,19 @@ import XCTest
 
 class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
+    enum QueryTestError: Error, CustomStringConvertible {
+
+        case couldNotDecodeAsString
+
+        var description: String {
+            switch self {
+            case .couldNotDecodeAsString:
+                return "Could not decode to String"
+            }
+        }
+
+    }
+
     struct GameScore: ParseObject, ParseQueryScorable {
         //: These are required by ParseObject
         var objectId: String?
@@ -75,6 +88,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
+    }
+
+    func encodeDoubleAsString(_ double: Double) throws -> String {
+        let encodedDouble = try ParseCoding.jsonEncoder().encode(double)
+        guard let decodedDouble = String(data: encodedDouble, encoding: .utf8) else {
+            throw QueryTestError.couldNotDecodeAsString
+        }
+        return decodedDouble
     }
 
     // MARK: Initialization
@@ -2934,11 +2955,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     #if !os(Linux) && !os(Android) && !os(Windows)
     func testWhereKeyWithinPolygonPoints() throws {
+        let latitude1 = 10.1
+        let longitude1 = 20.1
+        let latitude2 = 20.1
+        let longitude2 = 30.1
+        let latitude3 = 30.1
+        let longitude3 = 40.1
         // swiftlint:disable:next line_length
-        let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":[{\"__type\":\"GeoPoint\",\"latitude\":10.1,\"longitude\":20.100000000000001},{\"__type\":\"GeoPoint\",\"latitude\":20.100000000000001,\"longitude\":30.100000000000001},{\"__type\":\"GeoPoint\",\"latitude\":30.100000000000001,\"longitude\":40.100000000000001}]}}}"
-        let geoPoint1 = try ParseGeoPoint(latitude: 10.1, longitude: 20.1)
-        let geoPoint2 = try ParseGeoPoint(latitude: 20.1, longitude: 30.1)
-        let geoPoint3 = try ParseGeoPoint(latitude: 30.1, longitude: 40.1)
+        let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":[{\"__type\":\"GeoPoint\",\"latitude\":\(try encodeDoubleAsString(latitude1)),\"longitude\":\(try encodeDoubleAsString(longitude1))},{\"__type\":\"GeoPoint\",\"latitude\":\(try encodeDoubleAsString(latitude2)),\"longitude\":\(try encodeDoubleAsString(longitude2))},{\"__type\":\"GeoPoint\",\"latitude\":\(try encodeDoubleAsString(latitude3)),\"longitude\":\(try encodeDoubleAsString(longitude3))}]}}}"
+        let geoPoint1 = try ParseGeoPoint(latitude: latitude1, longitude: longitude1)
+        let geoPoint2 = try ParseGeoPoint(latitude: latitude2, longitude: longitude2)
+        let geoPoint3 = try ParseGeoPoint(latitude: latitude3, longitude: longitude3)
         let polygon = [geoPoint1, geoPoint2, geoPoint3]
         let constraint = withinPolygon(key: "yolo", points: polygon)
         let query = GameScore.query(constraint)
@@ -2946,11 +2973,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     func testWhereKeyWithinPolygon() throws {
+        let latitude1 = 10.1
+        let longitude1 = 20.1
+        let latitude2 = 20.1
+        let longitude2 = 30.1
+        let latitude3 = 30.1
+        let longitude3 = 40.1
         // swiftlint:disable:next line_length
-        let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":{\"__type\":\"Polygon\",\"coordinates\":[[20.100000000000001,10.1],[30.100000000000001,20.100000000000001],[40.100000000000001,30.100000000000001]]}}}}"
-        let geoPoint1 = try ParseGeoPoint(latitude: 10.1, longitude: 20.1)
-        let geoPoint2 = try ParseGeoPoint(latitude: 20.1, longitude: 30.1)
-        let geoPoint3 = try ParseGeoPoint(latitude: 30.1, longitude: 40.1)
+        let expected = "{\"yolo\":{\"$geoWithin\":{\"$polygon\":{\"__type\":\"Polygon\",\"coordinates\":[[\(try encodeDoubleAsString(longitude1)),\(try encodeDoubleAsString(latitude1))],[\(try encodeDoubleAsString(longitude2)),\(try encodeDoubleAsString(latitude2))],[\(try encodeDoubleAsString(longitude3)),\(try encodeDoubleAsString(latitude3))]]}}}}"
+        let geoPoint1 = try ParseGeoPoint(latitude: latitude1, longitude: longitude1)
+        let geoPoint2 = try ParseGeoPoint(latitude: latitude2, longitude: longitude2)
+        let geoPoint3 = try ParseGeoPoint(latitude: latitude3, longitude: longitude3)
         let polygon = try ParsePolygon(geoPoint1, geoPoint2, geoPoint3)
         let constraint = withinPolygon(key: "yolo", polygon: polygon)
         let query = GameScore.query(constraint)
