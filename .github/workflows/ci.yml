@@ -33,7 +33,7 @@ jobs:
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)'
             action: 'test'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use multiple cores
       run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
     - name: Create and set the default keychain
@@ -66,7 +66,7 @@ jobs:
     timeout-minutes: 25
     runs-on: macos-13
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -101,7 +101,7 @@ jobs:
     needs: linux
     runs-on: macos-12
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
       env:
@@ -111,7 +111,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: sersoft-gmbh/SwiftyActions@v3
         with:
           release-version: "5"
@@ -132,7 +132,7 @@ jobs:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: compnerd/gha-setup-swift@v0.1.0
         with:
           branch: swift-5.8-release
@@ -151,7 +151,7 @@ jobs:
     needs: linux
     runs-on: macos-13
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use multiple cores
         run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Generate Docs
@@ -163,7 +163,7 @@ jobs:
     needs: linux
     runs-on: macos-13
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use multiple cores
         run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Update Framework Version
