@@ -53,7 +53,7 @@ public extension ParseObject {
     }
 
     /// The Parse encoder is used to JSON encode all `ParseObject`s and
-    /// types in a way meaninful for a Parse Server to consume.
+    /// types in a way meaningful for a Parse Server to consume.
     func getEncoder() -> ParseEncoder {
         return Self.getEncoder()
     }

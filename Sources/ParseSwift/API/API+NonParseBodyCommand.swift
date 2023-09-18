@@ -74,7 +74,7 @@ internal extension API {
 
                 guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
                     return .failure(ParseError(code: .otherCause,
-                                               message: "Could not unrwrap url components for \(url)"))
+                                               message: "Could not unwrap url components for \(url)"))
                 }
                 components.queryItems = params
 
