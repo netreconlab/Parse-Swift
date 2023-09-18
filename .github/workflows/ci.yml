@@ -112,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: sersoft-gmbh/SwiftyActions@v2
+      - uses: sersoft-gmbh/SwiftyActions@v3
         with:
           release-version: "5"
           github-token: ${{ secrets.GITHUB_TOKEN }}
