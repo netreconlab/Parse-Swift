@@ -11,6 +11,7 @@ public protocol Savable: Encodable {
 
     func save(options: API.Options) async throws -> SavingType
     func save() async throws -> SavingType
+    func isSaved() async throws -> Bool
 }
 
 extension Savable {
