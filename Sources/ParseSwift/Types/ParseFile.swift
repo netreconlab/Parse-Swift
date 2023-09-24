@@ -17,7 +17,7 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
 
     internal var isDownloadNeeded: Bool {
         return cloudURL != nil
-            && url == nil
+            && !isSaved
             && localURL == nil
             && data == nil
     }
@@ -161,6 +161,10 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.id)
+    }
+
+    public func isSaved() async throws -> Bool {
+        isSaved
     }
 
     enum CodingKeys: String, CodingKey {

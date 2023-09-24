@@ -258,6 +258,10 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         let savedFile = try await parseFile.save()
         XCTAssertEqual(savedFile.name, response.name)
         XCTAssertEqual(savedFile.url, response.url)
+        let isSavedBefore = try await parseFile.isSaved()
+        XCTAssertFalse(isSavedBefore)
+        let isSavedAfter = try await savedFile.isSaved()
+        XCTAssertTrue(isSavedAfter)
     }
 
     @MainActor

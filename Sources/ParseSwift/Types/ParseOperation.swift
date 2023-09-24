@@ -29,6 +29,15 @@ public struct ParseOperation<T>: Savable,
     }
 
     /**
+     Specifies if this object related to the operation has been saved.
+     - returns: Returns **true** if this object is saved, **false** otherwise.
+     - throws: An error of `ParseError` type.
+     */
+    public func isSaved() async throws -> Bool {
+        try await target.isSaved()
+    }
+
+    /**
      An operation that sets a field's value.
      - Parameters:
         - keyPath: The respective `KeyPath` of the object.

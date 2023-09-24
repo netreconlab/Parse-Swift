@@ -5,6 +5,12 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+### 5.8.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.1...5.8.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.8.2/documentation/parseswift)
+
+__Fixes__
+* Expose isSaved method on ParseFile and ParseOperation ([#135](https://github.com/netreconlab/Parse-Swift/pull/135)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.8.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.0...5.8.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.8.1/documentation/parseswift)
 
