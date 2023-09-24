@@ -3,7 +3,7 @@ on:
   release:
     types: [published]
 env:
-  CI_XCODE_13: '/Applications/Xcode_13.4.1.app/Contents/Developer'
+  CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_15.0.app/Contents/Developer'
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push ParseSwiftOG.podspec --allow-warnings --verbose
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_14 }}
 
   docs:
     runs-on: macos-13
