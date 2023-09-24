@@ -155,7 +155,7 @@ class ParseOperationTests: XCTestCase {
             XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
             XCTAssertEqual(saved.ACL, scoreOnServer.ACL)
             XCTAssertEqual(saved.points, originalPoints-1)
-            let isSavedAfter = try await saved.isSaved()
+            let isSavedAfter = try await operations.isSaved()
             XCTAssertTrue(isSavedAfter)
         } catch {
             XCTFail(error.localizedDescription)
