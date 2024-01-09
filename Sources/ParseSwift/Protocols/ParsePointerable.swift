@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ParsePointer: Encodable {
+public protocol ParsePointer: Encodable {
 
     var __type: String { get } // swiftlint:disable:this identifier_name
 
@@ -28,11 +28,21 @@ extension ParsePointer {
     }
 }
 
-protocol ParsePointerObject: ParsePointer, ParseTypeable, Fetchable, Hashable {
+public protocol ParsePointerObject: ParsePointer, ParseTypeable, Fetchable, Hashable {
     associatedtype Object: ParseObject
 }
 
 extension ParsePointerObject {
+
+    /**
+     Convert a Pointer to its respective `ParseObject`.
+     - returns: A `ParseObject` created from this Pointer.
+     */
+    func toObject() -> Object {
+        var object = Object()
+        object.objectId = self.objectId
+        return object
+    }
 
     /**
      Determines if a `ParseObject` and `Pointer`have the same `objectId`.
@@ -92,6 +102,33 @@ extension ParsePointerObject {
 }
 
 // MARK: Batch Support
-extension Sequence where Element: ParsePointerObject {
+public extension Sequence where Element: ParsePointerObject {
+
+    /**
+     Fetches a collection of objects all at once *asynchronously* and executes the completion block when done.
+     - parameter includeKeys: The name(s) of the key(s) to include that are
+     `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
+     `includeAll` for `Query`.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+     - parameter completion: The block to execute.
+     It should have the following argument signature: `(Result<[(Result<Element.Object, ParseError>)], ParseError>)`.
+     - warning: The order in which objects are returned are not guarenteed. You should not expect results in
+     any particular order.
+    */
+    func fetchAll(
+        includeKeys: [String]? = nil,
+        options: API.Options = [],
+        callbackQueue: DispatchQueue = .main,
+        completion: @escaping (Result<[(Result<Element.Object, ParseError>)], ParseError>) -> Void
+    ) {
+        let objects = Set(compactMap { $0.toObject() })
+        objects.fetchAll(
+            includeKeys: includeKeys,
+            options: options,
+            callbackQueue: callbackQueue,
+            completion: completion
+        )
+    }
 
 }

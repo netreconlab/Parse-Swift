@@ -10,8 +10,8 @@ private func getObjectId(target: Objectable) throws -> String {
 /// A Pointer referencing a ParseObject.
 public struct Pointer<T: ParseObject>: ParsePointerObject {
 
-    typealias Object = T
-    internal let __type: String = "Pointer" // swiftlint:disable:this identifier_name
+    public typealias Object = T
+    public let __type: String = "Pointer" // swiftlint:disable:this identifier_name
 
     /**
      The class name of the object.
