@@ -9,6 +9,7 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.2...5.9.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.0/documentation/parseswift)
 
 __New features__
+* Add support for visionOS ([#143](https://github.com/netreconlab/Parse-Swift/pull/143)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Add fetchAll method to array of Parse Pointer Object's ([#141](https://github.com/netreconlab/Parse-Swift/pull/141)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.8.2
