@@ -131,7 +131,7 @@ class ParseEncoderTests: XCTestCase {
         XCTAssertEqual(decodedJSON["uint16"]?.value as? NSNumber, NSNumber(value: object.uint16))
         XCTAssertEqual(decodedJSON["uint32"]?.value as? NSNumber, NSNumber(value: object.uint32))
         XCTAssertEqual(decodedJSON["uint64"]?.value as? NSNumber, NSNumber(value: object.uint64))
-        XCTAssertEqual(decodedJSON["float"]?.value as? NSNumber, NSNumber(value: object.float))
+        XCTAssertEqual(decodedJSON["float"]?.value as? Double, Double(object.float))
     }
 
     func testSkipKeysDefaultCodingKeys() throws {
