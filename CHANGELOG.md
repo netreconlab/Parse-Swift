@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.9.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.2...5.9.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.0/documentation/parseswift)
+
+__New features__
+* Add fetchAll method to array of ParseObject's ([#141](https://github.com/netreconlab/Parse-Swift/pull/141)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.8.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.8.1...5.8.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.8.2/documentation/parseswift)
