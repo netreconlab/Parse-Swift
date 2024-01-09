@@ -11,7 +11,7 @@ import XCTest
 
 class ParseEncoderTests: XCTestCase {
     struct GameScore: ParseObject, ParseQueryScorable {
-        //: These are required by ParseObject
+        // These are required by ParseObject
         var objectId: String?
         var createdAt: Date?
         var updatedAt: Date?
@@ -19,19 +19,56 @@ class ParseEncoderTests: XCTestCase {
         var score: Double?
         var originalData: Data?
 
-        //: ParseUser property
+        // ParseUser property
         var emailVerified: Bool?
 
-        //: Your own properties
+        // Your own properties
         var points: Int
 
-        //: a custom initializer
+        // a custom initializer
         init() {
             self.points = 5
         }
         init(points: Int) {
             self.points = points
         }
+    }
+
+    struct AdditionalTypes: ParseObject {
+        // These are required by ParseObject
+        var objectId: String?
+        var createdAt: Date?
+        var updatedAt: Date?
+        var ACL: ParseACL?
+        var score: Double?
+        var originalData: Data?
+
+        // Your own properties
+        var int8: Int8
+        var int16: Int16
+        var int32: Int32
+        var int64: Int64
+        var uint: UInt
+        var uint8: UInt8
+        var uint16: UInt16
+        var uint32: UInt32
+        var uint64: UInt64
+        var float: Float
+
+        // a custom initializer
+        init() {
+            self.int8 = 1
+            self.int16 = 2
+            self.int32 = 3
+            self.int64 = 4
+            self.uint = 5
+            self.uint8 = 1
+            self.uint16 = 2
+            self.uint32 = 3
+            self.uint64 = 4
+            self.float = 1.1
+        }
+
     }
 
     struct Address: Codable {
@@ -78,6 +115,25 @@ class ParseEncoderTests: XCTestCase {
         XCTAssertEqual(jsonDecoded.values.count, parseDecoded.values.count)
         XCTAssertEqual(jsonDecoded["*"]?["read"], true)
         XCTAssertEqual(parseDecoded["*"]?["read"], true)
+    }
+
+    func testEncodingAdditionalTypes() throws {
+        let object = AdditionalTypes()
+
+        let encodedJSON = try ParseCoding.parseEncoder().encode(object, skipKeys: .object)
+        let decodedJSON = try ParseCoding.jsonDecoder().decode([String: AnyCodable].self, from: encodedJSON)
+        XCTAssertEqual(decodedJSON["int8"]?.value as? NSNumber, NSNumber(value: object.int8))
+        XCTAssertEqual(decodedJSON["int16"]?.value as? NSNumber, NSNumber(value: object.int16))
+        XCTAssertEqual(decodedJSON["int32"]?.value as? NSNumber, NSNumber(value: object.int32))
+        XCTAssertEqual(decodedJSON["int64"]?.value as? NSNumber, NSNumber(value: object.int64))
+        XCTAssertEqual(decodedJSON["uint"]?.value as? NSNumber, NSNumber(value: object.uint))
+        XCTAssertEqual(decodedJSON["uint8"]?.value as? NSNumber, NSNumber(value: object.uint8))
+        XCTAssertEqual(decodedJSON["uint16"]?.value as? NSNumber, NSNumber(value: object.uint16))
+        XCTAssertEqual(decodedJSON["uint32"]?.value as? NSNumber, NSNumber(value: object.uint32))
+        XCTAssertEqual(decodedJSON["uint64"]?.value as? NSNumber, NSNumber(value: object.uint64))
+        #if !os(Linux) && !os(Android) && !os(Windows)
+        XCTAssertEqual(decodedJSON["float"]?.value as? Double, Double(object.float))
+        #endif
     }
 
     func testSkipKeysDefaultCodingKeys() throws {
