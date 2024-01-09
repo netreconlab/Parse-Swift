@@ -22,7 +22,7 @@ jobs:
     runs-on: macos-13
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)', 'platform=macOS']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
         action: ['test', 'build']
         exclude:
           - destination: 'platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max'
@@ -30,6 +30,8 @@ jobs:
           - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
+            action: 'build'
+          - destination: 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro'
             action: 'build'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)'
             action: 'test'
