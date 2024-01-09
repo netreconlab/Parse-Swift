@@ -435,60 +435,60 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
 
     // MARK: - KeyedEncodingContainerProtocol Methods
     mutating func encodeNil(forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         container[key.stringValue] = NSNull()
     }
     mutating func encode(_ value: Bool, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Int, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Int8, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Int16, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Int32, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Int64, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: UInt, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: UInt8, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: UInt16, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: UInt32, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: UInt64, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: String, forKey key: Key) throws {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.container[key.stringValue] = self.encoder.box(value)
     }
     mutating func encode(_ value: Float, forKey key: Key) throws {
         // Since the float may be invalid and throw, the coding path needs to contain this key.
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
         self.container[key.stringValue] = try self.encoder.box(value)
@@ -496,14 +496,15 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
 
     mutating func encode(_ value: Double, forKey key: Key) throws {
         // Since the double may be invalid and throw, the coding path needs to contain this key.
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+        guard !shouldSkipKey(key) else { return }
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
         self.container[key.stringValue] = try self.encoder.box(value)
     }
 
     mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-        if self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys { return }
+
+        guard !shouldSkipKey(key) else { return }
 
         var valueToEncode: Encodable = value
         if ((value as? Objectable) != nil)
@@ -540,6 +541,13 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
         self.container[key.stringValue] = try self.encoder.box(valueToEncode)
+    }
+
+    func shouldSkipKey(_ key: Key) -> Bool {
+        guard self.encoder.skippedKeys.contains(key.stringValue) && !self.encoder.ignoreSkipKeys else {
+            return false
+        }
+        return true
     }
 
     mutating func nestedContainer<NestedKey>(

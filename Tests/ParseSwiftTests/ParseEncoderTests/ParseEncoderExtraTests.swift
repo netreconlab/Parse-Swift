@@ -74,7 +74,7 @@ class ParseEncoderTests: XCTestCase {
         let parseEncoded = try ParseCoding.jsonEncoder().encode(newACL)
         let parseDecoded = try ParseCoding.jsonDecoder().decode([String: [String: Bool]].self, from: parseEncoded)
 
-        XCTAssertEqual(jsonDecoded.keys.count, parseDecoded.keys.count)
+         XCTAssertEqual(jsonDecoded.keys.count, parseDecoded.keys.count)
         XCTAssertEqual(jsonDecoded.values.count, parseDecoded.values.count)
         XCTAssertEqual(jsonDecoded["*"]?["read"], true)
         XCTAssertEqual(parseDecoded["*"]?["read"], true)
