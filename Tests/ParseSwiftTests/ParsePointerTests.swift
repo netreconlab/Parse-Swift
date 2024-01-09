@@ -200,6 +200,29 @@ class ParsePointerTests: XCTestCase {
         }
 
         do {
+            let fetched = try await pointer.fetch(
+                includeKeys: [],
+                options: []
+            )
+            XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
+            guard let fetchedCreatedAt = fetched.createdAt,
+                let fetchedUpdatedAt = fetched.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            guard let originalCreatedAt = scoreOnServer.createdAt,
+                let originalUpdatedAt = scoreOnServer.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
+            XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
+            XCTAssertNil(fetched.ACL)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+
+        do {
             let fetched = try await pointer.fetch(options: [.usePrimaryKey])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,

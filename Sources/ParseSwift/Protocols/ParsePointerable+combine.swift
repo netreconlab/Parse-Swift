@@ -11,8 +11,6 @@
 import Foundation
 import Combine
 
-// swiftlint:disable line_length
-
 // MARK: Batch Support
 public extension Sequence where Element: ParsePointerObject {
 
@@ -26,12 +24,15 @@ public extension Sequence where Element: ParsePointerObject {
      - returns: A publisher that eventually produces an an array of Result enums with the object if a fetch was
      successful or a `ParseError` if it failed.
     */
-    func fetchAllPublisher(includeKeys: [String]? = nil,
-                           options: API.Options = []) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
+    func fetchAllPublisher(
+        includeKeys: [String]? = nil,
+        options: API.Options = []) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
         Future { promise in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: promise)
+            self.fetchAll(
+                includeKeys: includeKeys,
+                options: options,
+                completion: promise
+            )
         }
     }
 

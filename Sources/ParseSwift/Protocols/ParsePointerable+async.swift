@@ -8,8 +8,6 @@
 
 import Foundation
 
-// swiftlint:disable line_length
-
 // MARK: Batch Support
 public extension Sequence where Element: ParsePointerObject {
 
@@ -24,12 +22,16 @@ public extension Sequence where Element: ParsePointerObject {
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
     */
-    @discardableResult func fetchAll(includeKeys: [String]? = nil,
-                                     options: API.Options = []) async throws -> [(Result<Self.Element.Object, ParseError>)] {
+    @discardableResult func fetchAll(
+        includeKeys: [String]? = nil,
+        options: API.Options = []
+    ) async throws -> [(Result<Self.Element.Object, ParseError>)] {
         try await withCheckedThrowingContinuation { continuation in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: continuation.resume)
+            self.fetchAll(
+                includeKeys: includeKeys,
+                options: options,
+                completion: continuation.resume
+            )
         }
     }
 
