@@ -200,6 +200,29 @@ class ParsePointerTests: XCTestCase {
         }
 
         do {
+            let fetched = try await pointer.fetch(
+                includeKeys: [],
+                options: []
+            )
+            XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
+            guard let fetchedCreatedAt = fetched.createdAt,
+                let fetchedUpdatedAt = fetched.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            guard let originalCreatedAt = scoreOnServer.createdAt,
+                let originalUpdatedAt = scoreOnServer.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
+            XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
+            XCTAssertNil(fetched.ACL)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+
+        do {
             let fetched = try await pointer.fetch(options: [.usePrimaryKey])
             XCTAssert(fetched.hasSameObjectId(as: scoreOnServer))
             guard let fetchedCreatedAt = fetched.createdAt,
@@ -371,4 +394,98 @@ class ParsePointerTests: XCTestCase {
         }
         self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
+
+    @MainActor
+    func testFetchAll() async throws { // swiftlint:disable:this function_body_length
+        let score = GameScore(points: 10)
+        let score2 = GameScore(points: 20)
+
+        var scoreOnServer = score
+        scoreOnServer.objectId = "yarr"
+        scoreOnServer.createdAt = Date()
+        scoreOnServer.updatedAt = scoreOnServer.createdAt
+        scoreOnServer.ACL = nil
+        let scoreOnServerImmutable: GameScore!
+        let scoreOnServer2Immutable: GameScore!
+        var scoreOnServer2 = score2
+        scoreOnServer2.objectId = "yolo"
+        scoreOnServer2.createdAt = Calendar.current.date(byAdding: .init(day: -2), to: Date())
+        scoreOnServer2.updatedAt = scoreOnServer2.createdAt
+        scoreOnServer2.ACL = nil
+
+        let response = QueryResponse<GameScore>(results: [scoreOnServer, scoreOnServer2], count: 2)
+        let encoded: Data!
+        do {
+           encoded = try ParseCoding.jsonEncoder().encode(response)
+           // Get dates in correct format from ParseDecoding strategy
+           let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+           scoreOnServerImmutable = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
+           let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
+           scoreOnServer2Immutable = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded2)
+
+        } catch {
+            XCTFail("Should have encoded/decoded. Error \(error)")
+            return
+        }
+        MockURLProtocol.mockRequests { _ in
+           return MockURLResponse(data: encoded, statusCode: 200)
+        }
+
+        let fetched = try await [
+            GameScore(objectId: "yarr").toPointer(),
+            GameScore(objectId: "yolo").toPointer()
+        ].fetchAll()
+
+        XCTAssertEqual(fetched.count, 2)
+        guard let firstObject = try? fetched.first(where: {try $0.get().objectId == "yarr"}),
+            let secondObject = try? fetched.first(where: {try $0.get().objectId == "yolo"}) else {
+                XCTFail("Should unwrap")
+                return
+        }
+
+        switch firstObject {
+
+        case .success(let first):
+            XCTAssert(first.hasSameObjectId(as: scoreOnServerImmutable))
+            guard let fetchedCreatedAt = first.createdAt,
+                let fetchedUpdatedAt = first.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            guard let originalCreatedAt = scoreOnServerImmutable.createdAt,
+                let originalUpdatedAt = scoreOnServerImmutable.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            XCTAssertEqual(fetchedCreatedAt, originalCreatedAt)
+            XCTAssertEqual(fetchedUpdatedAt, originalUpdatedAt)
+            XCTAssertNil(first.ACL)
+            XCTAssertEqual(first.points, scoreOnServerImmutable.points)
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+
+        switch secondObject {
+
+        case .success(let second):
+            XCTAssert(second.hasSameObjectId(as: scoreOnServer2Immutable))
+            guard let savedCreatedAt = second.createdAt,
+                let savedUpdatedAt = second.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            guard let originalCreatedAt = scoreOnServer2Immutable.createdAt,
+                let originalUpdatedAt = scoreOnServer2Immutable.updatedAt else {
+                    XCTFail("Should unwrap dates")
+                    return
+            }
+            XCTAssertEqual(savedCreatedAt, originalCreatedAt)
+            XCTAssertEqual(savedUpdatedAt, originalUpdatedAt)
+            XCTAssertNil(second.ACL)
+            XCTAssertEqual(second.points, scoreOnServer2Immutable.points)
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+
 }
