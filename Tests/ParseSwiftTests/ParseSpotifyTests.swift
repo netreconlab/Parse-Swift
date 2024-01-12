@@ -110,7 +110,6 @@ class ParseSpotifyTests: XCTestCase {
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -137,7 +136,7 @@ class ParseSpotifyTests: XCTestCase {
         XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -210,7 +209,7 @@ class ParseSpotifyTests: XCTestCase {
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.authData, userOnServer.authData)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
 
         // Test stripping
@@ -254,7 +253,7 @@ class ParseSpotifyTests: XCTestCase {
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.authData, userOnServer.authData)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -299,7 +298,7 @@ class ParseSpotifyTests: XCTestCase {
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.authData, userOnServer.authData)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -332,7 +331,7 @@ class ParseSpotifyTests: XCTestCase {
         let isLinked = ParseSpotify.isLinked(with: current)
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 

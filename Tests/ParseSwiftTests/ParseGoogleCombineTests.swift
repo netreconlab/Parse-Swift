@@ -113,7 +113,6 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.google.__type: authData]
@@ -150,7 +149,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let current = try await User.current()
@@ -178,7 +177,6 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.google.__type: authData]
@@ -216,7 +214,7 @@ class ParseGoogleCombineTests: XCTestCase { // swiftlint:disable:this type_body_
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let current = try await User.current()

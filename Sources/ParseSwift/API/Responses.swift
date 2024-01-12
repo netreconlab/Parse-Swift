@@ -14,50 +14,93 @@ struct CreateResponse: Decodable {
     var updatedAt: Date {
         return createdAt
     }
+    var sessionToken: String?
 
-    func apply<T>(to object: T) -> T where T: ParseObject {
+    func setResponseProperties<T>(on object: T) -> T where T: ParseObject {
         var object = object
         object.objectId = objectId
         object.createdAt = createdAt
         object.updatedAt = updatedAt
         return object
     }
+
+    func apply<T>(to object: T) -> T where T: ParseObject {
+        setResponseProperties(on: object)
+    }
+
+    func apply<T>(to user: T) -> T where T: ParseUser {
+        var user = setResponseProperties(on: user)
+        user.password = nil
+        return user
+    }
+
 }
 
 struct ReplaceResponse: Decodable {
     var createdAt: Date?
     var updatedAt: Date?
+    var sessionToken: String?
 
-    func apply<T>(to object: T) throws -> T where T: ParseObject {
+    func setResponseProperties<T>(on object: T) throws -> T where T: ParseObject {
         guard let objectId = object.objectId else {
-            throw ParseError(code: .missingObjectId,
-                             message: "Response from server should not have an objectId of nil")
+            throw ParseError(
+                code: .missingObjectId,
+                message: "Response from server should not have an objectId of nil"
+            )
         }
         guard let createdAt = createdAt else {
             guard let updatedAt = updatedAt else {
-                throw ParseError(code: .otherCause,
-                                 message: "Response from server should not have an updatedAt of nil")
+                throw ParseError(
+                    code: .otherCause,
+                    message: "Response from server should not have an updatedAt of nil"
+                )
             }
-            return UpdateResponse(updatedAt: updatedAt).apply(to: object)
+            let response = UpdateResponse(
+                updatedAt: updatedAt,
+                sessionToken: sessionToken
+            ).apply(to: object)
+
+            return response
         }
-        return CreateResponse(objectId: objectId,
-                              createdAt: createdAt).apply(to: object)
+        let response = CreateResponse(
+            objectId: objectId,
+            createdAt: createdAt,
+            sessionToken: sessionToken
+        ).apply(to: object)
+
+        return response
+    }
+
+    func apply<T>(to object: T) throws -> T where T: ParseObject {
+        try setResponseProperties(on: object)
+    }
+
+    func apply<T>(to user: T) throws -> T where T: ParseUser {
+        var user = try setResponseProperties(on: user)
+        user.password = nil // password should be removed
+        return user
     }
 }
 
 struct UpdateResponse: Decodable {
     var updatedAt: Date
+    var sessionToken: String?
 
-    func apply<T>(to object: T) -> T where T: ParseObject {
+    func setResponseProperties<T>(on object: T) -> T where T: ParseObject {
         var object = object
         object.updatedAt = updatedAt
         return object
     }
-}
 
-struct UpdateSessionTokenResponse: Decodable {
-    var updatedAt: Date
-    let sessionToken: String?
+    func apply<T>(to object: T) -> T where T: ParseObject {
+        setResponseProperties(on: object)
+    }
+
+    func apply<T>(to user: T) -> T where T: ParseUser {
+        var user = setResponseProperties(on: user)
+        user.password = nil // password should be removed
+        return user
+    }
 }
 
 // MARK: ParseObject Batch
@@ -70,29 +113,50 @@ struct BatchResponse: Codable {
     var objectId: String?
     var createdAt: Date?
     var updatedAt: Date?
+    var sessionToken: String?
 
     func asCreateResponse() throws -> CreateResponse {
         guard let objectId = objectId else {
-            throw ParseError(code: .missingObjectId,
-                             message: "Response from server should not have an objectId of nil")
+            throw ParseError(
+                code: .missingObjectId,
+                message: "Response from server should not have an objectId of nil"
+            )
         }
         guard let createdAt = createdAt else {
-            throw ParseError(code: .otherCause,
-                             message: "Response from server should not have an createdAt of nil")
+            throw ParseError(
+                code: .otherCause,
+                message: "Response from server should not have an createdAt of nil"
+            )
         }
-        return CreateResponse(objectId: objectId, createdAt: createdAt)
+
+        let response = CreateResponse(
+            objectId: objectId,
+            createdAt: createdAt, sessionToken: sessionToken
+        )
+
+        return response
     }
 
     func asReplaceResponse() -> ReplaceResponse {
-        ReplaceResponse(createdAt: createdAt, updatedAt: updatedAt)
+        ReplaceResponse(
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            sessionToken: sessionToken
+        )
     }
 
     func asUpdateResponse() throws -> UpdateResponse {
         guard let updatedAt = updatedAt else {
-            throw ParseError(code: .otherCause,
-                             message: "Response from server should not have an updatedAt of nil")
+            throw ParseError(
+                code: .otherCause,
+                message: "Response from server should not have an updatedAt of nil"
+            )
         }
-        return UpdateResponse(updatedAt: updatedAt)
+        let response = UpdateResponse(
+            updatedAt: updatedAt,
+            sessionToken: sessionToken
+        )
+        return response
     }
 
     func apply<T>(to object: T, method: API.Method) throws -> T where T: ParseObject {
@@ -125,14 +189,14 @@ struct LoginSignupResponse: Codable {
     var updatedAt: Date?
     let username: String?
 
-    func applySignup<T>(to object: T) -> T where T: ParseUser {
-        var object = object
-        object.objectId = objectId
-        object.createdAt = createdAt
-        object.updatedAt = createdAt
-        object.password = nil // password should be removed
+    func apply<T>(to user: T) -> T where T: ParseUser {
+        var user = user
+        user.objectId = objectId
+        user.createdAt = createdAt
+        user.updatedAt = updatedAt ?? createdAt
+        user.password = nil // password should be removed
 
-        return object
+        return user
     }
 }
 

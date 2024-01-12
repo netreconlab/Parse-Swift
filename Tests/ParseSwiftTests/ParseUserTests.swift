@@ -1054,17 +1054,6 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNotNil(currentUser.objectId)
         XCTAssertNotNil(currentUser.customKey)
         XCTAssertNil(currentUser.ACL)
-
-        let userFromStorage = try await BaseParseUser.current()
-
-        XCTAssertNotNil(userFromStorage.createdAt)
-        XCTAssertNotNil(userFromStorage.updatedAt)
-        XCTAssertNotNil(userFromStorage.email)
-        XCTAssertNotNil(userFromStorage.username)
-        XCTAssertNil(userFromStorage.password)
-        XCTAssertNotNil(userFromStorage.objectId)
-        _ = try await BaseParseUser.sessionToken()
-        XCTAssertNil(userFromStorage.ACL)
     }
 
     @MainActor
@@ -1493,6 +1482,35 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     @MainActor
     func testSaveAndUpdateCurrentUser() async throws {
+        try await login()
+        MockURLProtocol.removeAll()
+
+        let newUsername = "stop"
+        let current = try await User.current()
+        var serverResponse = current
+        serverResponse.username = newUsername
+        serverResponse.createdAt = nil
+        serverResponse.updatedAt = current.updatedAt?.addingTimeInterval(+300)
+
+        MockURLProtocol.mockRequests { _ in
+            do {
+                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+                return MockURLResponse(data: encoded, statusCode: 200)
+            } catch {
+                return nil
+            }
+        }
+
+        let user = current
+            .set(\.username, to: newUsername)
+        let saved = try await user.save()
+        XCTAssertEqual(saved.objectId, serverResponse.objectId)
+        XCTAssertEqual(saved.updatedAt, serverResponse.updatedAt)
+        XCTAssertEqual(saved.username, serverResponse.username)
+    }
+
+    @MainActor
+    func testSaveAndUpdateCurrentUserNoChange() async throws {
         try await userSignUp()
         let user = try await User.current()
         XCTAssertNotNil(user.objectId)

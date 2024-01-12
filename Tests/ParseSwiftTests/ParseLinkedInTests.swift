@@ -162,7 +162,6 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.linkedin.__type: authData]
@@ -191,7 +190,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         var currentLinkedUser = await user.linkedin.isLinked()
         XCTAssertTrue(currentLinkedUser)
 
@@ -207,7 +206,6 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.linkedin.__type: authData]
@@ -236,7 +234,7 @@ class ParseLinkedInTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let currentLinkedUser = await user.linkedin.isLinked()
         XCTAssertTrue(currentLinkedUser)
     }

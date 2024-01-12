@@ -108,7 +108,6 @@ class ParseAppleTests: XCTestCase {
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -135,7 +134,6 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -166,7 +164,6 @@ class ParseAppleTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.apple.__type: authData]
@@ -198,7 +195,7 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseApple<User>.isLinked(with: user))
 
         // Test stripping
@@ -212,7 +209,6 @@ class ParseAppleTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.apple.__type: authData]
@@ -240,7 +236,7 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseApple<User>.isLinked(with: user))
     }
 
@@ -331,7 +327,7 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.authData, userOnServer.authData)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -367,7 +363,7 @@ class ParseAppleTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 

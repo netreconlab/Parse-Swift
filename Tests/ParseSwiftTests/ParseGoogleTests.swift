@@ -171,7 +171,6 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.google.__type: authData]
@@ -202,7 +201,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
 
         // Test stripping
         let strippedUser = user.google.strip(currentUser)
@@ -216,7 +215,6 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.google.__type: authData]
@@ -246,7 +244,7 @@ class ParseGoogleTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor

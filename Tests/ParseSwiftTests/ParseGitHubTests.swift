@@ -157,7 +157,6 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.github.__type: authData]
@@ -187,7 +186,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
 
         // Test stripping
         let strippedUser = user.github.strip(current)
@@ -201,7 +200,6 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.github.__type: authData]
@@ -231,7 +229,7 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor

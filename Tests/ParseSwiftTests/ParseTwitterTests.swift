@@ -110,7 +110,6 @@ class ParseTwitterTests: XCTestCase {
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -137,7 +136,7 @@ class ParseTwitterTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -185,7 +184,6 @@ class ParseTwitterTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.twitter.__type: authData]
@@ -216,7 +214,7 @@ class ParseTwitterTests: XCTestCase {
 
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         var isLinked = ParseTwitter.isLinked(with: currentUser)
@@ -234,7 +232,6 @@ class ParseTwitterTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.twitter.__type: authData]
@@ -267,7 +264,7 @@ class ParseTwitterTests: XCTestCase {
         let user = try await User.twitter.login(authData: twitterAuthData)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         let isLinked = ParseTwitter.isLinked(with: currentUser)
@@ -395,7 +392,7 @@ class ParseTwitterTests: XCTestCase {
         let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
@@ -426,7 +423,7 @@ class ParseTwitterTests: XCTestCase {
         let currentUser = try await User.current()
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }

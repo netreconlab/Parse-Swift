@@ -110,7 +110,6 @@ class ParseInstagramTests: XCTestCase {
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -137,7 +136,7 @@ class ParseInstagramTests: XCTestCase {
         XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -177,7 +176,6 @@ class ParseInstagramTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.instagram.__type: authData]
@@ -202,7 +200,7 @@ class ParseInstagramTests: XCTestCase {
         let user = try await User.instagram.login(id: "testing", accessToken: "access_token", apiURL: "apiURL")
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let current = try await User.current()
         XCTAssertEqual(user, current)
         var isLinked = await user.instagram.isLinked()
@@ -219,7 +217,6 @@ class ParseInstagramTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.instagram.__type: authData]
@@ -246,7 +243,7 @@ class ParseInstagramTests: XCTestCase {
                                                              "apiURL": "apiURL"])
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let current = try await User.current()
         XCTAssertEqual(user, current)
         var isLinked = await user.instagram.isLinked()
@@ -397,7 +394,7 @@ class ParseInstagramTests: XCTestCase {
 
         let user = try await User.instagram.login(id: "testing", accessToken: "access_token", apiURL: "apiURL")
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let current = try await User.current()
         XCTAssertEqual(user, current)
         let isLinked = await user.instagram.isLinked()
@@ -424,7 +421,7 @@ class ParseInstagramTests: XCTestCase {
 
         let user = try await User.instagram.link(id: "testing", accessToken: "access_token")
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         let current = try await User.current()
         XCTAssertEqual(user, current)
         let isLinked = await user.instagram.isLinked()

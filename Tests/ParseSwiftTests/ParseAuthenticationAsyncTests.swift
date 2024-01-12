@@ -145,7 +145,6 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         let type = TestAuth<User>.__type
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [type: authData]
@@ -172,7 +171,7 @@ class ParseAuthenticationAsyncTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertEqual(user.authData, serverResponse.authData)
     }
 
