@@ -344,6 +344,21 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         try? fileManager.removeDirectoryContents(directory2)
     }
 
+    func testReplaceResponseMissingObjectId() throws {
+        let object = User()
+        let response = ReplaceResponse(
+            createdAt: Date(),
+            updatedAt: Date(),
+            sessionToken: "hello"
+        )
+        do {
+            _ = try response.setResponseProperties(on: object)
+            XCTFail("Should have thrown error")
+        } catch {
+            XCTAssertTrue(error.containedIn([.missingObjectId]))
+        }
+    }
+
     func testIsEqualExtension() throws {
         let score1 = GameScore(points: 2)
         let score2 = GameScore(points: 3)

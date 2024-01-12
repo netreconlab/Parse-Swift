@@ -1216,7 +1216,6 @@ extension ParseUser {
         return command
     }
 
-    // swiftlint:disable:next function_body_length
     func replaceCommand() async throws -> API.Command<Self, Self> {
         guard self.objectId != nil else {
             throw ParseError(code: .missingObjectId,
@@ -1238,38 +1237,30 @@ extension ParseUser {
                     ReplaceResponse.self,
                     from: data
                 )
-            // MARK: The lines below should be removed when server supports PATCH.
-            guard let originalData = self.originalData,
-                  let originalUser = try? ParseCoding
+
+            // MARK: The if statement below should be removed when server supports PATCH.
+            if let originalData = self.originalData,
+                let originalUser = try? ParseCoding
                     .jsonDecoder()
                     .decode(
                         Self.self,
                         from: originalData
-                    ) else {
-                updatedUser = try userResponse.apply(to: updatedUser)
-                return updatedUser
+                    ) {
+                updatedUser = try updatedUser.merge(with: originalUser)
             }
 
-            guard originalUser.hasSameObjectId(as: updatedUser) else {
-                throw ParseError(
-                    code: .otherCause,
-                    message: "objectId's of objects do not match"
-                )
-            }
-
-            var mergedUser = try updatedUser.merge(with: originalUser)
-            mergedUser = try userResponse.apply(to: mergedUser)
+            updatedUser = try userResponse.apply(to: updatedUser)
             if let sessionToken = userResponse.sessionToken {
                 // Only need to update here because sessionToken changed.
                 // Any other changes will be saved to the Keychain later.
                 await Self.setCurrentContainer(
                     .init(
-                        currentUser: mergedUser,
+                        currentUser: updatedUser,
                         sessionToken: sessionToken
                     )
                 )
             }
-            return mergedUser
+            return updatedUser
         }
         let command = API.Command<Self, Self>(
             method: .PUT,
@@ -1280,7 +1271,6 @@ extension ParseUser {
         return command
     }
 
-    // swiftlint:disable:next function_body_length
     func updateCommand() async throws -> API.Command<Self, Self> {
         guard self.objectId != nil else {
             throw ParseError(code: .missingObjectId,
@@ -1302,37 +1292,29 @@ extension ParseUser {
                     UpdateResponse.self,
                     from: data
                 )
-            guard let originalData = self.originalData,
-                  let originalUser = try? ParseCoding
+
+            if let originalData = self.originalData,
+                let originalUser = try? ParseCoding
                     .jsonDecoder()
                     .decode(
                         Self.self,
                         from: originalData
-                    ) else {
-                updatedUser = userResponse.apply(to: updatedUser)
-                return updatedUser
+                    ) {
+                updatedUser = try updatedUser.merge(with: originalUser)
             }
 
-            guard originalUser.hasSameObjectId(as: updatedUser) else {
-                throw ParseError(
-                    code: .otherCause,
-                    message: "objectId's of objects do not match"
-                )
-            }
-
-            var mergedUser = try updatedUser.merge(with: originalUser)
-            mergedUser = userResponse.apply(to: mergedUser)
+            updatedUser = userResponse.apply(to: updatedUser)
             if let sessionToken = userResponse.sessionToken {
                 // Only need to update here because sessionToken changed.
                 // Any other changes will be saved to the Keychain later.
                 await Self.setCurrentContainer(
                     .init(
-                        currentUser: mergedUser,
+                        currentUser: updatedUser,
                         sessionToken: sessionToken
                     )
                 )
             }
-            return mergedUser
+            return updatedUser
         }
         let command = API.Command<Self, Self>(
             method: .PATCH,
