@@ -109,7 +109,6 @@ class ParseLDAPTests: XCTestCase {
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -136,7 +135,6 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -164,7 +162,6 @@ class ParseLDAPTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.ldap.__type: authData]
@@ -193,7 +190,7 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertEqual(user, current)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -202,7 +199,6 @@ class ParseLDAPTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.ldap.__type: authData]
@@ -230,7 +226,7 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -339,7 +335,7 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -370,7 +366,7 @@ class ParseLDAPTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
     }
 

@@ -98,7 +98,6 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.apple.__type: authData]
@@ -140,7 +139,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
 
             Task {
                 do {
@@ -170,7 +169,6 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.apple.__type: authData]
@@ -208,7 +206,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let updatedCurrentUser = try await User.current()

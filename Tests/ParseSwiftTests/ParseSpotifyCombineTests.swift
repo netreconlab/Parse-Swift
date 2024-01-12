@@ -95,7 +95,6 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.spotify.__type: authData]
@@ -132,7 +131,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
 
             Task {
                 do {
@@ -162,7 +161,6 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.spotify.__type: authData]
@@ -200,7 +198,7 @@ class ParseSpotifyCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let currentUser = try await User.current()

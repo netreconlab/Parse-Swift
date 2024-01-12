@@ -90,7 +90,6 @@ class ParseAnonymousAsyncTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -118,7 +117,7 @@ class ParseAnonymousAsyncTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(isLinked)
     }
 
@@ -128,7 +127,6 @@ class ParseAnonymousAsyncTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -156,7 +154,7 @@ class ParseAnonymousAsyncTests: XCTestCase {
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(isLinked)
     }
 

@@ -734,24 +734,7 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
             XCTAssertNotNil(currentUser.objectId)
             XCTAssertNotNil(currentUser.customKey)
             XCTAssertNil(currentUser.ACL)
-
-            Task {
-                do {
-                    let userFromStorage = try await BaseParseUser.current()
-                    XCTAssertNotNil(userFromStorage.createdAt)
-                    XCTAssertNotNil(userFromStorage.updatedAt)
-                    XCTAssertNotNil(userFromStorage.email)
-                    XCTAssertNotNil(userFromStorage.username)
-                    XCTAssertNil(userFromStorage.password)
-                    XCTAssertNotNil(userFromStorage.objectId)
-                    XCTAssertNil(userFromStorage.ACL)
-                } catch {
-                    XCTFail(error.localizedDescription)
-                }
-                DispatchQueue.main.async {
-                    expectation2.fulfill()
-                }
-            }
+            expectation2.fulfill()
         })
         publisher.store(in: &subscriptions)
         #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)

@@ -113,7 +113,6 @@ class ParseFacebookCombineTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -151,7 +150,7 @@ class ParseFacebookCombineTests: XCTestCase {
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let currentUser = try await User.current()
@@ -177,7 +176,6 @@ class ParseFacebookCombineTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -214,7 +212,7 @@ class ParseFacebookCombineTests: XCTestCase {
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let currentUser = try await User.current()
@@ -240,7 +238,6 @@ class ParseFacebookCombineTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -282,7 +279,7 @@ class ParseFacebookCombineTests: XCTestCase {
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let currentUser = try await User.current()

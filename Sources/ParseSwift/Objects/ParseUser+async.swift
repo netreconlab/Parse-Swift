@@ -570,7 +570,9 @@ internal extension ParseUser {
             let command: API.Command<Self, Self>!
             switch method {
             case .save:
-                command = try await self.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
+                command = try await self.saveCommand(
+                    ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig
+                )
             case .create:
                 command = try await self.createCommand()
             case .replace:

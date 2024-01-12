@@ -93,7 +93,6 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.twitter.__type: authData]
@@ -132,7 +131,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
         publisher.store(in: &current)
@@ -147,7 +146,6 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.twitter.__type: authData]
@@ -189,7 +187,7 @@ class ParseTwitterCombineTests: XCTestCase { // swiftlint:disable:this type_body
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             XCTAssertTrue(ParseTwitter<User>.isLinked(with: user))
         })
         publisher.store(in: &current)

@@ -129,7 +129,6 @@ class ParseAnonymousTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -156,7 +155,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
-        XCTAssertEqual(login1.password, "world")
+        XCTAssertNil(login1.password)
         let isLinked = await login1.anonymous.isLinked()
         XCTAssertTrue(isLinked)
     }
@@ -169,7 +168,6 @@ class ParseAnonymousTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -194,7 +192,7 @@ class ParseAnonymousTests: XCTestCase {
         let currentUser = try await User.current()
         XCTAssertEqual(currentUser, userOnServer)
         XCTAssertEqual(currentUser.username, "hello")
-        XCTAssertEqual(currentUser.password, "world")
+        XCTAssertNil(currentUser.password)
         let isLinked = await currentUser.anonymous.isLinked()
         XCTAssertTrue(isLinked)
 
@@ -220,7 +218,6 @@ class ParseAnonymousTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -247,7 +244,7 @@ class ParseAnonymousTests: XCTestCase {
         XCTAssertEqual(login1, currentUser)
         XCTAssertEqual(login1, userOnServer)
         XCTAssertEqual(login1.username, "hello")
-        XCTAssertEqual(login1.password, "world")
+        XCTAssertNil(login1.password)
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: login1))
     }
 
@@ -284,7 +281,7 @@ class ParseAnonymousTests: XCTestCase {
         let currentUser = try await User.current()
         XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
-        XCTAssertEqual(signedInUser.password, "world")
+        XCTAssertNil(signedInUser.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: signedInUser))
     }
 
@@ -321,7 +318,7 @@ class ParseAnonymousTests: XCTestCase {
         let currentUser = try await User.current()
         XCTAssertEqual(signedInUser, currentUser)
         XCTAssertEqual(signedInUser.username, "hello")
-        XCTAssertEqual(signedInUser.password, "world")
+        XCTAssertNil(signedInUser.password)
         XCTAssertFalse(ParseAnonymous<User>.isLinked(with: signedInUser))
     }
 
@@ -467,7 +464,7 @@ class ParseAnonymousTests: XCTestCase {
 
             case .success(let user):
                 XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
+                XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -515,7 +512,7 @@ class ParseAnonymousTests: XCTestCase {
 
             case .success(let user):
                 XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
+                XCTAssertNil(user.password)
                 XCTAssertFalse(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -533,7 +530,6 @@ class ParseAnonymousTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -563,7 +559,7 @@ class ParseAnonymousTests: XCTestCase {
             case .success(let user):
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
+                XCTAssertNil(user.password)
                 XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -581,7 +577,6 @@ class ParseAnonymousTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -611,7 +606,7 @@ class ParseAnonymousTests: XCTestCase {
             case .success(let user):
                 XCTAssertEqual(user, userOnServer)
                 XCTAssertEqual(user.username, "hello")
-                XCTAssertEqual(user.password, "world")
+                XCTAssertNil(user.password)
                 XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
             case .failure(let error):
                 XCTFail(error.localizedDescription)

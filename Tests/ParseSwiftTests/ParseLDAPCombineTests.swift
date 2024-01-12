@@ -110,7 +110,6 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.ldap.__type: authData]
@@ -147,7 +146,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let current = try await User.current()
@@ -176,7 +175,6 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.ldap.__type: authData]
@@ -214,7 +212,7 @@ class ParseLDAPCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             Task {
                 do {
                     let current = try await User.current()

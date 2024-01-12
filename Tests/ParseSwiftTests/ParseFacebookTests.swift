@@ -108,7 +108,6 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         //: Convert the anonymous user to a real new user.
         var serverResponse = LoginSignupResponse()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -135,7 +134,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertEqual(user, currentUser)
         XCTAssertEqual(user, userOnServer)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
         XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
@@ -213,7 +212,6 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -244,7 +242,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -324,7 +322,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -398,7 +396,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertNotNil(user.password)
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -434,7 +432,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         XCTAssertFalse(isLinked)
         XCTAssertEqual(user.updatedAt, userOnServer.updatedAt)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertNotNil(user.password)
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -442,7 +440,6 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -471,7 +468,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -517,7 +514,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         let isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
     }
 
     @MainActor
@@ -526,7 +523,6 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.facebook.__type: authData]
@@ -560,7 +556,7 @@ class ParseFacebookTests: XCTestCase { // swiftlint:disable:this type_body_lengt
         var isLinked = await user.facebook.isLinked()
         XCTAssertTrue(isLinked)
         XCTAssertEqual(user.username, "hello")
-        XCTAssertEqual(user.password, "world")
+        XCTAssertNil(user.password)
 
         // Test stripping
         let strippedUser = user.facebook.strip(currentUser)

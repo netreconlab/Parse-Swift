@@ -53,8 +53,10 @@ public extension ParseUser {
 
     func mergeParse(with object: Self) throws -> Self {
         guard hasSameObjectId(as: object) else {
-            throw ParseError(code: .otherCause,
-                             message: "objectId's of objects do not match")
+            throw ParseError(
+                code: .otherCause,
+                message: "objectId's of objects do not match"
+            )
         }
         var updatedUser = self
         if shouldRestoreKey(\.ACL,
@@ -262,28 +264,45 @@ extension ParseUser {
         }
     }
 
-    internal static func loginCommand(username: String? = nil,
-                                      email: String? = nil,
-                                      password: String,
-                                      // swiftlint:disable:next line_length
-                                      authData: [String: [String: String]?]? = nil) -> API.Command<SignupLoginBody, Self> {
+    internal static func loginCommand(
+        username: String? = nil,
+        email: String? = nil,
+        password: String,
+        authData: [String: [String: String]?]? = nil
+    ) -> API.Command<SignupLoginBody, Self> {
 
-        let body = SignupLoginBody(username: username,
-                                   email: email,
-                                   password: password,
-                                   authData: authData)
-        return API.Command<SignupLoginBody, Self>(method: .POST,
-                                                  path: .login,
-                                                  body: body) { (data) async throws -> Self in
-            let sessionToken = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: data).sessionToken
-            let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
-
+        let body = SignupLoginBody(
+            username: username,
+            email: email,
+            password: password,
+            authData: authData
+        )
+        let command = API.Command<SignupLoginBody, Self>(
+            method: .POST,
+            path: .login,
+            body: body
+        ) { (data) async throws -> Self in
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    LoginSignupResponse.self,
+                    from: data
+                )
+            let sessionToken = userResponse.sessionToken
+            var user = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    Self.self,
+                    from: data
+                )
+            user = userResponse.apply(to: user)
             await Self.setCurrentContainer(.init(
                 currentUser: user,
                 sessionToken: sessionToken
             ))
             return user
         }
+        return command
     }
 
     /**
@@ -481,18 +500,29 @@ extension ParseUser {
 
     internal static func loginAsCommand(objectId: String) throws -> API.Command<LoginAsBody, Self> {
         let body = LoginAsBody(userId: objectId)
-        return API.Command(method: .POST,
-                           path: .loginAs,
-                           body: body) { (data) async throws -> Self in
-            let sessionToken = try ParseCoding.jsonDecoder()
-                .decode(LoginSignupResponse.self, from: data).sessionToken
-            let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
-            await Self.setCurrentContainer(.init(
-                currentUser: user,
-                sessionToken: sessionToken
-            ))
+        let command = API.Command(
+            method: .POST,
+            path: .loginAs,
+            body: body
+        ) { (data) async throws -> Self in
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    LoginSignupResponse.self,
+                    from: data
+                )
+            let sessionToken = userResponse.sessionToken
+            var user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
+            user = userResponse.apply(to: user)
+            await Self.setCurrentContainer(
+                .init(
+                    currentUser: user,
+                    sessionToken: sessionToken
+                )
+            )
             return user
         }
+        return command
     }
 }
 
@@ -613,29 +643,37 @@ extension ParseUser {
         [issue](https://github.com/parse-community/parse-server/issues/7784) to be addressed on
         the Parse Server, othewise you should set `usingPost = false`.
     */
-    public static func verifyPassword(password: String,
-                                      usingPost: Bool = false,
-                                      options: API.Options = [],
-                                      callbackQueue: DispatchQueue = .main,
-                                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+    public static func verifyPassword(
+        password: String,
+        usingPost: Bool = false,
+        options: API.Options = [],
+        callbackQueue: DispatchQueue = .main,
+        completion: @escaping (Result<Self, ParseError>) -> Void
+    ) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             let currentUserName = try? await BaseParseUser.current().username
             let username = currentUserName ?? ""
             let method: API.Method = usingPost ? .POST : .GET
-            await verifyPasswordCommand(username: username,
-                                        password: password,
-                                        method: method)
-            .execute(options: options,
-                     callbackQueue: callbackQueue,
-                     completion: completion)
+            await verifyPasswordCommand(
+                username: username,
+                password: password,
+                method: method
+            )
+            .execute(
+                options: options,
+                callbackQueue: callbackQueue,
+                completion: completion
+            )
         }
     }
 
-    internal static func verifyPasswordCommand(username: String,
-                                               password: String,
-                                               method: API.Method) -> API.Command<SignupLoginBody, Self> {
+    internal static func verifyPasswordCommand(
+        username: String,
+        password: String,
+        method: API.Method
+    ) -> API.Command<SignupLoginBody, Self> {
         let loginBody: SignupLoginBody?
         let params: [String: String]?
 
@@ -648,20 +686,44 @@ extension ParseUser {
             params = nil
         }
 
-        return API.Command(method: method,
-                           path: .verifyPassword,
-                           params: params,
-                           body: loginBody) { (data) -> Self in
-            var sessionToken = await Self.currentContainer()?.sessionToken
-            if let decodedSessionToken = try? ParseCoding.jsonDecoder()
-                .decode(LoginSignupResponse.self, from: data).sessionToken {
-                sessionToken = decodedSessionToken
+        let command = API.Command(
+            method: method,
+            path: .verifyPassword,
+            params: params,
+            body: loginBody
+        ) { (data) -> Self in
+
+            do {
+
+                let userResponse = try ParseCoding
+                    .jsonDecoder()
+                    .decode(
+                        ReplaceResponse.self,
+                        from: data
+                    )
+
+                var user = try ParseCoding
+                    .jsonDecoder()
+                    .decode(
+                        Self.self,
+                        from: data
+                    )
+                user = try userResponse.apply(to: user)
+
+                return user
+
+            } catch {
+
+                let parseError = ParseError(
+                    code: .otherCause,
+                    message: "Could not verify password",
+                    swift: error
+                )
+                throw parseError
             }
-            let user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
-            await Self.setCurrentContainer(.init(currentUser: user,
-                                           sessionToken: sessionToken))
-            return user
         }
+
+        return command
     }
 }
 
@@ -819,14 +881,25 @@ extension ParseUser {
     }
 
     internal static func signupCommand(body: SignupLoginBody) throws -> API.Command<SignupLoginBody, Self> {
-        API.Command(method: .POST,
-                    path: .users,
-                    body: body) { (data) -> Self in
+        API.Command(
+            method: .POST,
+            path: .users,
+            body: body
+        ) { (data) -> Self in
 
-            let sessionToken = try ParseCoding.jsonDecoder()
-                .decode(LoginSignupResponse.self, from: data).sessionToken
-            var user = try ParseCoding.jsonDecoder().decode(Self.self, from: data)
-
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    LoginSignupResponse.self,
+                    from: data)
+            let sessionToken = userResponse.sessionToken
+            var user = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    Self.self,
+                    from: data
+                )
+            user = userResponse.apply(to: user)
             if user.username == nil {
                 if let username = body.username {
                     user.username = username
@@ -837,25 +910,37 @@ extension ParseUser {
                     user.authData = authData
                 }
             }
-            await Self.setCurrentContainer(.init(currentUser: user,
-                                                 sessionToken: sessionToken))
+            await Self.setCurrentContainer(
+                .init(
+                    currentUser: user,
+                    sessionToken: sessionToken
+                )
+            )
             return user
         }
     }
 
     internal func signupCommand() throws -> API.Command<Self, Self> {
 
-        API.Command(method: .POST,
-                    path: endpoint,
-                    body: self) { (data) -> Self in
+        API.Command(
+            method: .POST,
+            path: endpoint,
+            body: self
+        ) { (data) -> Self in
 
-            let response = try ParseCoding.jsonDecoder()
-                .decode(LoginSignupResponse.self, from: data)
-            let user = response.applySignup(to: self)
-            await Self.setCurrentContainer(.init(
-                currentUser: user,
-                sessionToken: response.sessionToken
-            ))
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    LoginSignupResponse.self,
+                    from: data
+                )
+            let user = userResponse.apply(to: self)
+            await Self.setCurrentContainer(
+                .init(
+                    currentUser: user,
+                    sessionToken: userResponse.sessionToken
+                )
+            )
             return user
         }
     }
@@ -982,10 +1067,12 @@ extension ParseUser {
         let method = Method.save
         Task {
             do {
-                let object = try await command(method: method,
-                                               ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                                               options: options,
-                                               callbackQueue: callbackQueue)
+                let object = try await command(
+                    method: method,
+                    ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+                    options: options,
+                    callbackQueue: callbackQueue
+                )
                 callbackQueue.async {
                     completion(.success(object))
                 }
@@ -1106,18 +1193,27 @@ extension ParseUser {
 
     // MARK: Saving ParseObjects - private
     func createCommand() async throws -> API.Command<Self, Self> {
-        var object = self
-        if object.ACL == nil,
+        var user = self
+        if user.ACL == nil,
             let acl = try? await ParseACL.defaultACL() {
-            object.ACL = acl
+            user.ACL = acl
         }
         let mapper = { (data) -> Self in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
+            try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    CreateResponse.self,
+                    from: data
+                ).apply(to: user)
         }
-        return API.Command<Self, Self>(method: .POST,
-                                       path: try await endpoint(.POST),
-                                       body: object,
-                                       mapper: mapper)
+        let path = try await endpoint(.POST)
+        let command = API.Command<Self, Self>(
+            method: .POST,
+            path: path,
+            body: user,
+            mapper: mapper
+        )
+        return command
     }
 
     func replaceCommand() async throws -> API.Command<Self, Self> {
@@ -1133,23 +1229,46 @@ extension ParseUser {
             }
         }
         let mapper = { (data: Data) -> Self in
-            var updatedObject = self
-            updatedObject.originalData = nil
-            updatedObject = try ParseCoding.jsonDecoder().decode(ReplaceResponse.self,
-                                                                 from: data).apply(to: updatedObject)
-            // MARK: The lines below should be removed when server supports PATCH.
-            guard let originalData = self.originalData,
-                  let original = try? ParseCoding.jsonDecoder().decode(Self.self,
-                                                                       from: originalData),
-                  original.hasSameObjectId(as: updatedObject) else {
-                      return updatedObject
-                  }
-            return try updatedObject.merge(with: original)
+            var updatedUser = self
+            updatedUser.originalData = nil
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    ReplaceResponse.self,
+                    from: data
+                )
+
+            // MARK: The if statement below should be removed when server supports PATCH.
+            if let originalData = self.originalData,
+                let originalUser = try? ParseCoding
+                    .jsonDecoder()
+                    .decode(
+                        Self.self,
+                        from: originalData
+                    ) {
+                updatedUser = try updatedUser.merge(with: originalUser)
+            }
+
+            updatedUser = try userResponse.apply(to: updatedUser)
+            if let sessionToken = userResponse.sessionToken {
+                // Only need to update here because sessionToken changed.
+                // Any other changes will be saved to the Keychain later.
+                await Self.setCurrentContainer(
+                    .init(
+                        currentUser: updatedUser,
+                        sessionToken: sessionToken
+                    )
+                )
+            }
+            return updatedUser
         }
-        return API.Command<Self, Self>(method: .PUT,
-                                 path: endpoint,
-                                 body: mutableSelf,
-                                 mapper: mapper)
+        let command = API.Command<Self, Self>(
+            method: .PUT,
+            path: endpoint,
+            body: mutableSelf,
+            mapper: mapper
+        )
+        return command
     }
 
     func updateCommand() async throws -> API.Command<Self, Self> {
@@ -1165,22 +1284,45 @@ extension ParseUser {
             }
         }
         let mapper = { (data: Data) -> Self in
-            var updatedObject = self
-            updatedObject.originalData = nil
-            updatedObject = try ParseCoding.jsonDecoder().decode(UpdateResponse.self,
-                                                                 from: data).apply(to: updatedObject)
-            guard let originalData = self.originalData,
-                  let original = try? ParseCoding.jsonDecoder().decode(Self.self,
-                                                                       from: originalData),
-                  original.hasSameObjectId(as: updatedObject) else {
-                      return updatedObject
-                  }
-            return try updatedObject.merge(with: original)
+            var updatedUser = self
+            updatedUser.originalData = nil
+            let userResponse = try ParseCoding
+                .jsonDecoder()
+                .decode(
+                    UpdateResponse.self,
+                    from: data
+                )
+
+            if let originalData = self.originalData,
+                let originalUser = try? ParseCoding
+                    .jsonDecoder()
+                    .decode(
+                        Self.self,
+                        from: originalData
+                    ) {
+                updatedUser = try updatedUser.merge(with: originalUser)
+            }
+
+            updatedUser = userResponse.apply(to: updatedUser)
+            if let sessionToken = userResponse.sessionToken {
+                // Only need to update here because sessionToken changed.
+                // Any other changes will be saved to the Keychain later.
+                await Self.setCurrentContainer(
+                    .init(
+                        currentUser: updatedUser,
+                        sessionToken: sessionToken
+                    )
+                )
+            }
+            return updatedUser
         }
-        return API.Command<Self, Self>(method: .PATCH,
-                                 path: endpoint,
-                                 body: mutableSelf,
-                                 mapper: mapper)
+        let command = API.Command<Self, Self>(
+            method: .PATCH,
+            path: endpoint,
+            body: mutableSelf,
+            mapper: mapper
+        )
+        return command
     }
 }
 
@@ -1295,12 +1437,14 @@ public extension Sequence where Element: ParseUser {
         let method = Method.save
         Task {
             do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
+                let objects = try await batchCommand(
+                    method: method,
+                    batchLimit: limit,
+                    transaction: transaction,
+                    ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+                    options: options,
+                    callbackQueue: callbackQueue
+                )
                 callbackQueue.async {
                     completion(.success(objects))
                 }
@@ -1340,11 +1484,13 @@ public extension Sequence where Element: ParseUser {
         let method = Method.create
         Task {
             do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
+                let objects = try await batchCommand(
+                    method: method,
+                    batchLimit: limit,
+                    transaction: transaction,
+                    options: options,
+                    callbackQueue: callbackQueue
+                )
                 callbackQueue.async {
                     completion(.success(objects))
                 }
@@ -1385,11 +1531,13 @@ public extension Sequence where Element: ParseUser {
         let method = Method.replace
         Task {
             do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
+                let objects = try await batchCommand(
+                    method: method,
+                    batchLimit: limit,
+                    transaction: transaction,
+                    options: options,
+                    callbackQueue: callbackQueue
+                )
                 callbackQueue.async {
                     completion(.success(objects))
                 }
@@ -1430,11 +1578,13 @@ public extension Sequence where Element: ParseUser {
         let method = Method.update
         Task {
             do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
+                let objects = try await batchCommand(
+                    method: method,
+                    batchLimit: limit,
+                    transaction: transaction,
+                    options: options,
+                    callbackQueue: callbackQueue
+                )
                 callbackQueue.async {
                     completion(.success(objects))
                 }

@@ -407,8 +407,8 @@ public extension ParseUser {
         return API.Command<Self, Self>(method: .PUT,
                                        path: endpoint,
                                        body: mutableSelf) { (data) -> Self in
-            let user = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: data)
-            mutableSelf.updatedAt = user.updatedAt
+            let user = try ParseCoding.jsonDecoder().decode(UpdateResponse.self, from: data)
+            mutableSelf = user.apply(to: mutableSelf)
             if let sessionToken = user.sessionToken {
                 await Self.setCurrentContainer(.init(currentUser: mutableSelf,
                                                      sessionToken: sessionToken))
@@ -434,9 +434,8 @@ public extension ParseUser {
         return API.Command<SignupLoginBody, Self>(method: .PUT,
                                                   path: endpoint,
                                                   body: body) { (data) -> Self in
-            let user = try ParseCoding.jsonDecoder().decode(UpdateSessionTokenResponse.self, from: data)
-            var currentUser = currentStrippedUser
-            currentUser.updatedAt = user.updatedAt
+            let user = try ParseCoding.jsonDecoder().decode(UpdateResponse.self, from: data)
+            var currentUser = user.apply(to: currentStrippedUser)
             currentUser.authData = body.authData
             if let sessionToken = user.sessionToken {
                 await Self.setCurrentContainer(.init(currentUser: currentUser,

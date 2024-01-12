@@ -92,7 +92,6 @@ class ParseAnonymousCombineTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -126,7 +125,7 @@ class ParseAnonymousCombineTests: XCTestCase {
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
@@ -141,7 +140,6 @@ class ParseAnonymousCombineTests: XCTestCase {
         var serverResponse = LoginSignupResponse()
         let authData = ParseAnonymous<User>.AuthenticationKeys.id.makeDictionary()
         serverResponse.username = "hello"
-        serverResponse.password = "world"
         serverResponse.objectId = "yarr"
         serverResponse.sessionToken = "myToken"
         serverResponse.authData = [serverResponse.anonymous.__type: authData]
@@ -175,7 +173,7 @@ class ParseAnonymousCombineTests: XCTestCase {
 
             XCTAssertEqual(user, userOnServer)
             XCTAssertEqual(user.username, "hello")
-            XCTAssertEqual(user.password, "world")
+            XCTAssertNil(user.password)
             XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
         })
         publisher.store(in: &subscriptions)
