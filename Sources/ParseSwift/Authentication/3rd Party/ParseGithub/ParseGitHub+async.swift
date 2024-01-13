@@ -12,7 +12,7 @@ public extension ParseGitHub {
     // MARK: Async/Await
 
     /**
-     Login a `ParseUser` *asynchronously* using GitHub authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using GitHub authentication for login.
      - parameter id: The **id** from **GitHub**.
      - parameter accessToken: Required **access_token** from **GitHub**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -31,7 +31,7 @@ public extension ParseGitHub {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using GitHub authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using GitHub authentication for login.
      - parameter authData: Dictionary containing key/values.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
@@ -49,7 +49,7 @@ public extension ParseGitHub {
 public extension ParseGitHub {
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using GitHub authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using GitHub authentication for login.
      - parameter id: The **id** from **GitHub**.
      - parameter accessToken: Required **access_token** from **GitHub**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -68,7 +68,7 @@ public extension ParseGitHub {
     }
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using GitHub authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using GitHub authentication for login.
      - parameter authData: Dictionary containing key/values.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.

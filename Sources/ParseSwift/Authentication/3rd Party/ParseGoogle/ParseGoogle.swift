@@ -68,7 +68,7 @@ public struct ParseGoogle<AuthenticatedUser: ParseUser>: ParseAuthentication {
 public extension ParseGoogle {
 
     /**
-     Login a `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using Google authentication for login.
      - parameter id: The `id` from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
      - parameter accessToken: Optional **access_token** from **Google**.
@@ -116,7 +116,7 @@ public extension ParseGoogle {
 public extension ParseGoogle {
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using Google authentication for login.
      - parameter id: The **id** from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
      - parameter accessToken: Optional **access_token** from **Google**.

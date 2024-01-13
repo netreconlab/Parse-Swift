@@ -12,7 +12,7 @@ public extension ParseLinkedIn {
     // MARK: Async/Await
 
     /**
-     Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -33,7 +33,7 @@ public extension ParseLinkedIn {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter authData: Dictionary containing key/values.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
@@ -51,7 +51,7 @@ public extension ParseLinkedIn {
 public extension ParseLinkedIn {
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
@@ -72,7 +72,7 @@ public extension ParseLinkedIn {
     }
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter authData: Dictionary containing key/values.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
