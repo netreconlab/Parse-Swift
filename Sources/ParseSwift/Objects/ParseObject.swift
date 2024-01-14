@@ -94,6 +94,13 @@ public protocol ParseObject: ParseTypeable,
     init(objectId: String)
 
     /**
+     Determines if two objects have the same objectId.
+     - parameter as: Object to compare.
+     - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
+    */
+    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool
+
+    /**
      Converts this `ParseObject` to a Parse Pointer.
      - returns: The pointer version of the `ParseObject`, Pointer<Self>.
     */
@@ -190,6 +197,12 @@ public extension ParseObject {
     init(objectId: String) {
         self.init()
         self.objectId = objectId
+    }
+
+    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool {
+        other.className == className &&
+        other.objectId == objectId &&
+        objectId != nil
     }
 
     func toPointer() throws -> Pointer<Self> {

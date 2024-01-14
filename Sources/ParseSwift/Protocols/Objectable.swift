@@ -54,13 +54,6 @@ public protocol Objectable: ParseEncodable, Decodable {
      - throws: An error of `ParseError` type.
      */
     func isSaved() async throws -> Bool
-
-    /**
-     Determines if two objects have the same objectId.
-     - parameter as: Object to compare.
-     - returns: Returns **true** if the other object has the same `objectId` or **false** if unsuccessful.
-    */
-    func hasSameObjectId<T: Objectable>(as other: T) -> Bool
 }
 
 // MARK: Default Implementation
@@ -92,12 +85,6 @@ public extension Objectable {
         }
     }
 
-    func hasSameObjectId<T: Objectable>(as other: T) -> Bool {
-        other.className == className &&
-        other.objectId == objectId &&
-        objectId != nil
-    }
-
     func endpoint(_ method: API.Method) async throws -> API.Endpoint {
         try await yieldIfNotInitialized()
         if !Parse.configuration.isRequiringCustomObjectIds ||
@@ -122,9 +109,9 @@ extension Objectable {
         return hashString
     }
 
+    // BAKER: mark this internal.
     /// Specifies if a `ParseObject` has been saved.
     /// - warning: This will not be available in ParseSwift 6.0.0. Use `isSaved()` instead.
-    /// BAKER mark this internal.
     public var isSaved: Bool {
         if !Parse.configuration.isRequiringCustomObjectIds {
             return objectId != nil
