@@ -174,7 +174,8 @@ extension ParseInstallation {
 
     func endpoint(_ method: API.Method) async throws -> API.Endpoint {
         try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
+        if !Parse.configuration.isRequiringCustomObjectIds ||
+            method != .POST {
             return endpoint
         } else {
             return .installations

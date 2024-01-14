@@ -140,14 +140,67 @@ class APICommandTests: XCTestCase {
         XCTAssertEqual(API.Endpoint.schemas.urlComponent, "/schemas")
     }
 
-    func testOptionCacheHasher() throws {
+    func testOptionHasherEquatable() throws {
         var options = API.Options()
-        options.insert(.cachePolicy(.returnCacheDataDontLoad))
+        let first = "first"
+        let second = "second"
+        let firstDictionary = [first: second]
+        let secondDictionary = [second: first]
+        let firstServerURLString = "http://parse:1337/\(first)"
+        let secondServerURLString = "http://parse:1337/\(second)"
+
         XCTAssertFalse(options.contains(.usePrimaryKey))
-        XCTAssertTrue(options.contains(.cachePolicy(.returnCacheDataDontLoad)))
-        XCTAssertTrue(options.contains(.cachePolicy(.reloadRevalidatingCacheData)))
         options.insert(.usePrimaryKey)
         XCTAssertTrue(options.contains(.usePrimaryKey))
+
+        XCTAssertFalse(options.contains(.removeMimeType))
+        options.insert(.removeMimeType)
+        XCTAssertTrue(options.contains(.removeMimeType))
+
+        XCTAssertFalse(options.contains(.sessionToken(first)))
+        options.insert(.sessionToken(first))
+        XCTAssertTrue(options.contains(.sessionToken(first)))
+        XCTAssertFalse(options.contains(.sessionToken(second)))
+
+        XCTAssertFalse(options.contains(.installationId(first)))
+        options.insert(.installationId(first))
+        XCTAssertTrue(options.contains(.installationId(first)))
+        XCTAssertFalse(options.contains(.installationId(second)))
+
+        XCTAssertFalse(options.contains(.mimeType(first)))
+        options.insert(.mimeType(first))
+        XCTAssertTrue(options.contains(.mimeType(first)))
+        XCTAssertFalse(options.contains(.mimeType(second)))
+
+        XCTAssertFalse(options.contains(.fileSize(first)))
+        options.insert(.fileSize(first))
+        XCTAssertTrue(options.contains(.fileSize(first)))
+        XCTAssertFalse(options.contains(.fileSize(second)))
+
+        XCTAssertFalse(options.contains(.metadata(firstDictionary)))
+        options.insert(.metadata(firstDictionary))
+        XCTAssertTrue(options.contains(.metadata(firstDictionary)))
+        XCTAssertFalse(options.contains(.metadata(secondDictionary)))
+
+        XCTAssertFalse(options.contains(.tags(firstDictionary)))
+        options.insert(.tags(firstDictionary))
+        XCTAssertTrue(options.contains(.tags(firstDictionary)))
+        XCTAssertFalse(options.contains(.tags(secondDictionary)))
+
+        XCTAssertFalse(options.contains(.context(first)))
+        options.insert(.context(first))
+        XCTAssertTrue(options.contains(.context(first)))
+        XCTAssertFalse(options.contains(.context(second)))
+
+        XCTAssertFalse(options.contains(.cachePolicy(.returnCacheDataDontLoad)))
+        options.insert(.cachePolicy(.returnCacheDataDontLoad))
+        XCTAssertTrue(options.contains(.cachePolicy(.returnCacheDataDontLoad)))
+        XCTAssertFalse(options.contains(.cachePolicy(.reloadRevalidatingCacheData)))
+
+        XCTAssertFalse(options.contains(.serverURL(firstServerURLString)))
+        options.insert(.serverURL(firstServerURLString))
+        XCTAssertTrue(options.contains(.serverURL(firstServerURLString)))
+        XCTAssertFalse(options.contains(.serverURL(secondServerURLString)))
     }
 
     func testExecuteCorrectly() async {
@@ -199,7 +252,7 @@ class APICommandTests: XCTestCase {
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
-                XCTFail("should be able unwrap final error to ParseError")
+                XCTFail("Should be able unwrap final error to ParseError")
                 return
             }
             XCTAssertEqual(originalError.code, error.code)
@@ -240,7 +293,7 @@ class APICommandTests: XCTestCase {
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
-                XCTFail("should be able unwrap final error to ParseError")
+                XCTFail("Should be able unwrap final error to ParseError")
                 return
             }
             XCTAssertEqual(error.code, parseError.code)
@@ -263,7 +316,7 @@ class APICommandTests: XCTestCase {
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
-                XCTFail("should be able unwrap final error to ParseError")
+                XCTFail("Should be able unwrap final error to ParseError")
                 return
             }
             XCTAssertEqual(originalError.code, error.code)
@@ -304,7 +357,7 @@ class APICommandTests: XCTestCase {
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
-                XCTFail("should be able unwrap final error to ParseError")
+                XCTFail("Should be able unwrap final error to ParseError")
                 return
             }
             XCTAssertEqual(error.code, parseError.code)
@@ -329,7 +382,7 @@ class APICommandTests: XCTestCase {
             XCTFail("Should have thrown an error")
         } catch {
             guard let error = error as? ParseError else {
-                XCTFail("should be able unwrap final error to ParseError")
+                XCTFail("Should be able unwrap final error to ParseError")
                 return
             }
             XCTAssertEqual(originalError.code, error.code)

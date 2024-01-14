@@ -77,7 +77,8 @@ public struct ParseOperation<T>: Savable,
     public func set<W>(_ key: (String, WritableKeyPath<T, W?>),
                        to value: W?) -> Self where W: Codable & Equatable {
         var mutableOperation = self
-        if value == nil && target[keyPath: key.1] != nil {
+        if value == nil &&
+            target[keyPath: key.1] != nil {
             mutableOperation.keysToNull.insert(key.0)
             mutableOperation.target[keyPath: key.1] = value
         } else if target[keyPath: key.1] != value {

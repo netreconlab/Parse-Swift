@@ -67,7 +67,8 @@ internal extension API {
             let params = self.params?.getURLQueryItems()
             do {
                 var headers = try await API.getHeaders(options: options)
-                if method == .GET || method == .DELETE {
+                if method == .GET ||
+                    method == .DELETE {
                     headers.removeValue(forKey: "X-Parse-Request-Id")
                 }
                 let url = API.serverURL(options: options).appendingPathComponent(path.urlComponent)

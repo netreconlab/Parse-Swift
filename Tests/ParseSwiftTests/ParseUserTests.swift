@@ -774,8 +774,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>
             = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
-            if installationFromMemory.installationId == oldInstallationId
-                || installationFromMemory.installationId == nil {
+            if installationFromMemory.installationId == oldInstallationId ||
+                installationFromMemory.installationId == nil {
                 XCTFail("\(installationFromMemory) was not deleted and recreated in memory during logout")
             }
         } else {
@@ -785,8 +785,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         #if !os(Linux) && !os(Android) && !os(Windows)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
-            if installationFromKeychain.installationId == oldInstallationId
-                || installationFromKeychain.installationId == nil {
+            if installationFromKeychain.installationId == oldInstallationId ||
+                installationFromKeychain.installationId == nil {
                 XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
             }
         } else {
@@ -840,8 +840,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         if let installationFromMemory: CurrentInstallationContainer<BaseParseInstallation>
             = try await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
-                if installationFromMemory.installationId == oldInstallationId
-                    || installationFromMemory.installationId == nil {
+                if installationFromMemory.installationId == oldInstallationId ||
+                    installationFromMemory.installationId == nil {
                     XCTFail("\(installationFromMemory) was not deleted & recreated in memory during logout")
                 }
         } else {
@@ -851,8 +851,8 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         #if !os(Linux) && !os(Android) && !os(Windows)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
-                if installationFromKeychain.installationId == oldInstallationId
-                    || installationFromKeychain.installationId == nil {
+                if installationFromKeychain.installationId == oldInstallationId ||
+                    installationFromKeychain.installationId == nil {
                     XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
                 }
         } else {

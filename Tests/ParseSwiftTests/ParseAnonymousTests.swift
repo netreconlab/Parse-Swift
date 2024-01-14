@@ -329,7 +329,7 @@ class ParseAnonymousTests: XCTestCase {
 
         var differentUser = User()
         differentUser.objectId = "nope"
-        differentUser.username = "shouldnot"
+        differentUser.username = "Shouldnot"
         differentUser.password = "work"
         do {
             _ = try await differentUser.signup()
@@ -628,7 +628,7 @@ class ParseAnonymousTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "SignUp")
         var differentUser = User()
         differentUser.objectId = "nope"
-        differentUser.username = "shouldnot"
+        differentUser.username = "Shouldnot"
         differentUser.password = "work"
         differentUser.signup { result in
             if case let .failure(error) = result {

@@ -174,7 +174,8 @@ extension ParsePush {
     public func send(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
                      completion: @escaping (Result<String, ParseError>) -> Void) {
-        if expirationTime != nil && expirationInterval != nil {
+        if expirationTime != nil &&
+            expirationInterval != nil {
             let error =  ParseError(code: .otherCause,
                                     message: "expirationTime and expirationInterval cannot both be set.")
             callbackQueue.async {
@@ -182,7 +183,8 @@ extension ParsePush {
             }
             return
         }
-        if `where` != nil && channels != nil {
+        if `where` != nil &&
+            channels != nil {
             let error =  ParseError(code: .otherCause,
                                     message: "query and channels cannot both be set.")
             callbackQueue.async {

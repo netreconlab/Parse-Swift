@@ -165,7 +165,8 @@ score.save { result in
 }
 
 //: This will store the second batch score to be used later.
-var score2ForFetchedLater: GameScore?
+var scoreToFetchLater: GameScore?
+var score2ToFetchLater: GameScore?
 
 //: Saving multiple GameScores at once with batching.
 [score, score2].saveAll { results in
@@ -179,8 +180,10 @@ var score2ForFetchedLater: GameScore?
                     Saved \"\(savedScore.className)\" with
                     points \(String(describing: savedScore.points)) successfully
                 """)
-                if index == 1 {
-                    score2ForFetchedLater = savedScore
+                if index == 0 {
+                    scoreToFetchLater = savedScore
+                } else if index == 1 {
+                    score2ToFetchLater = savedScore
                 }
                 index += 1
             case .failure(let error):
@@ -203,8 +206,10 @@ var score2ForFetchedLater: GameScore?
             switch otherResult {
             case .success(let savedScore):
                 print("Saved \"\(savedScore.className)\" with points \(savedScore.points) successfully")
-                if index == 1 {
-                    score2ForFetchedLater = savedScore
+                if index == 0 {
+                    scoreToFetchLater = savedScore
+                } else if index == 1 {
+                    score2ToFetchLater = savedScore
                 }
                 index += 1
             case .failure(let error):
@@ -299,7 +304,7 @@ Task {
 }
 
 //: Now we will fetch a ParseObject that has already been saved based on its' objectId.
-let scoreToFetch = GameScore(objectId: score2ForFetchedLater?.objectId)
+let scoreToFetch = GameScore(objectId: scoreToFetchLater?.objectId)
 
 //: Asynchronous completion block fetch this GameScore based on it is objectId alone.
 scoreToFetch.fetch { result in
@@ -322,7 +327,7 @@ Task {
 }
 
 //: Now we will fetch `ParseObject`'s in batch that have already been saved based on its' objectId.
-let score2ToFetch = GameScore(objectId: score2ForFetchedLater?.objectId)
+let score2ToFetch = GameScore(objectId: score2ToFetchLater?.objectId)
 
 //: Asynchronous completion block fetch GameScores based on it is objectId alone.
 [scoreToFetch, score2ToFetch].fetchAll { result in
