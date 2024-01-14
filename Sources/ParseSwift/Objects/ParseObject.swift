@@ -94,13 +94,6 @@ public protocol ParseObject: ParseTypeable,
     init(objectId: String)
 
     /**
-     Determines if two objects have the same objectId.
-     - parameter as: Object to compare.
-     - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
-    */
-    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool
-
-    /**
      Converts this `ParseObject` to a Parse Pointer.
      - returns: The pointer version of the `ParseObject`, Pointer<Self>.
     */
@@ -111,7 +104,7 @@ public protocol ParseObject: ParseTypeable,
      by comparing it to another `ParseObject`.
      - parameter keyPath: The `KeyPath` to check.
      - parameter original: The original `ParseObject`.
-     - returns: Returns a **true** if the keyPath should be restored  or **false** otherwise.
+     - returns: Returns **true** if the keyPath should be restored  or **false** otherwise.
     */
     func shouldRestoreKey<W>(_ keyPath: KeyPath<Self, W?>,
                              original: Self) -> Bool where W: Equatable
@@ -199,17 +192,14 @@ public extension ParseObject {
         self.objectId = objectId
     }
 
-    func hasSameObjectId<T: ParseObject>(as other: T) -> Bool {
-        other.className == className && other.objectId == objectId && objectId != nil
-    }
-
     func toPointer() throws -> Pointer<Self> {
         try Pointer(self)
     }
 
     func shouldRestoreKey<W>(_ keyPath: KeyPath<Self, W?>,
                              original: Self) -> Bool where W: Equatable {
-        self[keyPath: keyPath] == nil && original[keyPath: keyPath] != self[keyPath: keyPath]
+        self[keyPath: keyPath] == nil &&
+        original[keyPath: keyPath] != self[keyPath: keyPath]
     }
 
     func mergeParse(with object: Self) throws -> Self {
@@ -246,6 +236,8 @@ extension ParseObject {
 public extension ParseObject {
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.id)
+        hasher.combine(createdAt)
+        hasher.combine(updatedAt)
     }
 }
 

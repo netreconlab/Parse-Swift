@@ -203,8 +203,22 @@ public struct API {
             }
         }
 
+        // swiftlint:disable:next cyclomatic_complexity
         public static func == (lhs: API.Option, rhs: API.Option) -> Bool {
-            lhs.hashValue == rhs.hashValue
+            switch (lhs, rhs) {
+            case (.usePrimaryKey, .usePrimaryKey): return true
+            case (.removeMimeType, .removeMimeType): return true
+            case (.sessionToken(let object1), .sessionToken(let object2)): return object1 == object2
+            case (.installationId(let object1), .installationId(let object2)): return object1 == object2
+            case (.mimeType(let object1), .mimeType(let object2)): return object1 == object2
+            case (.fileSize(let object1), .fileSize(let object2)): return object1 == object2
+            case (.metadata(let object1), .metadata(let object2)): return object1 == object2
+            case (.tags(let object1), .tags(let object2)): return object1 == object2
+            case (.context(let object1), .context(let object2)): return object1.isEqual(object2)
+            case (.cachePolicy(let object1), .cachePolicy(let object2)): return object1 == object2
+            case (.serverURL(let object1), .serverURL(let object2)): return object1 == object2
+            default: return false
+            }
         }
     }
 
@@ -228,7 +242,7 @@ public struct API {
         headers["X-Parse-Client-Version"] = clientVersion()
         headers["X-Parse-Request-Id"] = Self.createUniqueRequestId()
 
-        options.forEach { (option) in
+        options.forEach { option in
             switch option {
             case .usePrimaryKey:
                 headers["X-Parse-Master-Key"] = Parse.configuration.primaryKey
@@ -272,11 +286,22 @@ public struct API {
     }
 
     internal static func serverURL(options: API.Options) -> URL {
-        guard let differentServerURLOption = options.first(where: { $0 == .serverURL("") }),
-                case .serverURL(let differentServerURLString) = differentServerURLOption,
-                let differentURL = URL(string: differentServerURLString) else {
+        var optionURL: URL?
+        // BAKER: Currently have to step through all options and
+        // break to get the current URL.
+        for option in options {
+            switch option {
+            case .serverURL(let url):
+                optionURL = URL(string: url)
+            default:
+                continue
+            }
+            break
+        }
+
+        guard let currentURL = optionURL else {
             return Parse.configuration.serverURL
         }
-        return differentURL
+        return currentURL
     }
 }

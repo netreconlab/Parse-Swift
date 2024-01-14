@@ -306,7 +306,11 @@ actor KeychainStore: SecureStorable {
                 mutatedKeychainAccessGroup.accessGroup = nil
                 let removedNoAccessGroupObject = self.removeObject(forKey: key,
                                                                    accessGroup: mutatedKeychainAccessGroup)
-                if !(removedDefaultObject || removedToggledObject || removedNoAccessGroupObject) {
+                if !(
+                    removedDefaultObject ||
+                    removedToggledObject ||
+                    removedNoAccessGroupObject
+                ) {
                     return false
                 }
             }

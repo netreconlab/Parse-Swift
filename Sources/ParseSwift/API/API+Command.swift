@@ -57,7 +57,9 @@ internal extension API {
                            uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                            stream: InputStream,
                            completion: @escaping (ParseError?) -> Void) {
-            guard method == .POST || method == .PUT || method == .PATCH else {
+            guard method == .POST ||
+                    method == .PUT ||
+                    method == .PATCH else {
                 callbackQueue.async {
                     completion(nil)
                 }
@@ -133,7 +135,9 @@ internal extension API {
                 }
             } else {
                 // ParseFiles are handled with a dedicated URLSession
-                if method == .POST || method == .PUT || method == .PATCH {
+                if method == .POST ||
+                    method == .PUT ||
+                    method == .PATCH {
                     switch await self.prepareURLRequest(options: options,
                                                         batching: batching,
                                                         childObjects: childObjects,
@@ -258,7 +262,8 @@ internal extension API {
             Task {
                 do {
                     var headers = try await API.getHeaders(options: options)
-                    if method == .GET || method == .DELETE {
+                    if method == .GET ||
+                        method == .DELETE {
                         headers.removeValue(forKey: "X-Parse-Request-Id")
                     }
                     let url = parseURL == nil ?
@@ -405,8 +410,9 @@ internal extension API.Command {
                         original data: Data?,
                         ignoringCustomObjectIdConfig: Bool,
                         batching: Bool = false) async throws -> API.Command<V, V> where V: ParseObject {
-        if Parse.configuration.isRequiringCustomObjectIds
-            && object.objectId == nil && !ignoringCustomObjectIdConfig {
+        if Parse.configuration.isRequiringCustomObjectIds &&
+            object.objectId == nil &&
+            !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
         if try await object.isSaved() {

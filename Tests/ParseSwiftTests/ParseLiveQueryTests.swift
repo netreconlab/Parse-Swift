@@ -1466,7 +1466,7 @@ class ParseLiveQueryTests: XCTestCase {
         }
 
         guard let url = URL(string: "wss://parse.com") else {
-            XCTFail("should create url")
+            XCTFail("Should create url")
             return
         }
         XCTAssertNotEqual(client.url, url)
@@ -1486,7 +1486,7 @@ class ParseLiveQueryTests: XCTestCase {
         try await pretendToBeConnected(delegate)
         XCTAssertNil(delegate.error)
         guard let url = URL(string: "http://parse.com") else {
-            XCTFail("should create url")
+            XCTFail("Should create url")
             return
         }
         XCTAssertNotEqual(client.url, url)
@@ -1512,7 +1512,7 @@ class ParseLiveQueryTests: XCTestCase {
         try await pretendToBeConnected(delegate)
         XCTAssertNil(delegate.error)
         guard let url = URL(string: "http://parse.com") else {
-            XCTFail("should create url")
+            XCTFail("Should create url")
             return
         }
         XCTAssertNotEqual(client.url, url)

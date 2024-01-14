@@ -569,7 +569,9 @@ extension Query: Queryable {
             }
             return
         }
-        if order != nil || skip > 0 || self.limit != 100 {
+        if order != nil ||
+            skip > 0 ||
+            self.limit != 100 {
             let error = ParseError(code: .otherCause,
                                    message: "Cannot iterate on a query with sort, skip, or limit.")
             callbackQueue.async {

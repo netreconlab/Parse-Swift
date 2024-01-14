@@ -54,6 +54,13 @@ public protocol Objectable: ParseEncodable, Decodable {
      - throws: An error of `ParseError` type.
      */
     func isSaved() async throws -> Bool
+
+    /**
+     Determines if two objects have the same objectId.
+     - parameter as: Object to compare.
+     - returns: Returns **true** if the other object has the same `objectId` or **false** if unsuccessful.
+    */
+    func hasSameObjectId<T: Objectable>(as other: T) -> Bool
 }
 
 // MARK: Default Implementation
@@ -80,13 +87,21 @@ public extension Objectable {
         if !Parse.configuration.isRequiringCustomObjectIds {
             return objectId != nil
         } else {
-            return objectId != nil && createdAt != nil
+            return objectId != nil &&
+            createdAt != nil
         }
+    }
+
+    func hasSameObjectId<T: Objectable>(as other: T) -> Bool {
+        other.className == className &&
+        other.objectId == objectId &&
+        objectId != nil
     }
 
     func endpoint(_ method: API.Method) async throws -> API.Endpoint {
         try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
+        if !Parse.configuration.isRequiringCustomObjectIds ||
+            method != .POST {
             return endpoint
         } else {
             return .objects(className: className)
@@ -114,7 +129,8 @@ extension Objectable {
         if !Parse.configuration.isRequiringCustomObjectIds {
             return objectId != nil
         } else {
-            return objectId != nil && createdAt != nil
+            return objectId != nil &&
+            createdAt != nil
         }
     }
 

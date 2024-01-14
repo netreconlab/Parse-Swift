@@ -1130,7 +1130,7 @@ private struct Timestamp: Codable, Equatable {
   }
 
   static func ==(_ lhs: Timestamp, _ rhs: Timestamp) -> Bool {
-    return lhs.value == rhs.value
+      lhs.value == rhs.value
   }
 }
 
@@ -1151,7 +1151,8 @@ fileprivate final class Counter: Codable, Equatable {
   }
 
   static func ==(_ lhs: Counter, _ rhs: Counter) -> Bool {
-    return lhs === rhs || lhs.count == rhs.count
+      lhs === rhs ||
+      lhs.count == rhs.count
   }
 }
 
@@ -1265,7 +1266,8 @@ private struct Company: Codable, Equatable {
   }
 
   static func ==(_ lhs: Company, _ rhs: Company) -> Bool {
-    return lhs.address == rhs.address && lhs.employees == rhs.employees
+    return lhs.address == rhs.address && 
+      lhs.employees == rhs.employees
   }
 
   static var testValue: Company {
@@ -1346,7 +1348,8 @@ fileprivate final class Mapping: Codable, Equatable {
   }
 
   static func ==(_ lhs: Mapping, _ rhs: Mapping) -> Bool {
-    return lhs === rhs || lhs.values == rhs.values
+      lhs === rhs ||
+      lhs.values == rhs.values
   }
 
   static var testValue: Mapping {

@@ -631,7 +631,8 @@ extension ParseLiveQuery {
         if isUserWantsToConnect {
             self.isDisconnectedByUser = false
         }
-        if self.status == .connected || self.isDisconnectedByUser {
+        if self.status == .connected ||
+            self.isDisconnectedByUser {
             completion(nil)
             return
         }
@@ -769,8 +770,8 @@ extension ParseLiveQuery {
         }
 
         static func == (lhs: SubscriptionRecord, rhs: SubscriptionRecord) -> Bool {
-            lhs.messageData == rhs.messageData
-                && lhs.queryData == rhs.queryData
+            lhs.messageData == rhs.messageData &&
+            lhs.queryData == rhs.queryData
         }
     }
 }

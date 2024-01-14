@@ -107,6 +107,8 @@ public extension ParseRole {
     func hash(into hasher: inout Hasher) {
         let name = self.name ?? self.objectId
         hasher.combine(name)
+        hasher.combine(createdAt)
+        hasher.combine(updatedAt)
     }
 
     func mergeParse(with object: Self) throws -> Self {
