@@ -367,7 +367,8 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
             }
             valueToEncode = pointer
         } else if let object = value as? Objectable {
-            if !batching || (batching && codingPath.last?.stringValue == "body"),
+            if !batching ||
+                (batching && codingPath.last?.stringValue == "body"),
                let pointer = try? PointerType(object) {
                 if let uniquePointer = self.uniquePointer,
                    uniquePointer.hasSameObjectId(as: pointer) {
@@ -507,8 +508,8 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
         guard !shouldSkipKey(key) else { return }
 
         var valueToEncode: Encodable = value
-        if ((value as? Objectable) != nil)
-            || ((value as? ParsePointer) != nil) {
+        if ((value as? Objectable) != nil) ||
+            ((value as? ParsePointer) != nil) {
             if let replacedObject = try self.encoder.deepFindAndReplaceParseObjects(value) {
                 valueToEncode = replacedObject
             }
@@ -964,18 +965,22 @@ extension _ParseEncoder {
         // Disambiguation between variable and function is required due to
         // issue tracked at: https://bugs.swift.org/browse/SR-1846
         let type = Swift.type(of: value)
-        if type == Date.self || type == NSDate.self {
+        if type == Date.self ||
+            type == NSDate.self {
             // Respect Date encoding strategy
             return try self.box((value as! Date))
-        } else if type == Data.self || type == NSData.self {
+        } else if type == Data.self ||
+                    type == NSData.self {
             // Respect Data encoding strategy
             // swiftlint:disable:next force_cast
             return try self.box((value as! Data))
-        } else if type == URL.self || type == NSURL.self {
+        } else if type == URL.self ||
+                    type == NSURL.self {
             // Encode URLs as single strings.
             // swiftlint:disable:next force_cast
             return self.box((value as! URL).absoluteString)
-        } else if type == Decimal.self || type == NSDecimalNumber.self {
+        } else if type == Decimal.self ||
+                    type == NSDecimalNumber.self {
             // JSONSerialization can natively handle NSDecimalNumber.
             // swiftlint:disable:next force_cast
             return (value as! NSDecimalNumber)

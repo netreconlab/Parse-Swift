@@ -106,7 +106,8 @@ extension ParseUser {
 
     func endpoint(_ method: API.Method) async throws -> API.Endpoint {
         try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
+        if !Parse.configuration.isRequiringCustomObjectIds ||
+            method != .POST {
             return endpoint
         } else {
             return .users
@@ -485,7 +486,8 @@ extension ParseUser {
 
             if let current = try? await Self.current() {
                 let isAnonymous = await self.anonymous.isLinked()
-                if !current.hasSameObjectId(as: user) && isAnonymous {
+                if !current.hasSameObjectId(as: user) &&
+                    isAnonymous {
                     await Self.deleteCurrentContainerFromStorage()
                 }
             }
@@ -1182,7 +1184,9 @@ extension ParseUser {
 
     func saveCommand(ignoringCustomObjectIdConfig: Bool = false) async throws -> API.Command<Self, Self> {
         try await yieldIfNotInitialized()
-        if Parse.configuration.isRequiringCustomObjectIds && objectId == nil && !ignoringCustomObjectIdConfig {
+        if Parse.configuration.isRequiringCustomObjectIds &&
+            objectId == nil &&
+            !ignoringCustomObjectIdConfig {
             throw ParseError(code: .missingObjectId, message: "objectId must not be nil")
         }
         if try await isSaved() {

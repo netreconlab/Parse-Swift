@@ -45,11 +45,11 @@ public enum Event<T: ParseObject>: Equatable {
 
     public static func == <U>(lhs: Event<U>, rhs: Event<U>) -> Bool {
         switch (lhs, rhs) {
-        case (.entered(let obj1), .entered(let obj2)): return obj1 == obj2
-        case (.left(let obj1), .left(let obj2)):       return obj1 == obj2
-        case (.created(let obj1), .created(let obj2)): return obj1 == obj2
-        case (.updated(let obj1), .updated(let obj2)): return obj1 == obj2
-        case (.deleted(let obj1), .deleted(let obj2)): return obj1 == obj2
+        case (.entered(let object1), .entered(let object2)): return object1 == object2
+        case (.left(let object1), .left(let object2)):       return object1 == object2
+        case (.created(let object1), .created(let object2)): return object1 == object2
+        case (.updated(let object1), .updated(let object2)): return object1 == object2
+        case (.deleted(let object1), .deleted(let object2)): return object1 == object2
         default: return false
         }
     }

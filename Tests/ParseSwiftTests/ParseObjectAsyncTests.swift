@@ -178,37 +178,19 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             self.points = points
         }
 
-        /**
-         Conforms to Equatable by determining if an object has the same objectId.
-         - note: You can specify a custom way of `Equatable` if a more  detailed way is needed.
-         - warning: If you use the default implementation, equatable will only work if the ParseObject
-         has been previously synced to the parse-server (has an objectId). In addition, if two
-         `ParseObject`'s have the same objectId, but were modified at different times, the
-         default implementation will still return true. In these cases you either want to use a
-         "struct" (value types) to make your `ParseObject`s instead of a class (reference type) or
-         provide your own implementation of `==`.
-         - parameter lhs: first object to compare
-         - parameter rhs: second object to compare
-
-         - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
-        */
-        public static func == (lhs: ParseObjectAsyncTests.GameScoreClass,
-                               rhs: ParseObjectAsyncTests.GameScoreClass) -> Bool {
-            lhs.hasSameObjectId(as: rhs)
+        public static func == (
+            lhs: ParseObjectAsyncTests.GameScoreClass,
+            rhs: ParseObjectAsyncTests.GameScoreClass
+        ) -> Bool {
+            lhs.hasSameObjectId(as: rhs) &&
+            lhs.createdAt == rhs.createdAt &&
+            lhs.updatedAt == rhs.updatedAt
         }
 
-        /**
-         Conforms to `Hashable` using objectId.
-         - note: You can specify a custom way of `Hashable` if a more  detailed way is needed.
-         - warning: If you use the default implementation, hash will only work if the ParseObject has been previously
-         synced to the parse-server (has an objectId). In addition, if two `ParseObject`'s have the same objectId,
-         but were modified at different times, the default implementation will hash to the same value. In these
-         cases you either want to use a "struct" (value types) to make your `ParseObject`s instead of a
-         class (reference type) or provide your own implementation of `hash`.
-
-        */
         public func hash(into hasher: inout Hasher) {
             hasher.combine(self.id)
+            hasher.combine(createdAt)
+            hasher.combine(updatedAt)
         }
     }
 
@@ -235,37 +217,19 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
             self.gameScore = gameScore
         }
 
-        /**
-         Conforms to Equatable by determining if an object has the same objectId.
-         - note: You can specify a custom way of `Equatable` if a more  detailed way is needed.
-         - warning: If you use the default implementation, equatable will only work if the ParseObject
-         has been previously synced to the parse-server (has an objectId). In addition, if two
-         `ParseObject`'s have the same objectId, but were modified at different times, the
-         default implementation will still return true. In these cases you either want to use a
-         "struct" (value types) to make your `ParseObject`s instead of a class (reference type) or
-         provide your own implementation of `==`.
-         - parameter lhs: first object to compare
-         - parameter rhs: second object to compare
-
-         - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
-        */
-        public static func == (lhs: ParseObjectAsyncTests.GameClass,
-                               rhs: ParseObjectAsyncTests.GameClass) -> Bool {
-            lhs.hasSameObjectId(as: rhs)
+        public static func == (
+            lhs: ParseObjectAsyncTests.GameClass,
+            rhs: ParseObjectAsyncTests.GameClass
+        ) -> Bool {
+            lhs.hasSameObjectId(as: rhs) &&
+            lhs.createdAt == rhs.createdAt &&
+            lhs.updatedAt == rhs.updatedAt
         }
 
-        /**
-         Conforms to `Hashable` using objectId.
-         - note: You can specify a custom way of `Hashable` if a more  detailed way is needed.
-         - warning: If you use the default implementation, hash will only work if the ParseObject has been previously
-         synced to the parse-server (has an objectId). In addition, if two `ParseObject`'s have the same objectId,
-         but were modified at different times, the default implementation will hash to the same value. In these
-         cases you either want to use a "struct" (value types) to make your `ParseObject`s instead of a
-         class (reference type) or provide your own implementation of `hash`.
-
-        */
         public func hash(into hasher: inout Hasher) {
             hasher.combine(self.id)
+            hasher.combine(createdAt)
+            hasher.combine(updatedAt)
         }
     }
 

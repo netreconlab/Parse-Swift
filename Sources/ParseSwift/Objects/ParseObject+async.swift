@@ -312,7 +312,8 @@ internal extension ParseObject {
                         objectsSavedBeforeThisOne: nil,
                         filesSavedBeforeThisOne: nil)
             var waitingToBeSaved = object.unsavedChildren
-            if isShouldReturnIfChildObjectsFound && waitingToBeSaved.count > 0 {
+            if isShouldReturnIfChildObjectsFound &&
+                waitingToBeSaved.count > 0 {
                 let error = ParseError(code: .otherCause,
                                        message: """
 When using transactions, all child ParseObjects have to originally
@@ -349,7 +350,9 @@ or disable transactions for this call.
                     }
                 }
                 waitingToBeSaved = nextBatch
-                if waitingToBeSaved.count > 0 && savableObjects.count == 0 && savableFiles.count == 0 {
+                if waitingToBeSaved.count > 0 &&
+                    savableObjects.count == 0 &&
+                    savableFiles.count == 0 {
                     throw ParseError(code: .otherCause,
                                      message: "Found a circular dependency in ParseObject.")
                 }

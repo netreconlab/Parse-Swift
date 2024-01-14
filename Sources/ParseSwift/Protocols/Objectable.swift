@@ -80,13 +80,15 @@ public extension Objectable {
         if !Parse.configuration.isRequiringCustomObjectIds {
             return objectId != nil
         } else {
-            return objectId != nil && createdAt != nil
+            return objectId != nil &&
+            createdAt != nil
         }
     }
 
     func endpoint(_ method: API.Method) async throws -> API.Endpoint {
         try await yieldIfNotInitialized()
-        if !Parse.configuration.isRequiringCustomObjectIds || method != .POST {
+        if !Parse.configuration.isRequiringCustomObjectIds ||
+            method != .POST {
             return endpoint
         } else {
             return .objects(className: className)
@@ -107,14 +109,15 @@ extension Objectable {
         return hashString
     }
 
+    // BAKER: mark this internal.
     /// Specifies if a `ParseObject` has been saved.
     /// - warning: This will not be available in ParseSwift 6.0.0. Use `isSaved()` instead.
-    /// BAKER mark this internal.
     public var isSaved: Bool {
         if !Parse.configuration.isRequiringCustomObjectIds {
             return objectId != nil
         } else {
-            return objectId != nil && createdAt != nil
+            return objectId != nil &&
+            createdAt != nil
         }
     }
 

@@ -19,14 +19,6 @@ extension Fileable {
         return url != nil
     }
 
-    mutating func hash(into hasher: inout Hasher) {
-        if let url = url {
-            hasher.combine(url)
-        } else {
-            hasher.combine(self.id)
-        }
-    }
-
     public static func == (lhs: Self, rhs: Self) -> Bool {
         guard let lURL = lhs.url,
               let rURL = rhs.url else {

@@ -546,6 +546,7 @@ extension ParseError: Equatable {
         lhs.code == rhs.code &&
         lhs.message == rhs.message &&
         lhs.error == rhs.error &&
+        lhs.otherCode == rhs.otherCode &&
         lhs.swift?.localizedDescription == rhs.swift?.localizedDescription
     }
 }

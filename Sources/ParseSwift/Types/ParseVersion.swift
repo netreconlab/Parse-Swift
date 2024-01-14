@@ -84,11 +84,13 @@ public struct ParseVersion: ParseTypeable, Hashable {
         case alpha, beta
 
         static func < (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
-            lhs == .alpha && rhs == .beta
+            lhs == .alpha &&
+            rhs == .beta
         }
 
         static func > (lhs: ParseVersion.PrereleaseName, rhs: ParseVersion.PrereleaseName) -> Bool {
-            lhs == .beta && rhs == .alpha
+            lhs == .beta &&
+            rhs == .alpha
         }
 
     }
@@ -104,7 +106,10 @@ public struct ParseVersion: ParseTypeable, Hashable {
          patch: Int,
          prereleaseName: PrereleaseName?,
          prereleaseVersion: Int?) throws {
-        if prereleaseName != nil && prereleaseVersion == nil || prereleaseName == nil && prereleaseVersion != nil {
+        if prereleaseName != nil &&
+            prereleaseVersion == nil ||
+            prereleaseName == nil &&
+            prereleaseVersion != nil {
             throw ParseError(code: .otherCause,
                              // swiftlint:disable:next line_length
                              message: "preleaseName and prereleaseVersion are both required, you cannot have one without the other")
@@ -203,9 +208,11 @@ extension ParseVersion: Comparable {
             return true
         } else if left.patch < right.patch {
             return false
-        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
+        } else if left.prereleaseVersion == nil &&
+                    right.prereleaseVersion != nil {
             return true
-        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
+        } else if left.prereleaseVersion != nil &&
+                    right.prereleaseVersion == nil {
             return false
         } else if let leftPreReleaseName = left.prereleaseName,
                   let rightPreReleaseName = right.prereleaseName,
@@ -226,7 +233,8 @@ extension ParseVersion: Comparable {
     }
 
     public static func >= (left: Self, right: Self) -> Bool {
-        guard left == right || left > right else {
+        guard left == right ||
+                left > right else {
             return false
         }
         return true
@@ -246,9 +254,11 @@ extension ParseVersion: Comparable {
             return true
         } else if left.patch > right.patch {
             return false
-        } else if left.prereleaseVersion != nil && right.prereleaseVersion == nil {
+        } else if left.prereleaseVersion != nil &&
+                    right.prereleaseVersion == nil {
             return true
-        } else if left.prereleaseVersion == nil && right.prereleaseVersion != nil {
+        } else if left.prereleaseVersion == nil &&
+                    right.prereleaseVersion != nil {
             return false
         } else if let leftPreReleaseName = left.prereleaseName,
                   let rightPreReleaseName = right.prereleaseName,
@@ -269,7 +279,8 @@ extension ParseVersion: Comparable {
     }
 
     public static func <= (left: Self, right: Self) -> Bool {
-        guard left == right || left < right else {
+        guard left == right ||
+                left < right else {
             return false
         }
         return true

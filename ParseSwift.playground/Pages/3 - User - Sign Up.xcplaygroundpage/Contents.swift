@@ -12,14 +12,6 @@ import ParseSwift
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-Task {
-    do {
-        try await initializeParse()
-    } catch {
-        assertionFailure("Error initializing Parse-Swift: \(error)")
-    }
-}
-
 struct User: ParseUser {
     //: These are required by `ParseObject`.
     var objectId: String?
@@ -49,6 +41,19 @@ struct User: ParseUser {
             updated.customKey = object.customKey
         }
         return updated
+    }
+}
+
+Task {
+    do {
+        try await initializeParse()
+    } catch {
+        assertionFailure("Error initializing Parse-Swift: \(error)")
+    }
+    do {
+        try await User.logout()
+    } catch let error {
+        print("Error logging out: \(error)")
     }
 }
 
