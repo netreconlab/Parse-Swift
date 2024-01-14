@@ -182,8 +182,8 @@ Task {
     let currentUser = try? await User.current()
     currentUser?.fetch(includeKeys: ["gameScore"]) { result in
         switch result {
-        case .success:
-            print("Successfully fetched user with gameScore key: \(String(describing: User.current))")
+        case .success(let user):
+            print("Successfully fetched user with gameScore key: \(user)")
         case .failure(let error):
             print("Error fetching User: \(error)")
         }
@@ -196,8 +196,8 @@ Task {
     let currentUser = try? await User.current()
     currentUser?.fetch(includeKeys: ["*"]) { result in
         switch result {
-        case .success:
-            print("Successfully fetched user with all keys: \(String(describing: User.current))")
+        case .success(let user):
+            print("Successfully fetched user with all keys: \(user)")
         case .failure(let error):
             print("Error fetching User: \(error)")
         }
