@@ -10,7 +10,7 @@ on:
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_15.1.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_15.2.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,10 +22,10 @@ jobs:
     runs-on: macos-13
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
         action: ['test', 'build']
         exclude:
-          - destination: 'platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max'
+          - destination: 'platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max'
             action: 'build'
           - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
             action: 'build'
@@ -33,7 +33,7 @@ jobs:
             action: 'build'
           - destination: 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro'
             action: 'build'
-          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)'
+          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)'
             action: 'test'
     steps:
     - uses: actions/checkout@v4
