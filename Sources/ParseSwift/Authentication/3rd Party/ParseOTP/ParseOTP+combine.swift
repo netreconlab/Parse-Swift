@@ -29,6 +29,11 @@ public extension ParseOTP {
         Future { promise in
             self.login(
                 id: id,
+                accessToken: accessToken,
+                
+            )
+            self.login(
+                id: id,
                 idToken: idToken,
                 accessToken: accessToken,
                 options: options,

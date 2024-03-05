@@ -83,42 +83,86 @@ public struct ParseOTP<AuthenticatedUser: ParseUser>: ParseAuthentication {
 // MARK: Login
 public extension ParseOTP {
 
-    /**
-     Login a `ParseUser` *asynchronously* using OTP authentication for login.
-     - parameter secret: Optional **secret** from **OTP**.
-     - parameter token: The `token` from **OTP**.
-     - parameter oldToken: Optional **old token** from **OTP**.
-     - parameter mobile: Optional **mobile** number from **OTP**.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     */
-    internal func login(
-        otpAuthData: [String: String],
+    func login(
+        authData: [String: String],
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
     ) {
-        login(
-            authData: otpAuthData,
-            options: options,
-            callbackQueue: callbackQueue,
-            completion: completion
-        )
+        callbackQueue.async {
+            completion(
+                .failure(
+                    .init(
+                        code: .otherCause,
+                        message: "Login is not supported. Please use \"link(...)\"."
+                    )
+                )
+            )
+        }
     }
+}
+
+// MARK: Link
+public extension ParseOTP {
 
     /**
-     Login a `ParseUser` *asynchronously* using TOTP authentication for login.
-     - parameter mobile: The **token** from **OTP**.
-     - parameter oldToken: Optional **old token** from **OTP**.
+     Verify and/or reauthenticate a `ParseUser` token  *asynchronously* using OTP enrollment.
+     - parameter token: The **token** from **OTP**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      */
-    func validate(
+    func verify(
+        token: String,
+        options: API.Options = [],
+        callbackQueue: DispatchQueue = .main,
+        completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
+    ) {
+        Task {
+            do {
+                let currentUser = try await AuthenticatedUser.current()
+                guard let potentialOTPAuthData = currentUser.authData?[Self.__type],
+                    var otpAuthData = potentialOTPAuthData else {
+                    let error = ParseError(
+                        code: .otherCause,
+                        message: "Logged in user is missing authData, did you link MFA before attempting to call \"verify()\"."
+                    )
+                    completion(.failure(error))
+                    return
+                }
+                if let oldToken = otpAuthData[AuthenticationKeys.token.rawValue] {
+                    otpAuthData[AuthenticationKeys.oldToken.rawValue] = oldToken
+                }
+                otpAuthData[AuthenticationKeys.token.rawValue] = token
+                link(
+                    authData: otpAuthData,
+                    options: options,
+                    callbackQueue: callbackQueue,
+                    completion: completion
+                )
+            } catch {
+                let defaultError = ParseError(
+                    code: .otherCause,
+                    message: "Could not retrieve logged in user from Keychain",
+                    swift: error
+                )
+                let parseError = error as? ParseError ?? defaultError
+                completion(.failure(parseError))
+            }
+        }
+    }
+
+    /**
+     Link the *current* `ParseUser` *asynchronously* using OTP enrollment.
+     - parameter secret: The **secret** from **OTP**.
+     - parameter token: The **token** from **OTP**.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+     - parameter completion: The block to execute.
+     */
+    func link(
         secret: String,
         token: String,
-        oldToken: String? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
         completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
@@ -127,37 +171,10 @@ public extension ParseOTP {
             .token
             .makeDictionary(
                 secret: secret,
-                token: token,
-                oldToken: oldToken
-            )
-        login(
-            otpAuthData: otpAuthData,
-            options: options,
-            callbackQueue: callbackQueue,
-            completion: completion
-        )
-    }
-
-    /**
-     Validate a `ParseUser`  *asynchronously* using SMS OTP authentication for login.
-     - parameter mobile: The **token** from **OTP**.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     */
-    func validate(
-        token: String,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
-    ) {
-        let otpAuthData = AuthenticationKeys
-            .token
-            .makeDictionary(
                 token: token
             )
-        login(
-            otpAuthData: otpAuthData,
+        link(
+            authData: otpAuthData,
             options: options,
             callbackQueue: callbackQueue,
             completion: completion
@@ -165,13 +182,13 @@ public extension ParseOTP {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using OTP authentication for login.
+     Link the *current* `ParseUser` *asynchronously* using SMS OTP enrollment.
      - parameter mobile: The **mobile** number from **OTP**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      */
-    func login(
+    func link(
         mobile: String,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
@@ -182,15 +199,15 @@ public extension ParseOTP {
             .makeDictionary(
                 mobile: mobile
             )
-        login(
-            otpAuthData: otpAuthData,
+        link(
+            authData: otpAuthData,
             options: options,
             callbackQueue: callbackQueue,
             completion: completion
         )
     }
 
-    func login(
+    func link(
         authData: [String: String],
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
@@ -209,75 +226,13 @@ public extension ParseOTP {
             }
             return
         }
-        AuthenticatedUser.login(
+        AuthenticatedUser.link(
             Self.__type,
             authData: authData,
             options: options,
             callbackQueue: callbackQueue,
             completion: completion
         )
-    }
-}
-
-// MARK: Link
-public extension ParseOTP {
-
-    /**
-     Link the *current* `ParseUser` *asynchronously* using OTP authentication for login.
-     - parameter id: The **id** from **OTP**.
-     - parameter idToken: Optional **id_token** from **OTP**.
-     - parameter accessToken: Optional **access_token** from **OTP**.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     */
-    func link(
-        id: String,
-        idToken: String? = nil,
-        accessToken: String? = nil,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
-    ) {
-        let otpAuthData = AuthenticationKeys
-            .id
-            .makeDictionary(
-                id: id,
-                idToken: idToken,
-                accessToken: accessToken
-            )
-        link(
-            authData: otpAuthData,
-            options: options,
-            callbackQueue: callbackQueue,
-            completion: completion
-        )
-    }
-
-    func link(
-        authData: [String: String],
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void
-    ) {
-        guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
-            callbackQueue.async {
-                completion(
-                    .failure(
-                        .init(
-                            code: .otherCause,
-                            message: "Should have \"authData\" in consisting of keys \"id\", \"idToken\" or \"accessToken\"."
-                        )
-                    )
-                )
-            }
-            return
-        }
-        AuthenticatedUser.link(Self.__type,
-                               authData: authData,
-                               options: options,
-                               callbackQueue: callbackQueue,
-                               completion: completion)
     }
 }
 
