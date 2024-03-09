@@ -19,7 +19,7 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-13-arm64
+    runs-on: macos-14
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
@@ -67,7 +67,7 @@ jobs:
 
   spm-test:
     timeout-minutes: 25
-    runs-on: macos-13-arm64
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
     - name: Create and set the default keychain
@@ -136,7 +136,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: compnerd/gha-setup-swift@v0
+      - uses: compnerd/gha-setup-swift@v0.2.1
         with:
           branch: swift-5.10-release
           tag: 5.10-RELEASE
@@ -152,7 +152,7 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-13-arm64
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Use multiple cores
@@ -164,7 +164,7 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-13-arm64
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Use multiple cores
