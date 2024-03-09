@@ -58,7 +58,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         fail_ci_if_error: false
@@ -91,7 +91,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
@@ -142,9 +142,9 @@ jobs:
           tag: 5.10-RELEASE
       - name: Build
         run: |
-          swift test -v
+          swift test --enable-test-discovery --enable-code-coverage -v
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         with:
           env_vars: WINDOWSLATEST
           fail_ci_if_error: false
