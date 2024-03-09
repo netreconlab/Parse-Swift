@@ -58,7 +58,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         fail_ci_if_error: false
@@ -67,7 +67,7 @@ jobs:
 
   spm-test:
     timeout-minutes: 25
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
     - name: Create and set the default keychain
@@ -91,7 +91,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
@@ -115,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: sersoft-gmbh/SwiftyActions@v3
+      - uses: sersoft-gmbh/swifty-linux-action@v3
         with:
           release-version: "5"
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -138,13 +138,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: compnerd/gha-setup-swift@v0.2.1
         with:
-          branch: swift-5.9.2-release
-          tag: 5.9.2-RELEASE
+          branch: swift-5.10-release
+          tag: 5.10-RELEASE
       - name: Build
         run: |
           swift build -v
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         with:
           env_vars: WINDOWSLATEST
           fail_ci_if_error: false
@@ -152,7 +152,7 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Use multiple cores
@@ -164,7 +164,7 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Use multiple cores
