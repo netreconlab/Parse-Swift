@@ -176,4 +176,4 @@ jobs:
       - name: CocoaPods
         run: pod lib lint --allow-warnings
         env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_14 }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
