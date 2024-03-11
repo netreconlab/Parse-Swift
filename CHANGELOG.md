@@ -2,12 +2,15 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
 
+### 5.9.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.0...5.9.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.1/documentation/parseswift)
+
 __Fixes__
-* Allow use of ParseSwift for visionOS when the project is added in an Xcode workspace ([#160](https://github.com/netreconlab/Parse-Swift/pull/160)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Build for visionOS properly ([#160](https://github.com/netreconlab/Parse-Swift/pull/160)), thanks to [Corey Baker](https://github.com/cbaker6).
 * Cocoapods now defaults to Swift 5.10 ([#159](https://github.com/netreconlab/Parse-Swift/pull/159)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.9.0

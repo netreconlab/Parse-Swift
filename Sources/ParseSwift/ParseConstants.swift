@@ -10,7 +10,7 @@ import Foundation
 
 enum ParseConstants {
     static let sdk = "swift"
-    static let version = "5.9.0"
+    static let version = "5.9.1"
     static let fileManagementDirectory = "parse/"
     static let fileManagementPrivateDocumentsDirectory = "Private Documents/"
     static let fileManagementLibraryDirectory = "Library/"
@@ -26,6 +26,8 @@ enum ParseConstants {
     static let deviceType = "tvos"
     #elseif os(watchOS)
     static let deviceType = "applewatch"
+    #elseif os(visionOS)
+    static let deviceType = "visionos"
     #elseif os(Linux)
     static let deviceType = "linux"
     #elseif os(Android)
