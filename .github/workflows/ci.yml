@@ -34,7 +34,7 @@ jobs:
           - destination: 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro'
             action: 'build'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)'
-            action: 'build'
+            action: 'test'
     steps:
     - uses: actions/checkout@v4
     - name: Use multiple cores
