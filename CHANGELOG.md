@@ -2,9 +2,15 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+
+### 5.9.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.1...5.9.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.2/documentation/parseswift)
+
+__Fixes__
+* Querying using findAll may be inacurrate when results are greater than the batch limit ([#161](https://github.com/netreconlab/Parse-Swift/pull/161)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.9.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.0...5.9.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.1/documentation/parseswift)
