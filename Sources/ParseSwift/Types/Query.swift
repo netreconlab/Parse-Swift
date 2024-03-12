@@ -584,6 +584,7 @@ extension Query: Queryable {
             var query = self
                 .order([.ascending("objectId")])
             query.limit = limit ?? ParseConstants.batchLimit
+            let originalQueryWhere = query.where
             var results = [ResultType]()
             var finished = false
             while !finished {
@@ -593,8 +594,9 @@ extension Query: Queryable {
                     results.append(contentsOf: currentResults)
                     if currentResults.count >= query.limit {
                         guard let lastObjectId = results[results.count - 1].objectId else {
-                            throw ParseError(code: .otherCause, message: "Last object should have an id.")
+                            throw ParseError(code: .otherCause, message: "Last object should have an objectId.")
                         }
+                        query.where = originalQueryWhere
                         query.where.add("objectId" > lastObjectId)
                     } else {
                         finished = true
