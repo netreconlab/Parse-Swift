@@ -1234,6 +1234,19 @@ public extension ParseInstallation {
                                    callbackQueue: DispatchQueue = .main,
                                    completion: @escaping (Result<Void, ParseError>) -> Void) {
         Task {
+            do {
+                try await yieldIfNotInitialized()
+            } catch {
+                let defaultError = ParseError(
+                    code: .otherCause,
+                    swift: error
+                )
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
+                return
+            }
             guard let objcParseKeychain = KeychainStore.objectiveC,
                   // swiftlint:disable:next line_length
                   let oldInstallationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
