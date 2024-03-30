@@ -1230,9 +1230,11 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func deleteObjCKeychain(options: API.Options = [],
-                                   callbackQueue: DispatchQueue = .main,
-                                   completion: @escaping (Result<Void, ParseError>) -> Void) {
+    static func deleteObjCKeychain( // swiftlint:disable:this function_body_length
+        options: API.Options = [],
+        callbackQueue: DispatchQueue = .main,
+        completion: @escaping (Result<Void, ParseError>) -> Void
+    ) {
         Task {
             do {
                 try await yieldIfNotInitialized()
