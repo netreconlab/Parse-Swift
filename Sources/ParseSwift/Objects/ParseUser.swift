@@ -186,6 +186,7 @@ public extension ParseUser {
     }
 
     internal static func setCurrent(_ newValue: Self?) async throws {
+        try await yieldIfNotInitialized()
         var currentContainer = await Self.currentContainer()
         if let newValue = newValue,
             let currentUser = currentContainer?.currentUser {
@@ -438,6 +439,19 @@ extension ParseUser {
                                               callbackQueue: DispatchQueue = .main,
                                               completion: @escaping (Result<Self, ParseError>) -> Void) {
         Task {
+            do {
+                try await yieldIfNotInitialized()
+            } catch {
+                let defaultError = ParseError(
+                    code: .otherCause,
+                    swift: error
+                )
+                let parseError = error as? ParseError ?? defaultError
+                callbackQueue.async {
+                    completion(.failure(parseError))
+                }
+                return
+            }
             let objcParseKeychain = KeychainStore.objectiveC
             // swiftlint:disable:next line_length
             guard let objcParseUser: [String: String] = await objcParseKeychain?.objectObjectiveC(forKey: "currentUser"),

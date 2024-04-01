@@ -2,9 +2,15 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+
+### 5.9.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.2...5.9.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.3/documentation/parseswift)
+
+__Fixes__
+* Certain calls to the user or installation did not wait for the SDK to initialize causing a crash ([#163](https://github.com/netreconlab/Parse-Swift/pull/163)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.9.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.1...5.9.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.9.2/documentation/parseswift)
