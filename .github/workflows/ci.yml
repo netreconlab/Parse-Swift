@@ -19,7 +19,7 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
