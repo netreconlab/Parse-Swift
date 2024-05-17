@@ -131,7 +131,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           env_vars: LINUX
-          fail_ci_if_error: false
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
