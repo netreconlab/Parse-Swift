@@ -62,6 +62,7 @@ jobs:
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
@@ -96,6 +97,7 @@ jobs:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
         fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
@@ -149,6 +151,7 @@ jobs:
         with:
           env_vars: WINDOWSLATEST
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
   
   docs:
     timeout-minutes: 10
