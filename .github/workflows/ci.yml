@@ -129,14 +129,15 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           env_vars: LINUX
-          fail_ci_if_error: true
-          
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   windows:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: compnerd/gha-setup-swift@v0.2.1
+      - uses: compnerd/gha-setup-swift@v0.2.2
         with:
           branch: swift-5.10-release
           tag: 5.10-RELEASE
