@@ -58,10 +58,11 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
@@ -91,11 +92,12 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
         fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
@@ -126,17 +128,18 @@ jobs:
           cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
           llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           env_vars: LINUX
-          fail_ci_if_error: true
-          
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   windows:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: compnerd/gha-setup-swift@v0.2.1
+      - uses: compnerd/gha-setup-swift@v0.2.2
         with:
           branch: swift-5.10-release
           tag: 5.10-RELEASE
@@ -144,10 +147,11 @@ jobs:
         run: |
           swift build -v
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           env_vars: WINDOWSLATEST
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
   
   docs:
     timeout-minutes: 10
@@ -176,4 +180,4 @@ jobs:
       - name: CocoaPods
         run: pod lib lint --allow-warnings
         env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_14 }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}

@@ -420,6 +420,7 @@ public extension ParseUser {
     }
 
     internal func linkCommand(body: SignupLoginBody) async throws -> API.Command<SignupLoginBody, Self> {
+        try await yieldIfNotInitialized()
         let currentStrippedUser = try await self.anonymous.strip()
         var body = body
         if var currentAuthData = currentStrippedUser.authData {
