@@ -37,8 +37,8 @@ jobs:
             action: 'test'
     steps:
     - uses: actions/checkout@v4
-    - name: Use multiple cores
-      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Install SwiftLint
+      run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -77,8 +77,8 @@ jobs:
         security default-keychain -s temporary
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
-    - name: Use multiple cores
-      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Install SwiftLint
+      run: brew install swiftlint
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
       env:
@@ -159,8 +159,6 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Use multiple cores
-        run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Generate Docs
         run: set -o pipefail && env NSUnbufferedIO=YES Scripts/generate-documentation
         env:
@@ -171,8 +169,6 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Use multiple cores
-        run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Update Framework Version
         run: ./Scripts/update_build
         env:
