@@ -64,7 +64,7 @@ class ParseAnalyticsTests: XCTestCase {
         let expected2 = "{\"dimensions\":{\"stop\":\"drop\"},\"name\":\"hello\"}"
         XCTAssertEqual(decoded2, expected2)
         let encoded3 = try ParseCoding.parseEncoder().encode(event2)
-        let decoded3 = String(data: encoded3, encoding: .utf8)
+        let decoded3 = String(decoding: encoded3, as: UTF8.self)
         let expected3 = "{\"dimensions\":{\"stop\":\"drop\"}}"
         XCTAssertEqual(decoded3, expected3)
     }

@@ -92,9 +92,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func encodeDoubleAsString(_ double: Double) throws -> String {
         let encodedDouble = try ParseCoding.jsonEncoder().encode(double)
-        guard let decodedDouble = String(data: encodedDouble, encoding: .utf8) else {
-            throw QueryTestError.couldNotDecodeAsString
-        }
+        let decodedDouble = String(decoding: encodedDouble, as: UTF8.self)
         return decodedDouble
     }
 
@@ -373,7 +371,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             .select("yolo", "nolo")
 
         let encoded = try ParseCoding.jsonEncoder().encode(query)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded,
                        // swiftlint:disable:next line_length
                        "{\"_method\":\"GET\",\"excludeKeys\":[\"hello\",\"world\"],\"include\":[\"bar\",\"foo\"],\"keys\":[\"nolo\",\"yolo\"],\"limit\":100,\"skip\":0,\"where\":{}}")
@@ -442,7 +440,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -461,7 +459,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"explain\":true,\"limit\":100,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -785,7 +783,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -797,7 +795,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"explain\":true,\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -1037,7 +1035,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"limit\":0,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -1049,7 +1047,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"_method\":\"GET\",\"count\":true,\"explain\":true,\"limit\":1,\"skip\":0,\"where\":{}},\"method\":\"POST\",\"path\":\"\\/classes\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -2131,10 +2129,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let encoded = try ParseCoding.jsonEncoder().encode(queryWhere)
-            guard let decoded = String(data: encoded, encoding: .utf8) else {
-                XCTFail("Should have casted")
-                return
-            }
+            let decoded = String(decoding: encoded, as: UTF8.self)
             XCTAssertEqual(expected, decoded)
 
         } catch {
@@ -2154,10 +2149,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let encoded = try ParseCoding.jsonEncoder().encode(queryWhere)
-            guard let decoded = String(data: encoded, encoding: .utf8) else {
-                XCTFail("Should have casted")
-                return
-            }
+            let decoded = String(decoding: encoded, as: UTF8.self)
             XCTAssertEqual(expected, decoded)
 
         } catch {
@@ -2177,10 +2169,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let encoded = try ParseCoding.jsonEncoder().encode(queryWhere)
-            guard let decoded = String(data: encoded, encoding: .utf8) else {
-                XCTFail("Should have casted")
-                return
-            }
+            let decoded = String(decoding: encoded, as: UTF8.self)
             XCTAssertEqual(expected, decoded)
 
         } catch {
@@ -2200,10 +2189,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         do {
             let encoded = try ParseCoding.jsonEncoder().encode(queryWhere)
-            guard let decoded = String(data: encoded, encoding: .utf8) else {
-                XCTFail("Should have casted")
-                return
-            }
+            let decoded = String(decoding: encoded, as: UTF8.self)
             XCTAssertEqual(expected, decoded)
 
         } catch {
@@ -3496,7 +3482,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"pipeline\":[{\"hello\":\"\(value)\"}]},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(aggregate)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -3507,7 +3493,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"explain\":true},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -3517,7 +3503,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"distinct\":\"hello\"},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(aggregate)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -3529,7 +3515,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expected = "{\"body\":{\"distinct\":\"hello\",\"explain\":true},\"method\":\"POST\",\"path\":\"\\/aggregate\\/GameScore\"}"
         let encoded = try ParseCoding.jsonEncoder()
             .encode(command)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 

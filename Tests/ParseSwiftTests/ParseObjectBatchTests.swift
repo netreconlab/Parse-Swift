@@ -87,7 +87,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         let expected = "{\"body\":{\"requests\":[{\"body\":{\"other\":{\"__type\":\"Pointer\",\"className\":\"Game2\",\"objectId\":\"brave\"},\"points\":10},\"method\":\"PUT\",\"path\":\"\\/parse\\/classes\\/GameScore\\/yolo\"}],\"transaction\":false},\"method\":\"POST\",\"path\":\"\\/batch\"}"
         let encoded = try ParseCoding.parseEncoder().encode(batch,
                                                             batching: true)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -108,7 +108,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         let expected = "{\"body\":{\"requests\":[{\"body\":{\"other\":{\"__type\":\"Pointer\",\"className\":\"Game2\",\"objectId\":\"brave\"},\"points\":10},\"method\":\"PUT\",\"path\":\"\\/parse\\/classes\\/GameScore\\/yolo\"},{\"body\":{\"other\":{\"__type\":\"Pointer\",\"className\":\"Game2\",\"objectId\":\"brave\"},\"points\":10},\"method\":\"PUT\",\"path\":\"\\/parse\\/classes\\/GameScore\\/yolo\"}],\"transaction\":false},\"method\":\"POST\",\"path\":\"\\/batch\"}"
         let encoded = try ParseCoding.parseEncoder().encode(batch,
                                                             batching: true)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -131,7 +131,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -555,7 +555,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -1150,7 +1150,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
             .encode(score, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 

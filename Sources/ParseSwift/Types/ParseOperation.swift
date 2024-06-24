@@ -439,11 +439,10 @@ public extension ParseObject {
 // MARK: CustomDebugStringConvertible
 public extension ParseOperation {
     var debugDescription: String {
-        guard let descriptionData = try? ParseCoding.jsonEncoder().encode(self),
-            let descriptionString = String(data: descriptionData, encoding: .utf8) else {
-                return "()"
+        guard let descriptionData = try? ParseCoding.jsonEncoder().encode(self) else {
+            return "()"
         }
-
+        let descriptionString = String(decoding: descriptionData, as: UTF8.self)
         return "\(descriptionString)"
     }
 }

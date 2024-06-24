@@ -125,8 +125,7 @@ extension ParseCoding {
 
             if
                 let decoded = try container.decodeIfPresent(String.self, forKey: .iso),
-                let date = dateFormatter.date(from: decoded)
-            {
+                let date = dateFormatter.date(from: decoded) {
                 return date
             } else {
                 throw ParseError(

@@ -57,10 +57,7 @@ extension LiveQuerySocket {
             .encode(await StandardMessage(operation: .connect,
                                           // swiftlint:disable:next line_length
                                           additionalProperties: Parse.configuration.liveQueryConnectionAdditionalProperties))
-        guard let encodedAsString = String(data: encoded, encoding: .utf8) else {
-            throw ParseError(code: .otherCause,
-                             message: "Could not encode connect message: \(encoded)")
-        }
+        let encodedAsString = String(decoding: encoded, as: UTF8.self)
         try await task.send(.string(encodedAsString))
         await self.receive(task)
     }
@@ -69,10 +66,7 @@ extension LiveQuerySocket {
 // MARK: Send
 extension LiveQuerySocket {
     func send(_ data: Data, task: URLSessionWebSocketTask) async throws {
-        guard let encodedAsString = String(data: data, encoding: .utf8) else {
-            throw ParseError(code: .otherCause,
-                             message: "Could not encode data as string: \(data)")
-        }
+        let encodedAsString = String(decoding: data, as: UTF8.self)
         try await task.send(.string(encodedAsString))
     }
 }
