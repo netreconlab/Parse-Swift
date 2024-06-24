@@ -257,17 +257,17 @@ public struct API {
             case .removeMimeType:
                 headers.removeValue(forKey: "Content-Type")
             case .metadata(let metadata):
-                metadata.forEach {(key, value) -> Void in
+                metadata.forEach {(key, value) in
                     headers[key] = value
                 }
             case .tags(let tags):
-                tags.forEach {(key, value) -> Void in
+                tags.forEach {(key, value) in
                     headers[key] = value
                 }
             case .context(let context):
                 let context = AnyEncodable(context)
-                if let encoded = try? ParseCoding.jsonEncoder().encode(context),
-                   let encodedString = String(data: encoded, encoding: .utf8) {
+                if let encoded = try? ParseCoding.jsonEncoder().encode(context) {
+                    let encodedString = String(decoding: encoded, as: UTF8.self)
                     headers["X-Parse-Cloud-Context"] = encodedString
                 }
             default:

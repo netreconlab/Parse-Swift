@@ -169,7 +169,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -197,7 +197,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -222,7 +222,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -249,7 +249,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -274,7 +274,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -300,7 +300,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -325,7 +325,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -352,7 +352,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -377,7 +377,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -403,7 +403,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -428,7 +428,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -455,7 +455,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
                     collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 

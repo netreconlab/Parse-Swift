@@ -890,7 +890,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -918,7 +918,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             .encode(body, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
 
         var empty = score.mergeable
@@ -933,7 +933,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             .encode(body2, collectChildren: false,
                     objectsSavedBeforeThisOne: nil,
                     filesSavedBeforeThisOne: nil).encoded
-        let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+        let decoded2 = String(decoding: encoded2, as: UTF8.self)
         XCTAssertEqual(decoded2, expected2)
     }
 

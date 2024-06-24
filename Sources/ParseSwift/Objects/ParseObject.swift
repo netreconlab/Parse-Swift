@@ -721,11 +721,10 @@ transactions for this call.
 // MARK: CustomDebugStringConvertible
 extension ParseObject {
     public var debugDescription: String {
-        guard let descriptionData = try? ParseCoding.jsonEncoder().encode(self),
-            let descriptionString = String(data: descriptionData, encoding: .utf8) else {
+        guard let descriptionData = try? ParseCoding.jsonEncoder().encode(self) else {
                 return "\(className) ()"
         }
-
+        let descriptionString = String(decoding: descriptionData, as: UTF8.self)
         return "\(className) (\(descriptionString))"
     }
 }

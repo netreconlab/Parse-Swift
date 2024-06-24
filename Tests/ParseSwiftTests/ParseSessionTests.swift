@@ -119,7 +119,7 @@ class ParseSessionTests: XCTestCase {
     func testParseURLSessionDefaultCertificatePinning() throws {
         let expectation1 = XCTestExpectation(description: "Authentication")
         URLSession.parse.delegate?.urlSession?(URLSession.parse,
-                                               didReceive: .init()) { (challenge, credential) -> Void in
+                                               didReceive: .init()) { (challenge, credential) in
             XCTAssertEqual(challenge, .performDefaultHandling)
             XCTAssertNil(credential)
             expectation1.fulfill()
@@ -159,7 +159,7 @@ class ParseSessionTests: XCTestCase {
         })
         let expectation1 = XCTestExpectation(description: "Authentication")
         URLSession.parse.delegate?.urlSession?(URLSession.parse,
-                                               didReceive: .init()) { (challenge, credential) -> Void in
+                                               didReceive: .init()) { (challenge, credential) in
             XCTAssertEqual(challenge, .cancelAuthenticationChallenge)
             XCTAssertEqual(credential, .none)
             expectation1.fulfill()

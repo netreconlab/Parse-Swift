@@ -192,7 +192,7 @@ extension AnyEncodable: Hashable {
     public func hash(into hasher: inout Hasher) {
         do {
             let encodedData = try ParseCoding.jsonEncoder().encode(self)
-            let encodedString = String(data: encodedData, encoding: .utf8)
+            let encodedString = String(decoding: encodedData, as: UTF8.self)
             hasher.combine(encodedString)
         } catch {
             hasher.combine(0)

@@ -315,7 +315,7 @@ class ParsePointerTests: XCTestCase {
                                                      objectsSavedBeforeThisOne: nil,
                                                      filesSavedBeforeThisOne: nil)
 
-        let decoded = String(data: encoded.encoded, encoding: .utf8)
+        let decoded = String(decoding: encoded.encoded, as: UTF8.self)
         XCTAssertEqual(decoded,
                        // swiftlint:disable:next line_length
                        "{\"other\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yarr\"},\"points\":50}")
@@ -331,7 +331,7 @@ class ParsePointerTests: XCTestCase {
         let pointerType = try PointerType(score)
 
         let encoded = try ParseCoding.parseEncoder().encode(pointerType)
-        let decoded = String(data: encoded, encoding: .utf8)
+        let decoded = String(decoding: encoded, as: UTF8.self)
         XCTAssertEqual(decoded,
                        "{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"yarr\"}")
     }
