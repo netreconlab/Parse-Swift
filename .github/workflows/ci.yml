@@ -10,7 +10,7 @@ on:
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_15.2.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_15.4.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,26 +19,26 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro', 'platform=macOS']
+        destination: ['platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
-          - destination: 'platform=iOS\ Simulator,name=iPhone\ 15\ Pro\ Max'
+          - destination: 'platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
+          - destination: 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
-          - destination: 'platform=visionOS\ Simulator,name=Apple\ Vision\ Pro'
-            action: 'build'
+          - destination: 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro'
+            action: 'test'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)'
             action: 'test'
     steps:
     - uses: actions/checkout@v4
-    - name: Use multiple cores
-      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Install SwiftLint
+      run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -77,8 +77,8 @@ jobs:
         security default-keychain -s temporary
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
-    - name: Use multiple cores
-      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Install SwiftLint
+      run: brew install swiftlint
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
       env:
@@ -131,7 +131,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           env_vars: LINUX
-          fail_ci_if_error: false
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
@@ -139,7 +139,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: compnerd/gha-setup-swift@v0.2.2
+      - uses: compnerd/gha-setup-swift@v0.2.3
         with:
           branch: swift-5.10-release
           tag: 5.10-RELEASE
@@ -159,8 +159,6 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Use multiple cores
-        run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Generate Docs
         run: set -o pipefail && env NSUnbufferedIO=YES Scripts/generate-documentation
         env:
@@ -171,8 +169,6 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Use multiple cores
-        run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: Update Framework Version
         run: ./Scripts/update_build
         env:

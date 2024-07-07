@@ -90,8 +90,9 @@ internal extension URLSession {
                         return .failure(ParseError(message: "Error decoding parse-server response: \(response)",
                                                    swift: error))
                     }
+                    let errorString = String(decoding: json, as: UTF8.self)
                     // swiftlint:disable:next line_length
-                    return .failure(ParseError(message: "Error decoding parse-server response: \(response) with error: \(String(describing: error)) Format: \(String(describing: String(data: json, encoding: .utf8)))",
+                    return .failure(ParseError(message: "Error decoding parse-server response: \(response) with error: \(String(describing: error)) Format: \(errorString)",
                                                swift: error))
                 }
                 return .failure(parseError)

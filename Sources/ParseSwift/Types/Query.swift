@@ -73,7 +73,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
                 return nil
             }
             let encoded = try ParseCoding.jsonEncoder().encode(value)
-            return String(data: encoded, encoding: .utf8)
+            return String(decoding: encoded, as: UTF8.self)
         }
     }
 
@@ -104,7 +104,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
                 return nil
             }
             let encoded = try ParseCoding.jsonEncoder().encode(value)
-            return String(data: encoded, encoding: .utf8)
+            return String(decoding: encoded, as: UTF8.self)
         }
     }
 
@@ -903,8 +903,7 @@ extension Query: Queryable {
             pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
 
             guard let encoded = try? ParseCoding.jsonEncoder()
-                    .encode(self.`where`),
-                let whereString = String(data: encoded, encoding: .utf8) else {
+                    .encode(self.`where`) else {
                 let error = ParseError(code: .otherCause,
                                        message: "Cannot decode \"where\" to String.")
                 callbackQueue.async {
@@ -912,7 +911,7 @@ extension Query: Queryable {
                 }
                 return
             }
-
+            let whereString = String(decoding: encoded, as: UTF8.self)
             var query = self
             query.`where` = QueryWhere()
 
@@ -976,8 +975,7 @@ extension Query: Queryable {
             pipeline.forEach { updatedPipeline = $0.map { [$0.key: AnyCodable($0.value)] } }
 
             guard let encoded = try? ParseCoding.jsonEncoder()
-                .encode(self.`where`),
-                  let whereString = String(data: encoded, encoding: .utf8) else {
+                .encode(self.`where`) else {
                 let error = ParseError(code: .otherCause,
                                        message: "Cannot decode \"where\" to String.")
                 callbackQueue.async {
@@ -986,6 +984,7 @@ extension Query: Queryable {
                 return
             }
 
+            let whereString = String(decoding: encoded, as: UTF8.self)
             var query = self
             query.`where` = QueryWhere()
 
@@ -1710,7 +1709,7 @@ internal extension Query {
             return nil
         }
         let encoded = try ParseCoding.jsonEncoder().encode(value)
-        return String(data: encoded, encoding: .utf8)
+        return String(decoding: encoded, as: UTF8.self)
     }
 
     func encodeAsString(_ key: KeyPath<Self, Set<String>?>) throws -> String? {
@@ -1718,12 +1717,12 @@ internal extension Query {
             return nil
         }
         let encoded = try ParseCoding.jsonEncoder().encode(value)
-        return String(data: encoded, encoding: .utf8)
+        return String(decoding: encoded, as: UTF8.self)
     }
 
     func encodeAsString<W>(_ key: KeyPath<Self, W>) throws -> String? where W: Encodable {
         let encoded = try ParseCoding.jsonEncoder().encode(self[keyPath: key])
-        return String(data: encoded, encoding: .utf8)
+        return String(decoding: encoded, as: UTF8.self)
     }
 }
 // swiftlint:disable:this file_length

@@ -16,20 +16,17 @@ internal extension Encodable {
                 self,
                 acl: nil
             ),
-              let lhsString = String(data: lhsData, encoding: .utf8),
               let other = other,
               let rhsData = try? ParseCoding
             .parseEncoder()
             .encode(
                 other,
                 acl: nil
-            ),
-              let rhsString = String(
-                data: rhsData,
-                encoding: .utf8
-              ) else {
+            ) else {
             return false
         }
+        let lhsString = String(decoding: lhsData, as: UTF8.self)
+        let rhsString = String(decoding: rhsData, as: UTF8.self)
         return lhsString == rhsString
     }
 }

@@ -112,13 +112,13 @@ class ParseRelationTests: XCTestCase {
 
         let expected = "{\"__type\":\"Relation\"}"
         let encoded = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
 
         relation.className = "hello"
         let expected2 = "{\"__type\":\"Relation\",\"className\":\"hello\"}"
         let encoded2 = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+        let decoded2 = String(decoding: encoded2, as: UTF8.self)
         XCTAssertEqual(decoded2, expected2)
         XCTAssertEqual(relation.debugDescription,
                        "{\"__type\":\"Relation\",\"className\":\"hello\"}")
@@ -141,31 +141,31 @@ class ParseRelationTests: XCTestCase {
 
         let expected = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
         let encoded = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
 
         relation.className = "hello"
         let expected2 = "{\"__type\":\"Relation\",\"className\":\"hello\"}"
         let encoded2 = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+        let decoded2 = String(decoding: encoded2, as: UTF8.self)
         XCTAssertEqual(decoded2, expected2)
 
         var relation2 = try score.relation("yolo", className: "Level")
 
         let expected3 = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
         let encoded3 = try ParseCoding.jsonEncoder().encode(relation2)
-        let decoded3 = try XCTUnwrap(String(data: encoded3, encoding: .utf8))
+        let decoded3 = String(decoding: encoded3, as: UTF8.self)
         XCTAssertEqual(decoded3, expected3)
 
         relation2.className = "hello"
         let expected4 = "{\"__type\":\"Relation\",\"className\":\"hello\"}"
         let encoded4 = try ParseCoding.jsonEncoder().encode(relation2)
-        let decoded4 = try XCTUnwrap(String(data: encoded4, encoding: .utf8))
+        let decoded4 = String(decoding: encoded4, as: UTF8.self)
         XCTAssertEqual(decoded4, expected4)
 
         let relation4 = try score.relation("yolo", object: Level.self)
         let encoded5 = try ParseCoding.jsonEncoder().encode(relation4)
-        let decoded5 = try XCTUnwrap(String(data: encoded5, encoding: .utf8))
+        let decoded5 = String(decoding: encoded5, as: UTF8.self)
         XCTAssertEqual(decoded5, expected)
     }
 
@@ -180,13 +180,13 @@ class ParseRelationTests: XCTestCase {
 
         let expected = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
         let encoded = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
 
         relation.className = "hello"
         let expected2 = "{\"__type\":\"Relation\",\"className\":\"hello\"}"
         let encoded2 = try ParseCoding.jsonEncoder().encode(relation)
-        let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+        let decoded2 = String(decoding: encoded2, as: UTF8.self)
         XCTAssertEqual(decoded2, expected2)
 
         _ = try ParseRelation<GameScore>(parent: score,
@@ -197,7 +197,7 @@ class ParseRelationTests: XCTestCase {
 
         let expected3 = "{\"__type\":\"Relation\",\"className\":\"Level\"}"
         let encoded3 = try ParseCoding.jsonEncoder().encode(relation2)
-        let decoded3 = try XCTUnwrap(String(data: encoded3, encoding: .utf8))
+        let decoded3 = String(decoding: encoded3, as: UTF8.self)
         XCTAssertEqual(decoded3, expected3)
     }
 
@@ -246,7 +246,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -285,7 +285,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -306,7 +306,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"AddRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -365,7 +365,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -404,7 +404,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -425,7 +425,7 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"level\":{\"__op\":\"RemoveRelation\",\"objects\":[{\"__type\":\"Pointer\",\"className\":\"Level\",\"objectId\":\"nice\"}]}}"
         let encoded = try ParseCoding.jsonEncoder().encode(operation)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
     }
 
@@ -471,14 +471,14 @@ class ParseRelationTests: XCTestCase {
             // swiftlint:disable:next line_length
             let expected = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
             let encoded = try ParseCoding.jsonEncoder().encode(query)
-            let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+            let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
             XCTAssertEqual(decoded, expected)
 
             let query2: Query<Level> = try relation.query("wow")
             // swiftlint:disable:next line_length
             let expected2 = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"wow\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
             let encoded2 = try ParseCoding.jsonEncoder().encode(query2)
-            let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+            let decoded2 = String(decoding: encoded2, as: UTF8.self)
             XCTAssertEqual(decoded2, expected2)
 
             guard let query3 = try level.relation?.query("levels", parent: score) else {
@@ -488,7 +488,7 @@ class ParseRelationTests: XCTestCase {
             // swiftlint:disable:next line_length
             let expected3 = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
             let encoded3 = try ParseCoding.jsonEncoder().encode(query3)
-            let decoded3 = try XCTUnwrap(String(data: encoded3, encoding: .utf8))
+            let decoded3 = String(decoding: encoded3, as: UTF8.self)
             XCTAssertEqual(decoded3, expected3)
 
             guard let query4 = try level.relation?.query("levels", parent: score.toPointer()) else {
@@ -498,7 +498,7 @@ class ParseRelationTests: XCTestCase {
             // swiftlint:disable:next line_length
             let expected4 = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
             let encoded4 = try ParseCoding.jsonEncoder().encode(query4)
-            let decoded4 = try XCTUnwrap(String(data: encoded4, encoding: .utf8))
+            let decoded4 = String(decoding: encoded4, as: UTF8.self)
             XCTAssertEqual(decoded4, expected4)
         } catch {
             XCTFail("Should not have thrown error")
@@ -550,7 +550,7 @@ class ParseRelationTests: XCTestCase {
             // swiftlint:disable:next line_length
             let expected = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
             let encoded = try ParseCoding.jsonEncoder().encode(query)
-            let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+            let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
             XCTAssertEqual(decoded, expected)
         } catch {
             XCTFail("Should not have thrown error")
@@ -581,7 +581,7 @@ class ParseRelationTests: XCTestCase {
             // swiftlint:disable:next line_length
             let expected = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore2\",\"objectId\":\"yolo\"}}}}"
             let encoded = try ParseCoding.jsonEncoder().encode(query)
-            let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+            let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
             XCTAssertEqual(decoded, expected)
         } catch {
             XCTFail("Should not have thrown error")
@@ -597,14 +597,14 @@ class ParseRelationTests: XCTestCase {
         // swiftlint:disable:next line_length
         let expected = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
         let encoded = try ParseCoding.jsonEncoder().encode(query)
-        let decoded = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+        let decoded = try XCTUnwrap(String(decoding: encoded, as: UTF8.self))
         XCTAssertEqual(decoded, expected)
 
         let query2 = try Level.queryRelations("levels", parent: score)
         // swiftlint:disable:next line_length
         let expected2 = "{\"_method\":\"GET\",\"limit\":100,\"skip\":0,\"where\":{\"$relatedTo\":{\"key\":\"levels\",\"object\":{\"__type\":\"Pointer\",\"className\":\"GameScore\",\"objectId\":\"hello\"}}}}"
         let encoded2 = try ParseCoding.jsonEncoder().encode(query2)
-        let decoded2 = try XCTUnwrap(String(data: encoded2, encoding: .utf8))
+        let decoded2 = String(decoding: encoded2, as: UTF8.self)
         XCTAssertEqual(decoded2, expected2)
     }
 }

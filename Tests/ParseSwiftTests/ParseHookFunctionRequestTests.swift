@@ -82,10 +82,7 @@ class ParseHookFunctionRequestTests: XCTestCase {
         let failedLoginCount = 3
         var accountLockoutExpiresAt = Date()
         let encodedDate = try ParseCoding.jsonEncoder().encode(accountLockoutExpiresAt)
-        guard let encodeedDateString = String(data: encodedDate, encoding: .utf8) else {
-            XCTFail("Should have unwrapped")
-            return
-        }
+        let encodeedDateString = String(decoding: encodedDate, as: UTF8.self)
         accountLockoutExpiresAt = try ParseCoding.jsonDecoder().decode(Date.self, from: encodedDate)
         // swiftlint:disable:next line_length
         let encodedString = "{\"className\":\"_User\",\"sessionToken\":\"\(sessionToken)\",\"_failed_login_count\":\(failedLoginCount),\"_account_lockout_expires_at\":\(encodeedDateString)}"

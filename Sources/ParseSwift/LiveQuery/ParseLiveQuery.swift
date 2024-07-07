@@ -233,7 +233,7 @@ Not attempting to open ParseLiveQuery socket anymore
                 // Resubscribe to all subscriptions by moving them in front of pending
                 var tempPendingSubscriptions = [(RequestId, SubscriptionRecord)]()
                 let subscriptions = await self.subscriptions.getCurrent()
-                subscriptions.forEach { (key, value) -> Void in
+                subscriptions.forEach { (key, value) in
                     tempPendingSubscriptions.append((key, value))
                 }
                 await self.subscriptions.removeAll()

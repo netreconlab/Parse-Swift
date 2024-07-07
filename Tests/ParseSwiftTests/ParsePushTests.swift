@@ -66,9 +66,7 @@ internal struct ParsePushStatusResponse: ParseObject {
     func setQueryWhere(_ query: QueryWhere) throws -> Self {
         var mutatingResponse = self
         let whereData = try ParseCoding.jsonEncoder().encode(query)
-        guard let whereString = String(data: whereData, encoding: .utf8) else {
-            throw ParseError(code: .otherCause, message: "Should have created String")
-        }
+        let whereString = String(decoding: whereData, as: UTF8.self)
         mutatingResponse.query = whereString
         return mutatingResponse
     }
@@ -76,9 +74,7 @@ internal struct ParsePushStatusResponse: ParseObject {
     func setPayload<V: ParsePushPayloadable>(_ payload: V) throws -> Self {
         var mutatingResponse = self
         let payloadData = try ParseCoding.jsonEncoder().encode(payload)
-        guard let payloadString = String(data: payloadData, encoding: .utf8) else {
-            throw ParseError(code: .otherCause, message: "Should have created String")
-        }
+        let payloadString = String(decoding: payloadData, as: UTF8.self)
         mutatingResponse.payload = payloadString
         return mutatingResponse
     }

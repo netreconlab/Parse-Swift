@@ -540,7 +540,7 @@ extension ParseError: LocalizedError {
     }
 }
 
-// MARK: 
+// MARK: Equatable
 extension ParseError: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.code == rhs.code &&

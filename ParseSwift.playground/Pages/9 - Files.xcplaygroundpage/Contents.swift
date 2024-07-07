@@ -194,9 +194,7 @@ Task {
                     assertionFailure("Data is not the same. Something went wrong.")
                 }
 
-                guard let parseFileString = String(data: dataFromParseFile, encoding: .utf8) else {
-                    fatalError("Error: Could not create String from data.")
-                }
+                let parseFileString = String(decoding: dataFromParseFile, as: UTF8.self)
                 print("The data saved on parse is: \"\(parseFileString)\"")
             } else {
                 assertionFailure("Error fetching: there should be a localURL")
