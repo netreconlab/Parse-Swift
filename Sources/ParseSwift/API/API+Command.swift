@@ -429,8 +429,9 @@ internal extension API.Command {
             let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
-        let mapper = { (data) -> V in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
+        let updatedObject = object
+        let mapper = { @Sendable (data) -> V in
+            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
         }
         return API.Command<V, V>(method: .POST,
                                  path: try await object.endpoint(.POST),
@@ -444,7 +445,7 @@ internal extension API.Command {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> V in
+        let mapper = { @Sendable (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -471,7 +472,7 @@ internal extension API.Command {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> V in
+        let mapper = { @Sendable (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -530,7 +531,7 @@ internal extension API.Command where T: ParseObject {
                                      mapper: command.mapper)
         }
 
-        let mapper = { (data: Data) -> [Result<T, ParseError>] in
+        let mapper = { @Sendable (data: Data) -> [Result<T, ParseError>] in
 
             let decodingType = [BatchResponseItem<BatchResponse>].self
             do {

@@ -7,7 +7,7 @@ import FoundationNetworking
 
 // MARK: Internal
 
-internal struct Parse: Sendable {
+internal struct Parse {
     static var configuration: ParseConfiguration!
     static var sessionDelegate: ParseURLSessionDelegate!
 }
