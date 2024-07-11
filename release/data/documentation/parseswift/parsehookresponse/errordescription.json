@@ -63,11 +63,19 @@
           "type" : "codeVoice"
         },
         {
-          "text" : ", and ",
+          "text" : ", ",
           "type" : "text"
         },
         {
           "code" : "Equatable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : ", and ",
+          "type" : "text"
+        },
+        {
+          "code" : "Sendable",
           "type" : "codeVoice"
         },
         {
@@ -305,11 +313,19 @@
         "type" : "codeVoice"
       },
       {
-        "text" : ", and ",
+        "text" : ", ",
         "type" : "text"
       },
       {
         "code" : "Equatable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Sendable",
         "type" : "codeVoice"
       },
       {

@@ -86,7 +86,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SY",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -407,6 +408,11 @@
   "title" : "ParsePushPayloadFirebase.PushPriority.normal",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/normal"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 },
 "https://firebase.google.com/docs/cloud-messaging/http-server-ref": {
   "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref",

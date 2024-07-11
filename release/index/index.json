@@ -833,14 +833,14 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
-                        "title" : "func isSaved() async throws -> Bool",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/objectable\/issaved",
                         "title" : "var isSaved: Bool",
                         "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
+                        "title" : "func isSaved() async throws -> Bool",
+                        "type" : "method"
                       }
                     ],
                     "title" : "Objectable Implementations",
@@ -2003,13 +2003,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -2253,12 +2253,12 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2276,7 +2276,7 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
@@ -2286,7 +2286,7 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
@@ -4233,7 +4233,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/api\/method\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -4273,7 +4273,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/api\/option\/context(_:)",
-                    "title" : "case context(Encodable)",
+                    "title" : "case context(Encodable & Sendable)",
                     "type" : "case"
                   },
                   {
@@ -4601,7 +4601,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseacl\/access\/init(from:)-3nwp2",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -4921,7 +4921,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseanonymous\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -5060,7 +5060,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseapple\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -5328,7 +5328,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseclp\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -6585,7 +6585,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -6603,7 +6603,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseerror\/code-swift.enum\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -6809,7 +6809,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsefacebook\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -6988,7 +6988,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsefield\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -7103,7 +7103,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsefield\/fieldtype\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -7121,7 +7121,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsefield\/fieldtype\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -7204,7 +7204,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsefieldoptions\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -7725,7 +7725,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsegithub\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -7879,7 +7879,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsegoogle\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -8033,7 +8033,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehookfunction\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -8210,7 +8210,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehookfunctionrequest\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -8576,7 +8576,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehooktrigger\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -8788,7 +8788,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -8994,7 +8994,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerrequest\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9175,7 +9175,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseinstagram\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9338,7 +9338,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseldap\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9492,7 +9492,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parselinkedin\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9833,7 +9833,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationadd\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9899,7 +9899,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationaddrelation\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -9965,7 +9965,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationaddunique\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10031,7 +10031,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationbatch\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10102,7 +10102,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationdelete\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10159,7 +10159,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationincrement\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10216,7 +10216,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationincrementdouble\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10268,7 +10268,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationremove\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10334,7 +10334,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseoperationremoverelation\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10518,7 +10518,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsepush\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10679,7 +10679,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsepushapplealert\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10811,7 +10811,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsepushapplesound\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -10879,7 +10879,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsepushfirebasenotification\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -11405,7 +11405,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsepushpayloadapple\/pushtype-swift.enum\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -11423,7 +11423,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsepushpayloadapple\/pushtype-swift.enum\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -11511,7 +11511,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -11635,7 +11635,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -11653,7 +11653,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -12289,7 +12289,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parserelation\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -12509,7 +12509,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseschema\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -12730,7 +12730,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseserver\/information\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -12762,7 +12762,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseserver\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -12881,7 +12881,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseserver\/status\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -12899,7 +12899,7 @@
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseserver\/status\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -12987,7 +12987,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsespotify\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -13141,7 +13141,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parsetwitter\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -13290,7 +13290,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/parseversion\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -13448,7 +13448,7 @@
               },
               {
                 "path" : "\/documentation\/parseswift\/pointer\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -14791,7 +14791,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parsehooktriggertype\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -14809,7 +14809,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parsehooktriggertype\/encode(to:)",
-                    "title" : "func encode(to: Encoder) throws",
+                    "title" : "func encode(to: any Encoder) throws",
                     "type" : "method"
                   },
                   {
@@ -14910,7 +14910,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseoperationcommand\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -14928,7 +14928,7 @@
                   },
                   {
                     "path" : "\/documentation\/parseswift\/parseoperationcommand\/encode(to:)",
-                    "title" : "func encode(to: Encoder) throws",
+                    "title" : "func encode(to: any Encoder) throws",
                     "type" : "method"
                   },
                   {

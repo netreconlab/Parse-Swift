@@ -76,7 +76,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -1520,6 +1521,11 @@
   "title" : "API.Endpoint.verifyPassword",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/api\/endpoint\/verifypassword"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

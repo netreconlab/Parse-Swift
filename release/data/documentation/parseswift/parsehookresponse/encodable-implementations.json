@@ -19,6 +19,7 @@
       }
     ],
     "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
     "title" : "Encodable Implementations"
   },
   "schemaVersion" : {
@@ -159,11 +160,19 @@
         "type" : "codeVoice"
       },
       {
-        "text" : ", and ",
+        "text" : ", ",
         "type" : "text"
       },
       {
         "code" : "Equatable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Sendable",
         "type" : "codeVoice"
       },
       {
