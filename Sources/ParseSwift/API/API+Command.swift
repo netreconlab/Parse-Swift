@@ -14,12 +14,12 @@ import FoundationNetworking
 internal extension API {
     // MARK: API.Command
     // swiftlint:disable:next type_body_length
-    struct Command<T, U>: Encodable where T: ParseEncodable {
+    struct Command<T, U>: Encodable, Sendable where T: ParseEncodable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) async throws -> U)
+        let mapper: (@Sendable (Data) async throws -> U)
         let params: [String: String?]?
         let uploadData: Data?
         let uploadFile: URL?
@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping ((Data) async throws -> U)) {
+             mapper: @escaping (@Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body
@@ -429,8 +429,9 @@ internal extension API.Command {
             let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
-        let mapper = { (data) -> V in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
+        let updatedObject = object
+        let mapper = { @Sendable (data) -> V in
+            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
         }
         return API.Command<V, V>(method: .POST,
                                  path: try await object.endpoint(.POST),
@@ -444,7 +445,7 @@ internal extension API.Command {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> V in
+        let mapper = { @Sendable (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -471,7 +472,7 @@ internal extension API.Command {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (mapperData: Data) -> V in
+        let mapper = { @Sendable (mapperData: Data) -> V in
             var updatedObject = object
             updatedObject.originalData = nil
             updatedObject = try ParseCoding
@@ -530,7 +531,7 @@ internal extension API.Command where T: ParseObject {
                                      mapper: command.mapper)
         }
 
-        let mapper = { (data: Data) -> [Result<T, ParseError>] in
+        let mapper = { @Sendable (data: Data) -> [Result<T, ParseError>] in
 
             let decodingType = [BatchResponseItem<BatchResponse>].self
             do {

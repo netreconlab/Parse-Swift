@@ -12,6 +12,7 @@ import Foundation
  A special type that is considered a Parse type.
  */
 public protocol ParseTypeable: Codable,
+                               Sendable,
                                Equatable,
                                CustomDebugStringConvertible,
                                CustomStringConvertible {}

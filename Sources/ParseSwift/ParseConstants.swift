@@ -10,7 +10,7 @@ import Foundation
 
 enum ParseConstants {
     static let sdk = "swift"
-    static let version = "5.9.3"
+    static let version = "5.10.0"
     static let fileManagementDirectory = "parse/"
     static let fileManagementPrivateDocumentsDirectory = "Private Documents/"
     static let fileManagementLibraryDirectory = "Library/"
@@ -44,7 +44,7 @@ enum Method: String {
 /**
  The types of Parse Hook Triggers available.
  */
-public enum ParseHookTriggerType: String, Codable {
+public enum ParseHookTriggerType: String, Codable, Sendable {
     /// Occurs before login of a `ParseUser`.
     case beforeLogin
     /// Occurs after login of a `ParseUser`.

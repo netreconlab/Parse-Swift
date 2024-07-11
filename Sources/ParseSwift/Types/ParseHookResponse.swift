@@ -12,7 +12,7 @@ import Foundation
  Build a response after processing a `ParseHookFunctionRequest`
  or `ParseHookTriggerRequest`.
  */
-public struct ParseHookResponse<R: Codable & Equatable>: ParseTypeable {
+public struct ParseHookResponse<R: Codable & Equatable & Sendable>: ParseTypeable {
     /// The data to return in the response.
     public var success: R?
     /// An object with a Parse code and message.

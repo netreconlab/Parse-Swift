@@ -12,7 +12,7 @@ import Foundation
  Types that conform to **ParseEncodable** should be encoded by the
  `ParseEncoder` when necessary.
  */
-public protocol ParseEncodable: Encodable {}
+public protocol ParseEncodable: Encodable, Sendable {}
 
 // MARK: CustomDebugStringConvertible
 extension ParseEncodable {
