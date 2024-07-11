@@ -747,8 +747,9 @@ extension ParseInstallation {
             let acl = try? await ParseACL.defaultACL() {
             object.ACL = acl
         }
-        let mapper = { (data) -> Self in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: object)
+        let updatedObject = object
+        let mapper = { @Sendable (data) -> Self in
+            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
         }
         return API.Command<Self, Self>(method: .POST,
                                        path: try await endpoint(.POST),
@@ -761,7 +762,7 @@ extension ParseInstallation {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (data: Data) -> Self in
+        let mapper = { @Sendable (data: Data) -> Self in
             var updatedObject = self
             updatedObject.originalData = nil
             updatedObject = try ParseCoding.jsonDecoder().decode(ReplaceResponse.self,
@@ -786,7 +787,7 @@ extension ParseInstallation {
             throw ParseError(code: .missingObjectId,
                              message: "objectId must not be nil")
         }
-        let mapper = { (data: Data) -> Self in
+        let mapper = { @Sendable (data: Data) -> Self in
             var updatedObject = self
             updatedObject.originalData = nil
             updatedObject = try ParseCoding.jsonDecoder().decode(UpdateResponse.self,

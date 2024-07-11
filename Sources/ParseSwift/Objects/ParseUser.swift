@@ -1216,13 +1216,14 @@ extension ParseUser {
             let acl = try? await ParseACL.defaultACL() {
             user.ACL = acl
         }
-        let mapper = { (data) -> Self in
+        let updatedUser = user
+        let mapper = { @Sendable (data) -> Self in
             try ParseCoding
                 .jsonDecoder()
                 .decode(
                     CreateResponse.self,
                     from: data
-                ).apply(to: user)
+                ).apply(to: updatedUser)
         }
         let path = try await endpoint(.POST)
         let command = API.Command<Self, Self>(
@@ -1246,7 +1247,7 @@ extension ParseUser {
                 mutableSelf.email = nil
             }
         }
-        let mapper = { (data: Data) -> Self in
+        let mapper = { @Sendable (data: Data) -> Self in
             var updatedUser = self
             updatedUser.originalData = nil
             let userResponse = try ParseCoding
@@ -1301,7 +1302,7 @@ extension ParseUser {
                 mutableSelf.email = nil
             }
         }
-        let mapper = { (data: Data) -> Self in
+        let mapper = { @Sendable (data: Data) -> Self in
             var updatedUser = self
             updatedUser.originalData = nil
             let userResponse = try ParseCoding

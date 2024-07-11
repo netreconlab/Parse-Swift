@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents all supported Parse operation commands.
-public enum ParseOperationCommand: String, Codable {
+public enum ParseOperationCommand: String, Codable, Sendable {
     /// The add command.
     case add = "Add"
     /// The add relation command.

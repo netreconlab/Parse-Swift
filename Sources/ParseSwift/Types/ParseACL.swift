@@ -25,7 +25,7 @@ public struct ParseACL: ParseTypeable,
     /**
      An enum specifying read and write access controls.
     */
-    public enum Access: String, Codable, CodingKey {
+    public enum Access: String, Codable, Sendable, CodingKey {
         /// Read access control.
         case read
         /// Write access control.

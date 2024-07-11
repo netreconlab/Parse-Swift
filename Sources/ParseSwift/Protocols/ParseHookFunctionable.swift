@@ -37,7 +37,7 @@ public extension ParseHookFunctionable {
 }
 
 /// A type of request for Parse Hook Functions.
-public struct FunctionRequest: Encodable {
+public struct FunctionRequest: Encodable, Sendable {
     let functionName: String
     let url: URL?
 

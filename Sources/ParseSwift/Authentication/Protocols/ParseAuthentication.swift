@@ -396,9 +396,9 @@ public extension ParseUser {
     }
 
     internal func linkCommand() async throws -> API.Command<Self, Self> {
-        var mutableSelf = self.anonymous.strip(self)
+        let strippedUser = self.anonymous.strip(self)
         if let current = try? await Self.current() {
-            guard current.hasSameObjectId(as: mutableSelf) else {
+            guard current.hasSameObjectId(as: strippedUser) else {
                 let error = ParseError(code: .otherCause,
                                        message: "Cannot signup a user with a different objectId than the current user")
                 throw error
@@ -406,16 +406,16 @@ public extension ParseUser {
         }
         return API.Command<Self, Self>(method: .PUT,
                                        path: endpoint,
-                                       body: mutableSelf) { (data) -> Self in
+                                       body: strippedUser) { (data) -> Self in
             let user = try ParseCoding.jsonDecoder().decode(UpdateResponse.self, from: data)
-            mutableSelf = user.apply(to: mutableSelf)
+            let updatedUser = user.apply(to: strippedUser)
             if let sessionToken = user.sessionToken {
-                await Self.setCurrentContainer(.init(currentUser: mutableSelf,
+                await Self.setCurrentContainer(.init(currentUser: updatedUser,
                                                      sessionToken: sessionToken))
             } else {
-                try await Self.setCurrent(mutableSelf)
+                try await Self.setCurrent(updatedUser)
             }
-            return mutableSelf
+            return updatedUser
         }
     }
 
@@ -431,13 +431,14 @@ public extension ParseUser {
             }
             body.authData = currentAuthData
         }
+        let updatedBody = body
 
         return API.Command<SignupLoginBody, Self>(method: .PUT,
                                                   path: endpoint,
-                                                  body: body) { (data) -> Self in
+                                                  body: updatedBody) { (data) -> Self in
             let user = try ParseCoding.jsonDecoder().decode(UpdateResponse.self, from: data)
             var currentUser = user.apply(to: currentStrippedUser)
-            currentUser.authData = body.authData
+            currentUser.authData = updatedBody.authData
             if let sessionToken = user.sessionToken {
                 await Self.setCurrentContainer(.init(currentUser: currentUser,
                                                      sessionToken: sessionToken))

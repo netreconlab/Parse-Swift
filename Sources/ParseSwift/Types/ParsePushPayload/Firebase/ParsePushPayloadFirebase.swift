@@ -46,7 +46,7 @@ public struct ParsePushPayloadFirebase: ParsePushFirebasePayloadable {
     public var notification: ParsePushFirebaseNotification?
 
     /// The priority type of a notification.
-    public enum PushPriority: String, Codable {
+    public enum PushPriority: String, Codable, Sendable {
         /// Sets the priority to **5**.
         case normal
         /// Sets the priority to **10**.

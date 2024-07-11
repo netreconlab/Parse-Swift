@@ -17,7 +17,7 @@ public struct ParseField: ParseTypeable {
     var targetClass: String?
 
     /// Field types available in `ParseSchema`.
-    public enum FieldType: String, Codable {
+    public enum FieldType: String, Codable, Sendable {
         /// A string type.
         case string = "String"
         /// A number type.
