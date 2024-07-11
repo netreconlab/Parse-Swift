@@ -16,11 +16,11 @@ import FoundationNetworking
 /// The REST API for communicating with a Parse Server.
 public struct API {
 
-    public enum Method: String, Encodable {
+    public enum Method: String, Encodable, Sendable {
         case GET, POST, PUT, PATCH, DELETE
     }
 
-    public enum Endpoint: Encodable {
+    public enum Endpoint: Encodable, Sendable {
         case batch
         case objects(className: String)
         case object(className: String, objectId: String)
@@ -139,7 +139,7 @@ public struct API {
     public typealias Options = Set<API.Option>
 
     /// Options available to send to Parse Server.
-    public enum Option: Hashable {
+    public enum Option: Hashable, Sendable {
 
         /// Use the primaryKey/masterKey if it was provided during initial configuraration.
         case usePrimaryKey
@@ -164,7 +164,7 @@ public struct API {
         case tags([String: String])
         /// Add context.
         /// - warning: Requires Parse Server 5.0.0+.
-        case context(Encodable)
+        case context(Encodable & Sendable)
         /// The caching policy to use for a specific http request. Determines when to
         /// return a response from the cache. See Apple's
         /// [documentation](https://developer.apple.com/documentation/foundation/url_loading_system/accessing_cached_data)

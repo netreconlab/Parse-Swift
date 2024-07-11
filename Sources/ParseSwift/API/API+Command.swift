@@ -14,12 +14,12 @@ import FoundationNetworking
 internal extension API {
     // MARK: API.Command
     // swiftlint:disable:next type_body_length
-    struct Command<T, U>: Encodable where T: ParseEncodable {
+    struct Command<T, U>: Encodable, Sendable where T: ParseEncodable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) async throws -> U)
+        let mapper: (@Sendable (Data) async throws -> U)
         let params: [String: String?]?
         let uploadData: Data?
         let uploadFile: URL?
@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping ((Data) async throws -> U)) {
+             mapper: @escaping (@Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body

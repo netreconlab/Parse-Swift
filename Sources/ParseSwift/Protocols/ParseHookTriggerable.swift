@@ -113,7 +113,7 @@ public extension ParseHookTriggerable {
 }
 
 /// A type of request for Parse Hook Triggers.
-public struct TriggerRequest: Encodable {
+public struct TriggerRequest: Encodable, Sendable {
     let className: String
     let trigger: ParseHookTriggerType
     let url: URL?

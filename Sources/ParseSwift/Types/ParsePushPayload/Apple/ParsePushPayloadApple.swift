@@ -76,7 +76,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
     var sound: AnyCodable?
 
     /// The type of notification.
-    public enum PushType: String, Codable {
+    public enum PushType: String, Codable, Sendable {
         /// Send as an alert.
         case alert
         /// Send as a background notification.
