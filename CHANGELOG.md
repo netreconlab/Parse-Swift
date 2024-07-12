@@ -2,9 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+### 5.11.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.0...5.10.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.10.0/documentation/parseswift)
+
+__Fixes__
+* Make ParseEncoder sendable ([#175](https://github.com/netreconlab/Parse-Swift/pull/175)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.10.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.9.3...5.10.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.10.0/documentation/parseswift)
