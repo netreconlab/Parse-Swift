@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: ParseCoding
 /// Custom coding for Parse objects.
-public enum ParseCoding {}
+enum ParseCoding {}
 
 // MARK: Coders
 extension ParseCoding {
@@ -100,7 +100,7 @@ extension ParseCoding {
         return dateFormatter
     }()
 
-    public static let parseDateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .custom { (date, encoder) in
+    static let parseDateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .custom { (date, encoder) in
         var container = encoder.container(keyedBy: DateEncodingKeys.self)
         try container.encode("Date", forKey: .type)
         let dateString = dateFormatter.string(from: date)
