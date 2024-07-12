@@ -174,6 +174,16 @@
       "kind" : "content"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -395,6 +405,11 @@
   "title" : "encode(_:acl:skipKeys:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseencoder\/encode(_:acl:skipkeys:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 },
 "https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift": {
   "identifier" : "https:\/\/github.com\/apple\/swift\/blob\/main\/stdlib\/public\/Darwin\/Foundation\/JSONEncoder.swift",
