@@ -1,43 +1,37 @@
 {
   "abstract" : [
     {
-      "text" : "The class name of the object.",
+      "text" : "Inherited from ",
       "type" : "text"
-    }
-  ],
-  "defaultImplementationsSections" : [
+    },
     {
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-swift.property",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-499yb"
-      ],
-      "title" : "Objectable Implementations"
+      "code" : "CustomDebugStringConvertible.debugDescription",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order\/CustomDebugStringConvertible-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-7kg6w"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order\/debugDescription"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift10ObjectableP9classNameSSvpZ",
+    "extendedModule" : "ParseSwift",
+    "externalID" : "s:10ParseSwift0A8TypeablePAAE16debugDescriptionSSvp::SYNTHESIZED::s:10ParseSwift5QueryV5OrderO",
     "fragments" : [
-      {
-        "kind" : "keyword",
-        "text" : "static"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
       {
         "kind" : "keyword",
         "text" : "var"
@@ -48,7 +42,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "className"
+        "text" : "debugDescription"
       },
       {
         "kind" : "text",
@@ -65,11 +59,10 @@
         "name" : "ParseSwift"
       }
     ],
-    "required" : true,
     "role" : "symbol",
-    "roleHeading" : "Type Property",
+    "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "className"
+    "title" : "debugDescription"
   },
   "primaryContentSections" : [
     {
@@ -84,14 +77,6 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "static"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
               "text" : "var"
             },
             {
@@ -100,7 +85,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "className"
+              "text" : "debugDescription"
             },
             {
               "kind" : "text",
@@ -140,7 +125,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/objectable\/classname-7kg6w"
+        "\/documentation\/parseswift\/query\/order\/debugdescription"
       ],
       "traits" : [
         {
@@ -165,10 +150,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query": {
   "abstract" : [
     {
-      "text" : "The base protocol for a ",
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "Query",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " class defines a query that is used to query for ",
       "type" : "text"
     },
     {
@@ -176,14 +169,14 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ".",
+      "text" : "s.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "protocol"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -191,41 +184,33 @@
     },
     {
       "kind" : "identifier",
-      "text" : "Objectable"
+      "text" : "Query"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "Objectable"
+      "text" : "Query"
     }
   ],
   "role" : "symbol",
-  "title" : "Objectable",
+  "title" : "Query",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable"
+  "url" : "\/documentation\/parseswift\/query"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/className-499yb": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Order": {
   "abstract" : [
     {
-      "text" : "The class name of the object.",
+      "text" : "An enum that determines the order to sort the results based on a given key.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "var"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -233,78 +218,36 @@
     },
     {
       "kind" : "identifier",
-      "text" : "className"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "text" : "Order"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-499yb",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order",
   "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "className",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/classname-499yb"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/className-7kg6w": {
-  "abstract" : [
-    {
-      "text" : "The class name of the object.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 2,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
+  "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "className"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "text" : "Order"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-7kg6w",
-  "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
-  "title" : "className",
+  "title" : "Query.Order",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/classname-7kg6w"
+  "url" : "\/documentation\/parseswift\/query\/order"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/className-swift.property": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Order/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
-    {
-      "text" : "The class name of the object.",
-      "type" : "text"
-    }
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order\/CustomDebugStringConvertible-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CustomDebugStringConvertible Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query\/order\/customdebugstringconvertible-implementations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Order/debugDescription": {
+  "abstract" : [
+
   ],
   "fragments" : [
     {
@@ -317,7 +260,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "className"
+      "text" : "debugDescription"
     },
     {
       "kind" : "text",
@@ -329,12 +272,12 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-swift.property",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order\/debugDescription",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "className",
+  "title" : "debugDescription",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/classname-swift.property"
+  "url" : "\/documentation\/parseswift\/query\/order\/debugdescription"
 }
 }
 }

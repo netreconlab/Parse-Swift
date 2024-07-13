@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "A computed property that is a unique identifier and makes it easy to use ",
+      "text" : "A computed property that ensures ",
       "type" : "text"
     },
     {
@@ -9,15 +9,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as models in MVVM and SwiftUI.",
+      "text" : "’s can be uniquely identified across instances.",
       "type" : "text"
     }
   ],
@@ -148,7 +140,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : "’s to be used even if they have not been saved and\/or missing an ",
+                  "text" : "’s to be uniquely identified even if they have not been saved and\/or missing an ",
                   "type" : "text"
                 },
                 {
@@ -308,7 +300,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/id": {
   "abstract" : [
     {
-      "text" : "A computed property that is a unique identifier and makes it easy to use ",
+      "text" : "A computed property that ensures ",
       "type" : "text"
     },
     {
@@ -316,15 +308,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as models in MVVM and SwiftUI.",
+      "text" : "’s can be uniquely identified across instances.",
       "type" : "text"
     }
   ],

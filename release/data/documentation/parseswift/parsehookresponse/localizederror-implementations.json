@@ -167,7 +167,7 @@
         "type" : "text"
       },
       {
-        "code" : "Equatable",
+        "code" : "Hashable",
         "type" : "codeVoice"
       },
       {

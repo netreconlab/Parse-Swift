@@ -67,7 +67,7 @@
           "type" : "text"
         },
         {
-          "code" : "Equatable",
+          "code" : "Hashable",
           "type" : "codeVoice"
         },
         {
@@ -341,7 +341,7 @@
         "type" : "text"
       },
       {
-        "code" : "Equatable",
+        "code" : "Hashable",
         "type" : "codeVoice"
       },
       {

@@ -833,14 +833,14 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
-                        "title" : "func isSaved() async throws -> Bool",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/objectable\/issaved",
                         "title" : "var isSaved: Bool",
                         "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
+                        "title" : "func isSaved() async throws -> Bool",
+                        "type" : "method"
                       }
                     ],
                     "title" : "Objectable Implementations",
@@ -860,13 +860,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-499yb",
-                        "title" : "static var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
+                        "title" : "var className: String",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
-                        "title" : "var className: String",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-499yb",
+                        "title" : "static var className: String",
                         "type" : "property"
                       }
                     ],
@@ -2026,13 +2026,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       }
                     ],
@@ -2243,12 +2243,7 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
-                        "title" : "func merge(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-99wj6",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       },
@@ -2258,7 +2253,12 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-99wj6",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
+                        "title" : "func merge(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2281,17 +2281,17 @@
                         "type" : "method"
                       },
                       {
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
+                        "title" : "func mergeParse(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-8plu3",
-                        "title" : "func mergeParse(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2507,22 +2507,6 @@
                 ],
                 "path" : "\/documentation\/parseswift\/parseobject\/customstringconvertible-implementations",
                 "title" : "CustomStringConvertible Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseobject\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parseobject\/hashable-implementations",
-                "title" : "Hashable Implementations",
                 "type" : "symbol"
               }
             ],
@@ -3072,22 +3056,6 @@
               {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parserole\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parserole\/hashable-implementations",
-                "title" : "Hashable Implementations",
-                "type" : "symbol"
               },
               {
                 "children" : [
@@ -6763,6 +6731,22 @@
               {
                 "children" : [
                   {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parseerror\/hash(into:)",
+                    "title" : "func hash(into: inout Hasher)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parseerror\/hashable-implementations",
+                "title" : "Hashable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
                   },
@@ -7282,11 +7266,6 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsefile\/id",
-                "title" : "var id: String",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parsefile\/localurl",
                 "title" : "var localURL: URL?",
                 "type" : "property"
@@ -7358,11 +7337,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parsefile\/fetchpublisher(options:progress:)",
                 "title" : "func fetchPublisher(options: API.Options, progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)) -> Future<`Self`, ParseError>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parsefile\/hash(into:)",
-                "title" : "func hash(into: inout Hasher)",
                 "type" : "method"
               },
               {
@@ -7482,6 +7456,22 @@
                 ],
                 "path" : "\/documentation\/parseswift\/parsefile\/equatable-implementations",
                 "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/parseswift\/parsefile\/id",
+                    "title" : "var id: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/parseswift\/parsefile\/identifiable-implementations",
+                "title" : "Identifiable Implementations",
                 "type" : "symbol"
               },
               {
@@ -11954,22 +11944,6 @@
               {
                 "children" : [
                   {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parsepushstatus\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parsepushstatus\/hashable-implementations",
-                "title" : "Hashable Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
                   },
@@ -13989,6 +13963,38 @@
                   {
                     "title" : "Default Implementations",
                     "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/query\/order\/debugdescription",
+                        "title" : "var debugDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/query\/order\/customdebugstringconvertible-implementations",
+                    "title" : "CustomDebugStringConvertible Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/query\/order\/description",
+                        "title" : "var description: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/parseswift\/query\/order\/customstringconvertible-implementations",
+                    "title" : "CustomStringConvertible Implementations",
+                    "type" : "symbol"
                   },
                   {
                     "children" : [

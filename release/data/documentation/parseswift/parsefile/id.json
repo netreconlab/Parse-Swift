@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "A computed property that is a unique identifier and makes it easy to use ",
+      "text" : "A computed property that ensures ",
       "type" : "text"
     },
     {
@@ -9,15 +9,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as models in MVVM and SwiftUI.",
+      "text" : "’s can be uniquely identified across instances.",
       "type" : "text"
     }
   ],
@@ -25,7 +17,8 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Identifiable-Implementations"
       ]
     ]
   },
@@ -35,6 +28,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
+    "extendedModule" : "ParseSwift",
     "externalID" : "s:10ParseSwift0A4FileV2idSSvp",
     "fragments" : [
       {
@@ -147,7 +141,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : "’s to be used even when they are  not saved.",
+                  "text" : "’s to be uniquely identified even if they have not been saved.",
                   "type" : "text"
                 }
               ],
@@ -175,7 +169,7 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "name",
+                  "code" : "objectId",
                   "type" : "codeVoice"
                 },
                 {
@@ -183,11 +177,19 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "ParseFile",
+                  "code" : "ParseObject",
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " is saved.",
+                  "text" : " contains an ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "objectId",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
                   "type" : "text"
                 }
               ],
@@ -288,10 +290,21 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/Identifiable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Identifiable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Identifiable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsefile\/identifiable-implementations"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/id": {
   "abstract" : [
     {
-      "text" : "A computed property that is a unique identifier and makes it easy to use ",
+      "text" : "A computed property that ensures ",
       "type" : "text"
     },
     {
@@ -299,15 +312,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as models in MVVM and SwiftUI.",
+      "text" : "’s can be uniquely identified across instances.",
       "type" : "text"
     }
   ],

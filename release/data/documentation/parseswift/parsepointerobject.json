@@ -95,15 +95,6 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift0A8TypeableP",
               "text" : "ParseTypeable"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SH",
-              "text" : "Hashable"
             }
           ]
         }
