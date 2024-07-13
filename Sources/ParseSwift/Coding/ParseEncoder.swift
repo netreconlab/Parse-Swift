@@ -72,14 +72,17 @@ public struct ParseEncoder: Sendable {
         case custom(Set<String>)
 
         func keys() -> Set<String> {
-            let defaultObjectKeys = Set(["createdAt",
-                                         "updatedAt",
-                                         "objectId",
-                                         "className",
-                                         "emailVerified",
-                                         "id",
-                                         "score",
-                                         "originalData"])
+            let defaultObjectKeys = Set(
+                [
+                    "objectId",
+                    "createdAt",
+                    "updatedAt",
+                    "emailVerified",
+                    "score",
+                    "originalData"
+                ]
+            )
+
             switch self {
 
             case .object:

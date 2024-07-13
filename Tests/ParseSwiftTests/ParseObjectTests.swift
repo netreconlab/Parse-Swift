@@ -11,6 +11,11 @@ import XCTest
 @testable import ParseSwift
 
 class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
+
+    struct Dummy: Codable, Hashable {
+        var id: String
+    }
+
     struct Level: ParseObject {
         var objectId: String?
 
@@ -43,6 +48,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         var level: Level?
         var levels: [Level]?
         var nextLevel: Level?
+        var dummy: Dummy?
 
         //: custom initializers
         init() {}
@@ -346,6 +352,29 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertFalse(score1.shouldRestoreKey(\.points, original: score2))
         XCTAssertFalse(score1.shouldRestoreKey(\.level, original: score2))
         XCTAssertTrue(score1.shouldRestoreKey(\.nextLevel, original: score2))
+    }
+
+    func testParseEncoderAllowsIdOnNestedTypesOnParseObject() throws {
+        var score = GameScore(points: 5)
+        score.dummy = Dummy(id: "hello")
+
+        let object = try ParseCoding
+            .parseEncoder()
+            .encode(
+                score,
+                acl: nil,
+                collectChildren: true,
+                objectsSavedBeforeThisOne: nil,
+                filesSavedBeforeThisOne: nil
+            )
+        let decoded = String(
+            decoding: object.encoded,
+            as: UTF8.self
+        )
+        XCTAssertEqual(
+            decoded,
+            #"{"dummy":{"id":"hello"},"player":"Jen","points":5}"#
+        )
     }
 
     func testParseObjectMutable() throws {

@@ -10,6 +10,11 @@ import XCTest
 @testable import ParseSwift
 
 class ParseEncoderTests: XCTestCase {
+
+    struct Dummy: Codable, Hashable {
+        var id: String
+    }
+
     struct GameScore: ParseObject, ParseQueryScorable {
         // These are required by ParseObject
         var objectId: String?
@@ -24,6 +29,7 @@ class ParseEncoderTests: XCTestCase {
 
         // Your own properties
         var points: Int
+        var dummy: Dummy?
 
         // a custom initializer
         init() {
