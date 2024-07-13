@@ -159,6 +159,23 @@ class ParseErrorTests: XCTestCase {
         XCTAssertNil(error.containedIn([.operationForbidden, .invalidQuery]))
     }
 
+    func testHashing() throws {
+        let error1 = ParseError(code: .accountAlreadyLinked, message: "Hello")
+        let error2 = ParseError(code: .accountAlreadyLinked, message: "World")
+        let error3 = error1
+
+        var setOfSameErrors = Set([error1, error1, error3])
+        XCTAssertEqual(setOfSameErrors.count, 1)
+        XCTAssertEqual(setOfSameErrors.first, error1)
+        XCTAssertEqual(setOfSameErrors.first, error3)
+        XCTAssertNotEqual(setOfSameErrors.first, error2)
+        setOfSameErrors.insert(error2)
+        XCTAssertEqual(setOfSameErrors.count, 2)
+        XCTAssertTrue(setOfSameErrors.contains(error1))
+        XCTAssertTrue(setOfSameErrors.contains(error2))
+        XCTAssertTrue(setOfSameErrors.contains(error3))
+    }
+
     func testErrorCount() throws {
         let errorCodes = ParseError.Code.allCases
         XCTAssertGreaterThan(errorCodes.count, 50)
