@@ -18,12 +18,4 @@ extension Fileable {
     var isSaved: Bool {
         return url != nil
     }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        guard let lURL = lhs.url,
-              let rURL = rhs.url else {
-            return lhs.id == rhs.id
-        }
-        return lURL == rURL
-    }
 }

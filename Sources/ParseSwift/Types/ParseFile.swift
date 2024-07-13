@@ -23,28 +23,6 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
     }
 
     /**
-     A computed property that is a unique identifier and makes it easy to use `ParseFile`'s
-     as models in MVVM and SwiftUI.
-     - note: `id` allows `ParseFile`'s to be used even when they are  not saved.
-     - important: `id` will have the same value as `name` when a `ParseFile` is saved.
-    */
-    public var id: String {
-        guard isSaved else {
-            guard let cloudURL = cloudURL else {
-                guard let localURL = localURL else {
-                    guard let data = data else {
-                        return name
-                    }
-                    return "\(name)_\(data)"
-                }
-                return combineName(with: localURL)
-            }
-            return combineName(with: cloudURL)
-        }
-        return name
-    }
-
-    /**
       The name of the file.
       Before the file is saved, this is the filename given by the user.
       After the file is saved, that name gets prefixed with a unique identifier.
@@ -159,10 +137,6 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
         self.options = options
     }
 
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-
     public func isSaved() async throws -> Bool {
         isSaved
     }
@@ -171,6 +145,30 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
         case url
         case name
         case type = "__type"
+    }
+}
+
+// MARK: Identifiable
+extension ParseFile {
+    /**
+     A computed property that ensures `ParseFile`'s can be uniquely identified across instances.
+     - note: `id` allows `ParseFile`'s to be uniquely identified even if they have not been saved.
+     - important: `id` will have the same value as `objectId` when a `ParseObject` contains an `objectId`.
+    */
+    public var id: String {
+        guard isSaved else {
+            guard let cloudURL = cloudURL else {
+                guard let localURL = localURL else {
+                    guard let data = data else {
+                        return name
+                    }
+                    return "\(name)_\(data)"
+                }
+                return combineName(with: localURL)
+            }
+            return combineName(with: cloudURL)
+        }
+        return name
     }
 }
 

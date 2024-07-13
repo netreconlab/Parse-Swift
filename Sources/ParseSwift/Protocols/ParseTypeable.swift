@@ -13,7 +13,7 @@ import Foundation
  */
 public protocol ParseTypeable: Codable,
                                Sendable,
-                               Equatable,
+                               Hashable,
                                CustomDebugStringConvertible,
                                CustomStringConvertible {}
 

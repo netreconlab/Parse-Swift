@@ -132,7 +132,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
 
       - parameter key: The key to order by.
     */
-    public enum Order: Codable, Equatable, Sendable {
+    public enum Order: ParseTypeable {
         /// Sort in ascending order based on `key`.
         case ascending(String)
         /// Sort in descending order based on `key`.
