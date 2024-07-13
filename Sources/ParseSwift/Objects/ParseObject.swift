@@ -245,15 +245,6 @@ extension ParseObject {
     }
 }
 
-// MARK: Hashable
-public extension ParseObject {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-        hasher.combine(createdAt)
-        hasher.combine(updatedAt)
-    }
-}
-
 // MARK: Helper Methods
 public extension ParseObject {
     /**

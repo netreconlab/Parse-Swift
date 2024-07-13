@@ -159,10 +159,6 @@ public struct ParseFile: Fileable, Savable, Deletable, Hashable, Identifiable {
         self.options = options
     }
 
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-
     public func isSaved() async throws -> Bool {
         isSaved
     }

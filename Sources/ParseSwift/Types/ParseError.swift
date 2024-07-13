@@ -11,7 +11,7 @@ import Foundation
 /**
  An object with a Parse code and message.
  */
-public struct ParseError: ParseTypeable, Swift.Error {
+public struct ParseError: ParseTypeable, Hashable, Swift.Error {
     /// The value representing the error from the Parse Server.
     public let code: Code
     /// The text representing the error from the Parse Server.
@@ -537,6 +537,17 @@ extension ParseError: CustomDebugStringConvertible {
 extension ParseError: LocalizedError {
     public var errorDescription: String? {
         debugDescription
+    }
+}
+
+// MARK: Hashable
+extension ParseError {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(code)
+        hasher.combine(message)
+        hasher.combine(error)
+        hasher.combine(otherCode)
+        hasher.combine(swift?.localizedDescription)
     }
 }
 
