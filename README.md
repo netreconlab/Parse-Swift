@@ -80,7 +80,19 @@ import PackageDescription
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.7.0")),
+        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.10.3"))
+    ],
+    targets: [
+        .target(
+            name: "YOUR_PROJECT_NAME",
+            dependencies: [
+                .product(name: "ParseSwift", package: "Parse-Swift")
+            ]
+        ),
+        .testTarget(
+            name: "YOUR_PROJECT_NAMETests",
+            dependencies: ["YOUR_PROJECT_NAME"]
+        )
     ]
 )
 ```
