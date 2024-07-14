@@ -54,7 +54,7 @@ extension Dictionary: _JSONStringDictionaryEncodableMarker where Key == String, 
  ParseEncoder matches the features of the [Swift 5.4 JSONEncoder ](https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift).
  Update commits as needed for improvement.
  */
-public struct ParseEncoder {
+public struct ParseEncoder: Sendable {
     let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy?
     let outputFormatting: JSONEncoder.OutputFormatting?
 
@@ -72,14 +72,17 @@ public struct ParseEncoder {
         case custom(Set<String>)
 
         func keys() -> Set<String> {
-            let defaultObjectKeys = Set(["createdAt",
-                                         "updatedAt",
-                                         "objectId",
-                                         "className",
-                                         "emailVerified",
-                                         "id",
-                                         "score",
-                                         "originalData"])
+            let defaultObjectKeys = Set(
+                [
+                    "objectId",
+                    "createdAt",
+                    "updatedAt",
+                    "emailVerified",
+                    "score",
+                    "originalData"
+                ]
+            )
+
             switch self {
 
             case .object:

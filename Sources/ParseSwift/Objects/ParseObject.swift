@@ -172,16 +172,6 @@ public protocol ParseObject: ParseTypeable,
 // MARK: Default Implementations
 public extension ParseObject {
 
-    /**
-     A computed property that is a unique identifier and makes it easy to use `ParseObject`'s
-     as models in MVVM and SwiftUI.
-     - note: `id` allows `ParseObject`'s to be used even if they have not been saved and/or missing an `objectId`.
-     - important: `id` will have the same value as `objectId` when a `ParseObject` contains an `objectId`.
-    */
-    var id: String {
-        objectId ?? UUID().uuidString
-    }
-
     var mergeable: Self {
         guard isSaved,
             originalData == nil else {
@@ -245,13 +235,18 @@ extension ParseObject {
     }
 }
 
-// MARK: Hashable
+// MARK: Identifiable
 public extension ParseObject {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-        hasher.combine(createdAt)
-        hasher.combine(updatedAt)
+
+    /**
+     A computed property that ensures `ParseObject`'s can be uniquely identified across instances.
+     - note: `id` allows `ParseObject`'s to be uniquely identified even if they have not been saved and/or missing an `objectId`.
+     - important: `id` will have the same value as `objectId` when a `ParseObject` contains an `objectId`.
+     */
+    var id: String {
+        objectId ?? UUID().uuidString
     }
+
 }
 
 // MARK: Helper Methods

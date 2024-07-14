@@ -540,6 +540,17 @@ extension ParseError: LocalizedError {
     }
 }
 
+// MARK: Hashable
+extension ParseError {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(code)
+        hasher.combine(message)
+        hasher.combine(error)
+        hasher.combine(otherCode)
+        hasher.combine(swift?.localizedDescription)
+    }
+}
+
 // MARK: Equatable
 extension ParseError: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {

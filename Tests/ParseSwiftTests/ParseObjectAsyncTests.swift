@@ -1801,7 +1801,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(savedGame.objectId, gameOnServer.objectId)
         XCTAssertEqual(savedGame.createdAt, gameOnServer.createdAt)
         XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
-        XCTAssertEqual(savedGame.profilePicture, gameOnServer.profilePicture)
+        XCTAssertEqual(savedGame.profilePicture?.url, gameOnServer.profilePicture?.url)
     }
     #endif
 }
