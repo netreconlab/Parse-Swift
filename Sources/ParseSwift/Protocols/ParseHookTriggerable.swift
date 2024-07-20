@@ -140,7 +140,7 @@ public extension ParseHookTriggerable {
         case .object(let parseObject):
             switch trigger {
             case .beforeLogin, .afterLogin, .afterLogout:
-                // BAKER: Handled this way to preserve Swifg backwards compatability.
+                // BAKER: Handled this way to preserve Swift backwards compatability.
                 guard parseObject.className == BaseParseUser.className else {
                     throw notSupportedError
                 }
