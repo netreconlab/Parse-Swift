@@ -1,0 +1,305 @@
+{
+  "abstract" : [
+    {
+      "text" : "An instance of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " to trigger on.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject\/object(_:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10ParseSwift0A17HookTriggerObjectO6objectyAcA0aE0_pcACmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "object"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "keyword",
+        "text" : "any"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
+        "text" : "ParseObject"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ParseSwift"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "ParseHookTriggerObject.object(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "iOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "object"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "keyword",
+              "text" : "any"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
+              "text" : "ParseObject"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/parseswift\/parsehooktriggerobject\/object(_:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
+  "abstract" : [
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ParseSwift",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject": {
+  "abstract" : [
+    {
+      "text" : "The objects that Parse Hooks can be triggered on.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerObject",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject/object(_:)": {
+  "abstract" : [
+    {
+      "text" : "An instance of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " to trigger on.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "object"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "keyword",
+      "text" : "any"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
+      "text" : "ParseObject"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject\/object(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ParseHookTriggerObject.object(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject\/object(_:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
+  "abstract" : [
+    {
+      "text" : "Objects that conform to the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol have a local representation of data persisted to the Parse Server.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This is the main protocol that is used to interact with objects in your app.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseObject"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseObject"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseObject",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject"
+}
+}
+}

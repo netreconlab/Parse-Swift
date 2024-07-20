@@ -1604,6 +1604,11 @@
                 "type" : "init"
               },
               {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerable\/init(object:trigger:url:)-3id4t",
+                "title" : "init(object: ParseHookTriggerObject, trigger: ParseHookTriggerType, url: URL) throws",
+                "type" : "init"
+              },
+              {
                 "path" : "\/documentation\/parseswift\/parsehooktriggerable\/init(object:trigger:url:)-4sels",
                 "title" : "init<T>(object: T, trigger: ParseHookTriggerType, url: URL)",
                 "type" : "init"
@@ -2253,12 +2258,12 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2276,22 +2281,22 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
-                        "title" : "func mergeParse(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-8plu3",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-49r7x",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
+                        "title" : "func mergeParse(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-49r7x",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -8662,6 +8667,11 @@
                     "type" : "init"
                   },
                   {
+                    "path" : "\/documentation\/parseswift\/parsehooktrigger\/init(object:trigger:url:)-37mpt",
+                    "title" : "init(object: ParseHookTriggerObject, trigger: ParseHookTriggerType, url: URL) throws",
+                    "type" : "init"
+                  },
+                  {
                     "path" : "\/documentation\/parseswift\/parsehooktrigger\/init(object:trigger:url:)-4voqc",
                     "title" : "init<T>(object: T, trigger: ParseHookTriggerType, url: URL)",
                     "type" : "init"
@@ -14692,6 +14702,42 @@
             ],
             "path" : "\/documentation\/parseswift\/event",
             "title" : "Event",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobject\/config",
+                "title" : "case config",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobject\/file",
+                "title" : "case file",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobject\/livequeryconnect",
+                "title" : "case liveQueryConnect",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobject\/object(_:)",
+                "title" : "case object(any ParseObject)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/parseswift\/parsehooktriggerobject\/objecttype(_:)",
+                "title" : "case objectType(any ParseObject.Type)",
+                "type" : "case"
+              }
+            ],
+            "path" : "\/documentation\/parseswift\/parsehooktriggerobject",
+            "title" : "ParseHookTriggerObject",
             "type" : "enum"
           },
           {

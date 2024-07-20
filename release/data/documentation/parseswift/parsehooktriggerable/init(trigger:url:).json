@@ -21,6 +21,17 @@
       "type" : "text"
     }
   ],
+  "deprecationSummary" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Add \\\"object\\\" as the first argument",
+          "type" : "text"
+        }
+      ],
+      "type" : "paragraph"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -89,6 +100,9 @@
       {
         "name" : "ParseSwift"
       }
+    ],
+    "platforms" : [
+
     ],
     "role" : "symbol",
     "roleHeading" : "Initializer",
@@ -343,6 +357,7 @@
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "identifier",

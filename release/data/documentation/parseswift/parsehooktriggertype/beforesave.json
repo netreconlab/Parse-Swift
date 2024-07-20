@@ -9,11 +9,19 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " or ",
+      "text" : ", ",
       "type" : "text"
     },
     {
       "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfig",
       "type" : "codeVoice"
     },
     {
@@ -170,11 +178,19 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " or ",
+      "text" : ", ",
       "type" : "text"
     },
     {
       "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfig",
       "type" : "codeVoice"
     },
     {

@@ -1,35 +1,16 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new ",
+      "text" : "Creates a new Parse hook trigger for any supported ",
       "type" : "text"
     },
     {
-      "code" : "ParseFile",
+      "code" : "ParseHookTriggerObject",
       "type" : "codeVoice"
     },
     {
-      "text" : " or ",
+      "text" : ".",
       "type" : "text"
-    },
-    {
-      "code" : "ParseHookTriggerType.beforeConnect",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " hook trigger.",
-      "type" : "text"
-    }
-  ],
-  "deprecationSummary" : [
-    {
-      "inlineContent" : [
-        {
-          "text" : "Add \\\"object\\\" as the first argument",
-          "type" : "text"
-        }
-      ],
-      "type" : "paragraph"
     }
   ],
   "hierarchy" : {
@@ -43,12 +24,12 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/init(trigger:url:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/init(object:trigger:url:)-37mpt"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A15HookTriggerablePAAE7trigger3urlxAA0aC11TriggerTypeO_10Foundation3URLVtKcfc::SYNTHESIZED::s:10ParseSwift0A11HookTriggerV",
+    "externalID" : "s:10ParseSwift0A15HookTriggerablePAAE6object7trigger3urlxAA0aC13TriggerObjectO_AA0acH4TypeO10Foundation3URLVtKcfc::SYNTHESIZED::s:10ParseSwift0A11HookTriggerV",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -57,6 +38,23 @@
       {
         "kind" : "text",
         "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "object"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10ParseSwift0A17HookTriggerObjectO",
+        "text" : "ParseHookTriggerObject"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
       },
       {
         "kind" : "externalParam",
@@ -102,13 +100,10 @@
         "name" : "ParseSwift"
       }
     ],
-    "platforms" : [
-
-    ],
     "role" : "symbol",
     "roleHeading" : "Initializer",
     "symbolKind" : "init",
-    "title" : "init(trigger:url:)"
+    "title" : "init(object:trigger:url:)"
   },
   "primaryContentSections" : [
     {
@@ -128,6 +123,24 @@
             {
               "kind" : "text",
               "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "object"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift0A17HookTriggerObjectO",
+              "text" : "ParseHookTriggerObject"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
             },
             {
               "kind" : "externalParam",
@@ -185,6 +198,28 @@
                   "type" : "text"
                 },
                 {
+                  "code" : "ParseHookTriggerObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " the trigger should act on.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "object"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The ",
+                  "type" : "text"
+                },
+                {
                   "code" : "ParseHookTriggerType",
                   "type" : "codeVoice"
                 },
@@ -226,7 +261,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktrigger\/init(trigger:url:)"
+        "\/documentation\/parseswift\/parsehooktrigger\/init(object:trigger:url:)-37mpt"
       ],
       "traits" : [
         {
@@ -296,30 +331,21 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger\/parsehooktriggerable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/init(trigger:url:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/init(object:trigger:url:)-37mpt": {
   "abstract" : [
     {
-      "text" : "Creates a new ",
+      "text" : "Creates a new Parse hook trigger for any supported ",
       "type" : "text"
     },
     {
-      "code" : "ParseFile",
+      "code" : "ParseHookTriggerObject",
       "type" : "codeVoice"
     },
     {
-      "text" : " or ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseHookTriggerType.beforeConnect",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " hook trigger.",
+      "text" : ".",
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "identifier",
@@ -328,6 +354,23 @@
     {
       "kind" : "text",
       "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "object"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A17HookTriggerObjectO",
+      "text" : "ParseHookTriggerObject"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -368,12 +411,46 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/init(trigger:url:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/init(object:trigger:url:)-37mpt",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(trigger:url:)",
+  "title" : "init(object:trigger:url:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktrigger\/init(trigger:url:)"
+  "url" : "\/documentation\/parseswift\/parsehooktrigger\/init(object:trigger:url:)-37mpt"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject": {
+  "abstract" : [
+    {
+      "text" : "The objects that Parse Hooks can be triggered on.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerObject",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
   "abstract" : [

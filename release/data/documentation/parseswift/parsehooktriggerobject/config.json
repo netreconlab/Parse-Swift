@@ -1,23 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Occurs after saving a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseFile",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", or ",
+      "text" : "Trigger on ",
       "type" : "text"
     },
     {
@@ -25,7 +9,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ".",
+      "text" : " updates.",
       "type" : "text"
     }
   ],
@@ -33,17 +17,17 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject\/config"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A15HookTriggerTypeO9afterSaveyA2CmF",
+    "externalID" : "s:10ParseSwift0A17HookTriggerObjectO6configyA2CmF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -55,7 +39,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "afterSave"
+        "text" : "config"
       }
     ],
     "modules" : [
@@ -66,7 +50,7 @@
     "role" : "symbol",
     "roleHeading" : "Case",
     "symbolKind" : "case",
-    "title" : "ParseHookTriggerType.afterSave"
+    "title" : "ParseHookTriggerObject.config"
   },
   "primaryContentSections" : [
     {
@@ -89,12 +73,39 @@
             },
             {
               "kind" : "identifier",
-              "text" : "afterSave"
+              "text" : "config"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Requires Parse Server 7.3.0-alpha.6+.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Warning",
+          "style" : "warning",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -108,7 +119,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parsehooktriggertype\/aftersave"
+        "\/documentation\/parseswift\/parsehooktriggerobject\/config"
       ],
       "traits" : [
         {
@@ -133,10 +144,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject": {
   "abstract" : [
     {
-      "text" : "The types of Parse Hook Triggers available.",
+      "text" : "The objects that Parse Hooks can be triggered on.",
       "type" : "text"
     }
   ],
@@ -151,42 +162,26 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerType"
+      "text" : "ParseHookTriggerObject"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseHookTriggerType"
+      "text" : "ParseHookTriggerObject"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseHookTriggerType",
+  "title" : "ParseHookTriggerObject",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggertype"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/afterSave": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject/config": {
   "abstract" : [
     {
-      "text" : "Occurs after saving a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseFile",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", or ",
+      "text" : "Trigger on ",
       "type" : "text"
     },
     {
@@ -194,7 +189,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ".",
+      "text" : " updates.",
       "type" : "text"
     }
   ],
@@ -209,15 +204,15 @@
     },
     {
       "kind" : "identifier",
-      "text" : "afterSave"
+      "text" : "config"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/afterSave",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject\/config",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "ParseHookTriggerType.afterSave",
+  "title" : "ParseHookTriggerObject.config",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggertype\/aftersave"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject\/config"
 }
 }
 }

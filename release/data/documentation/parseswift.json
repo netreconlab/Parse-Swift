@@ -528,6 +528,7 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Event",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationCommand",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTextOption"
@@ -3111,6 +3112,40 @@
   "title" : "ParseHookTrigger",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObject": {
+  "abstract" : [
+    {
+      "text" : "The objects that Parse Hooks can be triggered on.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObject",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObject"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerObject",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobject"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest": {
   "abstract" : [
