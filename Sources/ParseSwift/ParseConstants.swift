@@ -82,7 +82,7 @@ public enum ParseHookTriggerObject: Sendable {
     /// Trigger on `ParseFile`'s.
     case file
     /// Trigger on `ParseConfig` updates.
-    /// - warning: Requires Parse Server 7.4.0+.
+    /// - warning: Requires Parse Server 7.3.0-alpha.6+.
     case config
     /// Trigger on `ParseLiveQuery` connections.
     case liveQueryConnect
