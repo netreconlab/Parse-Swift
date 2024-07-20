@@ -10,7 +10,7 @@ import Foundation
 
 enum ParseConstants {
     static let sdk = "swift"
-    static let version = "5.10.3"
+    static let version = "5.11.0"
     static let fileManagementDirectory = "parse/"
     static let fileManagementPrivateDocumentsDirectory = "Private Documents/"
     static let fileManagementLibraryDirectory = "Library/"
@@ -51,9 +51,9 @@ public enum ParseHookTriggerType: String, Codable, Sendable {
     case afterLogin
     /// Occurs after logout of a `ParseUser`.
     case afterLogout
-    /// Occurs before saving a `ParseObject` or `ParseFile`.
+    /// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
     case beforeSave
-    /// Occurs after saving a `ParseObject` or `ParseFile`.
+    /// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
     case afterSave
     /// Occurs before deleting a `ParseObject` or `ParseFile`.
     case beforeDelete
@@ -69,4 +69,39 @@ public enum ParseHookTriggerType: String, Codable, Sendable {
     case beforeSubscribe
     /// Occurs after a `ParseLiveQuery` event.
     case afterEvent
+}
+
+/**
+ The objects that Parse Hooks can be triggered on.
+ */
+public enum ParseHookTriggerObject: Sendable {
+    /// The type of `ParseObject` to trigger on.
+    case objectType(any ParseObject.Type)
+    /// An instance of a `ParseObject` to trigger on.
+    case object(any ParseObject)
+    /// Trigger on `ParseFile`'s.
+    case file
+    /// Trigger on `ParseConfig` updates.
+    /// - warning: Requires Parse Server 7.3.0-alpha.6+.
+    case config
+    /// Trigger on `ParseLiveQuery` connections.
+    case liveQueryConnect
+
+    /// The class name of the `ParseObject` to trigger on.
+    var className: String {
+        switch self {
+
+        case .objectType(let object):
+            return object.className
+        case .object(let object):
+            return object.className
+        case .file:
+            return "@File"
+        case .config:
+            return "@Config"
+        case .liveQueryConnect:
+            return "@Connect"
+
+        }
+    }
 }
