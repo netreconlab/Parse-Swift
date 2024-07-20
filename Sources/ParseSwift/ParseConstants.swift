@@ -10,7 +10,7 @@ import Foundation
 
 enum ParseConstants {
     static let sdk = "swift"
-    static let version = "5.11.0"
+    static let version = "5.11.1"
     static let fileManagementDirectory = "parse/"
     static let fileManagementPrivateDocumentsDirectory = "Private Documents/"
     static let fileManagementLibraryDirectory = "Library/"
@@ -88,7 +88,7 @@ public enum ParseHookTriggerObject: Sendable {
     case liveQueryConnect
 
     /// The class name of the `ParseObject` to trigger on.
-    var className: String {
+    public var className: String {
         switch self {
 
         case .objectType(let object):
