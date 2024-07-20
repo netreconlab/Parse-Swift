@@ -121,8 +121,7 @@ public extension ParseHookTriggerable {
         case .objectType(let parseObject):
             switch trigger {
             case .beforeLogin, .afterLogin, .afterLogout:
-                // BAKER: Handled this way to preserve Swift backwards compatability.
-                guard parseObject.className == BaseParseUser.className else {
+                guard parseObject is (any ParseUser.Type) else {
                     throw notSupportedError
                 }
             case .beforeSave, .afterSave, .beforeDelete,
@@ -140,8 +139,7 @@ public extension ParseHookTriggerable {
         case .object(let parseObject):
             switch trigger {
             case .beforeLogin, .afterLogin, .afterLogout:
-                // BAKER: Handled this way to preserve Swift backwards compatability.
-                guard parseObject.className == BaseParseUser.className else {
+                guard parseObject is (any ParseUser) else {
                     throw notSupportedError
                 }
             case .beforeSave, .afterSave, .beforeDelete,

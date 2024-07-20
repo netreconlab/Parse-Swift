@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_14.2.app/Contents/Developer'
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_15.4.app/Contents/Developer'
 

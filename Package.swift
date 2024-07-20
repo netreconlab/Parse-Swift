@@ -1,26 +1,31 @@
-// swift-tools-version:5.5.2
+// swift-tools-version:5.7
 
 import PackageDescription
 
 let package = Package(
     name: "ParseSwift",
-    platforms: [.iOS(.v13),
-                .macCatalyst(.v13),
-                .macOS(.v10_15),
-                .tvOS(.v13),
-                .watchOS(.v6)],
+    platforms: [
+        .iOS(.v13),
+        .macCatalyst(.v13),
+        .macOS(.v10_15),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
         .library(
             name: "ParseSwift",
-            targets: ["ParseSwift"])
+            targets: ["ParseSwift"]
+        )
     ],
     targets: [
         .target(
             name: "ParseSwift",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "ParseSwiftTests",
             dependencies: ["ParseSwift"],
-            exclude: ["Info.plist"])
+            exclude: ["Info.plist"]
+        )
     ]
 )
