@@ -31,7 +31,11 @@ public extension ParseHookTriggerable {
      - parameter trigger: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
-    init(className: String, trigger: ParseHookTriggerType, url: URL) {
+    init(
+        className: String,
+        trigger: ParseHookTriggerType,
+        url: URL
+    ) {
         self.init()
         self.className = className
         self.triggerName = trigger
@@ -45,7 +49,11 @@ public extension ParseHookTriggerable {
      - parameter url: The endpoint of the hook.
      */
     @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init(className: String, triggerName: ParseHookTriggerType, url: URL) {
+    init(
+        className: String,
+        triggerName: ParseHookTriggerType,
+        url: URL
+    ) {
         self.init(className: className, trigger: triggerName, url: url)
     }
 
@@ -55,7 +63,11 @@ public extension ParseHookTriggerable {
      - parameter trigger: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
-    init<T>(object: T.Type, trigger: ParseHookTriggerType, url: URL) where T: ParseObject {
+    init<T>(
+        object: T.Type,
+        trigger: ParseHookTriggerType,
+        url: URL
+    ) where T: ParseObject {
         self.init(className: object.className, trigger: trigger, url: url)
     }
 
@@ -65,7 +77,11 @@ public extension ParseHookTriggerable {
      - parameter trigger: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
-    init<T>(object: T, trigger: ParseHookTriggerType, url: URL) where T: ParseObject {
+    init<T>(
+        object: T,
+        trigger: ParseHookTriggerType,
+        url: URL
+    ) where T: ParseObject {
         self.init(className: T.className, trigger: trigger, url: url)
     }
 
@@ -76,8 +92,102 @@ public extension ParseHookTriggerable {
      - parameter url: The endpoint of the hook.
      */
     @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init<T>(object: T, triggerName: ParseHookTriggerType, url: URL) where T: ParseObject {
+    init<T>(
+        object: T,
+        triggerName: ParseHookTriggerType,
+        url: URL
+    ) where T: ParseObject {
         self.init(object: object, trigger: triggerName, url: url)
+    }
+
+    /**
+     Creates a new Parse hook trigger for any supported `ParseHookTriggerObject`.
+     - parameter object: The `ParseHookTriggerObject` the trigger should act on.
+     - parameter trigger: The `ParseHookTriggerType` type.
+     - parameter url: The endpoint of the hook.
+     */
+    init( // swiftlint:disable:this cyclomatic_complexity function_body_length
+        object: ParseHookTriggerObject,
+        trigger: ParseHookTriggerType,
+        url: URL
+    ) throws {
+
+        let notSupportedError = ParseError(
+            code: .otherCause,
+            message: "This object \"\(object)\" currently does not support the hook trigger \"\(trigger)\""
+        )
+
+        switch object {
+        case .objectType(let parseObject):
+            switch trigger {
+            case .beforeLogin, .afterLogin, .afterLogout:
+                guard parseObject is (any ParseUser.Type) else {
+                    throw notSupportedError
+                }
+            case .beforeSave, .afterSave, .beforeDelete,
+                    .afterDelete, .beforeFind, .afterFind,
+                    .beforeSubscribe, .afterEvent:
+                break // No op
+            default:
+                throw notSupportedError
+            }
+            self.init(
+                className: object.className,
+                trigger: trigger,
+                url: url
+            )
+        case .object(let parseObject):
+            switch trigger {
+            case .beforeLogin, .afterLogin, .afterLogout:
+                guard parseObject is (any ParseUser) else {
+                    throw notSupportedError
+                }
+            case .beforeSave, .afterSave, .beforeDelete,
+                    .afterDelete, .beforeFind, .afterFind,
+                    .beforeSubscribe, .afterEvent:
+                break // No op
+            default:
+                throw notSupportedError
+            }
+            self.init(
+                className: object.className,
+                trigger: trigger,
+                url: url
+            )
+        case .file:
+            switch trigger {
+            case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
+                break // No op
+            default:
+                throw notSupportedError
+            }
+            self.init(
+                className: object.className,
+                trigger: trigger,
+                url: url
+            )
+        case .config:
+            switch trigger {
+            case .beforeSave, .afterSave:
+                break // No op
+            default:
+                throw notSupportedError
+            }
+            self.init(
+                className: object.className,
+                trigger: trigger,
+                url: url
+            )
+        case .liveQueryConnect:
+            guard trigger == .beforeConnect else {
+                throw notSupportedError
+            }
+            self.init(
+                className: object.className,
+                trigger: trigger,
+                url: url
+            )
+        }
     }
 
     /**
@@ -85,18 +195,26 @@ public extension ParseHookTriggerable {
      - parameter trigger: The `ParseHookTriggerType` type.
      - parameter url: The endpoint of the hook.
      */
+    @available(*, deprecated, message: "Add \"object\" as the first argument")
     init(trigger: ParseHookTriggerType, url: URL) throws {
-        self.init()
-        self.triggerName = trigger
-        self.url = url
-        switch triggerName {
+        switch trigger {
         case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
-            self.className = "@File"
+            self.init(
+                className: ParseHookTriggerObject.file.className,
+                trigger: trigger,
+                url: url
+            )
         case .beforeConnect:
-            self.className = "@Connect"
+            self.init(
+                className: ParseHookTriggerObject.liveQueryConnect.className,
+                trigger: trigger,
+                url: url
+            )
         default:
-            throw ParseError(code: .otherCause,
-                             message: "This initializer should only be used for \"ParseFile\" and \"beforeConnect\"")
+            throw ParseError(
+                code: .otherCause,
+                message: "This initializer should only be used for \"ParseFile\" and \"beforeConnect\""
+            )
         }
     }
 
