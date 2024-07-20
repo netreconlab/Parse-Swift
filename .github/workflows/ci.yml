@@ -101,7 +101,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-5_5:
+  xcode-test-5_7:
     timeout-minutes: 25
     needs: linux
     runs-on: macos-12
