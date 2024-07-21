@@ -2,12 +2,17 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+### 5.11.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.1...5.11.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.2/documentation/parseswift)
+
+__Fixes__
+* Change minimum Swift version in Podspec to 5.7 ([#181](https://github.com/netreconlab/Parse-Swift/pull/181)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.11.1
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.0...5.11.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.0/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.0...5.11.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.1/documentation/parseswift)
 
 __Fixes__
 * Make className property of ParseHookTriggerObject public ([#180](https://github.com/netreconlab/Parse-Swift/pull/180)), thanks to [Corey Baker](https://github.com/cbaker6).
