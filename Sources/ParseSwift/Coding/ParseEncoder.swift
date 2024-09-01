@@ -110,11 +110,13 @@ public struct ParseEncoder: Sendable {
         self.outputFormatting = outputFormatting
     }
 
-    func encode(_ value: Encodable,
-                acl: ParseACL? = nil,
-                batching: Bool = false,
-                objectsSavedBeforeThisOne: [String: PointerType]? = nil,
-                filesSavedBeforeThisOne: [String: ParseFile]? = nil) throws -> Data {
+    func encode(
+        _ value: Encodable,
+        acl: ParseACL? = nil,
+        batching: Bool = false,
+        objectsSavedBeforeThisOne: [String: PointerType]? = nil,
+        filesSavedBeforeThisOne: [String: ParseFile]? = nil
+    ) throws -> Data {
         var keysToSkip = SkipKeys.none.keys()
         if batching {
             keysToSkip = SkipKeys.object.keys()
@@ -138,53 +140,94 @@ public struct ParseEncoder: Sendable {
     /**
      Encodes an instance of the indicated `ParseEncodable`.
      - parameter value: The `ParseEncodable` instance to encode.
+     - parameter acl: The `ParseACL` to add to the value if it is an `ParseObject`. Defaults to `nil`.
      - parameter skipKeys: The set of keys to skip during encoding.
      */
-    public func encode<T: ParseEncodable>(_ value: T,
-                                          acl: ParseACL? = nil,
-                                          skipKeys: SkipKeys) throws -> Data {
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: skipKeys.keys())
+    public func encode<T: ParseEncodable>(
+        _ value: T,
+        acl: ParseACL? = nil,
+        skipKeys: SkipKeys
+    ) throws -> Data {
+        let encoder = _ParseEncoder(
+            codingPath: [],
+            dictionary: NSMutableDictionary(),
+            skippingKeys: skipKeys.keys()
+        )
         if let dateEncodingStrategy = dateEncodingStrategy {
             encoder.dateEncodingStrategy = dateEncodingStrategy
         }
         if let outputFormatting = outputFormatting {
             encoder.outputFormatting = outputFormatting
         }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        collectChildren: false,
-                                        uniquePointer: nil,
-                                        objectsSavedBeforeThisOne: nil,
-                                        filesSavedBeforeThisOne: nil).encoded
+        let encodedData = try encoder.encodeObject(
+            value,
+            acl: acl,
+            collectChildren: false,
+            uniquePointer: nil,
+            objectsSavedBeforeThisOne: nil,
+            filesSavedBeforeThisOne: nil
+        ).encoded
+
+        return encodedData
+    }
+
+    /**
+     Encodes an instance of the indicated `ParseObject`.
+     - parameter value: The `ParseObject` instance to encode.
+     - parameter acl: The `ParseACL` to add to the value. Defaults to `nil`.
+     */
+    public func encode<T: ParseObject>(
+        _ value: T,
+        acl: ParseACL? = nil
+    ) throws -> Data {
+        try encode(
+            value,
+            acl: acl,
+            collectChildren: false,
+            objectsSavedBeforeThisOne: nil,
+            filesSavedBeforeThisOne: nil
+        ).encoded
     }
 
     // swiftlint:disable large_tuple
-    internal func encode<T: ParseObject>(_ value: T,
-                                         acl: ParseACL? = nil,
-                                         collectChildren: Bool,
-                                         objectsSavedBeforeThisOne: [String: PointerType]?,
-                                         filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data,
-                                                                                                   unique: PointerType?,
-                                                                                                   unsavedChildren: [Encodable]) {
+    func encode<T: ParseObject>(
+        _ value: T,
+        acl: ParseACL? = nil,
+        collectChildren: Bool,
+        objectsSavedBeforeThisOne: [String: PointerType]?,
+        filesSavedBeforeThisOne: [String: ParseFile]?
+    ) throws -> (
+        encoded: Data,
+        unique: PointerType?,
+        unsavedChildren: [Encodable]
+    ) {
         let keysToSkip: Set<String>!
         if !Parse.configuration.isRequiringCustomObjectIds {
             keysToSkip = SkipKeys.object.keys()
         } else {
             keysToSkip = SkipKeys.customObjectId.keys()
         }
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: keysToSkip)
+        let encoder = _ParseEncoder(
+            codingPath: [],
+            dictionary: NSMutableDictionary(),
+            skippingKeys: keysToSkip
+        )
         if let dateEncodingStrategy = dateEncodingStrategy {
             encoder.dateEncodingStrategy = dateEncodingStrategy
         }
         if let outputFormatting = outputFormatting {
             encoder.outputFormatting = outputFormatting
         }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        collectChildren: collectChildren,
-                                        uniquePointer: try? value.toPointer(),
-                                        objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
-                                        filesSavedBeforeThisOne: filesSavedBeforeThisOne)
+        let encodedObject = try encoder.encodeObject(
+            value,
+            acl: acl,
+            collectChildren: collectChildren,
+            uniquePointer: try? value.toPointer(),
+            objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
+            filesSavedBeforeThisOne: filesSavedBeforeThisOne
+        )
+
+        return encodedObject
     }
 
     internal func encode(_ value: ParseEncodable,
