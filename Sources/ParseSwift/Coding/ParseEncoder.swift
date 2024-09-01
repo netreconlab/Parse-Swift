@@ -171,24 +171,6 @@ public struct ParseEncoder: Sendable {
         return encodedData
     }
 
-    /**
-     Encodes an instance of the indicated `ParseObject`.
-     - parameter value: The `ParseObject` instance to encode.
-     - parameter acl: The `ParseACL` to add to the value. Defaults to `nil`.
-     */
-    public func encode<T: ParseObject>(
-        _ value: T,
-        acl: ParseACL? = nil
-    ) throws -> Data {
-        try encode(
-            value,
-            acl: acl,
-            collectChildren: false,
-            objectsSavedBeforeThisOne: nil,
-            filesSavedBeforeThisOne: nil
-        ).encoded
-    }
-
     // swiftlint:disable large_tuple
     func encode<T: ParseObject>(
         _ value: T,
