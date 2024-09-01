@@ -14,7 +14,7 @@ import Foundation
  use the primary key in server-side applications where the key is kept secure and not
  exposed to the public.
  */
-public struct ParseSchema<SchemaObject: ParseObject>: ParseTypeable, Decodable, Equatable {
+public struct ParseSchema<SchemaObject: ParseObject>: ParseTypeable {
 
     /// The class name of the `ParseSchema`.
     public var className: String

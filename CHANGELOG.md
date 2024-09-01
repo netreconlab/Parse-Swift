@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.11.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.2...5.11.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.3/documentation/parseswift)
+
+__Fixes__
+* Remove all double conformance of Hashable and Equatable ([#182](https://github.com/netreconlab/Parse-Swift/pull/182)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.11.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.1...5.11.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.2/documentation/parseswift)

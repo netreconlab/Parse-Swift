@@ -49,10 +49,11 @@ extension Dictionary: _JSONStringDictionaryEncodableMarker where Key == String, 
 // MARK: ParseEncoder
 /** An object that encodes Parse instances of a data type as JSON objects.
  - note: `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
- `ParseEncoder` facilitates the encoding of `ParseEncodable` values into JSON.
- All Credit to Apple, this is a custom encoder with capability of skipping keys at runtime.
- ParseEncoder matches the features of the [Swift 5.4 JSONEncoder ](https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift).
- Update commits as needed for improvement.
+ `ParseEncoder` facilitates the encoding of `ParseEncodable` and `ParseTypeable`
+ values into JSON. All Credit to Apple, this is a custom encoder with capability of skipping
+ keys at runtime and encoding objects into a digestable format for a [parse-server](https://github.com/parse-community/parse-server).
+ `ParseEncoder` matches the features of the [Swift 5.4 JSONEncoder ](https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift).
+ Update comments as needed for improvement.
  */
 public struct ParseEncoder: Sendable {
     let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy?
