@@ -37,8 +37,8 @@ jobs:
             action: 'test'
     steps:
     - uses: actions/checkout@v4
-    - name: Install SwiftLint
-      run: brew install swiftlint
+    - name: Install Extra Packages
+      run: brew install swiftlint xcbeautify
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -46,7 +46,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -71,6 +71,8 @@ jobs:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
+    - name: Install Extra Packages
+      run: brew install xcbeautify
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -80,7 +82,7 @@ jobs:
     - name: Install SwiftLint
       run: brew install swiftlint
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -107,8 +109,10 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v4
+    - name: Install Extra Packages
+      run: brew install xcbeautify
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
