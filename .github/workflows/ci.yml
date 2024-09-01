@@ -38,7 +38,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install Extra Packages
-      run: brew install swiftlint xcbeautify
+      run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -71,8 +71,6 @@ jobs:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
-    - name: Install Extra Packages
-      run: brew install xcbeautify
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -109,8 +107,6 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v4
-    - name: Install Extra Packages
-      run: brew install xcbeautify
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
