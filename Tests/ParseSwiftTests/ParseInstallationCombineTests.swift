@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 1/30/21.
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
-
+#if !os(Windows)
 #if canImport(Combine)
 
 import Foundation
@@ -1090,4 +1090,5 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
     }
 }
 
+#endif
 #endif
