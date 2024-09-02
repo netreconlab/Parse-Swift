@@ -6,7 +6,6 @@
 //  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Windows)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -1849,4 +1848,3 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         try await installation.delete(options: [.usePrimaryKey])
     }
 }
-#endif
