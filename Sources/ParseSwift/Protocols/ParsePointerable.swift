@@ -29,7 +29,7 @@ extension ParsePointer {
     }
 }
 
-public protocol ParsePointerObject: ParsePointer, ParseTypeable, Fetchable, Hashable {
+public protocol ParsePointerObject: ParsePointer, ParseTypeable, Fetchable {
     associatedtype Object: ParseObject
 }
 

@@ -11,7 +11,7 @@ import Foundation
 /**
   `ParseBytes` is used to store base 64 data.
 */
-public struct ParseBytes: ParseTypeable, Hashable {
+public struct ParseBytes: ParseTypeable {
     private let __type: String = "Bytes" // swiftlint:disable:this identifier_name
     public let base64: String
 

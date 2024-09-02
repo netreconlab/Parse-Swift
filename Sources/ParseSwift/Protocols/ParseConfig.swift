@@ -94,12 +94,12 @@ extension ParseConfig {
     }
 }
 
-internal struct ConfigUpdateBody<T>: ParseTypeable, Decodable where T: ParseConfig {
+internal struct ConfigUpdateBody<T>: ParseTypeable where T: ParseConfig {
     let params: T
 }
 
 // MARK: Current
-struct CurrentConfigContainer<T: ParseConfig>: Codable, Equatable {
+struct CurrentConfigContainer<T: ParseConfig>: Codable, Hashable {
     var currentConfig: T?
 }
 

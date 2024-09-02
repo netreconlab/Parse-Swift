@@ -14,7 +14,7 @@ import UIKit
 /**
  `ParseAnalytics` provides an interface to Parse's logging and analytics backend.
  */
-public struct ParseAnalytics: ParseTypeable, Hashable {
+public struct ParseAnalytics: ParseTypeable {
 
     /// The name of the custom event to report to Parse as having happened.
     public var name: String

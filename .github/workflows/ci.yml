@@ -37,7 +37,7 @@ jobs:
             action: 'test'
     steps:
     - uses: actions/checkout@v4
-    - name: Install SwiftLint
+    - name: Install Extra Packages
       run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
@@ -46,7 +46,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -80,7 +80,7 @@ jobs:
     - name: Install SwiftLint
       run: brew install swiftlint
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
@@ -108,7 +108,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
@@ -141,11 +141,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: compnerd/gha-setup-swift@v0.2.3
         with:
-          branch: swift-5.10-release
-          tag: 5.10-RELEASE
+          branch: swift-5.10.1-release
+          tag: 5.10.1-RELEASE
       - name: Build
         run: |
-          swift build -v
+          swift build --enable-test-discovery -v
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:

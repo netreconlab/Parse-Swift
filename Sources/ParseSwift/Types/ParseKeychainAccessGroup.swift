@@ -9,7 +9,7 @@
 #if !os(Linux) && !os(Android) && !os(Windows)
 import Foundation
 
-struct ParseKeychainAccessGroup: ParseTypeable, Hashable {
+struct ParseKeychainAccessGroup: ParseTypeable {
 
     var accessGroup: String?
     var isSyncingKeychainAcrossDevices = false

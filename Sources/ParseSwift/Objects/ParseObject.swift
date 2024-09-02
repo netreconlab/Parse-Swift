@@ -44,8 +44,7 @@ public protocol ParseObject: ParseTypeable,
                              Fetchable,
                              Savable,
                              Deletable,
-                             Identifiable,
-                             Hashable {
+                             Identifiable {
 
     /**
      A JSON encoded version of this `ParseObject` before `.set()` or

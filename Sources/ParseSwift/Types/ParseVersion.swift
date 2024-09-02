@@ -10,7 +10,7 @@ import Foundation
 
 /// `ParseVersion` is used to determine the version of the SDK. The current
 /// version of the SDK is persisted to the Keychain.
-public struct ParseVersion: ParseTypeable, Hashable {
+public struct ParseVersion: ParseTypeable {
 
     var major: Int
     var minor: Int
