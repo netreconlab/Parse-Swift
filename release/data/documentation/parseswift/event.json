@@ -204,7 +204,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -674,6 +675,11 @@
   "title" : "ParseObject",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

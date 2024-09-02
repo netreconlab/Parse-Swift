@@ -134,7 +134,15 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "All Credit to Apple, this is a custom encoder with capability of skipping keys at runtime.",
+                  "text" : "All Credit to Apple for the baseline encoder. The ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseEncoder",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is a custom encoder",
                   "type" : "text"
                 },
                 {
@@ -142,7 +150,36 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "ParseEncoder matches the features of the ",
+                  "text" : "with capability of skipping keys at runtime and encoding objects into a digestable format",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "for a ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/github.com\/parse-community\/parse-server",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseEncoder",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " matches the features of the ",
                   "type" : "text"
                 },
                 {
@@ -159,7 +196,7 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "Update commits as needed for improvement.",
+                  "text" : "Update comments as needed for improvement.",
                   "type" : "text"
                 }
               ],
@@ -422,6 +459,18 @@
   ],
   "type" : "link",
   "url" : "https:\/\/github.com\/apple\/swift\/blob\/main\/stdlib\/public\/Darwin\/Foundation\/JSONEncoder.swift"
+},
+"https://github.com/parse-community/parse-server": {
+  "identifier" : "https:\/\/github.com\/parse-community\/parse-server",
+  "title" : "parse-server",
+  "titleInlineContent" : [
+    {
+      "text" : "parse-server",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/parse-community\/parse-server"
 }
 }
 }

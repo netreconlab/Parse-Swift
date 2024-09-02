@@ -200,6 +200,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
@@ -344,6 +345,65 @@
   "title" : "ParseCloudUser",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclouduser"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncodable": {
+  "abstract" : [
+    {
+      "text" : "Types that conform to ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "ParseEncodable",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " should be encoded by the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseEncoder",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " when necessary.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseEncodable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseEncodable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseEncodable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseencodable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest": {
   "abstract" : [

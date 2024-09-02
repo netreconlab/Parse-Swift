@@ -77,6 +77,16 @@
               "text" : " : "
             },
             {
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift0A9EncodableP",
+              "text" : "ParseEncodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:s28CustomDebugStringConvertibleP",
               "text" : "CustomDebugStringConvertible"
@@ -105,26 +115,8 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SE",
-              "text" : "Encodable"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SH",
               "text" : "Hashable"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:s8SendableP",
-              "text" : "Sendable"
             }
           ]
         }
@@ -135,6 +127,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
@@ -595,6 +588,65 @@
   "title" : "ParseConfig",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfig"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncodable": {
+  "abstract" : [
+    {
+      "text" : "Types that conform to ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "ParseEncodable",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " should be encoded by the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseEncoder",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " when necessary.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseEncodable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseEncodable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseEncodable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseencodable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
   "abstract" : [

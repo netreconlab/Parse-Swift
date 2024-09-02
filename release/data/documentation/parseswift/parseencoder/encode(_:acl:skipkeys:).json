@@ -290,6 +290,44 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "The ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseACL",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to add to the value if it is an ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". Defaults to ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "nil",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "acl"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "The set of keys to skip during encoding.",
                   "type" : "text"
                 }

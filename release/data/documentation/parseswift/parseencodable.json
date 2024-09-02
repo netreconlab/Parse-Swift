@@ -137,11 +137,23 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudTypeable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseInstallation",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePointerObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatusable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSession",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser"
       ],
       "kind" : "relationships",
@@ -150,8 +162,38 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseACL",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunction",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePush",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseServer",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Pointer",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -249,6 +291,219 @@
   "title" : "Objectable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseACL": {
+  "abstract" : [
+    {
+      "code" : "ParseACL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used to control which users can access or modify a particular ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Each ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has its own ACL. You can grant read and write permissions separately",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to specific users, to groups of users that belong to roles, or you can grant permissions to",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "the public",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " so that, for example, any user could read a particular object but only a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "particular set of users could write to that object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseACL"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseACL",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseACL"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseACL",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseacl"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnalytics": {
+  "abstract" : [
+    {
+      "code" : "ParseAnalytics",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " provides an interface to Parse’s logging and analytics backend.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseAnalytics"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnalytics",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseAnalytics"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseAnalytics",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseanalytics"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseBytes": {
+  "abstract" : [
+    {
+      "code" : "ParseBytes",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used to store base 64 data.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseBytes"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseBytes",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseBytes"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseBytes",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsebytes"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP": {
+  "abstract" : [
+    {
+      "text" : "Class Level Permissions for ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseSchema",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseCLP"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseCLP"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseCLP",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseclp"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudTypeable": {
   "abstract" : [
@@ -373,6 +628,80 @@
   "title" : "ParseCloudable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfig": {
+  "abstract" : [
+    {
+      "text" : "Objects that conform to the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfig",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol are able to access the Config on the Parse Server.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "When conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfig",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", any properties added can be retrieved by the client or updated on",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "the server. The current ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfig",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is persisted to the Keychain and Parse Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseConfig"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfig",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseConfig"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseConfig",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseconfig"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseEncodable": {
   "abstract" : [
@@ -501,6 +830,82 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseencodable\/description"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError": {
+  "abstract" : [
+    {
+      "text" : "An object with a Parse code and message.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseError"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseError",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseerror"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseField": {
+  "abstract" : [
+    {
+      "text" : "A type used to create internal fields for ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseSchema",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseField"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseField",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseField"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseField",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsefield"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile": {
   "abstract" : [
     {
@@ -550,6 +955,624 @@
   "title" : "ParseFile",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGeoPoint": {
+  "abstract" : [
+    {
+      "code" : "ParseGeoPoint",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used to embed a latitude \/ longitude point as the value for a key in a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "It could be used to perform queries in a geospatial manner using ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseQuery.whereKey:nearGeoPoint:",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseGeoPoint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGeoPoint",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseGeoPoint"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseGeoPoint",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsegeopoint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunction": {
+  "abstract" : [
+    {
+      "text" : "A generic Parse Hook Function type that can be used to create any Parse Hook Function.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunction"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunction",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunction"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookFunction",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookfunction"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest": {
+  "abstract" : [
+    {
+      "text" : "A type that can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookFunctionable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " functions are called.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunctionRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunctionRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookFunctionRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookfunctionrequest"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionable": {
+  "abstract" : [
+    {
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookFunctionable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows the creation of hooks",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "which are Cloud Code functions.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunctionable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookFunctionable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookFunctionable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookfunctionable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookParametable": {
+  "abstract" : [
+    {
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookParametable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows types that can be created",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to decode parameters in ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookFunctionRequest",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookParametable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookParametable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookParametable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookParametable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookparametable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookRequestable": {
+  "abstract" : [
+    {
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookRequestable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows you to create types that",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "can decode requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookRequestable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookRequestable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookRequestable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookRequestable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookrequestable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookResponse": {
+  "abstract" : [
+    {
+      "text" : "Build a response after processing a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookFunctionRequest",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerRequest",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookResponse",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookResponse"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookresponse"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger": {
+  "abstract" : [
+    {
+      "text" : "A generic Parse Hook Trigger type that can be used to create any Hook Trigger.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTrigger"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTrigger"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTrigger",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktrigger"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerObjectRequest": {
+  "abstract" : [
+    {
+      "text" : "A type that can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " triggers are called.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObjectRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerObjectRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerObjectRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerObjectRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerobjectrequest"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
+  "abstract" : [
+    {
+      "text" : "A type that can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " triggers are called.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequestable": {
+  "abstract" : [
+    {
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerRequestable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows you to create types that",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " triggers are called.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerRequestable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequestable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerRequestable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerRequestable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequestable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable": {
+  "abstract" : [
+    {
+      "text" : "Conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows the creation of hooks which",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "are Cloud Code triggers.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookTriggerable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookTriggerable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggerable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookable": {
+  "abstract" : [
+    {
+      "text" : "Hooks and Triggers should conform to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseHookable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseHookable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehookable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseInstallation": {
   "abstract" : [
@@ -687,6 +1710,543 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePointerObject": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePointerObject"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePointerObject",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePointerObject"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePointerObject",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepointerobject"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon": {
+  "abstract" : [
+    {
+      "code" : "ParsePolygon",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used to create a polygon that represents the coordinates",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "that may be associated with a key in a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or used as a reference point",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "for geo queries. This allows proximity-based queries on the key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePolygon"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePolygon"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePolygon",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepolygon"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePush": {
+  "abstract" : [
+    {
+      "text" : "Send and check the status of push notificaitons.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePush"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePush",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePush"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePush",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepush"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleAlert": {
+  "abstract" : [
+    {
+      "text" : "An alert payload for Apple push notifications. See Apple’s ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/generating_a_remote_notification#2943365",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "for more information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushAppleAlert"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleAlert",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushAppleAlert"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushAppleAlert",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushapplealert"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushApplePayloadable": {
+  "abstract" : [
+    {
+      "text" : "A protocol for adding the standard properties for Apple push notifications.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushApplePayloadable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushApplePayloadable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushApplePayloadable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushApplePayloadable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushapplepayloadable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushAppleSound": {
+  "abstract" : [
+    {
+      "text" : "Use these keys to configure the sound for a critical alert.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushAppleSound"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushAppleSound",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushAppleSound"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushAppleSound",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushapplesound"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification": {
+  "abstract" : [
+    {
+      "text" : "The Firebase Cloud Messaging (FCM) notification payload. For more information, see",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/firebase.google.com\/docs\/reference\/fcm\/rest\/v1\/projects.messages#Notification",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref#notification-payload-support",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushFirebaseNotification"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushFirebaseNotification"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushFirebaseNotification",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushfirebasenotification"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebasePayloadable": {
+  "abstract" : [
+    {
+      "text" : "A protocol for adding the standard properties for Firebase Cloud Messaging (FCM) push notifications.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushFirebasePayloadable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebasePayloadable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushFirebasePayloadable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushFirebasePayloadable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushfirebasepayloadable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadAny": {
+  "abstract" : [
+    {
+      "text" : "The payload data for both a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParsePushPayloadApple",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParsePushPayloadFirebase",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " push notification.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadAny"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadAny",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadAny"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushPayloadAny",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushpayloadany"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple": {
+  "abstract" : [
+    {
+      "text" : "The payload data for an Apple push notification.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadApple"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadApple"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushPayloadApple",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase": {
+  "abstract" : [
+    {
+      "text" : "The payload data for an Firebase Cloud Messaging (FCM) push notification.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "See ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "documentation for more information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadFirebase"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadFirebase"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushPayloadFirebase",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadable": {
+  "abstract" : [
+    {
+      "text" : "A protocol for making push notification payloads.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "See ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParsePushPayloadApple",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParsePushPayloadFirebase",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " for examples.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParsePushPayloadable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParsePushPayloadable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushpayloadable"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus": {
   "abstract" : [
     {
@@ -770,6 +2330,64 @@
   "title" : "ParsePushStatusable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatusable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRelation": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseRelation",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " object that is used to access all of the children of a many-to-many relationship.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Each instance of ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseRelation",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is associated with a particular parent object and key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseRelation"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRelation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseRelation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseRelation",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parserelation"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole": {
   "abstract" : [
@@ -897,6 +2515,82 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema": {
+  "abstract" : [
+    {
+      "code" : "ParseSchema",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used for handeling your schemas.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseSchema"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseSchema"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseSchema",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseschema"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseServer": {
+  "abstract" : [
+    {
+      "code" : "ParseServer",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " allows you to check the health or retrieve general information about a Parse Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseServer"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseServer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseServer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseServer",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseserver"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSession": {
   "abstract" : [
     {
@@ -958,6 +2652,40 @@
   "title" : "ParseSession",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsesession"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
+  "abstract" : [
+    {
+      "text" : "A special type that is considered a Parse type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseTypeable"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTypeable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseTypeable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseTypeable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsetypeable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
   "abstract" : [
@@ -1041,10 +2769,298 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseVersion": {
+  "abstract" : [
+    {
+      "code" : "ParseVersion",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is used to determine the version of the SDK. The current",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "version of the SDK is persisted to the Keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseVersion"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseVersion",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseVersion"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseVersion",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseversion"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Pointer": {
+  "abstract" : [
+    {
+      "text" : "A Pointer referencing a ParseObject.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Pointer"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Pointer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Pointer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Pointer",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/pointer"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "Query",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " class defines a query that is used to query for ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "s.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Query"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Query"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Query",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Order": {
+  "abstract" : [
+    {
+      "text" : "An enum that determines the order to sort the results based on a given key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Order"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Order",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Order"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Query.Order",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query\/order"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryConstraint": {
+  "abstract" : [
+    {
+      "text" : "Used to constrain a query.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "QueryConstraint",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/queryconstraint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryWhere": {
+  "abstract" : [
+    {
+      "text" : "The specified criteria to constrain a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Query",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "QueryWhere"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryWhere",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "QueryWhere"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "QueryWhere",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/querywhere"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification#2943365": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/generating_a_remote_notification#2943365",
+  "title" : "documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/usernotifications\/setting_up_a_remote_notification_server\/generating_a_remote_notification#2943365"
+},
+"https://firebase.google.com/docs/cloud-messaging/http-server-ref": {
+  "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref",
+  "title" : "Firebase Cloud Messaging",
+  "titleInlineContent" : [
+    {
+      "text" : "Firebase Cloud Messaging",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref"
+},
+"https://firebase.google.com/docs/cloud-messaging/http-server-ref#notification-payload-support": {
+  "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref#notification-payload-support",
+  "title" : "Firebase Cloud Messaging (legacy)",
+  "titleInlineContent" : [
+    {
+      "text" : "Firebase Cloud Messaging (legacy)",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref#notification-payload-support"
+},
+"https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Notification": {
+  "identifier" : "https:\/\/firebase.google.com\/docs\/reference\/fcm\/rest\/v1\/projects.messages#Notification",
+  "title" : "Firebase Cloud Messaging",
+  "titleInlineContent" : [
+    {
+      "text" : "Firebase Cloud Messaging",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/firebase.google.com\/docs\/reference\/fcm\/rest\/v1\/projects.messages#Notification"
 }
 }
 }
