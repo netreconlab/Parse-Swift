@@ -1800,6 +1800,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         #endif
     }
 
+    #if !os(Windows)
     func testInstallationSave() async throws {
         var installation = Installation()
         installation.objectId = "yarr"
@@ -2479,6 +2480,8 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         wait(for: [expectation1], timeout: 20.0)
         #endif
     }
+
+    #endif
 
     func testFetch() async throws {
         var score = GameScore(points: 10)
