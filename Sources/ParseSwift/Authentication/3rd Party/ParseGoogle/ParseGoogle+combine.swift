@@ -13,7 +13,7 @@ import Combine
 public extension ParseGoogle {
     // MARK: Combine
     /**
-     Login a `ParseUser` *asynchronously* using Google authentication for graph API login. Publishes when complete.
+     Login a `ParseUser` *asynchronously* using Google authentication for login. Publishes when complete.
      - parameter id: The **id** from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
      - parameter accessToken: Optional **access_token** from **Google**.
@@ -34,7 +34,7 @@ public extension ParseGoogle {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using Google authentication for graph API login. Publishes when complete.
+     Login a `ParseUser` *asynchronously* using Google authentication for login. Publishes when complete.
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
@@ -50,7 +50,7 @@ public extension ParseGoogle {
 
 public extension ParseGoogle {
     /**
-     Link the *current* `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using Google authentication for login.
      Publishes when complete.
      - parameter id: The **id** from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
@@ -72,7 +72,7 @@ public extension ParseGoogle {
     }
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using Google authentication for login.
      Publishes when complete.
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
