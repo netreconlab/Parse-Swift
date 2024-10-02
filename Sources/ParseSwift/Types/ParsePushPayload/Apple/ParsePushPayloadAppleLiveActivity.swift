@@ -1,15 +1,25 @@
 //
-//  ParsePushPayload.swift
+//  ParsePushPayloadAppleLiveActivity.swift
 //  ParseSwift
 //
-//  Created by Corey Baker on 6/5/22.
-//  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
+//  Created by Corey Baker on 9/16/24.
+//  Copyright © 2024 Network Reconnaissance Lab. All rights reserved.
 //
 
-import Foundation
+/// The payload data for an Apple LiveActivity push notification.
+public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
 
-/// The payload data for an Apple push notification.
-public struct ParsePushPayloadApple: ParsePushApplePayload {
+    /// A LiveActivity event.
+    public enum Event: String, Sendable, Codable {
+        /// Start a LiveActivity.
+        case start
+        /// Update a LiveActivity.
+        case update
+        /// End a LiveActivity.
+        case end
+    }
+
+    public var event : Event?
 
     public var contentAvailable: Int?
 
@@ -27,7 +37,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
 
     public var interruptionLevel: String?
 
-    public var pushType: PushType? = .alert
+    public var pushType: ParsePushPayloadApple.PushType? = .liveactivity
 
     public var category: String?
 
@@ -42,16 +52,6 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
     var badge: AnyCodable?
     var sound: AnyCodable?
 
-    /// The type of notification.
-    public enum PushType: String, Codable, Sendable {
-        /// Send as an alert.
-        case alert
-        /// Send as a background notification.
-        case background
-        /// Send as a Live Activity notification.
-        case liveactivity
-    }
-
     enum CodingKeys: String, CodingKey {
         case relevanceScore = "relevance-score"
         case targetContentId = "target-content-id"
@@ -63,7 +63,10 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
         case category, sound, badge, alert, topic
     }
 
-    public init() {}
+    public init() {
+        // Set to the lowest live activity priority by default.
+        priority = 5
+    }
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
