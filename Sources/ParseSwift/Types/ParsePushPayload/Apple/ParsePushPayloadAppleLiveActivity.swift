@@ -19,7 +19,7 @@ public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
         case end
     }
 
-    public var event : Event?
+    public var event: Event?
 
     public var contentAvailable: Int?
 
