@@ -19,7 +19,7 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-15
     strategy:
       matrix:
         destination: ['platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro']
@@ -68,7 +68,7 @@ jobs:
 
   spm-test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
     - name: Create and set the default keychain
@@ -156,7 +156,7 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Generate Docs
@@ -166,7 +166,7 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Update Framework Version
