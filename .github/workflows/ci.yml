@@ -27,7 +27,7 @@ jobs:
         exclude:
           - destination: 'platform=iOS\ Simulator,OS=18.1,name=iPhone\ 15\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,OS=18.`,name\=Apple\ TV'
+          - destination: 'platform\=tvOS\ Simulator,OS=18.1,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
