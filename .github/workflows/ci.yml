@@ -55,6 +55,7 @@ jobs:
       with:
         format: lcov
         search-paths: ./DerivedData
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
@@ -89,6 +90,7 @@ jobs:
       with:
         format: lcov
         search-paths: ./.build
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
