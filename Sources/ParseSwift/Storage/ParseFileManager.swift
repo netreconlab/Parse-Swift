@@ -112,7 +112,7 @@ extension ParseFileManager {
         }
     }
 
-    func writeString(_ string: String, filePath: URL, completion: @escaping(Error?) -> Void) {
+    func writeString(_ string: String, filePath: URL, completion: @escaping (Error?) -> Void) {
         synchronizationQueue.async {
             do {
                 guard let data = string.data(using: .utf8) else {
@@ -127,7 +127,7 @@ extension ParseFileManager {
         }
     }
 
-    func writeData(_ data: Data, filePath: URL, completion: @escaping(Error?) -> Void) {
+    func writeData(_ data: Data, filePath: URL, completion: @escaping (Error?) -> Void) {
         synchronizationQueue.async {
             do {
                 try data.write(to: filePath, options: self.defaultDataWritingOptions)
@@ -138,7 +138,7 @@ extension ParseFileManager {
         }
     }
 
-    func copyItem(_ fromPath: URL, toPath: URL, completion: @escaping(Error?) -> Void) {
+    func copyItem(_ fromPath: URL, toPath: URL, completion: @escaping (Error?) -> Void) {
         synchronizationQueue.async {
             do {
                 try FileManager.default.copyItem(at: fromPath, to: toPath)
@@ -149,7 +149,7 @@ extension ParseFileManager {
         }
     }
 
-    func moveItem(_ fromPath: URL, toPath: URL, completion: @escaping(Error?) -> Void) {
+    func moveItem(_ fromPath: URL, toPath: URL, completion: @escaping (Error?) -> Void) {
         synchronizationQueue.async {
             if fromPath != toPath {
                 do {
@@ -164,7 +164,7 @@ extension ParseFileManager {
         }
     }
 
-    func moveContentsOfDirectory(_ fromPath: URL, toPath: URL, completion: @escaping(Error?) -> Void) {
+    func moveContentsOfDirectory(_ fromPath: URL, toPath: URL, completion: @escaping (Error?) -> Void) {
         synchronizationQueue.async {
             do {
                 if fromPath == toPath {

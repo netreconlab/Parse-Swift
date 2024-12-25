@@ -100,7 +100,7 @@ internal extension API {
                      allowIntermediateResponses: Bool = false,
                      uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                      downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                     completion: @escaping(Result<U, ParseError>) -> Void) async {
+                     completion: @escaping (Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue
@@ -257,7 +257,7 @@ internal extension API {
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
                                childFiles: [String: ParseFile]? = nil,
-                               completion: @escaping(Result<URLRequest, ParseError>) -> Void) {
+                               completion: @escaping (Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
             Task {
                 do {
