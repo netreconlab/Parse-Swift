@@ -27,6 +27,5 @@ let package = Package(
             dependencies: ["ParseSwift"],
             exclude: ["Info.plist"]
         )
-    ],
-    swiftLanguageModes: [.v5]
+    ]
 )
