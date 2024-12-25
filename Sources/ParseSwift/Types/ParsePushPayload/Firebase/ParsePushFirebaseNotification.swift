@@ -128,8 +128,8 @@ public struct ParsePushFirebaseNotification: ParseTypeable {
     enum CodingKeys: String, CodingKey {
         case titleLocKey = "title_loc_key"
         case titleLocArgs = "title_loc_args"
-        case bodyLocKey = "body_loc-key"
-        case bodyLocArgs = "body-loc-args"
+        case bodyLocKey = "body_loc_key"
+        case bodyLocArgs = "body_loc_args"
         case clickAction = "click_action"
         case androidChannelId = "android_channel_id"
         case title, icon, body, sound, badge, tag,

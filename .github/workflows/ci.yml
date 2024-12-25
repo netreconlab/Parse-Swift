@@ -10,7 +10,7 @@ on:
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_14.2.app/Contents/Developer'
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_15.4.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_16.2.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,21 +19,21 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-15
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,OS=18.2,name=iPhone\ 16\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=18.2,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 10\ \(42mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=2.2,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
-          - destination: 'platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max'
+          - destination: 'platform=iOS\ Simulator,OS=18.2,name=iPhone\ 16\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV'
+          - destination: 'platform\=tvOS\ Simulator,OS=18.2,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
-          - destination: 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro'
+          - destination: 'platform=visionOS\ Simulator,OS=2.2,name=Apple\ Vision\ Pro'
             action: 'test'
-          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)'
+          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 10\ \(42mm\)'
             action: 'test'
     steps:
     - uses: actions/checkout@v4
@@ -55,6 +55,7 @@ jobs:
       with:
         format: lcov
         search-paths: ./DerivedData
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
@@ -68,7 +69,7 @@ jobs:
 
   spm-test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
     - name: Create and set the default keychain
@@ -89,6 +90,7 @@ jobs:
       with:
         format: lcov
         search-paths: ./.build
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
@@ -104,11 +106,11 @@ jobs:
   xcode-test-5_7:
     timeout-minutes: 25
     needs: linux
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v4
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
@@ -156,7 +158,7 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Generate Docs
@@ -166,7 +168,7 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Update Framework Version

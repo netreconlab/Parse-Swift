@@ -143,7 +143,7 @@ internal extension URLSession {
         attempts: Int = 1,
         allowIntermediateResponses: Bool,
         mapper: @escaping (Data) async throws -> U,
-        completion: @escaping(Result<U, ParseError>) -> Void
+        completion: @escaping (Result<U, ParseError>) -> Void
     ) async {
         do {
             let (responseData, urlResponse) = try await dataTask(for: request)
@@ -288,7 +288,7 @@ internal extension URLSession {
         from file: URL?,
         progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?,
         mapper: @escaping (Data) async throws -> U,
-        completion: @escaping(Result<U, ParseError>) -> Void
+        completion: @escaping (Result<U, ParseError>) -> Void
     ) {
         var task: URLSessionTask?
         if let data = data {
@@ -354,7 +354,7 @@ internal extension URLSession {
         with request: URLRequest,
         progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
         mapper: @escaping (Data) async throws -> U,
-        completion: @escaping(Result<U, ParseError>) -> Void
+        completion: @escaping (Result<U, ParseError>) -> Void
     ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
             Task {
@@ -374,7 +374,7 @@ internal extension URLSession {
     func downloadTask<U>(
         with request: URLRequest,
         mapper: @escaping (Data) async throws -> U,
-        completion: @escaping(Result<U, ParseError>) -> Void
+        completion: @escaping (Result<U, ParseError>) -> Void
     ) {
         Task {
             do {
