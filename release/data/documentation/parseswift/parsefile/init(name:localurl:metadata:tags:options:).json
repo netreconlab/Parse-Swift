@@ -371,53 +371,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Specify the Content-Type header to use for the file,  for example",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "application\/pdf",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "strong"
-                },
-                {
-                  "text" : ". The default is nil. If no value is specified the file type will be inferred from the file",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "extention of ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "name",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "mimeType"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "Optional key value pairs to be stored with file object.",
                   "type" : "text"
                 }

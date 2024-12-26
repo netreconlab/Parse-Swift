@@ -563,7 +563,7 @@
   "abstract" : [
 
   ],
-  "defaultImplementations" : 1,
+  "defaultImplementations" : 3,
   "fragments" : [
     {
       "kind" : "keyword",

@@ -7,6 +7,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseObject-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)-84qh"
       ],
@@ -182,25 +183,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Object to compare.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "as"
-        }
-      ]
     },
     {
       "content" : [

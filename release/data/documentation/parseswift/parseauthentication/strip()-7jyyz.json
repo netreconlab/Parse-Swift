@@ -20,6 +20,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseAuthentication-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/strip()-li6i"
       ],

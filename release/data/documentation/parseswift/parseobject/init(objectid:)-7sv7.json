@@ -39,6 +39,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseObject-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/init(objectId:)-6r6xq"
       ],

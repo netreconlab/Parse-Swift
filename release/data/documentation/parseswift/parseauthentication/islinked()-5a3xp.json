@@ -33,6 +33,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseAuthentication-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/isLinked()-97br7"
       ],

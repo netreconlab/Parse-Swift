@@ -7,6 +7,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseLiveQueryDelegate-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)-6cmf4"
       ],
@@ -174,25 +175,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "An error from the session task.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "error"
-        }
-      ]
     }
   ],
   "schemaVersion" : {

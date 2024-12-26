@@ -202,20 +202,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Whether the given role can read this object.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "value"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "The ",
                   "type" : "text"
                 },
@@ -232,6 +218,20 @@
             }
           ],
           "name" : "role"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Whether the given role can read this object.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "value"
         }
       ]
     }

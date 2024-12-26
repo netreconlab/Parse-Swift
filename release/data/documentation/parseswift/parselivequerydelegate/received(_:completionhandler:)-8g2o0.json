@@ -59,6 +59,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseLiveQueryDelegate-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:completionHandler:)-o1ge"
       ],

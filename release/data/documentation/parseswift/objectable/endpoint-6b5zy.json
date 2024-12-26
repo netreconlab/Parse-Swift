@@ -269,7 +269,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
+  "defaultImplementations" : 5,
   "fragments" : [
     {
       "kind" : "keyword",

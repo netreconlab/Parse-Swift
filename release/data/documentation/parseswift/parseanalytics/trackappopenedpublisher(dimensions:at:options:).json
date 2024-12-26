@@ -367,28 +367,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Explicitly set the time associated with a given event. If not provided the",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "server time will be used.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "at"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "A set of header options sent to the server. Defaults to an empty set.",
                   "type" : "text"
                 }

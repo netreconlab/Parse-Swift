@@ -223,28 +223,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An enum value of one of the following actions:",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "action"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "The set of fields that are either of",
                   "type" : "text"
                 },
@@ -277,6 +255,28 @@
             }
           ],
           "name" : "fields"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "An enum value of one of the following actions:",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "action"
         }
       ]
     },

@@ -293,28 +293,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An enum value of one of the following actions:",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "action"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "",
                   "type" : "text"
                 },
@@ -355,22 +333,22 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The ",
+                  "text" : "An enum value of one of the following actions:",
                   "type" : "text"
                 },
                 {
-                  "code" : "ParseRole",
-                  "type" : "codeVoice"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "text" : " to add\/remove access to.",
+                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "objectId"
+          "name" : "action"
         }
       ]
     },

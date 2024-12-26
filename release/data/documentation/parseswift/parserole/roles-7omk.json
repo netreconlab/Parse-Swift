@@ -55,6 +55,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseRole-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles-1kfkg"
       ],

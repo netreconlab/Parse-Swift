@@ -123,7 +123,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "variadic amount of zero or more ",
+                  "text" : "Variadic amount of zero or more ",
                   "type" : "text"
                 },
                 {

@@ -15,6 +15,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseObject-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/toPointer()-4qih8"
       ],

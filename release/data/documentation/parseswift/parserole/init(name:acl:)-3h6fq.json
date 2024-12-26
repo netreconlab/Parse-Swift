@@ -15,6 +15,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseRole-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:acl:)-8u3ui"
       ],

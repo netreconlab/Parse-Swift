@@ -1,4 +1,7 @@
 {
+  "includedArchiveIdentifiers" : [
+    "edu.uky.cs.netreconlab.ParseSwift"
+  ],
   "interfaceLanguages" : {
     "swift" : [
       {
@@ -688,7 +691,17 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-3vgtv",
+                        "title" : "func delete(options: API.Options) async throws",
+                        "type" : "method"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-u8rk",
+                        "title" : "func delete(options: API.Options) async throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-6rpv",
                         "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       }
@@ -744,6 +757,16 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-12t7t",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-33xzq",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "type" : "method"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-9iop9",
                         "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
@@ -783,7 +806,27 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-11glf",
+                        "title" : "var endpoint: API.Endpoint",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-3vf5d",
+                        "title" : "var endpoint: API.Endpoint",
+                        "type" : "property"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/objectable\/endpoint-6b5zy",
+                        "title" : "var endpoint: API.Endpoint",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-8slln",
+                        "title" : "var endpoint: API.Endpoint",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-9s7vq",
                         "title" : "var endpoint: API.Endpoint",
                         "type" : "property"
                       }
@@ -833,14 +876,14 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
-                        "title" : "func isSaved() async throws -> Bool",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/objectable\/issaved",
                         "title" : "var isSaved: Bool",
                         "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/issaved()-9c65v",
+                        "title" : "func isSaved() async throws -> Bool",
+                        "type" : "method"
                       }
                     ],
                     "title" : "Objectable Implementations",
@@ -860,13 +903,38 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-6pzxq",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-5hhno",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/objectable\/classname-499yb",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-4npbu",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-64fhv",
                         "title" : "static var className: String",
                         "type" : "property"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/objectable\/classname-swift.property",
                         "title" : "var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-8okkp",
+                        "title" : "static var className: String",
                         "type" : "property"
                       }
                     ],
@@ -1807,11 +1875,6 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/endpoint",
-                "title" : "var endpoint: API.Endpoint",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseinstallation\/installationid",
                 "title" : "var installationId: String?",
                 "type" : "property"
@@ -1851,11 +1914,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/delete(options:)",
-                "title" : "func delete(options: API.Options) async throws",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseinstallation\/delete(options:callbackqueue:completion:)",
                 "title" : "func delete(options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Void, ParseError>) -> Void)",
                 "type" : "method"
@@ -1863,11 +1921,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseinstallation\/deletepublisher(options:)",
                 "title" : "func deletePublisher(options: API.Options) -> Future<Void, ParseError>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseinstallation\/fetch(includekeys:options:)",
-                "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                 "type" : "method"
               },
               {
@@ -1953,26 +2006,6 @@
                 "path" : "\/documentation\/parseswift\/parseinstallation\/deleteobjckeychainpublisher(options:)",
                 "title" : "static func deleteObjCKeychainPublisher(options: API.Options) -> Future<Void, ParseError>",
                 "type" : "method"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseinstallation\/classname",
-                    "title" : "static var className: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parseinstallation\/objectable-implementations",
-                "title" : "Objectable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/parseswift\/parseinstallation",
@@ -2124,11 +2157,6 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseobject\/id",
-                "title" : "var id: String",
-                "type" : "property"
-              },
-              {
                 "children" : [
                   {
                     "children" : [
@@ -2253,17 +2281,17 @@
                         "type" : "method"
                       },
                       {
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
+                        "title" : "func merge(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-99wj6",
-                        "title" : "func merge(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2286,17 +2314,17 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
-                        "title" : "func mergeParse(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-13frx",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-8plu3",
+                        "title" : "func mergeParse(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2871,26 +2899,6 @@
                 "path" : "\/documentation\/parseswift\/parsepushstatusable\/title",
                 "title" : "var title: String?",
                 "type" : "property"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parsepushstatusable\/classname",
-                    "title" : "static var className: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parsepushstatusable\/objectable-implementations",
-                "title" : "Objectable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/parseswift\/parsepushstatusable",
@@ -2999,11 +3007,6 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/parseswift\/parserole\/endpoint",
-                "title" : "var endpoint: API.Endpoint",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parserole\/name",
                 "title" : "var name: String?",
                 "type" : "property"
@@ -3057,26 +3060,6 @@
                 "path" : "\/documentation\/parseswift\/parserole\/queryusers()",
                 "title" : "func queryUsers() throws -> Query<RoleUser>",
                 "type" : "method"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parserole\/classname",
-                    "title" : "static var className: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parserole\/objectable-implementations",
-                "title" : "Objectable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/parseswift\/parserole",
@@ -3104,11 +3087,6 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/parseswift\/parsesession\/endpoint",
-                "title" : "var endpoint: API.Endpoint",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parsesession\/expiresat",
                 "title" : "var expiresAt: Date",
                 "type" : "property"
@@ -3132,26 +3110,6 @@
                 "path" : "\/documentation\/parseswift\/parsesession\/user",
                 "title" : "var user: SessionUser",
                 "type" : "property"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parsesession\/classname",
-                    "title" : "static var className: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parsesession\/objectable-implementations",
-                "title" : "Objectable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/parseswift\/parsesession",
@@ -3230,11 +3188,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseuser\/emailverified",
                 "title" : "var emailVerified: Bool?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseuser\/endpoint",
-                "title" : "var endpoint: API.Endpoint",
                 "type" : "property"
               },
               {
@@ -3322,11 +3275,6 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/parseswift\/parseuser\/delete(options:)",
-                "title" : "func delete(options: API.Options) async throws",
-                "type" : "method"
-              },
-              {
                 "path" : "\/documentation\/parseswift\/parseuser\/delete(options:callbackqueue:completion:)",
                 "title" : "func delete(options: API.Options, callbackQueue: DispatchQueue, completion: (Result<Void, ParseError>) -> Void)",
                 "type" : "method"
@@ -3334,11 +3282,6 @@
               {
                 "path" : "\/documentation\/parseswift\/parseuser\/deletepublisher(options:)",
                 "title" : "func deletePublisher(options: API.Options) -> Future<Void, ParseError>",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/parseswift\/parseuser\/fetch(includekeys:options:)",
-                "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                 "type" : "method"
               },
               {
@@ -3658,26 +3601,6 @@
                 "path" : "\/documentation\/parseswift\/parseuser\/verifypasswordpublisher(password:usingpost:options:)",
                 "title" : "static func verifyPasswordPublisher(password: String, usingPost: Bool, options: API.Options) -> Future<Self, ParseError>",
                 "type" : "method"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/parseswift\/parseuser\/classname",
-                    "title" : "static var className: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/parseswift\/parseuser\/objectable-implementations",
-                "title" : "Objectable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/parseswift\/parseuser",
@@ -15113,6 +15036,6 @@
   "schemaVersion" : {
     "major" : 0,
     "minor" : 1,
-    "patch" : 1
+    "patch" : 2
   }
 }

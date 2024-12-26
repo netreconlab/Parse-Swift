@@ -172,20 +172,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Whether the given user can write this object.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "value"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "The ",
                   "type" : "text"
                 },
@@ -202,6 +188,20 @@
             }
           ],
           "name" : "objectId"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Whether the given user can write this object.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "value"
         }
       ]
     }

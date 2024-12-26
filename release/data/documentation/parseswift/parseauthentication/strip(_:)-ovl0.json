@@ -15,6 +15,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseAuthentication-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/strip(_:)-80krh"
       ],

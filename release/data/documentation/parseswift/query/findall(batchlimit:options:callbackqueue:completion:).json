@@ -370,52 +370,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The maximum number of objects to send in each batch. If the amount of items to be batched",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "is greater than the ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "batchLimit",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", the objects will be sent to the server in waves up to the ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "batchLimit",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "Defaults to 50.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "batchLimit"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "A set of header options sent to the server. Defaults to an empty set.",
                   "type" : "text"
                 }

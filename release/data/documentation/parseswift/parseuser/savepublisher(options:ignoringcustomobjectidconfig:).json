@@ -251,6 +251,20 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "A set of header options sent to the server. Defaults to an empty set.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "options"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "Ignore checking for ",
                   "type" : "text"
                 },
@@ -291,20 +305,6 @@
             }
           ],
           "name" : "ignoringCustomObjectIdConfig"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A set of header options sent to the server. Defaults to an empty set.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "options"
         }
       ]
     },

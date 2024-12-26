@@ -227,28 +227,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An enum value of one of the following actions:",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "action"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "",
                   "type" : "text"
                 },
@@ -283,6 +261,28 @@
             }
           ],
           "name" : "allow"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "An enum value of one of the following actions:",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "get\/find\/count\/create\/update\/delete\/addField.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "action"
         },
         {
           "content" : [

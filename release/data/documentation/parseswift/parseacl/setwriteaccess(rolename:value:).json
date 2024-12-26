@@ -164,20 +164,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Whether the given role can write this object.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "allowed"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "The name of the role.",
                   "type" : "text"
                 }

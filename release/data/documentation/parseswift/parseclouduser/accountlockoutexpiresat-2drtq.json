@@ -19,6 +19,7 @@
   ],
   "defaultImplementationsSections" : [
     {
+      "anchor" : "ParseCloudUser-Implementations",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt-13du2"
       ],

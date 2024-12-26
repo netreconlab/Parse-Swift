@@ -124,33 +124,6 @@
       "kind" : "declarations"
     },
     {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Instance of ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "CLLocationCoordinate2D",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", with set latitude and longitude.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "location"
-        }
-      ]
-    },
-    {
       "content" : [
         {
           "anchor" : "discussion",
