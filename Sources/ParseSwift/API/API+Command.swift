@@ -276,6 +276,11 @@ internal extension API {
                         return
                     }
                     components.queryItems = params
+                    components.percentEncodedQuery = components.percentEncodedQuery?
+                        .replacingOccurrences(
+                            of: "+",
+                            with: "%2B"
+                        )
 
                     guard let urlComponents = components.url else {
                         let error = ParseError(code: .otherCause,

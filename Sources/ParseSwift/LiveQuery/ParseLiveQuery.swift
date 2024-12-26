@@ -154,6 +154,11 @@ Not attempting to open ParseLiveQuery socket anymore
             throw error
         }
         components.scheme = (components.scheme == "https" || components.scheme == "wss") ? "wss" : "ws"
+        components.percentEncodedQuery = components.percentEncodedQuery?
+            .replacingOccurrences(
+                of: "+",
+                with: "%2B"
+            )
         url = components.url
         self.task = await URLSession.liveQuery.createTask(self.url,
                                                           taskDelegate: self)
