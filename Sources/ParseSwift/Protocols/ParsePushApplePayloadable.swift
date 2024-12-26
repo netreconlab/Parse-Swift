@@ -82,4 +82,44 @@ public protocol ParsePushApplePayloadable: ParsePushPayloadable {
      Specify for the `mdm` field where applicable.
      */
     var mdm: String? { get set }
+
+    init()
+}
+
+public extension ParsePushApplePayloadable {
+
+    /**
+     The content of the alert message.
+     */
+    var body: String? {
+        get {
+            alert?.body
+        }
+        set {
+            if alert != nil {
+                alert?.body = newValue
+            } else if let newBody = newValue {
+                alert = .init(body: newBody)
+            }
+        }
+    }
+
+    /**
+     Create an instance of `ParsePushPayloadApple` .
+     - parameter alert: The alert payload for the Apple push notification.
+     */
+    init(alert: ParsePushAppleAlert) {
+        self.init()
+        self.alert = alert
+    }
+
+    /**
+     Create an instance of `ParsePushPayloadApple` .
+     - parameter body: The body message to display for the Apple push notification.
+     */
+    init(body: String) {
+        self.init()
+        self.body = body
+    }
+
 }
