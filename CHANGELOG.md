@@ -2,8 +2,15 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.11.4
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.3...5.11.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.4/documentation/parseswift)
+
+__Fixes__
+* Encode plus symbol in query parameter URI's to server ([#191](https://github.com/netreconlab/Parse-Swift/pull/191)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Encode Firebase notification keys correctly ([#187](https://github.com/netreconlab/Parse-Swift/pull/187)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.11.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.2...5.11.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.3/documentation/parseswift)

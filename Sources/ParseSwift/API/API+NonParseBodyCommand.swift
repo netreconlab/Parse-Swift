@@ -78,6 +78,11 @@ internal extension API {
                                                message: "Could not unwrap url components for \(url)"))
                 }
                 components.queryItems = params
+                components.percentEncodedQuery = components.percentEncodedQuery?
+                    .replacingOccurrences(
+                        of: "+",
+                        with: "%2B"
+                    )
 
                 guard let urlComponents = components.url else {
                     return .failure(ParseError(code: .otherCause,

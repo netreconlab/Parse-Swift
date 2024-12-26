@@ -407,6 +407,55 @@ class APICommandTests: XCTestCase {
         }
     }
 
+    func testQueryWhereEncoding() async throws {
+        let query = Level.query("name" == "test@parse.com")
+        let parameters = try query.getQueryParameters()
+
+        let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(
+            method: .GET,
+            path: query.endpoint,
+            params: parameters
+        ) { _ in
+            return nil
+        }
+
+        switch await queryCommand.prepareURLRequest(options: []) {
+
+        case .success(let request):
+            XCTAssertEqual(
+                request.url?.absoluteString,
+                "http://localhost:1337/parse/classes/Level?limit=100&skip=0&where=%7B%22name%22:%22test@parse.com%22%7D"
+            )
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testQueryWhereEncodingPlus() async throws {
+        let query = Level.query("name" == "test+1@parse.com")
+        let parameters = try query.getQueryParameters()
+
+        let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(
+            method: .GET,
+            path: query.endpoint,
+            params: parameters
+        ) { _ in
+            return nil
+        }
+
+        switch await queryCommand.prepareURLRequest(options: []) {
+
+        case .success(let request):
+            XCTAssertEqual(
+                request.url?.absoluteString,
+                // swiftlint:disable:next line_length
+                "http://localhost:1337/parse/classes/Level?limit=100&skip=0&where=%7B%22name%22:%22test%2B1@parse.com%22%7D"
+            )
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+
     func testClientKeyHeader() async throws {
         guard let clientKey = ParseSwift.configuration.clientKey else {
             throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
