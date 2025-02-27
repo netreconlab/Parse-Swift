@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Add a constraint that requires that a key is equal to a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Add a constraint that requires that a key is equal to a value.",
       "type" : "text"
     }
   ],
@@ -22,11 +14,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:value:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF",
+    "externalID" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -38,11 +30,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "=="
-      },
-      {
-        "kind" : "text",
-        "text" : " "
+        "text" : "equalToNoComparator"
       },
       {
         "kind" : "text",
@@ -57,6 +45,14 @@
         "text" : ">("
       },
       {
+        "kind" : "externalParam",
+        "text" : "key"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SS",
         "text" : "String"
@@ -66,21 +62,21 @@
         "text" : ", "
       },
       {
+        "kind" : "externalParam",
+        "text" : "value"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF1TL_xmfp",
+        "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
         "text" : "T"
       },
       {
         "kind" : "text",
-        "text" : ") "
-      },
-      {
-        "kind" : "keyword",
-        "text" : "throws"
-      },
-      {
-        "kind" : "text",
-        "text" : " -> "
+        "text" : ") -> "
       },
       {
         "kind" : "typeIdentifier",
@@ -94,9 +90,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Operator",
-    "symbolKind" : "op",
-    "title" : "==(_:_:)"
+    "roleHeading" : "Function",
+    "symbolKind" : "func",
+    "title" : "equalToNoComparator(key:value:)"
   },
   "primaryContentSections" : [
     {
@@ -119,11 +115,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "=="
-            },
-            {
-              "kind" : "text",
-              "text" : " "
+              "text" : "equalToNoComparator"
             },
             {
               "kind" : "text",
@@ -138,7 +130,7 @@
               "text" : ">("
             },
             {
-              "kind" : "internalParam",
+              "kind" : "externalParam",
               "text" : "key"
             },
             {
@@ -155,8 +147,8 @@
               "text" : ", "
             },
             {
-              "kind" : "internalParam",
-              "text" : "object"
+              "kind" : "externalParam",
+              "text" : "value"
             },
             {
               "kind" : "text",
@@ -164,20 +156,12 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF1TL_xmfp",
+              "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
               "text" : "T"
             },
             {
               "kind" : "text",
-              "text" : ") "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "throws"
-            },
-            {
-              "kind" : "text",
-              "text" : " -> "
+              "text" : ") -> "
             },
             {
               "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryConstraint",
@@ -206,10 +190,26 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A6ObjectP",
-              "text" : "ParseObject"
+              "preciseIdentifier" : "s:Se",
+              "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SE",
+              "text" : "Encodable"
             }
           ]
         }
@@ -238,22 +238,14 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseObject",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " to compare.",
+                  "text" : "The value to compare.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "object"
+          "name" : "value"
         }
       ]
     },
@@ -298,63 +290,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "An error of type ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "ParseError",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Throws",
-          "style" : "note",
-          "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "See ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "equalTo",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " for more information.",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "This method uses ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "$eq",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " and can",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "be combined with all other ",
+                  "text" : "This ",
                   "type" : "text"
                 },
                 {
@@ -362,7 +298,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : "’s. It has the limitation of",
+                  "text" : " has the limitation of being able to be combined",
                   "type" : "text"
                 },
                 {
@@ -370,35 +306,15 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "not to working for LiveQuery on Parse Servers ",
+                  "text" : "with other ",
                   "type" : "text"
                 },
                 {
-                  "code" : "< 6.3.0",
+                  "code" : "QueryConstraint",
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : ". If you are using",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "an older Parse Server, you should use ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "equalToNoComparator()",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "instead.",
+                  "text" : "’s. It does however work with all versions of LiveQuery.",
                   "type" : "text"
                 }
               ],
@@ -424,7 +340,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/==(_:_:)-8pl0h"
+        "\/documentation\/parseswift\/equaltonocomparator(key:value:)"
       ],
       "traits" : [
         {
@@ -448,139 +364,6 @@
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-8pl0h": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint that requires that a key is equal to a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "=="
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF1TL_xmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "==(_:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/==(_:_:)-8pl0h"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject": {
-  "abstract" : [
-    {
-      "text" : "Objects that conform to the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseObject",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " protocol have a local representation of data persisted to the Parse Server.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "This is the main protocol that is used to interact with objects in your app.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseObject"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseObject"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseObject",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryConstraint": {
   "abstract" : [
@@ -615,6 +398,85 @@
   "title" : "QueryConstraint",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryconstraint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalToNoComparator(key:value:)": {
+  "abstract" : [
+    {
+      "text" : "Add a constraint that requires that a key is equal to a value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "equalToNoComparator"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "key"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:value:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "equalToNoComparator(key:value:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/equaltonocomparator(key:value:)"
 }
 }
 }

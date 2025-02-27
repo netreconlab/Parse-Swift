@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Use the ",
+      "text" : "ParseSwift uses the ",
       "type" : "text"
     },
     {
@@ -14,8 +14,19 @@
       "type" : "strong"
     },
     {
-      "text" : " query constraint when querying.",
+      "text" : " query constraint by default when querying.",
       "type" : "text"
+    }
+  ],
+  "deprecationSummary" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Changing has no effect. This will be remove in ParseSwift 6.0.0",
+          "type" : "text"
+        }
+      ],
+      "type" : "paragraph"
     }
   ],
   "hierarchy" : {
@@ -60,6 +71,9 @@
       {
         "name" : "ParseSwift"
       }
+    ],
+    "platforms" : [
+
     ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
@@ -120,8 +134,60 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "This is known not to work for LiveQuery on Parse Servers <= 5.0.0.",
+                  "text" : "This method uses ",
                   "type" : "text"
+                },
+                {
+                  "code" : "$eq",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " and can",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "be combined with all other ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "QueryConstaint",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : "’s. It has the limitation of",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "not to working for LiveQuery on Parse Servers ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "< 6.3.0",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". If you are using",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "an older Parse Server, you should use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "equalToNoComparator()",
+                  "type" : "codeVoice"
                 }
               ],
               "type" : "paragraph"
@@ -208,7 +274,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/isUsingEqualQueryConstraint": {
   "abstract" : [
     {
-      "text" : "Use the ",
+      "text" : "ParseSwift uses the ",
       "type" : "text"
     },
     {
@@ -221,10 +287,11 @@
       "type" : "strong"
     },
     {
-      "text" : " query constraint when querying.",
+      "text" : " query constraint by default when querying.",
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

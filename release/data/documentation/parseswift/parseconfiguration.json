@@ -1403,7 +1403,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/isUsingEqualQueryConstraint": {
   "abstract" : [
     {
-      "text" : "Use the ",
+      "text" : "ParseSwift uses the ",
       "type" : "text"
     },
     {
@@ -1416,10 +1416,11 @@
       "type" : "strong"
     },
     {
-      "text" : " query constraint when querying.",
+      "text" : " query constraint by default when querying.",
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

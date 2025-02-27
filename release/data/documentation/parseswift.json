@@ -476,8 +476,10 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotMatchKeyInQuery(key:queryKey:query:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:object:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:value:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/exists(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/geoPoint(_:within:)-41yaf",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/geoPoint(_:within:)-9uzx1",
@@ -7768,7 +7770,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/doesnotmatchkeyinquery(key:querykey:query:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:object:usingEqComparator:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:object:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a ",
@@ -7835,25 +7837,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift7equalTo3key6object17usingEqComparatorAA15QueryConstraintVSS_xSbtKAA0A6ObjectRzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift7equalTo3key6objectAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF1TL_xmfp",
       "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqComparator"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
     },
     {
       "kind" : "text",
@@ -7873,14 +7858,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:usingEqComparator:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:object:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "equalTo(key:object:usingEqComparator:)",
+  "title" : "equalTo(key:object:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/equalto(key:object:usingeqcomparator:)"
+  "url" : "\/documentation\/parseswift\/equalto(key:object:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:value:usingEqComparator:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalTo(key:value:)": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a value.",
@@ -7939,25 +7924,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5value17usingEqComparatorAA15QueryConstraintVSS_xSbtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
       "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "usingEqComparator"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
     },
     {
       "kind" : "text",
@@ -7969,12 +7937,186 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:usingEqComparator:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalTo(key:value:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "equalTo(key:value:usingEqComparator:)",
+  "title" : "equalTo(key:value:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/equalto(key:value:usingeqcomparator:)"
+  "url" : "\/documentation\/parseswift\/equalto(key:value:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalToNoComparator(key:object:)": {
+  "abstract" : [
+    {
+      "text" : "Add a constraint that requires that a key is equal to a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "equalToNoComparator"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "key"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "object"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key6objectAA15QueryConstraintVSS_xtKAA0A6ObjectRzlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:object:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "equalToNoComparator(key:object:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/equaltonocomparator(key:object:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/equalToNoComparator(key:value:)": {
+  "abstract" : [
+    {
+      "text" : "Add a constraint that requires that a key is equal to a value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "equalToNoComparator"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "key"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/equalToNoComparator(key:value:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "equalToNoComparator(key:value:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/equaltonocomparator(key:value:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/exists(key:)": {
   "abstract" : [
