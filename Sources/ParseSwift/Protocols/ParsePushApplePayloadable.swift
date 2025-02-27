@@ -17,19 +17,8 @@ import Foundation
  need to implement `CodingKeys`, see `ParsePushPayloadApple` for an example.
  */
 public protocol ParsePushApplePayloadable: ParsePushPayloadable {
-    /**
-     The payload for displaying an alert.
-     */
-    var alert: ParsePushAppleAlert? { get set }
-    /**
-     The destination topic for the notification.
-     */
-    var topic: String? { get set }
-    /**
-     Multiple notifications with same collapse identifier are displayed to the user as a single
-     notification. The value should not exceed 64 bytes.
-     */
-    var collapseId: String? { get set }
+
+    // MARK: Header and other high level information.
     /**
      The type of the notification. The value is alert or background. Specify alert when the
      delivery of your notification displays an alert, plays a sound, or badges your app’s icon.
@@ -39,6 +28,28 @@ public protocol ParsePushApplePayloadable: ParsePushPayloadable {
      devices running iOS 13 and later, or watchOS 6 and later. Ignored on earlier OS versions.
      */
     var pushType: ParsePushPayloadApple.PushType? { get set }
+
+    // MARK: APS information.
+
+    /**
+     The background notification flag. If you are a writing an app using the Remote Notification
+     Background Mode introduced in iOS7 (a.k.a. “Background Push”), set this value to
+     1 to trigger a background update. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app).
+     - warning: For Apple OS's only. You also have to set `pushType` starting iOS 13
+     and watchOS 6.
+     */
+    var contentAvailable: Int? { get set }
+    /**
+     The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
+     - warning: You also have to set `pushType` starting iOS 13
+     and watchOS 6.
+     */
+    var mutableContent: Int? { get set }
+
+    /**
+     The payload for displaying an alert.
+     */
+    var alert: ParsePushAppleAlert? { get set }
     /**
      The identifier of the `UNNotification​Category` for this push notification.
      See Apple's
@@ -78,10 +89,6 @@ public protocol ParsePushApplePayloadable: ParsePushPayloadable {
      notification summary. See [relevanceScore](https://developer.apple.com/documentation/usernotifications/unnotificationcontent/3821031-relevancescore).
      */
     var relevanceScore: Double? { get set }
-    /**
-     Specify for the `mdm` field where applicable.
-     */
-    var mdm: String? { get set }
 
     init()
 }

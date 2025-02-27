@@ -6,28 +6,70 @@
 //  Copyright © 2024 Network Reconnaissance Lab. All rights reserved.
 //
 
-struct ParsePushAppleNotification<P: ParsePushApplePayload>: ParsePushPayloadable {
+import Foundation
 
-    var aps: P?
+struct ParsePushAppleNotification<P: ParsePushApplePayload>: ParsePushAppleHeader, ParsePushPayloadable {
+
+    struct APS: ParseTypeable {
+        var payload: P
+
+        enum CodingKeys: String, CodingKey {
+            case payload = "aps"
+        }
+    }
+
+    // Notification Header properties set by parse-server-push-adapter.
     var collapseId: String?
-    var pushType: ParsePushPayloadApple.PushType?
     var priority: Int?
-    var mdm: String?
+    var pushType: ParsePushPayloadApple.PushType?
+    var topic: String?
+
+    // Notification Header properties set directly.
+    var id: UUID?
+    var requestId: UUID?
+    var channelId: String?
+    var payload: APS?
+
     public init() {}
 
-    public init(payload: P) {
-        self.aps = payload
-        self.collapseId = payload.collapseId
+    init(
+        id: UUID? = nil,
+        collapseId: String? = nil,
+        requestId: UUID? = nil,
+        channelId: String? = nil,
+        priority: Int? = nil,
+        topic: String? = nil,
+        payload: P
+    ) {
+        self.id = id
+        self.collapseId = collapseId
+        self.requestId = requestId
+        self.channelId = channelId
+        self.priority = priority
+        self.topic = topic
         self.pushType = payload.pushType
-        self.priority = payload.priority
-        self.mdm = payload.mdm
+        self.payload = APS(payload: payload)
     }
 
     enum CodingKeys: String, CodingKey {
         case pushType = "push_type"
-        case collapseId = "collapse_id"
-        case mdm = "_mdm"
-        case aps, priority
+        case payload = "rawPayload"
+        case collapseId, priority, topic, id, requestId, channelId
     }
 
+}
+
+extension ParsePushAppleNotification where P: ParsePushApplePayload & ParsePushAppleHeader {
+
+    init(
+        id: UUID? = nil,
+        payload: P
+    ) {
+        self.id = id
+        self.collapseId = payload.collapseId
+        self.pushType = payload.pushType
+        self.priority = payload.priority
+        self.topic = payload.topic
+        self.payload = APS(payload: payload)
+    }
 }
