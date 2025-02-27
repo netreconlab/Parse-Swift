@@ -408,7 +408,12 @@ class APICommandTests: XCTestCase {
     }
 
     func testQueryWhereEncoding() async throws {
-        let query = Level.query("name" == "test@parse.com")
+        let query = Level.query(
+            equalToNoComparator(
+                key: "name",
+                value: "test@parse.com"
+            )
+        )
         let parameters = try query.getQueryParameters()
 
         let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(
@@ -432,7 +437,12 @@ class APICommandTests: XCTestCase {
     }
 
     func testQueryWhereEncodingPlus() async throws {
-        let query = Level.query("name" == "test+1@parse.com")
+        let query = Level.query(
+            equalToNoComparator(
+                key: "name",
+                value: "test+1@parse.com"
+            )
+        )
         let parameters = try query.getQueryParameters()
 
         let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(

@@ -48,8 +48,12 @@ public struct ParseConfiguration {
     /// - warning: This is experimental.
     public internal(set) var isUsingTransactions = false
 
-    /// Use the **$eq** query constraint when querying.
-    /// - warning: This is known not to work for LiveQuery on Parse Servers <= 5.0.0.
+    /// ParseSwift uses the **$eq** query constraint by default when querying.
+    /// - warning: This method uses `$eq` and can
+    /// be combined with all other `QueryConstaint`'s. It has the limitation of
+    /// not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+    /// an older Parse Server, you should use `equalToNoComparator()`
+    @available(*, deprecated, message: "Changing has no effect. This will be remove in ParseSwift 6.0.0")
     public internal(set) var isUsingEqualQueryConstraint = false
 
     /// Use **POST** instead of **GET** when making query calls.

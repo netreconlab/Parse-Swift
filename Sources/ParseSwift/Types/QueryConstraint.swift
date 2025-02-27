@@ -133,9 +133,11 @@ public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  - warning: See `equalTo` for more information.
- Behavior changes based on `ParseSwift.configuration.isUsingEqualQueryConstraint`
- where isUsingEqualQueryConstraint == true is known not to work for LiveQuery on
- Parse Servers  <= 5.0.0.
+ This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
 public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
     equalTo(key: key, value: value)
@@ -145,23 +147,33 @@ public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  Add a constraint that requires that a key is equal to a value.
  - parameter key: The key that the value is stored in.
  - parameter value: The value to compare.
- - parameter usingEqComparator: Set to **true** to use **$eq** comparater,
- allowing for multiple `QueryConstraint`'s to be used on a single **key**.
- Setting to *false* may override any `QueryConstraint`'s on the same **key**.
- Defaults to `ParseSwift.configuration.isUsingEqualQueryConstraint`.
  - returns: The same instance of `QueryConstraint` as the receiver.
- - warning: `usingEqComparator == true` is known not to work for LiveQueries
- on Parse Servers <= 5.0.0.
+ - warning: This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
-public func equalTo <T>(key: String,
-                        value: T,
-                        // swiftlint:disable:next line_length
-                        usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) -> QueryConstraint where T: Codable {
-    if !usingEqComparator {
-        return QueryConstraint(key: key, value: value)
-    } else {
-        return QueryConstraint(key: key, value: value, comparator: .equalTo)
-    }
+public func equalTo<T>(
+    key: String,
+    value: T
+) -> QueryConstraint where T: Codable {
+    QueryConstraint(key: key, value: value, comparator: .equalTo)
+}
+
+/**
+ Add a constraint that requires that a key is equal to a value.
+ - parameter key: The key that the value is stored in.
+ - parameter value: The value to compare.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ - warning: This `QueryConstaint` has the limitation of being able to be combined
+ with other `QueryConstraint`'s. It does however work with all versions of LiveQuery.
+ */
+public func equalToNoComparator<T>(
+    key: String,
+    value: T
+) -> QueryConstraint where T: Codable {
+    QueryConstraint(key: key, value: value)
 }
 
 /**
@@ -171,9 +183,11 @@ public func equalTo <T>(key: String,
  - returns: The same instance of `QueryConstraint` as the receiver.
  - throws: An error of type `ParseError`.
  - warning: See `equalTo` for more information.
- Behavior changes based on `ParseSwift.configuration.isUsingEqualQueryConstraint`
- where isUsingEqualQueryConstraint == true is known not to work for LiveQuery on
- Parse Servers  <= 5.0.0.
+ This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
 public func == <T>(key: String, object: T) throws -> QueryConstraint where T: ParseObject {
     try equalTo(key: key, object: object)
@@ -183,24 +197,39 @@ public func == <T>(key: String, object: T) throws -> QueryConstraint where T: Pa
  Add a constraint that requires that a key is equal to a `ParseObject`.
  - parameter key: The key that the value is stored in.
  - parameter object: The `ParseObject` to compare.
- - parameter usingEqComparator: Set to **true** to use **$eq** comparater,
- allowing for multiple `QueryConstraint`'s to be used on a single **key**.
- Setting to *false* may override any `QueryConstraint`'s on the same **key**.
- Defaults to `ParseSwift.configuration.isUsingEqualQueryConstraint`.
  - returns: The same instance of `QueryConstraint` as the receiver.
  - throws: An error of type `ParseError`.
- - warning: `usingEqComparator == true` is known not to work for LiveQueries
- on Parse Servers <= 5.0.0.
+ - warning: This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
-public func equalTo <T>(key: String,
-                        object: T,
-                        // swiftlint:disable:next line_length
-                        usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) throws -> QueryConstraint where T: ParseObject {
-    if !usingEqComparator {
-        return try QueryConstraint(key: key, value: object.toPointer())
-    } else {
-        return try QueryConstraint(key: key, value: object.toPointer(), comparator: .equalTo)
-    }
+public func equalTo<T>(
+    key: String,
+    object: T
+) throws -> QueryConstraint where T: ParseObject {
+    try QueryConstraint(
+        key: key,
+        value: object.toPointer(),
+        comparator: .equalTo
+    )
+}
+
+/**
+ Add a constraint that requires that a key is equal to a `ParseObject`.
+ - parameter key: The key that the value is stored in.
+ - parameter object: The `ParseObject` to compare.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ - throws: An error of type `ParseError`.
+ - warning: This `QueryConstaint` has the limitation of being able to be combined
+ with other `QueryConstraint`'s. It does however work with all versions of LiveQuery.
+ */
+public func equalToNoComparator<T>(
+    key: String,
+    object: T
+) throws -> QueryConstraint where T: ParseObject {
+    try QueryConstraint(key: key, value: object.toPointer())
 }
 
 /**
