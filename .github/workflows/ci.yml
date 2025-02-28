@@ -138,7 +138,7 @@ jobs:
 
   windows:
     timeout-minutes: 15
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
       - uses: compnerd/gha-setup-swift@v0.3.0
