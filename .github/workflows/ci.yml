@@ -147,7 +147,8 @@ jobs:
           tag: 5.10.1-RELEASE
       - name: Build
         run: |
-          swift build --enable-test-discovery -v
+          swift build -v
+          swift test -v
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
