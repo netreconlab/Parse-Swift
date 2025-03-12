@@ -15,11 +15,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/init(applicationId:clientKey:primaryKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/init(applicationId:clientKey:primaryKey:maintenanceKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A13ConfigurationV13applicationId9clientKey07primaryG007webhookG09serverURL015liveQueryServerK024requiringCustomObjectIds17usingTransactions0s5EqualM10Constraint0s7PostForM014primitiveStore18requestCachePolicy19cacheMemoryCapacity17cacheDiskCapacity0S22DataProtectionKeychain24deletingKeychainIfNeeded21httpAdditionalHeaders0S14AutomaticLogin21maxConnectionAttempts0lM30ConnectionAdditionalProperties0lM21MaxConnectionAttempts17parseFileTransfer14authenticationACSS_SSSgA_A_10Foundation0K0VA2_SgS4bAA0A17PrimitiveStorable_pSgSo23NSURLRequestCachePolicyVS2iS2bSDys11AnyHashableVypGSgSbSiSbSiAA0A16FileTransferable_pSgySo28NSURLAuthenticationChallengeC_ySo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtXEtcSgtcfc",
+    "externalID" : "s:10ParseSwift0A13ConfigurationV13applicationId9clientKey07primaryG0011maintenanceG007webhookG09serverURL015liveQueryServerL024requiringCustomObjectIds17usingTransactions0t5EqualN10Constraint0t7PostForN014primitiveStore18requestCachePolicy19cacheMemoryCapacity17cacheDiskCapacity0T22DataProtectionKeychain24deletingKeychainIfNeeded21httpAdditionalHeaders0T14AutomaticLogin21maxConnectionAttempts0mN30ConnectionAdditionalProperties0mN21MaxConnectionAttempts17parseFileTransfer14authenticationACSS_SSSgA0_A0_A0_10Foundation0L0VA3_SgS4bAA0A17PrimitiveStorable_pSgSo23NSURLRequestCachePolicyVS2iS2bSDys11AnyHashableVypGSgSbSiSbSiAA0A16FileTransferable_pSgySo28NSURLAuthenticationChallengeC_ySo36NSURLSessionAuthChallengeDispositionV_So15NSURLCredentialCSgtXEtcSgtcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -66,6 +66,23 @@
       {
         "kind" : "externalParam",
         "text" : "primaryKey"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "maintenanceKey"
       },
       {
         "kind" : "text",
@@ -491,7 +508,7 @@
     "role" : "symbol",
     "roleHeading" : "Initializer",
     "symbolKind" : "init",
-    "title" : "init(applicationId:clientKey:primaryKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)"
+    "title" : "init(applicationId:clientKey:primaryKey:maintenanceKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)"
   },
   "primaryContentSections" : [
     {
@@ -549,6 +566,23 @@
             {
               "kind" : "externalParam",
               "text" : "primaryKey"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "maintenanceKey"
             },
             {
               "kind" : "text",
@@ -1024,6 +1058,28 @@
             }
           ],
           "name" : "primaryKey"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The maintenance key for your Parse application. This key should only be",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "specified when using the SDK on a server.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "maintenanceKey"
         },
         {
           "content" : [
@@ -1798,7 +1854,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:u-4vywn"
+        "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:maintenancekey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cach-f3sf"
       ],
       "traits" : [
         {
@@ -1857,7 +1913,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfiguration"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/init(applicationId:clientKey:primaryKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/init(applicationId:clientKey:primaryKey:maintenanceKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
   "abstract" : [
     {
       "text" : "Create a Parse Swift configuration.",
@@ -1910,6 +1966,23 @@
     {
       "kind" : "externalParam",
       "text" : "primaryKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maintenanceKey"
     },
     {
       "kind" : "text",
@@ -2327,12 +2400,12 @@
       "text" : ")?)"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/init(applicationId:clientKey:primaryKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/init(applicationId:clientKey:primaryKey:maintenanceKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(applicationId:clientKey:primaryKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
+  "title" : "init(applicationId:clientKey:primaryKey:maintenanceKey:webhookKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:u-4vywn"
+  "url" : "\/documentation\/parseswift\/parseconfiguration\/init(applicationid:clientkey:primarykey:maintenancekey:webhookkey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cach-f3sf"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable": {
   "abstract" : [

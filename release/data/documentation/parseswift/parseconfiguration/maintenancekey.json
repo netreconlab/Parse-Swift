@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The primary key for your Parse application.",
+      "text" : "The maintenance key for your Parse application.",
       "type" : "text"
     }
   ],
@@ -15,11 +15,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/primaryKey"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/maintenanceKey"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A13ConfigurationV10primaryKeySSSgvp",
+    "externalID" : "s:10ParseSwift0A13ConfigurationV14maintenanceKeySSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -31,7 +31,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "primaryKey"
+        "text" : "maintenanceKey"
       },
       {
         "kind" : "text",
@@ -55,7 +55,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "primaryKey"
+    "title" : "maintenanceKey"
   },
   "primaryContentSections" : [
     {
@@ -78,7 +78,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "primaryKey"
+              "text" : "maintenanceKey"
             },
             {
               "kind" : "text",
@@ -129,35 +129,6 @@
           "name" : "Warning",
           "style" : "warning",
           "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "This has been renamed from ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "masterKey",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " to reflect ",
-                  "type" : "text"
-                },
-                {
-                  "identifier" : "https:\/\/github.com\/dialpad\/inclusive-language#motivation",
-                  "isActive" : true,
-                  "type" : "reference"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Note",
-          "style" : "note",
-          "type" : "aside"
         }
       ],
       "kind" : "content"
@@ -174,7 +145,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseconfiguration\/primarykey"
+        "\/documentation\/parseswift\/parseconfiguration\/maintenancekey"
       ],
       "traits" : [
         {
@@ -233,10 +204,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseconfiguration"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/primaryKey": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/maintenanceKey": {
   "abstract" : [
     {
-      "text" : "The primary key for your Parse application.",
+      "text" : "The maintenance key for your Parse application.",
       "type" : "text"
     }
   ],
@@ -251,7 +222,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "primaryKey"
+      "text" : "maintenanceKey"
     },
     {
       "kind" : "text",
@@ -267,24 +238,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/primaryKey",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/maintenanceKey",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "primaryKey",
+  "title" : "maintenanceKey",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfiguration\/primarykey"
-},
-"https://github.com/dialpad/inclusive-language#motivation": {
-  "identifier" : "https:\/\/github.com\/dialpad\/inclusive-language#motivation",
-  "title" : "inclusive language",
-  "titleInlineContent" : [
-    {
-      "text" : "inclusive language",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/dialpad\/inclusive-language#motivation"
+  "url" : "\/documentation\/parseswift\/parseconfiguration\/maintenancekey"
 }
 }
 }

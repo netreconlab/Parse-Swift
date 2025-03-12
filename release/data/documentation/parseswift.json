@@ -329,7 +329,6 @@
       "anchor" : "Configure-SDK",
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
@@ -485,6 +484,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/geoPoint(_:within:)-9uzx1",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasPrefix(key:prefix:modifiers:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/hasSuffix(key:suffix:modifiers:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:maintenanceKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNotNull(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/isNull(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/matchesKeyInQuery(key:queryKey:query:)",
@@ -8527,7 +8527,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/hassuffix(key:suffix:modifiers:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:primaryKey:maintenanceKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
   "abstract" : [
     {
       "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
@@ -8600,6 +8600,23 @@
     {
       "kind" : "externalParam",
       "text" : "primaryKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maintenanceKey"
     },
     {
       "kind" : "text",
@@ -9012,12 +9029,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(applicationId:clientKey:primaryKey:maintenanceKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "initialize(applicationId:clientKey:primaryKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
+  "title" : "initialize(applicationId:clientKey:primaryKey:maintenanceKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachediskcapacity:usingd-8yiow"
+  "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:maintenancekey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachedisk-fuew"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(configuration:)": {
   "abstract" : [
