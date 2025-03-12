@@ -34,11 +34,14 @@ class APICommandTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try await ParseSwift.initialize(applicationId: "applicationId",
-                                        clientKey: "clientKey",
-                                        primaryKey: "primaryKey",
-                                        serverURL: url,
-                                        testing: true)
+        try await ParseSwift.initialize(
+            applicationId: "applicationId",
+            clientKey: "clientKey",
+            primaryKey: "primaryKey",
+            maintenanceKey: "maintenanceKey",
+            serverURL: url,
+            testing: true
+        )
     }
 
     override func tearDown() async throws {
@@ -507,6 +510,30 @@ class APICommandTests: XCTestCase {
                            primaryKey)
             XCTAssertEqual(ParseSwift.configuration.primaryKey,
                            primaryKey)
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testMaintenanceKeyHeader() async throws {
+        guard let maintenanceKey = ParseSwift.configuration.maintenanceKey else {
+            throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
+        }
+
+        let headers = try await API.getHeaders(options: [])
+        XCTAssertNil(headers["X-Parse-Maintenance-Key"])
+
+        let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
+            return nil
+        }
+
+        switch await post.prepareURLRequest(options: [.useMaintenanceKey]) {
+
+        case .success(let request):
+            XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Maintenance-Key"],
+                           maintenanceKey)
+            XCTAssertEqual(ParseSwift.configuration.maintenanceKey,
+                           maintenanceKey)
         case .failure(let error):
             XCTFail(error.localizedDescription)
         }

@@ -12,53 +12,59 @@ internal struct Parse {
     static var sessionDelegate: ParseURLSessionDelegate!
 }
 
-internal func initialize(applicationId: String,
-                         clientKey: String? = nil,
-                         primaryKey: String? = nil,
-                         serverURL: URL,
-                         liveQueryServerURL: URL? = nil,
-                         requiringCustomObjectIds: Bool = false,
-                         usingTransactions: Bool = false,
-                         usingEqualQueryConstraint: Bool = false,
-                         usingPostForQuery: Bool = false,
-                         primitiveStore: ParsePrimitiveStorable? = nil,
-                         requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-                         cacheMemoryCapacity: Int = 512_000,
-                         cacheDiskCapacity: Int = 10_000_000,
-                         migratingFromObjcSDK: Bool = false,
-                         usingDataProtectionKeychain: Bool = false,
-                         deletingKeychainIfNeeded: Bool = false,
-                         httpAdditionalHeaders: [AnyHashable: Any]? = nil,
-                         usingAutomaticLogin: Bool = false,
-                         maxConnectionAttempts: Int = 5,
-                         liveQueryConnectionAdditionalProperties: Bool = true,
-                         liveQueryMaxConnectionAttempts: Int = 20,
-                         testing: Bool = false,
-                         testLiveQueryDontCloseSocket: Bool = false,
-                         authentication: ((URLAuthenticationChallenge,
-                                          (URLSession.AuthChallengeDisposition,
-                                           URLCredential?) -> Void) -> Void)? = nil) async throws {
-    var configuration = ParseConfiguration(applicationId: applicationId,
-                                           clientKey: clientKey,
-                                           primaryKey: primaryKey,
-                                           serverURL: serverURL,
-                                           liveQueryServerURL: liveQueryServerURL,
-                                           requiringCustomObjectIds: requiringCustomObjectIds,
-                                           usingTransactions: usingTransactions,
-                                           usingEqualQueryConstraint: usingEqualQueryConstraint,
-                                           usingPostForQuery: usingPostForQuery,
-                                           primitiveStore: primitiveStore,
-                                           requestCachePolicy: requestCachePolicy,
-                                           cacheMemoryCapacity: cacheMemoryCapacity,
-                                           cacheDiskCapacity: cacheDiskCapacity,
-                                           usingDataProtectionKeychain: usingDataProtectionKeychain,
-                                           deletingKeychainIfNeeded: deletingKeychainIfNeeded,
-                                           httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticLogin: usingAutomaticLogin,
-                                           maxConnectionAttempts: maxConnectionAttempts,
-                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
-                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
-                                           authentication: authentication)
+internal func initialize(
+    applicationId: String,
+    clientKey: String? = nil,
+    primaryKey: String? = nil,
+    maintenanceKey: String? = nil,
+    serverURL: URL,
+    liveQueryServerURL: URL? = nil,
+    requiringCustomObjectIds: Bool = false,
+    usingTransactions: Bool = false,
+    usingEqualQueryConstraint: Bool = false,
+    usingPostForQuery: Bool = false,
+    primitiveStore: ParsePrimitiveStorable? = nil,
+    requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+    cacheMemoryCapacity: Int = 512_000,
+    cacheDiskCapacity: Int = 10_000_000,
+    migratingFromObjcSDK: Bool = false,
+    usingDataProtectionKeychain: Bool = false,
+    deletingKeychainIfNeeded: Bool = false,
+    httpAdditionalHeaders: [AnyHashable: Any]? = nil,
+    usingAutomaticLogin: Bool = false,
+    maxConnectionAttempts: Int = 5,
+    liveQueryConnectionAdditionalProperties: Bool = true,
+    liveQueryMaxConnectionAttempts: Int = 20,
+    testing: Bool = false,
+    testLiveQueryDontCloseSocket: Bool = false,
+    authentication: ((URLAuthenticationChallenge,
+                     (URLSession.AuthChallengeDisposition,
+                      URLCredential?) -> Void) -> Void)? = nil
+) async throws {
+    var configuration = ParseConfiguration(
+        applicationId: applicationId,
+        clientKey: clientKey,
+        primaryKey: primaryKey,
+        maintenanceKey: maintenanceKey,
+        serverURL: serverURL,
+        liveQueryServerURL: liveQueryServerURL,
+        requiringCustomObjectIds: requiringCustomObjectIds,
+        usingTransactions: usingTransactions,
+        usingEqualQueryConstraint: usingEqualQueryConstraint,
+        usingPostForQuery: usingPostForQuery,
+        primitiveStore: primitiveStore,
+        requestCachePolicy: requestCachePolicy,
+        cacheMemoryCapacity: cacheMemoryCapacity,
+        cacheDiskCapacity: cacheDiskCapacity,
+        usingDataProtectionKeychain: usingDataProtectionKeychain,
+        deletingKeychainIfNeeded: deletingKeychainIfNeeded,
+        httpAdditionalHeaders: httpAdditionalHeaders,
+        usingAutomaticLogin: usingAutomaticLogin,
+        maxConnectionAttempts: maxConnectionAttempts,
+        liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
+        liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
+        authentication: authentication
+    )
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
@@ -215,6 +221,8 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  - parameter primaryKey: The primary key for your Parse application. This key should only be
  specified when using the SDK on a server. This has been renamed from `masterKey` to reflect
  inclusive language.
+ - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
+ specified when using the SDK on a server.
  - parameter serverURL: The server URL to connect to Parse Server.
  - parameter liveQueryServerURL: The live query server URL to connect to Parse Server.
  - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
@@ -265,6 +273,7 @@ public func initialize(
     applicationId: String,
     clientKey: String? = nil,
     primaryKey: String? = nil,
+    maintenanceKey: String? = nil,
     serverURL: URL,
     liveQueryServerURL: URL? = nil,
     requiringCustomObjectIds: Bool = false,
@@ -287,28 +296,31 @@ public func initialize(
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
-    let configuration = ParseConfiguration(applicationId: applicationId,
-                                           clientKey: clientKey,
-                                           primaryKey: primaryKey,
-                                           serverURL: serverURL,
-                                           liveQueryServerURL: liveQueryServerURL,
-                                           requiringCustomObjectIds: requiringCustomObjectIds,
-                                           usingTransactions: usingTransactions,
-                                           usingEqualQueryConstraint: usingEqualQueryConstraint,
-                                           usingPostForQuery: usingPostForQuery,
-                                           primitiveStore: primitiveStore,
-                                           requestCachePolicy: requestCachePolicy,
-                                           cacheMemoryCapacity: cacheMemoryCapacity,
-                                           cacheDiskCapacity: cacheDiskCapacity,
-                                           usingDataProtectionKeychain: usingDataProtectionKeychain,
-                                           deletingKeychainIfNeeded: deletingKeychainIfNeeded,
-                                           httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticLogin: usingAutomaticLogin,
-                                           maxConnectionAttempts: maxConnectionAttempts,
-                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
-                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
-                                           parseFileTransfer: parseFileTransfer,
-                                           authentication: authentication)
+    let configuration = ParseConfiguration(
+        applicationId: applicationId,
+        clientKey: clientKey,
+        primaryKey: primaryKey,
+        maintenanceKey: maintenanceKey,
+        serverURL: serverURL,
+        liveQueryServerURL: liveQueryServerURL,
+        requiringCustomObjectIds: requiringCustomObjectIds,
+        usingTransactions: usingTransactions,
+        usingEqualQueryConstraint: usingEqualQueryConstraint,
+        usingPostForQuery: usingPostForQuery,
+        primitiveStore: primitiveStore,
+        requestCachePolicy: requestCachePolicy,
+        cacheMemoryCapacity: cacheMemoryCapacity,
+        cacheDiskCapacity: cacheDiskCapacity,
+        usingDataProtectionKeychain: usingDataProtectionKeychain,
+        deletingKeychainIfNeeded: deletingKeychainIfNeeded,
+        httpAdditionalHeaders: httpAdditionalHeaders,
+        usingAutomaticLogin: usingAutomaticLogin,
+        maxConnectionAttempts: maxConnectionAttempts,
+        liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
+        liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
+        parseFileTransfer: parseFileTransfer,
+        authentication: authentication
+    )
     try await initialize(configuration: configuration)
 }
 

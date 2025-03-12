@@ -141,6 +141,8 @@ public struct API {
     /// Options available to send to Parse Server.
     public enum Option: Hashable, Sendable {
 
+        /// Use the maintenanceKey if it was provided during initial configuraration.
+        case useMaintenanceKey
         /// Use the primaryKey/masterKey if it was provided during initial configuraration.
         case usePrimaryKey
         /// Use a specific session token.
@@ -178,34 +180,37 @@ public struct API {
         // swiftlint:disable:next cyclomatic_complexity
         public func hash(into hasher: inout Hasher) {
             switch self {
-            case .usePrimaryKey:
+            case .useMaintenanceKey:
                 hasher.combine(1)
-            case .sessionToken:
+            case .usePrimaryKey:
                 hasher.combine(2)
-            case .installationId:
+            case .sessionToken:
                 hasher.combine(3)
-            case .mimeType:
+            case .installationId:
                 hasher.combine(4)
-            case .fileSize:
+            case .mimeType:
                 hasher.combine(5)
-            case .removeMimeType:
+            case .fileSize:
                 hasher.combine(6)
-            case .metadata:
+            case .removeMimeType:
                 hasher.combine(7)
-            case .tags:
+            case .metadata:
                 hasher.combine(8)
-            case .context:
+            case .tags:
                 hasher.combine(9)
-            case .cachePolicy:
+            case .context:
                 hasher.combine(10)
-            case .serverURL:
+            case .cachePolicy:
                 hasher.combine(11)
+            case .serverURL:
+                hasher.combine(12)
             }
         }
 
         // swiftlint:disable:next cyclomatic_complexity
         public static func == (lhs: API.Option, rhs: API.Option) -> Bool {
             switch (lhs, rhs) {
+            case (.useMaintenanceKey, .useMaintenanceKey): return true
             case (.usePrimaryKey, .usePrimaryKey): return true
             case (.removeMimeType, .removeMimeType): return true
             case (.sessionToken(let object1), .sessionToken(let object2)): return object1 == object2
@@ -244,6 +249,8 @@ public struct API {
 
         options.forEach { option in
             switch option {
+            case .useMaintenanceKey:
+                headers["X-Parse-Maintenance-Key"] = Parse.configuration.maintenanceKey
             case .usePrimaryKey:
                 headers["X-Parse-Master-Key"] = Parse.configuration.primaryKey
             case .sessionToken(let sessionToken):
