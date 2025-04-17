@@ -1223,8 +1223,9 @@ extension ParseUser {
 				let savedObject = try ParseCoding.jsonDecoder().decode(
 					CreateResponse.self,
 					from: data
-				).apply(to: updatedUser)
-
+				).apply(
+					to: updatedUser
+				)
 				return savedObject
 			} catch let originalError {
 				do {
@@ -1232,9 +1233,8 @@ extension ParseUser {
 						Pointer<Self>.self,
 						from: data
 					)
-					var objectToUpdate = updatedUser
-					objectToUpdate.objectId = pointer.objectId
-					return objectToUpdate
+					let fetchedObject = try await pointer.fetch()
+					return fetchedObject
 				} catch {
 					throw originalError
 				}

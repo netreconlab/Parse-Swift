@@ -436,7 +436,27 @@ internal extension API.Command {
         }
         let updatedObject = object
         let mapper = { @Sendable (data) -> V in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
+			do {
+				// Try to decode CreateResponse, if that doesn't work try Pointer
+				let savedObject = try ParseCoding.jsonDecoder().decode(
+					CreateResponse.self,
+					from: data
+				).apply(
+					to: updatedObject
+				)
+				return savedObject
+			} catch let originalError {
+				do {
+					let pointer = try ParseCoding.jsonDecoder().decode(
+						Pointer<V>.self,
+						from: data
+					)
+					let fetchedObject = try await pointer.fetch()
+					return fetchedObject
+				} catch {
+					throw originalError
+				}
+			}
         }
         return API.Command<V, V>(method: .POST,
                                  path: try await object.endpoint(.POST),
