@@ -528,6 +528,48 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
 		XCTAssertNil(mergeable.updatedAt)
 	}
 
+	@MainActor
+	func testMergeableRetainsAllPropertiesWhenNotSaved() async throws {
+		var original = try await Installation.current()
+		original.badge = 10
+		original.deviceToken = "12345"
+		original.channels = ["halo"]
+		original.customKey = "newKey"
+		var acl = ParseACL()
+		acl.publicRead = true
+		original.ACL = acl
+
+		XCTAssertNil(original.objectId)
+		XCTAssertNil(original.createdAt)
+		XCTAssertNil(original.updatedAt)
+
+		// These properties should not be nil before merge
+		XCTAssertNotNil(original.customKey)
+		XCTAssertNotNil(original.deviceType)
+		XCTAssertNotNil(original.deviceToken)
+		XCTAssertNotNil(original.channels)
+		XCTAssertNotNil(original.installationId)
+		XCTAssertNotNil(original.ACL)
+
+		let mergeable = original.mergeable
+
+		XCTAssertEqual(original.badge, mergeable.badge)
+		XCTAssertEqual(original.timeZone, mergeable.timeZone)
+		XCTAssertEqual(original.appName, mergeable.appName)
+		XCTAssertEqual(original.appVersion, mergeable.appVersion)
+		XCTAssertEqual(original.appIdentifier, mergeable.appIdentifier)
+		XCTAssertEqual(original.parseVersion, mergeable.parseVersion)
+		XCTAssertEqual(original.localeIdentifier, mergeable.localeIdentifier)
+		XCTAssertEqual(original.customKey, mergeable.customKey)
+		XCTAssertEqual(original.deviceType, mergeable.deviceType)
+		XCTAssertEqual(original.deviceToken, mergeable.deviceToken)
+		XCTAssertEqual(original.channels, mergeable.channels)
+		XCTAssertEqual(original.installationId, mergeable.installationId)
+		XCTAssertEqual(original.ACL, mergeable.ACL)
+		XCTAssertEqual(original.createdAt, mergeable.createdAt)
+		XCTAssertEqual(original.updatedAt, mergeable.updatedAt)
+	}
+
     @MainActor
     func testMergeDifferentObjectId() async throws {
         var installation = Installation()
