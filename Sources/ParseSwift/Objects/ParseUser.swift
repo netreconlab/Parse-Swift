@@ -1218,12 +1218,27 @@ extension ParseUser {
         }
         let updatedUser = user
         let mapper = { @Sendable (data) -> Self in
-            try ParseCoding
-                .jsonDecoder()
-                .decode(
-                    CreateResponse.self,
-                    from: data
-                ).apply(to: updatedUser)
+			do {
+				// Try to decode CreateResponse, if that doesn't work try Pointer
+				let savedObject = try ParseCoding.jsonDecoder().decode(
+					CreateResponse.self,
+					from: data
+				).apply(to: updatedUser)
+
+				return savedObject
+			} catch let originalError {
+				do {
+					let pointer = try ParseCoding.jsonDecoder().decode(
+						Pointer<Self>.self,
+						from: data
+					)
+					var objectToUpdate = updatedUser
+					objectToUpdate.objectId = pointer.objectId
+					return objectToUpdate
+				} catch {
+					throw originalError
+				}
+			}
         }
         let path = try await endpoint(.POST)
         let command = API.Command<Self, Self>(

@@ -749,7 +749,27 @@ extension ParseInstallation {
         }
         let updatedObject = object
         let mapper = { @Sendable (data) -> Self in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
+			do {
+				// Try to decode CreateResponse, if that doesn't work try Pointer
+				let savedObject = try ParseCoding.jsonDecoder().decode(
+					CreateResponse.self,
+					from: data
+				).apply(to: updatedObject)
+
+				return savedObject
+			} catch let originalError {
+				do {
+					let pointer = try ParseCoding.jsonDecoder().decode(
+						Pointer<Self>.self,
+						from: data
+					)
+					var objectToUpdate = updatedObject
+					objectToUpdate.objectId = pointer.objectId
+					return objectToUpdate
+				} catch {
+					throw originalError
+				}
+			}
         }
         return API.Command<Self, Self>(method: .POST,
                                        path: try await endpoint(.POST),

@@ -57,7 +57,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    actor Result: Sendable {
+    actor Result {
         var attempts = 0
 
         func incrementAttempts() {
