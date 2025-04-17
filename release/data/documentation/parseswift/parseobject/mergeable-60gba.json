@@ -24,12 +24,12 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-96fqk"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-60gba"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ObjectPAAE9mergeablexvp",
+    "externalID" : "s:10ParseSwift0A12InstallationPAAE9mergeablexvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -221,7 +221,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseobject\/mergeable-96fqk"
+        "\/documentation\/parseswift\/parseobject\/mergeable-60gba"
       ],
       "traits" : [
         {
@@ -342,7 +342,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/mergeable-1pmms"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-96fqk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-60gba": {
   "abstract" : [
     {
       "text" : "An empty copy of the respective object that allows you to update a",
@@ -379,12 +379,12 @@
       "text" : "Self"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-96fqk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-60gba",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "mergeable",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/mergeable-96fqk"
+  "url" : "\/documentation\/parseswift\/parseobject\/mergeable-60gba"
 }
 }
 }

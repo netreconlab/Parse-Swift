@@ -17,6 +17,7 @@
     {
       "anchor" : "ParseObject-Implementations",
       "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-60gba",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-96fqk"
       ],
       "title" : "ParseObject Implementations"
@@ -319,7 +320,7 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
+  "defaultImplementations" : 2,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -349,6 +350,50 @@
   "title" : "mergeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject\/mergeable-1pmms"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-60gba": {
+  "abstract" : [
+    {
+      "text" : "An empty copy of the respective object that allows you to update a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "a subset of the fields (PATCH) of an object as oppose to replacing an object (PUT).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "mergeable"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/mergeable-60gba",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "mergeable",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseobject\/mergeable-60gba"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/mergeable-96fqk": {
   "abstract" : [
