@@ -8,110 +8,81 @@
 
 import Foundation
 
-// swiftlint:disable line_length
-
 /// The payload data for an Apple push notification.
-public struct ParsePushPayloadApple: ParsePushApplePayloadable {
-    /**
-     The background notification flag. If you are a writing an app using the Remote Notification
-     Background Mode introduced in iOS7 (a.k.a. “Background Push”), set this value to
-     1 to trigger a background update. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app).
-     - warning: For Apple OS's only. You also have to set `pushType` starting iOS 13
-     and watchOS 6.
-     */
-    public var contentAvailable: Int?
-    /**
-     The notification service app extension flag. Set this value to 1 to trigger the system to pass the notification to your notification service app extension before delivery. Use your extension to modify the notification’s content. For more informaiton, see [Apple's documentation](https://developer.apple.com/documentation/usernotifications/modifying_content_in_newly_delivered_notifications).
-     - warning: You also have to set `pushType` starting iOS 13
-     and watchOS 6.
-     */
-    public var mutableContent: Int?
-    /**
-     The priority of the notification. Specify 10 to send the notification immediately.
-     Specify 5 to send the notification based on power considerations on the user’s device.
-     See Apple's [documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)
-     for more information.
-     - warning: For Apple OS's only.
-     */
-    public var priority: Int?
+public struct ParsePushPayloadApple: ParsePushApplePayload {
 
+    // MARK: Header and other high level information.
+    public var collapseId: String?
+    public var mdm: String?
+    public var priority: Int?
+    public var pushType: PushType? = .alert
     public var topic: String?
 
-    public var collapseId: String?
-
+    // MARK: APS information.
+    public var contentAvailable: Int?
+    public var mutableContent: Int?
     public var relevanceScore: Double?
-
     public var targetContentId: String?
-
     public var interruptionLevel: String?
-
-    public var pushType: PushType? = .alert
-
     public var category: String?
-
     public var urlArgs: [String]?
-
     public var threadId: String?
-
-    public var mdm: String?
-
     public var alert: ParsePushAppleAlert?
 
-    /**
-     The content of the alert message.
-     */
-    public var body: String? {
-        get {
-            alert?.body
-        }
-        set {
-            if alert != nil {
-                alert?.body = newValue
-            } else if let newBody = newValue {
-                alert = .init(body: newBody)
-            }
-        }
-    }
     var badge: AnyCodable?
     var sound: AnyCodable?
 
     /// The type of notification.
+    /// For more details, see [Apple Documentation](https://developer.apple.com/documentation/usernotifications/sending-notification-requests-to-apns).
     public enum PushType: String, Codable, Sendable {
         /// Send as an alert.
         case alert
         /// Send as a background notification.
         case background
+        /// Send as a Push to Talk notification.
+        case location
+        case voip
+        case complication
+        case fileprovider
+        case mdm
+        case pushtotalk
+        /// Send as a Live Activity notification.
+        case liveactivity
+
+        func appendRequiredInformationToTopic(
+            _ topic: String
+        ) -> String {
+            switch self {
+            case .location:
+                return "\(topic).location-query"
+            case .voip:
+                return "\(topic).voip"
+            case .complication:
+                return "\(topic).complication"
+            case .fileprovider:
+                return "\(topic).pushkit.fileprovider"
+            case .liveactivity:
+                return "\(topic).push-type.liveactivity"
+            case .pushtotalk:
+                return "\(topic).voip-ptt"
+            default:
+                return topic
+            }
+        }
     }
 
     enum CodingKeys: String, CodingKey {
         case relevanceScore = "relevance-score"
-        case targetContentId = "targetContentIdentifier"
+        case targetContentId = "target-content-id"
         case mutableContent = "mutable-content"
         case contentAvailable = "content-available"
-        case pushType = "push_type"
-        case collapseId = "collapse_id"
-        case category, sound, badge, alert, threadId,
-             mdm, priority, topic, interruptionLevel,
-             urlArgs
+        case interruptionLevel = "interruption-level"
+        case urlArgs = "url-args"
+        case threadId = "thread-id"
+        case category, sound, badge, alert
     }
 
     public init() {}
-
-    /**
-     Create an instance of `ParsePushPayloadApple` .
-     - parameter alert: The alert payload for the Apple push notification.
-     */
-    public init(alert: ParsePushAppleAlert) {
-        self.alert = alert
-    }
-
-    /**
-     Create an instance of `ParsePushPayloadApple` .
-     - parameter body: The body message to display for the Apple push notification.
-     */
-    public init(body: String) {
-        self.body = body
-    }
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -126,18 +97,16 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
         targetContentId = try values.decodeIfPresent(String.self, forKey: .targetContentId)
         mutableContent = try values.decodeIfPresent(Int.self, forKey: .mutableContent)
         contentAvailable = try values.decodeIfPresent(Int.self, forKey: .contentAvailable)
-        priority = try values.decodeIfPresent(Int.self, forKey: .priority)
-        pushType = try values.decodeIfPresent(Self.PushType.self, forKey: .pushType)
-        collapseId = try values.decodeIfPresent(String.self, forKey: .collapseId)
         category = try values.decodeIfPresent(String.self, forKey: .category)
         sound = try values.decodeIfPresent(AnyCodable.self, forKey: .sound)
         badge = try values.decodeIfPresent(AnyCodable.self, forKey: .badge)
         threadId = try values.decodeIfPresent(String.self, forKey: .threadId)
-        mdm = try values.decodeIfPresent(String.self, forKey: .mdm)
-        topic = try values.decodeIfPresent(String.self, forKey: .topic)
         interruptionLevel = try values.decodeIfPresent(String.self, forKey: .interruptionLevel)
         urlArgs = try values.decodeIfPresent([String].self, forKey: .urlArgs)
     }
+}
+
+extension ParsePushPayloadApple {
 
     /**
      Set the name of a sound file in your app’s main bundle or in the Library/Sounds folder
