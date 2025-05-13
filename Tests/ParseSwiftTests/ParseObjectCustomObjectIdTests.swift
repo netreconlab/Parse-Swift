@@ -661,6 +661,66 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
+	func testCreateServerReturnsPointer() async throws {
+		var score = GameScore(points: 10)
+		score.objectId = "yarr"
+
+		var scoreOnServer = try score.toPointer()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			scoreOnServer = try score.getDecoder().decode(
+				Pointer<GameScore>.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			let saved = try await score.create()
+			XCTAssertTrue(saved.objectId == scoreOnServer.objectId)
+		} catch {
+			XCTFail(error.localizedDescription)
+		}
+	}
+
+	func testCreateServerReturnsIncorrectJSON() async throws {
+		var score = GameScore(points: 10)
+		score.objectId = "yarr"
+
+		var scoreOnServer = GameScore()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			scoreOnServer = try score.getDecoder().decode(
+				GameScore.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			_ = try await score.create()
+			XCTFail("Should have failed to decode")
+		} catch {
+			XCTAssertTrue(error.equalsTo(.otherCause))
+		}
+	}
+
     func testSaveNoObjectId() async throws {
         let score = GameScore(points: 10)
         do {
@@ -1276,6 +1336,68 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
+	func testUserCreateServerReturnsPointer() async throws {
+		var user = User()
+		user.objectId = "yarr"
+		user.ACL = nil
+
+		var userOnServer = try user.toPointer()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			userOnServer = try user.getDecoder().decode(
+				Pointer<User>.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			let saved = try await user.create()
+			XCTAssertTrue(saved.objectId == userOnServer.objectId)
+		} catch {
+			XCTFail(error.localizedDescription)
+		}
+	}
+
+	func testUserCreateServerReturnsIncorrectJSON() async throws {
+		var user = User()
+		user.objectId = "yarr"
+		user.ACL = nil
+
+		var userOnServer = User()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(userOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			userOnServer = try user.getDecoder().decode(
+				User.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			_ = try await user.create()
+			XCTFail("Should have failed to decode")
+		} catch {
+			XCTAssertTrue(error.equalsTo(.otherCause))
+		}
+	}
+
     func testUserSaveNoObjectId() async throws {
         let score = GameScore(points: 10)
         do {
@@ -1828,6 +1950,68 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             XCTFail(error.localizedDescription)
         }
     }
+
+	func testInstallationCreateServerReturnsPointer() async throws {
+		var installation = Installation()
+		installation.objectId = "yarr"
+		installation.ACL = nil
+
+		var installationOnServer = try installation.toPointer()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			installationOnServer = try installation.getDecoder().decode(
+				Pointer<Installation>.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			let saved = try await installation.create()
+			XCTAssertTrue(saved.objectId == installationOnServer.objectId)
+		} catch {
+			XCTFail(error.localizedDescription)
+		}
+	}
+
+	func testInstallationCreateServerReturnsIncorrectJSON() async throws {
+		var installation = Installation()
+		installation.objectId = "yarr"
+		installation.ACL = nil
+
+		var installationOnServer = Installation()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(installationOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			installationOnServer = try installation.getDecoder().decode(
+				Installation.self,
+				from: encoded
+			)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			_ = try await installation.create()
+			XCTFail("Should have failed to decode")
+		} catch {
+			XCTAssertTrue(error.equalsTo(.otherCause))
+		}
+	}
 
     func testInstallationSaveNoObjectId() async throws {
         let score = GameScore(points: 10)

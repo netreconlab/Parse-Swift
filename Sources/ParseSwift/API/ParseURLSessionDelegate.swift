@@ -18,7 +18,7 @@ class ParseURLSessionDelegate: NSObject {
                            URLCredential?) -> Void) -> Void)?
     var streamDelegates = [URLSessionTask: InputStream]()
 
-    actor SessionDelegate: Sendable {
+    actor SessionDelegate {
         var downloadDelegates = [URLSessionDownloadTask: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)]()
         var uploadDelegates = [URLSessionTask: ((URLSessionTask, Int64, Int64, Int64) -> Void)]()
         var taskCallbackQueues = [URLSessionTask: DispatchQueue]()

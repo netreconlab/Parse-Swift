@@ -95,6 +95,25 @@ public extension ParseInstallation {
         "_Installation"
     }
 
+	var mergeable: Self {
+		guard isSaved,
+			originalData == nil else {
+			return self
+		}
+		var object = Self()
+		object.objectId = objectId
+		object.createdAt = createdAt
+		object.badge = badge
+		object.timeZone = timeZone
+		object.appName = appName
+		object.appIdentifier = appIdentifier
+		object.appVersion = appVersion
+		object.parseVersion = parseVersion
+		object.localeIdentifier = localeIdentifier
+		object.originalData = try? ParseCoding.jsonEncoder().encode(self)
+		return object
+	}
+
     var endpoint: API.Endpoint {
         if let objectId = objectId {
             return .installation(objectId: objectId)
@@ -418,7 +437,7 @@ extension ParseInstallation {
             return
         }
         #if !os(Linux) && !os(Android) && !os(Windows)
-        #if TARGET_OS_MACCATALYST
+		#if targetEnvironment(macCatalyst)
         // If using an Xcode new enough to know about Mac Catalyst:
         // Mac Catalyst Apps use a prefix to the bundle ID. This should not be transmitted
         // to Parse Server. Catalyst apps should look like iOS apps otherwise
@@ -749,7 +768,27 @@ extension ParseInstallation {
         }
         let updatedObject = object
         let mapper = { @Sendable (data) -> Self in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
+			do {
+				// Try to decode CreateResponse, if that doesn't work try Pointer
+				let savedObject = try ParseCoding.jsonDecoder().decode(
+					CreateResponse.self,
+					from: data
+				).apply(
+					to: updatedObject
+				)
+				return savedObject
+			} catch let originalError {
+				do {
+					let pointer = try ParseCoding.jsonDecoder().decode(
+						Pointer<Self>.self,
+						from: data
+					)
+					let fetchedObject = try await pointer.fetch()
+					return fetchedObject
+				} catch {
+					throw originalError
+				}
+			}
         }
         return API.Command<Self, Self>(method: .POST,
                                        path: try await endpoint(.POST),
