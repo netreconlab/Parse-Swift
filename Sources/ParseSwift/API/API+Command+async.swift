@@ -24,7 +24,7 @@ internal extension API.Command {
 				batching: batching,
 				childObjects: childObjects,
 				childFiles: childFiles,
-				completion: continuation.resume
+				completion: { continuation.resume(returning: $0) }
 			)
         }
     }
