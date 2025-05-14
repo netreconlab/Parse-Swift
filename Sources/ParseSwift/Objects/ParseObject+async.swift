@@ -27,7 +27,7 @@ public extension ParseObject {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(includeKeys: includeKeys,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -55,7 +55,7 @@ public extension ParseObject {
         try await withCheckedThrowingContinuation { continuation in
             self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -68,7 +68,7 @@ public extension ParseObject {
     @discardableResult func create(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.create(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -81,7 +81,7 @@ public extension ParseObject {
     @discardableResult func replace(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.replace(options: options,
-                         completion: continuation.resume)
+                         completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -94,7 +94,7 @@ public extension ParseObject {
     @discardableResult internal func update(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.update(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -105,13 +105,10 @@ public extension ParseObject {
      - throws: An error of type `ParseError`.
     */
     func delete(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.delete(options: options,
-                        completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.delete(options: options,
+						completion: { continuation.resume(with: $0) })
+		}
     }
 }
 
@@ -132,7 +129,7 @@ public extension Sequence where Element: ParseObject {
         try await withCheckedThrowingContinuation { continuation in
             self.fetchAll(includeKeys: includeKeys,
                           options: options,
-                          completion: continuation.resume)
+                          completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -174,7 +171,7 @@ public extension Sequence where Element: ParseObject {
                          transaction: transaction,
                          ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
                          options: options,
-                         completion: continuation.resume)
+                         completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -202,7 +199,7 @@ public extension Sequence where Element: ParseObject {
             self.createAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -230,7 +227,7 @@ public extension Sequence where Element: ParseObject {
             self.replaceAll(batchLimit: limit,
                             transaction: transaction,
                             options: options,
-                            completion: continuation.resume)
+                            completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -258,7 +255,7 @@ public extension Sequence where Element: ParseObject {
             self.updateAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -283,7 +280,7 @@ public extension Sequence where Element: ParseObject {
             self.deleteAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 }

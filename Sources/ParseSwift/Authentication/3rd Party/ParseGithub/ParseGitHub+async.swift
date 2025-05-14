@@ -26,7 +26,7 @@ public extension ParseGitHub {
             self.login(id: id,
                        accessToken: accessToken,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -41,7 +41,7 @@ public extension ParseGitHub {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -63,7 +63,7 @@ public extension ParseGitHub {
             self.link(id: id,
                       accessToken: accessToken,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -79,7 +79,7 @@ public extension ParseGitHub {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

@@ -32,7 +32,7 @@ public extension ParseSpotify {
                        expiresIn: expiresIn,
                        refreshToken: refreshToken,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -47,7 +47,7 @@ public extension ParseSpotify {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -75,7 +75,7 @@ public extension ParseSpotify {
                       expiresIn: expiresIn,
                       refreshToken: refreshToken,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -91,7 +91,7 @@ public extension ParseSpotify {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

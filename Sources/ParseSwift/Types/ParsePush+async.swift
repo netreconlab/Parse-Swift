@@ -23,7 +23,7 @@ public extension ParsePush {
     func send(options: API.Options = []) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             self.send(options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -44,7 +44,7 @@ public extension ParsePush {
         try await withCheckedThrowingContinuation { continuation in
             self.fetchStatus(statusId,
                              options: options,
-                             completion: continuation.resume)
+                             completion: { continuation.resume(with: $0) })
         }
     }
 }

@@ -30,7 +30,7 @@ public extension Sequence where Element: ParsePointerObject {
             self.fetchAll(
                 includeKeys: includeKeys,
                 options: options,
-                completion: continuation.resume
+                completion: { continuation.resume(with: $0) }
             )
         }
     }

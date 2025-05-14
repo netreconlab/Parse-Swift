@@ -49,7 +49,7 @@ public extension ParseUser {
             Self.login(type,
                        authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -64,7 +64,7 @@ public extension ParseUser {
         try await withCheckedThrowingContinuation { continuation in
             self.unlink(type,
                         options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -85,7 +85,7 @@ public extension ParseUser {
             Self.link(type,
                       authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -96,7 +96,7 @@ public extension ParseUser {
             Self.signupWithAuthData(type,
                                     authData: authData,
                                     options: options,
-                                    completion: continuation.resume)
+                                    completion: { continuation.resume(with: $0) })
         }
     }
 

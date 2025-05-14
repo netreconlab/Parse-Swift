@@ -23,7 +23,7 @@ public extension ParseConfigCodable {
     static func fetch(options: API.Options = []) async throws -> [String: V] {
         try await withCheckedThrowingContinuation { continuation in
             Self.fetch(options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -41,7 +41,7 @@ public extension ParseConfigCodable {
         try await withCheckedThrowingContinuation { continuation in
             Self.save(config,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 

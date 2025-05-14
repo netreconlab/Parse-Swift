@@ -32,7 +32,7 @@ public extension ParseUser {
             Self.signup(username: username,
                         password: password,
                         options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -51,7 +51,7 @@ public extension ParseUser {
     @discardableResult func signup(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.signup(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -82,7 +82,7 @@ public extension ParseUser {
                        password: password,
                        authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -102,7 +102,7 @@ public extension ParseUser {
     @discardableResult func become(sessionToken: String,
                                    options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
-            self.become(sessionToken: sessionToken, options: options, completion: continuation.resume)
+            self.become(sessionToken: sessionToken, options: options, completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -121,7 +121,7 @@ public extension ParseUser {
     @discardableResult static func become(sessionToken: String,
                                           options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
-            Self.become(sessionToken: sessionToken, options: options, completion: continuation.resume)
+            Self.become(sessionToken: sessionToken, options: options, completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -151,7 +151,7 @@ public extension ParseUser {
     @discardableResult static func loginAs(objectId: String,
                                            options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
-            Self.loginAs(objectId: objectId, options: options, completion: continuation.resume)
+            Self.loginAs(objectId: objectId, options: options, completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -173,7 +173,7 @@ public extension ParseUser {
     */
     @discardableResult static func loginUsingObjCKeychain(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
-            Self.loginUsingObjCKeychain(options: options, completion: continuation.resume)
+            Self.loginUsingObjCKeychain(options: options, completion: { continuation.resume(with: $0) })
         }
     }
 #endif
@@ -189,12 +189,9 @@ public extension ParseUser {
      desires a different policy, it should be inserted in `options`.
     */
     static func logout(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            Self.logout(options: options, completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			Self.logout(options: options, completion: { continuation.resume(with: $0) })
+		}
     }
 
     /**
@@ -208,12 +205,9 @@ public extension ParseUser {
     */
     static func passwordReset(email: String,
                               options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            Self.passwordReset(email: email, options: options, completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			Self.passwordReset(email: email, options: options, completion: { continuation.resume(with: $0) })
+		}
     }
 
     /**
@@ -236,7 +230,7 @@ public extension ParseUser {
         try await withCheckedThrowingContinuation { continuation in
             Self.verifyPassword(password: password,
                                 usingPost: usingPost,
-                                options: options, completion: continuation.resume)
+                                options: options, completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -251,12 +245,9 @@ public extension ParseUser {
     */
     static func verificationEmail(email: String,
                                   options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            Self.verificationEmail(email: email, options: options, completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			Self.verificationEmail(email: email, options: options, completion: { continuation.resume(with: $0) })
+		}
     }
 
     /**
@@ -276,7 +267,7 @@ public extension ParseUser {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(includeKeys: includeKeys,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -306,7 +297,7 @@ public extension ParseUser {
         try await withCheckedThrowingContinuation { continuation in
             self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -321,7 +312,7 @@ public extension ParseUser {
     @discardableResult func create(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.create(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -337,7 +328,7 @@ public extension ParseUser {
     @discardableResult func replace(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.replace(options: options,
-                         completion: continuation.resume)
+                         completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -353,7 +344,7 @@ public extension ParseUser {
     @discardableResult internal func update(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.update(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -367,12 +358,9 @@ public extension ParseUser {
      desires a different policy, it should be inserted in `options`.
     */
     func delete(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.delete(options: options, completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.delete(options: options, completion: { continuation.resume(with: $0) })
+		}
     }
 }
 
@@ -396,7 +384,7 @@ public extension Sequence where Element: ParseUser {
         try await withCheckedThrowingContinuation { continuation in
             self.fetchAll(includeKeys: includeKeys,
                           options: options,
-                          completion: continuation.resume)
+                          completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -439,7 +427,7 @@ public extension Sequence where Element: ParseUser {
                          transaction: transaction,
                          ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
                          options: options,
-                         completion: continuation.resume)
+                         completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -467,7 +455,7 @@ public extension Sequence where Element: ParseUser {
             self.createAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -496,7 +484,7 @@ public extension Sequence where Element: ParseUser {
             self.replaceAll(batchLimit: limit,
                             transaction: transaction,
                             options: options,
-                            completion: continuation.resume)
+                            completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -525,7 +513,7 @@ public extension Sequence where Element: ParseUser {
             self.updateAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -553,7 +541,7 @@ public extension Sequence where Element: ParseUser {
             self.deleteAll(batchLimit: limit,
                            transaction: transaction,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 }
