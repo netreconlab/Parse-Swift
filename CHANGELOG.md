@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.12.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)
+
+__Fixes__
+* Update async methods so they do not produce warnings in Swift 6.0 ([#198](https://github.com/netreconlab/Parse-Swift/pull/198)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.12.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.1...5.12.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.2/documentation/parseswift)

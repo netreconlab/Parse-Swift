@@ -39,7 +39,7 @@ public extension ParseAnalytics {
             Self.trackAppOpened(launchOptions: launchOptions,
                                 at: date,
                                 options: options,
-                                completion: continuation.resume)
+                                completion: { continuation.resume(with: $0) })
         }
         if case let .failure(error) = result {
             throw error
@@ -64,15 +64,12 @@ public extension ParseAnalytics {
     static func trackAppOpened(dimensions: [String: String]? = nil,
                                at date: Date? = nil,
                                options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            Self.trackAppOpened(dimensions: dimensions,
-                                at: date,
-                                options: options,
-                                completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			Self.trackAppOpened(dimensions: dimensions,
+								at: date,
+								options: options,
+								completion: { continuation.resume(with: $0) })
+		}
     }
 
     /**
@@ -82,13 +79,10 @@ public extension ParseAnalytics {
      - throws: An error of type `ParseError`.
     */
     func track(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.track(options: options,
-                       completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.track(options: options,
+					   completion: { continuation.resume(with: $0) })
+		}
     }
 
     /**
@@ -104,14 +98,11 @@ public extension ParseAnalytics {
     mutating func track(dimensions: [String: String]?,
                         at date: Date? = nil,
                         options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.track(dimensions: dimensions,
-                       at: date,
-                       options: options,
-                       completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.track(dimensions: dimensions,
+					   at: date,
+					   options: options,
+					   completion: { continuation.resume(with: $0) })
+		}
     }
 }

@@ -24,7 +24,7 @@ public extension ParseSchema {
     func fetch(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -42,7 +42,7 @@ public extension ParseSchema {
     func create(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.create(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -60,7 +60,7 @@ public extension ParseSchema {
     func update(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.update(options: options,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -77,13 +77,12 @@ public extension ParseSchema {
      exposed to the public.
     */
     func purge(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.purge(options: options,
-                        completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.purge(
+				options: options,
+				completion: { continuation.resume(with: $0) }
+			)
+		}
     }
 
     /**
@@ -100,12 +99,9 @@ public extension ParseSchema {
      exposed to the public.
     */
     func delete(options: API.Options = []) async throws {
-        let result = try await withCheckedThrowingContinuation { continuation in
-            self.delete(options: options,
-                        completion: continuation.resume)
-        }
-        if case let .failure(error) = result {
-            throw error
-        }
+		try await withCheckedThrowingContinuation { continuation in
+			self.delete(options: options,
+						completion: { continuation.resume(with: $0) })
+		}
     }
 }

@@ -26,7 +26,7 @@ public extension ParseServer {
         try await withCheckedThrowingContinuation { continuation in
             Self.health(options: options,
                         allowIntermediateResponses: false,
-                        completion: continuation.resume)
+                        completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -57,7 +57,7 @@ public extension ParseServer {
     static func information(options: API.Options = []) async throws -> Information {
         try await withCheckedThrowingContinuation { continuation in
             Self.information(options: options,
-                             completion: continuation.resume)
+                             completion: { continuation.resume(with: $0) })
         }
     }
 

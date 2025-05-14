@@ -25,7 +25,7 @@ public extension Pointer {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(includeKeys: includeKeys,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }

@@ -19,11 +19,13 @@ internal extension API.Command {
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [String: ParseFile]? = nil) async -> Result<URLRequest, ParseError> {
         await withCheckedContinuation { continuation in
-            self.prepareURLRequest(options: options,
-                                         batching: batching,
-                                         childObjects: childObjects,
-                                         childFiles: childFiles,
-                                         completion: continuation.resume)
+            self.prepareURLRequest(
+				options: options,
+				batching: batching,
+				childObjects: childObjects,
+				childFiles: childFiles,
+				completion: continuation.resume
+			)
         }
     }
 
@@ -48,7 +50,7 @@ internal extension API.Command {
                                    allowIntermediateResponses: allowIntermediateResponses,
                                    uploadProgress: uploadProgress,
                                    downloadProgress: downloadProgress,
-                                   completion: continuation.resume)
+                                   completion: { continuation.resume(with: $0) })
             }
         }
     }

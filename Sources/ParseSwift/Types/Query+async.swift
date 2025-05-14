@@ -21,7 +21,7 @@ public extension Query {
     func find(options: API.Options = []) async throws -> [ResultType] {
         try await withCheckedThrowingContinuation { continuation in
             self.find(options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -44,7 +44,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.findExplain(usingMongoDB: usingMongoDB,
                              options: options,
-                             completion: continuation.resume)
+                             completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -62,7 +62,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.findAll(batchLimit: batchLimit,
                          options: options,
-                         completion: continuation.resume)
+                         completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -75,7 +75,7 @@ public extension Query {
     func first(options: API.Options = []) async throws -> ResultType {
         try await withCheckedThrowingContinuation { continuation in
             self.first(options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -98,7 +98,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.firstExplain(usingMongoDB: usingMongoDB,
                               options: options,
-                              completion: continuation.resume)
+                              completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -111,7 +111,7 @@ public extension Query {
     func count(options: API.Options = []) async throws -> Int {
         try await withCheckedThrowingContinuation { continuation in
             self.count(options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -134,7 +134,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.countExplain(usingMongoDB: usingMongoDB,
                               options: options,
-                              completion: continuation.resume)
+                              completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -148,7 +148,7 @@ public extension Query {
     func withCount(options: API.Options = []) async throws -> ([ResultType], Int) {
         try await withCheckedThrowingContinuation { continuation in
             self.withCount(options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -171,7 +171,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.withCountExplain(usingMongoDB: usingMongoDB,
                                   options: options,
-                                  completion: continuation.resume)
+                                  completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -190,7 +190,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.aggregate(pipeline,
                            options: options,
-                           completion: continuation.resume)
+                           completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -219,7 +219,7 @@ public extension Query {
             self.aggregateExplain(pipeline,
                                   usingMongoDB: usingMongoDB,
                                   options: options,
-                                  completion: continuation.resume)
+                                  completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -238,7 +238,7 @@ public extension Query {
         try await withCheckedThrowingContinuation { continuation in
             self.distinct(key,
                           options: options,
-                          completion: continuation.resume)
+                          completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -267,7 +267,7 @@ public extension Query {
             self.distinctExplain(key,
                                  usingMongoDB: usingMongoDB,
                                  options: options,
-                                 completion: continuation.resume)
+                                 completion: { continuation.resume(with: $0) })
         }
     }
 }
