@@ -4,13 +4,13 @@ on:
     types: [published]
 env:
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_16.2.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_16.4.app/Contents/Developer'
 
 jobs:
   cocoapods:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Get release version
         run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       - name: Update Framework Version
@@ -26,7 +26,7 @@ jobs:
   docs:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Get release version
         run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       - name: Build and Deploy Docs
