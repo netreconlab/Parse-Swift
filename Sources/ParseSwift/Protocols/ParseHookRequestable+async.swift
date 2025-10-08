@@ -20,7 +20,7 @@ public extension ParseHookRequestable {
     func hydrateUser(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.hydrateUser(options: options,
-                             completion: continuation.resume)
+                             completion: { continuation.resume(with: $0) })
         }
     }
 }

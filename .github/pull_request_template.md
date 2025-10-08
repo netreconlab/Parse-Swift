@@ -5,11 +5,13 @@
     Thanks for contributing to Parse-Swift!
 -->
 
-- [ ] I am not disclosing a [vulnerability](https://github.com/netreconlab/Parse-Swift/security/policy).
-- [ ] I am creating this PR in reference to an [issue](https://github.com/netreconlab/Parse-Swift/issues?q=is%3Aissue).
+- Disclose a [vulnerability](https://github.com/netreconlab/Parse-Swift/security/policy).
+- Link this PR to an [issue](https://github.com/netreconlab/Parse-Swift/issues?q=is%3Aissue).
 
 ### Issue Description
 <!-- Add a brief description of the issue this PR solves. -->
+
+Closes: FILL_THIS_OUT
 
 ### Approach
 <!-- Add a description of the approach in this PR. -->

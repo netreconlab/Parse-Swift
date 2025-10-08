@@ -22,7 +22,7 @@ public extension ParseOperation {
     @discardableResult func save(options: API.Options = []) async throws -> T {
         try await withCheckedThrowingContinuation { continuation in
             self.save(options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

@@ -258,7 +258,7 @@ internal extension URLSession {
     func dataTask(for request: URLRequest) async throws -> (Data, URLResponse) {
         try await withCheckedThrowingContinuation { continuation in
             self.dataTask(with: request,
-                          completionHandler: continuation.resume).resume()
+                          completionHandler: { continuation.resume(with: $0) }).resume()
         }
     }
 
@@ -400,7 +400,7 @@ internal extension URLSession {
                       delegate: URLSessionTaskDelegate? = nil) async throws -> (URL, URLResponse) {
         try await withCheckedThrowingContinuation { continuation in
             self.downloadTask(with: request,
-                              completionHandler: continuation.resume).resume()
+                              completionHandler: { continuation.resume(with: $0) }).resume()
         }
     }
 

@@ -2,8 +2,39 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 5.12.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)
+
+__Fixes__
+* Update async methods so they do not produce warnings in Swift 6.0 ([#198](https://github.com/netreconlab/Parse-Swift/pull/198)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.1...5.12.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.2/documentation/parseswift)
+
+__Fixes__
+* When creating objects, if the server does not return the correct full object, attempt to retrieve it before returning to call-site. ([#197](https://github.com/netreconlab/Parse-Swift/pull/197)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Fixes an issue when using `mergeable` on `ParseInstallation`'s' and properties that are automatically computed such as `appVersion` are not sent to the server. ([#197](https://github.com/netreconlab/Parse-Swift/pull/197)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.0...5.12.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.1/documentation/parseswift)
+
+__Fixes__
+* Fix failing to decode a ParseInstallation or ParseUser due to object returning from the server as a pointer ([#196](https://github.com/netreconlab/Parse-Swift/pull/196)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.5...5.12.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.0/documentation/parseswift)
+
+__New features__
+* Add maintenance key that can be used on server-side ([#194](https://github.com/netreconlab/Parse-Swift/pull/194)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.5
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.4...5.11.5), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.5/documentation/parseswift)
+
+__Fixes__
+* Fix app crash when using QueryConstraint == ([#193](https://github.com/netreconlab/Parse-Swift/pull/193)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.11.4
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.3...5.11.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.4/documentation/parseswift)

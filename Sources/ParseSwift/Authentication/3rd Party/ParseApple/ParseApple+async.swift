@@ -26,7 +26,7 @@ public extension ParseApple {
             self.login(user: user,
                        identityToken: identityToken,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -42,7 +42,7 @@ public extension ParseApple {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -64,7 +64,7 @@ public extension ParseApple {
             self.link(user: user,
                       identityToken: identityToken,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -80,7 +80,7 @@ public extension ParseApple {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

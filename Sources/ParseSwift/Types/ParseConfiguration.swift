@@ -16,7 +16,8 @@ import FoundationNetworking
 /**
  The Configuration for a Parse client.
 
- - important: It is recomended to only specify `primaryKey` when using the SDK on a server. Do not use this key on the client.
+ - important: It is recomended to only specify `maintenanceKey` and `primaryKey` when using
+ the SDK on a server. Do not use these keys on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
@@ -27,8 +28,14 @@ public struct ParseConfiguration {
     /// The application id for your Parse application.
     public internal(set) var applicationId: String
 
-    /// The primary key for your Parse application. This key should only
-    /// be specified when using the SDK on a server.
+    /// The maintenance key for your Parse application.
+    /// - warning: This key should only be specified when
+    /// using the SDK on a server.
+    public internal(set) var maintenanceKey: String?
+
+    /// The primary key for your Parse application.
+    /// - warning: This key should only be specified when
+    /// using the SDK on a server.
     /// - note: This has been renamed from `masterKey` to reflect [inclusive language](https://github.com/dialpad/inclusive-language#motivation)
     public internal(set) var primaryKey: String?
 
@@ -48,8 +55,12 @@ public struct ParseConfiguration {
     /// - warning: This is experimental.
     public internal(set) var isUsingTransactions = false
 
-    /// Use the **$eq** query constraint when querying.
-    /// - warning: This is known not to work for LiveQuery on Parse Servers <= 5.0.0.
+    /// ParseSwift uses the **$eq** query constraint by default when querying.
+    /// - warning: This method uses `$eq` and can
+    /// be combined with all other `QueryConstaint`'s. It has the limitation of
+    /// not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+    /// an older Parse Server, you should use `equalToNoComparator()`
+    @available(*, deprecated, message: "Changing has no effect. This will be remove in ParseSwift 6.0.0")
     public internal(set) var isUsingEqualQueryConstraint = false
 
     /// Use **POST** instead of **GET** when making query calls.
@@ -131,6 +142,8 @@ public struct ParseConfiguration {
      Create a Parse Swift configuration.
      - parameter applicationId: The application id for your Parse application.
      - parameter clientKey: The client key for your Parse application.
+     - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
+     specified when using the SDK on a server.
      - parameter primaryKey: The primary key for your Parse application. This key should only be
      specified when using the SDK on a server.
      - parameter serverURL: The server URL to connect to a Parse Server.
@@ -178,34 +191,38 @@ public struct ParseConfiguration {
      - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
      situtations when apps do not have credentials to setup a Keychain.
      */
-    public init(applicationId: String,
-                clientKey: String? = nil,
-                primaryKey: String? = nil,
-                webhookKey: String? = nil,
-                serverURL: URL,
-                liveQueryServerURL: URL? = nil,
-                requiringCustomObjectIds: Bool = false,
-                usingTransactions: Bool = false,
-                usingEqualQueryConstraint: Bool = false,
-                usingPostForQuery: Bool = false,
-                primitiveStore: ParsePrimitiveStorable? = nil,
-                requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-                cacheMemoryCapacity: Int = 512_000,
-                cacheDiskCapacity: Int = 10_000_000,
-                usingDataProtectionKeychain: Bool = false,
-                deletingKeychainIfNeeded: Bool = false,
-                httpAdditionalHeaders: [AnyHashable: Any]? = nil,
-                usingAutomaticLogin: Bool = false,
-                maxConnectionAttempts: Int = 5,
-                liveQueryConnectionAdditionalProperties: Bool = true,
-                liveQueryMaxConnectionAttempts: Int = 20,
-                parseFileTransfer: ParseFileTransferable? = nil,
-                authentication: ((URLAuthenticationChallenge,
-                                  (URLSession.AuthChallengeDisposition,
-                                   URLCredential?) -> Void) -> Void)? = nil) {
+    public init(
+        applicationId: String,
+        clientKey: String? = nil,
+        primaryKey: String? = nil,
+        maintenanceKey: String? = nil,
+        webhookKey: String? = nil,
+        serverURL: URL,
+        liveQueryServerURL: URL? = nil,
+        requiringCustomObjectIds: Bool = false,
+        usingTransactions: Bool = false,
+        usingEqualQueryConstraint: Bool = false,
+        usingPostForQuery: Bool = false,
+        primitiveStore: ParsePrimitiveStorable? = nil,
+        requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+        cacheMemoryCapacity: Int = 512_000,
+        cacheDiskCapacity: Int = 10_000_000,
+        usingDataProtectionKeychain: Bool = false,
+        deletingKeychainIfNeeded: Bool = false,
+        httpAdditionalHeaders: [AnyHashable: Any]? = nil,
+        usingAutomaticLogin: Bool = false,
+        maxConnectionAttempts: Int = 5,
+        liveQueryConnectionAdditionalProperties: Bool = true,
+        liveQueryMaxConnectionAttempts: Int = 20,
+        parseFileTransfer: ParseFileTransferable? = nil,
+        authentication: ((URLAuthenticationChallenge,
+                          (URLSession.AuthChallengeDisposition,
+                           URLCredential?) -> Void) -> Void)? = nil
+    ) {
         self.applicationId = applicationId
         self.clientKey = clientKey
         self.primaryKey = primaryKey
+        self.maintenanceKey = maintenanceKey
         self.serverURL = serverURL
         self.liveQuerysServerURL = liveQueryServerURL
         self.isRequiringCustomObjectIds = requiringCustomObjectIds

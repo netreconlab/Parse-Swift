@@ -34,11 +34,14 @@ class APICommandTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try await ParseSwift.initialize(applicationId: "applicationId",
-                                        clientKey: "clientKey",
-                                        primaryKey: "primaryKey",
-                                        serverURL: url,
-                                        testing: true)
+        try await ParseSwift.initialize(
+            applicationId: "applicationId",
+            clientKey: "clientKey",
+            primaryKey: "primaryKey",
+            maintenanceKey: "maintenanceKey",
+            serverURL: url,
+            testing: true
+        )
     }
 
     override func tearDown() async throws {
@@ -408,7 +411,12 @@ class APICommandTests: XCTestCase {
     }
 
     func testQueryWhereEncoding() async throws {
-        let query = Level.query("name" == "test@parse.com")
+        let query = Level.query(
+            equalToNoComparator(
+                key: "name",
+                value: "test@parse.com"
+            )
+        )
         let parameters = try query.getQueryParameters()
 
         let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(
@@ -432,7 +440,12 @@ class APICommandTests: XCTestCase {
     }
 
     func testQueryWhereEncodingPlus() async throws {
-        let query = Level.query("name" == "test+1@parse.com")
+        let query = Level.query(
+            equalToNoComparator(
+                key: "name",
+                value: "test+1@parse.com"
+            )
+        )
         let parameters = try query.getQueryParameters()
 
         let queryCommand = API.NonParseBodyCommand<Query<Level>, Level?>(
@@ -462,7 +475,8 @@ class APICommandTests: XCTestCase {
         }
 
         let headers = try await API.getHeaders(options: [])
-        XCTAssertEqual(headers["X-Parse-Client-Key"], clientKey)
+        let headerKey = "X-Parse-Client-Key"
+        XCTAssertEqual(headers[headerKey], clientKey)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
@@ -471,7 +485,7 @@ class APICommandTests: XCTestCase {
         switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
-            XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Client-Key"],
+            XCTAssertEqual(request.allHTTPHeaderFields?[headerKey],
                            clientKey)
         case .failure(let error):
             XCTFail(error.localizedDescription)
@@ -484,7 +498,8 @@ class APICommandTests: XCTestCase {
         }
 
         let headers = try await API.getHeaders(options: [])
-        XCTAssertNil(headers["X-Parse-Master-Key"])
+        let headerKey = "X-Parse-Master-Key"
+        XCTAssertNil(headers[headerKey])
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
@@ -493,10 +508,35 @@ class APICommandTests: XCTestCase {
         switch await post.prepareURLRequest(options: [.usePrimaryKey]) {
 
         case .success(let request):
-            XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Master-Key"],
+            XCTAssertEqual(request.allHTTPHeaderFields?[headerKey],
                            primaryKey)
             XCTAssertEqual(ParseSwift.configuration.primaryKey,
                            primaryKey)
+        case .failure(let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testMaintenanceKeyHeader() async throws {
+        guard let maintenanceKey = ParseSwift.configuration.maintenanceKey else {
+            throw ParseError(code: .otherCause, message: "Parse configuration should contain key")
+        }
+
+        let headers = try await API.getHeaders(options: [])
+        let headerKey = "X-Parse-Maintenance-Key"
+        XCTAssertNil(headers[headerKey])
+
+        let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
+            return nil
+        }
+
+        switch await post.prepareURLRequest(options: [.useMaintenanceKey]) {
+
+        case .success(let request):
+            XCTAssertEqual(request.allHTTPHeaderFields?[headerKey],
+                           maintenanceKey)
+            XCTAssertEqual(ParseSwift.configuration.maintenanceKey,
+                           maintenanceKey)
         case .failure(let error):
             XCTFail(error.localizedDescription)
         }
@@ -509,7 +549,8 @@ class APICommandTests: XCTestCase {
         }
 
         let headers = try await API.getHeaders(options: [])
-        XCTAssertEqual(headers["X-Parse-Session-Token"], sessionToken)
+        let headerKey = "X-Parse-Session-Token"
+        XCTAssertEqual(headers[headerKey], sessionToken)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
@@ -518,7 +559,7 @@ class APICommandTests: XCTestCase {
         switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
-            XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Session-Token"],
+            XCTAssertEqual(request.allHTTPHeaderFields?[headerKey],
                            sessionToken)
         case .failure(let error):
             XCTFail(error.localizedDescription)
@@ -547,7 +588,8 @@ class APICommandTests: XCTestCase {
         }
 
         let headers = try await API.getHeaders(options: [])
-        XCTAssertEqual(headers["X-Parse-Installation-Id"], installationId)
+        let headerKey = "X-Parse-Installation-Id"
+        XCTAssertEqual(headers[headerKey], installationId)
 
         let post = API.NonParseBodyCommand<NoBody, NoBody?>(method: .POST, path: .login) { _ in
             return nil
@@ -556,7 +598,7 @@ class APICommandTests: XCTestCase {
         switch await post.prepareURLRequest(options: []) {
 
         case .success(let request):
-            XCTAssertEqual(request.allHTTPHeaderFields?["X-Parse-Installation-Id"],
+            XCTAssertEqual(request.allHTTPHeaderFields?[headerKey],
                            installationId)
         case .failure(let error):
             XCTFail(error.localizedDescription)

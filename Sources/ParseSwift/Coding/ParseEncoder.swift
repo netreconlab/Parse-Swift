@@ -243,7 +243,7 @@ public struct ParseEncoder: Sendable {
 }
 
 // MARK: _ParseEncoder
-internal class _ParseEncoder: JSONEncoder, Encoder {
+internal class _ParseEncoder: JSONEncoder, Encoder, @unchecked Sendable {
     var codingPath: [CodingKey]
     let dictionary: NSMutableDictionary
     let skippedKeys: Set<String>
@@ -1049,7 +1049,7 @@ extension _ParseEncoder {
 // swiftlint:disable line_length
 /// __JSONReferencingEncoder is a special subclass of __JSONEncoder which has its own storage, but references the contents of a different encoder.
 /// It's used in superEncoder(), which returns a new encoder for encoding a superclass -- the lifetime of the encoder should not escape the scope it is created in, but it does not necessarily know when it is done being used (to write to the original container).
-private class _ParseReferencingEncoder: _ParseEncoder {
+private class _ParseReferencingEncoder: _ParseEncoder, @unchecked Sendable {
     // MARK: Reference types.
 
     /// The type of container we're referencing.

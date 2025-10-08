@@ -37,12 +37,15 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try await ParseSwift.initialize(applicationId: "applicationId",
-                                        clientKey: "clientKey",
-                                        primaryKey: "primaryKey",
-                                        serverURL: url,
-                                        maxConnectionAttempts: 2,
-                                        testing: true)
+        try await ParseSwift.initialize(
+            applicationId: "applicationId",
+            clientKey: "clientKey",
+            primaryKey: "primaryKey",
+            maintenanceKey: "maintenanceKey",
+            serverURL: url,
+            maxConnectionAttempts: 2,
+            testing: true
+        )
     }
 
     override func tearDown() async throws {
@@ -54,7 +57,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    actor Result: Sendable {
+    actor Result {
         var attempts = 0
 
         func incrementAttempts() {
