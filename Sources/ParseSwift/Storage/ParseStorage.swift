@@ -52,12 +52,12 @@ extension ParseStorage {
         return try await backingStore.deleteAll()
     }
 
-    func get<T>(valueFor key: String) async throws -> T? where T: Decodable {
+    func get<T>(valueFor key: String) async throws -> T? where T: Decodable & Sendable {
         try requireBackingStore()
         return try await backingStore.get(valueFor: key)
     }
 
-    func set<T>(_ object: T, for key: String) async throws where T: Encodable {
+    func set<T>(_ object: T, for key: String) async throws where T: Encodable & Sendable {
         try requireBackingStore()
         return try await backingStore.set(object, for: key)
     }
