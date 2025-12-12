@@ -121,7 +121,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: vapor/swiftly-action@v0.2
         with:
-          toolchain: 5.10.2
+          toolchain: 5.10.1
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
         run: swift test --enable-test-discovery --enable-code-coverage -v
