@@ -36,7 +36,7 @@ jobs:
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 10\ \(46mm\)'
             action: 'test'
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Install Extra Packages
       run: brew install swiftlint
     - name: Create and set the default keychain
@@ -50,7 +50,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v4
+      uses: sersoft-gmbh/swift-coverage-action@v5
       id: coverage-files
       with:
         format: lcov
@@ -71,7 +71,7 @@ jobs:
     timeout-minutes: 25
     runs-on: macos-15
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -85,7 +85,7 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v4
+      uses: sersoft-gmbh/swift-coverage-action@v5
       id: coverage-files
       with:
         format: lcov
@@ -108,7 +108,7 @@ jobs:
     needs: linux
     runs-on: macos-13
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
@@ -118,10 +118,10 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: sersoft-gmbh/swifty-linux-action@v3
+      - uses: actions/checkout@v6
+      - uses: vapor/swiftly-action@v0.2
         with:
-          release-version: "5"
+          toolchain: 5.10.1
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
         run: swift test --enable-test-discovery --enable-code-coverage -v
@@ -140,7 +140,7 @@ jobs:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: compnerd/gha-setup-swift@v0.3.0
         with:
           branch: swift-5.10.1-release
@@ -160,7 +160,7 @@ jobs:
     needs: linux
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Generate Docs
         run: set -o pipefail && env NSUnbufferedIO=YES Scripts/generate-documentation
         env:
@@ -170,7 +170,7 @@ jobs:
     needs: linux
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Update Framework Version
         run: ./Scripts/update_build
         env:
