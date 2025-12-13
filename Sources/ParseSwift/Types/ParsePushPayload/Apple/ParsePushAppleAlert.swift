@@ -15,6 +15,7 @@ import Foundation
  for more information.
  */
 public struct ParsePushAppleAlert: ParseTypeable {
+
     /**
      The content of the alert message.
      */

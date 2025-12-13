@@ -30,6 +30,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
     public var payload: V?
     /// When to send the notification.
     public var pushTime: Date?
+
     /**
      The UNIX timestamp when the notification should expire.
      If the notification cannot be delivered to the device, will retry until it expires.
@@ -37,7 +38,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      no retries will be attempted.
      - note: This should not be set directly using a **Date** type. Instead it should
      be set using `expirationDate`.
-     - warning: Cannot send a notification with this valuel and `expirationInterval` both set.
+     - warning: Cannot send a notification with this value and `expirationInterval` both set.
      */
     var expirationTime: TimeInterval?
 
@@ -46,7 +47,7 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
      If the notification cannot be delivered to the device, will retry until it expires.
      - note: This takes any date and turns it into a UNIX timestamp and sets the
      value of `expirationTime`.
-     - warning: Cannot send a notification with this valuel and `expirationInterval` both set.
+     - warning: Cannot send a notification with this value and `expirationInterval` both set.
      */
     var expirationDate: Date? {
         get {
@@ -59,9 +60,10 @@ public struct ParsePush<V: ParsePushPayloadable>: ParseTypeable {
             expirationTime = newValue?.timeIntervalSince1970
         }
     }
+
     /**
      The seconds from now to expire the notification.
-     - warning: Cannot send a notification with this valuel and `expirationTime` both set.
+     - warning: Cannot send a notification with this value and `expirationTime` both set.
      */
     public var expirationInterval: Int?
 
@@ -203,11 +205,13 @@ extension ParsePush {
         }
     }
 
-    func sendCommand() -> API.NonParseBodyCommand<Self, String> {
-
-        return API.NonParseBodyCommand(method: .POST,
-                                       path: .push,
-                                       body: self) { (data) -> String in
+    func sendCommand() -> API.NonParseBodyCommand<ParsePushNotificationBody, String> {
+        let body = ParsePushNotificationBody(push: self)
+        let command = API.NonParseBodyCommand(
+            method: .POST,
+            path: .push,
+            body: body
+        ) { (data) -> String in
             guard let response = try? ParseCoding.jsonDecoder().decode(PushResponse.self, from: data) else {
                 throw ParseError(code: .otherCause,
                                  message: "The server is missing \"X-Parse-Push-Status-Id\" in its header response")
@@ -222,6 +226,7 @@ extension ParsePush {
                 throw ParseError(code: .otherCause, message: "Push was unsuccessful")
             }
         }
+        return command
     }
 }
 
