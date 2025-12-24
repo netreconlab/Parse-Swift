@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -18,6 +18,7 @@ extension ParseLiveQuery {
       - parameter isUserWantsToConnect: Specifies if the user is calling this function. Defaults to **true**.
       - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     public func openPublisher(isUserWantsToConnect: Bool = true) -> Future<Void, Error> {
         Future { promise in
             self.open(isUserWantsToConnect: isUserWantsToConnect) { error in
@@ -35,6 +36,7 @@ extension ParseLiveQuery {
      server endpoint.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     public func sendPingPublisher() -> Future<Void, Error> {
         Future { promise in
             self.sendPing { error in

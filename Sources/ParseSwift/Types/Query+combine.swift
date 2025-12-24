@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -19,6 +19,7 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func findPublisher(options: API.Options = []) -> Future<[ResultType], ParseError> {
         Future { promise in
             self.find(options: options,
@@ -39,6 +40,7 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func findExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
                                             options: API.Options = []) -> Future<[U], ParseError> {
         Future { promise in
@@ -57,6 +59,7 @@ public extension Query {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func findAllPublisher(batchLimit: Int? = nil,
                           options: API.Options = []) -> Future<[ResultType], ParseError> {
         Future { promise in
@@ -71,6 +74,7 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func firstPublisher(options: API.Options = []) -> Future<ResultType, ParseError> {
         Future { promise in
             self.first(options: options,
@@ -91,6 +95,7 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func firstExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
                                              options: API.Options = []) -> Future<U, ParseError> {
         Future { promise in
@@ -105,6 +110,7 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func countPublisher(options: API.Options = []) -> Future<Int, ParseError> {
         Future { promise in
             self.count(options: options,
@@ -125,6 +131,7 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func countExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
                                              options: API.Options = []) -> Future<[U], ParseError> {
         Future { promise in

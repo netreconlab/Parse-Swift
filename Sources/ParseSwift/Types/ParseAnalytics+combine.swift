@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -33,6 +33,7 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func trackAppOpenedPublisher(launchOptions: [UIApplication.LaunchOptionsKey: Any],
                                         at date: Date? = nil,
                                         options: API.Options = []) -> Future<Void, ParseError> {
@@ -59,6 +60,7 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func trackAppOpenedPublisher(dimensions: [String: String]? = nil,
                                         at date: Date? = nil,
                                         options: API.Options = []) -> Future<Void, ParseError> {
@@ -76,6 +78,7 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func trackPublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
             self.track(options: options,
@@ -96,6 +99,7 @@ public extension ParseAnalytics {
      - warning: This method makes a copy of the current `ParseAnalytics` and then mutates
      it. You will not have access to the mutated analytic after calling this method.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func trackPublisher(dimensions: [String: String]?,
                         at date: Date? = nil,
                         options: API.Options = []) -> Future<Void, ParseError> {

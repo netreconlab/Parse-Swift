@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -24,6 +24,7 @@ public extension ParseObject {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchPublisher(includeKeys: [String]? = nil,
                         options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -52,6 +53,7 @@ public extension ParseObject {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func savePublisher(ignoringCustomObjectIdConfig: Bool = false,
                        options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -67,6 +69,7 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.create(options: options,
@@ -80,6 +83,7 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.replace(options: options,
@@ -93,6 +97,7 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.update(options: options,
@@ -106,6 +111,7 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
             self.delete(options: options, completion: promise)
@@ -124,6 +130,7 @@ public extension Sequence where Element: ParseObject {
      - returns: A publisher that eventually produces an an array of Result enums with the object if a fetch was
      successful or a `ParseError` if it failed.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchAllPublisher(includeKeys: [String]? = nil,
                            options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
@@ -159,6 +166,7 @@ public extension Sequence where Element: ParseObject {
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func saveAllPublisher(batchLimit limit: Int? = nil,
                           transaction: Bool = configuration.isUsingTransactions,
                           ignoringCustomObjectIdConfig: Bool = false,
@@ -186,6 +194,7 @@ public extension Sequence where Element: ParseObject {
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createAllPublisher(batchLimit limit: Int? = nil,
                             transaction: Bool = configuration.isUsingTransactions,
                             options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
@@ -211,6 +220,7 @@ public extension Sequence where Element: ParseObject {
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func replaceAllPublisher(batchLimit limit: Int? = nil,
                              transaction: Bool = configuration.isUsingTransactions,
                              options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
@@ -236,6 +246,7 @@ public extension Sequence where Element: ParseObject {
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     internal func updateAllPublisher(batchLimit limit: Int? = nil,
                                      transaction: Bool = configuration.isUsingTransactions,
                                      options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)],
@@ -262,6 +273,7 @@ public extension Sequence where Element: ParseObject {
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deleteAllPublisher(batchLimit limit: Int? = nil,
                             transaction: Bool = configuration.isUsingTransactions,
                             options: API.Options = []) -> Future<[(Result<Void, ParseError>)], ParseError> {

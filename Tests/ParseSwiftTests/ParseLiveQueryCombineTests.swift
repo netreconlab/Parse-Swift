@@ -6,13 +6,11 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import XCTest
 @testable import ParseSwift
-#if canImport(Combine)
 import Combine
-#endif
 
 class ParseLiveQueryCombineTests: XCTestCase {
 

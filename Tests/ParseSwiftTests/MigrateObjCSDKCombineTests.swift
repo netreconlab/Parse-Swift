@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && !os(Linux) && !os(Android) && !os(Windows)
+#if canImport(Combine) && !os(Linux) && !os(Android) && !os(Windows) && compiler(<6.0.0)
 
 import Foundation
 import XCTest

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -23,6 +23,7 @@ public extension Pointer {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchPublisher(includeKeys: [String]? = nil,
                         options: API.Options = []) -> Future<T, ParseError> {
         Future { promise in

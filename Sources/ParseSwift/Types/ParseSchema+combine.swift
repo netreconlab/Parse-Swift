@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -21,6 +21,7 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchPublisher(includeKeys: [String]? = nil,
                         options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -39,6 +40,7 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createPublisher(includeKeys: [String]? = nil,
                          options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -57,6 +59,7 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func updatePublisher(includeKeys: [String]? = nil,
                          options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -76,6 +79,7 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func purgePublisher(includeKeys: [String]? = nil,
                         options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
@@ -96,6 +100,7 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deletePublisher(includeKeys: [String]? = nil,
                          options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in

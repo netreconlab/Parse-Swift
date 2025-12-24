@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -19,6 +19,7 @@ public extension ParseAnonymous {
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func loginPublisher(options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
             self.login(options: options,
@@ -33,6 +34,7 @@ public extension ParseAnonymous {
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func loginPublisher(authData: [String: String],
                         options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
@@ -45,6 +47,7 @@ public extension ParseAnonymous {
 
 public extension ParseAnonymous {
 
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func linkPublisher(authData: [String: String],
                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in

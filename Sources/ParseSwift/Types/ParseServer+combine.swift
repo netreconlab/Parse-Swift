@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -19,6 +19,7 @@ public extension ParseServer {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func healthPublisher(options: API.Options = []) -> AnyPublisher<Status, ParseError> {
         let subject = PassthroughSubject<Status, ParseError>()
         Self.health(options: options) { result in
@@ -54,6 +55,7 @@ public extension ParseServer {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func informationPublisher(options: API.Options = []) -> Future<Information, ParseError> {
         Future { promise in
             Self.information(options: options,

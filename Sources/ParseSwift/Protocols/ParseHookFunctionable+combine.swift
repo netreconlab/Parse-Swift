@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -19,6 +19,7 @@ public extension ParseHookFunctionable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.fetch(options: options, completion: promise)
@@ -32,6 +33,7 @@ public extension ParseHookFunctionable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchAllPublisher(options: API.Options = []) -> Future<[Self], ParseError> {
         Future { promise in
             self.fetchAll(options: options, completion: promise)
@@ -48,6 +50,7 @@ public extension ParseHookFunctionable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.create(options: options, completion: promise)
@@ -65,6 +68,7 @@ public extension ParseHookFunctionable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.update(options: options, completion: promise)
@@ -81,6 +85,7 @@ public extension ParseHookFunctionable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
             self.delete(options: options, completion: promise)

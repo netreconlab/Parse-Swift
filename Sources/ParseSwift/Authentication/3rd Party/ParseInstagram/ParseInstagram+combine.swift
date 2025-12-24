@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -20,11 +20,12 @@ public extension ParseInstagram {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func loginPublisher(id: String,
                         accessToken: String,
                         apiURL: String = Self.graphAPIBaseURL,
                         options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
-        Future { promise in
+        Future { @Sendable promise in
             self.login(id: id,
                        accessToken: accessToken,
                        apiURL: apiURL,
@@ -38,6 +39,7 @@ public extension ParseInstagram {
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func loginPublisher(authData: [String: String],
                         options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
@@ -58,6 +60,7 @@ public extension ParseInstagram {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func linkPublisher(id: String,
                        accessToken: String,
                        apiURL: String = Self.graphAPIBaseURL,
@@ -77,6 +80,7 @@ public extension ParseInstagram {
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func linkPublisher(authData: [String: String],
                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in

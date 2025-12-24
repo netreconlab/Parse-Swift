@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -14,11 +14,13 @@ public extension ParseAuthentication {
 
     // MARK: Convenience Implementations - Combine
 
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func unlinkPublisher(_ user: AuthenticatedUser,
                          options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         user.unlinkPublisher(__type, options: options)
     }
 
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func unlinkPublisher(options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
             self.unlink(options: options,
@@ -41,6 +43,7 @@ public extension ParseUser {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func loginPublisher(_ type: String,
                                authData: [String: String],
                                options: API.Options = []) -> Future<Self, ParseError> {
@@ -58,6 +61,7 @@ public extension ParseUser {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func unlinkPublisher(_ type: String,
                          options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -77,6 +81,7 @@ public extension ParseUser {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func linkPublisher(_ type: String,
                               authData: [String: String],
                               options: API.Options = []) -> Future<Self, ParseError> {

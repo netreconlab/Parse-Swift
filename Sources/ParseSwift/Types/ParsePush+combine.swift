@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -21,6 +21,7 @@ public extension ParsePush {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func sendPublisher(options: API.Options = []) -> Future<String, ParseError> {
         Future { promise in
             self.send(options: options,

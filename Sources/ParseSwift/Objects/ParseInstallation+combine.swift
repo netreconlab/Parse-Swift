@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Foundation
 import Combine
 
@@ -25,6 +25,7 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchPublisher(includeKeys: [String]? = nil,
                         options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -55,6 +56,7 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func savePublisher(ignoringCustomObjectIdConfig: Bool = false,
                        options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
@@ -70,6 +72,7 @@ public extension ParseInstallation {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.create(options: options,
@@ -84,6 +87,7 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object replaced has the same objectId as current, it will automatically replace the current.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.replace(options: options,
@@ -98,6 +102,7 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object updated has the same objectId as current, it will automatically update the current.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
             self.update(options: options,
@@ -112,6 +117,7 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object deleted has the same objectId as current, it will automatically update the current.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
             self.delete(options: options, completion: promise)
@@ -134,6 +140,7 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func becomePublisher(_ installationId: String,
                                 copyEntireInstallation: Bool = true,
                                 options: API.Options = []) -> Future<Self, ParseError> {
@@ -159,6 +166,7 @@ public extension Sequence where Element: ParseInstallation {
      successful or a `ParseError` if it failed.
      - important: If an object fetched has the same objectId as current, it will automatically update the current.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchAllPublisher(includeKeys: [String]? = nil,
                            options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
@@ -197,6 +205,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func saveAllPublisher(batchLimit limit: Int? = nil,
                           transaction: Bool = configuration.isUsingTransactions,
                           ignoringCustomObjectIdConfig: Bool = false,
@@ -226,6 +235,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func createAllPublisher(batchLimit limit: Int? = nil,
                             transaction: Bool = configuration.isUsingTransactions,
                             options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
@@ -254,6 +264,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func replaceAllPublisher(batchLimit limit: Int? = nil,
                              transaction: Bool = configuration.isUsingTransactions,
                              options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
@@ -282,6 +293,7 @@ public extension Sequence where Element: ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     internal func updateAllPublisher(batchLimit limit: Int? = nil,
                                      transaction: Bool = configuration.isUsingTransactions,
                                      options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)],
@@ -309,6 +321,7 @@ public extension Sequence where Element: ParseInstallation {
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func deleteAllPublisher(batchLimit limit: Int? = nil,
                             transaction: Bool = configuration.isUsingTransactions,
                             options: API.Options = []) -> Future<[(Result<Void, ParseError>)], ParseError> {
@@ -334,6 +347,7 @@ public extension ParseInstallation {
      method will destroy the entire Objective-C Keychain and `ParseInstallation` on the Parse
      Server.
     */
+	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func deleteObjCKeychainPublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
             Self.deleteObjCKeychain(options: options, completion: promise)
