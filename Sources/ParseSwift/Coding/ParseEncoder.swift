@@ -188,7 +188,7 @@ public struct ParseEncoder: Sendable {
 		unique: PointerType?,
 		unsavedChildren: [Encodable]
 	) {
-		let keysToSkip: Set<String>!
+		let keysToSkip: Set<String>
 		if !Parse.configuration.isRequiringCustomObjectIds {
 			keysToSkip = SkipKeys.object.keys()
 		} else {
