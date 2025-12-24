@@ -41,7 +41,7 @@ public protocol ParseAuthentication: Codable {
     func login(authData: [String: String],
                options: API.Options,
                callbackQueue: DispatchQueue,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void)
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void)
 
     /**
      Link the *current* `ParseUser` *asynchronously* using the respective authentication type.
@@ -53,7 +53,7 @@ public protocol ParseAuthentication: Codable {
     func link(authData: [String: String],
               options: API.Options,
               callbackQueue: DispatchQueue,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void)
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void)
 
     /**
      Whether the `ParseUser` is logged in with the respective authentication type.
@@ -74,7 +74,7 @@ public protocol ParseAuthentication: Codable {
     func unlink(_ user: AuthenticatedUser,
                 options: API.Options,
                 callbackQueue: DispatchQueue,
-                completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void)
+                completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void)
 
     /**
      Unlink the *current* `ParseUser` *asynchronously* from the respective authentication type.
@@ -85,7 +85,7 @@ public protocol ParseAuthentication: Codable {
      */
     func unlink(options: API.Options,
                 callbackQueue: DispatchQueue,
-                completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void)
+                completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void)
 
     /**
      Strips the *current* user of a respective authentication type.
@@ -190,13 +190,13 @@ public extension ParseAuthentication {
     func unlink(_ user: AuthenticatedUser,
                 options: API.Options = [],
                 callbackQueue: DispatchQueue = .main,
-                completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+                completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         user.unlink(__type, options: options, callbackQueue: callbackQueue, completion: completion)
     }
 
     func unlink(options: API.Options = [],
                 callbackQueue: DispatchQueue = .main,
-                completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+                completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         Task {
             guard let current = try? await AuthenticatedUser.current() else {
                 let error = ParseError(code: .invalidLinkedSession,
@@ -245,7 +245,7 @@ public extension ParseUser {
                       authData: [String: String],
                       options: API.Options,
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             do {
                 _ = try await Self.current()
@@ -268,7 +268,7 @@ public extension ParseUser {
                                             authData: [String: String],
                                             options: API.Options = [],
                                             callbackQueue: DispatchQueue = .main,
-                                            completion: @escaping (Result<Self, ParseError>) -> Void) {
+                                            completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         let body = SignupLoginBody(authData: [type: authData])
         Task {
             do {
@@ -323,7 +323,7 @@ public extension ParseUser {
     func unlink(_ type: String,
                 options: API.Options = [],
                 callbackQueue: DispatchQueue = .main,
-                completion: @escaping (Result<Self, ParseError>) -> Void) {
+                completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         var options = options
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
         let immutableOptions = options
@@ -376,7 +376,7 @@ public extension ParseUser {
                      authData: [String: String],
                      options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<Self, ParseError>) -> Void) {
+                     completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))

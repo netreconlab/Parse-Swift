@@ -13,19 +13,19 @@ import FoundationNetworking
 
 internal extension API {
     // MARK: API.NonParseBodyCommand
-    struct NonParseBodyCommand<T, U>: Encodable where T: Encodable {
+    struct NonParseBodyCommand<T, U>: Encodable where T: Encodable & Sendable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((Data) async throws -> U)
+        let mapper: (@Sendable (Data) async throws -> U)
         let params: [String: String?]?
 
         init(method: API.Method,
              path: API.Endpoint,
              params: [String: String]? = nil,
              body: T? = nil,
-             mapper: @escaping ((Data) async throws -> U)) {
+             mapper: @escaping (@Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.params = params
@@ -37,7 +37,7 @@ internal extension API {
         func execute(options: API.Options,
                      callbackQueue: DispatchQueue,
                      allowIntermediateResponses: Bool = false,
-                     completion: @escaping (Result<U, ParseError>) -> Void) async {
+                     completion: @escaping @Sendable (Result<U, ParseError>) -> Void) async {
 
             switch await self.prepareURLRequest(options: options) {
             case .success(let urlRequest):
@@ -125,7 +125,7 @@ internal extension API.NonParseBodyCommand {
                              message: "Cannot delete an object without an objectId")
         }
 
-        let mapper = { (data: Data) -> NoBody in
+        let mapper = { @Sendable (data: Data) -> NoBody in
             if let error = try? ParseCoding
                 .jsonDecoder()
                 .decode(ParseError.self,
@@ -169,11 +169,15 @@ internal extension API.NonParseBodyCommand {
             }
 
             let path = Parse.configuration.mountPath + objectable.endpoint.urlComponent
-            let encoded = try ParseCoding.parseEncoder().encode(object,
-                                                                acl: defaultACL,
-                                                                batching: true,
-                                                                objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
-                                                                filesSavedBeforeThisOne: filesSavedBeforeThisOne)
+            let encoded = try ParseCoding
+				.parseEncoder()
+				.encode(
+					object,
+					acl: defaultACL,
+					batching: true,
+					objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
+					filesSavedBeforeThisOne: filesSavedBeforeThisOne
+				)
             let body = try ParseCoding.jsonDecoder().decode(AnyCodable.self, from: encoded)
             return API.BatchCommand<AnyCodable, PointerType>(method: method,
                                                              path: .any(path),
@@ -181,7 +185,7 @@ internal extension API.NonParseBodyCommand {
                                                              mapper: mapper)
         }
 
-        let mapper = { (data: Data) -> [Result<PointerType, ParseError>] in
+        let mapper = { @Sendable (data: Data) -> [Result<PointerType, ParseError>] in
             let decodingType = [BatchResponseItem<BaseObjectable>].self
             do {
                 let responses = try ParseCoding.jsonDecoder().decode(decodingType, from: data)

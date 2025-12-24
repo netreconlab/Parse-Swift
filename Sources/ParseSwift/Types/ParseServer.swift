@@ -20,7 +20,7 @@ public typealias ParseHealth = ParseServer
 public struct ParseServer: ParseTypeable {
 
     /// The health status value of a Parse Server.
-    public enum Status: String, Codable {
+    public enum Status: String, Codable, Sendable {
         /// The server started and is running.
         case ok
         /// The server has been created but the start method has not been called yet.
@@ -32,7 +32,7 @@ public struct ParseServer: ParseTypeable {
     }
 
     /// Any provided information from the Parse Server.
-    public struct Information: Decodable {
+    public struct Information: Decodable, Sendable {
 
         /// The version of the Parse Server.
         public var version: ParseVersion? {
@@ -84,7 +84,7 @@ extension ParseServer {
     static public func health(options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
                               allowIntermediateResponses: Bool = true,
-                              completion: @escaping (Result<Status, ParseError>) -> Void) {
+                              completion: @escaping @Sendable (Result<Status, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -110,7 +110,7 @@ extension ParseServer {
     static public func check(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
                              allowIntermediateResponses: Bool = true,
-                             completion: @escaping (Result<Status, ParseError>) -> Void) {
+                             completion: @escaping @Sendable (Result<Status, ParseError>) -> Void) {
         health(options: options,
                callbackQueue: callbackQueue,
                allowIntermediateResponses: allowIntermediateResponses,
@@ -141,7 +141,7 @@ extension ParseServer {
     */
     static public func information(options: API.Options = [],
                                    callbackQueue: DispatchQueue = .main,
-                                   completion: @escaping (Result<Information, ParseError>) -> Void) {
+                                   completion: @escaping @Sendable (Result<Information, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

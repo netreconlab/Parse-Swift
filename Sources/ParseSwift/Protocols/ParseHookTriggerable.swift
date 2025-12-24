@@ -273,7 +273,7 @@ extension ParseHookTriggerable {
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -312,7 +312,7 @@ extension ParseHookTriggerable {
     */
     public func fetchAll(options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
-                         completion: @escaping (Result<[Self], ParseError>) -> Void) {
+                         completion: @escaping @Sendable (Result<[Self], ParseError>) -> Void) {
         Self.fetchAll(options: options,
                       callbackQueue: callbackQueue,
                       completion: completion)
@@ -331,7 +331,7 @@ extension ParseHookTriggerable {
     */
     public static func fetchAll(options: API.Options = [],
                                 callbackQueue: DispatchQueue = .main,
-                                completion: @escaping (Result<[Self], ParseError>) -> Void) {
+                                completion: @escaping @Sendable (Result<[Self], ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -364,7 +364,7 @@ extension ParseHookTriggerable {
     */
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -406,7 +406,7 @@ extension ParseHookTriggerable {
     */
     public func update(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -448,7 +448,7 @@ extension ParseHookTriggerable {
     */
     public func delete(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Void, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

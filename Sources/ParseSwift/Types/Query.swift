@@ -473,7 +473,7 @@ extension Query: Queryable {
     */
     public func find(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
+                     completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
@@ -509,10 +509,12 @@ extension Query: Queryable {
       `usingMongoDB` flag needs to be set for MongoDB users. See more
       [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func findExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                          options: API.Options = [],
-                                          callbackQueue: DispatchQueue = .main,
-                                          completion: @escaping (Result<[U], ParseError>) -> Void) {
+    public func findExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[U], ParseError>) -> Void
+	) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
@@ -562,7 +564,7 @@ extension Query: Queryable {
     public func findAll(batchLimit limit: Int? = nil,
                         options: API.Options = [],
                         callbackQueue: DispatchQueue = .main,
-                        completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
+                        completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void) {
         if self.limit == 0 {
             callbackQueue.async {
                 completion(.success([ResultType]()))
@@ -627,7 +629,7 @@ extension Query: Queryable {
     */
     public func first(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<ResultType, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<ResultType, ParseError>) -> Void) {
         guard limit > 0 else {
             let error = ParseError(code: .objectNotFound,
                                    message: "Object not found on the server.")
@@ -667,10 +669,12 @@ extension Query: Queryable {
       `usingMongoDB` flag needs to be set for MongoDB users. See more
       [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func firstExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                           options: API.Options = [],
-                                           callbackQueue: DispatchQueue = .main,
-                                           completion: @escaping (Result<U, ParseError>) -> Void) {
+    public func firstExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<U, ParseError>) -> Void
+	) {
         guard limit > 0 else {
             let error = ParseError(code: .objectNotFound,
                                    message: "Object not found on the server.")
@@ -716,7 +720,7 @@ extension Query: Queryable {
     */
     public func count(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Int, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Int, ParseError>) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success(0))
@@ -752,10 +756,12 @@ extension Query: Queryable {
       `usingMongoDB` flag needs to be set for MongoDB users. See more
       [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func countExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                           options: API.Options = [],
-                                           callbackQueue: DispatchQueue = .main,
-                                           completion: @escaping (Result<[U], ParseError>) -> Void) {
+    public func countExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[U], ParseError>) -> Void
+	) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
@@ -800,7 +806,7 @@ extension Query: Queryable {
     */
     public func withCount(options: API.Options = [],
                           callbackQueue: DispatchQueue = .main,
-                          completion: @escaping (Result<([ResultType], Int), ParseError>) -> Void) {
+                          completion: @escaping @Sendable (Result<([ResultType], Int), ParseError>) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success(([], 0)))
@@ -836,10 +842,12 @@ extension Query: Queryable {
       `usingMongoDB` flag needs to be set for MongoDB users. See more
       [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func withCountExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                               options: API.Options = [],
-                                               callbackQueue: DispatchQueue = .main,
-                                               completion: @escaping (Result<[U], ParseError>) -> Void) {
+    public func withCountExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[U], ParseError>) -> Void
+	) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
@@ -885,10 +893,10 @@ extension Query: Queryable {
       It should have the following argument signature: `(Result<[ParseObject], ParseError>)`.
         - warning: This has not been tested thoroughly.
     */
-    public func aggregate(_ pipeline: [[String: Encodable]],
+    public func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                           options: API.Options = [],
                           callbackQueue: DispatchQueue = .main,
-                          completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
+                          completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
@@ -956,11 +964,13 @@ extension Query: Queryable {
         `usingMongoDB` flag needs to be set for MongoDB users. See more
         [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func aggregateExplain<U: Decodable>(_ pipeline: [[String: Encodable]], // swiftlint:disable:this function_body_length line_length
-                                               usingMongoDB: Bool = false,
-                                               options: API.Options = [],
-                                               callbackQueue: DispatchQueue = .main,
-                                               completion: @escaping (Result<[U], ParseError>) -> Void) {
+    public func aggregateExplain<U: Decodable & Sendable>( // swiftlint:disable:this function_body_length
+		_ pipeline: [[String: Encodable & Sendable]],
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[U], ParseError>
+		) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))
@@ -1038,7 +1048,7 @@ extension Query: Queryable {
     public func distinct(_ key: String,
                          options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
-                         completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
+                         completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([ResultType]()))
@@ -1081,11 +1091,13 @@ extension Query: Queryable {
         `usingMongoDB` flag needs to be set for MongoDB users. See more
         [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    public func distinctExplain<U: Decodable>(_ key: String,
-                                              usingMongoDB: Bool = false,
-                                              options: API.Options = [],
-                                              callbackQueue: DispatchQueue = .main,
-                                              completion: @escaping (Result<[U], ParseError>) -> Void) {
+    public func distinctExplain<U: Decodable & Sendable>(
+		_ key: String,
+		usingMongoDB: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[U], ParseError>) -> Void
+	) {
         guard limit > 0 else {
             callbackQueue.async {
                 completion(.success([U]()))

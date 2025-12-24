@@ -251,7 +251,7 @@ extension ParseUser {
         authData: [String: [String: String]?]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -324,7 +324,7 @@ extension ParseUser {
     public func become(sessionToken: String,
                        options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Self.become(sessionToken: sessionToken,
                     options: options,
                     callbackQueue: callbackQueue,
@@ -348,7 +348,7 @@ extension ParseUser {
     public static func become(sessionToken: String,
                               options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
-                              completion: @escaping (Result<Self, ParseError>) -> Void) {
+                              completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var newUser = Self()
             newUser.objectId = "me"
@@ -397,7 +397,7 @@ extension ParseUser {
     public static func loginAs(objectId: String,
                                options: API.Options = [],
                                callbackQueue: DispatchQueue = .main,
-                               completion: @escaping (Result<Self, ParseError>) -> Void) {
+                               completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -437,7 +437,7 @@ extension ParseUser {
     */
     public static func loginUsingObjCKeychain(options: API.Options = [],
                                               callbackQueue: DispatchQueue = .main,
-                                              completion: @escaping (Result<Self, ParseError>) -> Void) {
+                                              completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             do {
                 try await yieldIfNotInitialized()
@@ -559,7 +559,7 @@ extension ParseUser {
     */
     public static func logout(options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
-                              completion: @escaping (Result<Void, ParseError>) -> Void) {
+                              completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -612,7 +612,7 @@ extension ParseUser {
     */
     public static func passwordReset(email: String, options: API.Options = [],
                                      callbackQueue: DispatchQueue = .main,
-                                     completion: @escaping (Result<Void, ParseError>) -> Void) {
+                                     completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -664,7 +664,7 @@ extension ParseUser {
         usingPost: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -759,7 +759,7 @@ extension ParseUser {
     public static func verificationEmail(email: String,
                                          options: API.Options = [],
                                          callbackQueue: DispatchQueue = .main,
-                                         completion: @escaping (Result<Void, ParseError>) -> Void) {
+                                         completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -808,7 +808,7 @@ extension ParseUser {
      desires a different policy, it should be inserted in `options`.
     */
     public func signup(options: API.Options = [], callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -860,7 +860,7 @@ extension ParseUser {
                               password: String,
                               options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
-                              completion: @escaping (Result<Self, ParseError>) -> Void) {
+                              completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
 
         Task {
             var options = options
@@ -1002,7 +1002,7 @@ extension ParseUser {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -1078,7 +1078,7 @@ extension ParseUser {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.save
         Task {
@@ -1112,7 +1112,7 @@ extension ParseUser {
     public func create(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -1144,7 +1144,7 @@ extension ParseUser {
     public func replace(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -1176,7 +1176,7 @@ extension ParseUser {
     internal func update(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -1378,7 +1378,7 @@ extension ParseUser {
     public func delete(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -1466,7 +1466,7 @@ public extension Sequence where Element: ParseUser {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.save
         Task {
@@ -1513,7 +1513,7 @@ public extension Sequence where Element: ParseUser {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -1560,7 +1560,7 @@ public extension Sequence where Element: ParseUser {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -1607,7 +1607,7 @@ public extension Sequence where Element: ParseUser {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -1648,7 +1648,7 @@ public extension Sequence where Element: ParseUser {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         if (allSatisfy { $0.className == Self.Element.className}) {
             let uniqueObjectIds = Set(compactMap { $0.objectId })
@@ -1725,7 +1725,7 @@ public extension Sequence where Element: ParseUser {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
     ) {
         Task {
             var options = options

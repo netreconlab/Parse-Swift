@@ -19,12 +19,14 @@ class ParseURLSessionDelegate: NSObject {
     var streamDelegates = [URLSessionTask: InputStream]()
 
     actor SessionDelegate {
-        var downloadDelegates = [URLSessionDownloadTask: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)]()
-        var uploadDelegates = [URLSessionTask: ((URLSessionTask, Int64, Int64, Int64) -> Void)]()
+        var downloadDelegates = [
+			URLSessionDownloadTask: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)
+		]()
+        var uploadDelegates = [URLSessionTask: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)]()
         var taskCallbackQueues = [URLSessionTask: DispatchQueue]()
 
         func updateDownload(_ task: URLSessionDownloadTask,
-                            callback: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?) {
+                            callback: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?) {
             downloadDelegates[task] = callback
         }
 
@@ -34,7 +36,7 @@ class ParseURLSessionDelegate: NSObject {
         }
 
         func updateUpload(_ task: URLSessionTask,
-                          callback: ((URLSessionTask, Int64, Int64, Int64) -> Void)?) {
+                          callback: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)?) {
             uploadDelegates[task] = callback
         }
 

@@ -68,7 +68,7 @@ public extension ParseApple {
                identityToken: Data,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
 
         guard let appleAuthData = try? AuthenticationKeys.id.makeDictionary(user: user, identityToken: identityToken) else {
             callbackQueue.async {
@@ -86,7 +86,7 @@ public extension ParseApple {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -117,7 +117,7 @@ public extension ParseApple {
               identityToken: Data,
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard let appleAuthData = try? AuthenticationKeys.id.makeDictionary(user: user, identityToken: identityToken) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -134,7 +134,7 @@ public extension ParseApple {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             let error = ParseError(code: .otherCause,
                                    message: "Should have \"authData\" in consisting of keys \"id\" and \"token\".")

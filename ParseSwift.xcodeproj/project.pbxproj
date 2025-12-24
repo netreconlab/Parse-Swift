@@ -199,6 +199,7 @@
 		70D1BDBA25BB17A600A42E7C /* ParseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D1BDB925BB17A600A42E7C /* ParseConfig.swift */; };
 		70D1BE4B25BB312700A42E7C /* ParseConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D1BE0625BB2BF400A42E7C /* ParseConfigTests.swift */; };
 		70D1BE7325BB43EB00A42E7C /* BaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D1BE7225BB43EB00A42E7C /* BaseConfig.swift */; };
+		70D23A482EF9BE1D0033204F /* JSONEncoder+ParseEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D23A472EF9BE000033204F /* JSONEncoder+ParseEncoder.swift */; };
 		70D41D6728B0235100613510 /* MigrateObjCSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D41D6628B0235100613510 /* MigrateObjCSDKTests.swift */; };
 		70D41D6B28B294C100613510 /* MigrateObjCSDKCombineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D41D6A28B294C100613510 /* MigrateObjCSDKCombineTests.swift */; };
 		70D41D8028B520E200613510 /* ParseKeychainAccessGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D41D7F28B520E200613510 /* ParseKeychainAccessGroup.swift */; };
@@ -549,6 +550,7 @@
 		70D1BDB925BB17A600A42E7C /* ParseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConfig.swift; sourceTree = "<group>"; };
 		70D1BE0625BB2BF400A42E7C /* ParseConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConfigTests.swift; sourceTree = "<group>"; };
 		70D1BE7225BB43EB00A42E7C /* BaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConfig.swift; sourceTree = "<group>"; };
+		70D23A472EF9BE000033204F /* JSONEncoder+ParseEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+ParseEncoder.swift"; sourceTree = "<group>"; };
 		70D41D6628B0235100613510 /* MigrateObjCSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateObjCSDKTests.swift; sourceTree = "<group>"; };
 		70D41D6A28B294C100613510 /* MigrateObjCSDKCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateObjCSDKCombineTests.swift; sourceTree = "<group>"; };
 		70D41D7F28B520E200613510 /* ParseKeychainAccessGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseKeychainAccessGroup.swift; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 		706436A227341F36007C6461 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				70D23A472EF9BE000033204F /* JSONEncoder+ParseEncoder.swift */,
 				70386A0525D9718C0048EC1B /* Data.swift */,
 				706436A827341FD0007C6461 /* Date.swift */,
 				70C048C02880D7E500401689 /* Dictionary.swift */,
@@ -1684,6 +1687,7 @@
 				F97B460A24D9C6F200F4A88B /* Fetchable.swift in Sources */,
 				70CE0A9428590A0A00DAEA86 /* ParseHookResponse.swift in Sources */,
 				70F03A482780D27700E5AFB4 /* ParseLinkedIn+async.swift in Sources */,
+				70D23A482EF9BE1D0033204F /* JSONEncoder+ParseEncoder.swift in Sources */,
 				70CE0AA328595E5E00DAEA86 /* ParseHookRequestable.swift in Sources */,
 				703B090C26BD984D005A112F /* ParseConfig+async.swift in Sources */,
 				F97B460E24D9C6F200F4A88B /* ParseObject.swift in Sources */,
@@ -2025,6 +2029,7 @@
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_STRICT_CONCURRENCY = targeted;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4,6,7";
@@ -2060,6 +2065,7 @@
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_STRICT_CONCURRENCY = targeted;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4,6,7";

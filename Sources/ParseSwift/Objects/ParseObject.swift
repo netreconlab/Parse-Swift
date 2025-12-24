@@ -430,7 +430,7 @@ transactions for this call.
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.save
         Task {
@@ -475,7 +475,7 @@ transactions for this call.
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -519,7 +519,7 @@ transactions for this call.
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -563,7 +563,7 @@ transactions for this call.
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -601,7 +601,7 @@ transactions for this call.
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         if (allSatisfy { $0.className == Self.Element.className}) {
             let uniqueObjectIds = Set(compactMap { $0.objectId })
@@ -670,7 +670,7 @@ transactions for this call.
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
     ) {
         do {
             var options = options
@@ -749,7 +749,7 @@ extension ParseObject {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -800,7 +800,7 @@ extension ParseObject {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.save
         Task {
@@ -832,7 +832,7 @@ extension ParseObject {
     public func create(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -863,7 +863,7 @@ extension ParseObject {
     public func replace(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -894,7 +894,7 @@ extension ParseObject {
     func update(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -950,7 +950,7 @@ extension ParseObject {
     public func delete(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             do {

@@ -17,11 +17,12 @@ import Foundation
  indirectly created from any `ParseObject` by using the respective `operation` property.
  */
 public struct ParseOperation<T>: Savable,
+								 Sendable,
                                  CustomDebugStringConvertible,
                                  CustomStringConvertible where T: ParseObject {
 
     var target: T
-    var operations = [String: Codable]()
+    var operations = [String: Codable & Sendable]()
     var keysToNull = Set<String>()
 
     public init(target: T) {
@@ -381,7 +382,7 @@ extension ParseOperation {
     public func save(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<T, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<T, ParseError>) -> Void
     ) {
         guard target.objectId != nil else {
             let error = ParseError(code: .missingObjectId,

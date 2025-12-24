@@ -302,12 +302,15 @@ internal extension ParseObject {
         var filesFinishedSaving = [String: ParseFile]()
         let defaultACL = try? await ParseACL.defaultACL()
         do {
-            let object = try ParseCoding.parseEncoder()
-                .encode(self,
-                        acl: defaultACL,
-                        collectChildren: true,
-                        objectsSavedBeforeThisOne: nil,
-                        filesSavedBeforeThisOne: nil)
+            let object = try ParseCoding
+				.parseEncoder()
+                .encode(
+					self,
+					acl: defaultACL,
+					collectChildren: true,
+					objectsSavedBeforeThisOne: nil,
+					filesSavedBeforeThisOne: nil
+				)
             var waitingToBeSaved = object.unsavedChildren
             if isShouldReturnIfChildObjectsFound &&
                 waitingToBeSaved.count > 0 {
@@ -331,12 +334,14 @@ or disable transactions for this call.
                         // This is a ParseObject
                         let waitingObjectInfo = try ParseCoding
                             .parseEncoder()
-                            .encode(parseObject,
-                                    acl: defaultACL,
-                                    batching: false,
-                                    collectChildren: true,
-                                    objectsSavedBeforeThisOne: objectsFinishedSaving,
-                                    filesSavedBeforeThisOne: filesFinishedSaving)
+                            .encode(
+								parseObject,
+								acl: defaultACL,
+								batching: false,
+								collectChildren: true,
+								objectsSavedBeforeThisOne: objectsFinishedSaving,
+								filesSavedBeforeThisOne: filesFinishedSaving
+							)
                         if waitingObjectInfo.unsavedChildren.count == 0 {
                             // If this ParseObject has no additional children, it can be saved now
                             savableObjects.append(parseObject)

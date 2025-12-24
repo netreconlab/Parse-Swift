@@ -8,4 +8,4 @@
 
 import Foundation
 
-extension InputStream: @unchecked Sendable {}
+extension InputStream: @unchecked @retroactive Sendable {}

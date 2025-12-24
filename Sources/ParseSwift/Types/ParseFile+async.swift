@@ -42,7 +42,7 @@ public extension ParseFile {
      desires a different policy, it should be inserted in `options`.
     */
     func fetch(options: API.Options = [],
-               progress: @escaping ((URLSessionDownloadTask,
+               progress: @escaping (@Sendable (URLSessionDownloadTask,
                                      Int64, Int64, Int64) -> Void)) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(options: options,
@@ -78,7 +78,7 @@ public extension ParseFile {
      - throws: An error of type `ParseError`.
      */
     func save(options: API.Options = [],
-              progress: ((URLSessionTask,
+              progress: (@Sendable (URLSessionTask,
                           Int64,
                           Int64,
                           Int64) -> Void)? = nil) async throws -> Self {

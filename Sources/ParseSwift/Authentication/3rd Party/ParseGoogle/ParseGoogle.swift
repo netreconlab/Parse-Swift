@@ -81,7 +81,7 @@ public extension ParseGoogle {
                accessToken: String? = nil,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
 
         let googleAuthData = AuthenticationKeys.id
                 .makeDictionary(id: id,
@@ -96,7 +96,7 @@ public extension ParseGoogle {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -129,7 +129,7 @@ public extension ParseGoogle {
               accessToken: String? = nil,
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         let googleAuthData = AuthenticationKeys.id
             .makeDictionary(id: id,
                             idToken: idToken,
@@ -143,7 +143,7 @@ public extension ParseGoogle {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,

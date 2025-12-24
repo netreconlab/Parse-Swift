@@ -171,9 +171,6 @@ Not attempting to open ParseLiveQuery socket anymore
 
     /// Gracefully disconnects from the ParseLiveQuery Server.
     deinit {
-        Task {
-            await close()
-        }
         authenticationDelegate = nil
         receiveDelegate = nil
         if Self.client == self {

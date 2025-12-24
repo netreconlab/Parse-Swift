@@ -275,7 +275,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     }
 
     @MainActor
-    func testDeleteError () async throws {
+    func testDeleteError() async throws {
         // swiftlint:disable:next line_length
         guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")

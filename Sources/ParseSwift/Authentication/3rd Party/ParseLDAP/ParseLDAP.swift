@@ -64,7 +64,7 @@ public extension ParseLDAP {
                password: String,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         login(authData: AuthenticationKeys.id.makeDictionary(id: id,
                                                              password: password),
               options: options,
@@ -75,7 +75,7 @@ public extension ParseLDAP {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -106,7 +106,7 @@ public extension ParseLDAP {
               password: String,
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         link(authData: AuthenticationKeys.id.makeDictionary(id: id, password: password),
                         options: options,
                         callbackQueue: callbackQueue,
@@ -116,7 +116,7 @@ public extension ParseLDAP {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             let error = ParseError(code: .otherCause,
                                    message: "Should have \"authData\" in consisting of keys \"id\" and \"password\".")

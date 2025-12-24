@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that adds new objects to an array field.
  */
-public struct ParseOperationAdd<T>: ParseOperationable where T: Codable {
+public struct ParseOperationAdd<T>: ParseOperationable where T: Codable & Sendable {
     public var __op: ParseOperationCommand = .add // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public var objects: [T]

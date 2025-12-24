@@ -104,7 +104,7 @@ public struct ParseAnalytics: ParseTypeable {
                                       at date: Date? = nil,
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
-                                      completion: @escaping (Result<Void, ParseError>) -> Void) {
+                                      completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -149,7 +149,7 @@ public struct ParseAnalytics: ParseTypeable {
                                       at date: Date? = nil,
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,
-                                      completion: @escaping (Result<Void, ParseError>) -> Void) {
+                                      completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -182,7 +182,7 @@ public struct ParseAnalytics: ParseTypeable {
     */
     public func track(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Void, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -216,7 +216,7 @@ public struct ParseAnalytics: ParseTypeable {
                                at date: Date? = nil,
                                options: API.Options = [],
                                callbackQueue: DispatchQueue = .main,
-                               completion: @escaping (Result<Void, ParseError>) -> Void) {
+                               completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
 
         var mutableOptions = options
         mutableOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))

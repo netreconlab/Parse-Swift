@@ -31,7 +31,7 @@ extension ParseConfig {
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -67,7 +67,7 @@ extension ParseConfig {
     */
     public func save(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<Bool, ParseError>) -> Void) {
+                     completion: @escaping @Sendable (Result<Bool, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

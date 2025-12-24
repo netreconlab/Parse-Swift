@@ -75,7 +75,7 @@ public protocol QueryObservable: ObservableObject {
         - warning: This has not been tested thoroughly.
     */
     @MainActor
-    func aggregate(_ pipeline: [[String: Encodable]],
+    func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                    options: API.Options) async
 }
 #endif

@@ -137,13 +137,13 @@ internal extension URLSession {
     }
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func dataTask<U>(
+	func dataTask<U: Sendable>(
         with request: URLRequest,
         callbackQueue: DispatchQueue,
         attempts: Int = 1,
         allowIntermediateResponses: Bool,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        mapper: @escaping @Sendable (Data) async throws -> U,
+        completion: @escaping @Sendable (Result<U, ParseError>) -> Void
     ) async {
         do {
             let (responseData, urlResponse) = try await dataTask(for: request)
@@ -286,7 +286,7 @@ internal extension URLSession {
         with request: URLRequest,
         from data: Data?,
         from file: URL?,
-        progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?,
+        progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)?,
         mapper: @escaping (Data) async throws -> U,
         completion: @escaping (Result<U, ParseError>) -> Void
     ) {
@@ -352,9 +352,9 @@ internal extension URLSession {
     func downloadTask<U>(
         notificationQueue: DispatchQueue,
         with request: URLRequest,
-        progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        progress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
+        mapper: @escaping @Sendable (Data) async throws -> U,
+        completion: @escaping @Sendable (Result<U, ParseError>) -> Void
     ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
             Task {

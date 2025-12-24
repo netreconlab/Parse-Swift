@@ -13,17 +13,17 @@ import FoundationNetworking
 
 internal extension API {
     // MARK: API.BatchCommand
-    struct BatchCommand<T, U>: Encodable where T: Encodable {
+	struct BatchCommand<T, U>: Encodable where T: Encodable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint
         let body: T?
-        let mapper: ((BaseObjectable) throws -> U)
+        let mapper: (@Sendable (BaseObjectable) throws -> U)
 
         init(method: API.Method,
              path: API.Endpoint,
              body: T? = nil,
-             mapper: @escaping ((BaseObjectable) throws -> U)) {
+             mapper: @escaping (@Sendable (BaseObjectable) throws -> U)) {
             self.method = method
             self.path = path
             self.body = body

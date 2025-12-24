@@ -93,7 +93,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
     }
 
     @MainActor
-    open func aggregate(_ pipeline: [[String: Encodable]],
+    open func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                         options: API.Options = []) async {
         do {
             self.results = try await query.aggregate(pipeline, options: options)

@@ -15,7 +15,7 @@ import Foundation
  - note: Stored and fetched versions `ParseConfigCodable` and types that conform
  `ParseConfig`are interoperable and access the same Config.
 */
-public struct ParseConfigCodable<V: Codable> {}
+public struct ParseConfigCodable<V: Codable & Sendable> {}
 
 // MARK: Update
 extension ParseConfigCodable {
@@ -31,7 +31,7 @@ extension ParseConfigCodable {
     */
     public static func fetch(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
-                             completion: @escaping (Result<[String: V], ParseError>) -> Void) {
+                             completion: @escaping @Sendable (Result<[String: V], ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -71,7 +71,7 @@ extension ParseConfigCodable {
     public static func save(_ config: [String: V],
                             options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
-                            completion: @escaping (Result<Bool, ParseError>) -> Void) {
+                            completion: @escaping @Sendable (Result<Bool, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

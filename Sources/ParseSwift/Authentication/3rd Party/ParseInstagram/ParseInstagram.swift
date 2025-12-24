@@ -80,7 +80,7 @@ public extension ParseInstagram {
                apiURL: String = Self.graphAPIBaseURL,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
 
         let instagramAuthData = AuthenticationKeys.id
                 .makeDictionary(id: id,
@@ -95,7 +95,7 @@ public extension ParseInstagram {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -128,7 +128,7 @@ public extension ParseInstagram {
               apiURL: String = Self.graphAPIBaseURL,
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         let instagramAuthData = AuthenticationKeys.id
             .makeDictionary(id: id,
                             accessToken: accessToken,
@@ -142,7 +142,7 @@ public extension ParseInstagram {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,

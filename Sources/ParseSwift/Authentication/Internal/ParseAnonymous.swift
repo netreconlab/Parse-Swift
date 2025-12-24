@@ -54,7 +54,7 @@ public extension ParseAnonymous {
      */
     func login(options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         self.login(authData: AuthenticationKeys.id.makeDictionary(),
                    options: options,
                    callbackQueue: callbackQueue,
@@ -71,7 +71,7 @@ public extension ParseAnonymous {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         AuthenticatedUser.login(__type,
                                 authData: authData,
                                 options: options,
@@ -86,7 +86,7 @@ public extension ParseAnonymous {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         callbackQueue.async {
             completion(.failure(ParseError(code: .otherCause,
                                            message: "Not supported")))

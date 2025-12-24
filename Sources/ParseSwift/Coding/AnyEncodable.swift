@@ -30,9 +30,9 @@ import Foundation
  Source: https://github.com/Flight-School/AnyCodable
  */
 struct AnyEncodable: Encodable {
-    let value: Any
+    let value: Any & Sendable
 
-    init<T>(_ value: T?) {
+	init<T: Sendable>(_ value: T?) {
         self.value = value ?? ()
     }
 }
@@ -40,8 +40,8 @@ struct AnyEncodable: Encodable {
 @usableFromInline
 protocol _AnyEncodable { // swiftlint:disable:this type_name
 
-    var value: Any { get }
-    init<T>(_ value: T?)
+    var value: Any & Sendable { get }
+    init<T: Sendable>(_ value: T?)
 }
 
 extension AnyEncodable: _AnyEncodable {}

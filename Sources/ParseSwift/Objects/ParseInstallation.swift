@@ -343,7 +343,7 @@ public extension ParseInstallation {
                        copyEntireInstallation: Bool = true,
                        options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             do {
                 var currentInstallation = try await Self.current()
@@ -543,7 +543,7 @@ extension ParseInstallation {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         var murabeOptions = options
         murabeOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -626,7 +626,7 @@ extension ParseInstallation {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             do {
@@ -659,7 +659,7 @@ extension ParseInstallation {
     public func create(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -693,7 +693,7 @@ extension ParseInstallation {
     public func replace(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -727,7 +727,7 @@ extension ParseInstallation {
     func update(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -864,7 +864,7 @@ extension ParseInstallation {
     public func delete(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -956,7 +956,7 @@ public extension Sequence where Element: ParseInstallation {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.save
         Task {
@@ -1001,7 +1001,7 @@ public extension Sequence where Element: ParseInstallation {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -1046,7 +1046,7 @@ public extension Sequence where Element: ParseInstallation {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -1091,7 +1091,7 @@ public extension Sequence where Element: ParseInstallation {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -1130,7 +1130,7 @@ public extension Sequence where Element: ParseInstallation {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
     ) {
         if (allSatisfy { $0.className == Self.Element.className}) {
             let uniqueObjectIds = Set(compactMap { $0.objectId })
@@ -1205,7 +1205,7 @@ public extension Sequence where Element: ParseInstallation {
         transaction: Bool = configuration.isUsingTransactions,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -1273,7 +1273,7 @@ public extension ParseInstallation {
     static func deleteObjCKeychain( // swiftlint:disable:this function_body_length
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             do {

@@ -66,7 +66,7 @@ class TestParseEncoder: XCTestCase {
     // Person is a class with multiple fields.
     let expectedJSON = "{\"email\":\"appleseed@apple.com\",\"name\":\"Johnny Appleseed\"}".data(using: .utf8)!
     let person = Person.testValue
-    _testRoundTrip(of: person, expectedJSON: expectedJSON)
+	  _testRoundTrip(of: person, expectedJSON: expectedJSON, outputFormatting: .sortedKeys)
   }
 
   func testEncodingTopLevelStructuredSingleStruct() {
@@ -200,7 +200,7 @@ class TestParseEncoder: XCTestCase {
 
   // MARK: - Output Formatting Tests
   func testEncodingOutputFormattingDefault() {
-    let expectedJSON = "{\"email\":\"appleseed@apple.com\",\"name\":\"Johnny Appleseed\"}".data(using: .utf8)!
+    let expectedJSON = "{\"name\":\"Johnny Appleseed\",\"email\":\"appleseed@apple.com\"}".data(using: .utf8)!
     let person = Person.testValue
     _testRoundTrip(of: person, expectedJSON: expectedJSON)
   }
@@ -956,7 +956,7 @@ class TestParseEncoder: XCTestCase {
         _ = encoder.unkeyedContainer()
         enum CustomError: Error { case foo }
         throw CustomError.foo
-    }))
+	}), outputFormatting: .sortedKeys)
 
     _ = try? encoder.encode(ReferencingEncoderWrapper(Date()))
   }
@@ -996,32 +996,45 @@ class TestParseEncoder: XCTestCase {
     } catch {}
   }
 
-  private func _testRoundTrip<T>(of value: T,
-                                 expectedJSON json: Data? = nil,
-                                 outputFormatting: JSONEncoder.OutputFormatting = [],
-                                 dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .deferredToDate,
-                                 dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
-                                 dataEncodingStrategy: JSONEncoder.DataEncodingStrategy = .base64,
-                                 dataDecodingStrategy: JSONDecoder.DataDecodingStrategy = .base64,
-                                 keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys,
-                                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
-                                 nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy = .throw,
-                                 nonConformingFloatDecodingStrategy: JSONDecoder.NonConformingFloatDecodingStrategy = .throw) where T: Codable, T: Equatable {
+  private func _testRoundTrip<T>(
+	of value: T,
+
+	expectedJSON json: Data? = nil,
+
+	outputFormatting: JSONEncoder.OutputFormatting = [],
+
+	dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .deferredToDate,
+
+	dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
+
+	dataEncodingStrategy: JSONEncoder.DataEncodingStrategy = .base64,
+
+	dataDecodingStrategy: JSONDecoder.DataDecodingStrategy = .base64,
+
+	keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys,
+
+	keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
+
+	nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy = .throw,
+
+	nonConformingFloatDecodingStrategy: JSONDecoder.NonConformingFloatDecodingStrategy = .throw
+  ) where T: Codable, T: Equatable {
     var payload: Data! = nil
     do {
-        let encoder = ParseEncoder(dateEncodingStrategy: dateEncodingStrategy)
-      /*encoder.outputFormatting = outputFormatting
-      encoder.dateEncodingStrategy = dateEncodingStrategy
-      encoder.dataEncodingStrategy = dataEncodingStrategy
-      encoder.nonConformingFloatEncodingStrategy = nonConformingFloatEncodingStrategy
-      encoder.keyEncodingStrategy = keyEncodingStrategy*/
-      payload = try encoder.encode(value)
+		let encoder = ParseEncoder(
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		payload = try encoder.encode(value)
     } catch {
       XCTAssertThrowsError("Failed to encode \(T.self) to JSON: \(error)")
     }
 
-    if let expectedJSON = json {
-        XCTAssertEqual(expectedJSON, payload, "Produced JSON not identical to expected JSON.")
+    if let expectedJSON = json,
+	  let currentPayload = payload {
+		let expected = String(decoding: expectedJSON, as: UTF8.self)
+		let current = String(decoding: currentPayload, as: UTF8.self)
+        XCTAssertEqual(expected, current, "Produced JSON not identical to expected JSON.")
     }
 
     do {
