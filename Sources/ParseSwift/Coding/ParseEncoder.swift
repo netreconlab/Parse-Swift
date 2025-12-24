@@ -134,12 +134,6 @@ public struct ParseEncoder: Sendable {
 			dateEncodingStrategy: dateEncodingStrategy,
 			outputFormatting: outputFormatting
 		)
-		/* if let dateEncodingStrategy = dateEncodingStrategy {
-			encoder.dateEncodingStrategy = dateEncodingStrategy
-		}
-		if let outputFormatting = outputFormatting {
-			encoder.outputFormatting = outputFormatting
-		} */
 		let encodedObject = try encoder.encodeObject(
 			value,
 			acl: acl,
@@ -169,13 +163,7 @@ public struct ParseEncoder: Sendable {
 			skippingKeys: skipKeys.keys(),
 			dateEncodingStrategy: dateEncodingStrategy,
 			outputFormatting: outputFormatting
-		) /*
-		if let dateEncodingStrategy = dateEncodingStrategy {
-			encoder.dateEncodingStrategy = dateEncodingStrategy
-		}
-		if let outputFormatting = outputFormatting {
-			encoder.outputFormatting = outputFormatting
-		} */
+		)
 		let encodedData = try encoder.encodeObject(
 			value,
 			acl: acl,
@@ -212,13 +200,7 @@ public struct ParseEncoder: Sendable {
 			skippingKeys: keysToSkip,
 			dateEncodingStrategy: dateEncodingStrategy,
 			outputFormatting: outputFormatting
-		) /*
-		if let dateEncodingStrategy = dateEncodingStrategy {
-			encoder.dateEncodingStrategy = dateEncodingStrategy
-		}
-		if let outputFormatting = outputFormatting {
-			encoder.outputFormatting = outputFormatting
-		} */
+		)
 		let encodedObject = try encoder.encodeObject(
 			value,
 			acl: acl,
@@ -252,12 +234,6 @@ public struct ParseEncoder: Sendable {
 			dateEncodingStrategy: dateEncodingStrategy,
 			outputFormatting: outputFormatting
 		)
-		/* if let dateEncodingStrategy = dateEncodingStrategy {
-			encoder.dateEncodingStrategy = dateEncodingStrategy
-		}
-		if let outputFormatting = outputFormatting {
-			encoder.outputFormatting = outputFormatting
-		} */
 		return try encoder.encodeObject(value,
 										acl: acl,
 										batching: batching,
@@ -270,13 +246,15 @@ public struct ParseEncoder: Sendable {
 
 // MARK: _ParseEncoder
 internal class _ParseEncoder: Encoder {
-    var codingPath: [CodingKey]
     let dictionary: NSMutableDictionary
+	let skippedKeys: Set<String>
 	let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy
+	let outputFormatting: JSONEncoder.OutputFormatting
+
+	var codingPath: [CodingKey]
 	var dataEncodingStrategy: JSONEncoder.DataEncodingStrategy?
 	var nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy?
-	let outputFormatting: JSONEncoder.OutputFormatting
-    let skippedKeys: Set<String>
+	var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy?
     var uniquePointer: PointerType?
     var newObjects = [Encodable]()
     var collectChildren = false
@@ -295,11 +273,8 @@ internal class _ParseEncoder: Encoder {
 		let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy
 		let dataEncodingStrategy: JSONEncoder.DataEncodingStrategy
 		let nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy
-		/*
-
-		let keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy */
+		let keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy
 		let outputFormatting: JSONEncoder.OutputFormatting
-        let userInfo: [CodingUserInfoKey: Any]
     }
 
     /// The options set on the top-level encoder.
@@ -308,11 +283,8 @@ internal class _ParseEncoder: Encoder {
 			dateEncodingStrategy: dateEncodingStrategy,
 			dataEncodingStrategy: dataEncodingStrategy ?? .base64,
 			nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy ?? .throw,
-			/* ,
-			,
-			keyEncodingStrategy: keyEncodingStrategy, */
-			outputFormatting: outputFormatting,
-			userInfo: userInfo
+			keyEncodingStrategy: keyEncodingStrategy ?? .useDefaultKeys,
+			outputFormatting: outputFormatting
 		)
     }
 
@@ -356,20 +328,6 @@ internal class _ParseEncoder: Encoder {
 		filesSavedBeforeThisOne: [String: ParseFile]?
 	) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
         self.acl = acl
-		/*
-        let encoder = _ParseEncoder(
-			codingPath: codingPath,
-			dictionary: dictionary,
-			skippingKeys: skippedKeys,
-			dateEncodingStrategy: dateEncodingStrategy,
-			outputFormatting: outputFormatting
-		)
-        encoder.outputFormatting = outputFormatting
-        encoder.dateEncodingStrategy = dateEncodingStrategy
-         encoder.dataEncodingStrategy = dataEncodingStrategy
-        encoder.nonConformingFloatEncodingStrategy = nonConformingFloatEncodingStrategy
-        encoder.keyEncodingStrategy = keyEncodingStrategy */
-        // self.userInfoSendable = userInfoSendable
 		self.collectChildren = collectChildren
 		self.batching = batching
 		self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
