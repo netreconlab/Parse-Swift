@@ -1,11 +1,11 @@
 name: ci
 on:
   push:
-    branches: [ main ]
+    branches: [ 'release-5' ]
   pull_request:
     branches: '*'
   merge_group:
-    branches: [ main ]
+    branches: [ 'release-5' ]
 
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_14.2.app/Contents/Developer'
