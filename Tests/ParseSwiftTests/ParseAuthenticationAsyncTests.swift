@@ -12,7 +12,7 @@ import FoundationNetworking
 #endif
 import XCTest
 @testable import ParseSwift
-#if canImport(Combine)
+#if canImport(Combine) && compiler(<6.0.0)
 import Combine
 #endif
 
@@ -86,7 +86,7 @@ class ParseAuthenticationAsyncTests: XCTestCase {
             completion(.failure(error))
         }
 
-        #if canImport(Combine)
+        #if canImport(Combine) && compiler(<6.0.0)
         func loginPublisher(authData: [String: String],
                             options: API.Options) -> Future<AuthenticatedUser, ParseError> {
             let error = ParseError(code: .otherCause, message: "Not implemented")
