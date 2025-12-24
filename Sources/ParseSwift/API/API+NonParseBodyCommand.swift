@@ -153,7 +153,7 @@ internal extension API.NonParseBodyCommand {
 
         let defaultACL = try? await ParseACL.defaultACL()
         let batchCommands = try objects.compactMap { (object) -> API.BatchCommand<AnyCodable, PointerType>? in
-            guard var objectable = object as? Objectable else {
+            guard let objectable = object as? Objectable else {
                 return nil
             }
             let method: API.Method!
@@ -163,9 +163,11 @@ internal extension API.NonParseBodyCommand {
                 method = .POST
             }
 
-            let mapper = { (baseObjectable: BaseObjectable) throws -> PointerType in
-                objectable.objectId = baseObjectable.objectId
-                return try objectable.toPointer()
+			let objectableImmutable = objectable
+            let mapper = { @Sendable (baseObjectable: BaseObjectable) throws -> PointerType in
+				var objectableCopy = objectableImmutable
+				objectableCopy.objectId = baseObjectable.objectId
+                return try objectableCopy.toPointer()
             }
 
             let path = Parse.configuration.mountPath + objectable.endpoint.urlComponent

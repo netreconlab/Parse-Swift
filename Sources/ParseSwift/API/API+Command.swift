@@ -98,8 +98,8 @@ internal extension API {
                      childObjects: [String: PointerType]? = nil,
                      childFiles: [String: ParseFile]? = nil,
                      allowIntermediateResponses: Bool = false,
-                     uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                     uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     downloadProgress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
                      completion: @escaping @Sendable (Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
