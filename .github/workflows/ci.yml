@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_14.2.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_15.4.app/Contents/Developer'
   CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_16.4.app/Contents/Developer'
 
@@ -106,11 +106,11 @@ jobs:
   xcode-test-5_7:
     timeout-minutes: 25
     needs: linux
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v6
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 15\ Pro\ Max -derivedDataPath DerivedData build 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
