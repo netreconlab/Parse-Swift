@@ -106,7 +106,7 @@ jobs:
   xcode-test-5_7:
     timeout-minutes: 25
     needs: linux
-    runs-on: macos-13
+    runs-on: macos-13-arm64
     steps:
     - uses: actions/checkout@v6
     - name: Build-Test
