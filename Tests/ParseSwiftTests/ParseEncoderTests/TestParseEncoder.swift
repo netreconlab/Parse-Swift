@@ -100,7 +100,7 @@ class TestParseEncoder: XCTestCase {
     _testRoundTrip(of: EnhancedBool.fileNotFound, expectedJSON: "null".data(using: .utf8)!)
   }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   func testEncodingMultipleNestedContainersWithTheSameTopLevelKey() {
     struct Model: Codable, Equatable {
       let first: String
@@ -228,7 +228,7 @@ class TestParseEncoder: XCTestCase {
   }*/
 
   // MARK: - Date Strategy Tests
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   // Disabled for now till we resolve rdar://52618414
   func x_testEncodingDate() throws {
 
@@ -890,7 +890,7 @@ class TestParseEncoder: XCTestCase {
     _testRoundTripTypeCoercionFailure(of: [0.0, 1.0] as [Double], as: [Bool].self)
   }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   func testDecodingConcreteTypeParameter() {
       let encoder = ParseEncoder()
       guard let json = try? encoder.encode(Employee.testValue) else {

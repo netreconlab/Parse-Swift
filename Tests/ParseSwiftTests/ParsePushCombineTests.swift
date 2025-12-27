@@ -62,7 +62,7 @@ class ParsePushCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()

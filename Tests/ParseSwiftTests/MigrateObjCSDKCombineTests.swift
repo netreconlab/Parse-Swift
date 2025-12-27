@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && !os(Linux) && !os(Android) && !os(Windows) && compiler(<6.0.0)
+#if canImport(Combine) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI) && compiler(<6.0.0)
 
 import Foundation
 import XCTest
@@ -131,7 +131,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         try await KeychainStore.objectiveC?.deleteAllObjectiveC()
         #endif
@@ -303,7 +303,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -378,7 +378,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -453,7 +453,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -487,7 +487,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation2.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -517,7 +517,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -594,7 +594,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -651,7 +651,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -687,7 +687,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -719,7 +719,7 @@ class MigrateObjCSDKCombineTests: XCTestCase {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)

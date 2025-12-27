@@ -83,7 +83,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -295,7 +295,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -364,7 +364,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -437,7 +437,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -510,7 +510,7 @@ class ParseGitHubCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)

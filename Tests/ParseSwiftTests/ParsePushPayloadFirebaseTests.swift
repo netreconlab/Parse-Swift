@@ -30,7 +30,7 @@ class ParsePushPayloadFirebaseTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -71,7 +71,7 @@ class ParsePushPayloadFirebaseTests: XCTestCase {
         let encoded = try ParseCoding.parseEncoder().encode(fcmPayload)
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadFirebase.self, from: encoded)
         XCTAssertEqual(fcmPayload, decoded)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         XCTAssertEqual(fcmPayload.description,
                        "{\"collapseKey\":\"nope\",\"contentAvailable\":true,\"data\":{\"help\":\"you\"},\"delayWhileIdle\":false,\"dryRun\":false,\"mutableContent\":true,\"notification\":{\"android_channel_id\":\"you\",\"badge\":\"no\",\"body\":\"android\",\"body_loc_args\":[\"mother\"],\"body_loc_key\":\"cousin\",\"click_action\":\"to\",\"color\":\"blue\",\"icon\":\"world\",\"image\":\"icon\",\"sound\":\"yes\",\"subtitle\":\"trip\",\"tag\":\"it\",\"title\":\"hello\",\"title_loc_args\":[\"arg\"],\"title_loc_key\":\"it\"},\"priority\":\"high\",\"restrictedPackageName\":\"geez\",\"title\":\"peace\",\"uri\":\"https:\\/\\/parse.org\"}")
         #endif

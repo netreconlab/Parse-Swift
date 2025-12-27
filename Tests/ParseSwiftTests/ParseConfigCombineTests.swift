@@ -88,7 +88,7 @@ class ParseConfigCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -159,7 +159,7 @@ class ParseConfigCombineTests: XCTestCase {
                     let current = try await Config.current()
                     XCTAssertEqual(current.welcomeMessage, config.welcomeMessage)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
                         = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
@@ -175,7 +175,7 @@ class ParseConfigCombineTests: XCTestCase {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -225,7 +225,7 @@ class ParseConfigCombineTests: XCTestCase {
                     let current = try await Config.current()
                     XCTAssertEqual(current.welcomeMessage, immutableConfig.welcomeMessage)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
                         = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
@@ -240,7 +240,7 @@ class ParseConfigCombineTests: XCTestCase {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)

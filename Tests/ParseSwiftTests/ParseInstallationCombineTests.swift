@@ -109,7 +109,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -214,7 +214,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -275,7 +275,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -325,7 +325,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -374,7 +374,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             XCTAssertEqual(fetched.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -426,7 +426,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -506,7 +506,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                             // Should be updated in memory
                             XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
-                            #if !os(Linux) && !os(Android) && !os(Windows)
+                            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                             // Should be updated in Keychain
                             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
                                     = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
@@ -528,7 +528,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -603,7 +603,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                             // Should be updated in memory
                             XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
-                            #if !os(Linux) && !os(Android) && !os(Windows)
+                            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                             // Should be updated in Keychain
                             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
                                 = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
@@ -626,7 +626,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
 
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -698,7 +698,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -759,7 +759,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -829,7 +829,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -899,7 +899,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)
@@ -952,7 +952,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1033,7 +1033,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
                     XCTAssertEqual(currentInstallation.channels, response.channels)
                     XCTAssertEqual(currentInstallation.deviceToken, response.deviceToken)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
                         = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
@@ -1052,7 +1052,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1, expectation2], timeout: 20.0)
@@ -1063,7 +1063,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
         var subscriptions = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Become Installation")
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         await Installation.setCurrent(nil)
@@ -1082,7 +1082,7 @@ class ParseInstallationCombineTests: XCTestCase { // swiftlint:disable:this type
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation1], timeout: 20.0)

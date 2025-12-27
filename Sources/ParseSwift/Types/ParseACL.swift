@@ -321,7 +321,7 @@ extension ParseACL {
         try await yieldIfNotInitialized()
         let aclController: DefaultACL!
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if let controller: DefaultACL = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             aclController = controller
         } else {
@@ -392,7 +392,7 @@ extension ParseACL {
                            useCurrentUser: withAccessForCurrentUser)
         }
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #else
         try await ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
@@ -410,7 +410,7 @@ extension ParseACL {
 
     internal static func deleteDefaultFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #endif
     }

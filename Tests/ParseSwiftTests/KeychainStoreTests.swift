@@ -6,7 +6,7 @@
 //  Copyright © 2020 Parse. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
@@ -29,7 +29,7 @@ class KeychainStoreTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         _ = await testStore.removeAllObjects()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         try? await KeychainStore.objectiveC?.deleteAllObjectiveC()
         #endif

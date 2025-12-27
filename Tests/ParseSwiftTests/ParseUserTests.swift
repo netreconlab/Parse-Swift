@@ -145,7 +145,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -782,7 +782,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTFail("Should have a new installation")
         }
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
             if installationFromKeychain.installationId == oldInstallationId ||
@@ -848,7 +848,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTFail("Should have a new installation")
         }
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
                 if installationFromKeychain.installationId == oldInstallationId ||
@@ -1240,7 +1240,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(updatedCurrentUser.updatedAt, fetchedUpdatedAt)
         XCTAssertEqual(updatedCurrentUser.customKey, userOnServer.customKey)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
@@ -1549,7 +1549,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(currentUser.updatedAt, savedUpdatedAt)
         XCTAssertEqual(currentUser.email, user.email)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
@@ -1603,7 +1603,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(currentUser.updatedAt, savedUpdatedAt)
         XCTAssertEqual(currentUser.email, user.email)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
@@ -2184,7 +2184,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeUpdateAsync() {
         var user = User()
         let objectId = "yarr"
@@ -2221,7 +2221,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var user = try await User.current()
         user.customKey = customField
         try await User.setCurrent(user)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         let keychainUser: CurrentUserContainer<User>?
             = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
         XCTAssertEqual(keychainUser?.currentUser?.customKey, customField)
@@ -2358,7 +2358,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 // Should be updated in memory
                 XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
+                #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
@@ -2425,7 +2425,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
                 // Should be updated in memory
                 XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
+                #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
                     = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),

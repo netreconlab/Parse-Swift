@@ -85,7 +85,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -213,7 +213,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         let currentConfig = try await Config.current()
         XCTAssertEqual(currentConfig.welcomeMessage, configOnServer.welcomeMessage)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>?
             = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
@@ -256,7 +256,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(saved)
         XCTAssertEqual(currentConfig.welcomeMessage, config.welcomeMessage)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
             = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
@@ -298,7 +298,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                     let currentConfig = try await Config.current()
                     XCTAssertEqual(currentConfig.welcomeMessage, immutableConfigOnServer.welcomeMessage)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
                     = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
@@ -312,14 +312,14 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation], timeout: 10.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)
         #endif
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveAsync() async throws {
         await userLogin()
         var config = Config()
@@ -349,7 +349,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                     let currentConfig = try await Config.current()
                     XCTAssertEqual(currentConfig.welcomeMessage, immutableConfig.welcomeMessage)
 
-                    #if !os(Linux) && !os(Android) && !os(Windows)
+                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
                         = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
@@ -363,7 +363,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
                 expectation.fulfill()
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
+        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation], timeout: 10.0)
         #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
         wait(for: [expectation], timeout: 10.0)

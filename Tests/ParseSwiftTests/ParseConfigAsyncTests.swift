@@ -87,7 +87,7 @@ class ParseConfigAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -140,7 +140,7 @@ class ParseConfigAsyncTests: XCTestCase {
         let updatedConfig = try await Config.current()
         XCTAssertEqual(updatedConfig.welcomeMessage, configOnServer.welcomeMessage)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
             = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
@@ -176,7 +176,7 @@ class ParseConfigAsyncTests: XCTestCase {
         let updatedConfig = try await Config.current()
         XCTAssertEqual(updatedConfig.welcomeMessage, config.welcomeMessage)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
             = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {

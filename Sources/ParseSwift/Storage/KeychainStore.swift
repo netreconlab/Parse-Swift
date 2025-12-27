@@ -11,7 +11,7 @@ import Foundation
 import Security
 #endif
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 // swiftlint:disable type_body_length
 

@@ -134,7 +134,7 @@ public struct ParseConfiguration {
     internal var isInitialized = false
     internal var isTestingSDK = false
     internal var isTestingLiveQueryDontCloseSocket = false
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     internal var keychainAccessGroup = ParseKeychainAccessGroup()
     #endif
 

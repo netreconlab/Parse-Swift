@@ -74,7 +74,7 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         try await super.tearDown()
         MockURLProtocol.removeAll()
         ParseSwift.clearCache()
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try await KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()

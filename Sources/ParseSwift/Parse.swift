@@ -88,7 +88,7 @@ internal func yieldIfNotInitialized(_ iteration: Int = 0) async throws {
 }
 
 internal func deleteKeychainIfNeeded() async {
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
@@ -130,7 +130,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
                                                     authentication: configuration.authentication)
     Utility.updateParseURLSession()
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     await KeychainStore.createShared()
     await deleteKeychainIfNeeded()
     do {
@@ -147,7 +147,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         let oneNineEightSDKVersion = try ParseVersion(string: "1.9.8")
 
         // All migrations from previous versions to current should occur here:
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
             await KeychainStore.createOld()
@@ -177,7 +177,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     }
 
     let currentInstallationContainer = await BaseParseInstallation.currentContainer()
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
         await KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
@@ -350,7 +350,7 @@ public func clearCache() {
 
 // MARK: Public - Apple Platforms
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 /**
  Delete the Parse iOS Objective-C SDK Keychain from the device.

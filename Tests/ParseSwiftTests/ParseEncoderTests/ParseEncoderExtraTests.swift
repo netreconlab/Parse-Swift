@@ -137,7 +137,7 @@ class ParseEncoderTests: XCTestCase {
         XCTAssertEqual(decodedJSON["uint16"]?.value as? NSNumber, NSNumber(value: object.uint16))
         XCTAssertEqual(decodedJSON["uint32"]?.value as? NSNumber, NSNumber(value: object.uint32))
         XCTAssertEqual(decodedJSON["uint64"]?.value as? NSNumber, NSNumber(value: object.uint64))
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         XCTAssertEqual(decodedJSON["float"]?.value as? Double, Double(object.float))
         #endif
     }

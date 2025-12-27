@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 1/2/21.
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking

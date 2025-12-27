@@ -237,7 +237,7 @@ public extension ParseInstallation {
                                                                 installationId: newInstallationId)
         try await ParseStorage.shared.set(newBaseInstallationContainer,
                                           for: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try? await KeychainStore.shared.set(newBaseInstallationContainer,
                                       for: ParseStorage.Keys.currentInstallation)
         #endif
@@ -246,7 +246,7 @@ public extension ParseInstallation {
     internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
         guard let installationInMemory: CurrentInstallationContainer<Self> =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-            #if !os(Linux) && !os(Android) && !os(Windows)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
                     try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
             else {
@@ -279,7 +279,7 @@ public extension ParseInstallation {
         var currentContainer = newValue
         currentContainer.currentInstallation?.originalData = nil
         try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
         #endif
     }
@@ -293,7 +293,7 @@ public extension ParseInstallation {
 
     internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         // Prepare new installation
@@ -436,7 +436,7 @@ extension ParseInstallation {
         guard let appInfo = Bundle.main.infoDictionary else {
             return
         }
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 		#if targetEnvironment(macCatalyst)
         // If using an Xcode new enough to know about Mac Catalyst:
         // Mac Catalyst Apps use a prefix to the bundle ID. This should not be transmitted
@@ -1251,7 +1251,7 @@ public extension Sequence where Element: ParseInstallation {
     }
 }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 // MARK: Migrate from Objective-C SDK
 public extension ParseInstallation {
 

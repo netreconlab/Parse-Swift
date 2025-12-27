@@ -21,7 +21,7 @@ public struct ParseFileManager {
 
     private var defaultDataWritingOptions: Data.WritingOptions {
         var options = Data.WritingOptions.atomic
-        #if !os(macOS) && !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(macOS) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             options.insert(.completeFileProtectionUntilFirstUserAuthentication)
         #endif
         return options

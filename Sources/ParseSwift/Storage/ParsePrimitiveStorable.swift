@@ -26,7 +26,7 @@ public protocol ParsePrimitiveStorable: Actor {
     func set<T: Encodable>(_ object: T, for key: String) throws
 }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 // MARK: KeychainStore + ParsePrimitiveStorable
 extension KeychainStore: ParsePrimitiveStorable {

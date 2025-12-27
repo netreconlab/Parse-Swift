@@ -155,7 +155,7 @@ public extension ParseUser {
         }
     }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     /**
      Logs in a `ParseUser` *asynchronously* using the session token from the Parse Objective-C SDK Keychain.
      Returns an instance of the successfully logged in `ParseUser`. The Parse Objective-C SDK Keychain is not

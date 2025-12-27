@@ -134,7 +134,7 @@ public extension ParseUser {
     internal static func currentContainer() async -> CurrentUserContainer<Self>? {
         guard let currentUserInMemory: CurrentUserContainer<Self>
                 = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
-            #if !os(Linux) && !os(Android) && !os(Windows)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             return try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
             #else
             return nil
@@ -147,14 +147,14 @@ public extension ParseUser {
         var currentContainer = newValue
         currentContainer?.currentUser?.originalData = nil
         try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #endif
     }
 
     internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await URLSession.liveQuery.closeAll()
         try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #endif
@@ -416,7 +416,7 @@ extension ParseUser {
         }
     }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     /**
      Logs in a `ParseUser` *asynchronously* using the session token from the Parse Objective-C SDK Keychain.
      Returns an instance of the successfully logged in `ParseUser`. The Parse Objective-C SDK Keychain is not

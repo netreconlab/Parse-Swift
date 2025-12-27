@@ -13,7 +13,7 @@ import FoundationNetworking
 #endif
 
 internal extension URLSession {
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     static var parse = URLSession.shared
     #else
     static var parse: URLSession = {
