@@ -1428,7 +1428,7 @@ extension ParseUser {
 }
 
 // MARK: Batch Support
-public extension Sequence where Element: ParseUser & SendableMetatype {
+public extension Sequence where Element: ParseUser {
 
     /**
      Fetches a collection of users all at once *asynchronously* and executes the completion block when done.
