@@ -24,7 +24,7 @@ public struct ParseAnalytics: ParseTypeable {
     public var date: Date?
 
     /// The dictionary of information by which to segment this event.
-    public var dimensions: [String: Codable]? {
+    public var dimensions: [String: Codable & Sendable]? {
         get {
             convertToString(dimensionsAnyCodable)
         }
@@ -49,7 +49,7 @@ public struct ParseAnalytics: ParseTypeable {
      time will be used. Defaults to `nil`.
      */
     public init (name: String,
-                 dimensions: [String: Codable]? = nil,
+                 dimensions: [String: Codable & Sendable]? = nil,
                  at date: Date? = nil) {
         self.name = name
         self.dimensionsAnyCodable = convertToAnyCodable(dimensions)
@@ -57,7 +57,7 @@ public struct ParseAnalytics: ParseTypeable {
     }
 
     // MARK: Helpers
-    func convertToAnyCodable(_ dimensions: [String: Codable]?) -> [String: AnyCodable]? {
+    func convertToAnyCodable(_ dimensions: [String: Codable & Sendable]?) -> [String: AnyCodable]? {
         guard let dimensions = dimensions else {
             return nil
         }
@@ -100,7 +100,7 @@ public struct ParseAnalytics: ParseTypeable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any],
+    static public func trackAppOpened(launchOptions: [UIApplication.LaunchOptionsKey: Any & Sendable],
                                       at date: Date? = nil,
                                       options: API.Options = [],
                                       callbackQueue: DispatchQueue = .main,

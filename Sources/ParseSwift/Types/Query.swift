@@ -227,7 +227,7 @@ public struct Query<T>: ParseTypeable where T: ParseObject {
       - parameter value: String or Object of index that should be used when executing query.
       - returns: The mutated instance of query for easy chaining.
     */
-    public func hint<U: Encodable>(_ value: U) -> Query<T> {
+    public func hint<U: Encodable & Sendable>(_ value: U) -> Query<T> {
         var mutableQuery = self
         mutableQuery.hint = AnyCodable(value)
         return mutableQuery

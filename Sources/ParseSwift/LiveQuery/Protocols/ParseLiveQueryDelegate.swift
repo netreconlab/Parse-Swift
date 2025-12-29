@@ -14,7 +14,7 @@ import FoundationNetworking
 // swiftlint:disable line_length
 
 /// Receive/respond to notifications from the ParseLiveQuery Server.
-public protocol ParseLiveQueryDelegate: AnyObject {
+public protocol ParseLiveQueryDelegate: NSObjectProtocol, Sendable {
 
     /**
      Respond to authentication requests from a ParseLiveQuery Server. If you become a delegate
@@ -32,7 +32,7 @@ public protocol ParseLiveQueryDelegate: AnyObject {
      See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
      */
     func received(_ challenge: URLAuthenticationChallenge,
-                  completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                  completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition,
                                                 URLCredential?) -> Void)
 
     /**
@@ -69,7 +69,7 @@ public protocol ParseLiveQueryDelegate: AnyObject {
 
 public extension ParseLiveQueryDelegate {
     func received(_ challenge: URLAuthenticationChallenge,
-                  completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                  completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition,
                                                 URLCredential?) -> Void) {
         completionHandler(.performDefaultHandling, nil)
     }

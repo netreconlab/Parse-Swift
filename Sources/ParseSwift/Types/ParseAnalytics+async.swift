@@ -32,7 +32,7 @@ public extension ParseAnalytics {
      - throws: An error of type `ParseError`.
     */
     static func trackAppOpened(
-		launchOptions: [UIApplication.LaunchOptionsKey: Any],
+		launchOptions: [UIApplication.LaunchOptionsKey: Any & Sendable],
 		at date: Date? = nil,
 		options: API.Options = []
 	) async throws {

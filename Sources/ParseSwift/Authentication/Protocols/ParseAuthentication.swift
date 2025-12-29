@@ -19,7 +19,7 @@ import Combine
  The authentication methods supported by the Parse Server can be found
  [here](https://docs.parseplatform.org/parse-server/guide/#oauth-and-3rd-party-authentication).
  */
-public protocol ParseAuthentication: Codable {
+public protocol ParseAuthentication: Codable, Sendable {
     associatedtype AuthenticatedUser: ParseUser
 
     /// The type of authentication.

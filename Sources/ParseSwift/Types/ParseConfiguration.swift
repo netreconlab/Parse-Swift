@@ -127,7 +127,7 @@ public struct ParseConfiguration {
      */
     public internal(set) var parseFileTransfer: ParseFileTransferable
 
-    internal var authentication: ((URLAuthenticationChallenge,
+    internal var authentication: (@Sendable (URLAuthenticationChallenge,
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
@@ -215,7 +215,7 @@ public struct ParseConfiguration {
         liveQueryConnectionAdditionalProperties: Bool = true,
         liveQueryMaxConnectionAttempts: Int = 20,
         parseFileTransfer: ParseFileTransferable? = nil,
-        authentication: ((URLAuthenticationChallenge,
+        authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
                            URLCredential?) -> Void) -> Void)? = nil
     ) {

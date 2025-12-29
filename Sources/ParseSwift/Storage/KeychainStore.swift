@@ -29,10 +29,10 @@ actor KeychainStore: SecureStorable {
         }
         return "\(identifier).com.parse.sdk"
     }
-    static var shared: KeychainStore!
-    static var objectiveC: KeychainStore!
+	nonisolated(unsafe) static var shared: KeychainStore!
+	nonisolated(unsafe) static var objectiveC: KeychainStore!
     // This Keychain was used by SDK <= 1.9.7
-    static var old: KeychainStore!
+	nonisolated(unsafe) static var old: KeychainStore!
 
     init(service: String? = nil) async {
         var keychainService = ".parseSwift.sdk"

@@ -50,7 +50,7 @@ public struct ParseField: ParseTypeable {
         __op = operation
     }
 
-    init<V>(type: FieldType, options: ParseFieldOptions<V>) where V: Codable {
+    init<V>(type: FieldType, options: ParseFieldOptions<V>) where V: Codable & Sendable {
         self.type = type
         self.required = options.required
         if let defaultValue = options.defaultValue {

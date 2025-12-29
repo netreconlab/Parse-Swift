@@ -7,7 +7,7 @@
 
 // MARK: ParseStorage
 actor ParseStorage {
-    static var shared = ParseStorage()
+    static let shared = ParseStorage()
 
     var backingStore: ParsePrimitiveStorable!
 

@@ -14,9 +14,9 @@ import FoundationNetworking
 
 internal extension URLSession {
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-    static var parse = URLSession.shared
+	nonisolated(unsafe) static var parse = URLSession.shared
     #else
-    static var parse: URLSession = {
+	nonisolated(unsafe) static var parse: URLSession = {
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
             configuration.urlCache = URLCache.parse
@@ -263,7 +263,7 @@ internal extension URLSession {
     }
 
     func dataTask(with request: URLRequest,
-                  completionHandler: @escaping (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
+                  completionHandler: @escaping @Sendable (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
         return dataTask(with: request) { (data, response, error) in
             guard let data = data,
                   let response = response else {
@@ -287,8 +287,8 @@ internal extension URLSession {
         from data: Data?,
         from file: URL?,
         progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        mapper: @escaping @Sendable (Data) async throws -> U,
+        completion: @escaping @Sendable (Result<U, ParseError>) -> Void
     ) {
         var task: URLSessionTask?
         if let data = data {
@@ -373,8 +373,8 @@ internal extension URLSession {
 
     func downloadTask<U>(
         with request: URLRequest,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        mapper: @escaping @Sendable (Data) async throws -> U,
+        completion: @escaping @Sendable (Result<U, ParseError>) -> Void
     ) {
         Task {
             do {
@@ -405,7 +405,7 @@ internal extension URLSession {
     }
 
     func downloadTask(with request: URLRequest,
-                      completionHandler: @escaping (Result<(URL, URLResponse),
+                      completionHandler: @escaping @Sendable (Result<(URL, URLResponse),
                                                     Error>) -> Void) -> URLSessionDownloadTask {
         return downloadTask(with: request) { (location, response, error) in
             guard let location = location,

@@ -8,8 +8,8 @@ import FoundationNetworking
 // MARK: Internal
 
 internal struct Parse {
-    static var configuration: ParseConfiguration!
-    static var sessionDelegate: ParseURLSessionDelegate!
+	nonisolated(unsafe) static var configuration: ParseConfiguration!
+	nonisolated(unsafe) static var sessionDelegate: ParseURLSessionDelegate!
 }
 
 internal func initialize(
@@ -37,7 +37,7 @@ internal func initialize(
     liveQueryMaxConnectionAttempts: Int = 20,
     testing: Bool = false,
     testLiveQueryDontCloseSocket: Bool = false,
-    authentication: ((URLAuthenticationChallenge,
+    authentication: (@Sendable (URLAuthenticationChallenge,
                      (URLSession.AuthChallengeDisposition,
                       URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
@@ -292,7 +292,7 @@ public func initialize(
     liveQueryConnectionAdditionalProperties: Bool = true,
     liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
-    authentication: ((URLAuthenticationChallenge,
+    authentication: (@Sendable (URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
@@ -332,7 +332,7 @@ public func initialize(
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
  */
-public func updateAuthentication(_ authentication: ((URLAuthenticationChallenge,
+public func updateAuthentication(_ authentication: (@Sendable (URLAuthenticationChallenge,
                                                      (URLSession.AuthChallengeDisposition,
                                                       URLCredential?) -> Void) -> Void)?) {
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,

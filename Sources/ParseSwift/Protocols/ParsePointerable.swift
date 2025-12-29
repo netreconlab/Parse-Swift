@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ParsePointer: Encodable {
+public protocol ParsePointer: Encodable, Sendable {
 
     var __type: String { get } // swiftlint:disable:this identifier_name
 

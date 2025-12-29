@@ -11,9 +11,9 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class ParseURLSessionDelegate: NSObject {
+class ParseURLSessionDelegate: NSObject, @unchecked Sendable {
     var callbackQueue: DispatchQueue
-    var authentication: ((URLAuthenticationChallenge,
+    var authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
                            URLCredential?) -> Void) -> Void)?
     var streamDelegates = [URLSessionTask: InputStream]()
@@ -58,7 +58,7 @@ class ParseURLSessionDelegate: NSObject {
     var delegates = SessionDelegate()
 
     init (callbackQueue: DispatchQueue,
-          authentication: ((URLAuthenticationChallenge,
+          authentication: (@Sendable (URLAuthenticationChallenge,
                             (URLSession.AuthChallengeDisposition,
                              URLCredential?) -> Void) -> Void)?) {
         self.callbackQueue = callbackQueue
@@ -70,7 +70,7 @@ class ParseURLSessionDelegate: NSObject {
 extension ParseURLSessionDelegate: URLSessionDelegate {
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                    completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition,
                                                   URLCredential?) -> Void) {
         if let authentication = authentication {
             callbackQueue.async {

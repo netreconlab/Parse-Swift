@@ -164,16 +164,16 @@ extension ParseConfigCodable {
 
 }
 
-struct CurrentConfigDictionaryContainer<T: Codable>: Codable {
+struct CurrentConfigDictionaryContainer<T: Codable & Sendable>: Codable & Sendable {
     var currentConfig: [String: T]?
 }
 
 // MARK: ConfigCodableUpdateBody
-internal struct ConfigCodableUpdateBody<T>: Codable where T: Codable {
+internal struct ConfigCodableUpdateBody<T>: Codable where T: Codable & Sendable {
     let params: T
 }
 
 // MARK: ConfigCodableFetchResponse
-internal struct ConfigCodableFetchResponse<T>: Codable where T: Codable {
+internal struct ConfigCodableFetchResponse<T>: Codable where T: Codable & Sendable {
     let params: [String: T]
 }

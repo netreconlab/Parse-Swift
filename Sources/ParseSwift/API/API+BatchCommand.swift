@@ -13,7 +13,7 @@ import FoundationNetworking
 
 internal extension API {
     // MARK: API.BatchCommand
-	struct BatchCommand<T, U>: Encodable where T: Encodable, U: Sendable {
+	struct BatchCommand<T, U>: Encodable & Sendable where T: Encodable & Sendable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint

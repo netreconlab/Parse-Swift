@@ -11,7 +11,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-protocol LiveQuerySocketDelegate: AnyObject {
+protocol LiveQuerySocketDelegate: NSObjectProtocol, Sendable {
     func status(_ status: LiveQuerySocket.Status,
                 closeCode: URLSessionWebSocketTask.CloseCode?,
                 reason: Data?) async
@@ -19,7 +19,7 @@ protocol LiveQuerySocketDelegate: AnyObject {
     func receivedError(_ error: Error)
     func receivedUnsupported(_ data: Data?, socketMessage: URLSessionWebSocketTask.Message?)
     func received(challenge: URLAuthenticationChallenge,
-                  completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+                  completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
     func received(_ data: Data) async
     #if !os(watchOS)
     func received(_ metrics: URLSessionTaskTransactionMetrics)

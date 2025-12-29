@@ -96,9 +96,9 @@ extension _AnyEncodable {
         case let url as URL:
             try container.encode(url)
         #endif
-        case let array as [Any?]:
+        case let array as [(Any & Sendable)?]:
             try container.encode(array.map { AnyEncodable($0) })
-        case let dictionary as [String: Any?]:
+        case let dictionary as [String: (Any & Sendable)?]:
             try container.encode(dictionary.mapValues { AnyEncodable($0) })
         case let encodable as Encodable:
             try encodable.encode(to: encoder)
@@ -235,7 +235,7 @@ extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 
 extension _AnyEncodable {
     init(nilLiteral _: ()) {
-        self.init(nil as Any?)
+        self.init(nil as (Any & Sendable)?)
     }
 
     init(booleanLiteral value: Bool) {
@@ -257,11 +257,11 @@ extension _AnyEncodable {
         self.init(value)
     }
 
-    init(arrayLiteral elements: Any...) {
+    init(arrayLiteral elements: (Any & Sendable)...) {
         self.init(elements)
     }
 
-    init(dictionaryLiteral elements: (AnyHashable, Any)...) {
-        self.init([AnyHashable: Any](elements, uniquingKeysWith: { (first, _) in first }))
+    init(dictionaryLiteral elements: (AnyHashable, Any & Sendable)...) {
+        self.init([AnyHashable: Any & Sendable](elements, uniquingKeysWith: { (first, _) in first }))
     }
 }

@@ -119,7 +119,7 @@ public extension ParseSchema {
      - returns: A mutated instance of `ParseSchema` for easy chaining.
      - warning: The use of `options` requires Parse Server 3.7.0+.
     */
-    func addField<V>(_ name: String,
+	func addField<V: Sendable>(_ name: String,
                      type: ParseField.FieldType,
                      options: ParseFieldOptions<V>) -> Self {
         var mutableSchema = self
@@ -212,7 +212,7 @@ public extension ParseSchema {
     */
     func addIndex(_ name: String,
                   field: String,
-                  index: Encodable) -> Self {
+                  index: Encodable & Sendable) -> Self {
         var mutableSchema = self
         mutableSchema.pendingIndexes[name] = [field: AnyCodable(index)]
         return mutableSchema

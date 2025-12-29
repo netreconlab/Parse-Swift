@@ -10,7 +10,7 @@ import Foundation
 
 /// Used to constrain a query.
 public struct QueryConstraint: ParseTypeable {
-    enum Comparator: String, CodingKey, Codable, CaseIterable {
+    enum Comparator: String, CodingKey, Codable, Sendable, CaseIterable {
         case lessThan = "$lt"
         case lessThanOrEqualTo = "$lte"
         case greaterThan = "$gt"
@@ -53,7 +53,7 @@ public struct QueryConstraint: ParseTypeable {
     var comparator: Comparator?
     var isNull = false
 
-    init(key: String, value: Codable? = nil, comparator: Comparator? = nil, isNull: Bool = false) {
+    init(key: String, value: (Codable & Sendable)? = nil, comparator: Comparator? = nil, isNull: Bool = false) {
         self.key = key
         self.value = AnyCodable(value)
         self.comparator = comparator
@@ -93,7 +93,7 @@ public struct QueryConstraint: ParseTypeable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .greaterThan)
 }
 
@@ -103,7 +103,7 @@ public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .greaterThanOrEqualTo)
 }
 
@@ -113,7 +113,7 @@ public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .lessThan)
 }
 
@@ -123,7 +123,7 @@ public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .lessThanOrEqualTo)
 }
 
@@ -139,7 +139,7 @@ public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  an older Parse Server, you should use `equalToNoComparator()`
  instead.
  */
-public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     equalTo(key: key, value: value)
 }
 
@@ -157,7 +157,7 @@ public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
 public func equalTo<T>(
     key: String,
     value: T
-) -> QueryConstraint where T: Codable {
+) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .equalTo)
 }
 
@@ -172,7 +172,7 @@ public func equalTo<T>(
 public func equalToNoComparator<T>(
     key: String,
     value: T
-) -> QueryConstraint where T: Codable {
+) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value)
 }
 
@@ -238,7 +238,7 @@ public func equalToNoComparator<T>(
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func != <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func != <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .notEqualTo)
 }
 
@@ -404,7 +404,7 @@ public func doesNotMatchKeyInQuery<T>(key: String, queryKey: String, query: Quer
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .containedIn)
 }
 
@@ -427,7 +427,7 @@ public func containedIn<T>(key: String, array: [T]) throws -> QueryConstraint wh
   - parameter array: The list of values the key's object should not be.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func notContainedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func notContainedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .notContainedIn)
 }
 
@@ -450,7 +450,7 @@ public func notContainedIn<T>(key: String, array: [T]) throws -> QueryConstraint
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containsAll<T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containsAll<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .all)
 }
 
@@ -473,7 +473,7 @@ public func containsAll<T>(key: String, array: [T]) throws -> QueryConstraint wh
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedBy<T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containedBy<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .containedBy)
 }
 
@@ -727,8 +727,8 @@ public enum ParseTextOption: String {
     case diacriticSensitive = "$diacriticSensitive"
 
     internal func buildSearch(_ text: String,
-                              options: [Self: Encodable]) throws -> [String: Encodable] {
-        var dictionary: [String: Encodable] = [QueryConstraint.Comparator.term.rawValue: text]
+                              options: [Self: Encodable & Sendable]) throws -> [String: Encodable & Sendable] {
+        var dictionary: [String: Encodable & Sendable] = [QueryConstraint.Comparator.term.rawValue: text]
         for (key, value) in options {
             switch key {
             case .language:
@@ -764,7 +764,7 @@ public enum ParseTextOption: String {
  */
 public func matchesText(key: String,
                         text: String,
-                        options: [ParseTextOption: Encodable]) throws -> QueryConstraint {
+                        options: [ParseTextOption: Encodable & Sendable]) throws -> QueryConstraint {
     let search = try ParseTextOption.language.buildSearch(text, options: options)
     let dictionary = [QueryConstraint.Comparator.search.rawValue: search]
     return .init(key: key, value: AnyCodable(dictionary), comparator: .text)

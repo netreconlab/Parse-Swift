@@ -46,7 +46,9 @@ import FoundationNetworking
  running. Initializing new instances will create a new task/connection to the `ParseLiveQuery` server.
  When an instance is deinitialized it will automatically close it is connection gracefully.
  */
-public final class ParseLiveQuery: NSObject {
+public actor ParseLiveQuery: NSObject, @unchecked Sendable {
+
+	private let lock = NSLock()
 
     /// Have all `ParseLiveQuery` authentication challenges delegated to you. There can only
     /// be one of these for all `ParseLiveQuery` connections. The default is to
@@ -54,6 +56,8 @@ public final class ParseLiveQuery: NSObject {
     /// or if there is not one, delegate to the OS. Conforms to `ParseLiveQueryDelegate`.
     public weak var authenticationDelegate: ParseLiveQueryDelegate? {
         willSet {
+			lock.lock()
+			defer { lock.unlock() }
             if newValue != nil {
                 URLSession.liveQuery.authenticationDelegate = self
             } else {
@@ -94,12 +98,12 @@ public final class ParseLiveQuery: NSObject {
     }
 
     /// Current LiveQuery client.
-    public private(set) static var client: ParseLiveQuery?
+	nonisolated(unsafe) public private(set) static var client: ParseLiveQuery?
 
     /// The current status of the LiveQuery socket.
     public internal(set) var status: ConnectionStatus = .socketNotEstablished
 
-    static var isConfiguring: Bool = false
+	nonisolated(unsafe) static var isConfiguring: Bool = false
 
     let notificationQueue: DispatchQueue
     var task: URLSessionWebSocketTask!
@@ -138,7 +142,7 @@ Not attempting to open ParseLiveQuery socket anymore
      */
     public init(serverURL: URL? = nil, isDefault: Bool = false, notificationQueue: DispatchQueue = .main) async throws {
         self.notificationQueue = notificationQueue
-        super.init()
+		super.init()
         if let serverURL = serverURL {
             url = serverURL
         } else if let liveQueryConfigURL = Parse.configuration.liveQuerysServerURL {
@@ -196,7 +200,7 @@ Not attempting to open ParseLiveQuery socket anymore
         }
         isConfiguring = true
         try await yieldIfNotInitialized()
-        Self.defaultClient = try await Self(isDefault: true)
+        Self.defaultClient = try await ParseLiveQuery(isDefault: true)
     }
 
     static func client() async throws -> ParseLiveQuery {
@@ -296,7 +300,7 @@ extension ParseLiveQuery {
     }
 
     /// The default `ParseLiveQuery` client for all LiveQuery connections.
-    class public var defaultClient: ParseLiveQuery? {
+	static public var defaultClient: ParseLiveQuery? {
         get {
             Self.client
         }
@@ -600,7 +604,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
     }
 
     func received(challenge: URLAuthenticationChallenge,
-                  completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                  completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition,
                                                 URLCredential?) -> Void) {
         notificationQueue.async {
             if let delegate = self.authenticationDelegate {
@@ -629,7 +633,7 @@ extension ParseLiveQuery {
     /// - parameter isUserWantsToConnect: Specifies if the user is calling this function. Defaults to **true**.
     /// - parameter completion: Returns `nil` if successful, an `Error` otherwise.
     public func open(isUserWantsToConnect: Bool = true,
-                     completion: @escaping (Error?) -> Void) {
+                     completion: @escaping @Sendable (Error?) -> Void) {
         if isUserWantsToConnect {
             self.isDisconnectedByUser = false
         }
@@ -696,7 +700,7 @@ extension ParseLiveQuery {
      from the server. The closure receives an  `Error` that indicates a lost connection or other problem,
      or nil if no error occurred.
      */
-    public func sendPing(pongReceiveHandler: @escaping (Error?) -> Void) {
+    public func sendPing(pongReceiveHandler: @escaping @Sendable (Error?) -> Void) {
         if self.task.state == .running {
             URLSession.liveQuery.sendPing(task, pongReceiveHandler: pongReceiveHandler)
         } else {
@@ -721,7 +725,7 @@ extension ParseLiveQuery {
 
 // MARK: SubscriptionRecord
 extension ParseLiveQuery {
-    class SubscriptionRecord: Equatable {
+    struct SubscriptionRecord: Equatable, @unchecked Sendable {
 
         var messageData: Data
         var queryData: Data
@@ -740,29 +744,19 @@ extension ParseLiveQuery {
             self.subscriptionHandler = handler
 
             eventHandlerClosure = { event in
-                guard let handler = self.subscriptionHandler as? T else {
-                    return
-                }
-
                 try? handler.didReceive(event)
             }
 
             subscribeHandlerClosure = { (new) in
-                guard let handler = self.subscriptionHandler as? T else {
-                    return
-                }
                 handler.didSubscribe(new)
             }
 
             unsubscribeHandlerClosure = { () in
-                guard let handler = self.subscriptionHandler as? T else {
-                    return
-                }
                 handler.didUnsubscribe()
             }
         }
 
-        func update<T: ParseObject>(query: Query<T>, message: SubscribeMessage<T>) throws {
+        mutating func update<T: ParseObject>(query: Query<T>, message: SubscribeMessage<T>) throws {
             guard let queryData = try? ParseCoding.jsonEncoder().encode(query),
                   let encoded = try? ParseCoding.jsonEncoder().encode(message) else {
                 throw ParseError(code: .otherCause, message: "ParseLiveQuery Error: Unable to update subscription.")
@@ -830,7 +824,7 @@ extension ParseLiveQuery {
                     .jsonEncoder()
                     .encode(await StandardMessage(operation: .unsubscribe,
                                                   requestId: key))
-                let updatedRecord = value
+                var updatedRecord = value
                 updatedRecord.messageData = encoded
                 try await self.send(record: updatedRecord, requestId: key)
                 break
@@ -850,7 +844,7 @@ extension ParseLiveQuery {
                 let message = await SubscribeMessage<T.Object>(operation: .update,
                                                                requestId: key,
                                                                query: handler.query)
-                let updatedRecord = value
+                var updatedRecord = value
                 try updatedRecord.update(query: handler.query, message: message)
                 try await self.send(record: updatedRecord, requestId: key)
                 break
