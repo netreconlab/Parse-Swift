@@ -32,10 +32,10 @@ class ParseLiveQueryTests: XCTestCase {
         }
     }
 
-    class TestDelegate: ParseLiveQueryDelegate {
-        var error: ParseError?
-        var code: URLSessionWebSocketTask.CloseCode?
-        var reason: Data?
+    class TestDelegate: NSObject, ParseLiveQueryDelegate, @unchecked Sendable {
+		nonisolated(unsafe) var error: ParseError?
+		nonisolated(unsafe) var code: URLSessionWebSocketTask.CloseCode?
+		nonisolated(unsafe) var reason: Data?
         func received(_ error: Error) {
             if let error = error as? ParseError {
                 self.error = error

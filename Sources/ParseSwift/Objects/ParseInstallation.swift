@@ -980,42 +980,6 @@ public extension Sequence where Element: ParseInstallation {
             }
         }
     }
-
-    /**
-     Deletes a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[ParseError?], ParseError>)`.
-     Each element in the array is either `nil` if the delete successful or a `ParseError` if it failed.
-     1. A `ParseError.Code.aggregateError`. This object's "errors" property is an
-     array of other Parse.Error objects. Each error object in this array
-     has an "object" property that references the object that could not be
-     deleted (for instance, because that object could not be found).
-     2. A non-aggregate Parse.Error. This indicates a serious error that
-     caused the delete operation to be aborted partway through (for
-     instance, a connection failure in the middle of the delete).
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func deleteAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping @Sendable (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
-    ) {
-
-    }
 }
 
 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)

@@ -7,4 +7,4 @@
 
 import Foundation
 
-extension AnyHashable: @unchecked Sendable {}
+extension AnyHashable: @unchecked @retroactive Sendable {}

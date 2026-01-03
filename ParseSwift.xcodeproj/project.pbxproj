@@ -166,6 +166,7 @@
 		70B4E0BC2762F1D5004C9757 /* QueryConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B4E0BB2762F1D5004C9757 /* QueryConstraint.swift */; };
 		70B4E0C12762F313004C9757 /* QueryWhere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B4E0C02762F313004C9757 /* QueryWhere.swift */; };
 		70B8E05A2F022C0800440FCA /* AnyHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B8E0592F022C0800440FCA /* AnyHashable.swift */; };
+		70B8E05C2F032F1600440FCA /* ParseLiveQuery+LiveQuerySocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B8E05B2F032F1600440FCA /* ParseLiveQuery+LiveQuerySocketDelegate.swift */; };
 		70BC0B33251903D1001556DB /* ParseGeoPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BC0B32251903D1001556DB /* ParseGeoPointTests.swift */; };
 		70BC9890252A5B5C00FF3074 /* Objectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BC988F252A5B5C00FF3074 /* Objectable.swift */; };
 		70BDA2B3250536FF00FC2237 /* ParseInstallation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDA2B2250536FF00FC2237 /* ParseInstallation.swift */; };
@@ -516,6 +517,7 @@
 		70B4E0BB2762F1D5004C9757 /* QueryConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryConstraint.swift; sourceTree = "<group>"; };
 		70B4E0C02762F313004C9757 /* QueryWhere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryWhere.swift; sourceTree = "<group>"; };
 		70B8E0592F022C0800440FCA /* AnyHashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyHashable.swift; sourceTree = "<group>"; };
+		70B8E05B2F032F1600440FCA /* ParseLiveQuery+LiveQuerySocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParseLiveQuery+LiveQuerySocketDelegate.swift"; sourceTree = "<group>"; };
 		70BC0B32251903D1001556DB /* ParseGeoPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGeoPointTests.swift; sourceTree = "<group>"; };
 		70BC988F252A5B5C00FF3074 /* Objectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objectable.swift; sourceTree = "<group>"; };
 		70BDA2B2250536FF00FC2237 /* ParseInstallation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseInstallation.swift; sourceTree = "<group>"; };
@@ -1072,6 +1074,7 @@
 				7003959425A10DFC0052CB31 /* Messages.swift */,
 				700395A225A119430052CB31 /* Operations.swift */,
 				7003960825A184EF0052CB31 /* ParseLiveQuery.swift */,
+				70B8E05B2F032F1600440FCA /* ParseLiveQuery+LiveQuerySocketDelegate.swift */,
 				703B091526BD99BC005A112F /* ParseLiveQuery+async.swift */,
 				918CED582684C74000CFDC83 /* ParseLiveQuery+combine.swift */,
 				7051E2E12986F10D00ABFC7E /* SocketTasks.swift */,
@@ -1698,6 +1701,7 @@
 				70F03A272780BE0F00E5AFB4 /* ParseGoogle+combine.swift in Sources */,
 				F97B461224D9C6F200F4A88B /* Savable.swift in Sources */,
 				703B094926BF47D0005A112F /* ParseLDAP+async.swift in Sources */,
+				70B8E05C2F032F1600440FCA /* ParseLiveQuery+LiveQuerySocketDelegate.swift in Sources */,
 				F97B45CE24D9C6F200F4A88B /* ParseCoding.swift in Sources */,
 				70CE0AA828595FCE00DAEA86 /* ParseHookRequestable+async.swift in Sources */,
 				F97B465624D9C78C00F4A88B /* ParseOperationRemove.swift in Sources */,
