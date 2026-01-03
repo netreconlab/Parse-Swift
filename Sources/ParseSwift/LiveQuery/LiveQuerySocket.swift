@@ -37,7 +37,7 @@ final class LiveQuerySocket: NSObject, @unchecked Sendable {
     func createTask(_ url: URL, taskDelegate: LiveQuerySocketDelegate) async -> URLSessionWebSocketTask {
         let task = session.webSocketTask(with: url)
         await tasks.updateDelegates([task: taskDelegate])
-        await receive(task)
+		await receive(task)
         return task
     }
 
@@ -96,6 +96,10 @@ extension LiveQuerySocket {
         await tasks.updateReceivers([task: true])
 		let delegates = await self.tasks.getDelegates()
 		do {
+
+			if task.state == .suspended {
+				task.resume()
+			}
 			let result = try await task.receive()
 			await self.tasks.removeReceivers([task])
 
@@ -104,8 +108,10 @@ extension LiveQuerySocket {
 				if let data = message.data(using: .utf8) {
 					await delegates[task]?.received(data)
 				} else {
-					let parseError = ParseError(code: .otherCause,
-												message: "Could not encode LiveQuery string as data")
+					let parseError = ParseError(
+						code: .otherCause,
+						message: "Could not encode LiveQuery string as data"
+					)
 					delegates[task]?.receivedError(parseError)
 				}
 				await self.receive(task)

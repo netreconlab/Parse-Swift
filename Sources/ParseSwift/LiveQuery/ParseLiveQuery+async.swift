@@ -19,7 +19,7 @@ extension ParseLiveQuery {
       - throws: An error of type `ParseError`.
     */
     public func open(isUserWantsToConnect: Bool = true) async throws {
-        /* let _: Void = try await withCheckedThrowingContinuation { continuation in
+        let _: Void = try await withCheckedThrowingContinuation { continuation in
             self.open(isUserWantsToConnect: isUserWantsToConnect) { error in
                 guard let error = error else {
                     continuation.resume(with: .success(()))
@@ -27,7 +27,7 @@ extension ParseLiveQuery {
                 }
                 continuation.resume(with: .failure(error))
             }
-        } */
+        }
     }
 
     /**
@@ -36,7 +36,7 @@ extension ParseLiveQuery {
      - throws: An error of type `ParseError`.
     */
     public func sendPing() async throws {
-        /* let _: Void = try await withCheckedThrowingContinuation { continuation in
+        let _: Void = try await withCheckedThrowingContinuation { continuation in
             self.sendPing { error in
                 guard let error = error else {
                     continuation.resume(with: .success(()))
@@ -44,7 +44,7 @@ extension ParseLiveQuery {
                 }
                 continuation.resume(with: .failure(error))
             }
-        } */
+        }
     }
 }
 

@@ -294,14 +294,12 @@ extension ParseLiveQuery {
         switch self.task.state {
         case .suspended:
             await URLSession.liveQuery.receive(task)
-            self.task.resume()
         case .completed, .canceling:
             let oldTask = self.task
             self.task = await URLSession.liveQuery.createTask(
 				self.url,
 				taskDelegate: self
 			)
-            self.task.resume()
             if let oldTask = oldTask {
                 await URLSession.liveQuery.removeTask(oldTask)
             }
