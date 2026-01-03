@@ -162,9 +162,11 @@ extension LiveQuerySocket: URLSessionWebSocketDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession,
-                    didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    func urlSession(
+		_ session: URLSession,
+		didReceive challenge: URLAuthenticationChallenge,
+		completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+	) {
         if let authenticationDelegate = authenticationDelegate {
             authenticationDelegate.received(challenge: challenge, completionHandler: completionHandler)
         } else {

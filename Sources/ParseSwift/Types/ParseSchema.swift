@@ -119,9 +119,11 @@ public extension ParseSchema {
      - returns: A mutated instance of `ParseSchema` for easy chaining.
      - warning: The use of `options` requires Parse Server 3.7.0+.
     */
-	func addField<V: Sendable>(_ name: String,
-                     type: ParseField.FieldType,
-                     options: ParseFieldOptions<V>) -> Self {
+	func addField<V: Sendable>(
+		_ name: String,
+		type: ParseField.FieldType,
+		options: ParseFieldOptions<V>
+	) -> Self {
         var mutableSchema = self
         let field = ParseField(type: type, options: options)
         if mutableSchema.fields != nil {

@@ -28,9 +28,11 @@ public protocol ParseFileTransferable: AnyObject, Sendable {
     `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
      that prevented the file upload.
      */
-    func upload(with request: URLRequest,
-                fromFile fileURL: URL,
-                completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask
+    func upload(
+		with request: URLRequest,
+		fromFile fileURL: URL,
+		completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void
+	) throws -> URLSessionUploadTask
 
     /**
      Creates a task that performs an HTTP request for the specified URL request
@@ -44,9 +46,11 @@ public protocol ParseFileTransferable: AnyObject, Sendable {
     `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
      that prevented the file upload.
      */
-    func upload(with request: URLRequest,
-                from bodyData: Data?,
-                completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask
+    func upload(
+		with request: URLRequest,
+		from bodyData: Data?,
+		completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void
+	) throws -> URLSessionUploadTask
 
     /**
      Compose a valid file upload response with a name and url.

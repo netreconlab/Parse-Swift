@@ -262,8 +262,10 @@ internal extension URLSession {
         }
     }
 
-    func dataTask(with request: URLRequest,
-                  completionHandler: @escaping @Sendable (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
+    func dataTask(
+		with request: URLRequest,
+		completionHandler: @escaping @Sendable (Result<(Data, URLResponse), Error>) -> Void
+	) -> URLSessionDataTask {
         return dataTask(with: request) { (data, response, error) in
             guard let data = data,
                   let response = response else {

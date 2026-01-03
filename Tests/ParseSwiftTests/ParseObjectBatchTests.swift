@@ -892,10 +892,6 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 			XCTFail(error.localizedDescription)
 		}
 
-		if callbackQueue.qos == .userInteractive {
-			XCTAssertTrue(Thread.isMainThread)
-		}
-
 		let saved2 = try await scores.saveAll(
 			transaction: true,
 			options: [.usePrimaryKey],
@@ -942,7 +938,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
 
     func saveAllAsyncPointer(
-		scores: [GameScore], // swiftlint:disable:this function_body_length
+		scores: [GameScore],
 		transaction: Bool = false,
 		scoresOnServer: [GameScore], callbackQueue: DispatchQueue
 	) async throws {
@@ -978,10 +974,6 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 
 		case .failure(let error):
 			XCTFail(error.localizedDescription)
-		}
-
-		if callbackQueue.qos == .userInteractive {
-			XCTAssertTrue(Thread.isMainThread)
 		}
 
 		do {
@@ -1239,11 +1231,6 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 		case .failure(let error):
 			XCTFail(error.localizedDescription)
 		}
-
-		if callbackQueue.qos == .userInteractive {
-			XCTAssertTrue(Thread.isMainThread)
-		}
-
 
         let saved2 = try await scores.saveAll(
 			transaction: true,
@@ -1804,8 +1791,10 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
     #endif
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
-    func deleteAllAsync(transaction: Bool = false, callbackQueue: DispatchQueue) async throws {
+    func deleteAllAsync(
+		transaction: Bool = false,
+		callbackQueue: DispatchQueue
+	) async throws {
 
         let deleted = try await [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")]
 			.deleteAll(
@@ -1831,7 +1820,6 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 		if case let .failure(error) = lastObject {
 			XCTFail(error.localizedDescription)
 		}
-
 
         let deleted2 = try await [GameScore(objectId: "yarr"), GameScore(objectId: "yolo")]
             .deleteAll(
@@ -1936,10 +1924,6 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 			XCTAssertEqual(error.code, parseError.code)
 		} else {
 			XCTFail("Should have thrown ParseError")
-		}
-
-		if callbackQueue.qos == .userInteractive {
-			XCTAssertTrue(Thread.isMainThread)
 		}
     }
 

@@ -178,7 +178,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
 			}
 		}
 	}
-	
+
 	func isPosixError(_ error: Error) async -> Bool {
 		guard let posixError = error as? POSIXError else {
 			self.receiveDelegate?.received(error)
@@ -196,7 +196,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
 		}
 		return true
 	}
-	
+
 	func isURLError(_ error: Error) async -> Bool {
 		guard let urlError = error as? URLError else {
 			self.receiveDelegate?.received(error)
@@ -214,14 +214,14 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
 		}
 		return true
 	}
-	
+
 	func receivedUnsupported(
 		_ data: Data?,
 		socketMessage: URLSessionWebSocketTask.Message?
 	) {
 		self.receiveDelegate?.receivedUnsupported(data, socketMessage: socketMessage)
 	}
-	
+
 	func received(
 		challenge: URLAuthenticationChallenge,
 
@@ -239,7 +239,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
 			completionHandler(.performDefaultHandling, nil)
 		}
 	}
-	
+
 #if !os(watchOS)
 	func received(_ metrics: URLSessionTaskTransactionMetrics) {
 		self.receiveDelegate?.received(metrics)

@@ -28,7 +28,6 @@ import Foundation
 // swiftlint:disable return_arrow_whitespace
 // swiftlint:disable file_length
 // swiftlint:disable redundant_discardable_let
-// swiftlint:disable cyclomatic_complexity
 // swiftlint:disable large_tuple
 
 /// A marker protocol used to determine whether a value is a `String`-keyed `Dictionary`
