@@ -126,7 +126,7 @@ extension ParseLiveQuery: LiveQuerySocketDelegate {
                         return
                     }
                     let requestId = RequestId(value: preliminaryMessage.requestId)
-                    let isNew: Bool!
+                    let isNew: Bool
                     if subscriptions[requestId] != nil {
                         isNew = false
                     } else {

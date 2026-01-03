@@ -3,16 +3,16 @@
 import PackageDescription
 
 let sharedSwiftSettings: [SwiftSetting] = [
-	.enableUpcomingFeature("DisableOutwardActorIsolation"),
+	.enableUpcomingFeature("DisableOutwardActorInference"),
 	.enableUpcomingFeature("DynamicActorIsolation"),
 	.enableUpcomingFeature("ForwardTrailingClosures"),
 	.enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
 	.enableUpcomingFeature("ImplicitOpenExistentials"),
 	.enableUpcomingFeature("InferSendableFromCaptures"),
 	.enableUpcomingFeature("IsolatedDefaultValues"),
-	.enableUpcomingFeature("GlobalCuncurrency"),
-	.enableUpcomingFeature("NonfrozonEnumExhaustivity"),
-	.enableUpcomingFeature("RegioinBasedIsolation"),
+	.enableUpcomingFeature("GlobalConcurrency"),
+	.enableUpcomingFeature("NonfrozenEnumExhaustivity"),
+	.enableUpcomingFeature("RegionBasedIsolation"),
 	.enableExperimentalFeature("StrictConcurrency")
 ]
 

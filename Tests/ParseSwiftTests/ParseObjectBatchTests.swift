@@ -1238,13 +1238,13 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 			callbackQueue: callbackQueue
 		)
 
-		guard let firstObject = saved2.first,
-			let secondObject = saved2.last else {
+		guard let firstObject2 = saved2.first,
+			let secondObject2 = saved2.last else {
 				XCTFail("Should unwrap")
 			return
 		}
 
-		switch firstObject {
+		switch firstObject2 {
 
 		case .success(let first):
 			guard let savedUpdatedAt = first.updatedAt else {
@@ -1262,7 +1262,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 			XCTFail(error.localizedDescription)
 		}
 
-		switch secondObject {
+		switch secondObject2 {
 
 		case .success(let second):
 			guard let savedUpdatedAt2 = second.updatedAt else {
@@ -1895,6 +1895,8 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
 		} catch let error as ParseError {
 			XCTAssertEqual(error.code, .otherCause)
 			XCTAssertTrue(error.message.contains("exceed"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
 		}
     }
 

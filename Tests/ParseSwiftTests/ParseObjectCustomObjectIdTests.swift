@@ -1291,7 +1291,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         } catch let error as ParseError {
 			XCTAssertTrue(error.message.contains("objectId"))
 		} catch {
-			XCTFail("Should have throw ParseError")
+			XCTFail("Should have throwm a ParseError")
 		}
     }
 
@@ -2626,7 +2626,6 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
 		} catch {
 			XCTFail("Should have thrown a ParseError")
 		}
-
     }
 
     func testFetch() async throws {

@@ -102,6 +102,7 @@ public struct ParseEncoder: Sendable {
 		}
 	}
 
+	/// Create an instance of ParseEncoder.
 	public init() {
 		self.dateEncodingStrategy = ParseCoding.parseDateEncodingStrategy
 		self.outputFormatting = .sortedKeys
