@@ -37,7 +37,7 @@ class ParseServerAsyncTests: XCTestCase, @unchecked Sendable {
     }
 
     @MainActor
-    func testCheck() async throws {
+    func testHealth() async throws {
 
         let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -53,7 +53,7 @@ class ParseServerAsyncTests: XCTestCase, @unchecked Sendable {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let health = try await ParseHealth.check()
+        let health = try await ParseServer.health()
         XCTAssertEqual(health, healthOfServer)
     }
 

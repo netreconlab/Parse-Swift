@@ -34,14 +34,14 @@ class ParseServerTests: XCTestCase, @unchecked Sendable {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testCheckCommand() throws {
+    func testHealthCommand() throws {
         let command = ParseServer.healthCommand()
         XCTAssertEqual(command.path.urlComponent, "/health")
         XCTAssertEqual(command.method, API.Method.POST)
         XCTAssertNil(command.body)
     }
 
-    func testCheck() async throws {
+    func testHealth() async throws {
 
         let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -57,7 +57,7 @@ class ParseServerTests: XCTestCase, @unchecked Sendable {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let health = try await ParseHealth.check()
+            let health = try await ParseServer.health()
             XCTAssertEqual(health, healthOfServer)
 
         } catch {
@@ -65,7 +65,7 @@ class ParseServerTests: XCTestCase, @unchecked Sendable {
         }
     }
 
-    func testCheckAsync() {
+    func testHealthAsync() {
         let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
@@ -95,7 +95,7 @@ class ParseServerTests: XCTestCase, @unchecked Sendable {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testCheckErrorAsync() {
+    func testHealthErrorAsync() {
         let healthOfServer = "Should throw error"
         let encoded: Data!
         do {

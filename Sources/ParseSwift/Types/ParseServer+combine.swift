@@ -37,16 +37,6 @@ public extension ParseServer {
     }
 
     /**
-     Check the server health *asynchronously*. Publishes when complete.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces a single value and then finishes or fails.
-    */
-    @available(*, deprecated, renamed: "healthPublisher")
-    static func checkPublisher(options: API.Options = []) -> AnyPublisher<Status, ParseError> {
-        return healthPublisher(options: options)
-    }
-
-    /**
      Retrieves any information provided by the server *asynchronously*. Publishes when complete.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.

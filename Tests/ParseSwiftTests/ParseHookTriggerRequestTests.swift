@@ -83,7 +83,6 @@ class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
         // swiftlint:disable:next line_length
         let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
-        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
     }
 
     func testCodingObject() async throws {
@@ -96,7 +95,6 @@ class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
-        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
         let triggerRequest2 = ParseHookTriggerObjectRequest<User, User>(ipAddress: "1.1.1.1",
                                                                         headers: ["yolo": "me"],
                                                                         object: object)

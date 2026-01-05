@@ -22,7 +22,7 @@ public protocol ParseHookTriggerable: ParseHookable {
     /// The name of the `ParseObject` the trigger should act on.
     var className: String? { get set }
     /// The `ParseHookTriggerType` type.
-    var triggerName: ParseHookTriggerType? { get set }
+    var trigger: ParseHookTriggerType? { get set }
 }
 
 // MARK: Default Implementation
@@ -41,23 +41,8 @@ public extension ParseHookTriggerable {
     ) {
         self.init()
         self.className = className
-        self.triggerName = trigger
+        self.trigger = trigger
         self.url = url
-    }
-
-    /**
-     Creates a new Parse hook trigger.
-     - parameter className: The name of the `ParseObject` the trigger should act on.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init(
-        className: String,
-        triggerName: ParseHookTriggerType,
-        url: URL
-    ) {
-        self.init(className: className, trigger: triggerName, url: url)
     }
 
     /**
@@ -86,21 +71,6 @@ public extension ParseHookTriggerable {
         url: URL
     ) where T: ParseObject {
         self.init(className: T.className, trigger: trigger, url: url)
-    }
-
-    /**
-     Creates a new Parse hook trigger.
-     - parameter object: The `ParseObject` the trigger should act on.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init<T>(
-        object: T,
-        triggerName: ParseHookTriggerType,
-        url: URL
-    ) where T: ParseObject {
-        self.init(object: object, trigger: triggerName, url: url)
     }
 
     /**
@@ -192,45 +162,6 @@ public extension ParseHookTriggerable {
             )
         }
     }
-
-    /**
-     Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
-     - parameter trigger: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Add \"object\" as the first argument")
-    init(trigger: ParseHookTriggerType, url: URL) throws {
-        switch trigger {
-        case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
-            self.init(
-                className: ParseHookTriggerObject.file.className,
-                trigger: trigger,
-                url: url
-            )
-        case .beforeConnect:
-            self.init(
-                className: ParseHookTriggerObject.liveQueryConnect.className,
-                trigger: trigger,
-                url: url
-            )
-        default:
-            throw ParseError(
-                code: .otherCause,
-                message: "This initializer should only be used for \"ParseFile\" and \"beforeConnect\""
-            )
-        }
-    }
-
-    /**
-     Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init(triggerName: ParseHookTriggerType, url: URL) throws {
-        try self.init(trigger: triggerName, url: url)
-    }
-
 }
 
 /// A type of request for Parse Hook Triggers.
@@ -246,9 +177,9 @@ public struct TriggerRequest: Encodable, Sendable {
      */
     public init<T>(trigger: T) throws where T: ParseHookTriggerable {
         guard let className = trigger.className,
-              let triggerType = trigger.triggerName else {
+              let triggerType = trigger.trigger else {
             throw ParseError(code: .otherCause,
-                             message: "The \"className\" and \"triggerName\" needs to be set: \(trigger)")
+                             message: "The \"className\" and \"trigger\" needs to be set: \(trigger)")
         }
         self.className = className
         self.trigger = triggerType

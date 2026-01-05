@@ -21,12 +21,7 @@ public struct ParseHookTriggerObjectRequest<U: ParseCloudUser, T: ParseObject>: 
     public var installationId: String?
     public var ipAddress: String?
     public var headers: [String: String]?
-    /// The type of Parse Hook Trigger.
     public var trigger: ParseHookTriggerType?
-    @available(*, deprecated, message: "Use \"trigger\" instead.")
-    public var triggerName: String? {
-        trigger?.rawValue
-    }
     public var clients: Int?
     /// An object from the hook call.
     public var object: T?
