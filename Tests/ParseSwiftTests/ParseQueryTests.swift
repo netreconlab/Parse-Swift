@@ -574,8 +574,12 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            findAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.findAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
@@ -902,8 +906,12 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            firstAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.firstAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
@@ -937,8 +945,12 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
@@ -1051,8 +1063,12 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            countAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.countAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif

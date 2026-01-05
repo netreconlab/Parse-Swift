@@ -1534,8 +1534,12 @@ class ParseObjectBatchTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 			return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
 		}
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.fetchAllAsync(
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.fetchAllAsync(
 				scores: [score, score2],
 				scoresOnServer: [immutableScoreOnServer, immutableScoreOnServer2],
 				callbackQueue: .global(qos: .background)

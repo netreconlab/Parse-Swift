@@ -838,8 +838,12 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.fetchAsync(
 				score: immutableScore,
 				scoreOnServer: immutableScoreOnServer,
 				callbackQueue: .global(qos: .background)
@@ -1265,8 +1269,12 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
         }
 		let immutableScoreOnServer = scoreOnServer
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.saveAsync(
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.saveAsync(
 				score: score,
 				scoreOnServer: immutableScoreOnServer,
 				callbackQueue: .global(qos: .background)
@@ -1373,8 +1381,12 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.updateAsync(
 				score: immutableScore,
 				scoreOnServer: immutableScoreOnServer,
 				callbackQueue: .global(qos: .background)
@@ -1542,8 +1554,12 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.deleteAsync(
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.deleteAsync(
 				score: immutableScore,
 				scoreOnServer: immutableScoreOnServer,
 				callbackQueue: .global(qos: .background)

@@ -2120,7 +2120,11 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
             self.updateAsync(
 				user: immutableUser,
 				userOnServer: immutableUserOnServer,

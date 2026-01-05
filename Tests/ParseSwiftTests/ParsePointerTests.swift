@@ -357,8 +357,12 @@ class ParsePointerTests: XCTestCase, @unchecked Sendable {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.fetchAsync(
 				score: pointer,
 				scoreOnServer: immutableScoreOnServer,
 				callbackQueue: .global(qos: .background)

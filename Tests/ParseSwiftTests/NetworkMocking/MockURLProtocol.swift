@@ -121,7 +121,8 @@ class MockURLProtocol: URLProtocol, @unchecked Sendable {
         }
 
         if let error = response.error {
-            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) {
+            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) { [weak self] in
+				guard let self else { return }
                 if self.loading {
                     self.client?.urlProtocol(self, didFailWithError: error)
                 }
@@ -139,7 +140,8 @@ class MockURLProtocol: URLProtocol, @unchecked Sendable {
                 return
             }
 
-        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) {
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) { [weak self] in
+			guard let self else { return }
             if !self.loading {
                 return
             }
