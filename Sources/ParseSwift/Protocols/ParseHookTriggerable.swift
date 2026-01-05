@@ -179,7 +179,7 @@ public struct TriggerRequest: Encodable, Sendable {
         guard let className = trigger.className,
               let triggerType = trigger.trigger else {
             throw ParseError(code: .otherCause,
-                             message: "The \"className\" and \"triggerName\" needs to be set: \(trigger)")
+                             message: "The \"className\" and \"trigger\" needs to be set: \(trigger)")
         }
         self.className = className
         self.trigger = triggerType
