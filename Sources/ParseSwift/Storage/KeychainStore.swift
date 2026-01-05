@@ -87,7 +87,7 @@ struct KeychainStore: SecureStorable {
 		_ keychain: KeychainStore,
 		oldAccessGroup: ParseKeychainAccessGroup,
 		newAccessGroup: ParseKeychainAccessGroup
-	) async throws {
+	) throws {
         if let user = keychain.data(
 			forKey: ParseStorage.Keys.currentUser,
 			accessGroup: oldAccessGroup

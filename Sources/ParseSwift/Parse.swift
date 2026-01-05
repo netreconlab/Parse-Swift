@@ -131,7 +131,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     Utility.updateParseURLSession()
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-    await KeychainStore.createShared()
+    KeychainStore.createShared()
     await deleteKeychainIfNeeded()
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
@@ -150,7 +150,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            await KeychainStore.createOld()
+            KeychainStore.createOld()
             try? await KeychainStore.shared.copy(KeychainStore.old,
                                                  oldAccessGroup: configuration.keychainAccessGroup,
                                                  newAccessGroup: configuration.keychainAccessGroup)
@@ -179,9 +179,9 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     let currentInstallationContainer = await BaseParseInstallation.currentContainer()
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
-        await KeychainStore.createObjectiveC()
+        KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
-            guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
+            guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
                   currentInstallationContainer.installationId != installationId else {
                 Parse.configuration.isInitialized = true
                 return
@@ -359,7 +359,7 @@ public func clearCache() {
  - warning: The keychain cannot be recovered after deletion.
  */
 public func deleteObjectiveCKeychain() async throws {
-    try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+    try KeychainStore.objectiveC?.deleteAllObjectiveC()
 }
 
 /**
@@ -394,7 +394,7 @@ public func deleteObjectiveCKeychain() async throws {
         return true
     }
     do {
-        try await KeychainStore.shared.copy(KeychainStore.shared,
+        try KeychainStore.shared.copy(KeychainStore.shared,
                                             oldAccessGroup: currentAccessGroup,
                                             newAccessGroup: newKeychainAccessGroup)
         await ParseKeychainAccessGroup.setCurrent(newKeychainAccessGroup)

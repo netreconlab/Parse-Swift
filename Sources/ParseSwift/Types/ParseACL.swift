@@ -393,7 +393,7 @@ extension ParseACL {
         }
 
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
+        try KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #else
         try await ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #endif

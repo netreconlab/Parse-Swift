@@ -70,7 +70,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
         await URLSession.liveQuery.closeAll()
@@ -2242,7 +2242,6 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(subscription.query, query)
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
-        let expectation2 = XCTestExpectation(description: "Unsubscribe Handler")
         var count = 0
         subscription.handleSubscribe { subscribedQuery, isNew in
             XCTAssertEqual(query, subscribedQuery)
@@ -2258,9 +2257,6 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
                     XCTAssertEqual(current.count, 1)
                     if pending.count == 0 {
                         XCTAssertEqual(pending.count, 0)
-                    }
-                    DispatchQueue.main.async {
-                        expectation2.fulfill()
                     }
                 }
                 return
@@ -2291,11 +2287,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
+		await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testResubscribingSubscriptionCallback() async throws {

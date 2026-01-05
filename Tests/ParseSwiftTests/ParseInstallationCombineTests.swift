@@ -110,7 +110,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -485,7 +485,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
                             #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                             // Should be updated in Keychain
                             guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+                                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
                                   let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
                                 XCTFail("Should get object from Keychain")
                                 expectation2.fulfill()
@@ -588,7 +588,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
                     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+                        = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
                             XCTFail("Should get object from Keychain")
                         expectation2.fulfill()
                         return
@@ -616,7 +616,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
         let expectation1 = XCTestExpectation(description: "Become Installation")
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         await Installation.setCurrent(nil)
 

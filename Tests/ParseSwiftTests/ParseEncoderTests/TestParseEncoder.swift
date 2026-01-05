@@ -364,11 +364,11 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
     let timestamp = Date()
 
     // We'll encode a number instead of a date.
-    let encode = { (_ data: Date, _ encoder: Encoder) throws -> Void in
+    let encode = { @Sendable (_ data: Date, _ encoder: Encoder) throws -> Void in
       var container = encoder.singleValueContainer()
       try container.encode(42)
     }
-    let decode = { (_: Decoder) throws -> Date in return timestamp }
+    let decode = { @Sendable (_: Decoder) throws -> Date in return timestamp }
 
     let expectedJSON = "42".data(using: .utf8)!
     _testRoundTrip(of: timestamp,
@@ -387,8 +387,8 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
     let timestamp = Date()
 
     // Encoding nothing should encode an empty keyed container ({}).
-    let encode = { (_: Date, _: Encoder) throws -> Void in }
-    let decode = { (_: Decoder) throws -> Date in return timestamp }
+    let encode = { @Sendable (_: Date, _: Encoder) throws -> Void in }
+    let decode = { @Sendable (_: Decoder) throws -> Date in return timestamp }
 
     let expectedJSON = "{}".data(using: .utf8)!
     _testRoundTrip(of: timestamp,

@@ -238,7 +238,7 @@ public extension ParseInstallation {
         try await ParseStorage.shared.set(newBaseInstallationContainer,
                                           for: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try? await KeychainStore.shared.set(newBaseInstallationContainer,
+        try? KeychainStore.shared.set(newBaseInstallationContainer,
                                       for: ParseStorage.Keys.currentInstallation)
         #endif
     }
@@ -248,11 +248,11 @@ public extension ParseInstallation {
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                    try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
             else {
                 try? await create()
                 guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                        try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 else {
                     // Could not create container correctly, return empty one.
                     return CurrentInstallationContainer<Self>()
@@ -1021,8 +1021,7 @@ public extension ParseInstallation {
                 return
             }
             guard let objcParseKeychain = KeychainStore.objectiveC,
-                  // swiftlint:disable:next line_length
-                  let oldInstallationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
+                  let oldInstallationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
                 let error = ParseError(code: .otherCause,
                                        message: "Could not find Installation in the Objective-C SDK Keychain")
                 callbackQueue.async {

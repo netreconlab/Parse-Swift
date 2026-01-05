@@ -39,7 +39,7 @@ class ParseCloudViewModelTests: XCTestCase, @unchecked Sendable {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         try await ParseStorage.shared.deleteAll()
     }
 

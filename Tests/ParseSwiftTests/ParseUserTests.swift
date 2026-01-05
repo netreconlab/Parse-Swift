@@ -146,7 +146,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -736,7 +736,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
 
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
             if installationFromKeychain.installationId == oldInstallationId ||
                 installationFromKeychain.installationId == nil {
                 XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -798,7 +798,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
 
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
                 if installationFromKeychain.installationId == oldInstallationId ||
                     installationFromKeychain.installationId == nil {
                     XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -1167,7 +1167,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
         guard let keychainUpdatedCurrent = keychainUser?.currentUser else {
             XCTFail("Should get object from Keychain")
             return
@@ -1464,7 +1464,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
         guard let keychainUpdatedCurrent = keychainUser?.currentUser else {
             XCTFail("Should get object from Keychain")
             return
@@ -1518,7 +1518,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainUser: CurrentUserContainer<User>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
         guard let keychainUpdatedCurrent = keychainUser?.currentUser else {
             XCTFail("Should get object from Keychain")
             return
@@ -2139,7 +2139,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         try await User.setCurrent(user)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         let keychainUser: CurrentUserContainer<User>?
-            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
         XCTAssertEqual(keychainUser?.currentUser?.customKey, customField)
         #endif
     }
@@ -2269,7 +2269,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
                 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                     let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
                         XCTFail("Should get object from Keychain")
                     return
@@ -2336,7 +2336,7 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
                 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                     let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
                         XCTFail("Should get object from Keychain")
                     return

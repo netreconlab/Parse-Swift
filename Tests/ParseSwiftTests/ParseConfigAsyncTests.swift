@@ -88,7 +88,7 @@ class ParseConfigAsyncTests: XCTestCase, @unchecked Sendable {
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -139,7 +139,7 @@ class ParseConfigAsyncTests: XCTestCase, @unchecked Sendable {
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
-            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -175,7 +175,7 @@ class ParseConfigAsyncTests: XCTestCase, @unchecked Sendable {
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigContainer<Config>
-            = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+            = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
             return
         }

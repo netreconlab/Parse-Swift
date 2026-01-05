@@ -160,7 +160,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -332,7 +332,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         mutated.customKey = customField
         await Installation.setCurrent(mutated)
         guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have pulled from Keychain")
             return
         }
@@ -368,7 +368,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         await Installation.setCurrent(mutated)
 
         guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
@@ -1254,7 +1254,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
                 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 guard let keychainUpdatedCurrentDate = keychainInstallation?.currentInstallation?.updatedAt else {
                     XCTFail("Should get object from Keychain")
                     return
@@ -1320,7 +1320,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
                 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 guard let keychainUpdatedCurrentDate = keychainInstallation?.currentInstallation?.updatedAt else {
                     XCTFail("Should get object from Keychain")
                     return
@@ -1620,7 +1620,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, "wowsers")
         XCTAssertEqual(keychainInstallation?.currentInstallation?.channels, installationOnServer.channels)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.deviceToken, installationOnServer.deviceToken)
@@ -1648,7 +1648,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
     func testBecomeMissingObjectId() async throws {
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         await Installation.setCurrent(nil)
 
@@ -1848,7 +1848,7 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         // Should be updated in Keychain
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
             let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
                 XCTFail("Should get object from Keychain")
             return

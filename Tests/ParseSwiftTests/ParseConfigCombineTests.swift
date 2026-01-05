@@ -89,7 +89,7 @@ class ParseConfigCombineTests: XCTestCase, @unchecked Sendable {
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -158,7 +158,7 @@ class ParseConfigCombineTests: XCTestCase, @unchecked Sendable {
                     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                        = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
                     XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, config.welcomeMessage)
                     #endif
                 } catch {
@@ -224,7 +224,7 @@ class ParseConfigCombineTests: XCTestCase, @unchecked Sendable {
                     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     // Should be updated in Keychain
                     let keychainConfig: CurrentConfigContainer<Config>?
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+                        = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
                     XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
                     #endif
                 } catch {

@@ -89,7 +89,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -513,7 +513,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 
                     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+                        = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
                         if installationFromKeychain.installationId == oldInstallationId ||
                             installationFromKeychain.installationId == nil {
                             XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -574,7 +574,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 
                     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                     if let installationFromKeychain: CurrentInstallationContainer<BaseParseInstallation>
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
+                        = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) {
                         if installationFromKeychain.installationId == oldInstallationId ||
                             installationFromKeychain.installationId == nil {
                             XCTFail("\(installationFromKeychain) was not deleted & recreated in Keychain during logout")
@@ -1111,7 +1111,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
                             #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                             // Should be updated in Keychain
                             guard let keychainUser: CurrentUserContainer<BaseParseUser>
-                                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
+                                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser),
                                   let keychainUpdatedCurrentDate = keychainUser.currentUser?.updatedAt else {
                                 XCTFail("Should get object from Keychain")
                                 expectation2.fulfill()

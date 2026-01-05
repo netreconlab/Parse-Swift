@@ -129,8 +129,8 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
         try await super.tearDown()
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try await KeychainStore.shared.deleteAll()
-        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try KeychainStore.shared.deleteAll()
+        try KeychainStore.objectiveC?.deleteAllObjectiveC()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -141,7 +141,7 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
 		installationId: String
 	) async throws {
 
-        await KeychainStore.createObjectiveC()
+        KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
         guard let objcParseKeychain = KeychainStore.objectiveC else {
             XCTFail("Should have unwrapped")
@@ -152,13 +152,13 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
         let currentUserDictionary2 = ["session_token": objcSessionToken2]
         let currentUserDictionary3 = ["sessionToken": objcSessionToken,
                                       "session_token": objcSessionToken2]
-        _ = await objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
+        _ = objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
         if useBothTokens {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
         } else if !useOldObjCToken {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
         } else {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
         }
     }
 
@@ -442,7 +442,7 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
 
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
@@ -469,7 +469,7 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
 
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
@@ -501,7 +501,7 @@ class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         await Installation.setCurrent(nil)
 
         do {
