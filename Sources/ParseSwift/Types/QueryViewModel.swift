@@ -16,7 +16,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class QueryViewModel<T: ParseObject>: QueryObservable {
+open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable {
 
     public var query: Query<T>
     public typealias Object = T

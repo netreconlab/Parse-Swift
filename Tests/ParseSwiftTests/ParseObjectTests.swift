@@ -839,7 +839,11 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
         }
 
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: immutableScore, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+            self.fetchAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1262,7 +1266,11 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
 		let immutableScoreOnServer = scoreOnServer
 
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.saveAsync(score: score, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+            self.saveAsync(
+				score: score,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1366,7 +1374,11 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(score: immutableScore, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+            self.updateAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1531,7 +1543,11 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.deleteAsync(score: immutableScore, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+            self.deleteAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif

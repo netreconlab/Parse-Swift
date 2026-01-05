@@ -358,7 +358,11 @@ class ParsePointerTests: XCTestCase, @unchecked Sendable {
         }
 
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: pointer, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
+            self.fetchAsync(
+				score: pointer,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif

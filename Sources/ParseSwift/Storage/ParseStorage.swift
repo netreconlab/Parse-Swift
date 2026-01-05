@@ -5,11 +5,26 @@
 //  Created by Pranjal Satija on 7/19/20.
 //
 
+import Foundation
+
 // MARK: ParseStorage
 struct ParseStorage {
 	nonisolated(unsafe) static var shared = ParseStorage()
 
-    var backingStore: ParsePrimitiveStorable!
+	private let lock = NSLock()
+	private var _backingStore: ParsePrimitiveStorable!
+	var backingStore: ParsePrimitiveStorable! {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _backingStore
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_backingStore = newValue
+		}
+	}
 
 	mutating func use(_ store: ParsePrimitiveStorable) {
         self.backingStore = store

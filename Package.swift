@@ -2,7 +2,6 @@
 
 import PackageDescription
 
-
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),

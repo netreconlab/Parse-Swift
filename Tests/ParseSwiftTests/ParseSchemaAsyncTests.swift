@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseSchemaAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
+class ParseSchemaAsyncTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject, ParseQueryScorable {
         //: These are required by ParseObject
         var objectId: String?

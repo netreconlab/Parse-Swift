@@ -54,7 +54,7 @@ public extension ParseConfigCodable {
             Self.save(
 				config,
 				options: options
-			){ result in
+			) { result in
 				switch result {
 			 case .success(let user):
 				 promise(.success(user))

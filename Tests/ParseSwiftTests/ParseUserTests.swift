@@ -2121,7 +2121,11 @@ class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(user: immutableUser, userOnServer: immutableUserOnServer, callbackQueue: .global(qos: .background))
+            self.updateAsync(
+				user: immutableUser,
+				userOnServer: immutableUserOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif

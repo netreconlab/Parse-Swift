@@ -2599,6 +2599,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 
     func testWhereKeyNearGeoPointWithinMilesNotSorted() throws {
         let expected: [String: AnyCodable] = [
+			// swiftlint:disable:next line_length
             "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 1
             ]
@@ -2694,6 +2695,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 
     func testWhereKeyNearGeoPointWithinKilometersNotSorted() throws {
         let expected: [String: AnyCodable] = [
+			// swiftlint:disable:next line_length
             "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 1
             ]
@@ -2789,6 +2791,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 
     func testWhereKeyNearGeoPointWithinRadiansNotSorted() throws {
         let expected: [String: AnyCodable] = [
+			// swiftlint:disable:next line_length
             "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 10
             ]
@@ -2928,9 +2931,12 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 
     func testWhereKeyPolygonContains() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$geoIntersects": ["$point":
-                                            ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable]
-                                ]
+            "yolo": [
+				"$geoIntersects": [
+					"$point": [
+						"latitude": 10, "longitude": 20, "__type": "GeoPoint"
+					] as [String: Any & Sendable]
+				]
             ]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)

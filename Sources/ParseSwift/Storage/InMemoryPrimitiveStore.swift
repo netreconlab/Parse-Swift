@@ -14,7 +14,20 @@ import Foundation
 struct InMemoryPrimitiveStore: ParsePrimitiveStorable {
     let decoder = ParseCoding.jsonDecoder()
     let encoder = ParseCoding.jsonEncoder()
-    var storage = [String: Data]()
+	private let lock = NSLock()
+	private var _storage = [String: Data]()
+	var storage: [String: Data] {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _storage
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_storage = newValue
+		}
+	}
 
     mutating func delete(valueFor key: String) async throws {
         storage[key] = nil

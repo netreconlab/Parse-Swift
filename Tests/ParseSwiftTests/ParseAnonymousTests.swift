@@ -358,7 +358,7 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
 #if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-    func testReplaceAnonymousWithBecome() async throws { // swiftlint:disable:this function_body_length
+    func testReplaceAnonymousWithBecome() async throws {
         try await testLogin()
         MockURLProtocol.removeAll()
         let currentUser = try await User.current()
@@ -388,7 +388,6 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
-
 
         let become = try await user.become(sessionToken: "newValue")
 		XCTAssert(become.hasSameObjectId(as: userOnServer))
