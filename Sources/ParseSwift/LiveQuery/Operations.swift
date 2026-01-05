@@ -26,6 +26,6 @@ enum OperationErrorResponse: String, Codable {
 
 // An opaque placeholder structed used to ensure that we type-safely create request IDs and do not shoot ourself in
 // the foot with array indexes.
-struct RequestId: Hashable, Codable {
+struct RequestId: Hashable, Codable, Sendable {
     let value: Int
 }

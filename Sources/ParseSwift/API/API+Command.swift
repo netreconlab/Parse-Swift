@@ -54,9 +54,9 @@ internal extension API {
                            callbackQueue: DispatchQueue,
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [String: ParseFile]? = nil,
-                           uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                           uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                            stream: InputStream,
-                           completion: @escaping (ParseError?) -> Void) {
+                           completion: @escaping @Sendable (ParseError?) -> Void) {
             guard method == .POST ||
                     method == .PUT ||
                     method == .PATCH else {
@@ -98,9 +98,9 @@ internal extension API {
                      childObjects: [String: PointerType]? = nil,
                      childFiles: [String: ParseFile]? = nil,
                      allowIntermediateResponses: Bool = false,
-                     uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                     completion: @escaping (Result<U, ParseError>) -> Void) async {
+                     uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     downloadProgress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping @Sendable (Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue
@@ -257,7 +257,7 @@ internal extension API {
                                batching: Bool = false,
                                childObjects: [String: PointerType]? = nil,
                                childFiles: [String: ParseFile]? = nil,
-                               completion: @escaping (Result<URLRequest, ParseError>) -> Void) {
+                               completion: @escaping @Sendable (Result<URLRequest, ParseError>) -> Void) {
             let params = self.params?.getURLQueryItems()
             Task {
                 do {
@@ -294,8 +294,12 @@ internal extension API {
                     if let urlBody = body {
                         if (urlBody as? ParseCloudTypeable) != nil {
                             do {
-                                let bodyData = try ParseCoding.parseEncoder().encode(urlBody,
-                                                                                     skipKeys: .cloud)
+                                let bodyData = try ParseCoding
+									.parseEncoder()
+									.encode(
+										urlBody,
+										skipKeys: .cloud
+								)
                                 urlRequest.httpBody = bodyData
                             } catch {
                                 let defaultError = ParseError(code: .otherCause,
@@ -308,11 +312,13 @@ internal extension API {
                         } else {
                             guard let bodyData = try? ParseCoding
                                 .parseEncoder()
-                                .encode(urlBody,
-                                        batching: batching,
-                                        collectChildren: false,
-                                        objectsSavedBeforeThisOne: childObjects,
-                                        filesSavedBeforeThisOne: childFiles) else {
+                                .encode(
+									urlBody,
+									batching: batching,
+									collectChildren: false,
+									objectsSavedBeforeThisOne: childObjects,
+									filesSavedBeforeThisOne: childFiles
+								) else {
                                 let error = ParseError(code: .otherCause,
                                                        message: "Could not encode body \(urlBody)")
                                 completion(.failure(error))
@@ -601,7 +607,7 @@ internal extension API.Command where T: ParseObject {
                 path: .any(path), mapper: command.mapper)
         }
 
-        let mapper = { (data: Data) -> [(Result<Void, ParseError>)] in
+        let mapper = { @Sendable (data: Data) -> [(Result<Void, ParseError>)] in
 
             let decodingType = [BatchResponseItem<NoBody>].self
             do {

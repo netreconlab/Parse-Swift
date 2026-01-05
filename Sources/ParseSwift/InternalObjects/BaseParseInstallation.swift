@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 internal struct BaseParseInstallation: ParseInstallation {
     var deviceType: String?
@@ -31,8 +34,8 @@ internal struct BaseParseInstallation: ParseInstallation {
         guard let installationId = currentContainer.installationId,
             currentContainer.currentInstallation?.installationId == installationId else {
             try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-            #if !os(Linux) && !os(Android) && !os(Windows)
-            try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+            try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
             #endif
             _ = Self.currentContainer
             return

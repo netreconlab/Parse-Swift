@@ -17,9 +17,21 @@ public extension ParseHookRequestable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func hydrateUserPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func hydrateUserPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.hydrateUser(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.hydrateUser(
+				options: options
+			) { result in
+				switch result {
+				case .success(let hookRequest):
+					promise(.success(hookRequest))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

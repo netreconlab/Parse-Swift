@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseSchemaTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseSchemaTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -73,8 +73,8 @@ class ParseSchemaTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }

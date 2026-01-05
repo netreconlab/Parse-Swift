@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 public extension ParseUser {
@@ -26,14 +29,25 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func signupPublisher(username: String,
-                                password: String,
-                                options: API.Options = []) -> Future<Self, ParseError> {
+    static func signupPublisher(
+		username: String,
+		password: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.signup(username: username,
-                        password: password,
-                        options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.signup(
+				username: username,
+				password: password,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -50,8 +64,17 @@ public extension ParseUser {
     */
     func signupPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
-            self.signup(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.signup(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -70,18 +93,29 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func loginPublisher(username: String? = nil,
-                               email: String? = nil,
-                               password: String,
-                               authData: [String: [String: String]?]? = nil,
-                               options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginPublisher(
+		username: String? = nil,
+		email: String? = nil,
+		password: String,
+		authData: [String: [String: String]?]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.login(username: username,
-                       email: email,
-                       password: password,
-                       authData: authData,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.login(
+				username: username,
+				email: email,
+				password: password,
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -97,9 +131,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func becomePublisher(sessionToken: String, options: API.Options = []) -> Future<Self, ParseError> {
+    func becomePublisher(
+		sessionToken: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.become(sessionToken: sessionToken, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.become(
+				sessionToken: sessionToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -114,10 +162,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func becomePublisher(sessionToken: String,
-                                options: API.Options = []) -> Future<Self, ParseError> {
+    static func becomePublisher(
+		sessionToken: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.become(sessionToken: sessionToken, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.become(
+				sessionToken: sessionToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -143,14 +204,27 @@ public extension ParseUser {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    static func loginAsPublisher(objectId: String,
-                                 options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginAsPublisher(
+		objectId: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.loginAs(objectId: objectId, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.loginAs(
+				objectId: objectId,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     /**
      Logs in a `ParseUser` *asynchronously* using the session token from the Parse Objective-C SDK Keychain.
      Publishes an instance of the successfully logged in `ParseUser`. The Parse Objective-C SDK Keychain is not
@@ -166,9 +240,21 @@ public extension ParseUser {
      - warning: The latest **PFUser** from the Objective-C SDK should be saved to your
      Parse Server before calling this method.
     */
-    static func loginUsingObjCKeychainPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginUsingObjCKeychainPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.loginUsingObjCKeychain(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.loginUsingObjCKeychain(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 #endif
@@ -185,7 +271,17 @@ public extension ParseUser {
     */
     static func logoutPublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
-            Self.logout(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.logout(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -199,10 +295,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func passwordResetPublisher(email: String,
-                                       options: API.Options = []) -> Future<Void, ParseError> {
+    static func passwordResetPublisher(
+		email: String,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.passwordReset(email: email, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.passwordReset(
+				email: email,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -220,14 +329,25 @@ public extension ParseUser {
      [issue](https://github.com/parse-community/parse-server/issues/7784) to be addressed on
      the Parse Server, othewise you should set `usingPost = false`.
     */
-    static func verifyPasswordPublisher(password: String,
-                                        usingPost: Bool = false,
-                                        options: API.Options = []) -> Future<Self, ParseError> {
+    static func verifyPasswordPublisher(
+		password: String,
+		usingPost: Bool = false,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.verifyPassword(password: password,
-                                usingPost: usingPost,
-                                options: options,
-                                completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.verifyPassword(
+				password: password,
+				usingPost: usingPost,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -240,10 +360,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func verificationEmailPublisher(email: String,
-                                           options: API.Options = []) -> Future<Void, ParseError> {
+    static func verificationEmailPublisher(
+		email: String,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.verificationEmail(email: email, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.verificationEmail(
+				email: email,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -259,12 +392,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchPublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(includeKeys: includeKeys,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -289,12 +433,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func savePublisher(options: API.Options = [],
-                       ignoringCustomObjectIdConfig: Bool = false) -> Future<Self, ParseError> {
+    func savePublisher(
+		options: API.Options = [],
+		ignoringCustomObjectIdConfig: Bool = false
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -306,10 +461,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -322,10 +488,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func replacePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.replace(options: options,
-                         completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.replace(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -338,10 +515,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    internal func updatePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -354,9 +542,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -375,167 +575,23 @@ public extension Sequence where Element: ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchAllPublisher(includeKeys: [String]? = nil,
-                           options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+    func fetchAllPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: promise)
-        }
-    }
-
-    /**
-     Saves a collection of users *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func saveAllPublisher(batchLimit limit: Int? = nil,
-                          transaction: Bool = configuration.isUsingTransactions,
-                          ignoringCustomObjectIdConfig: Bool = false,
-                          options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
-        Future { promise in
-            self.saveAll(batchLimit: limit,
-                         transaction: transaction,
-                         ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                         options: options,
-                         completion: promise)
-        }
-    }
-
-    /**
-     Creates a collection of users *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func createAllPublisher(batchLimit limit: Int? = nil,
-                            transaction: Bool = configuration.isUsingTransactions,
-                            options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
-        Future { promise in
-            self.createAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
-
-    /**
-     Replaces a collection of users *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object replaced has the same objectId as current, it will automatically replace the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func replaceAllPublisher(batchLimit limit: Int? = nil,
-                             transaction: Bool = configuration.isUsingTransactions,
-                             options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)],
-                                                                    ParseError> {
-        Future { promise in
-            self.replaceAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
-
-    /**
-     Updates a collection of users *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object updated has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    internal func updateAllPublisher(batchLimit limit: Int? = nil,
-                                     transaction: Bool = configuration.isUsingTransactions,
-                                     options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)],
-                                                                            ParseError> {
-        Future { promise in
-            self.updateAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
-
-    /**
-     Deletes a collection of users *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with `nil` if a delete was
-     successful or a `ParseError` if it failed.
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func deleteAllPublisher(batchLimit limit: Int? = nil,
-                            transaction: Bool = configuration.isUsingTransactions,
-                            options: API.Options = []) -> Future<[(Result<Void, ParseError>)], ParseError> {
-        Future { promise in
-            self.deleteAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchAll(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let users):
+					promise(.success(users))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

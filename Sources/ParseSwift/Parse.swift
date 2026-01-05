@@ -8,8 +8,8 @@ import FoundationNetworking
 // MARK: Internal
 
 internal struct Parse {
-    static var configuration: ParseConfiguration!
-    static var sessionDelegate: ParseURLSessionDelegate!
+	nonisolated(unsafe) static var configuration: ParseConfiguration!
+	nonisolated(unsafe) static var sessionDelegate: ParseURLSessionDelegate!
 }
 
 internal func initialize(
@@ -37,7 +37,7 @@ internal func initialize(
     liveQueryMaxConnectionAttempts: Int = 20,
     testing: Bool = false,
     testLiveQueryDontCloseSocket: Bool = false,
-    authentication: ((URLAuthenticationChallenge,
+    authentication: (@Sendable (URLAuthenticationChallenge,
                      (URLSession.AuthChallengeDisposition,
                       URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
@@ -88,12 +88,12 @@ internal func yieldIfNotInitialized(_ iteration: Int = 0) async throws {
 }
 
 internal func deleteKeychainIfNeeded() async {
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? await KeychainStore.old?.deleteAll()
-            try? await KeychainStore.shared.deleteAll()
+            try? KeychainStore.old?.deleteAll()
+            try? KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
         clearCache()
@@ -125,13 +125,13 @@ public var configuration: ParseConfiguration {
  */
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
-    await ParseStorage.shared.use(configuration.primitiveStore)
+    ParseStorage.shared.use(configuration.primitiveStore)
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
                                                     authentication: configuration.authentication)
     Utility.updateParseURLSession()
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    await KeychainStore.createShared()
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    KeychainStore.createShared()
     await deleteKeychainIfNeeded()
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
@@ -147,15 +147,15 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         let oneNineEightSDKVersion = try ParseVersion(string: "1.9.8")
 
         // All migrations from previous versions to current should occur here:
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            await KeychainStore.createOld()
-            try? await KeychainStore.shared.copy(KeychainStore.old,
+            KeychainStore.createOld()
+            try? KeychainStore.shared.copy(KeychainStore.old,
                                                  oldAccessGroup: configuration.keychainAccessGroup,
                                                  newAccessGroup: configuration.keychainAccessGroup)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? await KeychainStore.old.deleteAll()
+            try? KeychainStore.old.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
@@ -177,11 +177,11 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     }
 
     let currentInstallationContainer = await BaseParseInstallation.currentContainer()
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
-        await KeychainStore.createObjectiveC()
+        KeychainStore.createObjectiveC()
         if let objcParseKeychain = KeychainStore.objectiveC {
-            guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
+            guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
                   currentInstallationContainer.installationId != installationId else {
                 Parse.configuration.isInitialized = true
                 return
@@ -292,7 +292,7 @@ public func initialize(
     liveQueryConnectionAdditionalProperties: Bool = true,
     liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
-    authentication: ((URLAuthenticationChallenge,
+    authentication: (@Sendable (URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
@@ -332,7 +332,7 @@ public func initialize(
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
  */
-public func updateAuthentication(_ authentication: ((URLAuthenticationChallenge,
+public func updateAuthentication(_ authentication: (@Sendable (URLAuthenticationChallenge,
                                                      (URLSession.AuthChallengeDisposition,
                                                       URLCredential?) -> Void) -> Void)?) {
     Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
@@ -350,7 +350,7 @@ public func clearCache() {
 
 // MARK: Public - Apple Platforms
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 /**
  Delete the Parse iOS Objective-C SDK Keychain from the device.
@@ -359,7 +359,7 @@ public func clearCache() {
  - warning: The keychain cannot be recovered after deletion.
  */
 public func deleteObjectiveCKeychain() async throws {
-    try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+    try KeychainStore.objectiveC?.deleteAllObjectiveC()
 }
 
 /**
@@ -394,7 +394,7 @@ public func deleteObjectiveCKeychain() async throws {
         return true
     }
     do {
-        try await KeychainStore.shared.copy(KeychainStore.shared,
+        try KeychainStore.shared.copy(KeychainStore.shared,
                                             oldAccessGroup: currentAccessGroup,
                                             newAccessGroup: newKeychainAccessGroup)
         await ParseKeychainAccessGroup.setCurrent(newKeychainAccessGroup)

@@ -8,6 +8,7 @@
 
 #if canImport(Combine)
 import Foundation
+import Combine
 
 /**
  A default implementation of the `QueryObservable` protocol. Suitable for `ObjectObserved`
@@ -15,38 +16,81 @@ import Foundation
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class QueryViewModel<T: ParseObject>: QueryObservable {
+open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable {
+
+	private let resultsLock = NSLock()
+	private let countLock = NSLock()
+	private let errorLock = NSLock()
+	private var _results = [Object]() {
+		willSet {
+			self.objectWillChange.send()
+		}
+	}
+	private var _count: Int = 0 {
+		willSet {
+			if newValue != _results.count {
+				self.objectWillChange.send()
+			}
+		}
+	}
+	private var _error: ParseError? {
+		willSet {
+			if newValue != nil {
+				_results.removeAll()
+				_count = 0
+				self.objectWillChange.send()
+			}
+		}
+	}
 
     public var query: Query<T>
     public typealias Object = T
 
     /// Updates and notifies when the new results have been retrieved.
-    open var results = [Object]() {
-        willSet {
-            count = newValue.count
-            self.objectWillChange.send()
-        }
+	open var results: [Object] {
+		get {
+			resultsLock.lock()
+			defer { resultsLock.unlock() }
+			return _results
+		}
+
+		set {
+			resultsLock.lock()
+			defer { resultsLock.unlock() }
+			_results = newValue
+			error = nil
+			count = newValue.count
+		}
     }
 
     /// Updates and notifies when the count of the results have been retrieved.
-    open var count = 0 {
-        willSet {
-            error = nil
-            if newValue != results.count {
-                self.objectWillChange.send()
-            }
-        }
+	open var count: Int {
+		get {
+			countLock.lock()
+			defer { countLock.unlock() }
+			return _count
+		}
+
+		set {
+			countLock.lock()
+			defer { countLock.unlock() }
+			_count = newValue
+		}
     }
 
     /// Updates and notifies when there is an error retrieving the results.
     open var error: ParseError? {
-        willSet {
-            if newValue != nil {
-                results.removeAll()
-                count = results.count
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			errorLock.lock()
+			defer { errorLock.unlock() }
+			return _error
+		}
+
+		set {
+			errorLock.lock()
+			defer { errorLock.unlock() }
+			_error = newValue
+		}
     }
 
     required public init(query: Query<T>) {
@@ -93,7 +137,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable {
     }
 
     @MainActor
-    open func aggregate(_ pipeline: [[String: Encodable]],
+    open func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                         options: API.Options = []) async {
         do {
             self.results = try await query.aggregate(pipeline, options: options)

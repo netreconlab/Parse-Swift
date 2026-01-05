@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseQueryCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -64,13 +64,13 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFind() {
+    func testFind() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Find")
 
@@ -82,13 +82,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -114,7 +110,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testWithCount() {
+    func testWithCount() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Find")
 
@@ -126,13 +122,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -159,7 +151,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testFindAll() {
+    func testFindAll() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "FindAll")
 
@@ -170,13 +162,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query
         let publisher = query.findAllPublisher()
@@ -272,7 +260,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testFirst() {
+    func testFirst() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -284,13 +272,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -348,7 +332,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCount() {
+    func testCount() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -360,13 +344,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -424,7 +404,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testAggregate() {
+    func testAggregate() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -435,13 +415,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -503,7 +479,7 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testDistinct() {
+    func testDistinct() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
@@ -514,13 +490,9 @@ class ParseQueryCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query

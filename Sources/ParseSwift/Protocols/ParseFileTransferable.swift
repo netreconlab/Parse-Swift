@@ -15,7 +15,7 @@ import FoundationNetworking
  A protocol for overriding the default transfer behavior for `ParseFile`'s.
  Allows for direct uploads to other file storage providers.
  */
-public protocol ParseFileTransferable: AnyObject {
+public protocol ParseFileTransferable: AnyObject, Sendable {
     /**
      Creates a task that performs an HTTP request for uploading the specified file,
      then calls a handler upon completion.
@@ -28,9 +28,11 @@ public protocol ParseFileTransferable: AnyObject {
     `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
      that prevented the file upload.
      */
-    func upload(with request: URLRequest,
-                fromFile fileURL: URL,
-                completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask
+    func upload(
+		with request: URLRequest,
+		fromFile fileURL: URL,
+		completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void
+	) throws -> URLSessionUploadTask
 
     /**
      Creates a task that performs an HTTP request for the specified URL request
@@ -44,9 +46,11 @@ public protocol ParseFileTransferable: AnyObject {
     `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
      that prevented the file upload.
      */
-    func upload(with request: URLRequest,
-                from bodyData: Data?,
-                completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask
+    func upload(
+		with request: URLRequest,
+		from bodyData: Data?,
+		completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void
+	) throws -> URLSessionUploadTask
 
     /**
      Compose a valid file upload response with a name and url.
@@ -78,7 +82,7 @@ extension ParseFileTransferable {
     func upload(with request: URLRequest,
                 fromFile fileURL: URL,
                 // swiftlint:disable:next line_length
-                completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
+                completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
         URLSession.parse.uploadTask(with: request, fromFile: fileURL) { (data, response, error) in
             completion(data, response, request, error)
         }
@@ -87,7 +91,7 @@ extension ParseFileTransferable {
     func upload(with request: URLRequest,
                 from bodyData: Data?,
                 // swiftlint:disable:next line_length
-                completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
+                completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
         URLSession.parse.uploadTask(with: request, from: bodyData) { (data, response, error) in
             completion(data, response, request, error)
         }

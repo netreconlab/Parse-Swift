@@ -15,7 +15,7 @@ import Combine
 
 // swiftlint:disable type_body_length
 
-class ParsePushCombineTests: XCTestCase {
+class ParsePushCombineTests: XCTestCase, @unchecked Sendable {
     struct Installation: ParseInstallation {
         var installationId: String?
         var deviceType: String?
@@ -62,8 +62,8 @@ class ParsePushCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -264,20 +264,16 @@ class ParsePushCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testSendErrorServerMissingHeader() {
+    func testSendErrorServerMissingHeader() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
         let appleAlert = ParsePushAppleAlert(body: "hello world")
 
         let results = BooleanResponse(result: true)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -301,7 +297,7 @@ class ParsePushCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testFetch() {
+    func testFetch() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Send")
 
@@ -316,13 +312,9 @@ class ParsePushCombineTests: XCTestCase {
         statusOnServer.updatedAt = statusOnServer.createdAt
 
         let results = QueryResponse<ParsePushStatus<ParsePushPayloadAny>>(results: [statusOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)

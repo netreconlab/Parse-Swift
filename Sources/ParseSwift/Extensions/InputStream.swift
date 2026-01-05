@@ -7,5 +7,8 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
-extension InputStream: @unchecked Sendable {}
+extension InputStream: @unchecked @retroactive Sendable {}

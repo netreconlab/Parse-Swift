@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigCodableTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct Config: ParseConfig {
         var welcomeMessage: String?
@@ -84,24 +84,20 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -112,7 +108,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testUpdateStorageIfNeeded() async throws {
-        await userLogin()
+        try await userLogin()
         let key = "welcomeMessage"
         let value = "Hello"
         var configDictionary = [String: AnyCodable]()
@@ -135,7 +131,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testDeleteFromStorageOnLogout() async throws {
-        await userLogin()
+        try await userLogin()
         let key = "welcomeMessage"
         let value = "Hello"
         var configDictionary = [String: AnyCodable]()
@@ -223,7 +219,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testFetch() async throws {
-        await userLogin()
+        try await userLogin()
 
         let key = "welcomeMessage"
         let value = "Hello"
@@ -258,10 +254,10 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         }
         XCTAssertEqual(codableValue, value)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigDictionaryContainer<AnyCodable>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
             return
         }
@@ -274,7 +270,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testSave() async throws {
-        await userLogin()
+        try await userLogin()
 
         let serverResponse = BooleanResponse(result: true)
         let encoded: Data!
@@ -303,10 +299,10 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         }
         XCTAssertEqual(codableValue, value)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         guard let keychainConfig: CurrentConfigDictionaryContainer<AnyCodable>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
                 XCTFail("Should get object from Keychain")
             return
         }

@@ -23,8 +23,17 @@ public extension ParsePush {
     */
     func sendPublisher(options: API.Options = []) -> Future<String, ParseError> {
         Future { promise in
-            self.send(options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.send(
+				options: options
+			) { result in
+				switch result {
+				case .success(let pushedString):
+					promise(.success(pushedString))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -39,12 +48,23 @@ public extension ParsePush {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func fetchStatusPublisher(_ statusId: String,
-                              options: API.Options = []) -> Future<ParsePushStatus<V>, ParseError> {
+    func fetchStatusPublisher(
+		_ statusId: String,
+		options: API.Options = []
+	) -> Future<ParsePushStatus<V>, ParseError> {
         Future { promise in
-            self.fetchStatus(statusId,
-                             options: options,
-                             completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchStatus(
+				statusId,
+				options: options
+			) { result in
+				switch result {
+				case .success(let status):
+					promise(.success(status))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

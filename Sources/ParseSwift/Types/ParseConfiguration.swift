@@ -127,14 +127,14 @@ public struct ParseConfiguration {
      */
     public internal(set) var parseFileTransfer: ParseFileTransferable
 
-    internal var authentication: ((URLAuthenticationChallenge,
+    internal var authentication: (@Sendable (URLAuthenticationChallenge,
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
     internal var isInitialized = false
     internal var isTestingSDK = false
     internal var isTestingLiveQueryDontCloseSocket = false
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     internal var keychainAccessGroup = ParseKeychainAccessGroup()
     #endif
 
@@ -215,7 +215,7 @@ public struct ParseConfiguration {
         liveQueryConnectionAdditionalProperties: Bool = true,
         liveQueryMaxConnectionAttempts: Int = 20,
         parseFileTransfer: ParseFileTransferable? = nil,
-        authentication: ((URLAuthenticationChallenge,
+        authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
                            URLCredential?) -> Void) -> Void)? = nil
     ) {

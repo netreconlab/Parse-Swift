@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Conforming to `ParseHookRequestable` allows you to create types that
@@ -74,10 +77,10 @@ extension ParseHookRequestable {
      */
     public func hydrateUser(options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
-                            completion: @escaping (Result<Self, ParseError>) -> Void) {
+                            completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         guard let user = user else {
             let error = ParseError(code: .otherCause,
-                                   message: "Resquest does not contain a user.")
+                                   message: "Request does not contain a user.")
             completion(.failure(error))
             return
         }

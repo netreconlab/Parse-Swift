@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Objects that conform to the `ParseRole` protocol represent a Role on the Parse Server.

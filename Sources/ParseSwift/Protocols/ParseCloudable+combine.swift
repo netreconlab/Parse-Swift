@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 public extension ParseCloudable {
@@ -20,10 +23,21 @@ public extension ParseCloudable {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func runFunctionPublisher(options: API.Options = []) -> Future<ReturnType, ParseError> {
+    func runFunctionPublisher(
+		options: API.Options = []
+	) -> Future<ReturnType, ParseError> {
         Future { promise in
-            self.runFunction(options: options,
-                             completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.runFunction(
+				options: options
+			) { result in
+				switch result {
+				case .success(let functionReturn):
+					promise(.success(functionReturn))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -33,10 +47,21 @@ public extension ParseCloudable {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func startJobPublisher(options: API.Options = []) -> Future<ReturnType, ParseError> {
+    func startJobPublisher(
+		options: API.Options = []
+	) -> Future<ReturnType, ParseError> {
         Future { promise in
-            self.startJob(options: options,
-                          completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.startJob(
+				options: options
+			) { result in
+				switch result {
+				case .success(let functionReturn):
+					promise(.success(functionReturn))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

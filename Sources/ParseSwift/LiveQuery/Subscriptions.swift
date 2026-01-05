@@ -6,22 +6,21 @@
 //  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 actor Subscriptions {
-    let requestIdGenerator: () -> RequestId
+	var currentRequestId = 0
     var current = [RequestId: ParseLiveQuery.SubscriptionRecord]()
     var pending = [(RequestId, ParseLiveQuery.SubscriptionRecord)]()
 
-    init() {
-        // Simple incrementing generator
-        var currentRequestId = 0
-        requestIdGenerator = {
-            currentRequestId += 1
-            return RequestId(value: currentRequestId)
-        }
-    }
+	func requestIdGenerator() -> RequestId {
+		self.currentRequestId += 1
+		return RequestId(value: self.currentRequestId)
+	}
 }
 
 // MARK: RequestIdGenerator

@@ -11,7 +11,7 @@ import Foundation
 struct Utility {
 
     static func updateParseURLSession() {
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
             configuration.urlCache = URLCache.parse

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  `ParseConfigCodable` allows access to the Config on the Parse Server as a
@@ -15,7 +18,7 @@ import Foundation
  - note: Stored and fetched versions `ParseConfigCodable` and types that conform
  `ParseConfig`are interoperable and access the same Config.
 */
-public struct ParseConfigCodable<V: Codable> {}
+public struct ParseConfigCodable<V: Codable & Sendable> {}
 
 // MARK: Update
 extension ParseConfigCodable {
@@ -31,7 +34,7 @@ extension ParseConfigCodable {
     */
     public static func fetch(options: API.Options = [],
                              callbackQueue: DispatchQueue = .main,
-                             completion: @escaping (Result<[String: V], ParseError>) -> Void) {
+                             completion: @escaping @Sendable (Result<[String: V], ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -71,7 +74,7 @@ extension ParseConfigCodable {
     public static func save(_ config: [String: V],
                             options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
-                            completion: @escaping (Result<Bool, ParseError>) -> Void) {
+                            completion: @escaping @Sendable (Result<Bool, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -122,8 +125,8 @@ extension ParseConfigCodable {
     static func currentContainer() async -> CurrentConfigDictionaryContainer<V>? {
         guard let configInMemory: CurrentConfigDictionaryContainer<V> =
             try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentConfig) else {
-            #if !os(Linux) && !os(Android) && !os(Windows)
-                return try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+                return try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
             #else
                 return nil
             #endif
@@ -133,8 +136,8 @@ extension ParseConfigCodable {
 
     static func setCurrentContainer(_ newValue: CurrentConfigDictionaryContainer<V>?) async {
         try? await ParseStorage.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.set(newValue, for: ParseStorage.Keys.currentConfig)
         #endif
     }
 
@@ -148,8 +151,8 @@ extension ParseConfigCodable {
 
     internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentConfig)
         #endif
     }
 
@@ -164,16 +167,16 @@ extension ParseConfigCodable {
 
 }
 
-struct CurrentConfigDictionaryContainer<T: Codable>: Codable {
+struct CurrentConfigDictionaryContainer<T: Codable & Sendable>: Codable & Sendable {
     var currentConfig: [String: T]?
 }
 
 // MARK: ConfigCodableUpdateBody
-internal struct ConfigCodableUpdateBody<T>: Codable where T: Codable {
+internal struct ConfigCodableUpdateBody<T>: Codable where T: Codable & Sendable {
     let params: T
 }
 
 // MARK: ConfigCodableFetchResponse
-internal struct ConfigCodableFetchResponse<T>: Codable where T: Codable {
+internal struct ConfigCodableFetchResponse<T>: Codable where T: Codable & Sendable {
     let params: [String: T]
 }

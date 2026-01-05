@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParseRoleTests: XCTestCase {
+class ParseRoleTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -135,8 +135,8 @@ class ParseRoleTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -652,7 +652,7 @@ class ParseRoleTests: XCTestCase {
         }
     }
 
-    func testRoleAddOperationSaveAsynchronous() throws {
+    func testRoleAddOperationSaveAsynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -689,18 +689,9 @@ class ParseRoleTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation1 = XCTestExpectation(description: "Save object1")
-        operation.save { result in
-            switch result {
-            case .success(let updatedRole):
-                XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
-                XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
+        let updatedRole = try await operation.save()
+		XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
+		XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
     func testRoleAddOperationSaveAsynchronousError() throws {
@@ -737,7 +728,7 @@ class ParseRoleTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testRoleAddOperationSaveAsynchronousCustomObjectId() throws {
+    func testRoleAddOperationSaveAsynchronousCustomObjectId() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
@@ -777,18 +768,9 @@ class ParseRoleTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation1 = XCTestExpectation(description: "Save object1")
-        operation.save { result in
-            switch result {
-            case .success(let updatedRole):
-                XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
-                XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
+		let updatedRole = try await operation.save()
+		XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
+		XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
     func testRoleAddOperationSaveAsynchronousCustomObjectIdError() throws {

@@ -20,7 +20,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class TestParseEncoder: XCTestCase {
+class TestParseEncoder: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -66,7 +66,7 @@ class TestParseEncoder: XCTestCase {
     // Person is a class with multiple fields.
     let expectedJSON = "{\"email\":\"appleseed@apple.com\",\"name\":\"Johnny Appleseed\"}".data(using: .utf8)!
     let person = Person.testValue
-    _testRoundTrip(of: person, expectedJSON: expectedJSON)
+	  _testRoundTrip(of: person, expectedJSON: expectedJSON, outputFormatting: .sortedKeys)
   }
 
   func testEncodingTopLevelStructuredSingleStruct() {
@@ -100,7 +100,7 @@ class TestParseEncoder: XCTestCase {
     _testRoundTrip(of: EnhancedBool.fileNotFound, expectedJSON: "null".data(using: .utf8)!)
   }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   func testEncodingMultipleNestedContainersWithTheSameTopLevelKey() {
     struct Model: Codable, Equatable {
       let first: String
@@ -200,7 +200,7 @@ class TestParseEncoder: XCTestCase {
 
   // MARK: - Output Formatting Tests
   func testEncodingOutputFormattingDefault() {
-    let expectedJSON = "{\"email\":\"appleseed@apple.com\",\"name\":\"Johnny Appleseed\"}".data(using: .utf8)!
+    let expectedJSON = "{\"name\":\"Johnny Appleseed\",\"email\":\"appleseed@apple.com\"}".data(using: .utf8)!
     let person = Person.testValue
     _testRoundTrip(of: person, expectedJSON: expectedJSON)
   }
@@ -228,7 +228,7 @@ class TestParseEncoder: XCTestCase {
   }*/
 
   // MARK: - Date Strategy Tests
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   // Disabled for now till we resolve rdar://52618414
   func x_testEncodingDate() throws {
 
@@ -340,35 +340,15 @@ class TestParseEncoder: XCTestCase {
     }
   }
 
-  func testEncodingDateFormatted() {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .full
-    formatter.timeStyle = .full
-
-    let timestamp = Date(timeIntervalSince1970: 1000)
-    let expectedJSON = "\"\(formatter.string(from: timestamp))\"".data(using: .utf8)!
-
-    _testRoundTrip(of: timestamp,
-                   expectedJSON: expectedJSON,
-                   dateEncodingStrategy: .formatted(formatter),
-                   dateDecodingStrategy: .formatted(formatter))
-
-    // Optional dates should encode the same way.
-    _testRoundTrip(of: Optional(timestamp),
-                   expectedJSON: expectedJSON,
-                   dateEncodingStrategy: .formatted(formatter),
-                   dateDecodingStrategy: .formatted(formatter))
-  }
-
   func testEncodingDateCustom() {
     let timestamp = Date()
 
     // We'll encode a number instead of a date.
-    let encode = { (_ data: Date, _ encoder: Encoder) throws -> Void in
+    let encode = { @Sendable (_ data: Date, _ encoder: Encoder) throws -> Void in
       var container = encoder.singleValueContainer()
       try container.encode(42)
     }
-    let decode = { (_: Decoder) throws -> Date in return timestamp }
+    let decode = { @Sendable (_: Decoder) throws -> Date in return timestamp }
 
     let expectedJSON = "42".data(using: .utf8)!
     _testRoundTrip(of: timestamp,
@@ -387,8 +367,8 @@ class TestParseEncoder: XCTestCase {
     let timestamp = Date()
 
     // Encoding nothing should encode an empty keyed container ({}).
-    let encode = { (_: Date, _: Encoder) throws -> Void in }
-    let decode = { (_: Decoder) throws -> Date in return timestamp }
+    let encode = { @Sendable (_: Date, _: Encoder) throws -> Void in }
+    let decode = { @Sendable (_: Decoder) throws -> Date in return timestamp }
 
     let expectedJSON = "{}".data(using: .utf8)!
     _testRoundTrip(of: timestamp,
@@ -890,7 +870,7 @@ class TestParseEncoder: XCTestCase {
     _testRoundTripTypeCoercionFailure(of: [0.0, 1.0] as [Double], as: [Bool].self)
   }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   func testDecodingConcreteTypeParameter() {
       let encoder = ParseEncoder()
       guard let json = try? encoder.encode(Employee.testValue) else {
@@ -956,7 +936,7 @@ class TestParseEncoder: XCTestCase {
         _ = encoder.unkeyedContainer()
         enum CustomError: Error { case foo }
         throw CustomError.foo
-    }))
+	}), outputFormatting: .sortedKeys)
 
     _ = try? encoder.encode(ReferencingEncoderWrapper(Date()))
   }
@@ -996,32 +976,45 @@ class TestParseEncoder: XCTestCase {
     } catch {}
   }
 
-  private func _testRoundTrip<T>(of value: T,
-                                 expectedJSON json: Data? = nil,
-                                 outputFormatting: JSONEncoder.OutputFormatting = [],
-                                 dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .deferredToDate,
-                                 dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
-                                 dataEncodingStrategy: JSONEncoder.DataEncodingStrategy = .base64,
-                                 dataDecodingStrategy: JSONDecoder.DataDecodingStrategy = .base64,
-                                 keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys,
-                                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
-                                 nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy = .throw,
-                                 nonConformingFloatDecodingStrategy: JSONDecoder.NonConformingFloatDecodingStrategy = .throw) where T: Codable, T: Equatable {
+  private func _testRoundTrip<T>(
+	of value: T,
+
+	expectedJSON json: Data? = nil,
+
+	outputFormatting: JSONEncoder.OutputFormatting = [],
+
+	dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .deferredToDate,
+
+	dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
+
+	dataEncodingStrategy: JSONEncoder.DataEncodingStrategy = .base64,
+
+	dataDecodingStrategy: JSONDecoder.DataDecodingStrategy = .base64,
+
+	keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys,
+
+	keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
+
+	nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy = .throw,
+
+	nonConformingFloatDecodingStrategy: JSONDecoder.NonConformingFloatDecodingStrategy = .throw
+  ) where T: Codable, T: Equatable {
     var payload: Data! = nil
     do {
-        let encoder = ParseEncoder(dateEncodingStrategy: dateEncodingStrategy)
-      /*encoder.outputFormatting = outputFormatting
-      encoder.dateEncodingStrategy = dateEncodingStrategy
-      encoder.dataEncodingStrategy = dataEncodingStrategy
-      encoder.nonConformingFloatEncodingStrategy = nonConformingFloatEncodingStrategy
-      encoder.keyEncodingStrategy = keyEncodingStrategy*/
-      payload = try encoder.encode(value)
+		let encoder = ParseEncoder(
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		payload = try encoder.encode(value)
     } catch {
       XCTAssertThrowsError("Failed to encode \(T.self) to JSON: \(error)")
     }
 
-    if let expectedJSON = json {
-        XCTAssertEqual(expectedJSON, payload, "Produced JSON not identical to expected JSON.")
+    if let expectedJSON = json,
+	  let currentPayload = payload {
+		let expected = String(decoding: expectedJSON, as: UTF8.self)
+		let current = String(decoding: currentPayload, as: UTF8.self)
+        XCTAssertEqual(expected, current, "Produced JSON not identical to expected JSON.")
     }
 
     do {

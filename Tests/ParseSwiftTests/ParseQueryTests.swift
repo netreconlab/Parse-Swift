@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     enum QueryTestError: Error, CustomStringConvertible {
 
@@ -58,11 +58,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         var points: Int?
     }
 
-    struct AnyResultsResponse<U: Codable>: Codable {
+    struct AnyResultsResponse<U: Codable & Sendable>: Codable & Sendable {
         let results: [U]
     }
 
-    struct AnyResultsMongoResponse<U: Codable>: Codable {
+    struct AnyResultsMongoResponse<U: Codable & Sendable>: Codable & Sendable {
         let results: U
     }
 
@@ -84,8 +84,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -472,13 +472,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -558,13 +554,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFindAsync() {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
         MockURLProtocol.mockRequests { _ in
@@ -577,13 +574,17 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            findAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.findAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
 
-    func testFindAsyncMainQueue() {
+    func testFindAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -591,13 +592,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         findAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
@@ -619,7 +616,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsync() {
+    func testFindAllAsync() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -627,37 +624,22 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
-        query.findAll { result in
-
-            switch result {
-
-            case .success(let found):
-                guard let score = found.first else {
-                    XCTFail("Should unwrap score count")
-                    expectation.fulfill()
-                    return
-                }
-                XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            XCTAssertTrue(Thread.isMainThread)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+        let found = try await query.findAll()
+		guard let score = found.first else {
+			XCTFail("Should unwrap score count")
+			expectation.fulfill()
+			return
+		}
+		XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
 
-    func testFindAllAsyncErrorSkip() {
+    func testFindAllAsyncErrorSkip() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -665,13 +647,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         var query = GameScore.query()
         query.skip = 10
@@ -691,7 +669,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsyncErrorOrder() {
+    func testFindAllAsyncErrorOrder() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -699,13 +677,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query()
             .order([.ascending("points")])
@@ -725,7 +699,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testFindAllAsyncErrorLimit() {
+    func testFindAllAsyncErrorLimit() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -733,13 +707,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         var query = GameScore.query()
         query.limit = 10
@@ -807,13 +777,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -829,13 +795,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScoreBroken>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -847,7 +809,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 XCTFail("Should have casted as ParseError")
                 return
             }
-            #if !os(Linux) && !os(Android) && !os(Windows)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             // swiftlint:disable:next line_length
             XCTAssertEqual(error.message, "Invalid struct: No value associated with key CodingKeys(stringValue: \"points\", intValue: nil) (\"points\").")
             XCTAssertEqual(error.code, .otherCause)
@@ -864,13 +826,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testFirstNoObjectFound() async throws {
 
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -933,31 +891,32 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeFirstAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeFirstAsync() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.firstAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
 
-    func testFirstAsyncMainQueue() {
+    func testFirstAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -965,18 +924,14 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFirstAsyncNoObjectFound() {
         let scoreOnServer = GameScore(points: 10)
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
@@ -990,22 +945,22 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
 
-    func testFirstAsyncNoObjectFoundMainQueue() {
+    func testFirstAsyncNoObjectFoundMainQueue() throws {
         let scoreOnServer = GameScore(points: 10)
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
@@ -1059,13 +1014,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -1097,31 +1048,32 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeCountAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeCountAsync() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            countAsync(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.countAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
 
-    func testCountAsyncMainQueue() {
+    func testCountAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
@@ -1129,13 +1081,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         countAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
@@ -1591,7 +1539,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$diacriticSensitive": true
             ]]]
         ]
-        let options: [ParseTextOption: Encodable] = [
+        let options: [ParseTextOption: Encodable & Sendable] = [
             ParseTextOption.language: "brew",
             ParseTextOption.caseSensitive: true,
             ParseTextOption.diacriticSensitive: true
@@ -1945,7 +1893,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$select": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ] as [String: Any]
+                ] as [String: Any & Sendable]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -1991,7 +1939,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                 "$dontSelect": [
                     "query": ["where": ["test": ["$lte": "awk"]]],
                     "key": "yolo1"
-                ] as [String: Any]
+                ] as [String: Any & Sendable]
             ]
         ]
         let inQuery = GameScore.query("test" <= "awk")
@@ -2582,7 +2530,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     // MARK: GeoPoint
     func testWhereKeyNearGeoPoint() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any]]
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable]]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)
         let constraint = near(key: "yolo", geoPoint: geoPoint)
@@ -2621,7 +2569,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMiles() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$maxDistance": 1
             ]
         ]
@@ -2667,7 +2615,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinMilesNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+			// swiftlint:disable:next line_length
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 1
             ]
         ]
@@ -2716,7 +2665,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometers() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$maxDistance": 1
             ]
         ]
@@ -2762,7 +2711,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinKilometersNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+			// swiftlint:disable:next line_length
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 1
             ]
         ]
@@ -2811,7 +2761,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadians() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+            "yolo": ["$nearSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$maxDistance": 10
             ]
         ]
@@ -2857,7 +2807,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyNearGeoPointWithinRadiansNotSorted() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+			// swiftlint:disable:next line_length
+            "yolo": ["$centerSphere": ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                      "$geoWithin": 10
             ]
         ]
@@ -2904,7 +2855,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testWhereKeyNearGeoBox() throws {
         let expected: [String: AnyCodable] = [
             "yolo": ["$within": ["$box": [
-                ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any],
+                ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any & Sendable],
                                     ["latitude": 20, "longitude": 30, "__type": "GeoPoint"]]
                                 ]
             ]
@@ -2956,7 +2907,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testWhereKeyWithinPolygonPoints() throws {
         let latitude1 = 10.1
         let longitude1 = 20.1
@@ -2996,9 +2947,12 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
     func testWhereKeyPolygonContains() throws {
         let expected: [String: AnyCodable] = [
-            "yolo": ["$geoIntersects": ["$point":
-                                            ["latitude": 10, "longitude": 20, "__type": "GeoPoint"] as [String: Any]
-                                ]
+            "yolo": [
+				"$geoIntersects": [
+					"$point": [
+						"latitude": 10, "longitude": 20, "__type": "GeoPoint"
+					] as [String: Any & Sendable]
+				]
             ]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)
@@ -3087,7 +3041,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(queryResult.isEmpty)
     }
 
-    func testExplainFindAsynchronous() {
+    func testExplainFindAsynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3102,19 +3056,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
-        query.findExplain(callbackQueue: .main) { (result: Result<[[String: String]], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+		let queryResult: [[String: String]] = try await query.findExplain()
+		XCTAssertEqual(queryResult, json.results)
     }
 
     func testExplainFindLimitAsynchronous() {
@@ -3190,7 +3134,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    func testExplainFirstAsynchronous() {
+    func testExplainFirstAsynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3205,19 +3149,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
-        query.firstExplain(callbackQueue: .main) { (result: Result<[String: String], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results.first)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+		let queryResult: [String: String] = try await query.firstExplain()
+		XCTAssertEqual(queryResult, json.results.first)
     }
 
     func testExplainFirstLimitAsynchronous() {
@@ -3286,35 +3220,25 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(queryResult.isEmpty)
     }
 
-    func testExplainCountAsynchronous() {
-        let json = AnyResultsResponse(results: [["yolo": "yarr"]])
+	func testExplainCountAsynchronous() async throws {
+		let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
-        let encoded: Data!
-        do {
-            encoded = try JSONEncoder().encode(json)
-        } catch {
-            XCTFail("Should encode. Error \(error)")
-            return
-        }
+		let encoded: Data!
+		do {
+			encoded = try JSONEncoder().encode(json)
+		} catch {
+			XCTFail("Should encode. Error \(error)")
+			return
+		}
 
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
 
-        let expectation = XCTestExpectation(description: "Fetch object")
-        let query = GameScore.query()
-        query.countExplain(callbackQueue: .main) { (result: Result<[[String: String]], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
-    }
+		let query = GameScore.query()
+		let queryResult: [[String: String]] = try await query.countExplain()
+		XCTAssertEqual(queryResult, json.results)
+	}
 
     func testExplainCountLimitAsynchronous() {
 
@@ -3355,7 +3279,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results)
     }
 
-    func testHintFindAsynchronous() {
+    func testHintFindAsynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3370,20 +3294,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
             .hint("_id_")
-        query.findExplain(callbackQueue: .main) { (result: Result<[[String: String]], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+		let queryResult: [[String: String]] = try await query.findExplain()
+		XCTAssertEqual(queryResult, json.results)
     }
 
     func testHintFirstSynchronous() async throws {
@@ -3407,7 +3321,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results.first)
     }
 
-    func testHintFirstAsynchronous() {
+    func testHintFirstAsynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3422,20 +3336,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
             .hint("_id_")
-        query.firstExplain(callbackQueue: .main) { (result: Result<[String: String], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results.first)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+		let queryResult: [String: String] = try await query.firstExplain()
+		XCTAssertEqual(queryResult, json.results.first)
     }
 
     func testHintCountSynchronous() async throws {
@@ -3459,7 +3363,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(queryResult, json.results)
     }
 
-    func testHintCountAsynchronous() {
+    func testHintCountAsynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
         let encoded: Data!
@@ -3474,20 +3378,10 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Fetch object")
         let query = GameScore.query()
             .hint("_id_")
-        query.countExplain(callbackQueue: .main) { (result: Result<[[String: String]], ParseError>) in
-            switch result {
-
-            case .success(let queryResult):
-                XCTAssertEqual(queryResult, json.results)
-            case .failure(let error):
-                XCTFail("Error: \(error)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 20.0)
+		let queryResult: [[String: String]] = try await query.countExplain()
+		XCTAssertEqual(queryResult, json.results)
     }
 
     func testAggregateCommand() async throws {
@@ -3544,13 +3438,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query()
@@ -3570,13 +3460,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3614,11 +3500,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query("points" > 9)
         let pipeline = [[String: String]]()
-        guard let score: [String: String] = try await query.aggregateExplain(pipeline).first else {
-            XCTFail("Should unwrap first object found")
-            return
-        }
-        XCTAssertEqual(score, json.results.first)
+		let score: [[String: String]] = try await query.aggregateExplain(pipeline)
+		XCTAssertEqual(score.first, json.results.first)
     }
 
     func testAggregateExplainMongoWithWhere() async throws {
@@ -3638,12 +3521,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let query = GameScore.query("points" > 9)
         let pipeline = [[String: String]]()
-        guard let score: [String: String] = try await query.aggregateExplain(pipeline,
-                                                                             usingMongoDB: true).first else {
-            XCTFail("Should unwrap first object found")
-            return
-        }
-        XCTAssertEqual(score, json.results)
+		let score: [[String: String]] = try await query.aggregateExplain(
+			pipeline,
+			usingMongoDB: true
+		)
+		XCTAssertEqual(score.first, json.results)
     }
 
     func testAggregateExplainWithWhereLimit() async throws {
@@ -3655,21 +3537,18 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(scores.isEmpty)
     }
 
-    func testAggregateAsyncMainQueue() {
+    func testAggregateAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = Date()
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
@@ -3684,7 +3563,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                     expectation.fulfill()
                     return
                 }
-                XCTAssert(score.hasSameObjectId(as: scoreOnServer))
+                XCTAssert(score.hasSameObjectId(as: immutableScoreOnServer))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -3693,21 +3572,18 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation], timeout: 20.0)
     }
 
-    func testAggregateWhereAsyncMainQueue() {
+    func testAggregateWhereAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query("points" > 9)
         let expectation = XCTestExpectation(description: "Aggregate object1")
@@ -3722,7 +3598,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                     expectation.fulfill()
                     return
                 }
-                XCTAssert(score.hasSameObjectId(as: scoreOnServer))
+                XCTAssert(score.hasSameObjectId(as: immutableScoreOnServer))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -3819,13 +3695,9 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query("points" > 9)
@@ -3860,11 +3732,8 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        guard let score: [String: String] = try await query.distinctExplain("hello").first else {
-            XCTFail("Should unwrap first object found")
-            return
-        }
-        XCTAssertEqual(score, json.results.first)
+		let score: [[String: String]] = try await query.distinctExplain("hello")
+		XCTAssertEqual(score.first, json.results.first)
     }
 
     func testDistinctExplainMongo() async throws {
@@ -3883,12 +3752,11 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         let query = GameScore.query("points" > 9)
-        guard let score: [String: String] = try await query.distinctExplain("hello",
-                                                                            usingMongoDB: true).first else {
-            XCTFail("Should unwrap first object found")
-            return
-        }
-        XCTAssertEqual(score, json.results)
+		let score: [[String: String]] = try await query.distinctExplain(
+			"hello",
+			usingMongoDB: true
+		)
+		XCTAssertEqual(score.first, json.results)
     }
 
     func testDistinctExplainLimit() async throws {
@@ -3899,21 +3767,18 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertTrue(scores.isEmpty)
     }
 
-    func testDistinctAsyncMainQueue() {
+    func testDistinctAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
+		let immutableScoreOnServer = scoreOnServer
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query("points" > 9)
         let expectation = XCTestExpectation(description: "Distinct object1")
@@ -3927,7 +3792,7 @@ class ParseQueryTests: XCTestCase { // swiftlint:disable:this type_body_length
                     expectation.fulfill()
                     return
                 }
-                XCTAssert(score.hasSameObjectId(as: scoreOnServer))
+                XCTAssert(score.hasSameObjectId(as: immutableScoreOnServer))
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

@@ -3,7 +3,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class AnyCodableTests: XCTestCase {
+class AnyCodableTests: XCTestCase, @unchecked Sendable {
 
     struct SomeCodable: Codable {
         var string: String
@@ -58,7 +58,7 @@ class AnyCodableTests: XCTestCase {
     }
 
     // Test has objective-c
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testJSONEncoding() {
 
         let someCodable = AnyCodable(SomeCodable(string: "String",

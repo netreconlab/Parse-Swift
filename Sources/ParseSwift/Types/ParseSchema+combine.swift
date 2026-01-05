@@ -21,11 +21,22 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func fetchPublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				options: options
+			) { result in
+				switch result {
+				case .success(let schema):
+					promise(.success(schema))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -39,11 +50,22 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func createPublisher(includeKeys: [String]? = nil,
-                         options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let schema):
+					promise(.success(schema))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -57,11 +79,22 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func updatePublisher(includeKeys: [String]? = nil,
-                         options: API.Options = []) -> Future<Self, ParseError> {
+    func updatePublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let schema):
+					promise(.success(schema))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -76,11 +109,22 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func purgePublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Void, ParseError> {
+    func purgePublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.purge(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.purge(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -96,11 +140,22 @@ public extension ParseSchema {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    func deletePublisher(includeKeys: [String]? = nil,
-                         options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

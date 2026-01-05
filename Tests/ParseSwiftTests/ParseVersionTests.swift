@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseVersionTests: XCTestCase {
+class ParseVersionTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -27,8 +27,8 @@ class ParseVersionTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -102,7 +102,7 @@ class ParseVersionTests: XCTestCase {
         XCTAssertEqual(current.description, "1.0.0")
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testCanRetrieveFromKeychain() async throws {
         let original = try await ParseVersion.current()
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentVersion)

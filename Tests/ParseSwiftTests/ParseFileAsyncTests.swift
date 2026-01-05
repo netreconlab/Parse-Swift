@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 
     struct FileUploadResponse: Codable {
@@ -41,8 +41,8 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
 
@@ -55,7 +55,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         try? fileManager.removeDirectoryContents(directory2)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // URL Mocker is not able to mock this in linux and tests fail, so do not run.
     @MainActor
     func testFetch() async throws {
@@ -275,7 +275,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
     }
 
     @MainActor
-    func testDeleteError () async throws {
+    func testDeleteError() async throws {
         // swiftlint:disable:next line_length
         guard let parseFileURL = URL(string: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg") else {
             XCTFail("Should create URL")
@@ -316,9 +316,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
         // swiftlint:disable:next line_length
-        let uploadCompletion: ((URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, _: Int64, _: Int64) in }
+        let uploadCompletion: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, _: Int64, _: Int64) in }
         // swiftlint:disable:next line_length
-        let downloadCompletion: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, _: Int64, _: Int64) in }
+        let downloadCompletion: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, _: Int64, _: Int64) in }
 
         // Add tasks
         Parse.sessionDelegate.streamDelegates[task] = .init(data: .init())
@@ -347,7 +347,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         XCTAssertEqual(downloadCount2, 0)
     }
 
-    // swiftlint:disable:next function_body_length
     func testParseURLSessionDelegateUpload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
@@ -358,7 +357,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let expectation2 = XCTestExpectation(description: "Call delegate 2")
 
         // swiftlint:disable:next line_length
-        let uploadCompletion: ((URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, sent: Int64, total: Int64) in
+        let uploadCompletion: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, sent: Int64, total: Int64) in
             if sent < total {
                 Task {
                     let uploadCount = await Parse.sessionDelegate.delegates.uploadDelegates.count
@@ -406,11 +405,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didSendBodyData: 0,
                                               totalBytesSent: 0,
                                               totalBytesExpectedToSend: 10)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -429,7 +424,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let expectation2 = XCTestExpectation(description: "Call delegate 2")
 
         // swiftlint:disable:next line_length
-        let downloadCompletion: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, sent: Int64, total: Int64) in
+        let downloadCompletion: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, sent: Int64, total: Int64) in
             if sent < total {
                 Task {
                     let downloadCount = await Parse.sessionDelegate.delegates.downloadDelegates.count
@@ -481,11 +476,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
                                               didWriteData: 0,
                                               totalBytesWritten: 0,
                                               totalBytesExpectedToWrite: 10)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testParseURLSessionDelegateStream() async throws {
@@ -530,10 +521,6 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         await Parse.sessionDelegate.delegates.updateTask(task, queue: queue)
 
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }

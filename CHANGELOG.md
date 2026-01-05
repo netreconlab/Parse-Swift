@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.0-beta.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.0.0-beta.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...6.0.0-beta.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.0-beta.1/documentation/parseswift)
+
+__Breaking Changes__
+* Update SDK to be Swift 6.0+ compliant. This includes making all objects `Sendable` and reducing the possibility of data races. Added WASM support. Multiple batches now perform asynchronously. ([#208](https://github.com/netreconlab/Parse-Swift/pull/208)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.12.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)

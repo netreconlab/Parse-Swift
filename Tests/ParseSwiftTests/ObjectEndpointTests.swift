@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 import ParseSwift
 
-class ObjectEndpointTests: XCTestCase {
+class ObjectEndpointTests: XCTestCase, @unchecked Sendable {
     struct User: ParseUser {
 
         //: These are required by ParseObject

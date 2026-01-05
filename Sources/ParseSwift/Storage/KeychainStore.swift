@@ -6,12 +6,12 @@
 //  Copyright © 2017 Parse. All rights reserved.
 //
 
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+
 import Foundation
 #if canImport(Security)
 import Security
 #endif
-
-#if !os(Linux) && !os(Android) && !os(Windows)
 
 // swiftlint:disable type_body_length
 
@@ -20,7 +20,7 @@ import Security
  It supports any object, with Coding support. All objects are available after the
  first device unlock and are not backed up.
  */
-actor KeychainStore: SecureStorable {
+struct KeychainStore: SecureStorable {
 
     let service: String
     static var objectiveCService: String {
@@ -29,12 +29,12 @@ actor KeychainStore: SecureStorable {
         }
         return "\(identifier).com.parse.sdk"
     }
-    static var shared: KeychainStore!
-    static var objectiveC: KeychainStore!
+	nonisolated(unsafe) static var shared: KeychainStore!
+	nonisolated(unsafe) static var objectiveC: KeychainStore!
     // This Keychain was used by SDK <= 1.9.7
-    static var old: KeychainStore!
+	nonisolated(unsafe) static var old: KeychainStore!
 
-    init(service: String? = nil) async {
+    init(service: String? = nil) {
         var keychainService = ".parseSwift.sdk"
         if let service = service {
             keychainService = service
@@ -46,25 +46,25 @@ actor KeychainStore: SecureStorable {
         self.service = keychainService
     }
 
-    static func createShared() async {
+    static func createShared() {
         if KeychainStore.shared == nil {
-            KeychainStore.shared = await KeychainStore()
+            KeychainStore.shared = KeychainStore()
         }
     }
 
-    static func createObjectiveC() async {
+    static func createObjectiveC() {
         if KeychainStore.objectiveC == nil {
-            KeychainStore.objectiveC = await KeychainStore(service: objectiveCService)
+            KeychainStore.objectiveC = KeychainStore(service: objectiveCService)
         }
     }
 
-    static func createOld() async {
+    static func createOld() {
         if KeychainStore.old == nil {
-            KeychainStore.old = await KeychainStore(service: "shared")
+            KeychainStore.old = KeychainStore(service: "shared")
         }
     }
 
-    func getKeychainQueryTemplate() -> [String: Any] {
+	nonisolated func getKeychainQueryTemplate() -> [String: Any] {
         var query = [String: Any]()
         if !service.isEmpty {
             query[kSecAttrService as String] = service
@@ -73,7 +73,7 @@ actor KeychainStore: SecureStorable {
         return query
     }
 
-    func getObjectiveCKeychainQueryTemplate() -> [String: Any] {
+	nonisolated func getObjectiveCKeychainQueryTemplate() -> [String: Any] {
         var query = [String: Any]()
         if !Self.objectiveCService.isEmpty {
             query[kSecAttrService as String] = Self.objectiveCService
@@ -82,50 +82,75 @@ actor KeychainStore: SecureStorable {
         return query
     }
 
-    func copy(_ keychain: KeychainStore,
-              oldAccessGroup: ParseKeychainAccessGroup,
-              newAccessGroup: ParseKeychainAccessGroup) async throws {
-        if let user = await keychain.data(forKey: ParseStorage.Keys.currentUser,
-                                          accessGroup: oldAccessGroup) {
+	// swiftlint:disable:next function_body_length
+    func copy(
+		_ keychain: KeychainStore,
+		oldAccessGroup: ParseKeychainAccessGroup,
+		newAccessGroup: ParseKeychainAccessGroup
+	) throws {
+        if let user = keychain.data(
+			forKey: ParseStorage.Keys.currentUser,
+			accessGroup: oldAccessGroup
+		) {
             try set(user,
                     forKey: ParseStorage.Keys.currentUser,
                     oldAccessGroup: oldAccessGroup,
                     newAccessGroup: newAccessGroup)
         }
-        if let installation = await keychain.data(forKey: ParseStorage.Keys.currentInstallation,
-                                                  accessGroup: oldAccessGroup) {
-            try set(installation,
-                    forKey: ParseStorage.Keys.currentInstallation,
-                    oldAccessGroup: oldAccessGroup,
-                    newAccessGroup: newAccessGroup)
+        if let installation = keychain.data(
+			forKey: ParseStorage.Keys.currentInstallation,
+			accessGroup: oldAccessGroup
+		) {
+            try set(
+				installation,
+				forKey: ParseStorage.Keys.currentInstallation,
+				oldAccessGroup: oldAccessGroup,
+				newAccessGroup: newAccessGroup
+			)
         }
-        if let version = await keychain.data(forKey: ParseStorage.Keys.currentVersion,
-                                             accessGroup: oldAccessGroup) {
-            try set(version,
-                    forKey: ParseStorage.Keys.currentVersion,
-                    oldAccessGroup: oldAccessGroup,
-                    newAccessGroup: newAccessGroup)
+        if let version = keychain.data(
+			forKey: ParseStorage.Keys.currentVersion,
+			accessGroup: oldAccessGroup
+		) {
+            try set(
+				version,
+				forKey: ParseStorage.Keys.currentVersion,
+				oldAccessGroup: oldAccessGroup,
+				newAccessGroup: newAccessGroup
+			)
         }
-        if let config = await keychain.data(forKey: ParseStorage.Keys.currentConfig,
-                                            accessGroup: oldAccessGroup) {
-            try set(config,
-                    forKey: ParseStorage.Keys.currentConfig,
-                    oldAccessGroup: oldAccessGroup,
-                    newAccessGroup: newAccessGroup)
+        if let config = keychain.data(
+			forKey: ParseStorage.Keys.currentConfig,
+			accessGroup: oldAccessGroup
+		) {
+            try set(
+				config,
+				forKey: ParseStorage.Keys.currentConfig,
+				oldAccessGroup: oldAccessGroup,
+				newAccessGroup: newAccessGroup
+			)
         }
-        if let acl = await keychain.data(forKey: ParseStorage.Keys.defaultACL,
-                                         accessGroup: oldAccessGroup) {
-            try set(acl,
-                    forKey: ParseStorage.Keys.defaultACL,
-                    oldAccessGroup: oldAccessGroup,
-                    newAccessGroup: newAccessGroup)
+        if let acl = keychain.data(
+			forKey: ParseStorage.Keys.defaultACL,
+			accessGroup: oldAccessGroup
+		) {
+            try set(
+				acl,
+				forKey: ParseStorage.Keys.defaultACL,
+				oldAccessGroup: oldAccessGroup,
+				newAccessGroup: newAccessGroup
+			)
         }
-        if let keychainAccessGroup = await keychain.data(forKey: ParseStorage.Keys.currentAccessGroup,
-                                                         accessGroup: oldAccessGroup) {
-            try set(keychainAccessGroup,
-                    forKey: ParseStorage.Keys.currentAccessGroup,
-                    oldAccessGroup: oldAccessGroup,
-                    newAccessGroup: newAccessGroup)
+        if let keychainAccessGroup = keychain.data(
+			forKey: ParseStorage.Keys.currentAccessGroup,
+			accessGroup: oldAccessGroup
+		) {
+            try set(
+				keychainAccessGroup,
+				forKey: ParseStorage.Keys.currentAccessGroup,
+				oldAccessGroup: oldAccessGroup,
+				newAccessGroup: newAccessGroup
+			)
         }
     }
 

@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that removes a set of objects from a field.
  */
-public struct ParseOperationRemove<T>: ParseOperationable where T: Codable {
+public struct ParseOperationRemove<T>: ParseOperationable where T: Codable & Sendable {
     public var __op: ParseOperationCommand = .remove // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public let objects: [T]

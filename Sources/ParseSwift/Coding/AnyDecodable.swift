@@ -29,15 +29,15 @@ import Foundation
      let dictionary = try! decoder.decode([String: AnyCodable].self, from: json)
  */
 struct AnyDecodable: Decodable {
-    let value: Any
-    init<T>(_ value: T?) {
+    let value: Any & Sendable
+	init<T: Sendable>(_ value: T?) {
         self.value = value ?? ()
     }
 }
 
 protocol _AnyDecodable { // swiftlint:disable:this type_name
-    var value: Any { get }
-    init<T>(_ value: T?)
+    var value: Any & Sendable { get }
+    init<T: Sendable>(_ value: T?)
 }
 
 extension AnyDecodable: _AnyDecodable {}

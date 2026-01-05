@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class BatchUtilsTests: XCTestCase {
+class BatchUtilsTests: XCTestCase, @unchecked Sendable {
 
     func testSplitArrayLessSegments() throws {
         let array = [1, 2]

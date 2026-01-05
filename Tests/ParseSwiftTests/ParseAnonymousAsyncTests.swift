@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseAnonymousAsyncTests: XCTestCase {
+class ParseAnonymousAsyncTests: XCTestCase, @unchecked Sendable {
     struct User: ParseUser {
 
         //: These are required by ParseObject
@@ -78,8 +78,8 @@ class ParseAnonymousAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -100,7 +100,12 @@ class ParseAnonymousAsyncTests: XCTestCase {
 
         let encoded: Data!
         do {
-            encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+            encoded = try serverResponse
+				.getEncoder()
+				.encode(
+					serverResponse,
+					skipKeys: .none
+				)
             // Get dates in correct format from ParseDecoding strategy
             userOnServer = try serverResponse.getDecoder().decode(User.self, from: encoded)
         } catch {

@@ -1,6 +1,12 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.0
 
 import PackageDescription
+
+let sharedSwiftSettings: [SwiftSetting] = [
+	.enableUpcomingFeature("MemberImportVisibility"),
+	.enableUpcomingFeature("InferIsolatedConformances"),
+	.enableUpcomingFeature("ImmutableWeakCaptures")
+]
 
 let package = Package(
     name: "ParseSwift",
@@ -20,7 +26,8 @@ let package = Package(
     targets: [
         .target(
             name: "ParseSwift",
-            dependencies: []
+			dependencies: [],
+			swiftSettings: sharedSwiftSettings
         ),
         .testTarget(
             name: "ParseSwiftTests",
