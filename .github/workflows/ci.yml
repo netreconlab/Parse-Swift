@@ -123,7 +123,7 @@ jobs:
           toolchain: 6.2.3
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
-        run: swift test --enable-test-discovery --enable-code-coverage
+        run: swift build --enable-test-discovery --enable-code-coverage
       #- name: Prepare codecov
       #  run: |
       #    cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
@@ -146,7 +146,7 @@ jobs:
           tag: 6.2.3-RELEASE
       - name: Build
         run: |
-          swift test --enable-test-discovery
+          swift build --enable-test-discovery
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
