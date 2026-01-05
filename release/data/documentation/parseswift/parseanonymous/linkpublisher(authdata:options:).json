@@ -1,20 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Link the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "current",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " ",
+      "text" : "Link a ",
       "type" : "text"
     },
     {
@@ -35,7 +22,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " using the respective authentication type. Publishes when complete.",
+      "text" : " using the respective authentication type.",
       "type" : "text"
     }
   ],
@@ -43,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous"
       ]
     ]
   },
@@ -317,7 +303,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The authData for the respective authentication type.",
+                  "text" : "The authData for the respective authentication type. This will be ignored.",
                   "type" : "text"
                 }
               ],
@@ -339,36 +325,28 @@
             }
           ],
           "name" : "options"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The queue to return to after completion. Default value of .main.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "callbackQueue"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The block to execute.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "completion"
         }
       ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A publisher that eventually produces a single value and then finishes or fails.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -509,34 +487,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseanonymous"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseanonymous\/parseauthentication-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/linkPublisher(authData:options:)": {
   "abstract" : [
     {
-      "text" : "Link the ",
-      "type" : "text"
-    },
-    {
-      "inlineContent" : [
-        {
-          "text" : "current",
-          "type" : "text"
-        }
-      ],
-      "type" : "emphasis"
-    },
-    {
-      "text" : " ",
+      "text" : "Link a ",
       "type" : "text"
     },
     {
@@ -557,7 +511,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " using the respective authentication type. Publishes when complete.",
+      "text" : " using the respective authentication type.",
       "type" : "text"
     }
   ],

@@ -78,6 +78,26 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10ParseSwift14CloudViewModelC1Txmfp",
               "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }

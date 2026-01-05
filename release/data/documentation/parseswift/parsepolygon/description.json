@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "CustomStringConvertible.description",
+      "code" : "ParseTypeable.description",
       "type" : "codeVoice"
     },
     {
@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomStringConvertible-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon"
       ]
     ]
   },
@@ -210,17 +209,6 @@
   "title" : "ParsePolygon",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepolygon"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepolygon\/customstringconvertible-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/description": {
   "abstract" : [

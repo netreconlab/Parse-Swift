@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable\/delete(options:)-370sk"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable"
       ]
     ]
   },
@@ -426,84 +425,6 @@
   "title" : "Deletable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/deletable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Deletable/delete(options:)-370sk": {
-  "abstract" : [
-
-  ],
-  "defaultImplementations" : 3,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "delete"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV7Optionsa",
-      "text" : "Options"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift9DeletableP12DeletingTypeQa",
-      "text" : "DeletingType"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Deletable\/delete(options:)-370sk",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "delete(options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/deletable\/delete(options:)-370sk"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Deletable/delete(options:)-3vgtv": {
   "abstract" : [

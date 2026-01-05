@@ -120,7 +120,9 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -156,8 +158,7 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/CustomStringConvertible-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/ParseOperationable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -284,27 +285,16 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperationremoverelation"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationRemoveRelation/CustomDebugStringConvertible-Implementations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationRemoveRelation/ParseOperationable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/CustomDebugStringConvertible-Implementations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/ParseOperationable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
+  "title" : "ParseOperationable Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperationremoverelation\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationRemoveRelation/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationRemoveRelation\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperationremoverelation\/customstringconvertible-implementations"
+  "url" : "\/documentation\/parseswift\/parseoperationremoverelation\/parseoperationable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationRemoveRelation/init(from:)": {
   "abstract" : [
@@ -471,6 +461,11 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserelationoperationable"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
@@ -479,6 +474,11 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
   "type" : "unresolvable"
 }
 }

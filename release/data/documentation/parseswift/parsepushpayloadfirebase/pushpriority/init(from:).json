@@ -18,8 +18,7 @@
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority"
       ]
     ]
   },
@@ -301,17 +300,6 @@
   "title" : "ParsePushPayloadFirebase.PushPriority",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadFirebase\/PushPriority\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushpayloadfirebase\/pushpriority\/rawrepresentable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadFirebase/PushPriority/init(from:)": {
   "abstract" : [

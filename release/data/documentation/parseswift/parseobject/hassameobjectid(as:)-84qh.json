@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)-5gkd9"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject"
       ]
     ]
   },
@@ -316,70 +315,6 @@
   "title" : "ParseObject",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/hasSameObjectId(as:)-5gkd9": {
-  "abstract" : [
-    {
-      "text" : "Determines if two objects have the same objectId.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "hasSameObjectId"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "as"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A6ObjectP07hasSameC2Id2asSbqd___tAaBRd__lF1TL_qd__mfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject\/hasSameObjectId(as:)-5gkd9",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "hasSameObjectId(as:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseobject\/hassameobjectid(as:)-5gkd9"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseObject/hasSameObjectId(as:)-84qh": {
   "abstract" : [

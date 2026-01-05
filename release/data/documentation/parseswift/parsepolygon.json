@@ -117,7 +117,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -162,11 +163,10 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomStringConvertible-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/Decodable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/Encodable-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/ParseTypeable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -340,28 +340,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepolygon"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepolygon\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepolygon\/customstringconvertible-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/Decodable-Implementations": {
   "abstract" : [
 
@@ -394,6 +372,17 @@
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepolygon\/equatable-implementations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/ParseTypeable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePolygon\/ParseTypeable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ParseTypeable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepolygon\/parsetypeable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePolygon/containsPoint(_:)": {
   "abstract" : [
@@ -610,6 +599,11 @@
   "title" : "ParseTypeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",

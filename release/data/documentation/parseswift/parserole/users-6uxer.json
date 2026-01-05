@@ -57,8 +57,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users-7o4v6"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole"
       ]
     ]
   },
@@ -490,105 +489,6 @@
   "title" : "users",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole\/users-6uxer"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/users-7o4v6": {
-  "abstract" : [
-    {
-      "text" : "Get the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseRelation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " for the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " objects that are direct children of this role.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "These users are granted any privileges that this role has been granted",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "(e.g. read or write access through ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseACL",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "s). You can add or remove users from",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "the role through this relation.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "users"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A8RelationV",
-      "text" : "ParseRelation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : ">?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users-7o4v6",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "users",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/users-7o4v6"
 }
 }
 }

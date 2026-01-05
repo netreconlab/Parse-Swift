@@ -104,7 +104,7 @@
       "anchor" : "Operators",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/_(_:_:)-3ydrw"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/_(_:_:)"
       ],
       "title" : "Operators"
     },
@@ -279,7 +279,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequery\/connectionstatus\/equatable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/ConnectionStatus/_(_:_:)-3ydrw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/ConnectionStatus/_(_:_:)": {
   "abstract" : [
 
   ],
@@ -326,12 +326,12 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/_(_:_:)-3ydrw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQuery\/ConnectionStatus\/_(_:_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "<(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequery\/connectionstatus\/_(_:_:)-3ydrw"
+  "url" : "\/documentation\/parseswift\/parselivequery\/connectionstatus\/_(_:_:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQuery/ConnectionStatus/connected": {
   "abstract" : [

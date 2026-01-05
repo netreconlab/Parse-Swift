@@ -141,7 +141,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -275,11 +276,10 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/CustomStringConvertible-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Decodable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Encodable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/ParseTypeable-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/Queryable-Implementations"
       ],
       "title" : "Default Implementations"
@@ -526,28 +526,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/query\/customstringconvertible-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Decodable-Implementations": {
   "abstract" : [
 
@@ -614,6 +592,17 @@
   "title" : "Query.Order",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/query\/order"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/ParseTypeable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Query\/ParseTypeable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ParseTypeable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/query\/parsetypeable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Query/Queryable-Implementations": {
   "abstract" : [
@@ -708,6 +697,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",
@@ -854,6 +852,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",
@@ -1047,6 +1054,15 @@
     },
     {
       "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
       "text" : "]], "
     },
     {
@@ -1110,7 +1126,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7optionsSayqd__GSaySDySSSE_pGG_SbShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7optionsSayqd__GSaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGtYaKSeRd__sAHRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -1218,6 +1234,15 @@
     },
     {
       "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
       "text" : "]], "
     },
     {
@@ -1299,7 +1324,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_pGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__sAIRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -1425,6 +1450,15 @@
     },
     {
       "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
       "text" : "]], "
     },
     {
@@ -1481,7 +1515,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV25aggregateExplainPublisher_12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSaySDySSSE_pGG_SbShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV25aggregateExplainPublisher_12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGtSeRd__sANRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -1587,6 +1621,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",
@@ -1889,7 +1932,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12countExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV12countExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -2060,7 +2103,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12countExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV12countExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -2224,7 +2267,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -2835,7 +2878,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV15distinctExplain_12usingMongoDB7optionsSayqd__GSS_SbShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV15distinctExplain_12usingMongoDB7optionsSayqd__GSS_SbShyAA3APIV6OptionOGtYaKSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -3015,7 +3058,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV15distinctExplain_12usingMongoDB7options13callbackQueue10completionySS_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV15distinctExplain_12usingMongoDB7options13callbackQueue10completionySS_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -3188,7 +3231,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV24distinctExplainPublisher_12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSS_SbShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV24distinctExplainPublisher_12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSS_SbShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -4302,7 +4345,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -4473,7 +4516,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -4637,7 +4680,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV20findExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV20findExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -4929,7 +4972,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12firstExplain12usingMongoDB7optionsqd__Sb_ShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV12firstExplain12usingMongoDB7optionsqd__Sb_ShyAA3APIV6OptionOGtYaKSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     }
   ],
@@ -5096,7 +5139,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV12firstExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyqd__AA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV12firstExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyqd__AA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -5260,7 +5303,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV21firstExplainPublisher12usingMongoDB7options7Combine6FutureCyqd__AA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV21firstExplainPublisher12usingMongoDB7options7Combine6FutureCyqd__AA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -5448,7 +5491,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -8702,7 +8745,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16withCountExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV16withCountExplain12usingMongoDB7optionsSayqd__GSb_ShyAA3APIV6OptionOGtYaKSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -8873,7 +8916,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16withCountExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV16withCountExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -9037,7 +9080,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV25withCountExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV25withCountExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {
@@ -9278,6 +9321,11 @@
   "title" : "Queryable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",

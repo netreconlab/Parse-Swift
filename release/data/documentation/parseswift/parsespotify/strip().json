@@ -22,8 +22,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
       ]
     ]
   },
@@ -293,17 +292,6 @@
   "title" : "ParseSpotify",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsespotify\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/strip()": {
   "abstract" : [

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/Fetchable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus"
       ]
     ]
   },
@@ -229,17 +228,6 @@
   "title" : "ParsePushStatus",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/Fetchable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/Fetchable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Fetchable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/fetchable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch()": {
   "abstract" : [

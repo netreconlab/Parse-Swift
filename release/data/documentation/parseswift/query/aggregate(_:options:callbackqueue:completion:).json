@@ -65,7 +65,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV9aggregate_7options13callbackQueue10completionySaySDySSSE_pGG_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayxGAA0A5ErrorVGctF",
+    "externalID" : "s:10ParseSwift5QueryV9aggregate_7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayxGAA0A5ErrorVGYbctF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -96,6 +96,15 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SE",
         "text" : "Encodable"
+      },
+      {
+        "kind" : "text",
+        "text" : " & "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -255,6 +264,15 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : " & "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -850,6 +868,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",

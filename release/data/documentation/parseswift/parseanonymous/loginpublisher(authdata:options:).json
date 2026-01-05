@@ -24,14 +24,29 @@
     {
       "text" : " using the respective authentication type.",
       "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "- parameter authData: The authData for the respective authentication type. This will be ignored.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "- parameter options: A set of header options sent to the server. Defaults to an empty set.",
+      "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous"
       ]
     ]
   },
@@ -297,37 +312,24 @@
       "kind" : "declarations"
     },
     {
-      "kind" : "parameters",
-      "parameters" : [
+      "content" : [
         {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The authData for the respective authentication type. This will be ignored.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "authData"
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
         },
         {
-          "content" : [
+          "inlineContent" : [
             {
-              "inlineContent" : [
-                {
-                  "text" : "A set of header options sent to the server. Defaults to an empty set.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
+              "text" : "A publisher that eventually produces a single value and then finishes or fails.",
+              "type" : "text"
             }
           ],
-          "name" : "options"
+          "type" : "paragraph"
         }
-      ]
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -468,17 +470,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseanonymous"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseanonymous\/parseauthentication-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/loginPublisher(authData:options:)": {
   "abstract" : [
     {
@@ -504,6 +495,22 @@
     },
     {
       "text" : " using the respective authentication type.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "- parameter authData: The authData for the respective authentication type. This will be ignored.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "- parameter options: A set of header options sent to the server. Defaults to an empty set.",
       "type" : "text"
     }
   ],

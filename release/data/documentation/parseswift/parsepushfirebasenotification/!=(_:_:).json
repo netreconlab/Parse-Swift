@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification"
       ]
     ]
   },
@@ -333,17 +332,6 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushfirebasenotification\/!=(_:_:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushFirebaseNotification/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushFirebaseNotification\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushfirebasenotification\/equatable-implementations"
 },
 "https://firebase.google.com/docs/cloud-messaging/http-server-ref#notification-payload-support": {
   "identifier" : "https:\/\/firebase.google.com\/docs\/cloud-messaging\/http-server-ref#notification-payload-support",

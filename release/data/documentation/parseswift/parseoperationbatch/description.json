@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "CustomStringConvertible.description",
+      "code" : "ParseOperationable.description",
       "type" : "codeVoice"
     },
     {
@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationBatch",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationBatch\/CustomStringConvertible-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationBatch"
       ]
     ]
   },
@@ -182,17 +181,6 @@
   "title" : "ParseOperationBatch",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperationbatch"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationBatch/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationBatch\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperationbatch\/customstringconvertible-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationBatch/description": {
   "abstract" : [

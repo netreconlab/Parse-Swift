@@ -18,7 +18,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF",
+    "externalID" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -71,7 +71,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+        "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
         "text" : "T"
       },
       {
@@ -156,7 +156,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+              "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
               "text" : "T"
             },
             {
@@ -210,6 +210,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -494,7 +511,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {

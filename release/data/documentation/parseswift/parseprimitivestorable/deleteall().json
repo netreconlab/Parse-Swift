@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP9deleteAllyyKF",
+    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP9deleteAllyyYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -36,6 +36,14 @@
       {
         "kind" : "text",
         "text" : "() "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -66,6 +74,14 @@
           "tokens" : [
             {
               "kind" : "keyword",
+              "text" : "mutating"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "func"
             },
             {
@@ -79,6 +95,14 @@
             {
               "kind" : "text",
               "text" : "() "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -191,6 +215,14 @@
     {
       "kind" : "text",
       "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

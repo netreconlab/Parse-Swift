@@ -97,7 +97,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -220,9 +221,8 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/ParseTypeable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -351,28 +351,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/action"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclp\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclp\/customstringconvertible-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/Equatable-Implementations": {
   "abstract" : [
 
@@ -383,6 +361,17 @@
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclp\/equatable-implementations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/ParseTypeable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCLP\/ParseTypeable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ParseTypeable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseclp\/parsetypeable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCLP/addPointerFields(_:on:)": {
   "abstract" : [
@@ -6220,6 +6209,11 @@
   "title" : "ParseTypeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",

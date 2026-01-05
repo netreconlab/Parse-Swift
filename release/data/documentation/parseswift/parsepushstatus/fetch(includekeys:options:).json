@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus"
       ]
     ]
   },
@@ -561,17 +560,6 @@
   "title" : "ParsePushStatus",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushstatus"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/ParseObject-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushStatus\/ParseObject-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseObject Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushstatus\/parseobject-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/fetch(includeKeys:options:)": {
   "abstract" : [

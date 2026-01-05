@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "CustomDebugStringConvertible.debugDescription",
+      "code" : "ParseOperationable.debugDescription",
       "type" : "codeVoice"
     },
     {
@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationAddRelation",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationAddRelation\/CustomDebugStringConvertible-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationAddRelation"
       ]
     ]
   },
@@ -182,17 +181,6 @@
   "title" : "ParseOperationAddRelation",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperationaddrelation"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationAddRelation/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperationAddRelation\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperationaddrelation\/customdebugstringconvertible-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperationAddRelation/debugDescription": {
   "abstract" : [

@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
       ]
     ]
   },
@@ -286,50 +285,6 @@
             }
           ],
           "name" : "options"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The queue to return to after completion. Default value of .main.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "callbackQueue"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The block to execute.",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "It should have the following argument signature: ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "(Result<Self, ParseError>)",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "completion"
         }
       ]
     }
@@ -582,17 +537,6 @@
   "title" : "ParseSpotify",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsespotify\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlinkPublisher(_:options:)": {
   "abstract" : [

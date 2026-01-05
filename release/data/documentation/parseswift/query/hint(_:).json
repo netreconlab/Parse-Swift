@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__lF",
+    "externalID" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__s8SendableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -47,7 +47,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__lF1UL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__s8SendableRd__lF1UL_qd__mfp",
         "text" : "U"
       },
       {
@@ -136,7 +136,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__lF1UL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__s8SendableRd__lF1UL_qd__mfp",
               "text" : "U"
             },
             {
@@ -182,6 +182,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "U"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -348,7 +365,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV4hintyACyxGqd__SERd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {

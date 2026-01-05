@@ -43,8 +43,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook"
       ]
     ]
   },
@@ -55,7 +54,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink7options13callbackQueue10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCys6ResultOy17AuthenticatedUserQzAA0A5ErrorVGctF::SYNTHESIZED::s:10ParseSwift0A8FacebookV",
+    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink7options13callbackQueue10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCys6ResultOy17AuthenticatedUserQzAA0A5ErrorVGYbctF::SYNTHESIZED::s:10ParseSwift0A8FacebookV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -622,17 +621,6 @@
   "title" : "ParseFacebook",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefacebook"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFacebook/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFacebook\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefacebook\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFacebook/unlink(options:callbackQueue:completion:)": {
   "abstract" : [

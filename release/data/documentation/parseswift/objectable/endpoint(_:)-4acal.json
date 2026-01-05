@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)-26c5h"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable"
       ]
     ]
   },
@@ -435,88 +434,6 @@
   "title" : "Objectable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint(_:)-26c5h": {
-  "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this object.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "endpoint"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV6MethodO",
-      "text" : "Method"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV8EndpointO",
-      "text" : "Endpoint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)-26c5h",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "endpoint(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/endpoint(_:)-26c5h"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint(_:)-4acal": {
   "abstract" : [

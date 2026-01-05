@@ -65,7 +65,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF",
+    "externalID" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -170,7 +170,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
         "text" : "U"
       },
       {
@@ -330,7 +330,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
               "text" : "U"
             },
             {
@@ -376,6 +376,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:Se",
               "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "U"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -944,7 +961,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV11findExplain12usingMongoDB7options13callbackQueue10completionySb_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {

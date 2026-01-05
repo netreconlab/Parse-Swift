@@ -466,11 +466,11 @@
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-4ugox",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/and(queries:)-8cafq",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-30b0x",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-3irrl",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-64cw0",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-f8wn",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-4rorx",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-7bkbc",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsString(key:substring:modifiers:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/doesNotExist(key:)",
@@ -495,11 +495,10 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-4b4r0",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/nor(queries:)-l87w",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-2eqxa",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-5p99b",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-1117v",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/or(queries:)-8hqvz",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/polygon(_:contains:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-23s9i",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/related(key:object:)-6tnr6",
@@ -509,8 +508,6 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinGeoBox(key:fromSouthWest:toNortheast:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinKilometers(key:geoPoint:distance:sorted:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinMiles(key:geoPoint:distance:sorted:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinRadians(key:geoPoint:distance:sorted:)"
       ],
       "title" : "Functions"
@@ -521,24 +518,16 @@
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-4oylc",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-6f2gk",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-9u728",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-1g4u2",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-8pl0h",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-998hz",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-3ski4",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-zzsb",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-1nqi2",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-785h"
       ],
       "title" : "Operators"
-    },
-    {
-      "anchor" : "Type-Aliases",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth"
-      ],
-      "title" : "Type Aliases"
     },
     {
       "anchor" : "Enumerations",
@@ -748,7 +737,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/!=(_:_:)-6f2gk"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/!=(_:_:)-8iwik": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/!=(_:_:)-9u728": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is not equal to a value.",
@@ -795,7 +784,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift2neoiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift2neoiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -808,14 +797,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-8iwik",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/!=(_:_:)-9u728",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/!=(_:_:)-8iwik"
+  "url" : "\/documentation\/parseswift\/!=(_:_:)-9u728"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-5jg5t": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-1g4u2": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is equal to a value.",
@@ -862,7 +851,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift2eeoiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -875,12 +864,12 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-5jg5t",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/==(_:_:)-1g4u2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "==(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/==(_:_:)-5jg5t"
+  "url" : "\/documentation\/parseswift\/==(_:_:)-1g4u2"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/==(_:_:)-8pl0h": {
   "abstract" : [
@@ -2768,45 +2757,6 @@
   "title" : "ParseGoogle",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsegoogle"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHealth": {
-  "abstract" : [
-    {
-      "code" : "ParseHealth",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " allows you to check the health of a Parse Server.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ParseHealth"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHealth",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ParseHealth"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ParseHealth",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehealth"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunction": {
   "abstract" : [
@@ -6372,74 +6322,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/triggerrequest"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-35vq2": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint that requires that a key is greater than a value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : ">"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift1goiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-35vq2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : ">(_:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/_(_:_:)-35vq2"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-4bsb2": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-3ski4": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is less than a value.",
@@ -6486,7 +6369,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift1loiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift1loiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -6499,17 +6382,17 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-4bsb2",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-3ski4",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "<(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/_(_:_:)-4bsb2"
+  "url" : "\/documentation\/parseswift\/_(_:_:)-3ski4"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-434pw": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_(_:_:)-zzsb": {
   "abstract" : [
     {
-      "text" : "Add a constraint that requires that a key is greater than or equal to a value.",
+      "text" : "Add a constraint that requires that a key is greater than a value.",
       "type" : "text"
     }
   ],
@@ -6524,7 +6407,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : ">="
+      "text" : ">"
     },
     {
       "kind" : "text",
@@ -6553,7 +6436,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift2geoiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift1goiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -6566,14 +6449,14 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-434pw",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_(_:_:)-zzsb",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : ">=(_:_:)",
+  "title" : ">(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/_=(_:_:)-434pw"
+  "url" : "\/documentation\/parseswift\/_(_:_:)-zzsb"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-6tzg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-1nqi2": {
   "abstract" : [
     {
       "text" : "Add a constraint that requires that a key is less than or equal to a value.",
@@ -6620,7 +6503,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift2leoiyAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift2leoiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -6633,12 +6516,79 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-6tzg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-1nqi2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "<=(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/_=(_:_:)-6tzg"
+  "url" : "\/documentation\/parseswift\/_=(_:_:)-1nqi2"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/_=(_:_:)-785h": {
+  "abstract" : [
+    {
+      "text" : "Add a constraint that requires that a key is greater than or equal to a value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : ">="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift2geoiyAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/_=(_:_:)-785h",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : ">=(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/_=(_:_:)-785h"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/and(queries:)-4ugox": {
   "abstract" : [
@@ -6875,6 +6825,93 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/configuration"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-30b0x": {
+  "abstract" : [
+    {
+      "text" : "Add a constraint to the query that requires a particular key’s object",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to be contained by the provided array. Get objects where all array elements match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "containedBy"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "key"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "array"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift11containedBy3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzs8SendableRzlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
+      "text" : "QueryConstraint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-30b0x",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "containedBy(key:array:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/containedby(key:array:)-30b0x"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-3irrl": {
   "abstract" : [
     {
@@ -6986,94 +7023,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedby(key:array:)-3irrl"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedBy(key:array:)-8m6r2": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint to the query that requires a particular key’s object",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "to be contained by the provided array. Get objects where all array elements match.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "containedBy"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "key"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "array"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift11containedBy3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzlF1TL_xmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedBy(key:array:)-8m6r2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "containedBy(key:array:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/containedby(key:array:)-8m6r2"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-36xo5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-64cw0": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -7140,7 +7090,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift11containedIn3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift11containedIn3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -7153,12 +7103,12 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-36xo5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containedIn(key:array:)-64cw0",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containedIn(key:array:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/containedin(key:array:)-36xo5"
+  "url" : "\/documentation\/parseswift\/containedin(key:array:)-64cw0"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containedIn(key:array:)-f8wn": {
   "abstract" : [
@@ -7263,7 +7213,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/containedin(key:array:)-f8wn"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-1g8ks": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-4rorx": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s array",
@@ -7330,7 +7280,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift11containsAll3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift11containsAll3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -7343,12 +7293,12 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-1g8ks",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/containsAll(key:array:)-4rorx",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "containsAll(key:array:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/containsall(key:array:)-1g8ks"
+  "url" : "\/documentation\/parseswift\/containsall(key:array:)-4rorx"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/containsAll(key:array:)-7bkbc": {
   "abstract" : [
@@ -7924,7 +7874,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift7equalTo3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -8098,7 +8048,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift19equalToNoComparator3key5valueAA15QueryConstraintVSS_xtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -9639,6 +9589,15 @@
     },
     {
       "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
       "text" : "]) "
     },
     {
@@ -10034,7 +9993,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/notcontainedin(key:array:)-2eqxa"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-lma5": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/notContainedIn(key:array:)-5p99b": {
   "abstract" : [
     {
       "text" : "Add a constraint to the query that requires a particular key’s object",
@@ -10101,7 +10060,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift14notContainedIn3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzlF1TL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift14notContainedIn3key5arrayAA15QueryConstraintVSS_SayxGtSeRzSERzs8SendableRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -10114,12 +10073,12 @@
       "text" : "QueryConstraint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-lma5",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/notContainedIn(key:array:)-5p99b",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "notContainedIn(key:array:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/notcontainedin(key:array:)-lma5"
+  "url" : "\/documentation\/parseswift\/notcontainedin(key:array:)-5p99b"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/or(queries:)-1117v": {
   "abstract" : [
@@ -10373,94 +10332,6 @@
   "title" : "polygon(_:contains:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/polygon(_:contains:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/polygonContains(key:point:)": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint to the query that requires a particular key’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "coordinates contains a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseGeoPoint",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "polygonContains"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "key"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "point"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A8GeoPointV",
-      "text" : "ParseGeoPoint"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/polygonContains(key:point:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "polygonContains(key:point:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/polygoncontains(key:point:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/related(key:)": {
   "abstract" : [
@@ -11437,182 +11308,6 @@
   "title" : "withinMiles(key:geoPoint:distance:sorted:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/withinmiles(key:geopoint:distance:sorted:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinPolygon(key:points:)": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint to the query that requires a particular key’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "coordinates be contained within and on the bounds of a given polygon",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Supports closed and open (last point is connected to first) paths.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "withinPolygon"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "key"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "points"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A8GeoPointV",
-      "text" : "ParseGeoPoint"
-    },
-    {
-      "kind" : "text",
-      "text" : "]) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:points:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "withinPolygon(key:points:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/withinpolygon(key:points:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinPolygon(key:polygon:)": {
-  "abstract" : [
-    {
-      "text" : "Add a constraint to the query that requires a particular key’s",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "coordinates be contained within and on the bounds of a given polygon",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Supports closed and open (last point is connected to first) paths.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "withinPolygon"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "key"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "polygon"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A7PolygonV",
-      "text" : "ParsePolygon"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift15QueryConstraintV",
-      "text" : "QueryConstraint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/withinPolygon(key:polygon:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "withinPolygon(key:polygon:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/withinpolygon(key:polygon:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/withinRadians(key:geoPoint:distance:sorted:)": {
   "abstract" : [

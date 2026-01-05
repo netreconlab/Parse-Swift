@@ -86,7 +86,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A7SpotifyV4link2id11accessToken9expiresIn07refreshG07options13callbackQueue10completionySS_SSSiSgSSSgShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGctF",
+    "externalID" : "s:10ParseSwift0A7SpotifyV4link2id11accessToken9expiresIn07refreshG07options13callbackQueue10completionySS_SSSiSgSSSgShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGYbctF",
     "fragments" : [
       {
         "kind" : "keyword",

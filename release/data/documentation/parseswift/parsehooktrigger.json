@@ -91,7 +91,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -121,7 +122,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/className",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/triggerName",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/trigger",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/url"
       ],
       "title" : "Instance Properties"
@@ -130,10 +131,9 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/CustomStringConvertible-Implementations",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/Equatable-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseHookTriggerable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseHookTriggerable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseTypeable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -279,28 +279,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktrigger\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktrigger\/customstringconvertible-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/Equatable-Implementations": {
   "abstract" : [
 
@@ -322,6 +300,17 @@
   "title" : "ParseHookTriggerable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger\/parsehooktriggerable-implementations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/ParseTypeable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseTypeable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ParseTypeable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktrigger\/parsetypeable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/className": {
   "abstract" : [
@@ -438,7 +427,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger\/init(from:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/triggerName": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/trigger": {
   "abstract" : [
     {
       "text" : "The ",
@@ -464,7 +453,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "triggerName"
+      "text" : "trigger"
     },
     {
       "kind" : "text",
@@ -480,12 +469,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/triggerName",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/trigger",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "triggerName",
+  "title" : "trigger",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktrigger\/triggername"
+  "url" : "\/documentation\/parseswift\/parsehooktrigger\/trigger"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/url": {
   "abstract" : [
@@ -653,6 +642,11 @@
   "title" : "ParseTypeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",

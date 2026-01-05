@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter"
       ]
     ]
   },
@@ -74,7 +73,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A7TwitterV5login8authData7options13callbackQueue10completionySDyS2SG_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGctF",
+    "externalID" : "s:10ParseSwift0A7TwitterV5login8authData7options13callbackQueue10completionySDyS2SG_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGYbctF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -655,17 +654,6 @@
   "title" : "ParseTwitter",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetwitter"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTwitter/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseTwitter\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsetwitter\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTwitter/login(authData:options:callbackQueue:completion:)": {
   "abstract" : [

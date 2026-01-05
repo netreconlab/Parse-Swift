@@ -60,7 +60,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6SchemaV8addIndex_5field5indexACyxGSS_SSSE_ptF",
+    "externalID" : "s:10ParseSwift0A6SchemaV8addIndex_5field5indexACyxGSS_SSSE_s8SendableptF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -116,6 +116,15 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SE",
         "text" : "Encodable"
+      },
+      {
+        "kind" : "text",
+        "text" : " & "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -230,6 +239,15 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : " & "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -536,6 +554,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",

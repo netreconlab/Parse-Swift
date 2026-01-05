@@ -57,8 +57,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles-7omk"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole"
       ]
     ]
   },
@@ -490,105 +489,6 @@
   "title" : "roles",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole\/roles-1kfkg"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/roles-7omk": {
-  "abstract" : [
-    {
-      "text" : "Get the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseRelation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " for the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseRole",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " objects that are direct children of this role.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "These roles’ users are granted any privileges that this role has been granted",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "(e.g. read or write access through ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseACL",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "s). You can add or remove child roles",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "from this role through this relation.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "roles"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A8RelationV",
-      "text" : "ParseRelation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : ">?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles-7omk",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "roles",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/roles-7omk"
 }
 }
 }

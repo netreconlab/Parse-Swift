@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/ParseHookRequestable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
       ]
     ]
   },
@@ -29,7 +28,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A15HookRequestablePAAE11hydrateUser7options13callbackQueue10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGctF::SYNTHESIZED::s:10ParseSwift0A18HookTriggerRequestV",
+    "externalID" : "s:10ParseSwift0A15HookRequestablePAAE11hydrateUser7options13callbackQueue10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGYbctF::SYNTHESIZED::s:10ParseSwift0A18HookTriggerRequestV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -567,17 +566,6 @@
   "title" : "ParseHookTriggerRequest",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/ParseHookRequestable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/ParseHookRequestable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseHookRequestable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/parsehookrequestable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/hydrateUser(options:callbackQueue:completion:)": {
   "abstract" : [

@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
       ]
     ]
   },
@@ -42,7 +41,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink_7options13callbackQueue10completiony17AuthenticatedUserQz_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyAiA0A5ErrorVGctF::SYNTHESIZED::s:10ParseSwift0A7SpotifyV",
+    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink_7options13callbackQueue10completiony17AuthenticatedUserQz_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyAiA0A5ErrorVGYbctF::SYNTHESIZED::s:10ParseSwift0A7SpotifyV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -658,17 +657,6 @@
   "title" : "ParseSpotify",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsespotify"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsespotify\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify/unlink(_:options:callbackQueue:completion:)": {
   "abstract" : [

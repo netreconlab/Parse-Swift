@@ -26,7 +26,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift11matchesText3key4text7optionsAA15QueryConstraintVSS_SSSDyAA0aD6OptionOSE_pGtKF",
+    "externalID" : "s:10ParseSwift11matchesText3key4text7optionsAA15QueryConstraintVSS_SSSDyAA0aD6OptionOSE_s8SendablepGtKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -99,6 +99,15 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SE",
         "text" : "Encodable"
+      },
+      {
+        "kind" : "text",
+        "text" : " & "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -211,6 +220,15 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : " & "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -609,6 +627,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SE",
       "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",

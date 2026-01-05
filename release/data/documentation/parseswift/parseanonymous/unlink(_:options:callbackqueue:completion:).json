@@ -30,8 +30,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous"
       ]
     ]
   },
@@ -42,7 +41,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink_7options13callbackQueue10completiony17AuthenticatedUserQz_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyAiA0A5ErrorVGctF::SYNTHESIZED::s:10ParseSwift0A9AnonymousV",
+    "externalID" : "s:10ParseSwift0A14AuthenticationPAAE6unlink_7options13callbackQueue10completiony17AuthenticatedUserQz_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyAiA0A5ErrorVGYbctF::SYNTHESIZED::s:10ParseSwift0A9AnonymousV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -547,17 +546,6 @@
   "title" : "ParseAnonymous",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseanonymous"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/ParseAuthentication-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous\/ParseAuthentication-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseAuthentication Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseanonymous\/parseauthentication-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous/unlink(_:options:callbackQueue:completion:)": {
   "abstract" : [

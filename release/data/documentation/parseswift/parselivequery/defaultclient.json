@@ -32,7 +32,7 @@
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "class"
+        "text" : "static"
       },
       {
         "kind" : "text",
@@ -87,7 +87,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "class"
+              "text" : "static"
             },
             {
               "kind" : "text",
@@ -245,7 +245,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "static"
     },
     {
       "kind" : "text",

@@ -197,7 +197,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s12IdentifiableP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -226,8 +227,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)-56bux",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:acl:)-3h6fq"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:acl:)"
       ],
       "title" : "Initializers"
     },
@@ -236,8 +237,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/name",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles-7omk",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users-7o4v6"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users"
       ],
       "title" : "Instance Properties"
     },
@@ -706,7 +707,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole\/init()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/init(name:)-56bux": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/init(name:)": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -761,15 +762,15 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)-56bux",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "init(name:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/init(name:)-56bux"
+  "url" : "\/documentation\/parseswift\/parserole\/init(name:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/init(name:acl:)-3h6fq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/init(name:acl:)": {
   "abstract" : [
     {
       "text" : "Create a ",
@@ -833,13 +834,13 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:acl:)-3h6fq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:acl:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "init(name:acl:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/init(name:acl:)-3h6fq"
+  "url" : "\/documentation\/parseswift\/parserole\/init(name:acl:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/name": {
   "abstract" : [
@@ -1094,7 +1095,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole\/queryusers()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/roles-7omk": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/roles": {
   "abstract" : [
     {
       "text" : "Get the ",
@@ -1185,15 +1186,15 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles-7omk",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/roles",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "roles",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/roles-7omk"
+  "url" : "\/documentation\/parseswift\/parserole\/roles"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/users-7o4v6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/users": {
   "abstract" : [
     {
       "text" : "Get the ",
@@ -1284,13 +1285,13 @@
       "text" : ">?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users-7o4v6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/users",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "users",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/users-7o4v6"
+  "url" : "\/documentation\/parseswift\/parserole\/users"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
@@ -1360,6 +1361,11 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/s12IdentifiableP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s12IdentifiableP",
   "title" : "Swift.Identifiable",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
   "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {

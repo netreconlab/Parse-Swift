@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Deletable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile"
       ]
     ]
   },
@@ -408,17 +407,6 @@
   "title" : "ParseFile",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/Deletable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Deletable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Deletable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/deletable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/delete(options:)": {
   "abstract" : [

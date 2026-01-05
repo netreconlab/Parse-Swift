@@ -91,7 +91,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -148,7 +149,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/incrementBadge()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setBadge(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-27wko",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-2lwh9"
       ],
       "title" : "Instance Methods"
     },
@@ -164,9 +165,8 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/Equatable-Implementations",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/ParseTypeable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -346,28 +346,6 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/customdebugstringconvertible-implementations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/CustomStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/CustomStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/customstringconvertible-implementations"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/Equatable-Implementations": {
   "abstract" : [
 
@@ -378,6 +356,17 @@
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/equatable-implementations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/ParseTypeable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/ParseTypeable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ParseTypeable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/parsetypeable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/PushType-swift.enum": {
   "abstract" : [
@@ -734,7 +723,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzlF1VL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzs8SendableRzlF1VL_xmfp",
       "text" : "V"
     }
   ],
@@ -1429,7 +1418,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setsound(_:)-27wko"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-4d1ma": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/setSound(_:)-2lwh9": {
   "abstract" : [
     {
       "text" : "Set the name of a sound file in your app’s main bundle or in the Library\/Sounds folder",
@@ -1517,7 +1506,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8setSoundyACxSeRzSERzlF1VL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8setSoundyACxSeRzSERzs8SendableRzlF1VL_xmfp",
       "text" : "V"
     },
     {
@@ -1530,12 +1519,12 @@
       "text" : "ParsePushPayloadApple"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-4d1ma",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParsePushPayloadApple\/setSound(_:)-2lwh9",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "setSound(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setsound(_:)-4d1ma"
+  "url" : "\/documentation\/parseswift\/parsepushpayloadapple\/setsound(_:)-2lwh9"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushPayloadApple/targetContentId": {
   "abstract" : [
@@ -1868,6 +1857,11 @@
   "title" : "ParseTypeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",

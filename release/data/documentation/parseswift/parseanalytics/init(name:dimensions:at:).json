@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A9AnalyticsV4name10dimensions2atACSS_SDySSSe_SEpGSg10Foundation4DateVSgtcfc",
+    "externalID" : "s:10ParseSwift0A9AnalyticsV4name10dimensions2atACSS_SDySSSe_SEs8SendablepGSg10Foundation4DateVSgtcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -67,6 +67,15 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:s7Codablea",
         "text" : "Codable"
+      },
+      {
+        "kind" : "text",
+        "text" : " & "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -157,6 +166,15 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:s7Codablea",
               "text" : "Codable"
+            },
+            {
+              "kind" : "text",
+              "text" : " & "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -362,6 +380,15 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:s7Codablea",
       "text" : "Codable"
+    },
+    {
+      "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",

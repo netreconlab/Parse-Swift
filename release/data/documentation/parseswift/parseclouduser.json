@@ -100,7 +100,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SQ",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SH",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s12IdentifiableP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -120,8 +121,8 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt-2drtq",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount-9kljm",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/sessionToken"
       ],
       "title" : "Instance Properties"
@@ -310,7 +311,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclouduser"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/accountLockoutExpiresAt-2drtq": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/accountLockoutExpiresAt": {
   "abstract" : [
     {
       "text" : "The date the lockout expires. After this date, the ",
@@ -357,15 +358,15 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt-2drtq",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "accountLockoutExpiresAt",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclouduser\/accountlockoutexpiresat-2drtq"
+  "url" : "\/documentation\/parseswift\/parseclouduser\/accountlockoutexpiresat"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/failedLoginCount-9kljm": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/failedLoginCount": {
   "abstract" : [
     {
       "text" : "The number of unsuccessful login attempts.",
@@ -400,13 +401,13 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount-9kljm",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "failedLoginCount",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclouduser\/failedlogincount-9kljm"
+  "url" : "\/documentation\/parseswift\/parseclouduser\/failedlogincount"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/sessionToken": {
   "abstract" : [
@@ -717,6 +718,11 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/s12IdentifiableP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s12IdentifiableP",
   "title" : "Swift.Identifiable",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
   "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {

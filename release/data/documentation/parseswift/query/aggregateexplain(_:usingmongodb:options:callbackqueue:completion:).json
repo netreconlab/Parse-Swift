@@ -65,7 +65,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_pGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF",
+    "externalID" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__sAIRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -104,6 +104,15 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SE",
         "text" : "Encodable"
+      },
+      {
+        "kind" : "text",
+        "text" : " & "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -188,7 +197,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_pGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__sAIRd__lF1UL_qd__mfp",
         "text" : "U"
       },
       {
@@ -291,6 +300,15 @@
             },
             {
               "kind" : "text",
+              "text" : " & "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
+            },
+            {
+              "kind" : "text",
               "text" : "]], "
             },
             {
@@ -382,7 +400,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_pGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__sAIRd__lF1UL_qd__mfp",
               "text" : "U"
             },
             {
@@ -428,6 +446,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:Se",
               "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "U"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -995,6 +1030,15 @@
     },
     {
       "kind" : "text",
+      "text" : " & "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
       "text" : "]], "
     },
     {
@@ -1076,7 +1120,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_pGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGctSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV16aggregateExplain_12usingMongoDB7options13callbackQueue10completionySaySDySSSE_s8SendablepGG_SbShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOySayqd__GAA0A5ErrorVGYbctSeRd__sAIRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {

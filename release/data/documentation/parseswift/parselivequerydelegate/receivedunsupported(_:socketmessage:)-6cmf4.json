@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)-83dzx"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate"
       ]
     ]
   },
@@ -305,75 +304,6 @@
   "title" : "receivedUnsupported(_:socketMessage:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequerydelegate\/receivedunsupported(_:socketmessage:)-6cmf4"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/receivedUnsupported(_:socketMessage:)-83dzx": {
-  "abstract" : [
-    {
-      "text" : "Receive unsupported data from the ParseLiveQuery task\/connection.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "receivedUnsupported"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DataV",
-      "text" : "Data"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "socketMessage"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSessionWebSocketTask",
-      "text" : "URLSessionWebSocketTask"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:So25NSURLSessionWebSocketTaskC10FoundationE7MessageO",
-      "text" : "Message"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)-83dzx",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "receivedUnsupported(_:socketMessage:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/receivedunsupported(_:socketmessage:)-83dzx"
 }
 }
 }

@@ -65,7 +65,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF",
+    "externalID" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -145,7 +145,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
         "text" : "U"
       },
       {
@@ -263,7 +263,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
               "text" : "U"
             },
             {
@@ -300,6 +300,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:Se",
               "text" : "Decodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "U"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -819,7 +836,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__lF1UL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift5QueryV21countExplainPublisher12usingMongoDB7options7Combine6FutureCySayqd__GAA0A5ErrorVGSb_ShyAA3APIV6OptionOGtSeRd__s8SendableRd__lF1UL_qd__mfp",
       "text" : "U"
     },
     {

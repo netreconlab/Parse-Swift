@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel\/ObservableObject-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel"
       ]
     ]
   },
@@ -298,17 +297,6 @@
   "title" : "QueryViewModel",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryviewmodel"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryViewModel/ObservableObject-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel\/ObservableObject-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ObservableObject Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/queryviewmodel\/observableobject-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryViewModel/objectWillChange": {
   "abstract" : [

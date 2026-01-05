@@ -137,8 +137,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/isSaved()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save()-51ej7",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save(options:)-15f1x"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save(options:)"
       ],
       "title" : "Instance Methods"
     }
@@ -933,7 +933,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/savable\/issaved()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable/save()-51ej7": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable/save()": {
   "abstract" : [
 
   ],
@@ -977,15 +977,15 @@
       "text" : "SavingType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save()-51ej7",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "save()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/savable\/save()-51ej7"
+  "url" : "\/documentation\/parseswift\/savable\/save()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable/save(options:)-15f1x": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable/save(options:)": {
   "abstract" : [
 
   ],
@@ -1055,13 +1055,13 @@
       "text" : "SavingType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save(options:)-15f1x",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable\/save(options:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "save(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/savable\/save(options:)-15f1x"
+  "url" : "\/documentation\/parseswift\/savable\/save(options:)"
 }
 }
 }

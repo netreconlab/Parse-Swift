@@ -49,7 +49,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A9AnalyticsV23trackAppOpenedPublisher13launchOptions2at7options7Combine6FutureCyytAA0A5ErrorVGSDySo019UIApplicationLaunchI3KeyaypG_10Foundation4DateVSgShyAA3APIV6OptionOGtFZ",
+    "externalID" : "s:10ParseSwift0A9AnalyticsV23trackAppOpenedPublisher13launchOptions2at7options7Combine6FutureCyytAA0A5ErrorVGSDySo019UIApplicationLaunchI3Keyas8Sendable_pG_10Foundation4DateVSgShyAA3APIV6OptionOGtFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -102,8 +102,9 @@
         "text" : " : "
       },
       {
-        "kind" : "keyword",
-        "text" : "Any"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
@@ -252,8 +253,9 @@
               "text" : " : "
             },
             {
-              "kind" : "keyword",
-              "text" : "Any"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -657,8 +659,9 @@
       "text" : " : "
     },
     {
-      "kind" : "keyword",
-      "text" : "Any"
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",

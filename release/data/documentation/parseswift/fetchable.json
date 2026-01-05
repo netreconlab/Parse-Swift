@@ -136,8 +136,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-2agid",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch(includeKeys:options:)-6xt2n"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch(includeKeys:options:)"
       ],
       "title" : "Instance Methods"
     }
@@ -232,7 +232,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable\/fetchingtype"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-2agid": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch()": {
   "abstract" : [
 
   ],
@@ -276,15 +276,15 @@
       "text" : "FetchingType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-2agid",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "fetch()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/fetchable\/fetch()-2agid"
+  "url" : "\/documentation\/parseswift\/fetchable\/fetch()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch(includeKeys:options:)-6xt2n": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch(includeKeys:options:)": {
   "abstract" : [
 
   ],
@@ -371,13 +371,13 @@
       "text" : "FetchingType"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch(includeKeys:options:)-6xt2n",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch(includeKeys:options:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "fetch(includeKeys:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-6xt2n"
+  "url" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser": {
   "abstract" : [

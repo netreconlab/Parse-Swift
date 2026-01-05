@@ -27,7 +27,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzlF",
+    "externalID" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzs8SendableRzlF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -63,7 +63,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzlF1VL_xmfp",
+        "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzs8SendableRzlF1VL_xmfp",
         "text" : "V"
       }
     ],
@@ -122,7 +122,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzlF1VL_xmfp",
+              "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzs8SendableRzlF1VL_xmfp",
               "text" : "V"
             },
             {
@@ -166,6 +166,23 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SE",
               "text" : "Encodable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "V"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
@@ -348,7 +365,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzlF1VL_xmfp",
+      "preciseIdentifier" : "s:10ParseSwift0A16PushPayloadAppleV8getSoundxyKSeRzSERzs8SendableRzlF1VL_xmfp",
       "text" : "V"
     }
   ],

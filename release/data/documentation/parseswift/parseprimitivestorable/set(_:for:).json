@@ -27,7 +27,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStKSERd__lF",
+    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStYaKSERd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -55,7 +55,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStKSERd__lF1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStYaKSERd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -78,6 +78,14 @@
       {
         "kind" : "text",
         "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "keyword",
@@ -106,6 +114,14 @@
             "iOS"
           ],
           "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "mutating"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
             {
               "kind" : "keyword",
               "text" : "func"
@@ -148,7 +164,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStKSERd__lF1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStYaKSERd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -179,6 +195,14 @@
             {
               "kind" : "text",
               "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -368,7 +392,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStKSERd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStYaKSERd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -391,6 +415,14 @@
     {
       "kind" : "text",
       "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",

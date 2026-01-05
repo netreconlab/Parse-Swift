@@ -74,12 +74,38 @@
             },
             {
               "kind" : "text",
-              "text" : " : AnyObject"
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(pl)NSObject",
+              "text" : "NSObjectProtocol"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(pl)NSObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
     }
   ],
   "schemaVersion" : {
@@ -95,11 +121,11 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/closedSocket(_:reason:)-170q6",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/closedSocket(_:reason:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-3krd3",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-4tgno",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:completionHandler:)-8g2o0",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)-83dzx"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:completionHandler:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)"
       ],
       "title" : "Instance Methods"
     }
@@ -166,7 +192,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequerydelegate"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/closedSocket(_:reason:)-170q6": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/closedSocket(_:reason:)": {
   "abstract" : [
     {
       "text" : "Receive notifications when the ParseLiveQuery closes a task\/connection.",
@@ -227,13 +253,13 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/closedSocket(_:reason:)-170q6",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/closedSocket(_:reason:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "closedSocket(_:reason:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/closedsocket(_:reason:)-170q6"
+  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/closedsocket(_:reason:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/received(_:)-3krd3": {
   "abstract" : [
@@ -321,7 +347,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-4tgno"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/received(_:completionHandler:)-8g2o0": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/received(_:completionHandler:)": {
   "abstract" : [
     {
       "text" : "Respond to authentication requests from a ParseLiveQuery Server. If you become a delegate",
@@ -452,15 +478,15 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:completionHandler:)-8g2o0",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:completionHandler:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "received(_:completionHandler:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:completionhandler:)-8g2o0"
+  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:completionhandler:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/receivedUnsupported(_:socketMessage:)-83dzx": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/receivedUnsupported(_:socketMessage:)": {
   "abstract" : [
     {
       "text" : "Receive unsupported data from the ParseLiveQuery task\/connection.",
@@ -521,13 +547,28 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)-83dzx",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/receivedUnsupported(_:socketMessage:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "receivedUnsupported(_:socketMessage:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/receivedunsupported(_:socketmessage:)-83dzx"
+  "url" : "\/documentation\/parseswift\/parselivequerydelegate\/receivedunsupported(_:socketmessage:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/objc(pl)NSObject": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/objc(pl)NSObject",
+  "title" : "ObjectiveC.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

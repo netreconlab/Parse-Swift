@@ -25,8 +25,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)-56bux"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole"
       ]
     ]
   },
@@ -401,69 +400,6 @@
   "title" : "init(name:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parserole\/init(name:)-3m5k4"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole/init(name:)-56bux": {
-  "abstract" : [
-    {
-      "text" : "Create a ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseRole",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " with a name. The ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseACL",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " will still need to be initialized before saving.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "name"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole\/init(name:)-56bux",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "init(name:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parserole\/init(name:)-56bux"
 }
 }
 }

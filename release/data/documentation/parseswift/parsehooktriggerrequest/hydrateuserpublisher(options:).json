@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/ParseHookRequestable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
       ]
     ]
   },
@@ -448,17 +447,6 @@
   "title" : "ParseHookTriggerRequest",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/ParseHookRequestable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/ParseHookRequestable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseHookRequestable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/parsehookrequestable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/hydrateUserPublisher(options:)": {
   "abstract" : [

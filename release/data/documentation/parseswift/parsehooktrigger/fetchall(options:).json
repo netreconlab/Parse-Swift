@@ -22,8 +22,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseHookTriggerable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger"
       ]
     ]
   },
@@ -457,17 +456,6 @@
   "title" : "ParseHookTrigger",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktrigger"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/ParseHookTriggerable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTrigger\/ParseHookTriggerable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseHookTriggerable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktrigger\/parsehooktriggerable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTrigger/fetchAll(options:)": {
   "abstract" : [

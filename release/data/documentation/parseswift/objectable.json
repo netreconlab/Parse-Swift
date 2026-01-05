@@ -146,7 +146,8 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseEncodable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/Se",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -190,7 +191,8 @@
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/ACL",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/createdAt",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint-65g5f",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/objectId",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/updatedAt"
       ],
@@ -200,8 +202,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)-26c5h",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-2szlz"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()"
       ],
       "title" : "Instance Methods"
     },
@@ -209,7 +211,7 @@
       "anchor" : "Type-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-7kg6w"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className"
       ],
       "title" : "Type Properties"
     }
@@ -336,7 +338,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable\/acl"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/className-7kg6w": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/className": {
   "abstract" : [
     {
       "text" : "The class name of the object.",
@@ -375,13 +377,13 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className-7kg6w",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/className",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "className",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/classname-7kg6w"
+  "url" : "\/documentation\/parseswift\/objectable\/classname"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/createdAt": {
   "abstract" : [
@@ -425,7 +427,55 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable\/createdat"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint(_:)-26c5h": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint": {
+  "abstract" : [
+    {
+      "text" : "The Parse Server endpoint for this object.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 5,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "endpoint"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV",
+      "text" : "API"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift3APIV8EndpointO",
+      "text" : "Endpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "endpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/objectable\/endpoint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint(_:)": {
   "abstract" : [
     {
       "text" : "The Parse Server endpoint for this object.",
@@ -499,22 +549,29 @@
       "text" : "Endpoint"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)-26c5h",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint(_:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "endpoint(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/endpoint(_:)-26c5h"
+  "url" : "\/documentation\/parseswift\/objectable\/endpoint(_:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint-65g5f": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved": {
   "abstract" : [
     {
-      "text" : "The Parse Server endpoint for this object.",
+      "text" : "Specifies if a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has been saved.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 5,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -526,7 +583,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "endpoint"
+      "text" : "isSaved"
     },
     {
       "kind" : "text",
@@ -534,35 +591,25 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV8EndpointO",
-      "text" : "Endpoint"
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint-65g5f",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
-  "title" : "endpoint",
+  "title" : "isSaved",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/endpoint-65g5f"
+  "url" : "\/documentation\/parseswift\/objectable\/issaved"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved()-2szlz": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/isSaved()": {
   "abstract" : [
     {
       "text" : "Specifies if this object has been saved.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 2,
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -602,13 +649,13 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()-2szlz",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/isSaved()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "isSaved()",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/issaved()-2szlz"
+  "url" : "\/documentation\/parseswift\/objectable\/issaved()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/objectId": {
   "abstract" : [
@@ -1273,6 +1320,11 @@
   "title" : "ParseUser",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseuser"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",

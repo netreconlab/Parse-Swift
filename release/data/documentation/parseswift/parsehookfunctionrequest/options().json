@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest\/ParseHookRequestable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest"
       ]
     ]
   },
@@ -286,17 +285,6 @@
   "title" : "ParseHookFunctionRequest",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehookfunctionrequest"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest/ParseHookRequestable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookFunctionRequest\/ParseHookRequestable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ParseHookRequestable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehookfunctionrequest\/parsehookrequestable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookFunctionRequest/options()": {
   "abstract" : [

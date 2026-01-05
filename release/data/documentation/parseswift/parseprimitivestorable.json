@@ -79,31 +79,11 @@
             {
               "kind" : "identifier",
               "text" : "ParsePrimitiveStorable"
-            },
-            {
-              "kind" : "text",
-              "text" : " : "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:ScA",
-              "text" : "Actor"
             }
           ]
         }
       ],
       "kind" : "declarations"
-    }
-  ],
-  "relationshipsSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/ScA"
-      ],
-      "kind" : "relationships",
-      "title" : "Inherits From",
-      "type" : "inheritsFrom"
     }
   ],
   "schemaVersion" : {
@@ -141,11 +121,6 @@
   ]
 , 
 "references": {
-"doc://edu.uky.cs.netreconlab.ParseSwift/ScA": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/ScA",
-  "title" : "_Concurrency.Actor",
-  "type" : "unresolvable"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
@@ -245,6 +220,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -279,6 +262,14 @@
     {
       "kind" : "text",
       "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "keyword",
@@ -352,6 +343,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -360,7 +359,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tKSeRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tYaKSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -418,7 +417,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStKSERd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3set_3foryqd___SStYaKSERd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -444,6 +443,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     }
   ],
@@ -454,11 +461,6 @@
   "title" : "set(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable\/set(_:for:)"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
-  "title" : "Swift.Sendable",
-  "type" : "unresolvable"
 }
 }
 }

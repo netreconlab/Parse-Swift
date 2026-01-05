@@ -39,23 +39,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC",
-        "text" : "QueryViewModel"
-      },
-      {
-        "kind" : "text",
-        "text" : "<"
-      },
-      {
-        "kind" : "typeIdentifier",
-        "text" : "T"
-      },
-      {
-        "kind" : "text",
-        "text" : ">."
-      },
-      {
-        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC6Objecta",
         "text" : "Object"
       },
       {
@@ -101,25 +85,9 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel",
+              "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel\/Object",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC",
-              "text" : "QueryViewModel"
-            },
-            {
-              "kind" : "text",
-              "text" : "<"
-            },
-            {
-              "kind" : "typeIdentifier",
-              "text" : "T"
-            },
-            {
-              "kind" : "text",
-              "text" : ">."
-            },
-            {
-              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC6Objecta",
               "text" : "Object"
             },
             {
@@ -255,6 +223,48 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/queryviewmodel"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryViewModel/Object": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " associated with this view model.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Object"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/QueryViewModel\/Object",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Object"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "QueryViewModel.Object",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/queryviewmodel\/object"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/QueryViewModel/results": {
   "abstract" : [
     {
@@ -281,23 +291,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC",
-      "text" : "QueryViewModel"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">."
-    },
-    {
-      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift14QueryViewModelC6Objecta",
       "text" : "Object"
     },
     {

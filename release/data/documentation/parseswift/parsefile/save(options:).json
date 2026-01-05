@@ -38,8 +38,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Savable-Implementations"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile"
       ]
     ]
   },
@@ -444,17 +443,6 @@
   "title" : "ParseFile",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefile"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/Savable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFile\/Savable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Savable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefile\/savable-implementations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFile/save(options:)": {
   "abstract" : [

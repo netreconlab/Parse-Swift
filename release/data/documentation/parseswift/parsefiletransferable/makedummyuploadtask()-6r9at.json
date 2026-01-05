@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable"
       ]
     ]
   },
@@ -319,53 +318,6 @@
   "title" : "makeDummyUploadTask()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsefiletransferable\/makedummyuploadtask()-6r9at"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseFileTransferable/makeDummyUploadTask()-71gc1": {
-  "abstract" : [
-    {
-      "text" : "Compose a dummy upload task.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "makeDummyUploadTask"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSURLSessionUploadTask",
-      "text" : "URLSessionUploadTask"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseFileTransferable\/makeDummyUploadTask()-71gc1",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "makeDummyUploadTask()",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsefiletransferable\/makedummyuploadtask()-71gc1"
 }
 }
 }

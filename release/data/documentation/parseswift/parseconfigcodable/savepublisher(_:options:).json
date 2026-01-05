@@ -59,11 +59,19 @@
           "type" : "codeVoice"
         },
         {
-          "text" : " and ",
+          "text" : ", ",
           "type" : "text"
         },
         {
           "code" : "Encodable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : ", and ",
+          "type" : "text"
+        },
+        {
+          "code" : "Sendable",
           "type" : "codeVoice"
         },
         {
@@ -604,11 +612,19 @@
         "type" : "codeVoice"
       },
       {
-        "text" : " and ",
+        "text" : ", ",
         "type" : "text"
       },
       {
         "code" : "Encodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Sendable",
         "type" : "codeVoice"
       },
       {

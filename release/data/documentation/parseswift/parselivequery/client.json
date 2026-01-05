@@ -77,6 +77,14 @@
           ],
           "tokens" : [
             {
+              "kind" : "attribute",
+              "text" : "nonisolated"
+            },
+            {
+              "kind" : "text",
+              "text" : "(unsafe) "
+            },
+            {
               "kind" : "keyword",
               "text" : "static"
             },

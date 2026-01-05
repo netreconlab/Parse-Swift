@@ -130,14 +130,6 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "weak"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
               "text" : "var"
             },
             {

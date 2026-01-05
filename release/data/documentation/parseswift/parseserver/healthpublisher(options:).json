@@ -250,7 +250,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "A publisher that eventually produces a single value and then finishes or fails.",
+              "text" : "A publisher that performs type erasure by wrapping another publisher.",
               "type" : "text"
             }
           ],

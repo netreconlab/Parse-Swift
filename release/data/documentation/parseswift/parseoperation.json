@@ -214,7 +214,9 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Savable",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/SE",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -242,12 +244,12 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-16zkg",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-4or5w",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-1b9u",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-uno9",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-47ckx",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addRelation(_:objects:)-gw2h",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-3v3y",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-9mi29",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2btug",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-4uryg",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/batch(_:operations:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/encode(to:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/forceSet(_:to:)",
@@ -255,15 +257,15 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)-19wfq",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/increment(_:by:)-2jfll",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/isSaved()",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-290yc",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-9b7ai",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-1z0r1",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-27et6",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-1wbm6",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/removeRelation(_:objects:)-3ty5e",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/save(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/savePublisher(options:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-88uvh",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1atuj",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1g9k9",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-8l8i1",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-5p2ln",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-7dqb3"
       ],
       "title" : "Instance Methods"
@@ -473,7 +475,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/savable-implementations"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-16zkg": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-1b9u": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field.",
@@ -524,7 +526,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_Sayqd__GtSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_Sayqd__GtSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -549,14 +551,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-16zkg",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-1b9u",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-16zkg"
+  "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-1b9u"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-4or5w": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/add(_:objects:)-uno9": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field.",
@@ -617,7 +619,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -634,7 +636,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3add_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -659,12 +661,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-4or5w",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/add(_:objects:)-uno9",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-4or5w"
+  "url" : "\/documentation\/parseswift\/parseoperation\/add(_:objects:)-uno9"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addRelation(_:objects:)-47ckx": {
   "abstract" : [
@@ -875,7 +877,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/addrelation(_:objects:)-gw2h"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-3v3y": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-2btug": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field,",
@@ -934,7 +936,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_Sayqd__GtSeRd__SERd__SHRd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_Sayqd__GtSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -959,14 +961,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-3v3y",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-2btug",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addUnique(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-3v3y"
+  "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-2btug"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-9mi29": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/addUnique(_:objects:)-4uryg": {
   "abstract" : [
     {
       "text" : "An operation that adds a new element to an array field,",
@@ -1035,7 +1037,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -1052,7 +1054,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV9addUnique_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -1077,12 +1079,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-9mi29",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/addUnique(_:objects:)-4uryg",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "addUnique(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-9mi29"
+  "url" : "\/documentation\/parseswift\/parseoperation\/addunique(_:objects:)-4uryg"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/batch(_:operations:)": {
   "abstract" : [
@@ -1270,7 +1272,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -1287,7 +1289,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -1380,7 +1382,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -1397,7 +1399,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV8forceSet_5valueACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -1670,7 +1672,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/issaved()"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-290yc": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-1z0r1": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of an element from",
@@ -1729,7 +1731,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_Sayqd__GtSeRd__SERd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_Sayqd__GtSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -1754,14 +1756,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-290yc",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-1z0r1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-290yc"
+  "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-1z0r1"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-9b7ai": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/remove(_:objects:)-27et6": {
   "abstract" : [
     {
       "text" : "An operation that removes every instance of an element from",
@@ -1830,7 +1832,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -1847,7 +1849,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV6remove_7objectsACyxGSS_s15WritableKeyPathCyxSayqd__GSgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -1872,12 +1874,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-9b7ai",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/remove(_:objects:)-27et6",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:objects:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-9b7ai"
+  "url" : "\/documentation\/parseswift\/parseoperation\/remove(_:objects:)-27et6"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/removeRelation(_:objects:)-1wbm6": {
   "abstract" : [
@@ -2414,116 +2416,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseoperation\/savepublisher(options:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-6e7l2": {
-  "abstract" : [
-    {
-      "text" : "An operation that sets a field’s value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "set"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s15WritableKeyPathC",
-      "text" : "WritableKeyPath"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : "?>, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "to"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SQRd__lF1WL_qd__mfp",
-      "text" : "W"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
-      "text" : "ParseOperation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-6e7l2",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "set(_:to:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-6e7l2"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-88uvh": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-1g9k9": {
   "abstract" : [
     {
       "text" : "An operation that sets a field’s value if it has changed from its previous value.",
@@ -2584,7 +2477,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SQRd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -2601,7 +2494,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SQRd__lF1WL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGSS_s15WritableKeyPathCyxqd__SgGt_AItSeRd__SERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
       "text" : "W"
     },
     {
@@ -2626,14 +2519,123 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-88uvh",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-1g9k9",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "set(_:to:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-88uvh"
+  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-1g9k9"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-1atuj": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/set(_:to:)-8l8i1": {
+  "abstract" : [
+    {
+      "text" : "An operation that sets a field’s value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "set"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s15WritableKeyPathC",
+      "text" : "WritableKeyPath"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV1Txmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : "?>, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV3set_2toACyxGs15WritableKeyPathCyxqd__SgG_qd__tKSERd__SHRd__s8SendableRd__lF1WL_qd__mfp",
+      "text" : "W"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV",
+      "text" : "ParseOperation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/set(_:to:)-8l8i1",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "set(_:to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseoperation\/set(_:to:)-8l8i1"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-5p2ln": {
   "abstract" : [
     {
       "text" : "An operation where a field is deleted from the object.",
@@ -2694,7 +2696,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A9OperationV5unsetyACyxGSS_s15WritableKeyPathCyxqd__SgGt_tSeRd__SERd__lF1VL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A9OperationV5unsetyACyxGSS_s15WritableKeyPathCyxqd__SgGt_tSeRd__SERd__SHRd__s8SendableRd__lF1VL_qd__mfp",
       "text" : "V"
     },
     {
@@ -2719,12 +2721,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-1atuj",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseOperation\/unset(_:)-5p2ln",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "unset(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-1atuj"
+  "url" : "\/documentation\/parseswift\/parseoperation\/unset(_:)-5p2ln"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseOperation/unset(_:)-7dqb3": {
   "abstract" : [
@@ -2815,6 +2817,11 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/savable"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s23CustomStringConvertibleP",
   "title" : "Swift.CustomStringConvertible",
@@ -2823,6 +2830,11 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/s28CustomDebugStringConvertibleP": {
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
   "type" : "unresolvable"
 }
 }

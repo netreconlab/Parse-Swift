@@ -9,8 +9,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount-9kljm"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser"
       ]
     ]
   },
@@ -216,49 +215,6 @@
   "title" : "failedLoginCount",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclouduser\/failedlogincount-1x7qw"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/failedLoginCount-9kljm": {
-  "abstract" : [
-    {
-      "text" : "The number of unsuccessful login attempts.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "failedLoginCount"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/failedLoginCount-9kljm",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "failedLoginCount",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclouduser\/failedlogincount-9kljm"
 }
 }
 }

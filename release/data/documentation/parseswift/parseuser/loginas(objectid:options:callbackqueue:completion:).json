@@ -86,7 +86,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A4UserPAAE7loginAs8objectId7options13callbackQueue10completionySS_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGctFZ",
+    "externalID" : "s:10ParseSwift0A4UserPAAE7loginAs8objectId7options13callbackQueue10completionySS_ShyAA3APIV6OptionOGSo17OS_dispatch_queueCys6ResultOyxAA0A5ErrorVGYbctFZ",
     "fragments" : [
       {
         "kind" : "keyword",

@@ -9,8 +9,8 @@
     {
       "anchor" : "ParseLiveQueryDelegate-Implementations",
       "identifiers" : [
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-798hl",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-1f3yl"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-1f3yl",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLiveQueryDelegate\/received(_:)-798hl"
       ],
       "title" : "ParseLiveQueryDelegate Implementations"
     }
@@ -242,7 +242,10 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/received(_:)-1f3yl": {
   "abstract" : [
-
+    {
+      "text" : "Receive errors from the ParseLiveQuery task\/connection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -323,7 +326,10 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLiveQueryDelegate/received(_:)-798hl": {
   "abstract" : [
-
+    {
+      "text" : "Receive metrics about the ParseLiveQuery task\/connection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

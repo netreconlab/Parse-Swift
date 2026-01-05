@@ -153,7 +153,9 @@
     {
       "identifiers" : [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/CloudObservable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/7Combine16ObservableObjectP"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/7Combine16ObservableObjectP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -813,6 +815,16 @@
   "title" : "ParseCloudable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsecloudable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/s8SendableP": {
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 },
 "https://developer.apple.com/documentation/combine/observableobject": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/combine\/observableobject",

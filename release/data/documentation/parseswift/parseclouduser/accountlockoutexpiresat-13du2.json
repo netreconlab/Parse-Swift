@@ -21,8 +21,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt-2drtq"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser"
       ]
     ]
   },
@@ -240,61 +239,6 @@
   "title" : "accountLockoutExpiresAt",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseclouduser\/accountlockoutexpiresat-13du2"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseCloudUser/accountLockoutExpiresAt-2drtq": {
-  "abstract" : [
-    {
-      "text" : "The date the lockout expires. After this date, the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "can attempt to login again.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "accountLockoutExpiresAt"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DateV",
-      "text" : "Date"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseCloudUser\/accountLockoutExpiresAt-2drtq",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "accountLockoutExpiresAt",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseclouduser\/accountlockoutexpiresat-2drtq"
 }
 }
 }

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/isLinked(with:)-7d4nj"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication"
       ]
     ]
   },
@@ -460,78 +459,6 @@
   "title" : "isLinked(with:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseauthentication\/islinked(with:)-30q3o"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAuthentication/isLinked(with:)-7d4nj": {
-  "abstract" : [
-    {
-      "text" : "Whether the ",
-      "type" : "text"
-    },
-    {
-      "code" : "ParseUser",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " is logged in with the respective authentication type.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "isLinked"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A14AuthenticationP17AuthenticatedUserQa",
-      "text" : "AuthenticatedUser"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication\/isLinked(with:)-7d4nj",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "isLinked(with:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseauthentication\/islinked(with:)-7d4nj"
 },
 "https://docs.parseplatform.org/parse-server/guide/#oauth-and-3rd-party-authentication": {
   "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#oauth-and-3rd-party-authentication",

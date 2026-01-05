@@ -3,8 +3,7 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-2agid"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable"
       ]
     ]
   },
@@ -262,58 +261,6 @@
   "title" : "fetch()",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/fetchable\/fetch()-1n2zp"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Fetchable/fetch()-2agid": {
-  "abstract" : [
-
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "fetch"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift9FetchableP12FetchingTypeQa",
-      "text" : "FetchingType"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Fetchable\/fetch()-2agid",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "fetch()",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/fetchable\/fetch()-2agid"
 }
 }
 }

@@ -27,7 +27,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tKSeRd__lF",
+    "externalID" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tYaKSeRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -72,6 +72,14 @@
       },
       {
         "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
         "text" : "throws"
       },
       {
@@ -80,7 +88,7 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tKSeRd__lF1TL_qd__mfp",
+        "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tYaKSeRd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -161,6 +169,14 @@
             },
             {
               "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "throws"
             },
             {
@@ -169,7 +185,7 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tKSeRd__lF1TL_qd__mfp",
+              "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tYaKSeRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -359,6 +375,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -367,7 +391,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tKSeRd__lF1TL_qd__mfp",
+      "preciseIdentifier" : "s:10ParseSwift0A17PrimitiveStorableP3get8valueForqd__SgSS_tYaKSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {

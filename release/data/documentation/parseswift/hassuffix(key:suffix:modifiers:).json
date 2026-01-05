@@ -233,6 +233,45 @@
                 }
               ],
               "type" : "paragraph"
+            },
+            {
+              "items" : [
+                {
+                  "content" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "code" : "i",
+                          "type" : "codeVoice"
+                        },
+                        {
+                          "text" : " - Case insensitive search",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "paragraph"
+                    }
+                  ]
+                },
+                {
+                  "content" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "code" : "m",
+                          "type" : "codeVoice"
+                        },
+                        {
+                          "text" : " - Search across multiple lines of input",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "paragraph"
+                    }
+                  ]
+                }
+              ],
+              "type" : "unorderedList"
             }
           ],
           "name" : "modifiers"

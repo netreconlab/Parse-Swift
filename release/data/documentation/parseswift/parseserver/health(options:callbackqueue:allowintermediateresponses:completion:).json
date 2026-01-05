@@ -33,7 +33,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6ServerV6health7options13callbackQueue26allowIntermediateResponses10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCSbys6ResultOyAC6StatusOAA0A5ErrorVGctFZ",
+    "externalID" : "s:10ParseSwift0A6ServerV6health7options13callbackQueue26allowIntermediateResponses10completionyShyAA3APIV6OptionOG_So17OS_dispatch_queueCSbys6ResultOyAC6StatusOAA0A5ErrorVGYbctFZ",
     "fragments" : [
       {
         "kind" : "keyword",

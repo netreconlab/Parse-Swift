@@ -1,10 +1,15 @@
 {
+  "abstract" : [
+    {
+      "text" : "The Parse Server endpoint for this object.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint-65g5f"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable"
       ]
     ]
   },
@@ -264,7 +269,10 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint-11glf": {
   "abstract" : [
-
+    {
+      "text" : "The Parse Server endpoint for this object.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -304,54 +312,6 @@
   "title" : "endpoint",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/objectable\/endpoint-11glf"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Objectable/endpoint-65g5f": {
-  "abstract" : [
-    {
-      "text" : "The Parse Server endpoint for this object.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 5,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "endpoint"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV",
-      "text" : "API"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift3APIV8EndpointO",
-      "text" : "Endpoint"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/Objectable\/endpoint-65g5f",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "endpoint",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/objectable\/endpoint-65g5f"
 }
 }
 }

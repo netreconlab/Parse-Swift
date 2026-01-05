@@ -115,10 +115,7 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/className": {
   "abstract" : [
-    {
-      "text" : "The class name of the object.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -152,7 +149,10 @@
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParsePushStatus/endpoint": {
   "abstract" : [
-
+    {
+      "text" : "The Parse Server endpoint for this object.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
