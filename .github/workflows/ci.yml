@@ -133,7 +133,7 @@ jobs:
         with:
           env_vars: LINUX
           fail_ci_if_error: true
-         token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
     timeout-minutes: 15
