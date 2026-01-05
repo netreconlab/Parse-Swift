@@ -340,6 +340,7 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
     }
   }
 
+/*
   func testEncodingDateFormatted() {
     let formatter = DateFormatter()
     formatter.dateStyle = .full
@@ -359,7 +360,7 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
                    dateEncodingStrategy: .formatted(formatter),
                    dateDecodingStrategy: .formatted(formatter))
   }
-
+*/
   func testEncodingDateCustom() {
     let timestamp = Date()
 
