@@ -6,14 +6,14 @@
 //  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseConfigCodableCombineTests: XCTestCase {
+class ParseConfigCodableCombineTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
 
@@ -89,18 +89,14 @@ class ParseConfigCodableCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -116,7 +112,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
-        await userLogin()
+        try await userLogin()
         let key = "welcomeMessage"
         let value = "Hello"
         var configOnServer = [String: AnyCodable]()
@@ -199,7 +195,7 @@ class ParseConfigCodableCombineTests: XCTestCase {
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Update")
 
-        await userLogin()
+        try await userLogin()
 
         let serverResponse = BooleanResponse(result: true)
         let encoded: Data!

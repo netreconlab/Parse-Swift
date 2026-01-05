@@ -99,7 +99,7 @@ public protocol ParseAuthentication: Codable, Sendable {
      */
     func strip(_ user: AuthenticatedUser) -> AuthenticatedUser
 
-    #if canImport(Combine) && compiler(<6.0.0)
+    #if canImport(Combine)
     // MARK: Combine
     /**
      Login a `ParseUser` *asynchronously* using the respective authentication type. Publishes when complete.

@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol SecureStorable: Actor {
-    init(service: String?) async
+protocol SecureStorable {
+    init(service: String?)
     func object<T>(forKey key: String) -> T? where T: Decodable
     func set<T>(object: T?, forKey: String) -> Bool where T: Encodable
     subscript <T>(key: String) -> T? where T: Codable { get }

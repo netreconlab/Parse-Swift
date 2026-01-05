@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct Level: ParseObject {
         var objectId: String?
 

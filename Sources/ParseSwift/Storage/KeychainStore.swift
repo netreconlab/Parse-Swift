@@ -6,12 +6,12 @@
 //  Copyright © 2017 Parse. All rights reserved.
 //
 
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+
 import Foundation
 #if canImport(Security)
 import Security
 #endif
-
-#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 // swiftlint:disable type_body_length
 
@@ -20,7 +20,7 @@ import Security
  It supports any object, with Coding support. All objects are available after the
  first device unlock and are not backed up.
  */
-actor KeychainStore: SecureStorable {
+struct KeychainStore: SecureStorable {
 
     let service: String
     static var objectiveCService: String {
@@ -34,7 +34,7 @@ actor KeychainStore: SecureStorable {
     // This Keychain was used by SDK <= 1.9.7
 	nonisolated(unsafe) static var old: KeychainStore!
 
-    init(service: String? = nil) async {
+    init(service: String? = nil) {
         var keychainService = ".parseSwift.sdk"
         if let service = service {
             keychainService = service
@@ -48,23 +48,23 @@ actor KeychainStore: SecureStorable {
 
     static func createShared() async {
         if KeychainStore.shared == nil {
-            KeychainStore.shared = await KeychainStore()
+            KeychainStore.shared = KeychainStore()
         }
     }
 
     static func createObjectiveC() async {
         if KeychainStore.objectiveC == nil {
-            KeychainStore.objectiveC = await KeychainStore(service: objectiveCService)
+            KeychainStore.objectiveC = KeychainStore(service: objectiveCService)
         }
     }
 
     static func createOld() async {
         if KeychainStore.old == nil {
-            KeychainStore.old = await KeychainStore(service: "shared")
+            KeychainStore.old = KeychainStore(service: "shared")
         }
     }
 
-    func getKeychainQueryTemplate() -> [String: Any] {
+	nonisolated func getKeychainQueryTemplate() -> [String: Any] {
         var query = [String: Any]()
         if !service.isEmpty {
             query[kSecAttrService as String] = service
@@ -73,7 +73,7 @@ actor KeychainStore: SecureStorable {
         return query
     }
 
-    func getObjectiveCKeychainQueryTemplate() -> [String: Any] {
+	nonisolated func getObjectiveCKeychainQueryTemplate() -> [String: Any] {
         var query = [String: Any]()
         if !Self.objectiveCService.isEmpty {
             query[kSecAttrService as String] = Self.objectiveCService
@@ -85,8 +85,10 @@ actor KeychainStore: SecureStorable {
     func copy(_ keychain: KeychainStore,
               oldAccessGroup: ParseKeychainAccessGroup,
               newAccessGroup: ParseKeychainAccessGroup) async throws {
-        if let user = await keychain.data(forKey: ParseStorage.Keys.currentUser,
-                                          accessGroup: oldAccessGroup) {
+        if let user = keychain.data(
+			forKey: ParseStorage.Keys.currentUser,
+			accessGroup: oldAccessGroup
+		) {
             try set(user,
                     forKey: ParseStorage.Keys.currentUser,
                     oldAccessGroup: oldAccessGroup,

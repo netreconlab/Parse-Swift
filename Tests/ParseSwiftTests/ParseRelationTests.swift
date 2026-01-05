@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable function_body_length type_body_length
 
-class ParseRelationTests: XCTestCase {
+class ParseRelationTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?

@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseAnonymousAsyncTests: XCTestCase {
+class ParseAnonymousAsyncTests: XCTestCase, @unchecked Sendable {
     struct User: ParseUser {
 
         //: These are required by ParseObject

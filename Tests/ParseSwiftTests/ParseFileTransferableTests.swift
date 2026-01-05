@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseFileTransferableTests: XCTestCase {
+class ParseFileTransferableTests: XCTestCase, @unchecked Sendable {
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 
     struct FileUploadResponse: Codable, Equatable {
@@ -21,7 +21,7 @@ class ParseFileTransferableTests: XCTestCase {
         let url: URL
     }
 
-    class TestFileTransfer: ParseFileTransferable {
+    final class TestFileTransfer: ParseFileTransferable {
         let name: String
         let url: URL
 
@@ -37,18 +37,18 @@ class ParseFileTransferableTests: XCTestCase {
         func upload(with request: URLRequest,
                     from bodyData: Data?,
                     // swiftlint:disable:next line_length
-                    completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
+                    completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
             try fakeUpload(completion: completion)
         }
 
         func upload(with request: URLRequest,
                     fromFile fileURL: URL,
                     // swiftlint:disable:next line_length
-                    completion: @escaping (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
+                    completion: @escaping @Sendable (Data?, URLResponse?, URLRequest?, Error?) -> Void) throws -> URLSessionUploadTask {
             try fakeUpload(completion: completion)
         }
 
-        func fakeUpload(completion: @escaping (Data?,
+        func fakeUpload(completion: @escaping @Sendable (Data?,
                                                URLResponse?,
                                                URLRequest?,
                                                Error?) -> Void) throws -> URLSessionUploadTask {
@@ -60,7 +60,7 @@ class ParseFileTransferableTests: XCTestCase {
         }
     }
 
-    class TestFileTransferThrowError: ParseFileTransferable {
+    final class TestFileTransferThrowError: ParseFileTransferable {
         let name: String
         let url: URL
 

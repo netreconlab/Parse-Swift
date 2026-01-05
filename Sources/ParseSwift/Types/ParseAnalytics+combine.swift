@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Foundation
 import Combine
 
@@ -33,16 +33,25 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func trackAppOpenedPublisher(launchOptions: [UIApplication.LaunchOptionsKey: Any],
-                                        at date: Date? = nil,
-                                        options: API.Options = []) -> Future<Void, ParseError> {
-
+    static func trackAppOpenedPublisher(
+		launchOptions: [UIApplication.LaunchOptionsKey: Any & Sendable],
+		at date: Date? = nil,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.trackAppOpened(launchOptions: launchOptions,
-                                at: date,
-                                options: options,
-                                completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.trackAppOpened(
+				launchOptions: launchOptions,
+				at: date,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -60,15 +69,25 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func trackAppOpenedPublisher(dimensions: [String: String]? = nil,
-                                        at date: Date? = nil,
-                                        options: API.Options = []) -> Future<Void, ParseError> {
+    static func trackAppOpenedPublisher(
+		dimensions: [String: String]? = nil,
+		at date: Date? = nil,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.trackAppOpened(dimensions: dimensions,
-                                at: date,
-                                options: options,
-                                completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.trackAppOpened(
+				dimensions: dimensions,
+				at: date,
+				options: options
+			) { result in
+				switch result {
+				case .success(let pushedString):
+					promise(.success(pushedString))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -78,11 +97,21 @@ public extension ParseAnalytics {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func trackPublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func trackPublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.track(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.track(
+				options: options
+			) { result in
+				switch result {
+				case .success(let pushedString):
+					promise(.success(pushedString))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -99,16 +128,26 @@ public extension ParseAnalytics {
      - warning: This method makes a copy of the current `ParseAnalytics` and then mutates
      it. You will not have access to the mutated analytic after calling this method.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func trackPublisher(dimensions: [String: String]?,
-                        at date: Date? = nil,
-                        options: API.Options = []) -> Future<Void, ParseError> {
+    func trackPublisher(
+		dimensions: [String: String]?,
+		at date: Date? = nil,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
             var analytic = self
-            analytic.track(dimensions: dimensions,
-                           at: date,
-                           options: options,
-                           completion: promise)
+			nonisolated(unsafe) let promise = promise
+            analytic.track(
+				dimensions: dimensions,
+				at: date,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

@@ -15,7 +15,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
 
@@ -153,7 +153,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var profilePicture: ParseFile?
     }
 
-    final class GameScoreClass: ParseObject {
+    struct GameScoreClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -167,10 +167,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var player = "Jen"
         var level: Level?
         var levels: [Level]?
-        var game: GameClass?
+        var game: Pointer<GameClass>?
 
         //: a custom initializer
-        required init() {
+        init() {
             self.points = 5
         }
 
@@ -194,7 +194,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    final class GameClass: ParseObject {
+    struct GameClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -209,7 +209,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var name = "Hello"
 
         //: a custom initializer
-        required init() {
+        init() {
             self.gameScore = GameScoreClass()
         }
 
@@ -310,13 +310,9 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let user = try await User.login(username: "parse", password: "user")
         MockURLProtocol.removeAll()
@@ -1638,10 +1634,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
 
     @MainActor
     func testDeepSaveDetectCircular() async throws {
-        let score = GameScoreClass(points: 10)
-        let game = GameClass(gameScore: score)
+        var score = GameScoreClass(points: 10)
+        var game = GameClass(gameScore: score)
         game.objectId = "nice"
-        score.game = game
+		score.game = try game.toPointer()
         do {
             _ = try await game.ensureDeepSave()
             XCTFail("Should have thrown error")

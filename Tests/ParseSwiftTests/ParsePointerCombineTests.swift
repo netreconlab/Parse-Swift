@@ -6,14 +6,14 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParsePointerCombineTests: XCTestCase {
+class ParsePointerCombineTests: XCTestCase, @unchecked Sendable {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject

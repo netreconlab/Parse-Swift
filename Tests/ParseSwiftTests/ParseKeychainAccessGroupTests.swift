@@ -13,7 +13,7 @@ import XCTest
 
 // swiftlint:disable line_length unused_optional_binding function_body_length type_body_length
 
-class ParseKeychainAccessGroupTests: XCTestCase {
+class ParseKeychainAccessGroupTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
 
@@ -137,13 +137,9 @@ class ParseKeychainAccessGroupTests: XCTestCase {
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         _ = try await User.login(username: loginUserName, password: loginPassword)
         MockURLProtocol.removeAll()

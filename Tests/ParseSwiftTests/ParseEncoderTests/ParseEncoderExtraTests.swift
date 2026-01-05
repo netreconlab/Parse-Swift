@@ -9,7 +9,7 @@
 import XCTest
 @testable import ParseSwift
 
-class ParseEncoderTests: XCTestCase {
+class ParseEncoderTests: XCTestCase, @unchecked Sendable {
 
     struct Dummy: Codable, Hashable {
         var id: String

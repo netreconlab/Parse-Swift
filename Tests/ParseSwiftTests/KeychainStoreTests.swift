@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class KeychainStoreTests: XCTestCase {
+class KeychainStoreTests: XCTestCase, @unchecked Sendable {
     var testStore: KeychainStore!
     override func setUp() async throws {
         try await super.setUp()
@@ -23,7 +23,7 @@ class KeychainStoreTests: XCTestCase {
                                         clientKey: "clientKey",
                                         primaryKey: "primaryKey",
                                         serverURL: url, testing: true)
-        testStore = await KeychainStore(service: "test")
+        testStore = KeychainStore(service: "test")
     }
 
     override func tearDown() async throws {
@@ -139,7 +139,7 @@ class KeychainStoreTests: XCTestCase {
     }
 
     func testQueryTemplate() async throws {
-        let query = await KeychainStore.shared.getKeychainQueryTemplate()
+        let query = KeychainStore.shared.getKeychainQueryTemplate()
         XCTAssertEqual(query.count, 2)
         let service = await KeychainStore.shared.service
         XCTAssertEqual(query[kSecAttrService as String] as? String, service)

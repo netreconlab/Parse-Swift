@@ -15,7 +15,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParseHookTriggerTests: XCTestCase {
+class ParseHookTriggerTests: XCTestCase, @unchecked Sendable {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject

@@ -15,7 +15,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -169,13 +169,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     func login() async throws {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -656,13 +652,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         serverResponse.customKey = "newValue"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await installation.fetch()
@@ -689,13 +681,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await installation.save()
@@ -861,15 +849,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.save()
@@ -892,15 +876,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.create()
@@ -923,15 +903,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.replace()
@@ -954,15 +930,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.replace()
@@ -984,15 +956,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.update()
@@ -1014,15 +982,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = Date()
         serverResponse.customKey = "newValue"
 
+		let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(InstallationDefaultMerge.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(InstallationDefaultMerge.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         installation = installation.set(\.customKey, to: "newValue")
@@ -1188,13 +1152,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         serverResponse.customKey = "newValue"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         _ = try await installation.delete()
@@ -1217,13 +1177,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
 
         let serverResponse = ParseError(code: .objectNotFound, message: "not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {

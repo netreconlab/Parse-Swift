@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 
     struct FileUploadResponse: Codable {
@@ -316,9 +316,9 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
         let task = downloadTask as URLSessionTask
         // swiftlint:disable:next line_length
-        let uploadCompletion: ((URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, _: Int64, _: Int64) in }
+        let uploadCompletion: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, _: Int64, _: Int64) in }
         // swiftlint:disable:next line_length
-        let downloadCompletion: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, _: Int64, _: Int64) in }
+        let downloadCompletion: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, _: Int64, _: Int64) in }
 
         // Add tasks
         Parse.sessionDelegate.streamDelegates[task] = .init(data: .init())
@@ -358,7 +358,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let expectation2 = XCTestExpectation(description: "Call delegate 2")
 
         // swiftlint:disable:next line_length
-        let uploadCompletion: ((URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, sent: Int64, total: Int64) in
+        let uploadCompletion: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionTask, _: Int64, sent: Int64, total: Int64) in
             if sent < total {
                 Task {
                     let uploadCount = await Parse.sessionDelegate.delegates.uploadDelegates.count
@@ -429,7 +429,7 @@ class ParseFileAsyncTests: XCTestCase { // swiftlint:disable:this type_body_leng
         let expectation2 = XCTestExpectation(description: "Call delegate 2")
 
         // swiftlint:disable:next line_length
-        let downloadCompletion: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, sent: Int64, total: Int64) in
+        let downloadCompletion: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void) = { (_: URLSessionDownloadTask, _: Int64, sent: Int64, total: Int64) in
             if sent < total {
                 Task {
                     let downloadCount = await Parse.sessionDelegate.delegates.downloadDelegates.count

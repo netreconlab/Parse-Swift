@@ -8,6 +8,7 @@
 
 #if canImport(Combine)
 import Foundation
+import Combine
 
 /**
  A default implementation of the `QueryObservable` protocol. Suitable for `ObjectObserved`

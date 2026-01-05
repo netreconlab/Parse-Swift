@@ -7,6 +7,7 @@
 //
 #if canImport(Combine)
 import Foundation
+import Combine
 
 /**
  A default implementation of the `CloudCodeObservable` protocol. Suitable for `ObjectObserved`
@@ -14,7 +15,7 @@ import Foundation
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class CloudViewModel<T: ParseCloudable>: CloudObservable {
+open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendable {
 
     public typealias CloudCodeType = T
     public var cloudCode: T

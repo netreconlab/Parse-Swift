@@ -11,19 +11,19 @@ import Foundation
  A store that supports key/value storage. It should be able
  to handle any object that conforms to encodable and decodable.
  */
-public protocol ParsePrimitiveStorable: Actor {
+public protocol ParsePrimitiveStorable {
     /// Delete an object from the store.
     /// - parameter key: The unique key value of the object.
-    func delete(valueFor key: String) throws
+    mutating func delete(valueFor key: String) async throws
     /// Delete all objects from the store.
-    func deleteAll() throws
+	mutating func deleteAll() async throws
     /// Gets an object from the store based on its `key`.
     /// - parameter key: The unique key value of the object.
-    func get<T: Decodable>(valueFor key: String) throws -> T?
+    func get<T: Decodable>(valueFor key: String) async throws -> T?
     /// Stores an object in the store with a given `key`.
     /// - parameter object: The object to store.
     /// - parameter key: The unique key value of the object.
-    func set<T: Encodable>(_ object: T, for key: String) throws
+	mutating func set<T: Encodable>(_ object: T, for key: String) async throws
 }
 
 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)

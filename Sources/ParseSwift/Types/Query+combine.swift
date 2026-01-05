@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Foundation
 import Combine
 
@@ -19,11 +19,21 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func findPublisher(options: API.Options = []) -> Future<[ResultType], ParseError> {
+    func findPublisher(
+		options: API.Options = []
+	) -> Future<[ResultType], ParseError> {
         Future { promise in
-            self.find(options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.find(
+				options: options
+			) { result in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -40,13 +50,23 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func findExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
-                                            options: API.Options = []) -> Future<[U], ParseError> {
+    func findExplainPublisher<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<[U], ParseError> {
         Future { promise in
-            self.findExplain(usingMongoDB: usingMongoDB,
-                             options: options,
-                             completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.findExplain(
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<[U], ParseError>) in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -59,13 +79,23 @@ public extension Query {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func findAllPublisher(batchLimit: Int? = nil,
-                          options: API.Options = []) -> Future<[ResultType], ParseError> {
+    func findAllPublisher(
+		batchLimit: Int? = nil,
+		options: API.Options = []
+	) -> Future<[ResultType], ParseError> {
         Future { promise in
-            self.findAll(batchLimit: batchLimit,
-                         options: options,
-                         completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.findAll(
+				batchLimit: batchLimit,
+				options: options
+			) { result in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -74,11 +104,21 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func firstPublisher(options: API.Options = []) -> Future<ResultType, ParseError> {
+    func firstPublisher(
+		options: API.Options = []
+	) -> Future<ResultType, ParseError> {
         Future { promise in
-            self.first(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.first(
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -95,13 +135,23 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func firstExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
-                                             options: API.Options = []) -> Future<U, ParseError> {
+    func firstExplainPublisher<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<U, ParseError> {
         Future { promise in
-            self.firstExplain(usingMongoDB: usingMongoDB,
-                              options: options,
-                              completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.firstExplain(
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<U, ParseError>) in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -110,11 +160,21 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func countPublisher(options: API.Options = []) -> Future<Int, ParseError> {
+    func countPublisher(
+		options: API.Options = []
+	) -> Future<Int, ParseError> {
         Future { promise in
-            self.count(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.count(
+				options: options
+			) { result in
+				switch result {
+				case .success(let count):
+					promise(.success(count))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -131,13 +191,23 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func countExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
-                                             options: API.Options = []) -> Future<[U], ParseError> {
+    func countExplainPublisher<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<[U], ParseError> {
         Future { promise in
-            self.countExplain(usingMongoDB: usingMongoDB,
-                              options: options,
-                              completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.countExplain(
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<[U], ParseError>) in
+				switch result {
+				case .success(let count):
+					promise(.success(count))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -148,10 +218,21 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func withCountPublisher(options: API.Options = []) -> Future<([ResultType], Int), ParseError> {
+    func withCountPublisher(
+		options: API.Options = []
+	) -> Future<([ResultType], Int), ParseError> {
         Future { promise in
-            self.withCount(options: options,
-                           completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.withCount(
+				options: options
+			) { result in
+				switch result {
+				case .success(let count):
+					promise(.success(count))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -168,12 +249,23 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func withCountExplainPublisher<U: Decodable>(usingMongoDB: Bool = false,
-                                                 options: API.Options = []) -> Future<[U], ParseError> {
+    func withCountExplainPublisher<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<[U], ParseError> {
         Future { promise in
-            self.withCountExplain(usingMongoDB: usingMongoDB,
-                                  options: options,
-                                  completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.withCountExplain(
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<[U], ParseError>) in
+				switch result {
+				case .success(let count):
+					promise(.success(count))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -186,12 +278,23 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func aggregatePublisher(_ pipeline: [[String: Encodable]],
-                            options: API.Options = []) -> Future<[ResultType], ParseError> {
+    func aggregatePublisher(
+		_ pipeline: [[String: Encodable & Sendable]],
+		options: API.Options = []
+	) -> Future<[ResultType], ParseError> {
         Future { promise in
-            self.aggregate(pipeline,
-                           options: options,
-                           completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.aggregate(
+				pipeline,
+				options: options
+			) { result in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -212,14 +315,25 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func aggregateExplainPublisher<U: Decodable>(_ pipeline: [[String: Encodable]],
-                                                 usingMongoDB: Bool = false,
-                                                 options: API.Options = []) -> Future<[U], ParseError> {
+    func aggregateExplainPublisher<U: Decodable & Sendable>(
+		_ pipeline: [[String: Encodable & Sendable]],
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<[U], ParseError> {
         Future { promise in
-            self.aggregateExplain(pipeline,
-                                  usingMongoDB: usingMongoDB,
-                                  options: options,
-                                  completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.aggregateExplain(
+				pipeline,
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<[U], ParseError>) in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -232,12 +346,23 @@ public extension Query {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func distinctPublisher(_ key: String,
-                           options: API.Options = []) -> Future<[ResultType], ParseError> {
+    func distinctPublisher(
+		_ key: String,
+		options: API.Options = []
+	) -> Future<[ResultType], ParseError> {
         Future { promise in
-            self.distinct(key,
-                          options: options,
-                          completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.distinct(
+				key,
+				options: options
+			) { result in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -258,14 +383,25 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func distinctExplainPublisher<U: Decodable>(_ key: String,
-                                                usingMongoDB: Bool = false,
-                                                options: API.Options = []) -> Future<[U], ParseError> {
+    func distinctExplainPublisher<U: Decodable & Sendable>(
+		_ key: String,
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) -> Future<[U], ParseError> {
         Future { promise in
-            self.distinctExplain(key,
-                                 usingMongoDB: usingMongoDB,
-                                 options: options,
-                                 completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.distinctExplain(
+				key,
+				usingMongoDB: usingMongoDB,
+				options: options
+			) { (result: Result<[U], ParseError>) in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

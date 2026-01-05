@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseHookResponseTests: XCTestCase {
+class ParseHookResponseTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {

@@ -89,7 +89,7 @@ internal struct ParsePushStatusResponse: ParseObject {
     }
 }
 
-class ParsePushTests: XCTestCase {
+class ParsePushTests: XCTestCase, @unchecked Sendable {
 
     struct Installation: ParseInstallation {
         var installationId: String?

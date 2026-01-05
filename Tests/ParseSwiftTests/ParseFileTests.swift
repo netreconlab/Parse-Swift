@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 

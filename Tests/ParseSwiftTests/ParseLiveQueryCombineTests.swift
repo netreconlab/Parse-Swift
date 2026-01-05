@@ -6,13 +6,13 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI) && canImport(Combine) && compiler(<6.0.0)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI) && canImport(Combine)
 import Foundation
 import XCTest
 @testable import ParseSwift
 import Combine
 
-class ParseLiveQueryCombineTests: XCTestCase {
+class ParseLiveQueryCombineTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()

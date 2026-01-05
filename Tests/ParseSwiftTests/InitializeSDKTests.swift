@@ -11,7 +11,7 @@ import XCTest
 
 // swiftlint:disable function_body_length type_body_length
 
-class InitializeSDKTests: XCTestCase {
+class InitializeSDKTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
         var username: String?
@@ -303,13 +303,9 @@ class InitializeSDKTests: XCTestCase {
         foundInstallation.installationId = installationId
 
         let results = QueryResponse<Installation>(results: [foundInstallation], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let nanoSeconds = UInt64(1 * 1_000_000_000)

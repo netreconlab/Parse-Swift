@@ -6,7 +6,7 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
@@ -15,7 +15,7 @@ import Combine
 
 // swiftlint:disable type_body_length
 
-class ParseHookTriggerCombineTests: XCTestCase {
+class ParseHookTriggerCombineTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()

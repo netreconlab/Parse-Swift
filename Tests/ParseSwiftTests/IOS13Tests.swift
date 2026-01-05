@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class IOS13Tests: XCTestCase {
+class IOS13Tests: XCTestCase, @unchecked Sendable {
     struct Level: ParseObject {
         var objectId: String?
 

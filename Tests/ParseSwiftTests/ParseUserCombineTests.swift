@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
@@ -15,7 +15,7 @@ import Combine
 
 // swiftlint:disable function_body_length
 
-class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -98,13 +98,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     func login() async throws {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         _ = try await User.login(username: loginUserName, password: loginPassword)
     }
@@ -112,13 +108,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     func testSignup() async throws {
         let loginResponse = LoginSignupResponse()
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Signup user1")
@@ -172,13 +164,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     func testSignupInstance() async throws {
         let loginResponse = LoginSignupResponse()
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Signup user1")
@@ -237,13 +225,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
     func testLogin() async throws {
         let loginResponse = LoginSignupResponse()
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Login user1")
@@ -308,13 +292,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.username = "stop"
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -374,13 +354,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.username = "stop"
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -440,13 +416,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.username = "stop"
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "LoginAs user1")
@@ -508,13 +480,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = NoBody()
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
@@ -573,13 +541,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = ParseError(code: .internalServer, message: "Object not found")
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Logout user1")
@@ -637,13 +601,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = NoBody()
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Password user1")
@@ -703,13 +663,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = LoginSignupResponse()
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Verify password user1")
@@ -782,13 +738,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = NoBody()
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Verification user1")
@@ -858,13 +810,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.username = "stop"
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -916,13 +864,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.username = "stop"
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -972,14 +916,10 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.createdAt = Date()
 
         var subscriptions = Set<AnyCancellable>()
+		let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try user.getDecoder().decode(User.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try user.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -1018,14 +958,10 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.updatedAt = Date()
 
         var subscriptions = Set<AnyCancellable>()
+		let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try user.getDecoder().decode(User.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try user.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")
@@ -1060,13 +996,9 @@ class ParseUserCombineTests: XCTestCase { // swiftlint:disable:this type_body_le
         let serverResponse = NoBody()
 
         var subscriptions = Set<AnyCancellable>()
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Become user1")

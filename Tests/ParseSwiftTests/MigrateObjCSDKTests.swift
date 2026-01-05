@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_length
+class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -135,9 +135,11 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         try await ParseStorage.shared.deleteAll()
     }
 
-    func setupObjcKeychainSDK(useOldObjCToken: Bool = false,
-                              useBothTokens: Bool = false,
-                              installationId: String) async throws {
+	func setupObjcKeychainSDK(
+		useOldObjCToken: Bool = false,
+		useBothTokens: Bool = false,
+		installationId: String
+	) async throws {
 
         await KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
@@ -163,10 +165,15 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func loginNormally(sessionToken: String) async throws -> User {
         var loginResponse = LoginSignupResponse()
         loginResponse.sessionToken = sessionToken
-
+		let immutableLoginResponse = loginResponse
         MockURLProtocol.mockRequests { _ in
             do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
+                let encoded = try immutableLoginResponse
+					.getEncoder()
+					.encode(
+						immutableLoginResponse,
+						skipKeys: .none
+					)
                 return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
@@ -184,14 +191,15 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()
@@ -228,14 +236,21 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding
+			.jsonDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
+
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()
@@ -272,14 +287,20 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding
+			.jsonDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()

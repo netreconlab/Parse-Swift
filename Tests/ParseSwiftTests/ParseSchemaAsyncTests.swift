@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseSchemaAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct GameScore: ParseObject, ParseQueryScorable {
         //: These are required by ParseObject
         var objectId: String?
@@ -79,13 +79,9 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
 
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await schema.create()
@@ -129,14 +125,10 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
 
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await schema.update()
@@ -159,13 +151,9 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         let serverResponse = schema
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await schema.update()
@@ -210,13 +198,10 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
 
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await schema.fetch()
@@ -259,13 +244,9 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         try await schema.purge()
@@ -303,13 +284,9 @@ class ParseSchemaAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
 
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         try await schema.delete()

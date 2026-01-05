@@ -6,14 +6,14 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseCloudableCombineTests: XCTestCase {
+class ParseCloudableCombineTests: XCTestCase, @unchecked Sendable {
 
     struct Cloud: ParseCloudable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
@@ -48,19 +48,14 @@ class ParseCloudableCombineTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testFunction() {
+    func testFunction() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let response = AnyResultResponse<String?>(result: nil)
-
+		let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let cloud = Cloud(functionJobName: "test")
@@ -81,19 +76,15 @@ class ParseCloudableCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testJob() {
+    func testJob() throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
 
         let response = AnyResultResponse<String?>(result: nil)
 
+		let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let cloud = Cloud(functionJobName: "test")

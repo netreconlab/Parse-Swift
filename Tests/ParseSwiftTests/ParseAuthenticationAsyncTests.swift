@@ -12,11 +12,11 @@ import FoundationNetworking
 #endif
 import XCTest
 @testable import ParseSwift
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Combine
 #endif
 
-class ParseAuthenticationAsyncTests: XCTestCase {
+class ParseAuthenticationAsyncTests: XCTestCase, @unchecked Sendable {
     struct User: ParseUser {
 
         //: These are required by ParseObject
@@ -86,7 +86,7 @@ class ParseAuthenticationAsyncTests: XCTestCase {
             completion(.failure(error))
         }
 
-        #if canImport(Combine) && compiler(<6.0.0)
+        #if canImport(Combine)
         func loginPublisher(authData: [String: String],
                             options: API.Options) -> Future<AuthenticatedUser, ParseError> {
             let error = ParseError(code: .otherCause, message: "Not implemented")
@@ -179,13 +179,9 @@ class ParseAuthenticationAsyncTests: XCTestCase {
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         return try await User.login(username: "parse", password: "user")
     }

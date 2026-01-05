@@ -12,7 +12,7 @@ import CoreLocation
 #endif
 @testable import ParseSwift
 
-class ParseGeoPointTests: XCTestCase {
+class ParseGeoPointTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {

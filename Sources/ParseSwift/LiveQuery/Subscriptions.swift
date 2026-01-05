@@ -10,18 +10,14 @@
 import Foundation
 
 actor Subscriptions {
-    let requestIdGenerator: () -> RequestId
+	var currentRequestId = 0
     var current = [RequestId: ParseLiveQuery.SubscriptionRecord]()
     var pending = [(RequestId, ParseLiveQuery.SubscriptionRecord)]()
 
-    init() {
-        // Simple incrementing generator
-        var currentRequestId = 0
-        requestIdGenerator = {
-            currentRequestId += 1
-            return RequestId(value: currentRequestId)
-        }
-    }
+	func requestIdGenerator() -> RequestId {
+		self.currentRequestId += 1
+		return RequestId(value: self.currentRequestId)
+	}
 }
 
 // MARK: RequestIdGenerator

@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectBatchTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
         // These are required by ParseObject
@@ -487,13 +487,9 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         scoreOnServer2.createdAt = Calendar.current.date(byAdding: .init(day: -2), to: Date())
         scoreOnServer2.ACL = nil
 
+		let encoded = try ParseCoding.jsonEncoder().encode([scoreOnServer, scoreOnServer2])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode([scoreOnServer, scoreOnServer2])
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -704,13 +700,9 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         var scoreOnServer2 = score2
         scoreOnServer2.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
 
+        let encoded = try ParseCoding.jsonEncoder().encode([scoreOnServer, scoreOnServer2])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode([scoreOnServer, scoreOnServer2])
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let saved = try await [score, score2].saveAll()
@@ -1509,7 +1501,7 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-    func testThreadSafeFetchAllAsync() {
+    func testThreadSafeFetchAllAsync() throws {
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
@@ -1526,28 +1518,28 @@ class ParseObjectBatchTests: XCTestCase { // swiftlint:disable:this type_body_le
         scoreOnServer2.ACL = nil
 
         let response = QueryResponse<GameScore>(results: [scoreOnServer, scoreOnServer2], count: 2)
-        let encoded: Data!
-        do {
-           encoded = try ParseCoding.jsonEncoder().encode(response)
-           // Get dates in correct format from ParseDecoding strategy
-           let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-           scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
-           let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
-           scoreOnServer2 = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded2)
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
 
-        } catch {
-            XCTFail("Should have encoded/decoded. Error \(error)")
-            return
-        }
-        MockURLProtocol.mockRequests { _ in
-            let delay = MockURLResponse.addRandomDelay(2)
-            return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
-        }
+		// Get dates in correct format from ParseDecoding strategy
+		let encoded1 = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded1)
+		let encoded2 = try ParseCoding.jsonEncoder().encode(scoreOnServer2)
+		scoreOnServer2 = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded2)
+
+		let immutableScoreOnServer = scoreOnServer
+		let immutableScoreOnServer2 = scoreOnServer2
+
+		MockURLProtocol.mockRequests { _ in
+			let delay = MockURLResponse.addRandomDelay(2)
+			return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
+		}
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.fetchAllAsync(scores: [score, score2],
-                               scoresOnServer: [scoreOnServer, scoreOnServer2],
-                               callbackQueue: .global(qos: .background))
+            self.fetchAllAsync(
+				scores: [score, score2],
+				scoresOnServer: [immutableScoreOnServer, immutableScoreOnServer2],
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif

@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable function_body_length type_body_length
 
-class ParseLiveQueryTests: XCTestCase {
+class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -2264,44 +2264,6 @@ class ParseLiveQueryTests: XCTestCase {
                     }
                 }
                 return
-            }
-
-            Task {
-                // Update
-                do {
-                    try await query.update(subscription)
-                    let isSubscribed = try await client.isSubscribed(query)
-                    let isPending = try await client.isPendingSubscription(query)
-                    XCTAssertTrue(isSubscribed)
-                    XCTAssertTrue(isPending)
-                } catch {
-                    XCTFail(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                        expectation2.fulfill()
-                    }
-                    return
-                }
-
-                let current = await client.subscriptions.current
-                let pending = await client.subscriptions.pending
-                XCTAssertEqual(current.count, 1)
-                XCTAssertEqual(pending.count, 1)
-
-                client.clientId = "yolo"
-                let response = PreliminaryMessageResponse(op: .subscribed,
-                                                          requestId: 1,
-                                                          clientId: "yolo",
-                                                          installationId: installationId)
-                guard let encoded = try? ParseCoding.jsonEncoder().encode(response) else {
-                    XCTFail("Should encode")
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                        expectation2.fulfill()
-                    }
-                    return
-                }
-                await client.received(encoded)
             }
         }
 

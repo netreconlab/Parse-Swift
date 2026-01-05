@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 #if canImport(FoundationNetworking)
@@ -18,7 +18,7 @@ import Combine
 
 // swiftlint:disable type_body_length function_body_length
 
-class ParseFacebookCombineTests: XCTestCase {
+class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
 
@@ -95,13 +95,9 @@ class ParseFacebookCombineTests: XCTestCase {
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         return try await User.login(username: "parse", password: "user")
     }

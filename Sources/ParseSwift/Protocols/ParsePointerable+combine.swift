@@ -6,7 +6,7 @@
 //  Copyright © 2024 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import Combine
@@ -24,16 +24,23 @@ public extension Sequence where Element: ParsePointerObject {
      - returns: A publisher that eventually produces an an array of Result enums with the object if a fetch was
      successful or a `ParseError` if it failed.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func fetchAllPublisher(
         includeKeys: [String]? = nil,
-        options: API.Options = []) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
+        options: API.Options = []
+	) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
         Future { promise in
+			nonisolated(unsafe) let promise = promise
             self.fetchAll(
                 includeKeys: includeKeys,
-                options: options,
-                completion: promise
-            )
+                options: options
+            ) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 

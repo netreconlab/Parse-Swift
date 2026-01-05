@@ -20,7 +20,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class TestParseEncoder: XCTestCase {
+class TestParseEncoder: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()

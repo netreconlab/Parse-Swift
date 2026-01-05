@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParseAnonymousTests: XCTestCase {
+class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
 
@@ -94,13 +94,9 @@ class ParseAnonymousTests: XCTestCase {
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         return try await User.login(username: "parse", password: "user")
     }
@@ -185,8 +181,9 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
+		let immutabledEncoded = encoded
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            return MockURLResponse(data: immutabledEncoded, statusCode: 200)
         }
 
         let currentUser = try await User.current()
@@ -206,8 +203,9 @@ class ParseAnonymousTests: XCTestCase {
             XCTFail("Should encode/decode. Error \(error)")
             return
         }
+		let immutabledEncoded2 = encoded
         MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
+            return MockURLResponse(data: immutabledEncoded2, statusCode: 200)
         }
         let currentUser2 = try await User.current()
         XCTAssertEqual(currentUser, currentUser2)
@@ -391,41 +389,26 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation1 = XCTestExpectation(description: "Fetch user1")
-        user.become(sessionToken: "newValue") { result in
 
-            switch result {
-            case .success(let become):
-                XCTAssert(become.hasSameObjectId(as: userOnServer))
-                guard let becomeCreatedAt = become.createdAt,
-                    let becomeUpdatedAt = become.updatedAt else {
-                        XCTFail("Should unwrap dates")
-                        return
-                }
-                guard let originalCreatedAt = user.createdAt,
-                    let originalUpdatedAt = user.updatedAt else {
-                        XCTFail("Should unwrap dates")
-                        return
-                }
-                XCTAssertEqual(becomeCreatedAt, originalCreatedAt)
-                XCTAssertGreaterThan(becomeUpdatedAt, originalUpdatedAt)
-                XCTAssertNil(become.ACL)
+        let become = try await user.become(sessionToken: "newValue")
+		XCTAssert(become.hasSameObjectId(as: userOnServer))
+		guard let becomeCreatedAt = become.createdAt,
+			let becomeUpdatedAt = become.updatedAt else {
+				XCTFail("Should unwrap dates")
+				return
+		}
+		guard let originalCreatedAt = user.createdAt,
+			let originalUpdatedAt = user.updatedAt else {
+				XCTFail("Should unwrap dates")
+				return
+		}
+		XCTAssertEqual(becomeCreatedAt, originalCreatedAt)
+		XCTAssertGreaterThan(becomeUpdatedAt, originalUpdatedAt)
+		XCTAssertNil(become.ACL)
 
-                // Should be updated in memory
-                XCTAssertEqual(userOnServer?.updatedAt, becomeUpdatedAt)
-                XCTAssertFalse(ParseAnonymous<User>.isLinked(with: become))
-
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		// Should be updated in memory
+		XCTAssertEqual(userOnServer?.updatedAt, becomeUpdatedAt)
+		XCTAssertFalse(ParseAnonymous<User>.isLinked(with: become))
     }
 
     func testReplaceAnonymousUser() async throws {
@@ -551,26 +534,11 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.anonymous.login { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertNil(user.password)
-                XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		let user = try await User.anonymous.login()
+		XCTAssertEqual(user, userOnServer)
+		XCTAssertEqual(user.username, "hello")
+		XCTAssertNil(user.password)
+		XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
     func testLoginAuthDataAsync() async throws {
@@ -598,26 +566,11 @@ class ParseAnonymousTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation1 = XCTestExpectation(description: "Login")
-
-        User.anonymous.login(authData: .init()) { result in
-            switch result {
-
-            case .success(let user):
-                XCTAssertEqual(user, userOnServer)
-                XCTAssertEqual(user.username, "hello")
-                XCTAssertNil(user.password)
-                XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		let user = try await User.anonymous.login(authData: .init())
+		XCTAssertEqual(user, userOnServer)
+		XCTAssertEqual(user.username, "hello")
+		XCTAssertNil(user.password)
+		XCTAssertTrue(ParseAnonymous<User>.isLinked(with: user))
     }
 
     func testCantReplaceAnonymousWithDifferentUser() async throws {

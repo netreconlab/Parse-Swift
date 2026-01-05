@@ -14,7 +14,7 @@ import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable:next type_body_length
-class ParseHookTriggerRequestTests: XCTestCase {
+class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseCloudUser {
 

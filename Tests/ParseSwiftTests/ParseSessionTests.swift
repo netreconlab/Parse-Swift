@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseSessionTests: XCTestCase {
+class ParseSessionTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseUser {
 

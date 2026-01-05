@@ -14,7 +14,7 @@ import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable:next type_body_length
-class ParseHookFunctionRequestTests: XCTestCase {
+class ParseHookFunctionRequestTests: XCTestCase, @unchecked Sendable {
 
     struct Parameters: ParseHookParametable {
         var hello = "world"

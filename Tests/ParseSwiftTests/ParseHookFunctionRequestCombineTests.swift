@@ -6,14 +6,14 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseHookFunctionRequestCombineTests: XCTestCase {
+class ParseHookFunctionRequestCombineTests: XCTestCase, @unchecked Sendable {
     struct Parameters: ParseHookParametable {
         var hello = "world"
     }

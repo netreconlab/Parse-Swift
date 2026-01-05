@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Foundation
 import Combine
 
@@ -24,13 +24,23 @@ public extension ParseObject {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func fetchPublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(includeKeys: includeKeys,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -53,13 +63,23 @@ public extension ParseObject {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func savePublisher(ignoringCustomObjectIdConfig: Bool = false,
-                       options: API.Options = []) -> Future<Self, ParseError> {
+    func savePublisher(
+		ignoringCustomObjectIdConfig: Bool = false,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -69,11 +89,21 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -83,11 +113,21 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func replacePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.replace(options: options,
-                         completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.replace(
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -97,11 +137,21 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    internal func updatePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -111,10 +161,21 @@ public extension ParseObject {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -130,13 +191,23 @@ public extension Sequence where Element: ParseObject {
      - returns: A publisher that eventually produces an an array of Result enums with the object if a fetch was
      successful or a `ParseError` if it failed.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func fetchAllPublisher(includeKeys: [String]? = nil,
-                           options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+    func fetchAllPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchAll(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let objects):
+					promise(.success(objects))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

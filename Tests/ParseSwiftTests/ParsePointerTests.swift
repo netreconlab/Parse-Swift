@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParsePointerTests: XCTestCase {
+class ParsePointerTests: XCTestCase, @unchecked Sendable {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -349,22 +349,16 @@ class ParsePointerTests: XCTestCase {
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        let encoded: Data!
-        do {
-            encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
-
+        let encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		let immutableScoreOnServer = scoreOnServer
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+            self.fetchAsync(score: pointer, scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif

@@ -6,14 +6,14 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseHookTriggerRequestCombineTests: XCTestCase {
+class ParseHookTriggerRequestCombineTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseCloudUser {
 

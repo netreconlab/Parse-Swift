@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigCodableTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct Config: ParseConfig {
         var welcomeMessage: String?
@@ -90,18 +90,14 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -112,7 +108,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testUpdateStorageIfNeeded() async throws {
-        await userLogin()
+        try await userLogin()
         let key = "welcomeMessage"
         let value = "Hello"
         var configDictionary = [String: AnyCodable]()
@@ -135,7 +131,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testDeleteFromStorageOnLogout() async throws {
-        await userLogin()
+        try await userLogin()
         let key = "welcomeMessage"
         let value = "Hello"
         var configDictionary = [String: AnyCodable]()
@@ -223,7 +219,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testFetch() async throws {
-        await userLogin()
+        try await userLogin()
 
         let key = "welcomeMessage"
         let value = "Hello"
@@ -274,7 +270,7 @@ class ParseConfigCodableTests: XCTestCase { // swiftlint:disable:this type_body_
     }
 
     func testSave() async throws {
-        await userLogin()
+        try await userLogin()
 
         let serverResponse = BooleanResponse(result: true)
         let encoded: Data!

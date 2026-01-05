@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable line_length function_body_length
 
-class ParsePushPayloadAnyTests: XCTestCase {
+class ParsePushPayloadAnyTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()

@@ -9,6 +9,7 @@
 
 #if canImport(Combine)
 import Foundation
+import Combine
 
 /**
  A default implementation of the `QuerySubscribable` protocol. Suitable for `ObjectObserved`

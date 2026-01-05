@@ -6,12 +6,12 @@
 //
 
 // MARK: ParseStorage
-actor ParseStorage {
-    static let shared = ParseStorage()
+struct ParseStorage {
+	nonisolated(unsafe) static var shared = ParseStorage()
 
     var backingStore: ParsePrimitiveStorable!
 
-    func use(_ store: ParsePrimitiveStorable) {
+	mutating func use(_ store: ParsePrimitiveStorable) {
         self.backingStore = store
     }
 
@@ -34,7 +34,7 @@ actor ParseStorage {
         static let currentAccessGroup = "_currentAccessGroup"
     }
 
-    func setBackingStoreToNil() {
+    mutating func setBackingStoreToNil() {
         backingStore = nil
     }
 }
@@ -42,12 +42,12 @@ actor ParseStorage {
 // MARK: Act as a proxy for ParsePrimitiveStorable
 extension ParseStorage {
 
-    func delete(valueFor key: String) async throws {
+    mutating func delete(valueFor key: String) async throws {
         try requireBackingStore()
         return try await backingStore.delete(valueFor: key)
     }
 
-    func deleteAll() async throws {
+	mutating func deleteAll() async throws {
         try requireBackingStore()
         return try await backingStore.deleteAll()
     }
@@ -57,9 +57,8 @@ extension ParseStorage {
         return try await backingStore.get(valueFor: key)
     }
 
-    func set<T>(_ object: T, for key: String) async throws where T: Encodable & Sendable {
+	mutating func set<T>(_ object: T, for key: String) async throws where T: Encodable & Sendable {
         try requireBackingStore()
         return try await backingStore.set(object, for: key)
     }
-
 }

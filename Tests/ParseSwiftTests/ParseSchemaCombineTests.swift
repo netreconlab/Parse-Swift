@@ -6,14 +6,14 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseSchemaCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct GameScore: ParseObject, ParseQueryScorable {
         //: These are required by ParseObject
         var objectId: String?
@@ -77,14 +77,9 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
-
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Save schema")
@@ -148,14 +143,9 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
-
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Update schema")
@@ -219,14 +209,9 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
-
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Fetch schema")
@@ -290,14 +275,9 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
-
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Purge schema")
@@ -356,14 +336,9 @@ class ParseSchemaCombineTests: XCTestCase { // swiftlint:disable:this type_body_
         var serverResponse = schema
         serverResponse.indexes = schema.pendingIndexes
         serverResponse.pendingIndexes.removeAll()
-
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let expectation1 = XCTestExpectation(description: "Delete schema")

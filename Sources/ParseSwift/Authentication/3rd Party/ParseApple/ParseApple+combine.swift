@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Foundation
 import Combine
 
@@ -20,15 +20,25 @@ public extension ParseApple {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func loginPublisher(user: String,
-                        identityToken: Data,
-                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func loginPublisher(
+		user: String,
+		identityToken: Data,
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.login(user: user,
-                       identityToken: identityToken,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.login(
+				user: user,
+				identityToken: identityToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -38,13 +48,23 @@ public extension ParseApple {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func loginPublisher(authData: [String: String],
-                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func loginPublisher(
+		authData: [String: String],
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.login(authData: authData,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.login(
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -58,15 +78,25 @@ public extension ParseApple {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func linkPublisher(user: String,
-                       identityToken: Data,
-                       options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func linkPublisher(
+		user: String,
+		identityToken: Data,
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.link(user: user,
-                      identityToken: identityToken,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.link(
+				user: user,
+				identityToken: identityToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -76,13 +106,23 @@ public extension ParseApple {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func linkPublisher(authData: [String: String],
-                       options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func linkPublisher(
+		authData: [String: String],
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.link(authData: authData,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.link(
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

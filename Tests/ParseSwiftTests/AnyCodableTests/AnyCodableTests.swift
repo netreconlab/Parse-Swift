@@ -3,7 +3,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class AnyCodableTests: XCTestCase {
+class AnyCodableTests: XCTestCase, @unchecked Sendable {
 
     struct SomeCodable: Codable {
         var string: String

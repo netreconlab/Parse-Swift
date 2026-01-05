@@ -9,7 +9,7 @@
 import XCTest
 @testable import ParseSwift
 
-class ParsePolygonTests: XCTestCase {
+class ParsePolygonTests: XCTestCase, @unchecked Sendable {
 
     struct FakeParsePolygon: Encodable, Hashable {
         private let __type: String = "Polygon" // swiftlint:disable:this identifier_name

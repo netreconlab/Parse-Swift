@@ -15,7 +15,7 @@ struct FileUploadResponse: Codable {
     let url: URL
 }
 
-class ParseFileManagerTests: XCTestCase {
+class ParseFileManagerTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()

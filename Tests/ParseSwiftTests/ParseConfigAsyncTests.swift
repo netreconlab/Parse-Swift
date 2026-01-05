@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigAsyncTests: XCTestCase {
+class ParseConfigAsyncTests: XCTestCase, @unchecked Sendable {
     struct Config: ParseConfig {
         var welcomeMessage: String?
         var winningNumber: Int?
@@ -93,18 +93,14 @@ class ParseConfigAsyncTests: XCTestCase {
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -117,7 +113,7 @@ class ParseConfigAsyncTests: XCTestCase {
     @MainActor
     func testFetch() async throws {
 
-        await userLogin()
+        try await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -154,7 +150,7 @@ class ParseConfigAsyncTests: XCTestCase {
     @MainActor
     func testSave() async throws {
 
-        await userLogin()
+        try await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 

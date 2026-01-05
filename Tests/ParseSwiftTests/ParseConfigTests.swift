@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseConfigTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct Config: ParseConfig {
         var welcomeMessage: String?
@@ -91,18 +91,14 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         try await ParseStorage.shared.deleteAll()
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -113,7 +109,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     func testUpdateStorageIfNeeded() async throws {
-        await userLogin()
+        try await userLogin()
         let config = Config()
         do {
             _ = try await Config.current()
@@ -132,7 +128,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     func testDeleteFromStorageOnLogout() async throws {
-        await userLogin()
+        try await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
         do {
@@ -190,7 +186,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     func testFetch() async throws {
-        await userLogin()
+        try await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -234,7 +230,7 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
 
     func testSave() async throws {
-        await userLogin()
+        try await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 
@@ -267,9 +263,8 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
         #endif
     }
 
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     func testFetchAsync() async throws {
-        await userLogin()
+        try await userLogin()
         let config = Config()
 
         var configOnServer = config
@@ -287,41 +282,24 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Config save")
-        config.fetch { result in
-            switch result {
+        let fetched = try await config.fetch()
+		XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
+		let immutableConfigOnServer = configOnServer
+		let currentConfig = try await Config.current()
+		XCTAssertEqual(currentConfig.welcomeMessage, immutableConfigOnServer.welcomeMessage)
 
-            case .success(let fetched):
-                XCTAssertEqual(fetched.welcomeMessage, configOnServer.welcomeMessage)
-                let immutableConfigOnServer = configOnServer
-                Task {
-                    let currentConfig = try await Config.current()
-                    XCTAssertEqual(currentConfig.welcomeMessage, immutableConfigOnServer.welcomeMessage)
-
-                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-                    // Should be updated in Keychain
-                    let keychainConfig: CurrentConfigContainer<Config>?
-                    = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
-                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage,
-                                   immutableConfigOnServer.welcomeMessage)
-                    #endif
-                    expectation.fulfill()
-                }
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation.fulfill()
-            }
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation], timeout: 10.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation], timeout: 10.0)
-        #endif
+		#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+		// Should be updated in Keychain
+		let keychainConfig: CurrentConfigContainer<Config>?
+		= try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+		XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage,
+					   immutableConfigOnServer.welcomeMessage)
+		#endif
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveAsync() async throws {
-        await userLogin()
+        try await userLogin()
         var config = Config()
         config.welcomeMessage = "Hello"
 
@@ -338,37 +316,18 @@ class ParseConfigTests: XCTestCase { // swiftlint:disable:this type_body_length
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        let expectation = XCTestExpectation(description: "Config save")
-        config.save { result in
-            switch result {
+        let saved = try await config.save()
+		XCTAssertTrue(saved)
+		let immutableConfig = config
+		let currentConfig = try await Config.current()
+		XCTAssertEqual(currentConfig.welcomeMessage, immutableConfig.welcomeMessage)
 
-            case .success(let saved):
-                XCTAssertTrue(saved)
-                let immutableConfig = config
-                Task {
-                    let currentConfig = try await Config.current()
-                    XCTAssertEqual(currentConfig.welcomeMessage, immutableConfig.welcomeMessage)
-
-                    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-                    // Should be updated in Keychain
-                    let keychainConfig: CurrentConfigContainer<Config>?
-                        = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
-                    XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
-                    #endif
-                    expectation.fulfill()
-                }
-
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                expectation.fulfill()
-            }
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        await fulfillment(of: [expectation], timeout: 10.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation], timeout: 10.0)
-        #endif
+		#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+		// Should be updated in Keychain
+		let keychainConfig: CurrentConfigContainer<Config>?
+			= try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentConfig)
+		XCTAssertEqual(keychainConfig?.currentConfig?.welcomeMessage, immutableConfig.welcomeMessage)
+		#endif
     }
     #endif
-#endif
 }

@@ -5,7 +5,7 @@ import XCTest
 
 // Test has objective-c
 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-class AnyEncodableTests: XCTestCase {
+class AnyEncodableTests: XCTestCase, @unchecked Sendable {
 
     struct SomeEncodable: Encodable {
         var string: String

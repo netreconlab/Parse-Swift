@@ -1,19 +1,12 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 
 import PackageDescription
 
+
 let sharedSwiftSettings: [SwiftSetting] = [
-	.enableUpcomingFeature("DisableOutwardActorInference"),
-	.enableUpcomingFeature("DynamicActorIsolation"),
-	.enableUpcomingFeature("ForwardTrailingClosures"),
-	.enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
-	.enableUpcomingFeature("ImplicitOpenExistentials"),
-	.enableUpcomingFeature("InferSendableFromCaptures"),
-	.enableUpcomingFeature("IsolatedDefaultValues"),
-	.enableUpcomingFeature("GlobalConcurrency"),
-	.enableUpcomingFeature("NonfrozenEnumExhaustivity"),
-	.enableUpcomingFeature("RegionBasedIsolation"),
-	.enableExperimentalFeature("StrictConcurrency")
+	.enableUpcomingFeature("MemberImportVisibility"),
+	.enableUpcomingFeature("InferIsolatedConformances"),
+	.enableUpcomingFeature("ImmutableWeakCaptures")
 ]
 
 let package = Package(

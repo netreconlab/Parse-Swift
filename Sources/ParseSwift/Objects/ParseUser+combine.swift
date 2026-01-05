@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 import Foundation
 import Combine
 
@@ -26,15 +26,25 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func signupPublisher(username: String,
-                                password: String,
-                                options: API.Options = []) -> Future<Self, ParseError> {
+    static func signupPublisher(
+		username: String,
+		password: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.signup(username: username,
-                        password: password,
-                        options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.signup(
+				username: username,
+				password: password,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -49,11 +59,19 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     func signupPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
-            self.signup(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.signup(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -72,19 +90,29 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func loginPublisher(username: String? = nil,
-                               email: String? = nil,
-                               password: String,
-                               authData: [String: [String: String]?]? = nil,
-                               options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginPublisher(
+		username: String? = nil,
+		email: String? = nil,
+		password: String,
+		authData: [String: [String: String]?]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.login(username: username,
-                       email: email,
-                       password: password,
-                       authData: authData,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.login(
+				username: username,
+				email: email,
+				password: password,
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -100,10 +128,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func becomePublisher(sessionToken: String, options: API.Options = []) -> Future<Self, ParseError> {
+    func becomePublisher(
+		sessionToken: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.become(sessionToken: sessionToken, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.become(
+				sessionToken: sessionToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -118,11 +159,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func becomePublisher(sessionToken: String,
-                                options: API.Options = []) -> Future<Self, ParseError> {
+    static func becomePublisher(
+		sessionToken: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.become(sessionToken: sessionToken, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.become(
+				sessionToken: sessionToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -148,11 +201,23 @@ public extension ParseUser {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func loginAsPublisher(objectId: String,
-                                 options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginAsPublisher(
+		objectId: String,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.loginAs(objectId: objectId, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.loginAs(
+				objectId: objectId,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -172,10 +237,21 @@ public extension ParseUser {
      - warning: The latest **PFUser** from the Objective-C SDK should be saved to your
      Parse Server before calling this method.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func loginUsingObjCKeychainPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    static func loginUsingObjCKeychainPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.loginUsingObjCKeychain(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.loginUsingObjCKeychain(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 #endif
@@ -190,10 +266,19 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
     static func logoutPublisher(options: API.Options = []) -> Future<Void, ParseError> {
         Future { promise in
-            Self.logout(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.logout(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -207,11 +292,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func passwordResetPublisher(email: String,
-                                       options: API.Options = []) -> Future<Void, ParseError> {
+    static func passwordResetPublisher(
+		email: String,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.passwordReset(email: email, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.passwordReset(
+				email: email,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -229,15 +326,25 @@ public extension ParseUser {
      [issue](https://github.com/parse-community/parse-server/issues/7784) to be addressed on
      the Parse Server, othewise you should set `usingPost = false`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func verifyPasswordPublisher(password: String,
-                                        usingPost: Bool = false,
-                                        options: API.Options = []) -> Future<Self, ParseError> {
+    static func verifyPasswordPublisher(
+		password: String,
+		usingPost: Bool = false,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.verifyPassword(password: password,
-                                usingPost: usingPost,
-                                options: options,
-                                completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.verifyPassword(
+				password: password,
+				usingPost: usingPost,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -250,11 +357,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    static func verificationEmailPublisher(email: String,
-                                           options: API.Options = []) -> Future<Void, ParseError> {
+    static func verificationEmailPublisher(
+		email: String,
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.verificationEmail(email: email, options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.verificationEmail(
+				email: email,
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -270,13 +389,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func fetchPublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(includeKeys: includeKeys,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -301,13 +430,23 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func savePublisher(options: API.Options = [],
-                       ignoringCustomObjectIdConfig: Bool = false) -> Future<Self, ParseError> {
+    func savePublisher(
+		options: API.Options = [],
+		ignoringCustomObjectIdConfig: Bool = false
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -319,11 +458,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -336,11 +485,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func replacePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.replace(options: options,
-                         completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.replace(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -353,11 +512,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    internal func updatePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -370,10 +539,21 @@ public extension ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -392,13 +572,23 @@ public extension Sequence where Element: ParseUser {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-	@available(*, deprecated, message: "Use async await instead. Will be removed in version 7.0.0.")
-    func fetchAllPublisher(includeKeys: [String]? = nil,
-                           options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+    func fetchAllPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchAll(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let users):
+					promise(.success(users))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

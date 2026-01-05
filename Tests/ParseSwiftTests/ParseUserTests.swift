@@ -15,7 +15,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseUserTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -155,13 +155,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func userSignUp() async throws {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         _ = try await loginResponse.createUser().signup()
         MockURLProtocol.removeAll()
@@ -361,13 +357,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testSignup() async throws {
         let loginResponse = LoginSignupResponse()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let signedUp = try await User.signup(username: loginUserName, password: loginUserName)
@@ -397,13 +389,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var loginResponse = LoginSignupResponse()
         loginResponse.email = nil
 
+		let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         var user = User()
         user.username = loginUserName
@@ -436,13 +424,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testSignupInstance() async throws {
         let loginResponse = LoginSignupResponse()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         var user = User()
@@ -486,13 +470,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     @MainActor
     func testLogin() async throws {
         let loginResponse = LoginSignupResponse()
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let signedUp = try await User.login(username: loginUserName, password: loginUserName)
@@ -522,13 +502,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func login() async throws {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         _ = try await User.login(username: loginUserName, password: loginPassword)
     }
@@ -557,13 +533,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let sessionToken = serverResponse.sessionToken else {
@@ -599,13 +571,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let sessionToken = serverResponse.sessionToken else {
@@ -650,13 +618,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let serverResponse = ParseError(code: .internalServer,
                                         message: "Object not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -672,13 +636,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let objectId = serverResponse.objectId else {
@@ -712,13 +672,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let serverResponse = ParseError(code: .internalServer,
                                         message: "Object not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -745,13 +701,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let oldInstallationId = try await BaseParseInstallation.current().installationId else {
@@ -802,13 +754,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let serverResponse = ParseError(code: .internalServer, message: "Object not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         guard let oldInstallationId = try await BaseParseInstallation.current().installationId else {
@@ -876,13 +824,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testPasswordReset() async throws {
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         _ = try await User.passwordReset(email: "hello@parse.org")
@@ -960,13 +904,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         serverResponse.sessionToken = nil
 
+		let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let currentUser = try await User.verifyPassword(password: "world", usingPost: true)
@@ -999,13 +939,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = LoginSignupResponse()
         serverResponse.sessionToken = nil
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let currentUser = try await User.verifyPassword(password: "world", usingPost: false)
@@ -1035,13 +971,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testVerifyPasswordNotLoggedIn() async throws {
         let serverResponse = LoginSignupResponse()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let currentUser = try await User.verifyPassword(password: "world")
@@ -1088,13 +1020,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
     func testVerificationEmail() async throws {
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         _ = try await User.verificationEmail(email: "hello@parse.org")
@@ -1177,13 +1105,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.sessionToken = "newValue"
         serverResponse.username = "stop"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await user.fetch()
@@ -1437,13 +1361,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = user
         serverResponse.updatedAt = user.updatedAt?.addingTimeInterval(+300)
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.save()
@@ -1467,13 +1387,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = current.createdAt
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.save()
@@ -1492,13 +1408,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.createdAt = nil
         serverResponse.updatedAt = current.updatedAt?.addingTimeInterval(+300)
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let user = current
@@ -1681,14 +1593,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = Date()
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+		let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.create()
@@ -1709,14 +1617,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = user
         serverResponse.createdAt = Date()
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.replace()
@@ -1737,14 +1641,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = user
         serverResponse.updatedAt = Date()
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.replace()
@@ -1780,14 +1680,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = user
         serverResponse.updatedAt = Date()
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         user = user.set(\.objectId, to: "naw")
@@ -1814,14 +1710,20 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = loginResponse
         serverResponse.updatedAt = Date()
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try serverResponse
+			.getDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let originalUser = try await User.current()
@@ -1847,14 +1749,10 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = user
         serverResponse.updatedAt = Date()
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		serverResponse = try serverResponse.getDecoder().decode(User.self, from: encoded)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await user.update()
@@ -1875,14 +1773,20 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         var serverResponse = loginResponse
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try serverResponse
+			.getDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let originalUser = try await User.current()
@@ -1909,14 +1813,20 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         serverResponse.updatedAt = Date()
         serverResponse.customKey = "be"
 
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try serverResponse.getDecoder().decode(UserDefaultMerge.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try serverResponse
+			.getDecoder()
+			.decode(
+				UserDefaultMerge.self,
+				from: encoded
+			)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         user = user.set(\.customKey, to: "be")
@@ -2191,9 +2101,11 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         user.objectId = objectId
         user.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         user.ACL = nil
+		let immutableUser = user
 
         var userOnServer = user
         userOnServer.updatedAt = Date()
+		let immutableUserOnServer = userOnServer
         let encoded: Data!
         do {
             encoded = try userOnServer.getEncoder().encode(userOnServer, skipKeys: .none)
@@ -2209,7 +2121,7 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
 
         DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(user: user, userOnServer: userOnServer, callbackQueue: .global(qos: .background))
+            self.updateAsync(user: immutableUser, userOnServer: immutableUserOnServer, callbackQueue: .global(qos: .background))
         }
     }
     #endif
@@ -2252,13 +2164,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
 
         let serverResponse = NoBody()
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         _ = try await user.delete()
@@ -2283,13 +2191,9 @@ class ParseUserTests: XCTestCase { // swiftlint:disable:this type_body_length
         let user = try await User.current()
         let serverResponse = ParseError(code: .objectNotFound, message: "Not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {

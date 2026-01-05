@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if canImport(Combine) && compiler(<6.0.0)
+#if canImport(Combine)
 
 import Foundation
 import XCTest
@@ -15,7 +15,7 @@ import Combine
 
 // swiftlint:disable function_body_length
 
-class ParseObjectCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
