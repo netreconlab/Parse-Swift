@@ -17,4 +17,10 @@ public struct ParseHookTrigger: ParseHookTriggerable {
     public var url: URL?
 
     public init() {}
+
+	enum CodingKeys: String, CodingKey {
+		case className
+		case trigger = "triggerName"
+		case url
+	}
 }
