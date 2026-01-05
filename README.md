@@ -1,7 +1,7 @@
 <!-- markdownlint-disable -->
 ![parse-swift](https://user-images.githubusercontent.com/8621344/204069535-e1882bb0-bbcb-4178-87e6-58fd1bed96d1.png)
 
-<h3 align="center">iOS · macOS · watchOS · tvOS · visionOS · Linux · Android · Windows</h3>
+<h3 align="center">iOS · macOS · watchOS · tvOS · visionOS · Linux · Android · Windows · WebAssembly</h3>
 
 <h4 align="center">
 ⭐️ ParseSwift was highlighted in <a href="https://iosdevweekly.com/issues/560#start" target="_blank"> issue #560</a> of <a href="https://iosdevweekly.com" target="_blank"> iOS Dev Weekly</a> and discussed in <a href="https://blog.swiftpackageindex.com/posts/swift-package-indexing-episode-5/" target="_blank"> episode 5</a> of <a href="https://swiftpackageindexing.transistor.fm" target="_blank">Swift Package Index Twitter Spaces</a> </h3>
