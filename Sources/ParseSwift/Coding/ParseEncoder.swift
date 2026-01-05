@@ -918,7 +918,7 @@ extension _ParseEncoder {
 
             // We can pop because the closure encoded something.
             return self.storage.popContainer()
-        @unknown default:
+        default:
             fatalError("Unhandled")
         }
     }
