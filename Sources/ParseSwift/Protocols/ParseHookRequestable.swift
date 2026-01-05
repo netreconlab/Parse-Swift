@@ -80,7 +80,7 @@ extension ParseHookRequestable {
                             completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         guard let user = user else {
             let error = ParseError(code: .otherCause,
-                                   message: "Resquest does not contain a user.")
+                                   message: "Request does not contain a user.")
             completion(.failure(error))
             return
         }

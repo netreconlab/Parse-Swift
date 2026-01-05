@@ -316,7 +316,7 @@ public extension Sequence where Element: ParseObject {
 		let updatedOptions = options
 
 		let commands = try map({ try $0.deleteCommand() })
-		let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
+		let batchLimit = limit ?? ParseConstants.batchLimit
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
 		let batches = BatchUtils.splitArray(
 			commands,
@@ -485,7 +485,7 @@ internal extension Sequence where Element: ParseObject {
         var childObjects = [String: PointerType]()
         var childFiles = [String: ParseFile]()
         var commands = [API.Command<Self.Element, Self.Element>]()
-        let objects = map { $0 }
+        let objects = Array(self)
         for object in objects {
             let (savedChildObjects, savedChildFiles) = try await object
                 .ensureDeepSave(
@@ -526,7 +526,7 @@ internal extension Sequence where Element: ParseObject {
 
 		let finalChildObjects = childObjects
 		let finalChildFiles = childFiles
-		let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
+		let batchLimit = limit ?? ParseConstants.batchLimit
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
 		let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
 

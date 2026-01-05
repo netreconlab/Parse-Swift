@@ -355,7 +355,7 @@ public extension Sequence where Element: ParseInstallation {
 		let updatedOptions = options
 
 		let commands = try map({ try $0.deleteCommand() })
-		let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
+		let batchLimit = limit ?? ParseConstants.batchLimit
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
 		let batches = BatchUtils.splitArray(
 			commands,
@@ -381,7 +381,7 @@ public extension Sequence where Element: ParseInstallation {
 			}
 		}
 		try? await Self.Element.updateStorageIfNeeded(
-			self.compactMap {$0},
+			Array(self),
 			deleting: true
 		)
 		return returnBatch
@@ -439,7 +439,7 @@ internal extension Sequence where Element: ParseInstallation {
         var childObjects = [String: PointerType]()
         var childFiles = [String: ParseFile]()
         var commands = [API.Command<Self.Element, Self.Element>]()
-        let objects = map { $0 }
+        let objects = Array(self)
         for object in objects {
             let (savedChildObjects, savedChildFiles) = try await object
                 .ensureDeepSave(
@@ -480,7 +480,7 @@ internal extension Sequence where Element: ParseInstallation {
 
 		let finalChildObjects = childObjects
 		let finalChildFiles = childFiles
-		let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
+		let batchLimit = limit ?? ParseConstants.batchLimit
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
 		let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
 
