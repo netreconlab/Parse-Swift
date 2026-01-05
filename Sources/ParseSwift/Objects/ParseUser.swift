@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Objects that conform to the `ParseUser` protocol have a local representation of a user persisted to the

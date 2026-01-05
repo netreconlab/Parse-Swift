@@ -19,6 +19,9 @@
 // ===----------------------------------------------------------------------===//
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 // This rule does not allow types with underscores in their names.
 // swiftlint:disable type_name

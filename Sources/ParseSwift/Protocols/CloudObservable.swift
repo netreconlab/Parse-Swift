@@ -7,6 +7,9 @@
 //
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  This protocol describes the interface for creating a view model for `ParseCloud` functions and jobs.

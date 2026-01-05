@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 internal struct BaseParseInstallation: ParseInstallation {
     var deviceType: String?

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Objects that conform to the `ParseConfig` protocol are able to access the Config on the Parse Server.

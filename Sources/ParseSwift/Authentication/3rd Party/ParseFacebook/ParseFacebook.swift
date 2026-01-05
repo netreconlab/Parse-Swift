@@ -6,6 +6,9 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 // swiftlint:disable line_length
 

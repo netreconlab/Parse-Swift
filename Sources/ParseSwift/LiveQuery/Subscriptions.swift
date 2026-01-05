@@ -8,6 +8,9 @@
 
 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 actor Subscriptions {
 	var currentRequestId = 0

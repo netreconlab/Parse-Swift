@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /// The base protocol for a `ParseObject`.
 /// - note: You should not use this directly and instead use `ParseObject`.

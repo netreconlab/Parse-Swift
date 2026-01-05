@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  A default implementation of the `QuerySubscribable` protocol using closures for callbacks.
