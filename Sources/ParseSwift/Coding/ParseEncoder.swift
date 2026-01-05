@@ -894,10 +894,7 @@ extension _ParseEncoder {
 
         case .iso8601:
 			return NSString(string: _iso8601Formatter.string(from: date))
-/* // BAKER: Commented out because linux, windows, etc. having trouble compiling
-        case .formatted(let formatter):
-            return NSString(string: formatter.string(from: date))
-*/
+
         case .custom(let closure):
             let depth = self.storage.count
             do {

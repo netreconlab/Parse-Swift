@@ -340,27 +340,6 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
     }
   }
 
-/*
-  func testEncodingDateFormatted() {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .full
-    formatter.timeStyle = .full
-
-    let timestamp = Date(timeIntervalSince1970: 1000)
-    let expectedJSON = "\"\(formatter.string(from: timestamp))\"".data(using: .utf8)!
-
-    _testRoundTrip(of: timestamp,
-                   expectedJSON: expectedJSON,
-                   dateEncodingStrategy: .formatted(formatter),
-                   dateDecodingStrategy: .formatted(formatter))
-
-    // Optional dates should encode the same way.
-    _testRoundTrip(of: Optional(timestamp),
-                   expectedJSON: expectedJSON,
-                   dateEncodingStrategy: .formatted(formatter),
-                   dateDecodingStrategy: .formatted(formatter))
-  }
-*/
   func testEncodingDateCustom() {
     let timestamp = Date()
 
