@@ -20,28 +20,51 @@ struct MockURLProtocolMock: Sendable {
     var response: @Sendable (URLRequest) -> MockURLResponse?
 }
 
-class MockURLProtocol: URLProtocol, @unchecked Sendable {
-    var mock: MockURLProtocolMock?
+final class MockURLProtocol: URLProtocol, @unchecked Sendable {
+	private let mockLock = NSLock()
+	private let loadingLock = NSLock()
+	private var _mock: MockURLProtocolMock?
+	var mock: MockURLProtocolMock? {
+		get {
+			mockLock.lock()
+			defer { mockLock.unlock() }
+			return _mock
+		}
+		set {
+			mockLock.lock()
+			defer { mockLock.unlock() }
+			_mock = newValue
+		}
+	}
 	nonisolated(unsafe) static var mocks: [MockURLProtocolMock] = []
-    private var loading: Bool = false
-    var isLoading: Bool {
-        return loading
-    }
+	private var _loading: Bool = false
+    private var loading: Bool {
+		get {
+			loadingLock.lock()
+			defer { loadingLock.unlock() }
+			return _loading
+		}
+		set {
+			loadingLock.lock()
+			defer { loadingLock.unlock() }
+			_loading = newValue
+		}
+	}
 
-    class func mockRequests(
+    static func mockRequests(
 		response: @escaping @Sendable (URLRequest) -> MockURLResponse?
 	) {
         mockRequestsPassing(Int.max, test: { _ in return true }, with: response)
     }
 
-    class func mockRequestsPassing(
+	static func mockRequestsPassing(
 		_ test: @escaping @Sendable (URLRequest) -> Bool,
 		with response: @escaping @Sendable (URLRequest) -> MockURLResponse?
 	) {
         mockRequestsPassing(Int.max, test: test, with: response)
     }
 
-    class func mockRequestsPassing(
+	static func mockRequestsPassing(
 		_ attempts: Int,
 		test: @escaping @Sendable (URLRequest) -> Bool,
 		with response: @escaping @Sendable (URLRequest) -> MockURLResponse?
@@ -57,14 +80,14 @@ class MockURLProtocol: URLProtocol, @unchecked Sendable {
         }
     }
 
-    class func removeAll() {
+	static func removeAll() {
         if !mocks.isEmpty {
             URLProtocol.unregisterClass(MockURLProtocol.self)
         }
         mocks.removeAll()
     }
 
-    class func firstMockForRequest(
+	static func firstMockForRequest(
 		_ request: URLRequest
 	) -> MockURLProtocolMock? {
         for mock in mocks {
@@ -75,13 +98,13 @@ class MockURLProtocol: URLProtocol, @unchecked Sendable {
         return nil
     }
 
-    override class func canInit(
+    override static func canInit(
 		with request: URLRequest
 	) -> Bool {
         MockURLProtocol.firstMockForRequest(request) != nil
     }
 
-    override class func canInit(
+    override static func canInit(
 		with task: URLSessionTask
 	) -> Bool {
         guard let originalRequest = task.originalRequest else {
@@ -90,7 +113,7 @@ class MockURLProtocol: URLProtocol, @unchecked Sendable {
         return MockURLProtocol.firstMockForRequest(originalRequest) != nil
     }
 
-    override class func canonicalRequest(
+    override static func canonicalRequest(
 		for request: URLRequest
 	) -> URLRequest {
         request
