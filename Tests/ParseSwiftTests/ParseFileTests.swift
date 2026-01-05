@@ -719,11 +719,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileStreamProgress() async throws {
@@ -765,11 +761,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileStreamCancel() async throws {
@@ -812,11 +804,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdateFileError() async throws {
@@ -837,7 +825,6 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         }
     }
 
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveAysnc() async throws {
 
@@ -876,11 +863,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileProgressAsync() async throws {
@@ -922,11 +905,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileCancelAsync() async throws {
@@ -970,11 +949,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveWithSpecifyingMimeAysnc() async throws {
@@ -1014,11 +989,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveLocalFileAysnc() async throws {
@@ -1061,11 +1032,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
     #endif
 
@@ -1088,11 +1055,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
@@ -1139,11 +1102,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testFetchFileAysnc() async throws {
@@ -1183,11 +1142,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testFetchFileProgressAsync() async throws {
@@ -1229,11 +1184,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveCloudFileProgressAysnc() async throws {
@@ -1279,11 +1230,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveCloudFileAysnc() async throws {
@@ -1326,11 +1273,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteFileAysnc() async throws {
@@ -1363,11 +1306,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteFileAysncError() async throws {
@@ -1399,12 +1338,7 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
     #endif
-#endif
 } // swiftlint:disable:this file_length

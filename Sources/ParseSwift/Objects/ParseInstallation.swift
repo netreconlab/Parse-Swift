@@ -280,7 +280,7 @@ public extension ParseInstallation {
         currentContainer.currentInstallation?.originalData = nil
         try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
+        try? KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
         #endif
     }
 
@@ -294,7 +294,7 @@ public extension ParseInstallation {
     internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         // Prepare new installation
         await BaseParseInstallation.createNewInstallationIfNeeded()

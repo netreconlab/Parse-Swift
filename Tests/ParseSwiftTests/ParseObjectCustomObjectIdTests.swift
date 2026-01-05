@@ -912,11 +912,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1029,11 +1025,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1560,11 +1552,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUserSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1655,11 +1643,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUserSaveAll() async throws {
@@ -2182,11 +2166,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testInstallationSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -2282,11 +2262,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testInstallationUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {

@@ -295,11 +295,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLoginUsingObjCKeychainOldSessionTokenKey() async throws {
@@ -366,11 +362,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLoginUsingObjCKeychainUseNewOverOld() async throws {
@@ -437,11 +429,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedIn() async throws {
@@ -471,11 +459,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             expectation2.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLoginUsingObjCKeychainAlreadyLoggedInWithDiffererentSession() async throws {
@@ -501,11 +485,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteObjCKeychain() async throws {
@@ -578,11 +558,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testDeleteObjCKeychainAlreadyMigrated() async throws {
@@ -635,11 +611,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             }
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testDeleteObjCKeychainNoObjcKeychain() async throws {
@@ -671,11 +643,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
@@ -703,11 +671,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
             expectation1.fulfill()
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 }
 #endif

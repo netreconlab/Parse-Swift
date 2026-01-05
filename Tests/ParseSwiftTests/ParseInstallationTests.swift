@@ -1755,7 +1755,6 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         XCTAssertThrowsError(try installation2.fetchCommand(include: nil))
     }
 
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     func testSaveCurrentAsyncMainQueue() async throws {
         var installation = try await Installation.current()
         installation.objectId = testInstallationObjectId
@@ -1856,7 +1855,6 @@ class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:dis
         XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
         #endif
     }
-#endif
 
     @MainActor
     func testDeleteCommand() async throws {

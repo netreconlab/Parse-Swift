@@ -348,14 +348,8 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
-
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testReplaceAnonymousWithBecome() async throws {
@@ -453,11 +447,7 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testReplaceAnonymousUserBody() async throws {
@@ -501,11 +491,7 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testLoginAsync() async throws {
@@ -591,12 +577,7 @@ class ParseAnonymousTests: XCTestCase, @unchecked Sendable {
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
     #endif
-#endif
 }

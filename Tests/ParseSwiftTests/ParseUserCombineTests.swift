@@ -154,11 +154,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSignupInstance() async throws {
@@ -215,11 +211,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLogin() async throws {
@@ -271,11 +263,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testBecome() async throws {
@@ -338,11 +326,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testBecomeTypeMethod() async throws {
@@ -400,11 +384,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testLoginAs() async throws {
@@ -466,11 +446,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testLogout() async throws {
@@ -527,11 +503,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 
         }, receiveValue: { _ in })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testLogoutError() async throws {
@@ -590,11 +562,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testPasswordReset() async throws {
@@ -619,11 +587,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testPasswordResetError() async throws {
@@ -652,11 +616,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testVerifyPassword() async throws {
@@ -693,11 +653,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             expectation2.fulfill()
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testVerifyPasswordError() async throws {
@@ -727,11 +683,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testVerificationEmail() async throws {
@@ -756,11 +708,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
 
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testVerificationEmailError() async throws {
@@ -789,11 +737,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             XCTFail("Should have thrown ParseError")
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testFetch() async throws {
@@ -843,11 +787,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSave() async throws {
@@ -897,11 +837,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testCreate() async throws {
@@ -939,11 +875,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             XCTAssertEqual(saved.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdate() async throws {
@@ -980,11 +912,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             XCTAssertEqual(saved.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDelete() async throws {
@@ -1031,11 +959,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testFetchAll() async throws {
@@ -1131,11 +1055,7 @@ class ParseUserCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
         })
         publisher.store(in: &subscriptions)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }
 

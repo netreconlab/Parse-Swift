@@ -135,7 +135,7 @@ public extension ParseUser {
         guard let currentUserInMemory: CurrentUserContainer<Self>
                 = try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentUser) else {
             #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-            return try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
+            return try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentUser)
             #else
             return nil
             #endif
@@ -148,7 +148,7 @@ public extension ParseUser {
         currentContainer?.currentUser?.originalData = nil
         try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
+        try? KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentUser)
         #endif
     }
 
@@ -156,7 +156,7 @@ public extension ParseUser {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await URLSession.liveQuery.closeAll()
-        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
+        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentUser)
         #endif
         await Self.setCurrentContainer(nil)
     }

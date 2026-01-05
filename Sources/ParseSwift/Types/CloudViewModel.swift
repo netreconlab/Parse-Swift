@@ -17,31 +17,74 @@ import Combine
  */
 open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendable {
 
-    public typealias CloudCodeType = T
-    public var cloudCode: T
+	private let resultsLock = NSLock()
+	private let cloudCodeLock = NSLock()
+	private let errorLock = NSLock()
+	private var _results: T.ReturnType? {
+		willSet {
+			if newValue != nil {
+				self.objectWillChange.send()
+			}
+		}
+	}
+	private var _cloudCode: T
+	private var _error: ParseError? {
+		willSet {
+			if newValue != nil {
+				_results = nil
+				self.objectWillChange.send()
+			}
+		}
+	}
+
+	public typealias CloudCodeType = T
+	public var cloudCode: T {
+		get {
+			cloudCodeLock.lock()
+			defer { cloudCodeLock.unlock() }
+			return _cloudCode
+		}
+
+		set {
+			cloudCodeLock.lock()
+			defer { cloudCodeLock.unlock() }
+			_cloudCode = newValue
+		}
+	}
 
     /// Updates and notifies when the new results have been retrieved.
     open var results: T.ReturnType? {
-        willSet {
-            if newValue != nil {
-                self.error = nil
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			resultsLock.lock()
+			defer { resultsLock.unlock() }
+			return _results
+		}
+
+		set {
+			resultsLock.lock()
+			defer { resultsLock.unlock() }
+			error = nil
+			_results = newValue
+		}
     }
 
     /// Updates and notifies when there is an error retrieving the results.
     open var error: ParseError? {
-        willSet {
-            if newValue != nil {
-                self.results = nil
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			errorLock.lock()
+			defer { errorLock.unlock() }
+			return _error
+		}
+
+		set {
+			errorLock.lock()
+			defer { errorLock.unlock() }
+			_error = newValue
+		}
     }
 
     required public init(cloudCode: T) {
-        self.cloudCode = cloudCode
+        self._cloudCode = cloudCode
     }
 
     @MainActor

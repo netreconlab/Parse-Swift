@@ -242,11 +242,7 @@ class ParseLinkedInCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testLinkAuthData() async throws {
@@ -296,11 +292,7 @@ class ParseLinkedInCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUnlink() async throws {
@@ -353,11 +345,7 @@ class ParseLinkedInCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUnlinkPassUser() async throws {
@@ -410,11 +398,7 @@ class ParseLinkedInCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 }
 

@@ -92,8 +92,8 @@ internal func deleteKeychainIfNeeded() async {
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? await KeychainStore.old?.deleteAll()
-            try? await KeychainStore.shared.deleteAll()
+            try? KeychainStore.old?.deleteAll()
+            try? KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
         clearCache()
@@ -151,11 +151,11 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
             KeychainStore.createOld()
-            try? await KeychainStore.shared.copy(KeychainStore.old,
+            try? KeychainStore.shared.copy(KeychainStore.old,
                                                  oldAccessGroup: configuration.keychainAccessGroup,
                                                  newAccessGroup: configuration.keychainAccessGroup)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? await KeychainStore.old.deleteAll()
+            try? KeychainStore.old.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {

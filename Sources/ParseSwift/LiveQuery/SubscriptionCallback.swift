@@ -13,6 +13,12 @@ import Foundation
  */
 open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
 
+	private let lock = NSLock()
+	private var _query: Query<T>
+	fileprivate var eventHandlers = [(Query<T>, Event<T>) -> Void]()
+	fileprivate var subscribeHandlers = [(Query<T>, Bool) -> Void]()
+	fileprivate var unsubscribeHandlers = [(Query<T>) -> Void]()
+
 	public var query: Query<T> {
 		get {
 			lock.lock()
@@ -25,12 +31,8 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
 			_query = newValue
 		}
 	}
-	private let lock = NSLock()
-	private var _query: Query<T>
+
     public typealias Object = T
-    fileprivate var eventHandlers = [(Query<T>, Event<T>) -> Void]()
-    fileprivate var subscribeHandlers = [(Query<T>, Bool) -> Void]()
-    fileprivate var unsubscribeHandlers = [(Query<T>) -> Void]()
 
     /**
      Creates a new subscription that can be used to handle updates.

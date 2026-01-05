@@ -32,7 +32,7 @@ internal struct BaseParseInstallation: ParseInstallation {
             currentContainer.currentInstallation?.installationId == installationId else {
             try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
             #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-            try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+            try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
             #endif
             _ = Self.currentContainer
             return

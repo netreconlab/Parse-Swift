@@ -347,7 +347,6 @@ class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
         XCTAssertEqual(downloadCount2, 0)
     }
 
-    // swiftlint:disable:next function_body_length
     func testParseURLSessionDelegateUpload() async throws {
         // swiftlint:disable:next line_length
         let downloadTask = URLSession.shared.downloadTask(with: .init(fileURLWithPath: "http://localhost:1337/parse/files/applicationId/d3a37aed0672a024595b766f97133615_logo.svg"))
@@ -406,11 +405,7 @@ class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
                                               didSendBodyData: 0,
                                               totalBytesSent: 0,
                                               totalBytesExpectedToSend: 10)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -481,11 +476,7 @@ class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
                                               didWriteData: 0,
                                               totalBytesWritten: 0,
                                               totalBytesExpectedToWrite: 10)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testParseURLSessionDelegateStream() async throws {
@@ -530,10 +521,6 @@ class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
         await Parse.sessionDelegate.delegates.updateTask(task, queue: queue)
 
         Parse.sessionDelegate.urlSession(URLSession.parse, task: task, needNewBodyStream: streamCompletion)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }

@@ -206,11 +206,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSave() async throws {
@@ -263,11 +259,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testCreate() async throws {
@@ -309,11 +301,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             XCTAssertEqual(fetched.updatedAt, serverResponse.createdAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdate() async throws {
@@ -354,11 +342,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             XCTAssertEqual(fetched.updatedAt, serverResponse.updatedAt)
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDelete() async throws {
@@ -402,11 +386,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testFetchAll() async throws {
@@ -504,11 +484,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testBecome() async throws {
@@ -604,11 +580,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             }
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testBecomeMissingObjectId() async throws {
@@ -634,11 +606,7 @@ class ParseInstallationCombineTests: XCTestCase, @unchecked Sendable { // swiftl
             expectation1.fulfill()
         })
         publisher.store(in: &subscriptions)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 }
 

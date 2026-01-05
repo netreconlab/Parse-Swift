@@ -292,11 +292,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLinkLimitedLogin() async throws {
@@ -357,11 +353,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLinkGraphAPILogin() async throws {
@@ -423,11 +415,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testLinkAuthData() async throws {
@@ -493,11 +481,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testUnlinkLimitedLogin() async throws {
@@ -567,11 +551,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testUnlinkGraphAPILogin() async throws {
@@ -641,11 +621,7 @@ class ParseFacebookCombineTests: XCTestCase, @unchecked Sendable {
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }
 

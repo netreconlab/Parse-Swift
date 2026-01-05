@@ -18,17 +18,54 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
+open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @unchecked Sendable {
+
+	private let eventLock = NSLock()
+	private let subscribedLock = NSLock()
+	private let unsubscribedLock = NSLock()
+	private let errorLock = NSLock()
+
+	private var _event: (query: Query<T>, event: Event<T>)? {
+		willSet {
+			if newValue != nil {
+				subscribed = nil
+				unsubscribed = nil
+				self.objectWillChange.send()
+			}
+		}
+	}
+	private var _subscribed: (query: Query<T>, isNew: Bool)? {
+		willSet {
+			if newValue != nil {
+				unsubscribed = nil
+				event = nil
+				self.objectWillChange.send()
+			}
+		}
+	}
+	private var _unsubscribed: Query<T>? {
+		willSet {
+			if newValue != nil {
+				subscribed = nil
+				event = nil
+				self.objectWillChange.send()
+			}
+		}
+	}
 
     /// Updates and notifies when there is a new event related to a specific query.
     open var event: (query: Query<T>, event: Event<T>)? {
-        willSet {
-            if newValue != nil {
-                subscribed = nil
-                unsubscribed = nil
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			eventLock.lock()
+			defer { eventLock.unlock() }
+			return _event
+		}
+
+		set {
+			eventLock.lock()
+			defer { eventLock.unlock() }
+			_event = newValue
+		}
     }
 
     /// If **true** the LiveQuery subscription is currently active,
@@ -39,13 +76,17 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
 
     /// Updates and notifies when a subscription request has been fulfilled and if it is new.
     open var subscribed: (query: Query<T>, isNew: Bool)? {
-        willSet {
-            if newValue != nil {
-                unsubscribed = nil
-                event = nil
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			subscribedLock.lock()
+			defer { subscribedLock.unlock() }
+			return _subscribed
+		}
+
+		set {
+			subscribedLock.lock()
+			defer { subscribedLock.unlock() }
+			_subscribed = newValue
+		}
     }
 
     /// If **true** the LiveQuery subscription is currently inactive,
@@ -56,13 +97,17 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
 
     /// Updates and notifies when an unsubscribe request has been fulfilled.
     open var unsubscribed: Query<T>? {
-        willSet {
-            if newValue != nil {
-                subscribed = nil
-                event = nil
-                self.objectWillChange.send()
-            }
-        }
+		get {
+			unsubscribedLock.lock()
+			defer { unsubscribedLock.unlock() }
+			return _unsubscribed
+		}
+
+		set {
+			unsubscribedLock.lock()
+			defer { unsubscribedLock.unlock() }
+			_unsubscribed = newValue
+		}
     }
 
     /**
