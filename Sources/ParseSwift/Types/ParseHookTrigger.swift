@@ -13,7 +13,7 @@ import Foundation
  */
 public struct ParseHookTrigger: ParseHookTriggerable {
     public var className: String?
-    public var triggerName: ParseHookTriggerType?
+    public var trigger: ParseHookTriggerType?
     public var url: URL?
 
     public init() {}

@@ -2921,7 +2921,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         let geoPoint2 = try ParseGeoPoint(latitude: latitude2, longitude: longitude2)
         let geoPoint3 = try ParseGeoPoint(latitude: latitude3, longitude: longitude3)
         let polygon = [geoPoint1, geoPoint2, geoPoint3]
-        let constraint = withinPolygon(key: "yolo", points: polygon)
+        let constraint = geoPoint("yolo", within: polygon)
         let query = GameScore.query(constraint)
         XCTAssertEqual(query.where.description, expected)
     }
@@ -2939,7 +2939,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         let geoPoint2 = try ParseGeoPoint(latitude: latitude2, longitude: longitude2)
         let geoPoint3 = try ParseGeoPoint(latitude: latitude3, longitude: longitude3)
         let polygon = try ParsePolygon(geoPoint1, geoPoint2, geoPoint3)
-        let constraint = withinPolygon(key: "yolo", polygon: polygon)
+        let constraint = geoPoint("yolo", within: polygon)
         let query = GameScore.query(constraint)
         XCTAssertEqual(query.where.description, expected)
     }
@@ -2956,7 +2956,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
             ]
         ]
         let geoPoint = try ParseGeoPoint(latitude: 10, longitude: 20)
-        let constraint = polygonContains(key: "yolo", point: geoPoint)
+        let constraint = polygon("yolo", contains: geoPoint)
         let query = GameScore.query(constraint)
         let queryWhere = query.`where`
 

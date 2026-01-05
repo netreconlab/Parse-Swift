@@ -23,10 +23,6 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
     public var headers: [String: String]?
     /// The type of Parse Hook Trigger.
     public var trigger: ParseHookTriggerType?
-    @available(*, deprecated, message: "Use \"trigger\" instead.")
-    public var triggerName: String? {
-        trigger?.rawValue
-    }
     public var clients: Int?
     /// The  from the hook call.
     public var file: ParseFile?
