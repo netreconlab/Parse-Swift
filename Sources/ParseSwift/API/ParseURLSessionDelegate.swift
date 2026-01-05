@@ -12,6 +12,7 @@ import FoundationNetworking
 #endif
 
 class ParseURLSessionDelegate: NSObject, @unchecked Sendable {
+	private let lock = NSLock()
     var callbackQueue: DispatchQueue
     var authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
@@ -101,17 +102,22 @@ extension ParseURLSessionDelegate: URLSessionDataDelegate {
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     needNewBodyStream completionHandler: @escaping (InputStream?) -> Void) {
+		lock.lock()
+		defer { lock.unlock() }
         if let stream = streamDelegates[task] {
             completionHandler(stream)
         }
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+		lock.lock()
+		defer { lock.unlock() }
         streamDelegates.removeValue(forKey: task)
-        Task {
-            await delegates.removeUpload(task)
+		Task { [weak self] in
+			guard let self else { return }
+			await self.delegates.removeUpload(task)
             if let downloadTask = task as? URLSessionDownloadTask {
-                await delegates.removeDownload(downloadTask)
+				await self.delegates.removeDownload(downloadTask)
             }
         }
     }
