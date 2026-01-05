@@ -104,7 +104,7 @@ jobs:
 
   xcode-test-oldest:
     timeout-minutes: 25
-    needs: spm-test
+    needs: linux
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v6
@@ -124,16 +124,16 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
         run: swift build --enable-test-discovery --enable-code-coverage -v
-      - name: Prepare codecov
-        run: |
-          cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
-          llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          env_vars: LINUX
-          fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+      #- name: Prepare codecov
+      #  run: |
+      #    cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
+      #    llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
+      #- name: Upload coverage to Codecov
+      #  uses: codecov/codecov-action@v5
+      #  with:
+      #    env_vars: LINUX
+      #    fail_ci_if_error: true
+      #   token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
     timeout-minutes: 15
@@ -156,7 +156,7 @@ jobs:
   
   docs:
     timeout-minutes: 10
-    needs: spm-test
+    needs: linux
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v6
@@ -166,7 +166,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   cocoapods:
-    needs: spm-test
+    needs: linux
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v6
