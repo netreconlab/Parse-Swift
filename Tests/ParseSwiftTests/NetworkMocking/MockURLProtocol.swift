@@ -11,9 +11,6 @@ import Foundation
 import FoundationNetworking
 #endif
 
-typealias MockURLProtocolRequestTestClosure = (URLRequest) -> Bool
-typealias MockURLResponseContructingClosure = (URLRequest) -> MockURLResponse?
-
 struct MockURLProtocolMock: Sendable {
     var attempts: Int
     var test: @Sendable (URLRequest) -> Bool
