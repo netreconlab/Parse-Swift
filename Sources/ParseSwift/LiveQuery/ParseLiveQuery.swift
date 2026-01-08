@@ -119,12 +119,25 @@ public class ParseLiveQuery: NSObject, @unchecked Sendable {
 
 	private let authenticationLock = NSLock()
 	private let receiveLock = NSLock()
+	private let taskLock = NSLock()
 	private weak var _authenticationDelegate: ParseLiveQueryDelegate?
 	private weak var _receiveDelegate: ParseLiveQueryDelegate?
 	nonisolated(unsafe) static var isConfiguring: Bool = false
 
     let notificationQueue: DispatchQueue
-    var task: URLSessionWebSocketTask!
+	var task: URLSessionWebSocketTask! {
+		get {
+			taskLock.lock()
+			defer { taskLock.unlock() }
+			return _task
+		}
+		set {
+			taskLock.lock()
+			defer { taskLock.unlock() }
+			_task = newValue
+		}
+	}
+	private var _task: URLSessionWebSocketTask!
     var url: URL!
     var clientId: String!
     var attempts: Int = 1 {
@@ -186,10 +199,11 @@ Not attempting to open ParseLiveQuery socket anymore
                 with: "%2B"
             )
         url = components.url
-        self.task = await URLSession.liveQuery.createTask(
+        let newTask = await URLSession.liveQuery.createTask(
 			self.url,
 			taskDelegate: self
 		)
+		self.task = newTask
         try await self.resumeTask()
         if isDefault {
             Self.defaultClient = self
@@ -294,15 +308,22 @@ Not attempting to open ParseLiveQuery socket anymore
 extension ParseLiveQuery {
 
     func resumeTask() async throws {
+		guard let task else {
+			throw ParseError(
+				code: .other,
+				message: "No task available to resume a live query connection"
+			)
+		}
         switch self.task.state {
         case .suspended:
             await URLSession.liveQuery.receive(task)
         case .completed, .canceling:
             let oldTask = self.task
-            self.task = await URLSession.liveQuery.createTask(
+            let newTask = await URLSession.liveQuery.createTask(
 				self.url,
 				taskDelegate: self
 			)
+			self.task = newTask
             if let oldTask = oldTask {
                 await URLSession.liveQuery.removeTask(oldTask)
             }
@@ -410,8 +431,16 @@ extension ParseLiveQuery {
 
         if self.status == .socketEstablished {
             Task {
+				guard let task else {
+					let parseError = ParseError(
+						code: .other,
+						message: "No task available to open a live query connection"
+					)
+					completion(parseError)
+					return
+				}
                 do {
-                    try await URLSession.liveQuery.connect(self.task)
+                    try await URLSession.liveQuery.connect(task)
                     await self.setStatus(.connecting)
                     completion(nil)
                 } catch {
@@ -437,15 +466,16 @@ extension ParseLiveQuery {
     /// Manually disconnect from the `ParseLiveQuery` Server.
     public func close() async {
         if self.status == .connected {
-            self.task.cancel(with: .goingAway, reason: nil)
+            self.task?.cancel(with: .goingAway, reason: nil)
             self.isDisconnectedByUser = true
             let oldTask = self.task
             await self.setStatus(.socketNotEstablished)
             // Prepare new task for future use.
-            self.task = await URLSession.liveQuery.createTask(
+            let newTask = await URLSession.liveQuery.createTask(
 				self.url,
 				taskDelegate: self
 			)
+			self.task = newTask
             if let oldTask = oldTask {
                 await URLSession.liveQuery.removeTask(oldTask)
             }
@@ -464,12 +494,20 @@ extension ParseLiveQuery {
      or nil if no error occurred.
      */
     public func sendPing(pongReceiveHandler: @escaping @Sendable (Error?) -> Void) {
-        if self.task.state == .running {
+		guard let task else {
+			let parseError = ParseError(
+				code: .other,
+				message: "No task available to ping a live query connection"
+			)
+			pongReceiveHandler(parseError)
+			return
+		}
+        if task.state == .running {
             URLSession.liveQuery.sendPing(task, pongReceiveHandler: pongReceiveHandler)
         } else {
             let error = ParseError(code: .otherCause,
                                    // swiftlint:disable:next line_length
-                                   message: "ParseLiveQuery Error: socket status needs to be \"\(URLSessionTask.State.running.rawValue)\" before pinging server. Current status is \"\(self.task.state.rawValue)\". Try calling \"open()\" to change socket status.")
+                                   message: "ParseLiveQuery Error: socket status needs to be \"\(URLSessionTask.State.running.rawValue)\" before pinging server. Current status is \"\(task.state.rawValue)\". Try calling \"open()\" to change socket status.")
             pongReceiveHandler(error)
         }
     }
@@ -478,7 +516,13 @@ extension ParseLiveQuery {
         await self.subscriptions.updatePending([(requestId, record)])
         Task {
             if self.status == .connected {
-                try? await URLSession.liveQuery.send(record.messageData, task: self.task)
+				guard let task else {
+					throw ParseError(
+						code: .other,
+						message: "No task available to send data over a live query connection"
+					)
+				}
+                try? await URLSession.liveQuery.send(record.messageData, task: task)
             } else {
                 try await self.open()
             }
