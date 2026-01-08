@@ -314,7 +314,7 @@ extension ParseLiveQuery {
 				message: "No task available to resume a live query connection"
 			)
 		}
-        switch self.task.state {
+        switch task.state {
         case .suspended:
             await URLSession.liveQuery.receive(task)
         case .completed, .canceling:
