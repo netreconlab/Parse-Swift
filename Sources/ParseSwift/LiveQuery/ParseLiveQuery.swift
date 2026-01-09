@@ -316,15 +316,17 @@ extension ParseLiveQuery {
 		}
         switch task.state {
         case .suspended:
+			task.resume()
             await URLSession.liveQuery.receive(task)
         case .completed, .canceling:
             let oldTask = task
-            let newTask = await URLSession.liveQuery.createTask(
+			await URLSession.liveQuery.removeTask(oldTask)
+			let newTask = await URLSession.liveQuery.createTask(
 				self.url,
 				taskDelegate: self
 			)
 			self.task = newTask
-			await URLSession.liveQuery.removeTask(oldTask)
+			try await resumeTask()
         case .running:
             try await self.open(isUserWantsToConnect: false)
         @unknown default:
@@ -468,15 +470,15 @@ extension ParseLiveQuery {
             self.isDisconnectedByUser = true
             let oldTask = self.task
             await self.setStatus(.socketNotEstablished)
-            // Prepare new task for future use.
+			if let oldTask = oldTask {
+				await URLSession.liveQuery.removeTask(oldTask)
+			}
+			// Prepare new task for future use.
             let newTask = await URLSession.liveQuery.createTask(
 				self.url,
 				taskDelegate: self
 			)
 			self.task = newTask
-            if let oldTask = oldTask {
-                await URLSession.liveQuery.removeTask(oldTask)
-            }
         }
     }
 
