@@ -67,8 +67,8 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
         try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try KeychainStore.shared?.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
-        try KeychainStore.old?.deleteAll()
+        try KeychainStore.createObjectiveC().deleteAllObjectiveC()
+        try KeychainStore.createOld().deleteAll()
         URLSession.shared.configuration.urlCache?.removeAllCachedResponses()
         #endif
         try await ParseStorage.shared.deleteAll()
@@ -523,7 +523,6 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testMigrateOldKeychainToNew() async throws {
-        KeychainStore.createOld()
         var user = BaseParseUser()
         user.objectId = "wow"
         var userContainer = CurrentUserContainer<BaseParseUser>()
@@ -548,11 +547,12 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
                                       lastCurrentUserObjectId: user.objectId,
                                       useCurrentUser: true)
         let version = "1.9.7"
-        try KeychainStore.old.set(version, for: ParseStorage.Keys.currentVersion)
-        try KeychainStore.old.set(userContainer, for: ParseStorage.Keys.currentUser)
-        try KeychainStore.old.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
-        try KeychainStore.old.set(configContainer, for: ParseStorage.Keys.currentConfig)
-        try KeychainStore.old.set(aclContainer, for: ParseStorage.Keys.defaultACL)
+		let oldKeychain = KeychainStore.createOld()
+        try oldKeychain.set(version, for: ParseStorage.Keys.currentVersion)
+        try oldKeychain.set(userContainer, for: ParseStorage.Keys.currentUser)
+        try oldKeychain.set(installationContainer, for: ParseStorage.Keys.currentInstallation)
+        try oldKeychain.set(configContainer, for: ParseStorage.Keys.currentConfig)
+        try oldKeychain.set(aclContainer, for: ParseStorage.Keys.defaultACL)
 
         let nanoSeconds = UInt64(1 * 1_000_000_000)
         try await Task.sleep(nanoseconds: nanoSeconds)
@@ -579,12 +579,8 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
     }
 
     func testMigrateObjcSDK() async throws {
-        KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
@@ -618,12 +614,8 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
     }
 
     func testDeleteObjcSDKKeychain() async throws {
-        KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 
@@ -650,13 +642,9 @@ class InitializeSDKTests: XCTestCase, @unchecked Sendable {
     }
 
     func testMigrateObjcSDKMissingInstallation() async throws {
-        KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
 
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "anotherPlace")
 

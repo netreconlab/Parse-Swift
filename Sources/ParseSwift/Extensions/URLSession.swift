@@ -13,27 +13,47 @@ import FoundationNetworking
 #endif
 
 internal extension URLSession {
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-	nonisolated(unsafe) static var parse = URLSession.shared
-    #else
-	nonisolated(unsafe) static var parse: URLSession = {
-        if !Parse.configuration.isTestingSDK {
-            let configuration = URLSessionConfiguration.default
-            configuration.urlCache = URLCache.parse
-            configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            return URLSession(configuration: configuration,
-                              delegate: Parse.sessionDelegate,
-                              delegateQueue: nil)
-        } else {
-            let session = URLSession.shared
-            session.configuration.urlCache = URLCache.parse
-            session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            return session
-        }
-    }()
-    #endif
+	static var parse: URLSession {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			if _parse == nil {
+				_parse = makeDefaultParseSession()
+			}
+			return _parse!
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_parse = newValue
+		}
+	}
+	nonisolated(unsafe) static var _parse: URLSession?
+	static let lock = NSLock()
+	static func makeDefaultParseSession() -> URLSession {
+		#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+		return URLSession.shared
+		#else
+		if !Parse.configuration.isTestingSDK {
+			let configuration = URLSessionConfiguration.default
+			configuration.urlCache = URLCache.parse
+			configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
+			configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
+			return URLSession(
+				configuration: configuration,
+				delegate: Parse.sessionDelegate,
+				delegateQueue: nil
+			)
+		} else {
+			let session = URLSession.shared
+			session.configuration.urlCache = URLCache.parse
+			session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
+			session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
+			return session
+		}
+
+		#endif
+	}
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
     func makeResult<U>(request: URLRequest,

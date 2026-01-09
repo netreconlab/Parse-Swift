@@ -133,7 +133,7 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
         MockURLProtocol.removeAll()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try KeychainStore.shared.deleteAll()
-        try KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try KeychainStore.createObjectiveC().deleteAllObjectiveC()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -142,13 +142,8 @@ class MigrateObjCSDKCombineTests: XCTestCase, @unchecked Sendable {
                               useBothTokens: Bool = false,
                               installationId: String) async throws {
 
-        KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
-
         let currentUserDictionary = ["sessionToken": Self.objcSessionToken]
         let currentUserDictionary2 = ["session_token": Self.objcSessionToken2]
         let currentUserDictionary3 = ["sessionToken": Self.objcSessionToken,

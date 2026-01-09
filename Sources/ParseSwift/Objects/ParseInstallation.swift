@@ -1023,8 +1023,8 @@ public extension ParseInstallation {
                 }
                 return
             }
-            guard let objcParseKeychain = KeychainStore.objectiveC,
-                  let oldInstallationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
+			let objcParseKeychain = KeychainStore.createObjectiveC()
+            guard let oldInstallationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
                 let error = ParseError(code: .otherCause,
                                        message: "Could not find Installation in the Objective-C SDK Keychain")
                 callbackQueue.async {

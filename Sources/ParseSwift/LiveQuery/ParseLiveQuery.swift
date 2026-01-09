@@ -46,7 +46,7 @@ import FoundationNetworking
  running. Initializing new instances will create a new task/connection to the `ParseLiveQuery` server.
  When an instance is deinitialized it will automatically close it is connection gracefully.
  */
-public class ParseLiveQuery: NSObject, @unchecked Sendable {
+public class ParseLiveQuery: NSObject, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     /// Have all `ParseLiveQuery` authentication challenges delegated to you. There can only
     /// be one of these for all `ParseLiveQuery` connections. The default is to
@@ -90,7 +90,7 @@ public class ParseLiveQuery: NSObject, @unchecked Sendable {
 	}
 
     /// The connection status of LiveQuery
-    public enum ConnectionStatus: Comparable {
+    public enum ConnectionStatus: Comparable, Hashable, Sendable {
         /// The socket is not established.
         case socketNotEstablished
         /// The socket is established, but neither connecting or connected.
@@ -113,18 +113,66 @@ public class ParseLiveQuery: NSObject, @unchecked Sendable {
     }
 
 	/// The current status of the LiveQuery socket.
-	public internal(set) var status: ConnectionStatus = .socketNotEstablished
+	public internal(set) var status: ConnectionStatus {
+		get {
+			statusLock.lock()
+			defer { statusLock.unlock() }
+			return _status
+		}
+		set {
+			statusLock.lock()
+			defer { statusLock.unlock() }
+			_status = newValue
+		}
+	}
 	/// Current LiveQuery client.
-	nonisolated(unsafe) public private(set) static var client: ParseLiveQuery?
+	public private(set) static var client: ParseLiveQuery? {
+		get {
+			clientLock.lock()
+			defer { clientLock.unlock() }
+			return _client
+		}
+		set {
+			clientLock.lock()
+			defer { clientLock.unlock() }
+			_client = newValue
+		}
+	}
 
+	private static var isConfiguring: Bool {
+		get {
+			configuringLock.lock()
+			defer { configuringLock.unlock() }
+			return _isConfiguring
+		}
+		set {
+			configuringLock.lock()
+			defer { configuringLock.unlock() }
+			_isConfiguring = newValue
+		}
+	}
+
+	private static let clientLock = NSLock()
+	private static let configuringLock = NSLock()
 	private let authenticationLock = NSLock()
+	private let statusLock = NSLock()
 	private let receiveLock = NSLock()
 	private let taskLock = NSLock()
+	private let otherLock = NSLock()
+
+	nonisolated(unsafe) private static var _client: ParseLiveQuery?
+	nonisolated(unsafe) private static var _isConfiguring: Bool = false
+	private var _task: URLSessionWebSocketTask!
+	private var _status: ConnectionStatus = .socketNotEstablished
+	private var _isDisconnectedByUser: Bool = false
+	private var _url: URL?
+	private var _clientId: String?
+	private var _attempts: Int = 1
 	private weak var _authenticationDelegate: ParseLiveQueryDelegate?
 	private weak var _receiveDelegate: ParseLiveQueryDelegate?
-	nonisolated(unsafe) static var isConfiguring: Bool = false
 
     let notificationQueue: DispatchQueue
+	let subscriptions = Subscriptions()
 	var task: URLSessionWebSocketTask! {
 		get {
 			taskLock.lock()
@@ -137,11 +185,52 @@ public class ParseLiveQuery: NSObject, @unchecked Sendable {
 			_task = newValue
 		}
 	}
-	private var _task: URLSessionWebSocketTask!
-    var url: URL!
-    var clientId: String!
-    var attempts: Int = 1 {
-        willSet {
+	var isDisconnectedByUser: Bool {
+		get {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			return _isDisconnectedByUser
+		}
+		set {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			_isDisconnectedByUser = newValue
+		}
+	}
+
+    var url: URL! {
+		get {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			return _url
+		}
+		set {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			_url = newValue
+		}
+	}
+    var clientId: String! {
+		get {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			return _clientId
+		}
+		set {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			_clientId = newValue
+		}
+	}
+    var attempts: Int {
+		get {
+			otherLock.lock()
+			defer { otherLock.unlock() }
+			return _attempts
+		}
+        set {
+			otherLock.lock()
+			defer { otherLock.unlock() }
             if newValue >= Parse.configuration.liveQueryMaxConnectionAttempts + 1 &&
                 !Parse.configuration.isTestingLiveQueryDontCloseSocket {
                 let error = ParseError(code: .otherCause,
@@ -157,10 +246,9 @@ Not attempting to open ParseLiveQuery socket anymore
                     await close() // Quit trying to reconnect
                 }
             }
+			_attempts = newValue
         }
     }
-    var isDisconnectedByUser = false
-    let subscriptions = Subscriptions()
 
     /**
      - parameter serverURL: The URL of the `ParseLiveQuery` Server to connect to.

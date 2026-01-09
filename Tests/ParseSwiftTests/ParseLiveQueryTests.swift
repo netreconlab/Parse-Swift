@@ -33,9 +33,49 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
     }
 
     class TestDelegate: NSObject, ParseLiveQueryDelegate, @unchecked Sendable {
-		nonisolated(unsafe) var error: ParseError?
-		nonisolated(unsafe) var code: URLSessionWebSocketTask.CloseCode?
-		nonisolated(unsafe) var reason: Data?
+		var error: ParseError? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _error
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_error = newValue
+			}
+
+		}
+		var code: URLSessionWebSocketTask.CloseCode? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _code
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_code = newValue
+			}
+
+		}
+		var reason: Data? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _reason
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_reason = newValue
+			}
+
+		}
+		nonisolated(unsafe) var _error: ParseError?
+		nonisolated(unsafe) var _code: URLSessionWebSocketTask.CloseCode?
+		nonisolated(unsafe) var _reason: Data?
+		let lock = NSLock()
         func received(_ error: Error) {
             if let error = error as? ParseError {
                 self.error = error
