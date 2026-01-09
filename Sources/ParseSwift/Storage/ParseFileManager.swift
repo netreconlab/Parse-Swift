@@ -12,7 +12,7 @@ import Foundation
 public struct ParseFileManager: Sendable {
 
     private var defaultDirectoryAttributes: [FileAttributeKey: Any]? {
-        #if os(macOS) || os(Linux) || os(Android) || os(Windows)
+        #if os(macOS) || os(Linux) || os(Android) || os(Windows) || os(WASI)
         return nil
         #else
         return [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication]
@@ -28,7 +28,7 @@ public struct ParseFileManager: Sendable {
     }
 
     private var localSandBoxDataDirectoryPath: URL? {
-        #if os(macOS) || os(Linux) || os(Android) || os(Windows)
+        #if os(macOS) || os(Linux) || os(Android) || os(Windows) || os(WASI)
         return self.defaultDataDirectoryPath
         #else
         // swiftlint:disable:next line_length
@@ -51,7 +51,7 @@ public struct ParseFileManager: Sendable {
 
     /// The default directory for storing Parse files.
     public var defaultDataDirectoryPath: URL? {
-        #if os(macOS) || os(Linux) || os(Android) || os(Windows)
+        #if os(macOS) || os(Linux) || os(Android) || os(Windows) || os(WASI)
         var directoryPath: String!
         let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         guard let directory = paths.first else {
@@ -79,7 +79,7 @@ public struct ParseFileManager: Sendable {
     /// Creates an instance of `ParseFileManager`.
     /// - returns: If an instance cannot be created, nil is returned.
     public init?() {
-        #if os(Linux) || os(Android) || os(Windows)
+        #if os(Linux) || os(Android) || os(Windows) || os(WASI)
         let applicationId = Parse.configuration.applicationId
         applicationIdentifier = "\(ParseConstants.bundlePrefix).\(applicationId)"
         #else

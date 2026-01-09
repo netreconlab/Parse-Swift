@@ -44,7 +44,6 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 				defer { lock.unlock() }
 				_error = newValue
 			}
-
 		}
 		var code: URLSessionWebSocketTask.CloseCode? {
 			get {
@@ -57,7 +56,6 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 				defer { lock.unlock() }
 				_code = newValue
 			}
-
 		}
 		var reason: Data? {
 			get {
@@ -70,7 +68,6 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 				defer { lock.unlock() }
 				_reason = newValue
 			}
-
 		}
 		nonisolated(unsafe) var _error: ParseError?
 		nonisolated(unsafe) var _code: URLSessionWebSocketTask.CloseCode?

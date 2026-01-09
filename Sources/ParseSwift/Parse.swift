@@ -10,13 +10,13 @@ import FoundationNetworking
 internal struct Parse {
 	static var configuration: ParseConfiguration! {
 		get {
-			sessionDelegateLock.lock()
-			defer { sessionDelegateLock.unlock() }
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
 			return _configuration
 		}
 		set {
-			sessionDelegateLock.lock()
-			defer { sessionDelegateLock.unlock() }
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
 			_configuration = newValue
 		}
 	}
@@ -174,14 +174,14 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            let oldKeycahin = KeychainStore.createOld()
+            let oldKeychain = KeychainStore.createOld()
             try? KeychainStore.shared.copy(
-				oldKeycahin,
+				oldKeychain,
 				oldAccessGroup: configuration.keychainAccessGroup,
 				newAccessGroup: configuration.keychainAccessGroup
 			)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? oldKeycahin.deleteAll()
+            try? oldKeychain.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
