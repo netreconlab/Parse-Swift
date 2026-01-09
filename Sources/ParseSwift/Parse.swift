@@ -8,8 +8,34 @@ import FoundationNetworking
 // MARK: Internal
 
 internal struct Parse {
-	nonisolated(unsafe) static var configuration: ParseConfiguration!
-	nonisolated(unsafe) static var sessionDelegate: ParseURLSessionDelegate!
+	static var configuration: ParseConfiguration! {
+		get {
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
+			return _configuration
+		}
+		set {
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
+			_configuration = newValue
+		}
+	}
+	static var sessionDelegate: ParseURLSessionDelegate! {
+		get {
+			sessionDelegateLock.lock()
+			defer { sessionDelegateLock.unlock() }
+			return _sessionDelegate
+		}
+		set {
+			sessionDelegateLock.lock()
+			defer { sessionDelegateLock.unlock() }
+			_sessionDelegate = newValue
+		}
+	}
+	static let configurationLock = NSLock()
+	static let sessionDelegateLock = NSLock()
+	nonisolated(unsafe) static var _configuration: ParseConfiguration!
+	nonisolated(unsafe) static var _sessionDelegate: ParseURLSessionDelegate!
 }
 
 internal func initialize(
@@ -91,7 +117,6 @@ internal func deleteKeychainIfNeeded() async {
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? KeychainStore.old?.deleteAll()
             try? KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
@@ -149,12 +174,14 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            KeychainStore.createOld()
-            try? KeychainStore.shared.copy(KeychainStore.old,
-                                                 oldAccessGroup: configuration.keychainAccessGroup,
-                                                 newAccessGroup: configuration.keychainAccessGroup)
+            let oldKeychain = KeychainStore.createOld()
+            try? KeychainStore.shared.copy(
+				oldKeychain,
+				oldAccessGroup: configuration.keychainAccessGroup,
+				newAccessGroup: configuration.keychainAccessGroup
+			)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? KeychainStore.old.deleteAll()
+            try? oldKeychain.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
@@ -175,21 +202,18 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
-    let currentInstallationContainer = await BaseParseInstallation.currentContainer()
+    var currentInstallationContainer = await BaseParseInstallation.currentContainer()
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
-        KeychainStore.createObjectiveC()
-        if let objcParseKeychain = KeychainStore.objectiveC {
-            guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
-                  currentInstallationContainer.installationId != installationId else {
-                Parse.configuration.isInitialized = true
-                return
-            }
-            var currentInstallationContainer = await BaseParseInstallation.currentContainer()
-            currentInstallationContainer.installationId = installationId
-            currentInstallationContainer.currentInstallation?.installationId = installationId
-            await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
-        }
+        let objcParseKeychain = KeychainStore.createObjectiveC()
+		guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
+			  currentInstallationContainer.installationId != installationId else {
+			Parse.configuration.isInitialized = true
+			return
+		}
+		currentInstallationContainer.installationId = installationId
+		currentInstallationContainer.currentInstallation?.installationId = installationId
+		await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
     }
     #endif
 
@@ -357,7 +381,8 @@ public func clearCache() {
  - warning: The keychain cannot be recovered after deletion.
  */
 public func deleteObjectiveCKeychain() async throws {
-    try KeychainStore.objectiveC?.deleteAllObjectiveC()
+	let objcParseKeychain = KeychainStore.createObjectiveC()
+    try objcParseKeychain.deleteAllObjectiveC()
 }
 
 /**

@@ -9,7 +9,20 @@ import Foundation
 
 // MARK: ParseStorage
 struct ParseStorage {
-	nonisolated(unsafe) static var shared = ParseStorage()
+	static var shared: ParseStorage {
+		get {
+			sharedLock.lock()
+			defer { sharedLock.unlock() }
+			return _shared
+		}
+		set {
+			sharedLock.lock()
+			defer { sharedLock.unlock() }
+			_shared = newValue
+		}
+	}
+	nonisolated(unsafe) static var _shared = ParseStorage()
+	private static let sharedLock = NSLock()
 
 	private let lock = NSLock()
 	private var _backingStore: ParsePrimitiveStorable!

@@ -39,9 +39,9 @@ public struct ParseVersion: ParseTypeable {
                             try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentVersion),
                             // swiftlint:disable:next line_length
                             let versionFromStorageToMigrate = try? ParseVersion(string: versionStringFromStorageToMigrate) else {
-                        KeychainStore.createOld()
+                        let oldKeychain = KeychainStore.createOld()
                         guard let versionStringFromOldKeychainToMigrate: String =
-                                try? KeychainStore.old.get(valueFor: ParseStorage.Keys.currentVersion),
+                                try? oldKeychain.get(valueFor: ParseStorage.Keys.currentVersion),
                               // swiftlint:disable:next line_length
                               let versionFromOldKeychainToMigrate = try? ParseVersion(string: versionStringFromOldKeychainToMigrate) else {
                             throw ParseError(code: .otherCause,

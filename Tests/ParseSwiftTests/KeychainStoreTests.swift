@@ -34,7 +34,7 @@ class KeychainStoreTests: XCTestCase, @unchecked Sendable {
         try await super.tearDown()
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         try KeychainStore.shared.deleteAll()
-        try? KeychainStore.objectiveC?.deleteAllObjectiveC()
+        try? KeychainStore.createObjectiveC().deleteAllObjectiveC()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -228,12 +228,8 @@ class KeychainStoreTests: XCTestCase, @unchecked Sendable {
     }
 
     func testSetObjectiveC() async throws {
-        KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
         let objcInstallationId = "helloWorld"
         _ = objcParseKeychain.setObjectiveC(object: objcInstallationId, forKey: "installationId")
 

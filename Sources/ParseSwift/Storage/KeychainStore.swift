@@ -20,7 +20,7 @@ import Security
  It supports any object, with Coding support. All objects are available after the
  first device unlock and are not backed up.
  */
-struct KeychainStore: SecureStorable {
+struct KeychainStore: SecureStorable, Hashable, Sendable {
 
     let service: String
     static var objectiveCService: String {
@@ -29,10 +29,20 @@ struct KeychainStore: SecureStorable {
         }
         return "\(identifier).com.parse.sdk"
     }
-	nonisolated(unsafe) static var shared: KeychainStore!
-	nonisolated(unsafe) static var objectiveC: KeychainStore!
-    // This Keychain was used by SDK <= 1.9.7
-	nonisolated(unsafe) static var old: KeychainStore!
+	static var shared: KeychainStore! {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _shared
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_shared = newValue
+		}
+	}
+	nonisolated(unsafe) static var _shared: KeychainStore!
+	static let lock = NSLock()
 
     init(service: String? = nil) {
         var keychainService = ".parseSwift.sdk"
@@ -52,16 +62,12 @@ struct KeychainStore: SecureStorable {
         }
     }
 
-    static func createObjectiveC() {
-        if KeychainStore.objectiveC == nil {
-            KeychainStore.objectiveC = KeychainStore(service: objectiveCService)
-        }
+    static func createObjectiveC() -> KeychainStore {
+		KeychainStore(service: objectiveCService)
     }
 
-    static func createOld() {
-        if KeychainStore.old == nil {
-            KeychainStore.old = KeychainStore(service: "shared")
-        }
+    static func createOld() -> KeychainStore {
+		KeychainStore(service: "shared")
     }
 
 	nonisolated func getKeychainQueryTemplate() -> [String: Any] {

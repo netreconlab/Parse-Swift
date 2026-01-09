@@ -18,9 +18,18 @@ struct MockURLProtocolMock: Sendable {
 }
 
 final class MockURLProtocol: URLProtocol, @unchecked Sendable {
-	private let mockLock = NSLock()
-	private let loadingLock = NSLock()
-	private var _mock: MockURLProtocolMock?
+	static var mocks: [MockURLProtocolMock] {
+		get {
+			mocksLock.lock()
+			defer { mocksLock.unlock() }
+			return _mocks
+		}
+		set {
+			mocksLock.lock()
+			defer { mocksLock.unlock() }
+			_mocks = newValue
+		}
+	}
 	var mock: MockURLProtocolMock? {
 		get {
 			mockLock.lock()
@@ -33,9 +42,7 @@ final class MockURLProtocol: URLProtocol, @unchecked Sendable {
 			_mock = newValue
 		}
 	}
-	nonisolated(unsafe) static var mocks: [MockURLProtocolMock] = []
-	private var _loading: Bool = false
-    private var loading: Bool {
+	private var loading: Bool {
 		get {
 			loadingLock.lock()
 			defer { loadingLock.unlock() }
@@ -47,6 +54,13 @@ final class MockURLProtocol: URLProtocol, @unchecked Sendable {
 			_loading = newValue
 		}
 	}
+
+	nonisolated(unsafe) static var _mocks: [MockURLProtocolMock] = []
+	static private let mocksLock = NSLock()
+	private let mockLock = NSLock()
+	private let loadingLock = NSLock()
+	private var _mock: MockURLProtocolMock?
+	private var _loading: Bool = false
 
     static func mockRequests(
 		response: @escaping @Sendable (URLRequest) -> MockURLResponse?
