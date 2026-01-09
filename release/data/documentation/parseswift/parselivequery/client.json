@@ -77,14 +77,6 @@
           ],
           "tokens" : [
             {
-              "kind" : "attribute",
-              "text" : "nonisolated"
-            },
-            {
-              "kind" : "text",
-              "text" : "(unsafe) "
-            },
-            {
               "kind" : "keyword",
               "text" : "static"
             },
@@ -116,7 +108,23 @@
             },
             {
               "kind" : "text",
-              "text" : "? { get }"
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
