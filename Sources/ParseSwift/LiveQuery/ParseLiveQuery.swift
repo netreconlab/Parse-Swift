@@ -316,6 +316,7 @@ extension ParseLiveQuery {
 		}
         switch task.state {
         case .suspended:
+			task.resume()
             await URLSession.liveQuery.receive(task)
         case .completed, .canceling:
             let oldTask = task

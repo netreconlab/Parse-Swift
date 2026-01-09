@@ -37,7 +37,6 @@ final class LiveQuerySocket: NSObject, @unchecked Sendable {
     func createTask(_ url: URL, taskDelegate: LiveQuerySocketDelegate) async -> URLSessionWebSocketTask {
         let task = session.webSocketTask(with: url)
         await tasks.updateDelegates([task: taskDelegate])
-		await receive(task)
         return task
     }
 
@@ -97,9 +96,6 @@ extension LiveQuerySocket {
 		let delegates = await self.tasks.getDelegates()
 		do {
 
-			if task.state == .suspended {
-				task.resume()
-			}
 			let result = try await task.receive()
 			await self.tasks.removeReceivers([task])
 
