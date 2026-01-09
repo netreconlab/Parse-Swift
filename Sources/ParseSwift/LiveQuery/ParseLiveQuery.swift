@@ -292,10 +292,12 @@ Not attempting to open ParseLiveQuery socket anymore
 			taskDelegate: self
 		)
 		self.task = newTask
-        try await self.resumeTask()
-        if isDefault {
-            Self.defaultClient = self
-        }
+		if isDefault {
+			Self.defaultClient = self
+		}
+		Task {
+			try await self.resumeTask()
+		}
     }
 
     /// Gracefully disconnects from the ParseLiveQuery Server.
