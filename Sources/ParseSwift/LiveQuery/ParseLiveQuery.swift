@@ -296,7 +296,7 @@ Not attempting to open ParseLiveQuery socket anymore
 			Self.defaultClient = self
 		}
 		Task {
-			try await self.resumeTask()
+			try? await self.resumeTask()
 		}
     }
 
