@@ -202,7 +202,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
-    let currentInstallationContainer = await BaseParseInstallation.currentContainer()
+    var currentInstallationContainer = await BaseParseInstallation.currentContainer()
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
         let objcParseKeychain = KeychainStore.createObjectiveC()
@@ -211,7 +211,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
 			Parse.configuration.isInitialized = true
 			return
 		}
-		var currentInstallationContainer = await BaseParseInstallation.currentContainer()
 		currentInstallationContainer.installationId = installationId
 		currentInstallationContainer.currentInstallation?.installationId = installationId
 		await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
