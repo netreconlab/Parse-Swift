@@ -671,7 +671,7 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-6rpv",
+                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-u8rk",
                         "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       },
@@ -681,7 +681,7 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-u8rk",
+                        "path" : "\/documentation\/parseswift\/deletable\/delete(options:)-6rpv",
                         "title" : "func delete(options: API.Options) async throws",
                         "type" : "method"
                       }
@@ -737,17 +737,17 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-33xzq",
-                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-12t7t",
                         "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-9iop9",
+                        "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/fetchable\/fetch(includekeys:options:)-33xzq",
                         "title" : "func fetch(includeKeys: [String]?, options: API.Options) async throws -> Self",
                         "type" : "method"
                       }
@@ -786,17 +786,17 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-8slln",
+                        "title" : "var endpoint: API.Endpoint",
+                        "type" : "property"
+                      },
+                      {
                         "path" : "\/documentation\/parseswift\/objectable\/endpoint-6b5zy",
                         "title" : "var endpoint: API.Endpoint",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-11glf",
-                        "title" : "var endpoint: API.Endpoint",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-8slln",
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-3vf5d",
                         "title" : "var endpoint: API.Endpoint",
                         "type" : "property"
                       },
@@ -806,7 +806,7 @@
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-3vf5d",
+                        "path" : "\/documentation\/parseswift\/objectable\/endpoint-11glf",
                         "title" : "var endpoint: API.Endpoint",
                         "type" : "property"
                       }
@@ -883,12 +883,7 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-6pzxq",
-                        "title" : "static var className: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-4npbu",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-499yb",
                         "title" : "static var className: String",
                         "type" : "property"
                       },
@@ -898,22 +893,27 @@
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-64fhv",
-                        "title" : "static var className: String",
-                        "type" : "property"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/objectable\/classname-5hhno",
                         "title" : "static var className: String",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/objectable\/classname-499yb",
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-64fhv",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-4npbu",
                         "title" : "static var className: String",
                         "type" : "property"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/objectable\/classname-8okkp",
+                        "title" : "static var className: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/objectable\/classname-6pzxq",
                         "title" : "static var className: String",
                         "type" : "property"
                       }
@@ -2024,13 +2024,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
-                        "title" : "func received(URLSessionTaskTransactionMetrics)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
+                        "title" : "func received(Error)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-1f3yl",
-                        "title" : "func received(Error)",
+                        "path" : "\/documentation\/parseswift\/parselivequerydelegate\/received(_:)-798hl",
+                        "title" : "func received(URLSessionTaskTransactionMetrics)",
                         "type" : "method"
                       }
                     ],
@@ -2241,22 +2241,22 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
-                        "title" : "func merge(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
-                        "title" : "func merge(with: Self) throws -> Self",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-4hjo0",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-99wj6",
+                        "title" : "func merge(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-3cli5",
+                        "title" : "func merge(with: Self) throws -> Self",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/parseswift\/parseobject\/merge(with:)-35a9v",
                         "title" : "func merge(with: Self) throws -> Self",
                         "type" : "method"
                       }
@@ -2279,12 +2279,12 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-49r7x",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-6csd5",
+                        "path" : "\/documentation\/parseswift\/parseobject\/mergeparse(with:)-49r7x",
                         "title" : "func mergeParse(with: Self) throws -> Self",
                         "type" : "method"
                       },
