@@ -295,7 +295,6 @@ Not attempting to open ParseLiveQuery socket anymore
         try await self.resumeTask()
         if isDefault {
             Self.defaultClient = self
-            Self.isConfiguring = false
         }
     }
 
@@ -329,7 +328,8 @@ Not attempting to open ParseLiveQuery socket anymore
         }
         isConfiguring = true
         try await yieldIfNotInitialized()
-        Self.defaultClient = try await ParseLiveQuery(isDefault: true)
+		_ = try await ParseLiveQuery(isDefault: true)
+		isConfiguring = false
     }
 
     static func client() async throws -> ParseLiveQuery {
