@@ -326,7 +326,7 @@ extension ParseLiveQuery {
 				taskDelegate: self
 			)
 			self.task = newTask
-			newTask.resume()
+			try await resumeTask()
         case .running:
             try await self.open(isUserWantsToConnect: false)
         @unknown default:
