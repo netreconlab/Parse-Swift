@@ -272,6 +272,10 @@ class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(requestOptions5, options5)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     @MainActor
     func testHydrateUser() async throws {
         let sessionToken = "dog"
@@ -330,4 +334,5 @@ class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
             XCTAssertTrue(error.equalsTo(server.code))
         }
     }
+	#endif
 }

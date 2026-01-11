@@ -17,7 +17,7 @@ struct MockURLProtocolMock: Sendable {
     var response: @Sendable (URLRequest) -> MockURLResponse?
 }
 
-final class MockURLProtocol: URLProtocol, @unchecked Sendable {
+final class MockURLProtocol: URLProtocol {
 	static var mocks: [MockURLProtocolMock] {
 		get {
 			mocksLock.lock()
@@ -155,12 +155,10 @@ final class MockURLProtocol: URLProtocol, @unchecked Sendable {
         }
 
         if let error = response.error {
-            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) { [weak self] in
-				guard let self else { return }
-                if self.loading {
-                    self.client?.urlProtocol(self, didFailWithError: error)
-                }
-            }
+			if self.loading {
+				Thread.sleep(forTimeInterval: response.delay)
+				self.client?.urlProtocol(self, didFailWithError: error)
+			}
             return
         }
 
@@ -173,22 +171,19 @@ final class MockURLProtocol: URLProtocol, @unchecked Sendable {
 			) else {
                 return
             }
-
-        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) { [weak self] in
-			guard let self else { return }
-            if !self.loading {
-                return
-            }
-            self.client?.urlProtocol(
-				self,
-				didReceive: urlResponse,
-				cacheStoragePolicy: .notAllowed
-			)
-            if let data = response.responseData {
-                self.client?.urlProtocol(self, didLoad: data)
-            }
-            self.client?.urlProtocolDidFinishLoading(self)
-        }
+		if !self.loading {
+			return
+		}
+		Thread.sleep(forTimeInterval: response.delay)
+		self.client?.urlProtocol(
+			self,
+			didReceive: urlResponse,
+			cacheStoragePolicy: .notAllowed
+		)
+		if let data = response.responseData {
+			self.client?.urlProtocol(self, didLoad: data)
+		}
+		self.client?.urlProtocolDidFinishLoading(self)
     }
 
     override func stopLoading() {

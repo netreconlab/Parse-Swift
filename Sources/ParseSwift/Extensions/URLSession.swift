@@ -24,6 +24,7 @@ internal extension URLSession {
 			defer { lock.unlock() }
 			_parse = newValue
 		}
+
 	}
 	nonisolated(unsafe) static var _parse: URLSession!
 	static let lock = NSLock()

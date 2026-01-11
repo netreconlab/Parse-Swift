@@ -633,6 +633,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSave() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
@@ -2689,4 +2693,5 @@ class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swift
             XCTFail(error.localizedDescription)
         }
     }
+	#endif
 }

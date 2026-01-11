@@ -198,6 +198,7 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
     }
   }*/
 
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
   // MARK: - Output Formatting Tests
   func testEncodingOutputFormattingDefault() {
     let expectedJSON = "{\"name\":\"Johnny Appleseed\",\"email\":\"appleseed@apple.com\"}".data(using: .utf8)!
@@ -228,7 +229,7 @@ class TestParseEncoder: XCTestCase, @unchecked Sendable {
   }*/
 
   // MARK: - Date Strategy Tests
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+
   // Disabled for now till we resolve rdar://52618414
   func x_testEncodingDate() throws {
 

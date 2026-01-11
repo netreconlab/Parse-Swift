@@ -463,28 +463,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         XCTAssertEqual(decoded, expected)
     }
 
-    // MARK: Querying Parse Server
-    func testFind() async throws {
-        var scoreOnServer = GameScore(points: 10)
-        scoreOnServer.objectId = "yarr"
-        scoreOnServer.createdAt = Date()
-        scoreOnServer.updatedAt = scoreOnServer.createdAt
-        scoreOnServer.ACL = nil
-
-        let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
-        let encoded = try ParseCoding.jsonEncoder().encode(results)
-        MockURLProtocol.mockRequests { _ in
-			MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let query = GameScore.query()
-        guard let score = try await query.find(options: []).first else {
-            XCTFail("Should unwrap first object found")
-            return
-        }
-        XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-    }
-
     func testFindLimit() async throws {
         let query = GameScore.query()
             .limit(0)
@@ -532,6 +510,31 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         XCTAssertEqual(jsonWhere, parseWhere, "Parse should always match JSON")
     }
 
+	// MARK: Querying Parse Server
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+	func testFind() async throws {
+		var scoreOnServer = GameScore(points: 10)
+		scoreOnServer.objectId = "yarr"
+		scoreOnServer.createdAt = Date()
+		scoreOnServer.updatedAt = scoreOnServer.createdAt
+		scoreOnServer.ACL = nil
+
+		let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+		let encoded = try ParseCoding.jsonEncoder().encode(results)
+		MockURLProtocol.mockRequests { _ in
+			MockURLResponse(data: encoded, statusCode: 200)
+		}
+
+		let query = GameScore.query()
+		guard let score = try await query.find(options: []).first else {
+			XCTFail("Should unwrap first object found")
+			return
+		}
+		XCTAssert(score.hasSameObjectId(as: scoreOnServer))
+	}
     func findAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
         let query = GameScore.query()
         let expectation = XCTestExpectation(description: "Count object1")
@@ -554,7 +557,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFindAsync() {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -582,7 +584,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			self.findAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
-    #endif
 
     func testFindAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
@@ -638,6 +639,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 		}
 		XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
+	#endif
 
     func testFindAllAsyncErrorSkip() throws {
         var scoreOnServer = GameScore(points: 10)
@@ -769,6 +771,10 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         XCTAssertEqual(decoded, expected)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testFirst() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -786,6 +792,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         let score = try await query.first(options: [])
         XCTAssert(score.hasSameObjectId(as: scoreOnServer))
     }
+	#endif
 
     func testFirstThrowDecodingError() async throws {
         var scoreOnServer = GameScoreBroken()
@@ -823,6 +830,21 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
     }
 
+	func testFirstLimit() async throws {
+		let query = GameScore.query()
+			.limit(0)
+		do {
+			_ = try await query.first()
+			XCTFail("Should have thrown error")
+		} catch {
+			XCTAssertTrue(error.containedIn([.objectNotFound]))
+		}
+	}
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testFirstNoObjectFound() async throws {
 
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
@@ -841,17 +863,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
                 return
             }
             XCTAssertEqual(error.code, .objectNotFound)
-        }
-    }
-
-    func testFirstLimit() async throws {
-        let query = GameScore.query()
-            .limit(0)
-        do {
-            _ = try await query.first()
-            XCTFail("Should have thrown error")
-        } catch {
-            XCTAssertTrue(error.containedIn([.objectNotFound]))
         }
     }
 
@@ -891,7 +902,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFirstAsync() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -914,7 +924,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			self.firstAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
-    #endif
 
     func testFirstAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
@@ -931,7 +940,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         firstAsync(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFirstAsyncNoObjectFound() {
         let scoreOnServer = GameScore(points: 10)
         let results = QueryResponse<GameScore>(results: [GameScore](), count: 0)
@@ -953,7 +961,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			self.firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
-    #endif
 
     func testFirstAsyncNoObjectFoundMainQueue() throws {
         let scoreOnServer = GameScore(points: 10)
@@ -964,6 +971,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
         firstAsyncNoObjectFound(scoreOnServer: scoreOnServer, callbackQueue: .main)
     }
+	#endif
 
     func testFirstAsyncLimit() {
         let query = GameScore.query()
@@ -1006,6 +1014,17 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         XCTAssertEqual(decoded, expected)
     }
 
+	func testCountLimit() async throws {
+		let query = GameScore.query()
+			.limit(0)
+		let count = try await query.count()
+		XCTAssertEqual(count, 0)
+	}
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testCount() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -1022,13 +1041,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         let query = GameScore.query()
         let scoreCount = try await query.count(options: [])
         XCTAssertEqual(scoreCount, 1)
-    }
-
-    func testCountLimit() async throws {
-        let query = GameScore.query()
-            .limit(0)
-        let count = try await query.count()
-        XCTAssertEqual(count, 0)
     }
 
     func countAsync(scoreOnServer: GameScore, callbackQueue: DispatchQueue) {
@@ -1048,7 +1060,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         wait(for: [expectation], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeCountAsync() throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -1071,7 +1082,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 			self.countAsync(scoreOnServer: immutableScoreOnServer, callbackQueue: .global(qos: .background))
         }
     }
-    #endif
 
     func testCountAsyncMainQueue() throws {
         var scoreOnServer = GameScore(points: 10)
@@ -1104,6 +1114,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
         wait(for: [expectation], timeout: 20.0)
     }
+	#endif
 
     // MARK: Standard Conditions
     func testWhereKeyExists() {
@@ -2993,7 +3004,19 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
     }
 
+	func testExplainFindLimitSynchronous() async throws {
+		let query = GameScore.query()
+			.limit(0)
+		let queryResult: [[String: String]] = try await query.findExplain()
+		XCTAssertTrue(queryResult.isEmpty)
+	}
+
     // MARK: JSON Responses
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testExplainFindSynchronous() async throws {
         let json = AnyResultsResponse(results: [["yolo": "yarr"]])
 
@@ -3032,13 +3055,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         let query = GameScore.query()
         let queryResult: [[String: String]] = try await query.findExplain(usingMongoDB: true)
         XCTAssertEqual(queryResult, [json.results])
-    }
-
-    func testExplainFindLimitSynchronous() async throws {
-        let query = GameScore.query()
-            .limit(0)
-        let queryResult: [[String: String]] = try await query.findExplain()
-        XCTAssertTrue(queryResult.isEmpty)
     }
 
     func testExplainFindAsynchronous() async throws {
@@ -3383,6 +3399,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
 		let queryResult: [[String: String]] = try await query.countExplain()
 		XCTAssertEqual(queryResult, json.results)
     }
+	#endif
 
     func testAggregateCommand() async throws {
         var query = GameScore.query()
@@ -3430,6 +3447,19 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         XCTAssertEqual(decoded, expected)
     }
 
+	func testAggregateLimit() async throws {
+
+		let query = GameScore.query()
+			.limit(0)
+		let pipeline = [["hello": "world"]]
+		let scores = try await query.aggregate(pipeline)
+		XCTAssertTrue(scores.isEmpty)
+	}
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testAggregate() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -3472,15 +3502,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
             return
         }
         XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-    }
-
-    func testAggregateLimit() async throws {
-
-        let query = GameScore.query()
-            .limit(0)
-        let pipeline = [["hello": "world"]]
-        let scores = try await query.aggregate(pipeline)
-        XCTAssertTrue(scores.isEmpty)
     }
 
     func testAggregateExplainWithWhere() async throws {
@@ -3686,7 +3707,20 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
         wait(for: [expectation], timeout: 20.0)
     }
+	#endif
 
+	func testDistinctLimit() async throws {
+
+		let query = GameScore.query("points" > 9)
+			.limit(0)
+		let scores = try await query.distinct("hello")
+		XCTAssertTrue(scores.isEmpty)
+	}
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testDistinct() async throws {
         var scoreOnServer = GameScore(points: 10)
         scoreOnServer.objectId = "yarr"
@@ -3706,14 +3740,6 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
             return
         }
         XCTAssert(score.hasSameObjectId(as: scoreOnServer))
-    }
-
-    func testDistinctLimit() async throws {
-
-        let query = GameScore.query("points" > 9)
-            .limit(0)
-        let scores = try await query.distinct("hello")
-        XCTAssertTrue(scores.isEmpty)
     }
 
     func testDistinctExplain() async throws {
@@ -3855,6 +3881,7 @@ class ParseQueryTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:th
         }
         wait(for: [expectation], timeout: 20.0)
     }
+	#endif
 
     func testDistinctExplainAsyncMainQueueLimit() {
         let expectation = XCTestExpectation(description: "Aggregate object1")

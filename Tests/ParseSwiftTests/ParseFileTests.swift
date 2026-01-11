@@ -229,6 +229,10 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
                        "{\"__type\":\"File\",\"name\":\"myFolder\\/sampleData.txt\"}")
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSave() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -297,7 +301,6 @@ class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:thi
         XCTAssertEqual(savedFile.localURL, tempFilePath)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveWithSpecifyingMime() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")

@@ -277,6 +277,10 @@ class ParseACLTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testDefaultACL() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
@@ -352,4 +356,5 @@ class ParseACLTests: XCTestCase, @unchecked Sendable {
             XCTFail("Should have set new ACL. Error \(error.localizedDescription)")
         }
     }
+	#endif
 }

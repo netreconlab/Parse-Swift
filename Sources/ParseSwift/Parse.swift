@@ -150,8 +150,10 @@ public var configuration: ParseConfiguration {
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
     ParseStorage.shared.use(configuration.primitiveStore)
-    Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
-                                                    authentication: configuration.authentication)
+    Parse.sessionDelegate = ParseURLSessionDelegate(
+		callbackQueue: .main,
+		authentication: configuration.authentication
+	)
     Utility.updateParseURLSession()
 
     #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
@@ -354,11 +356,16 @@ public func initialize(
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
  */
-public func updateAuthentication(_ authentication: (@Sendable (URLAuthenticationChallenge,
-                                                     (URLSession.AuthChallengeDisposition,
-                                                      URLCredential?) -> Void) -> Void)?) {
-    Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
-                                                    authentication: authentication)
+public func updateAuthentication(
+	_ authentication: (
+		@Sendable (URLAuthenticationChallenge,
+				   (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+				  ) -> Void)?
+) {
+	Parse.sessionDelegate = ParseURLSessionDelegate(
+		callbackQueue: .main,
+		authentication: authentication
+	)
     Utility.updateParseURLSession()
 }
 

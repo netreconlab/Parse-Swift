@@ -32,7 +32,8 @@ let package = Package(
         .testTarget(
             name: "ParseSwiftTests",
             dependencies: ["ParseSwift"],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist"],
+			swiftSettings: sharedSwiftSettings
         )
     ]
 )

@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -103,6 +107,7 @@ class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	#if !os(Windows) && !os(WASI)
     @MainActor
     func testTrackAppOpenedError() async throws {
         let serverResponse = ParseError(code: .internalServer, message: "none")
@@ -130,6 +135,7 @@ class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
             XCTAssertEqual(error.message, serverResponse.message)
         }
     }
+	#endif
 
     @MainActor
     func testTrackEvent() async throws {
@@ -222,3 +228,4 @@ class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
         }
     }
 }
+#endif

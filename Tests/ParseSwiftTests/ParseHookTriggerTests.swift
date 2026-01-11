@@ -6,6 +6,10 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -203,6 +207,13 @@ class ParseHookTriggerTests: XCTestCase, @unchecked Sendable {
         // swiftlint:disable:next line_length
         let expected11 = "{\"className\":\"_User\",\"triggerName\":\"afterLogout\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
         XCTAssertEqual(hookTrigger11.description, expected11)
+
+		let hookTrigger12 = ParseHookTrigger(
+			trigger: .afterLogout,
+			url: url
+		)
+		let expected12 = "{\"triggerName\":\"afterLogout\",\"url\":\"https:\\/\\/api.example.com\\/foo\"}"
+		XCTAssertEqual(hookTrigger12.description, expected12)
     }
 
     // swiftlint:disable:next function_body_length
@@ -585,3 +596,4 @@ class ParseHookTriggerTests: XCTestCase, @unchecked Sendable {
         }
     }
 }
+#endif
