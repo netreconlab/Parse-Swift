@@ -30,7 +30,15 @@ struct Utility {
             URLSession.parse = session
         }
 		#else
-		URLSession.parse = URLSession.shared
+		let configuration = URLSessionConfiguration.default
+		configuration.urlCache = URLCache.parse
+		configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
+		configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
+		URLSession.parse = URLSession(
+			configuration: configuration,
+			delegate: Parse.sessionDelegate,
+			delegateQueue: nil
+		)
 		#endif
     }
 

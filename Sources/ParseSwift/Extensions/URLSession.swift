@@ -12,7 +12,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-internal extension URLSession {
+extension URLSession {
 	static var parse: URLSession {
 		get {
 			lock.lock()
