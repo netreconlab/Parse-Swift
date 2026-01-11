@@ -5,8 +5,19 @@ import PackageDescription
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("ImmutableWeakCaptures")
+	.enableUpcomingFeature("ImmutableWeakCaptures"),
+	.enableExperimentalFeature("StrictConcurrency=minimal")
 ]
+
+var testSwiftSettings: [SwiftSetting] {
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+	return sharedSwiftSettings
+	#else
+	// Linux, windows, etc. is too strict in the test suite.
+	return sharedSwiftSettings + [.enableExperimentalFeature("StrictConcurrency=minimal")]
+	#endif
+}
+
 
 let package = Package(
     name: "ParseSwift",
@@ -33,7 +44,7 @@ let package = Package(
             name: "ParseSwiftTests",
             dependencies: ["ParseSwift"],
             exclude: ["Info.plist"],
-			swiftSettings: sharedSwiftSettings
+			swiftSettings: testSwiftSettings
         )
     ]
 )
