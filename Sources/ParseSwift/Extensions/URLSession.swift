@@ -35,7 +35,7 @@ internal extension URLSession {
 		responseData: Data?,
 		urlResponse: URLResponse?,
 		responseError: Error?,
-		mapper: (@escaping (Data) async throws -> U)
+		mapper: (@escaping @Sendable (Data) async throws -> U)
 	) async -> Result<U, ParseError> {
         if let responseError = responseError {
             let parseError = responseError as? ParseError ?? ParseError(message: "Unable to connect with parse-server",
@@ -353,7 +353,7 @@ internal extension URLSession {
         notificationQueue: DispatchQueue,
         with request: URLRequest,
         progress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
-        mapper: (@escaping @Sendable  (Data) async throws -> U),
+        mapper: (@escaping @Sendable (Data) async throws -> U),
         completion: (@escaping @Sendable (Result<U, ParseError>) -> Void)
     ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
