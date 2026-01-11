@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_16.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_15.4.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_26.1.app/Contents/Developer'
 
 concurrency:
@@ -109,7 +109,7 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 16\ Pro\ Max -derivedDataPath DerivedData test 2>&1 | xcbeautify --renderer github-actions
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 15\ Pro\ Max -derivedDataPath DerivedData test 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov

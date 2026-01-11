@@ -14,7 +14,7 @@ import FoundationNetworking
 // swiftlint:disable line_length
 
 /// The REST API for communicating with a Parse Server.
-public struct API {
+public struct API: Sendable {
 
     public enum Method: String, Encodable, Sendable {
         case GET, POST, PUT, PATCH, DELETE

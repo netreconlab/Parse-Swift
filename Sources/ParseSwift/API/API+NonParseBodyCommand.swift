@@ -13,7 +13,7 @@ import FoundationNetworking
 
 internal extension API {
     // MARK: API.NonParseBodyCommand
-    struct NonParseBodyCommand<T, U>: Encodable where T: Encodable & Sendable, U: Sendable {
+    struct NonParseBodyCommand<T, U>: Encodable, Sendable where T: Encodable & Sendable, U: Sendable {
         typealias ReturnType = U // swiftlint:disable:this nesting
         let method: API.Method
         let path: API.Endpoint
@@ -25,7 +25,7 @@ internal extension API {
              path: API.Endpoint,
              params: [String: String]? = nil,
              body: T? = nil,
-             mapper: @escaping (@Sendable (Data) async throws -> U)) {
+             mapper: (@escaping @Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.params = params
