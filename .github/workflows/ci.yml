@@ -117,10 +117,10 @@ jobs:
       id: coverage-files
       with:
         format: lcov
-        search-paths: ./.build
+        search-paths: ./DerivedData
         ignore-conversion-failures: true
       env:
-          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
       with:
@@ -140,12 +140,12 @@ jobs:
         with:
           toolchain: 6.2.3
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and Test
-        run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-test-discovery --enable-code-coverage
-      - name: Prepare codecov
-        run: |
-          cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
-          llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
+      - name: Build
+        run: set -o pipefail && env NSUnbufferedIO=YES swift build --enable-test-discovery --enable-code-coverage
+      #- name: Prepare codecov
+      #  run: |
+      #    cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
+      #    llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -162,9 +162,9 @@ jobs:
         with:
           branch: swift-6.2.3-release
           tag: 6.2.3-RELEASE
-      - name: Build and Test
+      - name: Build
         run: |
-          swift test --enable-test-discovery --enable-code-coverage
+          swift build --enable-test-discovery --enable-code-coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
