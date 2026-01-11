@@ -35,7 +35,7 @@ jobs:
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)'
             action: 'test'
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v6.0.1
     - name: Install Extra Packages
       run: brew install swiftlint
     - name: Create and set the default keychain
@@ -70,7 +70,7 @@ jobs:
     timeout-minutes: 25
     runs-on: macos-26
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v6.0.1
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
@@ -107,7 +107,7 @@ jobs:
     needs: linux
     runs-on: macos-14
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v6.0.1
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 16\ Pro\ Max -derivedDataPath DerivedData test 2>&1 | xcbeautify --renderer github-actions
       env:
@@ -135,7 +135,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.1
       - uses: vapor/swiftly-action@v0.2
         with:
           toolchain: 6.2.3
@@ -157,7 +157,7 @@ jobs:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.1
       - uses: compnerd/gha-setup-swift@v0.3.0
         with:
           branch: swift-6.2.3-release
@@ -177,7 +177,7 @@ jobs:
     needs: linux
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.1
       - name: Generate Docs
         run: set -o pipefail && env NSUnbufferedIO=YES Scripts/generate-documentation
         env:
@@ -187,7 +187,7 @@ jobs:
     needs: linux
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.1
       - name: Update Framework Version
         run: ./Scripts/update_build
         env:
