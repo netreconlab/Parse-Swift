@@ -199,8 +199,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(className:trigger:url:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:trigger:url:)-3id4t",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:trigger:url:)-4sels",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:trigger:url:)-6si3s",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(trigger:url:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(object:trigger:url:)-6si3s"
       ],
       "title" : "Initializers"
     },
@@ -2225,64 +2224,6 @@
   "title" : "init(object:trigger:url:)",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggerable\/init(object:trigger:url:)-6si3s"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/init(trigger:url:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a new Parse hook trigger.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "trigger"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10ParseSwift0A15HookTriggerTypeO",
-      "text" : "ParseHookTriggerType"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "url"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerable\/init(trigger:url:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(trigger:url:)",
-  "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parsehooktriggerable\/init(trigger:url:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerable/trigger": {
   "abstract" : [
