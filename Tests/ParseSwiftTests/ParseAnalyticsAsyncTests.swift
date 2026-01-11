@@ -107,6 +107,7 @@ class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	#if !os(Windows) && !os(WASI)
     @MainActor
     func testTrackAppOpenedError() async throws {
         let serverResponse = ParseError(code: .internalServer, message: "none")
@@ -134,6 +135,7 @@ class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
             XCTAssertEqual(error.message, serverResponse.message)
         }
     }
+	#endif
 
     @MainActor
     func testTrackEvent() async throws {

@@ -216,6 +216,7 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
     }
     #endif
 
+	#if !os(Android) && !os(Windows) && !os(WASI)
     func testTrackAppOpenedError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
@@ -240,6 +241,7 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
 
 	// Currently can't takeover URLSession with MockURLProtocol
 	// on Linux, Windows, etc. so disabling networking tests on
@@ -323,6 +325,7 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
     }
 	#endif
 
+	#if !os(Android) && !os(Windows) && !os(WASI)
     func testTrackEventError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
@@ -374,4 +377,5 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
 }
