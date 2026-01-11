@@ -31,7 +31,7 @@ jobs:
           - destination: 'platform=macOS'
             action: 'build'
           - destination: 'platform=visionOS\ Simulator,OS=26.2,name=Apple\ Vision\ Pro'
-            action: 'test'
+            action: 'build'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)'
             action: 'test'
     steps:

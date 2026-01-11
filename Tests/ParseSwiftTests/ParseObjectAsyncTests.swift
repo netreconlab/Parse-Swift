@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -1698,7 +1702,6 @@ class ParseObjectAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
         XCTAssertEqual(level.first?.objectId, "yarr") // This is because mocker is only returning 1 response
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     @MainActor
     func testDeepSaveObjectWithFile() async throws {
         var game = Game2()
@@ -1781,5 +1784,5 @@ class ParseObjectAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disa
         XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
         XCTAssertEqual(savedGame.profilePicture?.url, gameOnServer.profilePicture?.url)
     }
-    #endif
 }
+#endif

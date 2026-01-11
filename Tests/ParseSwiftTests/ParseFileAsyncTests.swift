@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -524,3 +528,4 @@ class ParseFileAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disabl
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
     }
 }
+#endif

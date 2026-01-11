@@ -647,6 +647,10 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // swiftlint:disable:next function_body_length
     func testFetch() async throws {
         var score = GameScore(points: 10)
@@ -1694,6 +1698,7 @@ class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             return
         }
     }
+	#endif
 }
 
 // swiftlint:disable:this file_length

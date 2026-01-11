@@ -216,31 +216,6 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
     }
     #endif
 
-    func testTrackAppOpened() {
-        let serverResponse = NoBody()
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation = XCTestExpectation(description: "Analytics save")
-        ParseAnalytics.trackAppOpened(dimensions: ["stop": "drop"]) { result in
-
-            if case .failure(let error) = result {
-                XCTFail(error.localizedDescription)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 10.0)
-    }
-
     func testTrackAppOpenedError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
@@ -265,6 +240,35 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+	func testTrackAppOpened() {
+		let serverResponse = NoBody()
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+
+		let expectation = XCTestExpectation(description: "Analytics save")
+		ParseAnalytics.trackAppOpened(dimensions: ["stop": "drop"]) { result in
+
+			if case .failure(let error) = result {
+				XCTFail(error.localizedDescription)
+			}
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 10.0)
+	}
 
     func testTrackEvent() {
         let serverResponse = NoBody()
@@ -317,6 +321,7 @@ class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
 
     func testTrackEventError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")

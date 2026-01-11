@@ -116,6 +116,10 @@ class ParseOperationTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(decoded, expected)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSave() async throws {
         var score = GameScore()
         score.points = 10
@@ -162,6 +166,41 @@ class ParseOperationTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	func testSaveKeyPath() async throws {
+		var score = GameScore()
+		score.objectId = "yarr"
+		let operations = try score.operation
+			.set(\.points, to: 15)
+			.set(\.levels, to: ["hello"])
+
+		var scoreOnServer = score
+		scoreOnServer.points = 15
+		scoreOnServer.levels = ["hello"]
+		scoreOnServer.updatedAt = Date()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+			// Get dates in correct format from ParseDecoding strategy
+			scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+		do {
+			let saved = try await operations.save()
+			XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
+			XCTAssertEqual(saved, scoreOnServer)
+		} catch {
+			XCTFail(error.localizedDescription)
+		}
+	}
+	#endif
+
     func testSaveNoObjectId() async throws {
         var score = GameScore()
         score.points = 10
@@ -177,40 +216,6 @@ class ParseOperationTests: XCTestCase, @unchecked Sendable {
                 return
             }
             XCTAssertEqual(parseError.code, .missingObjectId)
-        }
-    }
-
-    func testSaveKeyPath() async throws {
-        var score = GameScore()
-        score.objectId = "yarr"
-        let operations = try score.operation
-            .set(\.points, to: 15)
-            .set(\.levels, to: ["hello"])
-
-        var scoreOnServer = score
-        scoreOnServer.points = 15
-        scoreOnServer.levels = ["hello"]
-        scoreOnServer.updatedAt = Date()
-
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-        do {
-            let saved = try await operations.save()
-            XCTAssert(saved.hasSameObjectId(as: scoreOnServer))
-            XCTAssertEqual(saved, scoreOnServer)
-        } catch {
-            XCTFail(error.localizedDescription)
         }
     }
 
@@ -252,6 +257,10 @@ class ParseOperationTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveSet() async throws {
         var score = GameScore()
         score.points = 10
@@ -337,6 +346,7 @@ class ParseOperationTests: XCTestCase, @unchecked Sendable {
             XCTFail(error.localizedDescription)
         }
     }
+	#endif
 
     func testIncrement() throws {
         let score = GameScore(points: 10)
