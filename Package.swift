@@ -5,8 +5,7 @@ import PackageDescription
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("ImmutableWeakCaptures"),
-	.enableExperimentalFeature("StrictConcurrency=minimal")
+	.enableUpcomingFeature("ImmutableWeakCaptures")
 ]
 
 let package = Package(
