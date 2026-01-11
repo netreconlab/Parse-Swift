@@ -28,17 +28,6 @@ public protocol ParseHookTriggerable: ParseHookable {
 // MARK: Default Implementation
 public extension ParseHookTriggerable {
 
-	/**
-	 Creates a new Parse hook trigger.
-	 - parameter trigger: The `ParseHookTriggerType` type.
-	 - parameter url: The endpoint of the hook.
-	 */
-	init(trigger: ParseHookTriggerType, url: URL) {
-		self.init()
-		self.trigger = trigger
-		self.url = url
-	}
-
     /**
      Creates a new Parse hook trigger.
      - parameter className: The name of the `ParseObject` the trigger should act on.
