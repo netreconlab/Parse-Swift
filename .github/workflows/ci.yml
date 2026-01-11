@@ -112,6 +112,24 @@ jobs:
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 16\ Pro\ Max -derivedDataPath DerivedData test 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
+    - name: Prepare codecov
+      uses: sersoft-gmbh/swift-coverage-action@v5
+      id: coverage-files
+      with:
+        format: lcov
+        search-paths: ./.build
+        ignore-conversion-failures: true
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
+        env_vars: XCODEOLDEST
+        fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   linux:
     timeout-minutes: 10
@@ -132,7 +150,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           env_vars: LINUX
-          fail_ci_if_error: test
+          fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
@@ -151,7 +169,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           env_vars: WINDOWSLATEST
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
   
   docs:
