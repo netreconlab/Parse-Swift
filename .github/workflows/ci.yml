@@ -141,7 +141,7 @@ jobs:
           toolchain: 6.2.3
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
-        run: set -o pipefail && env NSUnbufferedIO=YES swift test -v --enable-test-discovery --enable-code-coverage
+        run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-test-discovery --enable-code-coverage
       - name: Prepare codecov
         run: |
           cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
@@ -164,7 +164,7 @@ jobs:
           tag: 6.2.3-RELEASE
       - name: Build and Test
         run: |
-          swift test -v --enable-test-discovery --enable-code-coverage
+          swift test --enable-test-discovery --enable-code-coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
