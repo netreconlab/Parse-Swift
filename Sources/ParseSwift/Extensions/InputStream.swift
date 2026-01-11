@@ -12,7 +12,7 @@ import FoundationNetworking
 #endif
 
 #if compiler(>=6.0)
-extension InputStream: @unchecked @retroactive Sendable {}
+extension InputStream: @retroactive @unchecked Sendable {}
 #else
 extension InputStream: @unchecked Sendable {}
 #endif

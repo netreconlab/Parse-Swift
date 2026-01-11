@@ -15,9 +15,8 @@ let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("ImplicitOpenExistentials"),
 	.enableUpcomingFeature("InferSendableFromCaptures"),
 	.enableUpcomingFeature("IsolatedDefaultValues"),
-	.enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
 	.enableUpcomingFeature("RegionBasedIsolation"),
-	// Optioinal features in Swift 6+
+	// Optional features in Swift 6+
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
 	.enableUpcomingFeature("NonisolatedNonsendingByDefault"),
