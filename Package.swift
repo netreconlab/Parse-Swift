@@ -9,16 +9,6 @@ let sharedSwiftSettings: [SwiftSetting] = [
 	.enableExperimentalFeature("StrictConcurrency=minimal")
 ]
 
-var testSwiftSettings: [SwiftSetting] {
-	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-	return sharedSwiftSettings
-	#else
-	// Linux, windows, etc. is too strict in the test suite.
-	return sharedSwiftSettings + [.enableExperimentalFeature("StrictConcurrency=minimal")]
-	#endif
-}
-
-
 let package = Package(
     name: "ParseSwift",
     platforms: [
@@ -44,7 +34,7 @@ let package = Package(
             name: "ParseSwiftTests",
             dependencies: ["ParseSwift"],
             exclude: ["Info.plist"],
-			swiftSettings: testSwiftSettings
+			swiftSettings: sharedSwiftSettings
         )
     ]
 )
