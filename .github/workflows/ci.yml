@@ -104,7 +104,7 @@ jobs:
 
   xcode-test-oldest:
     timeout-minutes: 25
-    needs: linux
+    needs: spm-test
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v6
@@ -174,7 +174,7 @@ jobs:
   
   docs:
     timeout-minutes: 10
-    needs: linux
+    needs: spm-test
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v6
@@ -184,7 +184,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   cocoapods:
-    needs: linux
+    needs: spm-test
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v6
