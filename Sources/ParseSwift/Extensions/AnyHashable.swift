@@ -7,4 +7,8 @@
 
 import Foundation
 
-extension AnyHashable: @unchecked @retroactive Sendable {}
+#if compiler(>=6.0)
+extension AnyHashable: @retroactive @unchecked Sendable {}
+#else
+extension AnyHashable: @unchecked Sendable {}
+#endif

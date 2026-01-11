@@ -11,5 +11,9 @@ import Foundation
 // swiftlint:disable line_length
 
 #if canImport(Darwin)
+#if compiler(>=6.0)
 extension JSONEncoder: @retroactive @unchecked Sendable {} // JSONEncoder Sendable conformance is not available before macOS 13.0/iOS 16.0/watchOS 9.0/tvOS 16.0 16.0
+#else
+extension JSONEncoder: @unchecked Sendable {} // JSONEncoder Sendable conformance is not available before macOS 13.0/iOS 16.0/watchOS 9.0/tvOS 16.0 16.0
+#endif
 #endif
