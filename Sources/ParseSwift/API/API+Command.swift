@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping (@Sendable (Data) async throws -> U)) {
+             mapper: (@escaping @Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body
