@@ -7,39 +7,30 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct Utility {
 
     static func updateParseURLSession() {
-        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
-        if !Parse.configuration.isTestingSDK {
-            let configuration = URLSessionConfiguration.default
-            configuration.urlCache = URLCache.parse
-            configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            URLSession.parse = URLSession(
+		if !Parse.configuration.isTestingSDK {
+			let configuration = URLSessionConfiguration.default
+			configuration.urlCache = URLCache.parse
+			configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
+			configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
+			URLSession.parse = URLSession(
 				configuration: configuration,
 				delegate: Parse.sessionDelegate,
 				delegateQueue: nil
 			)
-        } else {
-            let session = URLSession.shared
-            session.configuration.urlCache = URLCache.parse
-            session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            URLSession.parse = session
-        }
-		#else
-		let configuration = URLSessionConfiguration.default
-		configuration.urlCache = URLCache.parse
-		configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-		configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-		URLSession.parse = URLSession(
-			configuration: configuration,
-			delegate: Parse.sessionDelegate,
-			delegateQueue: nil
-		)
-		#endif
+		} else {
+			let session = URLSession.shared
+			session.configuration.urlCache = URLCache.parse
+			session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
+			session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
+			URLSession.parse = session
+		}
     }
 
     static func reconnectInterval(_ maxExponent: Int) -> Int {
