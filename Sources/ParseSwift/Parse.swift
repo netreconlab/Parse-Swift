@@ -151,7 +151,7 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
     Parse.configuration = configuration
     ParseStorage.shared.use(configuration.primitiveStore)
     Parse.sessionDelegate = ParseURLSessionDelegate(
-		callbackQueue: .global(qos: .default),
+		callbackQueue: .main,
 		authentication: configuration.authentication
 	)
     Utility.updateParseURLSession()
@@ -363,7 +363,7 @@ public func updateAuthentication(
 				  ) -> Void)?
 ) {
 	Parse.sessionDelegate = ParseURLSessionDelegate(
-		callbackQueue: .global(qos: .default),
+		callbackQueue: .main,
 		authentication: authentication
 	)
     Utility.updateParseURLSession()
