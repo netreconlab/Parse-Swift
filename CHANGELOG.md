@@ -5,6 +5,12 @@
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
+### 5.12.4
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...5.12.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.4/documentation/parseswift)
+
+__Fixes__
+* Fix issue where parse URLSession may not be created properly on Linux ([#222](https://github.com/netreconlab/Parse-Swift/pull/222)), thanks to [Corey Baker](https://github.com/cbaker6).
+
 ### 5.12.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)
 
