@@ -11,7 +11,6 @@ import Foundation
 struct Utility {
 
     static func updateParseURLSession() {
-        #if !os(Linux) && !os(Android) && !os(Windows)
         if !Parse.configuration.isTestingSDK {
             let configuration = URLSessionConfiguration.default
             configuration.urlCache = URLCache.parse
@@ -21,14 +20,16 @@ struct Utility {
                                           delegate: Parse.sessionDelegate,
                                           delegateQueue: nil)
         } else {
+            #if !os(Linux) && !os(Android) && !os(Windows)
             let session = URLSession.shared
             session.configuration.urlCache = URLCache.parse
             session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
             session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
             URLSession.parse = session
+            #else
+            URLSession.parse = URLSession.shared
+            #endif
         }
-        #endif
-
     }
 
     static func reconnectInterval(_ maxExponent: Int) -> Int {
