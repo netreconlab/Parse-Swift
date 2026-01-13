@@ -50,7 +50,7 @@ extension ParseConfig {
         return API.NonParseBodyCommand(method: .GET,
                                        path: .config) { (data) -> Self in
             let fetched = try ParseCoding.jsonDecoder().decode(ConfigFetchResponse<Self>.self, from: data).params
-            await Self.updateStorageIfNeeded(fetched)
+            await Self.updatePrimitiveStorage(fetched)
             return fetched
         }
     }
@@ -90,7 +90,7 @@ extension ParseConfig {
             let updated = try ParseCoding.jsonDecoder().decode(BooleanResponse.self, from: data).result
 
             if updated {
-                await Self.updateStorageIfNeeded(self)
+                await Self.updatePrimitiveStorage(self)
             }
             return updated
         }
@@ -143,7 +143,7 @@ extension ParseConfig {
         #endif
     }
 
-    static func updateStorageIfNeeded(_ result: Self, deleting: Bool = false) async {
+    static func updatePrimitiveStorage(_ result: Self, deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {

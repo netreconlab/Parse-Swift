@@ -966,7 +966,7 @@ extension ParseUser {
 
 // MARK: Fetchable
 extension ParseUser {
-    internal static func updateStorageIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+    internal static func updatePrimitiveStorage(_ results: [Self], deleting: Bool = false) async throws {
         let currentUser = try await Self.current()
         var foundCurrentUserObjects = results.filter { $0.hasSameObjectId(as: currentUser) }
         foundCurrentUserObjects = try foundCurrentUserObjects.sorted(by: {
@@ -1015,7 +1015,7 @@ extension ParseUser {
                              callbackQueue: callbackQueue) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                try? await Self.updateStorageIfNeeded([foundResult])
+                                try? await Self.updatePrimitiveStorage([foundResult])
                                 completion(.success(foundResult))
                             }
                         } else {
@@ -1392,7 +1392,7 @@ extension ParseUser {
 
                     case .success:
                         Task {
-                            try? await Self.updateStorageIfNeeded([self], deleting: true)
+                            try? await Self.updatePrimitiveStorage([self], deleting: true)
                             completion(.success(()))
                         }
                     case .failure(let error):
@@ -1480,9 +1480,6 @@ public extension Sequence where Element: ParseUser {
 					options: options,
 					callbackQueue: callbackQueue
 				)
-				try? await Self.Element.updateStorageIfNeeded(
-					objects.compactMap { try? $0.get() }
-				)
 				callbackQueue.async {
 					completion(.success(objects))
 				}
@@ -1527,9 +1524,6 @@ public extension Sequence where Element: ParseUser {
 					transaction: transaction,
 					options: options,
 					callbackQueue: callbackQueue
-				)
-				try? await Self.Element.updateStorageIfNeeded(
-					objects.compactMap { try? $0.get() }
 				)
 				callbackQueue.async {
 					completion(.success(objects))
@@ -1623,9 +1617,6 @@ public extension Sequence where Element: ParseUser {
 					options: options,
 					callbackQueue: callbackQueue
 				)
-				try? await Self.Element.updateStorageIfNeeded(
-					objects.compactMap { try? $0.get() }
-				)
 				callbackQueue.async {
 					completion(.success(objects))
 				}
@@ -1679,7 +1670,7 @@ public extension Sequence where Element: ParseUser {
 						}
 					}
 					Task {
-						try? await Self.Element.updateStorageIfNeeded(fetchedObjects)
+						try? await Self.Element.updatePrimitiveStorage(fetchedObjects)
 						callbackQueue.async {
 							completion(.success(fetchedObjectsToReturn))
 						}
@@ -1743,7 +1734,7 @@ public extension Sequence where Element: ParseUser {
 					options: options,
 					callbackQueue: callbackQueue
 				)
-				try? await Self.Element.updateStorageIfNeeded(
+				try? await Self.Element.updatePrimitiveStorage(
 					originalObjects,
 					deleting: true
 				)

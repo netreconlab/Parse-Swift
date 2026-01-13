@@ -327,7 +327,7 @@ public extension Sequence where Element: ParseObject {
 			valuesPerSegment: batchLimit
 		)
 
-		let returnBatch = try await withThrowingTaskGroup(
+		let batchResults = try await withThrowingTaskGroup(
 			of: ParseObjectBatchResponseNoBody<NoBody>.self,
 			returning: [(Result<Void, ParseError>)].self
 		) { group in
@@ -341,11 +341,12 @@ public extension Sequence where Element: ParseObject {
 						)
 				}
 			}
-			return try await group.reduce(into: [(Result<Void, ParseError>)]()) { partialResult, batch in
+			let results = try await group.reduce(into: [(Result<Void, ParseError>)]()) { partialResult, batch in
 				partialResult.append(contentsOf: batch)
 			}
+			return results
 		}
-		return returnBatch
+		return batchResults
     }
 }
 
