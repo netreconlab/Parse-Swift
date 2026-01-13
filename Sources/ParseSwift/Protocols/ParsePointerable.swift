@@ -119,7 +119,7 @@ public extension Sequence where Element: ParsePointerObject {
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      It should have the following argument signature: `(Result<[(Result<Element.Object, ParseError>)], ParseError>)`.
-     - warning: The order in which objects are returned are not guarenteed. You should not expect results in
+     - warning: The order in which objects are returned are not guaranteed. You should not expect results in
      any particular order.
     */
     func fetchAll(

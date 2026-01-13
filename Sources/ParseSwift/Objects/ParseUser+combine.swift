@@ -427,7 +427,7 @@ public extension ParseUser {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -619,7 +619,7 @@ public extension Sequence where Element: ParseUser {
 	 `ParseConfiguration.isRequiringCustomObjectIds = true` and
 	 `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
 	 and the server will generate an `objectId` only when the client does not provide one. This can
-	 increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+	 increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
 	 different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
 	 client-side checks are disabled. Developers are responsible for handling such cases.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer

@@ -421,7 +421,7 @@ transactions for this call.
 	 `ParseConfiguration.isRequiringCustomObjectIds = true` and
 	 `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
 	 and the server will generate an `objectId` only when the client does not provide one. This can
-	 increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+	 increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
 	 different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
 	 client-side checks are disabled. Developers are responsible for handling such cases.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -441,6 +441,7 @@ transactions for this call.
 				let objects = try await originalObjects.saveAll(
 					batchLimit: limit,
 					transaction: transaction,
+					ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
 					options: options,
 					callbackQueue: callbackQueue
 				)
@@ -600,7 +601,7 @@ transactions for this call.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-	 - warning: The order in which objects are returned are not guarenteed. You should not expect results in
+	 - warning: The order in which objects are returned are not guaranteed. You should not expect results in
 	 any particular order.
 	*/
 	func fetchAll(
@@ -610,8 +611,8 @@ transactions for this call.
 		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
 	) {
 		if (allSatisfy { $0.className == Self.Element.className}) {
-			let uniqueObjectIds = Set(compactMap { $0.objectId })
-			var query = Self.Element.query(containedIn(key: "objectId", array: [uniqueObjectIds]))
+			let uniqueObjectIds = Array(Set(compactMap { $0.objectId }))
+			var query = Self.Element.query(containedIn(key: "objectId", array: uniqueObjectIds))
 			if let include = includeKeys {
 				query = query.include(include)
 			}
@@ -619,19 +620,20 @@ transactions for this call.
 				switch result {
 
 				case .success(let fetchedObjects):
-					var fetchedObjectsToReturn = [(Result<Self.Element, ParseError>)]()
-
-					uniqueObjectIds.forEach {
-						let uniqueObjectId = $0
+					let fetchedObjectsToReturn = uniqueObjectIds.map { uniqueObjectId -> (Result<Self.Element, ParseError>) in
 						if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
-							fetchedObjectsToReturn.append(.success(fetchedObject))
+							return .success(fetchedObject)
 						} else {
-							fetchedObjectsToReturn.append(.failure(ParseError(code: .objectNotFound,
-																			  // swiftlint:disable:next line_length
-																			  message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")))
+							let error = ParseError(
+								code: .objectNotFound,
+								message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\""
+							)
+							return .failure(error)
 						}
 					}
-					completion(.success(fetchedObjectsToReturn))
+					callbackQueue.async {
+						completion(.success(fetchedObjectsToReturn))
+					}
 				case .failure(let error):
 					callbackQueue.async {
 						completion(.failure(error))
@@ -780,7 +782,7 @@ extension ParseObject {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
     */

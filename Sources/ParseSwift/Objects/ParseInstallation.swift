@@ -967,6 +967,7 @@ public extension Sequence where Element: ParseInstallation {
 				let objects = try await originalObjects.saveAll(
 					batchLimit: limit,
 					transaction: transaction,
+					ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
 					options: options,
 					callbackQueue: callbackQueue
 				)
@@ -1129,7 +1130,7 @@ public extension Sequence where Element: ParseInstallation {
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
 	 - important: If an object fetched has the same objectId as current, it will automatically update the current.
-	 - warning: The order in which installations are returned are not guarenteed. You should not expect results in
+	 - warning: The order in which installations are returned are not guaranteed. You should not expect results in
 	 any particular order.
 	*/
 	func fetchAll(
@@ -1139,8 +1140,8 @@ public extension Sequence where Element: ParseInstallation {
 		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
 	) {
 		if (allSatisfy { $0.className == Self.Element.className}) {
-			let uniqueObjectIds = Set(compactMap { $0.objectId })
-			var query = Self.Element.query(containedIn(key: "objectId", array: [uniqueObjectIds]))
+			let uniqueObjectIds = Array(Set(compactMap { $0.objectId }))
+			var query = Self.Element.query(containedIn(key: "objectId", array: uniqueObjectIds))
 			if let include = includeKeys {
 				query = query.include(include)
 			}
@@ -1148,22 +1149,22 @@ public extension Sequence where Element: ParseInstallation {
 				switch result {
 
 				case .success(let fetchedObjects):
-					var fetchedObjectsToReturnMutable = [(Result<Self.Element, ParseError>)]()
-
-					uniqueObjectIds.forEach {
-						let uniqueObjectId = $0
+					let fetchedObjectsToReturn = uniqueObjectIds.map { uniqueObjectId -> (Result<Self.Element, ParseError>) in
 						if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
-							fetchedObjectsToReturnMutable.append(.success(fetchedObject))
+							return .success(fetchedObject)
 						} else {
-							let error = ParseError(code: .objectNotFound,
-												   message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")
-							fetchedObjectsToReturnMutable.append(.failure(error))
+							let error = ParseError(
+								code: .objectNotFound,
+								message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\""
+							)
+							return .failure(error)
 						}
 					}
-					let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
 					Task {
 						try? await Self.Element.updateStorageIfNeeded(fetchedObjects)
-						completion(.success(fetchedObjectsToReturn))
+						callbackQueue.async {
+							completion(.success(fetchedObjectsToReturn))
+						}
 					}
 				case .failure(let error):
 					callbackQueue.async {

@@ -108,6 +108,8 @@ jobs:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v6
+    - name: Install Extra Packages
+      run: brew install swiftlint
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 16\ Pro\ Max -derivedDataPath DerivedData test 2>&1 | xcbeautify --renderer github-actions
       env:
