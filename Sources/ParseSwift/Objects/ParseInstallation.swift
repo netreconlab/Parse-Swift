@@ -971,6 +971,9 @@ public extension Sequence where Element: ParseInstallation {
 					options: options,
 					callbackQueue: callbackQueue
 				)
+				try? await Self.Element.updateStorageIfNeeded(
+					objects.compactMap { try? $0.get() }
+				)
 				callbackQueue.async {
 					completion(.success(objects))
 				}
@@ -1015,6 +1018,9 @@ public extension Sequence where Element: ParseInstallation {
 					transaction: transaction,
 					options: options,
 					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updateStorageIfNeeded(
+					objects.compactMap { try? $0.get() }
 				)
 				callbackQueue.async {
 					completion(.success(objects))
@@ -1062,6 +1068,9 @@ public extension Sequence where Element: ParseInstallation {
 					options: options,
 					callbackQueue: callbackQueue
 				)
+				try? await Self.Element.updateStorageIfNeeded(
+					objects.compactMap { try? $0.get() }
+				)
 				callbackQueue.async {
 					completion(.success(objects))
 				}
@@ -1107,6 +1116,9 @@ public extension Sequence where Element: ParseInstallation {
 					transaction: transaction,
 					options: options,
 					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updateStorageIfNeeded(
+					objects.compactMap { try? $0.get() }
 				)
 				callbackQueue.async {
 					completion(.success(objects))
@@ -1224,6 +1236,10 @@ public extension Sequence where Element: ParseInstallation {
 					transaction: transaction,
 					options: options,
 					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updateStorageIfNeeded(
+					originalObjects,
+					deleting: true
 				)
 				callbackQueue.async {
 					completion(.success(objects))

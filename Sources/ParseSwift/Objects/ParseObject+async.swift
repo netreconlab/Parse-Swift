@@ -508,7 +508,7 @@ internal extension Sequence where Element: ParseObject {
                 guard childObjects[key] == nil else {
 					let error = ParseError(
 						code: .otherCause,
-						message: "Found a circular dependency in ParseObject."
+						message: "Found a circular dependency in \"\(Self.Element.className)\"."
 					)
 					throw error
                 }
@@ -518,7 +518,7 @@ internal extension Sequence where Element: ParseObject {
                 guard childFiles[key] == nil else {
 					let error = ParseError(
 						code: .otherCause,
-						message: "Found a circular dependency in ParseObject."
+						message: "Found a circular dependency in \"\(Self.Element.className)\"."
 					)
 					throw error
                 }
