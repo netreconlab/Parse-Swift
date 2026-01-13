@@ -1682,10 +1682,11 @@ public extension Sequence where Element: ParseUser {
 				}
 			}
 		} else {
-			callbackQueue.async {
-				completion(.failure(ParseError(code: .otherCause,
-											   message: "All items to fetch must be of the same class")))
-			}
+			let error = ParseError(
+				code: .otherCause,
+				message: "All objects must have the same class"
+			)
+			completion(.failure(error))
 		}
 	}
 
@@ -1699,7 +1700,7 @@ public extension Sequence where Element: ParseUser {
 	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
 	 - parameter completion: The block to execute.
-	 It should have the following argument signature: `(Result<[ParseError?], ParseError>)`.
+	 It should have the following argument signature: `(Result<[(Result<Void, ParseError>)], ParseError>)`.
 	 Each element in the array is `nil` if the delete successful or a `ParseError` if it failed.
 	 1. A `ParseError.Code.aggregateError`. This object's "errors" property is an
 	 array of other Parse.Error objects. Each error object in this array
