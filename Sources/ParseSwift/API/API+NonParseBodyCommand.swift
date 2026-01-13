@@ -145,11 +145,12 @@ internal extension API.NonParseBodyCommand {
 internal extension API.NonParseBodyCommand {
     // MARK: Batch - Child Objects
     // swiftlint:disable:next function_body_length
-    static func batch(objects: [ParseEncodable],
-                      transaction: Bool,
-                      objectsSavedBeforeThisOne: [String: PointerType]?,
-                      // swiftlint:disable:next line_length
-                      filesSavedBeforeThisOne: [String: ParseFile]?) async throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
+    static func batch(
+		objects: [ParseEncodable],
+		transaction: Bool,
+		objectsSavedBeforeThisOne: [String: PointerType]?,
+		filesSavedBeforeThisOne: [String: ParseFile]?
+	) async throws -> RESTBatchCommandTypeEncodablePointer<AnyCodable> {
 
         let defaultACL = try? await ParseACL.defaultACL()
         let batchCommands = try objects.compactMap { (object) -> API.BatchCommand<AnyCodable, PointerType>? in
@@ -181,41 +182,58 @@ internal extension API.NonParseBodyCommand {
 					filesSavedBeforeThisOne: filesSavedBeforeThisOne
 				)
             let body = try ParseCoding.jsonDecoder().decode(AnyCodable.self, from: encoded)
-            return API.BatchCommand<AnyCodable, PointerType>(method: method,
-                                                             path: .any(path),
-                                                             body: body,
-                                                             mapper: mapper)
+			let command = API.BatchCommand<AnyCodable, PointerType>(
+				method: method,
+				path: .any(path),
+				body: body,
+				mapper: mapper
+			)
+			return command
         }
 
         let mapper = { @Sendable (data: Data) -> [Result<PointerType, ParseError>] in
             let decodingType = [BatchResponseItem<BaseObjectable>].self
             do {
                 let responses = try ParseCoding.jsonDecoder().decode(decodingType, from: data)
-                return batchCommands.enumerated().map({ (object) -> (Result<PointerType, ParseError>) in
-                    let response = responses[object.offset]
-                    if let success = response.success {
-                        guard let successfulResponse = try? object.element.mapper(success) else {
-                            return .failure(ParseError(code: .otherCause, message: "Unknown error"))
-                        }
-                        return .success(successfulResponse)
-                    } else {
-                        let parseError = response.error ?? ParseError(code: .otherCause,
-                                                                      message: "Unknown error")
-                        return .failure(parseError)
-                    }
-                })
+				let commands = batchCommands.enumerated().map { object -> Result<PointerType, ParseError> in
+					let response = responses[object.offset]
+					if let success = response.success {
+						guard let successfulResponse = try? object.element.mapper(success) else {
+							let error = ParseError(
+								code: .otherCause,
+								message: "Unknown error"
+							)
+							return .failure(error)
+						}
+						return .success(successfulResponse)
+					} else {
+						let parseError = response.error ?? ParseError(
+							code: .otherCause,
+							message: "Unknown error"
+						)
+						return .failure(parseError)
+					}
+				}
+				return commands
             } catch {
-                let parseError = error as? ParseError ?? ParseError(code: .otherCause,
-                                                                    message: "Decoding error",
-                                                                    swift: error)
+                let parseError = error as? ParseError ?? ParseError(
+					code: .otherCause,
+					message: "Decoding error",
+					swift: error
+				)
                 return [(.failure(parseError))]
             }
         }
-        let batchCommand = BatchChildCommand(requests: batchCommands,
-                                             transaction: transaction)
-        return RESTBatchCommandTypeEncodablePointer<AnyCodable>(method: .POST,
-                                                                path: .batch,
-                                                                body: batchCommand,
-                                                                mapper: mapper)
+        let batchCommand = BatchChildCommand(
+			requests: batchCommands,
+			transaction: transaction
+		)
+		let command = RESTBatchCommandTypeEncodablePointer<AnyCodable>(
+			method: .POST,
+			path: .batch,
+			body: batchCommand,
+			mapper: mapper
+		)
+        return command
     }
 }

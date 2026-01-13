@@ -218,6 +218,9 @@ public extension Sequence where Element: ParseInstallation {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updateStorageIfNeeded(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
     }
 
@@ -252,6 +255,9 @@ public extension Sequence where Element: ParseInstallation {
 			transaction: transaction,
 			options: options,
 			callbackQueue: callbackQueue
+		)
+		try? await Self.Element.updateStorageIfNeeded(
+			objects.compactMap { try? $0.get() }
 		)
 		return objects
     }
@@ -289,6 +295,9 @@ public extension Sequence where Element: ParseInstallation {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updateStorageIfNeeded(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
     }
 
@@ -324,6 +333,9 @@ public extension Sequence where Element: ParseInstallation {
 			transaction: transaction,
 			options: options,
 			callbackQueue: callbackQueue
+		)
+		try? await Self.Element.updateStorageIfNeeded(
+			objects.compactMap { try? $0.get() }
 		)
 		return objects
     }
@@ -421,6 +433,7 @@ internal extension ParseInstallation {
     }
 }
 
+/*
 // MARK: Batch Support
 internal extension Sequence where Element: ParseInstallation {
     // swiftlint:disable:next function_body_length
@@ -444,19 +457,25 @@ internal extension Sequence where Element: ParseInstallation {
             let (savedChildObjects, savedChildFiles) = try await object
                 .ensureDeepSave(
 					options: updatedOptions,
-					isShouldReturnIfChildObjectsFound: transaction
+					shouldReturnIfChildObjectsFound: transaction
 				)
             try savedChildObjects.forEach {(key, value) in
                 guard childObjects[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseInstallation.")
+					let error = ParseError(
+						code: .otherCause,
+						message: "Found a circular dependency in ParseInstallation."
+					)
+					throw error
                 }
                 childObjects[key] = value
             }
             try savedChildFiles.forEach {(key, value) in
                 guard childFiles[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseInstallation.")
+					let error = ParseError(
+						code: .otherCause,
+						message: "Found a circular dependency in ParseInstallation."
+					)
+					throw error
                 }
                 childFiles[key] = value
             }
@@ -484,7 +503,7 @@ internal extension Sequence where Element: ParseInstallation {
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
 		let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
 
-		let returnBatch = try await withThrowingTaskGroup(
+		let batchResult = try await withThrowingTaskGroup(
 			of: [Result<Self.Element, ParseError>].self,
 			returning: [(Result<Self.Element, ParseError>)].self
 		) { group in
@@ -501,16 +520,15 @@ internal extension Sequence where Element: ParseInstallation {
 						)
 				}
 			}
-			return try await group.reduce(into: [(Result<Self.Element, ParseError>)]()) { partialResult, batch in
+			let results = try await group.reduce(into: [(Result<Self.Element, ParseError>)]()) { partialResult, batch in
 				partialResult.append(contentsOf: batch)
 			}
+			return results
 		}
-		try? await Self.Element.updateStorageIfNeeded(
-			returnBatch.compactMap { try? $0.get() }
-		)
-		return returnBatch
+		return batchResult
     }
 }
+ */
 
 #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 // MARK: Migrate from Objective-C SDK
