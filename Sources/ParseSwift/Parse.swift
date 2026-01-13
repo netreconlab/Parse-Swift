@@ -143,7 +143,6 @@ public var configuration: ParseConfiguration {
  - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
@@ -290,7 +289,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */

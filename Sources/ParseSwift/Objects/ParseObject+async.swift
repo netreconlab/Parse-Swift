@@ -127,12 +127,16 @@ public extension Sequence where Element: ParseObject {
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
     */
-    @discardableResult func fetchAll(includeKeys: [String]? = nil,
-                                     options: API.Options = []) async throws -> [(Result<Self.Element, ParseError>)] {
+    @discardableResult func fetchAll(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) async throws -> [(Result<Self.Element, ParseError>)] {
         try await withCheckedThrowingContinuation { continuation in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: { continuation.resume(with: $0) })
+            self.fetchAll(
+				includeKeys: includeKeys,
+				options: options,
+				completion: { continuation.resume(with: $0) }
+			)
         }
     }
 
