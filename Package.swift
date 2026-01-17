@@ -2,12 +2,20 @@
 
 import PackageDescription
 
+#if swift(>=6.2)
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+	.enableUpcomingFeature("ImmutableWeakCaptures"),
+	.enableUpcomingFeature("NonisolatedNonsendingByDefault")
+]
+#else
+let sharedSwiftSettings: [SwiftSetting] = [
+	.enableUpcomingFeature("MemberImportVisibility"),
+	.enableUpcomingFeature("InferIsolatedConformances"),
 	.enableUpcomingFeature("ImmutableWeakCaptures")
 ]
+#endif
 
 let package = Package(
     name: "ParseSwift",

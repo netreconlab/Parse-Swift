@@ -628,6 +628,14 @@ transactions for this call.
 				switch result {
 
 				case .success(let fetchedObjects):
+					let fetchedObjectsDictionary = Dictionary(
+						uniqueKeysWithValues: fetchedObjects.map { object in
+							guard let objectId = object.objectId else {
+								fatalError("All fetched objects from the server should have an objectId")
+							}
+							return (objectId, object)
+						}
+					)
 					let fetchedObjectsToReturn = originalObjects.map { object -> (Result<Self.Element, ParseError>) in
 						guard let objectId = object.objectId else {
 							let error = ParseError(
@@ -636,14 +644,6 @@ transactions for this call.
 							)
 							return .failure(error)
 						}
-						let fetchedObjectsDictionary = Dictionary(
-							uniqueKeysWithValues: fetchedObjects.map { object in
-								guard let objectId = object.objectId else {
-									fatalError("All fetched objects from the server should have an objectId")
-								}
-								return (objectId, object)
-							}
-						)
 						if let fetchedObject = fetchedObjectsDictionary[objectId] {
 							return .success(fetchedObject)
 						} else {
