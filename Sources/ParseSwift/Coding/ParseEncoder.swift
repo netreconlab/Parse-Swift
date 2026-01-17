@@ -297,7 +297,7 @@ internal class _ParseEncoder: Encoder {
 		dictionary: NSMutableDictionary = NSMutableDictionary(),
 		skippingKeys: Set<String>,
 		dateEncodingStrategy: JSONEncoder.DateEncodingStrategy,
-		outputFormatting: JSONEncoder.OutputFormatting,
+		outputFormatting: JSONEncoder.OutputFormatting
 	) {
         self.codingPath = codingPath
 		self.userInfoSendable = userInfo

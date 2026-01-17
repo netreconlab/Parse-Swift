@@ -571,7 +571,7 @@ public extension Sequence where Element: ParseUser {
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
 	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-	 - returns: Returns and array of `(Result<Void, ParseError>)`.
+	 - returns: Returns and array.
 	 - throws: An error of type `ParseError`.
 	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else

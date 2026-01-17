@@ -612,11 +612,19 @@ transactions for this call.
 	) {
 		if (allSatisfy { $0.className == Self.Element.className}) {
 			let uniqueObjectIds = Array(Set(compactMap { $0.objectId }))
-			var query = Self.Element.query(containedIn(key: "objectId", array: uniqueObjectIds))
+			var query = Self.Element.query(
+				containedIn(
+					key: "objectId",
+					array: uniqueObjectIds
+				)
+			)
 			if let include = includeKeys {
 				query = query.include(include)
 			}
-			query.find(options: options, callbackQueue: callbackQueue) { result in
+			query.find(
+				options: options,
+				callbackQueue: callbackQueue
+			) { result in
 				switch result {
 
 				case .success(let fetchedObjects):
