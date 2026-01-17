@@ -601,9 +601,8 @@ transactions for this call.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-	 - warning: The order in which objects are returned are not guaranteed. You should not expect results in
-	 any particular order.
 	*/
+	// swiftlint:disable:next function_body_length
 	func fetchAll(
 		includeKeys: [String]? = nil,
 		options: API.Options = [],
@@ -611,6 +610,7 @@ transactions for this call.
 		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
 	) {
 		if (allSatisfy { $0.className == Self.Element.className}) {
+			let originalObjects = Array(self)
 			let uniqueObjectIds = Array(Set(compactMap { $0.objectId }))
 			var query = Self.Element.query(
 				containedIn(
@@ -628,13 +628,20 @@ transactions for this call.
 				switch result {
 
 				case .success(let fetchedObjects):
-					let fetchedObjectsToReturn = uniqueObjectIds.map { uniqueObjectId -> (Result<Self.Element, ParseError>) in
-						if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
+					let fetchedObjectsToReturn = originalObjects.map { object -> (Result<Self.Element, ParseError>) in
+						guard let objectId = object.objectId else {
+							let error = ParseError(
+								code: .missingObjectId,
+								message: "objectId must not be nil"
+							)
+							return .failure(error)
+						}
+						if let fetchedObject = fetchedObjects.first(where: { $0.objectId == objectId }) {
 							return .success(fetchedObject)
 						} else {
 							let error = ParseError(
 								code: .objectNotFound,
-								message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\""
+								message: "objectId \"\(objectId)\" was not found in className \"\(Self.Element.className)\""
 							)
 							return .failure(error)
 						}
