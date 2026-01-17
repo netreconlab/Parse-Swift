@@ -566,7 +566,9 @@ extension ParseInstallation {
 								}
                             }
                         } else {
-                            completion(result)
+							callbackQueue.async {
+								completion(result)
+							}
                         }
                     }
             } catch {
