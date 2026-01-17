@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_16.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_16.2.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_26.1.app/Contents/Developer'
 
 concurrency:
@@ -113,7 +113,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES swift test -v #--enable-code-coverage 2>&1 | xcbeautify --renderer github-actions
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
     - name: Prepare codecov
