@@ -198,14 +198,16 @@ internal extension API.NonParseBodyCommand {
 				let commands = batchCommands.enumerated().map { object -> Result<PointerType, ParseError> in
 					let response = responses[object.offset]
 					if let success = response.success {
-						guard let successfulResponse = try? object.element.mapper(success) else {
-							let error = ParseError(
+						do {
+							let successfulResponse = try object.element.mapper(success)
+							return .success(successfulResponse)
+						} catch {
+							let parseError = error as? ParseError ?? ParseError(
 								code: .otherCause,
 								message: "Unknown error"
 							)
-							return .failure(error)
+							return .failure(parseError)
 						}
-						return .success(successfulResponse)
 					} else {
 						let parseError = response.error ?? ParseError(
 							code: .otherCause,

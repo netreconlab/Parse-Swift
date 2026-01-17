@@ -52,25 +52,25 @@ public extension ParseObject {
     /// The Parse encoder is used to JSON encode all `ParseObject`s and
     /// types in a way meaninful for a Parse Server to consume.
     static func getEncoder() -> ParseEncoder {
-        return ParseCoding.parseEncoder()
+        ParseCoding.parseEncoder()
     }
 
     /// The Parse encoder is used to JSON encode all `ParseObject`s and
     /// types in a way meaningful for a Parse Server to consume.
     func getEncoder() -> ParseEncoder {
-        return Self.getEncoder()
+        Self.getEncoder()
     }
 
     /// The JSON encoder setup with the correct `dateEncodingStrategy`
     /// strategy to send data to a Parse Server.
     static func getJSONEncoder() -> JSONEncoder {
-        return ParseCoding.jsonEncoder()
+        ParseCoding.jsonEncoder()
     }
 
     /// The JSON encoder setup with the correct `dateEncodingStrategy`
     /// strategy to send data to a Parse Server.
     func getJSONEncoder() -> JSONEncoder {
-        return Self.getJSONEncoder()
+        Self.getJSONEncoder()
     }
 
     /// The JSON decoder setup with the correct `dateDecodingStrategy`

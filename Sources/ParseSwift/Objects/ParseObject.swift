@@ -646,9 +646,7 @@ transactions for this call.
 					code: .otherCause,
 					message: "All objects must have the same class"
 				)
-				callbackQueue.async {
-					completion(.failure(error))
-				}
+				completion(.failure(error))
 			}
 		}
 	}
