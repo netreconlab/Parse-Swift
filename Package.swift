@@ -12,7 +12,7 @@ let sharedSwiftSettings: [SwiftSetting] = [
 #else
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
-	.enableUpcomingFeature("InferIsolatedConformances"),
+	.enableUpcomingFeature("InferIsolatedConformances")
 ]
 #endif
 
