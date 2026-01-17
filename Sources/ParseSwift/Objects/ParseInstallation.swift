@@ -554,23 +554,21 @@ extension ParseInstallation {
         Task {
             do {
                 try await fetchCommand(include: includeKeys)
-                    .execute(options: options,
-                             callbackQueue: callbackQueue) { result in
+                    .execute(
+						options: options,
+						callbackQueue: callbackQueue
+					) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                do {
-                                    try await Self.updatePrimitiveStorage([foundResult])
-                                    completion(.success(foundResult))
-                                } catch {
-                                    let parseError = error as? ParseError ?? ParseError(swift: error)
-                                    completion(.failure(parseError))
-                                }
+								try? await Self.updatePrimitiveStorage([foundResult])
+								callbackQueue.async {
+									completion(.success(foundResult))
+								}
                             }
                         } else {
                             completion(result)
                         }
                     }
-
             } catch {
                 callbackQueue.async {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
@@ -1177,7 +1175,15 @@ public extension Sequence where Element: ParseInstallation {
 							)
 							return .failure(error)
 						}
-						if let fetchedObject = fetchedObjects.first(where: { $0.objectId == objectId }) {
+						let fetchedObjectsDictionary = Dictionary(
+							uniqueKeysWithValues: fetchedObjects.map { object in
+								guard let objectId = object.objectId else {
+									fatalError("All fetched objects from the server should have an objectId")
+								}
+								return (objectId, object)
+							}
+						)
+						if let fetchedObject = fetchedObjectsDictionary[objectId] {
 							return .success(fetchedObject)
 						} else {
 							let error = ParseError(

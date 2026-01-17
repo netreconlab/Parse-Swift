@@ -636,7 +636,15 @@ transactions for this call.
 							)
 							return .failure(error)
 						}
-						if let fetchedObject = fetchedObjects.first(where: { $0.objectId == objectId }) {
+						let fetchedObjectsDictionary = Dictionary(
+							uniqueKeysWithValues: fetchedObjects.map { object in
+								guard let objectId = object.objectId else {
+									fatalError("All fetched objects from the server should have an objectId")
+								}
+								return (objectId, object)
+							}
+						)
+						if let fetchedObject = fetchedObjectsDictionary[objectId] {
 							return .success(fetchedObject)
 						} else {
 							let error = ParseError(
@@ -764,9 +772,11 @@ extension ParseObject {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await fetchCommand(include: includeKeys)
-                    .execute(options: options,
-                             callbackQueue: callbackQueue,
-                             completion: completion)
+                    .execute(
+						options: options,
+						callbackQueue: callbackQueue,
+						completion: completion
+					)
             } catch {
                 let parseError = error as? ParseError ?? ParseError(swift: error)
                 callbackQueue.async {

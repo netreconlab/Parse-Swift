@@ -1011,15 +1011,21 @@ extension ParseUser {
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
             do {
                 try await fetchCommand(include: includeKeys)
-                    .execute(options: options,
-                             callbackQueue: callbackQueue) { result in
+                    .execute(
+						options: options,
+						callbackQueue: callbackQueue
+					) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                try? await Self.updatePrimitiveStorage([foundResult])
-                                completion(.success(foundResult))
+								try? await Self.updatePrimitiveStorage([foundResult])
+								callbackQueue.async {
+									completion(.success(foundResult))
+								}
                             }
                         } else {
-                            completion(result)
+							callbackQueue.async {
+								completion(result)
+							}
                         }
                     }
             } catch {
@@ -1639,8 +1645,6 @@ public extension Sequence where Element: ParseUser {
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
 	 - important: If an object fetched has the same objectId as current, it will automatically update the current.
-	 - warning: The order in which users are returned are not guaranteed. You should not expect results in
-	 any particular order.
 	*/
 	// swiftlint:disable:next function_body_length
 	func fetchAll(
@@ -1676,7 +1680,15 @@ public extension Sequence where Element: ParseUser {
 							)
 							return .failure(error)
 						}
-						if let fetchedObject = fetchedObjects.first(where: { $0.objectId == objectId }) {
+						let fetchedObjectsDictionary = Dictionary(
+							uniqueKeysWithValues: fetchedObjects.map { object in
+								guard let objectId = object.objectId else {
+									fatalError("All fetched objects from the server should have an objectId")
+								}
+								return (objectId, object)
+							}
+						)
+						if let fetchedObject = fetchedObjectsDictionary[objectId] {
 							return .success(fetchedObject)
 						} else {
 							let error = ParseError(

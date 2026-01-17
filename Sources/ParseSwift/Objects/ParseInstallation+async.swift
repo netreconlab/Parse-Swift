@@ -352,7 +352,7 @@ public extension Sequence where Element: ParseInstallation {
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Returns an array.
+     - returns: Returns an array [(Result<Void, ParseError>)].
      - throws: An error of type `ParseError`.
      - important: If an object deleted has the same objectId as current, it will automatically update the current.
      - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
