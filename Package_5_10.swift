@@ -19,8 +19,6 @@ let sharedSwiftSettings: [SwiftSetting] = [
 	// Optional features in Swift 6+
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-	.enableUpcomingFeature("ImmutableWeakCaptures"),
 	.enableExperimentalFeature("StrictConcurrency=complete")
 ]
 

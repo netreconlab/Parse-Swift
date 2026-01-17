@@ -13,7 +13,6 @@ let sharedSwiftSettings: [SwiftSetting] = [
 let sharedSwiftSettings: [SwiftSetting] = [
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("ImmutableWeakCaptures")
 ]
 #endif
 

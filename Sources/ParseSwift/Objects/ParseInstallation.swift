@@ -1168,9 +1168,9 @@ public extension Sequence where Element: ParseInstallation {
 
 				case .success(let fetchedObjects):
 					let fetchedObjectsDictionary = Dictionary(
-						uniqueKeysWithValues: fetchedObjects.map { object in
+						uniqueKeysWithValues: fetchedObjects.compactMap { object -> (String, Self.Element)? in
 							guard let objectId = object.objectId else {
-								fatalError("All fetched objects from the server should have an objectId")
+								return nil
 							}
 							return (objectId, object)
 						}
