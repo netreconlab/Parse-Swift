@@ -609,9 +609,9 @@ transactions for this call.
 		callbackQueue: DispatchQueue = .main,
 		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
 	) {
-		if (allSatisfy { $0.className == Self.Element.className}) {
-			let originalObjects = Array(self)
-			let uniqueObjectIds = Array(Set(compactMap { $0.objectId }))
+		let originalObjects = Array(self)
+		if (originalObjects.allSatisfy { $0.className == Self.Element.className}) {
+			let uniqueObjectIds = Array(Set(originalObjects.compactMap { $0.objectId }))
 			var query = Self.Element.query(
 				containedIn(
 					key: "objectId",
