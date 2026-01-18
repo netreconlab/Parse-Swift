@@ -90,78 +90,79 @@ public extension ParseHookTriggerable {
             message: "This object \"\(object)\" currently does not support the hook trigger \"\(trigger)\""
         )
 
-        switch object {
-        case .objectType(let parseObject):
-            switch trigger {
+		switch object {
+		case .objectType(let parseObject):
+			switch trigger {
+			case .beforeLogin, .afterLogin, .afterLogout,
+					.beforePasswordResetRequest:
+				guard parseObject is (any ParseUser.Type) else {
+					throw notSupportedError
+				}
+			case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind,
+					.beforeSubscribe, .afterEvent:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .object(let parseObject):
+			switch trigger {
 			case .beforeLogin, .afterLogin, .afterLogout, .beforePasswordResetRequest:
-                guard parseObject is (any ParseUser.Type) else {
-                    throw notSupportedError
-                }
-            case .beforeSave, .afterSave, .beforeDelete,
-                    .afterDelete, .beforeFind, .afterFind,
-                    .beforeSubscribe, .afterEvent:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .object(let parseObject):
-            switch trigger {
-			case .beforeLogin, .afterLogin, .afterLogout, .beforePasswordResetRequest:
-                guard parseObject is (any ParseUser) else {
-                    throw notSupportedError
-                }
-            case .beforeSave, .afterSave, .beforeDelete,
-                    .afterDelete, .beforeFind, .afterFind,
-                    .beforeSubscribe, .afterEvent:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .file:
-            switch trigger {
-            case .beforeSave, .afterSave, .beforeDelete,
+				guard parseObject is (any ParseUser) else {
+					throw notSupportedError
+				}
+			case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind,
+					.beforeSubscribe, .afterEvent:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .file:
+			switch trigger {
+			case .beforeSave, .afterSave, .beforeDelete,
 					.afterDelete, .beforeFind, .afterFind:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .config:
-            switch trigger {
-            case .beforeSave, .afterSave:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .liveQueryConnect:
-            guard trigger == .beforeConnect else {
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        }
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .config:
+			switch trigger {
+			case .beforeSave, .afterSave:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .liveQueryConnect:
+			guard trigger == .beforeConnect else {
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		}
     }
 }
 
