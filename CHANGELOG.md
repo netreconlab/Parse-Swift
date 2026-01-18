@@ -13,7 +13,7 @@ __Breaking Changes__
 * Remove all deprecated code and warnings ([#211](https://github.com/netreconlab/Parse-Swift/pull/211)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __New features__
-* Add missing hook tiggers: `beforePasswordResetRequest` for `ParseUser`, and `beforeFind` and `afterFind` for `ParseFile` ([#224](https://github.com/netreconlab/Parse-Swift/pull/224)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Add missing hook triggers: `beforePasswordResetRequest` for `ParseUser`, and `beforeFind` and `afterFind` for `ParseFile` ([#224](https://github.com/netreconlab/Parse-Swift/pull/224)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.12.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)

@@ -49,33 +49,33 @@ enum Method: String {
  The types of Parse Hook Triggers available.
  */
 public enum ParseHookTriggerType: String, Codable, Sendable {
-    /// Occurs before login of a `ParseUser`.
-    case beforeLogin
-    /// Occurs after login of a `ParseUser`.
-    case afterLogin
-    /// Occurs after logout of a `ParseUser`.
-    case afterLogout
+	/// Occurs before login of a `ParseUser`.
+	case beforeLogin
+	/// Occurs after login of a `ParseUser`.
+	case afterLogin
+	/// Occurs after logout of a `ParseUser`.
+	case afterLogout
 	/// Occurs before password is reset on a `ParseUser`.
 	/// - warning: Requires Parse Server 8.5.0+.
 	case beforePasswordResetRequest
 	/// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
-    case beforeSave
-    /// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
-    case afterSave
-    /// Occurs before deleting a `ParseObject` or `ParseFile`.
-    case beforeDelete
-    /// Occurs after deleting a `ParseObject` or `ParseFile`.
-    case afterDelete
-    /// Occurs before finding a `ParseObject` or `ParseFile`.
-    case beforeFind
-    /// Occurs after finding a `ParseObject` or `ParseFile`.
-    case afterFind
-    /// Occurs before a `ParseLiveQuery` connection is made.
-    case beforeConnect
-    /// Occurs before a `ParseLiveQuery` subscription is made.
-    case beforeSubscribe
-    /// Occurs after a `ParseLiveQuery` event.
-    case afterEvent
+	case beforeSave
+	/// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	case afterSave
+	/// Occurs before deleting a `ParseObject` or `ParseFile`.
+	case beforeDelete
+	/// Occurs after deleting a `ParseObject` or `ParseFile`.
+	case afterDelete
+	/// Occurs before finding a `ParseObject` or `ParseFile`.
+	case beforeFind
+	/// Occurs after finding a `ParseObject` or `ParseFile`.
+	case afterFind
+	/// Occurs before a `ParseLiveQuery` connection is made.
+	case beforeConnect
+	/// Occurs before a `ParseLiveQuery` subscription is made.
+	case beforeSubscribe
+	/// Occurs after a `ParseLiveQuery` event.
+	case afterEvent
 }
 
 /**
