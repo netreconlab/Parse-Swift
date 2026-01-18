@@ -28,6 +28,8 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
     public var file: ParseFile?
     /// The size of the file in bytes.
     public var fileSize: Int?
+	/// Force `ParseFile` download.
+	public var forceDownload: Bool?
     var log: AnyCodable?
     var context: AnyCodable?
 
@@ -37,7 +39,7 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
         case trigger = "triggerName"
         case user, installationId, headers,
              log, context, file, fileSize,
-             clients
+             clients, forceDownload
     }
 }
 

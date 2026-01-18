@@ -272,6 +272,13 @@ class ParseHookTriggerTests: XCTestCase, @unchecked Sendable {
                 url: url
             )
         )
+		XCTAssertThrowsError(
+			try ParseHookTrigger(
+				object: ParseHookTriggerObject.objectType(GameScore.self),
+				trigger: .beforePasswordResetRequest,
+				url: url
+			)
+		)
     }
 
     @MainActor

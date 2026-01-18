@@ -49,30 +49,33 @@ enum Method: String {
  The types of Parse Hook Triggers available.
  */
 public enum ParseHookTriggerType: String, Codable, Sendable {
-    /// Occurs before login of a `ParseUser`.
-    case beforeLogin
-    /// Occurs after login of a `ParseUser`.
-    case afterLogin
-    /// Occurs after logout of a `ParseUser`.
-    case afterLogout
-    /// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
-    case beforeSave
-    /// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
-    case afterSave
-    /// Occurs before deleting a `ParseObject` or `ParseFile`.
-    case beforeDelete
-    /// Occurs after deleting a `ParseObject` or `ParseFile`.
-    case afterDelete
-    /// Occurs before finding a `ParseObject`.
-    case beforeFind
-    /// Occurs after finding a `ParseObject`.
-    case afterFind
-    /// Occurs before a `ParseLiveQuery` connection is made.
-    case beforeConnect
-    /// Occurs before a `ParseLiveQuery` subscription is made.
-    case beforeSubscribe
-    /// Occurs after a `ParseLiveQuery` event.
-    case afterEvent
+	/// Occurs before login of a `ParseUser`.
+	case beforeLogin
+	/// Occurs after login of a `ParseUser`.
+	case afterLogin
+	/// Occurs after logout of a `ParseUser`.
+	case afterLogout
+	/// Occurs before password is reset on a `ParseUser`.
+	/// - warning: Requires Parse Server 8.5.0+.
+	case beforePasswordResetRequest
+	/// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	case beforeSave
+	/// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	case afterSave
+	/// Occurs before deleting a `ParseObject` or `ParseFile`.
+	case beforeDelete
+	/// Occurs after deleting a `ParseObject` or `ParseFile`.
+	case afterDelete
+	/// Occurs before finding a `ParseObject` or `ParseFile`.
+	case beforeFind
+	/// Occurs after finding a `ParseObject` or `ParseFile`.
+	case afterFind
+	/// Occurs before a `ParseLiveQuery` connection is made.
+	case beforeConnect
+	/// Occurs before a `ParseLiveQuery` subscription is made.
+	case beforeSubscribe
+	/// Occurs after a `ParseLiveQuery` event.
+	case afterEvent
 }
 
 /**
@@ -86,7 +89,7 @@ public enum ParseHookTriggerObject: Sendable {
     /// Trigger on `ParseFile`'s.
     case file
     /// Trigger on `ParseConfig` updates.
-    /// - warning: Requires Parse Server 7.3.0-alpha.6+.
+    /// - warning: Requires Parse Server 7.3.0+.
     case config
     /// Trigger on `ParseLiveQuery` connections.
     case liveQueryConnect
