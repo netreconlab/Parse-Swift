@@ -1,20 +1,26 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 
 import PackageDescription
 
-#if swift(>=6.2)
 let sharedSwiftSettings: [SwiftSetting] = [
+	// Only necessary in Swift 5.10+
+	.enableUpcomingFeature("ConciseMagicFile"),
+	.enableUpcomingFeature("BareSlashRegexLiterals"),
+	.enableUpcomingFeature("DeprecateApplicationMain"),
+	.enableUpcomingFeature("DisableOutwardActorInference"),
+	.enableUpcomingFeature("DynamicActorIsolation"),
+	.enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
+	.enableUpcomingFeature("ForwardTrailingClosures"),
+	.enableUpcomingFeature("ImportObjcForwardDeclarations"),
+	.enableUpcomingFeature("ImplicitOpenExistentials"),
+	.enableUpcomingFeature("InferSendableFromCaptures"),
+	.enableUpcomingFeature("IsolatedDefaultValues"),
+	.enableUpcomingFeature("RegionBasedIsolation"),
+	// Optional features in Swift 6+
 	.enableUpcomingFeature("MemberImportVisibility"),
 	.enableUpcomingFeature("InferIsolatedConformances"),
-	.enableUpcomingFeature("ImmutableWeakCaptures"),
-	.enableUpcomingFeature("NonisolatedNonsendingByDefault")
+	.enableExperimentalFeature("StrictConcurrency=complete")
 ]
-#else
-let sharedSwiftSettings: [SwiftSetting] = [
-	.enableUpcomingFeature("MemberImportVisibility"),
-	.enableUpcomingFeature("InferIsolatedConformances")
-]
-#endif
 
 let package = Package(
     name: "ParseSwift",

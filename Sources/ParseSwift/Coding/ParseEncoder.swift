@@ -321,9 +321,9 @@ internal class _ParseEncoder: Encoder {
         return self.storage.count == self.codingPath.count
     }
 
-    func encodeObject(
+    func encodeObject( // swiftlint:disable:this function_parameter_count
 		_ value: Encodable,
-		acl: ParseACL? = nil,
+		acl: ParseACL?,
 		batching: Bool = false,
 		collectChildren: Bool,
 		uniquePointer: PointerType?,
@@ -338,17 +338,34 @@ internal class _ParseEncoder: Encoder {
 		self.uniquePointer = uniquePointer
 
         guard let topLevel = try self.box_(value) else {
-            throw EncodingError.invalidValue(value,
-                                             EncodingError.Context(codingPath: [], debugDescription: "Top-level \(value) did not encode any values."))
+            throw EncodingError.invalidValue(
+				value,
+				EncodingError.Context(
+					codingPath: [],
+					debugDescription: "Top-level \(value) did not encode any values."
+				)
+			)
         }
 
-		let writingOptions = JSONSerialization.WritingOptions(rawValue: self.options.outputFormatting.rawValue).union(.fragmentsAllowed)
+		let writingOptions = JSONSerialization.WritingOptions(
+			rawValue: self.outputFormatting.rawValue
+		).union(.fragmentsAllowed)
         do {
-            let serialized = try JSONSerialization.data(withJSONObject: topLevel, options: writingOptions)
+            let serialized = try JSONSerialization.data(
+				withJSONObject: topLevel,
+				options: writingOptions
+			)
             return (serialized, self.uniquePointer, self.newObjects)
         } catch {
-            throw EncodingError.invalidValue(value,
-                                             EncodingError.Context(codingPath: [], debugDescription: "Unable to encode the given top-level value to JSON.", underlyingError: error))
+            throw EncodingError.invalidValue(
+				value,
+
+				EncodingError.Context(
+					codingPath: [],
+					debugDescription: "Unable to encode the given top-level value to JSON.",
+					underlyingError: error
+				)
+			)
         }
     }
 
@@ -368,7 +385,8 @@ internal class _ParseEncoder: Encoder {
         }
 
         let container = _ParseEncoderKeyedEncodingContainer<Key>(
-            referencing: self, codingPath: codingPath,
+			referencing: self,
+			codingPath: codingPath,
             wrapping: topContainer
         )
 
@@ -615,8 +633,11 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
         self.codingPath.append(key)
         defer { self.codingPath.removeLast() }
 
-        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(referencing: self.encoder, codingPath: self.codingPath,
-                                                                       wrapping: dictionary)
+        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(
+			referencing: self.encoder,
+			codingPath: self.codingPath,
+			wrapping: dictionary
+		)
         return KeyedEncodingContainer(container)
     }
 
@@ -713,7 +734,11 @@ private struct _ParseEncoderUnkeyedEncodingContainer: UnkeyedEncodingContainer {
         let dictionary = NSMutableDictionary()
         self.container.add(dictionary)
 
-        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(referencing: self.encoder, codingPath: self.codingPath, wrapping: dictionary)
+        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(
+			referencing: self.encoder,
+			codingPath: self.codingPath,
+			wrapping: dictionary
+		)
         return KeyedEncodingContainer(container)
     }
 
@@ -1094,6 +1119,7 @@ private class _ParseReferencingEncoder: _ParseEncoder, @unchecked Sendable {
         self.collectChildren = collectChildren
         self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
         self.filesSavedBeforeThisOne = filesSavedBeforeThisOne
+		self.acl = encoder.acl
         self.codingPath.append(_JSONKey(index: index))
     }
 
@@ -1120,6 +1146,7 @@ private class _ParseReferencingEncoder: _ParseEncoder, @unchecked Sendable {
         self.collectChildren = collectChildren
         self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
         self.filesSavedBeforeThisOne = filesSavedBeforeThisOne
+		self.acl = encoder.acl
         self.codingPath.append(key)
     }
 

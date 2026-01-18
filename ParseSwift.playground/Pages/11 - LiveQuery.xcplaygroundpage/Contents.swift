@@ -9,8 +9,16 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 //: Be sure you have LiveQuery enabled on your server.
 
+Task {
+	do {
+		try await initializeParse()
+	} catch {
+		assertionFailure("Error initializing Parse-Swift: \(error)")
+	}
+}
+
 //: Create a delegate for LiveQuery errors
-class LiveQueryDelegate: ParseLiveQueryDelegate {
+final class LiveQueryDelegate: NSObject, ParseLiveQueryDelegate {
 
     func received(_ error: Error) {
         print(error)
@@ -18,14 +26,6 @@ class LiveQueryDelegate: ParseLiveQueryDelegate {
 
     func closedSocket(_ code: URLSessionWebSocketTask.CloseCode?, reason: Data?) {
         print("Socket closed with \(String(describing: code)) and \(String(describing: reason))")
-    }
-}
-
-Task {
-    do {
-        try await initializeParse()
-    } catch {
-        assertionFailure("Error initializing Parse-Swift: \(error)")
     }
 }
 

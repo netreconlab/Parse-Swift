@@ -65,10 +65,12 @@ internal extension API {
                 }
                 return
             }
-            self.prepareURLRequest(options: options,
-                                   batching: false,
-                                   childObjects: childObjects,
-                                   childFiles: childFiles) { result in
+            self.prepareURLRequest(
+				options: options,
+				batching: false,
+				childObjects: childObjects,
+				childFiles: childFiles
+			) { result in
                 switch result {
                 case .success(let urlRequest):
                     let task = URLSession.parse.uploadTask(withStreamedRequest: urlRequest)
@@ -253,15 +255,18 @@ internal extension API {
 
         // MARK: URL Preperation
         // swiftlint:disable:next function_body_length
-        func prepareURLRequest(options: API.Options,
-                               batching: Bool = false,
-                               childObjects: [String: PointerType]? = nil,
-                               childFiles: [String: ParseFile]? = nil,
-                               completion: @escaping @Sendable (Result<URLRequest, ParseError>) -> Void) {
+        func prepareURLRequest(
+			options: API.Options,
+			batching: Bool = false,
+			childObjects: [String: PointerType]? = nil,
+			childFiles: [String: ParseFile]? = nil,
+			completion: @escaping @Sendable (Result<URLRequest, ParseError>) -> Void
+		) {
             let params = self.params?.getURLQueryItems()
             Task {
                 do {
                     var headers = try await API.getHeaders(options: options)
+					let defaultACL = try? await ParseACL.defaultACL()
                     if method == .GET ||
                         method == .DELETE {
                         headers.removeValue(forKey: "X-Parse-Request-Id")
@@ -298,8 +303,9 @@ internal extension API {
 									.parseEncoder()
 									.encode(
 										urlBody,
+										acl: defaultACL,
 										skipKeys: .cloud
-								)
+									)
                                 urlRequest.httpBody = bodyData
                             } catch {
                                 let defaultError = ParseError(code: .otherCause,
@@ -314,6 +320,7 @@ internal extension API {
                                 .parseEncoder()
                                 .encode(
 									urlBody,
+									acl: defaultACL,
 									batching: batching,
 									collectChildren: false,
 									objectsSavedBeforeThisOne: childObjects,

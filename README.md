@@ -74,13 +74,13 @@ To learn how to use or experiment with ParseSwift<sup>OG</sup>, you can run and 
 You can use The Swift Package Manager (SPM) to install ParseSwift<sup>OG</sup> by adding the following description to your `Package.swift` file:
 
 ```swift
-// swift-tools-version:5.5.2
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "5.10.3"))
+        .package(url: "https://github.com/netreconlab/Parse-Swift", .upToNextMajor(from: "6.0.0"))
     ],
     targets: [
         .target(

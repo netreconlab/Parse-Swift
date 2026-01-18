@@ -289,7 +289,7 @@ public extension ParseUser {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -367,6 +367,8 @@ public extension ParseUser {
     }
 }
 
+// MARK: Batch Support
+
 public extension Sequence where Element: ParseUser {
     /**
      Fetches a collection of users *aynchronously* with the current data from the server and sets
@@ -391,38 +393,38 @@ public extension Sequence where Element: ParseUser {
         }
     }
 
-    /**
-     Saves a collection of users *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	/**
+	 Saves a collection of users *asynchronously*.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
+	 when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
+	 `objectId` environments. Defaults to false.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Returns an array of Result enums with the object if a save was successful or a
-     `ParseError` if it failed.
-     - throws: An error of type `ParseError`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    @discardableResult func saveAll(
+	 - returns: Returns an array of Result enums with the object if a save was successful or a
+	 `ParseError` if it failed.
+	 - throws: An error of type `ParseError`.
+	 - important: If an object saved has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
+	 and plan to generate all of your `objectId`'s on the client-side then you should leave
+	 `ignoringCustomObjectIdConfig = false`. Setting
+	 `ParseConfiguration.isRequiringCustomObjectIds = true` and
+	 `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
+	 and the server will generate an `objectId` only when the client does not provide one. This can
+	 increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
+	 different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
+	 client-side checks are disabled. Developers are responsible for handling such cases.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	@discardableResult func saveAll(
 		batchLimit limit: Int? = nil,
 		transaction: Bool = configuration.isUsingTransactions,
 		ignoringCustomObjectIdConfig: Bool = false,
@@ -438,28 +440,31 @@ public extension Sequence where Element: ParseUser {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
-    }
+	}
 
-    /**
-     Creates a collection of users *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	/**
+	 Creates a collection of users *asynchronously*.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Returns an array of Result enums with the object if a save was successful or a
-     `ParseError` if it failed.
-     - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    @discardableResult func createAll(
+	 - returns: Returns an array of Result enums with the object if a save was successful or a
+	 `ParseError` if it failed.
+	 - throws: An error of type `ParseError`.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	@discardableResult func createAll(
 		batchLimit limit: Int? = nil,
 		transaction: Bool = configuration.isUsingTransactions,
 		options: API.Options = [],
@@ -472,6 +477,9 @@ public extension Sequence where Element: ParseUser {
 			transaction: transaction,
 			options: options,
 			callbackQueue: callbackQueue
+		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
 		)
 		return objects
 	}
@@ -509,29 +517,32 @@ public extension Sequence where Element: ParseUser {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
     }
 
-    /**
-     Updates a collection of users *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	/**
+	 Updates a collection of users *asynchronously*.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Returns an array of Result enums with the object if a save was successful or a
-     `ParseError` if it failed.
-     - throws: An error of type `ParseError`.
-     - important: If an object updated has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-	@discardableResult internal func updateAll(
+	 - returns: Returns an array of Result enums with the object if a save was successful or a
+	 `ParseError` if it failed.
+	 - throws: An error of type `ParseError`.
+	 - important: If an object updated has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	internal func updateAll(
 		batchLimit limit: Int? = nil,
 		transaction: Bool = configuration.isUsingTransactions,
 		options: API.Options = [],
@@ -545,28 +556,28 @@ public extension Sequence where Element: ParseUser {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
-    }
+	}
 
-    /**
-     Deletes a collection of users *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	/**
+	 Deletes a collection of users *asynchronously*.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Each element in the array is `nil` if the delete successful or a `ParseError` if it failed.
-     - throws: An error of type `ParseError`.
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    @discardableResult func deleteAll(
+	 - returns: Returns an array [(Result<Void, ParseError>)].
+	 - throws: An error of type `ParseError`.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	*/
+	@discardableResult func deleteAll(
 		batchLimit limit: Int? = nil,
 		transaction: Bool = configuration.isUsingTransactions,
 		options: API.Options = [],
@@ -576,6 +587,7 @@ public extension Sequence where Element: ParseUser {
 		options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
 		let updatedOptions = options
 
+		let originalObjects = Array(self)
 		let commands = try map({ try $0.deleteCommand() })
 		let batchLimit = limit ?? ParseConstants.batchLimit
 		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
@@ -584,7 +596,7 @@ public extension Sequence where Element: ParseUser {
 			valuesPerSegment: batchLimit
 		)
 
-		let returnBatch = try await withThrowingTaskGroup(
+		let batchResults = try await withThrowingTaskGroup(
 			of: ParseObjectBatchResponseNoBody<NoBody>.self,
 			returning: [(Result<Void, ParseError>)].self
 		) { group in
@@ -598,16 +610,18 @@ public extension Sequence where Element: ParseUser {
 						)
 				}
 			}
-			return try await group.reduce(into: [(Result<Void, ParseError>)]()) { partialResult, batch in
+			let results = try await group.reduce(into: [(Result<Void, ParseError>)]()) { partialResult, batch in
 				partialResult.append(contentsOf: batch)
 			}
+			return results
 		}
-		try? await Self.Element.updateStorageIfNeeded(
-			Array(self),
+
+		try? await Self.Element.updatePrimitiveStorage(
+			originalObjects,
 			deleting: true
 		)
-		return returnBatch
-    }
+		return batchResults
+	}
 }
 
 // MARK: Helper Methods (Internal)
@@ -637,101 +651,10 @@ internal extension ParseUser {
                          callbackQueue: callbackQueue,
                          childObjects: savedChildObjects,
                          childFiles: savedChildFiles)
-            try? await Self.updateStorageIfNeeded([saved])
+            try? await Self.updatePrimitiveStorage([saved])
             return saved
         } catch {
             throw error as? ParseError ?? ParseError(swift: error)
         }
-    }
-}
-
-// MARK: Batch Support
-internal extension Sequence where Element: ParseUser {
-    // swiftlint:disable:next function_body_length
-    func batchCommand(
-		method: Method,
-		batchLimit limit: Int?,
-		transaction: Bool,
-		ignoringCustomObjectIdConfig: Bool = false,
-		options: API.Options,
-		callbackQueue: DispatchQueue
-	) async throws -> [(Result<Element, ParseError>)] {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-		let updatedOptions = options
-
-        var childObjects = [String: PointerType]()
-        var childFiles = [String: ParseFile]()
-        var commands = [API.Command<Self.Element, Self.Element>]()
-        let objects = Array(self)
-        for object in objects {
-            let (savedChildObjects, savedChildFiles) = try await object
-                .ensureDeepSave(
-					options: updatedOptions,
-					isShouldReturnIfChildObjectsFound: transaction
-				)
-            try savedChildObjects.forEach {(key, value) in
-                guard childObjects[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseUser.")
-                }
-                childObjects[key] = value
-            }
-            try savedChildFiles.forEach {(key, value) in
-                guard childFiles[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseUser.")
-                }
-                childFiles[key] = value
-            }
-            do {
-                switch method {
-                case .save:
-                    commands.append(
-                        try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-                    )
-                case .create:
-                    commands.append(try await object.createCommand())
-                case .replace:
-                    commands.append(try await object.replaceCommand())
-                case .update:
-                    commands.append(try await object.updateCommand())
-                }
-            } catch {
-                throw error as? ParseError ?? ParseError(swift: error)
-            }
-        }
-
-		let finalChildObjects = childObjects
-		let finalChildFiles = childFiles
-		let batchLimit = limit ?? ParseConstants.batchLimit
-		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-		let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-
-		let returnBatch = try await withThrowingTaskGroup(
-			of: [Result<Self.Element, ParseError>].self,
-			returning: [(Result<Self.Element, ParseError>)].self
-		) { group in
-			for batch in batches {
-				group.addTask {
-					try await API.Command<Self.Element, Self.Element>
-						.batch(commands: batch, transaction: transaction)
-						.execute(
-							options: updatedOptions,
-							batching: true,
-							callbackQueue: callbackQueue,
-							childObjects: finalChildObjects,
-							childFiles: finalChildFiles
-						)
-				}
-			}
-			return try await group.reduce(into: [(Result<Self.Element, ParseError>)]()) { partialResult, batch in
-				partialResult.append(contentsOf: batch)
-			}
-		}
-		try? await Self.Element.updateStorageIfNeeded(
-			returnBatch.compactMap { try? $0.get() }
-		)
-		return returnBatch
     }
 }

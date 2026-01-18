@@ -122,7 +122,7 @@ class ParseConfigTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateStorageIfNeeded(config, deleting: true)
+        await Config.updatePrimitiveStorage(config, deleting: true)
         do {
             _ = try await Config.current()
             XCTFail("Should have thrown error")
@@ -142,7 +142,7 @@ class ParseConfigTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:t
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await Config.updateStorageIfNeeded(config)
+        await Config.updatePrimitiveStorage(config)
 
         let currentConfig = try await Config.current()
         XCTAssertEqual(config.welcomeMessage, currentConfig.welcomeMessage)

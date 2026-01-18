@@ -51,7 +51,7 @@ extension ParseConfigCodable {
             let fetched = try ParseCoding
                 .jsonDecoder()
                 .decode(ConfigCodableFetchResponse<V>.self, from: data).params
-            await Self.updateStorageIfNeeded(fetched)
+            await Self.updatePrimitiveStorage(fetched)
             return fetched
         }
     }
@@ -95,7 +95,7 @@ extension ParseConfigCodable {
             let updated = try ParseCoding.jsonDecoder().decode(BooleanResponse.self, from: data).result
 
             if updated {
-                await Self.updateStorageIfNeeded(config)
+                await Self.updatePrimitiveStorage(config)
             }
             return updated
         }
@@ -141,7 +141,7 @@ extension ParseConfigCodable {
         #endif
     }
 
-    static func updateStorageIfNeeded(_ result: [String: V], deleting: Bool = false) async {
+    static func updatePrimitiveStorage(_ result: [String: V], deleting: Bool = false) async {
         if !deleting {
             await Self.setCurrent(result)
         } else {

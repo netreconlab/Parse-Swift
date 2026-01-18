@@ -50,7 +50,7 @@ public extension ParseInstallation {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -150,6 +150,7 @@ public extension ParseInstallation {
 
 // MARK: Batch Support
 public extension Sequence where Element: ParseInstallation {
+
     /**
      Fetches a collection of installations *aynchronously* with the current data from the server and sets
      an error if one occurs.
@@ -162,8 +163,10 @@ public extension Sequence where Element: ParseInstallation {
      - throws: An error of type `ParseError`.
      - important: If an object fetched has the same objectId as current, it will automatically update the current.
     */
-    @discardableResult func fetchAll(includeKeys: [String]? = nil,
-                                     options: API.Options = []) async throws -> [(Result<Self.Element, ParseError>)] {
+    @discardableResult func fetchAll(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) async throws -> [(Result<Self.Element, ParseError>)] {
         try await withCheckedThrowingContinuation { continuation in
             self.fetchAll(includeKeys: includeKeys,
                           options: options,
@@ -196,7 +199,7 @@ public extension Sequence where Element: ParseInstallation {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -217,6 +220,9 @@ public extension Sequence where Element: ParseInstallation {
 			ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
 			options: options,
 			callbackQueue: callbackQueue
+		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
 		)
 		return objects
     }
@@ -252,6 +258,9 @@ public extension Sequence where Element: ParseInstallation {
 			transaction: transaction,
 			options: options,
 			callbackQueue: callbackQueue
+		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
 		)
 		return objects
     }
@@ -289,6 +298,9 @@ public extension Sequence where Element: ParseInstallation {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
     }
 
@@ -325,6 +337,9 @@ public extension Sequence where Element: ParseInstallation {
 			options: options,
 			callbackQueue: callbackQueue
 		)
+		try? await Self.Element.updatePrimitiveStorage(
+			objects.compactMap { try? $0.get() }
+		)
 		return objects
     }
 
@@ -337,7 +352,7 @@ public extension Sequence where Element: ParseInstallation {
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - returns: Each element in the array is `nil` if the delete successful or a `ParseError` if it failed.
+     - returns: Returns an array [(Result<Void, ParseError>)].
      - throws: An error of type `ParseError`.
      - important: If an object deleted has the same objectId as current, it will automatically update the current.
      - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
@@ -380,7 +395,7 @@ public extension Sequence where Element: ParseInstallation {
 				partialResult.append(contentsOf: batch)
 			}
 		}
-		try? await Self.Element.updateStorageIfNeeded(
+		try? await Self.Element.updatePrimitiveStorage(
 			Array(self),
 			deleting: true
 		)
@@ -413,102 +428,11 @@ internal extension ParseInstallation {
                          callbackQueue: callbackQueue,
                          childObjects: savedChildObjects,
                          childFiles: savedChildFiles)
-            try? await Self.updateStorageIfNeeded([saved])
+            try? await Self.updatePrimitiveStorage([saved])
             return saved
         } catch {
             throw error as? ParseError ?? ParseError(swift: error)
         }
-    }
-}
-
-// MARK: Batch Support
-internal extension Sequence where Element: ParseInstallation {
-    // swiftlint:disable:next function_body_length
-    func batchCommand(
-		method: Method,
-		batchLimit limit: Int?,
-		transaction: Bool,
-		ignoringCustomObjectIdConfig: Bool = false,
-		options: API.Options,
-		callbackQueue: DispatchQueue
-	) async throws -> [(Result<Element, ParseError>)] {
-        var options = options
-        options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-		let updatedOptions = options
-
-        var childObjects = [String: PointerType]()
-        var childFiles = [String: ParseFile]()
-        var commands = [API.Command<Self.Element, Self.Element>]()
-        let objects = Array(self)
-        for object in objects {
-            let (savedChildObjects, savedChildFiles) = try await object
-                .ensureDeepSave(
-					options: updatedOptions,
-					isShouldReturnIfChildObjectsFound: transaction
-				)
-            try savedChildObjects.forEach {(key, value) in
-                guard childObjects[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseInstallation.")
-                }
-                childObjects[key] = value
-            }
-            try savedChildFiles.forEach {(key, value) in
-                guard childFiles[key] == nil else {
-                    throw ParseError(code: .otherCause,
-                                     message: "Found a circular dependency in ParseInstallation.")
-                }
-                childFiles[key] = value
-            }
-            do {
-                switch method {
-                case .save:
-                    commands.append(
-                        try await object.saveCommand(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig)
-                    )
-                case .create:
-                    commands.append(try await object.createCommand())
-                case .replace:
-                    commands.append(try object.replaceCommand())
-                case .update:
-                    commands.append(try object.updateCommand())
-                }
-            } catch {
-                throw error as? ParseError ?? ParseError(swift: error)
-            }
-        }
-
-		let finalChildObjects = childObjects
-		let finalChildFiles = childFiles
-		let batchLimit = limit ?? ParseConstants.batchLimit
-		try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-		let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-
-		let returnBatch = try await withThrowingTaskGroup(
-			of: [Result<Self.Element, ParseError>].self,
-			returning: [(Result<Self.Element, ParseError>)].self
-		) { group in
-			for batch in batches {
-				group.addTask {
-					try await API.Command<Self.Element, Self.Element>
-						.batch(commands: batch, transaction: transaction)
-						.execute(
-							options: updatedOptions,
-							batching: true,
-							callbackQueue: callbackQueue,
-							childObjects: finalChildObjects,
-							childFiles: finalChildFiles
-						)
-				}
-			}
-			return try await group.reduce(into: [(Result<Self.Element, ParseError>)]()) { partialResult, batch in
-				partialResult.append(contentsOf: batch)
-			}
-		}
-		try? await Self.Element.updateStorageIfNeeded(
-			returnBatch.compactMap { try? $0.get() }
-		)
-		return returnBatch
     }
 }
 

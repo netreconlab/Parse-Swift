@@ -19,7 +19,6 @@ import FoundationNetworking
  - important: It is recomended to only specify `maintenanceKey` and `primaryKey` when using
  the SDK on a server. Do not use these keys on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
@@ -52,7 +51,6 @@ public struct ParseConfiguration {
     public internal(set) var isRequiringCustomObjectIds = false
 
     /// Use transactions when saving/updating multiple objects.
-    /// - warning: This is experimental.
     public internal(set) var isUsingTransactions = false
 
     /// Use **POST** instead of **GET** when making query calls.
@@ -178,7 +176,6 @@ public struct ParseConfiguration {
      See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
      - important: It is recomended to only specify `primaryKey` when using the SDK on a server. Do not use this key on the client.
      - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
-     - warning: `usingTransactions` is experimental.
      - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
      situtations when apps do not have credentials to setup a Keychain.
      */

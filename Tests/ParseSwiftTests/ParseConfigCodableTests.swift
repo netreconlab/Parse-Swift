@@ -125,7 +125,7 @@ class ParseConfigCodableTests: XCTestCase, @unchecked Sendable { // swiftlint:di
             XCTAssertTrue(error.containedIn([.otherCause]))
         }
 
-        await ParseConfigCodable.updateStorageIfNeeded(configDictionary, deleting: true)
+        await ParseConfigCodable.updatePrimitiveStorage(configDictionary, deleting: true)
         do {
             _ = try await ParseConfigCodable<[String: AnyCodable]>.current()
             XCTFail("Should have thrown error")
