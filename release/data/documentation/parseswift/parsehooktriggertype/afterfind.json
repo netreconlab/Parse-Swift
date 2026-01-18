@@ -9,6 +9,14 @@
       "type" : "codeVoice"
     },
     {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
       "text" : ".",
       "type" : "text"
     }
@@ -159,6 +167,14 @@
     },
     {
       "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
       "type" : "codeVoice"
     },
     {

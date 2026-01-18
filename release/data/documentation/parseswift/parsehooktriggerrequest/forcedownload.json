@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Use transactions when saving\/updating multiple objects.",
+      "text" : "Force ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " download.",
       "type" : "text"
     }
   ],
@@ -9,17 +17,17 @@
     "paths" : [
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/isUsingTransactions"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/forceDownload"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10ParseSwift0A13ConfigurationV19isUsingTransactionsSbvp",
+    "externalID" : "s:10ParseSwift0A18HookTriggerRequestV13forceDownloadSbSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -31,7 +39,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "isUsingTransactions"
+        "text" : "forceDownload"
       },
       {
         "kind" : "text",
@@ -41,6 +49,10 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:Sb",
         "text" : "Bool"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -51,7 +63,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "isUsingTransactions"
+    "title" : "forceDownload"
   },
   "primaryContentSections" : [
     {
@@ -74,7 +86,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "isUsingTransactions"
+              "text" : "forceDownload"
             },
             {
               "kind" : "text",
@@ -87,7 +99,7 @@
             },
             {
               "kind" : "text",
-              "text" : " { get }"
+              "text" : "?"
             }
           ]
         }
@@ -106,7 +118,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseconfiguration\/isusingtransactions"
+        "\/documentation\/parseswift\/parsehooktriggerrequest\/forcedownload"
       ],
       "traits" : [
         {
@@ -131,10 +143,18 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest": {
   "abstract" : [
     {
-      "text" : "The Configuration for a Parse client.",
+      "text" : "A type that can decode requests when ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseHookTriggerable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " triggers are called.",
       "type" : "text"
     }
   ],
@@ -149,26 +169,34 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ParseConfiguration"
+      "text" : "ParseHookTriggerRequest"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ParseConfiguration"
+      "text" : "ParseHookTriggerRequest"
     }
   ],
   "role" : "symbol",
-  "title" : "ParseConfiguration",
+  "title" : "ParseHookTriggerRequest",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfiguration"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseConfiguration/isUsingTransactions": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerRequest/forceDownload": {
   "abstract" : [
     {
-      "text" : "Use transactions when saving\/updating multiple objects.",
+      "text" : "Force ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " download.",
       "type" : "text"
     }
   ],
@@ -183,7 +211,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "isUsingTransactions"
+      "text" : "forceDownload"
     },
     {
       "kind" : "text",
@@ -193,14 +221,18 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:Sb",
       "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseConfiguration\/isUsingTransactions",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerRequest\/forceDownload",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "isUsingTransactions",
+  "title" : "forceDownload",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseconfiguration\/isusingtransactions"
+  "url" : "\/documentation\/parseswift\/parsehooktriggerrequest\/forcedownload"
 }
 }
 }

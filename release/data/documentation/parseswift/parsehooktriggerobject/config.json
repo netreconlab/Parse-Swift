@@ -93,7 +93,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Requires Parse Server 7.3.0-alpha.6+.",
+                  "text" : "Requires Parse Server 7.3.0+.",
                   "type" : "text"
                 }
               ],

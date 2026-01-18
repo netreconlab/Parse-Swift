@@ -275,30 +275,6 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "",
-                  "type" : "text"
-                },
-                {
-                  "code" : "usingTransactions",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " is experimental.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Warning",
-          "style" : "warning",
-          "type" : "aside"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
                   "text" : "Setting ",
                   "type" : "text"
                 },

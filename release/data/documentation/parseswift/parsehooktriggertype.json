@@ -117,6 +117,7 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeDelete",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeFind",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeLogin",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforePasswordResetRequest",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSave",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforeSubscribe"
       ],
@@ -337,6 +338,14 @@
     },
     {
       "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
       "type" : "codeVoice"
     },
     {
@@ -580,6 +589,14 @@
       "type" : "codeVoice"
     },
     {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseFile",
+      "type" : "codeVoice"
+    },
+    {
       "text" : ".",
       "type" : "text"
     }
@@ -640,6 +657,42 @@
   "title" : "ParseHookTriggerType.beforeLogin",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforelogin"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforePasswordResetRequest": {
+  "abstract" : [
+    {
+      "text" : "Occurs before password is reset on a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "beforePasswordResetRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseHookTriggerType\/beforePasswordResetRequest",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ParseHookTriggerType.beforePasswordResetRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsehooktriggertype\/beforepasswordresetrequest"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseHookTriggerType/beforeSave": {
   "abstract" : [
