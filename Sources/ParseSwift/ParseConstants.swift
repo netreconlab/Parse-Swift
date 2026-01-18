@@ -55,7 +55,10 @@ public enum ParseHookTriggerType: String, Codable, Sendable {
     case afterLogin
     /// Occurs after logout of a `ParseUser`.
     case afterLogout
-    /// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	/// Occurs before password is reset on a `ParseUser`.
+	/// - warning: Requires Parse Server 8.5.0+.
+	case beforePasswordResetRequest
+	/// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
     case beforeSave
     /// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
     case afterSave
@@ -63,9 +66,9 @@ public enum ParseHookTriggerType: String, Codable, Sendable {
     case beforeDelete
     /// Occurs after deleting a `ParseObject` or `ParseFile`.
     case afterDelete
-    /// Occurs before finding a `ParseObject`.
+    /// Occurs before finding a `ParseObject` or `ParseFile`.
     case beforeFind
-    /// Occurs after finding a `ParseObject`.
+    /// Occurs after finding a `ParseObject` or `ParseFile`.
     case afterFind
     /// Occurs before a `ParseLiveQuery` connection is made.
     case beforeConnect
@@ -86,7 +89,7 @@ public enum ParseHookTriggerObject: Sendable {
     /// Trigger on `ParseFile`'s.
     case file
     /// Trigger on `ParseConfig` updates.
-    /// - warning: Requires Parse Server 7.3.0-alpha.6+.
+    /// - warning: Requires Parse Server 7.3.0+.
     case config
     /// Trigger on `ParseLiveQuery` connections.
     case liveQueryConnect

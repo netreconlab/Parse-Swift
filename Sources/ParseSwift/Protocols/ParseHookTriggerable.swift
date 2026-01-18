@@ -93,7 +93,7 @@ public extension ParseHookTriggerable {
         switch object {
         case .objectType(let parseObject):
             switch trigger {
-            case .beforeLogin, .afterLogin, .afterLogout:
+			case .beforeLogin, .afterLogin, .afterLogout, .beforePasswordResetRequest:
                 guard parseObject is (any ParseUser.Type) else {
                     throw notSupportedError
                 }
@@ -111,7 +111,7 @@ public extension ParseHookTriggerable {
             )
         case .object(let parseObject):
             switch trigger {
-            case .beforeLogin, .afterLogin, .afterLogout:
+			case .beforeLogin, .afterLogin, .afterLogout, .beforePasswordResetRequest:
                 guard parseObject is (any ParseUser) else {
                     throw notSupportedError
                 }
@@ -129,7 +129,8 @@ public extension ParseHookTriggerable {
             )
         case .file:
             switch trigger {
-            case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
+            case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind:
                 break // No op
             default:
                 throw notSupportedError

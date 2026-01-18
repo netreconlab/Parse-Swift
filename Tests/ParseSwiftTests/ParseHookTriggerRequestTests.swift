@@ -74,24 +74,29 @@ class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
     }
 
     func testCoding() async throws {
-        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
-                                                           ipAddress: "1.1.1.1",
-                                                           headers: ["yolo": "me"],
-                                                           trigger: .beforeDelete,
-                                                           file: ParseFile(data: Data()),
-                                                           fileSize: 0)
+        let triggerRequest = ParseHookTriggerRequest<User>(
+			primaryKey: true,
+			ipAddress: "1.1.1.1",
+			headers: ["yolo": "me"],
+			trigger: .beforeDelete,
+			file: ParseFile(data: Data()),
+			fileSize: 0,
+			forceDownload: true
+		)
         // swiftlint:disable:next line_length
-        let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
+        let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"forceDownload\":true,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
     }
 
     func testCodingObject() async throws {
         let object = User(objectId: "geez")
-        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
-                                                                       ipAddress: "1.1.1.1",
-                                                                       headers: ["yolo": "me"],
-                                                                       trigger: .beforeDelete,
-                                                                       object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(
+			primaryKey: true,
+			ipAddress: "1.1.1.1",
+			headers: ["yolo": "me"],
+			trigger: .beforeDelete,
+			object: object
+		)
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
