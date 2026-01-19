@@ -99,7 +99,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 		}
 
 		let lock = NSLock()
-		var _count = 0
+		nonisolated(unsafe) var _count = 0
 	}
 
     override func setUp() async throws {
