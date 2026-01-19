@@ -17,11 +17,12 @@ import Foundation
  indirectly created from any `ParseObject` by using the respective `operation` property.
  */
 public struct ParseOperation<T>: Savable,
+								 Sendable,
                                  CustomDebugStringConvertible,
                                  CustomStringConvertible where T: ParseObject {
 
     var target: T
-    var operations = [String: Codable]()
+    var operations = [String: Codable & Sendable]()
     var keysToNull = Set<String>()
 
     public init(target: T) {
@@ -50,7 +51,7 @@ public struct ParseOperation<T>: Savable,
      instead.
      */
     public func set<W>(_ keyPath: WritableKeyPath<T, W?>,
-                       to value: W) throws -> Self where W: Encodable & Equatable {
+                       to value: W) throws -> Self where W: Encodable & Hashable & Sendable {
         guard operations.isEmpty,
               keysToNull.isEmpty else {
             throw ParseError(code: .otherCause,
@@ -75,7 +76,7 @@ public struct ParseOperation<T>: Savable,
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func set<W>(_ key: (String, WritableKeyPath<T, W?>),
-                       to value: W?) -> Self where W: Codable & Equatable {
+                       to value: W?) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
         if value == nil &&
             target[keyPath: key.1] != nil {
@@ -97,7 +98,7 @@ public struct ParseOperation<T>: Savable,
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
-                            value: W?) -> Self where W: Codable {
+                            value: W?) -> Self where W: Codable & Hashable & Sendable {
         forceSet(key, to: value)
     }
 
@@ -110,7 +111,7 @@ public struct ParseOperation<T>: Savable,
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
-                            to value: W?) -> Self where W: Codable {
+                            to value: W?) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
         if value != nil {
             mutableOperation.operations[key.0] = value
@@ -157,7 +158,7 @@ public struct ParseOperation<T>: Savable,
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func addUnique<W>(_ key: String, objects: [W]) -> Self where W: Codable, W: Hashable {
+    public func addUnique<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationAddUnique(objects: objects)
         return mutableOperation
@@ -172,7 +173,7 @@ public struct ParseOperation<T>: Savable,
         - returns: The updated operations.
      */
     public func addUnique<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                             objects: [V]) -> Self where V: Codable, V: Hashable {
+                             objects: [V]) -> Self where V: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key.0] = ParseOperationAddUnique(objects: objects)
         var values = target[keyPath: key.1] ?? []
@@ -188,7 +189,7 @@ public struct ParseOperation<T>: Savable,
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func add<W>(_ key: String, objects: [W]) -> Self where W: Codable {
+    public func add<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationAdd(objects: objects)
         return mutableOperation
@@ -202,7 +203,7 @@ public struct ParseOperation<T>: Savable,
         - returns: The updated operations.
      */
     public func add<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                       objects: [V]) -> Self where V: Codable {
+                       objects: [V]) -> Self where V: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key.0] = ParseOperationAdd(objects: objects)
         var values = target[keyPath: key.1] ?? []
@@ -249,7 +250,7 @@ public struct ParseOperation<T>: Savable,
         - objects: The field of objects.
         - returns: The updated operations.
      */
-    public func remove<W>(_ key: String, objects: [W]) -> Self where W: Codable {
+    public func remove<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key] = ParseOperationRemove(objects: objects)
         return mutableOperation
@@ -264,7 +265,7 @@ public struct ParseOperation<T>: Savable,
         - returns: The updated operations.
      */
     public func remove<V>(_ key: (String, WritableKeyPath<T, [V]?>),
-                          objects: [V]) -> Self where V: Codable, V: Hashable {
+                          objects: [V]) -> Self where V: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key.0] = ParseOperationRemove(objects: objects)
         let values = target[keyPath: key.1]
@@ -346,7 +347,7 @@ public struct ParseOperation<T>: Savable,
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - returns: The updated operations.
      */
-    public func unset<V>(_ key: (String, WritableKeyPath<T, V?>)) -> Self where V: Codable {
+    public func unset<V>(_ key: (String, WritableKeyPath<T, V?>)) -> Self where V: Codable & Hashable & Sendable {
         var mutableOperation = self
         mutableOperation.operations[key.0] = ParseOperationDelete()
         mutableOperation.target[keyPath: key.1] = nil
@@ -381,7 +382,7 @@ extension ParseOperation {
     public func save(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<T, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<T, ParseError>) -> Void
     ) {
         guard target.objectId != nil else {
             let error = ParseError(code: .missingObjectId,

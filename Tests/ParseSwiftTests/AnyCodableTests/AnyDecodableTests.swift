@@ -1,7 +1,7 @@
 import XCTest
 @testable import ParseSwift
 
-class AnyDecodableTests: XCTestCase {
+class AnyDecodableTests: XCTestCase, @unchecked Sendable {
     func testJSONDecoding() {
         guard let json = """
         {

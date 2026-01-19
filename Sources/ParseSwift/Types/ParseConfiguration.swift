@@ -19,7 +19,6 @@ import FoundationNetworking
  - important: It is recomended to only specify `maintenanceKey` and `primaryKey` when using
  the SDK on a server. Do not use these keys on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
@@ -52,16 +51,7 @@ public struct ParseConfiguration {
     public internal(set) var isRequiringCustomObjectIds = false
 
     /// Use transactions when saving/updating multiple objects.
-    /// - warning: This is experimental.
     public internal(set) var isUsingTransactions = false
-
-    /// ParseSwift uses the **$eq** query constraint by default when querying.
-    /// - warning: This method uses `$eq` and can
-    /// be combined with all other `QueryConstaint`'s. It has the limitation of
-    /// not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
-    /// an older Parse Server, you should use `equalToNoComparator()`
-    @available(*, deprecated, message: "Changing has no effect. This will be remove in ParseSwift 6.0.0")
-    public internal(set) var isUsingEqualQueryConstraint = false
 
     /// Use **POST** instead of **GET** when making query calls.
     /// Defaults to **false**.
@@ -127,14 +117,14 @@ public struct ParseConfiguration {
      */
     public internal(set) var parseFileTransfer: ParseFileTransferable
 
-    internal var authentication: ((URLAuthenticationChallenge,
+    internal var authentication: (@Sendable (URLAuthenticationChallenge,
                                    (URLSession.AuthChallengeDisposition,
                                     URLCredential?) -> Void) -> Void)?
     internal var mountPath: String
     internal var isInitialized = false
     internal var isTestingSDK = false
     internal var isTestingLiveQueryDontCloseSocket = false
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     internal var keychainAccessGroup = ParseKeychainAccessGroup()
     #endif
 
@@ -151,7 +141,6 @@ public struct ParseConfiguration {
      - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
      side for each object. Must be enabled on the server to work.
      - parameter usingTransactions: Use transactions when saving/updating multiple objects.
-     - parameter usingEqualQueryConstraint: Use the **$eq** query constraint when querying.
      - parameter usingPostForQuery: Use **POST** instead of **GET** when making query calls.
      Defaults to **false**.
      - parameter primitiveStore: A key/value store that conforms to the `ParsePrimitiveStorable`
@@ -187,7 +176,6 @@ public struct ParseConfiguration {
      See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
      - important: It is recomended to only specify `primaryKey` when using the SDK on a server. Do not use this key on the client.
      - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
-     - warning: `usingTransactions` is experimental.
      - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
      situtations when apps do not have credentials to setup a Keychain.
      */
@@ -201,7 +189,6 @@ public struct ParseConfiguration {
         liveQueryServerURL: URL? = nil,
         requiringCustomObjectIds: Bool = false,
         usingTransactions: Bool = false,
-        usingEqualQueryConstraint: Bool = false,
         usingPostForQuery: Bool = false,
         primitiveStore: ParsePrimitiveStorable? = nil,
         requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
@@ -215,7 +202,7 @@ public struct ParseConfiguration {
         liveQueryConnectionAdditionalProperties: Bool = true,
         liveQueryMaxConnectionAttempts: Int = 20,
         parseFileTransfer: ParseFileTransferable? = nil,
-        authentication: ((URLAuthenticationChallenge,
+        authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
                            URLCredential?) -> Void) -> Void)? = nil
     ) {
@@ -227,7 +214,6 @@ public struct ParseConfiguration {
         self.liveQuerysServerURL = liveQueryServerURL
         self.isRequiringCustomObjectIds = requiringCustomObjectIds
         self.isUsingTransactions = usingTransactions
-        self.isUsingEqualQueryConstraint = usingEqualQueryConstraint
         self.isUsingPostForQuery = usingPostForQuery
         self.mountPath = "/" + serverURL.pathComponents
             .filter { $0 != "/" }

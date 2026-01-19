@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 // swiftlint:disable line_length
 
@@ -89,7 +92,7 @@ public extension ParseSpotify {
                refreshToken: String? = nil,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
 
         let spotifyAuthData = AuthenticationKeys.id
                 .makeDictionary(id: id,
@@ -105,7 +108,7 @@ public extension ParseSpotify {
     func login(authData: [String: String],
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,
@@ -140,7 +143,7 @@ public extension ParseSpotify {
               refreshToken: String? = nil,
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         let spotifyAuthData = AuthenticationKeys.id
             .makeDictionary(id: id,
                             accessToken: accessToken,
@@ -155,7 +158,7 @@ public extension ParseSpotify {
     func link(authData: [String: String],
               options: API.Options = [],
               callbackQueue: DispatchQueue = .main,
-              completion: @escaping (Result<AuthenticatedUser, ParseError>) -> Void) {
+              completion: @escaping @Sendable (Result<AuthenticatedUser, ParseError>) -> Void) {
         guard AuthenticationKeys.id.verifyMandatoryKeys(authData: authData) else {
             callbackQueue.async {
                 completion(.failure(.init(code: .otherCause,

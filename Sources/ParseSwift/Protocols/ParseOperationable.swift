@@ -11,7 +11,8 @@ import Foundation
 /// A protocol that allows a type to be a Parse operation.
 public protocol ParseOperationable: Codable,
                                     CustomDebugStringConvertible,
-                                    CustomStringConvertible {
+                                    CustomStringConvertible,
+									Sendable {
     /// The operation command for this operation.
     var __op: ParseOperationCommand { get } // swiftlint:disable:this identifier_name
 }

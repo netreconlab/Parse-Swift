@@ -11,8 +11,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseCloudViewModelTests: XCTestCase {
-    struct Cloud: ParseCloudable {
+class ParseCloudViewModelTests: XCTestCase, @unchecked Sendable {
+    struct Cloud: ParseCloudable, Sendable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
 
         // These are required by ParseObject
@@ -39,20 +39,16 @@ class ParseCloudViewModelTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        try await KeychainStore.shared.deleteAll()
+        try KeychainStore.shared.deleteAll()
         try await ParseStorage.shared.deleteAll()
     }
 
     func testFunction() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
@@ -66,13 +62,9 @@ class ParseCloudViewModelTests: XCTestCase {
     func testFunctionError() async throws {
         let response = ParseError(code: .otherCause, message: "Custom error")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
@@ -86,13 +78,9 @@ class ParseCloudViewModelTests: XCTestCase {
     func testJob() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = Cloud(functionJobName: "test")
             .viewModel
@@ -106,13 +94,9 @@ class ParseCloudViewModelTests: XCTestCase {
     func testViewModelStatic() async throws {
         let response = AnyResultResponse<String>(result: "hello")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let cloud = Cloud(functionJobName: "test")
         let viewModel = Cloud.viewModel(cloud)
@@ -126,13 +110,9 @@ class ParseCloudViewModelTests: XCTestCase {
     func testJobError() async throws {
         let response = ParseError(code: .otherCause, message: "Custom error")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = Cloud(functionJobName: "test")
             .viewModel

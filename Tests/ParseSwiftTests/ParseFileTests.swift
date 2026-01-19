@@ -13,7 +13,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseFileTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     let temporaryDirectory = "\(NSTemporaryDirectory())test/"
 
@@ -44,8 +44,8 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         try await super.tearDown()
         MockURLProtocol.removeAll()
         URLSession.parse.configuration.urlCache?.removeAllCachedResponses()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
 
@@ -229,6 +229,10 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
                        "{\"__type\":\"File\",\"name\":\"myFolder\\/sampleData.txt\"}")
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSave() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -297,7 +301,6 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertEqual(savedFile.localURL, tempFilePath)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
     func testSaveWithSpecifyingMime() async throws {
         guard let sampleData = "Hello World".data(using: .utf8) else {
             throw ParseError(code: .otherCause, message: "Should have converted to data")
@@ -719,11 +722,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileStreamProgress() async throws {
@@ -765,11 +764,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileStreamCancel() async throws {
@@ -812,11 +807,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             XCTAssertNil(error)
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdateFileError() async throws {
@@ -837,8 +828,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSaveAysnc() async throws {
 
         guard let sampleData = "Hello World".data(using: .utf8) else {
@@ -876,11 +866,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileProgressAsync() async throws {
@@ -922,11 +908,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveFileCancelAsync() async throws {
@@ -970,11 +952,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveWithSpecifyingMimeAysnc() async throws {
@@ -1014,11 +992,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveLocalFileAysnc() async throws {
@@ -1061,11 +1035,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
     #endif
 
@@ -1088,14 +1058,10 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
     // URL Mocker is not able to mock this in linux and tests fail, so do not run.
     func testFetchFileCancelAsync() async throws {
@@ -1139,11 +1105,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testFetchFileAysnc() async throws {
@@ -1183,11 +1145,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testFetchFileProgressAsync() async throws {
@@ -1229,11 +1187,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveCloudFileProgressAysnc() async throws {
@@ -1279,11 +1233,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveCloudFileAysnc() async throws {
@@ -1326,11 +1276,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteFileAysnc() async throws {
@@ -1363,11 +1309,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testDeleteFileAysncError() async throws {
@@ -1399,12 +1341,7 @@ class ParseFileTests: XCTestCase { // swiftlint:disable:this type_body_length
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
     #endif
-#endif
 } // swiftlint:disable:this file_length

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public protocol ParseCloudTypeable: ParseEncodable {}
 
@@ -17,7 +20,7 @@ public protocol ParseCloudTypeable: ParseEncodable {}
 */
 public protocol ParseCloudable: ParseCloudTypeable, Hashable {
 
-    associatedtype ReturnType: Decodable
+    associatedtype ReturnType: Decodable & Sendable
     /**
      The name of the function or job.
     */
@@ -37,7 +40,7 @@ extension ParseCloudable {
     */
     public func runFunction(options: API.Options = [],
                             callbackQueue: DispatchQueue = .main,
-                            completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
+                            completion: @escaping @Sendable (Result<ReturnType, ParseError>) -> Void) {
         Task {
             await runFunctionCommand()
                 .execute(options: options,
@@ -68,7 +71,7 @@ extension ParseCloudable {
     */
     public func startJob(options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
-                         completion: @escaping (Result<ReturnType, ParseError>) -> Void) {
+                         completion: @escaping @Sendable (Result<ReturnType, ParseError>) -> Void) {
         Task {
             await startJobCommand()
                 .execute(options: options,

@@ -17,10 +17,10 @@ public extension ParseServer {
     /**
      Check the server health *asynchronously*. Publishes when complete.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - returns: A publisher that performs type erasure by wrapping another publisher.
     */
     static func healthPublisher(options: API.Options = []) -> AnyPublisher<Status, ParseError> {
-        let subject = PassthroughSubject<Status, ParseError>()
+		nonisolated(unsafe) let subject = PassthroughSubject<Status, ParseError>()
         Self.health(options: options) { result in
             switch result {
             case .success(let status):
@@ -37,16 +37,6 @@ public extension ParseServer {
     }
 
     /**
-     Check the server health *asynchronously*. Publishes when complete.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces a single value and then finishes or fails.
-    */
-    @available(*, deprecated, renamed: "healthPublisher")
-    static func checkPublisher(options: API.Options = []) -> AnyPublisher<Status, ParseError> {
-        return healthPublisher(options: options)
-    }
-
-    /**
      Retrieves any information provided by the server *asynchronously*. Publishes when complete.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
@@ -54,13 +44,23 @@ public extension ParseServer {
      use the primary key in server-side applications where the key is kept secure and not
      exposed to the public.
     */
-    static func informationPublisher(options: API.Options = []) -> Future<Information, ParseError> {
+    static func informationPublisher(
+		options: API.Options = []
+	) -> Future<Information, ParseError> {
         Future { promise in
-            Self.information(options: options,
-                             completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.information(
+				options: options
+			) { result in
+				switch result {
+				case .success(let information):
+					promise(.success(information))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
-
 }
 
 #endif

@@ -37,8 +37,9 @@ internal extension API.Command {
                  childObjects: [String: PointerType]? = nil,
                  childFiles: [String: ParseFile]? = nil,
                  allowIntermediateResponses: Bool = false,
-                 uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                 downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {
+                 uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+				 // swiftlint:disable:next line_length
+                 downloadProgress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
             Task {
                 await self.execute(options: options,

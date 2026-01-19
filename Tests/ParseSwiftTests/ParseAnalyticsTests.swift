@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParseAnalyticsTests: XCTestCase {
+class ParseAnalyticsTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -30,8 +30,8 @@ class ParseAnalyticsTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -216,31 +216,7 @@ class ParseAnalyticsTests: XCTestCase {
     }
     #endif
 
-    func testTrackAppOpened() {
-        let serverResponse = NoBody()
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation = XCTestExpectation(description: "Analytics save")
-        ParseAnalytics.trackAppOpened(dimensions: ["stop": "drop"]) { result in
-
-            if case .failure(let error) = result {
-                XCTFail(error.localizedDescription)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 10.0)
-    }
-
+	#if !os(Android) && !os(Windows) && !os(WASI)
     func testTrackAppOpenedError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
@@ -265,6 +241,36 @@ class ParseAnalyticsTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+	func testTrackAppOpened() {
+		let serverResponse = NoBody()
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+
+		let expectation = XCTestExpectation(description: "Analytics save")
+		ParseAnalytics.trackAppOpened(dimensions: ["stop": "drop"]) { result in
+
+			if case .failure(let error) = result {
+				XCTFail(error.localizedDescription)
+			}
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 10.0)
+	}
 
     func testTrackEvent() {
         let serverResponse = NoBody()
@@ -317,7 +323,9 @@ class ParseAnalyticsTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
 
+	#if !os(Android) && !os(Windows) && !os(WASI)
     func testTrackEventError() {
         let serverResponse = ParseError(code: .missingObjectId, message: "Object missing objectId")
         let encoded: Data!
@@ -369,4 +377,5 @@ class ParseAnalyticsTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
+	#endif
 }

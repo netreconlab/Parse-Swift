@@ -36,7 +36,7 @@ internal extension API {
              parseURL: URL? = nil,
              otherURL: URL? = nil,
              stream: InputStream? = nil,
-             mapper: @escaping (@Sendable (Data) async throws -> U)) {
+             mapper: (@escaping @Sendable (Data) async throws -> U)) {
             self.method = method
             self.path = path
             self.body = body
@@ -54,9 +54,9 @@ internal extension API {
                            callbackQueue: DispatchQueue,
                            childObjects: [String: PointerType]? = nil,
                            childFiles: [String: ParseFile]? = nil,
-                           uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                           uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
                            stream: InputStream,
-                           completion: @escaping (ParseError?) -> Void) {
+                           completion: @escaping @Sendable (ParseError?) -> Void) {
             guard method == .POST ||
                     method == .PUT ||
                     method == .PATCH else {
@@ -65,10 +65,12 @@ internal extension API {
                 }
                 return
             }
-            self.prepareURLRequest(options: options,
-                                   batching: false,
-                                   childObjects: childObjects,
-                                   childFiles: childFiles) { result in
+            self.prepareURLRequest(
+				options: options,
+				batching: false,
+				childObjects: childObjects,
+				childFiles: childFiles
+			) { result in
                 switch result {
                 case .success(let urlRequest):
                     let task = URLSession.parse.uploadTask(withStreamedRequest: urlRequest)
@@ -98,9 +100,9 @@ internal extension API {
                      childObjects: [String: PointerType]? = nil,
                      childFiles: [String: ParseFile]? = nil,
                      allowIntermediateResponses: Bool = false,
-                     uploadProgress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     downloadProgress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                     completion: @escaping (Result<U, ParseError>) -> Void) async {
+                     uploadProgress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     downloadProgress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping @Sendable (Result<U, ParseError>) -> Void) async {
             let currentNotificationQueue: DispatchQueue!
             if let notificationQueue = notificationQueue {
                 currentNotificationQueue = notificationQueue
@@ -253,15 +255,18 @@ internal extension API {
 
         // MARK: URL Preperation
         // swiftlint:disable:next function_body_length
-        func prepareURLRequest(options: API.Options,
-                               batching: Bool = false,
-                               childObjects: [String: PointerType]? = nil,
-                               childFiles: [String: ParseFile]? = nil,
-                               completion: @escaping (Result<URLRequest, ParseError>) -> Void) {
+        func prepareURLRequest(
+			options: API.Options,
+			batching: Bool = false,
+			childObjects: [String: PointerType]? = nil,
+			childFiles: [String: ParseFile]? = nil,
+			completion: @escaping @Sendable (Result<URLRequest, ParseError>) -> Void
+		) {
             let params = self.params?.getURLQueryItems()
             Task {
                 do {
                     var headers = try await API.getHeaders(options: options)
+					let defaultACL = try? await ParseACL.defaultACL()
                     if method == .GET ||
                         method == .DELETE {
                         headers.removeValue(forKey: "X-Parse-Request-Id")
@@ -294,8 +299,13 @@ internal extension API {
                     if let urlBody = body {
                         if (urlBody as? ParseCloudTypeable) != nil {
                             do {
-                                let bodyData = try ParseCoding.parseEncoder().encode(urlBody,
-                                                                                     skipKeys: .cloud)
+                                let bodyData = try ParseCoding
+									.parseEncoder()
+									.encode(
+										urlBody,
+										acl: defaultACL,
+										skipKeys: .cloud
+									)
                                 urlRequest.httpBody = bodyData
                             } catch {
                                 let defaultError = ParseError(code: .otherCause,
@@ -308,11 +318,14 @@ internal extension API {
                         } else {
                             guard let bodyData = try? ParseCoding
                                 .parseEncoder()
-                                .encode(urlBody,
-                                        batching: batching,
-                                        collectChildren: false,
-                                        objectsSavedBeforeThisOne: childObjects,
-                                        filesSavedBeforeThisOne: childFiles) else {
+                                .encode(
+									urlBody,
+									acl: defaultACL,
+									batching: batching,
+									collectChildren: false,
+									objectsSavedBeforeThisOne: childObjects,
+									filesSavedBeforeThisOne: childFiles
+								) else {
                                 let error = ParseError(code: .otherCause,
                                                        message: "Could not encode body \(urlBody)")
                                 completion(.failure(error))
@@ -601,7 +614,7 @@ internal extension API.Command where T: ParseObject {
                 path: .any(path), mapper: command.mapper)
         }
 
-        let mapper = { (data: Data) -> [(Result<Void, ParseError>)] in
+        let mapper = { @Sendable (data: Data) -> [(Result<Void, ParseError>)] in
 
             let decodingType = [BatchResponseItem<NoBody>].self
             do {

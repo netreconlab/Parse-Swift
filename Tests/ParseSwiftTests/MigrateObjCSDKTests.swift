@@ -6,12 +6,12 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
 
-class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_length
+class MigrateObjCSDKTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -128,45 +128,47 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
-        try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
+        try KeychainStore.createObjectiveC().deleteAllObjectiveC()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func setupObjcKeychainSDK(useOldObjCToken: Bool = false,
-                              useBothTokens: Bool = false,
-                              installationId: String) async throws {
+	func setupObjcKeychainSDK(
+		useOldObjCToken: Bool = false,
+		useBothTokens: Bool = false,
+		installationId: String
+	) async throws {
 
-        await KeychainStore.createObjectiveC()
+		let objcParseKeychain = KeychainStore.createObjectiveC()
         // Set keychain the way objc sets keychain
-        guard let objcParseKeychain = KeychainStore.objectiveC else {
-            XCTFail("Should have unwrapped")
-            return
-        }
-
         let currentUserDictionary = ["sessionToken": objcSessionToken]
         let currentUserDictionary2 = ["session_token": objcSessionToken2]
         let currentUserDictionary3 = ["sessionToken": objcSessionToken,
                                       "session_token": objcSessionToken2]
-        _ = await objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
+        _ = objcParseKeychain.setObjectiveC(object: installationId, forKey: "installationId")
         if useBothTokens {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary3, forKey: "currentUser")
         } else if !useOldObjCToken {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary, forKey: "currentUser")
         } else {
-            _ = await objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
+            _ = objcParseKeychain.setObjectiveC(object: currentUserDictionary2, forKey: "currentUser")
         }
     }
 
     func loginNormally(sessionToken: String) async throws -> User {
         var loginResponse = LoginSignupResponse()
         loginResponse.sessionToken = sessionToken
-
+		let immutableLoginResponse = loginResponse
         MockURLProtocol.mockRequests { _ in
             do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
+                let encoded = try immutableLoginResponse
+					.getEncoder()
+					.encode(
+						immutableLoginResponse,
+						skipKeys: .none
+					)
                 return MockURLResponse(data: encoded, statusCode: 200)
             } catch {
                 return nil
@@ -184,14 +186,15 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()
@@ -228,14 +231,21 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken2
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding
+			.jsonDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
+
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()
@@ -272,14 +282,20 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
         serverResponse.sessionToken = objcSessionToken
         serverResponse.username = loginUserName
 
+		let encoded = try serverResponse
+			.getEncoder()
+			.encode(
+				serverResponse,
+				skipKeys: .none
+			)
+		serverResponse = try ParseCoding
+			.jsonDecoder()
+			.decode(
+				LoginSignupResponse.self,
+				from: encoded
+			)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                serverResponse = try ParseCoding.jsonDecoder().decode(LoginSignupResponse.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			return MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let loggedIn = try await User.loginUsingObjCKeychain()
@@ -421,7 +437,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
@@ -448,7 +464,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
 
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, savedInstallationId)
     }
 
@@ -480,7 +496,7 @@ class MigrateObjCSDKTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testDeleteObjCKeychainNoCurrentInstallation() async throws {
         try await setupObjcKeychainSDK(installationId: objcInstallationId)
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         await Installation.setCurrent(nil)
 
         do {

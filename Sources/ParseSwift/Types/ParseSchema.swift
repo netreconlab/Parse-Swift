@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  `ParseSchema` is used for handeling your schemas.
@@ -119,9 +122,11 @@ public extension ParseSchema {
      - returns: A mutated instance of `ParseSchema` for easy chaining.
      - warning: The use of `options` requires Parse Server 3.7.0+.
     */
-    func addField<V>(_ name: String,
-                     type: ParseField.FieldType,
-                     options: ParseFieldOptions<V>) -> Self {
+	func addField<V: Sendable>(
+		_ name: String,
+		type: ParseField.FieldType,
+		options: ParseFieldOptions<V>
+	) -> Self {
         var mutableSchema = self
         let field = ParseField(type: type, options: options)
         if mutableSchema.fields != nil {
@@ -212,7 +217,7 @@ public extension ParseSchema {
     */
     func addIndex(_ name: String,
                   field: String,
-                  index: Encodable) -> Self {
+                  index: Encodable & Sendable) -> Self {
         var mutableSchema = self
         mutableSchema.pendingIndexes[name] = [field: AnyCodable(index)]
         return mutableSchema
@@ -261,7 +266,7 @@ extension ParseSchema {
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -300,7 +305,7 @@ extension ParseSchema {
     */
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -327,7 +332,7 @@ extension ParseSchema {
     */
     public func update(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         var mutableSchema = self
         if !mutableSchema.pendingIndexes.isEmpty {
             mutableSchema.indexes = pendingIndexes
@@ -384,7 +389,7 @@ extension ParseSchema {
     public func purge(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -422,7 +427,7 @@ extension ParseSchema {
     public func delete(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             var options = options

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Conforming to `ParseHookTriggerable` allows the creation of hooks which
@@ -19,7 +22,7 @@ public protocol ParseHookTriggerable: ParseHookable {
     /// The name of the `ParseObject` the trigger should act on.
     var className: String? { get set }
     /// The `ParseHookTriggerType` type.
-    var triggerName: ParseHookTriggerType? { get set }
+    var trigger: ParseHookTriggerType? { get set }
 }
 
 // MARK: Default Implementation
@@ -38,23 +41,8 @@ public extension ParseHookTriggerable {
     ) {
         self.init()
         self.className = className
-        self.triggerName = trigger
+        self.trigger = trigger
         self.url = url
-    }
-
-    /**
-     Creates a new Parse hook trigger.
-     - parameter className: The name of the `ParseObject` the trigger should act on.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init(
-        className: String,
-        triggerName: ParseHookTriggerType,
-        url: URL
-    ) {
-        self.init(className: className, trigger: triggerName, url: url)
     }
 
     /**
@@ -86,21 +74,6 @@ public extension ParseHookTriggerable {
     }
 
     /**
-     Creates a new Parse hook trigger.
-     - parameter object: The `ParseObject` the trigger should act on.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init<T>(
-        object: T,
-        triggerName: ParseHookTriggerType,
-        url: URL
-    ) where T: ParseObject {
-        self.init(object: object, trigger: triggerName, url: url)
-    }
-
-    /**
      Creates a new Parse hook trigger for any supported `ParseHookTriggerObject`.
      - parameter object: The `ParseHookTriggerObject` the trigger should act on.
      - parameter trigger: The `ParseHookTriggerType` type.
@@ -117,117 +90,80 @@ public extension ParseHookTriggerable {
             message: "This object \"\(object)\" currently does not support the hook trigger \"\(trigger)\""
         )
 
-        switch object {
-        case .objectType(let parseObject):
-            switch trigger {
-            case .beforeLogin, .afterLogin, .afterLogout:
-                guard parseObject is (any ParseUser.Type) else {
-                    throw notSupportedError
-                }
-            case .beforeSave, .afterSave, .beforeDelete,
-                    .afterDelete, .beforeFind, .afterFind,
-                    .beforeSubscribe, .afterEvent:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .object(let parseObject):
-            switch trigger {
-            case .beforeLogin, .afterLogin, .afterLogout:
-                guard parseObject is (any ParseUser) else {
-                    throw notSupportedError
-                }
-            case .beforeSave, .afterSave, .beforeDelete,
-                    .afterDelete, .beforeFind, .afterFind,
-                    .beforeSubscribe, .afterEvent:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .file:
-            switch trigger {
-            case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .config:
-            switch trigger {
-            case .beforeSave, .afterSave:
-                break // No op
-            default:
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        case .liveQueryConnect:
-            guard trigger == .beforeConnect else {
-                throw notSupportedError
-            }
-            self.init(
-                className: object.className,
-                trigger: trigger,
-                url: url
-            )
-        }
+		switch object {
+		case .objectType(let parseObject):
+			switch trigger {
+			case .beforeLogin, .afterLogin, .afterLogout,
+					.beforePasswordResetRequest:
+				guard parseObject is (any ParseUser.Type) else {
+					throw notSupportedError
+				}
+			case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind,
+					.beforeSubscribe, .afterEvent:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .object(let parseObject):
+			switch trigger {
+			case .beforeLogin, .afterLogin, .afterLogout, .beforePasswordResetRequest:
+				guard parseObject is (any ParseUser) else {
+					throw notSupportedError
+				}
+			case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind,
+					.beforeSubscribe, .afterEvent:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .file:
+			switch trigger {
+			case .beforeSave, .afterSave, .beforeDelete,
+					.afterDelete, .beforeFind, .afterFind:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .config:
+			switch trigger {
+			case .beforeSave, .afterSave:
+				break // No op
+			default:
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		case .liveQueryConnect:
+			guard trigger == .beforeConnect else {
+				throw notSupportedError
+			}
+			self.init(
+				className: object.className,
+				trigger: trigger,
+				url: url
+			)
+		}
     }
-
-    /**
-     Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
-     - parameter trigger: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Add \"object\" as the first argument")
-    init(trigger: ParseHookTriggerType, url: URL) throws {
-        switch trigger {
-        case .beforeSave, .afterSave, .beforeDelete, .afterDelete:
-            self.init(
-                className: ParseHookTriggerObject.file.className,
-                trigger: trigger,
-                url: url
-            )
-        case .beforeConnect:
-            self.init(
-                className: ParseHookTriggerObject.liveQueryConnect.className,
-                trigger: trigger,
-                url: url
-            )
-        default:
-            throw ParseError(
-                code: .otherCause,
-                message: "This initializer should only be used for \"ParseFile\" and \"beforeConnect\""
-            )
-        }
-    }
-
-    /**
-     Creates a new `ParseFile` or `ParseHookTriggerType.beforeConnect` hook trigger.
-     - parameter triggerName: The `ParseHookTriggerType` type.
-     - parameter url: The endpoint of the hook.
-     */
-    @available(*, deprecated, message: "Change \"triggerName\" to \"trigger\"")
-    init(triggerName: ParseHookTriggerType, url: URL) throws {
-        try self.init(trigger: triggerName, url: url)
-    }
-
 }
 
 /// A type of request for Parse Hook Triggers.
@@ -243,9 +179,9 @@ public struct TriggerRequest: Encodable, Sendable {
      */
     public init<T>(trigger: T) throws where T: ParseHookTriggerable {
         guard let className = trigger.className,
-              let triggerType = trigger.triggerName else {
+              let triggerType = trigger.trigger else {
             throw ParseError(code: .otherCause,
-                             message: "The \"className\" and \"triggerName\" needs to be set: \(trigger)")
+                             message: "The \"className\" and \"trigger\" needs to be set: \(trigger)")
         }
         self.className = className
         self.trigger = triggerType
@@ -273,7 +209,7 @@ extension ParseHookTriggerable {
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -312,7 +248,7 @@ extension ParseHookTriggerable {
     */
     public func fetchAll(options: API.Options = [],
                          callbackQueue: DispatchQueue = .main,
-                         completion: @escaping (Result<[Self], ParseError>) -> Void) {
+                         completion: @escaping @Sendable (Result<[Self], ParseError>) -> Void) {
         Self.fetchAll(options: options,
                       callbackQueue: callbackQueue,
                       completion: completion)
@@ -331,7 +267,7 @@ extension ParseHookTriggerable {
     */
     public static func fetchAll(options: API.Options = [],
                                 callbackQueue: DispatchQueue = .main,
-                                completion: @escaping (Result<[Self], ParseError>) -> Void) {
+                                completion: @escaping @Sendable (Result<[Self], ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -364,7 +300,7 @@ extension ParseHookTriggerable {
     */
     public func create(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -406,7 +342,7 @@ extension ParseHookTriggerable {
     */
     public func update(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -448,7 +384,7 @@ extension ParseHookTriggerable {
     */
     public func delete(options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Void, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

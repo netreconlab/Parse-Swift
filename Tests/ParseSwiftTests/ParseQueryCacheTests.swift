@@ -6,13 +6,20 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable line_length
 
-class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseQueryCacheTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject, ParseQueryScorable {
         //: These are required by ParseObject
@@ -74,8 +81,8 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         try await super.tearDown()
         MockURLProtocol.removeAll()
         ParseSwift.clearCache()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -153,13 +160,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -192,13 +195,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -233,13 +232,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: nil)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -273,13 +268,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = AnyResultsResponse(results: [scoreOnServer])
+		let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let found = try await GameScore.query.findAll()
@@ -420,13 +411,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -505,13 +492,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -589,13 +572,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -688,13 +667,9 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let query = GameScore.query
@@ -774,3 +749,4 @@ class ParseQueryCacheTests: XCTestCase { // swiftlint:disable:this type_body_len
         XCTAssertEqual(queryResult2, [json.results])
     }
 }
+#endif

@@ -7,12 +7,15 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable type_body_length
 
-class APICommandTests: XCTestCase {
+class APICommandTests: XCTestCase, @unchecked Sendable {
 
     struct Level: ParseObject {
         var objectId: String?
@@ -47,8 +50,8 @@ class APICommandTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -105,18 +108,14 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    func userLogin() async {
+    func userLogin() async throws {
         let loginResponse = LoginSignupResponse()
         let loginUserName = "hello10"
         let loginPassword = "world"
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -206,6 +205,10 @@ class APICommandTests: XCTestCase {
         XCTAssertFalse(options.contains(.serverURL(secondServerURLString)))
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testExecuteCorrectly() async {
         let originalObject = "test"
         MockURLProtocol.mockRequests { _ in
@@ -231,39 +234,8 @@ class APICommandTests: XCTestCase {
         }
     }
 
-    // This is how errors from the server should typically come in
-    func testErrorFromParseServer() async {
-        let originalError = ParseError(code: .otherCause, message: "Could not decode")
-        MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try JSONEncoder().encode(originalError)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                XCTFail("Should encode error")
-                return nil
-            }
-        }
-
-        do {
-            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                                  path: .login,
-                                                                  params: nil,
-                                                                  mapper: { _ -> NoBody in
-                throw originalError
-            }).execute(options: [],
-                       callbackQueue: .main)
-            XCTFail("Should have thrown an error")
-        } catch {
-            guard let error = error as? ParseError else {
-                XCTFail("Should be able unwrap final error to ParseError")
-                return
-            }
-            XCTAssertEqual(originalError.code, error.code)
-        }
-    }
-
     // This is how HTTP errors should typically come in
-    func testErrorHTTP400JSON() async {
+    func testErrorHTTP400JSON() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -274,14 +246,10 @@ class APICommandTests: XCTestCase {
             codeKey: codeValue
         ]
 
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
+
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 400)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 400)
         }
 
         do {
@@ -300,34 +268,11 @@ class APICommandTests: XCTestCase {
                 return
             }
             XCTAssertEqual(error.code, parseError.code)
-        }
-    }
-
-    func testErrorHTTPReturns400NoDataFromServer() async {
-        let originalError = ParseError(code: .otherCause, message: "Could not decode")
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(error: originalError) // Status code defaults to 400
-        }
-        do {
-            _ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
-                                                                  path: .login,
-                                                                  params: nil,
-                                                                  mapper: { _ -> NoBody in
-                throw originalError
-            }).execute(options: [],
-                       callbackQueue: .main)
-            XCTFail("Should have thrown an error")
-        } catch {
-            guard let error = error as? ParseError else {
-                XCTFail("Should be able unwrap final error to ParseError")
-                return
-            }
-            XCTAssertEqual(originalError.code, error.code)
         }
     }
 
     // This is how errors HTTP errors should typically come in
-    func testErrorHTTP500JSON() async {
+    func testErrorHTTP500JSON() async throws {
         let parseError = ParseError(code: .connectionFailed, message: "Connection failed")
         let errorKey = "error"
         let errorValue = "yarr"
@@ -338,14 +283,9 @@ class APICommandTests: XCTestCase {
             codeKey: codeValue
         ]
 
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 500)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 500)
         }
 
         do {
@@ -366,6 +306,61 @@ class APICommandTests: XCTestCase {
             XCTAssertEqual(error.code, parseError.code)
         }
     }
+	#endif
+
+	// This is how errors from the server should typically come in
+	func testErrorFromParseServer() async {
+		let originalError = ParseError(code: .otherCause, message: "Could not decode")
+		MockURLProtocol.mockRequests { _ in
+			do {
+				let encoded = try JSONEncoder().encode(originalError)
+				return MockURLResponse(data: encoded, statusCode: 200)
+			} catch {
+				XCTFail("Should encode error")
+				return nil
+			}
+		}
+
+		do {
+			_ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+																  path: .login,
+																  params: nil,
+																  mapper: { _ -> NoBody in
+				throw originalError
+			}).execute(options: [],
+					   callbackQueue: .main)
+			XCTFail("Should have thrown an error")
+		} catch {
+			guard let error = error as? ParseError else {
+				XCTFail("Should be able unwrap final error to ParseError")
+				return
+			}
+			XCTAssertEqual(originalError.code, error.code)
+		}
+	}
+
+	func testErrorHTTPReturns400NoDataFromServer() async {
+		let originalError = ParseError(code: .otherCause, message: "Could not decode")
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(error: originalError) // Status code defaults to 400
+		}
+		do {
+			_ = try await API.NonParseBodyCommand<NoBody, NoBody>(method: .GET,
+																  path: .login,
+																  params: nil,
+																  mapper: { _ -> NoBody in
+				throw originalError
+			}).execute(options: [],
+					   callbackQueue: .main)
+			XCTFail("Should have thrown an error")
+		} catch {
+			guard let error = error as? ParseError else {
+				XCTFail("Should be able unwrap final error to ParseError")
+				return
+			}
+			XCTAssertEqual(originalError.code, error.code)
+		}
+	}
 
     func testErrorHTTPReturns500NoDataFromServer() async {
         let originalError = ParseError(code: .otherCause, message: "Could not decode")
@@ -542,8 +537,12 @@ class APICommandTests: XCTestCase {
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSessionTokenHeader() async throws {
-        await userLogin()
+        try await userLogin()
         guard let sessionToken = await BaseParseUser.currentContainer()?.sessionToken else {
             throw ParseError(code: .otherCause, message: "Parse current user should have session token")
         }
@@ -565,6 +564,7 @@ class APICommandTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
+	#endif
 
     func testReplaceSessionTokenHeader() async throws {
 

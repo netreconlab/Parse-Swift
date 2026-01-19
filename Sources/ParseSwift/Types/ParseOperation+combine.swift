@@ -20,10 +20,21 @@ public extension ParseOperation {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func savePublisher(options: API.Options = []) -> Future<T, ParseError> {
+    func savePublisher(
+		options: API.Options = []
+	) -> Future<T, ParseError> {
         Future { promise in
-            self.save(options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				options: options
+			) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

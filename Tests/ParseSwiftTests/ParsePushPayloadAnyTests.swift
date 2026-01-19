@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable line_length function_body_length
 
-class ParsePushPayloadAnyTests: XCTestCase {
+class ParsePushPayloadAnyTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -30,8 +30,8 @@ class ParsePushPayloadAnyTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -113,7 +113,7 @@ class ParsePushPayloadAnyTests: XCTestCase {
         XCTAssertEqual(fcmPayload, decoded2)
         let decodedAny2 = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encoded).convertToApple()
         XCTAssertEqual(decodedAny2, applePayload)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         XCTAssertEqual(fcmPayload.description,
                        "{\"collapseKey\":\"nope\",\"data\":{\"help\":\"you\"},\"delayWhileIdle\":false,\"dryRun\":false,\"notification\":{\"android_channel_id\":\"you\",\"badge\":\"no\",\"body\":\"android\",\"body_loc_args\":[\"mother\"],\"body_loc_key\":\"cousin\",\"click_action\":\"to\",\"color\":\"blue\",\"icon\":\"world\",\"image\":\"icon\",\"sound\":\"yes\",\"subtitle\":\"trip\",\"tag\":\"it\",\"title\":\"hello\",\"title_loc_args\":[\"arg\"],\"title_loc_key\":\"it\"},\"restrictedPackageName\":\"geez\",\"title\":\"peace\",\"uri\":\"https:\\/\\/parse.org\"}")
         #endif
@@ -228,7 +228,7 @@ class ParsePushPayloadAnyTests: XCTestCase {
         XCTAssertEqual(fcmPayload, decoded)
         let decoded2 = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encoded).convertToFirebase()
         XCTAssertEqual(decoded2, fcmPayload)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         XCTAssertEqual(fcmPayload.description,
                        "{\"collapseKey\":\"nope\",\"contentAvailable\":true,\"data\":{\"help\":\"you\"},\"delayWhileIdle\":false,\"dryRun\":false,\"mutableContent\":true,\"notification\":{\"android_channel_id\":\"you\",\"badge\":\"no\",\"body\":\"android\",\"body_loc_args\":[\"mother\"],\"body_loc_key\":\"cousin\",\"click_action\":\"to\",\"color\":\"blue\",\"icon\":\"world\",\"image\":\"icon\",\"sound\":\"yes\",\"subtitle\":\"trip\",\"tag\":\"it\",\"title\":\"hello\",\"title_loc_args\":[\"arg\"],\"title_loc_key\":\"it\"},\"priority\":\"high\",\"restrictedPackageName\":\"geez\",\"title\":\"peace\",\"uri\":\"https:\\/\\/parse.org\"}")
         #endif

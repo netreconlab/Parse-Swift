@@ -12,7 +12,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParseRoleTests: XCTestCase {
+class ParseRoleTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -135,8 +135,8 @@ class ParseRoleTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -464,6 +464,10 @@ class ParseRoleTests: XCTestCase {
         XCTAssertEqual(decoded2, expected2)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testRoleAddOperationSaveSynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
@@ -505,7 +509,12 @@ class ParseRoleTests: XCTestCase {
         XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
         XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
+	#endif
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testRoleUpdateMergeSynchronous() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
@@ -552,6 +561,50 @@ class ParseRoleTests: XCTestCase {
         XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
+	func testRoleAddOperationSaveSynchronousCustomObjectId() async throws {
+		var acl = ParseACL()
+		acl.publicWrite = false
+		acl.publicRead = true
+
+		Parse.configuration.isRequiringCustomObjectIds = true
+		var role = try Role<User>(name: "Administrator", acl: acl)
+		role.createdAt = Date()
+		role.updatedAt = Date()
+		XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
+		role.objectId = "yolo"
+		guard let roles = role.roles else {
+			XCTFail("Should have unwrapped")
+			return
+		}
+
+		var newRole = try Role<User>(name: "Moderator", acl: acl)
+		newRole.objectId = "heel"
+		let operation = try roles.add([newRole])
+
+		var serverResponse = role
+		serverResponse.createdAt = nil
+		serverResponse.updatedAt = Date()
+
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+			// Get dates in correct format from ParseDecoding strategy
+			serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
+
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
+
+		let updatedRole = try await operation.save()
+		XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
+		XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
+	}
+	#endif
+
     func testRoleAddOperationSaveSynchronousError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
@@ -580,12 +633,44 @@ class ParseRoleTests: XCTestCase {
         }
     }
 
-    func testRoleAddOperationSaveSynchronousCustomObjectId() async throws {
+    func testRoleAddOperationSaveSynchronousCustomObjectIdError() async throws {
         var acl = ParseACL()
         acl.publicWrite = false
         acl.publicRead = true
 
         Parse.configuration.isRequiringCustomObjectIds = true
+        var role = try Role<User>(name: "Administrator", acl: acl)
+        role.createdAt = Date()
+        role.updatedAt = Date()
+        XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
+        role.objectId = "yolo"
+        guard let roles = role.roles else {
+            XCTFail("Should have unwrapped")
+            return
+        }
+
+        var newRole = try Role<User>(name: "Moderator", acl: acl)
+        newRole.objectId = "heel"
+        var operation = try roles.add([newRole])
+        operation.target.objectId = nil
+
+        do {
+            _ = try await operation.save()
+            XCTFail("Should have failed")
+        } catch {
+            XCTAssertTrue(error.containedIn([.missingObjectId]))
+        }
+    }
+
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testRoleAddOperationSaveAsynchronous() async throws {
+        var acl = ParseACL()
+        acl.publicWrite = false
+        acl.publicRead = true
+
         var role = try Role<User>(name: "Administrator", acl: acl)
         role.createdAt = Date()
         role.updatedAt = Date()
@@ -619,89 +704,55 @@ class ParseRoleTests: XCTestCase {
         }
 
         let updatedRole = try await operation.save()
-        XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
-        XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
+		XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
+		XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
     }
 
-    func testRoleAddOperationSaveSynchronousCustomObjectIdError() async throws {
-        var acl = ParseACL()
-        acl.publicWrite = false
-        acl.publicRead = true
+	func testRoleAddOperationSaveAsynchronousCustomObjectId() async throws {
+		var acl = ParseACL()
+		acl.publicWrite = false
+		acl.publicRead = true
 
-        Parse.configuration.isRequiringCustomObjectIds = true
-        var role = try Role<User>(name: "Administrator", acl: acl)
-        role.createdAt = Date()
-        role.updatedAt = Date()
-        XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
-        role.objectId = "yolo"
-        guard let roles = role.roles else {
-            XCTFail("Should have unwrapped")
-            return
-        }
+		Parse.configuration.isRequiringCustomObjectIds = true
+		XCTAssertEqual(Parse.configuration.isRequiringCustomObjectIds,
+					   Parse.configuration.isRequiringCustomObjectIds)
+		var role = try Role<User>(name: "Administrator", acl: acl)
+		role.createdAt = Date()
+		role.updatedAt = Date()
+		XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
+		role.objectId = "yolo"
+		guard let roles = role.roles else {
+			XCTFail("Should have unwrapped")
+			return
+		}
 
-        var newRole = try Role<User>(name: "Moderator", acl: acl)
-        newRole.objectId = "heel"
-        var operation = try roles.add([newRole])
-        operation.target.objectId = nil
+		var newRole = try Role<User>(name: "Moderator", acl: acl)
+		newRole.objectId = "heel"
+		let operation = try roles.add([newRole])
 
-        do {
-            _ = try await operation.save()
-            XCTFail("Should have failed")
-        } catch {
-            XCTAssertTrue(error.containedIn([.missingObjectId]))
-        }
-    }
+		var serverResponse = role
+		serverResponse.createdAt = nil
+		serverResponse.updatedAt = Date()
 
-    func testRoleAddOperationSaveAsynchronous() throws {
-        var acl = ParseACL()
-        acl.publicWrite = false
-        acl.publicRead = true
+		let encoded: Data!
+		do {
+			encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
+			// Get dates in correct format from ParseDecoding strategy
+			serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
+		} catch {
+			XCTFail("Should encode/decode. Error \(error)")
+			return
+		}
 
-        var role = try Role<User>(name: "Administrator", acl: acl)
-        role.createdAt = Date()
-        role.updatedAt = Date()
-        XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
-        role.objectId = "yolo"
-        guard let roles = role.roles else {
-            XCTFail("Should have unwrapped")
-            return
-        }
+		MockURLProtocol.mockRequests { _ in
+			return MockURLResponse(data: encoded, statusCode: 200)
+		}
 
-        var newRole = try Role<User>(name: "Moderator", acl: acl)
-        newRole.objectId = "heel"
-        let operation = try roles.add([newRole])
-
-        var serverResponse = role
-        serverResponse.createdAt = nil
-        serverResponse.updatedAt = Date()
-
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            // Get dates in correct format from ParseDecoding strategy
-            serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Save object1")
-        operation.save { result in
-            switch result {
-            case .success(let updatedRole):
-                XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
-                XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
+		let updatedRole = try await operation.save()
+		XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
+		XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
+	}
+	#endif
 
     func testRoleAddOperationSaveAsynchronousError() throws {
         var acl = ParseACL()
@@ -731,60 +782,6 @@ class ParseRoleTests: XCTestCase {
                 XCTFail("Should have failed")
             case .failure(let error):
                 XCTAssertEqual(error.code, .missingObjectId)
-            }
-            expectation1.fulfill()
-        }
-        wait(for: [expectation1], timeout: 20.0)
-    }
-
-    func testRoleAddOperationSaveAsynchronousCustomObjectId() throws {
-        var acl = ParseACL()
-        acl.publicWrite = false
-        acl.publicRead = true
-
-        Parse.configuration.isRequiringCustomObjectIds = true
-        XCTAssertEqual(Parse.configuration.isRequiringCustomObjectIds,
-                       Parse.configuration.isRequiringCustomObjectIds)
-        var role = try Role<User>(name: "Administrator", acl: acl)
-        role.createdAt = Date()
-        role.updatedAt = Date()
-        XCTAssertNil(role.roles) // Should not produce a relation without an objectId.
-        role.objectId = "yolo"
-        guard let roles = role.roles else {
-            XCTFail("Should have unwrapped")
-            return
-        }
-
-        var newRole = try Role<User>(name: "Moderator", acl: acl)
-        newRole.objectId = "heel"
-        let operation = try roles.add([newRole])
-
-        var serverResponse = role
-        serverResponse.createdAt = nil
-        serverResponse.updatedAt = Date()
-
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-            // Get dates in correct format from ParseDecoding strategy
-            serverResponse = try serverResponse.getDecoder().decode(Role<User>.self, from: encoded)
-        } catch {
-            XCTFail("Should encode/decode. Error \(error)")
-            return
-        }
-
-        MockURLProtocol.mockRequests { _ in
-            return MockURLResponse(data: encoded, statusCode: 200)
-        }
-
-        let expectation1 = XCTestExpectation(description: "Save object1")
-        operation.save { result in
-            switch result {
-            case .success(let updatedRole):
-                XCTAssertEqual(updatedRole.updatedAt, serverResponse.updatedAt)
-                XCTAssertTrue(updatedRole.hasSameObjectId(as: serverResponse))
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
             }
             expectation1.fulfill()
         }

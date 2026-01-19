@@ -6,6 +6,10 @@
 //  Copyright © 2023 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -16,7 +20,7 @@ import XCTest
 // swiftlint:disable function_body_length
 
 // swiftlint:disable:next type_body_length
-class APICommandMultipleAttemptsTests: XCTestCase {
+class APICommandMultipleAttemptsTests: XCTestCase, @unchecked Sendable {
     struct Level: ParseObject {
         var objectId: String?
 
@@ -51,8 +55,8 @@ class APICommandMultipleAttemptsTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -77,14 +81,9 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         ]
         let currentAttempts = Result()
 
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 400)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 400)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait 1")
@@ -114,11 +113,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTPReturns400NoDataFromServer() async throws {
@@ -145,11 +140,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 expectation1.fulfill()
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP429JSONInterval() async throws {
@@ -166,15 +157,9 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerValue = "2"
         let headerFields = [headerKey: headerValue]
         let currentAttempts = Result()
-
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -204,11 +189,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP429JSONDate() async throws {
@@ -233,15 +214,9 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerValue = dateFormatter.string(from: date)
         let headerFields = [headerKey: headerValue]
         let currentAttempts = Result()
-
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 429, headerFields: headerFields)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -271,11 +246,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP429JSONNoHeader() async throws {
@@ -289,15 +260,9 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             codeKey: codeValue
         ]
         let currentAttempts = Result()
-
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 429)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 429)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -327,11 +292,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP503JSONInterval() async throws {
@@ -348,15 +309,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerValue = "2"
         let headerFields = [headerKey: headerValue]
         let currentAttempts = Result()
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
 
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -386,11 +342,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP503JSONDate() async throws {
@@ -415,15 +367,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
         let headerValue = dateFormatter.string(from: date)
         let headerFields = [headerKey: headerValue]
         let currentAttempts = Result()
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
 
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 503, headerFields: headerFields)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -453,11 +400,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testErrorHTTP503JSONNoHeader() async throws {
@@ -471,15 +414,10 @@ class APICommandMultipleAttemptsTests: XCTestCase {
             codeKey: codeValue
         ]
         let currentAttempts = Result()
+		let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
 
         MockURLProtocol.mockRequests { _ in
-            do {
-                let json = try JSONSerialization.data(withJSONObject: responseDictionary, options: [])
-                return MockURLResponse(data: json, statusCode: 503)
-            } catch {
-                XCTFail(error.localizedDescription)
-                return nil
-            }
+			MockURLResponse(data: json, statusCode: 503)
         }
 
         let expectation1 = XCTestExpectation(description: "Wait")
@@ -509,10 +447,7 @@ class APICommandMultipleAttemptsTests: XCTestCase {
                 }
             }
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 }
+#endif

@@ -6,6 +6,10 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -15,7 +19,7 @@ import XCTest
 
 // swiftlint:disable type_body_length
 
-class ParsePushAsyncTests: XCTestCase {
+class ParsePushAsyncTests: XCTestCase, @unchecked Sendable {
     struct Installation: ParseInstallation {
         var installationId: String?
         var deviceType: String?
@@ -62,8 +66,8 @@ class ParsePushAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -218,13 +222,9 @@ class ParsePushAsyncTests: XCTestCase {
         let appleAlert = ParsePushAppleAlert(body: "hello world")
 
         let results = BooleanResponse(result: true)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -246,13 +246,9 @@ class ParsePushAsyncTests: XCTestCase {
         let appleAlert = ParsePushAppleAlert(body: "hello world")
 
         let results = BooleanResponse(result: false)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -283,13 +279,9 @@ class ParsePushAsyncTests: XCTestCase {
         statusOnServer.updatedAt = statusOnServer.createdAt
 
         let results = QueryResponse<ParsePushStatus<ParsePushPayloadAny>>(results: [statusOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -315,13 +307,9 @@ class ParsePushAsyncTests: XCTestCase {
         statusOnServer.updatedAt = statusOnServer.createdAt
 
         let results = QueryResponse<ParsePushStatusResponse>(results: [statusOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -347,13 +335,9 @@ class ParsePushAsyncTests: XCTestCase {
         statusOnServer.updatedAt = statusOnServer.createdAt
 
         let results = QueryResponse<ParsePushStatusResponse>(results: [statusOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -379,13 +363,9 @@ class ParsePushAsyncTests: XCTestCase {
         statusOnServer.updatedAt = statusOnServer.createdAt
 
         let results = QueryResponse<ParsePushStatusResponse>(results: [statusOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let applePayload = ParsePushPayloadApple(alert: appleAlert)
@@ -397,3 +377,4 @@ class ParsePushAsyncTests: XCTestCase {
         }
     }
 }
+#endif

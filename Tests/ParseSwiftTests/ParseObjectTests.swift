@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct Dummy: Codable, Hashable {
         var id: String
@@ -138,7 +138,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         var profilePicture: ParseFile?
     }
 
-    final class GameScoreClass: ParseObject {
+    struct GameScoreClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -152,10 +152,10 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         var player = "Jen"
         var level: Level?
         var levels: [Level]?
-        var game: GameClass?
+        var game: Pointer<GameClass>?
 
         //: a custom initializer
-        required init() {
+        init() {
             self.points = 5
         }
 
@@ -179,7 +179,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
-    final class GameClass: ParseObject {
+    struct GameClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -194,7 +194,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         var name = "Hello"
 
         //: a custom initializer
-        required init() {
+        init() {
             self.gameScore = GameScoreClass()
         }
 
@@ -270,13 +270,9 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let user = try await User.login(username: "parse", password: "user")
         MockURLProtocol.removeAll()
@@ -299,8 +295,8 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
 
@@ -651,6 +647,10 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // swiftlint:disable:next function_body_length
     func testFetch() async throws {
         var score = GameScore(points: 10)
@@ -821,33 +821,37 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeFetchAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeFetchAsync() throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
+		let immutableScore = score
 
         var scoreOnServer = score
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
+        let encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		let immutableScoreOnServer = scoreOnServer
 
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.fetchAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1253,29 +1257,32 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeSaveAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeSaveAsync() throws {
         let score = GameScore(points: 10)
 
         var scoreOnServer = score
         scoreOnServer.objectId = "yarr"
         scoreOnServer.createdAt = Date()
 
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
+        let encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
+		let immutableScoreOnServer = scoreOnServer
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.saveAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.saveAsync(
+				score: score,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1359,31 +1366,35 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeUpdateAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeUpdateAsync() throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
         score.updatedAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
         score.ACL = nil
+		let immutableScore = score
 
         var scoreOnServer = score
         scoreOnServer.updatedAt = Date()
-        let encoded: Data!
-        do {
-            encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
+        let encoded = try ParseCoding.jsonEncoder().encode(scoreOnServer)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		let immutableScoreOnServer = scoreOnServer
         MockURLProtocol.mockRequests { _ in
             let delay = MockURLResponse.addRandomDelay(2)
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.updateAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.updateAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1525,34 +1536,38 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    func testThreadSafeDeleteAsync() {
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    func testThreadSafeDeleteAsync() throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
         score.objectId = objectId
+		let immutableScore = score
 
         var scoreOnServer = score
         scoreOnServer.createdAt = Date()
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        let encoded: Data!
-        do {
-            encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
+        let encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		let immutableScoreOnServer = scoreOnServer
 
         MockURLProtocol.mockRequests { _ in
             let delay = MockURLResponse.addRandomDelay(2)
             return MockURLResponse(data: encoded, statusCode: 200, delay: delay)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 3) { _ in
-            self.deleteAsync(score: score, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 3) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.deleteAsync(
+				score: immutableScore,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -1683,6 +1698,7 @@ class ParseObjectTests: XCTestCase { // swiftlint:disable:this type_body_length
             return
         }
     }
+	#endif
 }
 
 // swiftlint:disable:this file_length

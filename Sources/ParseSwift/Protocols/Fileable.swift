@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 protocol Fileable: ParseEncodable, ParseTypeable, Identifiable {
     var type: String { get }

@@ -11,7 +11,7 @@ import Foundation
 /**
  An operation that adds unique objects to an array field.
  */
-public struct ParseOperationAddUnique<T>: ParseOperationable where T: Codable & Hashable {
+public struct ParseOperationAddUnique<T>: ParseOperationable where T: Codable & Hashable & Sendable {
     public var __op: ParseOperationCommand = .addUnique // swiftlint:disable:this identifier_name
     /// The array of objects related to the operation.
     public var objects: Set<T>

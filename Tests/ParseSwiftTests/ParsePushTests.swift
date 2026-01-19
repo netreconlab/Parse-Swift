@@ -89,7 +89,7 @@ internal struct ParsePushStatusResponse: ParseObject {
     }
 }
 
-class ParsePushTests: XCTestCase {
+class ParsePushTests: XCTestCase, @unchecked Sendable {
 
     struct Installation: ParseInstallation {
         var installationId: String?
@@ -137,8 +137,8 @@ class ParsePushTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }

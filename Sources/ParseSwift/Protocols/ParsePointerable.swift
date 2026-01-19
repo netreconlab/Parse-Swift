@@ -7,8 +7,11 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
-public protocol ParsePointer: Encodable {
+public protocol ParsePointer: Encodable, Sendable {
 
     var __type: String { get } // swiftlint:disable:this identifier_name
 
@@ -80,7 +83,7 @@ extension ParsePointerObject {
     func fetch(includeKeys: [String]? = nil,
                options: API.Options = [],
                callbackQueue: DispatchQueue = .main,
-               completion: @escaping (Result<Object, ParseError>) -> Void) {
+               completion: @escaping @Sendable (Result<Object, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -93,7 +96,7 @@ extension ParsePointerObject {
                 }
                 return ["include": "\(Set(includeKeys))"]
             }()
-            let mapper = { (data) -> Object in
+            let mapper = { @Sendable (data) -> Object in
                 try ParseCoding.jsonDecoder().decode(Object.self, from: data)
             }
             await API.NonParseBodyCommand<NoBody, Object>(method: method, path: path, params: params, mapper: mapper)
@@ -116,16 +119,14 @@ public extension Sequence where Element: ParsePointerObject {
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter completion: The block to execute.
      It should have the following argument signature: `(Result<[(Result<Element.Object, ParseError>)], ParseError>)`.
-     - warning: The order in which objects are returned are not guarenteed. You should not expect results in
-     any particular order.
     */
     func fetchAll(
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element.Object, ParseError>)], ParseError>) -> Void
+        completion: @escaping @Sendable (Result<[(Result<Element.Object, ParseError>)], ParseError>) -> Void
     ) {
-        let objects = Set(compactMap { $0.toObject() })
+        let objects = compactMap { $0.toObject() }
         objects.fetchAll(
             includeKeys: includeKeys,
             options: options,

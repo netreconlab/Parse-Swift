@@ -14,11 +14,11 @@ public protocol Queryable {
     func first(options: API.Options) async throws -> ResultType
     func count(options: API.Options) async throws -> Int
     func find(options: API.Options, callbackQueue: DispatchQueue,
-              completion: @escaping (Result<[ResultType], ParseError>) -> Void)
+              completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void)
     func first(options: API.Options, callbackQueue: DispatchQueue,
-               completion: @escaping (Result<ResultType, ParseError>) -> Void)
+               completion: @escaping @Sendable (Result<ResultType, ParseError>) -> Void)
     func count(options: API.Options, callbackQueue: DispatchQueue,
-               completion: @escaping (Result<Int, ParseError>) -> Void)
+               completion: @escaping @Sendable (Result<Int, ParseError>) -> Void)
 }
 
 extension Queryable {
@@ -30,7 +30,10 @@ extension Queryable {
       - parameter completion: The block to execute.
       It should have the following argument signature: `(Result<[ResultType], ParseError>)`
     */
-    func find(callbackQueue: DispatchQueue = .main, completion: @escaping (Result<[ResultType], ParseError>) -> Void) {
+    func find(
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[ResultType], ParseError>) -> Void
+	) {
         find(options: [], callbackQueue: callbackQueue, completion: completion)
     }
 
@@ -45,7 +48,10 @@ extension Queryable {
       `result` will be `nil` if `error` is set OR no object was found matching the query.
       `error` will be `nil` if `result` is set OR if the query succeeded, but found no results.
     */
-    func first(callbackQueue: DispatchQueue = .main, completion: @escaping (Result<ResultType, ParseError>) -> Void) {
+    func first(
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<ResultType, ParseError>) -> Void
+	) {
         first(options: [], callbackQueue: callbackQueue, completion: completion)
     }
 
@@ -56,7 +62,10 @@ extension Queryable {
       - parameter completion: The block to execute.
       It should have the following argument signature: `^(int count, ParseError *error)`
     */
-    func count(callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Int, ParseError>) -> Void) {
+    func count(
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<Int, ParseError>) -> Void
+	) {
         count(options: [], callbackQueue: callbackQueue, completion: completion)
     }
 }

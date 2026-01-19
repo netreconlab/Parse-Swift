@@ -13,34 +13,30 @@ import FoundationNetworking
 #endif
 
 internal extension URLSession {
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    static var parse = URLSession.shared
-    #else
-    static var parse: URLSession = {
-        if !Parse.configuration.isTestingSDK {
-            let configuration = URLSessionConfiguration.default
-            configuration.urlCache = URLCache.parse
-            configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            return URLSession(configuration: configuration,
-                              delegate: Parse.sessionDelegate,
-                              delegateQueue: nil)
-        } else {
-            let session = URLSession.shared
-            session.configuration.urlCache = URLCache.parse
-            session.configuration.requestCachePolicy = Parse.configuration.requestCachePolicy
-            session.configuration.httpAdditionalHeaders = Parse.configuration.httpAdditionalHeaders
-            return session
-        }
-    }()
-    #endif
+	static var parse: URLSession {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _parse
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_parse = newValue
+		}
+
+	}
+	nonisolated(unsafe) static var _parse: URLSession!
+	static let lock = NSLock()
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func makeResult<U>(request: URLRequest,
-                       responseData: Data?,
-                       urlResponse: URLResponse?,
-                       responseError: Error?,
-                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
+	func makeResult<U: Sendable>(
+		request: URLRequest,
+		responseData: Data?,
+		urlResponse: URLResponse?,
+		responseError: Error?,
+		mapper: (@escaping @Sendable (Data) async throws -> U)
+	) async -> Result<U, ParseError> {
         if let responseError = responseError {
             let parseError = responseError as? ParseError ?? ParseError(message: "Unable to connect with parse-server",
                                                                         swift: responseError)
@@ -103,11 +99,13 @@ internal extension URLSession {
                                    message: "Unable to connect with parse-server: \(String(describing: urlResponse))."))
     }
 
-    func makeResult<U>(request: URLRequest,
-                       location: URL?,
-                       urlResponse: URLResponse?,
-                       responseError: Error?,
-                       mapper: @escaping (Data) async throws -> U) async -> Result<U, ParseError> {
+    func makeResult<U: Sendable>(
+		request: URLRequest,
+		location: URL?,
+		urlResponse: URLResponse?,
+		responseError: Error?,
+		mapper: (@escaping @Sendable (Data) async throws -> U)
+	) async -> Result<U, ParseError> {
         guard let response = urlResponse else {
             let parseError = responseError as? ParseError ?? ParseError(code: .otherCause,
                                                                         message: "No response from server")
@@ -137,13 +135,13 @@ internal extension URLSession {
     }
 
     // swiftlint:disable:next function_body_length cyclomatic_complexity
-    func dataTask<U>(
+	func dataTask<U: Sendable>(
         with request: URLRequest,
         callbackQueue: DispatchQueue,
         attempts: Int = 1,
         allowIntermediateResponses: Bool,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        mapper: (@escaping @Sendable (Data) async throws -> U),
+        completion: (@escaping @Sendable (Result<U, ParseError>) -> Void)
     ) async {
         do {
             let (responseData, urlResponse) = try await dataTask(for: request)
@@ -262,8 +260,10 @@ internal extension URLSession {
         }
     }
 
-    func dataTask(with request: URLRequest,
-                  completionHandler: @escaping (Result<(Data, URLResponse), Error>) -> Void) -> URLSessionDataTask {
+    func dataTask(
+		with request: URLRequest,
+		completionHandler: @escaping @Sendable (Result<(Data, URLResponse), Error>) -> Void
+	) -> URLSessionDataTask {
         return dataTask(with: request) { (data, response, error) in
             guard let data = data,
                   let response = response else {
@@ -281,14 +281,14 @@ internal extension URLSession {
 }
 
 internal extension URLSession {
-    func uploadTask<U>( // swiftlint:disable:this function_body_length function_parameter_count
+    func uploadTask<U: Sendable>( // swiftlint:disable:this function_body_length function_parameter_count
         notificationQueue: DispatchQueue,
         with request: URLRequest,
         from data: Data?,
         from file: URL?,
-        progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)?,
+        mapper: (@escaping @Sendable (Data) async throws -> U),
+        completion: (@escaping @Sendable (Result<U, ParseError>) -> Void)
     ) {
         var task: URLSessionTask?
         if let data = data {
@@ -349,12 +349,12 @@ internal extension URLSession {
         }
     }
 
-    func downloadTask<U>(
+    func downloadTask<U: Sendable>(
         notificationQueue: DispatchQueue,
         with request: URLRequest,
-        progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        progress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?,
+        mapper: (@escaping @Sendable (Data) async throws -> U),
+        completion: (@escaping @Sendable (Result<U, ParseError>) -> Void)
     ) async {
         let task = downloadTask(with: request) { (location, urlResponse, responseError) in
             Task {
@@ -371,10 +371,10 @@ internal extension URLSession {
         task.resume()
     }
 
-    func downloadTask<U>(
+    func downloadTask<U: Sendable>(
         with request: URLRequest,
-        mapper: @escaping (Data) async throws -> U,
-        completion: @escaping (Result<U, ParseError>) -> Void
+        mapper: (@escaping @Sendable (Data) async throws -> U),
+        completion: (@escaping @Sendable (Result<U, ParseError>) -> Void)
     ) {
         Task {
             do {
@@ -405,7 +405,7 @@ internal extension URLSession {
     }
 
     func downloadTask(with request: URLRequest,
-                      completionHandler: @escaping (Result<(URL, URLResponse),
+                      completionHandler: @escaping @Sendable (Result<(URL, URLResponse),
                                                     Error>) -> Void) -> URLSessionDownloadTask {
         return downloadTask(with: request) { (location, response, error) in
             guard let location = location,

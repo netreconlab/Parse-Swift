@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /// The base protocol for a `ParseObject`.
 /// - note: You should not use this directly and instead use `ParseObject`.
@@ -100,9 +103,11 @@ public extension Objectable {
 extension Objectable {
 
     static func createHash(_ object: Encodable) throws -> String {
-        let encoded = try ParseCoding.parseEncoder().encode(object,
-                                                            acl: nil,
-                                                            batching: false)
+        let encoded = try ParseCoding.parseEncoder().encode(
+			object,
+			acl: nil,
+			batching: false
+		)
         let hashString = String(decoding: encoded, as: UTF8.self)
         return hashString
     }

@@ -3,12 +3,11 @@ on:
   release:
     types: [published]
 env:
-  CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_16.4.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_26.1.app/Contents/Developer'
 
 jobs:
   cocoapods:
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v6
       - name: Get release version
@@ -24,7 +23,7 @@ jobs:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
   docs:
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v6
       - name: Get release version

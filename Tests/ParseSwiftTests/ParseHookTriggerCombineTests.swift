@@ -15,7 +15,7 @@ import Combine
 
 // swiftlint:disable type_body_length
 
-class ParseHookTriggerCombineTests: XCTestCase {
+class ParseHookTriggerCombineTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -33,8 +33,8 @@ class ParseHookTriggerCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }

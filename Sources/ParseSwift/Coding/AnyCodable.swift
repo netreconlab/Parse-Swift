@@ -17,9 +17,9 @@ import Foundation
  */
 struct AnyCodable: Codable {
 
-    let value: Any
+    let value: Any & Sendable
 
-    init<T>(_ value: T?) {
+	init<T: Sendable>(_ value: T?) {
         self.value = value ?? ()
     }
 }

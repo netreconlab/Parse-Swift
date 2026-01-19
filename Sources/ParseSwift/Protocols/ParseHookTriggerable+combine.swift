@@ -19,9 +19,21 @@ public extension ParseHookTriggerable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				options: options
+			) { result in
+				switch result {
+				case .success(let hookTrigger):
+					promise(.success(hookTrigger))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -32,9 +44,21 @@ public extension ParseHookTriggerable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchAllPublisher(options: API.Options = []) -> Future<[Self], ParseError> {
+    func fetchAllPublisher(
+		options: API.Options = []
+	) -> Future<[Self], ParseError> {
         Future { promise in
-            self.fetchAll(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchAll(
+				options: options
+			) { result in
+				switch result {
+				case .success(let hookTriggers):
+					promise(.success(hookTriggers))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -48,9 +72,21 @@ public extension ParseHookTriggerable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let hookTrigger):
+					promise(.success(hookTrigger))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -64,9 +100,21 @@ public extension ParseHookTriggerable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func updatePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let hookTrigger):
+					promise(.success(hookTrigger))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -79,9 +127,21 @@ public extension ParseHookTriggerable {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

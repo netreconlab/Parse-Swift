@@ -16,7 +16,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseAppleCombineTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -83,8 +83,8 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -230,13 +230,9 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         return try await User.login(username: "parse", password: "user")
     }
@@ -306,14 +302,10 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
-    func testLinkAuthData() async throws { // swiftlint:disable:this function_body_length
+    func testLinkAuthData() async throws {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Save")
         let expectation2 = XCTestExpectation(description: "Updated")
@@ -373,11 +365,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -451,11 +439,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     // swiftlint:disable:next function_body_length
@@ -529,11 +513,7 @@ class ParseAppleCombineTests: XCTestCase { // swiftlint:disable:this type_body_l
         })
         publisher.store(in: &current)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }
 

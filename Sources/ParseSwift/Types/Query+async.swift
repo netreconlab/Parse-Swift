@@ -39,8 +39,10 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func findExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                   options: API.Options = []) async throws -> [U] {
+    func findExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> [U] {
         try await withCheckedThrowingContinuation { continuation in
             self.findExplain(usingMongoDB: usingMongoDB,
                              options: options,
@@ -93,8 +95,10 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func firstExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                    options: API.Options = []) async throws -> U {
+    func firstExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> U {
         try await withCheckedThrowingContinuation { continuation in
             self.firstExplain(usingMongoDB: usingMongoDB,
                               options: options,
@@ -129,8 +133,10 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func countExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                    options: API.Options = []) async throws -> [U] {
+    func countExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> [U] {
         try await withCheckedThrowingContinuation { continuation in
             self.countExplain(usingMongoDB: usingMongoDB,
                               options: options,
@@ -166,8 +172,10 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func withCountExplain<U: Decodable>(usingMongoDB: Bool = false,
-                                        options: API.Options = []) async throws -> [U] {
+    func withCountExplain<U: Decodable & Sendable>(
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> [U] {
         try await withCheckedThrowingContinuation { continuation in
             self.withCountExplain(usingMongoDB: usingMongoDB,
                                   options: options,
@@ -185,7 +193,7 @@ public extension Query {
      - returns: An array of ParseObjects.
      - throws: An error of type `ParseError`.
     */
-    func aggregate(_ pipeline: [[String: Encodable]],
+    func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                    options: API.Options = []) async throws -> [ResultType] {
         try await withCheckedThrowingContinuation { continuation in
             self.aggregate(pipeline,
@@ -212,9 +220,11 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func aggregateExplain<U: Decodable>(_ pipeline: [[String: Encodable]],
-                                        usingMongoDB: Bool = false,
-                                        options: API.Options = []) async throws -> [U] {
+    func aggregateExplain<U: Decodable & Sendable>(
+		_ pipeline: [[String: Encodable & Sendable]],
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> [U] {
         try await withCheckedThrowingContinuation { continuation in
             self.aggregateExplain(pipeline,
                                   usingMongoDB: usingMongoDB,
@@ -260,9 +270,11 @@ public extension Query {
      `usingMongoDB` flag needs to be set for MongoDB users. See more
      [here](https://github.com/parse-community/parse-server/pull/7440).
     */
-    func distinctExplain<U: Decodable>(_ key: String,
-                                       usingMongoDB: Bool = false,
-                                       options: API.Options = []) async throws -> [U] {
+    func distinctExplain<U: Decodable & Sendable>(
+		_ key: String,
+		usingMongoDB: Bool = false,
+		options: API.Options = []
+	) async throws -> [U] {
         try await withCheckedThrowingContinuation { continuation in
             self.distinctExplain(key,
                                  usingMongoDB: usingMongoDB,

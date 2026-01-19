@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectCustomObjectIdTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct Level: ParseObject {
         var objectId: String?
 
@@ -134,8 +134,8 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
 
@@ -633,6 +633,10 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         }
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testSave() async throws {
         var score = GameScore(points: 10)
         score.objectId = "yarr"
@@ -912,11 +916,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1029,11 +1029,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1195,20 +1191,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let score = GameScore(points: 10)
         let score2 = GameScore(points: 20)
 
-        let expectation1 = XCTestExpectation(description: "Save object2")
-        [score, score2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [score, score2].saveAll()
+			XCTFail("Should have failed")
+		} catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
+		}
     }
 
     func testUpdateAll() async throws {
@@ -1291,20 +1281,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         var score2 = GameScore(points: 20)
         score2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
 
-        let expectation1 = XCTestExpectation(description: "Save object2")
-        [score, score2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [score, score2].saveAll()
+			XCTFail("Should have failed")
+        } catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have throwm a ParseError")
+		}
     }
 
     func testUserSave() async throws {
@@ -1572,11 +1556,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUserSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -1667,11 +1647,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testUserSaveAll() async throws {
@@ -1749,20 +1725,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let user = User()
         let user2 = User()
 
-        let expectation1 = XCTestExpectation(description: "SaveAll user")
-        [user, user2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [user, user2].saveAll()
+			XCTFail("Should have failed")
+		} catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
+		}
     }
 
     func testUserUpdateAll() async throws {
@@ -1906,20 +1876,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         var user2 = User()
         user2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
 
-        let expectation1 = XCTestExpectation(description: "UpdateAll user")
-        [user, user2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [user, user2].saveAll()
+			XCTFail("Should have failed")
+		} catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
+		}
     }
 
     func testInstallationSave() async throws {
@@ -2206,11 +2170,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testInstallationSaveNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -2306,11 +2266,7 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             }
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testInstallationUpdateNoObjectIdIgnoreConfigAsyncMainQueue() {
@@ -2491,20 +2447,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         let installation = Installation()
         let installation2 = Installation()
 
-        let expectation1 = XCTestExpectation(description: "SaveAll installation")
-        [installation, installation2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [installation, installation2].saveAll()
+			XCTFail("Should have failed")
+		} catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
+		}
     }
 
     func testInstallationUpdateAll() async throws {
@@ -2648,20 +2598,14 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
         var installation2 = Installation()
         installation2.createdAt = Calendar.current.date(byAdding: .init(day: -1), to: Date())
 
-        let expectation1 = XCTestExpectation(description: "UpdateAll installation")
-        [installation, installation2].saveAll { result in
-            if case let .failure(error) = result {
-                XCTAssertTrue(error.message.contains("objectId"))
-            } else {
-                XCTFail("Should have failed")
-            }
-            expectation1.fulfill()
-        }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
+		do {
+			_ = try await [installation, installation2].saveAll()
+			XCTFail("Should have failed")
+		} catch let error as ParseError {
+			XCTAssertTrue(error.message.contains("objectId"))
+		} catch {
+			XCTFail("Should have thrown a ParseError")
+		}
     }
 
     func testFetch() async throws {
@@ -2749,4 +2693,5 @@ class ParseObjectCustomObjectIdTests: XCTestCase { // swiftlint:disable:this typ
             XCTFail(error.localizedDescription)
         }
     }
+	#endif
 }

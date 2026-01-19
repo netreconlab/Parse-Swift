@@ -23,10 +23,21 @@ public extension ParseFile {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				options: options
+			) { result in
+				switch result {
+				case .success(let file):
+					promise(.success(file))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -40,13 +51,23 @@ public extension ParseFile {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchPublisher(options: API.Options = [],
-                        progress: @escaping ((URLSessionDownloadTask,
-                                              Int64, Int64, Int64) -> Void)) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		options: API.Options = [],
+		progress: @escaping ((URLSessionDownloadTask,
+                                              Int64, Int64, Int64) -> Void)
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(options: options,
-                       progress: progress,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				options: options
+			) { result in
+				switch result {
+				case .success(let file):
+					promise(.success(file))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -58,10 +79,21 @@ public extension ParseFile {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func savePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func savePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				options: options
+			) { result in
+				switch result {
+				case .success(let file):
+					promise(.success(file))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -75,12 +107,23 @@ public extension ParseFile {
      bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)`.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func savePublisher(options: API.Options = [],
-                       progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil) -> Future<Self, ParseError> {
+    func savePublisher(
+		options: API.Options = [],
+		progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(options: options,
-                      progress: progress,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				options: options,
+				progress: progress
+			) { result in
+				switch result {
+				case .success(let file):
+					promise(.success(file))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -92,9 +135,21 @@ public extension ParseFile {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
