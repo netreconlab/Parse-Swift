@@ -84,6 +84,24 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	class KeepCount: @unchecked Sendable {
+		var count: Int {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _count
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_count = newValue
+			}
+		}
+
+		let lock = NSLock()
+		var _count = 0
+	}
+
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -1140,15 +1158,15 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
         let expectation2 = XCTestExpectation(description: "Resubscribe Handler")
-        var count = 0
-        var originalTask: URLSessionWebSocketTask?
+        let keepCount = KeepCount()
         subscription.handleSubscribe { subscribedQuery, isNew in
             XCTAssertEqual(query, subscribedQuery)
-            if count == 0 {
+			var originalTask: URLSessionWebSocketTask?
+			if keepCount.count == 0 {
                 XCTAssertTrue(isNew)
                 XCTAssertNotNil(ParseLiveQuery.client?.task)
                 originalTask = ParseLiveQuery.client?.task
-                count += 1
+				keepCount.count += 1
                 Task {
                     let current = await client.subscriptions.current
                     let pending = await client.subscriptions.pending
@@ -2211,12 +2229,12 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(subscription.query, query)
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
-        var count = 0
+        let keepCount = KeepCount()
         subscription.handleSubscribe { subscribedQuery, isNew in
             XCTAssertEqual(query, subscribedQuery)
-            if count == 0 {
+			if keepCount.count == 0 {
                 XCTAssertTrue(isNew)
-                count += 1
+				keepCount.count += 1
                 expectation1.fulfill()
             } else {
                 XCTAssertFalse(isNew)
@@ -2272,12 +2290,12 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
         let expectation2 = XCTestExpectation(description: "Unsubscribe Handler")
-        var count = 0
+        let keepCount = KeepCount()
         subscription.handleSubscribe { subscribedQuery, isNew in
             XCTAssertEqual(query, subscribedQuery)
-            if count == 0 {
+			if keepCount.count == 0 {
                 XCTAssertTrue(isNew)
-                count += 1
+				keepCount.count += 1
                 expectation1.fulfill()
             } else {
                 XCTAssertTrue(isNew)

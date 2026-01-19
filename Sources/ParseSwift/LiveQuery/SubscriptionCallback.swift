@@ -102,7 +102,7 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable, @unchecked S
      - returns: The same subscription, for easy chaining.
      */
     @discardableResult open func handleSubscribe(
-		_ handler: @escaping  @Sendable (Query<T>, Bool) -> Void
+		_ handler: @escaping @Sendable (Query<T>, Bool) -> Void
 	) -> SubscriptionCallback {
         subscribeHandlers.append(handler)
         return self
