@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_16.0.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_16.2.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_26.2.app/Contents/Developer'
 
 concurrency:
