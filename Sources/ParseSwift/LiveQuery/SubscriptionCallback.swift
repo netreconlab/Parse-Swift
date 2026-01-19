@@ -14,7 +14,7 @@ import FoundationNetworking
 /**
  A default implementation of the `QuerySubscribable` protocol using closures for callbacks.
  */
-open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
+open class SubscriptionCallback<T: ParseObject>: QuerySubscribable, @unchecked Sendable {
 
 	private let lock = NSLock()
 	private var _query: Query<T>
