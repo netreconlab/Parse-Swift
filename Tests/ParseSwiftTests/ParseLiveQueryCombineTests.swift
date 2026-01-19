@@ -6,15 +6,13 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI) && canImport(Combine)
 import Foundation
 import XCTest
 @testable import ParseSwift
-#if canImport(Combine)
 import Combine
-#endif
 
-class ParseLiveQueryCombineTests: XCTestCase {
+class ParseLiveQueryCombineTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -35,8 +33,8 @@ class ParseLiveQueryCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
         await URLSession.liveQuery.closeAll()
@@ -68,11 +66,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testPingSocketNotEstablished() async throws {
@@ -107,11 +101,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testPing() async throws {
@@ -141,11 +131,7 @@ class ParseLiveQueryCombineTests: XCTestCase {
             XCTFail("Should have produced error")
         })
         publisher.store(in: &current)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 }
 #endif

@@ -14,7 +14,7 @@ import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable:next type_body_length
-class ParseHookTriggerRequestTests: XCTestCase {
+class ParseHookTriggerRequestTests: XCTestCase, @unchecked Sendable {
 
     struct User: ParseCloudUser {
 
@@ -67,36 +67,39 @@ class ParseHookTriggerRequestTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
     func testCoding() async throws {
-        let triggerRequest = ParseHookTriggerRequest<User>(primaryKey: true,
-                                                           ipAddress: "1.1.1.1",
-                                                           headers: ["yolo": "me"],
-                                                           trigger: .beforeDelete,
-                                                           file: ParseFile(data: Data()),
-                                                           fileSize: 0)
+        let triggerRequest = ParseHookTriggerRequest<User>(
+			primaryKey: true,
+			ipAddress: "1.1.1.1",
+			headers: ["yolo": "me"],
+			trigger: .beforeDelete,
+			file: ParseFile(data: Data()),
+			fileSize: 0,
+			forceDownload: true
+		)
         // swiftlint:disable:next line_length
-        let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
+        let expected = "{\"file\":{\"__type\":\"File\",\"name\":\"file\"},\"fileSize\":0,\"forceDownload\":true,\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
-        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
     }
 
     func testCodingObject() async throws {
         let object = User(objectId: "geez")
-        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(primaryKey: true,
-                                                                       ipAddress: "1.1.1.1",
-                                                                       headers: ["yolo": "me"],
-                                                                       trigger: .beforeDelete,
-                                                                       object: object)
+        let triggerRequest = ParseHookTriggerObjectRequest<User, User>(
+			primaryKey: true,
+			ipAddress: "1.1.1.1",
+			headers: ["yolo": "me"],
+			trigger: .beforeDelete,
+			object: object
+		)
         // swiftlint:disable:next line_length
         let expected = "{\"headers\":{\"yolo\":\"me\"},\"ip\":\"1.1.1.1\",\"master\":true,\"object\":{\"objectId\":\"geez\"},\"triggerName\":\"beforeDelete\"}"
         XCTAssertEqual(triggerRequest.description, expected)
-        XCTAssertEqual(triggerRequest.triggerName, triggerRequest.trigger?.rawValue)
         let triggerRequest2 = ParseHookTriggerObjectRequest<User, User>(ipAddress: "1.1.1.1",
                                                                         headers: ["yolo": "me"],
                                                                         object: object)
@@ -274,6 +277,10 @@ class ParseHookTriggerRequestTests: XCTestCase {
         XCTAssertEqual(requestOptions5, options5)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     @MainActor
     func testHydrateUser() async throws {
         let sessionToken = "dog"
@@ -332,4 +339,5 @@ class ParseHookTriggerRequestTests: XCTestCase {
             XCTAssertTrue(error.equalsTo(server.code))
         }
     }
+	#endif
 }

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension ParseLDAP {
     // MARK: Async/Await
@@ -25,7 +28,7 @@ public extension ParseLDAP {
             self.login(id: id,
                        password: password,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -41,7 +44,7 @@ public extension ParseLDAP {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -62,7 +65,7 @@ public extension ParseLDAP {
             self.link(id: id,
                       password: password,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -78,7 +81,7 @@ public extension ParseLDAP {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

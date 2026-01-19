@@ -7,23 +7,41 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  A default implementation of the `QuerySubscribable` protocol using closures for callbacks.
  */
 open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
 
-    public var query: Query<T>
+	private let lock = NSLock()
+	private var _query: Query<T>
+	fileprivate var eventHandlers = [(Query<T>, Event<T>) -> Void]()
+	fileprivate var subscribeHandlers = [(Query<T>, Bool) -> Void]()
+	fileprivate var unsubscribeHandlers = [(Query<T>) -> Void]()
+
+	public var query: Query<T> {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _query
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_query = newValue
+		}
+	}
+
     public typealias Object = T
-    fileprivate var eventHandlers = [(Query<T>, Event<T>) -> Void]()
-    fileprivate var subscribeHandlers = [(Query<T>, Bool) -> Void]()
-    fileprivate var unsubscribeHandlers = [(Query<T>) -> Void]()
 
     /**
      Creates a new subscription that can be used to handle updates.
      */
     public required init(query: Query<T>) {
-        self.query = query
+        self._query = query
     }
 
     /**

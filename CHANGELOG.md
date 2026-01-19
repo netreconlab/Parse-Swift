@@ -2,14 +2,86 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.0.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...6.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.0/documentation/parseswift)
+
+__Breaking Changes__
+* Update SDK to be Swift 6.0+ compliant. This includes making all objects `Sendable` and reducing the possibility of data races. Added WASM support. Multiple batches now perform asynchronously ([#208](https://github.com/netreconlab/Parse-Swift/pull/208)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Remove all deprecated code and warnings ([#211](https://github.com/netreconlab/Parse-Swift/pull/211)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+__New features__
+* Add missing hook triggers: `beforePasswordResetRequest` for `ParseUser`, and `beforeFind` and `afterFind` for `ParseFile` ([#224](https://github.com/netreconlab/Parse-Swift/pull/224)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.2...5.12.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.3/documentation/parseswift)
+
+__Fixes__
+* Update async methods so they do not produce warnings in Swift 6.0 ([#198](https://github.com/netreconlab/Parse-Swift/pull/198)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.1...5.12.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.2/documentation/parseswift)
+
+__Fixes__
+* When creating objects, if the server does not return the correct full object, attempt to retrieve it before returning to call-site. ([#197](https://github.com/netreconlab/Parse-Swift/pull/197)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Fixes an issue when using `mergeable` on `ParseInstallation`'s' and properties that are automatically computed such as `appVersion` are not sent to the server. ([#197](https://github.com/netreconlab/Parse-Swift/pull/197)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.0...5.12.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.1/documentation/parseswift)
+
+__Fixes__
+* Fix failing to decode a ParseInstallation or ParseUser due to object returning from the server as a pointer ([#196](https://github.com/netreconlab/Parse-Swift/pull/196)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.12.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.5...5.12.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.12.0/documentation/parseswift)
+
+__New features__
+* Add maintenance key that can be used on server-side ([#194](https://github.com/netreconlab/Parse-Swift/pull/194)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.5
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.4...5.11.5), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.5/documentation/parseswift)
+
+__Fixes__
+* Fix app crash when using QueryConstraint == ([#193](https://github.com/netreconlab/Parse-Swift/pull/193)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.4
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.3...5.11.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.4/documentation/parseswift)
+
+__Fixes__
+* Encode plus symbol in query parameter URI's to server ([#191](https://github.com/netreconlab/Parse-Swift/pull/191)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Encode Firebase notification keys correctly ([#187](https://github.com/netreconlab/Parse-Swift/pull/187)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.2...5.11.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.3/documentation/parseswift)
+
+__Fixes__
+* Remove all double conformance of Hashable and Equatable ([#182](https://github.com/netreconlab/Parse-Swift/pull/182)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.2
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.1...5.11.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.2/documentation/parseswift)
+
+__Fixes__
+* Change minimum Swift version in Podspec to 5.7 ([#181](https://github.com/netreconlab/Parse-Swift/pull/181)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.11.0...5.11.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.1/documentation/parseswift)
+
+__Fixes__
+* Make className property of ParseHookTriggerObject public ([#180](https://github.com/netreconlab/Parse-Swift/pull/180)), thanks to [Corey Baker](https://github.com/cbaker6).
+
+### 5.11.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.3...5.11.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.11.0/documentation/parseswift)
+
+__New features__
+* Allow hook triggers on ParseConfig and improve SDK ability to throw errors when the developer uses unsupported trigger combinations. Also changes lowest requirements to be Swift 5.7 and Xcode 14.0 which aligns with other Swift Packages ([#179](https://github.com/netreconlab/Parse-Swift/pull/179)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.10.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.2...5.10.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.10.3/documentation/parseswift)
 
 __Fixes__
-* Allow encoding of id and className on nested types that are not ParseObjects ([#176](https://github.com/netreconlab/Parse-Swift/pull/177)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Allow encoding of id and className on nested types that are not ParseObjects ([#177](https://github.com/netreconlab/Parse-Swift/pull/177)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 5.10.2
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.10.1...5.10.2), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/5.10.2/documentation/parseswift)

@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -13,7 +17,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseCloudableAsyncTests: XCTestCase {
+class ParseCloudableAsyncTests: XCTestCase, @unchecked Sendable {
     struct Cloud: ParseCloudable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
 
@@ -41,8 +45,8 @@ class ParseCloudableAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -51,14 +55,9 @@ class ParseCloudableAsyncTests: XCTestCase {
     func testFunction() async throws {
 
         let response = AnyResultResponse<String?>(result: nil)
-
+		let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let cloud = Cloud(functionJobName: "test")
@@ -70,14 +69,9 @@ class ParseCloudableAsyncTests: XCTestCase {
     func testJob() async throws {
 
         let response = AnyResultResponse<String?>(result: nil)
-
+		let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let cloud = Cloud(functionJobName: "test")
@@ -85,3 +79,4 @@ class ParseCloudableAsyncTests: XCTestCase {
         XCTAssertNil(functionResponse)
     }
 }
+#endif

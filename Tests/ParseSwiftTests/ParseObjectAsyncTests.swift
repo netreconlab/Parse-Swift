@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -15,7 +19,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseObjectAsyncTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct GameScore: ParseObject {
 
@@ -153,7 +157,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var profilePicture: ParseFile?
     }
 
-    final class GameScoreClass: ParseObject {
+    struct GameScoreClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -167,10 +171,10 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var player = "Jen"
         var level: Level?
         var levels: [Level]?
-        var game: GameClass?
+        var game: Pointer<GameClass>?
 
         //: a custom initializer
-        required init() {
+        init() {
             self.points = 5
         }
 
@@ -194,7 +198,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         }
     }
 
-    final class GameClass: ParseObject {
+    struct GameClass: ParseObject {
 
         //: These are required by ParseObject
         var objectId: String?
@@ -209,7 +213,7 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         var name = "Hello"
 
         //: a custom initializer
-        required init() {
+        init() {
             self.gameScore = GameScoreClass()
         }
 
@@ -301,8 +305,8 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -310,13 +314,9 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let user = try await User.login(username: "parse", password: "user")
         MockURLProtocol.removeAll()
@@ -1637,24 +1637,6 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
     }
 
     @MainActor
-    func testDeepSaveDetectCircular() async throws {
-        let score = GameScoreClass(points: 10)
-        let game = GameClass(gameScore: score)
-        game.objectId = "nice"
-        score.game = game
-        do {
-            _ = try await game.ensureDeepSave()
-            XCTFail("Should have thrown error")
-        } catch {
-            guard let parseError = error as? ParseError else {
-                XCTFail("Should have failed with an error of detecting a circular dependency")
-                return
-            }
-            XCTAssertTrue(parseError.message.contains("circular"))
-        }
-    }
-
-    @MainActor
     func testAllowFieldsWithSameObject() async throws {
         var score = GameScore(points: 10)
         var level = Level()
@@ -1720,7 +1702,6 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(level.first?.objectId, "yarr") // This is because mocker is only returning 1 response
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
     @MainActor
     func testDeepSaveObjectWithFile() async throws {
         var game = Game2()
@@ -1803,5 +1784,5 @@ class ParseObjectAsyncTests: XCTestCase { // swiftlint:disable:this type_body_le
         XCTAssertEqual(savedGame.updatedAt, gameOnServer.createdAt)
         XCTAssertEqual(savedGame.profilePicture?.url, gameOnServer.profilePicture?.url)
     }
-    #endif
 }
+#endif

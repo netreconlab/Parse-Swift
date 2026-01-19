@@ -26,13 +26,21 @@ public extension Sequence where Element: ParsePointerObject {
     */
     func fetchAllPublisher(
         includeKeys: [String]? = nil,
-        options: API.Options = []) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
+        options: API.Options = []
+	) -> Future<[(Result<Self.Element.Object, ParseError>)], ParseError> {
         Future { promise in
+			nonisolated(unsafe) let promise = promise
             self.fetchAll(
                 includeKeys: includeKeys,
-                options: options,
-                completion: promise
-            )
+                options: options
+            ) { result in
+				switch result {
+				case .success(let object):
+					promise(.success(object))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 

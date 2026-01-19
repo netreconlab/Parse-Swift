@@ -23,15 +23,13 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
     public var headers: [String: String]?
     /// The type of Parse Hook Trigger.
     public var trigger: ParseHookTriggerType?
-    @available(*, deprecated, message: "Use \"trigger\" instead.")
-    public var triggerName: String? {
-        trigger?.rawValue
-    }
     public var clients: Int?
     /// The  from the hook call.
     public var file: ParseFile?
     /// The size of the file in bytes.
     public var fileSize: Int?
+	/// Force `ParseFile` download.
+	public var forceDownload: Bool?
     var log: AnyCodable?
     var context: AnyCodable?
 
@@ -41,7 +39,7 @@ public struct ParseHookTriggerRequest<U: ParseCloudUser>: ParseHookTriggerReques
         case trigger = "triggerName"
         case user, installationId, headers,
              log, context, file, fileSize,
-             clients
+             clients, forceDownload
     }
 }
 

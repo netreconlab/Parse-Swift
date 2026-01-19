@@ -4,8 +4,8 @@ import XCTest
 // swiftlint:disable function_body_length
 
 // Test has objective-c
-#if !os(Linux) && !os(Android) && !os(Windows)
-class AnyEncodableTests: XCTestCase {
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+class AnyEncodableTests: XCTestCase, @unchecked Sendable {
 
     struct SomeEncodable: Encodable {
         var string: String

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Conforming to `ParseHookTriggerRequestable` allows you to create types that
@@ -16,8 +19,8 @@ import Foundation
  exposed to the public.
  */
 public protocol ParseHookTriggerRequestable: ParseHookRequestable {
-    /// The name of the Parse Hook Trigger.
-    var triggerName: String? { get }
+	/// The type of Parse Hook Trigger.
+	var trigger: ParseHookTriggerType? { get }
     /// The number of clients connected.
     var clients: Int? { get }
 }

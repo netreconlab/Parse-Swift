@@ -19,8 +19,19 @@
 // ===----------------------------------------------------------------------===//
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
+// This rule does not allow types with underscores in their names.
 // swiftlint:disable type_name
+// swiftlint:disable colon
+// swiftlint:disable force_cast
+// swiftlint:disable line_length
+// swiftlint:disable return_arrow_whitespace
+// swiftlint:disable file_length
+// swiftlint:disable redundant_discardable_let
+// swiftlint:disable large_tuple
 
 /// A marker protocol used to determine whether a value is a `String`-keyed `Dictionary`
 /// containing `Encodable` values (in which case it should be exempt from key conversion strategies).
@@ -36,190 +47,217 @@ private protocol _JSONStringDictionaryEncodableMarker { }
 #endif
 extension Dictionary: _JSONStringDictionaryEncodableMarker where Key == String, Value: Encodable { }
 
-// This rule does not allow types with underscores in their names.
-// swiftlint:disable type_name
-// swiftlint:disable colon
-// swiftlint:disable force_cast
-// swiftlint:disable line_length
-// swiftlint:disable return_arrow_whitespace
-// swiftlint:disable file_length
-// swiftlint:disable redundant_discardable_let
-// swiftlint:disable cyclomatic_complexity
-
 // MARK: ParseEncoder
 /** An object that encodes Parse instances of a data type as JSON objects.
  - note: `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
  `ParseEncoder` facilitates the encoding of `ParseEncodable` values into JSON.
- All Credit to Apple, this is a custom encoder with capability of skipping keys at runtime.
- ParseEncoder matches the features of the [Swift 5.4 JSONEncoder ](https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift).
- Update commits as needed for improvement.
+ All Credit to Apple for the baseline encoder. The `ParseEncoder` is a custom encoder
+ with capability of skipping keys at runtime and encoding objects into a digestable format
+ for a [parse-server](https://github.com/parse-community/parse-server).
+ `ParseEncoder` matches the features of the [Swift 5.4 JSONEncoder ](https://github.com/apple/swift/blob/main/stdlib/public/Darwin/Foundation/JSONEncoder.swift).
+ Update comments as needed for improvement.
  */
 public struct ParseEncoder: Sendable {
-    let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy?
-    let outputFormatting: JSONEncoder.OutputFormatting?
 
-    /// Keys to skip during encoding.
-    public enum SkipKeys {
-        /// Skip keys for `ParseObject`'s.
-        case object
-        /// Skip keys for `ParseCloud` functions or jobs.
-        case cloud
-        /// Do not skip any keys.
-        case none
-        /// Skip keys for `ParseObject`'s when using custom `objectId`'s.
-        case customObjectId
-        /// Specify a custom set of keys to skip.
-        case custom(Set<String>)
+	let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy
+	let outputFormatting: JSONEncoder.OutputFormatting
 
-        func keys() -> Set<String> {
-            let defaultObjectKeys = Set(
-                [
-                    "objectId",
-                    "createdAt",
-                    "updatedAt",
-                    "emailVerified",
-                    "score",
-                    "originalData"
-                ]
-            )
+	/// Keys to skip during encoding.
+	public enum SkipKeys {
+		/// Skip keys for `ParseObject`'s.
+		case object
+		/// Skip keys for `ParseCloud` functions or jobs.
+		case cloud
+		/// Do not skip any keys.
+		case none
+		/// Skip keys for `ParseObject`'s when using custom `objectId`'s.
+		case customObjectId
+		/// Specify a custom set of keys to skip.
+		case custom(Set<String>)
 
-            switch self {
+		func keys() -> Set<String> {
+			let defaultObjectKeys = Set(
+				[
+					"objectId",
+					"createdAt",
+					"updatedAt",
+					"emailVerified",
+					"score",
+					"originalData"
+				]
+			)
 
-            case .object:
-                return defaultObjectKeys
-            case .customObjectId:
-                var mutableKeys = defaultObjectKeys
-                _ = mutableKeys.remove("objectId")
-                return mutableKeys
-            case .cloud:
-                return Set(["functionJobName"])
-            case .none:
-                return .init()
-            case .custom(let keys):
-                return keys
-            }
-        }
-    }
+			switch self {
 
-    init(
-        dateEncodingStrategy: JSONEncoder.DateEncodingStrategy? = nil,
-        outputFormatting: JSONEncoder.OutputFormatting? = .sortedKeys
-    ) {
-        self.dateEncodingStrategy = dateEncodingStrategy
-        self.outputFormatting = outputFormatting
-    }
+			case .object:
+				return defaultObjectKeys
+			case .customObjectId:
+				var mutableKeys = defaultObjectKeys
+				_ = mutableKeys.remove("objectId")
+				return mutableKeys
+			case .cloud:
+				return Set(["functionJobName"])
+			case .none:
+				return .init()
+			case .custom(let keys):
+				return keys
+			}
+		}
+	}
 
-    func encode(_ value: Encodable,
-                acl: ParseACL? = nil,
-                batching: Bool = false,
-                objectsSavedBeforeThisOne: [String: PointerType]? = nil,
-                filesSavedBeforeThisOne: [String: ParseFile]? = nil) throws -> Data {
-        var keysToSkip = SkipKeys.none.keys()
-        if batching {
-            keysToSkip = SkipKeys.object.keys()
-        }
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: keysToSkip)
-        if let dateEncodingStrategy = dateEncodingStrategy {
-            encoder.dateEncodingStrategy = dateEncodingStrategy
-        }
-        if let outputFormatting = outputFormatting {
-            encoder.outputFormatting = outputFormatting
-        }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        batching: batching,
-                                        collectChildren: false,
-                                        uniquePointer: nil,
-                                        objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
-                                        filesSavedBeforeThisOne: filesSavedBeforeThisOne).encoded
-    }
+	/// Create an instance of ParseEncoder.
+	public init() {
+		self.dateEncodingStrategy = ParseCoding.parseDateEncodingStrategy
+		self.outputFormatting = .sortedKeys
+	}
 
-    /**
-     Encodes an instance of the indicated `ParseEncodable`.
-     - parameter value: The `ParseEncodable` instance to encode.
-     - parameter skipKeys: The set of keys to skip during encoding.
-     */
-    public func encode<T: ParseEncodable>(_ value: T,
-                                          acl: ParseACL? = nil,
-                                          skipKeys: SkipKeys) throws -> Data {
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: skipKeys.keys())
-        if let dateEncodingStrategy = dateEncodingStrategy {
-            encoder.dateEncodingStrategy = dateEncodingStrategy
-        }
-        if let outputFormatting = outputFormatting {
-            encoder.outputFormatting = outputFormatting
-        }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        collectChildren: false,
-                                        uniquePointer: nil,
-                                        objectsSavedBeforeThisOne: nil,
-                                        filesSavedBeforeThisOne: nil).encoded
-    }
+	init(
+		dateEncodingStrategy: JSONEncoder.DateEncodingStrategy,
+		outputFormatting: JSONEncoder.OutputFormatting
+	) {
+		self.dateEncodingStrategy = dateEncodingStrategy
+		self.outputFormatting = outputFormatting
+	}
 
-    // swiftlint:disable large_tuple
-    internal func encode<T: ParseObject>(_ value: T,
-                                         acl: ParseACL? = nil,
-                                         collectChildren: Bool,
-                                         objectsSavedBeforeThisOne: [String: PointerType]?,
-                                         filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data,
-                                                                                                   unique: PointerType?,
-                                                                                                   unsavedChildren: [Encodable]) {
-        let keysToSkip: Set<String>!
-        if !Parse.configuration.isRequiringCustomObjectIds {
-            keysToSkip = SkipKeys.object.keys()
-        } else {
-            keysToSkip = SkipKeys.customObjectId.keys()
-        }
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: keysToSkip)
-        if let dateEncodingStrategy = dateEncodingStrategy {
-            encoder.dateEncodingStrategy = dateEncodingStrategy
-        }
-        if let outputFormatting = outputFormatting {
-            encoder.outputFormatting = outputFormatting
-        }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        collectChildren: collectChildren,
-                                        uniquePointer: try? value.toPointer(),
-                                        objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
-                                        filesSavedBeforeThisOne: filesSavedBeforeThisOne)
-    }
+	func encode(
+		_ value: Encodable,
+		acl: ParseACL? = nil,
+		batching: Bool = false,
+		objectsSavedBeforeThisOne: [String: PointerType]? = nil,
+		filesSavedBeforeThisOne: [String: ParseFile]? = nil
+	) throws -> Data {
+		var keysToSkip = SkipKeys.none.keys()
+		if batching {
+			keysToSkip = SkipKeys.object.keys()
+		}
+		let encoder = _ParseEncoder(
+			codingPath: [],
+			dictionary: NSMutableDictionary(),
+			skippingKeys: keysToSkip,
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		let encodedObject = try encoder.encodeObject(
+			value,
+			acl: acl,
+			batching: batching,
+			collectChildren: false,
+			uniquePointer: nil,
+			objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
+			filesSavedBeforeThisOne: filesSavedBeforeThisOne
+		).encoded
+		return encodedObject
+	}
 
-    internal func encode(_ value: ParseEncodable,
-                         acl: ParseACL? = nil,
-                         batching: Bool,
-                         collectChildren: Bool,
-                         objectsSavedBeforeThisOne: [String: PointerType]?,
-                         filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
-        let keysToSkip: Set<String>!
-        if !Parse.configuration.isRequiringCustomObjectIds {
-            keysToSkip = SkipKeys.object.keys()
-        } else {
-            keysToSkip = SkipKeys.customObjectId.keys()
-        }
-        let encoder = _ParseEncoder(codingPath: [], dictionary: NSMutableDictionary(), skippingKeys: keysToSkip)
-        if let dateEncodingStrategy = dateEncodingStrategy {
-            encoder.dateEncodingStrategy = dateEncodingStrategy
-        }
-        if let outputFormatting = outputFormatting {
-            encoder.outputFormatting = outputFormatting
-        }
-        return try encoder.encodeObject(value,
-                                        acl: acl,
-                                        batching: batching,
-                                        collectChildren: collectChildren,
-                                        uniquePointer: nil,
-                                        objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
-                                        filesSavedBeforeThisOne: filesSavedBeforeThisOne)
-    }
+	/**
+	 Encodes an instance of the indicated `ParseEncodable`.
+	 - parameter value: The `ParseEncodable` instance to encode.
+	 - parameter acl: The `ParseACL` to add to the value if it is an `ParseObject`. Defaults to `nil`.
+	 - parameter skipKeys: The set of keys to skip during encoding.
+	 */
+	public func encode<T: ParseEncodable>(
+		_ value: T,
+		acl: ParseACL? = nil,
+		skipKeys: SkipKeys
+	) throws -> Data {
+		let encoder = _ParseEncoder(
+			codingPath: [],
+			dictionary: NSMutableDictionary(),
+			skippingKeys: skipKeys.keys(),
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		let encodedData = try encoder.encodeObject(
+			value,
+			acl: acl,
+			collectChildren: false,
+			uniquePointer: nil,
+			objectsSavedBeforeThisOne: nil,
+			filesSavedBeforeThisOne: nil
+		).encoded
+
+		return encodedData
+	}
+
+	// swiftlint:disable large_tuple
+	func encode<T: ParseObject>(
+		_ value: T,
+		acl: ParseACL? = nil,
+		collectChildren: Bool,
+		objectsSavedBeforeThisOne: [String: PointerType]?,
+		filesSavedBeforeThisOne: [String: ParseFile]?
+	) throws -> (
+		encoded: Data,
+		unique: PointerType?,
+		unsavedChildren: [Encodable]
+	) {
+		let keysToSkip: Set<String>
+		if !Parse.configuration.isRequiringCustomObjectIds {
+			keysToSkip = SkipKeys.object.keys()
+		} else {
+			keysToSkip = SkipKeys.customObjectId.keys()
+		}
+		let encoder = _ParseEncoder(
+			codingPath: [],
+			dictionary: NSMutableDictionary(),
+			skippingKeys: keysToSkip,
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		let encodedObject = try encoder.encodeObject(
+			value,
+			acl: acl,
+			collectChildren: collectChildren,
+			uniquePointer: try? value.toPointer(),
+			objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
+			filesSavedBeforeThisOne: filesSavedBeforeThisOne
+		)
+
+		return encodedObject
+	}
+
+	internal func encode(
+		_ value: ParseEncodable,
+		acl: ParseACL? = nil,
+		batching: Bool,
+		collectChildren: Bool,
+		objectsSavedBeforeThisOne: [String: PointerType]?,
+		filesSavedBeforeThisOne: [String: ParseFile]?
+	) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
+		let keysToSkip: Set<String>!
+		if !Parse.configuration.isRequiringCustomObjectIds {
+			keysToSkip = SkipKeys.object.keys()
+		} else {
+			keysToSkip = SkipKeys.customObjectId.keys()
+		}
+		let encoder = _ParseEncoder(
+			codingPath: [],
+			dictionary: NSMutableDictionary(),
+			skippingKeys: keysToSkip,
+			dateEncodingStrategy: dateEncodingStrategy,
+			outputFormatting: outputFormatting
+		)
+		return try encoder.encodeObject(value,
+										acl: acl,
+										batching: batching,
+										collectChildren: collectChildren,
+										uniquePointer: nil,
+										objectsSavedBeforeThisOne: objectsSavedBeforeThisOne,
+										filesSavedBeforeThisOne: filesSavedBeforeThisOne)
+	}
 }
 
 // MARK: _ParseEncoder
-internal class _ParseEncoder: JSONEncoder, Encoder {
-    var codingPath: [CodingKey]
+internal class _ParseEncoder: Encoder {
     let dictionary: NSMutableDictionary
-    let skippedKeys: Set<String>
+	let skippedKeys: Set<String>
+	let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy
+	let outputFormatting: JSONEncoder.OutputFormatting
+
+	var codingPath: [CodingKey]
+	var dataEncodingStrategy: JSONEncoder.DataEncodingStrategy?
+	var nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy?
+	var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy?
     var uniquePointer: PointerType?
     var newObjects = [Encodable]()
     var collectChildren = false
@@ -230,31 +268,44 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
     var storage: _ParseEncodingStorage
     var ignoreSkipKeys = false
     var acl: ParseACL?
+	var userInfoSendable: [CodingUserInfoKey: Sendable]
+	var userInfo: [CodingUserInfoKey: Any] { self.userInfoSendable }
 
     /// Options set on the top-level encoder to pass down the encoding hierarchy.
     fileprivate struct _Options {
-        let dateEncodingStrategy: DateEncodingStrategy
-        let dataEncodingStrategy: DataEncodingStrategy
-        let nonConformingFloatEncodingStrategy: NonConformingFloatEncodingStrategy
-        let keyEncodingStrategy: KeyEncodingStrategy
-        let userInfo: [CodingUserInfoKey: Any]
+		let dateEncodingStrategy: JSONEncoder.DateEncodingStrategy
+		let dataEncodingStrategy: JSONEncoder.DataEncodingStrategy
+		let nonConformingFloatEncodingStrategy: JSONEncoder.NonConformingFloatEncodingStrategy
+		let keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy
+		let outputFormatting: JSONEncoder.OutputFormatting
     }
 
     /// The options set on the top-level encoder.
     fileprivate var options: _Options {
-        return _Options(dateEncodingStrategy: dateEncodingStrategy,
-                        dataEncodingStrategy: dataEncodingStrategy,
-                        nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy,
-                        keyEncodingStrategy: keyEncodingStrategy,
-                        userInfo: userInfo)
+		return _Options(
+			dateEncodingStrategy: dateEncodingStrategy,
+			dataEncodingStrategy: dataEncodingStrategy ?? .base64,
+			nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy ?? .throw,
+			keyEncodingStrategy: keyEncodingStrategy ?? .useDefaultKeys,
+			outputFormatting: outputFormatting
+		)
     }
 
-    init(codingPath: [CodingKey], dictionary: NSMutableDictionary, skippingKeys: Set<String>) {
+    init(
+		codingPath: [CodingKey],
+		userInfo: [CodingUserInfoKey: Sendable] = [:],
+		dictionary: NSMutableDictionary = NSMutableDictionary(),
+		skippingKeys: Set<String>,
+		dateEncodingStrategy: JSONEncoder.DateEncodingStrategy,
+		outputFormatting: JSONEncoder.OutputFormatting
+	) {
         self.codingPath = codingPath
+		self.userInfoSendable = userInfo
         self.dictionary = dictionary
         self.skippedKeys = skippingKeys
+		self.dateEncodingStrategy = dateEncodingStrategy
+		self.outputFormatting = outputFormatting
         self.storage = _ParseEncodingStorage()
-        super.init()
     }
 
     /// Returns whether a new element can be encoded at this coding path.
@@ -270,45 +321,51 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
         return self.storage.count == self.codingPath.count
     }
 
-    @available(*, unavailable)
-    override func encode<T : Encodable>(_ value: T) throws -> Data {
-        throw ParseError(code: .otherCause,
-                         message: "This method should not be used. Either use the JSONEncoder or if you are encoding a ParseObject use \"encodeObject\"")
-    }
-
-    func encodeObject(_ value: Encodable,
-                      acl: ParseACL? = nil,
-                      batching: Bool = false,
-                      collectChildren: Bool,
-                      uniquePointer: PointerType?,
-                      objectsSavedBeforeThisOne: [String: PointerType]?,
-                      filesSavedBeforeThisOne: [String: ParseFile]?) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
+    func encodeObject( // swiftlint:disable:this function_parameter_count
+		_ value: Encodable,
+		acl: ParseACL?,
+		batching: Bool = false,
+		collectChildren: Bool,
+		uniquePointer: PointerType?,
+		objectsSavedBeforeThisOne: [String: PointerType]?,
+		filesSavedBeforeThisOne: [String: ParseFile]?
+	) throws -> (encoded: Data, unique: PointerType?, unsavedChildren: [Encodable]) {
         self.acl = acl
-        let encoder = _ParseEncoder(codingPath: codingPath, dictionary: dictionary, skippingKeys: skippedKeys)
-        encoder.outputFormatting = outputFormatting
-        encoder.dateEncodingStrategy = dateEncodingStrategy
-        encoder.dataEncodingStrategy = dataEncodingStrategy
-        encoder.nonConformingFloatEncodingStrategy = nonConformingFloatEncodingStrategy
-        encoder.keyEncodingStrategy = keyEncodingStrategy
-        encoder.userInfo = userInfo
-        encoder.collectChildren = collectChildren
-        encoder.batching = batching
-        encoder.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
-        encoder.filesSavedBeforeThisOne = filesSavedBeforeThisOne
-        encoder.uniquePointer = uniquePointer
+		self.collectChildren = collectChildren
+		self.batching = batching
+		self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
+		self.filesSavedBeforeThisOne = filesSavedBeforeThisOne
+		self.uniquePointer = uniquePointer
 
-        guard let topLevel = try encoder.box_(value) else {
-            throw EncodingError.invalidValue(value,
-                                             EncodingError.Context(codingPath: [], debugDescription: "Top-level \(value) did not encode any values."))
+        guard let topLevel = try self.box_(value) else {
+            throw EncodingError.invalidValue(
+				value,
+				EncodingError.Context(
+					codingPath: [],
+					debugDescription: "Top-level \(value) did not encode any values."
+				)
+			)
         }
 
-        let writingOptions = JSONSerialization.WritingOptions(rawValue: self.outputFormatting.rawValue).union(.fragmentsAllowed)
+		let writingOptions = JSONSerialization.WritingOptions(
+			rawValue: self.outputFormatting.rawValue
+		).union(.fragmentsAllowed)
         do {
-            let serialized = try JSONSerialization.data(withJSONObject: topLevel, options: writingOptions)
-            return (serialized, encoder.uniquePointer, encoder.newObjects)
+            let serialized = try JSONSerialization.data(
+				withJSONObject: topLevel,
+				options: writingOptions
+			)
+            return (serialized, self.uniquePointer, self.newObjects)
         } catch {
-            throw EncodingError.invalidValue(value,
-                                             EncodingError.Context(codingPath: [], debugDescription: "Unable to encode the given top-level value to JSON.", underlyingError: error))
+            throw EncodingError.invalidValue(
+				value,
+
+				EncodingError.Context(
+					codingPath: [],
+					debugDescription: "Unable to encode the given top-level value to JSON.",
+					underlyingError: error
+				)
+			)
         }
     }
 
@@ -328,7 +385,8 @@ internal class _ParseEncoder: JSONEncoder, Encoder {
         }
 
         let container = _ParseEncoderKeyedEncodingContainer<Key>(
-            referencing: self, codingPath: codingPath,
+			referencing: self,
+			codingPath: codingPath,
             wrapping: topContainer
         )
 
@@ -575,8 +633,11 @@ private struct _ParseEncoderKeyedEncodingContainer<Key: CodingKey>: KeyedEncodin
         self.codingPath.append(key)
         defer { self.codingPath.removeLast() }
 
-        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(referencing: self.encoder, codingPath: self.codingPath,
-                                                                       wrapping: dictionary)
+        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(
+			referencing: self.encoder,
+			codingPath: self.codingPath,
+			wrapping: dictionary
+		)
         return KeyedEncodingContainer(container)
     }
 
@@ -673,7 +734,11 @@ private struct _ParseEncoderUnkeyedEncodingContainer: UnkeyedEncodingContainer {
         let dictionary = NSMutableDictionary()
         self.container.add(dictionary)
 
-        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(referencing: self.encoder, codingPath: self.codingPath, wrapping: dictionary)
+        let container = _ParseEncoderKeyedEncodingContainer<NestedKey>(
+			referencing: self.encoder,
+			codingPath: self.codingPath,
+			wrapping: dictionary
+		)
         return KeyedEncodingContainer(container)
     }
 
@@ -798,9 +863,11 @@ extension _ParseEncoder {
 
     func box(_ float: Float) throws -> NSObject {
         guard !float.isInfinite && !float.isNaN else {
-            guard case let .convertToString(positiveInfinity: posInfString,
-                                            negativeInfinity: negInfString,
-                                            nan: nanString) = self.options.nonConformingFloatEncodingStrategy else {
+            guard case let .convertToString(
+				positiveInfinity: posInfString,
+				negativeInfinity: negInfString,
+				nan: nanString
+			) = self.options.nonConformingFloatEncodingStrategy else {
                 throw EncodingError._invalidFloatingPointValue(float, at: codingPath)
             }
 
@@ -851,14 +918,7 @@ extension _ParseEncoder {
             return NSNumber(value: 1000.0 * date.timeIntervalSince1970)
 
         case .iso8601:
-            if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                return NSString(string: _iso8601Formatter.string(from: date))
-            } else {
-                fatalError("ISO8601DateFormatter is unavailable on this platform.")
-            }
-
-        case .formatted(let formatter):
-            return NSString(string: formatter.string(from: date))
+			return NSString(string: _iso8601Formatter.string(from: date))
 
         case .custom(let closure):
             let depth = self.storage.count
@@ -880,7 +940,7 @@ extension _ParseEncoder {
 
             // We can pop because the closure encoded something.
             return self.storage.popContainer()
-        @unknown default:
+        default:
             fatalError("Unhandled")
         }
     }
@@ -1022,7 +1082,7 @@ extension _ParseEncoder {
 // swiftlint:disable line_length
 /// __JSONReferencingEncoder is a special subclass of __JSONEncoder which has its own storage, but references the contents of a different encoder.
 /// It's used in superEncoder(), which returns a new encoder for encoding a superclass -- the lifetime of the encoder should not escape the scope it is created in, but it does not necessarily know when it is done being used (to write to the original container).
-private class _ParseReferencingEncoder: _ParseEncoder {
+private class _ParseReferencingEncoder: _ParseEncoder, @unchecked Sendable {
     // MARK: Reference types.
 
     /// The type of container we're referencing.
@@ -1048,21 +1108,45 @@ private class _ParseReferencingEncoder: _ParseEncoder {
     init(referencing encoder: _ParseEncoder, at index: Int, wrapping array: NSMutableArray, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [String: ParseFile]?) {
         self.encoder = encoder
         self.reference = .array(array, index)
-        super.init(codingPath: encoder.codingPath, dictionary: NSMutableDictionary(), skippingKeys: skippingKeys)
+        super.init(
+			codingPath: encoder.codingPath,
+			userInfo: encoder.userInfoSendable,
+			dictionary: NSMutableDictionary(),
+			skippingKeys: skippingKeys,
+			dateEncodingStrategy: encoder.dateEncodingStrategy,
+			outputFormatting: encoder.outputFormatting
+		)
         self.collectChildren = collectChildren
         self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
         self.filesSavedBeforeThisOne = filesSavedBeforeThisOne
+		self.acl = encoder.acl
         self.codingPath.append(_JSONKey(index: index))
     }
 
     /// Initializes `self` by referencing the given dictionary container in the given encoder.
-    init(referencing encoder: _ParseEncoder, key: CodingKey, wrapping dictionary: NSMutableDictionary, skippingKeys: Set<String>, collectChildren: Bool, objectsSavedBeforeThisOne: [String: PointerType]?, filesSavedBeforeThisOne: [String: ParseFile]?) {
+    init(
+		referencing encoder: _ParseEncoder,
+		key: CodingKey,
+		wrapping dictionary: NSMutableDictionary,
+		skippingKeys: Set<String>,
+		collectChildren: Bool,
+		objectsSavedBeforeThisOne: [String: PointerType]?,
+		filesSavedBeforeThisOne: [String: ParseFile]?
+	) {
         self.encoder = encoder
         self.reference = .dictionary(dictionary, key.stringValue)
-        super.init(codingPath: encoder.codingPath, dictionary: dictionary, skippingKeys: skippingKeys)
+		super.init(
+			codingPath: encoder.codingPath,
+			userInfo: encoder.userInfoSendable,
+			dictionary: dictionary,
+			skippingKeys: skippingKeys,
+			dateEncodingStrategy: encoder.dateEncodingStrategy,
+			outputFormatting: encoder.outputFormatting
+		)
         self.collectChildren = collectChildren
         self.objectsSavedBeforeThisOne = objectsSavedBeforeThisOne
         self.filesSavedBeforeThisOne = filesSavedBeforeThisOne
+		self.acl = encoder.acl
         self.codingPath.append(key)
     }
 
@@ -1200,8 +1284,7 @@ private struct _JSONKey : CodingKey {
 // ===----------------------------------------------------------------------===//
 // swiftlint:disable:next line_length
 // NOTE: This value is implicitly lazy and _must_ be lazy. We're compiled against the latest SDK (w/ ISO8601DateFormatter), but linked against whichever Foundation the user has. ISO8601DateFormatter might not exist, so we better not hit this code path on an older OS.
-@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-private var _iso8601Formatter: ISO8601DateFormatter = {
+nonisolated(unsafe) private let _iso8601Formatter: ISO8601DateFormatter = {
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions = .withInternetDateTime
     return formatter

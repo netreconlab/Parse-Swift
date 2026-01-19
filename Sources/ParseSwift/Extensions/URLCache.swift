@@ -20,7 +20,7 @@ internal extension URLCache {
         }
         let parseCacheDirectory = "ParseCache"
         let diskURL = cacheURL.appendingPathComponent(parseCacheDirectory, isDirectory: true)
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         return URLCache(memoryCapacity: Parse.configuration.cacheMemoryCapacity,
                         diskCapacity: Parse.configuration.cacheDiskCapacity,
                         directory: diskURL)

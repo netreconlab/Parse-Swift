@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 // MARK: Sending
 struct StandardMessage: LiveQueryable, Codable {
@@ -14,6 +17,7 @@ struct StandardMessage: LiveQueryable, Codable {
     var applicationId: String?
     var clientKey: String?
     var primaryKey: String?
+    var maintenanceKey: String?
     var sessionToken: String?
     var installationId: String?
     var requestId: Int?
@@ -24,6 +28,7 @@ struct StandardMessage: LiveQueryable, Codable {
         case .connect:
             self.applicationId = Parse.configuration.applicationId
             self.primaryKey = Parse.configuration.primaryKey
+            self.maintenanceKey = Parse.configuration.maintenanceKey
             self.clientKey = Parse.configuration.clientKey
             self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
             if additionalProperties {
@@ -33,6 +38,7 @@ struct StandardMessage: LiveQueryable, Codable {
             if additionalProperties {
                 self.applicationId = Parse.configuration.applicationId
                 self.primaryKey = Parse.configuration.primaryKey
+                self.maintenanceKey = Parse.configuration.maintenanceKey
                 self.clientKey = Parse.configuration.clientKey
                 self.sessionToken = await BaseParseUser.currentContainer()?.sessionToken
                 self.installationId = await BaseParseInstallation.currentContainer().installationId
@@ -50,6 +56,7 @@ struct StandardMessage: LiveQueryable, Codable {
         case applicationId
         case clientKey
         case primaryKey = "masterKey"
+        case maintenanceKey
         case sessionToken
         case installationId
         case requestId

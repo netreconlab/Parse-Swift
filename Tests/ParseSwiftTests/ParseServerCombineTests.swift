@@ -13,7 +13,7 @@ import XCTest
 import Combine
 @testable import ParseSwift
 
-class ParseServerCombineTests: XCTestCase {
+class ParseServerCombineTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -30,13 +30,13 @@ class ParseServerCombineTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testCheckOk() {
+    func testHealthOk() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
@@ -55,7 +55,7 @@ class ParseServerCombineTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        ParseServer.checkPublisher()
+        ParseServer.healthPublisher()
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     XCTFail(error.localizedDescription)
@@ -70,7 +70,7 @@ class ParseServerCombineTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCheckError() {
+    func testHealthError() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
         let expectation2 = XCTestExpectation(description: "Received Complete")
@@ -104,7 +104,7 @@ class ParseServerCombineTests: XCTestCase {
         wait(for: [expectation1, expectation2], timeout: 20.0)
     }
 
-    func testCheckInitialized() {
+    func testHealthInitialized() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 
@@ -138,7 +138,7 @@ class ParseServerCombineTests: XCTestCase {
         wait(for: [expectation1], timeout: 20.0)
     }
 
-    func testCheckStarting() {
+    func testHealthStarting() {
         var current = Set<AnyCancellable>()
         let expectation1 = XCTestExpectation(description: "Received Value")
 

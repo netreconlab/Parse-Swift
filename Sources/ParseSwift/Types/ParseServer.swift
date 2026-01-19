@@ -7,12 +7,9 @@
 //
 
 import Foundation
-
-/**
-  `ParseHealth` allows you to check the health of a Parse Server.
- */
-@available(*, deprecated, renamed: "ParseServer")
-public typealias ParseHealth = ParseServer
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
   `ParseServer` allows you to check the health or retrieve general information about a Parse Server.
@@ -20,7 +17,7 @@ public typealias ParseHealth = ParseServer
 public struct ParseServer: ParseTypeable {
 
     /// The health status value of a Parse Server.
-    public enum Status: String, Codable {
+    public enum Status: String, Codable, Sendable {
         /// The server started and is running.
         case ok
         /// The server has been created but the start method has not been called yet.
@@ -32,7 +29,7 @@ public struct ParseServer: ParseTypeable {
     }
 
     /// Any provided information from the Parse Server.
-    public struct Information: Decodable {
+    public struct Information: Decodable, Sendable {
 
         /// The version of the Parse Server.
         public var version: ParseVersion? {
@@ -84,7 +81,7 @@ extension ParseServer {
     static public func health(options: API.Options = [],
                               callbackQueue: DispatchQueue = .main,
                               allowIntermediateResponses: Bool = true,
-                              completion: @escaping (Result<Status, ParseError>) -> Void) {
+                              completion: @escaping @Sendable (Result<Status, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -94,27 +91,6 @@ extension ParseServer {
                          allowIntermediateResponses: allowIntermediateResponses,
                          completion: completion)
         }
-    }
-
-    /**
-     Check the server health *asynchronously* and returns the result of its execution.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter allowIntermediateResponses: If *true*, this method will continue to update `Status`
-     until the server returns `Status.ok`. Otherwise, calling this method will only return `Status.ok`
-     or throw a `ParseError`.
-     - parameter completion: A block that will be called when the health check completes or fails.
-     It should have the following argument signature: `(Result<Status, ParseError>)`.
-    */
-    @available(*, deprecated, renamed: "health")
-    static public func check(options: API.Options = [],
-                             callbackQueue: DispatchQueue = .main,
-                             allowIntermediateResponses: Bool = true,
-                             completion: @escaping (Result<Status, ParseError>) -> Void) {
-        health(options: options,
-               callbackQueue: callbackQueue,
-               allowIntermediateResponses: allowIntermediateResponses,
-               completion: completion)
     }
 
     internal static func healthCommand() -> API.Command<NoBody, Status> {
@@ -141,7 +117,7 @@ extension ParseServer {
     */
     static public func information(options: API.Options = [],
                                    callbackQueue: DispatchQueue = .main,
-                                   completion: @escaping (Result<Information, ParseError>) -> Void) {
+                                   completion: @escaping @Sendable (Result<Information, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)

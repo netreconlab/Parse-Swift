@@ -6,11 +6,15 @@
 //  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseCloudableTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct Cloud: ParseCloudable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
@@ -56,8 +60,8 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -135,14 +139,11 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testFunction() async throws {
         let response = AnyResultResponse<String?>(result: nil)
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
+
         do {
             let cloud = Cloud(functionJobName: "test")
             let functionResponse = try await cloud.runFunction()
@@ -155,16 +156,12 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testFunction2() async throws {
         var result = ["hello": "world"]
         let response = AnyResultResponse(result: result)
+		let encoded = try ParseCoding.jsonEncoder().encode(response)
+		let encodedResult = try ParseCoding.jsonEncoder().encode(result)
+		result = try ParseCoding.jsonDecoder().decode([String: String].self, from: encodedResult)
 
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                let encodedResult = try ParseCoding.jsonEncoder().encode(result)
-                result = try ParseCoding.jsonDecoder().decode([String: String].self, from: encodedResult)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud3(functionJobName: "test")
@@ -221,16 +218,12 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testFunctionMainQueue() {
+    func testFunctionMainQueue() async throws {
         let response = AnyResultResponse(result: ["hello": "world"])
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         self.functionAsync(serverResponse: ["hello": "world"], callbackQueue: .main)
@@ -295,13 +288,9 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testJob() async throws {
         let response = AnyResultResponse<String?>(result: nil)
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud(functionJobName: "test")
@@ -315,13 +304,9 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
     func testJob2() async throws {
         let response = AnyResultResponse(result: ["hello": "world"])
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             let cloud = Cloud3(functionJobName: "test")
@@ -403,16 +388,12 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         wait(for: [expectation1], timeout: 10.0)
     }
 
-    func testJobMainQueue() {
+    func testJobMainQueue() async throws {
         let response = AnyResultResponse(result: ["hello": "world"])
 
+        let encoded = try ParseCoding.jsonEncoder().encode(response)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(response)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         self.jobAsync(serverResponse: ["hello": "world"], callbackQueue: .main)
@@ -453,3 +434,4 @@ class ParseCloudableTests: XCTestCase { // swiftlint:disable:this type_body_leng
         self.jobAsyncError(parseError: parseError, callbackQueue: .main)
     }
 } // swiftlint:disable:this file_length
+#endif

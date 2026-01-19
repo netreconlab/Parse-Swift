@@ -6,6 +6,10 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -13,7 +17,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseAnalyticsAsyncTests: XCTestCase {
+class ParseAnalyticsAsyncTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -30,8 +34,8 @@ class ParseAnalyticsAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -103,6 +107,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
         }
     }
 
+	#if !os(Windows) && !os(WASI)
     @MainActor
     func testTrackAppOpenedError() async throws {
         let serverResponse = ParseError(code: .internalServer, message: "none")
@@ -130,6 +135,7 @@ class ParseAnalyticsAsyncTests: XCTestCase {
             XCTAssertEqual(error.message, serverResponse.message)
         }
     }
+	#endif
 
     @MainActor
     func testTrackEvent() async throws {
@@ -222,3 +228,4 @@ class ParseAnalyticsAsyncTests: XCTestCase {
         }
     }
 }
+#endif

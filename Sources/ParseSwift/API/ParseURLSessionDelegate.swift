@@ -11,20 +11,23 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class ParseURLSessionDelegate: NSObject {
+class ParseURLSessionDelegate: NSObject, @unchecked Sendable {
+	private let lock = NSLock()
     var callbackQueue: DispatchQueue
-    var authentication: ((URLAuthenticationChallenge,
+    var authentication: (@Sendable (URLAuthenticationChallenge,
                           (URLSession.AuthChallengeDisposition,
                            URLCredential?) -> Void) -> Void)?
     var streamDelegates = [URLSessionTask: InputStream]()
 
-    actor SessionDelegate: Sendable {
-        var downloadDelegates = [URLSessionDownloadTask: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)]()
-        var uploadDelegates = [URLSessionTask: ((URLSessionTask, Int64, Int64, Int64) -> Void)]()
+    actor SessionDelegate {
+        var downloadDelegates = [
+			URLSessionDownloadTask: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)
+		]()
+        var uploadDelegates = [URLSessionTask: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)]()
         var taskCallbackQueues = [URLSessionTask: DispatchQueue]()
 
         func updateDownload(_ task: URLSessionDownloadTask,
-                            callback: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?) {
+                            callback: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)?) {
             downloadDelegates[task] = callback
         }
 
@@ -34,7 +37,7 @@ class ParseURLSessionDelegate: NSObject {
         }
 
         func updateUpload(_ task: URLSessionTask,
-                          callback: ((URLSessionTask, Int64, Int64, Int64) -> Void)?) {
+                          callback: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)?) {
             uploadDelegates[task] = callback
         }
 
@@ -56,7 +59,7 @@ class ParseURLSessionDelegate: NSObject {
     var delegates = SessionDelegate()
 
     init (callbackQueue: DispatchQueue,
-          authentication: ((URLAuthenticationChallenge,
+          authentication: (@Sendable (URLAuthenticationChallenge,
                             (URLSession.AuthChallengeDisposition,
                              URLCredential?) -> Void) -> Void)?) {
         self.callbackQueue = callbackQueue
@@ -68,7 +71,7 @@ class ParseURLSessionDelegate: NSObject {
 extension ParseURLSessionDelegate: URLSessionDelegate {
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                    completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition,
                                                   URLCredential?) -> Void) {
         if let authentication = authentication {
             callbackQueue.async {
@@ -99,17 +102,22 @@ extension ParseURLSessionDelegate: URLSessionDataDelegate {
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     needNewBodyStream completionHandler: @escaping (InputStream?) -> Void) {
+		lock.lock()
+		defer { lock.unlock() }
         if let stream = streamDelegates[task] {
             completionHandler(stream)
         }
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+		lock.lock()
+		defer { lock.unlock() }
         streamDelegates.removeValue(forKey: task)
-        Task {
-            await delegates.removeUpload(task)
+		Task { [weak self] in
+			guard let self else { return }
+			await self.delegates.removeUpload(task)
             if let downloadTask = task as? URLSessionDownloadTask {
-                await delegates.removeDownload(downloadTask)
+				await self.delegates.removeDownload(downloadTask)
             }
         }
     }

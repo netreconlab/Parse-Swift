@@ -6,6 +6,10 @@
 //  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -15,7 +19,7 @@ import XCTest
 
 // swiftlint:disable function_body_length
 
-class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseInstallationTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
 
     struct User: ParseUser {
 
@@ -159,8 +163,8 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -169,13 +173,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     func login() async throws {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
             _ = try await User.login(username: loginUserName, password: loginPassword)
@@ -289,7 +289,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertNotEqual(originalInstallation.deviceToken, current.customKey)
     }
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     @MainActor
     func testInstallationImmutableFieldsCannotBeChangedInMemory() async throws {
         let originalInstallation = try await Installation.current()
@@ -336,7 +336,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         mutated.customKey = customField
         await Installation.setCurrent(mutated)
         guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have pulled from Keychain")
             return
         }
@@ -372,7 +372,7 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         await Installation.setCurrent(mutated)
 
         guard let keychainInstallation: CurrentInstallationContainer<Installation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
             XCTFail("Should have unwrapped")
             return
         }
@@ -483,6 +483,93 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(merged, original)
     }
 
+	@MainActor
+	func testMergeableRetainsAutomaticallyComputedProperties() async throws {
+		var original = try await Installation.current()
+		original.objectId = "yolo"
+		original.createdAt = Date()
+		original.updatedAt = Date()
+		original.badge = 10
+		original.deviceToken = "12345"
+		original.channels = ["halo"]
+		original.customKey = "newKey"
+		var acl = ParseACL()
+		acl.publicRead = true
+		original.ACL = acl
+
+		// These properties should not be nil before merge
+		XCTAssertNotNil(original.customKey)
+		XCTAssertNotNil(original.deviceType)
+		XCTAssertNotNil(original.deviceToken)
+		XCTAssertNotNil(original.channels)
+		XCTAssertNotNil(original.installationId)
+		XCTAssertNotNil(original.ACL)
+		XCTAssertNotNil(original.updatedAt)
+
+		let mergeable = original.mergeable
+
+		// These should always remain in the merge
+		XCTAssertEqual(original.badge, mergeable.badge)
+		XCTAssertEqual(original.timeZone, mergeable.timeZone)
+		XCTAssertEqual(original.appName, mergeable.appName)
+		XCTAssertEqual(original.appVersion, mergeable.appVersion)
+		XCTAssertEqual(original.appIdentifier, mergeable.appIdentifier)
+		XCTAssertEqual(original.parseVersion, mergeable.parseVersion)
+		XCTAssertEqual(original.localeIdentifier, mergeable.localeIdentifier)
+		XCTAssertEqual(original.createdAt, mergeable.createdAt)
+
+		// All other properties should be nil
+		XCTAssertNil(mergeable.customKey)
+		XCTAssertNil(mergeable.deviceType)
+		XCTAssertNil(mergeable.deviceToken)
+		XCTAssertNil(mergeable.channels)
+		XCTAssertNil(mergeable.installationId)
+		XCTAssertNil(mergeable.ACL)
+		XCTAssertNil(mergeable.updatedAt)
+	}
+
+	@MainActor
+	func testMergeableRetainsAllPropertiesWhenNotSaved() async throws {
+		var original = try await Installation.current()
+		original.badge = 10
+		original.deviceToken = "12345"
+		original.channels = ["halo"]
+		original.customKey = "newKey"
+		var acl = ParseACL()
+		acl.publicRead = true
+		original.ACL = acl
+
+		XCTAssertNil(original.objectId)
+		XCTAssertNil(original.createdAt)
+		XCTAssertNil(original.updatedAt)
+
+		// These properties should not be nil before merge
+		XCTAssertNotNil(original.customKey)
+		XCTAssertNotNil(original.deviceType)
+		XCTAssertNotNil(original.deviceToken)
+		XCTAssertNotNil(original.channels)
+		XCTAssertNotNil(original.installationId)
+		XCTAssertNotNil(original.ACL)
+
+		let mergeable = original.mergeable
+
+		XCTAssertEqual(original.badge, mergeable.badge)
+		XCTAssertEqual(original.timeZone, mergeable.timeZone)
+		XCTAssertEqual(original.appName, mergeable.appName)
+		XCTAssertEqual(original.appVersion, mergeable.appVersion)
+		XCTAssertEqual(original.appIdentifier, mergeable.appIdentifier)
+		XCTAssertEqual(original.parseVersion, mergeable.parseVersion)
+		XCTAssertEqual(original.localeIdentifier, mergeable.localeIdentifier)
+		XCTAssertEqual(original.customKey, mergeable.customKey)
+		XCTAssertEqual(original.deviceType, mergeable.deviceType)
+		XCTAssertEqual(original.deviceToken, mergeable.deviceToken)
+		XCTAssertEqual(original.channels, mergeable.channels)
+		XCTAssertEqual(original.installationId, mergeable.installationId)
+		XCTAssertEqual(original.ACL, mergeable.ACL)
+		XCTAssertEqual(original.createdAt, mergeable.createdAt)
+		XCTAssertEqual(original.updatedAt, mergeable.updatedAt)
+	}
+
     @MainActor
     func testMergeDifferentObjectId() async throws {
         var installation = Installation()
@@ -569,13 +656,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         serverResponse.customKey = "newValue"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await installation.fetch()
@@ -602,13 +685,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let fetched = try await installation.save()
@@ -774,15 +853,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.save()
@@ -805,15 +880,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.objectId = "yolo"
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.create()
@@ -836,15 +907,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.createdAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.replace()
@@ -867,15 +934,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.replace()
@@ -897,15 +960,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         var serverResponse = installation
         serverResponse.updatedAt = Date()
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(Installation.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         let saved = try await installation.update()
@@ -927,15 +986,11 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = Date()
         serverResponse.customKey = "newValue"
 
+		let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		serverResponse = try serverResponse.getDecoder().decode(InstallationDefaultMerge.self, from: encoded)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                // Get dates in correct format from ParseDecoding strategy
-                serverResponse = try serverResponse.getDecoder().decode(InstallationDefaultMerge.self, from: encoded)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         installation = installation.set(\.customKey, to: "newValue")
@@ -1101,13 +1156,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         serverResponse.updatedAt = installation.updatedAt?.addingTimeInterval(+300)
         serverResponse.customKey = "newValue"
 
+        let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try serverResponse.getEncoder().encode(serverResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         _ = try await installation.delete()
@@ -1130,13 +1181,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
 
         let serverResponse = ParseError(code: .objectNotFound, message: "not found")
 
+        let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(serverResponse)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
 
         do {
@@ -1208,10 +1255,10 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
                 // Should be updated in memory
                 XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
+                #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 guard let keychainUpdatedCurrentDate = keychainInstallation?.currentInstallation?.updatedAt else {
                     XCTFail("Should get object from Keychain")
                     return
@@ -1274,10 +1321,10 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
                 // Should be updated in memory
                 XCTAssertEqual(updatedCurrentDate, originalUpdatedAt)
 
-                #if !os(Linux) && !os(Android) && !os(Windows)
+                #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
                 // Should be updated in Keychain
                 let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-                    = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 guard let keychainUpdatedCurrentDate = keychainInstallation?.currentInstallation?.updatedAt else {
                     XCTFail("Should get object from Keychain")
                     return
@@ -1574,10 +1621,10 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(current.channels, installationOnServer.channels)
         XCTAssertEqual(current.deviceToken, installationOnServer.deviceToken)
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         // Should be updated in Keychain
         let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>?
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.installationId, "wowsers")
         XCTAssertEqual(keychainInstallation?.currentInstallation?.channels, installationOnServer.channels)
         XCTAssertEqual(keychainInstallation?.currentInstallation?.deviceToken, installationOnServer.deviceToken)
@@ -1604,8 +1651,8 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
     @MainActor
     func testBecomeMissingObjectId() async throws {
         try await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         await Installation.setCurrent(nil)
 
@@ -1712,7 +1759,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertThrowsError(try installation2.fetchCommand(include: nil))
     }
 
-#if compiler(>=5.8.0) || (compiler(<5.8.0) && !os(iOS) && !os(tvOS))
     func testSaveCurrentAsyncMainQueue() async throws {
         var installation = try await Installation.current()
         installation.objectId = testInstallationObjectId
@@ -1803,9 +1849,9 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(updatedCurrentDate, serverUpdatedAt)
 
         // Should be updated in Keychain
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         guard let keychainInstallation: CurrentInstallationContainer<BaseParseInstallation>
-            = try await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
+            = try KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation),
             let keychainUpdatedCurrentDate = keychainInstallation.currentInstallation?.updatedAt else {
                 XCTFail("Should get object from Keychain")
             return
@@ -1813,7 +1859,6 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         XCTAssertEqual(keychainUpdatedCurrentDate, serverUpdatedAt)
         #endif
     }
-#endif
 
     @MainActor
     func testDeleteCommand() async throws {
@@ -1848,3 +1893,4 @@ class ParseInstallationTests: XCTestCase { // swiftlint:disable:this type_body_l
         try await installation.delete(options: [.usePrimaryKey])
     }
 }
+#endif

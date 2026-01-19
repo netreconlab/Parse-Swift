@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension ParseCloudable {
 
@@ -21,7 +24,7 @@ public extension ParseCloudable {
     func runFunction(options: API.Options = []) async throws -> ReturnType {
         try await withCheckedThrowingContinuation { continuation in
             self.runFunction(options: options,
-                             completion: continuation.resume)
+                             completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -34,7 +37,7 @@ public extension ParseCloudable {
     func startJob(options: API.Options = []) async throws -> ReturnType {
         try await withCheckedThrowingContinuation { continuation in
             self.startJob(options: options,
-                          completion: continuation.resume)
+                          completion: { continuation.resume(with: $0) })
         }
     }
 }

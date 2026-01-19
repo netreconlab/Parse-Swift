@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 public extension ParseSpotify {
@@ -21,18 +24,29 @@ public extension ParseSpotify {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func loginPublisher(id: String,
-                        accessToken: String,
-                        expiresIn: Int? = nil,
-                        refreshToken: String? = nil,
-                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func loginPublisher(
+		id: String,
+		accessToken: String,
+		expiresIn: Int? = nil,
+		refreshToken: String? = nil,
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.login(id: id,
-                       accessToken: accessToken,
-                       expiresIn: expiresIn,
-                       refreshToken: refreshToken,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.login(
+				id: id,
+				accessToken: accessToken,
+				expiresIn: expiresIn,
+				refreshToken: refreshToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -41,12 +55,23 @@ public extension ParseSpotify {
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func loginPublisher(authData: [String: String],
-                        options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func loginPublisher(
+		authData: [String: String],
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.login(authData: authData,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.login(
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
@@ -62,18 +87,29 @@ public extension ParseSpotify {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func linkPublisher(id: String,
-                       accessToken: String,
-                       expiresIn: Int? = nil,
-                       refreshToken: String? = nil,
-                       options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func linkPublisher(
+		id: String,
+		accessToken: String,
+		expiresIn: Int? = nil,
+		refreshToken: String? = nil,
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.link(id: id,
-                      accessToken: accessToken,
-                      expiresIn: expiresIn,
-                      refreshToken: refreshToken,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.link(
+				id: id,
+				accessToken: accessToken,
+				expiresIn: expiresIn,
+				refreshToken: refreshToken,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -83,12 +119,23 @@ public extension ParseSpotify {
      - parameter authData: Dictionary containing key/values.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
-    func linkPublisher(authData: [String: String],
-                       options: API.Options = []) -> Future<AuthenticatedUser, ParseError> {
+    func linkPublisher(
+		authData: [String: String],
+		options: API.Options = []
+	) -> Future<AuthenticatedUser, ParseError> {
         Future { promise in
-            self.link(authData: authData,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.link(
+				authData: authData,
+				options: options
+			) { result in
+				switch result {
+				case .success(let user):
+					promise(.success(user))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

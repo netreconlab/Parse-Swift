@@ -5,16 +5,29 @@
 //  Created by Corey Baker on 12/31/20.
 //  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
-final class LiveQuerySocket: NSObject {
+final class LiveQuerySocket: NSObject, @unchecked Sendable {
     private var session: URLSession!
-    var tasks = SocketTasks()
-    weak var authenticationDelegate: LiveQuerySocketDelegate?
+	private let lock = NSLock()
+    let tasks = SocketTasks()
+	private weak var _authenticationDelegate: LiveQuerySocketDelegate?
+	var authenticationDelegate: LiveQuerySocketDelegate? {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _authenticationDelegate
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_authenticationDelegate = newValue
+		}
+	}
 
     override init() {
         super.init()
@@ -24,7 +37,6 @@ final class LiveQuerySocket: NSObject {
     func createTask(_ url: URL, taskDelegate: LiveQuerySocketDelegate) async -> URLSessionWebSocketTask {
         let task = session.webSocketTask(with: url)
         await tasks.updateDelegates([task: taskDelegate])
-        await receive(task)
         return task
     }
 
@@ -81,40 +93,43 @@ extension LiveQuerySocket {
             return
         }
         await tasks.updateReceivers([task: true])
-        task.receive { result in
-            Task {
-                await self.tasks.removeReceivers([task])
-                let delegates = await self.tasks.getDelegates()
-                switch result {
-                case .success(.string(let message)):
-                    if let data = message.data(using: .utf8) {
-                        Task {
-                            await delegates[task]?.received(data)
-                        }
-                    } else {
-                        let parseError = ParseError(code: .otherCause,
-                                                    message: "Could not encode LiveQuery string as data")
-                        delegates[task]?.receivedError(parseError)
-                    }
-                    await self.receive(task)
-                case .success(.data(let data)):
-                    delegates[task]?.receivedUnsupported(data, socketMessage: nil)
-                    await self.receive(task)
-                case .success(let message):
-                    delegates[task]?.receivedUnsupported(nil, socketMessage: message)
-                    await self.receive(task)
-                case .failure(let error):
-                    delegates[task]?.receivedError(error)
-                }
-            }
-        }
+		let delegates = await self.tasks.getDelegates()
+		do {
+
+			let result = try await task.receive()
+			await self.tasks.removeReceivers([task])
+
+			switch result {
+			case .string(let message):
+				if let data = message.data(using: .utf8) {
+					await delegates[task]?.received(data)
+				} else {
+					let parseError = ParseError(
+						code: .otherCause,
+						message: "Could not encode LiveQuery string as data"
+					)
+					delegates[task]?.receivedError(parseError)
+				}
+				await self.receive(task)
+			case .data(let data):
+				delegates[task]?.receivedUnsupported(data, socketMessage: nil)
+				await self.receive(task)
+			case let message:
+				delegates[task]?.receivedUnsupported(nil, socketMessage: message)
+				await self.receive(task)
+			}
+
+		} catch {
+			await self.tasks.removeReceivers([task])
+			delegates[task]?.receivedError(error)
+		}
     }
 }
 
 // MARK: Ping
 extension LiveQuerySocket {
 
-    func sendPing(_ task: URLSessionWebSocketTask, pongReceiveHandler: @escaping (Error?) -> Void) {
+    func sendPing(_ task: URLSessionWebSocketTask, pongReceiveHandler: @escaping @Sendable (Error?) -> Void) {
         task.sendPing(pongReceiveHandler: pongReceiveHandler)
     }
 }
@@ -149,9 +164,11 @@ extension LiveQuerySocket: URLSessionWebSocketDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession,
-                    didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    func urlSession(
+		_ session: URLSession,
+		didReceive challenge: URLAuthenticationChallenge,
+		completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+	) {
         if let authenticationDelegate = authenticationDelegate {
             authenticationDelegate.received(challenge: challenge, completionHandler: completionHandler)
         } else {

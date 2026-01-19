@@ -15,12 +15,12 @@ typealias RESTBatchCommandType<T> = API.Command<ParseObjectBatchCommand<T>, Pars
 
 typealias ParseObjectBatchCommandNoBody<T> = BatchCommandEncodable<NoBody, NoBody>
 typealias ParseObjectBatchResponseNoBody<NoBody> = [(Result<Void, ParseError>)]
-typealias RESTBatchCommandNoBodyType<T> = API.NonParseBodyCommand<ParseObjectBatchCommandNoBody<T>, ParseObjectBatchResponseNoBody<T>> where T: Encodable
+typealias RESTBatchCommandNoBodyType<T> = API.NonParseBodyCommand<ParseObjectBatchCommandNoBody<T>, ParseObjectBatchResponseNoBody<T>> where T: Encodable & Sendable
 
-typealias ParseObjectBatchCommandEncodablePointer<T> = BatchChildCommand<T, PointerType> where T: Encodable
+typealias ParseObjectBatchCommandEncodablePointer<T> = BatchChildCommand<T, PointerType> where T: Encodable & Sendable
 typealias ParseObjectBatchResponseEncodablePointer<U> = [(Result<PointerType, ParseError>)]
 // swiftlint:disable line_length
-typealias RESTBatchCommandTypeEncodablePointer<T> = API.NonParseBodyCommand<ParseObjectBatchCommandEncodablePointer<T>, ParseObjectBatchResponseEncodablePointer<Encodable>> where T: Encodable
+typealias RESTBatchCommandTypeEncodablePointer<T> = API.NonParseBodyCommand<ParseObjectBatchCommandEncodablePointer<T>, ParseObjectBatchResponseEncodablePointer<Encodable & Sendable>> where T: Encodable & Sendable
  // swiftlint:enable line_length
 
 internal struct BatchCommand<T, U>: ParseEncodable where T: ParseEncodable, U: Sendable {
@@ -28,12 +28,12 @@ internal struct BatchCommand<T, U>: ParseEncodable where T: ParseEncodable, U: S
     var transaction: Bool
 }
 
-internal struct BatchCommandEncodable<T, U>: Encodable where T: Encodable {
+internal struct BatchCommandEncodable<T, U>: Encodable where T: Encodable & Sendable, U: Sendable {
     let requests: [API.NonParseBodyCommand<T, U>]
     var transaction: Bool
 }
 
-internal struct BatchChildCommand<T, U>: Encodable where T: Encodable {
+internal struct BatchChildCommand<T, U>: Encodable & Sendable where T: Encodable & Sendable, U: Sendable {
     let requests: [API.BatchCommand<T, U>]
     var transaction: Bool
 }

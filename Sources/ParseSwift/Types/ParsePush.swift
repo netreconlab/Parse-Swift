@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Send and check the status of push notificaitons.
@@ -173,7 +176,7 @@ extension ParsePush {
     */
     public func send(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<String, ParseError>) -> Void) {
+                     completion: @escaping @Sendable (Result<String, ParseError>) -> Void) {
         if expirationTime != nil &&
             expirationInterval != nil {
             let error =  ParseError(code: .otherCause,
@@ -245,7 +248,7 @@ public extension ParsePush {
     func fetchStatus(_ statusId: String,
                      options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     completion: @escaping (Result<ParsePushStatus<V>, ParseError>) -> Void) {
+                     completion: @escaping @Sendable (Result<ParsePushStatus<V>, ParseError>) -> Void) {
         var options = options
         options.insert(.usePrimaryKey)
         options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))

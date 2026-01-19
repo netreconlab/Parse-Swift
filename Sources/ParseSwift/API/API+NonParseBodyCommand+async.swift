@@ -21,7 +21,7 @@ extension API.NonParseBodyCommand {
                 await self.execute(options: options,
                                    callbackQueue: callbackQueue,
                                    allowIntermediateResponses: allowIntermediateResponses,
-                                   completion: continuation.resume)
+                                   completion: { continuation.resume(with: $0) })
             }
         }
     }

@@ -1,26 +1,47 @@
-// swift-tools-version:5.5.2
+// swift-tools-version:6.0
 
 import PackageDescription
 
+#if swift(>=6.2)
+let sharedSwiftSettings: [SwiftSetting] = [
+	.enableUpcomingFeature("MemberImportVisibility"),
+	.enableUpcomingFeature("InferIsolatedConformances"),
+	.enableUpcomingFeature("ImmutableWeakCaptures"),
+	.enableUpcomingFeature("NonisolatedNonsendingByDefault")
+]
+#else
+let sharedSwiftSettings: [SwiftSetting] = [
+	.enableUpcomingFeature("MemberImportVisibility"),
+	.enableUpcomingFeature("InferIsolatedConformances")
+]
+#endif
+
 let package = Package(
     name: "ParseSwift",
-    platforms: [.iOS(.v13),
-                .macCatalyst(.v13),
-                .macOS(.v10_15),
-                .tvOS(.v13),
-                .watchOS(.v6)],
+    platforms: [
+        .iOS(.v13),
+        .macCatalyst(.v13),
+        .macOS(.v10_15),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
         .library(
             name: "ParseSwift",
-            targets: ["ParseSwift"])
+            targets: ["ParseSwift"]
+        )
     ],
     targets: [
         .target(
             name: "ParseSwift",
-            dependencies: []),
+			dependencies: [],
+			swiftSettings: sharedSwiftSettings
+        ),
         .testTarget(
             name: "ParseSwiftTests",
             dependencies: ["ParseSwift"],
-            exclude: ["Info.plist"])
+            exclude: ["Info.plist"],
+			swiftSettings: sharedSwiftSettings
+        )
     ]
 )

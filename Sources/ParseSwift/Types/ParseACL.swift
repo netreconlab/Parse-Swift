@@ -17,8 +17,7 @@ import Foundation
  **the public** so that, for example, any user could read a particular object but only a 
  particular set of users could write to that object.
 */
-public struct ParseACL: ParseTypeable,
-                        Hashable {
+public struct ParseACL: ParseTypeable {
     private static let publicScope = "*"
     private var acl: [String: [Access: Bool]]?
 
@@ -322,8 +321,8 @@ extension ParseACL {
         try await yieldIfNotInitialized()
         let aclController: DefaultACL!
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        if let controller: DefaultACL = try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        if let controller: DefaultACL = try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.defaultACL) {
             aclController = controller
         } else {
             throw ParseError(code: .otherCause,
@@ -393,8 +392,8 @@ extension ParseACL {
                            useCurrentUser: withAccessForCurrentUser)
         }
 
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #else
         try await ParseStorage.shared.set(aclController, for: ParseStorage.Keys.defaultACL)
         #endif
@@ -411,8 +410,8 @@ extension ParseACL {
 
     internal static func deleteDefaultFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.defaultACL)
         #endif
     }
 

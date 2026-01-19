@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension ParseLinkedIn {
     // MARK: Async/Await
@@ -28,7 +31,7 @@ public extension ParseLinkedIn {
                        accessToken: accessToken,
                        isMobileSDK: isMobileSDK,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -43,7 +46,7 @@ public extension ParseLinkedIn {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -67,7 +70,7 @@ public extension ParseLinkedIn {
                       accessToken: accessToken,
                       isMobileSDK: isMobileSDK,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -83,7 +86,7 @@ public extension ParseLinkedIn {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

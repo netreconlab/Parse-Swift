@@ -254,7 +254,7 @@ extension ParseFile {
      */
     public func delete(options: API.Options,
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Void, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Void, ParseError>) -> Void) {
         Task {
             var options = options
             options.insert(.usePrimaryKey)
@@ -326,8 +326,8 @@ extension ParseFile {
     public func save(options: API.Options = [],
                      stream: InputStream,
                      callbackQueue: DispatchQueue = .main,
-                     progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     completion: @escaping (ParseError?) -> Void) throws {
+                     progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping @Sendable (ParseError?) -> Void) throws {
         try uploadFileCommand()
             .executeStream(options: setDefaultOptions(options),
                            callbackQueue: callbackQueue,
@@ -382,8 +382,8 @@ extension ParseFile {
     */
     public func save(options: API.Options = [],
                      callbackQueue: DispatchQueue = .main,
-                     progress: ((URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
-                     completion: @escaping (Result<Self, ParseError>) -> Void) {
+                     progress: (@Sendable (URLSessionTask, Int64, Int64, Int64) -> Void)? = nil,
+                     completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         let options = setDefaultOptions(options)
         if isDownloadNeeded {
             fetch(options: options) { result in
@@ -481,8 +481,8 @@ extension ParseFile {
     */
     public func fetch(options: API.Options = [],
                       callbackQueue: DispatchQueue = .main,
-                      progress: ((URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
-                      completion: @escaping (Result<Self, ParseError>) -> Void) {
+                      progress: (@Sendable (URLSessionDownloadTask, Int64, Int64, Int64) -> Void)? = nil,
+                      completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         let options = setDefaultOptions(options)
         Task {
             do {

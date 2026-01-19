@@ -5,13 +5,41 @@
 //  Created by Pranjal Satija on 7/19/20.
 //
 
+import Foundation
+
 // MARK: ParseStorage
-actor ParseStorage {
-    static var shared = ParseStorage()
+struct ParseStorage {
+	static var shared: ParseStorage {
+		get {
+			sharedLock.lock()
+			defer { sharedLock.unlock() }
+			return _shared
+		}
+		set {
+			sharedLock.lock()
+			defer { sharedLock.unlock() }
+			_shared = newValue
+		}
+	}
+	nonisolated(unsafe) static var _shared = ParseStorage()
+	private static let sharedLock = NSLock()
 
-    var backingStore: ParsePrimitiveStorable!
+	private let lock = NSLock()
+	private var _backingStore: ParsePrimitiveStorable!
+	var backingStore: ParsePrimitiveStorable! {
+		get {
+			lock.lock()
+			defer { lock.unlock() }
+			return _backingStore
+		}
+		set {
+			lock.lock()
+			defer { lock.unlock() }
+			_backingStore = newValue
+		}
+	}
 
-    func use(_ store: ParsePrimitiveStorable) {
+	mutating func use(_ store: ParsePrimitiveStorable) {
         self.backingStore = store
     }
 
@@ -34,7 +62,7 @@ actor ParseStorage {
         static let currentAccessGroup = "_currentAccessGroup"
     }
 
-    func setBackingStoreToNil() {
+    mutating func setBackingStoreToNil() {
         backingStore = nil
     }
 }
@@ -42,24 +70,23 @@ actor ParseStorage {
 // MARK: Act as a proxy for ParsePrimitiveStorable
 extension ParseStorage {
 
-    func delete(valueFor key: String) async throws {
+    mutating func delete(valueFor key: String) async throws {
         try requireBackingStore()
         return try await backingStore.delete(valueFor: key)
     }
 
-    func deleteAll() async throws {
+	mutating func deleteAll() async throws {
         try requireBackingStore()
         return try await backingStore.deleteAll()
     }
 
-    func get<T>(valueFor key: String) async throws -> T? where T: Decodable {
+    func get<T>(valueFor key: String) async throws -> T? where T: Decodable & Sendable {
         try requireBackingStore()
         return try await backingStore.get(valueFor: key)
     }
 
-    func set<T>(_ object: T, for key: String) async throws where T: Encodable {
+	mutating func set<T>(_ object: T, for key: String) async throws where T: Encodable & Sendable {
         try requireBackingStore()
         return try await backingStore.set(object, for: key)
     }
-
 }

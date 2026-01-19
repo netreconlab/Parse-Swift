@@ -14,7 +14,7 @@ import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable:next type_body_length
-class ParseHookFunctionRequestTests: XCTestCase {
+class ParseHookFunctionRequestTests: XCTestCase, @unchecked Sendable {
 
     struct Parameters: ParseHookParametable {
         var hello = "world"
@@ -71,8 +71,8 @@ class ParseHookFunctionRequestTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -219,6 +219,10 @@ class ParseHookFunctionRequestTests: XCTestCase {
         XCTAssertEqual(requestOptions5, options5)
     }
 
+	// Currently can't takeover URLSession with MockURLProtocol
+	// on Linux, Windows, etc. so disabling networking tests on
+	// those platforms.
+	#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     @MainActor
     func testHydrateUser() async throws {
         let sessionToken = "dog"
@@ -300,4 +304,5 @@ class ParseHookFunctionRequestTests: XCTestCase {
             XCTAssertTrue(error.equalsTo(.otherCause))
         }
     }
+	#endif
 }

@@ -11,9 +11,7 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-// swiftlint:disable type_body_length
-
-class ParseQueryViewModelTests: XCTestCase {
+class ParseQueryViewModelTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -50,7 +48,9 @@ class ParseQueryViewModelTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        try await KeychainStore.shared.deleteAll()
+		#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
+		#endif
         try await ParseStorage.shared.deleteAll()
     }
 
@@ -62,13 +62,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -87,13 +83,9 @@ class ParseQueryViewModelTests: XCTestCase {
     func testFindError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -114,13 +106,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let query = GameScore.query
         let viewModel = Query.viewModel(query)
@@ -144,13 +132,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -169,13 +153,9 @@ class ParseQueryViewModelTests: XCTestCase {
     func testFindAllError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -196,13 +176,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -221,13 +197,9 @@ class ParseQueryViewModelTests: XCTestCase {
     func testFirstError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -248,13 +220,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -269,13 +237,9 @@ class ParseQueryViewModelTests: XCTestCase {
     func testCountError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -296,13 +260,9 @@ class ParseQueryViewModelTests: XCTestCase {
         scoreOnServer.ACL = nil
 
         let results = QueryResponse<GameScore>(results: [scoreOnServer], count: 1)
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query
             .viewModel
@@ -321,13 +281,9 @@ class ParseQueryViewModelTests: XCTestCase {
     func testAggregateError() async throws {
 
         let results = ParseError(code: .otherCause, message: "Custom error")
+        let encoded = try ParseCoding.jsonEncoder().encode(results)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try ParseCoding.jsonEncoder().encode(results)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         let viewModel = GameScore.query.viewModel
         viewModel.results = [GameScore(points: 10)]

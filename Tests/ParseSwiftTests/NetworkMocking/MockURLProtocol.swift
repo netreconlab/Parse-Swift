@@ -11,50 +11,96 @@ import Foundation
 import FoundationNetworking
 #endif
 
-typealias MockURLProtocolRequestTestClosure = (URLRequest) -> Bool
-typealias MockURLResponseContructingClosure = (URLRequest) -> MockURLResponse?
-
-struct MockURLProtocolMock {
+struct MockURLProtocolMock: Sendable {
     var attempts: Int
-    var test: (URLRequest) -> Bool
-    var response: (URLRequest) -> MockURLResponse?
+    var test: @Sendable (URLRequest) -> Bool
+    var response: @Sendable (URLRequest) -> MockURLResponse?
 }
 
-class MockURLProtocol: URLProtocol {
-    var mock: MockURLProtocolMock?
-    static var mocks: [MockURLProtocolMock] = []
-    private var loading: Bool = false
-    var isLoading: Bool {
-        return loading
-    }
+final class MockURLProtocol: URLProtocol {
+	static var mocks: [MockURLProtocolMock] {
+		get {
+			mocksLock.lock()
+			defer { mocksLock.unlock() }
+			return _mocks
+		}
+		set {
+			mocksLock.lock()
+			defer { mocksLock.unlock() }
+			_mocks = newValue
+		}
+	}
+	var mock: MockURLProtocolMock? {
+		get {
+			mockLock.lock()
+			defer { mockLock.unlock() }
+			return _mock
+		}
+		set {
+			mockLock.lock()
+			defer { mockLock.unlock() }
+			_mock = newValue
+		}
+	}
+	private var loading: Bool {
+		get {
+			loadingLock.lock()
+			defer { loadingLock.unlock() }
+			return _loading
+		}
+		set {
+			loadingLock.lock()
+			defer { loadingLock.unlock() }
+			_loading = newValue
+		}
+	}
 
-    class func mockRequests(response: @escaping (URLRequest) -> MockURLResponse?) {
+	nonisolated(unsafe) static var _mocks: [MockURLProtocolMock] = []
+	static private let mocksLock = NSLock()
+	private let mockLock = NSLock()
+	private let loadingLock = NSLock()
+	private var _mock: MockURLProtocolMock?
+	private var _loading: Bool = false
+
+    static func mockRequests(
+		response: @escaping @Sendable (URLRequest) -> MockURLResponse?
+	) {
         mockRequestsPassing(Int.max, test: { _ in return true }, with: response)
     }
 
-    class func mockRequestsPassing(_ test: @escaping (URLRequest) -> Bool,
-                                   with response: @escaping (URLRequest) -> MockURLResponse?) {
+	static func mockRequestsPassing(
+		_ test: @escaping @Sendable (URLRequest) -> Bool,
+		with response: @escaping @Sendable (URLRequest) -> MockURLResponse?
+	) {
         mockRequestsPassing(Int.max, test: test, with: response)
     }
 
-    class func mockRequestsPassing(_ attempts: Int,
-                                   test: @escaping (URLRequest) -> Bool,
-                                   with response: @escaping (URLRequest) -> MockURLResponse?) {
-        let mock = MockURLProtocolMock(attempts: attempts, test: test, response: response)
+	static func mockRequestsPassing(
+		_ attempts: Int,
+		test: @escaping @Sendable (URLRequest) -> Bool,
+		with response: @escaping @Sendable (URLRequest) -> MockURLResponse?
+	) {
+        let mock = MockURLProtocolMock(
+			attempts: attempts,
+			test: test,
+			response: response
+		)
         mocks.append(mock)
         if mocks.count == 1 {
             URLProtocol.registerClass(MockURLProtocol.self)
         }
     }
 
-    class func removeAll() {
+	static func removeAll() {
         if !mocks.isEmpty {
             URLProtocol.unregisterClass(MockURLProtocol.self)
         }
         mocks.removeAll()
     }
 
-    class func firstMockForRequest(_ request: URLRequest) -> MockURLProtocolMock? {
+	static func firstMockForRequest(
+		_ request: URLRequest
+	) -> MockURLProtocolMock? {
         for mock in mocks {
             if (mock.attempts > 0) && mock.test(request) {
                 return mock
@@ -63,25 +109,37 @@ class MockURLProtocol: URLProtocol {
         return nil
     }
 
-    override class func canInit(with request: URLRequest) -> Bool {
-        return MockURLProtocol.firstMockForRequest(request) != nil
+    override static func canInit(
+		with request: URLRequest
+	) -> Bool {
+        MockURLProtocol.firstMockForRequest(request) != nil
     }
 
-    override class func canInit(with task: URLSessionTask) -> Bool {
+    override static func canInit(
+		with task: URLSessionTask
+	) -> Bool {
         guard let originalRequest = task.originalRequest else {
             return false
         }
         return MockURLProtocol.firstMockForRequest(originalRequest) != nil
     }
 
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        return request
+    override static func canonicalRequest(
+		for request: URLRequest
+	) -> URLRequest {
+        request
     }
 
-    override required init(request: URLRequest,
-                           cachedResponse: CachedURLResponse?,
-                           client: URLProtocolClient?) {
-        super.init(request: request, cachedResponse: cachedResponse, client: client)
+    override required init(
+		request: URLRequest,
+		cachedResponse: CachedURLResponse?,
+		client: URLProtocolClient?
+	) {
+        super.init(
+			request: request,
+			cachedResponse: cachedResponse,
+			client: client
+		)
         guard let mock = MockURLProtocol.firstMockForRequest(request) else {
             self.mock = nil
             return
@@ -97,35 +155,35 @@ class MockURLProtocol: URLProtocol {
         }
 
         if let error = response.error {
-            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) {
-
-                if self.loading {
-                    self.client?.urlProtocol(self, didFailWithError: error)
-                }
-
-            }
+			if self.loading {
+				Thread.sleep(forTimeInterval: response.delay)
+				self.client?.urlProtocol(self, didFailWithError: error)
+			}
             return
         }
 
         guard let url = request.url,
-            let urlResponse = HTTPURLResponse(url: url,
-                                              statusCode: response.statusCode,
-                                              httpVersion: "HTTP/2",
-                                              headerFields: response.headerFields) else {
+            let urlResponse = HTTPURLResponse(
+				url: url,
+				statusCode: response.statusCode,
+				httpVersion: "HTTP/2",
+				headerFields: response.headerFields
+			) else {
                 return
             }
-
-        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + response.delay) {
-            if !self.loading {
-                return
-            }
-            self.client?.urlProtocol(self, didReceive: urlResponse, cacheStoragePolicy: .notAllowed)
-            if let data = response.responseData {
-                self.client?.urlProtocol(self, didLoad: data)
-            }
-            self.client?.urlProtocolDidFinishLoading(self)
-        }
-
+		if !self.loading {
+			return
+		}
+		Thread.sleep(forTimeInterval: response.delay)
+		self.client?.urlProtocol(
+			self,
+			didReceive: urlResponse,
+			cacheStoragePolicy: .notAllowed
+		)
+		if let data = response.responseData {
+			self.client?.urlProtocol(self, didLoad: data)
+		}
+		self.client?.urlProtocolDidFinishLoading(self)
     }
 
     override func stopLoading() {

@@ -10,7 +10,7 @@ import Foundation
 
 enum ParseConstants {
     static let sdk = "swift"
-    static let version = "5.10.3"
+    static let version = "6.0.0"
     static let fileManagementDirectory = "parse/"
     static let fileManagementPrivateDocumentsDirectory = "Private Documents/"
     static let fileManagementLibraryDirectory = "Library/"
@@ -34,6 +34,10 @@ enum ParseConstants {
     static let deviceType = "android"
     #elseif os(Windows)
     static let deviceType = "windows"
+	#elseif os(WASI)
+	static let deviceType = "wasi"
+	#else
+	static let deviceType = "unknown"
     #endif
 }
 
@@ -45,28 +49,66 @@ enum Method: String {
  The types of Parse Hook Triggers available.
  */
 public enum ParseHookTriggerType: String, Codable, Sendable {
-    /// Occurs before login of a `ParseUser`.
-    case beforeLogin
-    /// Occurs after login of a `ParseUser`.
-    case afterLogin
-    /// Occurs after logout of a `ParseUser`.
-    case afterLogout
-    /// Occurs before saving a `ParseObject` or `ParseFile`.
-    case beforeSave
-    /// Occurs after saving a `ParseObject` or `ParseFile`.
-    case afterSave
-    /// Occurs before deleting a `ParseObject` or `ParseFile`.
-    case beforeDelete
-    /// Occurs after deleting a `ParseObject` or `ParseFile`.
-    case afterDelete
-    /// Occurs before finding a `ParseObject`.
-    case beforeFind
-    /// Occurs after finding a `ParseObject`.
-    case afterFind
-    /// Occurs before a `ParseLiveQuery` connection is made.
-    case beforeConnect
-    /// Occurs before a `ParseLiveQuery` subscription is made.
-    case beforeSubscribe
-    /// Occurs after a `ParseLiveQuery` event.
-    case afterEvent
+	/// Occurs before login of a `ParseUser`.
+	case beforeLogin
+	/// Occurs after login of a `ParseUser`.
+	case afterLogin
+	/// Occurs after logout of a `ParseUser`.
+	case afterLogout
+	/// Occurs before password is reset on a `ParseUser`.
+	/// - warning: Requires Parse Server 8.5.0+.
+	case beforePasswordResetRequest
+	/// Occurs before saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	case beforeSave
+	/// Occurs after saving a `ParseObject`, `ParseFile`, or `ParseConfig`.
+	case afterSave
+	/// Occurs before deleting a `ParseObject` or `ParseFile`.
+	case beforeDelete
+	/// Occurs after deleting a `ParseObject` or `ParseFile`.
+	case afterDelete
+	/// Occurs before finding a `ParseObject` or `ParseFile`.
+	case beforeFind
+	/// Occurs after finding a `ParseObject` or `ParseFile`.
+	case afterFind
+	/// Occurs before a `ParseLiveQuery` connection is made.
+	case beforeConnect
+	/// Occurs before a `ParseLiveQuery` subscription is made.
+	case beforeSubscribe
+	/// Occurs after a `ParseLiveQuery` event.
+	case afterEvent
+}
+
+/**
+ The objects that Parse Hooks can be triggered on.
+ */
+public enum ParseHookTriggerObject: Sendable {
+    /// The type of `ParseObject` to trigger on.
+    case objectType(any ParseObject.Type)
+    /// An instance of a `ParseObject` to trigger on.
+    case object(any ParseObject)
+    /// Trigger on `ParseFile`'s.
+    case file
+    /// Trigger on `ParseConfig` updates.
+    /// - warning: Requires Parse Server 7.3.0+.
+    case config
+    /// Trigger on `ParseLiveQuery` connections.
+    case liveQueryConnect
+
+    /// The class name of the `ParseObject` to trigger on.
+    public var className: String {
+        switch self {
+
+        case .objectType(let object):
+            return object.className
+        case .object(let object):
+            return object.className
+        case .file:
+            return "@File"
+        case .config:
+            return "@Config"
+        case .liveQueryConnect:
+            return "@Connect"
+
+        }
+    }
 }

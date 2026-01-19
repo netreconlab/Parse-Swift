@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 extension ParseLiveQuery {
@@ -20,6 +23,7 @@ extension ParseLiveQuery {
     */
     public func openPublisher(isUserWantsToConnect: Bool = true) -> Future<Void, Error> {
         Future { promise in
+			nonisolated(unsafe) let promise = promise
             self.open(isUserWantsToConnect: isUserWantsToConnect) { error in
                 guard let error = error else {
                     promise(.success(()))
@@ -37,6 +41,7 @@ extension ParseLiveQuery {
     */
     public func sendPingPublisher() -> Future<Void, Error> {
         Future { promise in
+			nonisolated(unsafe) let promise = promise
             self.sendPing { error in
                 guard let error = error else {
                     promise(.success(()))

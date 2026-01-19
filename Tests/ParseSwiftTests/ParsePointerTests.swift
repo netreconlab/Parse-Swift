@@ -6,13 +6,17 @@
 //  Copyright © 2020 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable type_body_length
 
-class ParsePointerTests: XCTestCase {
+class ParsePointerTests: XCTestCase, @unchecked Sendable {
 
     struct GameScore: ParseObject {
         //: These are required by ParseObject
@@ -52,8 +56,8 @@ class ParsePointerTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -337,7 +341,7 @@ class ParsePointerTests: XCTestCase {
     }
 
     // Thread tests randomly fail on linux
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     func testThreadSafeFetchAsync() throws {
         var score = GameScore(points: 10)
         let objectId = "yarr"
@@ -349,22 +353,24 @@ class ParsePointerTests: XCTestCase {
         scoreOnServer.updatedAt = scoreOnServer.createdAt
         scoreOnServer.ACL = nil
 
-        let encoded: Data!
-        do {
-            encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
-            // Get dates in correct format from ParseDecoding strategy
-            scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
-        } catch {
-            XCTFail("Should have encoded/decoded: Error: \(error)")
-            return
-        }
-
+        let encoded = try scoreOnServer.getEncoder().encode(scoreOnServer, skipKeys: .none)
+		// Get dates in correct format from ParseDecoding strategy
+		scoreOnServer = try scoreOnServer.getDecoder().decode(GameScore.self, from: encoded)
+		let immutableScoreOnServer = scoreOnServer
         MockURLProtocol.mockRequests { _ in
             return MockURLResponse(data: encoded, statusCode: 200)
         }
 
-        DispatchQueue.concurrentPerform(iterations: 1) { _ in
-            self.fetchAsync(score: pointer, scoreOnServer: scoreOnServer, callbackQueue: .global(qos: .background))
+        DispatchQueue.concurrentPerform(iterations: 1) { [weak self] _ in
+			guard let self else {
+				XCTFail("self should not be nil")
+				return
+			}
+			self.fetchAsync(
+				score: pointer,
+				scoreOnServer: immutableScoreOnServer,
+				callbackQueue: .global(qos: .background)
+			)
         }
     }
     #endif
@@ -487,5 +493,5 @@ class ParsePointerTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
-
 }
+#endif

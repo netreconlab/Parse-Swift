@@ -6,11 +6,15 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseServerTests: XCTestCase {
+class ParseServerTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
         try await super.setUp()
@@ -28,20 +32,20 @@ class ParseServerTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
 
-    func testCheckCommand() throws {
+    func testHealthCommand() throws {
         let command = ParseServer.healthCommand()
         XCTAssertEqual(command.path.urlComponent, "/health")
         XCTAssertEqual(command.method, API.Method.POST)
         XCTAssertNil(command.body)
     }
 
-    func testCheck() async throws {
+    func testHealth() async throws {
 
         let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
@@ -57,7 +61,7 @@ class ParseServerTests: XCTestCase {
             return MockURLResponse(data: encoded, statusCode: 200)
         }
         do {
-            let health = try await ParseHealth.check()
+            let health = try await ParseServer.health()
             XCTAssertEqual(health, healthOfServer)
 
         } catch {
@@ -65,7 +69,7 @@ class ParseServerTests: XCTestCase {
         }
     }
 
-    func testCheckAsync() {
+    func testHealthAsync() {
         let healthOfServer = ParseServer.Status.ok
         let serverResponse = HealthResponse(status: healthOfServer)
         let encoded: Data!
@@ -95,7 +99,7 @@ class ParseServerTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testCheckErrorAsync() {
+    func testHealthErrorAsync() {
         let healthOfServer = "Should throw error"
         let encoded: Data!
         do {
@@ -119,3 +123,4 @@ class ParseServerTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 }
+#endif

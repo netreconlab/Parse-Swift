@@ -9,8 +9,8 @@
 import Foundation
 
 /// Used to constrain a query.
-public struct QueryConstraint: ParseTypeable, Hashable {
-    enum Comparator: String, CodingKey, Codable, CaseIterable {
+public struct QueryConstraint: ParseTypeable {
+    enum Comparator: String, CodingKey, Codable, Sendable, CaseIterable {
         case lessThan = "$lt"
         case lessThanOrEqualTo = "$lte"
         case greaterThan = "$gt"
@@ -53,7 +53,7 @@ public struct QueryConstraint: ParseTypeable, Hashable {
     var comparator: Comparator?
     var isNull = false
 
-    init(key: String, value: Codable? = nil, comparator: Comparator? = nil, isNull: Bool = false) {
+    init(key: String, value: (Codable & Sendable)? = nil, comparator: Comparator? = nil, isNull: Bool = false) {
         self.key = key
         self.value = AnyCodable(value)
         self.comparator = comparator
@@ -93,7 +93,7 @@ public struct QueryConstraint: ParseTypeable, Hashable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .greaterThan)
 }
 
@@ -103,7 +103,7 @@ public func > <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .greaterThanOrEqualTo)
 }
 
@@ -113,7 +113,7 @@ public func >= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .lessThan)
 }
 
@@ -123,7 +123,7 @@ public func < <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .lessThanOrEqualTo)
 }
 
@@ -133,11 +133,13 @@ public func <= <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  - warning: See `equalTo` for more information.
- Behavior changes based on `ParseSwift.configuration.isUsingEqualQueryConstraint`
- where isUsingEqualQueryConstraint == true is known not to work for LiveQuery on
- Parse Servers  <= 5.0.0.
+ This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
-public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     equalTo(key: key, value: value)
 }
 
@@ -145,23 +147,33 @@ public func == <T>(key: String, value: T) -> QueryConstraint where T: Codable {
  Add a constraint that requires that a key is equal to a value.
  - parameter key: The key that the value is stored in.
  - parameter value: The value to compare.
- - parameter usingEqComparator: Set to **true** to use **$eq** comparater,
- allowing for multiple `QueryConstraint`'s to be used on a single **key**.
- Setting to *false* may override any `QueryConstraint`'s on the same **key**.
- Defaults to `ParseSwift.configuration.isUsingEqualQueryConstraint`.
  - returns: The same instance of `QueryConstraint` as the receiver.
- - warning: `usingEqComparator == true` is known not to work for LiveQueries
- on Parse Servers <= 5.0.0.
+ - warning: This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
-public func equalTo <T>(key: String,
-                        value: T,
-                        // swiftlint:disable:next line_length
-                        usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) -> QueryConstraint where T: Codable {
-    if !usingEqComparator {
-        return QueryConstraint(key: key, value: value)
-    } else {
-        return QueryConstraint(key: key, value: value, comparator: .equalTo)
-    }
+public func equalTo<T>(
+    key: String,
+    value: T
+) -> QueryConstraint where T: Codable & Sendable {
+    QueryConstraint(key: key, value: value, comparator: .equalTo)
+}
+
+/**
+ Add a constraint that requires that a key is equal to a value.
+ - parameter key: The key that the value is stored in.
+ - parameter value: The value to compare.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ - warning: This `QueryConstaint` has the limitation of being able to be combined
+ with other `QueryConstraint`'s. It does however work with all versions of LiveQuery.
+ */
+public func equalToNoComparator<T>(
+    key: String,
+    value: T
+) -> QueryConstraint where T: Codable & Sendable {
+    QueryConstraint(key: key, value: value)
 }
 
 /**
@@ -171,9 +183,11 @@ public func equalTo <T>(key: String,
  - returns: The same instance of `QueryConstraint` as the receiver.
  - throws: An error of type `ParseError`.
  - warning: See `equalTo` for more information.
- Behavior changes based on `ParseSwift.configuration.isUsingEqualQueryConstraint`
- where isUsingEqualQueryConstraint == true is known not to work for LiveQuery on
- Parse Servers  <= 5.0.0.
+ This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
 public func == <T>(key: String, object: T) throws -> QueryConstraint where T: ParseObject {
     try equalTo(key: key, object: object)
@@ -183,24 +197,39 @@ public func == <T>(key: String, object: T) throws -> QueryConstraint where T: Pa
  Add a constraint that requires that a key is equal to a `ParseObject`.
  - parameter key: The key that the value is stored in.
  - parameter object: The `ParseObject` to compare.
- - parameter usingEqComparator: Set to **true** to use **$eq** comparater,
- allowing for multiple `QueryConstraint`'s to be used on a single **key**.
- Setting to *false* may override any `QueryConstraint`'s on the same **key**.
- Defaults to `ParseSwift.configuration.isUsingEqualQueryConstraint`.
  - returns: The same instance of `QueryConstraint` as the receiver.
  - throws: An error of type `ParseError`.
- - warning: `usingEqComparator == true` is known not to work for LiveQueries
- on Parse Servers <= 5.0.0.
+ - warning: This method uses `$eq` and can
+ be combined with all other `QueryConstaint`'s. It has the limitation of
+ not to working for LiveQuery on Parse Servers `< 6.3.0`. If you are using
+ an older Parse Server, you should use `equalToNoComparator()`
+ instead.
  */
-public func equalTo <T>(key: String,
-                        object: T,
-                        // swiftlint:disable:next line_length
-                        usingEqComparator: Bool = configuration.isUsingEqualQueryConstraint) throws -> QueryConstraint where T: ParseObject {
-    if !usingEqComparator {
-        return try QueryConstraint(key: key, value: object.toPointer())
-    } else {
-        return try QueryConstraint(key: key, value: object.toPointer(), comparator: .equalTo)
-    }
+public func equalTo<T>(
+    key: String,
+    object: T
+) throws -> QueryConstraint where T: ParseObject {
+    try QueryConstraint(
+        key: key,
+        value: object.toPointer(),
+        comparator: .equalTo
+    )
+}
+
+/**
+ Add a constraint that requires that a key is equal to a `ParseObject`.
+ - parameter key: The key that the value is stored in.
+ - parameter object: The `ParseObject` to compare.
+ - returns: The same instance of `QueryConstraint` as the receiver.
+ - throws: An error of type `ParseError`.
+ - warning: This `QueryConstaint` has the limitation of being able to be combined
+ with other `QueryConstraint`'s. It does however work with all versions of LiveQuery.
+ */
+public func equalToNoComparator<T>(
+    key: String,
+    object: T
+) throws -> QueryConstraint where T: ParseObject {
+    try QueryConstraint(key: key, value: object.toPointer())
 }
 
 /**
@@ -209,7 +238,7 @@ public func equalTo <T>(key: String,
  - parameter value: The value to compare.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func != <T>(key: String, value: T) -> QueryConstraint where T: Codable {
+public func != <T>(key: String, value: T) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: value, comparator: .notEqualTo)
 }
 
@@ -256,7 +285,7 @@ internal struct QuerySelect<T>: Codable where T: ParseObject {
   - parameter queries: The list of queries to `or` together.
   - returns: An instance of `QueryConstraint`'s that are the `or` of the passed in queries.
  */
-public func or <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
+public func or<T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
     let orQueries = queries.map { OrAndQuery(query: $0) }
     return QueryConstraint(key: QueryConstraint.Comparator.or.rawValue, value: orQueries)
 }
@@ -266,7 +295,7 @@ public func or <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject 
   - parameter queries: The variadic amount of queries to `or` together.
   - returns: An instance of `QueryConstraint`'s that are the `or` of the passed in queries.
  */
-public func or <T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
+public func or<T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
     or(queries: queries)
 }
 
@@ -275,7 +304,7 @@ public func or <T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject
   - parameter queries: The list of queries to `nor` together.
   - returns: An instance of `QueryConstraint`'s that are the `nor` of the passed in queries.
  */
-public func nor <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
+public func nor<T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
     let orQueries = queries.map { OrAndQuery(query: $0) }
     return QueryConstraint(key: QueryConstraint.Comparator.nor.rawValue, value: orQueries)
 }
@@ -285,7 +314,7 @@ public func nor <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject
   - parameter queries: The variadic amount of queries to `nor` together.
   - returns: An instance of `QueryConstraint`'s that are the `nor` of the passed in queries.
  */
-public func nor <T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
+public func nor<T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
     nor(queries: queries)
 }
 
@@ -300,7 +329,7 @@ public func nor <T>(queries: Query<T>...) -> QueryConstraint where T: ParseObjec
     - parameter queries: The list of queries to `and` together.
     - returns: An instance of `QueryConstraint`'s that are the `and` of the passed in queries.
 */
-public func and <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
+public func and<T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject {
     let andQueries = queries.map { OrAndQuery(query: $0) }
     return QueryConstraint(key: QueryConstraint.Comparator.and.rawValue, value: andQueries)
 }
@@ -316,7 +345,7 @@ public func and <T>(queries: [Query<T>]) -> QueryConstraint where T: ParseObject
     - parameter queries: The variadic amount of queries to `and` together.
     - returns: An instance of `QueryConstraint`'s that are the `and` of the passed in queries.
 */
-public func and <T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
+public func and<T>(queries: Query<T>...) -> QueryConstraint where T: ParseObject {
     and(queries: queries)
 }
 
@@ -350,7 +379,7 @@ public func != <T>(key: String, query: Query<T>) -> QueryConstraint {
  - parameter query: The query to run.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func matchesKeyInQuery <T>(key: String, queryKey: String, query: Query<T>) -> QueryConstraint {
+public func matchesKeyInQuery<T>(key: String, queryKey: String, query: Query<T>) -> QueryConstraint {
     let select = QuerySelect(query: InQuery(query: query), key: queryKey)
     return QueryConstraint(key: key, value: select, comparator: .select)
 }
@@ -363,7 +392,7 @@ public func matchesKeyInQuery <T>(key: String, queryKey: String, query: Query<T>
  - parameter query: The query to run.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func doesNotMatchKeyInQuery <T>(key: String, queryKey: String, query: Query<T>) -> QueryConstraint {
+public func doesNotMatchKeyInQuery<T>(key: String, queryKey: String, query: Query<T>) -> QueryConstraint {
     let select = QuerySelect(query: InQuery(query: query), key: queryKey)
     return QueryConstraint(key: key, value: select, comparator: .dontSelect)
 }
@@ -375,7 +404,7 @@ public func doesNotMatchKeyInQuery <T>(key: String, queryKey: String, query: Que
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedIn <T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .containedIn)
 }
 
@@ -386,7 +415,7 @@ public func containedIn <T>(key: String, array: [T]) -> QueryConstraint where T:
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedIn <T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
+public func containedIn<T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
     let pointers = try array.map { try $0.toPointer() }
     return containedIn(key: key, array: pointers)
 }
@@ -398,7 +427,7 @@ public func containedIn <T>(key: String, array: [T]) throws -> QueryConstraint w
   - parameter array: The list of values the key's object should not be.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func notContainedIn <T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func notContainedIn<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .notContainedIn)
 }
 
@@ -409,7 +438,7 @@ public func notContainedIn <T>(key: String, array: [T]) -> QueryConstraint where
   - parameter array: The list of values the key's object should not be.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func notContainedIn <T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
+public func notContainedIn<T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
     let pointers = try array.map { try $0.toPointer() }
     return notContainedIn(key: key, array: pointers)
 }
@@ -421,7 +450,7 @@ public func notContainedIn <T>(key: String, array: [T]) throws -> QueryConstrain
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containsAll <T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containsAll<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .all)
 }
 
@@ -432,7 +461,7 @@ public func containsAll <T>(key: String, array: [T]) -> QueryConstraint where T:
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containsAll <T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
+public func containsAll<T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
     let pointers = try array.map { try $0.toPointer() }
     return containsAll(key: key, array: pointers)
 }
@@ -444,7 +473,7 @@ public func containsAll <T>(key: String, array: [T]) throws -> QueryConstraint w
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedBy <T>(key: String, array: [T]) -> QueryConstraint where T: Codable {
+public func containedBy<T>(key: String, array: [T]) -> QueryConstraint where T: Codable & Sendable {
     QueryConstraint(key: key, value: array, comparator: .containedBy)
 }
 
@@ -456,7 +485,7 @@ public func containedBy <T>(key: String, array: [T]) -> QueryConstraint where T:
   - parameter array: The possible values for the key's object.
   - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func containedBy <T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
+public func containedBy<T>(key: String, array: [T]) throws -> QueryConstraint where T: ParseObject {
     let pointers = try array.map { try $0.toPointer() }
     return containedBy(key: key, array: pointers)
 }
@@ -597,23 +626,6 @@ public func geoPoint(_ key: String, within points: [ParseGeoPoint]) -> QueryCons
  coordinates be contained within and on the bounds of a given polygon
  Supports closed and open (last point is connected to first) paths.
 
- Polygon must have at least 3 points.
-
- - parameter key: The key to be constrained.
- - parameter points: The polygon points as an Array of `ParseGeoPoint`'s.
- - warning: Requires Parse Server 2.5.0+.
- - returns: The same instance of `QueryConstraint` as the receiver.
- */
-@available(*, deprecated, renamed: "geoPoint")
-public func withinPolygon(key: String, points: [ParseGeoPoint]) -> QueryConstraint {
-    geoPoint(key, within: points)
-}
-
-/**
- Add a constraint to the query that requires a particular key's
- coordinates be contained within and on the bounds of a given polygon
- Supports closed and open (last point is connected to first) paths.
-
  - parameter key: The key to be constrained.
  - parameter polygon: The `ParsePolygon`.
  - warning: Requires Parse Server 2.5.0+.
@@ -628,21 +640,6 @@ public func geoPoint(_ key: String, within polygon: ParsePolygon) -> QueryConstr
 
 /**
  Add a constraint to the query that requires a particular key's
- coordinates be contained within and on the bounds of a given polygon
- Supports closed and open (last point is connected to first) paths.
-
- - parameter key: The key to be constrained.
- - parameter polygon: The `ParsePolygon`.
- - warning: Requires Parse Server 2.5.0+.
- - returns: The same instance of `QueryConstraint` as the receiver.
- */
-@available(*, deprecated, renamed: "geoPoint")
-public func withinPolygon(key: String, polygon: ParsePolygon) -> QueryConstraint {
-    geoPoint(key, within: polygon)
-}
-
-/**
- Add a constraint to the query that requires a particular key's
  coordinates contains a `ParseGeoPoint`.
 
  - parameter key: The key of the `ParsePolygon`.
@@ -653,20 +650,6 @@ public func withinPolygon(key: String, polygon: ParsePolygon) -> QueryConstraint
 public func polygon(_ key: String, contains point: ParseGeoPoint) -> QueryConstraint {
     let dictionary = [QueryConstraint.Comparator.point.rawValue: point]
     return .init(key: key, value: dictionary, comparator: .geoIntersects)
-}
-
-/**
- Add a constraint to the query that requires a particular key's
- coordinates contains a `ParseGeoPoint`.
-
- - parameter key: The key of the `ParsePolygon`.
- - parameter point: The `ParseGeoPoint` to check for containment.
- - warning: Requires Parse Server 2.6.0+.
- - returns: The same instance of `QueryConstraint` as the receiver.
- */
-@available(*, deprecated, renamed: "polygon")
-public func polygonContains(key: String, point: ParseGeoPoint) -> QueryConstraint {
-    polygon(key, contains: point)
 }
 
 /**
@@ -698,8 +681,8 @@ public enum ParseTextOption: String {
     case diacriticSensitive = "$diacriticSensitive"
 
     internal func buildSearch(_ text: String,
-                              options: [Self: Encodable]) throws -> [String: Encodable] {
-        var dictionary: [String: Encodable] = [QueryConstraint.Comparator.term.rawValue: text]
+                              options: [Self: Encodable & Sendable]) throws -> [String: Encodable & Sendable] {
+        var dictionary: [String: Encodable & Sendable] = [QueryConstraint.Comparator.term.rawValue: text]
         for (key, value) in options {
             switch key {
             case .language:
@@ -735,7 +718,7 @@ public enum ParseTextOption: String {
  */
 public func matchesText(key: String,
                         text: String,
-                        options: [ParseTextOption: Encodable]) throws -> QueryConstraint {
+                        options: [ParseTextOption: Encodable & Sendable]) throws -> QueryConstraint {
     let search = try ParseTextOption.language.buildSearch(text, options: options)
     let dictionary = [QueryConstraint.Comparator.search.rawValue: search]
     return .init(key: key, value: AnyCodable(dictionary), comparator: .text)
@@ -819,7 +802,7 @@ public func hasSuffix(key: String, suffix: String, modifiers: String? = nil) -> 
  - parameter key: The key that the value is stored in.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func isNull (key: String) -> QueryConstraint {
+public func isNull(key: String) -> QueryConstraint {
     QueryConstraint(key: key, isNull: true)
 }
 
@@ -828,7 +811,7 @@ public func isNull (key: String) -> QueryConstraint {
  - parameter key: The key that the value is stored in.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
-public func isNotNull (key: String) -> QueryConstraint {
+public func isNotNull(key: String) -> QueryConstraint {
     QueryConstraint(key: key, comparator: .notEqualTo, isNull: true)
 }
 
@@ -870,7 +853,7 @@ internal struct RelatedCondition <T>: Codable where T: ParseObject {
   - returns: The resulting `QueryConstraint`.
   - throws: An error of type `ParseError`.
  */
-public func related <T>(key: String, object: T) throws -> QueryConstraint where T: ParseObject {
+public func related<T>(key: String, object: T) throws -> QueryConstraint where T: ParseObject {
     let pointer = try object.toPointer()
     let condition = RelatedCondition(object: pointer, key: key)
     return .init(key: QueryConstraint.Comparator.relatedTo.rawValue, value: condition)
@@ -882,7 +865,7 @@ public func related <T>(key: String, object: T) throws -> QueryConstraint where 
   - parameter object: The pointer object that should be related.
   - returns: The resulting `QueryConstraint`.
  */
-public func related <T>(key: String, object: Pointer<T>) -> QueryConstraint where T: ParseObject {
+public func related<T>(key: String, object: Pointer<T>) -> QueryConstraint where T: ParseObject {
     let condition = RelatedCondition(object: object, key: key)
     return .init(key: QueryConstraint.Comparator.relatedTo.rawValue, value: condition)
 }
@@ -904,7 +887,7 @@ public func related(key: String) -> QueryConstraint {
   - returns: The resulting `QueryConstraint`.
   - throws: An error of type `ParseError`.
  */
-public func related <T>(object: T) throws -> QueryConstraint where T: ParseObject {
+public func related<T>(object: T) throws -> QueryConstraint where T: ParseObject {
     let pointer = try object.toPointer()
     let condition = RelatedObjectCondition(object: pointer)
     return .init(key: QueryConstraint.Comparator.relatedTo.rawValue, value: condition)
@@ -915,7 +898,7 @@ public func related <T>(object: T) throws -> QueryConstraint where T: ParseObjec
   - parameter object: The pointer object that should be related.
   - returns: The resulting `QueryConstraint`.
  */
-public func related <T>(object: Pointer<T>) -> QueryConstraint where T: ParseObject {
+public func related<T>(object: Pointer<T>) -> QueryConstraint where T: ParseObject {
     let condition = RelatedObjectCondition(object: object)
     return .init(key: QueryConstraint.Comparator.relatedTo.rawValue, value: condition)
 }

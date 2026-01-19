@@ -6,6 +6,10 @@
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
+// Currently can't takeover URLSession with MockURLProtocol
+// on Linux, Windows, etc. so disabling networking tests on
+// those platforms.
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -13,7 +17,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
+class ParseGitHubTests: XCTestCase, @unchecked Sendable { // swiftlint:disable:this type_body_length
     struct User: ParseUser {
 
         //: These are required by ParseObject
@@ -79,8 +83,8 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
     }
@@ -88,13 +92,9 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
     func loginNormally() async throws -> User {
         let loginResponse = LoginSignupResponse()
 
+        let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
         MockURLProtocol.mockRequests { _ in
-            do {
-                let encoded = try loginResponse.getEncoder().encode(loginResponse, skipKeys: .none)
-                return MockURLResponse(data: encoded, statusCode: 200)
-            } catch {
-                return nil
-            }
+			MockURLResponse(data: encoded, statusCode: 200)
         }
         return try await User.login(username: "parse", password: "user")
     }
@@ -447,3 +447,4 @@ class ParseGitHubTests: XCTestCase { // swiftlint:disable:this type_body_length
         XCTAssertNil(user.password)
     }
 }
+#endif

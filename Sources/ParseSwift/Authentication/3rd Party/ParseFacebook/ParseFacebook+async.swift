@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension ParseFacebook {
     // MARK: Async/Await
@@ -29,7 +32,7 @@ public extension ParseFacebook {
                        authenticationToken: authenticationToken,
                        expiresIn: expiresIn,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -51,7 +54,7 @@ public extension ParseFacebook {
                        accessToken: accessToken,
                        expiresIn: expiresIn,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -66,7 +69,7 @@ public extension ParseFacebook {
         try await withCheckedThrowingContinuation { continuation in
             self.login(authData: authData,
                        options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 }
@@ -90,7 +93,7 @@ public extension ParseFacebook {
                       authenticationToken: authenticationToken,
                       expiresIn: expiresIn,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -112,7 +115,7 @@ public extension ParseFacebook {
                       accessToken: accessToken,
                       expiresIn: expiresIn,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -128,7 +131,7 @@ public extension ParseFacebook {
         try await withCheckedThrowingContinuation { continuation in
             self.link(authData: authData,
                       options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

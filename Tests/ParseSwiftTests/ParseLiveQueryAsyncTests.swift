@@ -6,7 +6,7 @@
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -14,7 +14,7 @@ import FoundationNetworking
 import XCTest
 @testable import ParseSwift
 
-class ParseLiveQueryAsyncTests: XCTestCase {
+class ParseLiveQueryAsyncTests: XCTestCase, @unchecked Sendable {
     override func setUp() async throws {
         try await super.setUp()
         guard let url = URL(string: "http://localhost:1337/parse") else {
@@ -34,8 +34,8 @@ class ParseLiveQueryAsyncTests: XCTestCase {
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
         await URLSession.liveQuery.closeAll()

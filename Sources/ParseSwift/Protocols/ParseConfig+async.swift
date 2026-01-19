@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension ParseConfig {
 
@@ -23,7 +26,7 @@ public extension ParseConfig {
     func fetch(options: API.Options = []) async throws -> Self {
         try await withCheckedThrowingContinuation { continuation in
             self.fetch(options: options,
-                       completion: continuation.resume)
+                       completion: { continuation.resume(with: $0) })
         }
     }
 
@@ -38,7 +41,7 @@ public extension ParseConfig {
     func save(options: API.Options = []) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
             self.save(options: options,
-                      completion: continuation.resume)
+                      completion: { continuation.resume(with: $0) })
         }
     }
 }

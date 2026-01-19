@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 public extension ParseConfig {
@@ -23,8 +26,18 @@ public extension ParseConfig {
     */
     func fetchPublisher(options: API.Options = []) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				options: options
+			) { result in
+				switch result {
+				case .success(let config):
+					promise(.success(config))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+
+			}
         }
     }
 
@@ -35,8 +48,18 @@ public extension ParseConfig {
     */
     func savePublisher(options: API.Options = []) -> Future<Bool, ParseError> {
         Future { promise in
-            self.save(options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				options: options
+			) { result in
+				switch result {
+				case .success(let saved):
+					promise(.success(saved))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+
+			}
         }
     }
 }

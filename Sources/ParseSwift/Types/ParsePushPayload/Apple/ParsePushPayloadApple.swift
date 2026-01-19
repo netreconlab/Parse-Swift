@@ -163,7 +163,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
      - returns: A mutated instance of `ParsePushPayloadApple` for easy chaining.
      - warning: For Apple OS's only.
      */
-    public func setSound<V>(_ sound: V) -> Self where V: Codable {
+    public func setSound<V>(_ sound: V) -> Self where V: Codable & Sendable {
         var mutablePayload = self
         mutablePayload.sound = AnyCodable(sound)
         return mutablePayload
@@ -174,7 +174,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
      - returns: The sound casted to the inferred type.
      - throws: An error of type `ParseError`.
      */
-    public func getSound<V>() throws -> V where V: Codable {
+    public func getSound<V>() throws -> V where V: Codable & Sendable {
         guard let sound = sound?.value as? V else {
             throw ParseError(code: .otherCause,
                              message: "Cannot be casted to the inferred type")

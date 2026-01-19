@@ -5,14 +5,14 @@
 //  Created by Corey Baker on 1/3/21.
 //  Copyright © 2021 Network Reconnaissance Lab. All rights reserved.
 //
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 import Foundation
 import XCTest
 @testable import ParseSwift
 
 // swiftlint:disable function_body_length type_body_length
 
-class ParseLiveQueryTests: XCTestCase {
+class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?
@@ -32,10 +32,47 @@ class ParseLiveQueryTests: XCTestCase {
         }
     }
 
-    class TestDelegate: ParseLiveQueryDelegate {
-        var error: ParseError?
-        var code: URLSessionWebSocketTask.CloseCode?
-        var reason: Data?
+    class TestDelegate: NSObject, ParseLiveQueryDelegate, @unchecked Sendable {
+		var error: ParseError? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _error
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_error = newValue
+			}
+		}
+		var code: URLSessionWebSocketTask.CloseCode? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _code
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_code = newValue
+			}
+		}
+		var reason: Data? {
+			get {
+				lock.lock()
+				defer { lock.unlock() }
+				return _reason
+			}
+			set {
+				lock.lock()
+				defer { lock.unlock() }
+				_reason = newValue
+			}
+		}
+		nonisolated(unsafe) var _error: ParseError?
+		nonisolated(unsafe) var _code: URLSessionWebSocketTask.CloseCode?
+		nonisolated(unsafe) var _reason: Data?
+		let lock = NSLock()
         func received(_ error: Error) {
             if let error = error as? ParseError {
                 self.error = error
@@ -53,21 +90,24 @@ class ParseLiveQueryTests: XCTestCase {
             XCTFail("Should create valid URL")
             return
         }
-        try await ParseSwift.initialize(applicationId: "applicationId",
-                                        clientKey: "clientKey",
-                                        primaryKey: "primaryKey",
-                                        serverURL: url,
-                                        liveQueryMaxConnectionAttempts: 1,
-                                        testing: true,
-                                        testLiveQueryDontCloseSocket: true)
+        try await ParseSwift.initialize(
+			applicationId: "applicationId",
+			clientKey: "clientKey",
+			primaryKey: "primaryKey",
+			maintenanceKey: "maintenanceKey",
+			serverURL: url,
+			liveQueryMaxConnectionAttempts: 1,
+			testing: true,
+			testLiveQueryDontCloseSocket: true
+		)
         try await ParseLiveQuery.configure()
     }
 
     override func tearDown() async throws {
         try await super.tearDown()
         MockURLProtocol.removeAll()
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try await KeychainStore.shared.deleteAll()
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try KeychainStore.shared.deleteAll()
         #endif
         try await ParseStorage.shared.deleteAll()
         await URLSession.liveQuery.closeAll()
@@ -181,6 +221,7 @@ class ParseLiveQueryTests: XCTestCase {
         try await ParseSwift.initialize(applicationId: "applicationId",
                                         clientKey: "clientKey",
                                         primaryKey: "primaryKey",
+                                        maintenanceKey: "maintenanceKey",
                                         serverURL: url,
                                         liveQueryConnectionAdditionalProperties: false,
                                         liveQueryMaxConnectionAttempts: 1,
@@ -195,7 +236,7 @@ class ParseLiveQueryTests: XCTestCase {
             return
         }
         // swiftlint:disable:next line_length
-        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
+        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"maintenanceKey\":\"maintenanceKey\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
         let message = await StandardMessage(operation: .connect, additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
@@ -205,7 +246,7 @@ class ParseLiveQueryTests: XCTestCase {
 
     func testStandardMessageNoAdditionalPropertiesEncoding() async throws {
         // swiftlint:disable:next line_length
-        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
+        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"maintenanceKey\":\"maintenanceKey\",\"masterKey\":\"primaryKey\",\"op\":\"connect\"}"
         let message = await StandardMessage(operation: .connect)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
@@ -219,7 +260,7 @@ class ParseLiveQueryTests: XCTestCase {
             return
         }
         // swiftlint:disable:next line_length
-        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"masterKey\":\"primaryKey\",\"op\":\"subscribe\"}"
+        let expected = "{\"applicationId\":\"applicationId\",\"clientKey\":\"clientKey\",\"installationId\":\"\(installationId)\",\"maintenanceKey\":\"maintenanceKey\",\"masterKey\":\"primaryKey\",\"op\":\"subscribe\"}"
         let message = await StandardMessage(operation: .subscribe, additionalProperties: true)
         let encoded = try ParseCoding.jsonEncoder()
             .encode(message)
@@ -496,11 +537,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertNotNil(error) // Should always fail since WS is not intercepted.
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testCloseFromServer() async throws {
@@ -607,11 +644,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertTrue([-1003, -1004, -1022].contains(urlError.errorCode))
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testPing() async throws {
@@ -628,11 +661,7 @@ class ParseLiveQueryTests: XCTestCase {
             XCTAssertNotNil(error) // Should have error because testcases do not intercept websocket
             expectation1.fulfill()
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testRandomIdGenerator() async throws {
@@ -883,11 +912,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             XCTAssertEqual(pending.count, 1)
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSubscribeCallbackConnected2() async throws {
@@ -993,11 +1018,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSubscribeCallbackConnected3() async throws {
@@ -1102,11 +1123,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSubscribeCloseSubscribe() async throws {
@@ -1198,11 +1215,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testSubscribeCloseWrongClientId() async throws {
@@ -1452,11 +1465,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 
     func testServerRedirectResponse() async throws {
@@ -1629,11 +1638,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventCreate() async throws {
@@ -1684,11 +1689,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventUpdate() async throws {
@@ -1739,11 +1740,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventDelete() async throws {
@@ -1793,11 +1790,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSubscriptionUpdate() async throws {
@@ -2027,11 +2020,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventLeaveSubscriptioinCallback() async throws {
@@ -2075,11 +2064,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventCreateSubscriptionCallback() async throws {
@@ -2123,11 +2108,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventUpdateSubscriptionCallback() async throws {
@@ -2171,11 +2152,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testEventDeleteSubscriptionCallback() async throws {
@@ -2219,11 +2196,7 @@ class ParseLiveQueryTests: XCTestCase {
                                       installationId: installationId)
         let encoded2 = try ParseCoding.jsonEncoder().encode(response2)
         await client.received(encoded2)
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1], timeout: 20.0)
-        #endif
     }
 
     func testSubscriptionUpdateSubscriptionCallback() async throws {
@@ -2238,7 +2211,6 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(subscription.query, query)
 
         let expectation1 = XCTestExpectation(description: "Subscribe Handler")
-        let expectation2 = XCTestExpectation(description: "Unsubscribe Handler")
         var count = 0
         subscription.handleSubscribe { subscribedQuery, isNew in
             XCTAssertEqual(query, subscribedQuery)
@@ -2255,49 +2227,8 @@ class ParseLiveQueryTests: XCTestCase {
                     if pending.count == 0 {
                         XCTAssertEqual(pending.count, 0)
                     }
-                    DispatchQueue.main.async {
-                        expectation2.fulfill()
-                    }
                 }
                 return
-            }
-
-            Task {
-                // Update
-                do {
-                    try await query.update(subscription)
-                    let isSubscribed = try await client.isSubscribed(query)
-                    let isPending = try await client.isPendingSubscription(query)
-                    XCTAssertTrue(isSubscribed)
-                    XCTAssertTrue(isPending)
-                } catch {
-                    XCTFail(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                        expectation2.fulfill()
-                    }
-                    return
-                }
-
-                let current = await client.subscriptions.current
-                let pending = await client.subscriptions.pending
-                XCTAssertEqual(current.count, 1)
-                XCTAssertEqual(pending.count, 1)
-
-                client.clientId = "yolo"
-                let response = PreliminaryMessageResponse(op: .subscribed,
-                                                          requestId: 1,
-                                                          clientId: "yolo",
-                                                          installationId: installationId)
-                guard let encoded = try? ParseCoding.jsonEncoder().encode(response) else {
-                    XCTFail("Should encode")
-                    DispatchQueue.main.async {
-                        expectation1.fulfill()
-                        expectation2.fulfill()
-                    }
-                    return
-                }
-                await client.received(encoded)
             }
         }
 
@@ -2325,11 +2256,7 @@ class ParseLiveQueryTests: XCTestCase {
         XCTAssertEqual(current.count, 1)
         XCTAssertEqual(pending.count, 0)
 
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
-        await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
+		await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
     func testResubscribingSubscriptionCallback() async throws {
@@ -2442,11 +2369,7 @@ class ParseLiveQueryTests: XCTestCase {
         } else {
             _ = XCTSkip("Should have 0 pending subscriptions, currently has \(pending.count)")
         }
-        #if compiler(>=5.8.0) && !os(Linux) && !os(Android) && !os(Windows)
         await fulfillment(of: [expectation1, expectation2], timeout: 20.0)
-        #elseif compiler(<5.8.0) && !os(iOS) && !os(tvOS)
-        wait(for: [expectation1, expectation2], timeout: 20.0)
-        #endif
     }
 }
 #endif

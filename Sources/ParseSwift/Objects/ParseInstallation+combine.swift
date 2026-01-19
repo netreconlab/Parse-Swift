@@ -8,6 +8,9 @@
 
 #if canImport(Combine)
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Combine
 
 public extension ParseInstallation {
@@ -25,12 +28,23 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func fetchPublisher(includeKeys: [String]? = nil,
-                        options: API.Options = []) -> Future<Self, ParseError> {
+    func fetchPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.fetch(includeKeys: includeKeys,
-                       options: options,
-                       completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetch(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -49,18 +63,29 @@ public extension ParseInstallation {
      `ParseConfiguration.isRequiringCustomObjectIds = true` and
      `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
      and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
+     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
      different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
      client-side checks are disabled. Developers are responsible for handling such cases.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    func savePublisher(ignoringCustomObjectIdConfig: Bool = false,
-                       options: API.Options = []) -> Future<Self, ParseError> {
+    func savePublisher(
+		ignoringCustomObjectIdConfig: Bool = false,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.save(ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                      options: options,
-                      completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.save(
+				ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -70,10 +95,21 @@ public extension ParseInstallation {
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
     */
-    func createPublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func createPublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.create(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.create(
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -84,10 +120,21 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object replaced has the same objectId as current, it will automatically replace the current.
     */
-    func replacePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    func replacePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.replace(options: options,
-                         completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.replace(
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -98,10 +145,21 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object updated has the same objectId as current, it will automatically update the current.
     */
-    internal func updatePublisher(options: API.Options = []) -> Future<Self, ParseError> {
+    internal func updatePublisher(
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            self.update(options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.update(
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -112,9 +170,21 @@ public extension ParseInstallation {
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      - important: If an object deleted has the same objectId as current, it will automatically update the current.
     */
-    func deletePublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    func deletePublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            self.delete(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.delete(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
@@ -134,20 +204,32 @@ public extension ParseInstallation {
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
-    static func becomePublisher(_ installationId: String,
-                                copyEntireInstallation: Bool = true,
-                                options: API.Options = []) -> Future<Self, ParseError> {
+    static func becomePublisher(
+		_ installationId: String,
+		copyEntireInstallation: Bool = true,
+		options: API.Options = []
+	) -> Future<Self, ParseError> {
         Future { promise in
-            Self.become(installationId,
-                        copyEntireInstallation: copyEntireInstallation,
-                        options: options,
-                        completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.become(
+				installationId,
+				copyEntireInstallation: copyEntireInstallation,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installation):
+					promise(.success(installation))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }
 
 // MARK: Batch Support
 public extension Sequence where Element: ParseInstallation {
+
     /**
      Fetches a collection of installations *aynchronously* with the current data from the server and sets
      an error if one occurs. Publishes when complete.
@@ -159,169 +241,234 @@ public extension Sequence where Element: ParseInstallation {
      successful or a `ParseError` if it failed.
      - important: If an object fetched has the same objectId as current, it will automatically update the current.
     */
-    func fetchAllPublisher(includeKeys: [String]? = nil,
-                           options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+    func fetchAllPublisher(
+		includeKeys: [String]? = nil,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
         Future { promise in
-            self.fetchAll(includeKeys: includeKeys,
-                          options: options,
-                          completion: promise)
+			nonisolated(unsafe) let promise = promise
+            self.fetchAll(
+				includeKeys: includeKeys,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 
-    /**
-     Saves a collection of installations *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliiding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func saveAllPublisher(batchLimit limit: Int? = nil,
-                          transaction: Bool = configuration.isUsingTransactions,
-                          ignoringCustomObjectIdConfig: Bool = false,
-                          options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
-        Future { promise in
-            self.saveAll(batchLimit: limit,
-                         transaction: transaction,
-                         ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                         options: options,
-                         completion: promise)
-        }
-    }
+	/**
+	 Saves a collection of installations *asynchronously* and publishes when complete.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
+	 when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
+	 `objectId` environments. Defaults to false.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
+	 successful or a `ParseError` if it failed.
+	 - important: If an object saved has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
+	 and plan to generate all of your `objectId`'s on the client-side then you should leave
+	 `ignoringCustomObjectIdConfig = false`. Setting
+	 `ParseConfiguration.isRequiringCustomObjectIds = true` and
+	 `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
+	 and the server will generate an `objectId` only when the client does not provide one. This can
+	 increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
+	 different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
+	 client-side checks are disabled. Developers are responsible for handling such cases.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func saveAllPublisher(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		ignoringCustomObjectIdConfig: Bool = false,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+		Future { promise in
+			nonisolated(unsafe) let promise = promise
+			self.saveAll(
+				batchLimit: limit,
+				transaction: transaction,
+				ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
+		}
+	}
 
-    /**
-     Creates a collection of installations *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func createAllPublisher(batchLimit limit: Int? = nil,
-                            transaction: Bool = configuration.isUsingTransactions,
-                            options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
-        Future { promise in
-            self.createAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
+	/**
+	 Creates a collection of installations *asynchronously* and publishes when complete.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
+	 successful or a `ParseError` if it failed.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func createAllPublisher(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+		Future { promise in
+			nonisolated(unsafe) let promise = promise
+			self.createAll(
+				batchLimit: limit,
+				transaction: transaction,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
+		}
+	}
 
-    /**
-     Replaces a collection of installations *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object replaced has the same objectId as current, it will automatically replace the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func replaceAllPublisher(batchLimit limit: Int? = nil,
-                             transaction: Bool = configuration.isUsingTransactions,
-                             options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
-        Future { promise in
-            self.replaceAll(batchLimit: limit,
-                            transaction: transaction,
-                            options: options,
-                            completion: promise)
-        }
-    }
+	/**
+	 Replaces a collection of installations *asynchronously* and publishes when complete.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
+	 successful or a `ParseError` if it failed.
+	 - important: If an object replaced has the same objectId as current, it will automatically replace the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func replaceAllPublisher(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+		Future { promise in
+			nonisolated(unsafe) let promise = promise
+			self.replaceAll(
+				batchLimit: limit,
+				transaction: transaction,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
+		}
+	}
 
-    /**
-     Updates a collection of installations *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
-     successful or a `ParseError` if it failed.
-     - important: If an object updated has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    internal func updateAllPublisher(batchLimit limit: Int? = nil,
-                                     transaction: Bool = configuration.isUsingTransactions,
-                                     options: API.Options = []) -> Future<[(Result<Self.Element, ParseError>)],
-                                                                            ParseError> {
-        Future { promise in
-            self.updateAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
+	/**
+	 Updates a collection of installations *asynchronously* and publishes when complete.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
+	 successful or a `ParseError` if it failed.
+	 - important: If an object updated has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	internal func updateAllPublisher(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = []
+	) -> Future<[(Result<Self.Element, ParseError>)], ParseError> {
+		Future { promise in
+			nonisolated(unsafe) let promise = promise
+			self.updateAll(
+				batchLimit: limit,
+				transaction: transaction,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
+		}
+	}
 
-    /**
-     Deletes a collection of installations *asynchronously* and publishes when complete.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces an an array of Result enums with `nil` if a delete was
-     successful or a `ParseError` if it failed.
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-    */
-    func deleteAllPublisher(batchLimit limit: Int? = nil,
-                            transaction: Bool = configuration.isUsingTransactions,
-                            options: API.Options = []) -> Future<[(Result<Void, ParseError>)], ParseError> {
-        Future { promise in
-            self.deleteAll(batchLimit: limit,
-                           transaction: transaction,
-                           options: options,
-                           completion: promise)
-        }
-    }
+	/**
+	 Deletes a collection of installations *asynchronously* and publishes when complete.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - returns: A publisher that eventually produces an an array of Result enums with `nil` if a delete was
+	 successful or a `ParseError` if it failed.
+	 - important: If an object deleted has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	*/
+	func deleteAllPublisher(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = []
+	) -> Future<[(Result<Void, ParseError>)], ParseError> {
+		Future { promise in
+			nonisolated(unsafe) let promise = promise
+			self.deleteAll(
+				batchLimit: limit,
+				transaction: transaction,
+				options: options
+			) { result in
+				switch result {
+				case .success(let installations):
+					promise(.success(installations))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
+		}
+	}
 }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 // MARK: Migrate from Objective-C SDK
 public extension ParseInstallation {
     /**
@@ -334,9 +481,21 @@ public extension ParseInstallation {
      method will destroy the entire Objective-C Keychain and `ParseInstallation` on the Parse
      Server.
     */
-    static func deleteObjCKeychainPublisher(options: API.Options = []) -> Future<Void, ParseError> {
+    static func deleteObjCKeychainPublisher(
+		options: API.Options = []
+	) -> Future<Void, ParseError> {
         Future { promise in
-            Self.deleteObjCKeychain(options: options, completion: promise)
+			nonisolated(unsafe) let promise = promise
+            Self.deleteObjCKeychain(
+				options: options
+			) { result in
+				switch result {
+				case .success:
+					promise(.success(()))
+				case .failure(let error):
+					promise(.failure(error))
+				}
+			}
         }
     }
 }

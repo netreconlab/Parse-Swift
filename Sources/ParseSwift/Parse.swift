@@ -8,57 +8,88 @@ import FoundationNetworking
 // MARK: Internal
 
 internal struct Parse {
-    static var configuration: ParseConfiguration!
-    static var sessionDelegate: ParseURLSessionDelegate!
+	static var configuration: ParseConfiguration! {
+		get {
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
+			return _configuration
+		}
+		set {
+			configurationLock.lock()
+			defer { configurationLock.unlock() }
+			_configuration = newValue
+		}
+	}
+	static var sessionDelegate: ParseURLSessionDelegate! {
+		get {
+			sessionDelegateLock.lock()
+			defer { sessionDelegateLock.unlock() }
+			return _sessionDelegate
+		}
+		set {
+			sessionDelegateLock.lock()
+			defer { sessionDelegateLock.unlock() }
+			_sessionDelegate = newValue
+		}
+	}
+	static let configurationLock = NSLock()
+	static let sessionDelegateLock = NSLock()
+	nonisolated(unsafe) static var _configuration: ParseConfiguration!
+	nonisolated(unsafe) static var _sessionDelegate: ParseURLSessionDelegate!
 }
 
-internal func initialize(applicationId: String,
-                         clientKey: String? = nil,
-                         primaryKey: String? = nil,
-                         serverURL: URL,
-                         liveQueryServerURL: URL? = nil,
-                         requiringCustomObjectIds: Bool = false,
-                         usingTransactions: Bool = false,
-                         usingEqualQueryConstraint: Bool = false,
-                         usingPostForQuery: Bool = false,
-                         primitiveStore: ParsePrimitiveStorable? = nil,
-                         requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-                         cacheMemoryCapacity: Int = 512_000,
-                         cacheDiskCapacity: Int = 10_000_000,
-                         migratingFromObjcSDK: Bool = false,
-                         usingDataProtectionKeychain: Bool = false,
-                         deletingKeychainIfNeeded: Bool = false,
-                         httpAdditionalHeaders: [AnyHashable: Any]? = nil,
-                         usingAutomaticLogin: Bool = false,
-                         maxConnectionAttempts: Int = 5,
-                         liveQueryConnectionAdditionalProperties: Bool = true,
-                         liveQueryMaxConnectionAttempts: Int = 20,
-                         testing: Bool = false,
-                         testLiveQueryDontCloseSocket: Bool = false,
-                         authentication: ((URLAuthenticationChallenge,
-                                          (URLSession.AuthChallengeDisposition,
-                                           URLCredential?) -> Void) -> Void)? = nil) async throws {
-    var configuration = ParseConfiguration(applicationId: applicationId,
-                                           clientKey: clientKey,
-                                           primaryKey: primaryKey,
-                                           serverURL: serverURL,
-                                           liveQueryServerURL: liveQueryServerURL,
-                                           requiringCustomObjectIds: requiringCustomObjectIds,
-                                           usingTransactions: usingTransactions,
-                                           usingEqualQueryConstraint: usingEqualQueryConstraint,
-                                           usingPostForQuery: usingPostForQuery,
-                                           primitiveStore: primitiveStore,
-                                           requestCachePolicy: requestCachePolicy,
-                                           cacheMemoryCapacity: cacheMemoryCapacity,
-                                           cacheDiskCapacity: cacheDiskCapacity,
-                                           usingDataProtectionKeychain: usingDataProtectionKeychain,
-                                           deletingKeychainIfNeeded: deletingKeychainIfNeeded,
-                                           httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticLogin: usingAutomaticLogin,
-                                           maxConnectionAttempts: maxConnectionAttempts,
-                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
-                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
-                                           authentication: authentication)
+internal func initialize(
+    applicationId: String,
+    clientKey: String? = nil,
+    primaryKey: String? = nil,
+    maintenanceKey: String? = nil,
+    serverURL: URL,
+    liveQueryServerURL: URL? = nil,
+    requiringCustomObjectIds: Bool = false,
+    usingTransactions: Bool = false,
+    usingEqualQueryConstraint: Bool = false,
+    usingPostForQuery: Bool = false,
+    primitiveStore: ParsePrimitiveStorable? = nil,
+    requestCachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+    cacheMemoryCapacity: Int = 512_000,
+    cacheDiskCapacity: Int = 10_000_000,
+    migratingFromObjcSDK: Bool = false,
+    usingDataProtectionKeychain: Bool = false,
+    deletingKeychainIfNeeded: Bool = false,
+    httpAdditionalHeaders: [AnyHashable: Any]? = nil,
+    usingAutomaticLogin: Bool = false,
+    maxConnectionAttempts: Int = 5,
+    liveQueryConnectionAdditionalProperties: Bool = true,
+    liveQueryMaxConnectionAttempts: Int = 20,
+    testing: Bool = false,
+    testLiveQueryDontCloseSocket: Bool = false,
+    authentication: (@Sendable (URLAuthenticationChallenge,
+                     (URLSession.AuthChallengeDisposition,
+                      URLCredential?) -> Void) -> Void)? = nil
+) async throws {
+    var configuration = ParseConfiguration(
+        applicationId: applicationId,
+        clientKey: clientKey,
+        primaryKey: primaryKey,
+        maintenanceKey: maintenanceKey,
+        serverURL: serverURL,
+        liveQueryServerURL: liveQueryServerURL,
+        requiringCustomObjectIds: requiringCustomObjectIds,
+        usingTransactions: usingTransactions,
+        usingPostForQuery: usingPostForQuery,
+        primitiveStore: primitiveStore,
+        requestCachePolicy: requestCachePolicy,
+        cacheMemoryCapacity: cacheMemoryCapacity,
+        cacheDiskCapacity: cacheDiskCapacity,
+        usingDataProtectionKeychain: usingDataProtectionKeychain,
+        deletingKeychainIfNeeded: deletingKeychainIfNeeded,
+        httpAdditionalHeaders: httpAdditionalHeaders,
+        usingAutomaticLogin: usingAutomaticLogin,
+        maxConnectionAttempts: maxConnectionAttempts,
+        liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
+        liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
+        authentication: authentication
+    )
     configuration.isMigratingFromObjcSDK = migratingFromObjcSDK
     configuration.isTestingSDK = testing
     configuration.isTestingLiveQueryDontCloseSocket = testLiveQueryDontCloseSocket
@@ -82,12 +113,11 @@ internal func yieldIfNotInitialized(_ iteration: Int = 0) async throws {
 }
 
 internal func deleteKeychainIfNeeded() async {
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     // Clear items out of the Keychain on app first run.
     if UserDefaults.standard.object(forKey: ParseConstants.bundlePrefix) == nil {
         if Parse.configuration.isDeletingKeychainIfNeeded {
-            try? await KeychainStore.old?.deleteAll()
-            try? await KeychainStore.shared.deleteAll()
+            try? KeychainStore.shared.deleteAll()
         }
         Parse.configuration.keychainAccessGroup = .init()
         clearCache()
@@ -113,19 +143,20 @@ public var configuration: ParseConfiguration {
  - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
-    await ParseStorage.shared.use(configuration.primitiveStore)
-    Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
-                                                    authentication: configuration.authentication)
+    ParseStorage.shared.use(configuration.primitiveStore)
+    Parse.sessionDelegate = ParseURLSessionDelegate(
+		callbackQueue: .main,
+		authentication: configuration.authentication
+	)
     Utility.updateParseURLSession()
 
-    #if !os(Linux) && !os(Android) && !os(Windows)
-    await KeychainStore.createShared()
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+    KeychainStore.createShared()
     await deleteKeychainIfNeeded()
     do {
         let keychainAccessGroup = try await ParseKeychainAccessGroup.current()
@@ -141,15 +172,17 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         let oneNineEightSDKVersion = try ParseVersion(string: "1.9.8")
 
         // All migrations from previous versions to current should occur here:
-        #if !os(Linux) && !os(Android) && !os(Windows)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         if previousSDKVersion < oneNineEightSDKVersion {
             // Old macOS Keychain cannot be used because it is global to all apps.
-            await KeychainStore.createOld()
-            try? await KeychainStore.shared.copy(KeychainStore.old,
-                                                 oldAccessGroup: configuration.keychainAccessGroup,
-                                                 newAccessGroup: configuration.keychainAccessGroup)
+            let oldKeychain = KeychainStore.createOld()
+            try? KeychainStore.shared.copy(
+				oldKeychain,
+				oldAccessGroup: configuration.keychainAccessGroup,
+				newAccessGroup: configuration.keychainAccessGroup
+			)
             // Need to delete the old Keychain because a new one is created with bundleId.
-            try? await KeychainStore.old.deleteAll()
+            try? oldKeychain.deleteAll()
         }
         #endif
         if currentSDKVersion > previousSDKVersion {
@@ -170,21 +203,18 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
         try await ParseVersion.setCurrent(try ParseVersion(string: ParseConstants.version))
     }
 
-    let currentInstallationContainer = await BaseParseInstallation.currentContainer()
-    #if !os(Linux) && !os(Android) && !os(Windows)
+    var currentInstallationContainer = await BaseParseInstallation.currentContainer()
+    #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
     if configuration.isMigratingFromObjcSDK {
-        await KeychainStore.createObjectiveC()
-        if let objcParseKeychain = KeychainStore.objectiveC {
-            guard let installationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId"),
-                  currentInstallationContainer.installationId != installationId else {
-                Parse.configuration.isInitialized = true
-                return
-            }
-            var currentInstallationContainer = await BaseParseInstallation.currentContainer()
-            currentInstallationContainer.installationId = installationId
-            currentInstallationContainer.currentInstallation?.installationId = installationId
-            await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
-        }
+        let objcParseKeychain = KeychainStore.createObjectiveC()
+		guard let installationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId"),
+			  currentInstallationContainer.installationId != installationId else {
+			Parse.configuration.isInitialized = true
+			return
+		}
+		currentInstallationContainer.installationId = installationId
+		currentInstallationContainer.currentInstallation?.installationId = installationId
+		await BaseParseInstallation.setCurrentContainer(currentInstallationContainer)
     }
     #endif
 
@@ -215,6 +245,8 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  - parameter primaryKey: The primary key for your Parse application. This key should only be
  specified when using the SDK on a server. This has been renamed from `masterKey` to reflect
  inclusive language.
+ - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
+ specified when using the SDK on a server.
  - parameter serverURL: The server URL to connect to Parse Server.
  - parameter liveQueryServerURL: The live query server URL to connect to Parse Server.
  - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
@@ -257,7 +289,6 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  - throws: An error of `ParseError` type.
  - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
- - warning: `usingTransactions` is experimental.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
  situtations when apps do not have credentials to setup a Keychain.
  */
@@ -265,6 +296,7 @@ public func initialize(
     applicationId: String,
     clientKey: String? = nil,
     primaryKey: String? = nil,
+    maintenanceKey: String? = nil,
     serverURL: URL,
     liveQueryServerURL: URL? = nil,
     requiringCustomObjectIds: Bool = false,
@@ -283,32 +315,34 @@ public func initialize(
     liveQueryConnectionAdditionalProperties: Bool = true,
     liveQueryMaxConnectionAttempts: Int = 20,
     parseFileTransfer: ParseFileTransferable? = nil,
-    authentication: ((URLAuthenticationChallenge,
+    authentication: (@Sendable (URLAuthenticationChallenge,
                       (URLSession.AuthChallengeDisposition,
                        URLCredential?) -> Void) -> Void)? = nil
 ) async throws {
-    let configuration = ParseConfiguration(applicationId: applicationId,
-                                           clientKey: clientKey,
-                                           primaryKey: primaryKey,
-                                           serverURL: serverURL,
-                                           liveQueryServerURL: liveQueryServerURL,
-                                           requiringCustomObjectIds: requiringCustomObjectIds,
-                                           usingTransactions: usingTransactions,
-                                           usingEqualQueryConstraint: usingEqualQueryConstraint,
-                                           usingPostForQuery: usingPostForQuery,
-                                           primitiveStore: primitiveStore,
-                                           requestCachePolicy: requestCachePolicy,
-                                           cacheMemoryCapacity: cacheMemoryCapacity,
-                                           cacheDiskCapacity: cacheDiskCapacity,
-                                           usingDataProtectionKeychain: usingDataProtectionKeychain,
-                                           deletingKeychainIfNeeded: deletingKeychainIfNeeded,
-                                           httpAdditionalHeaders: httpAdditionalHeaders,
-                                           usingAutomaticLogin: usingAutomaticLogin,
-                                           maxConnectionAttempts: maxConnectionAttempts,
-                                           liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
-                                           liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
-                                           parseFileTransfer: parseFileTransfer,
-                                           authentication: authentication)
+    let configuration = ParseConfiguration(
+        applicationId: applicationId,
+        clientKey: clientKey,
+        primaryKey: primaryKey,
+        maintenanceKey: maintenanceKey,
+        serverURL: serverURL,
+        liveQueryServerURL: liveQueryServerURL,
+        requiringCustomObjectIds: requiringCustomObjectIds,
+        usingTransactions: usingTransactions,
+        usingPostForQuery: usingPostForQuery,
+        primitiveStore: primitiveStore,
+        requestCachePolicy: requestCachePolicy,
+        cacheMemoryCapacity: cacheMemoryCapacity,
+        cacheDiskCapacity: cacheDiskCapacity,
+        usingDataProtectionKeychain: usingDataProtectionKeychain,
+        deletingKeychainIfNeeded: deletingKeychainIfNeeded,
+        httpAdditionalHeaders: httpAdditionalHeaders,
+        usingAutomaticLogin: usingAutomaticLogin,
+        maxConnectionAttempts: maxConnectionAttempts,
+        liveQueryConnectionAdditionalProperties: liveQueryConnectionAdditionalProperties,
+        liveQueryMaxConnectionAttempts: liveQueryMaxConnectionAttempts,
+        parseFileTransfer: parseFileTransfer,
+        authentication: authentication
+    )
     try await initialize(configuration: configuration)
 }
 
@@ -320,11 +354,16 @@ public func initialize(
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
  */
-public func updateAuthentication(_ authentication: ((URLAuthenticationChallenge,
-                                                     (URLSession.AuthChallengeDisposition,
-                                                      URLCredential?) -> Void) -> Void)?) {
-    Parse.sessionDelegate = ParseURLSessionDelegate(callbackQueue: .main,
-                                                    authentication: authentication)
+public func updateAuthentication(
+	_ authentication: (
+		@Sendable (URLAuthenticationChallenge,
+				   (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+				  ) -> Void)?
+) {
+	Parse.sessionDelegate = ParseURLSessionDelegate(
+		callbackQueue: .main,
+		authentication: authentication
+	)
     Utility.updateParseURLSession()
 }
 
@@ -338,7 +377,7 @@ public func clearCache() {
 
 // MARK: Public - Apple Platforms
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 
 /**
  Delete the Parse iOS Objective-C SDK Keychain from the device.
@@ -347,7 +386,8 @@ public func clearCache() {
  - warning: The keychain cannot be recovered after deletion.
  */
 public func deleteObjectiveCKeychain() async throws {
-    try await KeychainStore.objectiveC?.deleteAllObjectiveC()
+	let objcParseKeychain = KeychainStore.createObjectiveC()
+    try objcParseKeychain.deleteAllObjectiveC()
 }
 
 /**
@@ -382,7 +422,7 @@ public func deleteObjectiveCKeychain() async throws {
         return true
     }
     do {
-        try await KeychainStore.shared.copy(KeychainStore.shared,
+        try KeychainStore.shared.copy(KeychainStore.shared,
                                             oldAccessGroup: currentAccessGroup,
                                             newAccessGroup: newKeychainAccessGroup)
         await ParseKeychainAccessGroup.setCurrent(newKeychainAccessGroup)

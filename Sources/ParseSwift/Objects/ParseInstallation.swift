@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /**
  Objects that conform to the `ParseInstallation` protocol have a local representation of an
@@ -94,6 +97,25 @@ public extension ParseInstallation {
     static var className: String {
         "_Installation"
     }
+
+	var mergeable: Self {
+		guard isSaved,
+			originalData == nil else {
+			return self
+		}
+		var object = Self()
+		object.objectId = objectId
+		object.createdAt = createdAt
+		object.badge = badge
+		object.timeZone = timeZone
+		object.appName = appName
+		object.appIdentifier = appIdentifier
+		object.appVersion = appVersion
+		object.parseVersion = parseVersion
+		object.localeIdentifier = localeIdentifier
+		object.originalData = try? ParseCoding.jsonEncoder().encode(self)
+		return object
+	}
 
     var endpoint: API.Endpoint {
         if let objectId = objectId {
@@ -218,8 +240,8 @@ public extension ParseInstallation {
                                                                 installationId: newInstallationId)
         try await ParseStorage.shared.set(newBaseInstallationContainer,
                                           for: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.set(newBaseInstallationContainer,
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.set(newBaseInstallationContainer,
                                       for: ParseStorage.Keys.currentInstallation)
         #endif
     }
@@ -227,13 +249,13 @@ public extension ParseInstallation {
     internal static func currentContainer() async -> CurrentInstallationContainer<Self> {
         guard let installationInMemory: CurrentInstallationContainer<Self> =
                 try? await ParseStorage.shared.get(valueFor: ParseStorage.Keys.currentInstallation) else {
-            #if !os(Linux) && !os(Android) && !os(Windows)
+            #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
             guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                    try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                    try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
             else {
                 try? await create()
                 guard let installationFromKeyChain: CurrentInstallationContainer<Self> =
-                        try? await KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
+                        try? KeychainStore.shared.get(valueFor: ParseStorage.Keys.currentInstallation)
                 else {
                     // Could not create container correctly, return empty one.
                     return CurrentInstallationContainer<Self>()
@@ -260,8 +282,8 @@ public extension ParseInstallation {
         var currentContainer = newValue
         currentContainer.currentInstallation?.originalData = nil
         try? await ParseStorage.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.set(currentContainer, for: ParseStorage.Keys.currentInstallation)
         #endif
     }
 
@@ -274,8 +296,8 @@ public extension ParseInstallation {
 
     internal static func deleteCurrentContainerFromStorage() async {
         try? await ParseStorage.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        try? await KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+        try? KeychainStore.shared.delete(valueFor: ParseStorage.Keys.currentInstallation)
         #endif
         // Prepare new installation
         await BaseParseInstallation.createNewInstallationIfNeeded()
@@ -324,7 +346,7 @@ public extension ParseInstallation {
                        copyEntireInstallation: Bool = true,
                        options: API.Options = [],
                        callbackQueue: DispatchQueue = .main,
-                       completion: @escaping (Result<Self, ParseError>) -> Void) {
+                       completion: @escaping @Sendable (Result<Self, ParseError>) -> Void) {
         Task {
             do {
                 var currentInstallation = try await Self.current()
@@ -417,8 +439,8 @@ extension ParseInstallation {
         guard let appInfo = Bundle.main.infoDictionary else {
             return
         }
-        #if !os(Linux) && !os(Android) && !os(Windows)
-        #if TARGET_OS_MACCATALYST
+        #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
+		#if targetEnvironment(macCatalyst)
         // If using an Xcode new enough to know about Mac Catalyst:
         // Mac Catalyst Apps use a prefix to the bundle ID. This should not be transmitted
         // to Parse Server. Catalyst apps should look like iOS apps otherwise
@@ -486,7 +508,7 @@ extension ParseInstallation {
 
 // MARK: Fetchable
 extension ParseInstallation {
-    internal static func updateStorageIfNeeded(_ results: [Self], deleting: Bool = false) async throws {
+    static func updatePrimitiveStorage(_ results: [Self], deleting: Bool = false) async throws {
         let currentInstallation = try await Self.current()
         var foundCurrentInstallationObjects = results.filter { $0.hasSameInstallationId(as: currentInstallation) }
         foundCurrentInstallationObjects = try foundCurrentInstallationObjects.sorted(by: {
@@ -524,7 +546,7 @@ extension ParseInstallation {
         includeKeys: [String]? = nil,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         var murabeOptions = options
         murabeOptions.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
@@ -532,23 +554,23 @@ extension ParseInstallation {
         Task {
             do {
                 try await fetchCommand(include: includeKeys)
-                    .execute(options: options,
-                             callbackQueue: callbackQueue) { result in
+                    .execute(
+						options: options,
+						callbackQueue: callbackQueue
+					) { result in
                         if case .success(let foundResult) = result {
                             Task {
-                                do {
-                                    try await Self.updateStorageIfNeeded([foundResult])
-                                    completion(.success(foundResult))
-                                } catch {
-                                    let parseError = error as? ParseError ?? ParseError(swift: error)
-                                    completion(.failure(parseError))
-                                }
+								try? await Self.updatePrimitiveStorage([foundResult])
+								callbackQueue.async {
+									completion(.success(foundResult))
+								}
                             }
                         } else {
-                            completion(result)
+							callbackQueue.async {
+								completion(result)
+							}
                         }
                     }
-
             } catch {
                 callbackQueue.async {
                     let parseError = error as? ParseError ?? ParseError(swift: error)
@@ -607,7 +629,7 @@ extension ParseInstallation {
         ignoringCustomObjectIdConfig: Bool = false,
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         Task {
             do {
@@ -640,7 +662,7 @@ extension ParseInstallation {
     public func create(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.create
         Task {
@@ -674,7 +696,7 @@ extension ParseInstallation {
     public func replace(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.replace
         Task {
@@ -708,7 +730,7 @@ extension ParseInstallation {
     func update(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Self, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Self, ParseError>) -> Void
     ) {
         let method = Method.update
         Task {
@@ -749,7 +771,27 @@ extension ParseInstallation {
         }
         let updatedObject = object
         let mapper = { @Sendable (data) -> Self in
-            try ParseCoding.jsonDecoder().decode(CreateResponse.self, from: data).apply(to: updatedObject)
+			do {
+				// Try to decode CreateResponse, if that doesn't work try Pointer
+				let savedObject = try ParseCoding.jsonDecoder().decode(
+					CreateResponse.self,
+					from: data
+				).apply(
+					to: updatedObject
+				)
+				return savedObject
+			} catch let originalError {
+				do {
+					let pointer = try ParseCoding.jsonDecoder().decode(
+						Pointer<Self>.self,
+						from: data
+					)
+					let fetchedObject = try await pointer.fetch()
+					return fetchedObject
+				} catch {
+					throw originalError
+				}
+			}
         }
         return API.Command<Self, Self>(method: .POST,
                                        path: try await endpoint(.POST),
@@ -825,7 +867,7 @@ extension ParseInstallation {
     public func delete(
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             var options = options
@@ -839,7 +881,7 @@ extension ParseInstallation {
                         case .success:
                             Task {
                                 do {
-                                    try await Self.updateStorageIfNeeded([self], deleting: true)
+                                    try await Self.updatePrimitiveStorage([self], deleting: true)
                                     completion(.success(()))
                                 } catch {
                                     let parseError = error as? ParseError ?? ParseError(swift: error)
@@ -881,338 +923,361 @@ extension ParseInstallation {
 // MARK: Batch Support
 public extension Sequence where Element: ParseInstallation {
 
-    /**
-     Saves a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
-     when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
-     `objectId` environments. Defaults to false.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-     - important: If an object saved has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
-     and plan to generate all of your `objectId`'s on the client-side then you should leave
-     `ignoringCustomObjectIdConfig = false`. Setting
-     `ParseConfiguration.isRequiringCustomObjectIds = true` and
-     `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
-     and the server will generate an `objectId` only when the client does not provide one. This can
-     increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
-     different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
-     client-side checks are disabled. Developers are responsible for handling such cases.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func saveAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        ignoringCustomObjectIdConfig: Bool = false,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        let method = Method.save
-        Task {
-            do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
-                callbackQueue.async {
-                    completion(.success(objects))
-                }
-            } catch {
-                let parseError = error as? ParseError ?? ParseError(swift: error)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
+	/**
+	 Saves a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter ignoringCustomObjectIdConfig: Ignore checking for `objectId`
+	 when `ParseConfiguration.isRequiringCustomObjectIds = true` to allow for mixed
+	 `objectId` environments. Defaults to false.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute.
+	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
+	 - important: If an object saved has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
+	 and plan to generate all of your `objectId`'s on the client-side then you should leave
+	 `ignoringCustomObjectIdConfig = false`. Setting
+	 `ParseConfiguration.isRequiringCustomObjectIds = true` and
+	 `ignoringCustomObjectIdConfig = true` means the client will generate `objectId`'s
+	 and the server will generate an `objectId` only when the client does not provide one. This can
+	 increase the probability of colliding `objectId`'s as the client and server `objectId`'s may be generated using
+	 different algorithms. This can also lead to overwriting of `ParseObject`'s by accident as the
+	 client-side checks are disabled. Developers are responsible for handling such cases.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func saveAll(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		ignoringCustomObjectIdConfig: Bool = false,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		Task {
+			do {
+				let objects = try await originalObjects.saveAll(
+					batchLimit: limit,
+					transaction: transaction,
+					ignoringCustomObjectIdConfig: ignoringCustomObjectIdConfig,
+					options: options,
+					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updatePrimitiveStorage(
+					objects.compactMap { try? $0.get() }
+				)
+				callbackQueue.async {
+					completion(.success(objects))
+				}
+			} catch {
+				let parseError = error as? ParseError ?? ParseError(swift: error)
+				callbackQueue.async {
+					completion(.failure(parseError))
+				}
+			}
+		}
+	}
 
-    /**
-     Creates a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func createAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        let method = Method.create
-        Task {
-            do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
-                callbackQueue.async {
-                    completion(.success(objects))
-                }
-            } catch {
-                let parseError = error as? ParseError ?? ParseError(swift: error)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
+	/**
+	 Creates a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute.
+	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func createAll(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		Task {
+			do {
+				let objects = try await originalObjects.createAll(
+					batchLimit: limit,
+					transaction: transaction,
+					options: options,
+					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updatePrimitiveStorage(
+					objects.compactMap { try? $0.get() }
+				)
+				callbackQueue.async {
+					completion(.success(objects))
+				}
+			} catch {
+				let parseError = error as? ParseError ?? ParseError(swift: error)
+				callbackQueue.async {
+					completion(.failure(parseError))
+				}
+			}
+		}
+	}
 
-    /**
-     Replaces a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-     - important: If an object replaced has the same objectId as current, it will automatically replace the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func replaceAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        let method = Method.replace
-        Task {
-            do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
-                callbackQueue.async {
-                    completion(.success(objects))
-                }
-            } catch {
-                let parseError = error as? ParseError ?? ParseError(swift: error)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
+	/**
+	 Replaces a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute.
+	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
+	 - important: If an object replaced has the same objectId as current, it will automatically replace the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func replaceAll(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		Task {
+			do {
+				let objects = try await originalObjects.replaceAll(
+					batchLimit: limit,
+					transaction: transaction,
+					options: options,
+					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updatePrimitiveStorage(
+					objects.compactMap { try? $0.get() }
+				)
+				callbackQueue.async {
+					completion(.success(objects))
+				}
+			} catch {
+				let parseError = error as? ParseError ?? ParseError(swift: error)
+				callbackQueue.async {
+					completion(.failure(parseError))
+				}
+			}
+		}
+	}
 
-    /**
-     Updates a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-     - important: If an object updated has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    internal func updateAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        let method = Method.update
-        Task {
-            do {
-                let objects = try await batchCommand(method: method,
-                                                     batchLimit: limit,
-                                                     transaction: transaction,
-                                                     options: options,
-                                                     callbackQueue: callbackQueue)
-                callbackQueue.async {
-                    completion(.success(objects))
-                }
-            } catch {
-                let parseError = error as? ParseError ?? ParseError(swift: error)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
+	/**
+	 Updates a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute.
+	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
+	 - important: If an object updated has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	internal func updateAll(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		Task {
+			do {
+				let objects = try await originalObjects.updateAll(
+					batchLimit: limit,
+					transaction: transaction,
+					options: options,
+					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updatePrimitiveStorage(
+					objects.compactMap { try? $0.get() }
+				)
+				callbackQueue.async {
+					completion(.success(objects))
+				}
+			} catch {
+				let parseError = error as? ParseError ?? ParseError(swift: error)
+				callbackQueue.async {
+					completion(.failure(parseError))
+				}
+			}
+		}
+	}
 
-    /**
-     Fetches a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter includeKeys: The name(s) of the key(s) to include that are
-     `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
-     `includeAll` for `Query`.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-     - important: If an object fetched has the same objectId as current, it will automatically update the current.
-     - warning: The order in which installations are returned are not guarenteed. You should not expect results in
-     any particular order.
-    */
-    func fetchAll(
-        includeKeys: [String]? = nil,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
-    ) {
-        if (allSatisfy { $0.className == Self.Element.className}) {
-            let uniqueObjectIds = Set(compactMap { $0.objectId })
-            var query = Self.Element.query(containedIn(key: "objectId", array: [uniqueObjectIds]))
-            if let include = includeKeys {
-                query = query.include(include)
-            }
-            query.find(options: options, callbackQueue: callbackQueue) { result in
-                switch result {
+	/**
+	 Fetches a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter includeKeys: The name(s) of the key(s) to include that are
+		 `ParseObject`s. Use `["*"]` to include all keys one level deep. This is similar to `include` and
+		 `includeAll` for `Query`.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute. It should have the following argument
+	 signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
+	 - important: If an object fetched has the same objectId as current, it will automatically update the current.
+	 */
+	// swiftlint:disable:next function_body_length
+	func fetchAll(
+		includeKeys: [String]? = nil,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Element, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		if (originalObjects.allSatisfy { $0.className == Self.Element.className}) {
+			let uniqueObjectIds = Array(Set(originalObjects.compactMap { $0.objectId }))
+			var query = Self.Element.query(
+				containedIn(
+					key: "objectId",
+					array: uniqueObjectIds
+				)
+			)
+			if let include = includeKeys {
+				query = query.include(include)
+			}
+			query.find(
+				options: options,
+				callbackQueue: callbackQueue
+			) { result in
+				switch result {
 
-                case .success(let fetchedObjects):
-                    var fetchedObjectsToReturnMutable = [(Result<Self.Element, ParseError>)]()
+				case .success(let fetchedObjects):
+					let fetchedObjectsDictionary = Dictionary(
+						uniqueKeysWithValues: fetchedObjects.compactMap { object -> (String, Self.Element)? in
+							guard let objectId = object.objectId else {
+								return nil
+							}
+							return (objectId, object)
+						}
+					)
+					let fetchedObjectsToReturn = originalObjects.map { object -> (Result<Self.Element, ParseError>) in
+						guard let objectId = object.objectId else {
+							let error = ParseError(
+								code: .missingObjectId,
+								message: "objectId must not be nil"
+							)
+							return .failure(error)
+						}
+						if let fetchedObject = fetchedObjectsDictionary[objectId] {
+							return .success(fetchedObject)
+						} else {
+							let error = ParseError(
+								code: .objectNotFound,
+								message: "objectId \"\(objectId)\" was not found in className \"\(Self.Element.className)\""
+							)
+							return .failure(error)
+						}
+					}
+					Task {
+						try? await Self.Element.updatePrimitiveStorage(fetchedObjects)
+						callbackQueue.async {
+							completion(.success(fetchedObjectsToReturn))
+						}
+					}
+				case .failure(let error):
+					callbackQueue.async {
+						completion(.failure(error))
+					}
+				}
+			}
+		} else {
+			let error = ParseError(
+				code: .otherCause,
+				message: "All objects must have the same class"
+			)
+			callbackQueue.async {
+				completion(.failure(error))
+			}
+		}
+	}
 
-                    uniqueObjectIds.forEach {
-                        let uniqueObjectId = $0
-                        if let fetchedObject = fetchedObjects.first(where: {$0.objectId == uniqueObjectId}) {
-                            fetchedObjectsToReturnMutable.append(.success(fetchedObject))
-                        } else {
-                            let error = ParseError(code: .objectNotFound,
-                                                   // swiftlint:disable:next line_length
-                                                   message: "objectId \"\(uniqueObjectId)\" was not found in className \"\(Self.Element.className)\"")
-                            fetchedObjectsToReturnMutable.append(.failure(error))
-                        }
-                    }
-                    let fetchedObjectsToReturn = fetchedObjectsToReturnMutable
-                    Task {
-                        try? await Self.Element.updateStorageIfNeeded(fetchedObjects)
-                        completion(.success(fetchedObjectsToReturn))
-                    }
-                case .failure(let error):
-                    callbackQueue.async {
-                        completion(.failure(error))
-                    }
-                }
-            }
-        } else {
-            callbackQueue.async {
-                completion(.failure(ParseError(code: .otherCause,
-                                               message: "All items to fetch must be of the same class")))
-            }
-        }
-    }
-
-    /**
-     Deletes a collection of installations all at once *asynchronously* and executes the completion block when done.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
-     Defaults to 50.
-     - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
-     prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
-     - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<[ParseError?], ParseError>)`.
-     Each element in the array is either `nil` if the delete successful or a `ParseError` if it failed.
-     1. A `ParseError.Code.aggregateError`. This object's "errors" property is an
-     array of other Parse.Error objects. Each error object in this array
-     has an "object" property that references the object that could not be
-     deleted (for instance, because that object could not be found).
-     2. A non-aggregate Parse.Error. This indicates a serious error that
-     caused the delete operation to be aborted partway through (for
-     instance, a connection failure in the middle of the delete).
-     - important: If an object deleted has the same objectId as current, it will automatically update the current.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
-     objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
-     the transactions can fail.
-     - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
-     desires a different policy, it should be inserted in `options`.
-    */
-    func deleteAll(
-        batchLimit limit: Int? = nil,
-        transaction: Bool = configuration.isUsingTransactions,
-        options: API.Options = [],
-        callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
-    ) {
-        Task {
-            var options = options
-            options.insert(.cachePolicy(.reloadIgnoringLocalCacheData))
-            do {
-                var returnBatch = [(Result<Void, ParseError>)]()
-                let commands = try map({ try $0.deleteCommand() })
-                let batchLimit = limit != nil ? limit! : ParseConstants.batchLimit
-                try canSendTransactions(transaction, objectCount: commands.count, batchLimit: batchLimit)
-                let batches = BatchUtils.splitArray(commands, valuesPerSegment: batchLimit)
-                var completed = 0
-                for batch in batches {
-                    await API.Command<Self.Element, ParseError?>
-                        .batch(commands: batch, transaction: transaction)
-                        .execute(options: options,
-                                 callbackQueue: callbackQueue) { results in
-                            switch results {
-
-                            case .success(let saved):
-                                returnBatch.append(contentsOf: saved)
-                                if completed == (batches.count - 1) {
-                                    let returnBatchImmutable = returnBatch
-                                    Task {
-                                        try? await Self.Element.updateStorageIfNeeded(self.compactMap {$0},
-                                                                                       deleting: true)
-                                        completion(.success(returnBatchImmutable))
-                                    }
-                                }
-                                completed += 1
-                            case .failure(let error):
-                                completion(.failure(error))
-                                return
-                            }
-                        }
-                }
-            } catch {
-                let parseError = error as? ParseError ?? ParseError(swift: error)
-                callbackQueue.async {
-                    completion(.failure(parseError))
-                }
-            }
-        }
-    }
+	/**
+	 Deletes a collection of installations all at once *asynchronously* and executes the completion block when done.
+	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 Defaults to 50.
+	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
+	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
+	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
+	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
+	 - parameter completion: The block to execute.
+	 It should have the following argument signature: `(Result<[(Result<Void, ParseError>)], ParseError>)`.
+	 Each element in the array is either `nil` if the delete successful or a `ParseError` if it failed.
+	 1. A `ParseError.Code.aggregateError`. This object's "errors" property is an
+	 array of other Parse.Error objects. Each error object in this array
+	 has an "object" property that references the object that could not be
+	 deleted (for instance, because that object could not be found).
+	 2. A non-aggregate Parse.Error. This indicates a serious error that
+	 caused the delete operation to be aborted partway through (for
+	 instance, a connection failure in the middle of the delete).
+	 - important: If an object deleted has the same objectId as current, it will automatically update the current.
+	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
+	 the transactions can fail.
+	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
+	 desires a different policy, it should be inserted in `options`.
+	*/
+	func deleteAll(
+		batchLimit limit: Int? = nil,
+		transaction: Bool = configuration.isUsingTransactions,
+		options: API.Options = [],
+		callbackQueue: DispatchQueue = .main,
+		completion: @escaping @Sendable (Result<[(Result<Void, ParseError>)], ParseError>) -> Void
+	) {
+		let originalObjects = Array(self)
+		Task {
+			do {
+				let objects = try await originalObjects.deleteAll(
+					batchLimit: limit,
+					transaction: transaction,
+					options: options,
+					callbackQueue: callbackQueue
+				)
+				try? await Self.Element.updatePrimitiveStorage(
+					originalObjects,
+					deleting: true
+				)
+				callbackQueue.async {
+					completion(.success(objects))
+				}
+			} catch {
+				let parseError = error as? ParseError ?? ParseError(swift: error)
+				callbackQueue.async {
+					completion(.failure(parseError))
+				}
+			}
+		}
+	}
 }
 
-#if !os(Linux) && !os(Android) && !os(Windows)
+#if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
 // MARK: Migrate from Objective-C SDK
 public extension ParseInstallation {
 
@@ -1234,7 +1299,7 @@ public extension ParseInstallation {
     static func deleteObjCKeychain( // swiftlint:disable:this function_body_length
         options: API.Options = [],
         callbackQueue: DispatchQueue = .main,
-        completion: @escaping (Result<Void, ParseError>) -> Void
+        completion: @escaping @Sendable (Result<Void, ParseError>) -> Void
     ) {
         Task {
             do {
@@ -1250,9 +1315,8 @@ public extension ParseInstallation {
                 }
                 return
             }
-            guard let objcParseKeychain = KeychainStore.objectiveC,
-                  // swiftlint:disable:next line_length
-                  let oldInstallationId: String = await objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
+			let objcParseKeychain = KeychainStore.createObjectiveC()
+            guard let oldInstallationId: String = objcParseKeychain.objectObjectiveC(forKey: "installationId") else {
                 let error = ParseError(code: .otherCause,
                                        message: "Could not find Installation in the Objective-C SDK Keychain")
                 callbackQueue.async {

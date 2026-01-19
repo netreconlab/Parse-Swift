@@ -8,9 +8,8 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_13.3.1.app/Contents/Developer'
-  CI_XCODE_14: '/Applications/Xcode_14.3.1.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_15.4.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_16.1.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_26.1.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,25 +18,25 @@ concurrency:
 jobs:
   test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-26
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=26.2,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
-          - destination: 'platform=iOS\ Simulator,OS=17.5,name=iPhone\ 15\ Pro\ Max'
+          - destination: 'platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,OS=17.5,name\=Apple\ TV'
+          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
-          - destination: 'platform=visionOS\ Simulator,OS=1.2,name=Apple\ Vision\ Pro'
-            action: 'test'
-          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 9\ \(41mm\)'
+          - destination: 'platform=visionOS\ Simulator,OS=26.2,name=Apple\ Vision\ Pro'
+            action: 'build'
+          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)'
             action: 'test'
     steps:
-    - uses: actions/checkout@v4
-    - name: Install SwiftLint
+    - uses: actions/checkout@v6
+    - name: Install Extra Packages
       run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
@@ -46,19 +45,20 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v4
+      uses: sersoft-gmbh/swift-coverage-action@v5
       id: coverage-files
       with:
         format: lcov
         search-paths: ./DerivedData
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         fail_ci_if_error: false
@@ -68,31 +68,30 @@ jobs:
 
   spm-test:
     timeout-minutes: 25
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Create and set the default keychain
       run: |
         security create-keychain -p "" temporary
         security default-keychain -s temporary
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
-    - name: Install SwiftLint
-      run: brew install swiftlint
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage 2>&1 | xcbeautify --renderer github-actions
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v4
+      uses: sersoft-gmbh/swift-coverage-action@v5
       id: coverage-files
       with:
         format: lcov
         search-paths: ./.build
+        ignore-conversion-failures: true
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
@@ -101,14 +100,38 @@ jobs:
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_LATEST }}
 
-  xcode-test-5_5:
+  xcode-test-oldest:
     timeout-minutes: 25
     needs: linux
-    runs-on: macos-12
+    runs-on: macos-14
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
+    - name: Create and set the default keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build-Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max -derivedDataPath DerivedData build | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES swift build 2>&1 | xcbeautify --renderer github-actions
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
+    - name: Prepare codecov
+      uses: sersoft-gmbh/swift-coverage-action@v5
+      id: coverage-files
+      with:
+        format: lcov
+        search-paths: ./DerivedData
+        ignore-conversion-failures: true
+      env:
+          DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
+        env_vars: XCODEOLDEST
+        fail_ci_if_error: false
+        token: ${{ secrets.CODECOV_TOKEN }}
       env:
           DEVELOPER_DIR: ${{ env.CI_XCODE_OLDEST }}
 
@@ -116,38 +139,38 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: sersoft-gmbh/swifty-linux-action@v3
+      - uses: actions/checkout@v6
+      - uses: vapor/swiftly-action@v0.2
         with:
-          release-version: "5"
+          toolchain: 6.2.3
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
-        run: swift test --enable-test-discovery --enable-code-coverage -v
+        run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-test-discovery --enable-code-coverage
       - name: Prepare codecov
         run: |
           cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
           llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           env_vars: LINUX
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
     timeout-minutes: 15
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: compnerd/gha-setup-swift@v0.2.3
+      - uses: actions/checkout@v6
+      - uses: compnerd/gha-setup-swift@v0.3.0
         with:
-          branch: swift-5.10-release
-          tag: 5.10-RELEASE
-      - name: Build
+          branch: swift-6.2.3-release
+          tag: 6.2.3-RELEASE
+      - name: Build and Test
         run: |
-          swift build -v
+          swift test --enable-test-discovery --enable-code-coverage
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           env_vars: WINDOWSLATEST
           fail_ci_if_error: false
@@ -156,9 +179,9 @@ jobs:
   docs:
     timeout-minutes: 10
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Generate Docs
         run: set -o pipefail && env NSUnbufferedIO=YES Scripts/generate-documentation
         env:
@@ -166,9 +189,9 @@ jobs:
 
   cocoapods:
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Update Framework Version
         run: ./Scripts/update_build
         env:
