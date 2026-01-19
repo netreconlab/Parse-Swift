@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.0...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.0.1
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.0...6.0.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.1/documentation/parseswift)
+
+__Fixes__
+* Fix `SubscriptionCallback` causing issue in Swift 6.1 because of missing `@unchecked Sendable` ([#226](https://github.com/netreconlab/Parse-Swift/pull/226)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 6.0.0
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/5.12.3...6.0.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.0/documentation/parseswift)

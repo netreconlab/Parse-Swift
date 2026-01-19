@@ -14,13 +14,53 @@ import FoundationNetworking
 /**
  A default implementation of the `QuerySubscribable` protocol using closures for callbacks.
  */
-open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
+open class SubscriptionCallback<T: ParseObject>: QuerySubscribable, @unchecked Sendable {
 
 	private let lock = NSLock()
+	private let eventLock = NSLock()
+	private let subscribedLock = NSLock()
+	private let unsubscribedLock = NSLock()
 	private var _query: Query<T>
-	fileprivate var eventHandlers = [(Query<T>, Event<T>) -> Void]()
-	fileprivate var subscribeHandlers = [(Query<T>, Bool) -> Void]()
-	fileprivate var unsubscribeHandlers = [(Query<T>) -> Void]()
+	fileprivate var eventHandlers: [(Query<T>, Event<T>) -> Void] {
+		get {
+			eventLock.lock()
+			defer { eventLock.unlock() }
+			return _eventHandlers
+		}
+		set {
+			eventLock.lock()
+			defer { eventLock.unlock() }
+			_eventHandlers = newValue
+		}
+	}
+	fileprivate var subscribeHandlers: [(Query<T>, Bool) -> Void] {
+		get {
+			subscribedLock.lock()
+			defer { subscribedLock.unlock() }
+			return _subscribeHandlers
+		}
+		set {
+			subscribedLock.lock()
+			defer { subscribedLock.unlock() }
+			_subscribeHandlers = newValue
+		}
+	}
+	fileprivate var unsubscribeHandlers: [(Query<T>) -> Void] {
+		get {
+			unsubscribedLock.lock()
+			defer { unsubscribedLock.unlock() }
+			return _unsubscribeHandlers
+		}
+		set {
+			unsubscribedLock.lock()
+			defer { unsubscribedLock.unlock() }
+			_unsubscribeHandlers = newValue
+		}
+	}
+
+	fileprivate var _eventHandlers = [(Query<T>, Event<T>) -> Void]()
+	fileprivate var _subscribeHandlers = [(Query<T>, Bool) -> Void]()
+	fileprivate var _unsubscribeHandlers = [(Query<T>) -> Void]()
 
 	public var query: Query<T> {
 		get {
@@ -49,8 +89,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
      - parameter handler: The callback to register.
      - returns: The same subscription, for easy chaining.
      */
-    @discardableResult open func handleEvent(_ handler: @escaping (Query<T>,
-                                                                   Event<T>) -> Void) -> SubscriptionCallback {
+    @discardableResult open func handleEvent(
+		_ handler: @escaping @Sendable (Query<T>, Event<T>) -> Void
+	) -> SubscriptionCallback {
         eventHandlers.append(handler)
         return self
     }
@@ -60,8 +101,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
      - parameter handler: The callback to register.
      - returns: The same subscription, for easy chaining.
      */
-    @discardableResult open func handleSubscribe(_ handler: @escaping (Query<T>,
-                                                                       Bool) -> Void) -> SubscriptionCallback {
+    @discardableResult open func handleSubscribe(
+		_ handler: @escaping @Sendable (Query<T>, Bool) -> Void
+	) -> SubscriptionCallback {
         subscribeHandlers.append(handler)
         return self
     }
@@ -71,7 +113,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
      - parameter handler: The callback to register.
      - returns: The same subscription, for easy chaining.
      */
-    @discardableResult open func handleUnsubscribe(_ handler: @escaping (Query<T>) -> Void) -> SubscriptionCallback {
+    @discardableResult open func handleUnsubscribe(
+		_ handler: @escaping @Sendable (Query<T>) -> Void
+	) -> SubscriptionCallback {
         unsubscribeHandlers.append(handler)
         return self
     }
@@ -86,8 +130,10 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
      - parameter handler: The callback to register.
      - returns: The same subscription, for easy chaining.
      */
-    @discardableResult public func handle(_ eventType: @escaping (T) -> Event<T>,
-                                          _ handler: @escaping (Query<T>, T) -> Void) -> SubscriptionCallback {
+    @discardableResult public func handle(
+		_ eventType: @escaping @Sendable (T) -> Event<T>,
+		_ handler: @escaping @Sendable (Query<T>, T) -> Void
+	) -> SubscriptionCallback {
         return handleEvent { query, event in
             switch event {
             case .entered(let obj) where eventType(obj) == event: handler(query, obj)
@@ -102,7 +148,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
 
     // MARK: QuerySubscribable
 
-    open func didReceive(_ eventData: Data) throws {
+    open func didReceive(
+		_ eventData: Data
+	) throws {
         // Need to decode the event with respect to the `ParseObject`.
         let eventMessage = try ParseCoding.jsonDecoder().decode(EventResponse<T>.self, from: eventData)
         guard let event = Event(event: eventMessage) else {
@@ -111,7 +159,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable {
         eventHandlers.forEach { $0(query, event) }
     }
 
-    open func didSubscribe(_ new: Bool) {
+    open func didSubscribe(
+		_ new: Bool
+	) {
         subscribeHandlers.forEach { $0(query, new) }
     }
 
