@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  CI_XCODE_OLDEST: '/Applications/Xcode_16.1.app/Contents/Developer'
+  CI_XCODE_OLDEST: '/Applications/Xcode_16.3.app/Contents/Developer'
   CI_XCODE_LATEST: '/Applications/Xcode_26.2.app/Contents/Developer'
 
 concurrency:
@@ -103,7 +103,7 @@ jobs:
   xcode-test-oldest:
     timeout-minutes: 25
     needs: linux
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v6
     - name: Create and set the default keychain
