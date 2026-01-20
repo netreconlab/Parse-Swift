@@ -2,7 +2,7 @@ version: 1
 builder:
   configs:
   - documentation_targets: [ParseSwift]
-    swift_version: 5.10
+    swift_version: 6.2
   - platform: watchos
     scheme: "ParseSwift"
   - platform: visionos
