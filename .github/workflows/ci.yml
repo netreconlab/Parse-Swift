@@ -40,10 +40,12 @@ jobs:
       run: brew install swiftlint
     - name: Create and set the default keychain
       run: |
-        security create-keychain -p "" temporary
-        security default-keychain -s temporary
-        security unlock-keychain -p "" temporary
-        security set-keychain-settings -lut 7200 temporary
+        KEYCHAIN_NAME="temporary-${GITHUB_RUN_ID}"
+        security delete-keychain "$KEYCHAIN_NAME" 2>/dev/null || true
+        security create-keychain -p "" "$KEYCHAIN_NAME"
+        security default-keychain -s "$KEYCHAIN_NAME"
+        security unlock-keychain -p "" "$KEYCHAIN_NAME"
+        security set-keychain-settings -lut 7200 "$KEYCHAIN_NAME"
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Parse.xcworkspace -scheme ParseSwift -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} 2>&1 | xcbeautify --renderer github-actions
       env:
