@@ -15,7 +15,7 @@ public extension ParseGoogle {
     // MARK: Async/Await
 
     /**
-     Login a `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using Google authentication for login.
      - parameter id: The **id** from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
      - parameter accessToken: Optional **access_token** from **Google**.
@@ -37,7 +37,7 @@ public extension ParseGoogle {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using Google authentication for login.
      - parameter authData: Dictionary containing key/values.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
@@ -55,7 +55,7 @@ public extension ParseGoogle {
 public extension ParseGoogle {
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using Google authentication for login.
      - parameter id: The **id** from **Google**.
      - parameter idToken: Optional **id_token** from **Google**.
      - parameter accessToken: Optional **access_token** from **Google**.
@@ -77,7 +77,7 @@ public extension ParseGoogle {
     }
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using Google authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using Google authentication for login.
      - parameter authData: Dictionary containing key/values.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
