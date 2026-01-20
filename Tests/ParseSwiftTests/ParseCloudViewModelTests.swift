@@ -11,7 +11,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseCloudViewModelTests: XCTestCase, @unchecked Sendable {
+@MainActor
+class ParseCloudViewModelTests: XCTestCase {
     struct Cloud: ParseCloudable, Sendable {
         typealias ReturnType = String? // swiftlint:disable:this nesting
 

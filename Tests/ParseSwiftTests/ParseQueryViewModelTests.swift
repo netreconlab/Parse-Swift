@@ -11,7 +11,8 @@ import Foundation
 import XCTest
 @testable import ParseSwift
 
-class ParseQueryViewModelTests: XCTestCase, @unchecked Sendable {
+@MainActor
+class ParseQueryViewModelTests: XCTestCase {
     struct GameScore: ParseObject {
         //: These are required by ParseObject
         var objectId: String?

@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.1...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.0.3
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.2...6.0.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.3/documentation/parseswift)
+
+__Fixes__
+* All view models run on the `@MainActor` ([#229](https://github.com/netreconlab/Parse-Swift/pull/229)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 6.0.1
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.0...6.0.1), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.1/documentation/parseswift)

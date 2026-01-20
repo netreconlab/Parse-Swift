@@ -21,7 +21,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @unchecked Sendable {
+open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable {
 
 	private let eventLock = NSLock()
 	private let subscribedLock = NSLock()

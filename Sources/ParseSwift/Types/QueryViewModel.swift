@@ -16,7 +16,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable {
+open class QueryViewModel<T: ParseObject>: QueryObservable {
 
 	private let resultsLock = NSLock()
 	private let countLock = NSLock()
@@ -97,7 +97,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         self.query = query
     }
 
-    @MainActor
     open func find(options: API.Options = []) async {
         do {
             self.results = try await query.find(options: options)
@@ -106,7 +105,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
     open func findAll(batchLimit: Int? = nil,
                       options: API.Options = []) async {
         do {
@@ -117,7 +115,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
     open func first(options: API.Options = []) async {
         do {
             let result = try await query.first(options: options)
@@ -127,7 +124,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
     open func count(options: API.Options = []) async {
         do {
             self.count = try await query.count(options: options)
@@ -136,7 +132,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
     open func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                         options: API.Options = []) async {
         do {
@@ -148,6 +143,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 }
 
 // MARK: QueryViewModel
+@MainActor
 public extension Query {
 
     /**
