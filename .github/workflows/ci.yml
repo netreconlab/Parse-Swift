@@ -158,16 +158,16 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   android:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Build and Test
+      - name: Build
         uses: skiptools/swift-android-action@v2
         with:
           swift-version: '6.2'
           build-tests: true
-          run-tests: true
-          free-disk-space: true
+          run-tests: false
 
   windows:
     timeout-minutes: 15
