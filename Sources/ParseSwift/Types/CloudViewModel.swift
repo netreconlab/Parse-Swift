@@ -87,7 +87,6 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendab
         self._cloudCode = cloudCode
     }
 
-    @MainActor
     public func runFunction(options: API.Options = []) async {
         do {
             self.results = try await cloudCode.runFunction(options: options)
@@ -96,7 +95,6 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendab
         }
     }
 
-    @MainActor
     public func startJob(options: API.Options = []) async {
         do {
             self.results = try await cloudCode.startJob(options: options)
@@ -107,6 +105,7 @@ open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendab
 }
 
 // MARK: CloudCodeViewModel
+@MainActor
 public extension ParseCloudable {
 
     /**
@@ -114,7 +113,8 @@ public extension ParseCloudable {
      as the view model can be used as a SwiftUI publisher. Meaning it can serve
      indepedently as a ViewModel in MVVM.
      */
-    var viewModel: CloudViewModel<Self> {
+
+	var viewModel: CloudViewModel<Self> {
         CloudViewModel(cloudCode: self)
     }
 
@@ -125,7 +125,7 @@ public extension ParseCloudable {
      - parameter query: Any query.
      - returns: The view model for this query.
      */
-    static func viewModel(_ cloudCode: Self) -> CloudViewModel<Self> {
+	static func viewModel(_ cloudCode: Self) -> CloudViewModel<Self> {
         CloudViewModel(cloudCode: cloudCode)
     }
 }

@@ -32,7 +32,7 @@ public protocol QueryObservable: ObservableObject {
 
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    @MainActor
+	@MainActor
     func find(options: API.Options) async
 
     /**
@@ -43,7 +43,7 @@ public protocol QueryObservable: ObservableObject {
      - warning: The items are processed in an unspecified order. The query may not have any sort
      order, and may not use limit or skip.
     */
-    @MainActor
+	@MainActor
     func findAll(batchLimit: Int?,
                  options: API.Options) async
 
@@ -53,7 +53,7 @@ public protocol QueryObservable: ObservableObject {
       - warning: This method mutates the query. It will reset the limit to `1`.
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    @MainActor
+	@MainActor
     func first(options: API.Options) async
 
     /**
@@ -62,7 +62,7 @@ public protocol QueryObservable: ObservableObject {
 
       - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    @MainActor
+	@MainActor
     func count(options: API.Options) async
 
     /**
@@ -74,7 +74,7 @@ public protocol QueryObservable: ObservableObject {
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
         - warning: This has not been tested thoroughly.
     */
-    @MainActor
+	@MainActor
     func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                    options: API.Options) async
 }

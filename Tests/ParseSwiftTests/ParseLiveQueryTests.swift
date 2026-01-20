@@ -693,6 +693,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	@MainActor
     func testSubscribeNotConnected() async throws {
         let query = GameScore.query("points" > 9)
         let subscription = try await query.subscribe()
@@ -745,6 +746,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	@MainActor
     func testSubscribeConnected() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1560,6 +1562,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(client.status, .socketNotEstablished)
     }
 
+	@MainActor
     func testEventEnter() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1608,6 +1611,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         }
     }
 
+	@MainActor
     func testEventLeave() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1659,6 +1663,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
+	@MainActor
     func testEventCreate() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1710,6 +1715,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
+	@MainActor
     func testEventUpdate() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1761,6 +1767,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
+	@MainActor
     func testEventDelete() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1811,6 +1818,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         await fulfillment(of: [expectation1], timeout: 20.0)
     }
 
+	@MainActor
     func testSubscriptionUpdate() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId
@@ -1903,6 +1911,7 @@ class ParseLiveQueryTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(pending.count, 0)
     }
 
+	@MainActor
     func testResubscribing() async throws {
         let query = GameScore.query("points" > 9)
         let installationId = try await BaseParseInstallation.current().installationId

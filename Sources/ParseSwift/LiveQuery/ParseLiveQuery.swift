@@ -672,6 +672,7 @@ extension ParseLiveQuery {
 // MARK: Subscribing
 extension ParseLiveQuery {
 
+	@MainActor
 	func subscribe<T>(_ query: Query<T>) async throws -> Subscription<T> {
         try await subscribe(Subscription(query: query))
     }
@@ -776,6 +777,7 @@ public extension Query {
      - returns: The subscription that has just been registered.
      - throws: An error of type `ParseError`.
      */
+	@MainActor
     func subscribe(_ client: ParseLiveQuery) async throws -> Subscription<ResultType> {
         try await client.subscribe(Subscription(query: self))
     }

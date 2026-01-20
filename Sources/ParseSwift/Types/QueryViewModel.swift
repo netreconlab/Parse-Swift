@@ -21,6 +21,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 	private let resultsLock = NSLock()
 	private let countLock = NSLock()
 	private let errorLock = NSLock()
+	private let queryLock = NSLock()
 	private var _results = [Object]() {
 		willSet {
 			self.objectWillChange.send()
@@ -42,11 +43,34 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 			}
 		}
 	}
+	private var _query: Query<T> {
+		willSet {
+			if newValue != _query {
+				_results.removeAll()
+				_count = 0
+				self.objectWillChange.send()
+			}
+		}
+	}
 
-    public var query: Query<T>
+	public var query: Query<T> {
+		get {
+			queryLock.lock()
+			defer { queryLock.unlock() }
+			return _query
+		}
+
+		set {
+			queryLock.lock()
+			defer { queryLock.unlock() }
+			_query = newValue
+		}
+	}
+
     public typealias Object = T
 
     /// Updates and notifies when the new results have been retrieved.
+	@MainActor
 	open var results: [Object] {
 		get {
 			resultsLock.lock()
@@ -64,6 +88,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
     }
 
     /// Updates and notifies when the count of the results have been retrieved.
+	@MainActor
 	open var count: Int {
 		get {
 			countLock.lock()
@@ -79,6 +104,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
     }
 
     /// Updates and notifies when there is an error retrieving the results.
+	@MainActor
     open var error: ParseError? {
 		get {
 			errorLock.lock()
@@ -94,10 +120,10 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
     }
 
     required public init(query: Query<T>) {
-        self.query = query
+        self._query = query
     }
 
-    @MainActor
+	@MainActor
     open func find(options: API.Options = []) async {
         do {
             self.results = try await query.find(options: options)
@@ -106,7 +132,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
+	@MainActor
     open func findAll(batchLimit: Int? = nil,
                       options: API.Options = []) async {
         do {
@@ -117,7 +143,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
+	@MainActor
     open func first(options: API.Options = []) async {
         do {
             let result = try await query.first(options: options)
@@ -127,7 +153,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
+	@MainActor
     open func count(options: API.Options = []) async {
         do {
             self.count = try await query.count(options: options)
@@ -136,7 +162,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
-    @MainActor
+	@MainActor
     open func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                         options: API.Options = []) async {
         do {
@@ -148,6 +174,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 }
 
 // MARK: QueryViewModel
+@MainActor
 public extension Query {
 
     /**
