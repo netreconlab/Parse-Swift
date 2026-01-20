@@ -15,7 +15,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class CloudViewModel<T: ParseCloudable>: CloudObservable {
+open class CloudViewModel<T: ParseCloudable>: CloudObservable, @unchecked Sendable {
 
 	private let resultsLock = NSLock()
 	private let cloudCodeLock = NSLock()
