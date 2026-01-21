@@ -21,14 +21,14 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-@preconcurrency @MainActor
-open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @unchecked Sendable {
+open class Subscription<T: ParseObject>: QueryViewModel<T>, @preconcurrency QuerySubscribable, @unchecked Sendable {
 
 	private let eventLock = NSLock()
 	private let subscribedLock = NSLock()
 	private let unsubscribedLock = NSLock()
 	private let errorLock = NSLock()
 
+	@MainActor
 	private var _event: (query: Query<T>, event: Event<T>)? {
 		willSet {
 			if newValue != nil {
@@ -38,6 +38,8 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 			}
 		}
 	}
+
+	@MainActor
 	private var _subscribed: (query: Query<T>, isNew: Bool)? {
 		willSet {
 			if newValue != nil {
@@ -47,6 +49,8 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 			}
 		}
 	}
+
+	@MainActor
 	private var _unsubscribed: Query<T>? {
 		willSet {
 			if newValue != nil {
@@ -58,6 +62,7 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 	}
 
     /// Updates and notifies when there is a new event related to a specific query.
+	@MainActor
     open var event: (query: Query<T>, event: Event<T>)? {
 		get {
 			eventLock.lock()
@@ -74,11 +79,13 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 
     /// If **true** the LiveQuery subscription is currently active,
     /// **false** otherwise.
+	@MainActor
     open var isSubscribed: Bool {
         subscribed != nil
     }
 
     /// Updates and notifies when a subscription request has been fulfilled and if it is new.
+	@MainActor
     open var subscribed: (query: Query<T>, isNew: Bool)? {
 		get {
 			subscribedLock.lock()
@@ -95,11 +102,13 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 
     /// If **true** the LiveQuery subscription is currently inactive,
     /// **false** otherwise.
+	@MainActor
     open var isUnsubscribed: Bool {
         unsubscribed != nil
     }
 
     /// Updates and notifies when an unsubscribe request has been fulfilled.
+	@MainActor
     open var unsubscribed: Query<T>? {
 		get {
 			unsubscribedLock.lock()
@@ -119,9 +128,9 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
      */
     public required init(query: Query<T>) {
         super.init(query: query)
-        self.subscribed = nil
-        self.event = nil
-        self.unsubscribed = nil
+        self._subscribed = nil
+        self._event = nil
+        self._unsubscribed = nil
     }
 
     // MARK: QuerySubscribable
@@ -131,15 +140,27 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
         guard let event = Event(event: eventMessage) else {
             throw ParseError(code: .otherCause, message: "ParseLiveQuery Error: Could not create event.")
         }
-        self.event = (query, event)
+		Task {
+			await MainActor.run {
+				self.event = (query, event)
+			}
+		}
     }
 
     open func didSubscribe(_ new: Bool) {
-        self.subscribed = (query, new)
+		Task {
+			await MainActor.run {
+				self.subscribed = (query, new)
+			}
+		}
     }
 
     open func didUnsubscribe() {
-        self.unsubscribed = query
+		Task {
+			await MainActor.run {
+				self.unsubscribed = query
+			}
+		}
     }
 }
 

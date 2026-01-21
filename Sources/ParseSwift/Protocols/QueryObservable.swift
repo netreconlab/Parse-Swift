@@ -13,14 +13,13 @@ import Foundation
  This protocol describes the interface for creating a view model for a `Query`.
  You can use this protocol on any custom class of yours, instead of `QueryViewModel`, if it fits your use case better.
  */
-@preconcurrency @MainActor
 public protocol QueryObservable: ObservableObject {
 
     /// The `ParseObject` associated with this view model.
     associatedtype Object: ParseObject
 
     /// The query associated with this view model.
-    var query: Query<Object> { get set }
+    var query: Query<Object> { get }
 
     /**
      Creates a new view model that can be used to handle updates.
