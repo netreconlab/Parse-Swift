@@ -118,14 +118,6 @@
             },
             {
               "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "set"
-            },
-            {
-              "kind" : "text",
               "text" : " }"
             }
           ]
