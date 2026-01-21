@@ -16,7 +16,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class QueryViewModel<T: ParseObject>: @preconcurrency QueryObservable, @unchecked Sendable {
+open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable {
 
 	private let resultsLock = NSLock()
 	private let countLock = NSLock()
