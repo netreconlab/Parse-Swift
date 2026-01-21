@@ -45,7 +45,6 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 	}
 	private var _query: Query<T>
 
-	@MainActor
 	public var query: Query<T> {
 		queryLock.lock()
 		defer { queryLock.unlock() }
@@ -108,6 +107,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         self._query = query
     }
 
+	@MainActor
     open func find(options: API.Options = []) async {
         do {
             self.results = try await query.find(options: options)
@@ -116,6 +116,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
+	@MainActor
     open func findAll(batchLimit: Int? = nil,
                       options: API.Options = []) async {
         do {
@@ -126,6 +127,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
+	@MainActor
     open func first(options: API.Options = []) async {
         do {
             let result = try await query.first(options: options)
@@ -135,6 +137,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
+	@MainActor
     open func count(options: API.Options = []) async {
         do {
             self.count = try await query.count(options: options)
@@ -143,6 +146,7 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
         }
     }
 
+	@MainActor
     open func aggregate(_ pipeline: [[String: Encodable & Sendable]],
                         options: API.Options = []) async {
         do {

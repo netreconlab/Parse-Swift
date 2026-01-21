@@ -21,7 +21,7 @@ import Combine
  [documentation](https://developer.apple.com/documentation/combine/observableobject)
  for more details.
  */
-open class Subscription<T: ParseObject>: QueryViewModel<T>, @preconcurrency QuerySubscribable, @unchecked Sendable {
+open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @unchecked Sendable {
 
 	private let eventLock = NSLock()
 	private let subscribedLock = NSLock()
@@ -134,33 +134,24 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, @preconcurrency Quer
     }
 
     // MARK: QuerySubscribable
+	@MainActor
     open func didReceive(_ eventData: Data) throws {
         // Need to decode the event with respect to the `ParseObject`.
         let eventMessage = try ParseCoding.jsonDecoder().decode(EventResponse<T>.self, from: eventData)
         guard let event = Event(event: eventMessage) else {
             throw ParseError(code: .otherCause, message: "ParseLiveQuery Error: Could not create event.")
         }
-		Task {
-			await MainActor.run {
-				self.event = (query, event)
-			}
-		}
+        self.event = (query, event)
     }
 
+	@MainActor
     open func didSubscribe(_ new: Bool) {
-		Task {
-			await MainActor.run {
-				self.subscribed = (query, new)
-			}
-		}
+        self.subscribed = (query, new)
     }
 
+	@MainActor
     open func didUnsubscribe() {
-		Task {
-			await MainActor.run {
-				self.unsubscribed = query
-			}
-		}
+        self.unsubscribed = query
     }
 }
 
