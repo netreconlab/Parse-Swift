@@ -28,7 +28,6 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 	private let unsubscribedLock = NSLock()
 	private let errorLock = NSLock()
 
-	@MainActor
 	private var _event: (query: Query<T>, event: Event<T>)? {
 		willSet {
 			if newValue != nil {
@@ -39,7 +38,6 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 		}
 	}
 
-	@MainActor
 	private var _subscribed: (query: Query<T>, isNew: Bool)? {
 		willSet {
 			if newValue != nil {
@@ -50,7 +48,6 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 		}
 	}
 
-	@MainActor
 	private var _unsubscribed: Query<T>? {
 		willSet {
 			if newValue != nil {
@@ -62,7 +59,6 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 	}
 
     /// Updates and notifies when there is a new event related to a specific query.
-	@MainActor
     open var event: (query: Query<T>, event: Event<T>)? {
 		get {
 			eventLock.lock()
@@ -79,13 +75,11 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 
     /// If **true** the LiveQuery subscription is currently active,
     /// **false** otherwise.
-	@MainActor
     open var isSubscribed: Bool {
         subscribed != nil
     }
 
     /// Updates and notifies when a subscription request has been fulfilled and if it is new.
-	@MainActor
     open var subscribed: (query: Query<T>, isNew: Bool)? {
 		get {
 			subscribedLock.lock()
@@ -102,13 +96,11 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 
     /// If **true** the LiveQuery subscription is currently inactive,
     /// **false** otherwise.
-	@MainActor
     open var isUnsubscribed: Bool {
         unsubscribed != nil
     }
 
     /// Updates and notifies when an unsubscribe request has been fulfilled.
-	@MainActor
     open var unsubscribed: Query<T>? {
 		get {
 			unsubscribedLock.lock()
@@ -134,7 +126,6 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
     }
 
     // MARK: QuerySubscribable
-	@MainActor
     open func didReceive(_ eventData: Data) throws {
         // Need to decode the event with respect to the `ParseObject`.
         let eventMessage = try ParseCoding.jsonDecoder().decode(EventResponse<T>.self, from: eventData)
@@ -144,12 +135,10 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
         self.event = (query, event)
     }
 
-	@MainActor
     open func didSubscribe(_ new: Bool) {
         self.subscribed = (query, new)
     }
 
-	@MainActor
     open func didUnsubscribe() {
         self.unsubscribed = query
     }
