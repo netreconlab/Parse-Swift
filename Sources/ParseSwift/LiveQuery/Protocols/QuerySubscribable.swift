@@ -13,6 +13,7 @@ import Foundation
  You can use this protocol on any custom class of yours, instead of `Subscription` or
  `SubscriptionCallback`, if it fits your use case better.
  */
+@preconcurrency
 public protocol QuerySubscribable: AnyObject {
 
     /// The `ParseObject` associated with this subscription.
