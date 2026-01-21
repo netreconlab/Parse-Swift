@@ -622,14 +622,14 @@ extension ParseLiveQuery {
 
 // MARK: SubscriptionRecord
 extension ParseLiveQuery {
-    struct SubscriptionRecord: Equatable, @unchecked Sendable {
+    struct SubscriptionRecord: Equatable, Sendable {
 
         var messageData: Data
         var queryData: Data
-        var subscriptionHandler: AnyObject
-        var eventHandlerClosure: ((Data) -> Void)?
-        var subscribeHandlerClosure: ((Bool) -> Void)?
-        var unsubscribeHandlerClosure: (() -> Void)?
+        var subscriptionHandler: AnyObject & Sendable
+        var eventHandlerClosure: (@Sendable (Data) -> Void)?
+        var subscribeHandlerClosure: (@Sendable (Bool) -> Void)?
+        var unsubscribeHandlerClosure: (@Sendable () -> Void)?
 
         init?<T: QuerySubscribable>(query: Query<T.Object>, message: SubscribeMessage<T.Object>, handler: T) {
             guard let queryData = try? ParseCoding.jsonEncoder().encode(query),

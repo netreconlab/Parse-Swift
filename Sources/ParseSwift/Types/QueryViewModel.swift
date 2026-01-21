@@ -43,28 +43,12 @@ open class QueryViewModel<T: ParseObject>: QueryObservable, @unchecked Sendable 
 			}
 		}
 	}
-	private var _query: Query<T> {
-		willSet {
-			if newValue != _query {
-				_results.removeAll()
-				_count = 0
-				self.objectWillChange.send()
-			}
-		}
-	}
+	private var _query: Query<T>
 
 	public var query: Query<T> {
-		get {
-			queryLock.lock()
-			defer { queryLock.unlock() }
-			return _query
-		}
-
-		set {
-			queryLock.lock()
-			defer { queryLock.unlock() }
-			_query = newValue
-		}
+		queryLock.lock()
+		defer { queryLock.unlock() }
+		return _query
 	}
 
     public typealias Object = T

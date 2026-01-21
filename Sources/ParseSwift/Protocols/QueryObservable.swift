@@ -19,7 +19,7 @@ public protocol QueryObservable: ObservableObject {
     associatedtype Object: ParseObject
 
     /// The query associated with this view model.
-    var query: Query<Object> { get set }
+    var query: Query<Object> { get }
 
     /**
      Creates a new view model that can be used to handle updates.

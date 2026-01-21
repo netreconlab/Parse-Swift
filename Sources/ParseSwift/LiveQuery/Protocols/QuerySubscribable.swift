@@ -13,13 +13,13 @@ import Foundation
  You can use this protocol on any custom class of yours, instead of `Subscription` or
  `SubscriptionCallback`, if it fits your use case better.
  */
-public protocol QuerySubscribable: AnyObject {
+public protocol QuerySubscribable: AnyObject, Sendable {
 
     /// The `ParseObject` associated with this subscription.
     associatedtype Object: ParseObject
 
     /// The query associated with this subscription.
-    var query: Query<Object> { get set }
+    var query: Query<Object> { get }
 
     /**
      Creates a new subscription that can be used to handle updates.

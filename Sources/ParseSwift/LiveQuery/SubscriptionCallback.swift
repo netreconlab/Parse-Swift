@@ -63,16 +63,9 @@ open class SubscriptionCallback<T: ParseObject>: QuerySubscribable, @unchecked S
 	fileprivate var _unsubscribeHandlers = [(Query<T>) -> Void]()
 
 	public var query: Query<T> {
-		get {
-			lock.lock()
-			defer { lock.unlock() }
-			return _query
-		}
-		set {
-			lock.lock()
-			defer { lock.unlock() }
-			_query = newValue
-		}
+		lock.lock()
+		defer { lock.unlock() }
+		return _query
 	}
 
     public typealias Object = T

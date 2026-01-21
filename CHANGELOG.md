@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.3...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.0.4
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.3...6.0.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.4/documentation/parseswift)
+
+__Fixes__
+* Do not allow developers to change the `query` property in `QueryObservable` and `QuerySubscribable` ([#230](https://github.com/netreconlab/Parse-Swift/pull/230)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 6.0.3
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.2...6.0.3), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.3/documentation/parseswift)
