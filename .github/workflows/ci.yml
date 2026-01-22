@@ -183,7 +183,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
         with:
-          tag: "swift-DEVELOPMENT-SNAPSHOT-2025-10-02-a_wasm"
+          tag: "swift-DEVELOPMENT-SNAPSHOT-2025-10-02-a"
       - run: swift build
 
   windows:
