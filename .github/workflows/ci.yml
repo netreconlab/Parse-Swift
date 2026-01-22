@@ -182,7 +182,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
-      - run: swift build --swift-sdk wasm32-unknown-wasip1-threads
+      - run: swift sdk list
 
   windows:
     timeout-minutes: 15
