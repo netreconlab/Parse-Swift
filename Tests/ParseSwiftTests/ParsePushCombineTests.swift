@@ -305,6 +305,7 @@ class ParsePushCombineTests: XCTestCase, @unchecked Sendable {
         let appleAlert = ParsePushAppleAlert(body: "hello world")
         var anyPayload = ParsePushPayloadAny()
         anyPayload.alert = appleAlert
+        anyPayload.pushType = .alert
         var statusOnServer = ParsePushStatus<ParsePushPayloadAny>()
         statusOnServer.payload = anyPayload
         statusOnServer.objectId = objectId
