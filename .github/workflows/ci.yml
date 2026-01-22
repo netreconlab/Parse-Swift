@@ -182,8 +182,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
-        with:
-          tag: "swift-wasm-DEVELOPMENT-SNAPSHOT-2025-10-02-a"
       - run: swift build --swift-sdk wasm32-unknown-wasip1-threads
 
   windows:
