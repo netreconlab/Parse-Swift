@@ -178,7 +178,7 @@ jobs:
   wasm:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: swift:6.1
+    container: swift:6.0
     steps:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
