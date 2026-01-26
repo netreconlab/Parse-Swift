@@ -268,7 +268,7 @@ internal extension URLSession {
             guard let data = data,
                   let response = response else {
                 guard let error = error else {
-                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occurred")
                     completionHandler(.failure(parseError))
                     return
                 }
@@ -411,7 +411,7 @@ internal extension URLSession {
             guard let location = location,
                   let response = response else {
                 guard let error = error else {
-                    let parseError = ParseError(code: .otherCause, message: "An unknown error occured")
+                    let parseError = ParseError(code: .otherCause, message: "An unknown error occurred")
                     completionHandler(.failure(parseError))
                     return
                 }

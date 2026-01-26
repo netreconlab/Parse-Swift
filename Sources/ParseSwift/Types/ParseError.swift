@@ -404,7 +404,7 @@ public struct ParseError: ParseTypeable, Swift.Error {
         case invalidAuthDataError = 253
 
         /**
-         Error code indicating an invalid operation occured on schema
+         Error code indicating an invalid operation occurred on schema
          */
         case invalidSchemaOperation = 255
 
