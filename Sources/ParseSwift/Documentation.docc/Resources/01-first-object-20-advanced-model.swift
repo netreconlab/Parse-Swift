@@ -18,10 +18,10 @@ struct GameData: ParseObject {
     // Optional - implement your own version of merge
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)
-        if shouldRestoreKey(\.fence, original: object) {
+        if updated.shouldRestoreKey(\.fence, original: object) {
             updated.fence = object.fence
         }
-        if shouldRestoreKey(\.bytes, original: object) {
+        if updated.shouldRestoreKey(\.bytes, original: object) {
             updated.bytes = object.bytes
         }
         return updated
