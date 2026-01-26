@@ -352,7 +352,7 @@ public extension ParseInstallation {
                 var currentInstallation = try await Self.current()
                 guard currentInstallation.objectId != objectId else {
                     let currentInstallation = currentInstallation
-                    // If the installationId's are the same, assume successful replacement already occured.
+                    // If the installationId's are the same, assume successful replacement already occurred.
                     callbackQueue.async {
                         completion(.success(currentInstallation))
                     }
