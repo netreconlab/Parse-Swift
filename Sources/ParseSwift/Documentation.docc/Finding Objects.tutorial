@@ -1,0 +1,203 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Finding Objects") {
+        Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints.
+        
+        This tutorial covers querying objects with constraints, ordering and limiting results, counting objects, and using advanced query features like relative time and field projection.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Setup and basic query creation") {
+        @ContentAndMedia {
+            Before querying objects, you need to initialize the Parse SDK and create a ParseObject model to query.
+            
+            Queries allow you to find objects that match specific criteria, such as filtering by field values or date ranges.
+        }
+        
+        @Steps {
+            @Step {
+                Import the ParseSwift framework to access Parse functionality.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-01-import.swift)
+            }
+            
+            @Step {
+                Initialize the Parse SDK with your server configuration.
+                
+                Replace the placeholder values with your actual server credentials. The `serverURL` should point to your Parse Server endpoint.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-02-initialize.swift)
+            }
+            
+            @Step {
+                Define a GameScore model that conforms to ParseObject.
+                
+                The model includes required Parse fields and custom properties like `points`, `timeStamp`, `oldScore`, and `isHighest`.
+                
+                @Code(name: "GameScore.swift", file: 02-finding-objects-03-model.swift)
+            }
+            
+            @Step {
+                Create a GameScore object and save it to Parse Server.
+                
+                This creates sample data that you can query in the following sections.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-04-save.swift)
+            }
+            
+            @Step {
+                Create a basic query with multiple constraints.
+                
+                This query finds GameScore objects where `points` is greater than 50 and `createdAt` is after a specific date. You can chain multiple constraints together.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-05-query.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Finding multiple objects") {
+        @ContentAndMedia {
+            Use the `find()` method to retrieve all objects that match your query constraints.
+            
+            The async/await pattern provides a clean way to handle query results and errors.
+        }
+        
+        @Steps {
+            @Step {
+                Execute the query using async/await to find all matching objects.
+                
+                The `find()` method returns an array of objects that satisfy the query constraints.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-06-find.swift)
+            }
+            
+            @Step {
+                Process the results by iterating through the returned array.
+                
+                Each object in the results contains all the fields you defined in your model.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-07-process-results.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Finding a single object") {
+        @ContentAndMedia {
+            When you only need one object that matches your criteria, use the `first()` method instead of `find()`.
+            
+            This is more efficient than retrieving all results when you only need one.
+        }
+        
+        @Steps {
+            @Step {
+                Use the `first()` method to retrieve just the first matching object.
+                
+                The `first()` method returns a single object instead of an array.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-08-first.swift)
+            }
+            
+            @Step {
+                Verify that the returned object has the expected properties.
+                
+                You can access all the object's fields after it's retrieved from the server.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-09-verify-first.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Counting objects") {
+        @ContentAndMedia {
+            Sometimes you only need to know how many objects match your query without retrieving the actual data.
+            
+            The `count()` and `withCount()` methods provide efficient ways to get result counts.
+        }
+        
+        @Steps {
+            @Step {
+                Use the `count()` method to get the total number of matching objects.
+                
+                This returns just the count without fetching the actual object data, making it very efficient.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-10-count.swift)
+            }
+            
+            @Step {
+                Use the `withCount()` method to get both the results and the total count.
+                
+                This is useful when you need both the actual objects and the total count for pagination.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-11-with-count.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Ordering and limiting results") {
+        @ContentAndMedia {
+            Control the order and number of results returned by your query using `order()` and `limit()`.
+            
+            These methods are essential for pagination and displaying sorted data.
+        }
+        
+        @Steps {
+            @Step {
+                Order results in descending order by a field.
+                
+                The `order()` method accepts an array of sort descriptors. Use `.descending()` to sort from highest to lowest.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-12-order.swift)
+            }
+            
+            @Step {
+                Limit the number of results returned.
+                
+                The `limit()` method restricts how many objects are returned, which is useful for pagination.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-13-limit.swift)
+            }
+            
+            @Step {
+                Combine ordering and limiting for pagination.
+                
+                You can chain multiple query modifiers together to create complex queries.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-14-order-limit.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Advanced query features") {
+        @ContentAndMedia {
+            Parse-Swift provides advanced query features like relative time queries and field projection.
+            
+            These features give you fine-grained control over what data is retrieved and how it's filtered.
+        }
+        
+        @Steps {
+            @Step {
+                Query based on relative time using natural language.
+                
+                The `relative()` function allows you to create queries with time-based constraints like "in 10 minutes" or "2 hours ago".
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-15-relative.swift)
+            }
+            
+            @Step {
+                Use the `select()` method to retrieve only specific fields.
+                
+                This reduces bandwidth by only fetching the fields you need. Other fields will be nil.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-16-select.swift)
+            }
+            
+            @Step {
+                Use the `exclude()` method to omit specific fields from results.
+                
+                This is the opposite of `select()` - it fetches all fields except the ones you specify.
+                
+                @Code(name: "YourApp.swift", file: 02-finding-objects-17-exclude.swift)
+            }
+        }
+    }
+}
