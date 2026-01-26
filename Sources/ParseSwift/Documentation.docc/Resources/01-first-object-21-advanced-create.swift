@@ -3,8 +3,9 @@ import ParseSwift
 
 Task {
     do {
-        // Create a polygon representing Detroit area
-        let detroitPoints = [
+        // Create a polygon using geographic coordinates
+        // First point must match the last point to close the polygon
+        let points = [
             try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705),
             try ParseGeoPoint(latitude: 42.633047793854814, longitude: -83.75333640366955),
             try ParseGeoPoint(latitude: 42.61625254348911, longitude: -83.75149921669944),
@@ -12,12 +13,14 @@ Task {
             try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705)
         ]
         
-        let detroit = try ParsePolygon(detroitPoints)
+        let polygon = try ParsePolygon(points)
         
-        // Create binary data
-        let bytes = ParseBytes(data: "hello world".data(using: .utf8)!)
+        // Create binary data using ParseBytes
+        let data = "hello world".data(using: .utf8)!
+        let bytes = ParseBytes(data: data)
         
-        print("Created ParsePolygon and ParseBytes")
+        print("Created polygon with \(polygon.coordinates.count) points")
+        print("Created bytes with \(bytes.data.count) bytes")
     } catch {
         print("Error creating advanced types: \(error)")
     }
