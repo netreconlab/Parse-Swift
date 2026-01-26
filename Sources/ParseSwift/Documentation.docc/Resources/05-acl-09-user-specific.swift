@@ -1,6 +1,29 @@
 import Foundation
 import ParseSwift
 
+struct GameScore: ParseObject {
+    var objectId: String?
+    var createdAt: Date?
+    var updatedAt: Date?
+    var ACL: ParseACL?
+    var originalData: Data?
+    var points: Int?
+    
+    func merge(with object: Self) throws -> Self {
+        var updated = try mergeParse(with: object)
+        if updated.shouldRestoreKey(\.points, original: object) {
+            updated.points = object.points
+        }
+        return updated
+    }
+}
+
+extension GameScore {
+    init(points: Int) {
+        self.points = points
+    }
+}
+
 // Define a User type that conforms to ParseUser
 struct User: ParseUser {
     var objectId: String?
