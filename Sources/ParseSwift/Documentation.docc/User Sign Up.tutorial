@@ -1,0 +1,173 @@
+@Tutorial(time: 25) {
+    @Intro(title: "User Sign Up") {
+        Learn how to implement user authentication with Parse-Swift by creating custom user models and performing sign up operations.
+        
+        This tutorial covers user creation, signup with custom fields, password verification, error handling, and managing the current user session.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Initialize Parse SDK") {
+        @ContentAndMedia {
+            Before working with ParseUser, you need to initialize the Parse SDK and verify your server is running.
+            
+            The SDK requires your application ID, client key, and server URL to connect to your Parse Server.
+        }
+        
+        @Steps {
+            @Step {
+                Import the ParseSwift framework to access Parse functionality.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-01-import.swift)
+            }
+            
+            @Step {
+                Initialize the Parse SDK with your server configuration. Replace the placeholder values with your actual server credentials.
+                
+                The `serverURL` should point to your Parse Server endpoint. For local development, this is typically `http://localhost:1337/parse`.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-02-initialize.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Define your ParseUser model") {
+        @ContentAndMedia {
+            ParseUser is a specialized ParseObject that handles user authentication. Create a custom struct that conforms to the `ParseUser` protocol to define your user model.
+            
+            Each ParseUser includes required Parse fields, user-specific authentication fields, and can have any number of custom properties.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `User` struct that conforms to `ParseUser`.
+                
+                The required ParseObject properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, and `originalData`) are managed by Parse. The required ParseUser properties (`username`, `email`, `emailVerified`, `password`, and `authData`) handle authentication.
+                
+                @Code(name: "User.swift", file: 03-user-signup-03-model.swift)
+            }
+            
+            @Step {
+                Add your own custom fields to store additional user information.
+                
+                Custom fields can be any type that conforms to `Codable`. Common examples include profile information, preferences, or application-specific data.
+                
+                @Code(name: "User.swift", file: 03-user-signup-04-custom-fields.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding after updates. It specifies how to merge server data with local changes for your custom fields.
+                
+                @Code(name: "User.swift", file: 03-user-signup-05-merge.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Sign up a new user") {
+        @ContentAndMedia {
+            The signup process creates a new user account on Parse Server. You can sign up users with just a username and password, or include additional fields during registration.
+            
+            Parse-Swift provides convenient methods for both simple and advanced signup scenarios.
+        }
+        
+        @Steps {
+            @Step {
+                Sign up a user with just username and password using the static `signup` method.
+                
+                After successful signup, Parse automatically populates the `objectId`, `createdAt`, and `updatedAt` fields. The user is also logged in automatically.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-06-basic-signup.swift)
+            }
+            
+            @Step {
+                Sign up a user with custom fields by creating a User instance and calling the `signup()` method.
+                
+                This approach allows you to set additional fields like email and custom properties before signup. All fields are saved in a single operation.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-07-custom-signup.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Access the current user") {
+        @ContentAndMedia {
+            After a successful signup, Parse automatically logs in the user and stores their session locally. You can retrieve the current logged-in user at any time.
+            
+            The current user persists across app launches until they explicitly log out.
+        }
+        
+        @Steps {
+            @Step {
+                Use the static `current()` method to retrieve the currently logged-in user.
+                
+                The current user is stored in local storage (Keychain on Apple platforms) and can be accessed without making a network request.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-08-current-user.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Verify user passwords") {
+        @ContentAndMedia {
+            Parse provides a method to verify that a user's password is correct without logging them in. This is useful for sensitive operations that require password confirmation.
+            
+            Password verification makes a request to the server to validate the credentials.
+        }
+        
+        @Steps {
+            @Step {
+                Verify a user's password using the `verifyPassword` method.
+                
+                On newer Parse Servers, set `usingPost` to `true` for enhanced security. The method returns the user object if the password is correct.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-09-verify-password.swift)
+            }
+            
+            @Step {
+                Handle incorrect password verification gracefully.
+                
+                When the password is incorrect, the method throws an error. Use do-catch blocks to handle this scenario appropriately in your app.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-10-verify-wrong-password.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Handle signup errors") {
+        @ContentAndMedia {
+            User signup can fail for various reasons, such as duplicate usernames, missing required fields, or weak passwords. Proper error handling ensures a good user experience.
+            
+            Parse-Swift uses typed errors that allow you to handle specific failure scenarios.
+        }
+        
+        @Steps {
+            @Step {
+                Handle common signup errors using ParseError.
+                
+                Common error codes include `usernameTaken` for duplicate usernames and `passwordMissing` for missing passwords. You can provide specific feedback to users based on the error type.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-11-error-handling.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Log out users") {
+        @ContentAndMedia {
+            When a user is done with their session, you should log them out to clear their credentials from local storage.
+            
+            Logging out removes the current user from local storage and invalidates their session token on the server.
+        }
+        
+        @Steps {
+            @Step {
+                Use the static `logout()` method to log out the current user.
+                
+                After logout, attempting to access the current user will throw an error. Always log out users when they explicitly request it or when switching accounts.
+                
+                @Code(name: "YourApp.swift", file: 03-user-signup-12-logout.swift)
+            }
+        }
+    }
+}
