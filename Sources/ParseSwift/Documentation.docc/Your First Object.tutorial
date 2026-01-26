@@ -190,17 +190,9 @@
         
         @Steps {
             @Step {
-                Create and save an object that you want to delete.
+                Create, save, and delete an object in one flow.
                 
-                First, create a new GameScore and save it to get an objectId.
-                
-                @Code(name: "YourApp.swift", file: 01-first-object-17-delete-create.swift)
-            }
-            
-            @Step {
-                Delete the object from Parse Server.
-                
-                Once deleted, the object will no longer exist on the server, though you still have the local copy.
+                The example shows how to create a GameScore, save it to get an objectId, and then delete it from the server.
                 
                 @Code(name: "YourApp.swift", file: 01-first-object-18-delete.swift)
             }

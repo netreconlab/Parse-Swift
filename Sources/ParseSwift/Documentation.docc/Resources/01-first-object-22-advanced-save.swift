@@ -3,13 +3,13 @@ import ParseSwift
 
 Task {
     do {
-        // Create the geographic polygon
+        // Create a simple square polygon
         let points = [
-            try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705),
-            try ParseGeoPoint(latitude: 42.633047793854814, longitude: -83.75333640366955),
-            try ParseGeoPoint(latitude: 42.61625254348911, longitude: -83.75149921669944),
-            try ParseGeoPoint(latitude: 42.61526926650296, longitude: -83.78161794858735),
-            try ParseGeoPoint(latitude: 42.631655189280224, longitude: -83.78406753121705)
+            try ParseGeoPoint(latitude: 40.0, longitude: -75.0),  // Southwest corner
+            try ParseGeoPoint(latitude: 40.0, longitude: -74.0),  // Southeast corner
+            try ParseGeoPoint(latitude: 41.0, longitude: -74.0),  // Northeast corner
+            try ParseGeoPoint(latitude: 41.0, longitude: -75.0),  // Northwest corner
+            try ParseGeoPoint(latitude: 40.0, longitude: -75.0)   // Close the polygon
         ]
         let polygon = try ParsePolygon(points)
         
