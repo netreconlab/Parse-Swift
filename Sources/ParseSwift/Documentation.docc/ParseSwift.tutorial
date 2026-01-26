@@ -16,10 +16,10 @@
     }
     
     @Chapter(name: "User Authentication") {
-        Learn how to implement user authentication in your Parse-Swift applications, including signup, login, and session management.
+        Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
-        @TutorialReference(tutorial: "doc:User Sign Up")
+        @TutorialReference(tutorial: "doc:User-Sign-Up")
     }
 }

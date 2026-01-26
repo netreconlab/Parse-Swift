@@ -10,10 +10,10 @@ Task {
         )
         
         // Verify the password
-        // Note: usingPost should be set to true on newer servers
+        // For production, usingPost should be set to true so credentials are sent in the request body
         let verifiedUser = try await User.verifyPassword(
             password: "TestMePass123^",
-            usingPost: false
+            usingPost: true
         )
         
         print("Password verified successfully for user: \(verifiedUser.username ?? "N/A")")

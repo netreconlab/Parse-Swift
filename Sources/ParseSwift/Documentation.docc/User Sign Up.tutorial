@@ -7,32 +7,10 @@
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
     
-    @Section(title: "Initialize Parse SDK") {
-        @ContentAndMedia {
-            Before working with ParseUser, you need to initialize the Parse SDK and verify your server is running.
-            
-            The SDK requires your application ID, client key, and server URL to connect to your Parse Server.
-        }
-        
-        @Steps {
-            @Step {
-                Import the ParseSwift framework to access Parse functionality.
-                
-                @Code(name: "YourApp.swift", file: 03-user-signup-01-import.swift)
-            }
-            
-            @Step {
-                Initialize the Parse SDK with your server configuration. Replace the placeholder values with your actual server credentials.
-                
-                The `serverURL` should point to your Parse Server endpoint. For local development, this is typically `http://localhost:1337/parse`.
-                
-                @Code(name: "YourApp.swift", file: 03-user-signup-02-initialize.swift)
-            }
-        }
-    }
-    
     @Section(title: "Define your ParseUser model") {
         @ContentAndMedia {
+            Before working with ParseUser, ensure you have completed the <doc:Your-First-Object> tutorial to learn how to import ParseSwift and initialize the Parse SDK.
+            
             ParseUser is a specialized ParseObject that handles user authentication. Create a custom struct that conforms to the `ParseUser` protocol to define your user model.
             
             Each ParseUser includes required Parse fields, user-specific authentication fields, and can have any number of custom properties.
@@ -120,7 +98,7 @@
             @Step {
                 Verify a user's password using the `verifyPassword` method.
                 
-                On newer Parse Servers, set `usingPost` to `true` for enhanced security. The method returns the user object if the password is correct.
+                For production environments, set `usingPost` to `true` so credentials are sent in the request body instead of URL query parameters. The method returns the user object if the password is correct.
                 
                 @Code(name: "YourApp.swift", file: 03-user-signup-09-verify-password.swift)
             }

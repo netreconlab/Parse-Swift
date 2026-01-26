@@ -26,7 +26,7 @@ Task {
         switch error.code {
         case .usernameTaken:
             print("Error: Username already exists")
-        case .passwordMissing:
+        case .userPasswordMissing:
             print("Error: Password is required")
         default:
             print("Signup error: \(error.message)")
