@@ -10,7 +10,7 @@ struct GameScore: ParseObject {
 
     // Your own properties
     var points: Int?
-    var timeStamp: Date? = Date()
+    var timeStamp: Date?
     var oldScore: Int?
     var isHighest: Bool?
 
