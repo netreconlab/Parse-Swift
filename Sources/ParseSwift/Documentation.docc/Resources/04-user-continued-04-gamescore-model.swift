@@ -10,7 +10,7 @@ struct GameScore: ParseObject {
     var originalData: Data?
 
     // Your own custom properties
-    var points: Int? = 0
+    var points: Int?
 
     // Optional - implement your own version of merge
     // for faster decoding after updating your ParseObject
