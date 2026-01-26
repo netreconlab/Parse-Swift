@@ -18,9 +18,9 @@ struct User: ParseUser {
 
 Task {
     do {
-        // Create a default ACL for all new ParseObjects
+        // Create a restrictive default ACL for all new ParseObjects
         var defaultACL = ParseACL()
-        defaultACL.publicRead = true
+        defaultACL.publicRead = false
         defaultACL.publicWrite = false
         
         // Set as default ACL with access for current user

@@ -4,6 +4,8 @@
         
         ACLs are a critical security feature that allows you to specify which users and roles can access or modify specific objects. This tutorial covers creating ACLs, setting public permissions, user-specific permissions, role-based permissions, and managing default ACLs.
         
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
+        
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
     
@@ -15,20 +17,6 @@
         }
         
         @Steps {
-            @Step {
-                Import the ParseSwift framework to get started.
-                
-                @Code(name: "YourApp.swift", file: 05-acl-01-import.swift)
-            }
-            
-            @Step {
-                Initialize the Parse SDK with your server configuration.
-                
-                You'll need to connect to your Parse Server before working with ACLs.
-                
-                @Code(name: "YourApp.swift", file: 05-acl-02-initialize.swift)
-            }
-            
             @Step {
                 Create a ParseObject model that includes the ACL property.
                 
