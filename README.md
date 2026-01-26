@@ -218,7 +218,7 @@ do {
 }
 ```
 
-Handling errors and other events is similar, take a look at the `Subscription` class for more information. You can test out LiveQuery subscriptions in [Swift Playgrounds](https://github.com/netreconlab/Parse-Swift/blob/main/ParseSwift.playground/Pages/11%20-%20LiveQuery.xcplaygroundpage/Contents.swift).
+Handling errors and other events are similar; take a look at the `Subscription` class for more information. You can test out LiveQuery subscriptions in [Swift Playgrounds](https://github.com/netreconlab/Parse-Swift/blob/main/ParseSwift.playground/Pages/11%20-%20LiveQuery.xcplaygroundpage/Contents.swift).
 
 ### Advanced Usage
 
