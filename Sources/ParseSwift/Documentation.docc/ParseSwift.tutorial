@@ -1,9 +1,14 @@
 @Tutorials(name: "ParseSwift") {
     @Intro(title: "Welcome to ParseSwift") {
+        Parse-Swift is the Swift SDK for Parse Platform, enabling you to build powerful iOS, macOS, watchOS, tvOS, Android, Linux, and Windows applications with a cloud backend.
         
+        These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery and SwiftUI integration.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
     
-    @Chapter(name: "Your first Object") {
+    @Chapter(name: "Getting Started") {
+        Learn the fundamentals of Parse-Swift by working with ParseObjects - the foundation of data storage in Parse.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
