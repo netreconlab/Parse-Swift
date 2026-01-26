@@ -9,26 +9,12 @@
     
     @Section(title: "Setup and basic query creation") {
         @ContentAndMedia {
-            Before querying objects, you need to initialize the Parse SDK and create a ParseObject model to query.
+            This tutorial assumes you have already completed the <doc:Your-First-Object> tutorial, which covers importing ParseSwift and initializing the Parse SDK.
             
-            Queries allow you to find objects that match specific criteria, such as filtering by field values or date ranges.
+            Queries allow you to find objects that match specific criteria, such as filtering by field values or date ranges. You'll create a GameScore model and use it to demonstrate various query operations.
         }
         
         @Steps {
-            @Step {
-                Import the ParseSwift framework to access Parse functionality.
-                
-                @Code(name: "YourApp.swift", file: 02-finding-objects-01-import.swift)
-            }
-            
-            @Step {
-                Initialize the Parse SDK with your server configuration.
-                
-                Replace the placeholder values with your actual server credentials. The `serverURL` should point to your Parse Server endpoint.
-                
-                @Code(name: "YourApp.swift", file: 02-finding-objects-02-initialize.swift)
-            }
-            
             @Step {
                 Define a GameScore model that conforms to ParseObject.
                 
