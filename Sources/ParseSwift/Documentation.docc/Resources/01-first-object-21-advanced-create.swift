@@ -20,7 +20,7 @@ Task {
         let bytes = ParseBytes(data: data)
         
         print("Created polygon with \(polygon.coordinates.count) points")
-        print("Created bytes with \(bytes.data.count) bytes")
+        print("Created bytes with base64: \(bytes.base64)")
     } catch {
         print("Error creating advanced types: \(error)")
     }

@@ -1,12 +1,12 @@
 import Foundation
 import ParseSwift
 
-let scoreToFetch = GameScore(objectId: "objectId1")
-let score2ToFetch = GameScore(objectId: "objectId2")
+let scoreToDelete = GameScore(objectId: "objectId1")
+let score2ToDelete = GameScore(objectId: "objectId2")
 
 Task {
     do {
-        let results = try await [scoreToFetch, score2ToFetch].deleteAll()
+        let results = try await [scoreToDelete, score2ToDelete].deleteAll()
         
         results.forEach { result in
             switch result {
