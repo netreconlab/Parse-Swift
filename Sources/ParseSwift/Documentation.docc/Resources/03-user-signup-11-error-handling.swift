@@ -2,20 +2,25 @@ import Foundation
 import ParseSwift
 
 Task {
+    // First, attempt to sign up a user (ignore if already exists)
     do {
-        // Attempt to sign up with duplicate username
-        let user1 = try await User.signup(
+        _ = try await User.signup(
             username: "duplicateUser",
             password: "SecurePass123!"
         )
-        
-        // This should fail with a duplicate username error
+    } catch {
+        // User may already exist from previous run, that's okay
+        print("First user may already exist: \(error)")
+    }
+    
+    // Now attempt to sign up with the same username - this should fail
+    do {
         let user2 = try await User.signup(
             username: "duplicateUser",
             password: "AnotherPass456!"
         )
         
-        print("Second user created: \(user2)")
+        print("Second user created unexpectedly: \(user2)")
     } catch let error as ParseError {
         // Handle specific Parse errors
         switch error.code {

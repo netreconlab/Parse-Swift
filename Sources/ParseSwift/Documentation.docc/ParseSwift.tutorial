@@ -20,6 +20,6 @@
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
-        @TutorialReference(tutorial: "doc:User-Sign-Up")
+        @TutorialReference(tutorial: "doc:User Sign Up")
     }
 }
