@@ -1,0 +1,245 @@
+@Tutorial(time: 30) {
+    @Intro(title: "LiveQuery") {
+        Learn how to use LiveQuery for real-time subscriptions to your Parse queries.
+        
+        This tutorial covers setting up LiveQuery subscriptions, handling real-time events, managing connection lifecycle, and working with advanced subscription patterns. LiveQuery enables your app to receive instant notifications when data on your Parse Server changes, making it perfect for chat applications, collaborative tools, and real-time dashboards.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. LiveQuery must be enabled on your Parse Server for these features to work.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Create a LiveQuery delegate") {
+        @ContentAndMedia {
+            Before subscribing to queries, set up a delegate to handle LiveQuery connection errors and socket events.
+            
+            The `ParseLiveQueryDelegate` protocol allows you to receive notifications about connection errors and socket closures. This is essential for debugging and handling network issues gracefully.
+        }
+        
+        @Steps {
+            @Step {
+                Import the ParseSwift framework to access LiveQuery functionality.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-01-import.swift)
+            }
+            
+            @Step {
+                Initialize the Parse SDK with your server configuration.
+                
+                Replace the placeholder values with your actual server credentials. Make sure LiveQuery is enabled on your Parse Server.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-02-initialize.swift)
+            }
+            
+            @Step {
+                Create a delegate class that conforms to `ParseLiveQueryDelegate`.
+                
+                The delegate receives errors and socket closure notifications. Implement the `received(_:)` method to handle errors and `closedSocket(_:reason:)` to respond to connection closures.
+                
+                @Code(name: "LiveQueryDelegate.swift", file: 11-livequery-03-delegate.swift)
+            }
+            
+            @Step {
+                Set the delegate on the default LiveQuery client.
+                
+                After creating your delegate instance, assign it to the `receiveDelegate` property of the default client to start receiving notifications.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-04-set-delegate.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Define your ParseObject model") {
+        @ContentAndMedia {
+            Create a ParseObject model that will be used with LiveQuery subscriptions.
+            
+            Just like with other Parse operations, you need a custom struct conforming to `ParseObject`. The model includes the required Parse fields and your custom properties.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `GameScore` struct that conforms to `ParseObject`.
+                
+                Include the required properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, and `originalData`) and custom properties like `points`, `location`, and `name`.
+                
+                @Code(name: "GameScore.swift", file: 11-livequery-05-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding when receiving LiveQuery updates. It specifies how to merge server data with local changes.
+                
+                @Code(name: "GameScore.swift", file: 11-livequery-06-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension.
+                
+                This allows you to create GameScore instances with specific field values while preserving the memberwise initializer.
+                
+                @Code(name: "GameScore.swift", file: 11-livequery-07-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Subscribe to queries") {
+        @ContentAndMedia {
+            Create a query and subscribe to it to receive real-time updates.
+            
+            When you subscribe to a query, Parse establishes a WebSocket connection to the LiveQuery server and notifies you whenever objects matching your query are created, updated, or deleted.
+        }
+        
+        @Steps {
+            @Step {
+                Create a query for GameScore objects.
+                
+                Define a query just as you would for normal fetching. This example queries for GameScore objects with points less than 11.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-08-create-query.swift)
+            }
+            
+            @Step {
+                Subscribe to the query using callbacks.
+                
+                Use the `subscribeCallback()` method to create a subscription. This establishes a WebSocket connection and prepares the subscription to receive events.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-09-subscribe.swift)
+            }
+            
+            @Step {
+                Handle subscription success notifications.
+                
+                Use the `handleSubscribe` closure to receive confirmation when your subscription is established. The `isNew` parameter indicates whether this is a new subscription or an update to an existing one.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-10-handle-subscribe.swift)
+            }
+            
+            @Step {
+                Register for unsubscribe notifications.
+                
+                Use the `handleUnsubscribe` closure to know when you've been unsubscribed from a query, either manually or due to a connection issue.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-11-handle-unsubscribe.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Handle subscription events") {
+        @ContentAndMedia {
+            Process real-time events when objects are created, updated, deleted, or match/unmatch your query.
+            
+            LiveQuery provides five types of events: `created`, `updated`, `deleted`, `entered`, and `left`. These events allow you to respond immediately to changes in your data.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new query with field selection.
+                
+                Define a query for GameScore objects with points greater than 50, and use `select()` to specify which fields you want to receive in the events.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-12-query-with-select.swift)
+            }
+            
+            @Step {
+                Subscribe to the new query.
+                
+                Create a subscription for the query that will receive real-time events.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-13-subscribe-events.swift)
+            }
+            
+            @Step {
+                Handle all subscription events using a switch statement.
+                
+                Use the `handleEvent` closure to process different event types. The `.entered` and `.left` events occur when objects start or stop matching your query. The `.created`, `.updated`, and `.deleted` events track object lifecycle changes.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-14-handle-events.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Manage connection lifecycle") {
+        @ContentAndMedia {
+            Learn how to unsubscribe from queries, check connection health, and close connections.
+            
+            Proper connection management is important for conserving resources and ensuring your app responds correctly to network changes.
+        }
+        
+        @Steps {
+            @Step {
+                Unsubscribe from a query when you no longer need updates.
+                
+                Call `unsubscribe()` on your query to stop receiving events. If this is the last subscription, the WebSocket connection will automatically close.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-15-unsubscribe.swift)
+            }
+            
+            @Step {
+                Ping the LiveQuery server to check connection health.
+                
+                Use `sendPing()` to verify the WebSocket connection is active and the server is responding.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-16-ping.swift)
+            }
+            
+            @Step {
+                Close the current LiveQuery connection.
+                
+                Use `close()` to disconnect the current WebSocket connection. This affects all active subscriptions on this connection.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-17-close.swift)
+            }
+            
+            @Step {
+                Verify the connection is closed by attempting to ping.
+                
+                After closing, ping attempts will fail, confirming the connection is no longer active.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-18-ping-after-close.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Advanced query subscriptions") {
+        @ContentAndMedia {
+            Resubscribe to queries after reconnecting and manage multiple subscriptions.
+            
+            When connections are closed, you can reestablish subscriptions. If you never unsubscribed from a query, you can reuse the previous subscription object with its handlers intact.
+        }
+        
+        @Steps {
+            @Step {
+                Resubscribe to a query that was never unsubscribed.
+                
+                If you only closed the connection but didn't unsubscribe, you can call `subscribeCallback()` again to reestablish the subscription with the same handlers.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-19-resubscribe-existing.swift)
+            }
+            
+            @Step {
+                Resubscribe to a query that was previously unsubscribed.
+                
+                For queries you unsubscribed from, you need to set up new handlers when you resubscribe.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-20-resubscribe-new.swift)
+            }
+            
+            @Step {
+                Set up event handlers for the resubscribed query.
+                
+                Register new event handlers to process the five event types for this subscription.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-21-new-handlers.swift)
+            }
+            
+            @Step {
+                Ping the server to verify active subscriptions.
+                
+                After resubscribing, ping the server to confirm the WebSocket connection is active and healthy.
+                
+                @Code(name: "YourApp.swift", file: 11-livequery-22-final-ping.swift)
+            }
+        }
+    }
+}
