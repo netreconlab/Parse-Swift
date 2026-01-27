@@ -5,11 +5,11 @@ import Combine
 // Configuration manager with Combine/SwiftUI observation support
 class ConfigManager: ObservableObject {
     @Published var config: Config
-    
+
     init() {
         // Initialize with default config
         self.config = Config()
-        
+
         // Attempt to load cached config
         Task {
             do {
@@ -22,24 +22,24 @@ class ConfigManager: ObservableObject {
             }
         }
     }
-    
+
     // Fetch and update configuration
     func refreshConfiguration() async throws {
         let freshConfig = try await config.fetch()
-        
+
         // Update the published property (notifies observers)
         await MainActor.run {
             self.config = freshConfig
         }
-        
+
         print("Configuration refreshed successfully")
     }
 }
 
 struct Config: ParseConfig {
-    var welcomeMessage: String? = "Welcome!"
-    var winningNumber: Int? = 42
-    var newFeatureEnabled: Bool? = false
+    var welcomeMessage: String? // e.g. "Welcome!"
+    var winningNumber: Int? // e.g. 42
+    var newFeatureEnabled: Bool? // e.g. false
 }
 
 // Usage in SwiftUI or with Combine

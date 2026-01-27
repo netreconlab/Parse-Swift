@@ -14,7 +14,7 @@ Task {
     } catch {
         // Handle the case where no config has been cached yet
         print("No cached configuration found. Fetching from server...")
-        
+
         do {
             var config = Config()
             let fetchedConfig = try await config.fetch()

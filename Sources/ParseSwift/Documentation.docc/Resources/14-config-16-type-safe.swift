@@ -3,10 +3,10 @@ import ParseSwift
 
 // Define type-safe configuration access
 struct Config: ParseConfig {
-    var welcomeMessage: String? = "Welcome!"
-    var winningNumber: Int? = 42
-    var newFeatureEnabled: Bool? = false
-    var minAppVersion: String? = "1.0.0"
+    var welcomeMessage: String? // e.g. "Welcome!"
+    var winningNumber: Int? // e.g. 42
+    var newFeatureEnabled: Bool? // e.g. false
+    var minAppVersion: String? // e.g. "1.0.0"
 }
 
 extension Config {
@@ -14,15 +14,15 @@ extension Config {
     var safeWelcomeMessage: String {
         return welcomeMessage ?? "Welcome to our app!"
     }
-    
+
     var safeWinningNumber: Int {
         return winningNumber ?? 42
     }
-    
+
     var isNewFeatureEnabled: Bool {
         return newFeatureEnabled ?? false
     }
-    
+
     // Validation methods
     func isVersionSupported(_ currentVersion: String) -> Bool {
         guard let minVersion = minAppVersion else { return true }

@@ -12,7 +12,7 @@ Task {
     do {
         // Fetch the current configuration
         config = try await config.fetch()
-        
+
         // Modify a configuration parameter
         config.winningNumber = 50
         print("Updated winning number to 50")

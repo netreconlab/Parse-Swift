@@ -12,7 +12,7 @@ Task {
     do {
         config = try await config.fetch()
         config.winningNumber = 50
-        
+
         // WARNING: ParseConfig.save() uses the Parse primary/master key.
         // This example is intended for trusted server-side/admin tooling only,
         // where the primary key can be stored securely. Do NOT call config.save()
@@ -21,7 +21,7 @@ Task {
         // Client apps should typically only read config via fetch, while updates
         // are performed by secure backend or admin tools.
         let isUpdated = try await config.save()
-        
+
         if isUpdated {
             // Fetch again to verify the update
             let verifiedConfig = try await config.fetch()

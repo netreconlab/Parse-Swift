@@ -5,7 +5,7 @@ import ParseSwift
 struct Config: ParseConfig {
     var welcomeMessage: String?
     var winningNumber: Int?
-    
+
     // Dynamic content
     var promotionalMessage: String?
     var maintenanceMessage: String?
@@ -17,13 +17,13 @@ var config = Config()
 Task {
     do {
         config = try await config.fetch()
-        
+
         // Display dynamic content
         if let promo = config.promotionalMessage {
             print("Showing promotional message: \(promo)")
             // Display in UI
         }
-        
+
         if let announcement = config.announcementText {
             print("Announcement: \(announcement)")
             // Show announcement banner

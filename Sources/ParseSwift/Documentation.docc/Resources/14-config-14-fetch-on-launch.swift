@@ -2,8 +2,8 @@ import Foundation
 import ParseSwift
 
 struct Config: ParseConfig {
-    var welcomeMessage: String? = "Welcome!"
-    var winningNumber: Int? = 42
+    var welcomeMessage: String? // e.g. "Welcome!"
+    var winningNumber: Int? // e.g. 42
 }
 
 // Fetch configuration early in your app lifecycle
@@ -16,7 +16,7 @@ Task {
         print("Successfully loaded latest configuration")
     } catch {
         print("Failed to fetch config, using cached or defaults: \(error)")
-        
+
         // Try to use cached configuration as fallback
         do {
             config = try await Config.current()
@@ -26,4 +26,3 @@ Task {
         }
     }
 }
-

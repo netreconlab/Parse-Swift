@@ -7,7 +7,7 @@ struct Config: ParseConfig {
     var welcomeMessage: String? = "Welcome to our app!"
     var winningNumber: Int? = 42
     var newFeatureEnabled: Bool? = false
-    var promotionalMessage: String? = nil
+    var promotionalMessage: String?
     var maxRetries: Int? = 3
     var timeoutSeconds: Int? = 30
 }

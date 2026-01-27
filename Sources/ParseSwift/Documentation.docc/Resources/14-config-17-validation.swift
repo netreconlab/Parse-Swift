@@ -2,10 +2,10 @@ import Foundation
 import ParseSwift
 
 struct Config: ParseConfig {
-    var welcomeMessage: String? = "Welcome!"
-    var winningNumber: Int? = 42
-    var maxUploadSizeMB: Int? = 10
-    var apiEndpoint: String? = "https://api.example.com"
+    var welcomeMessage: String? // e.g. "Welcome!"
+    var winningNumber: Int? // e.g. 42
+    var maxUploadSizeMB: Int? // e.g. 10
+    var apiEndpoint: String? // e.g. "https://api.example.com"
 }
 
 extension Config {
@@ -16,13 +16,13 @@ extension Config {
             throw NSError(domain: "ConfigError", code: 1,
                          userInfo: [NSLocalizedDescriptionKey: "Winning number must be between 1 and 100"])
         }
-        
+
         // Ensure max upload size is reasonable
         if let size = maxUploadSizeMB, size < 1 || size > 100 {
             throw NSError(domain: "ConfigError", code: 2,
                          userInfo: [NSLocalizedDescriptionKey: "Max upload size must be between 1 and 100 MB"])
         }
-        
+
         // Validate API endpoint format
         if let endpoint = apiEndpoint, !endpoint.hasPrefix("https://") {
             throw NSError(domain: "ConfigError", code: 3,

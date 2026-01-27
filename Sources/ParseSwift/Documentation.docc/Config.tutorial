@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Understanding Parse Config") {
@@ -28,11 +28,7 @@
             @Step {
                 Add configuration parameters in Parse Dashboard.
                 
-                Go to your Parse Dashboard and click **Config → Create a parameter**. Add the following parameters:
-                - Parameter Name: "welcomeMessage", Type: "String", Value: "Hello"
-                - Parameter Name: "winningNumber", Type: "Number", Value: "42"
-                
-                These values can be changed at any time from the Dashboard without requiring an app update.
+                Go to your Parse Dashboard and click **Config → Create a parameter**. Add the following parameters: - Parameter Name: "welcomeMessage", Type: "String", Value: "Hello" - Parameter Name: "winningNumber", Type: "Number", Value: "42". These values can be changed at any time from the Dashboard without requiring an app update.
                 
                 @Code(name: "Config.swift", file: 14-config-01-model.swift)
             }
@@ -79,7 +75,7 @@
             
             While it's common to update configuration through the Parse Dashboard, you can also modify values from code that runs in a secure environment (for example Cloud Code, backend services, or internal admin apps) and save them to the server. This is useful for admin tools or automated configuration management.
             
-            > Security warning: `ParseConfig.save()` requires the Parse Server master/primary key. Never ship the master key in public or otherwise untrusted client apps (iOS, macOS, watchOS, tvOS). Only call `save()` from server-side code, Cloud Code, or other trusted admin environments.
+            > Security warning: `ParseConfig.save()` requires the Parse Server primary key. Never ship the master key in public or otherwise untrusted client apps (e.g. iOS, macOS, watchOS, tvOS, visionOS). Only call `save()` from server-side code, Cloud Code, or other trusted admin environments.
         }
         
         @Steps {
@@ -178,9 +174,7 @@
             @Step {
                 **Best Practice 2: Fetch on app launch**
                 
-                Fetch the configuration when your app launches to ensure you have the latest settings. Use the cached version as a fallback if the fetch fails.
-                
-                For information on initializing the Parse SDK at app launch, see <doc:Your-First-Object#Initialize-Parse-and-check-server-health>.
+                Fetch the configuration when your app launches to ensure you have the latest settings. Use the cached version as a fallback if the fetch fails. For information on initializing the Parse SDK at app launch, see <doc:Your-First-Object#Initialize-Parse-and-check-server-health>.
                 
                 @Code(name: "YourApp.swift", file: 14-config-14-fetch-on-launch.swift)
             }
