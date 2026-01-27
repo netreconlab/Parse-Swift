@@ -9,7 +9,7 @@ struct GameScore: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     // Your own properties
     var points: Int? = 0
     var profilePicture: ParseFile?

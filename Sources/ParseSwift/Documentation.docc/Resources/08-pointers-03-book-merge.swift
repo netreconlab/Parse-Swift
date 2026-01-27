@@ -13,7 +13,7 @@ struct Book: ParseObject, ParseQueryScorable {
     // Custom properties
     var title: String?
     var relatedBook: Pointer<Book>?
-    
+
     // Custom merge method for optimal performance
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)

@@ -8,7 +8,7 @@ Task {
     do {
         // Save the score to get an objectId
         let savedScore = try await score.save()
-        
+
         print("Saved score: \(savedScore)")
         print("Initial points: \(savedScore.points ?? 0)")
     } catch {

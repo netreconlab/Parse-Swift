@@ -8,7 +8,7 @@ struct Installation: ParseInstallation {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     // These are required by `ParseInstallation`
     var installationId: String?
     var deviceType: String?
@@ -21,7 +21,7 @@ struct Installation: ParseInstallation {
     var appVersion: String?
     var parseVersion: String?
     var localeIdentifier: String?
-    
+
     // Your custom properties
     var customKey: String?
 }

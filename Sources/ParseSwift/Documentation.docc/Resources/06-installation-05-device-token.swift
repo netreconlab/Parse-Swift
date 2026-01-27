@@ -6,11 +6,11 @@ func registerDeviceToken(_ deviceTokenData: Data) {
     Task {
         do {
             var currentInstallation = try await Installation.current()
-            
+
             // In a real app, you would get this Data from APNS registration
             currentInstallation.setDeviceToken(deviceTokenData)
             currentInstallation.badge = 0
-            
+
             let savedInstallation = try await currentInstallation.save()
             print("Successfully saved installation with device token: \(savedInstallation)")
         } catch {

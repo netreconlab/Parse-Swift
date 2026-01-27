@@ -21,14 +21,14 @@ Task {
         score.points = 100
         score.rating = 4.0
         let savedScore = try await score.save()
-        
+
         // Increment the rating by a decimal amount
         let incrementDoubleOperation = savedScore
             .operation
             .increment("rating", by: 0.5)
-        
+
         let updatedScore = try await incrementDoubleOperation.save()
-        
+
         print("Rating incremented by 0.5")
         print("New rating value: \(updatedScore.rating ?? 0)")
     } catch {

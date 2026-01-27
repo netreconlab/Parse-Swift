@@ -8,7 +8,7 @@ let query = Author.query("name" == "Bruce")
 do {
     let author = try await query.first()
     print("Found author with all pointers included: \(author)")
-    
+
     // All pointer fields (book and otherBooks) contain complete objects
 } catch {
     print("Error querying: \(error)")

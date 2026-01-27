@@ -6,7 +6,7 @@ Task {
         // Query the users relation to retrieve all users in the role
         let query: Query<User>? = try savedRole!.users?.query()
         let relatedUsers = try await query?.find()
-        
+
         print("""
             The following users are part of the
             \"\(String(describing: savedRole!.name))\" role: \(relatedUsers ?? [])
