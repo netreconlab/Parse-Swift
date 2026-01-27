@@ -26,7 +26,7 @@
             @Step {
                 Initialize the Parse SDK with your server configuration.
                 
-                Replace the placeholder values with your actual server credentials. Make sure LiveQuery is enabled on your Parse Server.
+                Replace the placeholder values with your actual, non-privileged client configuration (for example, applicationId, server URL, and any client keys). Never include your Parse primary/master key or other highly privileged credentials in this app; those must be kept only in secure, trusted server-side environments. Make sure LiveQuery is enabled on your Parse Server.
                 
                 @Code(name: "YourApp.swift", file: 11-livequery-02-initialize.swift)
             }
