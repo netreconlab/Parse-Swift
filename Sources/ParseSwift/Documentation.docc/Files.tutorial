@@ -198,7 +198,7 @@
             @Step {
                 Create a new GameScore and assign the data file.
                 
-                Assign the ParseFile to a new GameScore instance's `myData` property (you'll need to add this property to your model for this example).
+                Assign the ParseFile to a new GameScore instance's `myData` property that we added to the model earlier (in Section 1).
                 
                 @Code(name: "YourApp.swift", file: 09-files-17-assign-data-file.swift)
             }
