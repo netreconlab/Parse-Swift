@@ -2,7 +2,7 @@ import Foundation
 import ParseSwift
 
 // Track different events throughout your app
-func trackUserActions() async {
+Task {
     do {
         // Track when user views their profile
         var profileEvent = ParseAnalytics(name: "viewedProfile")

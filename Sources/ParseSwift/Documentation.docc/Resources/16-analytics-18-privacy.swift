@@ -18,10 +18,9 @@ class AnalyticsManager {
         }
     }
     
-    // Only track if user has given consent
+    // Only track if the user hasn't opted out of analytics
     static func trackEvent(name: String, dimensions: [String: String]? = nil) {
         guard isAnalyticsEnabled else {
-            print("Analytics disabled by user preference")
             return
         }
         

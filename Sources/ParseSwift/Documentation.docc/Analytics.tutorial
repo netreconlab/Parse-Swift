@@ -20,13 +20,13 @@
 			@Step {
 				**What is Parse Analytics?** Parse Analytics is a built-in feature that allows you to track events in your application. Events are actions that users take, such as opening the app, completing a tutorial, making a purchase, or any other custom action you want to measure. Analytics data is stored on your Parse Server and can be queried or exported for analysis. Benefits include: Understanding user behavior and engagement, Tracking feature adoption and usage, Measuring the success of new features, Identifying areas for improvement, Making data-driven decisions
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-01-overview.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-01-overview.swift)
 			}
 			
 			@Step {
 				**The ParseAnalytics API** Parse provides two main ways to track analytics: `ParseAnalytics.trackAppOpened()` for tracking when users open your app, and creating custom `ParseAnalytics` instances for tracking any other events. Both methods support async/await for modern Swift concurrency as well as completion handlers for backward compatibility.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-02-api.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-02-api.swift)
 			}
 		}
 	}
@@ -42,25 +42,25 @@
 			@Step {
 				Import ParseSwift to access the analytics functionality. The ParseAnalytics type is part of the ParseSwift module and provides all the analytics tracking capabilities.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-03-import.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-03-import.swift)
 			}
 			
 			@Step {
 				Track app opened using async/await. Call `ParseAnalytics.trackAppOpened()` using `try await` when your app launches. This is typically done in your app's initialization code or in the `AppDelegate`/`SceneDelegate` lifecycle methods.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-04-track-app-opened-async.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-04-track-app-opened-async.swift)
 			}
 			
 			@Step {
 				Alternatively, use completion handlers if your code doesn't support async/await. The completion handler receives a `Result` type that you can switch on to handle success and failure cases.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-05-track-app-opened-callback.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-05-track-app-opened-callback.swift)
 			}
 			
 			@Step {
 				Handle the result to confirm tracking succeeded. When successful, the analytics event has been recorded on your Parse Server. On failure, you receive a `ParseError` describing what went wrong, such as network issues or server problems.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-06-handle-app-opened-result.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-06-handle-app-opened-result.swift)
 			}
 		}
 	}
@@ -76,25 +76,25 @@
 			@Step {
 				Create a custom analytics event with a descriptive name. Initialize a `ParseAnalytics` instance with a name that clearly describes the event. Use consistent naming conventions across your app to make analysis easier.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-07-create-event.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-07-create-event.swift)
 			}
 			
 			@Step {
 				Track the custom event using async/await. Call the `track()` method on your analytics instance to send the event to Parse Server. This records that the event occurred at the current time.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-08-track-event-async.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-08-track-event-async.swift)
 			}
 			
 			@Step {
 				Alternatively, track the event using a completion handler. Like with `trackAppOpened()`, you can use the completion handler pattern if you're not using async/await in your codebase.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-09-track-event-callback.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-09-track-event-callback.swift)
 			}
 			
 			@Step {
 				Track multiple different events throughout your app. Create separate `ParseAnalytics` instances for each type of event you want to track. This helps you understand which features users engage with most.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-10-multiple-events.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-10-multiple-events.swift)
 			}
 		}
 	}
@@ -110,19 +110,19 @@
 			@Step {
 				Pass dimensions as a dictionary when tracking an event. The dimensions parameter accepts a dictionary of string keys and values. Include any contextual information that will help you analyze the event later.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-11-track-with-dimensions.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-11-track-with-dimensions.swift)
 			}
 			
 			@Step {
 				Use dimensions to track user segments and behaviors. Dimensions can include user attributes (subscription tier, user level), action details (button clicked, feature used), or environmental factors (screen size, network type). This creates rich, queryable analytics data.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-12-dimensions-examples.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-12-dimensions-examples.swift)
 			}
 			
 			@Step {
 				Combine event names and dimensions for powerful analytics. By using specific event names and relevant dimensions together, you can build a comprehensive picture of user behavior. For example, track "purchaseCompleted" with dimensions for product category, price range, and payment method.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-13-combined-analytics.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-13-combined-analytics.swift)
 			}
 		}
 	}
@@ -138,31 +138,31 @@
 			@Step {
 				**Best Practice 1: Use descriptive event names** Choose event names that clearly describe the user action. Use a consistent naming convention across your app, such as camelCase or snake_case. Avoid generic names like "event1" or "buttonClick" – instead use specific names like "tutorialCompleted" or "shareButtonTapped".
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-14-naming-convention.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-14-naming-convention.swift)
 			}
 			
 			@Step {
 				**Best Practice 2: Don't track too frequently** Avoid tracking events for every small user interaction, as this can overload your server and make analysis difficult. Focus on meaningful user actions and business-critical events. For high-frequency actions, consider sampling or aggregating data.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-15-track-meaningful.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-15-track-meaningful.swift)
 			}
 			
 			@Step {
 				**Best Practice 3: Keep dimensions simple and consistent** Use a limited, well-defined set of dimension keys across your app. Avoid including personally identifiable information (PII) in dimensions. Keep dimension values short and categorical when possible to make analysis easier.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-16-simple-dimensions.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-16-simple-dimensions.swift)
 			}
 			
 			@Step {
 				**Best Practice 4: Handle errors gracefully** Analytics tracking should never interrupt the user experience. Always handle errors silently or log them for debugging, but don't show error messages to users if analytics tracking fails. The app should continue to function normally even if analytics are unavailable.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-17-error-handling.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-17-error-handling.swift)
 			}
 			
 			@Step {
 				**Best Practice 5: Respect user privacy** Be transparent about the data you collect and give users control over analytics tracking. Follow platform guidelines and privacy regulations. Consider providing an opt-out mechanism for users who don't want their usage tracked.
 				
-				@Code(name: "Analytics.swift", file: 11-analytics-18-privacy.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-18-privacy.swift)
 			}
 		}
 	}

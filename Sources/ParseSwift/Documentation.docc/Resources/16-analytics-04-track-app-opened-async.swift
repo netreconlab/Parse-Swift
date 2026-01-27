@@ -2,7 +2,7 @@ import Foundation
 import ParseSwift
 
 // Track when the app is opened using async/await
-func trackAppLaunch() async {
+Task {
     do {
         try await ParseAnalytics.trackAppOpened()
         print("Successfully tracked app opened event")
