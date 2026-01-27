@@ -10,7 +10,7 @@ Task {
     do {
         let results = try await query.find()
         print("Found \(results.count) GameScore(s)")
-        
+
         // Process each result
         results.forEach { score in
             guard let createdAt = score.createdAt else { return }

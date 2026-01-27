@@ -9,11 +9,11 @@ Task {
             password: "TestMePass123^"
         )
         print("User signed up: \(newUser.username ?? "N/A")")
-        
+
         // Log out the user
         try await User.logout()
         print("User logged out successfully")
-        
+
         // Verify no current user exists
         do {
             let currentUser = try await User.current()

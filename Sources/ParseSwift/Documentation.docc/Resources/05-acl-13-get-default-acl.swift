@@ -8,7 +8,7 @@ struct User: ParseUser {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     var username: String?
     var email: String?
     var emailVerified: Bool?
@@ -20,7 +20,7 @@ Task {
     do {
         // Retrieve the current default ACL
         let currentDefaultACL = try await ParseACL.defaultACL()
-        
+
         print("Current default ACL:")
         print("Public read: \(currentDefaultACL.publicRead)")
         print("Public write: \(currentDefaultACL.publicWrite)")

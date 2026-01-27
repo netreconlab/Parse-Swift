@@ -10,10 +10,10 @@ Task {
     do {
         // Get both the results and the total count
         let (scores, count) = try await query.withCount()
-        
+
         print("Found \(scores.count) GameScore(s) in this page")
         print("Total matching objects: \(count)")
-        
+
         scores.forEach { score in
             print("Score: \(score.points ?? 0) points")
         }

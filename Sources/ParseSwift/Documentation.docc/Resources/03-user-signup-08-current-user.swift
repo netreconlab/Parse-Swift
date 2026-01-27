@@ -8,10 +8,10 @@ Task {
             username: "hello",
             password: "TestMePass123^"
         )
-        
+
         // Retrieve the current user from local storage
         let currentUser = try await User.current()
-        
+
         // Verify they match
         if currentUser.hasSameObjectId(as: newUser) {
             print("Current user matches signed up user")

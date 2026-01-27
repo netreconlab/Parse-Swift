@@ -8,7 +8,7 @@ Task {
     do {
         // The default ACL will be automatically applied when saved
         let savedScore = try await score.save()
-        
+
         print("Saved score with ACL: \(savedScore)")
         print("Score has ACL: \(savedScore.ACL != nil)")
     } catch {

@@ -8,7 +8,7 @@ struct User: ParseUser {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     var username: String?
     var email: String?
     var emailVerified: Bool?
@@ -22,14 +22,14 @@ Task {
         var defaultACL = ParseACL()
         defaultACL.publicRead = false
         defaultACL.publicWrite = false
-        
+
         // Set as default ACL with access for current user
         // The current user will automatically get read and write access
         let savedACL = try await ParseACL.setDefaultACL(
             defaultACL,
             withAccessForCurrentUser: true
         )
-        
+
         print("Default ACL set successfully")
         print("Public read: \(savedACL.publicRead)")
         print("Public write: \(savedACL.publicWrite)")

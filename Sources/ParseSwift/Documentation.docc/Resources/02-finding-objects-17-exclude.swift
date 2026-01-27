@@ -11,7 +11,7 @@ Task {
         // Exclude the "points" field
         let queryExclude = query.exclude("points")
         let firstScore = try await queryExclude.first()
-        
+
         // All fields except "points" are populated
         print("Score retrieved (points excluded)")
         print("points is nil: \(firstScore.points == nil)")

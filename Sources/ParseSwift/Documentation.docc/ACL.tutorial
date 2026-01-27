@@ -168,12 +168,7 @@
             @Step {
                 **Best Practice 1: Set a restrictive default ACL**
                 
-                Always configure a default ACL when initializing your app. A good starting point is:
-                - `publicRead = false`
-                - `publicWrite = false`
-                - `withAccessForCurrentUser = true`
-                
-                This ensures new objects are private by default, and users only have access to objects they create.
+                If needed, you can configure a default ACL when initializing your app. Depending on the ACL configuration, it can ensure new objects are private by default, and users only have access to objects they create.
                 
                 @Code(name: "YourApp.swift", file: 05-acl-06-default-acl.swift)
             }
@@ -181,9 +176,7 @@
             @Step {
                 **Best Practice 2: Validate permissions on the server**
                 
-                ACLs are enforced on the Parse Server, not just in the client. This means users can't bypass ACLs by modifying client code.
-                
-                However, you should still validate that the correct ACLs are set when creating objects with sensitive data.
+                ACLs are enforced on the Parse Server, not just in the client. This means users can't bypass ACLs by modifying client code. However, you should still validate that the correct ACLs are set when creating objects with sensitive data.
                 
                 @Code(name: "YourApp.swift", file: 05-acl-09-user-specific.swift)
             }
@@ -191,9 +184,7 @@
             @Step {
                 **Best Practice 3: Use roles for scalable permissions**
                 
-                Instead of granting permissions to individual users on every object, create roles for common permission groups.
-                
-                This makes it easier to manage permissions as your app grows.
+                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows.
                 
                 @Code(name: "YourApp.swift", file: 05-acl-12-role-based.swift)
             }

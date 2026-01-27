@@ -8,13 +8,13 @@ Task {
             username: "verifyUser",
             password: "TestMePass123^"
         )
-        
+
         // Attempt to verify with incorrect password
         let verifiedUser = try await User.verifyPassword(
             password: "wrongPassword",
             usingPost: true
         )
-        
+
         print("User verified (this shouldn't happen): \(verifiedUser)")
     } catch {
         // This error is expected when using wrong password
