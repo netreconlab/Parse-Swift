@@ -80,4 +80,12 @@
         
         @TutorialReference(tutorial: "doc:Roles-and-Relations")
     }
+    
+    @Chapter(name: "Configuration Management") {
+        Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Config")
+    }
 }
