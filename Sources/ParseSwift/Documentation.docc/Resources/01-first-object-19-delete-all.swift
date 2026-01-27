@@ -7,7 +7,7 @@ let score2ToDelete = GameScore(objectId: "objectId2")
 Task {
     do {
         let results = try await [scoreToDelete, score2ToDelete].deleteAll()
-        
+
         results.forEach { result in
             switch result {
             case .success:
