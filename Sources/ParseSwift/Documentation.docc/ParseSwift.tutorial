@@ -10,14 +10,23 @@
     }
     
     @Chapter(name: "Getting Started") {
-        Learn the fundamentals of Parse-Swift by working with ParseObjects and User authentication - the foundation of data storage and user management in Parse.
+        Learn the fundamentals of Parse-Swift by working with ParseObjects - the foundation of data storage in Parse.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
-        @TutorialReference(tutorial: "doc:Finding-Objects")
         @TutorialReference(tutorial: "doc:Custom-ObjectId")
     }
+
+	  @Chapter(name: "Query and retrieve ParseObjects") {
+		    Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery to receive real-time updates when ParseObjects are created, updated, or deleted on your Parse Server.
+		
+		    @Image(source: parse-logo.png, alt: "Parse logo")
+		
+		    @TutorialReference(tutorial: "doc:Finding-Objects")
+		    @TutorialReference(tutorial: "doc:GeoPoint")
+		    @TutorialReference(tutorial: "doc:LiveQuery")
+	  }
     
     @Chapter(name: "User Authentication") {
         Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
@@ -59,14 +68,6 @@
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Files")   
-    }
-
-    @Chapter(name: "Location Based Services and Queries") {
-        Learn about advanced Parse-Swift features including location-based services and geo-spatial queries.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:GeoPoint")
     }
 
     @Chapter(name: "Data Operations") {
