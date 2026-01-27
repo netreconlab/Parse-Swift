@@ -5,10 +5,10 @@ import Combine
 
 // Create a SwiftUI view
 struct ContentView: View {
-    
+
     // A view model in SwiftUI
     @StateObject var viewModel = ViewModel()
-    
+
     var body: some View {
         NavigationView {
             if let error = viewModel.error {

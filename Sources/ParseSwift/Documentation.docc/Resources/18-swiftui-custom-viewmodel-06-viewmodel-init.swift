@@ -6,9 +6,9 @@ import Combine
 class ViewModel: ObservableObject {
     @Published var objects = [GameScore]()
     @Published var error: ParseError?
-    
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     init() {
         fetchScores()
     }

@@ -19,14 +19,22 @@
     }
 	
 	@Chapter(name: "Query and retrieve ParseObjects") {
-		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates and integrate queries with SwiftUI views.
+		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates.
 		
 		@Image(source: parse-logo.png, alt: "Parse logo")
 		
 		@TutorialReference(tutorial: "doc:Finding-Objects")
-		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects")
 		@TutorialReference(tutorial: "doc:GeoPoint")
 		@TutorialReference(tutorial: "doc:LiveQuery")
+	}
+	
+	@Chapter(name: "SwiftUI Query Integration") {
+		Learn how to integrate Parse-Swift with SwiftUI applications using custom view models and Combine publishers.
+		
+		@Image(source: parse-logo.png, alt: "Parse logo")
+		
+		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects")
+		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects-With-Custom-ViewModel")
 	}
 
     @Chapter(name: "User Authentication") {
@@ -101,13 +109,5 @@
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Analytics")
-    }
-    
-    @Chapter(name: "SwiftUI Integration") {
-        Learn how to integrate Parse-Swift with SwiftUI applications using custom view models and Combine publishers.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects-With-Custom-ViewModel")
     }
 }

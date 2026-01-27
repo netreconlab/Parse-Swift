@@ -9,11 +9,11 @@ struct GameScore: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     var points: Int?
     var location: ParseGeoPoint?
     var name: String?
-    
+
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)
         if updated.shouldRestoreKey(\.points, original: object) {
@@ -39,13 +39,13 @@ extension GameScore {
 class ViewModel: ObservableObject {
     @Published var objects = [GameScore]()
     @Published var error: ParseError?
-    
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     init() {
         fetchScores()
     }
-    
+
     func fetchScores() {
         let query = GameScore.query("points" > 2)
             .order([.descending("points")])
@@ -70,7 +70,7 @@ class ViewModel: ObservableObject {
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
-    
+
     var body: some View {
         NavigationView {
             if let error = viewModel.error {

@@ -6,13 +6,13 @@ import Combine
 class ViewModel: ObservableObject {
     @Published var objects = [GameScore]()
     @Published var error: ParseError?
-    
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     init() {
         fetchScores()
     }
-    
+
     func fetchScores() {
         let query = GameScore.query("points" > 2)
             .order([.descending("points")])
