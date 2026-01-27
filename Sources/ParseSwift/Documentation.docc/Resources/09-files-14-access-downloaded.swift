@@ -3,9 +3,14 @@ import ParseSwift
 
 Task {
     do {
-        // Assume we have a fetched GameScore with a profilePicture
+        // Save the GameScore with the associated file
+        let savedScore = try await score.save()
+        
+        // Fetch the GameScore to get updated file information
+        let fetchedScore = try await savedScore.fetch()
+        
+        // Download the file content
         if let picture = fetchedScore.profilePicture {
-            // Download the file content
             let fetchedFile = try await picture.fetch()
             
             // Access the downloaded file from its local URL
