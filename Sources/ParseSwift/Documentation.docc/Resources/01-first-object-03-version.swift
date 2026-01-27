@@ -9,7 +9,7 @@ Task {
             primaryKey: "primaryKey",
             serverURL: URL(string: "http://localhost:1337/parse")!
         )
-        
+
         let version = try await ParseVersion.current()
         print("Current Swift SDK version is \"\(version)\"")
     } catch {

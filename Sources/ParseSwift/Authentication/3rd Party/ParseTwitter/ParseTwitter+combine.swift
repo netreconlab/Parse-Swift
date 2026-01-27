@@ -18,7 +18,7 @@ public extension ParseTwitter {
 
     /**
      Login a `ParseUser` *asynchronously* using Twitter authentication. Publishes when complete.
-     - parameter user: The **id** from **Twitter**.
+     - parameter userId: The **id** from **Twitter**.
      - parameter screenName: The `user screenName` from **Twitter**.
      - parameter consumerKey: The `consumerKey` from **Twitter**.
      - parameter consumerSecret: The `consumerSecret` from **Twitter**.
@@ -88,7 +88,7 @@ public extension ParseTwitter {
 
     /**
      Link the *current* `ParseUser` *asynchronously* using Twitter authentication. Publishes when complete.
-     - parameter user: The `user` from **Twitter**.
+     - parameter userId: The `user` from **Twitter**.
      - parameter screenName: The `user screenName` from **Twitter**.
      - parameter consumerKey: The `consumerKey` from **Twitter**.
      - parameter consumerSecret: The `consumerSecret` from **Twitter**.

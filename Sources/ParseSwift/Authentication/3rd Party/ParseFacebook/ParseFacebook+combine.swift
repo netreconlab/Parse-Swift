@@ -82,6 +82,7 @@ public extension ParseFacebook {
     /**
      Login a `ParseUser` *asynchronously* using Facebook authentication for graph API login. Publishes when complete.
      - parameter authData: Dictionary containing key/values.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
     func loginPublisher(
