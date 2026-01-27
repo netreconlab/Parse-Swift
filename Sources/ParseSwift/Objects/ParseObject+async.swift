@@ -143,7 +143,7 @@ public extension Sequence where Element: ParseObject {
     /**
      Saves a collection of objects *asynchronously*.
      - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+     is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -155,7 +155,7 @@ public extension Sequence where Element: ParseObject {
      - returns: Returns an array of Result enums with the object if a save was successful or a
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+     - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
      - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
@@ -192,7 +192,7 @@ public extension Sequence where Element: ParseObject {
     /**
      Creates a collection of objects *asynchronously*.
      - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+     is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -201,7 +201,7 @@ public extension Sequence where Element: ParseObject {
      - returns: Returns an array of Result enums with the object if a save was successful or a
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+     - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -227,7 +227,7 @@ public extension Sequence where Element: ParseObject {
     /**
      Replaces a collection of objects *asynchronously*.
      - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+     is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -236,7 +236,7 @@ public extension Sequence where Element: ParseObject {
      - returns: Returns an array of Result enums with the object if a save was successful or a
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+     - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -262,7 +262,7 @@ public extension Sequence where Element: ParseObject {
     /**
      Updates a collection of objects *asynchronously*.
      - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+     is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -271,7 +271,7 @@ public extension Sequence where Element: ParseObject {
      - returns: Returns an array of Result enums with the object if a save was successful or a
      `ParseError` if it failed.
      - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+     - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -297,7 +297,7 @@ public extension Sequence where Element: ParseObject {
     /**
      Deletes a collection of objects *asynchronously*.
      - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-     is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+     is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
      prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -305,7 +305,7 @@ public extension Sequence where Element: ParseObject {
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - returns: Returns an array [(Result<Void, ParseError>)].
      - throws: An error of type `ParseError`.
-     - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+     - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
      objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
      the transactions can fail.
     */

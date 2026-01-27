@@ -1441,7 +1441,7 @@ public extension Sequence where Element: ParseUser {
 	/**
 	 Saves a collection of users all at once *asynchronously* and executes the completion block when done.
 	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -1453,7 +1453,7 @@ public extension Sequence where Element: ParseUser {
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
 	 - important: If an object saved has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
@@ -1501,7 +1501,7 @@ public extension Sequence where Element: ParseUser {
 	/**
 	 Creates a collection of users all at once *asynchronously* and executes the completion block when done.
 	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -1509,7 +1509,7 @@ public extension Sequence where Element: ParseUser {
 	 - parameter callbackQueue: The queue to return to after completion. Default value of .main.
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -1546,7 +1546,7 @@ public extension Sequence where Element: ParseUser {
 	/**
 	 Replaces a collection of users all at once *asynchronously* and executes the completion block when done.
 	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -1555,7 +1555,7 @@ public extension Sequence where Element: ParseUser {
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
 	 - important: If an object replaced has the same objectId as current, it will automatically replace the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -1592,7 +1592,7 @@ public extension Sequence where Element: ParseUser {
 	/**
 	 Updates a collection of users all at once *asynchronously* and executes the completion block when done.
 	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -1601,7 +1601,7 @@ public extension Sequence where Element: ParseUser {
 	 - parameter completion: The block to execute.
 	 It should have the following argument signature: `(Result<[(Result<Element, ParseError>)], ParseError>)`.
 	 - important: If an object updated has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -1724,7 +1724,7 @@ public extension Sequence where Element: ParseUser {
 	/**
 	 Deletes a collection of users all at once *asynchronously* and executes the completion block when done.
 	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -1741,7 +1741,7 @@ public extension Sequence where Element: ParseUser {
 	 caused the delete operation to be aborted partway through (for
 	 instance, a connection failure in the middle of the delete).
 	 - important: If an object deleted has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer

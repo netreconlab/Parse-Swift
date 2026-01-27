@@ -123,7 +123,7 @@ public extension ParseCloudable {
      as the view model can be used as a SwiftUI publisher. Meaning it can serve
      indepedently as a ViewModel in MVVM.
      - parameter cloudCode: A type that conforms to `ParseCloudable` to create a view model for.
-     - returns: The view model for this query.
+     - returns: The view model for this cloud code.
      */
 	static func viewModel(_ cloudCode: Self) -> CloudViewModel<Self> {
         CloudViewModel(cloudCode: cloudCode)

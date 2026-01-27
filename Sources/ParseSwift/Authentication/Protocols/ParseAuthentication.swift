@@ -164,7 +164,7 @@ public protocol ParseAuthentication: Codable, Sendable {
     /**
      Unlink the *current* `ParseUser` *asynchronously* from the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: A publisher that eventually produces a single value and then finishes or fails.
+     - returns: The unlinked user.
      */
     func unlink(options: API.Options) async throws -> AuthenticatedUser
 }
