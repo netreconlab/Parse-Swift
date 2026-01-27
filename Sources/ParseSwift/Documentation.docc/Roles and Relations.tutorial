@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> and <doc:ACL> tutorials to understand ParseObjects and access control fundamentals.
         
-        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Understanding Roles") {

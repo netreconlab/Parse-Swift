@@ -4,7 +4,7 @@
         
         This tutorial covers querying objects with constraints, ordering and limiting results, counting objects, and using advanced query features like relative time and field projection.
         
-        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Setup and basic query creation") {

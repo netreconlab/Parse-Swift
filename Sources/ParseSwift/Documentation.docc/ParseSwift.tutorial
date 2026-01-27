@@ -1,8 +1,10 @@
 @Tutorials(name: "ParseSwift") {
     @Intro(title: "Welcome to ParseSwift") {
-        Parse-Swift is the Swift SDK for Parse Platform, enabling you to build powerful iOS, macOS, watchOS, tvOS, Android, Linux, and Windows applications with a cloud backend.
+        A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.
         
         These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery and SwiftUI integration.
+        
+        For full details about Parse-Swift, please view the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
         
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
@@ -10,7 +12,7 @@
     @Chapter(name: "Getting Started") {
         Learn the fundamentals of Parse-Swift by working with ParseObjects and User authentication - the foundation of data storage and user management in Parse.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
         @TutorialReference(tutorial: "doc:Finding-Objects")
@@ -19,7 +21,7 @@
     @Chapter(name: "User Authentication") {
         Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:User-Sign-Up")
         @TutorialReference(tutorial: "doc:User-Continued")
@@ -28,7 +30,7 @@
     @Chapter(name: "Device Installations") {
         Learn about tracking and handling device installations.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Installation")
     }
@@ -36,23 +38,24 @@
     @Chapter(name: "Security") {
         Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:ACL")
     }
     
     @Chapter(name: "Data Relationships") {
-        Learn how to create relationships between objects using pointers and manage complex data structures.
+        Learn how to create relationships between objects using pointers and manage complex data structures. In addition, learn how to manage complex relationships using roles and relations for sophisticated data models.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Pointers")
+        @TutorialReference(tutorial: "doc:Roles-and-Relations")
     }
         
     @Chapter(name: "Handling Files") {
         Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Files")   
     }
@@ -60,25 +63,25 @@
     @Chapter(name: "Location Based Services and Queries") {
         Learn about advanced Parse-Swift features including location-based services and geo-spatial queries.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:GeoPoint")
     }
-    
+
     @Chapter(name: "Data Operations") {
         Learn how to perform atomic operations on object fields for safe concurrent updates.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Operations")
     }
-    
-    @Chapter(name: "Advanced Data Relationships") {
-        Learn how to manage complex relationships using roles and relations for sophisticated data models.
+
+    @Chapter(name: "Accessing Cloud Code") {
+        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic.
         
-        @Image(source: parse-swift.png, alt: "Parse image")
+        @Image(source: parse-logo.png, alt: "Parse logo")
         
-        @TutorialReference(tutorial: "doc:Roles-and-Relations")
+        @TutorialReference(tutorial: "doc:Cloud-Code")
     }
     
     @Chapter(name: "Configuration Management") {

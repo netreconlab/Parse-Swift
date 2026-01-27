@@ -4,7 +4,7 @@
         
         This tutorial covers the fundamental operations for working with data on your Parse Server, including creating custom ParseObject models, performing CRUD operations, and working with batch operations.
         
-        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Initialize Parse and check server health") {
