@@ -19,11 +19,12 @@
     }
 	
 	@Chapter(name: "Query and retrieve ParseObjects") {
-		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery to receive real-time updates when ParseObjects are created, updated, or deleted on your Parse Server.
+		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates and integrate queries with SwiftUI views.
 		
 		@Image(source: parse-logo.png, alt: "Parse logo")
 		
 		@TutorialReference(tutorial: "doc:Finding-Objects")
+		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects")
 		@TutorialReference(tutorial: "doc:GeoPoint")
 		@TutorialReference(tutorial: "doc:LiveQuery")
 	}
