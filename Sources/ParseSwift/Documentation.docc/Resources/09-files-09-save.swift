@@ -21,7 +21,7 @@ score.otherPhoto = photo
 Task {
     do {
         // Save the GameScore with the associated file
-        let savedScore = try await score.save()
+        _ = try await score.save()
         print("Successfully saved GameScore with profile picture")
     } catch {
         print("Error saving: \(error)")

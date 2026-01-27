@@ -14,7 +14,7 @@ score2.myData = helloFile
 Task {
     do {
         // Save the GameScore to upload the data file
-        let savedScore = try await score2.save()
+        _ = try await score2.save()
         print("Successfully saved GameScore with data file")
         print("The file has been uploaded to Parse Server")
     } catch {

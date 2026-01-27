@@ -29,7 +29,7 @@ Task {
         // Download the file content
         if let picture = fetchedScore.profilePicture {
             let fetchedFile = try await picture.fetch()
-            print("File downloaded successfully")
+            print("File downloaded successfully to: \(String(describing: fetchedFile.localURL))")
         }
     } catch {
         print("Error: \(error)")

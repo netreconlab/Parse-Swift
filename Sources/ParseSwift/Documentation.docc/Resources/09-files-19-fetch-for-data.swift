@@ -18,7 +18,7 @@ Task {
         
         // Fetch to get the updated file metadata
         let fetchedScore = try await savedScore.fetch()
-        print("Fetched GameScore with updated file information")
+        print("Fetched GameScore with updated file information: \(String(describing: fetchedScore.myData?.url))")
     } catch {
         print("Error: \(error)")
     }
