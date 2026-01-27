@@ -21,9 +21,11 @@ let charge = ChargeCreditCard(
     paymentMethodId: "pm_12345"
 )
 
-do {
-    let result = try await charge.runFunction()
-    print("Payment processed: \(result)")
-} catch {
-    print("Payment failed: \(error)")
+Task {
+    do {
+        let result = try await charge.runFunction()
+        print("Payment processed: \(result)")
+    } catch {
+        print("Payment failed: \(error)")
+    }
 }

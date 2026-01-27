@@ -4,7 +4,7 @@ Parse.Cloud.job("myBackgroundJob", async(request) => {
   
   // Perform long-running operations
   // For example: data migrations, cleanup, batch processing
-  const batchSize = request.params.batchSize || 50;
+  // Access batch size from params: request.params.batchSize || 50
   
   // Your job logic here
   // ...
