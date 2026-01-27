@@ -1,11 +1,10 @@
 import Foundation
 import ParseSwift
 
-// Assume we have a saved author
-var savedAuthor = Author(name: "Scott", book: Book(title: "world"))
-// savedAuthor has been saved and has an objectId
-
 do {
+    // Create and save the author so it has an objectId
+    var savedAuthor = try await Author(name: "Scott", book: Book(title: "world")).save()
+    
     // Fetch the latest version of the author
     var fetchedAuthor = try await savedAuthor.fetch()
     print("Fetched latest author: \(fetchedAuthor)")

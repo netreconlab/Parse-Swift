@@ -1,17 +1,18 @@
 import Foundation
 import ParseSwift
 
-// Create an author with a mix of saved and unsaved books
-let savedBook = Book(title: "hello")
-// Assume savedBook has been saved and has an objectId
+let unsavedBook = Book(title: "hello")
 
 let otherBook1 = Book(title: "I like this book")
 let otherBook2 = Book(title: "I like this book also")
 
-var author = Author(name: "Logan", book: savedBook)
-author.otherBooks = [otherBook1, otherBook2]
-
 do {
+    // Pre-save one book so it already has an objectId
+    let savedBook = try await unsavedBook.save()
+
+    var author = Author(name: "Logan", book: savedBook)
+    author.otherBooks = [otherBook1, otherBook2]
+    
     // Batch save - Parse handles saving unsaved pointers automatically
     let results = try await [author].saveAll()
     

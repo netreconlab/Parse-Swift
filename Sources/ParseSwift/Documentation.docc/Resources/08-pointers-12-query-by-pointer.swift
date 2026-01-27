@@ -1,12 +1,12 @@
 import Foundation
 import ParseSwift
 
-// First, get a saved book to query by
-let bookToFind = Book(title: "hello")
-let savedBook = try await bookToFind.save()
-
 // Query for authors whose "book" field equals this specific Book object
 do {
+    // First, get a saved book to query by
+    let bookToFind = Book(title: "hello")
+    let savedBook = try await bookToFind.save()
+    
     let query = try Author.query("book" == savedBook)
         .includeAll()
     

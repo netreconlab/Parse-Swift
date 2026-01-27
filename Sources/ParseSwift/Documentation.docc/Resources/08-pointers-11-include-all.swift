@@ -17,3 +17,10 @@ do {
 // Alternative: use include("*") for the same result
 let queryAlt = Author.query("name" == "Bruce")
     .include("*")
+
+do {
+    let authorAlt = try await queryAlt.first()
+    print("Found author with all pointers included using include(\"*\"): \(authorAlt)")
+} catch {
+    print("Error querying with include(\"*\"): \(error)")
+}
