@@ -13,5 +13,6 @@
         @Image(source: parse-swift.png, alt: "Parse image")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
+        @TutorialReference(tutorial: "doc:Finding-Objects")
     }
 }
