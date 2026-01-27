@@ -1,0 +1,193 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Access Control Lists (ACL)") {
+        Learn how to secure your Parse objects using Access Control Lists (ACLs) to control read and write permissions.
+        
+        ACLs are a critical security feature that allows you to specify which users and roles can access or modify specific objects. This tutorial covers creating ACLs, setting public permissions, user-specific permissions, role-based permissions, and managing default ACLs.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Understanding Access Control Lists") {
+        @ContentAndMedia {
+            Access Control Lists (ACLs) are a powerful security mechanism in Parse that control who can read and write individual objects.
+            
+            Without ACLs, any user could access and modify any object in your database. ACLs let you implement fine-grained security policies to protect your data.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseObject model that includes the ACL property.
+                
+                Every ParseObject has an optional `ACL` property that controls access permissions for that specific object.
+                
+                @Code(name: "GameScore.swift", file: 05-acl-03-model.swift)
+            }
+            
+            @Step {
+                Implement the merge method and custom initializer for better performance.
+                
+                The merge method is optional but recommended for efficient updates.
+                
+                @Code(name: "GameScore.swift", file: 05-acl-04-model-with-merge.swift)
+            }
+            
+            @Step {
+                Create a basic ACL with public read and write permissions.
+                
+                An ACL controls two types of access: read (viewing) and write (modifying/deleting). You can set these permissions for the public, specific users, or roles.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-05-what-is-acl.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Setting a default ACL") {
+        @ContentAndMedia {
+            Default ACLs are automatically applied to all new ParseObjects you create, saving you from setting permissions on every object individually.
+            
+            This is a best practice for ensuring consistent security across your application.
+        }
+        
+        @Steps {
+            @Step {
+                Set a default ACL that applies to all new objects.
+                
+                The `withAccessForCurrentUser: true` parameter ensures the current user automatically gets read and write access to objects they create, even if public access is restricted.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-06-default-acl.swift)
+            }
+            
+            @Step {
+                Create and save an object that will automatically use the default ACL.
+                
+                When you save a new object without explicitly setting an ACL, the default ACL is applied automatically.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-07-create-with-acl.swift)
+            }
+            
+            @Step {
+                Retrieve the current default ACL to verify what permissions are being applied.
+                
+                You can check the default ACL settings at any time using `ParseACL.defaultACL()`.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-13-get-default-acl.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Public read and write permissions") {
+        @ContentAndMedia {
+            Public permissions determine whether anyone can access an object, even without authentication.
+            
+            Common patterns include allowing public read but restricting write access, or making objects completely private.
+        }
+        
+        @Steps {
+            @Step {
+                Create an object with public read access but restricted write access.
+                
+                This is useful for data that everyone should see (like posts in a social app) but only specific users should modify.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-08-public-permissions.swift)
+            }
+        }
+    }
+    
+    @Section(title: "User-specific permissions") {
+        @ContentAndMedia {
+            You can grant read and write permissions to specific users by their objectId or user object.
+            
+            This allows fine-grained control over who can access individual objects.
+        }
+        
+        @Steps {
+            @Step {
+                Grant permissions to a specific user using their objectId.
+                
+                This creates a private object that only the specified user can access.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-09-user-specific.swift)
+            }
+            
+            @Step {
+                Alternatively, set permissions using a ParseUser object directly.
+                
+                Using the user object is more convenient when you already have the user instance.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-10-user-object.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Modifying ACLs on existing objects") {
+        @ContentAndMedia {
+            You can change an object's ACL after it has been saved by updating the ACL property and saving the object again.
+            
+            This is useful for implementing features like making a post private or sharing with additional users.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch an object, modify its ACL, and save the changes.
+                
+                Use the `.mergeable` property to create a mutable copy of the object, then update the ACL and save.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-11-modify-acl.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Role-based permissions") {
+        @ContentAndMedia {
+            Roles allow you to group users and grant permissions to entire groups at once.
+            
+            This is essential for implementing features like administrators, moderators, or team-based access control.
+        }
+        
+        @Steps {
+            @Step {
+                Create an ACL with role-based permissions.
+                
+                You can grant read or write access to all users in a specific role by name. The roles must exist in your Parse Server database.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-12-role-based.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Security best practices") {
+        @ContentAndMedia {
+            Following ACL best practices helps protect your application and user data from unauthorized access.
+            
+            Always think about the principle of least privilege: grant only the minimum permissions needed for functionality.
+        }
+        
+        @Steps {
+            @Step {
+                **Best Practice 1: Set a restrictive default ACL**
+                
+                If needed, you can configure a default ACL when initializing your app. Depending on the ACL configuration, it can ensure new objects are private by default, and users only have access to objects they create.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-06-default-acl.swift)
+            }
+            
+            @Step {
+                **Best Practice 2: Validate permissions on the server**
+                
+                ACLs are enforced on the Parse Server, not just in the client. This means users can't bypass ACLs by modifying client code. However, you should still validate that the correct ACLs are set when creating objects with sensitive data.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-09-user-specific.swift)
+            }
+            
+            @Step {
+                **Best Practice 3: Use roles for scalable permissions**
+                
+                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows.
+                
+                @Code(name: "YourApp.swift", file: 05-acl-12-role-based.swift)
+            }
+        }
+    }
+}

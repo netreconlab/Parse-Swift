@@ -10,7 +10,7 @@ Task {
                                     "createdAt" > afterDate)
             .order([.descending("points")])
             .limit(2)
-        
+
         let results = try await query.find()
         print("Found \(results.count) GameScore(s) (limited to 2)")
     } catch {

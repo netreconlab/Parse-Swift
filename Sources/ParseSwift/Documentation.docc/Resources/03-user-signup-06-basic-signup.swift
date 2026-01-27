@@ -8,12 +8,12 @@ Task {
             username: "hello",
             password: "TestMePass123^"
         )
-        
+
         // Verify the user was created successfully
         assert(newUser.objectId != nil)
         assert(newUser.createdAt != nil)
         assert(newUser.username == "hello")
-        
+
         print("Successfully signed up user: \(newUser)")
     } catch {
         print("Error signing up: \(error)")

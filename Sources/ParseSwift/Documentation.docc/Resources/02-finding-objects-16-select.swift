@@ -11,7 +11,7 @@ Task {
         // Select only the "points" field
         let querySelect = query.select("points")
         let firstScore = try await querySelect.first()
-        
+
         // Only the selected field and required Parse fields are populated
         print("Selected score with points: \(firstScore.points ?? 0)")
         // Other custom fields like oldScore will be nil

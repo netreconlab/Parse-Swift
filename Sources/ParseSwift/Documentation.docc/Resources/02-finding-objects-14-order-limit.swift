@@ -10,9 +10,9 @@ Task {
                                     "createdAt" > afterDate)
             .order([.descending("points")])
             .limit(2)
-        
+
         let results = try await query.find()
-        
+
         print("Top \(results.count) scores:")
         results.forEach { score in
             print("- \(score.points ?? 0) points")

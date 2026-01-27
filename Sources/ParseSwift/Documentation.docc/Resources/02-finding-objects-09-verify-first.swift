@@ -9,14 +9,14 @@ var query = GameScore.query("points" > 50,
 Task {
     do {
         let firstScore = try await query.first()
-        
+
         // Verify the object has expected properties
         guard let objectId = firstScore.objectId,
               let createdAt = firstScore.createdAt else {
             print("Missing required fields")
             return
         }
-        
+
         print("First score objectId: \(objectId)")
         print("Points: \(firstScore.points ?? 0)")
         print("Created at: \(createdAt)")

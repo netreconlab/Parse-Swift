@@ -9,9 +9,9 @@ Task {
         let query = GameScore.query("points" > 50,
                                     "createdAt" > afterDate)
             .order([.descending("points")])
-        
+
         let results = try await query.find()
-        
+
         results.forEach { score in
             print("Score: \(score.points ?? 0) points")
         }

@@ -24,4 +24,12 @@
         @TutorialReference(tutorial: "doc:User-Sign-Up")
         @TutorialReference(tutorial: "doc:User-Continued")
     }
+    
+    @Chapter(name: "Security") {
+        Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:ACL")
+    }
 }
