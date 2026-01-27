@@ -6,7 +6,7 @@ Task {
         // Query for scores where name is null or undefined
         let query = GameScore.query(isNull(key: "name"))
         let results = try await query.find()
-        
+
         print("Found \(results.count) scores with null or undefined name")
         results.forEach { score in
             print("Score: \(score.objectId ?? ""), name is null/undefined")

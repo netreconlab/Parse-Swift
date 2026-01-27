@@ -5,7 +5,7 @@ import ParseSwift
 struct TestCloudCodeError: ParseCloudable {
     // The Cloud Function would return a String if successful
     typealias ReturnType = String
-    
+
     // The name of the Cloud Function on the server
     var functionJobName: String = "testCloudCodeError"
 }

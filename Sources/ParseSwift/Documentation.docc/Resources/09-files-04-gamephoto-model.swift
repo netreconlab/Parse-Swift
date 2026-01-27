@@ -9,7 +9,7 @@ struct GamePhoto: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     // Your own properties
     var image: ParseFile?
 }

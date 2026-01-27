@@ -8,7 +8,7 @@ Task {
     do {
         // Start the Cloud Job (runs asynchronously on the server)
         let response = try await job.startJob()
-        
+
         print("Job started: \(response)")
         // The job continues running on the server even after this returns
     } catch {

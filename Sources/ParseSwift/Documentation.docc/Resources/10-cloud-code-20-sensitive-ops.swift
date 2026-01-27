@@ -5,10 +5,10 @@ import ParseSwift
 struct ChargeCreditCard: ParseCloudable {
     typealias ReturnType = [String: Any]
     var functionJobName: String = "chargeCreditCard"
-    
+
     var amount: Double
     var currency: String
-    
+
     // Don't pass sensitive card details from the client
     // Instead, use a tokenized payment method or saved card ID
     var paymentMethodId: String

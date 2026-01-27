@@ -18,26 +18,13 @@
         
         @Steps {
             @Step {
-                **What is Cloud Code?**
-                
-                Cloud Code is JavaScript that runs on Parse Server. You define functions using `Parse.Cloud.define()` in your server's `main.js` file, and then call them from your Swift app using the `ParseCloudable` protocol.
-                
-                Benefits of Cloud Code include:
-                - Centralized business logic shared across platforms
-                - Server-side validation and data integrity
-                - Secure operations that shouldn't run on the client
-                - Integration with third-party services
-                - Complex computations without draining device battery
+                **What is Cloud Code?** Cloud Code is JavaScript that runs on Parse Server. You define functions using `Parse.Cloud.define()` in your server's `main.js` file, and then call them from your Swift app using the `ParseCloudable` protocol.Benefits of Cloud Code include: Centralized business logic shared across platforms, Server-side validation and data integrity. Secure operations that shouldn't run on the client, Integration with third-party services, Complex computations without draining device battery
                 
                 @Code(name: "main.js (on Parse Server)", file: 10-cloud-code-01-server-example.js)
             }
             
             @Step {
-                **The ParseCloudable protocol**
-                
-                To call Cloud Functions from Swift, you create a type conforming to `ParseCloudable`. This protocol requires you to specify the function name and the expected return type.
-                
-                The `functionJobName` property identifies which Cloud Function to call, and `ReturnType` specifies what data type the function returns.
+                **The ParseCloudable protocol** To call Cloud Functions from Swift, you create a type conforming to `ParseCloudable`. This protocol requires you to specify the function name and the expected return type. The `functionJobName` property identifies which Cloud Function to call, and `ReturnType` specifies what data type the function returns.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-02-parsecloudable.swift)
             }
@@ -53,25 +40,19 @@
         
         @Steps {
             @Step {
-                Create a ParseCloudable type for the "hello" Cloud Function.
-                
-                The `Hello` struct conforms to `ParseCloudable` and specifies that the return type is `String`. The `functionJobName` is set to "hello", matching the Cloud Function defined on the server.
+                Create a ParseCloudable type for the "hello" Cloud Function. The `Hello` struct conforms to `ParseCloudable` and specifies that the return type is `String`. The `functionJobName` is set to "hello", matching the Cloud Function defined on the server.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-03-hello-type.swift)
             }
             
             @Step {
-                Call the Cloud Function using async/await.
-                
-                Create an instance of `Hello` and call its `runFunction()` method using `try await`. Wrap the call in a do-catch block to handle any errors that might occur.
+                Call the Cloud Function using async/await. Create an instance of `Hello` and call its `runFunction()` method using `try await`. Wrap the call in a do-catch block to handle any errors that might occur.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-04-call-hello.swift)
             }
             
             @Step {
-                Process the response from the Cloud Function.
-                
-                The `runFunction()` method returns the value specified by `ReturnType`. In this case, it's a String containing "Hello world!" from the server.
+                Process the response from the Cloud Function. The `runFunction()` method returns the value specified by `ReturnType`. In this case, it's a String containing "Hello world!" from the server.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-05-process-response.swift)
             }
@@ -87,25 +68,19 @@
         
         @Steps {
             @Step {
-                Create a ParseCloudable type with parameters.
-                
-                The `TestCloudCode` struct includes an `argument1` property. This property will be sent to the Cloud Function as a parameter and can be accessed as `request.params.argument1` on the server.
+                Create a ParseCloudable type with parameters. The `TestCloudCode` struct includes an `argument1` property. This property will be sent to the Cloud Function as a parameter and can be accessed as `request.params.argument1` on the server.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-06-with-params.swift)
             }
             
             @Step {
-                Create an instance with parameter values and call the function.
-                
-                Pass the parameter values when creating the instance. The Cloud Function will receive these values and can process them accordingly.
+                Create an instance with parameter values and call the function. Pass the parameter values when creating the instance. The Cloud Function will receive these values and can process them accordingly.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-07-call-with-params.swift)
             }
             
             @Step {
-                On the server, the Cloud Function can access the parameters.
-                
-                The parameters are available in the `request.params` object. The function can use these values to perform calculations, query data, or execute any custom logic.
+                On the server, the Cloud Function can access the parameters. The parameters are available in the `request.params` object. The function can use these values to perform calculations, query data, or execute any custom logic.
                 
                 @Code(name: "main.js (on Parse Server)", file: 10-cloud-code-08-server-params.js)
             }
@@ -121,33 +96,25 @@
         
         @Steps {
             @Step {
-                Create a ParseCloudable type for a function that throws errors.
-                
-                The `TestCloudCodeError` struct calls a Cloud Function that intentionally throws an error to demonstrate error handling.
+                Create a ParseCloudable type for a function that throws errors. The `TestCloudCodeError` struct calls a Cloud Function that intentionally throws an error to demonstrate error handling.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-09-error-type.swift)
             }
             
             @Step {
-                Call the function and handle the error.
-                
-                When calling a Cloud Function that might throw an error, use a do-catch block to handle the ParseError. The error contains a `code` and potentially an `otherCode` for custom error codes.
+                Call the function and handle the error. When calling a Cloud Function that might throw an error, use a do-catch block to handle the ParseError. The error contains a `code` and potentially an `otherCode` for custom error codes.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-10-handle-error.swift)
             }
             
             @Step {
-                Check for custom error codes.
-                
-                Custom Cloud Code errors use the `.other` error code. You can access the specific error code via the `otherCode` property to determine what went wrong.
+                Check for custom error codes. Custom Cloud Code errors use the `.other` error code. You can access the specific error code via the `otherCode` property to determine what went wrong.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-11-check-error-code.swift)
             }
             
             @Step {
-                On the server, throw custom errors from your Cloud Function.
-                
-                Use `Parse.Error` to throw errors with custom codes and messages. The error code and message will be available to your Swift client.
+                On the server, throw custom errors from your Cloud Function. Use `Parse.Error` to throw errors with custom codes and messages. The error code and message will be available to your Swift client.
                 
                 @Code(name: "main.js (on Parse Server)", file: 10-cloud-code-12-server-error.js)
             }
@@ -163,25 +130,19 @@
         
         @Steps {
             @Step {
-                Cloud Jobs use the same ParseCloudable protocol.
-                
-                Create a ParseCloudable type for your job, just like you would for a Cloud Function. The only difference is that you'll call `startJob()` instead of `runFunction()`.
+                Cloud Jobs use the same ParseCloudable protocol. Create a ParseCloudable type for your job, just like you would for a Cloud Function. The only difference is that you'll call `startJob()` instead of `runFunction()`.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-13-job-type.swift)
             }
             
             @Step {
-                Start a Cloud Job using the `startJob()` method.
-                
-                Jobs run asynchronously on the server. The `startJob()` call returns immediately after the job starts, without waiting for it to complete.
+                Start a Cloud Job using the `startJob()` method. Jobs run asynchronously on the server. The `startJob()` call returns immediately after the job starts, without waiting for it to complete.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-14-start-job.swift)
             }
             
             @Step {
-                Define the job on Parse Server.
-                
-                Jobs are defined using `Parse.Cloud.job()` in your server's main.js file. They can perform any long-running operations needed by your application.
+                Define the job on Parse Server. Jobs are defined using `Parse.Cloud.job()` in your server's main.js file. They can perform any long-running operations needed by your application.
                 
                 @Code(name: "main.js (on Parse Server)", file: 10-cloud-code-15-server-job.js)
             }
@@ -197,32 +158,25 @@
         
         @Steps {
             @Step {
-                Define a ParseObject model to work with.
-                
-                Create a standard ParseObject model. This example uses GameScore, which we'll save with context data.
+                Define a ParseObject model to work with. Create a standard ParseObject model. This example uses GameScore, which we'll save with context data.
                 
                 @Code(name: "GameScore.swift", file: 10-cloud-code-16-model.swift)
             }
             
             @Step {
-                Add a custom initializer and merge method.
-                
-                Implement the recommended patterns for custom initializers and merge methods to preserve performance.
+                Add a custom initializer and merge method. Implement the recommended patterns for custom initializers and merge methods to preserve performance.
                 
                 @Code(name: "GameScore.swift", file: 10-cloud-code-17-initializer.swift)
             }
             
             @Step {
-                Save an object with context data.
-                
-                Use the `.context()` option when saving to pass additional data to server-side hooks. The context is a dictionary that can contain any JSON-serializable values.
+                Save an object with context data. Use the `.context()` option when saving to pass additional data to server-side hooks. The context is a dictionary that can contain any JSON-serializable values.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-18-save-with-context.swift)
             }
             
             @Step {
                 Access the context in server-side hooks.
-                
                 In beforeSave, afterSave, or other hooks, the context is available as `request.context`. You can use it to implement conditional logic or logging.
                 
                 @Code(name: "main.js (on Parse Server)", file: 10-cloud-code-19-server-context.js)
@@ -239,33 +193,25 @@
         
         @Steps {
             @Step {
-                **Best Practice 1: Use Cloud Code for sensitive operations**
-                
-                Never trust client-side code for security-critical operations. Use Cloud Code to validate permissions, enforce business rules, and protect sensitive data.
+                **Best Practice 1: Use Cloud Code for sensitive operations**. Never trust client-side code for security-critical operations. Use Cloud Code to validate permissions, enforce business rules, and protect sensitive data.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-20-sensitive-ops.swift)
             }
             
             @Step {
-                **Best Practice 2: Keep Cloud Functions focused**
-                
-                Each Cloud Function should do one thing well. This makes your code easier to test, maintain, and reuse across different parts of your application.
+                **Best Practice 2: Keep Cloud Functions focused** Each Cloud Function should do one thing well. This makes your code easier to test, maintain, and reuse across different parts of your application.
                 
                 @Code(name: "CloudFunctions.swift", file: 10-cloud-code-21-focused-functions.swift)
             }
             
             @Step {
-                **Best Practice 3: Handle errors gracefully**
-                
-                Always implement comprehensive error handling in both your Cloud Functions and your Swift client code. Provide meaningful error messages to help with debugging and user experience.
+                **Best Practice 3: Handle errors gracefully** Always implement comprehensive error handling in both your Cloud Functions and your Swift client code. Provide meaningful error messages to help with debugging and user experience.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-22-error-handling.swift)
             }
             
             @Step {
-                **Best Practice 4: Use Jobs for long-running tasks**
-                
-                Don't make users wait for operations that can be completed asynchronously. Use Cloud Jobs for batch processing, email sending, report generation, and other tasks that don't need immediate completion.
+                **Best Practice 4: Use Jobs for long-running tasks** Don't make users wait for operations that can be completed asynchronously. Use Cloud Jobs for batch processing, email sending, report generation, and other tasks that don't need immediate completion.
                 
                 @Code(name: "YourApp.swift", file: 10-cloud-code-23-use-jobs.swift)
             }

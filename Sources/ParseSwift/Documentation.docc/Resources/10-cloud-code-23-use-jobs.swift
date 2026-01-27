@@ -16,7 +16,7 @@ Task {
         // Start the job and return immediately
         let jobId = try await reportJob.startJob()
         print("Report generation started: \(jobId)")
-        
+
         // The user can continue using the app
         // The report will be ready later and can be accessed via another query
     } catch {
