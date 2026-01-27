@@ -18,7 +18,7 @@
 		
 		@Steps {
 			@Step {
-				**What is Parse Analytics?** Parse Analytics is a built-in feature that allows you to track events in your application. Events are actions that users take, such as opening the app, completing a tutorial, making a purchase, or any other custom action you want to measure. Analytics data is stored on your Parse Server and can be queried or exported for analysis.Benefits include: Understanding user behavior and engagement, Tracking feature adoption and usage, Measuring the success of new features, Identifying areas for improvement, Making data-driven decisions
+				**What is Parse Analytics?** Parse Analytics is a built-in feature that allows you to track events in your application. Events are actions that users take, such as opening the app, completing a tutorial, making a purchase, or any other custom action you want to measure. Analytics data is stored on your Parse Server and can be queried or exported for analysis. Benefits include: Understanding user behavior and engagement, Tracking feature adoption and usage, Measuring the success of new features, Identifying areas for improvement, Making data-driven decisions
 				
 				@Code(name: "Analytics.swift", file: 11-analytics-01-overview.swift)
 			}
