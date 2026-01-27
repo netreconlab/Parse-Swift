@@ -1,10 +1,10 @@
 @Tutorials(name: "ParseSwift") {
     @Intro(title: "Welcome to ParseSwift") {
-		A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.
+        A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.
         
         These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery and SwiftUI integration.
-		
-		For full details about Parse-Swift, please view the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
+        
+        For full details about Parse-Swift, please view the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
         
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
