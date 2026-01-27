@@ -4,7 +4,7 @@
         
         This tutorial covers user creation, signup with custom fields, password verification, error handling, and managing the current user session.
         
-        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Define your ParseUser model") {
