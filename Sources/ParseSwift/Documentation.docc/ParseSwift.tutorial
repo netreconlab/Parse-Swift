@@ -101,4 +101,12 @@
         
         @TutorialReference(tutorial: "doc:Analytics")
     }
+    
+    @Chapter(name: "SwiftUI Integration") {
+        Learn how to integrate Parse-Swift with SwiftUI applications using custom view models and Combine publishers.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+        
+        @TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects-With-Custom-ViewModel")
+    }
 }
