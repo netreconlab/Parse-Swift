@@ -8,7 +8,7 @@ Task {
         
         // Get the session token for the current user
         let sessionToken = try await User.sessionToken()
-        print("Session token: \(sessionToken)")
+        print("Successfully retrieved session token for current user.")
     } catch {
         print("Error: \(error)")
     }

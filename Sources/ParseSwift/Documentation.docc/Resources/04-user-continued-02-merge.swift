@@ -18,7 +18,6 @@ struct User: ParseUser {
 
     // Your custom properties
     var customKey: String?
-    var gameScore: GameScore?
 
     // Optional - implement your own version of merge
     // for faster decoding after updating your ParseUser
@@ -26,9 +25,6 @@ struct User: ParseUser {
         var updated = try mergeParse(with: object)
         if updated.shouldRestoreKey(\.customKey, original: object) {
             updated.customKey = object.customKey
-        }
-        if updated.shouldRestoreKey(\.gameScore, original: object) {
-            updated.gameScore = object.gameScore
         }
         return updated
     }

@@ -18,5 +18,4 @@ struct User: ParseUser {
 
     // Your custom properties
     var customKey: String?
-    var gameScore: GameScore?
 }

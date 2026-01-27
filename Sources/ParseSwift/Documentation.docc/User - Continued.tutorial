@@ -20,7 +20,7 @@
             @Step {
                 Create a `User` struct that conforms to `ParseUser`.
                 
-                Include the required `ParseObject` properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, `originalData`) and required `ParseUser` properties (`username`, `email`, `emailVerified`, `password`, `authData`). Add custom properties like `customKey` and `gameScore` as needed.
+                Include the required `ParseObject` properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, `originalData`) and required `ParseUser` properties (`username`, `email`, `emailVerified`, `password`, `authData`). Add a custom property like `customKey`.
                 
                 @Code(name: "User.swift", file: 04-user-continued-01-user-model.swift)
             }
@@ -44,9 +44,17 @@
             @Step {
                 Define a `GameScore` model for use with pointer fields.
                 
-                This example demonstrates how to work with related ParseObjects. The GameScore will be used as a pointer field in the User model.
+                This ParseObject will be used to demonstrate relationships between User and other objects. The GameScore model includes a `points` property and its own merge method.
                 
                 @Code(name: "GameScore.swift", file: 04-user-continued-04-gamescore-model.swift)
+            }
+            
+            @Step {
+                Add the `gameScore` pointer field to your User model.
+                
+                Now that GameScore is defined, you can add it as a property to the User model. The merge method is also updated to handle the gameScore field.
+                
+                @Code(name: "User.swift", file: 04-user-continued-04a-user-with-gamescore.swift)
             }
         }
     }

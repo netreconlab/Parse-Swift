@@ -16,7 +16,7 @@ Task {
         
         // Get the new session token
         let sessionToken = try await User.sessionToken()
-        print("New session token: \(sessionToken)")
+        print("New session token obtained successfully.")
     } catch {
         print("Error converting user: \(error)")
     }
