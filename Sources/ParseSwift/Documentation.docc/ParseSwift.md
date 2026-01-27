@@ -25,3 +25,22 @@ This repo is maintained by [Corey E. Baker](https://github.com/cbaker6), [1 of 2
 - ``ParseSwift/updateAuthentication(_:)``
 - ``ParseSwift/clearCache()``
 - ``ParseSwift/deleteObjectiveCKeychain()``
+
+### Protocols for Creating Parse Objects
+- ``ParseObject``
+- ``ParseUser``
+- ``ParseInstallation``
+- ``ParseRole``
+- ``ParseSession``
+
+### User Authentication
+
+- ``ParseAuthentication``
+- ``ParseAnonymous``
+- ``ParseApple``
+- ``ParseGitHub``
+- ``ParseGoogle``
+- ``ParseLDAP``
+- ``ParseLinkedIn``
+- ``ParseSpotify``
+- ``ParseTwitter``

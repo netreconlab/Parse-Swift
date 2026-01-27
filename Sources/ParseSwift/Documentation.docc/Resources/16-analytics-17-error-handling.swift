@@ -4,7 +4,7 @@ import ParseSwift
 // Analytics should never interrupt user experience
 func trackUserAction() {
     var event = ParseAnalytics(name: "importantAction")
-    
+
     // ✅ Good: Error handling that doesn't disrupt user flow
     event.track { result in
         switch result {
@@ -21,7 +21,7 @@ func trackUserAction() {
             // Optionally report to error tracking service
         }
     }
-    
+
     // Continue with normal app functionality regardless of analytics result
     performUserAction()
 }

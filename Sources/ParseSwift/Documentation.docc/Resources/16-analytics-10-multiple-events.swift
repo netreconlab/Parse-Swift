@@ -10,7 +10,7 @@ func trackUserActions() {
             print("Error tracking viewedProfile: \(error)")
         }
     }
-    
+
     // Track when user sends a message
     var messageEvent = ParseAnalytics(name: "sentMessage")
     messageEvent.track { result in
@@ -18,7 +18,7 @@ func trackUserActions() {
             print("Error tracking sentMessage: \(error)")
         }
     }
-    
+
     // Track when user shares content
     var shareEvent = ParseAnalytics(name: "sharedContent")
     shareEvent.track { result in

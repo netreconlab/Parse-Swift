@@ -17,13 +17,13 @@ class AnalyticsManager {
             UserDefaults.standard.set(newValue, forKey: "analyticsEnabled")
         }
     }
-    
+
     // Only track if the user hasn't opted out of analytics
     static func trackEvent(name: String, dimensions: [String: String]? = nil) {
         guard isAnalyticsEnabled else {
             return
         }
-        
+
         var event = ParseAnalytics(name: name)
         event.track(dimensions: dimensions) { result in
             #if DEBUG

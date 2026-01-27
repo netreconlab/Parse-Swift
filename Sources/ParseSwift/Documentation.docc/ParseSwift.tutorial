@@ -94,7 +94,7 @@
         @TutorialReference(tutorial: "doc:Config")
     }
     
-    @Chapter(name: "Analytics") {
+    @Chapter(name: "Logging Analytics") {
         Learn how to track app usage and custom events using Parse Analytics to understand user behavior.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
