@@ -38,9 +38,9 @@ struct ContentView: View {
             }, label: {
                 Text("Unsubscribe")
                     .font(.headline)
-                    .background(Color.red)
                     .foregroundColor(.white)
                     .padding()
+                    .background(Color.red)
                     .cornerRadius(20.0)
             })
             Spacer()
