@@ -26,7 +26,7 @@
     }
     
     @Chapter(name: "Device Installations") {
-        Learn about tracking and handleing device installations.
+        Learn about tracking and handling device installations.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
@@ -49,7 +49,7 @@
         @TutorialReference(tutorial: "doc:Pointers")
     }
         
-    @Chapter(name: "Handleing Files") {
+    @Chapter(name: "Handling Files") {
         Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
         
         @Image(source: parse-swift.png, alt: "Parse image")
