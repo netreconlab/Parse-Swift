@@ -267,8 +267,8 @@ public struct ParseACL: ParseTypeable {
     /**
      Set whether users belonging to the role with the given name are allowed to write this object.
 
-     - parameter allowed: Whether the given role can write this object.
      - parameter roleName: The name of the role.
+     - parameter value: Whether the given role can write this object.
     */
     public mutating func setWriteAccess(roleName: String, value: Bool) {
         set(Self.getRoleAccessName(roleName), access: .write, value: value)
@@ -277,8 +277,8 @@ public struct ParseACL: ParseTypeable {
     /**
      Set whether users belonging to the role are allowed to write this object.
 
-     - parameter allowed: Whether the given role can write this object.
      - parameter role: The `ParseRole` to set access for.
+     - parameter value: Whether the given role can write this object.
     */
     public mutating func setWriteAccess<T>(role: T, value: Bool) where T: ParseRole {
         guard let name = role.name else { return }

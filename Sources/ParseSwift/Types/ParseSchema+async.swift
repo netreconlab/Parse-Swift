@@ -70,7 +70,6 @@ public extension ParseSchema {
     /**
      Deletes all objects in the `ParseSchema` *aynchronously* from the server.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: Returns the fetched `ParseSchema`.
      - throws: An error of type `ParseError`.
      - warning: This will delete all objects for this `ParseSchema` and cannot be reversed.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -91,7 +90,6 @@ public extension ParseSchema {
     /**
      Deletes the `ParseSchema` *aynchronously*  from the server.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - returns: Returns the fetched `ParseSchema`.
      - throws: An error of type `ParseError`.
      - warning: This can only be used on a `ParseSchema` without objects. If the `ParseSchema`
      currently contains objects, run `purge()` first.

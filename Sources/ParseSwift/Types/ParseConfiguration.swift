@@ -132,10 +132,12 @@ public struct ParseConfiguration {
      Create a Parse Swift configuration.
      - parameter applicationId: The application id for your Parse application.
      - parameter clientKey: The client key for your Parse application.
-     - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
-     specified when using the SDK on a server.
      - parameter primaryKey: The primary key for your Parse application. This key should only be
      specified when using the SDK on a server.
+     - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
+	 specified when using the SDK on a server.
+     - parameter webhookKey: The webhook key sent with outgoing webhook calls. This key should only be
+	 specified when using the SDK on a server.
      - parameter serverURL: The server URL to connect to a Parse Server.
      - parameter liveQueryServerURL: The live query server URL to connect to a Parse LiveQuery Server.
      - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
