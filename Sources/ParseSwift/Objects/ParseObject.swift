@@ -97,7 +97,7 @@ public protocol ParseObject: ParseTypeable,
 
     /**
      Determines if two objects have the same objectId.
-     - parameter as: Object to compare.
+     - parameter other: Object to compare.
      - returns: Returns a **true** if the other object has the same `objectId` or **false** if unsuccessful.
     */
     func hasSameObjectId<T: ParseObject>(as other: T) -> Bool
@@ -121,7 +121,7 @@ public protocol ParseObject: ParseTypeable,
     /**
      Merges two `ParseObject`'s with the resulting object consisting of all modified
      and unchanged Parse properties.
-     - parameter with: The original object.
+     - parameter object: The original object.
      - returns: The updated installation.
      - throws: An error of type `ParseError`.
      - note: This is used in combination with `merge` to only send updated
@@ -157,7 +157,7 @@ public protocol ParseObject: ParseTypeable,
              }
          }
 
-     - parameter with: The original object.
+     - parameter object: The original object.
      - returns: The merged object.
      - throws: An error of type `ParseError`.
      - note: Use this in combination with `ParseMutable` to only send updated
@@ -400,7 +400,7 @@ transactions for this call.
 
 	/**
 	 Saves a collection of objects all at once *asynchronously* and executes the completion block when done.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -459,7 +459,7 @@ transactions for this call.
 
 	/**
 	 Creates a collection of objects all at once *asynchronously* and executes the completion block when done.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -504,7 +504,7 @@ transactions for this call.
 
 	/**
 	 Replaces a collection of objects all at once *asynchronously* and executes the completion block when done.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -549,7 +549,7 @@ transactions for this call.
 
 	/**
 	 Updates a collection of objects all at once *asynchronously* and executes the completion block when done.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -676,7 +676,7 @@ transactions for this call.
 
 	/**
 	 Deletes a collection of objects all at once *asynchronously* and executes the completion block when done.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that

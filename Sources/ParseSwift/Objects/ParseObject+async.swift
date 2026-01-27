@@ -142,7 +142,7 @@ public extension Sequence where Element: ParseObject {
 
     /**
      Saves a collection of objects *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+     - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
      is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -191,7 +191,7 @@ public extension Sequence where Element: ParseObject {
 
     /**
      Creates a collection of objects *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+     - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
      is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -226,7 +226,7 @@ public extension Sequence where Element: ParseObject {
 
     /**
      Replaces a collection of objects *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+     - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
      is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -261,7 +261,7 @@ public extension Sequence where Element: ParseObject {
 
     /**
      Updates a collection of objects *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+     - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
      is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -296,7 +296,7 @@ public extension Sequence where Element: ParseObject {
 
     /**
      Deletes a collection of objects *asynchronously*.
-     - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+     - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
      is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
      Defaults to 50.
      - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that

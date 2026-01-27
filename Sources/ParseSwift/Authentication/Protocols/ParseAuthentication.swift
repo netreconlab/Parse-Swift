@@ -108,8 +108,7 @@ public protocol ParseAuthentication: Codable, Sendable {
      Login a `ParseUser` *asynchronously* using the respective authentication type. Publishes when complete.
      - parameter authData: The authData for the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
+     
      */
     func loginPublisher(authData: [String: String],
                         options: API.Options) -> Future<AuthenticatedUser, ParseError>
@@ -118,8 +117,7 @@ public protocol ParseAuthentication: Codable, Sendable {
      Link the *current* `ParseUser` *asynchronously* using the respective authentication type. Publishes when complete.
      - parameter authData: The authData for the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
+     - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
     func linkPublisher(authData: [String: String],
                        options: API.Options) -> Future<AuthenticatedUser, ParseError>
@@ -128,9 +126,7 @@ public protocol ParseAuthentication: Codable, Sendable {
      Unlink the `ParseUser` *asynchronously* from the respective authentication type. Publishes when complete.
      - parameter user: The `ParseUser` to unlink. The user must be logged in on this device.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<Self, ParseError>)`.
+     - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
     func unlinkPublisher(_ user: AuthenticatedUser,
                          options: API.Options) -> Future<AuthenticatedUser, ParseError>
@@ -149,7 +145,8 @@ public protocol ParseAuthentication: Codable, Sendable {
      Link the *current* `ParseUser` *asynchronously* using the respective authentication type.
      - parameter authData: The authData for the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter returns: An instance of the linked `AuthenticatedUser`.
+     - returns: An instance of the linked `AuthenticatedUser`.
+     - throws: An error of type `ParseError`.
      */
     func link(authData: [String: String],
               options: API.Options) async throws -> AuthenticatedUser
@@ -158,7 +155,8 @@ public protocol ParseAuthentication: Codable, Sendable {
      Unlink the `ParseUser` *asynchronously* from the respective authentication type.
      - parameter user: The `ParseUser` to unlink. The user must be logged in on this device.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter returns: An instance of the unlinked `AuthenticatedUser`.
+     - returns: An instance of the unlinked `AuthenticatedUser`.
+     - throws: An error of type `ParseError`.
      */
     func unlink(_ user: AuthenticatedUser,
                 options: API.Options) async throws -> AuthenticatedUser
@@ -166,8 +164,7 @@ public protocol ParseAuthentication: Codable, Sendable {
     /**
      Unlink the *current* `ParseUser` *asynchronously* from the respective authentication type.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter returns: An instance of the unlinked `AuthenticatedUser`.
+     - returns: A publisher that eventually produces a single value and then finishes or fails.
      */
     func unlink(options: API.Options) async throws -> AuthenticatedUser
 }

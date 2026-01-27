@@ -198,9 +198,6 @@ public extension ParseInstallation {
      When **false**, only the `channels` and `deviceToken` are copied; resulting in a new
      `ParseInstallation` for original `sessionToken`. Defaults to **true**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<Self, ParseError>)`.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
@@ -263,7 +260,7 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Saves a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -316,7 +313,7 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Creates a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -354,7 +351,7 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Replaces a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -393,7 +390,7 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Updates a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
@@ -432,7 +429,7 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Deletes a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
 	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
