@@ -29,8 +29,9 @@ class ViewModel: ObservableObject {
             },
             receiveValue: {
                 // Publish found objects
+                self.error = nil
                 self.objects = $0
-                print("Found \(self.objects.count), objects: \(self.objects)")
+                print("Found \(self.objects.count) objects: \(self.objects)")
             })
         publisher.store(in: &subscriptions)
     }
