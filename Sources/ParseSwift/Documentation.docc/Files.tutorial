@@ -63,14 +63,14 @@
         @ContentAndMedia {
             The simplest way to create a ParseFile is from a URL pointing to an existing file on the internet.
             
-            When you create a ParseFile from a URL, Parse stores a reference to that URL. The file is not downloaded or uploaded immediately - it's associated with your object when you save it.
+            When you create a ParseFile from a URL, Parse-Swift treats the URL as a source for the file contents. The data is downloaded from the URL and then uploaded to Parse Server the first time you save the file (or a ParseObject that references it), rather than at initialization time.
         }
         
         @Steps {
             @Step {
                 Create a ParseFile from an external URL.
                 
-                Use the `ParseFile(name:cloudURL:)` initializer to create a file reference. The name parameter specifies the filename, and cloudURL provides the file location.
+                Use the `ParseFile(name:cloudURL:)` initializer to create a file from a remote source. The name parameter specifies the filename, and cloudURL provides the location from which the SDK will download the data before uploading it to Parse Server on save.
                 
                 @Code(name: "YourApp.swift", file: 09-files-06-create-from-url.swift)
             }

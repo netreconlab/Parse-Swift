@@ -12,4 +12,4 @@ var score = GameScore(points: 52)
 
 // Associate the ParseFile with your ParseObject
 score.profilePicture = profilePic
-print("GameScore now has a profile picture: \(score.profilePicture!.name)")
+print("GameScore now has a profile picture: \(profilePic.name)")
