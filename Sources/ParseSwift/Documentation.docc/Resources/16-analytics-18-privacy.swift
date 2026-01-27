@@ -26,12 +26,14 @@ class AnalyticsManager {
         
         var event = ParseAnalytics(name: name)
         event.track(dimensions: dimensions) { result in
+            #if DEBUG
             switch result {
             case .success:
                 print("Event tracked: \(name)")
             case .failure(let error):
                 print("Failed to track event: \(error)")
             }
+            #endif
         }
     }
 }
