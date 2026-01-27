@@ -34,7 +34,7 @@
     }
     
     @Chapter(name: "Advanced Features") {
-        Learn about advanced Parse-Swift features including installations, access control, and data types.
+        Learn about advanced Parse-Swift features related to installations in your apps.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
