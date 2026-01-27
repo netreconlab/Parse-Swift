@@ -75,9 +75,11 @@
     
     @Section(title: "Updating configuration values") {
         @ContentAndMedia {
-            You can update configuration parameters programmatically and save them back to the server.
+            You can update configuration parameters programmatically and save them back to the server from trusted, server-side, or admin-only tools.
             
-            While it's common to update configuration through the Parse Dashboard, you can also modify values from your app and save them to the server. This is useful for admin tools or automated configuration management.
+            While it's common to update configuration through the Parse Dashboard, you can also modify values from code that runs in a secure environment (for example Cloud Code, backend services, or internal admin apps) and save them to the server. This is useful for admin tools or automated configuration management.
+            
+            > Security warning: `ParseConfig.save()` requires the Parse Server master/primary key. Never ship the master key in public or otherwise untrusted client apps (iOS, macOS, watchOS, tvOS). Only call `save()` from server-side code, Cloud Code, or other trusted admin environments.
         }
         
         @Steps {
@@ -216,9 +218,9 @@
             }
             
             @Step {
-                **Pattern 3: Combine with notifications**
+                **Pattern 3: Reactive updates with Combine/SwiftUI**
                 
-                Use notifications or SwiftUI's `@Published` properties to notify your app when configuration changes. This allows different parts of your app to react to configuration updates automatically.
+                Use SwiftUI's `@Published` properties and `ObservableObject` (Combine) to notify your app when configuration changes. This allows different parts of your app to react to configuration updates automatically.
                 
                 @Code(name: "ConfigManager.swift", file: 14-config-18-notifications.swift)
             }

@@ -14,19 +14,21 @@ struct Config: ParseConfig {
 
 var config = Config()
 
-do {
-    config = try await config.fetch()
-    
-    // Check feature flags to enable/disable features
-    if config.newFeatureEnabled == true {
-        print("Enabling new feature")
-        // Enable the feature in your app
+Task {
+    do {
+        config = try await config.fetch()
+        
+        // Check feature flags to enable/disable features
+        if config.newFeatureEnabled == true {
+            print("Enabling new feature")
+            // Enable the feature in your app
+        }
+        
+        if config.experimentalUIEnabled == true {
+            print("Showing experimental UI")
+            // Show the new UI
+        }
+    } catch {
+        print("Error: \(error)")
     }
-    
-    if config.experimentalUIEnabled == true {
-        print("Showing experimental UI")
-        // Show the new UI
-    }
-} catch {
-    print("Error: \(error)")
 }

@@ -34,10 +34,12 @@ extension Config {
 // Fetch and validate configuration
 var config = Config()
 
-do {
-    config = try await config.fetch()
-    try config.validate()
-    print("Configuration is valid: \(config)")
-} catch {
-    print("Configuration validation failed: \(error)")
+Task {
+    do {
+        config = try await config.fetch()
+        try config.validate()
+        print("Configuration is valid: \(config)")
+    } catch {
+        print("Configuration validation failed: \(error)")
+    }
 }

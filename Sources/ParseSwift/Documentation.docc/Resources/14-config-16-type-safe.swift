@@ -26,9 +26,9 @@ extension Config {
     // Validation methods
     func isVersionSupported(_ currentVersion: String) -> Bool {
         guard let minVersion = minAppVersion else { return true }
-        // Note: This is a simple string comparison. For production use,
+        // Note: This uses a simple numeric string comparison. For production use,
         // consider using a proper semantic versioning library
-        return currentVersion >= minVersion
+        return currentVersion.compare(minVersion, options: .numeric) != .orderedAscending
     }
 }
 

@@ -14,19 +14,21 @@ struct Config: ParseConfig {
 
 var config = Config()
 
-do {
-    config = try await config.fetch()
-    
-    // Display dynamic content
-    if let promo = config.promotionalMessage {
-        print("Showing promotional message: \(promo)")
-        // Display in UI
+Task {
+    do {
+        config = try await config.fetch()
+        
+        // Display dynamic content
+        if let promo = config.promotionalMessage {
+            print("Showing promotional message: \(promo)")
+            // Display in UI
+        }
+        
+        if let announcement = config.announcementText {
+            print("Announcement: \(announcement)")
+            // Show announcement banner
+        }
+    } catch {
+        print("Error: \(error)")
     }
-    
-    if let announcement = config.announcementText {
-        print("Announcement: \(announcement)")
-        // Show announcement banner
-    }
-} catch {
-    print("Error: \(error)")
 }

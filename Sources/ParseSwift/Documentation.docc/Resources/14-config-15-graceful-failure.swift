@@ -31,5 +31,7 @@ func getConfiguration() async -> Config {
 }
 
 // Use the configuration
-let config = await getConfiguration()
-print("Using configuration: \(config)")
+Task {
+    let config = await getConfiguration()
+    print("Using configuration: \(config)")
+}

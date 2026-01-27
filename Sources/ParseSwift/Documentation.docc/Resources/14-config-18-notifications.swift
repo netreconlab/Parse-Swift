@@ -2,7 +2,7 @@ import Foundation
 import ParseSwift
 import Combine
 
-// Configuration manager with notification support
+// Configuration manager with Combine/SwiftUI observation support
 class ConfigManager: ObservableObject {
     @Published var config: Config
     
@@ -11,9 +11,12 @@ class ConfigManager: ObservableObject {
         self.config = Config()
         
         // Attempt to load cached config
-        Task { @MainActor in
+        Task {
             do {
-                self.config = try await Config.current()
+                let cachedConfig = try await Config.current()
+                await MainActor.run {
+                    self.config = cachedConfig
+                }
             } catch {
                 print("No cached config available")
             }
@@ -44,6 +47,10 @@ let configManager = ConfigManager()
 
 // The @Published property automatically notifies observers when config changes
 Task {
-    try await configManager.refreshConfiguration()
-    // UI automatically updates when config changes
+    do {
+        try await configManager.refreshConfiguration()
+        // UI automatically updates when config changes
+    } catch {
+        print("Failed to refresh configuration: \(error)")
+    }
 }

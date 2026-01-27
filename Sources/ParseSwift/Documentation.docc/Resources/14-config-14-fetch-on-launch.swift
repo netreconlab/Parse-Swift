@@ -29,3 +29,8 @@ func initializeApp() async {
     // Continue with app initialization using the config
     print("App initialized with config: \(config)")
 }
+
+// Call during app launch
+Task {
+    await initializeApp()
+}

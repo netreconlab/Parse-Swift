@@ -9,6 +9,12 @@ struct Config: ParseConfig {
 // Create a config instance
 var config = Config()
 
-// Fetch the current configuration from the server
-let fetchedConfig = try await config.fetch()
-print("Current config: \(fetchedConfig)")
+Task {
+    do {
+        // Fetch the current configuration from the server
+        let fetchedConfig = try await config.fetch()
+        print("Current config: \(fetchedConfig)")
+    } catch {
+        print("Error fetching config: \(error)")
+    }
+}
