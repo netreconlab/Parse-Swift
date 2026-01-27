@@ -133,14 +133,16 @@
         @ContentAndMedia {
             Subscribe to the query and set up your SwiftUI view with the subscription.
             
-            Before your view can display live updates, you need to subscribe to the query and pass the resulting `Subscription` object to your SwiftUI view. This is typically done at app startup.
+            Before your view can display live updates, you need to subscribe to the query and pass the resulting `Subscription` object to your SwiftUI view. This is typically done at app startup, after initializing the Parse SDK.
+            
+            > Note: Make sure you have initialized the Parse SDK before subscribing to queries. See <doc:Your-First-Object> for details on initializing ParseSwift with your application ID, client key, and server URL.
         }
         
         @Steps {
             @Step {
                 Create a function to subscribe and initialize the view.
                 
-                Use an async function marked with `@MainActor` to subscribe to the query. The `subscribe()` method returns a `Subscription` object that can be used with your SwiftUI view.
+                Use an async function marked with `@MainActor` to subscribe to the query. The `subscribe()` method returns a `Subscription` object that can be passed to your SwiftUI view's initializer.
                 
                 @Code(name: "YourApp.swift", file: 17-swiftui-livequery-11-subscribe.swift)
             }
@@ -148,7 +150,7 @@
             @Step {
                 Put it all together in a complete example.
                 
-                Combine all the components: model definition with merge method, query creation, SwiftUI view with event handling, and initialization code. In a real app, you would use the `ContentView` with a hosting controller or in your `App` struct to display the live-updating interface.
+                Combine all the components: model definition with merge method, query creation, SwiftUI view with event handling, and subscription setup. The example shows how to create the ContentView with the subscription and use it with a hosting controller in your app. Remember to initialize ParseSwift first (see <doc:Your-First-Object>).
                 
                 @Code(name: "CompleteExample.swift", file: 17-swiftui-livequery-12-complete-example.swift)
             }

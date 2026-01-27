@@ -85,16 +85,18 @@ struct ContentView: View {
 }
 
 @MainActor
-func startView() async throws {
+func startView() async throws -> ContentView {
     let subscribe = try await query.subscribe()
-    // Use the subscription with your SwiftUI view
+    // Return the ContentView with the subscription
+    return ContentView(subscription: subscribe)
 }
 
+// In your App or SceneDelegate, after initializing ParseSwift:
 Task {
     do {
-        // Initialize Parse SDK first
-        try await initializeParse()
-        try await startView()
+        let contentView = try await startView()
+        // Use contentView with UIHostingController or in your SwiftUI App
+        // Example: UIHostingController(rootView: contentView)
     } catch {
         print("Error subscribing: \(error)")
     }

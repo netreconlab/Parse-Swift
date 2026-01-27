@@ -3,10 +3,9 @@ import ParseSwift
 import SwiftUI
 
 @MainActor
-func startView() async throws {
+func startView() async throws -> ContentView {
     // Subscribe to the query
     let subscribe = try await query.subscribe()
-    // Use the subscription with your SwiftUI view
-    // In a real app, you would use this with a hosting controller
-    // or in your App struct
+    // Return the ContentView with the subscription
+    return ContentView(subscription: subscribe)
 }
