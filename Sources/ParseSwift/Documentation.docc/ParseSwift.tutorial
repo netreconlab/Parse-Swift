@@ -33,11 +33,19 @@
         @TutorialReference(tutorial: "doc:ACL")
     }
     
-    @Chapter(name: "Advanced Features") {
+    @Chapter(name: "Handleing Files") {
         Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
-        @TutorialReference(tutorial: "doc:Files")
+        @TutorialReference(tutorial: "doc:Files")   
+    }
+    
+    @Chapter(name: "Advanced Features") {
+        Learn about advanced Parse-Swift features including location-based services and geo-spatial queries.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:GeoPoint")
     }
 }
