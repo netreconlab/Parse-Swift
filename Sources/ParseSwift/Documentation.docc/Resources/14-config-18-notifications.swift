@@ -11,7 +11,7 @@ class ConfigManager: ObservableObject {
         self.config = Config()
         
         // Attempt to load cached config
-        Task {
+        Task { @MainActor in
             do {
                 self.config = try await Config.current()
             } catch {
