@@ -25,6 +25,14 @@
         @TutorialReference(tutorial: "doc:User-Continued")
     }
     
+    @Chapter(name: "Device Installations") {
+        Learn about tracking and handling device installations.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Installation")
+    }
+ 
     @Chapter(name: "Security") {
         Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.
         
@@ -40,8 +48,8 @@
         
         @TutorialReference(tutorial: "doc:Pointers")
     }
-
-    @Chapter(name: "Handleing Files") {
+        
+    @Chapter(name: "Handling Files") {
         Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
         
         @Image(source: parse-swift.png, alt: "Parse image")
