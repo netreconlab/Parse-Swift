@@ -209,8 +209,6 @@
                 5. **Handle null locations**: Use `exists()` or `doesNotExist()` constraints when querying objects that may not have location data.
                 
                 6. **Polygon complexity**: Keep polygons simple with fewer points for better performance. Complex polygons with many vertices can slow down queries.
-                
-                @Code(name: "YourApp.swift", file: 07-geopoint-14-query-exists.swift)
             }
         }
     }
