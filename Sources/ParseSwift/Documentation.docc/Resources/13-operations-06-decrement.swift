@@ -1,11 +1,12 @@
 import Foundation
 import ParseSwift
 
-// Assuming you have a saved score
-let savedScore: GameScore // ... previously saved
-
 Task {
     do {
+        // Create and save a score
+        let score = GameScore(points: 102, name: "player1")
+        let savedScore = try await score.save()
+        
         // Decrement by using a negative value
         let decrementOperation = savedScore
             .operation

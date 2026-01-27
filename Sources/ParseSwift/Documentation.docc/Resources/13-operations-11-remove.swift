@@ -1,11 +1,12 @@
 import Foundation
 import ParseSwift
 
-// Assuming you have a saved score
-let savedScore: GameScore // ... previously saved
-
 Task {
     do {
+        // Create and save a score with tags
+        let score = GameScore(points: 100, name: "player1", tags: ["action", "adventure"])
+        let savedScore = try await score.save()
+        
         // Remove tags from the array
         let removeOperation = savedScore
             .operation

@@ -230,19 +230,11 @@
         
         @Steps {
             @Step {
-                Chain multiple operations together for a batch update.
+                Chain multiple operations together and save them atomically.
                 
-                You can combine different operation types like increment, add, and set in a single operation chain.
+                You can combine different operation types like increment, add, and set in a single operation chain. All chained operations are sent to the server in a single request and applied atomically.
                 
                 @Code(name: "YourApp.swift", file: 13-operations-20-chaining.swift)
-            }
-            
-            @Step {
-                Save the combined operations to apply all changes at once.
-                
-                All chained operations are sent to the server in a single request and applied atomically.
-                
-                @Code(name: "YourApp.swift", file: 13-operations-21-save-chained.swift)
             }
         }
     }

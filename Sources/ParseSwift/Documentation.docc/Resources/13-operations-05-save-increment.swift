@@ -1,11 +1,17 @@
 import Foundation
 import ParseSwift
 
-// Assuming you have an increment operation from the previous step
-let incrementOperation: ParseOperation<GameScore> // ... from previous step
-
 Task {
     do {
+        // Create and save a score
+        let score = GameScore(points: 102, name: "player1")
+        let savedScore = try await score.save()
+        
+        // Create an increment operation
+        let incrementOperation = savedScore
+            .operation
+            .increment("points", by: 1)
+        
         // Save the increment operation to apply it on the server
         let updatedScore = try await incrementOperation.save()
         
