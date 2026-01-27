@@ -33,6 +33,14 @@
         @TutorialReference(tutorial: "doc:ACL")
     }
     
+    @Chapter(name: "Data Relationships") {
+        Learn how to create relationships between objects using pointers and manage complex data structures.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Pointers")
+    }
+
     @Chapter(name: "Advanced Features") {
         Learn about advanced Parse-Swift features including installations, location-based services, and geo-spatial queries.
         
