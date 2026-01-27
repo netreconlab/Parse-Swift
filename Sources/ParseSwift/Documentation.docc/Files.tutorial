@@ -1,0 +1,257 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Files") {
+        Learn how to work with files in Parse-Swift using the ParseFile type.
+        
+        This tutorial covers creating ParseFile instances from URLs and Data, associating files with ParseObjects, uploading files to Parse Server, and downloading file content. Files are essential for building media-rich applications that handle images, documents, videos, and other binary data.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Define your model with ParseFile properties") {
+        @ContentAndMedia {
+            Before working with files, you need to define ParseObject models that include `ParseFile` properties.
+            
+            Files in Parse are represented by the `ParseFile` type, which can be added as properties to any ParseObject. This allows you to associate files like images, documents, or other binary data with your objects.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `GameScore` struct that includes a `ParseFile` property for a profile picture.
+                
+                The `GameScore` model includes the required ParseObject properties and a custom `profilePicture` property of type `ParseFile?` to store user profile images.
+                
+                @Code(name: "GameScore.swift", file: 09-files-01-gamescore-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding after updates. It specifies how to merge server data with local changes for custom properties, including the `profilePicture` field.
+                
+                @Code(name: "GameScore.swift", file: 09-files-02-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension to preserve the memberwise initializer.
+                
+                This allows you to create GameScore instances with specific point values.
+                
+                @Code(name: "GameScore.swift", file: 09-files-03-initializer.swift)
+            }
+            
+            @Step {
+                Define a `GamePhoto` model that uses ParseFile for storing images.
+                
+                This demonstrates how files can be the primary content of a ParseObject. The `GamePhoto` model includes an `image` property for storing photos.
+                
+                @Code(name: "GamePhoto.swift", file: 09-files-04-gamephoto-model.swift)
+            }
+            
+            @Step {
+                Add a nested ParseObject reference to demonstrate pointer relationships with files.
+                
+                Add an `otherPhoto` property to GameScore that references a GamePhoto. This shows how files can be included in nested object relationships.
+                
+                @Code(name: "GameScore.swift", file: 09-files-05-nested-object.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create ParseFile from URL") {
+        @ContentAndMedia {
+            The simplest way to create a ParseFile is from a URL pointing to an existing file on the internet.
+            
+            When you create a ParseFile from a URL, Parse stores a reference to that URL. The file is not downloaded or uploaded immediately - it's associated with your object when you save it.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseFile from an external URL.
+                
+                Use the `ParseFile(name:cloudURL:)` initializer to create a file reference. The name parameter specifies the filename, and cloudURL provides the file location.
+                
+                @Code(name: "YourApp.swift", file: 09-files-06-create-from-url.swift)
+            }
+            
+            @Step {
+                Associate the ParseFile with your ParseObject.
+                
+                Assign the ParseFile to the `profilePicture` property of your GameScore object. This establishes the relationship between the object and the file.
+                
+                @Code(name: "YourApp.swift", file: 09-files-07-associate-file.swift)
+            }
+            
+            @Step {
+                Add a file to a nested ParseObject.
+                
+                You can also associate files with nested ParseObjects. Create a GamePhoto instance, assign the file to its `image` property, and set it as the `otherPhoto` on GameScore.
+                
+                @Code(name: "YourApp.swift", file: 09-files-08-nested-file.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Save objects with files") {
+        @ContentAndMedia {
+            When you save a ParseObject that contains ParseFile properties, Parse automatically handles uploading the files to the server.
+            
+            The save operation uploads any new or modified files and stores their metadata with the object. You don't need to manually upload files separately.
+        }
+        
+        @Steps {
+            @Step {
+                Save the GameScore with the associated file using async/await.
+                
+                Use the `save()` method to save the object. Parse will automatically upload the file and save the object with a reference to it.
+                
+                @Code(name: "YourApp.swift", file: 09-files-09-save.swift)
+            }
+            
+            @Step {
+                Verify the saved object has the expected properties.
+                
+                After saving, check that the object has been assigned an objectId, timestamps, and that the profilePicture property is still set.
+                
+                @Code(name: "YourApp.swift", file: 09-files-10-verify-save.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetch file metadata") {
+        @ContentAndMedia {
+            After saving an object with files, you need to fetch it again to get the complete file metadata from the server.
+            
+            The fetch operation retrieves the updated file information including the server-assigned URL where the file is stored.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch the GameScore to get updated file information.
+                
+                Use the `fetch()` method to retrieve the latest version of the object from the server, which includes the complete ParseFile metadata.
+                
+                @Code(name: "YourApp.swift", file: 09-files-11-fetch-object.swift)
+            }
+            
+            @Step {
+                Access the file metadata from the fetched object.
+                
+                After fetching, you can access the file's name and URL properties. The URL indicates where the file is stored on Parse Server.
+                
+                @Code(name: "YourApp.swift", file: 09-files-12-access-metadata.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Download file data") {
+        @ContentAndMedia {
+            To access the actual file content, you need to download it from Parse Server.
+            
+            Use the `fetch()` method on the ParseFile itself to download the file to your device. The downloaded file is saved locally and you can access it via the `localURL` property.
+        }
+        
+        @Steps {
+            @Step {
+                Download the file content using the ParseFile's fetch method.
+                
+                Call `fetch()` on the ParseFile instance to download it. This saves the file locally and returns an updated ParseFile with a `localURL` pointing to the downloaded content.
+                
+                @Code(name: "YourApp.swift", file: 09-files-13-download-file.swift)
+            }
+            
+            @Step {
+                Access the downloaded file from its local URL.
+                
+                Once downloaded, use the `localURL` property to access the file on your device. You can load the file data, display an image, or perform other operations with the content.
+                
+                @Code(name: "YourApp.swift", file: 09-files-14-access-downloaded.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create ParseFile from Data") {
+        @ContentAndMedia {
+            In addition to URLs, you can create ParseFile instances from in-memory data.
+            
+            This is useful when you have data generated by your app (like camera photos, user-generated text, or downloaded content) that you want to upload to Parse Server.
+        }
+        
+        @Steps {
+            @Step {
+                Create data to upload to Parse.
+                
+                Start by creating some data - in this example, a simple text string converted to Data. This could also be image data, JSON, or any binary content.
+                
+                @Code(name: "YourApp.swift", file: 09-files-15-create-data.swift)
+            }
+            
+            @Step {
+                Create a ParseFile from the data.
+                
+                Use the `ParseFile(name:data:)` initializer to create a file from your data. The name parameter specifies the filename that will be used on the server.
+                
+                @Code(name: "YourApp.swift", file: 09-files-16-create-from-data.swift)
+            }
+            
+            @Step {
+                Create a new GameScore and assign the data file.
+                
+                Assign the ParseFile to a new GameScore instance's `myData` property (you'll need to add this property to your model for this example).
+                
+                @Code(name: "YourApp.swift", file: 09-files-17-assign-data-file.swift)
+            }
+            
+            @Step {
+                Save the object with the data file.
+                
+                Save the GameScore to upload the data file to Parse Server. The file is automatically uploaded during the save operation.
+                
+                @Code(name: "YourApp.swift", file: 09-files-18-save-data-file.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Work with downloaded file data") {
+        @ContentAndMedia {
+            Once you've downloaded a file, you can read its contents and use the data in your application.
+            
+            This is essential for displaying images, processing documents, or working with any file content your app needs to access.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch the GameScore to get the updated file metadata.
+                
+                After saving, fetch the object again to get the complete file information from the server.
+                
+                @Code(name: "YourApp.swift", file: 09-files-19-fetch-for-data.swift)
+            }
+            
+            @Step {
+                Download the data file.
+                
+                Call `fetch()` on the ParseFile to download it to your device.
+                
+                @Code(name: "YourApp.swift", file: 09-files-20-download-data-file.swift)
+            }
+            
+            @Step {
+                Read the file contents from the local URL.
+                
+                Use the `localURL` to read the file data. You can then process or display the content as needed by your application.
+                
+                @Code(name: "YourApp.swift", file: 09-files-21-read-contents.swift)
+            }
+            
+            @Step {
+                Verify and use the downloaded data.
+                
+                Compare the downloaded data with the original to verify integrity, then convert it to the appropriate format (like a String for text data).
+                
+                @Code(name: "YourApp.swift", file: 09-files-22-verify-data.swift)
+            }
+        }
+    }
+}
