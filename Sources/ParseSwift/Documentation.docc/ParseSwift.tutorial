@@ -48,6 +48,14 @@
         
         @TutorialReference(tutorial: "doc:Pointers")
     }
+    
+    @Chapter(name: "Advanced Data Relationships") {
+        Learn how to manage complex relationships using roles and relations for sophisticated data models.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Roles-and-Relations")
+    }
         
     @Chapter(name: "Handling Files") {
         Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
@@ -78,6 +86,6 @@
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
-        @TutorialReference(tutorial: "doc:Cloud-Code")
+        @TutorialReference(tutorial: "doc:Cloud-Code")    
     }
 }
