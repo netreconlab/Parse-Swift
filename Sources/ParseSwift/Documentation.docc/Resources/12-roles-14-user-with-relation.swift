@@ -24,7 +24,8 @@ struct User: ParseUser {
 extension User {
     // Add a computed property to access the scores relation
     // The relation stores references to GameScore objects
-    var scores: ParseRelation<GameScore>? {
+    // ParseRelation is generic over the parent type (User), not the child type
+    var scores: ParseRelation<User>? {
         get { self["scores"] }
         set { self["scores"] = newValue }
     }

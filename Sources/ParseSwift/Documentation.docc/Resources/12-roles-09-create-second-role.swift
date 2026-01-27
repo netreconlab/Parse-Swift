@@ -2,7 +2,7 @@ import Foundation
 import ParseSwift
 
 // Variable to store the second role
-var savedRoleModerator: Role<User>?
+var savedMemberRole: Role<User>?
 
 Task {
     do {
@@ -18,9 +18,9 @@ Task {
         let memberRole = try Role<User>(name: "Member", acl: acl)
         
         // Save the role
-        savedRoleModerator = try await memberRole.save()
+        savedMemberRole = try await memberRole.save()
         
-        print("The role saved successfully: \(savedRoleModerator!)")
+        print("The role saved successfully: \(savedMemberRole!)")
         print("Check your \"Role\" class in Parse Dashboard.")
     } catch {
         print("Error creating second role: \(error)")

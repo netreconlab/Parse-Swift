@@ -12,8 +12,7 @@ Task {
         // Use the stored ParseRelation property to query related scores
         // The relation was previously saved with GameScore objects
         if let scoresRelation = currentUser.scores {
-            let usableStoredRelation = try currentUser.relation(scoresRelation, key: "scores")
-            let scores = try await (usableStoredRelation.query() as Query<GameScore>).find()
+            let scores = try await (scoresRelation.query() as Query<GameScore>).find()
             
             print("Found related scores from stored ParseRelation: \(scores)")
         } else {

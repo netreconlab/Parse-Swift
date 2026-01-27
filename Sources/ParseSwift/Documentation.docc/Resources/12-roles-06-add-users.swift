@@ -9,7 +9,7 @@ Task {
         // ParseRoles have ParseRelations that relate them to ParseUser and ParseRole objects
         // The ParseUser relations can be accessed using `users`
         // Add users to the relation and save it
-        guard let savedRelation = try await savedRole!.users?.add([currentUser]).save() else {
+        guard let _ = try await savedRole!.users?.add([currentUser]).save() else {
             print("Error: could not add user to role")
             return
         }

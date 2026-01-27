@@ -164,7 +164,7 @@
             @Step {
                 Add a ParseRelation property to your User model.
                 
-                The `ParseRelation<GameScore>` property type indicates this relation stores references to GameScore objects. This is more type-safe than using a generic relation.
+                The `ParseRelation<User>` property type is generic over the parent type (User). The relation will store references to child objects (like GameScore) through the relation key.
                 
                 @Code(name: "User.swift", file: 12-roles-14-user-with-relation.swift)
             }
