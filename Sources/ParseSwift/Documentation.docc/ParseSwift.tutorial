@@ -29,12 +29,13 @@
 	}
 	
 	@Chapter(name: "SwiftUI Query Integration") {
-		Learn how to integrate Parse-Swift with SwiftUI applications using custom view models and Combine publishers.
+		Learn how to integrate Parse-Swift with SwiftUI applications using custom view models, Combine publishers, and LiveQuery for real-time updates.
 		
 		@Image(source: parse-logo.png, alt: "Parse logo")
 		
 		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects")
 		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects-With-Custom-ViewModel")
+		@TutorialReference(tutorial: "doc:SwiftUI-LiveQuery")
 	}
 
     @Chapter(name: "User Authentication") {
@@ -109,13 +110,5 @@
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Analytics")
-    }
-    
-    @Chapter(name: "SwiftUI Integration") {
-        Learn how to integrate Parse-Swift with SwiftUI for building reactive, data-driven user interfaces with real-time updates.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:SwiftUI-LiveQuery")
     }
 }
