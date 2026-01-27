@@ -78,7 +78,7 @@
             @Step {
                 Increment by a decimal amount using Double values.
                 
-                The increment operation also supports Double values for floating-point arithmetic.
+                The increment operation also supports Double values for floating-point arithmetic. This example shows incrementing a rating field by 0.5.
                 
                 @Code(name: "YourApp.swift", file: 13-operations-07-increment-double.swift)
             }
