@@ -91,14 +91,14 @@
         @ContentAndMedia {
             When updating installation properties, use the `.mergeable` property to send only the changed fields.
             
-            This approach improves performance and reduces network traffic by sending only the modified properties to Parse Server instead of the entire object.
+            The `.mergeable` property works on installations that have already been saved to Parse Server. It returns a minimal object that tracks only the fields you modify, reducing network traffic when calling `save()`.
         }
         
         @Steps {
             @Step {
                 Update installation properties using `.mergeable`.
                 
-                The `.mergeable` property returns a version of the installation that tracks which fields have been modified. Only these changed fields will be sent to Parse Server when you call `save()`.
+                The `.mergeable` property creates a change-tracking version of the installation. This only works for installations that have been saved at least once (`isSaved == true`). First ensure the installation is saved, then use `.mergeable` to send only modified fields.
                 
                 @Code(name: "YourApp.swift", file: 06-installation-07-mergeable.swift)
             }

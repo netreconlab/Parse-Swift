@@ -5,6 +5,12 @@ import ParseSwift
 Task {
     do {
         var installationToUpdate = try await Installation.current()
+        
+        // Ensure the installation has been saved at least once before using `mergeable`
+        if installationToUpdate.objectId == nil {
+            installationToUpdate = try await installationToUpdate.save()
+        }
+        
         installationToUpdate = installationToUpdate.mergeable
         
         // Reset badge count to 0

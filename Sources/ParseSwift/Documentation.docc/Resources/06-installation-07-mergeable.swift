@@ -6,8 +6,13 @@ Task {
     do {
         var installationToUpdate = try await Installation.current()
         
-        // Using .mergeable allows you to send only updated keys
-        // to the Parse server instead of the whole object
+        // Ensure the installation has been saved at least once
+        if installationToUpdate.objectId == nil {
+            installationToUpdate = try await installationToUpdate.save()
+        }
+        
+        // Using `.mergeable` on an already-saved installation allows you to send
+        // only the keys you modify to Parse Server instead of the whole object
         installationToUpdate = installationToUpdate.mergeable
         installationToUpdate.customKey = "myCustomInstallationKey2"
         installationToUpdate.channels = ["newDevices"]
