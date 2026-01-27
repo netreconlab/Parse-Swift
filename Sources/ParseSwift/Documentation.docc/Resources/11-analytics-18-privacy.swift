@@ -6,7 +6,12 @@ class AnalyticsManager {
     // Allow users to opt out of analytics
     static var isAnalyticsEnabled: Bool {
         get {
-            UserDefaults.standard.bool(forKey: "analyticsEnabled")
+            let defaults = UserDefaults.standard
+            // Default to analytics enabled until the user explicitly opts out
+            if defaults.object(forKey: "analyticsEnabled") == nil {
+                return true
+            }
+            return defaults.bool(forKey: "analyticsEnabled")
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "analyticsEnabled")
