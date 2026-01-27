@@ -89,8 +89,6 @@ public extension ParseSchema {
      - parameter name: Name of the field that will be created/updated in the schema on Parse Server.
      - parameter type: The `ParseField.FieldType` of the field that will be created/updated
      in the schema on Parse Server.
-     - parameter target: The  target `ParseObject` of the field that will be created/updated in
-     the schema on Parse Server.
      - parameter options: The `ParseFieldOptions` of the field that will be created/updated in
      the schema on Parse Server.
      - returns: A mutated instance of `ParseSchema` for easy chaining.
@@ -142,8 +140,6 @@ public extension ParseSchema {
      Add a Pointer field to create/update a `ParseSchema`.
      
      - parameter name: Name of the field that will be created/updated in the schema on Parse Server.
-     - parameter target: The  target `ParseObject` of the field that will be created/updated in
-     the schema on Parse Server.
      Defaults to **nil**.
      - parameter options: The `ParseFieldOptions` of the field that will be created/updated in
      the schema on Parse Server.

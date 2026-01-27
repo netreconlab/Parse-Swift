@@ -14,7 +14,7 @@ struct GameData: ParseObject {
     // ParseBytes needs to be a part of the original schema
     // or else you will need your primaryKey to force an upgrade
     var bytes: ParseBytes?
-    
+
     // Optional - implement your own version of merge
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)

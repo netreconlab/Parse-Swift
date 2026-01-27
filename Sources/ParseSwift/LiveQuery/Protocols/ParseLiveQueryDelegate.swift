@@ -44,7 +44,8 @@ public protocol ParseLiveQueryDelegate: NSObjectProtocol, Sendable {
 
     /**
     Receive unsupported data from the ParseLiveQuery task/connection.
-     - parameter error: An error from the session task.
+     - parameter data: The unsupported data received.
+     - parameter socketMessage: An enumeration of the types of messages sent and received.
      */
     func receivedUnsupported(_ data: Data?, socketMessage: URLSessionWebSocketTask.Message?)
 
