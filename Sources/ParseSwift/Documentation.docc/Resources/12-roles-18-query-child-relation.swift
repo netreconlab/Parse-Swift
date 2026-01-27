@@ -7,7 +7,8 @@ Task {
         let currentUser = try await User.current()
         
         // Query from the child perspective using queryRelations
-        let scores = try await GameScore.queryRelations("scores", parent: currentUser).find()
+        let query = try GameScore.queryRelations("scores", parent: currentUser)
+        let scores = try await query.find()
         
         print("Found related scores from child: \(scores)")
     } catch {

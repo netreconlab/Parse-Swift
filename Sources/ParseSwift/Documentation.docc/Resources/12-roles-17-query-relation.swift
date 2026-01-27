@@ -11,7 +11,8 @@ Task {
         let specificRelation = try currentUser.relation("scores", child: score1)
         
         // Query the relation to get all related objects
-        let scores = try await (specificRelation.query() as Query<GameScore>).find()
+        let query: Query<GameScore> = try specificRelation.query()
+        let scores = try await query.find()
         
         print("Found related scores: \(scores)")
     } catch {

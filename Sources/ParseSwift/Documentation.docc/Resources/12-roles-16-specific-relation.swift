@@ -13,7 +13,8 @@ Task {
         print("Created specific relation for key: scores")
         
         // You can also use this alternative syntax:
-        // let specificRelation = try await User.current().relation("scores", object: GameScore.self)
+        // let currentUser = try await User.current()
+        // let specificRelation = try currentUser.relation("scores", object: GameScore.self)
     } catch {
         print("Error creating specific relation: \(error)")
     }

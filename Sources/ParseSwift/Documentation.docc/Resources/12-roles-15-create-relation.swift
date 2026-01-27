@@ -16,8 +16,17 @@ Task {
         // Save the scores first
         let savedScores = try await [score1, score2].saveAll()
         
-        // Make an array of all scores that were properly saved
-        let scores = savedScores.compactMap { try? $0.get() }
+        // Process saved scores, handling any failures
+        var scores = [GameScore]()
+        for result in savedScores {
+            switch result {
+            case .success(let score):
+                scores.append(score)
+            case .failure(let error):
+                print("Error saving score: \(error)")
+                throw error
+            }
+        }
         
         // Add the scores to the relation
         guard let newRelations = try relation?.add("scores", objects: scores) else {
