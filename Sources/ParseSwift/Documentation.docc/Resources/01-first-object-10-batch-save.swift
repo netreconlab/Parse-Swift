@@ -7,7 +7,7 @@ let score2 = GameScore(points: 3)
 Task {
     do {
         let results = try await [score, score2].saveAll()
-        
+
         results.forEach { result in
             switch result {
             case .success(let savedScore):

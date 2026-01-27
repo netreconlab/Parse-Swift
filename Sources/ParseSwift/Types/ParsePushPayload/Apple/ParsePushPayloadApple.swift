@@ -184,7 +184,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayloadable {
 
     /**
      Set the badge to a specific value to display on your app's icon.
-     - parameter badge: The number to display in a badge on your app’s icon.
+     - parameter number: The number to display in a badge on your app’s icon.
      Specify 0 to remove the current badge, if any.
      - returns: A mutated instance of `ParsePushPayloadApple` for easy chaining.
      - warning: For Apple OS's only.

@@ -593,8 +593,8 @@ public func withinKilometers(key: String,
  Add a constraint to the query that requires a particular key's coordinates (specified via `ParseGeoPoint`) be
  contained within a given rectangular geographic bounding box.
  - parameter key: The key to be constrained.
- - parameter fromSouthWest: The lower-left inclusive corner of the box.
- - parameter toNortheast: The upper-right inclusive corner of the box.
+ - parameter southwest: The lower-left inclusive corner of the box.
+ - parameter northeast: The upper-right inclusive corner of the box.
  - returns: The same instance of `QueryConstraint` as the receiver.
  */
 public func withinGeoBox(key: String, fromSouthWest southwest: ParseGeoPoint,
