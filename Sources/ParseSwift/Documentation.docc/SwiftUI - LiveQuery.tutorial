@@ -184,33 +184,21 @@
             @Step {
                 Create a new GameScore object with points less than 11.
                 
-                In the Parse Dashboard, add a new row to the GameScore class. Set the `points` field to a value less than 11 (like 5 or 8). Set the `name` field to any string.
-                
-                Watch your SwiftUI app - it should immediately display "Created with points: 5" (or whatever value you entered).
+                In the Parse Dashboard, add a new row to the GameScore class. Set the `points` field to a value less than 11 (like 5 or 8). Set the `name` field to any string. Watch your SwiftUI app - it should immediately display "Created with points: 5" (or whatever value you entered).
             }
             
             @Step {
                 Update the object to trigger an update event.
                 
-                In Parse Dashboard, click on the GameScore object you just created and change the `points` value to a different number less than 11. Save the changes.
-                
-                Your app should now show "Updated with points: [new value]" as the subscription receives the update event.
+                In Parse Dashboard, click on the GameScore object you just created and change the `points` value to a different number less than 11. Save the changes. Your app should now show "Updated with points: [new value]" as the subscription receives the update event.
             }
             
             @Step {
-                Change points to exceed the query threshold.
-                
-                Update the `points` value to 15 (greater than 11). This makes the object no longer match your query constraint.
-                
-                Your app should display "Left with points: 15" as the subscription receives a `left` event indicating the object no longer matches the query.
+                Change points to exceed the query threshold. Update the `points` value to 15 (greater than 11). This makes the object no longer match your query constraint. Your app should display "Left with points: 15" as the subscription receives a `left` event indicating the object no longer matches the query.
             }
             
             @Step {
-                Test the unsubscribe functionality.
-                
-                Tap the "Unsubscribe" button in your app. The view should change to display "Unsubscribed from query!"
-                
-                Now try creating or updating GameScore objects in Parse Dashboard - your app should no longer receive updates, confirming the unsubscribe worked correctly.
+                Test the unsubscribe functionality. Tap the "Unsubscribe" button in your app. The view should change to display "Unsubscribed from query!". Now try creating or updating GameScore objects in Parse Dashboard - your app should no longer receive updates, confirming the unsubscribe worked correctly.
             }
         }
     }
@@ -224,74 +212,29 @@
         
         @Steps {
             @Step {
-                Use `@StateObject` for subscription ownership.
-                
-                Always use `@StateObject` (not `@ObservedObject`) when the view creates and owns the subscription. This ensures SwiftUI doesn't recreate the subscription on every view update.
-                
-                ```swift
-                // Correct - view owns the subscription
-                @StateObject var subscription: Subscription<GameScore>
-                
-                // Wrong - could recreate subscription unnecessarily
-                @ObservedObject var subscription: Subscription<GameScore>
-                ```
+                Use `@StateObject` for subscription ownership. Always use `@StateObject` (not `@ObservedObject`) when the view creates and owns the subscription. This ensures SwiftUI doesn't recreate the subscription on every view update.
             }
             
             @Step {
-                Implement proper error handling.
-                
-                Wrap subscription calls in do-catch blocks to handle potential errors gracefully. Display error messages in your UI to help users understand connection issues.
-                
-                ```swift
-                Task {
-                    do {
-                        try await initializeParse()
-                        try await startView()
-                    } catch {
-                        // Update UI to show error state
-                        print("Error subscribing: \(error)")
-                    }
-                }
-                ```
+                Implement proper error handling. Wrap subscription calls in do-catch blocks to handle potential errors gracefully. Display error messages in your UI to help users understand connection issues.
             }
             
             @Step {
-                Consider subscription lifecycle management.
-                
-                Unsubscribe when views are dismissed or when users navigate away. This prevents memory leaks and reduces server load. You can use SwiftUI's `onDisappear` modifier to unsubscribe automatically.
-                
-                ```swift
-                .onDisappear {
-                    Task {
-                        try? await query.unsubscribe()
-                    }
-                }
-                ```
+                Consider subscription lifecycle management. Unsubscribe when views are dismissed or when users navigate away. This prevents memory leaks and reduces server load. You can use SwiftUI's `onDisappear` modifier to unsubscribe automatically.
             }
             
             @Step {
                 Optimize with the merge method.
                 
-                Always implement the `merge` method on your ParseObject models when using LiveQuery. This significantly improves performance by allowing faster object updates when events arrive.
-                
-                Without merge, ParseSwift has to fully re-decode objects. With merge, only changed fields are processed.
+                Always implement the `merge` method on your ParseObject models when using LiveQuery. This significantly improves performance by allowing faster object updates when events arrive. Without merge, ParseSwift has to fully re-decode objects. With merge, only changed fields are processed.
             }
             
             @Step {
-                Use field selection for better performance.
-                
-                If you only need specific fields in your UI, use the `select()` method on your query to reduce network traffic and parsing overhead.
-                
-                ```swift
-                var query = GameScore.query("points" < 11)
-                    .select("points", "name")
-                ```
+                Use field selection for better performance. If you only need specific fields in your UI, use the `select()` method on your query to reduce network traffic and parsing overhead.
             }
             
             @Step {
-                Handle reconnection scenarios.
-                
-                Network connections can be interrupted. Consider implementing reconnection logic and showing connection status in your UI to provide a better user experience during network issues.
+                Handle reconnection scenarios. Network connections can be interrupted. Consider implementing reconnection logic and showing connection status in your UI to provide a better user experience during network issues.
             }
         }
     }
