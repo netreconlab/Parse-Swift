@@ -8,7 +8,7 @@ Task {
     do {
         // Fetch the complete object from the server
         let fetchedScore = try await scoreToFetch.fetch()
-        
+
         print("Successfully fetched: \(fetchedScore)")
         print("ObjectId: \(fetchedScore.objectId ?? "nil")")
         print("Points: \(fetchedScore.points ?? 0)")

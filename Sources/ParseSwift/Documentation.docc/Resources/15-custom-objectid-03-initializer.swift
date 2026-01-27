@@ -11,7 +11,7 @@ struct GameScore: ParseObject {
 
     // Your own custom properties
     var points: Int?
-    
+
     // Optional - implement your own version of merge
     // for faster decoding after updating your ParseObject
     func merge(with object: Self) throws -> Self {

@@ -8,7 +8,7 @@ Task {
     do {
         // Try to fetch the non-existent object
         let fetchedScore = try await nonExistentScore.fetch()
-        
+
         print("Successfully fetched: \(fetchedScore)")
     } catch {
         // Handle the error appropriately

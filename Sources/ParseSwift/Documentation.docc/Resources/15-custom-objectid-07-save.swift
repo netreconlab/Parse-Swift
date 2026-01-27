@@ -8,7 +8,7 @@ Task {
     do {
         // Save the score with custom objectId
         let savedScore = try await score.save()
-        
+
         print("Saved score: \(savedScore)")
         print("ObjectId: \(savedScore.objectId ?? "nil")")
         print("Points: \(savedScore.points ?? 0)")
