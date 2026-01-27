@@ -15,9 +15,9 @@
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
-        
+        @TutorialReference(tutorial: "doc:Custom-ObjectId")
     }
-
+	
 	@Chapter(name: "Query and retrieve ParseObjects") {
 		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery to receive real-time updates when ParseObjects are created, updated, or deleted on your Parse Server.
 		
@@ -27,7 +27,7 @@
 		@TutorialReference(tutorial: "doc:GeoPoint")
 		@TutorialReference(tutorial: "doc:LiveQuery")
 	}
-    
+
     @Chapter(name: "User Authentication") {
         Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
         

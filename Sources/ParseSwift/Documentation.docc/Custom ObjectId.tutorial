@@ -1,0 +1,208 @@
+@Tutorial(time: 20) {
+    @Intro(title: "Custom ObjectId") {
+        Learn how to use custom object identifiers when creating ParseObjects.
+        
+        By default, Parse Server automatically generates unique objectIds for new objects. However, in some scenarios, you may want to specify your own custom objectIds. This tutorial shows you how to enable and use custom objectIds, including creating, saving, fetching, and querying objects with custom identifiers.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn the basics of creating and working with ParseObjects.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Custom ObjectIds") {
+        @ContentAndMedia {
+            Custom objectIds allow you to specify your own unique identifiers for ParseObjects instead of relying on Parse Server's auto-generated IDs.
+            
+            This feature is useful when integrating with existing systems, maintaining compatibility with legacy data, or when you need specific ID formats for your application. However, custom objectIds must be enabled on your Parse Server before you can use them.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseObject model that will use custom objectIds.
+                
+                The `GameScore` struct is the same as in other tutorials, conforming to `ParseObject` with the required properties and custom fields.
+                
+                @Code(name: "GameScore.swift", file: 15-custom-objectid-01-model.swift)
+            }
+            
+            @Step {
+                Implement the merge method for optimal performance.
+                
+                The merge method specifies how to combine server data with local changes after updates.
+                
+                @Code(name: "GameScore.swift", file: 15-custom-objectid-02-model-with-merge.swift)
+            }
+            
+            @Step {
+                Add a custom initializer that accepts an objectId parameter.
+                
+                This initializer allows you to create GameScore instances with a specific objectId. Place it in an extension to preserve the memberwise initializer.
+                
+                @Code(name: "GameScore.swift", file: 15-custom-objectid-03-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Initialize Parse with custom objectId support") {
+        @ContentAndMedia {
+            Before using custom objectIds, you must enable this feature when initializing Parse-Swift.
+            
+            Custom objectIds must also be enabled on your Parse Server. If the server doesn't support custom objectIds, save operations will fail.
+        }
+        
+        @Steps {
+            @Step {
+                Import the ParseSwift framework.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-04-import.swift)
+            }
+            
+            @Step {
+                Initialize Parse with the `customObjectId` parameter set to `true`.
+                
+                The `customObjectId` parameter in the initialization tells Parse-Swift to allow custom objectIds. This must match your server configuration.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-05-initialize.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create and save objects with custom objectIds") {
+        @ContentAndMedia {
+            With custom objectId support enabled, you can create ParseObjects with your own objectId values.
+            
+            The objectId you specify must be unique across all objects of that class. If you try to save an object with an objectId that already exists, the operation will fail.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore instance with a custom objectId.
+                
+                Use the custom initializer to create an object with both a custom objectId and initial data values.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-06-create.swift)
+            }
+            
+            @Step {
+                Save the object to Parse Server.
+                
+                After saving, Parse populates the `createdAt` and `updatedAt` fields, but the `objectId` remains the custom value you specified.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-07-save.swift)
+            }
+            
+            @Step {
+                Verify the objectId matches your custom value.
+                
+                After saving, you can confirm that your custom objectId was preserved on the server.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-08-verify.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Update objects with custom objectIds") {
+        @ContentAndMedia {
+            Updating objects with custom objectIds works the same as with auto-generated IDs.
+            
+            Once an object is saved with a custom objectId, that ID cannot be changed. Updates only modify the object's data fields.
+        }
+        
+        @Steps {
+            @Step {
+                Create a mutable copy of the saved object using `.mergeable`.
+                
+                The `.mergeable` property allows you to track which fields have been modified for efficient updates.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-09-mergeable.swift)
+            }
+            
+            @Step {
+                Modify the object's properties and save the changes.
+                
+                Only the modified fields are sent to Parse Server. The custom objectId remains unchanged.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-10-update.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetch objects using custom objectIds") {
+        @ContentAndMedia {
+            Fetching objects with custom objectIds works exactly like fetching objects with auto-generated IDs.
+            
+            You can use the `fetch()` method with your custom objectId to retrieve the complete object data from the server.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore instance with just the custom objectId.
+                
+                This creates a local reference to an object that exists on the server, using your custom ID.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-11-fetch-init.swift)
+            }
+            
+            @Step {
+                Fetch the complete object data from Parse Server.
+                
+                The `fetch()` method retrieves all fields for the object using the custom objectId.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-12-fetch.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Query objects by custom objectId") {
+        @ContentAndMedia {
+            You can query for objects using custom objectIds just like with auto-generated IDs.
+            
+            Queries allow you to find objects by their objectId or other fields, combining multiple constraints as needed.
+        }
+        
+        @Steps {
+            @Step {
+                Create a query to find an object by its custom objectId.
+                
+                The query uses the `==` operator to match the exact objectId value you specified.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-13-query.swift)
+            }
+            
+            @Step {
+                Execute the query to find the object.
+                
+                The `first()` method returns the first object matching the query, or an error if no object is found.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-14-query-execute.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Handle objects that don't exist") {
+        @ContentAndMedia {
+            When working with custom objectIds, you may try to fetch objects that don't exist on the server.
+            
+            Understanding how Parse-Swift handles these scenarios helps you build robust error handling into your applications.
+        }
+        
+        @Steps {
+            @Step {
+                Attempt to fetch an object with a non-existent custom objectId.
+                
+                Create a GameScore instance with an objectId that hasn't been saved to the server.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-15-fetch-nonexistent.swift)
+            }
+            
+            @Step {
+                Handle the fetch error gracefully.
+                
+                When fetching fails, the error indicates that the object doesn't exist on the server. Your application should handle this scenario appropriately.
+                
+                @Code(name: "YourApp.swift", file: 15-custom-objectid-16-error-handling.swift)
+            }
+        }
+    }
+}
+
