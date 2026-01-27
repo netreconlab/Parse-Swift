@@ -24,7 +24,7 @@
 			}
 			
 			@Step {
-				**The ParseAnalytics API** Parse provides two main ways to track analytics: `ParseAnalytics.trackAppOpened()` for tracking when users open your app, and creating custom `ParseAnalytics` instances for tracking any other events. Both methods support async/await for modern Swift concurrency as well as completion handlers for backward compatibility.
+				**The ParseAnalytics API** Parse provides two main ways to track analytics: `ParseAnalytics.trackAppOpened()` for tracking when users open your app, and creating custom `ParseAnalytics` instances for tracking any other events. Both methods use completion handlers to handle success and failure cases asynchronously.
 				
 				@Code(name: "Analytics.swift", file: 16-analytics-02-api.swift)
 			}
@@ -46,15 +46,9 @@
 			}
 			
 			@Step {
-				Track app opened using async/await. Call `ParseAnalytics.trackAppOpened()` using `try await` when your app launches. This is typically done in your app's initialization code or in the `AppDelegate`/`SceneDelegate` lifecycle methods.
+				Track app opened using a completion handler. Call `ParseAnalytics.trackAppOpened()` with a completion handler when your app launches. This is typically done in your app's initialization code or in the `AppDelegate`/`SceneDelegate` lifecycle methods.
 				
-				@Code(name: "Analytics.swift", file: 16-analytics-04-track-app-opened-async.swift)
-			}
-			
-			@Step {
-				Alternatively, use completion handlers if your code doesn't support async/await. The completion handler receives a `Result` type that you can switch on to handle success and failure cases.
-				
-				@Code(name: "Analytics.swift", file: 16-analytics-05-track-app-opened-callback.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-04-track-app-opened.swift)
 			}
 			
 			@Step {
@@ -80,15 +74,9 @@
 			}
 			
 			@Step {
-				Track the custom event using async/await. Call the `track()` method on your analytics instance to send the event to Parse Server. This records that the event occurred at the current time.
+				Track the custom event using a completion handler. Call the `track()` method on your analytics instance with a completion handler to send the event to Parse Server. This records that the event occurred at the current time.
 				
-				@Code(name: "Analytics.swift", file: 16-analytics-08-track-event-async.swift)
-			}
-			
-			@Step {
-				Alternatively, track the event using a completion handler. Like with `trackAppOpened()`, you can use the completion handler pattern if you're not using async/await in your codebase.
-				
-				@Code(name: "Analytics.swift", file: 16-analytics-09-track-event-callback.swift)
+				@Code(name: "Analytics.swift", file: 16-analytics-08-track-event.swift)
 			}
 			
 			@Step {
