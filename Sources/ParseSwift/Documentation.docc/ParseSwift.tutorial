@@ -91,4 +91,12 @@
         
         @TutorialReference(tutorial: "doc:Config")
     }
+    
+    @Chapter(name: "Real-time Data with LiveQuery") {
+        Learn how to use LiveQuery to receive real-time updates when ParseObjects are created, updated, or deleted on your Parse Server.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+        
+        @TutorialReference(tutorial: "doc:LiveQuery")
+    }
 }
