@@ -16,9 +16,9 @@ final class LiveQueryDelegate: NSObject, ParseLiveQueryDelegate {
 
 // Set the delegate on the default LiveQuery client
 let delegate = LiveQueryDelegate()
-if let client = ParseLiveQuery.defaultClient {
+if let client = ParseLiveQuery.client {
     client.receiveDelegate = delegate
     print("LiveQuery delegate set successfully")
 } else {
-    print("Warning: LiveQuery default client not available")
+    print("Warning: LiveQuery client not available")
 }
