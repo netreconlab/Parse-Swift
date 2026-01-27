@@ -18,7 +18,14 @@ struct User: ParseUser {
 
     // Your custom keys
     var customKey: String?
-    
-    // Add a ParseRelation property to relate to other objects
-    var scores: ParseRelation<Self>?
+}
+
+// Extend User to add a ParseRelation for GameScore objects
+extension User {
+    // Add a computed property to access the scores relation
+    // The relation stores references to GameScore objects
+    var scores: ParseRelation<GameScore>? {
+        get { self["scores"] }
+        set { self["scores"] = newValue }
+    }
 }

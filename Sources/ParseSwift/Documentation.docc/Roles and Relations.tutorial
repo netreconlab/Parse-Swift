@@ -164,7 +164,7 @@
             @Step {
                 Add a ParseRelation property to your User model.
                 
-                The `ParseRelation<Self>` property type indicates this user can have relations to other objects of the same type. You can also use `ParseRelation<GameScore>` for specific types.
+                The `ParseRelation<GameScore>` property type indicates this relation stores references to GameScore objects. This is more type-safe than using a generic relation.
                 
                 @Code(name: "User.swift", file: 12-roles-14-user-with-relation.swift)
             }
