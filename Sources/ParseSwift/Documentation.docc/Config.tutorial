@@ -1,0 +1,225 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Configuration Management") {
+        Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.
+        
+        Parse Config allows you to remotely configure your application by storing configuration parameters on Parse Server. This is useful for feature flags, A/B testing, changing app behavior without releasing updates, and managing environment-specific settings. You can update configuration values from the Parse Dashboard and fetch them in your app at runtime.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+		@Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Parse Config") {
+        @ContentAndMedia {
+            Parse Config enables remote configuration management, allowing you to change app behavior without deploying new versions.
+            
+            With Parse Config, you can store configuration parameters on your Parse Server and fetch them in your app. This is particularly useful for feature flags, A/B testing, promotional messages, and other dynamic settings that may need to change without requiring users to update their apps.
+        }
+        
+        @Steps {
+            @Step {
+                Define a ParseConfig struct that matches your server configuration.
+                
+                Create a struct that conforms to `ParseConfig`. Each property represents a configuration parameter that you'll set in the Parse Dashboard. The property names and types must match the parameters you create on the server.
+                
+                @Code(name: "Config.swift", file: 14-config-01-model.swift)
+            }
+            
+            @Step {
+                Add configuration parameters in Parse Dashboard.
+                
+                Go to your Parse Dashboard and click **Config → Create a parameter**. Add the following parameters: - Parameter Name: "welcomeMessage", Type: "String", Value: "Hello" - Parameter Name: "winningNumber", Type: "Number", Value: "42". These values can be changed at any time from the Dashboard without requiring an app update.
+                
+                @Code(name: "Config.swift", file: 14-config-01-model.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetching configuration from server") {
+        @ContentAndMedia {
+            Fetch the latest configuration from Parse Server to get current parameter values.
+            
+            The `fetch()` method retrieves the configuration from the server and automatically caches it locally. This allows your app to work with the latest settings from the server.
+        }
+        
+        @Steps {
+            @Step {
+                Create a Config instance and fetch it from the server.
+                
+                Initialize your Config struct and call the `fetch()` method using async/await. This retrieves the current configuration parameters from Parse Server.
+                
+                @Code(name: "YourApp.swift", file: 14-config-02-fetch.swift)
+            }
+            
+            @Step {
+                Handle errors when fetching configuration.
+                
+                Always wrap the fetch operation in a do-catch block to handle potential errors like network failures or server issues gracefully.
+                
+                @Code(name: "YourApp.swift", file: 14-config-03-fetch-with-error.swift)
+            }
+            
+            @Step {
+                Access configuration values from the fetched config.
+                
+                Once fetched, you can access the configuration parameters as regular properties. These values come directly from the Parse Dashboard settings.
+                
+                @Code(name: "YourApp.swift", file: 14-config-04-access-values.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Updating configuration values") {
+        @ContentAndMedia {
+            You can update configuration parameters programmatically and save them back to the server from trusted, server-side, or admin-only tools.
+            
+            While it's common to update configuration through the Parse Dashboard, you can also modify values from code that runs in a secure environment (for example Cloud Code, backend services, or internal admin apps) and save them to the server. This is useful for admin tools or automated configuration management.
+            
+            > Security warning: `ParseConfig.save()` requires the Parse Server primary key. Never ship the master key in public or otherwise untrusted client apps (e.g. iOS, macOS, watchOS, tvOS, visionOS). Only call `save()` from server-side code, Cloud Code, or other trusted admin environments.
+        }
+        
+        @Steps {
+            @Step {
+                Modify a configuration parameter.
+                
+                Update the value of a configuration property. In this example, we're changing the winning number from 42 to 50.
+                
+                @Code(name: "YourApp.swift", file: 14-config-05-modify.swift)
+            }
+            
+            @Step {
+                Save the updated configuration to the server.
+                
+                Use the `save()` method to persist your changes to Parse Server. The method returns a boolean indicating whether the update was successful.
+                
+                @Code(name: "YourApp.swift", file: 14-config-06-save.swift)
+            }
+            
+            @Step {
+                Verify the update by fetching again.
+                
+                After saving, fetch the configuration again to confirm that the changes were persisted to the server.
+                
+                @Code(name: "YourApp.swift", file: 14-config-07-verify-update.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Working with cached configuration") {
+        @ContentAndMedia {
+            Parse automatically caches your configuration locally for offline access and improved performance.
+            
+            Whenever you successfully fetch or update a configuration, it's automatically saved to the Keychain. This allows you to access the configuration even when offline or to reduce network calls by using the cached version.
+        }
+        
+        @Steps {
+            @Step {
+                Access the cached configuration.
+                
+                Use the `Config.current()` static method to retrieve the cached configuration from the Keychain. This doesn't make a network request and provides instant access to the last known configuration.
+                
+                @Code(name: "YourApp.swift", file: 14-config-08-cached.swift)
+            }
+            
+            @Step {
+                Handle cases where no cached configuration exists.
+                
+                If no configuration has been fetched yet, the `current()` method will throw an error. Always handle this case appropriately in your app.
+                
+                @Code(name: "YourApp.swift", file: 14-config-09-cached-with-error.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Best practices and use cases") {
+        @ContentAndMedia {
+            Learn how to effectively use Parse Config in your applications for maximum flexibility and maintainability.
+            
+            Parse Config is a powerful tool for managing dynamic app behavior. Following best practices ensures your app remains responsive and handles configuration changes gracefully.
+        }
+        
+        @Steps {
+            @Step {
+                **Use Case 1: Feature Flags**
+                
+                Use boolean configuration parameters to enable or disable features remotely. This allows you to roll out features gradually or disable problematic features without releasing an update.
+                
+                @Code(name: "Config.swift", file: 14-config-10-feature-flags.swift)
+            }
+            
+            @Step {
+                **Use Case 2: Dynamic Content**
+                
+                Store promotional messages, announcements, or other dynamic text that changes frequently. This is perfect for seasonal messages or time-sensitive announcements.
+                
+                @Code(name: "Config.swift", file: 14-config-11-dynamic-content.swift)
+            }
+            
+            @Step {
+                **Use Case 3: Environment Configuration**
+                
+                Use different config parameters for development, staging, and production environments. This allows you to test configuration changes before rolling them out to all users.
+                
+                @Code(name: "Config.swift", file: 14-config-12-environment.swift)
+            }
+            
+            @Step {
+                **Best Practice 1: Provide defaults**
+                
+                Always provide sensible default values for your configuration properties. This ensures your app works correctly even if the server configuration is unavailable or hasn't been set up yet.
+                
+                @Code(name: "Config.swift", file: 14-config-13-defaults.swift)
+            }
+            
+            @Step {
+                **Best Practice 2: Fetch on app launch**
+                
+                Fetch the configuration when your app launches to ensure you have the latest settings. Use the cached version as a fallback if the fetch fails. For information on initializing the Parse SDK at app launch, see <doc:Your-First-Object#Initialize-Parse-and-check-server-health>.
+                
+                @Code(name: "YourApp.swift", file: 14-config-14-fetch-on-launch.swift)
+            }
+            
+            @Step {
+                **Best Practice 3: Handle fetch failures gracefully**
+                
+                Network requests can fail, so always have a fallback strategy. Use cached configuration or default values when fetching fails.
+                
+                @Code(name: "YourApp.swift", file: 14-config-15-graceful-failure.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Advanced configuration patterns") {
+        @ContentAndMedia {
+            Explore advanced patterns for managing complex configurations and implementing sophisticated features.
+            
+            As your app grows, you may need more sophisticated configuration management. These patterns help you build robust, flexible configuration systems.
+        }
+        
+        @Steps {
+            @Step {
+                **Pattern 1: Type-safe configuration access**
+                
+                Define computed properties or helper methods to access configuration with type safety and validation. This prevents runtime errors from unexpected configuration values.
+                
+                @Code(name: "Config.swift", file: 14-config-16-type-safe.swift)
+            }
+            
+            @Step {
+                **Pattern 2: Configuration validation**
+                
+                Validate configuration values after fetching to ensure they meet your app's requirements. This catches configuration errors early and provides better error messages.
+                
+                @Code(name: "YourApp.swift", file: 14-config-17-validation.swift)
+            }
+            
+            @Step {
+                **Pattern 3: Reactive updates with Combine/SwiftUI**
+                
+                Use SwiftUI's `@Published` properties and `ObservableObject` (Combine) to notify your app when configuration changes. This allows different parts of your app to react to configuration updates automatically.
+                
+                @Code(name: "ConfigManager.swift", file: 14-config-18-notifications.swift)
+            }
+        }
+    }
+}
