@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn the basics of creating and working with ParseObjects.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: parse-logo.png, alt: "Parse logo")
     }
     
     @Section(title: "Understanding Custom ObjectIds") {
