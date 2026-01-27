@@ -32,4 +32,12 @@
         
         @TutorialReference(tutorial: "doc:ACL")
     }
+    
+    @Chapter(name: "Advanced Features") {
+        Learn about advanced Parse-Swift features including location-based services and geo-spatial queries.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:GeoPoint")
+    }
 }
