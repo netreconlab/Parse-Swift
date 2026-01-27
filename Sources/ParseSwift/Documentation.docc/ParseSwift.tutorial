@@ -64,4 +64,12 @@
         
         @TutorialReference(tutorial: "doc:GeoPoint")
     }
+    
+    @Chapter(name: "Data Operations") {
+        Learn how to perform atomic operations on object fields for safe concurrent updates.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Operations")
+    }
 }
