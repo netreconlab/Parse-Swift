@@ -8,10 +8,11 @@
     }
     
     @Chapter(name: "Getting Started") {
-        Learn the fundamentals of Parse-Swift by working with ParseObjects - the foundation of data storage in Parse.
+        Learn the fundamentals of Parse-Swift by working with ParseObjects and User authentication - the foundation of data storage and user management in Parse.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
+        @TutorialReference(tutorial: "doc:User-Continued")
     }
 }
