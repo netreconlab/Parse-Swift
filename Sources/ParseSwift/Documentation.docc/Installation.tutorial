@@ -1,0 +1,143 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Installation") {
+        Learn how to work with ParseInstallation objects to enable push notifications in your Parse-Swift applications.
+        
+        ParseInstallation represents an app installation on a specific device. It's essential for implementing push notifications, allowing you to target specific devices or groups of devices with your messages. This tutorial covers creating custom Installation models, managing device tokens, subscribing to channels, and updating installation properties.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Define your Installation model") {
+        @ContentAndMedia {
+            Before working with installations, you need to define a custom Installation struct that conforms to the `ParseInstallation` protocol.
+            
+            The Installation model includes required Parse fields, required Installation fields, and any custom properties specific to your application. This allows you to store additional metadata about each device installation.
+        }
+        
+        @Steps {
+            @Step {
+                Create an `Installation` struct that conforms to `ParseInstallation`.
+                
+                Include the required `ParseObject` properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, `originalData`) and required `ParseInstallation` properties (`installationId`, `deviceType`, `deviceToken`, `badge`, `timeZone`, `channels`, `appName`, `appIdentifier`, `appVersion`, `parseVersion`, `localeIdentifier`). Add custom properties like `customKey` for your app-specific data.
+                
+                @Code(name: "Installation.swift", file: 06-installation-01-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding after updates. It specifies how to merge server data with local changes for custom properties.
+                
+                @Code(name: "Installation.swift", file: 06-installation-02-merge.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Access the current installation") {
+        @ContentAndMedia {
+            Parse-Swift automatically creates and manages an installation object for your app on the device.
+            
+            You can access the current installation using the `current()` method, which returns the installation for the device your app is running on.
+        }
+        
+        @Steps {
+            @Step {
+                Get the current installation for this device.
+                
+                The `current()` method returns the `Installation` object representing this app on the current device. Parse creates this automatically when the SDK initializes.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-03-get-current.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Save installations for push notifications") {
+        @ContentAndMedia {
+            To enable push notifications, you need to save the installation to Parse Server.
+            
+            This registers the device with Parse, allowing you to send targeted push notifications. You can also add custom properties to track app-specific information about each installation.
+        }
+        
+        @Steps {
+            @Step {
+                Save the current installation with custom properties.
+                
+                Set any custom properties on the installation, then call `save()` to persist it to Parse Server. This makes the installation available for push notification targeting.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-04-save.swift)
+            }
+            
+            @Step {
+                Set the device token for push notifications.
+                
+                The device token is provided by Apple Push Notification Service (APNS) and uniquely identifies this device for push notifications. You typically get this from your app delegate's push notification registration callback.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-05-device-token.swift)
+            }
+            
+            @Step {
+                Subscribe to push notification channels.
+                
+                Channels allow you to segment your installations into groups. You can send push notifications to specific channels, making it easy to target users interested in specific topics.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-06-channels.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Update installation properties efficiently") {
+        @ContentAndMedia {
+            When updating installation properties, use the `.mergeable` property to send only the changed fields.
+            
+            This approach improves performance and reduces network traffic by sending only the modified properties to Parse Server instead of the entire object.
+        }
+        
+        @Steps {
+            @Step {
+                Update installation properties using `.mergeable`.
+                
+                The `.mergeable` property returns a version of the installation that tracks which fields have been modified. Only these changed fields will be sent to Parse Server when you call `save()`.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-07-mergeable.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetch installation data") {
+        @ContentAndMedia {
+            You can fetch the latest installation data from Parse Server at any time.
+            
+            This is useful to ensure you have the most recent installation state, including any updates made from other sources like the Parse Dashboard or cloud code.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch the current installation from Parse Server.
+                
+                The `fetch()` method retrieves the latest installation data from the server, overwriting any local changes. This ensures your local installation object is synchronized with the server.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-08-fetch.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Manage badge counts") {
+        @ContentAndMedia {
+            Badge counts display unread notifications on your app icon.
+            
+            Parse-Swift makes it easy to manage badge counts through the installation object. You can update the badge count and sync it with Parse Server, which can then be used to display the correct badge on the device.
+        }
+        
+        @Steps {
+            @Step {
+                Update the badge count for the installation.
+                
+                Set the `badge` property to the current number of unread items. Setting it to 0 clears the badge. Use `.mergeable` to efficiently send only the badge update.
+                
+                @Code(name: "YourApp.swift", file: 06-installation-09-badge.swift)
+            }
+        }
+    }
+}
