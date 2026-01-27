@@ -26,11 +26,11 @@ Task {
         let savedScore = try await score.save()
         
         // Verify the saved object has expected properties
-        if savedScore.objectId != nil {
-            print("✓ Object saved with ID: \(savedScore.objectId!)")
+        if let objectId = savedScore.objectId {
+            print("✓ Object saved with ID: \(objectId)")
         }
-        if savedScore.createdAt != nil {
-            print("✓ Created at: \(savedScore.createdAt!)")
+        if let createdAt = savedScore.createdAt {
+            print("✓ Created at: \(createdAt)")
         }
         if savedScore.profilePicture != nil {
             print("✓ Profile picture is associated with the object")

@@ -2,7 +2,9 @@ import Foundation
 import ParseSwift
 
 // Set the URL for an online file
-let linkToFile = URL(string: "https://parseplatform.org/img/logo.svg")!
+guard let linkToFile = URL(string: "https://parseplatform.org/img/logo.svg") else {
+    fatalError("Invalid URL")
+}
 
 // Create a new ParseFile for your picture
 let profilePic = ParseFile(name: "profile.svg", cloudURL: linkToFile)
