@@ -6,10 +6,10 @@ struct Config: ParseConfig {
     var winningNumber: Int? = 42
 }
 
-// Fetch configuration when app launches
-func initializeApp() async {
-    var config = Config()
-    
+// Fetch configuration early in your app lifecycle
+var config = Config()
+
+Task {
     do {
         // Try to fetch the latest configuration
         config = try await config.fetch()
@@ -17,7 +17,7 @@ func initializeApp() async {
     } catch {
         print("Failed to fetch config, using cached or defaults: \(error)")
         
-        // Try to use cached configuration
+        // Try to use cached configuration as fallback
         do {
             config = try await Config.current()
             print("Using cached configuration")
@@ -25,12 +25,5 @@ func initializeApp() async {
             print("No cached config, using defaults")
         }
     }
-    
-    // Continue with app initialization using the config
-    print("App initialized with config: \(config)")
 }
 
-// Call during app launch
-Task {
-    await initializeApp()
-}

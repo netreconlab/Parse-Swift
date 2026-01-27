@@ -180,6 +180,8 @@
                 
                 Fetch the configuration when your app launches to ensure you have the latest settings. Use the cached version as a fallback if the fetch fails.
                 
+                For information on initializing the Parse SDK at app launch, see <doc:Your-First-Object#Initialize-Parse-and-check-server-health>.
+                
                 @Code(name: "YourApp.swift", file: 14-config-14-fetch-on-launch.swift)
             }
             
