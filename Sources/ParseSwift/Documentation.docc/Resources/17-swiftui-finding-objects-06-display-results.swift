@@ -54,7 +54,7 @@ struct ContentView: View {
         } else {
             List(viewModel.results, id: \.id) { result in
                 VStack(alignment: .leading) {
-                    Text("Points: \(String(describing: result.points))")
+                    Text("Points: \(result.points ?? 0)")
                         .font(.headline)
                     if let createdAt = result.createdAt {
                         Text("\(createdAt.description)")

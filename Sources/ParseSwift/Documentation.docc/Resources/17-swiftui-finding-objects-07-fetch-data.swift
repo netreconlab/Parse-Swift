@@ -54,30 +54,7 @@ struct ContentView: View {
         } else {
             List(viewModel.results, id: \.id) { result in
                 VStack(alignment: .leading) {
-                    Text("Points: \(String(describing: result.points))")
-                        .font(.headline)
-                    if let createdAt = result.createdAt {
-                        Text("\(createdAt.description)")
-                    }
-                }
-            }
-        }
-    }
-}
-
-// Fetch data when view appears using the task modifier
-struct ContentViewWithFetch: View {
-    @StateObject var viewModel = GameScore.query("points" > 2)
-        .order([.descending("points")])
-        .viewModel
-
-    var body: some View {
-        if let error = viewModel.error {
-            Text(error.description)
-        } else {
-            List(viewModel.results, id: \.id) { result in
-                VStack(alignment: .leading) {
-                    Text("Points: \(String(describing: result.points))")
+                    Text("Points: \(result.points ?? 0)")
                         .font(.headline)
                     if let createdAt = result.createdAt {
                         Text("\(createdAt.description)")
