@@ -196,19 +196,7 @@
             }
             
             @Step {
-                **Best practices for GeoPoint queries:**
-                
-                1. **Validate coordinates**: Always validate latitude and longitude values before creating a GeoPoint. The initializer throws an error for invalid values.
-                
-                2. **Index location fields**: Ensure your location fields are indexed in Parse Server for optimal query performance.
-                
-                3. **Limit query results**: Use `.limit()` to control the number of results returned, especially for proximity searches.
-                
-                4. **Consider distance constraints**: For "nearby" queries, you may want to add distance constraints to avoid returning objects that are too far away.
-                
-                5. **Handle null locations**: Use `exists()` or `doesNotExist()` constraints when querying objects that may not have location data.
-                
-                6. **Polygon complexity**: Keep polygons simple with fewer points for better performance. Complex polygons with many vertices can slow down queries.
+                **Best practices for GeoPoint queries:** 1. **Validate coordinates**: Always validate latitude and longitude values before creating a GeoPoint. The initializer throws an error for invalid values. 2. **Index location fields**: Ensure your location fields are indexed in Parse Server for optimal query performance. 3. **Limit query results**: Use `.limit()` to control the number of results returned, especially for proximity searches. 4. **Consider distance constraints**: For "nearby" queries, you may want to add distance constraints to avoid returning objects that are too far away. 5. **Handle null locations**: Use `exists()` or `doesNotExist()` constraints when querying objects that may not have location data. 6. **Polygon complexity**: Keep polygons simple with fewer points for better performance. Complex polygons with many vertices can slow down queries.
             }
         }
     }

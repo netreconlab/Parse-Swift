@@ -9,9 +9,9 @@ Task {
             try .init(latitude: 42.0, longitude: -35.0),
             try .init(latitude: 42.0, longitude: -20.0)
         ]
-        
+
         let polygon = try ParsePolygon(points)
-        
+
         print("Created polygon with \(polygon.coordinates.count) points")
         print("Polygon: \(polygon)")
     } catch {
