@@ -3,6 +3,7 @@ import ParseSwift
 
 Task {
     do {
+        let score = GameScore(objectId: "myObjectId", points: 10)
         let savedScore = try await score.save()
         
         // Create a mutable copy using .mergeable

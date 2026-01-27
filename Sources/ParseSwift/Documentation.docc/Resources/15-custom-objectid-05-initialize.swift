@@ -7,9 +7,9 @@ Task {
             applicationId: "applicationId",
             clientKey: "clientKey",
             serverURL: URL(string: "http://localhost:1337/parse")!,
-            customObjectId: true  // Enable custom objectId support
+            requiringCustomObjectIds: true  // Require custom objectIds
         )
-        print("Parse initialized with custom objectId support")
+        print("Parse initialized requiring custom objectIds")
     } catch {
         print("Error initializing Parse: \(error)")
     }

@@ -3,6 +3,7 @@ import ParseSwift
 
 Task {
     do {
+        let score = GameScore(objectId: "myObjectId", points: 10)
         let savedScore = try await score.save()
         
         // To modify, need to make it a var as the value type
