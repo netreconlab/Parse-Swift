@@ -1,0 +1,235 @@
+@Tutorial(time: 25) {
+    @Intro(title: "User - Continued") {
+        Learn advanced user management operations with the Parse-Swift SDK.
+        
+        This tutorial covers user login, updating user properties, fetching user data with included pointer fields, email verification, password reset, anonymous login, and session management. Building on the "User - Sign Up" tutorial, you'll master the complete user lifecycle.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Define your User model") {
+        @ContentAndMedia {
+            Before working with users, you need to define a custom User struct that conforms to the `ParseUser` protocol.
+            
+            The User model includes required Parse fields plus any custom properties specific to your application.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `User` struct that conforms to `ParseUser`.
+                
+                Include the required `ParseObject` properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, `originalData`) and required `ParseUser` properties (`username`, `email`, `emailVerified`, `password`, `authData`). Add a custom property like `customKey`.
+                
+                @Code(name: "User.swift", file: 04-user-continued-01-user-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding after updates. It specifies how to merge server data with local changes for custom properties.
+                
+                @Code(name: "User.swift", file: 04-user-continued-02-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension to preserve the memberwise initializer.
+                
+                This allows you to create User instances with specific values for signup.
+                
+                @Code(name: "User.swift", file: 04-user-continued-03-initializer.swift)
+            }
+            
+            @Step {
+                Define a `GameScore` model for use with pointer fields.
+                
+                This ParseObject will be used to demonstrate relationships between User and other objects. The GameScore model includes a `points` property and its own merge method.
+                
+                @Code(name: "GameScore.swift", file: 04-user-continued-04-gamescore-model.swift)
+            }
+            
+            @Step {
+                Add the `gameScore` pointer field to your User model.
+                
+                Now that GameScore is defined, you can add it as a property to the User model. The merge method is also updated to handle the gameScore field.
+                
+                @Code(name: "User.swift", file: 04-user-continued-04a-user-with-gamescore.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Login users") {
+        @ContentAndMedia {
+            Authenticate users with their username and password using the `login()` method.
+            
+            Parse-Swift provides async/await methods for logging in users, which automatically stores the current user locally.
+        }
+        
+        @Steps {
+            @Step {
+                Login a user with their username and password using async/await.
+                
+                The login method authenticates the user with Parse Server and returns the logged-in user object.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-05-login.swift)
+            }
+            
+            @Step {
+                Verify the current user is stored locally after login.
+                
+                After a successful login, Parse automatically stores the user locally. You can access it using `User.current()`.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-06-current-user.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Update user properties") {
+        @ContentAndMedia {
+            Modify user properties using the `set()` method or `.mergeable` property.
+            
+            These approaches ensure only changed fields are sent to the server, improving performance and reducing network traffic.
+        }
+        
+        @Steps {
+            @Step {
+                Update user properties using the `set()` method.
+                
+                The `set()` method allows you to chain updates to multiple fields. Only the modified fields will be sent to Parse Server when you call `save()`.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-07-update-user.swift)
+            }
+            
+            @Step {
+                Alternatively, use `.mergeable` to update properties directly.
+                
+                The `.mergeable` property returns a version of the user that tracks which fields have been modified, allowing direct property assignment.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-08-mergeable.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetch user data with included pointer fields") {
+        @ContentAndMedia {
+            When fetching users, pointer fields like `gameScore` are not automatically included. Use `includeKeys` to fetch related objects in a single request.
+            
+            This is more efficient than fetching pointer objects separately.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch a user with specific pointer fields included.
+                
+                Use `includeKeys` parameter to specify which pointer fields should be fully populated. This example includes the `gameScore` field.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-09-fetch-include.swift)
+            }
+            
+            @Step {
+                Fetch a user with all pointer fields included using `["*"]`.
+                
+                The wildcard `"*"` includes all pointer fields in the fetch operation, ensuring you get the complete user data.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-10-fetch-all-keys.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Logout users") {
+        @ContentAndMedia {
+            Remove the current user session and clear local storage.
+            
+            Logging out ensures the user's session token is invalidated and they must login again to perform authenticated operations.
+        }
+        
+        @Steps {
+            @Step {
+                Logout the current user using async/await.
+                
+                The `logout()` method clears the current user from local storage and invalidates the session on Parse Server.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-11-logout.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Signup with custom fields") {
+        @ContentAndMedia {
+            Create new user accounts with additional custom properties beyond the standard username, password, and email.
+            
+            You can add any custom fields to your User model and set them before signing up.
+        }
+        
+        @Steps {
+            @Step {
+                Create and signup a user with custom fields.
+                
+                Set custom properties on the user instance before calling `signup()`. The user will be created on Parse Server with all the specified fields.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-12-signup.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Email verification and password reset") {
+        @ContentAndMedia {
+            Parse provides built-in email verification and password reset functionality.
+            
+            These features help secure user accounts and provide a smooth user experience for account recovery.
+        }
+        
+        @Steps {
+            @Step {
+                Request an email verification for a user.
+                
+                Parse Server will send a verification email to the specified address. The user must click the link in the email to verify their account.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-13-verification.swift)
+            }
+            
+            @Step {
+                Request a password reset email.
+                
+                Parse Server will send a password reset email to the specified address. The user can click the link to reset their password.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-14-password-reset.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Anonymous login and session management") {
+        @ContentAndMedia {
+            Anonymous login allows users to interact with your app without creating an account.
+            
+            You can later convert anonymous users to regular users, preserving their data. Session tokens authenticate user requests to Parse Server.
+        }
+        
+        @Steps {
+            @Step {
+                Login anonymously without credentials.
+                
+                Anonymous login creates a temporary user account that can be used immediately without signup. This is useful for onboarding flows.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-15-anonymous.swift)
+            }
+            
+            @Step {
+                Access the session token for the current user.
+                
+                The session token is a unique identifier used to authenticate user requests. It's automatically managed by Parse but can be accessed if needed.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-16-session-token.swift)
+            }
+            
+            @Step {
+                Convert an anonymous user to a regular user.
+                
+                Set a username and password on the anonymous user and call `signup()` to convert them. All data associated with the anonymous user is preserved.
+                
+                @Code(name: "YourApp.swift", file: 04-user-continued-17-convert-anonymous.swift)
+            }
+        }
+    }
+}
