@@ -1,0 +1,148 @@
+@Tutorial(time: 30) {
+    @Intro(title: "SwiftUI - Finding Objects With Custom ViewModel") {
+        Learn how to build custom view models for Parse queries in SwiftUI applications using Combine publishers.
+        
+        This tutorial demonstrates how to create a custom `ObservableObject` view model that manages Parse queries, handles query results with Combine publishers, displays data in SwiftUI views, and manages error states. By creating custom view models, you gain full control over data fetching, state management, and user interaction patterns in your SwiftUI apps.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. Basic knowledge of SwiftUI and Combine is also recommended.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Setup your ParseObject model") {
+        @ContentAndMedia {
+            Before creating a custom view model, define the ParseObject model that will be queried.
+            
+            Just like in other Parse tutorials, you need a struct conforming to `ParseObject`. This model will be the foundation for your custom view model's data management.
+        }
+        
+        @Steps {
+            @Step {
+                Import the required frameworks for SwiftUI and Parse integration.
+                
+                You'll need ParseSwift for Parse functionality, SwiftUI for the UI, and Combine for reactive programming with publishers.
+                
+                @Code(name: "GameScore.swift", file: 18-swiftui-custom-viewmodel-01-import.swift)
+            }
+            
+            @Step {
+                Define a GameScore model that conforms to ParseObject.
+                
+                Include the required Parse fields (`objectId`, `createdAt`, `updatedAt`, `ACL`, and `originalData`) and custom properties like `points`, `location`, and `name`.
+                
+                @Code(name: "GameScore.swift", file: 18-swiftui-custom-viewmodel-02-model.swift)
+            }
+            
+            @Step {
+                Implement a custom merge method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding when updating objects. It specifies how to merge server data with local changes.
+                
+                @Code(name: "GameScore.swift", file: 18-swiftui-custom-viewmodel-03-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension.
+                
+                This allows you to create GameScore instances with specific field values while preserving the memberwise initializer.
+                
+                @Code(name: "GameScore.swift", file: 18-swiftui-custom-viewmodel-04-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create a custom ObservableObject view model") {
+        @ContentAndMedia {
+            Build a custom view model class that manages Parse queries and publishes results to SwiftUI views.
+            
+            Unlike using the built-in `.viewModel` property on queries, creating a custom `ObservableObject` gives you complete control over data fetching logic, error handling, and state management. This approach is ideal when you need custom business logic, multiple query operations, or complex data transformations.
+        }
+        
+        @Steps {
+            @Step {
+                Create a view model class that conforms to ObservableObject.
+                
+                Use `@Published` properties to automatically notify SwiftUI views when data changes. Include a property for the query results and another for errors.
+                
+                @Code(name: "ViewModel.swift", file: 18-swiftui-custom-viewmodel-05-viewmodel-class.swift)
+            }
+            
+            @Step {
+                Add an initializer that triggers data fetching.
+                
+                By fetching data in the initializer, your view model will automatically load data when created. This ensures data is available as soon as the view appears.
+                
+                @Code(name: "ViewModel.swift", file: 18-swiftui-custom-viewmodel-06-viewmodel-init.swift)
+            }
+            
+            @Step {
+                Implement the fetchScores method using Combine publishers.
+                
+                Create a query with constraints and ordering, then use `findPublisher()` to get a Combine publisher. The `sink` operator handles both completion (success or failure) and received values. Store the subscription to prevent it from being deallocated.
+                
+                @Code(name: "ViewModel.swift", file: 18-swiftui-custom-viewmodel-07-fetch-method.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Build the SwiftUI view") {
+        @ContentAndMedia {
+            Create a SwiftUI view that uses your custom view model to display Parse data.
+            
+            The view observes the view model's published properties and automatically updates when data changes. This reactive pattern ensures your UI always reflects the current state of your data.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ContentView with a StateObject view model.
+                
+                Use `@StateObject` to create and own the view model instance. The view will automatically re-render when the view model's `@Published` properties change.
+                
+                @Code(name: "ContentView.swift", file: 18-swiftui-custom-viewmodel-08-contentview-basic.swift)
+            }
+            
+            @Step {
+                Review the complete working example.
+                
+                This brings together the model, view model, and view into a complete SwiftUI application. The view model handles all Parse query logic using Combine, while the view focuses purely on presentation. Errors are displayed to the user, and successful queries populate the list with GameScore objects.
+                
+                @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Understanding the benefits") {
+        @ContentAndMedia {
+            Custom view models provide several advantages over using the built-in query view model.
+            
+            By creating your own `ObservableObject`, you gain flexibility and control that enables more sophisticated SwiftUI applications. Understanding when to use custom view models versus the built-in `.viewModel` property helps you choose the right approach for your needs.
+        }
+        
+        @Steps {
+            @Step {
+                **Benefit 1: Full control over data fetching** With a custom view model, you decide exactly when and how data is fetched. You can add refresh methods, implement pagination, combine multiple queries, or add caching logic. The `fetchScores()` method can be called manually whenever you need to refresh data, giving you fine-grained control over network requests.
+                
+                @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
+            }
+            
+            @Step {
+                **Benefit 2: Custom business logic** You can add any business logic your app needs directly in the view model. This might include data transformation, filtering, sorting, aggregation, or combining data from multiple sources. The view model becomes the single source of truth for all data operations related to this view.
+                
+                @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
+            }
+            
+            @Step {
+                **Benefit 3: Better testability** Custom view models are easier to test than views with inline logic. You can write unit tests that verify query construction, error handling, and data transformation without needing to render UI. Mock the Parse server or use test doubles to verify your view model behaves correctly in all scenarios.
+                
+                @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
+            }
+            
+            @Step {
+                **Benefit 4: Reusability across views** A well-designed custom view model can be shared across multiple views in your app. Different views can observe the same view model and react to data changes. This promotes consistency and reduces code duplication throughout your application.
+                
+                @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
+            }
+        }
+    }
+}
+# Applied Conventional Commits Specification

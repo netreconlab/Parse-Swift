@@ -1,0 +1,121 @@
+@Tutorial(time: 30) {
+    @Intro(title: "SwiftUI - Finding Objects") {
+        Learn how to integrate Parse queries with SwiftUI views to create reactive, data-driven user interfaces.
+        
+        This tutorial demonstrates how to use Parse-Swift's SwiftUI integration features to query and display ParseObjects in SwiftUI views. You'll learn to use the query view model pattern, display results in SwiftUI Lists, and create new objects with files.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Setup your ParseObject model") {
+        @ContentAndMedia {
+            This tutorial assumes you have already completed the <doc:Your-First-Object> and <doc:Finding-Objects> tutorials, which cover importing ParseSwift, initializing the Parse SDK, and basic querying.
+            
+            Before you can use queries with SwiftUI, you need a ParseObject model. You'll use the same GameScore model to demonstrate SwiftUI integration.
+        }
+        
+        @Steps {
+            @Step {
+                Import the necessary modules including SwiftUI.
+                
+                In addition to Foundation and ParseSwift, you'll need to import SwiftUI to use the view integration features.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-finding-objects-01-import.swift)
+            }
+            
+            @Step {
+                Define a GameScore model that conforms to ParseObject.
+                
+                The model includes required Parse fields and custom properties like `points`, `name`, `location`, and `myFiles`. The merge method helps with faster decoding after updates.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-finding-objects-02-model.swift)
+            }
+            
+            @Step {
+                Add a custom initializer in an extension.
+                
+                It's recommended to place custom initializers in an extension to preserve the memberwise initializer.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-finding-objects-03-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create a query for SwiftUI") {
+        @ContentAndMedia {
+            Parse-Swift provides a special `.viewModel` property on queries that creates a SwiftUI-compatible observable object.
+            
+            This view model automatically manages query state and provides results that can be displayed in SwiftUI views.
+        }
+        
+        @Steps {
+            @Step {
+                Create a query with constraints and ordering.
+                
+                This query finds GameScore objects where points is greater than 2 and orders them by descending points.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-finding-objects-04-query-setup.swift)
+            }
+            
+            @Step {
+                Create a SwiftUI view with a query view model.
+                
+                Use the `@StateObject` property wrapper with the query's `.viewModel` property to create an observable object that manages query results.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-05-viewmodel.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Display query results in SwiftUI") {
+        @ContentAndMedia {
+            The view model provides `results` and `error` properties that automatically update when the query is executed.
+            
+            You can display these results in standard SwiftUI views like List, ForEach, or any other view components.
+        }
+        
+        @Steps {
+            @Step {
+                Display results in a List with error handling.
+                
+                The view model's results array can be used directly in a List. Check for errors and display them if they occur.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-06-display-results.swift)
+            }
+            
+            @Step {
+                Fetch data when the view appears using the task modifier.
+                
+                Use the `.task` modifier to call `await viewModel.find()` when the view appears. This fetches the data from Parse Server.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-07-fetch-data.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create and save objects from SwiftUI") {
+        @ContentAndMedia {
+            You can create and save ParseObjects directly from SwiftUI views using standard Parse-Swift save methods.
+            
+            After saving, you can refresh the view model to display the updated results.
+        }
+        
+        @Steps {
+            @Step {
+                Add UI controls for creating new GameScore objects.
+                
+                Use TextFields for input and a Button to trigger the save operation. Include ParseFiles in the object before saving.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-08-create-save.swift)
+            }
+            
+            @Step {
+                Build a complete view with create, save, and display functionality.
+                
+                Combine all the pieces: input fields, save button with file attachments, error handling, results display, and alerts for user feedback. After saving, call `viewModel.find()` to refresh the displayed results.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-09-complete-view.swift)
+            }
+        }
+    }
+}
