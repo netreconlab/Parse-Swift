@@ -4,7 +4,7 @@
         
         This tutorial covers setting up LiveQuery subscriptions, handling real-time events, managing connection lifecycle, and working with advanced subscription patterns. LiveQuery enables your app to receive instant notifications when data on your Parse Server changes, making it perfect for chat applications, collaborative tools, and real-time dashboards.
         
-        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. LiveQuery must be enabled on your Parse Server for these features to work.
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. LiveQuery must be enabled on your Parse Server for these features to work.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
     }
@@ -21,14 +21,6 @@
                 Import the ParseSwift framework to access LiveQuery functionality.
                 
                 @Code(name: "YourApp.swift", file: 11-livequery-01-import.swift)
-            }
-            
-            @Step {
-                Initialize the Parse SDK with your server configuration.
-                
-                Replace the placeholder values with your actual, non-privileged client configuration (for example, applicationId, server URL, and any client keys). Never include your Parse primary/master key or other highly privileged credentials in this app; those must be kept only in secure, trusted server-side environments. Make sure LiveQuery is enabled on your Parse Server.
-                
-                @Code(name: "YourApp.swift", file: 11-livequery-02-initialize.swift)
             }
             
             @Step {
