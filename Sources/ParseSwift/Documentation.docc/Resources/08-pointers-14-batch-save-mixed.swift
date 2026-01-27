@@ -12,10 +12,10 @@ do {
 
     var author = Author(name: "Logan", book: savedBook)
     author.otherBooks = [otherBook1, otherBook2]
-    
+
     // Batch save - Parse handles saving unsaved pointers automatically
     let results = try await [author].saveAll()
-    
+
     for result in results {
         switch result {
         case .success(let savedAuthor):

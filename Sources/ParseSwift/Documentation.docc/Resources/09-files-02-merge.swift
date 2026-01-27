@@ -9,11 +9,11 @@ struct GameScore: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     // Your own properties
     var points: Int? = 0
     var profilePicture: ParseFile?
-    
+
     // Optional - implement your own version of merge for faster decoding
     func merge(with object: Self) throws -> Self {
         var updated = try mergeParse(with: object)

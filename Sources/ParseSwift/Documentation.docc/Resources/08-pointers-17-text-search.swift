@@ -8,10 +8,10 @@ do {
                                            options: [:]))
         .include(["*"])
         .sortByTextScore()
-    
+
     let books = try await query.find()
     print("Found \(books.count) books matching 'like'")
-    
+
     for book in books {
         print("Book: \(book.title ?? "no title"), Score: \(book.score ?? 0)")
     }

@@ -1,0 +1,259 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Roles and Relations") {
+        Learn how to manage complex relationships using roles and relations for sophisticated data models.
+        
+        Roles provide a way to organize users into groups with specific permissions, while relations enable many-to-many relationships between objects. Together, they're essential for building applications with advanced access control and complex data structures.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> and <doc:ACL> tutorials to understand ParseObjects and access control fundamentals.
+        
+        @Image(source: parse-swift.png, alt: "Parse Swift logo")
+    }
+    
+    @Section(title: "Understanding Roles") {
+        @ContentAndMedia {
+            ParseRole objects provide a way to group users with common access privileges.
+            
+            Roles can contain users and other roles, enabling hierarchical permission structures. Each role requires a unique name and an ACL that controls who can modify the role itself.
+        }
+        
+        @Steps {
+            @Step {
+                Create a User model with custom properties.
+                
+                Every ParseRole works with ParseUser objects. Start by defining your User model with any custom properties you need.
+                
+                @Code(name: "User.swift", file: 12-roles-01-user-model.swift)
+            }
+            
+            @Step {
+                Create a Role model with custom properties.
+                
+                The ParseRole protocol requires `name` property. You can add custom properties like `subtitle` to store additional role metadata.
+                
+                @Code(name: "Role.swift", file: 12-roles-02-role-model.swift)
+            }
+            
+            @Step {
+                Add the merge method for efficient updates.
+                
+                The merge method is optional but recommended for better performance when updating role objects.
+                
+                @Code(name: "Role.swift", file: 12-roles-03-role-merge.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating and Saving Roles") {
+        @ContentAndMedia {
+            Creating a role requires a unique name and an ACL that defines who can read and modify the role.
+            
+            The role's ACL is immutable after creation, so it's important to set it correctly from the start. Typically, you'll want administrators or the creating user to have write access.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new role with a name and ACL.
+                
+                Every role needs an ACL that cannot be changed after saving. Set read and write permissions for the current user to ensure they can manage the role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-04-create-role.swift)
+            }
+            
+            @Step {
+                Save the role to the server.
+                
+                Once created, save the role using async/await. The saved role is stored for later use in managing users and permissions.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-05-save-role.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Adding Users to Roles") {
+        @ContentAndMedia {
+            Roles have a `users` relation that allows you to add ParseUser objects to the role.
+            
+            This creates a many-to-many relationship between roles and users, where one user can belong to multiple roles, and one role can contain multiple users.
+        }
+        
+        @Steps {
+            @Step {
+                Add users to a role using the users relation.
+                
+                Access the role's `users` relation and add one or more users. Then save the relation to persist the changes.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-06-add-users.swift)
+            }
+            
+            @Step {
+                Query users in a role.
+                
+                To retrieve all users who are members of a role, query the users relation. This returns all ParseUser objects in that role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-07-query-users.swift)
+            }
+            
+            @Step {
+                Remove users from a role.
+                
+                You can remove users from a role's users relation at any time. This revokes any role-based permissions those users had through the role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-08-remove-users.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating Role Hierarchies") {
+        @ContentAndMedia {
+            Roles can contain other roles through the `roles` relation, enabling hierarchical permission structures.
+            
+            For example, an "Administrator" role could contain a "Moderator" role, automatically granting administrators all moderator permissions.
+        }
+        
+        @Steps {
+            @Step {
+                Create a second role to add to the first role.
+                
+                Create a new role like "Member" or "Moderator" that will be nested within another role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-09-create-second-role.swift)
+            }
+            
+            @Step {
+                Add a role to another role's roles relation.
+                
+                Access the parent role's `roles` relation and add the child role. This creates a hierarchy where users in the parent role inherit permissions from child roles.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-10-add-role-to-role.swift)
+            }
+            
+            @Step {
+                Query roles within a role.
+                
+                Use the `queryRoles()` helper method to find all roles nested within a parent role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-11-query-roles.swift)
+            }
+            
+            @Step {
+                Remove a role from another role.
+                
+                Just like users, you can remove child roles from a parent role's roles relation.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-12-remove-roles.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Understanding Relations") {
+        @ContentAndMedia {
+            ParseRelation enables many-to-many relationships between ParseObjects.
+            
+            While pointers create one-to-one or one-to-many relationships, relations are perfect for scenarios like users following other users, articles with multiple tags, or students enrolled in multiple courses.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore model to use with relations.
+                
+                Relations can connect any ParseObject types. Here we'll create GameScore objects to relate to users.
+                
+                @Code(name: "GameScore.swift", file: 12-roles-13-gamescore-model.swift)
+            }
+            
+            @Step {
+                Add a ParseRelation property to your User model.
+                
+                The `ParseRelation<User>` property type is generic over the parent type (User). The relation will store references to child objects (like GameScore) through the relation key.
+                
+                @Code(name: "User.swift", file: 12-roles-14-user-with-relation.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating and Saving Relations") {
+        @ContentAndMedia {
+            Relations work differently from pointers - they're saved separately and create lightweight references between objects.
+            
+            You can add objects to a relation, save the relation, and then query the relation to retrieve the related objects.
+        }
+        
+        @Steps {
+            @Step {
+                Create objects and add them to a relation.
+                
+                First save the objects you want to relate, then use the `relation` property to create a relation and add the objects to it.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-15-create-relation.swift)
+            }
+            
+            @Step {
+                Use a specific relation by key name.
+                
+                You can create named relations on any ParseObject using the `relation(_:child:)` method. This is useful when you need multiple different relations on the same object.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-16-specific-relation.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Querying Relations") {
+        @ContentAndMedia {
+            Relations can be queried from either the parent or child object perspective.
+            
+            This flexibility allows you to find all objects related to a parent, or find all parents that relate to a specific child object.
+        }
+        
+        @Steps {
+            @Step {
+                Query a relation from the parent object.
+                
+                Use the relation's `query()` method to retrieve all related objects. This returns a standard Parse query that you can further filter if needed.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-17-query-relation.swift)
+            }
+            
+            @Step {
+                Query relations from the child perspective.
+                
+                Use `queryRelations(_:parent:)` on the child object type to find all children related to a specific parent. This is the reverse direction of the previous query.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-18-query-child-relation.swift)
+            }
+            
+            @Step {
+                Use stored ParseRelation properties.
+                
+                If you defined a `ParseRelation` property on your model, you can use it to query relations after fetching the updated object from the server.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-19-stored-relation.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Role-Based Access Control") {
+        @ContentAndMedia {
+            Combine roles with ACLs to create powerful, scalable security policies.
+            
+            Instead of granting permissions to individual users on every object, you can grant permissions to roles. Then manage which users belong to those roles.
+        }
+        
+        @Steps {
+            @Step {
+                Create an ACL with role-based permissions.
+                
+                Use `setReadAccess(roleName:value:)` and `setWriteAccess(roleName:value:)` to grant permissions to all users in a specific role.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-20-role-based-acl.swift)
+            }
+            
+            @Step {
+                Apply role-based ACLs to objects.
+                
+                When you save an object with a role-based ACL, only users who belong to the specified roles (or roles that contain those roles) can access it according to the permissions set.
+                
+                @Code(name: "YourApp.swift", file: 12-roles-21-save-with-role-acl.swift)
+            }
+        }
+    }
+}

@@ -6,7 +6,7 @@ Task {
         // Query for scores where name does not exist (is undefined)
         let query = GameScore.query(doesNotExist(key: "name"))
         let results = try await query.find()
-        
+
         print("Found \(results.count) scores without name field")
         results.forEach { score in
             print("Score: \(score.objectId ?? ""), no name field")

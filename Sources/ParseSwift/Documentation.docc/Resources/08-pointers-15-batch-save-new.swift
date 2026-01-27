@@ -12,7 +12,7 @@ author.otherBooks = [otherBook1, otherBook2]
 do {
     // Batch save with all unsaved pointers
     let results = try await [author].saveAll()
-    
+
     for result in results {
         switch result {
         case .success(let savedAuthor):

@@ -10,11 +10,11 @@ do {
 
     if let authorBook = author.book,
        let firstOtherBook = author.otherBooks?.first {
-        
+
         // Create a mutable copy and update the relatedBook pointer
         var modifiedBook = authorBook.mergeable
         modifiedBook.relatedBook = try? firstOtherBook.toPointer()
-        
+
         let updatedBook = try await modifiedBook.save()
         print("Updated book with related book pointer: \(updatedBook)")
     }

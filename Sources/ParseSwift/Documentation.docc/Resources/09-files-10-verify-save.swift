@@ -24,7 +24,7 @@ Task {
     do {
         // Save the GameScore with the associated file
         let savedScore = try await score.save()
-        
+
         // Verify the saved object has expected properties
         if let objectId = savedScore.objectId {
             print("✓ Object saved with ID: \(objectId)")

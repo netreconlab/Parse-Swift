@@ -72,4 +72,12 @@
         
         @TutorialReference(tutorial: "doc:Operations")
     }
+    
+    @Chapter(name: "Advanced Data Relationships") {
+        Learn how to manage complex relationships using roles and relations for sophisticated data models.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Roles-and-Relations")
+    }
 }
