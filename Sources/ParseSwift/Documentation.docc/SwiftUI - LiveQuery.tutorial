@@ -1,0 +1,296 @@
+@Tutorial(time: 35) {
+    @Intro(title: "SwiftUI - LiveQuery") {
+        Learn how to integrate real-time Parse LiveQuery subscriptions with SwiftUI for reactive, data-driven user interfaces.
+        
+        This tutorial shows you how to use LiveQuery's `Subscription` type as a SwiftUI view model with `@StateObject` to automatically update your UI when data changes on your Parse Server. You'll build an interactive SwiftUI view that displays real-time updates from GameScore objects, perfect for creating live dashboards, chat interfaces, and collaborative apps.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:LiveQuery> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. LiveQuery must be enabled on your Parse Server for these features to work.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Import required frameworks") {
+        @ContentAndMedia {
+            Start by importing the necessary frameworks for using Parse LiveQuery with SwiftUI.
+            
+            You'll need ParseSwift for LiveQuery functionality and SwiftUI for building reactive user interfaces. The combination allows you to create data-driven views that automatically update when your Parse data changes.
+        }
+        
+        @Steps {
+            @Step {
+                Import Foundation, ParseSwift, and SwiftUI frameworks.
+                
+                These three frameworks provide all the necessary components for creating reactive SwiftUI views with LiveQuery subscriptions.
+                
+                @Code(name: "YourApp.swift", file: 17-swiftui-livequery-01-import.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Define your ParseObject model") {
+        @ContentAndMedia {
+            Create the ParseObject model that will be used with LiveQuery and SwiftUI.
+            
+            Just like in the LiveQuery tutorial, you need a custom struct conforming to `ParseObject`. This model will be the data type for your subscription and the objects displayed in your SwiftUI views.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `GameScore` struct that conforms to `ParseObject`.
+                
+                Include the required Parse properties and your custom fields. Set default values where appropriate, such as `points` defaulting to 0.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-livequery-02-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method helps ParseSwift efficiently update objects when receiving LiveQuery events, improving performance when your SwiftUI view re-renders.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-livequery-03-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension.
+                
+                This preserves the memberwise initializer while providing convenient ways to create GameScore instances.
+                
+                @Code(name: "GameScore.swift", file: 17-swiftui-livequery-04-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Create a query for subscription") {
+        @ContentAndMedia {
+            Define a query that will be used to subscribe to real-time updates.
+            
+            Create a query with constraints just as you would for normal fetching. This query will determine which objects trigger events in your SwiftUI view.
+        }
+        
+        @Steps {
+            @Step {
+                Create a query for GameScore objects with points less than 11.
+                
+                This query will match GameScore objects that have fewer than 11 points, and your subscription will receive events when matching objects are created, updated, or deleted.
+                
+                @Code(name: "YourApp.swift", file: 17-swiftui-livequery-05-create-query.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Build a SwiftUI view with LiveQuery") {
+        @ContentAndMedia {
+            Create a SwiftUI view that uses a LiveQuery subscription as its view model.
+            
+            The `Subscription` type can be used with SwiftUI's `@StateObject` property wrapper, making it a perfect view model that automatically triggers view updates when LiveQuery events occur.
+        }
+        
+        @Steps {
+            @Step {
+                Create a basic SwiftUI view with a `@StateObject` subscription.
+                
+                Use the `Subscription<GameScore>` type as a `@StateObject` property. This makes SwiftUI automatically re-render the view whenever the subscription receives events or changes state.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-livequery-06-swiftui-view.swift)
+            }
+            
+            @Step {
+                Add subscription state checks to the view.
+                
+                Use the `isSubscribed` and `isUnsubscribed` properties to show different UI based on the subscription state. This provides feedback to users about the connection status.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-livequery-07-subscription-state.swift)
+            }
+            
+            @Step {
+                Handle LiveQuery events in the view body.
+                
+                Check for events using the `subscription.event` property and use a switch statement to handle the five event types: `entered`, `left`, `created`, `updated`, and `deleted`. Each event provides the affected object.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-livequery-08-handle-events.swift)
+            }
+            
+            @Step {
+                Add instructions for users to test the subscription.
+                
+                Include helpful text to guide users on how to see the LiveQuery in action by updating objects in the Parse Dashboard.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-livequery-09-add-instructions.swift)
+            }
+            
+            @Step {
+                Add an unsubscribe button for user control.
+                
+                Include a button that calls the query's `unsubscribe()` method, allowing users to manually stop receiving updates. Notice the use of `Task` to handle the async operation.
+                
+                @Code(name: "ContentView.swift", file: 17-swiftui-livequery-10-unsubscribe-button.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Initialize and display the view") {
+        @ContentAndMedia {
+            Subscribe to the query and set up your SwiftUI view with the subscription.
+            
+            Before your view can display live updates, you need to subscribe to the query and pass the resulting `Subscription` object to your SwiftUI view. This is typically done at app startup.
+        }
+        
+        @Steps {
+            @Step {
+                Create a function to subscribe and initialize the view.
+                
+                Use an async function marked with `@MainActor` to subscribe to the query. The `subscribe()` method returns a `Subscription` object that can be used with your SwiftUI view.
+                
+                @Code(name: "YourApp.swift", file: 17-swiftui-livequery-11-subscribe.swift)
+            }
+            
+            @Step {
+                Put it all together in a complete example.
+                
+                Combine all the components: model definition with merge method, query creation, SwiftUI view with event handling, and initialization code. In a real app, you would use the `ContentView` with a hosting controller or in your `App` struct to display the live-updating interface.
+                
+                @Code(name: "CompleteExample.swift", file: 17-swiftui-livequery-12-complete-example.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Testing your live view") {
+        @ContentAndMedia {
+            Learn how to test your SwiftUI LiveQuery integration and see real-time updates in action.
+            
+            To verify your implementation works correctly, you'll use the Parse Dashboard to create, update, and delete GameScore objects, then observe how your SwiftUI view automatically updates in real-time.
+        }
+        
+        @Steps {
+            @Step {
+                Run your SwiftUI app on a simulator or device.
+                
+                Build and run your app. The view should initially show "Subscribed to query!" indicating the LiveQuery connection is active.
+                
+                > Tip: If you see "Not subscribed to a query" or an error, verify that LiveQuery is enabled on your Parse Server and that your query was created correctly.
+            }
+            
+            @Step {
+                Open Parse Dashboard in a web browser.
+                
+                Navigate to your Parse Server's dashboard and find the GameScore class in the data browser.
+                
+                > Important: Make sure you're looking at the correct Parse Server instance that your app is connected to.
+            }
+            
+            @Step {
+                Create a new GameScore object with points less than 11.
+                
+                In the Parse Dashboard, add a new row to the GameScore class. Set the `points` field to a value less than 11 (like 5 or 8). Set the `name` field to any string.
+                
+                Watch your SwiftUI app - it should immediately display "Created with points: 5" (or whatever value you entered).
+            }
+            
+            @Step {
+                Update the object to trigger an update event.
+                
+                In Parse Dashboard, click on the GameScore object you just created and change the `points` value to a different number less than 11. Save the changes.
+                
+                Your app should now show "Updated with points: [new value]" as the subscription receives the update event.
+            }
+            
+            @Step {
+                Change points to exceed the query threshold.
+                
+                Update the `points` value to 15 (greater than 11). This makes the object no longer match your query constraint.
+                
+                Your app should display "Left with points: 15" as the subscription receives a `left` event indicating the object no longer matches the query.
+            }
+            
+            @Step {
+                Test the unsubscribe functionality.
+                
+                Tap the "Unsubscribe" button in your app. The view should change to display "Unsubscribed from query!"
+                
+                Now try creating or updating GameScore objects in Parse Dashboard - your app should no longer receive updates, confirming the unsubscribe worked correctly.
+            }
+        }
+    }
+    
+    @Section(title: "Best practices for SwiftUI and LiveQuery") {
+        @ContentAndMedia {
+            Follow these recommendations for building robust, performant SwiftUI apps with LiveQuery.
+            
+            Understanding these patterns will help you avoid common pitfalls and create better real-time user experiences.
+        }
+        
+        @Steps {
+            @Step {
+                Use `@StateObject` for subscription ownership.
+                
+                Always use `@StateObject` (not `@ObservedObject`) when the view creates and owns the subscription. This ensures SwiftUI doesn't recreate the subscription on every view update.
+                
+                ```swift
+                // Correct - view owns the subscription
+                @StateObject var subscription: Subscription<GameScore>
+                
+                // Wrong - could recreate subscription unnecessarily
+                @ObservedObject var subscription: Subscription<GameScore>
+                ```
+            }
+            
+            @Step {
+                Implement proper error handling.
+                
+                Wrap subscription calls in do-catch blocks to handle potential errors gracefully. Display error messages in your UI to help users understand connection issues.
+                
+                ```swift
+                Task {
+                    do {
+                        try await initializeParse()
+                        try await startView()
+                    } catch {
+                        // Update UI to show error state
+                        print("Error subscribing: \(error)")
+                    }
+                }
+                ```
+            }
+            
+            @Step {
+                Consider subscription lifecycle management.
+                
+                Unsubscribe when views are dismissed or when users navigate away. This prevents memory leaks and reduces server load. You can use SwiftUI's `onDisappear` modifier to unsubscribe automatically.
+                
+                ```swift
+                .onDisappear {
+                    Task {
+                        try? await query.unsubscribe()
+                    }
+                }
+                ```
+            }
+            
+            @Step {
+                Optimize with the merge method.
+                
+                Always implement the `merge` method on your ParseObject models when using LiveQuery. This significantly improves performance by allowing faster object updates when events arrive.
+                
+                Without merge, ParseSwift has to fully re-decode objects. With merge, only changed fields are processed.
+            }
+            
+            @Step {
+                Use field selection for better performance.
+                
+                If you only need specific fields in your UI, use the `select()` method on your query to reduce network traffic and parsing overhead.
+                
+                ```swift
+                var query = GameScore.query("points" < 11)
+                    .select("points", "name")
+                ```
+            }
+            
+            @Step {
+                Handle reconnection scenarios.
+                
+                Network connections can be interrupted. Consider implementing reconnection logic and showing connection status in your UI to provide a better user experience during network issues.
+            }
+        }
+    }
+}

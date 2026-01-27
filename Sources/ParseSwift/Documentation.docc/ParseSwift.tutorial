@@ -101,4 +101,12 @@
         
         @TutorialReference(tutorial: "doc:Analytics")
     }
+    
+    @Chapter(name: "SwiftUI Integration") {
+        Learn how to integrate Parse-Swift with SwiftUI for building reactive, data-driven user interfaces with real-time updates.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+        
+        @TutorialReference(tutorial: "doc:SwiftUI-LiveQuery")
+    }
 }
