@@ -49,7 +49,7 @@
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Pointers")
-		@TutorialReference(tutorial: "doc:Roles-and-Relations")
+        @TutorialReference(tutorial: "doc:Roles-and-Relations")
     }
         
     @Chapter(name: "Handling Files") {
@@ -76,11 +76,11 @@
         @TutorialReference(tutorial: "doc:Operations")
     }
 
-	@Chapter(name: "Accessing Cloud Code") {
-		Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic.
-		
-		@Image(source: parse-logo.png, alt: "Parse logo")
-		
-		@TutorialReference(tutorial: "doc:Cloud-Code")    
-	}
+    @Chapter(name: "Accessing Cloud Code") {
+        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+        
+        @TutorialReference(tutorial: "doc:Cloud-Code")
+    }
 }
