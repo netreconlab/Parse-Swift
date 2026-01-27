@@ -64,4 +64,12 @@
         
         @TutorialReference(tutorial: "doc:GeoPoint")
     }
+    
+    @Chapter(name: "Cloud Code") {
+        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic.
+        
+        @Image(source: parse-swift.png, alt: "Parse image")
+        
+        @TutorialReference(tutorial: "doc:Cloud-Code")
+    }
 }
