@@ -72,7 +72,7 @@
             @Step {
                 Set the device token for push notifications.
                 
-                The device token is provided by Apple Push Notification Service (APNS) and uniquely identifies this device for push notifications. You typically get this from your app delegate's push notification registration callback.
+                The device token is provided by Apple Push Notification Service (APNS) as `Data` and uniquely identifies this device for push notifications. You typically receive this `Data` in your app delegate's push notification registration callback, then pass it to `setDeviceToken(_:)` on the current `Installation` so it can be properly encoded for Parse Server.
                 
                 @Code(name: "YourApp.swift", file: 06-installation-05-device-token.swift)
             }
