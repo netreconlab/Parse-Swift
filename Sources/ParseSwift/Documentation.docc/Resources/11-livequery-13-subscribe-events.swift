@@ -13,7 +13,7 @@ Task {
         // Subscribe to the new query
         let subscription2 = try await query2.subscribeCallback()
         print("Subscription created successfully")
-        
+
         // Handle subscription notifications
         subscription2.handleSubscribe { subscribedQuery, isNew in
             if isNew {

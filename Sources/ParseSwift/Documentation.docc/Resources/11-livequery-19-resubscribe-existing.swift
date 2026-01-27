@@ -10,7 +10,7 @@ Task {
         // Since we never unsubscribed, you can reuse your previous handlers
         let subscription3 = try await query2.subscribeCallback()
         print("Resubscribed to existing query")
-        
+
         // The previous event handlers are still active
     } catch {
         print("Error resubscribing: \(error)")

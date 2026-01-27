@@ -8,7 +8,7 @@ Task {
         // Subscribe to your query using callbacks
         let subscription = try await query.subscribeCallback()
         print("Subscription created successfully")
-        
+
         // Handle subscription success notifications
         subscription.handleSubscribe { subscribedQuery, isNew in
             // You can check if this subscription is for this query

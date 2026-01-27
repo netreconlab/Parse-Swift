@@ -13,7 +13,7 @@ Task {
         // Subscribe to the new query
         let subscription2 = try await query2.subscribeCallback()
         print("Subscription created successfully")
-        
+
         // Handle subscription notifications
         subscription2.handleSubscribe { subscribedQuery, isNew in
             if isNew {
@@ -22,7 +22,7 @@ Task {
                 print("Successfully updated subscription to query: \(subscribedQuery)")
             }
         }
-        
+
         // Handle all subscription events
         subscription2.handleEvent { _, event in
             switch event {
@@ -38,7 +38,7 @@ Task {
                 print("Object deleted: \(object)")
             }
         }
-        
+
         // Now you can modify GameScore objects in your dashboard
         // and you will receive real-time notifications
     } catch {
