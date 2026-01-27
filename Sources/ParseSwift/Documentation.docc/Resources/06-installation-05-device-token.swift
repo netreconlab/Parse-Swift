@@ -18,3 +18,8 @@ func registerDeviceToken(_ deviceTokenData: Data) {
         }
     }
 }
+
+// Example usage for this tutorial step:
+// In a real app, `deviceTokenData` comes from APNS registration callbacks.
+let sampleDeviceToken = Data(repeating: 0, count: 32) // Placeholder token for demonstration
+registerDeviceToken(sampleDeviceToken)

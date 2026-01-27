@@ -98,7 +98,7 @@
             @Step {
                 Update installation properties using `.mergeable`.
                 
-                The `.mergeable` property creates a change-tracking version of the installation. This only works for installations that have been saved at least once (`isSaved == true`). First ensure the installation is saved, then use `.mergeable` to send only modified fields.
+                The `.mergeable` property creates a change-tracking version of the installation. This only works for installations that have already been saved to Parse Server. First ensure the installation has been saved (for example, by checking `try await installation.isSaved()`), then use `.mergeable` to send only modified fields.
                 
                 @Code(name: "YourApp.swift", file: 06-installation-07-mergeable.swift)
             }

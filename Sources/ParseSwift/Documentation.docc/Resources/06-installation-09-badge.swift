@@ -7,7 +7,7 @@ Task {
         var installationToUpdate = try await Installation.current()
         
         // Ensure the installation has been saved at least once before using `mergeable`
-        if installationToUpdate.objectId == nil {
+        if try await !installationToUpdate.isSaved() {
             installationToUpdate = try await installationToUpdate.save()
         }
         

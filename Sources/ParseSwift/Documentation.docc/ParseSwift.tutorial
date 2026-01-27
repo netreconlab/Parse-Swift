@@ -34,18 +34,11 @@
     }
     
     @Chapter(name: "Advanced Features") {
-        Learn how to track and handle installations of your apps.
+        Learn about advanced Parse-Swift features including installations, location-based services, and geo-spatial queries.
         
         @Image(source: parse-swift.png, alt: "Parse image")
         
-        @TutorialReference(tutorial: "doc:Installation")    
-    }
-    
-    @Chapter(name: "Advanced Features") {
-        Learn about advanced Parse-Swift features including location-based services and geo-spatial queries.
-        
-        @Image(source: parse-swift.png, alt: "Parse image")
-        
+        @TutorialReference(tutorial: "doc:Installation")
         @TutorialReference(tutorial: "doc:GeoPoint")
     }
 }
