@@ -27,7 +27,7 @@ struct UserProfile: ParseObject {
     var updatedAt: Date?
     var ACL: ParseACL?
     var originalData: Data?
-    
+
     var displayName: String?      // Public
     var email: String?            // Private - hidden from public, visible to authenticated users
     var phoneNumber: String?      // Private - hidden from public, visible to authenticated users

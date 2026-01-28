@@ -113,7 +113,7 @@
     }
     
     @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including schema management and deployment automation using the Parse Server primary key.
+        Learn how to perform server-side operations including schema management and deployment automation using [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift).
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
