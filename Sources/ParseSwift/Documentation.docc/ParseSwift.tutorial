@@ -113,11 +113,13 @@
     }
     
     @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including schema management, push notifications, and deployment automation using [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift).
+        Learn how to perform server-side operations including schema management, webhook management, and push notifications using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Cloud-Schemas")
+        @TutorialReference(tutorial: "doc:Cloud-Hook-Functions")
+        @TutorialReference(tutorial: "doc:Cloud-Hook-Triggers")
         @TutorialReference(tutorial: "doc:Cloud-Push-Notifications")
     }
 }

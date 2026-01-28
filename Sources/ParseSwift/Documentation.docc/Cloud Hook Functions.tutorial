@@ -1,0 +1,237 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Cloud Hook Functions") {
+        Learn how to manage Parse Cloud Hook Functions programmatically from Swift for server-side operations.
+        
+        Cloud Hook Functions enable you to register webhooks that Parse Server calls when specific cloud functions are invoked. This tutorial covers creating, updating, fetching, and deleting Hook Functions. Hook Functions are useful for integrating Parse Server with external services, implementing custom business logic outside your Parse Server, or creating microservice architectures.
+        
+        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Cloud Hook Functions") {
+        @ContentAndMedia {
+            Cloud Hook Functions provide a way to execute external webhooks when Parse Cloud Functions are invoked. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            
+            Instead of implementing all your business logic directly in Parse Server Cloud Code, Hook Functions allow you to delegate function execution to external services. When a Cloud Function with a registered hook is called, Parse Server makes an HTTP request to your webhook URL with the function parameters. This enables microservice architectures, integration with third-party services, and flexible deployment strategies.
+        }
+        
+        @Steps {
+            @Step {
+                **What are Cloud Hook Functions?** Hook Functions are webhooks that Parse Server calls when specific cloud functions are invoked. You define a function name and webhook URL, and Parse Server will POST to that URL whenever the function is called. The webhook receives the function parameters and must return a response that Parse Server sends back to the client.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-01-overview.swift)
+            }
+            
+            @Step {
+                **ParseHookFunction structure** The `ParseHookFunction` type represents a webhook registration in Parse Server. It requires a function name and a URL. When the cloud function is called, Parse Server makes a POST request to the URL with the function parameters in the request body.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-02-structure.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating a Hook Function") {
+        @ContentAndMedia {
+            Create a new Hook Function by specifying the function name and webhook URL.
+            
+            The function name must match the name that clients will use when calling the cloud function. The URL should point to your webhook endpoint that will handle the function execution.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseHookFunction instance with a function name and URL. The function name is what clients will use to call the cloud function. The URL is where Parse Server will send the function parameters.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-03-create-instance.swift)
+            }
+            
+            @Step {
+                Save the Hook Function to Parse Server using the create method. This registers the webhook with Parse Server. After this succeeds, any calls to the cloud function will trigger your webhook.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-04-create.swift)
+            }
+            
+            @Step {
+                Handle the creation result. The success case returns the created Hook Function with server-assigned metadata. The failure case contains any errors that occurred during creation.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-05-handle-create.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetching Hook Functions") {
+        @ContentAndMedia {
+            Retrieve Hook Functions from Parse Server to inspect their configuration.
+            
+            You can fetch individual Hook Functions or retrieve all registered Hook Functions. This is useful for auditing, debugging, or building administration tools.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch a specific Hook Function using the fetch method. This retrieves the current configuration from Parse Server, including the function name and URL.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-06-fetch.swift)
+            }
+            
+            @Step {
+                Handle the fetch result. The success case returns the Hook Function with its current configuration. Use this to verify the function exists and check its settings.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-07-handle-fetch.swift)
+            }
+            
+            @Step {
+                Fetch all Hook Functions using the fetchAll instance method. This returns all registered Hook Functions on Parse Server. Useful for getting an overview of all configured webhooks.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-08-fetchall-instance.swift)
+            }
+            
+            @Step {
+                Fetch all Hook Functions using the type method. The type method provides an alternative way to fetch all Hook Functions without needing an instance. Both approaches return the same results.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-09-fetchall-type.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Updating Hook Functions") {
+        @ContentAndMedia {
+            Modify existing Hook Functions to change their webhook URLs.
+            
+            As your architecture evolves, you may need to update webhook URLs to point to new services or endpoints. Hook Functions can be updated at any time without interrupting service.
+        }
+        
+        @Steps {
+            @Step {
+                Update the Hook Function's URL property. Change the URL to point to a new webhook endpoint. The function name cannot be changed - you must delete and recreate the Hook Function to change the name.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-10-update-url.swift)
+            }
+            
+            @Step {
+                Save the updated Hook Function using the update method. This persists the URL change to Parse Server. After this succeeds, future function calls will use the new URL.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-11-update.swift)
+            }
+            
+            @Step {
+                Handle the update result. The success case returns the updated Hook Function with the new configuration. Verify the URL was updated correctly.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-12-handle-update.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Deleting Hook Functions") {
+        @ContentAndMedia {
+            Remove Hook Functions from Parse Server when they're no longer needed.
+            
+            Deleting a Hook Function removes the webhook registration. After deletion, calls to the cloud function will fail unless you've defined a JavaScript Cloud Function with the same name in your Parse Server main.js file.
+        }
+        
+        @Steps {
+            @Step {
+                Delete a Hook Function using the delete method. This removes the webhook registration from Parse Server permanently.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-13-delete.swift)
+            }
+            
+            @Step {
+                Handle the deletion result. The success case indicates the Hook Function was deleted successfully. After deletion, the cloud function name is available for reuse.
+                
+                @Code(name: "CloudHookFunctions.swift", file: 22-cloud-hook-functions-14-handle-delete.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Webhook request and response format") {
+        @ContentAndMedia {
+            Understand the HTTP request and response format for Hook Function webhooks.
+            
+            When Parse Server calls your webhook, it sends a POST request with specific headers and body format. Your webhook must respond with the correct format for Parse Server to process the result.
+        }
+        
+        @Steps {
+            @Step {
+                **Request format** Parse Server sends a POST request to your webhook URL with JSON body containing the function parameters. The request includes standard Parse headers for authentication and version information.
+                
+                @Code(name: "WebhookExample.swift", file: 22-cloud-hook-functions-15-request-format.swift)
+            }
+            
+            @Step {
+                **Response format** Your webhook must return a JSON response with either a success result or an error. The success response should have a "result" field with the return value. Error responses should have a "code" and "error" message.
+                
+                @Code(name: "WebhookExample.swift", file: 22-cloud-hook-functions-16-response-format.swift)
+            }
+            
+            @Step {
+                **Example webhook implementation** For complete working examples of webhook implementations using Vapor and Parse-Swift, see the [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) repository. The routes.swift file demonstrates proper webhook authentication, request handling, and response formatting for Hook Functions.
+                
+                @Code(name: "WebhookReference.swift", file: 22-cloud-hook-functions-17-webhook-reference.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Calling Hook Functions from clients") {
+        @ContentAndMedia {
+            Once a Hook Function is registered, clients can call it like any other Cloud Function.
+            
+            From the client's perspective, Hook Functions are identical to JavaScript Cloud Functions defined in Parse Server. Use the same `ParseCloudable` protocol to call them.
+        }
+        
+        @Steps {
+            @Step {
+                Define a ParseCloudable type for your Hook Function. The `functionJobName` must match the name you registered with the Hook Function. The return type should match what your webhook returns.
+                
+                @Code(name: "ClientCode.swift", file: 22-cloud-hook-functions-18-client-type.swift)
+            }
+            
+            @Step {
+                Call the Hook Function from your client application. Create an instance with the function parameters and call `runFunction()`. Parse Server will execute your webhook and return the result.
+                
+                @Code(name: "ClientCode.swift", file: 22-cloud-hook-functions-19-client-call.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Best practices for Cloud Hook Functions") {
+        @ContentAndMedia {
+            Follow these best practices when working with Cloud Hook Functions to ensure security, reliability, and maintainability.
+            
+            Proper Hook Function management is essential for building robust microservice architectures with Parse Server.
+        }
+        
+        @Steps {
+            @Step {
+                **Best Practice 1: Never use primary key in client apps** Hook Function management requires the Parse Server primary key, which grants unrestricted access to your database. Only use these operations in secure, server-side environments. Never embed the primary key in client applications.
+                
+                @Code(name: "Security.swift", file: 22-cloud-hook-functions-20-security.swift)
+            }
+            
+            @Step {
+                **Best Practice 2: Implement proper webhook security** Your webhook endpoints should verify requests are from your Parse Server using secure authentication. See the [ParseServerSwift examples](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) for proper webhook authentication patterns including header validation and secure request handling.
+                
+                @Code(name: "WebhookSecurity.swift", file: 22-cloud-hook-functions-21-webhook-security.swift)
+            }
+            
+            @Step {
+                **Best Practice 3: Handle errors gracefully** Always implement comprehensive error handling in your webhook implementations. Return proper Parse error codes so clients can handle errors appropriately. For examples, see the error handling patterns in [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+                
+                @Code(name: "ErrorHandling.swift", file: 22-cloud-hook-functions-22-error-handling.swift)
+            }
+            
+            @Step {
+                **Best Practice 4: Use appropriate response types** Webhook responses should use ParseHookResponse types with appropriate success or error values. This ensures compatibility with Parse Server's expectations.
+                
+                @Code(name: "ResponseTypes.swift", file: 22-cloud-hook-functions-23-response-types.swift)
+            }
+            
+            @Step {
+                **Best Practice 5: Version your webhook APIs** As your webhooks evolve, use URL versioning (e.g., /v1/functions/foo, /v2/functions/foo) to maintain backward compatibility. Update Hook Functions to point to new versions when ready.
+                
+                @Code(name: "WebhookVersioning.swift", file: 22-cloud-hook-functions-24-versioning.swift)
+            }
+        }
+    }
+}
