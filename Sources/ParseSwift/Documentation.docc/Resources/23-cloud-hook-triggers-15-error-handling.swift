@@ -4,17 +4,17 @@ import ParseSwift
 // Implement comprehensive error handling for trigger operations
 Task {
     let gameScore = GameScore()
-    
+
     do {
         let trigger = ParseHookTrigger(
             object: gameScore,
             trigger: .afterSave,
             url: URL(string: "https://api.example.com/webhook")!
         )
-        
+
         let savedTrigger = try await trigger.create()
         print("Trigger created: \(savedTrigger)")
-        
+
     } catch let error as ParseError {
         // Handle Parse-specific errors
         switch error.code {

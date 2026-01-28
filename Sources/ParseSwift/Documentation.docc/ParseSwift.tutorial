@@ -113,7 +113,7 @@
     }
     
     @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including schema management, webhook triggers, and deployment automation using [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift).
+        Learn how to perform server-side operations including schema management, webhook triggers, and deployment automation using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         

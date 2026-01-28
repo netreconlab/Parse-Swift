@@ -5,7 +5,7 @@ import ParseSwift
 // Hook Triggers require the primary key and should only be used server-side
 
 // ✅ Use Hook Triggers only in server-side Swift applications
-// such as Parse-Server-Swift, Vapor, Kitura, or similar backend frameworks
+// such as ParseServerSwift, Vapor, Kitura, or similar backend frameworks
 Task {
     // Only run this code in a secure server environment
     // with proper authentication and access controls

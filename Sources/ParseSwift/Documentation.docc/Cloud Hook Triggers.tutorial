@@ -4,7 +4,7 @@
         
         Cloud Hook Triggers allow you to execute custom webhooks when specific database events occur on Parse Server. Unlike Cloud Code, which runs JavaScript on the Parse Server itself, Hook Triggers call external HTTP endpoints, enabling you to integrate Parse Server with any web service or microservice architecture. This is useful for sending notifications, syncing data to other systems, logging events, or triggering workflows in response to database changes.
         
-        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
+        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
@@ -13,7 +13,7 @@
     
     @Section(title: "Understanding Cloud Hook Triggers") {
         @ContentAndMedia {
-            Cloud Hook Triggers call external webhooks in response to database events on Parse Server.
+            Cloud Hook Triggers call external webhooks in response to database events on Parse Server. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
             
             When a database event occurs (such as saving or deleting an object), Parse Server can automatically send HTTP POST requests to your webhook endpoint. This enables event-driven architectures, allowing you to react to database changes by calling external services, logging events, sending notifications, or performing any custom logic in your own web services.
         }
@@ -21,13 +21,6 @@
         @Steps {
             @Step {
                 **What are Cloud Hook Triggers?** Hook Triggers are webhooks that Parse Server calls when specific database events occur. Unlike Cloud Code functions which run JavaScript on Parse Server, Hook Triggers make HTTP POST requests to external URLs you specify.
-                
-                This allows you to:
-                - React to database changes in real-time
-                - Integrate Parse Server with external services
-                - Implement event-driven architectures
-                - Use any programming language for your webhook handlers
-                - Scale webhook processing independently from Parse Server
                 
                 @Code(name: "GameScore.swift", file: 23-cloud-hook-triggers-01-model.swift)
             }
@@ -39,13 +32,7 @@
             }
             
             @Step {
-                **Available Trigger Types** Parse Server supports six types of triggers for different database events:
-                - **beforeSave** - Called before an object is saved (can modify or reject the save)
-                - **afterSave** - Called after an object is successfully saved
-                - **beforeDelete** - Called before an object is deleted (can reject the delete)
-                - **afterDelete** - Called after an object is successfully deleted
-                - **beforeFind** - Called before a query executes (can modify the query)
-                - **afterFind** - Called after a query completes (can modify results)
+                **Available Trigger Types** Parse Server supports six types of triggers for different database events: - **beforeSave** - Called before an object is saved (can modify or reject the save), - **afterSave** - Called after an object is successfully saved, - **beforeDelete** - Called before an object is deleted (can reject the delete), - **afterDelete** - Called after an object is successfully deleted, - **beforeFind** - Called before a query executes (can modify the query), - **afterFind** - Called after a query completes (can modify results)
                 
                 @Code(name: "TriggerTypes.swift", file: 23-cloud-hook-triggers-05-trigger-types.swift)
             }
@@ -146,19 +133,12 @@
             
             When a trigger fires, Parse Server sends an HTTP POST request to your webhook URL with JSON data about the database event. Your webhook endpoint needs to handle this request and return an appropriate response.
             
-            For complete examples of implementing Parse Hook Triggers with Vapor in Swift, see the [parse-server-swift](https://github.com/netreconlab/parse-server-swift) repository. The [routes.swift](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) file contains comprehensive examples of Hook Trigger implementations including beforeSave, afterSave, beforeFind, and other trigger types.
+            For complete examples of implementing Parse Hook Triggers with Vapor in Swift, see the [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) repository. The [routes.swift](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) file contains comprehensive examples of Hook Trigger implementations including beforeSave, afterSave, beforeFind, and other trigger types.
         }
         
         @Steps {
             @Step {
-                **Webhook Request Format** When a trigger fires, Parse Server sends a POST request with JSON containing:
-                - **object** - The ParseObject that triggered the event
-                - **original** - The original object state (for update triggers)
-                - **master** - Whether the request uses the master key
-                - **user** - The Parse User who triggered the event (if authenticated)
-                - **installationId** - The installation ID that triggered the event
-                
-                Your webhook must respond with a 200 status code for success or an error code to reject the operation (for before triggers). For production-ready examples of handling these requests in Swift with Vapor, refer to [parse-server-swift](https://github.com/netreconlab/parse-server-swift).
+                **Webhook Request Format** When a trigger fires, Parse Server sends a POST request with JSON containing: - **object** - The ParseObject that triggered the event, - **original** - The original object state (for update triggers), - **master** - Whether the request uses the master key, - **user** - The Parse User who triggered the event (if authenticated), - **installationId** - The installation ID that triggered the event. Your webhook must respond with a 200 status code for success or an error code to reject the operation (for before triggers). For production-ready examples of handling these requests in Swift with Vapor, refer to [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
             }
         }
     }
