@@ -1,7 +1,8 @@
 import Foundation
 import ParseSwift
 
-// Let users subscribe to topics they care about
+// CLIENT-SIDE: Let users subscribe to topics they care about
+// This runs in your client app without requiring the primary key
 Task {
     do {
         var installation = try await Installation.current()
@@ -13,7 +14,7 @@ Task {
     }
 }
 
-// Send targeted notifications to specific topics
+// SERVER-SIDE: Send targeted notifications to specific topics
 // WARNING: This requires the primary key and must run in a trusted server environment
 // Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
 let alert = ParsePushAppleAlert(body: "Breaking sports news!")
