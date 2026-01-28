@@ -3,7 +3,7 @@ import ParseSwift
 
 // Make trigger setup idempotent for reliable deployment
 func ensureTrigger(for object: some ParseObject, 
-                   trigger: ParseHookTrigger.TriggerType,
+                   trigger: ParseHookTriggerType,
                    url: URL) async throws -> ParseHookTrigger {
     
     // Try to fetch existing triggers

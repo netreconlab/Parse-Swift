@@ -1,6 +1,6 @@
 // Example webhook endpoint receiving trigger data (Node.js/Express)
 app.post('/afterSave', (req, res) => {
-    const { object, original, master, user, installationId } = req.body;
+    const { object, original } = req.body;
     
     // Process the trigger event
     console.log('Object saved:', object);

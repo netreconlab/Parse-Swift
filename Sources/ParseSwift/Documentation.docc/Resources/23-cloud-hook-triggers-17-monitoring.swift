@@ -11,7 +11,10 @@ func auditTriggers() async throws {
     // Group triggers by class
     var triggersByClass: [String: [ParseHookTrigger]] = [:]
     for trigger in allTriggers {
-        triggersByClass[trigger.className, default: []].append(trigger)
+        guard let className = trigger.className else {
+            continue
+        }
+        triggersByClass[className, default: []].append(trigger)
     }
     
     // Print summary
