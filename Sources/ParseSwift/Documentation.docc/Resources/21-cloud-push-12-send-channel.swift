@@ -1,6 +1,10 @@
 import Foundation
 import ParseSwift
 
+// SERVER-SIDE: Send push notifications to channel subscribers
+// WARNING: This requires the primary key and must run in a trusted server environment
+// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+
 let channelAlert = ParsePushAppleAlert(body: "Hello from ParseSwift again!")
 let channelPayload = ParsePushPayloadApple(alert: channelAlert)
     .incrementBadge()

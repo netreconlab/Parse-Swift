@@ -1,6 +1,10 @@
 import Foundation
 import ParseSwift
 
+// SERVER-SIDE: Query push notification statuses using primary key
+// WARNING: This requires the primary key and must run in a trusted server environment
+// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+
 let query = ParsePushStatus<ParsePushPayloadAny>
     .query(isNotNull(key: "objectId"))
 
