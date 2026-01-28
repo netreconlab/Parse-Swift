@@ -1,0 +1,6 @@
+/*
+ Cloud Hook Functions allow you to register webhooks
+ that Parse Server calls when cloud functions are invoked.
+ This enables microservice architectures and external
+ integrations.
+ */
