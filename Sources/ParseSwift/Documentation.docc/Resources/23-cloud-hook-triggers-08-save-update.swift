@@ -2,6 +2,7 @@ import Foundation
 import ParseSwift
 
 // Save the updated trigger to Parse Server
+// Using modified myTrigger from previous step
 Task {
     do {
         let updatedTrigger = try await myTrigger.update()

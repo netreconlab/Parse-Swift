@@ -2,6 +2,8 @@ import Foundation
 import ParseSwift
 
 // Available trigger types for database events
+let gameScore = GameScore()
+
 let afterSaveTrigger = ParseHookTrigger(object: gameScore,
                                         trigger: .afterSave,
                                         url: URL(string: "https://api.example.com/afterSave")!)

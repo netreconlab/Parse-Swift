@@ -2,6 +2,7 @@ import Foundation
 import ParseSwift
 
 // Fetch a trigger from Parse Server
+// Using myTrigger from previous steps
 Task {
     do {
         let fetchedTrigger = try await myTrigger.fetch()

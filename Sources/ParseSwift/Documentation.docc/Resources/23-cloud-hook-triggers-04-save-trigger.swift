@@ -2,6 +2,7 @@ import Foundation
 import ParseSwift
 
 // Create the trigger on Parse Server
+// Using myTrigger from the previous step
 Task {
     do {
         let savedTrigger = try await myTrigger.create()
