@@ -9,11 +9,11 @@ var push = ParsePush(payload: channelPayload)
 push.channels = Set(["newDevices"])
 
 // Send the push notification to all channel subscribers
-push.send { result in
-    switch result {
-    case .success(let statusId):
+Task {
+    do {
+        let statusId = try await push.send()
         print("The push was created with id: \"\(statusId)\"")
-    case .failure(let error):
+    } catch {
         print("Could not create push: \(error)")
     }
 }

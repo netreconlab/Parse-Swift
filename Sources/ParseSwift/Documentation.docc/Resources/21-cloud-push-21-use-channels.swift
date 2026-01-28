@@ -19,3 +19,12 @@ let payload = ParsePushPayloadApple(alert: alert)
 
 var push = ParsePush(payload: payload)
 push.channels = Set(["sports"])
+
+Task {
+    do {
+        try await push.send()
+        print("Push sent to sports channel")
+    } catch {
+        print("Error sending push: \(error)")
+    }
+}
