@@ -3,7 +3,7 @@ import ParseSwift
 
 // SERVER-SIDE: Send push and fetch delivery status
 // WARNING: This requires the primary key and must run in a trusted server environment
-// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+// Do NOT run this in your client app - use Cloud Code or ParseServerSwift
 
 let alert = ParsePushAppleAlert(body: "Hello from ParseSwift!")
 let applePayload = ParsePushPayloadApple(alert: alert)

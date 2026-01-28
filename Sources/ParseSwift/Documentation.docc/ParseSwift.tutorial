@@ -89,7 +89,7 @@
     }
 
     @Chapter(name: "Accessing Cloud Code") {
-        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic via your client-side apps.
+        Learn how to call Parse Cloud Functions from your Swift applications to run server-side logic.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
