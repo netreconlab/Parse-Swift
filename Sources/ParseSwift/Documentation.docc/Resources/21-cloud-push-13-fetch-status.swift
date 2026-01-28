@@ -8,19 +8,13 @@ let applePayload = ParsePushPayloadApple(alert: alert)
 let installationQuery = Installation.query(isNotNull(key: "objectId"))
 let push = ParsePush(payload: applePayload, query: installationQuery)
 
-push.send { result in
-    switch result {
-    case .success(let statusId):
-        // Fetch the status of the notification after successfully sending the push
-        push.fetchStatus(statusId) { result in
-            switch result {
-            case .success(let pushStatus):
-                print("The push status is: \"\(pushStatus)\"")
-            case .failure(let error):
-                print("Could not fetch push status: \(error)")
-            }
-        }
-    case .failure(let error):
-        print("Could not create push: \(error)")
+// Fetch the status of the notification after successfully sending the push
+Task {
+    do {
+        let statusId = try await push.send()
+        let pushStatus = try await push.fetchStatus(statusId)
+        print("The push status is: \"\(pushStatus)\"")
+    } catch {
+        print("Could not send push or fetch status: \(error)")
     }
 }

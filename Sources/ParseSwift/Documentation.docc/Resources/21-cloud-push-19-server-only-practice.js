@@ -8,7 +8,7 @@ Parse.Cloud.define("sendWelcomeNotification", async (request) => {
     throw new Parse.Error(Parse.Error.SESSION_MISSING, "User must be authenticated to send a welcome notification.");
   }
   
-  const Installation = Parse.Object.extend("Installation");
+  const Installation = Parse.Installation;
   const query = new Parse.Query(Installation);
   query.equalTo("userId", request.user.id);
   

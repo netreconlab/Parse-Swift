@@ -9,3 +9,12 @@ let query = Installation.query(isNotNull(key: "objectId"))
 let alert = ParsePushAppleAlert(body: "Here's an update you subscribed to")
 let payload = ParsePushPayloadApple(alert: alert)
 let push = ParsePush(payload: payload, query: query)
+
+Task {
+    do {
+        try await push.send()
+        print("Successfully sent push notification to opted-in users.")
+    } catch {
+        print("Error sending push notification to opted-in users: \(error)")
+    }
+}
