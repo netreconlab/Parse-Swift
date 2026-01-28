@@ -33,7 +33,7 @@ struct ContentView: View {
             // Add an unsubscribe button
             Button(action: {
                 Task {
-                    try? await query.unsubscribe(subscription)
+                    try? await subscription.query.unsubscribe(subscription)
                 }
             }, label: {
                 Text("Unsubscribe")
