@@ -10,6 +10,6 @@
  */
 
 // This Swift example shows how to send pushes from a trusted server-side environment
-// (for example, Parse-Server-Swift/Vapor), and should not be run inside your client app.
+// (for example, ParseServerSwift/Vapor), and should not be run inside your client app.
 // Parse Cloud Code itself is implemented in JavaScript (e.g., main.js) and would use a
 // different, JavaScript-based implementation for server-side push logic.

@@ -3,7 +3,7 @@ import ParseSwift
 
 // SERVER-SIDE: Send targeted notifications to specific channels
 // WARNING: This requires the primary key and must run in a trusted server environment
-// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+// Do NOT run this in your client app - use Cloud Code or ParseServerSwift/Vapor
 
 // Note: Users subscribe to channels in your client app using Installation.current().save()
 // This server-side code targets those subscribed users by channel name

@@ -3,7 +3,7 @@ import ParseSwift
 
 // SERVER-SIDE: Monitor push notification delivery status
 // WARNING: This requires the primary key and must run in a trusted server environment
-// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+// Do NOT run this in your client app - use Cloud Code or ParseServerSwift/Vapor
 
 let alert = ParsePushAppleAlert(body: "Important update")
 let payload = ParsePushPayloadApple(alert: alert)
