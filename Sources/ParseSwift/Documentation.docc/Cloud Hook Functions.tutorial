@@ -166,9 +166,9 @@
             }
             
             @Step {
-                **Example webhook implementation** Here's a complete example of a webhook endpoint that processes the function parameters and returns a result. This example uses Vapor, but you can use any web framework.
+                **Example webhook implementation** For complete working examples of webhook implementations using Vapor and Parse-Swift, see the [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift) repository. The routes.swift file demonstrates proper webhook authentication, request handling, and response formatting for Hook Functions.
                 
-                @Code(name: "WebhookServer.swift", file: 22-cloud-hook-functions-17-webhook-example.swift)
+                @Code(name: "WebhookReference.swift", file: 22-cloud-hook-functions-17-webhook-reference.swift)
             }
         }
     }
@@ -210,33 +210,27 @@
             }
             
             @Step {
-                **Best Practice 2: Secure your webhook endpoints** Your webhook URLs are publicly accessible. Implement authentication using Parse Server headers, verify the X-Parse-Application-Id header, and use HTTPS to protect data in transit.
+                **Best Practice 2: Implement proper webhook security** Your webhook endpoints should verify requests are from your Parse Server using secure authentication. See the [Parse-Server-Swift examples](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) for proper webhook authentication patterns including header validation and secure request handling.
                 
                 @Code(name: "WebhookSecurity.swift", file: 22-cloud-hook-functions-21-webhook-security.swift)
             }
             
             @Step {
-                **Best Practice 3: Handle webhook timeouts** Parse Server has a timeout for webhook calls (default 15 seconds). Ensure your webhooks respond quickly. For long-running tasks, return immediately and use background jobs or callbacks.
+                **Best Practice 3: Handle errors gracefully** Always implement comprehensive error handling in your webhook implementations. Return proper Parse error codes so clients can handle errors appropriately. For examples, see the error handling patterns in [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift).
                 
-                @Code(name: "WebhookPerformance.swift", file: 22-cloud-hook-functions-22-timeout.swift)
+                @Code(name: "ErrorHandling.swift", file: 22-cloud-hook-functions-22-error-handling.swift)
             }
             
             @Step {
-                **Best Practice 4: Implement error handling** Always return proper error responses from your webhooks. Use Parse Error codes so clients can handle errors appropriately. Log errors for debugging and monitoring.
+                **Best Practice 4: Use appropriate response types** Webhook responses should use ParseHookResponse types with appropriate success or error values. This ensures compatibility with Parse Server's expectations.
                 
-                @Code(name: "WebhookErrors.swift", file: 22-cloud-hook-functions-23-error-handling.swift)
+                @Code(name: "ResponseTypes.swift", file: 22-cloud-hook-functions-23-response-types.swift)
             }
             
             @Step {
-                **Best Practice 5: Monitor webhook health** Implement health checks and monitoring for your webhook endpoints. Parse Server will retry failed webhook calls, but persistent failures indicate problems that need attention.
+                **Best Practice 5: Version your webhook APIs** As your webhooks evolve, use URL versioning (e.g., /v1/functions/foo, /v2/functions/foo) to maintain backward compatibility. Update Hook Functions to point to new versions when ready.
                 
-                @Code(name: "WebhookMonitoring.swift", file: 22-cloud-hook-functions-24-monitoring.swift)
-            }
-            
-            @Step {
-                **Best Practice 6: Version your webhook APIs** As your webhooks evolve, use URL versioning (e.g., /v1/functions/foo, /v2/functions/foo) to maintain backward compatibility. Update Hook Functions to point to new versions when ready.
-                
-                @Code(name: "WebhookVersioning.swift", file: 22-cloud-hook-functions-25-versioning.swift)
+                @Code(name: "WebhookVersioning.swift", file: 22-cloud-hook-functions-24-versioning.swift)
             }
         }
     }

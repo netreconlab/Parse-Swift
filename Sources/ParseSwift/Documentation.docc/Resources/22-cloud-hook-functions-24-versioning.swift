@@ -5,7 +5,7 @@ import ParseSwift
 func setupHookFunctions() async throws {
     // Version 1 of the function
     var functionV1 = ParseHookFunction(
-        functionName: "processOrder",
+        name: "processOrder",
         url: URL(string: "https://api.example.com/v1/functions/processOrder")!
     )
     
