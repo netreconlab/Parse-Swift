@@ -4,7 +4,7 @@
 		
 		Cloud Push Notifications allow you to send messages to users' devices from your Parse Server. This is a server-side operation that requires the primary key and should only be performed in Cloud Code or trusted server environments. This tutorial covers creating push payloads for Apple Push Notification Service (APNS) and Firebase Cloud Messaging (FCM), targeting devices with queries or channels, managing badge counts, and checking push notification status.
 		
-		> Warning: The code in this tutorial is intended to run at the server level only in Cloud Code. It requires the use of the primary key and should not be run in client applications.
+		> Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
 		
 		> Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Installation>. You should have initialized the Parse SDK and understand how to work with ParseInstallation objects.
 		
