@@ -4,7 +4,7 @@
         
         Cloud Hook Functions enable you to register webhooks that Parse Server calls when specific cloud functions are invoked. This tutorial covers creating, updating, fetching, and deleting Hook Functions. Hook Functions are useful for integrating Parse Server with external services, implementing custom business logic outside your Parse Server, or creating microservice architectures.
         
-        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
+        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
@@ -13,7 +13,7 @@
     
     @Section(title: "Understanding Cloud Hook Functions") {
         @ContentAndMedia {
-            Cloud Hook Functions provide a way to execute external webhooks when Parse Cloud Functions are invoked.
+            Cloud Hook Functions provide a way to execute external webhooks when Parse Cloud Functions are invoked. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
             
             Instead of implementing all your business logic directly in Parse Server Cloud Code, Hook Functions allow you to delegate function execution to external services. When a Cloud Function with a registered hook is called, Parse Server makes an HTTP request to your webhook URL with the function parameters. This enables microservice architectures, integration with third-party services, and flexible deployment strategies.
         }
@@ -166,7 +166,7 @@
             }
             
             @Step {
-                **Example webhook implementation** For complete working examples of webhook implementations using Vapor and Parse-Swift, see the [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift) repository. The routes.swift file demonstrates proper webhook authentication, request handling, and response formatting for Hook Functions.
+                **Example webhook implementation** For complete working examples of webhook implementations using Vapor and Parse-Swift, see the [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) repository. The routes.swift file demonstrates proper webhook authentication, request handling, and response formatting for Hook Functions.
                 
                 @Code(name: "WebhookReference.swift", file: 22-cloud-hook-functions-17-webhook-reference.swift)
             }
@@ -210,13 +210,13 @@
             }
             
             @Step {
-                **Best Practice 2: Implement proper webhook security** Your webhook endpoints should verify requests are from your Parse Server using secure authentication. See the [Parse-Server-Swift examples](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) for proper webhook authentication patterns including header validation and secure request handling.
+                **Best Practice 2: Implement proper webhook security** Your webhook endpoints should verify requests are from your Parse Server using secure authentication. See the [ParseServerSwift examples](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) for proper webhook authentication patterns including header validation and secure request handling.
                 
                 @Code(name: "WebhookSecurity.swift", file: 22-cloud-hook-functions-21-webhook-security.swift)
             }
             
             @Step {
-                **Best Practice 3: Handle errors gracefully** Always implement comprehensive error handling in your webhook implementations. Return proper Parse error codes so clients can handle errors appropriately. For examples, see the error handling patterns in [Parse-Server-Swift](https://github.com/netreconlab/parse-server-swift).
+                **Best Practice 3: Handle errors gracefully** Always implement comprehensive error handling in your webhook implementations. Return proper Parse error codes so clients can handle errors appropriately. For examples, see the error handling patterns in [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
                 
                 @Code(name: "ErrorHandling.swift", file: 22-cloud-hook-functions-22-error-handling.swift)
             }

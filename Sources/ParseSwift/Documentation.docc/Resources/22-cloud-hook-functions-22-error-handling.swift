@@ -9,7 +9,7 @@
  For complete error handling examples, see:
  https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift
  
- Example error handling patterns from Parse-Server-Swift:
+ Example error handling patterns from ParseServerSwift:
  
  // Validate user authentication
  guard parseRequest.user != nil else {

@@ -12,7 +12,7 @@
  )
  
  ✅ Only use Hook Functions in server-side environments:
- - Parse-Server-Swift
+ - ParseServerSwift
  - Vapor server
  - Kitura server
  - Other backend frameworks

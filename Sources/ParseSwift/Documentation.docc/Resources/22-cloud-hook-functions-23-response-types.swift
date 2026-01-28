@@ -13,7 +13,7 @@
  For complete examples, see:
  https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift
  
- Example from Parse-Server-Swift:
+ Example from ParseServerSwift:
  
  // Returning a String result
  return ParseHookResponse(success: "Hello world!")

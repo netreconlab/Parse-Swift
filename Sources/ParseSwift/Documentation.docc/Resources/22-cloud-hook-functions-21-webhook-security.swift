@@ -9,7 +9,7 @@
  For complete security implementation examples, see:
  https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift
  
- The checkHeaders() function in Parse-Server-Swift demonstrates:
+ The checkHeaders() function in ParseServerSwift demonstrates:
  - Validating X-Parse-Application-Id header
  - Verifying X-Parse-Primary-Key for server operations
  - Returning appropriate error responses for failed validation
@@ -26,4 +26,3 @@
      return nil
  }
  */
-

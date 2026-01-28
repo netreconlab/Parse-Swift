@@ -1,6 +1,6 @@
 /*
  For complete working examples of Hook Function webhook implementations,
- see the Parse-Server-Swift repository:
+ see the ParseServerSwift repository:
  https://github.com/netreconlab/parse-server-swift
  
  The routes.swift file demonstrates:
