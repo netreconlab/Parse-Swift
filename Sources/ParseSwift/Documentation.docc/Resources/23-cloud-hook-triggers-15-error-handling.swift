@@ -3,6 +3,8 @@ import ParseSwift
 
 // Implement comprehensive error handling for trigger operations
 Task {
+    let gameScore = GameScore()
+    
     do {
         let trigger = ParseHookTrigger(
             object: gameScore,

@@ -5,4 +5,4 @@ import ParseSwift
 let gameScore = GameScore()
 var myTrigger = ParseHookTrigger(object: gameScore,
                                  trigger: .afterSave,
-                                 url: URL(string: "https://api.example.com/bar")!)
+                                 url: URL(string: "https://api.example.com/gameScore/afterSave")!)

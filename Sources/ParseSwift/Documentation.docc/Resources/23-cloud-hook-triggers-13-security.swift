@@ -9,6 +9,7 @@ import ParseSwift
 Task {
     // Only run this code in a secure server environment
     // with proper authentication and access controls
+    let gameScore = GameScore()
     let trigger = ParseHookTrigger(object: gameScore,
                                    trigger: .afterSave,
                                    url: URL(string: "https://api.example.com/webhook")!)
