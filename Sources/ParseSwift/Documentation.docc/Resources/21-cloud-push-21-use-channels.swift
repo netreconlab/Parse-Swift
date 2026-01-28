@@ -1,22 +1,13 @@
 import Foundation
 import ParseSwift
 
-// CLIENT-SIDE: Let users subscribe to topics they care about
-// This runs in your client app without requiring the primary key
-Task {
-    do {
-        var installation = try await Installation.current()
-        installation.channels = ["sports", "news", "weather"]
-        try await installation.save()
-        print("Subscribed to channels")
-    } catch {
-        print("Error subscribing: \(error)")
-    }
-}
-
-// SERVER-SIDE: Send targeted notifications to specific topics
+// SERVER-SIDE: Send targeted notifications to specific channels
 // WARNING: This requires the primary key and must run in a trusted server environment
 // Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+
+// Note: Users subscribe to channels in your client app using Installation.current().save()
+// This server-side code targets those subscribed users by channel name
+
 let alert = ParsePushAppleAlert(body: "Breaking sports news!")
 let payload = ParsePushPayloadApple(alert: alert)
 

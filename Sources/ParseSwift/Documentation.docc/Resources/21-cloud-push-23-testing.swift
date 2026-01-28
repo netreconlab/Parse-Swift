@@ -1,6 +1,10 @@
 import Foundation
 import ParseSwift
 
+// SERVER-SIDE: Test with a specific installation before production deployment
+// WARNING: This requires the primary key and must run in a trusted server environment
+// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+
 // Test with a specific test installationId first (replace with a real installationId)
 let testQuery = Installation.query("installationId" == "your-test-installation-id")
 

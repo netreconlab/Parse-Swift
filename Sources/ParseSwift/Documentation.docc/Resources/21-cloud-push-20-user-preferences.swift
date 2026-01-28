@@ -1,7 +1,10 @@
 import Foundation
 import ParseSwift
 
-// Only send notifications to users who have opted in
+// SERVER-SIDE: Only send notifications to users who have opted in
+// WARNING: This requires the primary key and must run in a trusted server environment
+// Do NOT run this in your client app - use Cloud Code or Parse-Server-Swift/Vapor
+
 // Use a custom property on Installation to track opt-in status
 let query = Installation.query(isNotNull(key: "objectId"))
     .where("customKey" == "opted-in")
