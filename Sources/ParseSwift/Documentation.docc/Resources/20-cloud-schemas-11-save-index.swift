@@ -2,13 +2,13 @@ import Foundation
 import ParseSwift
 
 // Update the schema on the server to create the index
-gameScoreSchema.update { result in
-    switch result {
-    case .success(let updatedSchema):
+Task {
+    do {
+        let updatedSchema = try await gameScoreSchema.update()
         print("Index created successfully!")
         print("Updated schema: \(updatedSchema)")
         gameScoreSchema = updatedSchema
-    case .failure(let error):
+    } catch {
         print("Could not update schema: \(error)")
     }
 }

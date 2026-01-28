@@ -2,14 +2,14 @@ import Foundation
 import ParseSwift
 
 // Update the schema on the server to remove the field
-gameScoreSchema.update { result in
-    switch result {
-    case .success(let updatedSchema):
+Task {
+    do {
+        let updatedSchema = try await gameScoreSchema.update()
         print("Field deleted successfully!")
         print("The 'data' field has been removed from the schema.")
         print("Updated schema: \(updatedSchema)")
         gameScoreSchema = updatedSchema
-    case .failure(let error):
+    } catch {
         print("Could not update schema: \(error)")
     }
 }

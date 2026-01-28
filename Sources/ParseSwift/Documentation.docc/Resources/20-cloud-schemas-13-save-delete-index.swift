@@ -2,13 +2,13 @@ import Foundation
 import ParseSwift
 
 // Update the schema on the server to remove the index
-gameScoreSchema.update { result in
-    switch result {
-    case .success(let updatedSchema):
+Task {
+    do {
+        let updatedSchema = try await gameScoreSchema.update()
         print("Index deleted successfully!")
         print("Updated schema: \(updatedSchema)")
         gameScoreSchema = updatedSchema
-    case .failure(let error):
+    } catch {
         print("Could not update schema: \(error)")
     }
 }

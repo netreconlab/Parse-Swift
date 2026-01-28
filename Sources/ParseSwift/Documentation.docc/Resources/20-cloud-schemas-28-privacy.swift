@@ -3,6 +3,23 @@ import ParseSwift
 
 // Protect sensitive user data with field-level permissions
 
+// Your specific User value type.
+struct User: ParseUser {
+    // These are required by ParseObject
+    var objectId: String?
+    var createdAt: Date?
+    var updatedAt: Date?
+    var ACL: ParseACL?
+    var originalData: Data?
+
+    // These are required by ParseUser
+    var username: String?
+    var email: String?
+    var emailVerified: Bool?
+    var password: String?
+    var authData: [String: [String: String]?]?
+}
+
 // Example: User profile with private information
 struct UserProfile: ParseObject {
     var objectId: String?
@@ -14,7 +31,7 @@ struct UserProfile: ParseObject {
     var displayName: String?      // Public
     var email: String?            // Private - only visible to owner
     var phoneNumber: String?      // Private - only visible to owner
-    var friends: [User]?          // Semi-private - visible to friends
+    var friends: [User]?          // Array of user references
 }
 
 // Create schema with field protection
@@ -33,7 +50,6 @@ var profileSchema = ParseSchema<UserProfile>(classLevelPermissions: clp)
 // Protect sensitive fields
 var protectedCLP = clp
     .setProtectedFieldsPublic(["email", "phoneNumber"])  // Hide from public
-    .setProtectedFields(["friends"], userField: "friends") // Visible to friends
 
 profileSchema.classLevelPermissions = protectedCLP
 

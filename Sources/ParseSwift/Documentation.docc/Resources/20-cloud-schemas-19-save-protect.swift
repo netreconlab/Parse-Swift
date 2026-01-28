@@ -2,14 +2,14 @@ import Foundation
 import ParseSwift
 
 // Update the schema with protected field settings
-gameScoreSchema.update { result in
-    switch result {
-    case .success(let updatedSchema):
+Task {
+    do {
+        let updatedSchema = try await gameScoreSchema.update()
         print("Field protection updated successfully!")
         print("Protected fields are now enforced.")
         print("Updated schema: \(updatedSchema)")
         gameScoreSchema = updatedSchema
-    case .failure(let error):
+    } catch {
         print("Could not update schema: \(error)")
     }
 }
