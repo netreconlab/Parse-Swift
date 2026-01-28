@@ -2,9 +2,9 @@ import Vapor
 
 // Implement proper error handling in your webhooks
 func routes(_ app: Application) throws {
-    app.post("foo") { req async throws -> Response in
+    app.post("foo") { req async throws in
         struct WebhookRequest: Content {
-            let params: [String: AnyCodable]
+            let params: [String: String]
         }
         
         struct SuccessResponse: Content {
@@ -23,14 +23,14 @@ func routes(_ app: Application) throws {
             guard let requiredParam = webhookReq.params["required"] else {
                 // Return Parse error format
                 let error = ErrorResponse(code: 400, error: "Missing required parameter")
-                return try await error.encodeResponse(for: req)
+                return error
             }
             
             // Process the request
             let result = processWebhook(requiredParam)
             
             // Return success
-            return try await SuccessResponse(result: result).encodeResponse(for: req)
+            return SuccessResponse(result: result)
             
         } catch {
             // Log the error for debugging
@@ -41,11 +41,11 @@ func routes(_ app: Application) throws {
                 code: 141,
                 error: "Internal server error: \(error.localizedDescription)"
             )
-            return try await errorResponse.encodeResponse(for: req)
+            return errorResponse
         }
     }
 }
 
-func processWebhook(_ param: AnyCodable) -> String {
+func processWebhook(_ param: String) -> String {
     return "Processed"
 }

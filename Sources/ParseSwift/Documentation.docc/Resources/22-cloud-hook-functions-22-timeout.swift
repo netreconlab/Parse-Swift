@@ -2,9 +2,9 @@ import Vapor
 
 // Handle webhook requests with appropriate timeouts
 func routes(_ app: Application) throws {
-    app.post("foo") { req -> Response in
+    app.post("foo") { req async throws in
         struct WebhookRequest: Content {
-            let params: [String: AnyCodable]
+            let params: [String: String]
         }
         
         let webhookReq = try req.content.decode(WebhookRequest.self)
@@ -30,15 +30,15 @@ func routes(_ app: Application) throws {
     }
 }
 
-func isQuickOperation(_ params: [String: AnyCodable]) -> Bool {
+func isQuickOperation(_ params: [String: String]) -> Bool {
     // Check if this operation can complete quickly
     return true
 }
 
-func processQuickly(_ params: [String: AnyCodable]) -> String {
+func processQuickly(_ params: [String: String]) -> String {
     return "Quick result"
 }
 
-func processInBackground(_ params: [String: AnyCodable]) async {
+func processInBackground(_ params: [String: String]) async {
     // Long-running operation
 }

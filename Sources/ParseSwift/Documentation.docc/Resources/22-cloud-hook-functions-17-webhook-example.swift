@@ -2,7 +2,7 @@ import Vapor
 
 // Example webhook endpoint using Vapor framework
 func routes(_ app: Application) throws {
-    app.post("foo") { req -> Response in
+    app.post("foo") { req async throws in
         // Parse the incoming webhook request
         struct WebhookRequest: Content {
             let params: [String: String]
