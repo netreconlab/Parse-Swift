@@ -1,6 +1,8 @@
 import Foundation
 import ParseSwift
 
+// Note: This builds on the User and GameScore definitions from the previous code sample
+
 struct GameScore: ParseObject {
     var objectId: String?
     var createdAt: Date?

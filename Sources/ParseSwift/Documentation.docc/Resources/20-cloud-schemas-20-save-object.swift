@@ -1,6 +1,8 @@
 import Foundation
 import ParseSwift
 
+// Note: This builds on the User and GameScore definitions from previous code samples
+
 Task {
     do {
         // Create and save a new object to the schema

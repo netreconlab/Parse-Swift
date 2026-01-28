@@ -29,8 +29,8 @@ struct UserProfile: ParseObject {
     var originalData: Data?
     
     var displayName: String?      // Public
-    var email: String?            // Private - only visible to owner
-    var phoneNumber: String?      // Private - only visible to owner
+    var email: String?            // Private - hidden from public, visible to authenticated users
+    var phoneNumber: String?      // Private - hidden from public, visible to authenticated users
     var friends: [User]?          // Array of user references
 }
 
