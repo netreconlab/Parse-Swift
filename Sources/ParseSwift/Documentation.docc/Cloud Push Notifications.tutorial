@@ -13,7 +13,7 @@
 	
 	@Section(title: "Understanding Cloud Push Notifications") {
 		@ContentAndMedia {
-			Cloud Push Notifications are messages sent from Parse Server to devices that have installed your app.
+			Cloud Push Notifications are messages sent from Parse Server to devices that have installed your app. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
 			
 			Unlike client-side operations, sending push notifications is a privileged server-side operation that requires the primary key. This ensures that only authorized code can send notifications to your users. Push notifications can be targeted to specific devices using queries, broadcast to channel subscribers, or sent to all installations. Parse Server supports both Apple Push Notification Service (APNS) for iOS/macOS apps and Firebase Cloud Messaging (FCM) for cross-platform delivery.
 		}
