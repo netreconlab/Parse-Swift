@@ -145,6 +145,8 @@
             Learn what data Parse Server sends to your webhook endpoint when a trigger fires.
             
             When a trigger fires, Parse Server sends an HTTP POST request to your webhook URL with JSON data about the database event. Your webhook endpoint needs to handle this request and return an appropriate response.
+            
+            For complete examples of implementing Parse Hook Triggers with Vapor in Swift, see the [parse-server-swift](https://github.com/netreconlab/parse-server-swift) repository. The [routes.swift](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) file contains comprehensive examples of Hook Trigger implementations including beforeSave, afterSave, beforeFind, and other trigger types.
         }
         
         @Steps {
@@ -156,9 +158,7 @@
                 - **user** - The Parse User who triggered the event (if authenticated)
                 - **installationId** - The installation ID that triggered the event
                 
-                Your webhook must respond with a 200 status code for success or an error code to reject the operation (for before triggers).
-                
-                @Code(name: "webhook.js", file: 23-cloud-hook-triggers-12-webhook-request.js)
+                Your webhook must respond with a 200 status code for success or an error code to reject the operation (for before triggers). For production-ready examples of handling these requests in Swift with Vapor, refer to [parse-server-swift](https://github.com/netreconlab/parse-server-swift).
             }
         }
     }
