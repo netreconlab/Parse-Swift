@@ -15,8 +15,8 @@ let push = ParsePush(payload: payload, query: query)
 
 Task {
     do {
-        try await push.send()
-        print("Successfully sent push notification to opted-in users.")
+        let statusId = try await push.send()
+        print("Successfully sent push notification to opted-in users. Status ID: \(statusId)")
     } catch {
         print("Error sending push notification to opted-in users: \(error)")
     }
