@@ -9,10 +9,14 @@ func routes(_ app: Application) throws {
         
         let webhookReq = try req.content.decode(WebhookRequest.self)
         
+        struct SuccessResponse: Content {
+            let result: String
+        }
+        
         // For quick operations, process and return immediately
         if isQuickOperation(webhookReq.params) {
             let result = processQuickly(webhookReq.params)
-            return try await ["result": result].encodeResponse(for: req)
+            return SuccessResponse(result: result)
         }
         
         // For long-running operations, start a background job
@@ -22,7 +26,7 @@ func routes(_ app: Application) throws {
         }
         
         // Return success immediately
-        return try await ["result": "Processing started"].encodeResponse(for: req)
+        return SuccessResponse(result: "Processing started")
     }
 }
 

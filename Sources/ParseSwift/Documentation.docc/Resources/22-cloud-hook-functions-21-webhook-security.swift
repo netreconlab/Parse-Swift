@@ -20,7 +20,9 @@ func routes(_ app: Application) throws {
         let webhookReq = try req.content.decode(WebhookRequest.self)
         
         // Your business logic here
-        let result = ["result": "Success"]
-        return try await result.encodeResponse(for: req)
+        struct SuccessResponse: Content {
+            let result: String
+        }
+        return SuccessResponse(result: "Success")
     }
 }

@@ -20,8 +20,10 @@ func routes(_ app: Application) throws {
         let result = processFunction(params: webhookReq.params)
         
         // Return success response
-        let response = ["result": result]
-        return try await response.encodeResponse(for: req)
+        struct SuccessResponse: Content {
+            let result: String
+        }
+        return SuccessResponse(result: result)
     }
 }
 

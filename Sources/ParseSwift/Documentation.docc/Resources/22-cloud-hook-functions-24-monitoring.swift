@@ -8,12 +8,18 @@ func routes(_ app: Application) throws {
     }
     
     // Metrics endpoint for monitoring
-    app.get("metrics") { req -> [String: Any] in
-        return [
-            "requests_processed": getRequestCount(),
-            "average_response_time": getAverageResponseTime(),
-            "error_rate": getErrorRate()
-        ]
+    app.get("metrics") { req -> MetricsResponse in
+        return MetricsResponse(
+            requests_processed: getRequestCount(),
+            average_response_time: getAverageResponseTime(),
+            error_rate: getErrorRate()
+        )
+    }
+    
+    struct MetricsResponse: Content {
+        let requests_processed: Int
+        let average_response_time: Double
+        let error_rate: Double
     }
     
     // Webhook endpoint with monitoring
