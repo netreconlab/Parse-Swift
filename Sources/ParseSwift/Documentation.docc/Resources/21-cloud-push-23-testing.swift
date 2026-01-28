@@ -1,8 +1,8 @@
 import Foundation
 import ParseSwift
 
-// Test with a specific test device first
-let testQuery = Installation.query("installationId" == "your-test-device-id")
+// Test with a specific test installationId first (replace with a real installationId)
+let testQuery = Installation.query("installationId" == "your-test-installation-id")
 
 let testAlert = ParsePushAppleAlert(body: "Test notification")
 let testPayload = ParsePushPayloadApple(alert: testAlert)
