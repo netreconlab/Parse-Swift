@@ -1,0 +1,273 @@
+@Tutorial(time: 30) {
+	@Intro(title: "Cloud Push Notifications") {
+		Learn how to send push notifications from Parse Server using Cloud Code in your Swift applications.
+		
+		Cloud Push Notifications allow you to send messages to users' devices from your Parse Server. This is a server-side operation that requires the primary key and should only be performed in Cloud Code or trusted server environments. This tutorial covers creating push payloads for Apple Push Notification Service (APNS) and Firebase Cloud Messaging (FCM), targeting devices with queries or channels, managing badge counts, and checking push notification status.
+		
+		> Warning: The code in this tutorial is intended to run at the server level only in Cloud Code. It requires the use of the primary key and should not be run in client applications.
+		
+		> Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Installation>. You should have initialized the Parse SDK and understand how to work with ParseInstallation objects.
+		
+		@Image(source: parse-logo.png, alt: "Parse logo")
+	}
+	
+	@Section(title: "Understanding Cloud Push Notifications") {
+		@ContentAndMedia {
+			Cloud Push Notifications are messages sent from Parse Server to devices that have installed your app.
+			
+			Unlike client-side operations, sending push notifications is a privileged server-side operation that requires the primary key. This ensures that only authorized code can send notifications to your users. Push notifications can be targeted to specific devices using queries, broadcast to channel subscribers, or sent to all installations. Parse Server supports both Apple Push Notification Service (APNS) for iOS/macOS apps and Firebase Cloud Messaging (FCM) for cross-platform delivery.
+		}
+		
+		@Steps {
+			@Step {
+				**What are Cloud Push Notifications?** Push notifications are messages delivered to users' devices even when your app isn't running. They can contain alerts, badge updates, sounds, and custom data. Parse Server handles the complexity of communicating with APNS and FCM, providing a unified API for sending notifications. Benefits include: Re-engaging users with timely updates, Delivering important information instantly, Increasing user retention and engagement, Broadcasting announcements to all users, Targeting specific user segments with relevant content
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-01-overview.swift)
+			}
+			
+			@Step {
+				**Server-side only operation** Sending push notifications requires the primary key, which should never be included in client applications. This code should only run in Parse Cloud Code on your server, where the primary key can be securely stored and accessed. Never expose your primary key in client-side code.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-02-server-only.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Define the Installation model") {
+		@ContentAndMedia {
+			Before sending push notifications, you need an Installation model that represents the devices receiving notifications.
+			
+			The Installation model must conform to `ParseInstallation` and includes all the required properties for tracking device information, channels, and custom data.
+		}
+		
+		@Steps {
+			@Step {
+				Create an `Installation` struct conforming to `ParseInstallation`.
+				
+				Include all required `ParseObject` properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, `originalData`) and all required `ParseInstallation` properties (`installationId`, `deviceType`, `deviceToken`, `badge`, `timeZone`, `channels`, `appName`, `appIdentifier`, `appVersion`, `parseVersion`, `localeIdentifier`). You can also add custom properties for your app-specific needs.
+				
+				@Code(name: "Installation.swift", file: 21-cloud-push-03-installation-model.swift)
+			}
+			
+			@Step {
+				Implement the `merge` method for optimal performance.
+				
+				The merge method is optional but recommended for faster decoding after server updates. It specifies how to merge the server response with your local object, preserving custom properties that should be retained.
+				
+				@Code(name: "Installation.swift", file: 21-cloud-push-04-installation-merge.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Create Apple push notification payloads") {
+		@ContentAndMedia {
+			To send push notifications to iOS, macOS, tvOS, or watchOS devices, you create an Apple push notification payload.
+			
+			The payload includes the alert message and optional properties like badge count, sound, and custom data. Parse-Swift provides `ParsePushAppleAlert` and `ParsePushPayloadApple` types to construct these payloads in a type-safe manner.
+		}
+		
+		@Steps {
+			@Step {
+				Create a simple alert with a body message.
+				
+				The `ParsePushAppleAlert` represents the alert that will be displayed to the user. At minimum, you provide a body message. You can also include a title, subtitle, and other alert properties.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-05-apple-alert.swift)
+			}
+			
+			@Step {
+				Create the payload with the alert and set the badge count.
+				
+				Wrap the alert in a `ParsePushPayloadApple` and use the `setBadge()` method to set the app icon badge count. This is the number displayed on your app icon on the home screen.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-06-apple-payload.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Send push notifications using queries") {
+		@ContentAndMedia {
+			Target specific devices by creating a query on the Installation class.
+			
+			Queries allow you to send push notifications only to installations that match certain criteria. For example, you can target users in a specific geographic area, users of a specific app version, or installations with custom properties.
+		}
+		
+		@Steps {
+			@Step {
+				Create a query to target installations.
+				
+				Use the standard query API to create an `Installation` query. This example targets all installations where the `objectId` is not null, effectively selecting all installations. You can add more specific constraints as needed.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-07-query.swift)
+			}
+			
+			@Step {
+				Create a `ParsePush` instance with the payload and query.
+				
+				Combine the payload and query into a `ParsePush` object. This specifies what message to send and which devices should receive it.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-08-create-push.swift)
+			}
+			
+			@Step {
+				Send the push notification.
+				
+				Call the `send()` method to dispatch the push notification. This returns a status ID that you can use to track the notification's delivery status. The completion handler receives either the status ID on success or an error on failure.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-09-send-push.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Send push notifications using channels") {
+		@ContentAndMedia {
+			Channels provide a simple way to group installations and send targeted notifications.
+			
+			Instead of complex queries, you can subscribe installations to named channels and send notifications to all subscribers of a channel. This is useful for topic-based notifications like sports scores, news categories, or user interest groups.
+		}
+		
+		@Steps {
+			@Step {
+				Create a push notification payload for the channel.
+				
+				Create a new alert and payload for the channel-based notification. You can use `incrementBadge()` instead of `setBadge()` to increase the current badge count by one.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-10-channel-payload.swift)
+			}
+			
+			@Step {
+				Create a `ParsePush` and set the target channels.
+				
+				Initialize a `ParsePush` with just the payload, then set the `channels` property to a set of channel names. The notification will be sent to all installations subscribed to any of these channels.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-11-set-channels.swift)
+			}
+			
+			@Step {
+				Send the channel-based push notification.
+				
+				Call `send()` to dispatch the notification to all channel subscribers. The process is identical to query-based notifications, returning a status ID for tracking.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-12-send-channel.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Check push notification status") {
+		@ContentAndMedia {
+			After sending a push notification, you can check its delivery status using the status ID.
+			
+			Parse Server tracks the status of each push notification, including how many devices received it, how many pushes were sent, and whether there were any failures. This helps you monitor the effectiveness of your notifications and troubleshoot delivery issues.
+		}
+		
+		@Steps {
+			@Step {
+				Fetch the status of a specific push notification.
+				
+				Use the `fetchStatus()` method with the status ID returned from `send()`. The status object contains information about the notification's delivery, including the number of pushes sent and received.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-13-fetch-status.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Send Firebase Cloud Messaging notifications") {
+		@ContentAndMedia {
+			Parse Server also supports Firebase Cloud Messaging (FCM) for cross-platform push notifications.
+			
+			FCM can deliver notifications to Android, iOS, and web applications. If your app uses FCM instead of or in addition to APNS, you can create Firebase payloads using `ParsePushPayloadFirebase`.
+		}
+		
+		@Steps {
+			@Step {
+				Create a Firebase notification.
+				
+				Use `ParsePushFirebaseNotification` to create the notification content. Similar to Apple alerts, you provide a body message and optional title and other properties.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-14-firebase-notification.swift)
+			}
+			
+			@Step {
+				Create the Firebase payload.
+				
+				Wrap the notification in a `ParsePushPayloadFirebase`. This payload can be used with queries or channels just like Apple payloads.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-15-firebase-payload.swift)
+			}
+			
+			@Step {
+				Send the Firebase notification.
+				
+				Create a `ParsePush` with the Firebase payload and a query, then call `send()`. The process is identical to sending Apple notifications.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-16-send-firebase.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Query push notification statuses") {
+		@ContentAndMedia {
+			You can query multiple push notification statuses to track your notification campaigns.
+			
+			The `ParsePushStatus` class allows you to query all sent notifications and analyze their delivery metrics. This is useful for monitoring notification performance and debugging delivery issues.
+		}
+		
+		@Steps {
+			@Step {
+				Create a query for push statuses.
+				
+				Use `ParsePushStatus<ParsePushPayloadAny>` to query statuses for both Apple and Firebase notifications. The `ParsePushPayloadAny` type works with mixed push environments where you might have sent notifications using different payload types.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-17-query-statuses.swift)
+			}
+			
+			@Step {
+				Query statuses with the primary key option.
+				
+				Querying `ParsePushStatus` directly requires the primary key. Always include `.usePrimaryKey` in the options when calling `findAll()` or other query methods on push statuses.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-18-find-statuses.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Best practices for push notifications") {
+		@ContentAndMedia {
+			Following best practices ensures your push notifications are effective, secure, and well-received by users.
+			
+			Push notifications are powerful but can be intrusive if misused. These guidelines help you deliver valuable notifications while respecting user preferences and maintaining security.
+		}
+		
+		@Steps {
+			@Step {
+				**Best Practice 1: Only send from server** Never include your primary key in client applications. Push notifications should only be sent from Cloud Code or other trusted server environments where you can securely store credentials.
+				
+				@Code(name: "CloudCode.js", file: 21-cloud-push-19-server-only-practice.js)
+			}
+			
+			@Step {
+				**Best Practice 2: Respect user preferences** Allow users to opt out of notifications and respect their channel subscriptions. Don't spam users with excessive notifications, and provide clear value in each message.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-20-user-preferences.swift)
+			}
+			
+			@Step {
+				**Best Practice 3: Use channels for topics** Organize notifications by topics using channels. Let users subscribe to channels they're interested in, making notifications more relevant and reducing notification fatigue.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-21-use-channels.swift)
+			}
+			
+			@Step {
+				**Best Practice 4: Monitor delivery status** Track notification delivery using status IDs. Monitor failed notifications and investigate delivery issues to ensure your messages reach users reliably.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-22-monitor-status.swift)
+			}
+			
+			@Step {
+				**Best Practice 5: Test thoroughly** Test your push notifications in a development environment before sending to production users. Verify that messages display correctly on different devices and OS versions.
+				
+				@Code(name: "CloudPushNotifications.swift", file: 21-cloud-push-23-testing.swift)
+			}
+		}
+	}
+}
