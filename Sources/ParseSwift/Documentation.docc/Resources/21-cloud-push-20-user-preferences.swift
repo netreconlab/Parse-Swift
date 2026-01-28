@@ -1,19 +1,8 @@
 import Foundation
 import ParseSwift
 
-// Check if user has opted in to notifications before sending
-struct UserPreferences: ParseObject {
-    var objectId: String?
-    var createdAt: Date?
-    var updatedAt: Date?
-    var ACL: ParseACL?
-    var originalData: Data?
-    
-    var userId: String?
-    var notificationsEnabled: Bool?
-}
-
 // Only send notifications to users who have opted in
+// The Installation model should have a notificationsEnabled property
 let query = Installation.query(isNotNull(key: "objectId"))
     .where("notificationsEnabled" == true)
 

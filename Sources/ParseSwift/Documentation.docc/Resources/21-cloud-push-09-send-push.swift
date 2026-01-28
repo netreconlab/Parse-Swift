@@ -8,12 +8,12 @@ let applePayload = ParsePushPayloadApple(alert: alert)
 let installationQuery = Installation.query(isNotNull(key: "objectId"))
 let push = ParsePush(payload: applePayload, query: installationQuery)
 
-// Send the push notification
-push.send { result in
-    switch result {
-    case .success(let statusId):
+// Send the push notification using async/await
+Task {
+    do {
+        let statusId = try await push.send()
         print("The push was created with id: \"\(statusId)\"")
-    case .failure(let error):
+    } catch {
         print("Could not create push: \(error)")
     }
 }

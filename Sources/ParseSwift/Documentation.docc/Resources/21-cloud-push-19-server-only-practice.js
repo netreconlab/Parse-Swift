@@ -3,6 +3,11 @@
 Parse.Cloud.define("sendWelcomeNotification", async (request) => {
   // This code runs securely on the server with access to the primary key
   
+  // Ensure the request is authenticated before accessing request.user.id
+  if (!request.user) {
+    throw new Parse.Error(Parse.Error.SESSION_MISSING, "User must be authenticated to send a welcome notification.");
+  }
+  
   const Installation = Parse.Object.extend("Installation");
   const query = new Parse.Query(Installation);
   query.equalTo("userId", request.user.id);

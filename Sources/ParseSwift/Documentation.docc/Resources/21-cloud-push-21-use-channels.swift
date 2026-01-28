@@ -2,11 +2,10 @@ import Foundation
 import ParseSwift
 
 // Let users subscribe to topics they care about
-var installation = Installation.current()
-installation.channels = ["sports", "news", "weather"]
-
 Task {
     do {
+        var installation = try await Installation.current()
+        installation.channels = ["sports", "news", "weather"]
         try await installation.save()
         print("Subscribed to channels")
     } catch {
