@@ -10,7 +10,7 @@
  - Error handling patterns
  - Integration with Vapor framework
  
- Example Hook Function from Parse-Server-Swift:
+ Example Hook Function from ParseServerSwift:
  
  app.post("hello", name: "hello") { req async throws -> ParseHookResponse<String> in
      var parseRequest = try req.content

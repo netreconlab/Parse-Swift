@@ -1,6 +1,6 @@
 @Tutorial(time: 25) {
 	@Intro(title: "Cloud Code") {
-		Learn how to call Parse Cloud Functions and Jobs from your Swift applications to execute server-side logic.
+		Learn how to call Parse Cloud Functions and Jobs from your Swift applications to execute server-side logic via your client-side apps.
 		
 		Cloud Code allows you to run custom JavaScript code on the Parse Server. This tutorial covers creating ParseCloudable types, calling Cloud Functions with parameters, handling responses, catching Cloud Code errors, running jobs, and using context with save operations for server-side hooks.
 		
