@@ -2,9 +2,9 @@
     @Intro(title: "Welcome to ParseSwift") {
         A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.
         
-        These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery and SwiftUI integration.
+        These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery, SwiftUI integration, and server-side operations.
         
-        For full details about Parse-Swift, please view the [api documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
+        For detailed information about the Parse-Swift API, please view the [API documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
         
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
@@ -48,7 +48,7 @@
     }
     
     @Chapter(name: "Device Installations") {
-        Learn about tracking and handling device installations.
+        Learn about tracking and handling device installations necessary to receive push notifications.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
@@ -89,7 +89,7 @@
     }
 
     @Chapter(name: "Accessing Cloud Code") {
-        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic.
+        Learn how to call Parse Cloud Functions from your Swift applications to execute server-side logic via your client-side apps.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
@@ -113,7 +113,7 @@
     }
     
     @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including schema management, webhook management, and push notifications using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+        Learn how to perform server-side operations including: schema management, webhook management, and push notifications using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
