@@ -1,0 +1,191 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Cloud Hook Triggers") {
+        Learn how to manage Parse Cloud Hook Triggers for database events using Swift for server-side trigger operations.
+        
+        Cloud Hook Triggers allow you to execute custom webhooks when specific database events occur on Parse Server. Unlike Cloud Code, which runs JavaScript on the Parse Server itself, Hook Triggers call external HTTP endpoints, enabling you to integrate Parse Server with any web service or microservice architecture. This is useful for sending notifications, syncing data to other systems, logging events, or triggering workflows in response to database changes.
+        
+        > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Cloud Hook Triggers") {
+        @ContentAndMedia {
+            Cloud Hook Triggers call external webhooks in response to database events on Parse Server. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            
+            When a database event occurs (such as saving or deleting an object), Parse Server can automatically send HTTP POST requests to your webhook endpoint. This enables event-driven architectures, allowing you to react to database changes by calling external services, logging events, sending notifications, or performing any custom logic in your own web services.
+        }
+        
+        @Steps {
+            @Step {
+                **What are Cloud Hook Triggers?** Hook Triggers are webhooks that Parse Server calls when specific database events occur. Unlike Cloud Code functions which run JavaScript on Parse Server, Hook Triggers make HTTP POST requests to external URLs you specify.
+                
+                @Code(name: "GameScore.swift", file: 23-cloud-hook-triggers-01-model.swift)
+            }
+            
+            @Step {
+                Define your ParseObject model with merge method. Like all ParseObject types, your models should implement the merge method for optimal performance when updating objects.
+                
+                @Code(name: "GameScore.swift", file: 23-cloud-hook-triggers-02-merge.swift)
+            }
+            
+            @Step {
+                **Available Trigger Types** Parse Server supports six types of triggers for different database events: - **beforeSave** - Called before an object is saved (can modify or reject the save), - **afterSave** - Called after an object is successfully saved, - **beforeDelete** - Called before an object is deleted (can reject the delete), - **afterDelete** - Called after an object is successfully deleted, - **beforeFind** - Called before a query executes (can modify the query), - **afterFind** - Called after a query completes (can modify results)
+                
+                @Code(name: "TriggerTypes.swift", file: 23-cloud-hook-triggers-05-trigger-types.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating a Cloud Hook Trigger") {
+        @ContentAndMedia {
+            Create a new trigger by specifying the object class, trigger type, and webhook URL.
+            
+            To create a trigger, you instantiate a ParseHookTrigger with your ParseObject, the trigger type, and the URL where Parse Server should send webhook requests when the trigger fires.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseHookTrigger instance. Initialize the trigger with your ParseObject instance (which determines the class name), the trigger type (.afterSave, .beforeDelete, etc.), and the webhook URL that should receive the trigger events.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-03-create-trigger.swift)
+            }
+            
+            @Step {
+                Save the trigger to Parse Server using the create method. The create operation registers your trigger with Parse Server. Once registered, Parse Server will call your webhook URL whenever the specified database event occurs for the specified class.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-04-save-trigger.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetching Cloud Hook Triggers") {
+        @ContentAndMedia {
+            Retrieve existing triggers from Parse Server to inspect or modify them.
+            
+            You can fetch individual triggers or retrieve all triggers registered on your Parse Server. This is useful for auditing your trigger configuration or updating existing triggers.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch a specific trigger from Parse Server. The fetch method retrieves the latest trigger configuration from the server, including the URL and trigger type.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-06-fetch-trigger.swift)
+            }
+            
+            @Step {
+                Fetch all triggers using the instance method. When you have a trigger instance, you can call fetchAll to retrieve all triggers registered on Parse Server. This is useful for listing and managing your trigger configuration.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-09-fetchall-instance.swift)
+            }
+            
+            @Step {
+                Fetch all triggers using the type method. You can also call fetchAll as a static method on ParseHookTrigger without needing an instance. This retrieves all triggers across all Parse classes.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-10-fetchall-type.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Updating Cloud Hook Triggers") {
+        @ContentAndMedia {
+            Modify existing triggers to change their webhook URLs or other properties.
+            
+            Triggers can be updated after creation. This is useful when your webhook endpoint changes, when migrating to a new infrastructure, or when updating your trigger configuration.
+        }
+        
+        @Steps {
+            @Step {
+                Modify the trigger properties. Update any trigger property such as the URL. You can change the webhook endpoint to point to a different service or update the URL as your infrastructure evolves.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-07-update-trigger.swift)
+            }
+            
+            @Step {
+                Save the changes to Parse Server using the update method. The update operation persists your changes to Parse Server. After updating, the trigger will use the new configuration for future database events.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-08-save-update.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Deleting Cloud Hook Triggers") {
+        @ContentAndMedia {
+            Remove triggers that are no longer needed from Parse Server.
+            
+            When a trigger is no longer needed, you can delete it to stop webhook calls for that event. This is useful for cleaning up old triggers, removing test triggers, or decommissioning features.
+        }
+        
+        @Steps {
+            @Step {
+                Delete a trigger from Parse Server. The delete method removes the trigger registration from Parse Server. After deletion, the trigger will no longer fire for database events.
+                
+                @Code(name: "TriggerSetup.swift", file: 23-cloud-hook-triggers-11-delete-trigger.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Understanding webhook requests") {
+        @ContentAndMedia {
+            Learn what data Parse Server sends to your webhook endpoint when a trigger fires.
+            
+            When a trigger fires, Parse Server sends an HTTP POST request to your webhook URL with JSON data about the database event. Your webhook endpoint needs to handle this request and return an appropriate response.
+            
+            For complete examples of implementing Parse Hook Triggers with Vapor in Swift, see the [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) repository. The [routes.swift](https://github.com/netreconlab/parse-server-swift/blob/main/Sources/ParseServerSwift/routes.swift) file contains comprehensive examples of Hook Trigger implementations including beforeSave, afterSave, beforeFind, and other trigger types.
+        }
+        
+        @Steps {
+            @Step {
+                **Webhook Request Format** When a trigger fires, Parse Server sends a POST request with JSON containing: - **object** - The ParseObject that triggered the event, - **original** - The original object state (for update triggers), - **master** - Whether the request uses the master key, - **user** - The Parse User who triggered the event (if authenticated), - **installationId** - The installation ID that triggered the event. Your webhook must respond with a 200 status code for success or an error code to reject the operation (for before triggers). For production-ready examples of handling these requests in Swift with Vapor, refer to [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+            }
+        }
+    }
+    
+    @Section(title: "Best practices for Cloud Hook Triggers") {
+        @ContentAndMedia {
+            Follow these best practices when working with Cloud Hook Triggers to ensure security, reliability, and maintainability.
+            
+            Proper trigger management is critical for application security and reliability. These guidelines help you use Cloud Hook Triggers effectively.
+        }
+        
+        @Steps {
+            @Step {
+                **Best Practice 1: Never use primary key in client apps** Hook Trigger operations require the Parse Server primary key, which grants unrestricted access to your database. Only use these operations in secure, server-side environments. Never embed the primary key in client applications.
+                
+                @Code(name: "Security.swift", file: 23-cloud-hook-triggers-13-security.swift)
+            }
+            
+            @Step {
+                **Best Practice 2: Define triggers during deployment** Use trigger operations in deployment scripts or server-side initialization code to set up your webhook integrations. This ensures consistent trigger configuration across development, staging, and production environments.
+                
+                @Code(name: "Deployment.swift", file: 23-cloud-hook-triggers-14-deployment.swift)
+            }
+            
+            @Step {
+                **Best Practice 3: Implement robust error handling** Always implement comprehensive error handling in both your trigger setup code and your webhook endpoints. Handle network failures gracefully and provide meaningful error messages for debugging.
+                
+                @Code(name: "ErrorHandling.swift", file: 23-cloud-hook-triggers-15-error-handling.swift)
+            }
+            
+            @Step {
+                **Best Practice 4: Use migrations for trigger changes** When modifying trigger configurations, use a migration approach: check if triggers exist before creating them, update existing triggers instead of creating duplicates, and handle version differences gracefully across environments.
+                
+                @Code(name: "Migration.swift", file: 23-cloud-hook-triggers-16-migration.swift)
+            }
+            
+            @Step {
+                **Best Practice 5: Monitor and audit your triggers** Regularly audit your trigger configuration to ensure all triggers are still needed and pointing to the correct endpoints. Remove obsolete triggers and document the purpose of each trigger.
+                
+                @Code(name: "Monitoring.swift", file: 23-cloud-hook-triggers-17-monitoring.swift)
+            }
+            
+            @Step {
+                **Best Practice 6: Make trigger setup idempotent** Design your trigger setup code to be idempotent, meaning it can be run multiple times safely. Check for existing triggers before creating new ones, and update rather than duplicate when triggers already exist.
+                
+                @Code(name: "IdempotentSetup.swift", file: 23-cloud-hook-triggers-18-idempotent.swift)
+            }
+        }
+    }
+}

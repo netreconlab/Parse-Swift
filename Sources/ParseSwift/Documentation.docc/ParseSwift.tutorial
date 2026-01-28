@@ -119,5 +119,6 @@
         
         @TutorialReference(tutorial: "doc:Cloud-Schemas")
         @TutorialReference(tutorial: "doc:Cloud-Hook-Functions")
+        @TutorialReference(tutorial: "doc:Cloud-Hook-Triggers")
     }
 }
