@@ -35,7 +35,7 @@ public extension ParseHookResponse {
     }
 
     /**
-     Create an error reponse to a `ParseHookFunctionRequest` or
+     Create an error response to a `ParseHookFunctionRequest` or
      `ParseHookTriggerRequest`  with a `ParseError`.
      - parameter error: The `ParseError`.
      */

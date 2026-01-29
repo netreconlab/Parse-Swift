@@ -1,0 +1,241 @@
+@Tutorial(time: 25) {
+    @Intro(title: "Atomic Operations on Object Fields") {
+        Learn how to perform atomic operations on ParseObject fields to safely handle concurrent updates.
+        
+        Operations are crucial for maintaining data integrity in multi-user applications. They allow you to increment counters, add items to arrays, and modify fields atomically on the server without race conditions. This tutorial covers increment operations, array operations (add, addUnique, remove), field operations (set, forceSet, unset), and how to query for null and undefined fields.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
+        
+		@Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Parse Operations") {
+        @ContentAndMedia {
+            Parse Operations allow you to perform atomic updates on object fields without worrying about concurrent modifications.
+            
+            When multiple users try to update the same field simultaneously (like a like counter or a game score), regular updates can lead to race conditions. Operations solve this by having the Parse Server handle the modification atomically, ensuring data consistency.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseObject model with fields that will be updated using operations.
+                
+                This GameScore model includes a `points` field for numeric operations and a `name` field for demonstrating set/unset operations.
+                
+                @Code(name: "GameScore.swift", file: 13-operations-01-model.swift)
+            }
+            
+            @Step {
+                Implement the merge method and custom initializer for optimal performance.
+                
+                The merge method helps Parse-Swift efficiently update your local object after server operations complete.
+                
+                @Code(name: "GameScore.swift", file: 13-operations-02-model-with-merge.swift)
+            }
+            
+            @Step {
+                Create and save a GameScore instance that we'll use for operations.
+                
+                Operations require an object to already be saved (have an objectId). We'll save a score with initial values.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-03-create-score.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Increment and decrement operations") {
+        @ContentAndMedia {
+            Increment operations atomically increase or decrease numeric fields on the server.
+            
+            This is essential for counters, scores, likes, and any numeric field that multiple users might update simultaneously. Parse Server ensures the increment happens atomically, preventing lost updates.
+        }
+        
+        @Steps {
+            @Step {
+                Create an increment operation to increase the points by 1.
+                
+                The `operation.increment()` method creates an operation that will atomically increment the field on the server.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-04-increment.swift)
+            }
+            
+            @Step {
+                Save the increment operation to apply it to the server.
+                
+                After the operation completes, the points field will be incremented by 1 on the server. Note that your local `savedScore` object still has the original value.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-05-save-increment.swift)
+            }
+            
+            @Step {
+                Decrement a field by using a negative increment value.
+                
+                To decrease a value, simply pass a negative number to the increment method.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-06-decrement.swift)
+            }
+            
+            @Step {
+                Increment by a decimal amount using Double values.
+                
+                The increment operation also supports Double values for floating-point arithmetic. This example shows incrementing a rating field by 0.5.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-07-increment-double.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Add and addUnique operations for arrays") {
+        @ContentAndMedia {
+            Array operations allow you to add or remove elements from array fields atomically.
+            
+            The `add` operation appends elements to an array, while `addUnique` only adds elements that aren't already present. These operations are perfect for managing tags, favorites, or relationships.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore model with an array field for tags.
+                
+                Add a `tags` property to store an array of strings representing game tags.
+                
+                @Code(name: "GameScore.swift", file: 13-operations-08-model-with-array.swift)
+            }
+            
+            @Step {
+                Use the add operation to append items to an array.
+                
+                The `add` operation adds all specified elements to the array, even if they already exist.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-09-add-operation.swift)
+            }
+            
+            @Step {
+                Use addUnique to add items only if they don't already exist.
+                
+                The `addUnique` operation ensures no duplicate values are added to the array.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-10-add-unique.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Remove operations for arrays") {
+        @ContentAndMedia {
+            The remove operation atomically removes all instances of specified elements from an array field.
+            
+            This is useful for removing tags, un-liking items, or removing users from lists.
+        }
+        
+        @Steps {
+            @Step {
+                Remove elements from an array field using the remove operation.
+                
+                The `remove` operation removes all instances of the specified elements from the array.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-11-remove.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Set, forceSet, and unset operations") {
+        @ContentAndMedia {
+            Parse provides several operations for managing field values: `set` for conditional updates, `forceSet` for unconditional updates, and `unset` for field deletion.
+            
+            Understanding the difference between setting a field to null and unsetting it is important for querying and data modeling.
+        }
+        
+        @Steps {
+            @Step {
+                Use the set operation to update a field value.
+                
+                The `set` operation only updates the field if the value has changed from its previous value.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-12-set.swift)
+            }
+            
+            @Step {
+                Set a field to null using the set operation.
+                
+                You can set a field to null by passing `nil` to the set operation. A null field still exists but has no value.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-13-set-null.swift)
+            }
+            
+            @Step {
+                Use unset to completely remove a field from an object.
+                
+                Unlike setting to null, `unset` completely removes the field from the object on the server.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-14-unset.swift)
+            }
+            
+            @Step {
+                Use forceSet to update a field regardless of its current value.
+                
+                The `forceSet` operation always sends the update to the server, even if the value hasn't changed locally.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-15-force-set.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Querying for null and undefined fields") {
+        @ContentAndMedia {
+            Parse distinguishes between fields that are null (exist with a null value) and fields that are undefined (don't exist on the object).
+            
+            Understanding this distinction is important for querying and filtering your data correctly.
+        }
+        
+        @Steps {
+            @Step {
+                Query for objects where a field exists (is not undefined).
+                
+                The `exists` constraint finds objects where the field is present, regardless of whether it's null.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-16-query-exists.swift)
+            }
+            
+            @Step {
+                Query for objects where a field does not exist (is undefined).
+                
+                The `doesNotExist` constraint finds objects where the field is not present at all.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-17-query-does-not-exist.swift)
+            }
+            
+            @Step {
+                Query for objects where a field is not null.
+                
+                The `isNotNull` constraint finds objects where the field exists and has a non-null value.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-18-query-is-not-null.swift)
+            }
+            
+            @Step {
+                Query for objects where a field is null.
+                
+                The `isNull` constraint finds objects where the field exists but is set to null, or doesn't exist at all.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-19-query-is-null.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Combining multiple operations") {
+        @ContentAndMedia {
+            You can chain multiple operations together to perform complex updates in a single server request.
+            
+            This is more efficient than making multiple separate updates and ensures all changes are applied atomically.
+        }
+        
+        @Steps {
+            @Step {
+                Chain multiple operations together and save them atomically.
+                
+                You can combine different operation types like increment, add, and set in a single operation chain. All chained operations are sent to the server in a single request and applied atomically.
+                
+                @Code(name: "YourApp.swift", file: 13-operations-20-chaining.swift)
+            }
+        }
+    }
+}

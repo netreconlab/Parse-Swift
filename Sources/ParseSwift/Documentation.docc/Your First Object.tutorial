@@ -1,13 +1,242 @@
-@Tutorial(time: 1) {
+@Tutorial(time: 30) {
     @Intro(title: "Your First Object") {
+        Learn how to create, save, update, fetch, and delete ParseObjects using the Parse-Swift SDK.
         
+        This tutorial covers the fundamental operations for working with data on your Parse Server, including creating custom ParseObject models, performing CRUD operations, and working with batch operations.
+        
+		@Image(source: parse-logo.png, alt: "Parse logo")
     }
     
-    @Section(title: "Check server health") {
+    @Section(title: "Initialize Parse and check server health") {
+        @ContentAndMedia {
+            Before working with ParseObjects, you need to initialize the Parse SDK and verify your server is running.
+            
+            The SDK requires your application ID, client key, and server URL to connect to your Parse Server.
+        }
+        
         @Steps {
+            @Step {
+                Import the ParseSwift framework to access Parse functionality.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-01-import.swift)
+            }
             
             @Step {
-                Check your server health.
+                Initialize the Parse SDK with your server configuration. Replace the placeholder values with your actual server credentials.
+                
+                The `serverURL` should point to your Parse Server endpoint. For local development, this is typically `http://localhost:1337/parse`.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-02-initialize.swift)
+            }
+            
+            @Step {
+                Check your Parse SDK version to ensure the SDK is properly initialized.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-03-version.swift)
+            }
+            
+            @Step {
+                Verify your Parse Server is healthy and responding to requests.
+                
+                The health check returns a status object indicating the server is running properly.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-04-health.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Define your ParseObject model") {
+        @ContentAndMedia {
+            ParseObjects are the foundation of Parse data storage. Create a custom struct that conforms to the `ParseObject` protocol to define your data model.
+            
+            Each ParseObject must include required Parse fields and can have any number of custom properties.
+        }
+        
+        @Steps {
+            @Step {
+                Create a `GameScore` struct that conforms to `ParseObject`.
+                
+                The required properties (`objectId`, `createdAt`, `updatedAt`, `ACL`, and `originalData`) are managed by Parse. Add your own custom properties like `points`.
+                
+                @Code(name: "GameScore.swift", file: 01-first-object-05-model.swift)
+            }
+            
+            @Step {
+                Implement a custom `merge` method for optimal performance.
+                
+                The merge method is optional but recommended for faster decoding after updates. It specifies how to merge server data with local changes.
+                
+                @Code(name: "GameScore.swift", file: 01-first-object-06-merge.swift)
+            }
+            
+            @Step {
+                Add custom initializers in an extension to preserve the memberwise initializer.
+                
+                This allows you to create GameScore instances with specific field values.
+                
+                @Code(name: "GameScore.swift", file: 01-first-object-07-initializer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Save objects to Parse Server") {
+        @ContentAndMedia {
+            Once you've defined your ParseObject model, you can create instances and save them to Parse Server using async/await.
+            
+            Parse-Swift provides both single object and batch save operations.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore instance with initial data.
+                
+                At this point, the object only exists locally and hasn't been saved to Parse Server yet.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-08-create.swift)
+            }
+            
+            @Step {
+                Save the GameScore to Parse Server using `try await`.
+                
+                After saving, Parse populates the `objectId`, `createdAt`, and `updatedAt` fields automatically.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-09-save.swift)
+            }
+            
+            @Step {
+                Save multiple objects at once using batch operations.
+                
+                The `saveAll` method is more efficient than saving objects individually, as it performs all saves in a single network request.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-10-batch-save.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Update existing objects") {
+        @ContentAndMedia {
+            To modify a ParseObject that has already been saved, you need to make it mutable and use either the `.mergeable` property or the `.set()` method.
+            
+            These approaches ensure only changed fields are sent to the server, improving performance.
+        }
+        
+        @Steps {
+            @Step {
+                Create a mutable copy of your saved object using `.mergeable`.
+                
+                The `.mergeable` property returns a version of the object that tracks which fields have been modified.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-11-mergeable.swift)
+            }
+            
+            @Step {
+                Modify the object's properties and save the changes.
+                
+                Only the modified `points` field will be sent to Parse Server, not the entire object.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-12-update.swift)
+            }
+            
+            @Step {
+                Alternatively, use the `.set()` method to update specific fields.
+                
+                The `set()` method is another way to mark fields as modified before saving.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-13-set-method.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetch objects from Parse Server") {
+        @ContentAndMedia {
+            Retrieve objects from Parse Server using their objectId with the `fetch()` method.
+            
+            You can fetch single objects or multiple objects in batch.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore instance with just an objectId.
+                
+                This creates a local reference to an object that exists on the server.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-14-fetch-init.swift)
+            }
+            
+            @Step {
+                Fetch the complete object data from Parse Server.
+                
+                The `fetch()` method retrieves all fields for the object from the server.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-15-fetch.swift)
+            }
+            
+            @Step {
+                Fetch multiple objects at once using `fetchAll()`.
+                
+                Like `saveAll()`, this is more efficient than fetching objects individually.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-16-fetch-all.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Delete objects") {
+        @ContentAndMedia {
+            Remove objects from Parse Server using the `delete()` method.
+            
+            Objects can be deleted individually or in batch operations.
+        }
+        
+        @Steps {
+            @Step {
+                Create, save, and delete an object in one flow.
+                
+                The example shows how to create a GameScore, save it to get an objectId, and then delete it from the server.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-18-delete.swift)
+            }
+            
+            @Step {
+                Delete multiple objects at once using `deleteAll()`.
+                
+                Batch delete operations are more efficient for removing multiple objects.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-19-delete-all.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Work with advanced data types") {
+        @ContentAndMedia {
+            Parse-Swift supports advanced data types like `ParseBytes` for binary data and `ParsePolygon` for geographic boundaries.
+            
+            These types must be part of your schema or you'll need the primary key to add them.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new ParseObject model that includes advanced data types.
+                
+                The `GameData` model includes properties for `ParsePolygon` and `ParseBytes`.
+                
+                @Code(name: "GameData.swift", file: 01-first-object-20-advanced-model.swift)
+            }
+            
+            @Step {
+                Create instances of advanced data types.
+                
+                `ParsePolygon` represents a geographic area using multiple coordinates, while `ParseBytes` wraps binary data.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-21-advanced-create.swift)
+            }
+            
+            @Step {
+                Save the object with advanced data types to Parse Server.
+                
+                The SDK automatically handles encoding these complex types for server storage.
+                
+                @Code(name: "YourApp.swift", file: 01-first-object-22-advanced-save.swift)
             }
         }
     }

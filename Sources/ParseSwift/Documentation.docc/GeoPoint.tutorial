@@ -1,0 +1,203 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Working with GeoPoints") {
+        Learn how to work with location data using ParseGeoPoint and perform location-based queries.
+        
+        GeoPoints enable you to build location-aware applications by storing geographic coordinates and querying objects based on their location. This tutorial covers creating GeoPoints, storing them in ParseObjects, and performing various geo-spatial queries including proximity searches and polygon-based filtering.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
+        
+		@Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding ParseGeoPoint") {
+        @ContentAndMedia {
+            ParseGeoPoint represents a geographic location with latitude and longitude coordinates.
+            
+            GeoPoints are useful for location-based applications such as finding nearby places, delivery apps, social networks with location features, and geofencing.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseObject model that includes a location property.
+                
+                The `location` property is of type `ParseGeoPoint?` which will store the geographic coordinates.
+                
+                @Code(name: "GameScore.swift", file: 07-geopoint-01-model.swift)
+            }
+            
+            @Step {
+                Implement the merge method and custom initializer for better performance.
+                
+                The merge method is optional but recommended for efficient updates when working with GeoPoints.
+                
+                @Code(name: "GameScore.swift", file: 07-geopoint-02-model-with-merge.swift)
+            }
+            
+            @Step {
+                Create a ParseGeoPoint with latitude and longitude.
+                
+                Latitude must be between -90 and 90 degrees, and longitude must be between -180 and 180 degrees. The initializer throws an error if the values are invalid.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-03-create-geopoint.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Storing GeoPoints in objects") {
+        @ContentAndMedia {
+            Once you've created a GeoPoint, you can assign it to a ParseObject property and save it to Parse Server.
+            
+            This allows you to associate location data with your objects for later retrieval and querying.
+        }
+        
+        @Steps {
+            @Step {
+                Create a GameScore object and assign a location.
+                
+                The GeoPoint is stored alongside other properties and will be saved to Parse Server.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-04-save-with-geopoint.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Basic geo queries") {
+        @ContentAndMedia {
+            Parse provides powerful querying capabilities for location-based searches.
+            
+            You can find objects near a specific location, combine geo queries with other constraints, and sort results by distance or other criteria.
+        }
+        
+        @Steps {
+            @Step {
+                Query for objects near a reference point.
+                
+                The `near()` query constraint finds objects whose location is close to a specified GeoPoint. By default, results are sorted by distance from the reference point.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-05-query-near.swift)
+            }
+            
+            @Step {
+                Combine geo queries with other constraints.
+                
+                You can add multiple query constraints to filter results. For example, finding objects near a location that also have certain property values.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-06-query-near-with-constraint.swift)
+            }
+            
+            @Step {
+                Sort query results by a custom field.
+                
+                While geo queries are sorted by distance by default, you can change the sort order to prioritize other fields like points.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-07-query-sorted.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Working with polygons") {
+        @ContentAndMedia {
+            ParsePolygon allows you to define geographic boundaries using multiple GeoPoints.
+            
+            Polygons are useful for representing areas like delivery zones, service areas, or geographic boundaries. You can query for objects within a polygon or check if a location falls within a stored polygon.
+        }
+        
+        @Steps {
+            @Step {
+                Update your model to include a polygon property.
+                
+                The `fence` property of type `ParsePolygon?` can store a geographic boundary defined by multiple points.
+                
+                @Code(name: "GameScore.swift", file: 07-geopoint-08-polygon-model.swift)
+            }
+            
+            @Step {
+                Create a ParsePolygon from an array of GeoPoints.
+                
+                A polygon is created from at least three GeoPoints that define the boundary. The points should form a closed shape.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-09-create-polygon.swift)
+            }
+            
+            @Step {
+                Save an object with both a location and a polygon fence.
+                
+                Objects can have both a point location and a polygon boundary, enabling complex location-based features.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-10-save-with-polygon.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Advanced polygon queries") {
+        @ContentAndMedia {
+            Parse supports sophisticated geo-spatial queries with polygons.
+            
+            You can find objects whose location falls within a defined polygon area, or find objects whose polygon boundary contains a specific point.
+        }
+        
+        @Steps {
+            @Step {
+                Query for objects within a polygon defined by points.
+                
+                The `geoPoint(within:)` constraint finds objects whose location is inside the specified polygon area.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-11-query-within-polygon-points.swift)
+            }
+            
+            @Step {
+                Query using a ParsePolygon object.
+                
+                You can also create a ParsePolygon first and use it in the query for better reusability.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-12-query-within-polygon.swift)
+            }
+            
+            @Step {
+                Query for polygons that contain a specific location.
+                
+                The `polygon(contains:)` constraint finds objects whose stored polygon boundary contains the specified GeoPoint. This is useful for finding which zones or areas a location belongs to.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-13-query-polygon-contains.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Combining queries and best practices") {
+        @ContentAndMedia {
+            Learn how to combine different query constraints and follow best practices for location-based queries.
+            
+            Understanding these patterns will help you build robust location-aware features in your applications.
+        }
+        
+        @Steps {
+            @Step {
+                Check if a location exists before querying.
+                
+                Use the `exists()` constraint to find objects that have a location set. This is useful when not all objects have location data.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-14-query-exists.swift)
+            }
+            
+            @Step {
+                Query for objects without a location.
+                
+                Use `doesNotExist()` to find objects that don't have a location set. This helps identify incomplete data or objects that need location updates.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-15-query-does-not-exist.swift)
+            }
+            
+            @Step {
+                Combine multiple queries with OR logic.
+                
+                You can create compound queries that match objects satisfying any of several conditions. This is powerful for complex location-based searches.
+                
+                @Code(name: "YourApp.swift", file: 07-geopoint-16-query-compound.swift)
+            }
+            
+            @Step {
+                **Best practices for GeoPoint queries:** 1. **Validate coordinates**: Always validate latitude and longitude values before creating a GeoPoint. The initializer throws an error for invalid values. 2. **Index location fields**: Ensure your location fields are indexed in Parse Server for optimal query performance. 3. **Limit query results**: Use `.limit()` to control the number of results returned, especially for proximity searches. 4. **Consider distance constraints**: For "nearby" queries, you may want to add distance constraints to avoid returning objects that are too far away. 5. **Handle null locations**: Use `exists()` or `doesNotExist()` constraints when querying objects that may not have location data. 6. **Polygon complexity**: Keep polygons simple with fewer points for better performance. Complex polygons with many vertices can slow down queries.
+            }
+        }
+    }
+}

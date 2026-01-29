@@ -792,7 +792,7 @@ __Fixes__
 [Full Changelog](https://github.com/parse-community/Parse-Swift/compare/1.9.7...1.9.8)
 
 __Fixes__
-- Use a seperate Keychain for each app bundleId. This only effects macOS apps as their Keychain is handled by the OS differently. For macOS app developers only, the user who logged in last to your app will have their Keychain upgraded to the patched version. Other users/apps will either need to login again or logout then login again ([#224](https://github.com/parse-community/Parse-Swift/pull/224)), thanks to [Corey Baker](https://github.com/cbaker6).
+- Use a separate Keychain for each app bundleId. This only effects macOS apps as their Keychain is handled by the OS differently. For macOS app developers only, the user who logged in last to your app will have their Keychain upgraded to the patched version. Other users/apps will either need to login again or logout then login again ([#224](https://github.com/parse-community/Parse-Swift/pull/224)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 1.9.7
 [Full Changelog](https://github.com/parse-community/Parse-Swift/compare/1.9.6...1.9.7)
@@ -921,7 +921,7 @@ __Improvements__
 - Future proof SDK by always sending client version header. Also added http method PATCH to API for future use ([#146](https://github.com/parse-community/Parse-Swift/pull/146)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
-- Fixed an error that occured when deleting a ParseFile which resulted in the file being downloaded locally ([#147](https://github.com/parse-community/Parse-Swift/pull/147)), thanks to [Corey Baker](https://github.com/cbaker6).
+- Fixed an error that occurred when deleting a ParseFile which resulted in the file being downloaded locally ([#147](https://github.com/parse-community/Parse-Swift/pull/147)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 1.7.2
 [Full Changelog](https://github.com/parse-community/Parse-Swift/compare/1.7.1...1.7.2)
@@ -1033,7 +1033,7 @@ __Fixes__
 [Full Changelog](https://github.com/parse-community/Parse-Swift/compare/1.2.0...1.2.1)
 
 __Improvements__
-- Child objects are now automatically saved in batches using transactions. This will result in less network overhead and prevent uneccessary clean up of data on the server if a child objects throws an error while saving ([#94](https://github.com/parse-community/Parse-Swift/pull/94)), thanks to [Corey Baker](https://github.com/cbaker6).
+- Child objects are now automatically saved in batches using transactions. This will result in less network overhead and prevent unnecessary clean up of data on the server if a child objects throws an error while saving ([#94](https://github.com/parse-community/Parse-Swift/pull/94)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
 - There was a bug after a user first logs in anonymously and then becomes a real user as the server sends a new sessionToken when this occurs, but the SDK used the old sessionToken, resulting in an invalid sessionToken error ([#94](https://github.com/parse-community/Parse-Swift/pull/94)), thanks to [Corey Baker](https://github.com/cbaker6).
@@ -1115,8 +1115,8 @@ __New features__
 - Config support ([#56](https://github.com/parse-community/Parse-Swift/pull/56)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Role and Relation support. Also improved Parse operations and added examples in Playgrounds ([#54](https://github.com/parse-community/Parse-Swift/pull/54)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Added more `Query` support for distinct, aggregate, nor, containedBy, and relative time ([#54](https://github.com/parse-community/Parse-Swift/pull/54)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
-- Annonymous and Apple login along with `ParseAuthentication` protocol for support of any adapter ([#53](https://github.com/parse-community/Parse-Swift/pull/53)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
-- Developer side network authentication for certificate pinning. Parse-Swift can share authentication with `ParseLiveQuery` or they can use seperate ([#45](https://github.com/parse-community/Parse-Swift/pull/45)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
+- Anonymous and Apple login along with `ParseAuthentication` protocol for support of any adapter ([#53](https://github.com/parse-community/Parse-Swift/pull/53)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
+- Developer side network authentication for certificate pinning. Parse-Swift can share authentication with `ParseLiveQuery` or they can use separate ([#45](https://github.com/parse-community/Parse-Swift/pull/45)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Full LiveQuery support (min requirement: macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0) ([#45](https://github.com/parse-community/Parse-Swift/pull/45)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Support of Cloud and Job functions along with password reset and verification email request ([#43](https://github.com/parse-community/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Add `ParseFile` support ([#40](https://github.com/parse-community/Parse-Swift/pull/40)), thanks to [Corey Baker](https://github.com/cbaker6).
@@ -1151,7 +1151,7 @@ __Fixes__
 - Bug when updating a ParseObject bug where objects was accidently converted to pointers ([#48](https://github.com/parse-community/Parse-Swift/pull/48)), thanks to [Corey Baker](https://github.com/cbaker6).
 - User logout was calling the wrong endpoint ([#43](https://github.com/parse-community/Parse-Swift/pull/43)), thanks to [Corey Baker](https://github.com/cbaker6) and [Tom Fox](https://github.com/TomWFox).
 - Fix an issue where ACL was overwritten with nil ([#40](https://github.com/parse-community/Parse-Swift/pull/40)), thanks to [Corey Baker](https://github.com/cbaker6).
-- Update Keychain during fetch. Fix synchronous bug that occured with `ParseError` was thrown ([#38](https://github.com/parse-community/Parse-Swift/pull/38)), thanks to [Corey Baker](https://github.com/cbaker6).
+- Update Keychain during fetch. Fix synchronous bug that occurred with `ParseError` was thrown ([#38](https://github.com/parse-community/Parse-Swift/pull/38)), thanks to [Corey Baker](https://github.com/cbaker6).
 - Fix ParseEncoder bugs ([#27](https://github.com/parse-community/Parse-Swift/pull/27)), thanks to [Corey Baker](https://github.com/cbaker6).
 - Fix async callback queue bug ([#27](https://github.com/parse-community/Parse-Swift/pull/27)), thanks to [Corey Baker](https://github.com/cbaker6).
 - Fix bugs in ParseACL and bump minimum OS support to `.iOS(.v11), .macOS(.v10_13), .tvOS(.v11), .watchOS(.v4)` ([#19](https://github.com/parse-community/Parse-Swift/pull/19)), thanks to [Corey Baker](https://github.com/cbaker6).

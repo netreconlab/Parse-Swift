@@ -1,0 +1,271 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Cloud Schemas") {
+        Learn how to manage Parse Server schemas programmatically from Swift for server-side schema operations.
+        
+        Cloud Schemas enable you to create, modify, and manage Parse Server database schemas directly from Swift code. This is particularly useful for server-side operations, database migrations, managing class-level permissions (CLP), creating indexes, and protecting sensitive fields. Schema operations provide fine-grained control over your data structure and security.
+        
+		> Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
+        
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Cloud Schemas") {
+        @ContentAndMedia {
+            Cloud Schemas provide programmatic control over your Parse Server database structure. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            
+            Instead of manually creating schemas through the Parse Dashboard, you can define and manage them using Swift code. This is essential for automated deployments, version control of database structures, and implementing complex security rules. ParseSchema allows you to define data types, add fields, set permissions, and create indexes programmatically.
+        }
+        
+        @Steps {
+            @Step {
+                **What are Cloud Schemas?** Parse Schemas represent the structure of your Parse classes (database tables). Each schema defines the fields, data types, class-level permissions (CLP), and indexes for a specific Parse class. By managing schemas programmatically, you can ensure consistent database structures across environments and automate schema migrations.
+                
+                @Code(name: "GameScore.swift", file: 20-cloud-schemas-01-model.swift)
+            }
+            
+            @Step {
+                Define your ParseObject model with merge method. Like all ParseObject types, your schema-managed objects should implement the merge method for optimal performance when updating objects.
+                
+                @Code(name: "GameScore.swift", file: 20-cloud-schemas-02-merge.swift)
+            }
+            
+            @Step {
+                **Understanding Class-Level Permissions (CLP)** CLPs control who can perform operations on a Parse class. You can set public permissions, require authentication, or restrict access to specific users and roles. CLPs are enforced at the database level, making them more secure than client-side checks.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-03-clp.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Creating a new schema") {
+        @ContentAndMedia {
+            Create a new schema with fields and permissions for your Parse class.
+            
+            When creating a schema, you define the class-level permissions first, then add fields with their types and options. Parse supports various field types including strings, numbers, booleans, dates, arrays, objects, pointers, and more.
+        }
+        
+        @Steps {
+            @Step {
+                Create a ParseCLP to define class-level permissions. The CLP controls access to your Parse class. In this example, we require authentication for most operations but allow public read access (get and find).
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-04-create-clp.swift)
+            }
+            
+            @Step {
+                Initialize a ParseSchema with the CLP and add basic fields. Start by creating the schema with class-level permissions, then add fields one by one. Each field requires a name, type, and options (such as whether it's required and default values).
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-05-add-fields.swift)
+            }
+            
+            @Step {
+                Add pointer and array fields to establish relationships. Pointer fields reference other Parse objects (like foreign keys), while array fields can store collections of pointers or primitive values. These fields must specify their target type using ParseFieldOptions.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-06-add-pointer.swift)
+            }
+            
+            @Step {
+                Save the schema to Parse Server using the create method. The create operation sends your schema definition to the server, where it creates the new Parse class with all specified fields and permissions.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-07-create.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Updating class-level permissions") {
+        @ContentAndMedia {
+            Modify class-level permissions to implement advanced security rules.
+            
+            CLPs can be updated after schema creation to implement more sophisticated access control. You can restrict operations to specific pointer fields, meaning only users referenced in those fields can perform the operations.
+        }
+        
+        @Steps {
+            @Step {
+                Update CLP to restrict access by pointer field. The `setPointerFields` method allows you to specify that only users referenced in certain pointer fields (like "owner") can perform specific operations. This is useful for implementing ownership-based access control.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-08-update-clp.swift)
+            }
+            
+            @Step {
+                Apply the updated permissions to the schema and save changes. After modifying the CLP, you must call the update method to persist the changes to Parse Server.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-09-save-clp.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Managing indexes") {
+        @ContentAndMedia {
+            Create and manage database indexes to improve query performance.
+            
+            Indexes significantly speed up queries on specific fields. Without indexes, Parse Server must scan entire collections to find matching documents. With indexes, lookups are much faster, especially for large datasets.
+        }
+        
+        @Steps {
+            @Step {
+                Add an index to a field for faster queries. Use the `addIndex` method to create an index. The index parameter (1 for ascending, -1 for descending) determines the sort order of the index. Indexes are especially important for fields frequently used in queries.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-10-add-index.swift)
+            }
+            
+            @Step {
+                Update the schema on the server with the new index. After adding an index, call update to create it on Parse Server.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-11-save-index.swift)
+            }
+            
+            @Step {
+                Remove an index when it's no longer needed. Delete indexes that are no longer used to reduce storage overhead and improve write performance.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-12-delete-index.swift)
+            }
+            
+            @Step {
+                Update the schema to remove the index from the server. Call update to persist the index deletion.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-13-save-delete-index.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Fetching and deleting fields") {
+        @ContentAndMedia {
+            Fetch existing schemas from the server and modify them by adding or removing fields.
+            
+            You can retrieve schema definitions from Parse Server and make changes to them. This is useful for migrations or when you need to inspect the current schema structure.
+        }
+        
+        @Steps {
+            @Step {
+                Fetch the current schema from Parse Server. The fetch method retrieves the latest schema definition, including all fields, permissions, and indexes.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-14-fetch.swift)
+            }
+            
+            @Step {
+                Delete a field from the schema. Use the `deleteField` method to remove fields that are no longer needed. This helps keep your schema clean and reduces storage requirements.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-15-delete-field.swift)
+            }
+            
+            @Step {
+                Update the schema to remove the field from the server. Call update to persist the field deletion. Note that deleting a field removes the column from the database but doesn't delete existing data immediately.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-16-save-delete-field.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Protecting fields") {
+        @ContentAndMedia {
+            Implement field-level security by protecting sensitive fields from unauthorized access.
+            
+            Protected fields allow you to hide certain fields from users who don't have permission to access them. This is useful for sensitive data like email addresses, phone numbers, or private profile information.
+        }
+        
+        @Steps {
+            @Step {
+                Set protected fields for public access. The `setProtectedFieldsPublic` method specifies which fields are hidden from unauthenticated users. Public users won't see these fields in query results.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-17-protect-public.swift)
+            }
+            
+            @Step {
+                Set protected fields based on user relationships. The `setProtectedFields` method allows you to specify that certain fields are only visible to users referenced in another field. This implements relationship-based field access control.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-18-protect-user.swift)
+            }
+            
+            @Step {
+                Update the schema with the new protected field settings. Call update to apply the field protection rules on Parse Server.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-19-save-protect.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Working with schema data") {
+        @ContentAndMedia {
+            Once your schema is created, you can save objects to it just like any other ParseObject.
+            
+            After defining a schema, you can use your ParseObject models normally. The schema ensures that only valid data is stored and that permissions are enforced.
+        }
+        
+        @Steps {
+            @Step {
+                Create and save an object to your schema. Once the schema exists, create instances of your ParseObject and save them normally. The schema ensures data integrity and enforces the defined permissions.
+                
+                @Code(name: "YourApp.swift", file: 20-cloud-schemas-20-save-object.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Purging and deleting schemas") {
+        @ContentAndMedia {
+            Clean up schemas by purging their data or deleting them entirely.
+            
+            Purging removes all objects from a schema while keeping the schema structure intact. Deleting removes both the data and the schema itself. Use these operations carefully, as they cannot be undone.
+        }
+        
+        @Steps {
+            @Step {
+                Purge all objects from a schema. The purge method deletes all objects in the Parse class but preserves the schema definition. This is useful for clearing test data or resetting a class.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-21-purge.swift)
+            }
+            
+            @Step {
+                Delete the schema entirely. The delete method removes the schema and all its data from Parse Server. You can only delete a schema if it contains no data (purge first if needed).
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-22-delete.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Best practices for Cloud Schemas") {
+        @ContentAndMedia {
+            Follow these best practices when working with Cloud Schemas to ensure security, performance, and maintainability.
+            
+            Proper schema management is critical for application security and performance. These guidelines help you use Cloud Schemas effectively.
+        }
+        
+        @Steps {
+            @Step {
+                **Best Practice 1: Never use primary key in client apps** Schema operations require the Parse Server primary key, which grants unrestricted access to your database. Only use these operations in secure, server-side environments. Never embed the primary key in client applications.
+                
+                @Code(name: "Security.swift", file: 20-cloud-schemas-23-security.swift)
+            }
+            
+            @Step {
+                **Best Practice 2: Define schemas during deployment** Use schema operations in deployment scripts or server-side initialization code to set up your database structure. This ensures consistent schemas across development, staging, and production environments.
+                
+                @Code(name: "Deployment.swift", file: 20-cloud-schemas-24-deployment.swift)
+            }
+            
+            @Step {
+                **Best Practice 3: Use migrations for schema changes** When modifying existing schemas, use a migration approach: check if the schema exists, add new fields incrementally, and handle errors gracefully. Never assume a schema is in a particular state.
+                
+                @Code(name: "Migration.swift", file: 20-cloud-schemas-25-migration.swift)
+            }
+            
+            @Step {
+                **Best Practice 4: Leverage CLPs for security** Always define appropriate class-level permissions. Start with the most restrictive permissions and only grant additional access as needed. Use pointer fields for ownership-based access control.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-26-clp-best-practice.swift)
+            }
+            
+            @Step {
+                **Best Practice 5: Index frequently queried fields** Add indexes to fields that are frequently used in queries, especially in where clauses or sort operations. This dramatically improves query performance for large datasets.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-27-index-best-practice.swift)
+            }
+            
+            @Step {
+                **Best Practice 6: Use field protection for privacy** Protect sensitive fields to ensure they're only visible to authorized users. This is crucial for GDPR compliance and user privacy.
+                
+                @Code(name: "SchemaSetup.swift", file: 20-cloud-schemas-28-privacy.swift)
+            }
+        }
+    }
+}

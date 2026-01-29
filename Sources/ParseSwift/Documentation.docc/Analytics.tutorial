@@ -1,0 +1,157 @@
+@Tutorial(time: 20) {
+	@Intro(title: "Analytics") {
+		Learn how to track app usage and custom events in your Swift applications using Parse Analytics.
+		
+		Analytics helps you understand how users interact with your app by tracking events such as app opens, button taps, feature usage, and custom business metrics. This tutorial covers tracking app opened events, creating and tracking custom events, adding dimensions to events for richer analytics data, and best practices for implementing analytics in your application.
+		
+		> Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+		
+		@Image(source: parse-logo.png, alt: "Parse logo")
+	}
+	
+	@Section(title: "Understanding Parse Analytics") {
+		@ContentAndMedia {
+			Parse Analytics provides a simple way to track events and gather insights about how users interact with your application.
+			
+			With Parse Analytics, you can track standard events like app opens, as well as custom events specific to your application. All analytics data is sent to your Parse Server, where you can analyze usage patterns, user engagement, and feature adoption. This data helps you make informed decisions about product development and user experience improvements.
+		}
+		
+		@Steps {
+			@Step {
+				**What is Parse Analytics?** Parse Analytics is a built-in feature that allows you to track events in your application. Events are actions that users take, such as opening the app, completing a tutorial, making a purchase, or any other custom action you want to measure. Analytics data is stored on your Parse Server and can be queried or exported for analysis. Benefits include: Understanding user behavior and engagement, Tracking feature adoption and usage, Measuring the success of new features, Identifying areas for improvement, Making data-driven decisions
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-01-overview.swift)
+			}
+			
+			@Step {
+				**The ParseAnalytics API** Parse provides two main ways to track analytics: `ParseAnalytics.trackAppOpened()` for tracking when users open your app, and creating custom `ParseAnalytics` instances for tracking any other events. Both methods use completion handlers to handle success and failure cases asynchronously.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-02-api.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Tracking app opened events") {
+		@ContentAndMedia {
+			One of the most important metrics for any application is tracking when users open your app.
+			
+			The `trackAppOpened()` method is a convenience function that automatically tracks app launch events. This helps you understand your app's daily active users, session frequency, and user retention over time.
+		}
+		
+		@Steps {
+			@Step {
+				Import ParseSwift to access the analytics functionality. The ParseAnalytics type is part of the ParseSwift module and provides all the analytics tracking capabilities.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-03-import.swift)
+			}
+			
+			@Step {
+				Track app opened using a completion handler. Call `ParseAnalytics.trackAppOpened()` with a completion handler when your app launches. This is typically done in your app's initialization code or in the `AppDelegate`/`SceneDelegate` lifecycle methods.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-04-track-app-opened.swift)
+			}
+			
+			@Step {
+				Handle the result to confirm tracking succeeded. When successful, the analytics event has been recorded on your Parse Server. On failure, you receive a `ParseError` describing what went wrong, such as network issues or server problems.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-06-handle-app-opened-result.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Tracking custom events") {
+		@ContentAndMedia {
+			Beyond tracking app opens, you'll want to track specific user actions and feature usage in your application.
+			
+			Custom events let you track any action that matters to your business or product. Examples include completing a tutorial, making a purchase, sharing content, or using a specific feature. Each event has a name that you define, making it easy to identify and analyze later.
+		}
+		
+		@Steps {
+			@Step {
+				Create a custom analytics event with a descriptive name. Initialize a `ParseAnalytics` instance with a name that clearly describes the event. Use consistent naming conventions across your app to make analysis easier.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-07-create-event.swift)
+			}
+			
+			@Step {
+				Track the custom event using a completion handler. Call the `track()` method on your analytics instance with a completion handler to send the event to Parse Server. This records that the event occurred at the current time.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-08-track-event.swift)
+			}
+			
+			@Step {
+				Track multiple different events throughout your app. Create separate `ParseAnalytics` instances for each type of event you want to track. This helps you understand which features users engage with most.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-10-multiple-events.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Adding dimensions to events") {
+		@ContentAndMedia {
+			Dimensions allow you to add additional context and metadata to your analytics events.
+			
+			While event names tell you what happened, dimensions tell you the details. For example, when tracking a "videoPlayed" event, you might include dimensions for video category, duration, or quality. This rich data enables deeper analysis and helps you understand not just what users do, but how and why they do it.
+		}
+		
+		@Steps {
+			@Step {
+				Pass dimensions as a dictionary when tracking an event. The dimensions parameter accepts a dictionary of string keys and values. Include any contextual information that will help you analyze the event later.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-11-track-with-dimensions.swift)
+			}
+			
+			@Step {
+				Use dimensions to track user segments and behaviors. Dimensions can include user attributes (subscription tier, user level), action details (button clicked, feature used), or environmental factors (screen size, network type). This creates rich, queryable analytics data.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-12-dimensions-examples.swift)
+			}
+			
+			@Step {
+				Combine event names and dimensions for powerful analytics. By using specific event names and relevant dimensions together, you can build a comprehensive picture of user behavior. For example, track "purchaseCompleted" with dimensions for product category, price range, and payment method.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-13-combined-analytics.swift)
+			}
+		}
+	}
+	
+	@Section(title: "Best practices for analytics") {
+		@ContentAndMedia {
+			Following best practices when implementing analytics ensures you gather meaningful data while maintaining app performance and user privacy.
+			
+			Good analytics implementation is about finding the right balance: tracking enough to understand user behavior without overwhelming your server or compromising user experience.
+		}
+		
+		@Steps {
+			@Step {
+				**Best Practice 1: Use descriptive event names** Choose event names that clearly describe the user action. Use a consistent naming convention across your app, such as camelCase or snake_case. Avoid generic names like "event1" or "buttonClick" – instead use specific names like "tutorialCompleted" or "shareButtonTapped".
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-14-naming-convention.swift)
+			}
+			
+			@Step {
+				**Best Practice 2: Don't track too frequently** Avoid tracking events for every small user interaction, as this can overload your server and make analysis difficult. Focus on meaningful user actions and business-critical events. For high-frequency actions, consider sampling or aggregating data.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-15-track-meaningful.swift)
+			}
+			
+			@Step {
+				**Best Practice 3: Keep dimensions simple and consistent** Use a limited, well-defined set of dimension keys across your app. Avoid including personally identifiable information (PII) in dimensions. Keep dimension values short and categorical when possible to make analysis easier.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-16-simple-dimensions.swift)
+			}
+			
+			@Step {
+				**Best Practice 4: Handle errors gracefully** Analytics tracking should never interrupt the user experience. Always handle errors silently or log them for debugging, but don't show error messages to users if analytics tracking fails. The app should continue to function normally even if analytics are unavailable.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-17-error-handling.swift)
+			}
+			
+			@Step {
+				**Best Practice 5: Respect user privacy** Be transparent about the data you collect and give users control over analytics tracking. Follow platform guidelines and privacy regulations. Consider providing an opt-out mechanism for users who don't want their usage tracked.
+				
+				@Code(name: "Analytics.swift", file: 16-analytics-18-privacy.swift)
+			}
+		}
+	}
+}

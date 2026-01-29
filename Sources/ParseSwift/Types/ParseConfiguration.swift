@@ -16,11 +16,11 @@ import FoundationNetworking
 /**
  The Configuration for a Parse client.
 
- - important: It is recomended to only specify `maintenanceKey` and `primaryKey` when using
+ - important: It is recommended to only specify `maintenanceKey` and `primaryKey` when using
  the SDK on a server. Do not use these keys on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
- situtations when apps do not have credentials to setup a Keychain.
+ situations when apps do not have credentials to setup a Keychain.
  */
 public struct ParseConfiguration {
 
@@ -132,10 +132,12 @@ public struct ParseConfiguration {
      Create a Parse Swift configuration.
      - parameter applicationId: The application id for your Parse application.
      - parameter clientKey: The client key for your Parse application.
-     - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
-     specified when using the SDK on a server.
      - parameter primaryKey: The primary key for your Parse application. This key should only be
      specified when using the SDK on a server.
+     - parameter maintenanceKey: The maintenance key for your Parse application. This key should only be
+	 specified when using the SDK on a server.
+     - parameter webhookKey: The webhook key sent with outgoing webhook calls. This key should only be
+	 specified when using the SDK on a server.
      - parameter serverURL: The server URL to connect to a Parse Server.
      - parameter liveQueryServerURL: The live query server URL to connect to a Parse LiveQuery Server.
      - parameter requiringCustomObjectIds: Requires `objectId`'s to be created on the client
@@ -174,10 +176,10 @@ public struct ParseConfiguration {
      It should have the following argument signature: `(challenge: URLAuthenticationChallenge,
      completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
      See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
-     - important: It is recomended to only specify `primaryKey` when using the SDK on a server. Do not use this key on the client.
+     - important: It is recommended to only specify `primaryKey` when using the SDK on a server. Do not use this key on the client.
      - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
      - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
-     situtations when apps do not have credentials to setup a Keychain.
+     situations when apps do not have credentials to setup a Keychain.
      */
     public init(
         applicationId: String,

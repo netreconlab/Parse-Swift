@@ -1,0 +1,215 @@
+@Tutorial(time: 30) {
+    @Intro(title: "Pointers") {
+        Learn how to create relationships between objects using pointers in Parse-Swift.
+        
+        Pointers enable you to model one-to-one and one-to-many relationships between ParseObjects, making it easy to build complex data structures. This tutorial covers creating objects with pointer references, fetching pointer data, querying by pointers, and managing pointer relationships efficiently.
+        
+        Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn the basics of working with ParseObjects.
+        
+		@Image(source: parse-logo.png, alt: "Parse logo")
+    }
+    
+    @Section(title: "Understanding Pointers") {
+        @ContentAndMedia {
+            Pointers are Parse's way of linking objects together to represent relationships in your data model.
+            
+            Instead of duplicating data across objects, you can use pointers to reference other ParseObjects. This creates efficient relationships while maintaining data integrity.
+        }
+        
+        @Steps {
+            @Step {
+                Import the ParseSwift framework to get started.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-01-import.swift)
+            }
+            
+            @Step {
+                Create a `Book` model with a pointer to another Book.
+                
+                The `Pointer<Book>` type indicates this field references another Book object. The `ParseQueryScorable` protocol enables text search functionality.
+                
+                @Code(name: "Book.swift", file: 08-pointers-02-book-model.swift)
+            }
+            
+            @Step {
+                Add the merge method and custom initializer.
+                
+                The merge method is optional but recommended for performance. Custom initializers should be in extensions to preserve the memberwise initializer.
+                
+                @Code(name: "Book.swift", file: 08-pointers-03-book-merge.swift)
+            }
+            
+            @Step {
+                Create an `Author` model with pointers to Book objects.
+                
+                An Author can have a single `book` pointer and an array of `otherBooks` pointers, demonstrating one-to-one and one-to-many relationships.
+                
+                @Code(name: "Author.swift", file: 08-pointers-04-author-model.swift)
+            }
+            
+            @Step {
+                Complete the Author model with merge method and custom initializer.
+                
+                The merge method handles all custom properties including both single and array pointer fields.
+                
+                @Code(name: "Author.swift", file: 08-pointers-05-author-merge.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Saving Objects with Pointers") {
+        @ContentAndMedia {
+            When you save an object that contains pointers to other objects, Parse automatically handles saving the referenced objects if they haven't been saved yet.
+            
+            This deep save behavior ensures all related objects are persisted to the server in a single operation.
+        }
+        
+        @Steps {
+            @Step {
+                Create and save an Author with a pointer to a Book.
+                
+                When you save the Author, Parse automatically saves the unsaved Book as well. This is called a "deep save".
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-06-save-with-pointer.swift)
+            }
+            
+            @Step {
+                Save an Author with an array of Book pointers.
+                
+                Parse saves all unsaved books in the array automatically. Note that the pointer objects on the client are not updated with their new objectIds - you need to fetch them if you need the latest data.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-07-pointer-array.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Querying and Including Pointer Data") {
+        @ContentAndMedia {
+            By default, queries return pointer fields as simple references containing only the objectId. To retrieve the complete pointed-to objects, you need to use the `include()` method.
+            
+            This is similar to SQL joins and allows you to fetch related data efficiently.
+        }
+        
+        @Steps {
+            @Step {
+                Query for an Author without including pointer data.
+                
+                The returned Author object contains pointers with only objectIds, not the complete Book objects.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-08-query-basic.swift)
+            }
+            
+            @Step {
+                Include a specific pointer field in the query results.
+                
+                Using `.include("book")` fetches the complete Book object, not just its objectId. The book field will contain all the Book's properties.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-09-include-single.swift)
+            }
+            
+            @Step {
+                Include multiple pointer fields at once.
+                
+                You can pass an array of field names to `.include()` to fetch multiple pointer relationships in a single query.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-10-include-multiple.swift)
+            }
+            
+            @Step {
+                Use `includeAll()` to fetch all pointer fields automatically.
+                
+                Instead of listing every pointer field, use `.includeAll()` or `.include("*")` to fetch all pointer relationships. This is convenient but may retrieve more data than needed.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-11-include-all.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Querying by Pointer Values") {
+        @ContentAndMedia {
+            You can query for objects based on their pointer field values, finding objects that point to a specific target.
+            
+            This is useful for queries like "find all Authors who wrote this specific Book" or "find all Comments on this Post".
+        }
+        
+        @Steps {
+            @Step {
+                Query for Authors whose `book` field points to a specific Book.
+                
+                You can use the equality operator with ParseObjects in queries. Parse will match based on the objectId of the pointed-to object.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-12-query-by-pointer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Updating Pointer Relationships") {
+        @ContentAndMedia {
+            You can update an object's pointer fields just like any other property by using `.mergeable` and saving the changes.
+            
+            The `toPointer()` method converts a ParseObject into a Pointer reference for assignment to pointer fields.
+        }
+        
+        @Steps {
+            @Step {
+                Query for an object with included pointer data, then update one of its pointers.
+                
+                Use `.mergeable` to create a mutable copy, update the pointer field using `toPointer()`, and save the changes.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-13-update-pointer.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Batch Operations with Pointers") {
+        @ContentAndMedia {
+            Batch save operations work seamlessly with pointers, automatically handling deep saves for all unsaved referenced objects.
+            
+            This is more efficient than saving objects individually and ensures all related data is persisted atomically.
+        }
+        
+        @Steps {
+            @Step {
+                Batch save an Author with a mix of saved and unsaved Book pointers.
+                
+                Parse intelligently handles the mix - it only saves the unsaved books and creates proper pointer references to already-saved books.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-14-batch-save-mixed.swift)
+            }
+            
+            @Step {
+                Batch save with all new pointer objects.
+                
+                When all referenced objects are new, Parse saves everything in the optimal order to ensure all relationships are properly established.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-15-batch-save-new.swift)
+            }
+            
+            @Step {
+                Fetch and update an object in a batch operation.
+                
+                You can combine fetch and save operations to update existing objects with new data.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-16-fetch-and-update.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Advanced Pointer Queries") {
+        @ContentAndMedia {
+            Parse-Swift supports advanced query operations on objects with pointers, including text search and scoring.
+            
+            These features work seamlessly with pointer includes, allowing you to build powerful search functionality.
+        }
+        
+        @Steps {
+            @Step {
+                Use text matching to search for Books and include pointer data.
+                
+                The `matchesText()` function searches text fields and returns results sorted by relevance score. Combined with `.include()`, you can fetch related objects in the same query.
+                
+                @Code(name: "YourApp.swift", file: 08-pointers-17-text-search.swift)
+            }
+        }
+    }
+}
