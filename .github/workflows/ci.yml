@@ -175,6 +175,15 @@ jobs:
           build-tests: true
           run-tests: false
 
+  wasm:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container: swift:6.2
+    steps:
+      - uses: actions/checkout@v6
+      - uses: swiftwasm/setup-swiftwasm@v2
+      - run: swift build --swift-sdk wasm32-unknown-wasip1
+
   windows:
     timeout-minutes: 15
     runs-on: windows-latest
