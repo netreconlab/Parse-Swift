@@ -452,7 +452,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional key value pairs to be stored with file object",
+                  "text" : "Optional key value pairs to be stored with file object.",
                   "type" : "text"
                 }
               ],
@@ -466,7 +466,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional key value pairs to be stored with file object",
+                  "text" : "Optional key value pairs to be stored with file object.",
                   "type" : "text"
                 }
               ],
@@ -474,6 +474,20 @@
             }
           ],
           "name" : "tags"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A set of header options sent to the server. Defaults to an empty set.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "options"
         }
       ]
     },
@@ -563,7 +577,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],

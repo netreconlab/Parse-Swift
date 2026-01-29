@@ -185,6 +185,25 @@
       "kind" : "declarations"
     },
     {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Object to compare.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "other"
+        }
+      ]
+    },
+    {
       "content" : [
         {
           "anchor" : "return-value",
@@ -264,7 +283,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],

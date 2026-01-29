@@ -406,6 +406,19 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Protocols-for-Creating-Parse-Objects",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseObject",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSession"
+      ],
+      "title" : "Protocols for Creating Parse Objects"
+    }
+  ],
   "topicSections" : [
     {
       "anchor" : "Instance-Properties",
@@ -498,7 +511,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -4032,6 +4045,194 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseobject"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseRole": {
+  "abstract" : [
+    {
+      "text" : "Objects that conform to the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseRole",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol represent a Role on the Parse Server.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseRole",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s represent groupings of ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " objects for the purposes of",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "granting permissions (e.g. specifying a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseACL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " for a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Roles are specified by their sets of child users and child roles,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "all of which are granted any permissions that the parent role has.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Roles must have a name (which cannot be changed after creation of the role),",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and must specify a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseACL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseRole"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseRole",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseRole"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseRole",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parserole"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSession": {
+  "abstract" : [
+    {
+      "code" : "ParseSession",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " is a local representation of a session.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This protocol conforms to ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and retains the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "same functionality.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseSession"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSession",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseSession"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseSession",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsesession"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [
     {
@@ -4065,6 +4266,88 @@
   "title" : "ParseTypeable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parsetypeable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseUser": {
+  "abstract" : [
+    {
+      "text" : "Objects that conform to the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol have a local representation of a user persisted to the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Keychain and Parse Server. This protocol inherits from the ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " protocol, and retains the same",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "functionality of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseObject",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", but also extends it with various user specific methods, like",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "authentication, signing up, and validation uniqueness.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseUser"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseUser",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseUser"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseUser",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseuser"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/Savable": {
   "abstract" : [

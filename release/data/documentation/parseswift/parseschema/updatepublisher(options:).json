@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Fetches the ",
+      "text" : "Updates the ",
       "type" : "text"
     },
     {
@@ -22,7 +22,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " from the server. Publishes when complete.",
+      "text" : " on the server. Publishes when complete.",
       "type" : "text"
     }
   ],
@@ -36,7 +36,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(includeKeys:options:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(options:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -73,7 +73,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6SchemaV14fetchPublisher11includeKeys7options7Combine6FutureCyACyxGAA0A5ErrorVGSaySSGSg_ShyAA3APIV6OptionOGtF",
+    "externalID" : "s:10ParseSwift0A6SchemaV15updatePublisher7options7Combine6FutureCyACyxGAA0A5ErrorVGShyAA3APIV6OptionOG_tF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -85,28 +85,11 @@
       },
       {
         "kind" : "identifier",
-        "text" : "fetchPublisher"
+        "text" : "updatePublisher"
       },
       {
         "kind" : "text",
         "text" : "("
-      },
-      {
-        "kind" : "externalParam",
-        "text" : "includeKeys"
-      },
-      {
-        "kind" : "text",
-        "text" : ": ["
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:SS",
-        "text" : "String"
-      },
-      {
-        "kind" : "text",
-        "text" : "]?, "
       },
       {
         "kind" : "externalParam",
@@ -165,7 +148,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "fetchPublisher(includeKeys:options:)"
+    "title" : "updatePublisher(options:)"
   },
   "primaryContentSections" : [
     {
@@ -188,28 +171,11 @@
             },
             {
               "kind" : "identifier",
-              "text" : "fetchPublisher"
+              "text" : "updatePublisher"
             },
             {
               "kind" : "text",
               "text" : "("
-            },
-            {
-              "kind" : "externalParam",
-              "text" : "includeKeys"
-            },
-            {
-              "kind" : "text",
-              "text" : ": ["
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SS",
-              "text" : "String"
-            },
-            {
-              "kind" : "text",
-              "text" : "]? = nil, "
             },
             {
               "kind" : "externalParam",
@@ -409,7 +375,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseschema\/fetchpublisher(includekeys:options:)"
+        "\/documentation\/parseswift\/parseschema\/updatepublisher(options:)"
       ],
       "traits" : [
         {
@@ -423,7 +389,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -574,10 +540,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/fetchPublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/updatePublisher(options:)": {
   "abstract" : [
     {
-      "text" : "Fetches the ",
+      "text" : "Updates the ",
       "type" : "text"
     },
     {
@@ -598,7 +564,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " from the server. Publishes when complete.",
+      "text" : " on the server. Publishes when complete.",
       "type" : "text"
     }
   ],
@@ -645,28 +611,11 @@
     },
     {
       "kind" : "identifier",
-      "text" : "fetchPublisher"
+      "text" : "updatePublisher"
     },
     {
       "kind" : "text",
       "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
     },
     {
       "kind" : "externalParam",
@@ -717,12 +666,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "fetchPublisher(includeKeys:options:)",
+  "title" : "updatePublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/fetchpublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/updatepublisher(options:)"
 }
 }
 }

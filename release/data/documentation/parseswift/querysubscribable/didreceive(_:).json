@@ -139,7 +139,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The event data that has been recieved from the server.",
+                  "text" : "The event data that has been received from the server.",
                   "type" : "text"
                 }
               ],
@@ -176,7 +176,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],

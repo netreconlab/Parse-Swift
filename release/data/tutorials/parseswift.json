@@ -13,7 +13,7 @@
   "metadata" : {
     "category" : "ParseSwift",
     "categoryPathComponent" : "ParseSwift",
-    "estimatedTime" : "1min",
+    "estimatedTime" : "10hr 30min",
     "role" : "overview",
     "title" : "Welcome to ParseSwift"
   },
@@ -36,9 +36,46 @@
         ],
         "type" : "reference"
       },
+      "backgroundImage" : "parse-swift.png",
       "content" : [
-
+        {
+          "inlineContent" : [
+            {
+              "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery, SwiftUI integration, and server-side operations.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For detailed information about the Parse-Swift API, please view the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
       ],
+      "image" : "parse-swift.png",
       "kind" : "hero",
       "title" : "Welcome to ParseSwift"
     },
@@ -46,12 +83,255 @@
       "chapters" : [
         {
           "content" : [
-
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn the fundamentals of Parse-Swift by working with ParseObjects - the foundation of data storage in Parse.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
           ],
-          "image" : "parse-swift.png",
-          "name" : "Your first Object",
+          "image" : "parse-logo.png",
+          "name" : "Getting Started",
           "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object"
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Custom-ObjectId"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Query and retrieve ParseObjects",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Finding-Objects",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/GeoPoint",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/LiveQuery"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to integrate Parse-Swift with SwiftUI applications using custom view models, Combine publishers, and LiveQuery for real-time updates.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "SwiftUI Query Integration",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects-With-Custom-ViewModel",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---LiveQuery"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "User Authentication",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/User-Sign-Up",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/User---Continued"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn about tracking and handling device installations necessary to receive push notifications.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Device Installations",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Security",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to create relationships between objects using pointers and manage complex data structures. In addition, learn how to manage complex relationships using roles and relations for sophisticated data models.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Data Relationships",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Roles-and-Relations"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn advanced Parse-Swift features like file storage and management for building media-rich applications.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Handling Files",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to perform atomic operations on object fields for safe concurrent updates.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Data Operations",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to call Parse Cloud Functions from your Swift applications to run server-side logic.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Accessing Cloud Code",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Configuration Management",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to track app usage and custom events using Parse Analytics to understand user behavior.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Logging Analytics",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Analytics"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to perform server-side operations including: schema management, webhook management, and push notifications using ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/github.com\/netreconlab\/parse-server-swift",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "parse-logo.png",
+          "name" : "Server-Side Operations",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Schemas",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Functions",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Triggers",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications"
           ]
         }
       ],
@@ -79,7 +359,10 @@
 "references": {
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift": {
   "abstract" : [
-
+    {
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift",
   "kind" : "overview",
@@ -88,11 +371,344 @@
   "type" : "topic",
   "url" : "\/tutorials\/parseswift"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/ACL": {
+  "abstract" : [
+    {
+      "text" : "Learn how to secure your Parse objects using Access Control Lists (ACLs) to control read and write permissions.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Access Control Lists (ACL)",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/acl"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Analytics": {
+  "abstract" : [
+    {
+      "text" : "Learn how to track app usage and custom events in your Swift applications using Parse Analytics.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "20min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Analytics",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Analytics",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/analytics"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Code": {
+  "abstract" : [
+    {
+      "text" : "Learn how to call Parse Cloud Functions and Jobs from your Swift applications to execute server-side logic via your client-side apps.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Cloud Code",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-code"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Hook-Functions": {
+  "abstract" : [
+    {
+      "text" : "Learn how to manage Parse Cloud Hook Functions programmatically from Swift for server-side operations.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Functions",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Cloud Hook Functions",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-hook-functions"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Hook-Triggers": {
+  "abstract" : [
+    {
+      "text" : "Learn how to manage Parse Cloud Hook Triggers for database events using Swift for server-side trigger operations.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Triggers",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Cloud Hook Triggers",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-hook-triggers"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Push-Notifications": {
+  "abstract" : [
+    {
+      "text" : "Learn how to send push notifications from Parse Server using Cloud Code in your Swift applications.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Cloud Push Notifications",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-push-notifications"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Schemas": {
+  "abstract" : [
+    {
+      "text" : "Learn how to manage Parse Server schemas programmatically from Swift for server-side schema operations.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Schemas",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Cloud Schemas",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-schemas"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Config": {
+  "abstract" : [
+    {
+      "text" : "Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Configuration Management",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/config"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Custom-ObjectId": {
+  "abstract" : [
+    {
+      "text" : "Learn how to use custom object identifiers when creating ParseObjects.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "20min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Custom-ObjectId",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Custom ObjectId",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/custom-objectid"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Files": {
+  "abstract" : [
+    {
+      "text" : "Learn how to work with files in Parse-Swift using the ParseFile type.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Files",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/files"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Finding-Objects": {
+  "abstract" : [
+    {
+      "text" : "Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Finding-Objects",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Finding Objects",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/finding-objects"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/GeoPoint": {
+  "abstract" : [
+    {
+      "text" : "Learn how to work with location data using ParseGeoPoint and perform location-based queries.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/GeoPoint",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Working with GeoPoints",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/geopoint"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Installation": {
+  "abstract" : [
+    {
+      "text" : "Learn how to work with ParseInstallation objects to enable push notifications in your Parse-Swift applications.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Installation",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/installation"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/LiveQuery": {
+  "abstract" : [
+    {
+      "text" : "Learn how to use LiveQuery for real-time subscriptions to your Parse queries.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/LiveQuery",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "LiveQuery",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/livequery"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Operations": {
+  "abstract" : [
+    {
+      "text" : "Learn how to perform atomic operations on ParseObject fields to safely handle concurrent updates.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Atomic Operations on Object Fields",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/operations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Pointers": {
+  "abstract" : [
+    {
+      "text" : "Learn how to create relationships between objects using pointers in Parse-Swift.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Pointers",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/pointers"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Roles-and-Relations": {
+  "abstract" : [
+    {
+      "text" : "Learn how to manage complex relationships using roles and relations for sophisticated data models.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Roles-and-Relations",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "Roles and Relations",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/roles-and-relations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/SwiftUI---Finding-Objects": {
+  "abstract" : [
+    {
+      "text" : "Learn how to integrate Parse queries with SwiftUI views to create reactive, data-driven user interfaces.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "SwiftUI - Finding Objects",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/swiftui---finding-objects"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/SwiftUI---Finding-Objects-With-Custom-ViewModel": {
+  "abstract" : [
+    {
+      "text" : "Learn how to build custom view models for Parse queries in SwiftUI applications using Combine publishers.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "30min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects-With-Custom-ViewModel",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "SwiftUI - Finding Objects With Custom ViewModel",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/swiftui---finding-objects-with-custom-viewmodel"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/SwiftUI---LiveQuery": {
+  "abstract" : [
+    {
+      "text" : "Learn how to integrate real-time Parse LiveQuery subscriptions with SwiftUI for reactive, data-driven user interfaces.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "35min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---LiveQuery",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "SwiftUI - LiveQuery",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/swiftui---livequery"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/User---Continued": {
+  "abstract" : [
+    {
+      "text" : "Learn advanced user management operations with the Parse-Swift SDK.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/User---Continued",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "User - Continued",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/user---continued"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/User-Sign-Up": {
+  "abstract" : [
+    {
+      "text" : "Learn how to implement user authentication with Parse-Swift by creating custom user models and performing sign up operations.",
+      "type" : "text"
+    }
+  ],
+  "estimatedTime" : "25min",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/User-Sign-Up",
+  "kind" : "project",
+  "role" : "project",
+  "title" : "User Sign Up",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/user-sign-up"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Your-First-Object": {
   "abstract" : [
-
+    {
+      "text" : "Learn how to create, save, update, fetch, and delete ParseObjects using the Parse-Swift SDK.",
+      "type" : "text"
+    }
   ],
-  "estimatedTime" : "1min",
+  "estimatedTime" : "30min",
   "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object",
   "kind" : "project",
   "role" : "project",
@@ -100,8 +716,46 @@
   "type" : "topic",
   "url" : "\/tutorials\/parseswift\/your-first-object"
 },
+"https://github.com/netreconlab/parse-server-swift": {
+  "identifier" : "https:\/\/github.com\/netreconlab\/parse-server-swift",
+  "title" : "ParseServerSwift",
+  "titleInlineContent" : [
+    {
+      "text" : "ParseServerSwift",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/netreconlab\/parse-server-swift"
+},
+"https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/": {
+  "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
+  "title" : "API documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "API documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/"
+},
+"parse-logo.png": {
+  "alt" : "Parse logo",
+  "identifier" : "parse-logo.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/parse-logo.png"
+    }
+  ]
+},
 "parse-swift.png": {
-  "alt" : "Parse image",
+  "alt" : "Parse Swift logo",
   "identifier" : "parse-swift.png",
   "type" : "image",
   "variants" : [

@@ -184,6 +184,23 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "User-Authentication",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAuthentication",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify"
+      ],
+      "title" : "User Authentication"
+    }
+  ],
   "topicSections" : [
     {
       "anchor" : "Initializers",
@@ -244,7 +261,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -254,6 +271,124 @@
   "title" : "ParseSwift",
   "type" : "topic",
   "url" : "\/documentation\/parseswift"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAnonymous": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with Anonymously logged-in users.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseAnonymous"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseAnonymous",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseAnonymous"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseAnonymous",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseanonymous"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseApple": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with Apple User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-sign-in-with-apple",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For information on acquiring Apple sign-in credentials to use with ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseApple",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", refer to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/authenticationservices\/implementing_user_authentication_with_sign_in_with_apple",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseApple"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseApple",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseApple"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseApple",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseapple"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseAuthentication": {
   "abstract" : [
@@ -325,6 +460,393 @@
   "title" : "ParseAuthentication",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseauthentication"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGitHub": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with GitHub User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#github-authdata",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For information on acquiring GitHub sign-in credentials to use with ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseGitHub",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", refer to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.github.com\/en\/developers\/apps\/building-oauth-apps\/authorizing-oauth-apps",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseGitHub"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGitHub",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseGitHub"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseGitHub",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsegithub"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseGoogle": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with Google User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#google-authdata",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For information on acquiring Google sign-in credentials to use with ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseGoogle",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", refer to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developers.google.com\/identity\/protocols\/oauth2",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseGoogle"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseGoogle",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseGoogle"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseGoogle",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsegoogle"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLDAP": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with LDAP User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-ldap",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseLDAP"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLDAP",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseLDAP"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseLDAP",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parseldap"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseLinkedIn": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with LinkedIn User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#linkedin-authdata",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For information on acquiring LinkedIn sign-in credentials to use with ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseLinkedIn",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", refer to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.microsoft.com\/en-us\/linkedin\/shared\/authentication\/authentication?context=linkedin\/consumer\/context",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseLinkedIn"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseLinkedIn",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseLinkedIn"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseLinkedIn",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parselinkedin"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSpotify": {
+  "abstract" : [
+    {
+      "text" : "Provides utility functions for working with Spotify User Authentication and ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseUser",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "’s.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Be sure your Parse Server is configured for ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#spotify-authdata",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For information on acquiring Spotify sign-in credentials to use with ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseSpotify",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", refer to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developer.spotify.com\/documentation\/general\/guides\/authorization\/",
+      "isActive" : true,
+      "type" : "reference"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ParseSpotify"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSpotify",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ParseSpotify"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ParseSpotify",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/parsespotify"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTwitter": {
   "abstract" : [
@@ -2272,6 +2794,30 @@
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
 },
+"https://developer.apple.com/documentation/authenticationservices/implementing_user_authentication_with_sign_in_with_apple": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/authenticationservices\/implementing_user_authentication_with_sign_in_with_apple",
+  "title" : "Apple’s Documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Apple’s Documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/authenticationservices\/implementing_user_authentication_with_sign_in_with_apple"
+},
+"https://developer.spotify.com/documentation/general/guides/authorization/": {
+  "identifier" : "https:\/\/developer.spotify.com\/documentation\/general\/guides\/authorization\/",
+  "title" : "Spotify’s Documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Spotify’s Documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.spotify.com\/documentation\/general\/guides\/authorization\/"
+},
 "https://developer.twitter.com/en/docs/authentication/guides/log-in-with-twitter": {
   "identifier" : "https:\/\/developer.twitter.com\/en\/docs\/authentication\/guides\/log-in-with-twitter",
   "title" : "Twitter’s Documentation",
@@ -2284,6 +2830,102 @@
   "type" : "link",
   "url" : "https:\/\/developer.twitter.com\/en\/docs\/authentication\/guides\/log-in-with-twitter"
 },
+"https://developers.google.com/identity/protocols/oauth2": {
+  "identifier" : "https:\/\/developers.google.com\/identity\/protocols\/oauth2",
+  "title" : "Google’s Documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "Google’s Documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developers.google.com\/identity\/protocols\/oauth2"
+},
+"https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps": {
+  "identifier" : "https:\/\/docs.github.com\/en\/developers\/apps\/building-oauth-apps\/authorizing-oauth-apps",
+  "title" : "GitHub’s Documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "GitHub’s Documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.github.com\/en\/developers\/apps\/building-oauth-apps\/authorizing-oauth-apps"
+},
+"https://docs.microsoft.com/en-us/linkedin/shared/authentication/authentication?context=linkedin/consumer/context": {
+  "identifier" : "https:\/\/docs.microsoft.com\/en-us\/linkedin\/shared\/authentication\/authentication?context=linkedin\/consumer\/context",
+  "title" : "LinkedIn’s Documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "LinkedIn’s Documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.microsoft.com\/en-us\/linkedin\/shared\/authentication\/authentication?context=linkedin\/consumer\/context"
+},
+"https://docs.parseplatform.org/parse-server/guide/#configuring-parse-server-for-ldap": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-ldap",
+  "title" : "sign in with LDAP",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with LDAP",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-ldap"
+},
+"https://docs.parseplatform.org/parse-server/guide/#configuring-parse-server-for-sign-in-with-apple": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-sign-in-with-apple",
+  "title" : "sign in with Apple",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with Apple",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#configuring-parse-server-for-sign-in-with-apple"
+},
+"https://docs.parseplatform.org/parse-server/guide/#github-authdata": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#github-authdata",
+  "title" : "sign in with GitHub",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with GitHub",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#github-authdata"
+},
+"https://docs.parseplatform.org/parse-server/guide/#google-authdata": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#google-authdata",
+  "title" : "sign in with Google",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with Google",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#google-authdata"
+},
+"https://docs.parseplatform.org/parse-server/guide/#linkedin-authdata": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#linkedin-authdata",
+  "title" : "sign in with LinkedIn",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with LinkedIn",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#linkedin-authdata"
+},
 "https://docs.parseplatform.org/parse-server/guide/#oauth-and-3rd-party-authentication": {
   "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#oauth-and-3rd-party-authentication",
   "title" : "here",
@@ -2295,6 +2937,18 @@
   ],
   "type" : "link",
   "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#oauth-and-3rd-party-authentication"
+},
+"https://docs.parseplatform.org/parse-server/guide/#spotify-authdata": {
+  "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#spotify-authdata",
+  "title" : "sign in with Spotify",
+  "titleInlineContent" : [
+    {
+      "text" : "sign in with Spotify",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#spotify-authdata"
 },
 "https://docs.parseplatform.org/parse-server/guide/#twitter-authdata": {
   "identifier" : "https:\/\/docs.parseplatform.org\/parse-server\/guide\/#twitter-authdata",

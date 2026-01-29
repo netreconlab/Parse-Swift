@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Creates the ",
+      "text" : "Deletes the ",
       "type" : "text"
     },
     {
@@ -22,7 +22,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " on the server. Publishes when complete.",
+      "text" : " from the server. Publishes when complete.",
       "type" : "text"
     }
   ],
@@ -36,7 +36,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(includeKeys:options:)"
+    "url" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(options:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -73,7 +73,7 @@
       ]
     },
     "extendedModule" : "ParseSwift",
-    "externalID" : "s:10ParseSwift0A6SchemaV15createPublisher11includeKeys7options7Combine6FutureCyACyxGAA0A5ErrorVGSaySSGSg_ShyAA3APIV6OptionOGtF",
+    "externalID" : "s:10ParseSwift0A6SchemaV15deletePublisher7options7Combine6FutureCyytAA0A5ErrorVGShyAA3APIV6OptionOG_tF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -85,28 +85,11 @@
       },
       {
         "kind" : "identifier",
-        "text" : "createPublisher"
+        "text" : "deletePublisher"
       },
       {
         "kind" : "text",
         "text" : "("
-      },
-      {
-        "kind" : "externalParam",
-        "text" : "includeKeys"
-      },
-      {
-        "kind" : "text",
-        "text" : ": ["
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:SS",
-        "text" : "String"
-      },
-      {
-        "kind" : "text",
-        "text" : "]?, "
       },
       {
         "kind" : "externalParam",
@@ -141,7 +124,12 @@
       },
       {
         "kind" : "text",
-        "text" : "<`Self`"
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s4Voida",
+        "text" : "Void"
       },
       {
         "kind" : "text",
@@ -165,7 +153,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "createPublisher(includeKeys:options:)"
+    "title" : "deletePublisher(options:)"
   },
   "primaryContentSections" : [
     {
@@ -188,28 +176,11 @@
             },
             {
               "kind" : "identifier",
-              "text" : "createPublisher"
+              "text" : "deletePublisher"
             },
             {
               "kind" : "text",
               "text" : "("
-            },
-            {
-              "kind" : "externalParam",
-              "text" : "includeKeys"
-            },
-            {
-              "kind" : "text",
-              "text" : ": ["
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SS",
-              "text" : "String"
-            },
-            {
-              "kind" : "text",
-              "text" : "]? = nil, "
             },
             {
               "kind" : "externalParam",
@@ -246,7 +217,12 @@
             },
             {
               "kind" : "text",
-              "text" : "<`Self`"
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s4Voida",
+              "text" : "Void"
             },
             {
               "kind" : "text",
@@ -359,6 +335,50 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "This can only be used on a ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseSchema",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " without objects. If the ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseSchema",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "currently contains objects, run ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "purge()",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " first.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Warning",
+          "style" : "warning",
+          "type" : "aside"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "",
                   "type" : "text"
                 },
@@ -409,7 +429,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/parseswift\/parseschema\/createpublisher(includekeys:options:)"
+        "\/documentation\/parseswift\/parseschema\/deletepublisher(options:)"
       ],
       "traits" : [
         {
@@ -423,7 +443,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -574,10 +594,10 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/createPublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/deletePublisher(options:)": {
   "abstract" : [
     {
-      "text" : "Creates the ",
+      "text" : "Deletes the ",
       "type" : "text"
     },
     {
@@ -598,7 +618,7 @@
       "type" : "emphasis"
     },
     {
-      "text" : " on the server. Publishes when complete.",
+      "text" : " from the server. Publishes when complete.",
       "type" : "text"
     }
   ],
@@ -645,28 +665,11 @@
     },
     {
       "kind" : "identifier",
-      "text" : "createPublisher"
+      "text" : "deletePublisher"
     },
     {
       "kind" : "text",
       "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
     },
     {
       "kind" : "externalParam",
@@ -701,7 +704,12 @@
     },
     {
       "kind" : "text",
-      "text" : "<`Self`"
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
     },
     {
       "kind" : "text",
@@ -717,12 +725,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "createPublisher(includeKeys:options:)",
+  "title" : "deletePublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/createpublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/deletepublisher(options:)"
 }
 }
 }

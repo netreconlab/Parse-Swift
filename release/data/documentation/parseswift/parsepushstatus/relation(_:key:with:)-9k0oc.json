@@ -366,6 +366,36 @@
             }
           ],
           "name" : "key"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The parent ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseObject",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " Pointer of the ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "ParseRelation",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "parent"
         }
       ]
     },
@@ -423,7 +453,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],

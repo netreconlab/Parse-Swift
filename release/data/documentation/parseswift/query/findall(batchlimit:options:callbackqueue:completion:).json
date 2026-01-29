@@ -370,6 +370,52 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "The maximum number of objects to send in each batch. If the amount of items to be batched",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "is greater than the ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "limit",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", the objects will be sent to the server in waves up to the ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "limit",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "Defaults to 50.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "limit"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "A set of header options sent to the server. Defaults to an empty set.",
                   "type" : "text"
                 }
@@ -486,7 +532,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],

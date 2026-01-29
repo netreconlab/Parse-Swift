@@ -279,7 +279,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -1780,7 +1780,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseError/Code-swift.enum/invalidSchemaOperation": {
   "abstract" : [
     {
-      "text" : "Error code indicating an invalid operation occured on schema",
+      "text" : "Error code indicating an invalid operation occurred on schema",
       "type" : "text"
     }
   ],

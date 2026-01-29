@@ -225,23 +225,23 @@
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/addRelation(_:options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/create(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/create(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/delete(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/delete(options:callbackQueue:completion:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deleteField(_:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deleteIndex(_:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetch(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetch(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/getFields()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/getIndexes()",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purge(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purge(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purgePublisher(includeKeys:options:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purgePublisher(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/update(options:)",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/update(options:callbackQueue:completion:)",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(includeKeys:options:)"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(options:)"
       ],
       "title" : "Instance Methods"
     },
@@ -300,7 +300,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -1688,7 +1688,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema\/create(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/createPublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/createPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Creates the ",
@@ -1767,23 +1767,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "options"
     },
     {
@@ -1831,12 +1814,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/createPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "createPublisher(includeKeys:options:)",
+  "title" : "createPublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/createpublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/createpublisher(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/delete(options:)": {
   "abstract" : [
@@ -2329,7 +2312,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema\/deleteindex(_:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/deletePublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/deletePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Deletes the ",
@@ -2408,23 +2391,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "options"
     },
     {
@@ -2477,12 +2443,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/deletePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "deletePublisher(includeKeys:options:)",
+  "title" : "deletePublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/deletepublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/deletepublisher(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/fetch(options:)": {
   "abstract" : [
@@ -2795,7 +2761,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema\/fetch(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/fetchPublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/fetchPublisher(options:)": {
   "abstract" : [
     {
       "text" : "Fetches the ",
@@ -2874,23 +2840,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "options"
     },
     {
@@ -2938,12 +2887,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/fetchPublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "fetchPublisher(includeKeys:options:)",
+  "title" : "fetchPublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/fetchpublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/fetchpublisher(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/getFields()": {
   "abstract" : [
@@ -3544,7 +3493,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema\/purge(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/purgePublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/purgePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Deletes all objects in the ",
@@ -3623,23 +3572,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "options"
     },
     {
@@ -3692,12 +3624,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purgePublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/purgePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "purgePublisher(includeKeys:options:)",
+  "title" : "purgePublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/purgepublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/purgepublisher(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/update(options:)": {
   "abstract" : [
@@ -4010,7 +3942,7 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseschema\/update(options:callbackqueue:completion:)"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/updatePublisher(includeKeys:options:)": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseSchema/updatePublisher(options:)": {
   "abstract" : [
     {
       "text" : "Updates the ",
@@ -4089,23 +4021,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "includeKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "options"
     },
     {
@@ -4153,12 +4068,12 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(includeKeys:options:)",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/ParseSchema\/updatePublisher(options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "updatePublisher(includeKeys:options:)",
+  "title" : "updatePublisher(options:)",
   "type" : "topic",
-  "url" : "\/documentation\/parseswift\/parseschema\/updatepublisher(includekeys:options:)"
+  "url" : "\/documentation\/parseswift\/parseschema\/updatepublisher(options:)"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/ParseTypeable": {
   "abstract" : [

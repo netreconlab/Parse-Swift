@@ -1763,7 +1763,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "It is recomended to only specify ",
+                  "text" : "It is recommended to only specify ",
                   "type" : "text"
                 },
                 {
@@ -1861,7 +1861,7 @@
                   "type" : "text"
                 },
                 {
-                  "text" : "situtations when apps do not have credentials to setup a Keychain.",
+                  "text" : "situations when apps do not have credentials to setup a Keychain.",
                   "type" : "text"
                 }
               ],
@@ -1884,6 +1884,21 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Configure-SDK",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/clearCache()",
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()"
+      ],
+      "title" : "Configure SDK"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
@@ -1901,7 +1916,7 @@
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift": {
   "abstract" : [
     {
-      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from your Swift applications.",
+      "text" : "A pure Swift library that gives you access to the powerful Parse Server backend from Swift applications built for iOS, macOS, watchOS, tvOS, visionOS, Android, Linux, and Windows.",
       "type" : "text"
     }
   ],
@@ -2003,6 +2018,127 @@
   "title" : "ParsePrimitiveStorable",
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/parseprimitivestorable"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/clearCache()": {
+  "abstract" : [
+    {
+      "text" : "Manually remove all stored cache.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "clearCache"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/clearCache()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "clearCache()",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/clearcache()"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/configuration": {
+  "abstract" : [
+    {
+      "text" : "The current ",
+      "type" : "text"
+    },
+    {
+      "code" : "ParseConfiguration",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " for the ParseSwift client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "configuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigurationV",
+      "text" : "ParseConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/configuration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/configuration"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/deleteObjectiveCKeychain()": {
+  "abstract" : [
+    {
+      "text" : "Delete the Parse iOS Objective-C SDK Keychain from the device.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deleteObjectiveCKeychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/deleteObjectiveCKeychain()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "deleteObjectiveCKeychain()",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/deleteobjectiveckeychain()"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(applicationId:clientKey:primaryKey:maintenanceKey:serverURL:liveQueryServerURL:requiringCustomObjectIds:usingTransactions:usingEqualQueryConstraint:usingPostForQuery:primitiveStore:requestCachePolicy:cacheMemoryCapacity:cacheDiskCapacity:usingDataProtectionKeychain:deletingKeychainIfNeeded:httpAdditionalHeaders:usingAutomaticLogin:maxConnectionAttempts:liveQueryConnectionAdditionalProperties:liveQueryMaxConnectionAttempts:parseFileTransfer:authentication:)": {
   "abstract" : [
@@ -2513,6 +2649,269 @@
   "type" : "topic",
   "url" : "\/documentation\/parseswift\/initialize(applicationid:clientkey:primarykey:maintenancekey:serverurl:livequeryserverurl:requiringcustomobjectids:usingtransactions:usingequalqueryconstraint:usingpostforquery:primitivestore:requestcachepolicy:cachememorycapacity:cachedisk-fuew"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/initialize(configuration:)": {
+  "abstract" : [
+    {
+      "text" : "Configure the Parse Swift client. This should only be used when starting your app. Typically in the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "application(... didFinishLaunchingWithOptions launchOptions...)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "initialize"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "configuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10ParseSwift0A13ConfigurationV",
+      "text" : "ParseConfiguration"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/initialize(configuration:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "initialize(configuration:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/initialize(configuration:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/setAccessGroup(_:synchronizeAcrossDevices:)": {
+  "abstract" : [
+    {
+      "text" : "Sets all of the items in the Parse Keychain to a specific access group.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Apps in the same access group can share Keychain items. See Apple’s",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/developer.apple.com\/documentation\/security\/ksecattraccessgroup",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "for more information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "setAccessGroup"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "synchronizeAcrossDevices"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/setAccessGroup(_:synchronizeAcrossDevices:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "setAccessGroup(_:synchronizeAcrossDevices:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/setaccessgroup(_:synchronizeacrossdevices:)"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/documentation/ParseSwift/updateAuthentication(_:)": {
+  "abstract" : [
+    {
+      "text" : "Update the authentication callback.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "updateAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "((("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSURLAuthenticationChallenge",
+      "text" : "URLAuthenticationChallenge"
+    },
+    {
+      "kind" : "text",
+      "text" : ", ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSURLSession",
+      "text" : "URLSession"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@E@NSURLSessionAuthChallengeDisposition",
+      "text" : "AuthChallengeDisposition"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSURLCredential",
+      "text" : "URLCredential"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?)"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/documentation\/ParseSwift\/updateAuthentication(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "updateAuthentication(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/parseswift\/updateauthentication(_:)"
+},
 "https://developer.apple.com/documentation/foundation/url_loading_system/accessing_cached_data": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/foundation\/url_loading_system\/accessing_cached_data",
   "title" : "documentation",
@@ -2548,6 +2947,18 @@
   ],
   "type" : "link",
   "url" : "https:\/\/developer.apple.com\/documentation\/foundation\/urlsessiontaskdelegate\/1411595-urlsession"
+},
+"https://developer.apple.com/documentation/security/ksecattraccessgroup": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/security\/ksecattraccessgroup",
+  "title" : "documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/security\/ksecattraccessgroup"
 },
 "https://developer.apple.com/documentation/security/ksecusedataprotectionkeychain": {
   "identifier" : "https:\/\/developer.apple.com\/documentation\/security\/ksecusedataprotectionkeychain",
