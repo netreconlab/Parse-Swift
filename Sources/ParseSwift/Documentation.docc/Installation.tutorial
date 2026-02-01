@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-push.png, alt: "Mobile device with notification bell and broadcast waves representing push notifications")
     }
     
     @Section(title: "Define your Installation model") {
@@ -137,6 +137,12 @@
                 Set the `badge` property to the current number of unread items. Setting it to 0 clears the badge. Use `.mergeable` to efficiently send only the badge update.
                 
                 @Code(name: "YourApp.swift", file: 06-installation-09-badge.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                Now that you understand device installations, you can learn how to send push notifications from your server using <doc:Cloud-Push-Notifications>, which demonstrates server-side push notification operations.
             }
         }
     }

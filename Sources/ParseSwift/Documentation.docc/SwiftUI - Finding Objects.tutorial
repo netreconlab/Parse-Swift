@@ -4,7 +4,7 @@
         
         This tutorial demonstrates how to use Parse-Swift's SwiftUI integration features to query and display ParseObjects in SwiftUI views. You'll learn to use the query view model pattern, display results in SwiftUI Lists, and create new objects with files.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-swiftui.png, alt: "SwiftUI bird symbol with bidirectional arrows to Parse cloud representing reactive data binding")
     }
     
     @Section(title: "Setup your ParseObject model") {
@@ -115,6 +115,12 @@
                 Combine all the pieces: input fields, save button with file attachments, error handling, results display, and alerts for user feedback. After saving, call `viewModel.find()` to refresh the displayed results.
                 
                 @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-09-complete-view.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                The built-in query view model is great for simple use cases. For more control over your SwiftUI data flow, explore <doc:SwiftUI-Finding-Objects-With-Custom-ViewModel>, which shows how to build custom view models with Combine publishers. For real-time updates, see <doc:SwiftUI-LiveQuery>.
             }
         }
     }

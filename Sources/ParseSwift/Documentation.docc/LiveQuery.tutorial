@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. LiveQuery must be enabled on your Parse Server for these features to work.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-querying-data.png, alt: "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations")
     }
     
     @Section(title: "Create a LiveQuery delegate") {
@@ -231,6 +231,12 @@
                 After resubscribing, ping the server to confirm the WebSocket connection is active and healthy.
                 
                 @Code(name: "YourApp.swift", file: 11-livequery-22-final-ping.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned the fundamentals of LiveQuery! To integrate real-time queries with SwiftUI for reactive user interfaces, explore <doc:SwiftUI-LiveQuery>, which demonstrates how to use LiveQuery subscriptions with SwiftUI views.
             }
         }
     }

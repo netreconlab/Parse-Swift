@@ -8,12 +8,12 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-server.png, alt: "Server with database schema grid and webhook arrows representing server-side operations")
     }
     
     @Section(title: "Understanding Cloud Hook Triggers") {
         @ContentAndMedia {
-            Cloud Hook Triggers call external webhooks in response to database events on Parse Server. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            Cloud Hook Triggers call external webhooks in response to database events on Parse Server. We recommend using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using Parse-Swift on a server.
             
             When a database event occurs (such as saving or deleting an object), Parse Server can automatically send HTTP POST requests to your webhook endpoint. This enables event-driven architectures, allowing you to react to database changes by calling external services, logging events, sending notifications, or performing any custom logic in your own web services.
         }

@@ -8,7 +8,7 @@
 		
 		> Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Installation>. You should have initialized the Parse SDK and understand how to work with ParseInstallation objects.
 		
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-push.png, alt: "Mobile device with notification bell and broadcast waves representing push notifications")
 	}
 	
 	@Section(title: "Understanding Cloud Push Notifications") {

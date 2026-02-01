@@ -2,11 +2,11 @@
     @Intro(title: "User - Continued") {
         Learn advanced user management operations with the Parse-Swift SDK.
         
-        This tutorial covers user login, updating user properties, fetching user data with included pointer fields, email verification, password reset, anonymous login, and session management. Building on the "User - Sign Up" tutorial, you'll master the complete user lifecycle.
+        This tutorial covers user login, updating user properties, fetching user data with included pointer fields, email verification, password reset, anonymous login, and session management. Building on the <doc:User-Sign-Up> tutorial, you'll master the complete user lifecycle.
         
-        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
+        > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:User-Sign-Up> tutorials, and have initialized the Parse SDK. If you haven't done so, please refer to those tutorials first.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-user-auth.png, alt: "User profile icon with checkmark shield and session token representing authentication")
     }
     
     @Section(title: "Define your User model") {

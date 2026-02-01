@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-files.png, alt: "Document and image icons with cloud upload arrow representing file storage")
     }
     
     @Section(title: "Define your model with ParseFile properties") {
@@ -251,6 +251,12 @@
                 Compare the downloaded data with the original to verify integrity, then convert it to the appropriate format (like a String for text data).
                 
                 @Code(name: "YourApp.swift", file: 09-files-22-verify-data.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                Files can be associated with ParseObjects using <doc:Pointers> as file properties. For SwiftUI examples of file uploads, see <doc:SwiftUI-Finding-Objects>.
             }
         }
     }

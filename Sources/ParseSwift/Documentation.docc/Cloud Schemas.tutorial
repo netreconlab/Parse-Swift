@@ -8,12 +8,12 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-server.png, alt: "Server with database schema grid and webhook arrows representing server-side operations")
     }
     
     @Section(title: "Understanding Cloud Schemas") {
         @ContentAndMedia {
-            Cloud Schemas provide programmatic control over your Parse Server database structure. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            Cloud Schemas provide programmatic control over your Parse Server database structure. We recommend using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using Parse-Swift on a server.
             
             Instead of manually creating schemas through the Parse Dashboard, you can define and manage them using Swift code. This is essential for automated deployments, version control of database structures, and implementing complex security rules. ParseSchema allows you to define data types, add fields, set permissions, and create indexes programmatically.
         }
