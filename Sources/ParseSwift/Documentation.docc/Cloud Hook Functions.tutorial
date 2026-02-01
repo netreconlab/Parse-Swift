@@ -2,7 +2,7 @@
     @Intro(title: "Cloud Hook Functions") {
         Learn how to manage Parse Cloud Hook Functions programmatically from Swift for server-side operations.
         
-        Cloud Hook Functions enable you to register webhooks that Parse Server calls when specific cloud functions are invoked. This tutorial covers creating, updating, fetching, and deleting Hook Functions. Hook Functions are useful for integrating Parse Server with external services, implementing custom business logic outside your Parse Server, or creating microservice architectures.
+        Cloud Hook Functions enable you to register webhooks that Parse Server calls when specific cloud functions are invoked. This tutorial covers creating, updating, fetching, and deleting Hook Functions. Hook Functions are useful for integrating Parse Server with external services, implementing custom business logic outside your Parse Server, or creating microservice architectures. To learn how to call Cloud Functions from client applications, see <doc:Cloud-Code>.
         
         > Warning: This tutorial demonstrates server-level operations that require the use of the Parse Server primary key. **Never** use the primary key in client applications. Only use these APIs from secure, server-side Swift environments such as [ParseServerSwift](https://github.com/netreconlab/parse-server-swift), Vapor, Kitura, or other backend frameworks.
         

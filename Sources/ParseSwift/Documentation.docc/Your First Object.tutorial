@@ -240,4 +240,44 @@
             }
         }
     }
+    
+    @Section(title: "Next Steps") {
+        @ContentAndMedia {
+            Now that you understand the basics of working with ParseObjects, you can explore more advanced features of Parse-Swift.
+            
+            Continue your learning journey by exploring these related tutorials based on your interests.
+        }
+        
+        @Steps {
+            @Step {
+                **Querying and retrieving objects**
+                
+                Learn how to find objects using queries, filters, and constraints in <doc:Finding-Objects>. This is essential for building data-driven applications.
+            }
+            
+            @Step {
+                **User authentication**
+                
+                Add user accounts and authentication to your app with <doc:User-Sign-Up> and <doc:User-Continued>. These tutorials cover signup, login, password management, and session handling.
+            }
+            
+            @Step {
+                **SwiftUI integration**
+                
+                Build reactive SwiftUI applications with Parse queries using <doc:SwiftUI-Finding-Objects> and <doc:SwiftUI-LiveQuery> for real-time updates.
+            }
+            
+            @Step {
+                **Security and relationships**
+                
+                Protect your data with <doc:ACL> and create complex data relationships with <doc:Pointers> and <doc:Roles-and-Relations>.
+            }
+            
+            @Step {
+                **Advanced features**
+                
+                Explore additional features like <doc:Files> for binary data, <doc:GeoPoint> for location-based queries, <doc:LiveQuery> for real-time subscriptions, and <doc:Cloud-Code> for server-side functions.
+            }
+        }
+    }
 }

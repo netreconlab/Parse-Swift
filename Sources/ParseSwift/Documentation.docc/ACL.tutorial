@@ -184,7 +184,7 @@
             @Step {
                 **Best Practice 3: Use roles for scalable permissions**
                 
-                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows.
+                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows. For more advanced role-based security and managing complex relationships, see <doc:Roles-and-Relations>.
                 
                 @Code(name: "YourApp.swift", file: 05-acl-12-role-based.swift)
             }

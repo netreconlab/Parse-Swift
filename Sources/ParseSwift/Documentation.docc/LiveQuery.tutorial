@@ -232,6 +232,12 @@
                 
                 @Code(name: "YourApp.swift", file: 11-livequery-22-final-ping.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned the fundamentals of LiveQuery! To integrate real-time queries with SwiftUI for reactive user interfaces, explore <doc:SwiftUI-LiveQuery>, which demonstrates how to use LiveQuery subscriptions with SwiftUI views.
+            }
         }
     }
 }

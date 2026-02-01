@@ -184,6 +184,12 @@
                 
                 @Code(name: "YourApp.swift", file: 02-finding-objects-17-exclude.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                Now that you understand querying, you can integrate queries with SwiftUI using <doc:SwiftUI-Finding-Objects> or add real-time updates with <doc:LiveQuery>. For more complex data relationships, explore <doc:Pointers> and <doc:Roles-and-Relations>.
+            }
         }
     }
 }

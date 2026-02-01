@@ -116,6 +116,12 @@
                 
                 @Code(name: "ContentView.swift", file: 17-swiftui-finding-objects-09-complete-view.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                The built-in query view model is great for simple use cases. For more control over your SwiftUI data flow, explore <doc:SwiftUI-Finding-Objects-With-Custom-ViewModel>, which shows how to build custom view models with Combine publishers. For real-time updates, see <doc:SwiftUI-LiveQuery>.
+            }
         }
     }
 }

@@ -138,6 +138,12 @@
                 
                 @Code(name: "YourApp.swift", file: 06-installation-09-badge.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                Now that you understand device installations, you can learn how to send push notifications from your server using <doc:Cloud-Push-Notifications>, which demonstrates server-side push notification operations.
+            }
         }
     }
 }

@@ -215,6 +215,12 @@
 				
 				@Code(name: "YourApp.swift", file: 10-cloud-code-23-use-jobs.swift)
 			}
+			
+			@Step {
+				**Next Steps: Server-Side Cloud Features**
+				
+				This tutorial covered calling Cloud Code from client applications. For server-side operations, explore <doc:Cloud-Hook-Functions> and <doc:Cloud-Hook-Triggers> to learn how to manage webhooks, or <doc:Cloud-Schemas> for programmatic schema management. For sending push notifications from your server, see <doc:Cloud-Push-Notifications>.
+			}
 		}
 	}
 }
