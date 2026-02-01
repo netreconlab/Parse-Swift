@@ -4,7 +4,7 @@
         
         This tutorial covers querying objects with constraints, ordering and limiting results, counting objects, and using advanced query features like relative time and field projection.
         
-		@Image(source: chapter-querying-data.png, alt: "Parse logo")
+		@Image(source: chapter-querying-data.png, alt: "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations")
     }
     
     @Section(title: "Setup and basic query creation") {

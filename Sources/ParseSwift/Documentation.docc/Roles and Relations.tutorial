@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> and <doc:ACL> tutorials to understand ParseObjects and access control fundamentals.
         
-		@Image(source: chapter-security.png, alt: "Parse logo")
+		@Image(source: chapter-security.png, alt: "Shield with ACL grid showing read/write permissions for different roles")
     }
     
     @Section(title: "Understanding Roles") {

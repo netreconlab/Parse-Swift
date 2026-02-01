@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
         
-		@Image(source: chapter-querying-data.png, alt: "Parse logo")
+		@Image(source: chapter-querying-data.png, alt: "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations")
     }
     
     @Section(title: "Understanding ParseGeoPoint") {
