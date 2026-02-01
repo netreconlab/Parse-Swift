@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:LiveQuery> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. LiveQuery must be enabled on your Parse Server for these features to work.
         
-        @Image(source: chapter-swiftui.png, alt: "Parse logo")
+        @Image(source: chapter-swiftui.png, alt: "SwiftUI bird symbol with bidirectional arrows to Parse cloud representing reactive data binding")
     }
     
     @Section(title: "Import required frameworks") {

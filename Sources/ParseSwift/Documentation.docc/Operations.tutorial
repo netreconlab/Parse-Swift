@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
         
-		@Image(source: chapter-relationships.png, alt: "Parse logo")
+		@Image(source: chapter-relationships.png, alt: "Connected objects with pointer arrows and atomic operation symbol representing data relationships")
     }
     
     @Section(title: "Understanding Parse Operations") {

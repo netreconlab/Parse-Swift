@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
         
-        @Image(source: chapter-files.png, alt: "Parse logo")
+        @Image(source: chapter-files.png, alt: "Document and image icons with cloud upload arrow representing file storage")
     }
     
     @Section(title: "Define your model with ParseFile properties") {

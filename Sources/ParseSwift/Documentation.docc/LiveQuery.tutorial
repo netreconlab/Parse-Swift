@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. LiveQuery must be enabled on your Parse Server for these features to work.
         
-        @Image(source: chapter-querying-data.png, alt: "Parse logo")
+        @Image(source: chapter-querying-data.png, alt: "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations")
     }
     
     @Section(title: "Create a LiveQuery delegate") {
