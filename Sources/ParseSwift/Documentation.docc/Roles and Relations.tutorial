@@ -254,6 +254,12 @@
                 
                 @Code(name: "YourApp.swift", file: 12-roles-21-save-with-role-acl.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned advanced security patterns with roles and relations. This builds on concepts from <doc:ACL> and <doc:Pointers>. For server-side schema and permission management, explore <doc:Cloud-Schemas>.
+            }
         }
     }
 }

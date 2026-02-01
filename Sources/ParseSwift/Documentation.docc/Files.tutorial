@@ -252,6 +252,12 @@
                 
                 @Code(name: "YourApp.swift", file: 09-files-22-verify-data.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                Files can be associated with ParseObjects using <doc:Pointers> as file properties. For SwiftUI examples of file uploads, see <doc:SwiftUI-Finding-Objects>.
+            }
         }
     }
 }

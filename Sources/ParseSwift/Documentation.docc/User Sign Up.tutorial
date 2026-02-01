@@ -146,6 +146,12 @@
                 
                 @Code(name: "YourApp.swift", file: 03-user-signup-12-logout.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned the basics of user signup and authentication. Continue with <doc:User-Continued> to learn about login, updating user properties, password reset, email verification, and advanced user management.
+            }
         }
     }
 }
