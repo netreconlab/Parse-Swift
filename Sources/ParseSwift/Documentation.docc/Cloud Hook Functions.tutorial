@@ -13,7 +13,7 @@
     
     @Section(title: "Understanding Cloud Hook Functions") {
         @ContentAndMedia {
-            Cloud Hook Functions provide a way to execute external webhooks when Parse Cloud Functions are invoked. It is recommended to use [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using ParseSwift on a server.
+            Cloud Hook Functions provide a way to execute external webhooks when Parse Cloud Functions are invoked. We recommend using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift) for using Parse-Swift on a server.
             
             Instead of implementing all your business logic directly in Parse Server Cloud Code, Hook Functions allow you to delegate function execution to external services. When a Cloud Function with a registered hook is called, Parse Server makes an HTTP request to your webhook URL with the function parameters. This enables microservice architectures, integration with third-party services, and flexible deployment strategies.
         }

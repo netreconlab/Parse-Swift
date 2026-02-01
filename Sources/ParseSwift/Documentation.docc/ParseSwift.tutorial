@@ -18,8 +18,8 @@
         @TutorialReference(tutorial: "doc:Custom-ObjectId")
     }
 	
-	@Chapter(name: "Query and retrieve ParseObjects") {
-		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates.
+	@Chapter(name: "Querying and Retrieving Data") {
+		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. Master location-based queries and real-time updates with LiveQuery.
 		
 		@Image(source: parse-logo.png, alt: "Parse logo")
 		
@@ -28,8 +28,8 @@
 		@TutorialReference(tutorial: "doc:LiveQuery")
 	}
 	
-	@Chapter(name: "SwiftUI Query Integration") {
-		Learn how to integrate Parse-Swift with SwiftUI applications using custom view models, Combine publishers, and LiveQuery for real-time updates.
+	@Chapter(name: "SwiftUI Integration") {
+		Learn how to integrate Parse-Swift with SwiftUI applications using query view models, custom view models with Combine publishers, and LiveQuery for real-time reactive user interfaces.
 		
 		@Image(source: parse-logo.png, alt: "Parse logo")
 		
@@ -39,87 +39,66 @@
 	}
 
     @Chapter(name: "User Authentication") {
-        Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
+        Learn how to implement user authentication in your Parse-Swift applications, including signup, login, and session management.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:User-Sign-Up")
         @TutorialReference(tutorial: "doc:User-Continued")
     }
-    
-    @Chapter(name: "Device Installations") {
-        Learn about tracking and handling device installations necessary to receive push notifications.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:Installation")
-    }
  
-    @Chapter(name: "Security") {
-        Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.
+    @Chapter(name: "Security and Access Control") {
+        Learn how to secure your Parse data using Access Control Lists (ACLs), roles, and relations to control permissions and manage complex access patterns.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:ACL")
+        @TutorialReference(tutorial: "doc:Roles-and-Relations")
     }
     
-    @Chapter(name: "Data Relationships") {
-        Learn how to create relationships between objects using pointers and manage complex data structures. In addition, learn how to manage complex relationships using roles and relations for sophisticated data models.
+    @Chapter(name: "Data Relationships and Operations") {
+        Learn how to create relationships between objects using pointers and perform atomic operations on object fields for safe concurrent updates.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Pointers")
-        @TutorialReference(tutorial: "doc:Roles-and-Relations")
+        @TutorialReference(tutorial: "doc:Operations")
     }
         
-    @Chapter(name: "Handling Files") {
-        Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
+    @Chapter(name: "Files and Media") {
+        Learn how to handle file storage and management for building media-rich applications with Parse-Swift.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Files")   
     }
 
-    @Chapter(name: "Data Operations") {
-        Learn how to perform atomic operations on object fields for safe concurrent updates.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:Operations")
-    }
-
-    @Chapter(name: "Accessing Cloud Code") {
-        Learn how to call Parse Cloud Functions from your Swift applications to run server-side logic.
+    @Chapter(name: "Cloud Features") {
+        Learn how to leverage Parse Server cloud features including Cloud Functions, configuration management, and analytics from your Swift applications.
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Cloud-Code")
-    }
-    
-    @Chapter(name: "Configuration Management") {
-        Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.
-        
-		@Image(source: parse-logo.png, alt: "Parse logo")
-        
         @TutorialReference(tutorial: "doc:Config")
-    }
-    
-    @Chapter(name: "Logging Analytics") {
-        Learn how to track app usage and custom events using Parse Analytics to understand user behavior.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
         @TutorialReference(tutorial: "doc:Analytics")
     }
     
+    @Chapter(name: "Push Notifications") {
+        Learn how to set up device installations and send push notifications to engage your users.
+        
+        @Image(source: parse-logo.png, alt: "Parse logo")
+        
+        @TutorialReference(tutorial: "doc:Installation")
+        @TutorialReference(tutorial: "doc:Cloud-Push-Notifications")
+    }
+    
     @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including: schema management, webhook management, and push notifications using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+        Learn how to perform advanced server-side operations including schema management and webhook management using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
         
         @Image(source: parse-logo.png, alt: "Parse logo")
         
         @TutorialReference(tutorial: "doc:Cloud-Schemas")
         @TutorialReference(tutorial: "doc:Cloud-Hook-Functions")
         @TutorialReference(tutorial: "doc:Cloud-Hook-Triggers")
-        @TutorialReference(tutorial: "doc:Cloud-Push-Notifications")
     }
 }
