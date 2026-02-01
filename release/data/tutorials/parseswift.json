@@ -93,7 +93,7 @@
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
+          "image" : "chapter-getting-started.png",
           "name" : "Getting Started",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object",
@@ -105,15 +105,15 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates.",
+                  "text" : "Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. Master location-based queries and real-time updates with LiveQuery.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
-          "name" : "Query and retrieve ParseObjects",
+          "image" : "chapter-querying-data.png",
+          "name" : "Querying and Retrieving Data",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Finding-Objects",
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/GeoPoint",
@@ -125,15 +125,15 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn how to integrate Parse-Swift with SwiftUI applications using custom view models, Combine publishers, and LiveQuery for real-time updates.",
+                  "text" : "Learn how to integrate Parse-Swift with SwiftUI applications using query view models, custom view models with Combine publishers, and LiveQuery for real-time reactive user interfaces.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
-          "name" : "SwiftUI Query Integration",
+          "image" : "chapter-swiftui.png",
+          "name" : "SwiftUI Integration",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects",
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects-With-Custom-ViewModel",
@@ -145,14 +145,14 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.",
+                  "text" : "Learn how to implement user authentication in your Parse-Swift applications, including signup, login, and session management.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
+          "image" : "chapter-user-auth.png",
           "name" : "User Authentication",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/User-Sign-Up",
@@ -164,53 +164,17 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn about tracking and handling device installations necessary to receive push notifications.",
+                  "text" : "Learn how to secure your Parse data using Access Control Lists (ACLs), roles, and relations to control permissions and manage complex access patterns.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
-          "name" : "Device Installations",
+          "image" : "chapter-security.png",
+          "name" : "Security and Access Control",
           "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation"
-          ]
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "image" : "parse-logo.png",
-          "name" : "Security",
-          "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL"
-          ]
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Learn how to create relationships between objects using pointers and manage complex data structures. In addition, learn how to manage complex relationships using roles and relations for sophisticated data models.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "image" : "parse-logo.png",
-          "name" : "Data Relationships",
-          "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL",
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Roles-and-Relations"
           ]
         },
@@ -219,15 +183,34 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn advanced Parse-Swift features like file storage and management for building media-rich applications.",
+                  "text" : "Learn how to create relationships between objects using pointers and perform atomic operations on object fields for safe concurrent updates.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
-          "name" : "Handling Files",
+          "image" : "chapter-relationships.png",
+          "name" : "Data Relationships and Operations",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to handle file storage and management for building media-rich applications with Parse-Swift.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "chapter-files.png",
+          "name" : "Files and Media",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files"
           ]
@@ -237,70 +220,18 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn how to perform atomic operations on object fields for safe concurrent updates.",
+                  "text" : "Learn how to leverage Parse Server cloud features including Cloud Functions, configuration management, and analytics from your Swift applications.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
-          "name" : "Data Operations",
+          "image" : "chapter-cloud.png",
+          "name" : "Cloud Features",
           "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations"
-          ]
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Learn how to call Parse Cloud Functions from your Swift applications to run server-side logic.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "image" : "parse-logo.png",
-          "name" : "Accessing Cloud Code",
-          "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code"
-          ]
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "image" : "parse-logo.png",
-          "name" : "Configuration Management",
-          "tutorials" : [
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config"
-          ]
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Learn how to track app usage and custom events using Parse Analytics to understand user behavior.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "image" : "parse-logo.png",
-          "name" : "Logging Analytics",
-          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config",
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Analytics"
           ]
         },
@@ -309,7 +240,26 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Learn how to perform server-side operations including: schema management, webhook management, and push notifications using ",
+                  "text" : "Learn how to set up device installations and send push notifications to engage your users.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "image" : "chapter-push.png",
+          "name" : "Push Notifications",
+          "tutorials" : [
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation",
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications"
+          ]
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Learn how to perform advanced server-side operations including schema management and webhook management using ",
                   "type" : "text"
                 },
                 {
@@ -325,13 +275,12 @@
               "type" : "paragraph"
             }
           ],
-          "image" : "parse-logo.png",
+          "image" : "chapter-server.png",
           "name" : "Server-Side Operations",
           "tutorials" : [
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Schemas",
             "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Functions",
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Triggers",
-            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications"
+            "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Triggers"
           ]
         }
       ],
@@ -357,6 +306,146 @@
   ]
 , 
 "references": {
+"chapter-cloud.png": {
+  "alt" : "Cloud with function symbol, config gear, and analytics graph representing cloud features",
+  "identifier" : "chapter-cloud.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-cloud.png"
+    }
+  ]
+},
+"chapter-files.png": {
+  "alt" : "Document and image icons with cloud upload arrow representing file storage",
+  "identifier" : "chapter-files.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-files.png"
+    }
+  ]
+},
+"chapter-getting-started.png": {
+  "alt" : "Foundation building blocks representing ParseObjects as the foundation of data storage",
+  "identifier" : "chapter-getting-started.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-getting-started.png"
+    }
+  ]
+},
+"chapter-push.png": {
+  "alt" : "Mobile device with notification bell and broadcast waves representing push notifications",
+  "identifier" : "chapter-push.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-push.png"
+    }
+  ]
+},
+"chapter-querying-data.png": {
+  "alt" : "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations",
+  "identifier" : "chapter-querying-data.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-querying-data.png"
+    }
+  ]
+},
+"chapter-relationships.png": {
+  "alt" : "Connected objects with pointer arrows and atomic operation symbol representing data relationships",
+  "identifier" : "chapter-relationships.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-relationships.png"
+    }
+  ]
+},
+"chapter-security.png": {
+  "alt" : "Shield with ACL grid showing read\/write permissions for different roles",
+  "identifier" : "chapter-security.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-security.png"
+    }
+  ]
+},
+"chapter-server.png": {
+  "alt" : "Server with database schema grid and webhook arrows representing server-side operations",
+  "identifier" : "chapter-server.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-server.png"
+    }
+  ]
+},
+"chapter-swiftui.png": {
+  "alt" : "SwiftUI bird symbol with bidirectional arrows to Parse cloud representing reactive data binding",
+  "identifier" : "chapter-swiftui.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-swiftui.png"
+    }
+  ]
+},
+"chapter-user-auth.png": {
+  "alt" : "User profile icon with checkmark shield and session token representing authentication",
+  "identifier" : "chapter-user-auth.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-user-auth.png"
+    }
+  ]
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift": {
   "abstract" : [
     {
@@ -739,20 +828,6 @@
   ],
   "type" : "link",
   "url" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/"
-},
-"parse-logo.png": {
-  "alt" : "Parse logo",
-  "identifier" : "parse-logo.png",
-  "type" : "image",
-  "variants" : [
-    {
-      "traits" : [
-        "1x",
-        "light"
-      ],
-      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/parse-logo.png"
-    }
-  ]
 },
 "parse-swift.png": {
   "alt" : "Parse Swift logo",

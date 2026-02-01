@@ -33,6 +33,10 @@
               {
                 "kind" : "task",
                 "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object#Work-with-advanced-data-types"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object#Next-Steps"
               }
             ]
           },
@@ -162,7 +166,7 @@
             ]
           }
         ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Query-and-retrieve-ParseObjects"
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Querying-and-Retrieving-Data"
       },
       {
         "projects" : [
@@ -242,7 +246,7 @@
             ]
           }
         ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI-Query-Integration"
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI-Integration"
       },
       {
         "projects" : [
@@ -318,40 +322,6 @@
       {
         "projects" : [
           {
-            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation",
-            "sections" : [
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Define-your-Installation-model"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Access-the-current-installation"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Save-installations-for-push-notifications"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Update-installation-properties-efficiently"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Fetch-installation-data"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Manage-badge-counts"
-              }
-            ]
-          }
-        ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Device-Installations"
-      },
-      {
-        "projects" : [
-          {
             "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL",
             "sections" : [
               {
@@ -381,44 +351,6 @@
               {
                 "kind" : "task",
                 "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/ACL#Security-best-practices"
-              }
-            ]
-          }
-        ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Security"
-      },
-      {
-        "projects" : [
-          {
-            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
-            "sections" : [
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Understanding-Pointers"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Saving-Objects-with-Pointers"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Querying-and-Including-Pointer-Data"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Querying-by-Pointer-Values"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Updating-Pointer-Relationships"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Batch-Operations-with-Pointers"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Advanced-Pointer-Queries"
               }
             ]
           },
@@ -460,7 +392,78 @@
             ]
           }
         ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Relationships"
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Security-and-Access-Control"
+      },
+      {
+        "projects" : [
+          {
+            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+            "sections" : [
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Understanding-Pointers"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Saving-Objects-with-Pointers"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Querying-and-Including-Pointer-Data"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Querying-by-Pointer-Values"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Updating-Pointer-Relationships"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Batch-Operations-with-Pointers"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers#Advanced-Pointer-Queries"
+              }
+            ]
+          },
+          {
+            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations",
+            "sections" : [
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Understanding-Parse-Operations"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Increment-and-decrement-operations"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Add-and-addUnique-operations-for-arrays"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Remove-operations-for-arrays"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Set-forceSet-and-unset-operations"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Querying-for-null-and-undefined-fields"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Combining-multiple-operations"
+              }
+            ]
+          }
+        ],
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Relationships-and-Operations"
       },
       {
         "projects" : [
@@ -498,45 +501,7 @@
             ]
           }
         ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Handling-Files"
-      },
-      {
-        "projects" : [
-          {
-            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations",
-            "sections" : [
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Understanding-Parse-Operations"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Increment-and-decrement-operations"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Add-and-addUnique-operations-for-arrays"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Remove-operations-for-arrays"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Set-forceSet-and-unset-operations"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Querying-for-null-and-undefined-fields"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations#Combining-multiple-operations"
-              }
-            ]
-          }
-        ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Operations"
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files-and-Media"
       },
       {
         "projects" : [
@@ -572,12 +537,7 @@
                 "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code#Best-practices-for-Cloud-Code"
               }
             ]
-          }
-        ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Accessing-Cloud-Code"
-      },
-      {
-        "projects" : [
+          },
           {
             "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config",
             "sections" : [
@@ -606,12 +566,7 @@
                 "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Config#Advanced-configuration-patterns"
               }
             ]
-          }
-        ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Configuration-Management"
-      },
-      {
-        "projects" : [
+          },
           {
             "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Analytics",
             "sections" : [
@@ -638,7 +593,82 @@
             ]
           }
         ],
-        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Logging-Analytics"
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Features"
+      },
+      {
+        "projects" : [
+          {
+            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation",
+            "sections" : [
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Define-your-Installation-model"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Access-the-current-installation"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Save-installations-for-push-notifications"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Update-installation-properties-efficiently"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Fetch-installation-data"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Installation#Manage-badge-counts"
+              }
+            ]
+          },
+          {
+            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications",
+            "sections" : [
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Understanding-Cloud-Push-Notifications"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Define-the-Installation-model"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Create-Apple-push-notification-payloads"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-push-notifications-using-queries"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-push-notifications-using-channels"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Check-push-notification-status"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-Firebase-Cloud-Messaging-notifications"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Query-push-notification-statuses"
+              },
+              {
+                "kind" : "task",
+                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Best-practices-for-push-notifications"
+              }
+            ]
+          }
+        ],
+        "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Push-Notifications"
       },
       {
         "projects" : [
@@ -752,47 +782,6 @@
                 "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Hook-Triggers#Best-practices-for-Cloud-Hook-Triggers"
               }
             ]
-          },
-          {
-            "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications",
-            "sections" : [
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Understanding-Cloud-Push-Notifications"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Define-the-Installation-model"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Create-Apple-push-notification-payloads"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-push-notifications-using-queries"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-push-notifications-using-channels"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Check-push-notification-status"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Send-Firebase-Cloud-Messaging-notifications"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Query-push-notification-statuses"
-              },
-              {
-                "kind" : "task",
-                "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Push-Notifications#Best-practices-for-push-notifications"
-              }
-            ]
           }
         ],
         "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Server-Side-Operations"
@@ -802,7 +791,7 @@
       [
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift",
         "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/$volume",
-        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Handling-Files"
+        "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files-and-Media"
       ]
     ],
     "reference" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift"
@@ -825,8 +814,8 @@
   },
   "sections" : [
     {
-      "backgroundImage" : "parse-logo.png",
-      "chapter" : "Handling Files",
+      "backgroundImage" : "chapter-files.png",
+      "chapter" : "Files and Media",
       "content" : [
         {
           "inlineContent" : [
@@ -873,7 +862,7 @@
         }
       ],
       "estimatedTimeInMinutes" : 25,
-      "image" : "parse-logo.png",
+      "image" : "chapter-files.png",
       "kind" : "hero",
       "title" : "Files"
     },
@@ -1940,6 +1929,57 @@
               "media" : null,
               "runtimePreview" : null,
               "type" : "step"
+            },
+            {
+              "caption" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Files can be associated with ParseObjects using ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Pointers",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " as file properties. For SwiftUI examples of file uploads, see ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI---Finding-Objects",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              "code" : null,
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "Next Steps",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              "media" : null,
+              "runtimePreview" : null,
+              "type" : "step"
             }
           ],
           "title" : "Work with downloaded file data"
@@ -1949,12 +1989,12 @@
     {
       "abstract" : [
         {
-          "text" : "Learn how to perform atomic operations on ParseObject fields to safely handle concurrent updates.",
+          "text" : "Learn how to call Parse Cloud Functions and Jobs from your Swift applications to execute server-side logic via your client-side apps.",
           "type" : "text"
         }
       ],
       "action" : {
-        "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Operations",
+        "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Code",
         "isActive" : true,
         "overridingTitle" : "Get started",
         "overridingTitleInlineContent" : [
@@ -1967,7 +2007,7 @@
       },
       "featuredEyebrow" : "Tutorial",
       "kind" : "callToAction",
-      "title" : "Atomic Operations on Object Fields"
+      "title" : "Cloud Code"
     }
   ],
   "variants" : [
@@ -3174,6 +3214,20 @@
   "syntax" : "swift",
   "type" : "file"
 },
+"chapter-files.png": {
+  "alt" : "Document and image icons with cloud upload arrow representing file storage",
+  "identifier" : "chapter-files.png",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/chapter-files.png"
+    }
+  ]
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift": {
   "abstract" : [
     {
@@ -3300,17 +3354,6 @@
   "title" : "User-specific permissions",
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/acl#User-specific-permissions"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Accessing-Cloud-Code": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Accessing-Cloud-Code",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Accessing Cloud Code",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/accessing-cloud-code"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Analytics": {
   "abstract" : [
@@ -3509,6 +3552,17 @@
   "title" : "Using context with save operations",
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/cloud-code#Using-context-with-save-operations"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Features": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Cloud-Features",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Cloud Features",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/cloud-features"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Cloud-Hook-Functions": {
   "abstract" : [
@@ -4131,17 +4185,6 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/config#Working-with-cached-configuration"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Configuration-Management": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Configuration-Management",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Configuration Management",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/configuration-management"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Custom-ObjectId": {
   "abstract" : [
     {
@@ -4255,38 +4298,16 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/custom-objectid#Update-objects-with-custom-objectIds"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Data-Operations": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Data-Relationships-and-Operations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Operations",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Relationships-and-Operations",
   "kind" : "article",
   "role" : "article",
-  "title" : "Data Operations",
+  "title" : "Data Relationships and Operations",
   "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/data-operations"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Data-Relationships": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Data-Relationships",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Data Relationships",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/data-relationships"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Device-Installations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Device-Installations",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Device Installations",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/device-installations"
+  "url" : "\/tutorials\/parseswift\/data-relationships-and-operations"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Files": {
   "abstract" : [
@@ -4400,6 +4421,17 @@
   "title" : "Work with downloaded file data",
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/files#Work-with-downloaded-file-data"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Files-and-Media": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Files-and-Media",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Files and Media",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/files-and-media"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Finding-Objects": {
   "abstract" : [
@@ -4610,17 +4642,6 @@
   "type" : "topic",
   "url" : "\/tutorials\/parseswift\/getting-started"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Handling-Files": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Handling-Files",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Handling Files",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/handling-files"
-},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Installation": {
   "abstract" : [
     {
@@ -4818,17 +4839,6 @@
   "title" : "Subscribe to queries",
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/livequery#Subscribe-to-queries"
-},
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Logging-Analytics": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Logging-Analytics",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Logging Analytics",
-  "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/logging-analytics"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Operations": {
   "abstract" : [
@@ -5056,16 +5066,27 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/pointers#Updating-Pointer-Relationships"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Query-and-retrieve-ParseObjects": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Push-Notifications": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Query-and-retrieve-ParseObjects",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Push-Notifications",
   "kind" : "article",
   "role" : "article",
-  "title" : "Query and retrieve ParseObjects",
+  "title" : "Push Notifications",
   "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/query-and-retrieve-parseobjects"
+  "url" : "\/tutorials\/parseswift\/push-notifications"
+},
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Querying-and-Retrieving-Data": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Querying-and-Retrieving-Data",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Querying and Retrieving Data",
+  "type" : "topic",
+  "url" : "\/tutorials\/parseswift\/querying-and-retrieving-data"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Roles-and-Relations": {
   "abstract" : [
@@ -5194,16 +5215,16 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/roles-and-relations#Understanding-Roles"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Security": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Security-and-Access-Control": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Security",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Security-and-Access-Control",
   "kind" : "article",
   "role" : "article",
-  "title" : "Security",
+  "title" : "Security and Access Control",
   "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/security"
+  "url" : "\/tutorials\/parseswift\/security-and-access-control"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Server-Side-Operations": {
   "abstract" : [
@@ -5471,16 +5492,16 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/swiftui---livequery#Testing-your-live-view"
 },
-"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/SwiftUI-Query-Integration": {
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/SwiftUI-Integration": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI-Query-Integration",
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/SwiftUI-Integration",
   "kind" : "article",
   "role" : "article",
-  "title" : "SwiftUI Query Integration",
+  "title" : "SwiftUI Integration",
   "type" : "topic",
-  "url" : "\/tutorials\/parseswift\/swiftui-query-integration"
+  "url" : "\/tutorials\/parseswift\/swiftui-integration"
 },
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/User---Continued": {
   "abstract" : [
@@ -5790,6 +5811,20 @@
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/your-first-object#Initialize-Parse-and-check-server-health"
 },
+"doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Your-First-Object#Next-Steps": {
+  "abstract" : [
+    {
+      "text" : "Learn how to create, save, update, fetch, and delete ParseObjects using the Parse-Swift SDK.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/edu.uky.cs.netreconlab.ParseSwift\/tutorials\/ParseSwift\/Your-First-Object#Next-Steps",
+  "kind" : "section",
+  "role" : "pseudoSymbol",
+  "title" : "Next Steps",
+  "type" : "section",
+  "url" : "\/tutorials\/parseswift\/your-first-object#Next-Steps"
+},
 "doc://edu.uky.cs.netreconlab.ParseSwift/tutorials/ParseSwift/Your-First-Object#Save-objects-to-Parse-Server": {
   "abstract" : [
     {
@@ -5831,20 +5866,6 @@
   "title" : "Work with advanced data types",
   "type" : "section",
   "url" : "\/tutorials\/parseswift\/your-first-object#Work-with-advanced-data-types"
-},
-"parse-logo.png": {
-  "alt" : "Parse logo",
-  "identifier" : "parse-logo.png",
-  "type" : "image",
-  "variants" : [
-    {
-      "traits" : [
-        "1x",
-        "light"
-      ],
-      "url" : "\/images\/edu.uky.cs.netreconlab.ParseSwift\/parse-logo.png"
-    }
-  ]
 }
 }
 }
