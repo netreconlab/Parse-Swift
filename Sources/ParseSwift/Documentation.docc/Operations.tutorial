@@ -236,6 +236,12 @@
                 
                 @Code(name: "YourApp.swift", file: 13-operations-20-chaining.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                Operations provide atomic updates for concurrent scenarios. Build on this with <doc:LiveQuery> for real-time updates when operated fields change, or use operations within <doc:Cloud-Code> functions for server-side data manipulation.
+            }
         }
     }
 }

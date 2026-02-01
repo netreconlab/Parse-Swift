@@ -220,6 +220,12 @@
                 
                 @Code(name: "ConfigManager.swift", file: 14-config-18-notifications.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                Config provides dynamic app behavior without updates. Use it with <doc:Cloud-Code> to manage configuration server-side, or combine it with <doc:Analytics> to enable features based on user behavior data.
+            }
         }
     }
 }

@@ -152,6 +152,12 @@
 				
 				@Code(name: "Analytics.swift", file: 16-analytics-18-privacy.swift)
 			}
+			
+			@Step {
+				**Next Steps**
+				
+				Analytics helps you understand user behavior. Combine it with <doc:Cloud-Code> to process analytics data server-side, or use <doc:Config> to enable/disable features based on analytics insights.
+			}
 		}
 	}
 }
