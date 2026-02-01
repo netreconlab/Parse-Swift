@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-security.png, alt: "Parse logo")
     }
     
     @Section(title: "Understanding Access Control Lists") {

@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn the basics of working with ParseObjects.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-relationships.png, alt: "Parse logo")
     }
     
     @Section(title: "Understanding Pointers") {

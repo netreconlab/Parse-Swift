@@ -4,7 +4,7 @@
         
         This tutorial demonstrates how to use Parse-Swift's SwiftUI integration features to query and display ParseObjects in SwiftUI views. You'll learn to use the query view model pattern, display results in SwiftUI Lists, and create new objects with files.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-swiftui.png, alt: "Parse logo")
     }
     
     @Section(title: "Setup your ParseObject model") {
