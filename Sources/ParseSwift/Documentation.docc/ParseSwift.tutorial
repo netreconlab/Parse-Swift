@@ -4,7 +4,7 @@
         
         These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery, SwiftUI integration, and server-side operations.
         
-        For detailed information about the Parse-Swift API, please view the [API documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
+        For detailed information about the Parse-Swift API, please view the [API documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/documentation).
         
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
