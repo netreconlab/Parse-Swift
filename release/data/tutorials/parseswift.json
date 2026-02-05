@@ -63,7 +63,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
+              "identifier" : "https:\/\/swiftpackageindex.com\/netreconlab\/Parse-Swift\/documentation",
               "isActive" : true,
               "type" : "reference"
             },
@@ -817,8 +817,8 @@
   "type" : "link",
   "url" : "https:\/\/github.com\/netreconlab\/parse-server-swift"
 },
-"https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/": {
-  "identifier" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/",
+"https://swiftpackageindex.com/netreconlab/Parse-Swift/documentation": {
+  "identifier" : "https:\/\/swiftpackageindex.com\/netreconlab\/Parse-Swift\/documentation",
   "title" : "API documentation",
   "titleInlineContent" : [
     {
@@ -827,7 +827,7 @@
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/netreconlab.github.io\/Parse-Swift\/release\/documentation\/parseswift\/"
+  "url" : "https:\/\/swiftpackageindex.com\/netreconlab\/Parse-Swift\/documentation"
 },
 "parse-swift.png": {
   "alt" : "Parse Swift logo",
