@@ -183,9 +183,9 @@ jobs:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
         with:
-          swift-version: "wasm-6.2.3-RELEASE"
+          target: "wasm32-unknown-wasip1-threads"
       - name: Build
-        run: swift build --swift-sdk wasm32-unknown-wasi
+        run: swift build --swift-sdk wasm32-unknown-wasip1-threads
 
   windows:
     timeout-minutes: 15
