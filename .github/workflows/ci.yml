@@ -178,11 +178,11 @@ jobs:
   wasm:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: swift:6.2
+    container: swift:6.2.3
     steps:
       - uses: actions/checkout@v6
       - uses: swiftwasm/setup-swiftwasm@v2
-      - run: swift build --swift-sdk wasm32-unknown-wasip1
+      - run: swift build --swift-sdk wasm32-unknown-wasi
 
   windows:
     timeout-minutes: 15
