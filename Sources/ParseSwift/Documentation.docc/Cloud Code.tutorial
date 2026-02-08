@@ -6,7 +6,7 @@
 		
 		> Note: This tutorial assumes you have already completed <doc:Your-First-Object> and have initialized the Parse SDK. If you haven't done so, please refer to the "Initialize Parse and check server health" section in that tutorial.
 		
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-cloud.png, alt: "Cloud with function symbol, config gear, and analytics graph representing cloud features")
 	}
 	
 	@Section(title: "Understanding Cloud Code") {
@@ -214,6 +214,12 @@
 				**Best Practice 4: Use Jobs for long-running tasks** Don't make users wait for operations that can be completed asynchronously. Use Cloud Jobs for batch processing, email sending, report generation, and other tasks that don't need immediate completion.
 				
 				@Code(name: "YourApp.swift", file: 10-cloud-code-23-use-jobs.swift)
+			}
+			
+			@Step {
+				**Next Steps: Server-Side Cloud Features**
+				
+				This tutorial covered calling Cloud Code from client applications. For server-side operations, explore <doc:Cloud-Hook-Functions> and <doc:Cloud-Hook-Triggers> to learn how to manage webhooks, or <doc:Cloud-Schemas> for programmatic schema management. For sending push notifications from your server, see <doc:Cloud-Push-Notifications>.
 			}
 		}
 	}

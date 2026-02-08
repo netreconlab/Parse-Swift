@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-security.png, alt: "Shield with ACL grid showing read/write permissions for different roles")
     }
     
     @Section(title: "Understanding Access Control Lists") {
@@ -184,7 +184,7 @@
             @Step {
                 **Best Practice 3: Use roles for scalable permissions**
                 
-                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows.
+                Instead of granting permissions to individual users on every object, create roles for common permission groups. This makes it easier to manage permissions as your app grows. For more advanced role-based security and managing complex relationships, see <doc:Roles-and-Relations>.
                 
                 @Code(name: "YourApp.swift", file: 05-acl-12-role-based.swift)
             }

@@ -6,7 +6,7 @@
         
         > Note: This tutorial assumes you have already completed <doc:Your-First-Object> and <doc:Finding-Objects> tutorials. If you haven't initialized the Parse SDK yet, please refer to the "Initialize Parse and check server health" section in <doc:Your-First-Object>. Basic knowledge of SwiftUI and Combine is also recommended.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-swiftui.png, alt: "SwiftUI bird symbol with bidirectional arrows to Parse cloud representing reactive data binding")
     }
     
     @Section(title: "Setup your ParseObject model") {
@@ -142,7 +142,12 @@
                 
                 @Code(name: "YourApp.swift", file: 18-swiftui-custom-viewmodel-09-complete-example.swift)
             }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned how to build custom view models for more control over your SwiftUI data flow. For real-time updates with SwiftUI, explore <doc:SwiftUI-LiveQuery>, which demonstrates reactive LiveQuery subscriptions in SwiftUI views.
+            }
         }
     }
 }
-# Applied Conventional Commits Specification

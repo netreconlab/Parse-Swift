@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn how to initialize Parse and create ParseObject models.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-relationships.png, alt: "Connected objects with pointer arrows and atomic operation symbol representing data relationships")
     }
     
     @Section(title: "Understanding Parse Operations") {
@@ -235,6 +235,12 @@
                 You can combine different operation types like increment, add, and set in a single operation chain. All chained operations are sent to the server in a single request and applied atomically.
                 
                 @Code(name: "YourApp.swift", file: 13-operations-20-chaining.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                Operations provide atomic updates for concurrent scenarios. Build on this with <doc:LiveQuery> for real-time updates when operated fields change, or use operations within <doc:Cloud-Code> functions for server-side data manipulation.
             }
         }
     }

@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> and <doc:ACL> tutorials to understand ParseObjects and access control fundamentals.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-security.png, alt: "Shield with ACL grid showing read/write permissions for different roles")
     }
     
     @Section(title: "Understanding Roles") {
@@ -253,6 +253,12 @@
                 When you save an object with a role-based ACL, only users who belong to the specified roles (or roles that contain those roles) can access it according to the permissions set.
                 
                 @Code(name: "YourApp.swift", file: 12-roles-21-save-with-role-acl.swift)
+            }
+            
+            @Step {
+                **Next Steps**
+                
+                You've learned advanced security patterns with roles and relations. This builds on concepts from <doc:ACL> and <doc:Pointers>. For server-side schema and permission management, explore <doc:Cloud-Schemas>.
             }
         }
     }

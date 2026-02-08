@@ -6,7 +6,7 @@
         
         Before starting this tutorial, complete the <doc:Your-First-Object> tutorial to learn the basics of working with ParseObjects.
         
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-relationships.png, alt: "Connected objects with pointer arrows and atomic operation symbol representing data relationships")
     }
     
     @Section(title: "Understanding Pointers") {
@@ -209,6 +209,12 @@
                 The `matchesText()` function searches text fields and returns results sorted by relevance score. Combined with `.include()`, you can fetch related objects in the same query.
                 
                 @Code(name: "YourApp.swift", file: 08-pointers-17-text-search.swift)
+            }
+            
+            @Step {
+                **Next Steps: Many-to-many relationships**
+                
+                Pointers are ideal for one-to-one and one-to-many relationships. For many-to-many relationships and advanced role-based access control, explore <doc:Roles-and-Relations>, which introduces Parse Relations for managing complex data structures.
             }
         }
     }

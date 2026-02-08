@@ -2,8 +2,14 @@
 # Parse-Swift Changelog
 
 ### main
-[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.4...main), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift)
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.1.0...main), [API Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/main/documentation/parseswift), [Tutorial Documentation](https://netreconlab.github.io/Parse-Swift/release/tutorials/parseswift/)
 * _Contributing to this repo? Add info about your change here to be included in the next release_
+
+### 6.1.0
+[Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.6...6.1.0), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.1.0/documentation/parseswift)
+
+__New features__
+* Add privacy manifest to project ([#261](https://github.com/netreconlab/Parse-Swift/pull/261)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 ### 6.0.4
 [Full Changelog](https://github.com/netreconlab/Parse-Swift/compare/6.0.3...6.0.4), [Documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/6.0.4/documentation/parseswift)

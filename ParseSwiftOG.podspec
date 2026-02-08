@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = "ParseSwiftOG"
-  s.version  = "6.0.0-beta.2"
+  s.version  = "6.1.0"
   s.summary  = "The original Parse Swift SDK"
   s.homepage = "https://github.com/netreconlab/Parse-Swift"
   s.authors = {
@@ -16,6 +16,9 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "6.0"
   s.swift_versions = ['6.0', '6.1', '6.2']
   s.source_files = "Sources/ParseSwift/**/*.swift"
+  s.resource_bundles = {
+    "#{s.module_name}_Privacy" => 'Sources/ParseSwift/PrivacyInfo.xcprivacy'
+  }
   s.license = {
     :type => "Apache 2.0",
     :file => "LICENSE"

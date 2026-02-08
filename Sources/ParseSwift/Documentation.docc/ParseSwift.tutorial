@@ -4,7 +4,7 @@
         
         These tutorials will guide you through the fundamental concepts and features of Parse-Swift, from basic object storage to advanced features like LiveQuery, SwiftUI integration, and server-side operations.
         
-        For detailed information about the Parse-Swift API, please view the [API documentation](https://netreconlab.github.io/Parse-Swift/release/documentation/parseswift/).
+        For detailed information about the Parse-Swift API, please view the [API documentation](https://swiftpackageindex.com/netreconlab/Parse-Swift/documentation).
         
         @Image(source: parse-swift.png, alt: "Parse Swift logo")
     }
@@ -12,26 +12,26 @@
     @Chapter(name: "Getting Started") {
         Learn the fundamentals of Parse-Swift by working with ParseObjects - the foundation of data storage in Parse.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-getting-started.png, alt: "Foundation building blocks representing ParseObjects as the foundation of data storage")
         
         @TutorialReference(tutorial: "doc:Your-First-Object")
         @TutorialReference(tutorial: "doc:Custom-ObjectId")
     }
 	
-	@Chapter(name: "Query and retrieve ParseObjects") {
-		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. In addition, learn how to use LiveQuery for real-time updates.
+	@Chapter(name: "Querying and Retrieving Data") {
+		Learn how to query and retrieve ParseObjects from your Parse Server using various query methods and constraints. Master location-based queries and real-time updates with LiveQuery.
 		
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-querying-data.png, alt: "Magnifying glass with filter funnel, location pin, and real-time wave symbols representing query operations")
 		
 		@TutorialReference(tutorial: "doc:Finding-Objects")
 		@TutorialReference(tutorial: "doc:GeoPoint")
 		@TutorialReference(tutorial: "doc:LiveQuery")
 	}
 	
-	@Chapter(name: "SwiftUI Query Integration") {
-		Learn how to integrate Parse-Swift with SwiftUI applications using custom view models, Combine publishers, and LiveQuery for real-time updates.
+	@Chapter(name: "SwiftUI Integration") {
+		Learn how to integrate Parse-Swift with SwiftUI applications using query view models, custom view models with Combine publishers, and LiveQuery for real-time reactive user interfaces.
 		
-		@Image(source: parse-logo.png, alt: "Parse logo")
+		@Image(source: chapter-swiftui.png, alt: "SwiftUI bird symbol with bidirectional arrows to Parse cloud representing reactive data binding")
 		
 		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects")
 		@TutorialReference(tutorial: "doc:SwiftUI-Finding-Objects-With-Custom-ViewModel")
@@ -39,87 +39,66 @@
 	}
 
     @Chapter(name: "User Authentication") {
-        Learn how to implement user authentication in your Parse-Swift applications, including signup and session management.
+        Learn how to implement user authentication in your Parse-Swift applications, including signup, login, and session management.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-user-auth.png, alt: "User profile icon with checkmark shield and session token representing authentication")
         
         @TutorialReference(tutorial: "doc:User-Sign-Up")
         @TutorialReference(tutorial: "doc:User-Continued")
     }
-    
-    @Chapter(name: "Device Installations") {
-        Learn about tracking and handling device installations necessary to receive push notifications.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:Installation")
-    }
  
-    @Chapter(name: "Security") {
-        Learn how to secure your Parse data using Access Control Lists (ACLs) to control read and write permissions.
+    @Chapter(name: "Security and Access Control") {
+        Learn how to secure your Parse data using Access Control Lists (ACLs), roles, and relations to control permissions and manage complex access patterns.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-security.png, alt: "Shield with ACL grid showing read/write permissions for different roles")
         
         @TutorialReference(tutorial: "doc:ACL")
-    }
-    
-    @Chapter(name: "Data Relationships") {
-        Learn how to create relationships between objects using pointers and manage complex data structures. In addition, learn how to manage complex relationships using roles and relations for sophisticated data models.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:Pointers")
         @TutorialReference(tutorial: "doc:Roles-and-Relations")
     }
+    
+    @Chapter(name: "Data Relationships and Operations") {
+        Learn how to create relationships between objects using pointers and perform atomic operations on object fields for safe concurrent updates.
         
-    @Chapter(name: "Handling Files") {
-        Learn advanced Parse-Swift features like file storage and management for building media-rich applications.
+        @Image(source: chapter-relationships.png, alt: "Connected objects with pointer arrows and atomic operation symbol representing data relationships")
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @TutorialReference(tutorial: "doc:Pointers")
+        @TutorialReference(tutorial: "doc:Operations")
+    }
+        
+    @Chapter(name: "Files and Media") {
+        Learn how to handle file storage and management for building media-rich applications with Parse-Swift.
+        
+        @Image(source: chapter-files.png, alt: "Document and image icons with cloud upload arrow representing file storage")
         
         @TutorialReference(tutorial: "doc:Files")   
     }
 
-    @Chapter(name: "Data Operations") {
-        Learn how to perform atomic operations on object fields for safe concurrent updates.
+    @Chapter(name: "Cloud Features") {
+        Learn how to leverage Parse Server cloud features including Cloud Functions, configuration management, and analytics from your Swift applications.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
-        @TutorialReference(tutorial: "doc:Operations")
-    }
-
-    @Chapter(name: "Accessing Cloud Code") {
-        Learn how to call Parse Cloud Functions from your Swift applications to run server-side logic.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-cloud.png, alt: "Cloud with function symbol, config gear, and analytics graph representing cloud features")
         
         @TutorialReference(tutorial: "doc:Cloud-Code")
-    }
-    
-    @Chapter(name: "Configuration Management") {
-        Learn how to manage app configuration remotely using Parse Config for dynamic behavior without app updates.
-        
-		@Image(source: parse-logo.png, alt: "Parse logo")
-        
         @TutorialReference(tutorial: "doc:Config")
-    }
-    
-    @Chapter(name: "Logging Analytics") {
-        Learn how to track app usage and custom events using Parse Analytics to understand user behavior.
-        
-        @Image(source: parse-logo.png, alt: "Parse logo")
-        
         @TutorialReference(tutorial: "doc:Analytics")
     }
     
-    @Chapter(name: "Server-Side Operations") {
-        Learn how to perform server-side operations including: schema management, webhook management, and push notifications using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+    @Chapter(name: "Push Notifications") {
+        Learn how to set up device installations and send push notifications to engage your users.
         
-        @Image(source: parse-logo.png, alt: "Parse logo")
+        @Image(source: chapter-push.png, alt: "Mobile device with notification bell and broadcast waves representing push notifications")
+        
+        @TutorialReference(tutorial: "doc:Installation")
+        @TutorialReference(tutorial: "doc:Cloud-Push-Notifications")
+    }
+    
+    @Chapter(name: "Server-Side Operations") {
+        Learn how to perform advanced server-side operations including schema management and webhook management using [ParseServerSwift](https://github.com/netreconlab/parse-server-swift).
+        
+        @Image(source: chapter-server.png, alt: "Server with database schema grid and webhook arrows representing server-side operations")
         
         @TutorialReference(tutorial: "doc:Cloud-Schemas")
         @TutorialReference(tutorial: "doc:Cloud-Hook-Functions")
         @TutorialReference(tutorial: "doc:Cloud-Hook-Triggers")
-        @TutorialReference(tutorial: "doc:Cloud-Push-Notifications")
     }
 }
