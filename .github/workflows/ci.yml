@@ -180,7 +180,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: compnerd/gha-setup-swift@v0.3.0
+      - uses: compnerd/gha-setup-swift@v0.4.0
         with:
           branch: swift-6.2.3-release
           tag: 6.2.3-RELEASE
