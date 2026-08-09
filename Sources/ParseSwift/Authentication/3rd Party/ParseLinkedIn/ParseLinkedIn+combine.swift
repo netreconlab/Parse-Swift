@@ -16,7 +16,7 @@ import Combine
 public extension ParseLinkedIn {
     // MARK: Combine
     /**
-     Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login. Publishes when complete.
+     Login a `ParseUser` *asynchronously* using LinkedIn authentication for login. Publishes when complete.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
      - parameter isMobileSDK: Setting **isMobileSDK** to **true** allows the backend
@@ -50,7 +50,7 @@ public extension ParseLinkedIn {
     }
 
     /**
-     Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login. Publishes when complete.
+     Login a `ParseUser` *asynchronously* using LinkedIn authentication for login. Publishes when complete.
      - parameter authData: Dictionary containing key/values.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: A publisher that eventually produces a single value and then finishes or fails.
@@ -78,7 +78,7 @@ public extension ParseLinkedIn {
 
 public extension ParseLinkedIn {
     /**
-     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for login.
      Publishes when complete.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
@@ -113,7 +113,7 @@ public extension ParseLinkedIn {
     }
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for login.
      Publishes when complete.
      - parameter authData: Dictionary containing key/values.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.

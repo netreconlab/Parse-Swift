@@ -66,7 +66,7 @@ public struct ParseLinkedIn<AuthenticatedUser: ParseUser>: ParseAuthentication {
 public extension ParseLinkedIn {
 
     /**
-     Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Login a `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter id: The `LinkedIn id` from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
      - parameter isMobileSDK: Setting **isMobileSDK** to **true** allows the backend to handle the token validation differently, as mobile SDK tokens may have different security characteristics than server-side tokens.
@@ -114,7 +114,7 @@ public extension ParseLinkedIn {
 public extension ParseLinkedIn {
 
     /**
-     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
+     Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for login.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
      - parameter isMobileSDK: Setting **isMobileSDK** to **true** allows the backend to handle the token validation differently, as mobile SDK tokens may have different security characteristics than server-side tokens.
