@@ -13,13 +13,13 @@ import Foundation
  You can use this protocol on any custom class of yours, instead of `Subscription` or
  `SubscriptionCallback`, if it fits your use case better.
  */
-public protocol QuerySubscribable: AnyObject {
+public protocol QuerySubscribable: AnyObject, Sendable {
 
     /// The `ParseObject` associated with this subscription.
     associatedtype Object: ParseObject
 
     /// The query associated with this subscription.
-    var query: Query<Object> { get set }
+    var query: Query<Object> { get }
 
     /**
      Creates a new subscription that can be used to handle updates.
@@ -28,7 +28,7 @@ public protocol QuerySubscribable: AnyObject {
 
     /**
      Tells the handler that an event has been received from the `ParseLiveQuery` Server.
-     - parameter eventData: The event data that has been recieved from the server.
+     - parameter eventData: The event data that has been received from the server.
      */
     func didReceive(_ eventData: Data) throws
 

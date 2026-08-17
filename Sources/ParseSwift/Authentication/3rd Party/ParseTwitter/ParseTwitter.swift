@@ -143,12 +143,13 @@ public extension ParseTwitter {
 
     /**
      Link the *current* `ParseUser` *asynchronously* using Twitter authentication.
-     - parameter user: The **id** from **Twitter**.
+     - parameter userId: The **id** from **Twitter**.
      - parameter screenName: The `user screenName` from **Twitter**.
      - parameter authToken: The Twitter `authToken` obtained from Twitter.
      - parameter authTokenSecret: The Twitter `authSecretToken` obtained from Twitter.
      - parameter consumerKey: The `consumerKey` from **Twitter**.
      - parameter consumerSecret: The `consumerSecret` from **Twitter**.
+     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter completion: The block to execute.
      */

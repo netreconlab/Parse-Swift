@@ -307,7 +307,7 @@ public extension ParseCLP {
      - parameter action: An enum value of one of the following actions:
      get/find/count/create/update/delete/addField.
      - parameter allow: **true** to allow access , **false** to remove access.
-     - parameter objectId: The `ParseUser` to add/remove access to.
+     - parameter user: The `ParseUser` to add/remove access to.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - throws: An error of type `ParseError`.
      */
@@ -337,7 +337,7 @@ public extension ParseCLP {
      - parameter action: An enum value of one of the following actions:
      get/find/count/create/update/delete/addField.
      - parameter allow: **true** to allow access , **false** to remove access.
-     - parameter objectId: The `ParseRole` to add/remove access to.
+     - parameter role: The `ParseRole` to add/remove access to.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - throws: An error of type `ParseError`.
      */
@@ -448,7 +448,7 @@ public extension ParseCLP {
     /**
      Sets whether user authentication is required to perform create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - warning: Requires Parse Server 2.3.0+.
@@ -461,7 +461,7 @@ public extension ParseCLP {
     /**
      Sets whether the public has access to perform create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
     */
@@ -475,7 +475,7 @@ public extension ParseCLP {
      create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
      - parameter objectId: The `ParseUser` objectId to provide/restrict access to.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
     */
@@ -498,7 +498,7 @@ public extension ParseCLP {
      Sets whether the given `ParseUser` has access to perform create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
      - parameter user: The `ParseUser` to provide/restrict access to.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - throws: An error of type `ParseError`.
@@ -515,7 +515,7 @@ public extension ParseCLP {
      create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
      - parameter user: The `ParseUser` to provide/restrict access to.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
     */
@@ -529,7 +529,7 @@ public extension ParseCLP {
      Sets whether the given `ParseRole` has access to perform create/update/delete/addField actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
      - parameter role: The `ParseRole` to provide/restrict access to.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - throws: An error of type `ParseError`.
@@ -614,7 +614,7 @@ public extension ParseCLP {
     /**
      Sets whether authentication is required to perform get/find/count actions on a Parse class.
      - parameter allow: **true** if access should be allowed, **false** otherwise.
-     - parameter canAddField: **true** if access should be allowed to `addField`,
+     - parameter addField: **true** if access should be allowed to `addField`,
      **false** otherwise. Defaults to **false**.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - warning: Requires Parse Server 2.3.0+.
@@ -1027,7 +1027,6 @@ public extension ParseCLP {
     /**
      Remove the set of specific fields the public should not have access to on a Parse class.
      - parameter fields: The set of fields that should be removed from protected access.
-     - parameter objectId: The `ParseUser` objectId to restrict access to.
      - returns: A mutated instance of `ParseCLP` for easy chaining.
      - throws: An error of type `ParseError`.
      - note: This method removes from the current set of `fields` in the CLP.

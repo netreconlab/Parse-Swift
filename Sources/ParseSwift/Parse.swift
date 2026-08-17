@@ -141,10 +141,10 @@ public var configuration: ParseConfiguration {
  `application(... didFinishLaunchingWithOptions launchOptions...)`.
  - parameter configuration: The Parse configuration.
  - throws: An error of `ParseError` type.
- - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
+ - important: It is recommended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
- situtations when apps do not have credentials to setup a Keychain.
+ situations when apps do not have credentials to setup a Keychain.
  */
 public func initialize(configuration: ParseConfiguration) async throws { // swiftlint:disable:this cyclomatic_complexity function_body_length
     Parse.configuration = configuration
@@ -287,10 +287,10 @@ public func initialize(configuration: ParseConfiguration) async throws { // swif
  completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) -> Void`.
  See Apple's [documentation](https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411595-urlsession) for more for details.
  - throws: An error of `ParseError` type.
- - important: It is recomended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
+ - important: It is recommended to only specify `primaryKey/masterKey` when using the SDK on a server. Do not use this key on the client.
  - note: Setting `usingPostForQuery` to **true**  will require all queries to access the server instead of following the `requestCachePolicy`.
  - warning: Setting `usingDataProtectionKeychain` to **true** is known to cause issues in Playgrounds or in
- situtations when apps do not have credentials to setup a Keychain.
+ situations when apps do not have credentials to setup a Keychain.
  */
 public func initialize(
     applicationId: String,

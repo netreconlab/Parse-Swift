@@ -48,7 +48,7 @@ public struct ParseAnalytics: ParseTypeable {
      Create an instance of ParseAnalytics for tracking.
      - parameter name: The name of the custom event to report to Parse as having happened.
      - parameter dimensions: The dictionary of information by which to segment this event. Defaults to `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the server
+     - parameter date: Explicitly set the time associated with a given event. If not provided the server
      time will be used. Defaults to `nil`.
      */
     public init (name: String,
@@ -94,7 +94,7 @@ public struct ParseAnalytics: ParseTypeable {
      - parameter launchOptions: The dictionary indicating the reason the application was
      launched, if any. This value can be found as a parameter to various
      `UIApplicationDelegate` methods, and can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
@@ -139,7 +139,7 @@ public struct ParseAnalytics: ParseTypeable {
      
      - parameter dimensions: The dictionary of information by which to segment this
      event. Can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.
@@ -206,7 +206,7 @@ public struct ParseAnalytics: ParseTypeable {
      
      - parameter dimensions: The dictionary of information by which to segment this
      event. Can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - parameter callbackQueue: The queue to return to after completion. Default value of .main.

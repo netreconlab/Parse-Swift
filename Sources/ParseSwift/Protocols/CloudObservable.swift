@@ -15,6 +15,7 @@ import FoundationNetworking
  This protocol describes the interface for creating a view model for `ParseCloud` functions and jobs.
  You can use this protocol on any custom class of yours, instead of `CloudViewModel`, if it fits your use case better.
  */
+@MainActor
 public protocol CloudObservable: ObservableObject {
 
     /// The `ParseObject` associated with this view model.
@@ -30,14 +31,12 @@ public protocol CloudObservable: ObservableObject {
      when the result of its execution.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    @MainActor
     func runFunction(options: API.Options) async
 
     /**
      Starts a Cloud Code Job *asynchronously* and updates the view model with the result and jobStatusId of the job.
         - parameter options: A set of header options sent to the server. Defaults to an empty set.
     */
-    @MainActor
     func startJob(options: API.Options) async
 }
 #endif

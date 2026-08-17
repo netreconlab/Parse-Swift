@@ -42,6 +42,7 @@ public extension ParseSpotify {
     /**
      Login a `ParseUser` *asynchronously* using Spotify authentication.
      - parameter authData: Dictionary containing key/values.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
      */

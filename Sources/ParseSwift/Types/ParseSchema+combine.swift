@@ -22,7 +22,6 @@ public extension ParseSchema {
      exposed to the public.
     */
     func fetchPublisher(
-		includeKeys: [String]? = nil,
 		options: API.Options = []
 	) -> Future<Self, ParseError> {
         Future { promise in
@@ -51,7 +50,6 @@ public extension ParseSchema {
      exposed to the public.
     */
     func createPublisher(
-		includeKeys: [String]? = nil,
 		options: API.Options = []
 	) -> Future<Self, ParseError> {
         Future { promise in
@@ -80,7 +78,6 @@ public extension ParseSchema {
      exposed to the public.
     */
     func updatePublisher(
-		includeKeys: [String]? = nil,
 		options: API.Options = []
 	) -> Future<Self, ParseError> {
         Future { promise in
@@ -110,7 +107,6 @@ public extension ParseSchema {
      exposed to the public.
     */
     func purgePublisher(
-		includeKeys: [String]? = nil,
 		options: API.Options = []
 	) -> Future<Void, ParseError> {
         Future { promise in
@@ -141,7 +137,6 @@ public extension ParseSchema {
      exposed to the public.
     */
     func deletePublisher(
-		includeKeys: [String]? = nil,
 		options: API.Options = []
 	) -> Future<Void, ParseError> {
         Future { promise in

@@ -26,7 +26,7 @@ public extension ParseAnalytics {
      - parameter launchOptions: The dictionary indicating the reason the application was
      launched, if any. This value can be found as a parameter to various
      `UIApplicationDelegate` methods, and can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.
@@ -53,7 +53,7 @@ public extension ParseAnalytics {
      
      - parameter dimensions: The dictionary of information by which to segment this
      event and can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.
@@ -87,7 +87,7 @@ public extension ParseAnalytics {
   
      - parameter dimensions: The dictionary of information by which to segment this
      event and can be empty or `nil`.
-     - parameter at: Explicitly set the time associated with a given event. If not provided the
+     - parameter date: Explicitly set the time associated with a given event. If not provided the
      server time will be used.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - throws: An error of type `ParseError`.

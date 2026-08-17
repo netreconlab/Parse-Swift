@@ -198,9 +198,6 @@ public extension ParseInstallation {
      When **false**, only the `channels` and `deviceToken` are copied; resulting in a new
      `ParseInstallation` for original `sessionToken`. Defaults to **true**.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
-     - parameter callbackQueue: The queue to return to after completion. Default value of .main.
-     - parameter completion: The block to execute.
-     It should have the following argument signature: `(Result<Self, ParseError>)`.
      - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
      desires a different policy, it should be inserted in `options`.
     */
@@ -263,8 +260,8 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Saves a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -275,7 +272,7 @@ public extension Sequence where Element: ParseInstallation {
 	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
 	 successful or a `ParseError` if it failed.
 	 - important: If an object saved has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - warning: If you are using `ParseConfiguration.isRequiringCustomObjectIds = true`
@@ -316,15 +313,15 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Creates a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
 	 - parameter options: A set of header options sent to the server. Defaults to an empty set.
 	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
 	 successful or a `ParseError` if it failed.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -354,8 +351,8 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Replaces a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -363,7 +360,7 @@ public extension Sequence where Element: ParseInstallation {
 	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
 	 successful or a `ParseError` if it failed.
 	 - important: If an object replaced has the same objectId as current, it will automatically replace the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -393,8 +390,8 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Updates a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -402,7 +399,7 @@ public extension Sequence where Element: ParseInstallation {
 	 - returns: A publisher that eventually produces an an array of Result enums with the object if a save was
 	 successful or a `ParseError` if it failed.
 	 - important: If an object updated has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	 - note: The default cache policy for this method is `.reloadIgnoringLocalCacheData`. If a developer
@@ -432,8 +429,8 @@ public extension Sequence where Element: ParseInstallation {
 
 	/**
 	 Deletes a collection of installations *asynchronously* and publishes when complete.
-	 - parameter batchLimit: The maximum number of objects to send in each batch. If the amount of items to be batched
-	 is greater than the `batchLimit`, the objects will be sent to the server in waves up to the `batchLimit`.
+	 - parameter limit: The maximum number of objects to send in each batch. If the amount of items to be batched
+	 is greater than the `limit`, the objects will be sent to the server in waves up to the `limit`.
 	 Defaults to 50.
 	 - parameter transaction: Treat as an all-or-nothing operation. If some operation failure occurs that
 	 prevents the transaction from completing, then none of the objects are committed to the Parse Server database.
@@ -441,7 +438,7 @@ public extension Sequence where Element: ParseInstallation {
 	 - returns: A publisher that eventually produces an an array of Result enums with `nil` if a delete was
 	 successful or a `ParseError` if it failed.
 	 - important: If an object deleted has the same objectId as current, it will automatically update the current.
-	 - warning: If `transaction = true`, then `batchLimit` will be automatically be set to the amount of the
+	 - warning: If `transaction = true`, then `limit` will be automatically be set to the amount of the
 	 objects in the transaction. The developer should ensure their respective Parse Servers can handle the limit or else
 	 the transactions can fail.
 	*/

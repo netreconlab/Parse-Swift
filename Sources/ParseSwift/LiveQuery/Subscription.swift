@@ -37,6 +37,7 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 			}
 		}
 	}
+
 	private var _subscribed: (query: Query<T>, isNew: Bool)? {
 		willSet {
 			if newValue != nil {
@@ -46,6 +47,7 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
 			}
 		}
 	}
+
 	private var _unsubscribed: Query<T>? {
 		willSet {
 			if newValue != nil {
@@ -118,9 +120,9 @@ open class Subscription<T: ParseObject>: QueryViewModel<T>, QuerySubscribable, @
      */
     public required init(query: Query<T>) {
         super.init(query: query)
-        self.subscribed = nil
-        self.event = nil
-        self.unsubscribed = nil
+        self._subscribed = nil
+        self._event = nil
+        self._unsubscribed = nil
     }
 
     // MARK: QuerySubscribable

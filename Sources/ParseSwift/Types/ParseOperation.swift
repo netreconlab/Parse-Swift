@@ -43,8 +43,8 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - keyPath: The respective `KeyPath` of the object.
         - value: The value to set the `KeyPath` to.
-        - returns: The updated operations.
-     - warning: Do not combine operations using this method with other operations that
+     - Returns: The updated operations.
+     - Warning: Do not combine operations using this method with other operations that
      do not use this method to **set** all operations. If you need to combine multiple types
      of operations such as: add, increment, forceSet, etc., use
      `func set<W>(_ key: (String, WritableKeyPath<T, W?>), value: W?)`
@@ -72,7 +72,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - value: The value to set the `KeyPath` to.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func set<W>(_ key: (String, WritableKeyPath<T, W?>),
@@ -94,7 +94,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - value: The value to set the `KeyPath` to.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
@@ -107,7 +107,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - value: The value to set the `KeyPath` to.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      - Note: Set the value to "nil" if you want it to be "null" on the Parse Server.
      */
     public func forceSet<W>(_ key: (String, WritableKeyPath<T, W?>),
@@ -127,7 +127,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - amount: How much to increment/decrement by.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      - note: A field can be incremented/decremented by a positive/negative value.
      */
     public func increment(_ key: String, by amount: Int) -> Self {
@@ -141,7 +141,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - amount: How much to increment/decrement by.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      - note: A field can be incremented/decremented by a positive/negative value.
      */
     public func increment(_ key: String, by amount: Double) -> Self {
@@ -156,7 +156,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func addUnique<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
@@ -170,7 +170,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func addUnique<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                              objects: [V]) -> Self where V: Codable & Hashable & Sendable {
@@ -187,7 +187,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func add<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
@@ -200,7 +200,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func add<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                        objects: [V]) -> Self where V: Codable & Hashable & Sendable {
@@ -217,7 +217,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func addRelation<W>(_ key: String, objects: [W]) throws -> Self where W: ParseObject {
         var mutableOperation = self
@@ -230,7 +230,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func addRelation<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                                objects: [V]) throws -> Self where V: ParseObject {
@@ -248,7 +248,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func remove<W>(_ key: String, objects: [W]) -> Self where W: Codable & Hashable & Sendable {
         var mutableOperation = self
@@ -262,7 +262,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func remove<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                           objects: [V]) -> Self where V: Codable & Hashable & Sendable {
@@ -283,7 +283,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: The key of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func removeRelation<W>(_ key: String, objects: [W]) throws -> Self where W: ParseObject {
         var mutableOperation = self
@@ -297,7 +297,7 @@ public struct ParseOperation<T>: Savable,
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
         - objects: The field of objects.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func removeRelation<V>(_ key: (String, WritableKeyPath<T, [V]?>),
                                   objects: [V]) throws -> Self where V: ParseObject {
@@ -316,11 +316,11 @@ public struct ParseOperation<T>: Savable,
      An operation that batches an array of operations on a particular field.
      - Parameters:
         - key: The key of the object.
-        - operations: The batch of operations to complete on the `key`.
-        - returns: The updated operations.
-     - warning: The developer must ensure that the respective Parse Server supports the
+        - batch: The batch of operations to complete on the `key`.
+     - Returns: The updated operations.
+     - Warning: The developer must ensure that the respective Parse Server supports the
      set of batch operations and that the operations are compatable with the field type.
-     - note: It is known that `ParseOperationAddRelation` and
+     - Note: It is known that `ParseOperationAddRelation` and
      `ParseOperationRemoveRelation` are the only two types of operations that
      can be batched together on Parse Server <= 6.0.0.
      */
@@ -345,7 +345,7 @@ public struct ParseOperation<T>: Savable,
      An operation where a field is deleted from the object.
      - Parameters:
         - key: A tuple consisting of the key and the respective `KeyPath` of the object.
-        - returns: The updated operations.
+     - Returns: The updated operations.
      */
     public func unset<V>(_ key: (String, WritableKeyPath<T, V?>)) -> Self where V: Codable & Hashable & Sendable {
         var mutableOperation = self

@@ -1,0 +1,41 @@
+import Foundation
+import ParseSwift
+
+struct User: ParseUser {
+    // These are required by ParseObject
+    var objectId: String?
+    var createdAt: Date?
+    var updatedAt: Date?
+    var ACL: ParseACL?
+    var originalData: Data?
+
+    // These are required by ParseUser
+    var username: String?
+    var email: String?
+    var emailVerified: Bool?
+    var password: String?
+    var authData: [String: [String: String]?]?
+
+    // Your custom properties
+    var customKey: String?
+
+    // Optional - implement your own version of merge
+    // for faster decoding after updating your ParseUser
+    func merge(with object: Self) throws -> Self {
+        var updated = try mergeParse(with: object)
+        if updated.shouldRestoreKey(\.customKey, original: object) {
+            updated.customKey = object.customKey
+        }
+        return updated
+    }
+}
+
+// It's recommended to place custom initializers in an extension
+// to preserve the memberwise initializer
+extension User {
+    init(username: String, password: String, email: String) {
+        self.username = username
+        self.password = password
+        self.email = email
+    }
+}

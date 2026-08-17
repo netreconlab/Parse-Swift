@@ -18,6 +18,9 @@ public extension ParseLinkedIn {
      Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
+     - parameter isMobileSDK: Setting **isMobileSDK** to **true** allows the backend
+	 to handle the token validation differently, as mobile SDK tokens may
+	 have different security characteristics than server-side tokens.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
@@ -38,6 +41,7 @@ public extension ParseLinkedIn {
     /**
      Login a `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
      - parameter authData: Dictionary containing key/values.
+     - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.
      */
@@ -57,6 +61,9 @@ public extension ParseLinkedIn {
      Link the *current* `ParseUser` *asynchronously* using LinkedIn authentication for graph API login.
      - parameter id: The **id** from **LinkedIn**.
      - parameter accessToken: Required **access_token** from **LinkedIn**.
+     - parameter isMobileSDK: Setting **isMobileSDK** to **true** allows the backend
+	 to handle the token validation differently, as mobile SDK tokens may
+	 have different security characteristics than server-side tokens.
      - parameter options: A set of header options sent to the server. Defaults to an empty set.
      - returns: An instance of the logged in `ParseUser`.
      - throws: An error of type `ParseError`.

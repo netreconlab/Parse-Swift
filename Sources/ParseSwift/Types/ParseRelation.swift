@@ -383,7 +383,7 @@ public extension ParseObject {
      Establish a relation based on a stored relation.
      - parameter relation: The stored relation property.
      - parameter key: The key for the relation.
-     - parameter with: The parent `ParseObject` Pointer of the `ParseRelation`.
+     - parameter parent: The parent `ParseObject` Pointer of the `ParseRelation`.
      - returns: A usable `ParseRelation` based on the stored relation property.
      */
     static func relation<T: ParseObject>(_ relation: ParseRelation<T>?,
@@ -403,7 +403,7 @@ public extension ParseObject {
      Establish a relation based on a stored relation.
      - parameter relation: The stored relation property.
      - parameter key: The key for the relation.
-     - parameter with: The parent `ParseObject` of the `ParseRelation`.
+     - parameter parent: The parent `ParseObject` of the `ParseRelation`.
      - returns: A usable `ParseRelation` based on the stored relation property.
      */
     static func relation<T: ParseObject>(_ relation: ParseRelation<T>?,
@@ -447,7 +447,7 @@ public extension ParseObject {
     /**
      Create a new relation with a specific key.
      - parameter key: The key for the relation.
-     - parameter className: The name of the child class for the relation.
+     - parameter object: The child `ParseObject` of the relation.
      - returns: A new `ParseRelation`.
      */
     func relation<V: ParseObject>(_ key: String, object: V.Type) throws -> ParseRelation<Self> {
@@ -479,7 +479,7 @@ public extension ParseObject {
      Establish a relation based on a stored relation.
      - parameter relation: The stored relation property.
      - parameter key: The key for the relation.
-     - parameter with: The parent `ParseObject` Pointer of the `ParseRelation`.
+     - parameter parent: The parent `ParseObject` Pointer of the `ParseRelation`.
      - returns: A usable `ParseRelation` based on the stored relation property.
      */
     func relation<T: ParseObject>(_ relation: ParseRelation<T>?,
@@ -492,7 +492,7 @@ public extension ParseObject {
      Establish a relation based on a stored relation.
      - parameter relation: The stored relation property.
      - parameter key: The key for the relation.
-     - parameter with: The parent `ParseObject` of the `ParseRelation`.
+     - parameter parent: The parent `ParseObject` of the `ParseRelation`.
      - returns: A usable `ParseRelation` based on the stored relation property.
      */
     func relation<T: ParseObject>(_ relation: ParseRelation<T>?,

@@ -35,6 +35,9 @@ let package = Package(
         .target(
             name: "ParseSwift",
 			dependencies: [],
+			resources: [
+				.process("PrivacyInfo.xcprivacy")
+			],
 			swiftSettings: sharedSwiftSettings
         ),
         .testTarget(

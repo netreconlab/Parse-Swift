@@ -154,7 +154,7 @@ public extension ParseGeoPoint {
 
     /**
      Creates a new `ParseGeoPoint` instance for the given `CLLocationCoordinate2D`, set to the location's coordinates.
-     - parameter location: Instance of `CLLocationCoordinate2D`, with set latitude and longitude.
+     - parameter coordinate: Instance of `CLLocationCoordinate2D`, with set latitude and longitude.
      - throws: An error of `ParseError` type.
      */
     init(coordinate: CLLocationCoordinate2D) throws {

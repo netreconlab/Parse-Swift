@@ -70,10 +70,10 @@ $ brew install swiftlint
 
 ### Swift Playgrounds
 
-Any feature additions should work with a real Parse Server. You can experiment with features in the ParseSwift SDK by modifying the [ParseSwift Playground files](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). It is recommended to make sure your ParseSwift workspace in Xcode is set to build for `ParseSwift` framework when using Swift Playgrounds. To configure the playgounds, you can do one of the following:
+Any feature additions should work with a real Parse Server. You can experiment with features in the ParseSwift SDK by modifying the [ParseSwift Playground files](https://github.com/netreconlab/Parse-Swift/tree/main/ParseSwift.playground/Pages). It is recommended to make sure your ParseSwift workspace in Xcode is set to build for `ParseSwift` framework when using Swift Playgrounds. To configure the playgrounds, you can do one of the following:
 
 * Use the pre-configured parse-server in [this repo](https://github.com/netreconlab/parse-hipaa/tree/parse-swift) which comes with docker compose files (`docker-compose up` gives you a working server) configured to connect with the ParseSwift Playgrounds. The docker comes with [Parse Dashboard](https://github.com/parse-community/parse-dashboard) and can be used with MongoDB or PostgreSQL.
-* Configure the ParseSwift Playgrounds to work with your own Parse Server by editing the configuation in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19).
+* Configure the ParseSwift Playgrounds to work with your own Parse Server by editing the configuration in [Common.swift](https://github.com/netreconlab/Parse-Swift/blob/e9ba846c399257100b285d25d2bd055628b13b4b/ParseSwift.playground/Sources/Common.swift#L4-L19).
 
 ### Please Do's
 

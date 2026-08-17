@@ -622,14 +622,14 @@ extension ParseLiveQuery {
 
 // MARK: SubscriptionRecord
 extension ParseLiveQuery {
-    struct SubscriptionRecord: Equatable, @unchecked Sendable {
+    struct SubscriptionRecord: Equatable, Sendable {
 
         var messageData: Data
         var queryData: Data
-        var subscriptionHandler: AnyObject
-        var eventHandlerClosure: ((Data) -> Void)?
-        var subscribeHandlerClosure: ((Bool) -> Void)?
-        var unsubscribeHandlerClosure: (() -> Void)?
+        var subscriptionHandler: AnyObject & Sendable
+        var eventHandlerClosure: (@Sendable (Data) -> Void)?
+        var subscribeHandlerClosure: (@Sendable (Bool) -> Void)?
+        var unsubscribeHandlerClosure: (@Sendable () -> Void)?
 
         init?<T: QuerySubscribable>(query: Query<T.Object>, message: SubscribeMessage<T.Object>, handler: T) {
             guard let queryData = try? ParseCoding.jsonEncoder().encode(query),
@@ -672,6 +672,7 @@ extension ParseLiveQuery {
 // MARK: Subscribing
 extension ParseLiveQuery {
 
+	@MainActor
 	func subscribe<T>(_ query: Query<T>) async throws -> Subscription<T> {
         try await subscribe(Subscription(query: query))
     }
@@ -776,6 +777,7 @@ public extension Query {
      - returns: The subscription that has just been registered.
      - throws: An error of type `ParseError`.
      */
+	@MainActor
     func subscribe(_ client: ParseLiveQuery) async throws -> Subscription<ResultType> {
         try await client.subscribe(Subscription(query: self))
     }

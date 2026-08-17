@@ -25,7 +25,7 @@ public protocol ParseFileTransferable: AnyObject, Sendable {
      - parameter completion: The completion handler to call when the load request
      is complete. Should be in the form `(Data?, URLResponse?, URLRequest?, Error?)`.
     `Data` and `URLResponse` should be created using `makeSuccessfulUploadResponse()`.
-    `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
+    `URLRequest` is the request used to upload the file if available. `Error` is any error that occurred
      that prevented the file upload.
      */
     func upload(
@@ -43,7 +43,7 @@ public protocol ParseFileTransferable: AnyObject, Sendable {
      - parameter completion: The completion handler to call when the load request
      is complete. Should be in the form `(Data?, URLResponse?, URLRequest?, Error?)`.
     `Data` and `URLResponse` should be created using `makeSuccessfulUploadResponse()`.
-    `URLRequest` is the request used to upload the file if available. `Error` is any error that occured
+    `URLRequest` is the request used to upload the file if available. `Error` is any error that occurred
      that prevented the file upload.
      */
     func upload(
