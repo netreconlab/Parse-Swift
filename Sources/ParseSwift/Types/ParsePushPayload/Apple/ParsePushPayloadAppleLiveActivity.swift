@@ -6,6 +6,8 @@
 //  Copyright © 2024 Network Reconnaissance Lab. All rights reserved.
 //
 
+import Foundation
+
 /// The payload data for an Apple LiveActivity push notification.
 public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
 
@@ -45,7 +47,11 @@ public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
 
     public var threadId: String?
 
-    public var mdm: String?
+    public var id: UUID?
+
+    public var requestId: UUID?
+
+    public var channelId: String?
 
     public var alert: ParsePushAppleAlert?
 
@@ -60,7 +66,7 @@ public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
         case interruptionLevel = "interruption-level"
         case urlArgs = "url-args"
         case threadId = "thread-id"
-        case category, sound, badge, alert, topic
+        case category, sound, badge, alert, event
     }
 
     public init() {
@@ -85,7 +91,7 @@ public struct ParsePushPayloadAppleLiveActivity: ParsePushApplePayload {
         sound = try values.decodeIfPresent(AnyCodable.self, forKey: .sound)
         badge = try values.decodeIfPresent(AnyCodable.self, forKey: .badge)
         threadId = try values.decodeIfPresent(String.self, forKey: .threadId)
-        topic = try values.decodeIfPresent(String.self, forKey: .topic)
+        event = try values.decodeIfPresent(Event.self, forKey: .event)
         interruptionLevel = try values.decodeIfPresent(String.self, forKey: .interruptionLevel)
         urlArgs = try values.decodeIfPresent([String].self, forKey: .urlArgs)
     }

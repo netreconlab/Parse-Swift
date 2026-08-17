@@ -10,66 +10,36 @@ import Foundation
 
 struct ParsePushAppleNotification<P: ParsePushApplePayload>: ParsePushAppleHeader, ParsePushPayloadable {
 
-    struct APS: ParseTypeable {
-        var payload: P
-
-        enum CodingKeys: String, CodingKey {
-            case payload = "aps"
-        }
-    }
-
     // Notification Header properties set by parse-server-push-adapter.
     var collapseId: String?
     var priority: Int?
     var pushType: ParsePushPayloadApple.PushType?
     var topic: String?
 
-    // Notification Header properties set directly.
+    // Notification Header properties used for broadcast push notifications.
     var id: UUID?
     var requestId: UUID?
     var channelId: String?
-    var payload: APS?
+
+    // The `aps` payload delivered to the device.
+    var payload: P?
 
     public init() {}
 
-    init(
-        id: UUID? = nil,
-        collapseId: String? = nil,
-        requestId: UUID? = nil,
-        channelId: String? = nil,
-        priority: Int? = nil,
-        topic: String? = nil,
-        payload: P
-    ) {
-        self.id = id
-        self.collapseId = collapseId
-        self.requestId = requestId
-        self.channelId = channelId
-        self.priority = priority
-        self.topic = topic
+    init(payload: P) {
+        self.id = payload.id
+        self.collapseId = payload.collapseId
+        self.requestId = payload.requestId
+        self.channelId = payload.channelId
+        self.priority = payload.priority
+        self.topic = payload.topic
         self.pushType = payload.pushType
-        self.payload = APS(payload: payload)
+        self.payload = payload
     }
 
     enum CodingKeys: String, CodingKey {
-        case pushType = "push_type"
-        case payload = "rawPayload"
-        case collapseId, priority, topic, id, requestId, channelId
+        case payload = "aps"
+        case collapseId, priority, topic, id, requestId, channelId, pushType
     }
 
-}
-
-extension ParsePushAppleNotification where P: ParsePushApplePayload & ParsePushAppleHeader {
-
-    init(
-        id: UUID? = nil,
-        payload: P
-    ) {
-        self.id = id
-        self.collapseId = payload.collapseId
-        self.pushType = payload.pushType
-        self.priority = payload.priority
-        self.topic = payload.topic
-        self.payload = APS(payload: payload)
-    }
 }

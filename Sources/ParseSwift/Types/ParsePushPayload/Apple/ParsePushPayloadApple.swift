@@ -8,15 +8,21 @@
 
 import Foundation
 
+// swiftlint:disable line_length
+
 /// The payload data for an Apple push notification.
 public struct ParsePushPayloadApple: ParsePushApplePayload {
 
     // MARK: Header and other high level information.
     public var collapseId: String?
-    public var mdm: String?
     public var priority: Int?
     public var pushType: PushType? = .alert
     public var topic: String?
+
+    // MARK: Broadcast push notification information.
+    public var id: UUID?
+    public var requestId: UUID?
+    public var channelId: String?
 
     // MARK: APS information.
     public var contentAvailable: Int?

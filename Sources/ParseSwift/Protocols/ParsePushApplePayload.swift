@@ -10,7 +10,7 @@ import Foundation
 
 // swiftlint:disable line_length
 
-protocol ParsePushAppleHeader {
+public protocol ParsePushAppleHeader {
 
     /**
      The unique ID for the notification.
@@ -55,7 +55,7 @@ protocol ParsePushAppleHeader {
     var pushType: ParsePushPayloadApple.PushType? { get set }
 }
 
-public protocol ParsePushApplePayload: ParsePushApplePayloadable {
+public protocol ParsePushApplePayload: ParsePushApplePayloadable, ParsePushAppleHeader {
     /**
      The background notification flag. If you are a writing an app using the Remote Notification
      Background Mode introduced in iOS7 (a.k.a. “Background Push”), set this value to
