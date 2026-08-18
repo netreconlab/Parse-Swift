@@ -12,6 +12,11 @@ import XCTest
 
 // swiftlint:disable line_length
 
+private struct LiveActivityContentState: Codable, Sendable, Equatable {
+    var currentHealthLevel: Double
+    var eventDescription: String
+}
+
 class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
@@ -216,5 +221,63 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
         // payload, so only the encodable fields are compared here.
         XCTAssertEqual(decoded.event, .start)
         XCTAssertEqual(decoded.alert, payload.alert)
+    }
+
+    func testParsePushAppleLiveActivityContent() throws {
+        let contentState = LiveActivityContentState(currentHealthLevel: 0.5, eventDescription: "hi")
+        var payload = ParsePushPayloadAppleLiveActivity()
+        payload.event = .update
+        payload.timestamp = 1685952000
+        payload.staleDate = 1685955600
+        payload.dismissalDate = 1685959200
+        payload.attributesType = "AdventureAttributes"
+        payload.filterCriteria = "myFocus"
+        payload.relevanceScore = 1.0
+        payload.alert = ParsePushAppleAlert(body: "Live!")
+        payload = payload.setContentState(contentState)
+        payload.topic = "com.example.app"
+
+        let retrievedContentState: LiveActivityContentState = try payload.getContentState()
+        XCTAssertEqual(retrievedContentState, contentState)
+
+        XCTAssertEqual(payload.description,
+                       "{\"alert\":{\"body\":\"Live!\"},\"attributes-type\":\"AdventureAttributes\",\"content-state\":{\"currentHealthLevel\":0.5,\"eventDescription\":\"hi\"},\"dismissal-date\":1685959200,\"event\":\"update\",\"filter-criteria\":\"myFocus\",\"relevance-score\":1,\"stale-date\":1685955600,\"timestamp\":1685952000}")
+
+        // The notification wraps the payload under `aps` and lifts the header fields.
+        let notification = ParsePushAppleNotification(payload: payload)
+        XCTAssertEqual(notification.description,
+                       "{\"aps\":{\"alert\":{\"body\":\"Live!\"},\"attributes-type\":\"AdventureAttributes\",\"content-state\":{\"currentHealthLevel\":0.5,\"eventDescription\":\"hi\"},\"dismissal-date\":1685959200,\"event\":\"update\",\"filter-criteria\":\"myFocus\",\"relevance-score\":1,\"stale-date\":1685955600,\"timestamp\":1685952000},\"priority\":5,\"pushType\":\"liveactivity\",\"topic\":\"com.example.app\"}")
+
+        // Verify the aps-level fields survive a round-trip.
+        let encoded = try ParseCoding.parseEncoder().encode(payload)
+        let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAppleLiveActivity.self, from: encoded)
+        XCTAssertEqual(decoded.event, .update)
+        XCTAssertEqual(decoded.timestamp, 1685952000)
+        XCTAssertEqual(decoded.staleDate, 1685955600)
+        XCTAssertEqual(decoded.dismissalDate, 1685959200)
+        XCTAssertEqual(decoded.attributesType, "AdventureAttributes")
+        XCTAssertEqual(decoded.filterCriteria, "myFocus")
+        let reEncoded = try ParseCoding.parseEncoder().encode(decoded)
+        XCTAssertEqual(encoded, reEncoded)
+    }
+
+    func testParsePushAppleLiveActivityAttributes() throws {
+        let attributes = LiveActivityContentState(currentHealthLevel: 1.0, eventDescription: "start")
+        let payload = ParsePushPayloadAppleLiveActivity()
+            .setAttributes(attributes)
+        let retrievedAttributes: LiveActivityContentState = try payload.getAttributes()
+        XCTAssertEqual(retrievedAttributes, attributes)
+        XCTAssertThrowsError(try payload.getAttributes() as String)
+    }
+
+    func testFilterCriteria() throws {
+        var applePayload = ParsePushPayloadApple(body: "hello")
+        applePayload.filterCriteria = "myFocus"
+        let encoded = try ParseCoding.parseEncoder().encode(applePayload)
+        let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encoded)
+        XCTAssertEqual(applePayload, decoded)
+        XCTAssertEqual(decoded.filterCriteria, "myFocus")
+        XCTAssertEqual(applePayload.description,
+                       "{\"alert\":{\"body\":\"hello\"},\"filter-criteria\":\"myFocus\"}")
     }
 }

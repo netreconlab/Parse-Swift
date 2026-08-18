@@ -6,7 +6,7 @@
 * _Contributing to this repo? Add info about your change here to be included in the next release_
 
 __New features__
-* Add support for broadcast Apple push notifications by exposing the `id`, `requestId`, and `channelId` notification header fields, and encode the `event` field for Live Activity payloads ([#184](https://github.com/netreconlab/Parse-Swift/pull/184)), thanks to [Corey Baker](https://github.com/cbaker6).
+* Add support for broadcast Apple push notifications by exposing the `id`, `requestId`, and `channelId` notification header fields. Complete Live Activity support by encoding the `event`, `content-state`, `timestamp`, `stale-date`, `dismissal-date`, `attributes`, and `attributes-type` payload fields, and add the `filter-criteria` field to Apple push payloads ([#184](https://github.com/netreconlab/Parse-Swift/pull/184)), thanks to [Corey Baker](https://github.com/cbaker6).
 
 __Fixes__
 * Encode Apple push notifications in the format expected by the parse-server-push-adapter, wrapping the payload in `aps` and lifting notification header fields such as `pushType`, `collapseId`, `priority`, and `topic` to the top level. `ParsePushAppleHeader` is now public, and the unused `mdm` property has been removed ([#184](https://github.com/netreconlab/Parse-Swift/pull/184)), thanks to [Corey Baker](https://github.com/cbaker6).

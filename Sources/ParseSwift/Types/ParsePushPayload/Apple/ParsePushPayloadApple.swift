@@ -33,6 +33,11 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
     public var category: String?
     public var urlArgs: [String]?
     public var threadId: String?
+    /**
+     The criteria the system evaluates to determine if it displays the notification in the current Focus.
+     For more information, see [SetFocusFilterIntent](https://developer.apple.com/documentation/AppIntents/SetFocusFilterIntent).
+     */
+    public var filterCriteria: String?
     public var alert: ParsePushAppleAlert?
 
     var badge: AnyCodable?
@@ -85,6 +90,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
         case interruptionLevel = "interruption-level"
         case urlArgs = "url-args"
         case threadId = "thread-id"
+        case filterCriteria = "filter-criteria"
         case category, sound, badge, alert
     }
 
@@ -109,6 +115,7 @@ public struct ParsePushPayloadApple: ParsePushApplePayload {
         threadId = try values.decodeIfPresent(String.self, forKey: .threadId)
         interruptionLevel = try values.decodeIfPresent(String.self, forKey: .interruptionLevel)
         urlArgs = try values.decodeIfPresent([String].self, forKey: .urlArgs)
+        filterCriteria = try values.decodeIfPresent(String.self, forKey: .filterCriteria)
     }
 }
 
