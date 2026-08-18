@@ -76,15 +76,14 @@ class ParsePushPayloadAnyTests: XCTestCase, @unchecked Sendable {
         anyPayload.sound = AnyCodable(sound)
         anyPayload.urlArgs = ["help"]
         anyPayload.interruptionLevel = "yolo"
-        anyPayload.topic = "naw"
         anyPayload.threadId = "yep"
-        anyPayload.collapseId = "nope"
-        anyPayload.pushType = .background
         anyPayload.targetContentId = "press"
         anyPayload.relevanceScore = 2.0
-        anyPayload.priority = 6
         anyPayload.contentAvailable = 1
         anyPayload.mutableContent = 1
+        // `topic`, `collapseId`, `pushType`, and `priority` are notification header
+        // fields that are lifted out of the `aps` payload, so they are not encoded as
+        // part of the payload and cannot be verified through an encode/decode round-trip.
 
         // Set Firebase
         anyPayload.notification = notification
@@ -102,17 +101,13 @@ class ParsePushPayloadAnyTests: XCTestCase, @unchecked Sendable {
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encoded)
         XCTAssertEqual(applePayload, decoded)
         XCTAssertEqual(applePayload.description,
-                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"collapse_id\":\"nope\",\"content-available\":1,\"interruptionLevel\":\"yolo\",\"mutable-content\":1,\"priority\":6,\"push_type\":\"background\",\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"targetContentIdentifier\":\"press\",\"threadId\":\"yep\",\"topic\":\"naw\",\"urlArgs\":[\"help\"]}")
-        let decodedAny = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encoded).convertToApple()
-        XCTAssertEqual(decodedAny, applePayload)
+                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"content-available\":1,\"interruption-level\":\"yolo\",\"mutable-content\":1,\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"target-content-id\":\"press\",\"thread-id\":\"yep\",\"url-args\":[\"help\"]}")
 
         // Test Firebase
         let fcmPayload = anyPayload.convertToFirebase()
         let encoded2 = try ParseCoding.parseEncoder().encode(fcmPayload)
         let decoded2 = try ParseCoding.jsonDecoder().decode(ParsePushPayloadFirebase.self, from: encoded2)
         XCTAssertEqual(fcmPayload, decoded2)
-        let decodedAny2 = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encoded).convertToApple()
-        XCTAssertEqual(decodedAny2, applePayload)
         #if !os(Linux) && !os(Android) && !os(Windows) && !os(WASI)
         XCTAssertEqual(fcmPayload.description,
                        "{\"collapseKey\":\"nope\",\"data\":{\"help\":\"you\"},\"delayWhileIdle\":false,\"dryRun\":false,\"notification\":{\"android_channel_id\":\"you\",\"badge\":\"no\",\"body\":\"android\",\"body_loc_args\":[\"mother\"],\"body_loc_key\":\"cousin\",\"click_action\":\"to\",\"color\":\"blue\",\"icon\":\"world\",\"image\":\"icon\",\"sound\":\"yes\",\"subtitle\":\"trip\",\"tag\":\"it\",\"title\":\"hello\",\"title_loc_args\":[\"arg\"],\"title_loc_key\":\"it\"},\"restrictedPackageName\":\"geez\",\"title\":\"peace\",\"uri\":\"https:\\/\\/parse.org\"}")
@@ -169,28 +164,25 @@ class ParsePushPayloadAnyTests: XCTestCase, @unchecked Sendable {
         anyPayload.sound = AnyCodable(sound)
         anyPayload.urlArgs = ["help"]
         anyPayload.interruptionLevel = "yolo"
-        anyPayload.topic = "naw"
         anyPayload.threadId = "yep"
-        anyPayload.collapseId = "nope"
-        anyPayload.pushType = .background
         anyPayload.targetContentId = "press"
         anyPayload.relevanceScore = 2.0
-        anyPayload.priority = 6
         anyPayload.contentAvailable = 1
         anyPayload.mutableContent = 1
+        // `topic`, `collapseId`, `pushType`, and `priority` are notification header
+        // fields that are lifted out of the `aps` payload, so they are not encoded as
+        // part of the payload and cannot be verified through an encode/decode round-trip.
 
         let applePayload = anyPayload.convertToApple()
         let encoded = try ParseCoding.parseEncoder().encode(applePayload)
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encoded)
         XCTAssertEqual(applePayload, decoded)
         XCTAssertEqual(applePayload.description,
-                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"collapse_id\":\"nope\",\"content-available\":1,\"interruptionLevel\":\"yolo\",\"mutable-content\":1,\"priority\":6,\"push_type\":\"background\",\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"targetContentIdentifier\":\"press\",\"threadId\":\"yep\",\"topic\":\"naw\",\"urlArgs\":[\"help\"]}")
-        let decoded2 = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encoded).convertToApple()
-        XCTAssertEqual(decoded2, applePayload)
+                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"content-available\":1,\"interruption-level\":\"yolo\",\"mutable-content\":1,\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"target-content-id\":\"press\",\"thread-id\":\"yep\",\"url-args\":[\"help\"]}")
         var applePayload2 = applePayload
         applePayload2.sound = AnyCodable("wow")
         let encodedSound = try ParseCoding.parseEncoder().encode(applePayload2)
-        let decodedSound = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAny.self, from: encodedSound).convertToApple()
+        let decodedSound = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encodedSound)
         XCTAssertEqual(decodedSound, applePayload2)
     }
 

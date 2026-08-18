@@ -17,19 +17,8 @@ import Foundation
  need to implement `CodingKeys`, see `ParsePushPayloadApple` for an example.
  */
 public protocol ParsePushApplePayloadable: ParsePushPayloadable {
-    /**
-     The payload for displaying an alert.
-     */
-    var alert: ParsePushAppleAlert? { get set }
-    /**
-     The destination topic for the notification.
-     */
-    var topic: String? { get set }
-    /**
-     Multiple notifications with same collapse identifier are displayed to the user as a single
-     notification. The value should not exceed 64 bytes.
-     */
-    var collapseId: String? { get set }
+
+    // MARK: Header and other high level information.
     /**
      The type of the notification. The value is alert or background. Specify alert when the
      delivery of your notification displays an alert, plays a sound, or badges your app’s icon.
@@ -39,6 +28,13 @@ public protocol ParsePushApplePayloadable: ParsePushPayloadable {
      devices running iOS 13 and later, or watchOS 6 and later. Ignored on earlier OS versions.
      */
     var pushType: ParsePushPayloadApple.PushType? { get set }
+
+    // MARK: APS information.
+
+    /**
+     The payload for displaying an alert.
+     */
+    var alert: ParsePushAppleAlert? { get set }
     /**
      The identifier of the `UNNotification​Category` for this push notification.
      See Apple's
@@ -78,8 +74,44 @@ public protocol ParsePushApplePayloadable: ParsePushPayloadable {
      notification summary. See [relevanceScore](https://developer.apple.com/documentation/usernotifications/unnotificationcontent/3821031-relevancescore).
      */
     var relevanceScore: Double? { get set }
+
+    init()
+}
+
+public extension ParsePushApplePayloadable {
+
     /**
-     Specify for the `mdm` field where applicable.
+     The content of the alert message.
      */
-    var mdm: String? { get set }
+    var body: String? {
+        get {
+            alert?.body
+        }
+        set {
+            if alert != nil {
+                alert?.body = newValue
+            } else if let newBody = newValue {
+                alert = .init(body: newBody)
+            }
+        }
+    }
+
+    /**
+     Create an instance of `ParsePushPayloadApple` .
+     - parameter alert: The alert payload for the Apple push notification.
+     */
+    init(alert: ParsePushAppleAlert) {
+        self.init()
+        self.alert = alert
+    }
+
+    /**
+     Create an instance of `ParsePushPayloadApple` .
+     - parameter body: The body message to display for the Apple push notification.
+     */
+    init(body: String) {
+        self.init()
+        self.body = body
+    }
+
 }
