@@ -22,7 +22,6 @@ public struct ParsePushPayloadAny: ParsePushApplePayloadable, ParsePushFirebaseP
     public var threadId: String?
     public var interruptionLevel: String?
     public var relevanceScore: Double?
-    public var mdm: String?
     public var uri: URL?
     public var title: String?
     public var collapseKey: String?
@@ -42,39 +41,16 @@ public struct ParsePushPayloadAny: ParsePushApplePayloadable, ParsePushFirebaseP
         let values = try decoder.container(keyedBy: RawCodingKey.self)
         relevanceScore = try values.decodeIfPresent(Double.self, forKey: .key("relevance-score"))
         targetContentId = try values.decodeIfPresent(String.self, forKey: .key("targetContentIdentifier"))
-        do {
-            mutableContent = try values.decode(AnyCodable.self, forKey: .key("mutable-content"))
-        } catch {
-            mutableContent = try values.decodeIfPresent(AnyCodable.self, forKey: .key("mutableContent"))
-        }
-        do {
-            contentAvailable = try values.decode(AnyCodable.self, forKey: .key("content-available"))
-        } catch {
-            contentAvailable = try values.decodeIfPresent(AnyCodable.self, forKey: .key("contentAvailable"))
-        }
-        do {
-            let priorityInt = try values.decode(Int.self, forKey: .key("priority"))
-            priority = AnyCodable(priorityInt)
-        } catch {
-            if let priorityString = try values.decodeIfPresent(String.self, forKey: .key("priority")),
-               let priorityEnum = ParsePushPayloadFirebase.PushPriority(rawValue: priorityString) {
-                priority = AnyCodable(priorityEnum)
-            }
-        }
+        mutableContent = try Self.decodeAny(values, first: "mutable-content", second: "mutableContent")
+        contentAvailable = try Self.decodeAny(values, first: "content-available", second: "contentAvailable")
+        priority = try Self.decodePriority(values)
         pushType = try values.decodeIfPresent(ParsePushPayloadApple.PushType.self, forKey: .key("push_type"))
         collapseId = try values.decodeIfPresent(String.self, forKey: .key("collapse_id"))
         category = try values.decodeIfPresent(String.self, forKey: .key("category"))
         sound = try values.decodeIfPresent(AnyCodable.self, forKey: .key("sound"))
         badge = try values.decodeIfPresent(AnyCodable.self, forKey: .key("badge"))
-        do {
-            alert = try values.decode(ParsePushAppleAlert.self, forKey: .key("alert"))
-        } catch {
-            if let alertBody = try? values.decode(String.self, forKey: .key("alert")) {
-                alert = ParsePushAppleAlert(body: alertBody)
-            }
-        }
+        alert = try Self.decodeAlert(values)
         threadId = try values.decodeIfPresent(String.self, forKey: .key("threadId"))
-        mdm = try values.decodeIfPresent(String.self, forKey: .key("mdm"))
         topic = try values.decodeIfPresent(String.self, forKey: .key("topic"))
         interruptionLevel = try values.decodeIfPresent(String.self, forKey: .key("interruptionLevel"))
         urlArgs = try values.decodeIfPresent([String].self, forKey: .key("urlArgs"))
@@ -88,6 +64,46 @@ public struct ParsePushPayloadAny: ParsePushApplePayloadable, ParsePushFirebaseP
         notification = try values.decodeIfPresent(ParsePushFirebaseNotification.self, forKey: .key("notification"))
     }
 
+    static func decodeAny(
+        _ values: KeyedDecodingContainer<RawCodingKey>,
+        first: String,
+        second: String
+    ) throws -> AnyCodable? {
+        do {
+            return try values.decode(AnyCodable.self, forKey: .key(first))
+        } catch {
+            return try values.decodeIfPresent(AnyCodable.self, forKey: .key(second))
+        }
+    }
+
+    static func decodePriority(
+        _ values: KeyedDecodingContainer<RawCodingKey>
+    ) throws -> AnyCodable? {
+        do {
+            let priorityInt = try values.decode(Int.self, forKey: .key("priority"))
+            return AnyCodable(priorityInt)
+        } catch {
+            if let priorityString = try values.decodeIfPresent(String.self, forKey: .key("priority")),
+                let priorityEnum = ParsePushPayloadFirebase.PushPriority(rawValue: priorityString) {
+                return AnyCodable(priorityEnum)
+            }
+            return nil
+        }
+    }
+
+    static func decodeAlert(
+        _ values: KeyedDecodingContainer<RawCodingKey>
+    ) throws -> ParsePushAppleAlert? {
+        do {
+            return try values.decode(ParsePushAppleAlert.self, forKey: .key("alert"))
+        } catch {
+            if let alertBody = try? values.decode(String.self, forKey: .key("alert")) {
+                return ParsePushAppleAlert(body: alertBody)
+            }
+            return nil
+        }
+    }
+
     public init() {}
 
     /**
@@ -98,14 +114,18 @@ public struct ParsePushPayloadAny: ParsePushApplePayloadable, ParsePushFirebaseP
         var payload = ParsePushPayloadApple()
         payload.topic = topic
         payload.collapseId = collapseId
-        payload.pushType = pushType
+        // Only override the default `pushType` when a value is present so the
+        // resulting payload keeps its default when converting from an `Any` payload
+        // that does not specify one.
+        if let pushType = pushType {
+            payload.pushType = pushType
+        }
         payload.category = category
         payload.urlArgs = urlArgs
         payload.targetContentId = targetContentId
         payload.threadId = threadId
         payload.interruptionLevel = interruptionLevel
         payload.relevanceScore = relevanceScore
-        payload.mdm = mdm
         payload.alert = alert
         payload.badge = badge
         payload.sound = sound

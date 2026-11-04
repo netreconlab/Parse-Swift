@@ -12,6 +12,11 @@ import XCTest
 
 // swiftlint:disable line_length
 
+private struct LiveActivityContentState: Codable, Sendable, Equatable {
+    var currentHealthLevel: Double
+    var eventDescription: String
+}
+
 class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
 
     override func setUp() async throws {
@@ -39,10 +44,12 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
     func testInitializers() throws {
         let body = "Hello from ParseSwift!"
         var applePayload = ParsePushPayloadApple(body: body)
-        XCTAssertEqual(applePayload.description,
-                       "{\"alert\":{\"body\":\"\(body)\"},\"push_type\":\"alert\"}")
+        let appleNotification = ParsePushAppleNotification(payload: applePayload)
+        XCTAssertEqual(appleNotification.description,
+                       "{\"aps\":{\"alert\":{\"body\":\"\(body)\"}},\"pushType\":\"alert\"}")
         let applePayload2 = ParsePushPayloadApple(alert: .init(body: body))
-        XCTAssertEqual(applePayload, applePayload2)
+        let appleNotification2 = ParsePushAppleNotification(payload: applePayload2)
+        XCTAssertEqual(appleNotification, appleNotification2)
         XCTAssertEqual(applePayload.body, body)
         applePayload.alert = nil
         XCTAssertNil(applePayload.body)
@@ -50,29 +57,42 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(applePayload.alert, applePayload2.alert)
     }
 
+    func testParsePushAppleNotification() throws {
+        let body = "Hello from ParseSwift!"
+        var applePayload = ParsePushPayloadApple(body: body)
+        applePayload.collapseId = "hello"
+        applePayload.pushType = .background
+        applePayload.priority = 1
+        let appleNotification = ParsePushAppleNotification(payload: applePayload)
+        XCTAssertEqual(
+            appleNotification.description,
+            "{\"aps\":{\"alert\":{\"body\":\"\(body)\"}},\"collapseId\":\"hello\",\"priority\":1,\"pushType\":\"background\"}"
+        )
+    }
+
     func testBadge() throws {
         let applePayload = ParsePushPayloadApple()
             .setBadge(1)
         XCTAssertEqual(applePayload.description,
-                       "{\"badge\":1,\"push_type\":\"alert\"}")
+                       "{\"badge\":1}")
         let applePayload2 = ParsePushPayloadApple()
             .incrementBadge()
         XCTAssertEqual(applePayload2.description,
-                       "{\"badge\":{\"__op\":\"Increment\",\"amount\":1},\"push_type\":\"alert\"}")
+                       "{\"badge\":{\"__op\":\"Increment\",\"amount\":1}}")
     }
 
     func testSound() throws {
         let applePayload = ParsePushPayloadApple()
             .setSound("hello")
         XCTAssertEqual(applePayload.description,
-                       "{\"push_type\":\"alert\",\"sound\":\"hello\"}")
+                       "{\"sound\":\"hello\"}")
         let soundString: String = try applePayload.getSound()
         XCTAssertEqual(soundString, "hello")
         let sound = ParsePushAppleSound(critical: true, name: "hello", volume: 7)
         let applePayload2 = ParsePushPayloadApple()
             .setSound(sound)
         XCTAssertEqual(applePayload2.description,
-                       "{\"push_type\":\"alert\",\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7}}")
+                       "{\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7}}")
         let soundObject: ParsePushAppleSound = try applePayload2.getSound()
         XCTAssertEqual(soundObject, sound)
         XCTAssertThrowsError(try applePayload2.getSound() as String)
@@ -98,11 +118,14 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
             .setSound(sound)
         applePayload.urlArgs = ["help"]
         applePayload.interruptionLevel = "yolo"
-        applePayload.topic = "naw"
         applePayload.threadId = "yep"
-        applePayload.collapseId = "nope"
-        applePayload.pushType = .background
-        applePayload.priority = 6
+        // The following are notification header fields that are lifted out of the
+        // `aps` payload by `ParsePushAppleNotification`, so they do not round-trip
+        // through the payload's own encoding.
+        // applePayload.topic = "naw"
+        // applePayload.collapseId = "nope"
+        // applePayload.pushType = .background
+        // applePayload.priority = 6
         applePayload.contentAvailable = 1
         applePayload.mutableContent = 1
         applePayload.targetContentId = "press"
@@ -111,7 +134,7 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
         let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encoded)
         XCTAssertEqual(applePayload, decoded)
         XCTAssertEqual(applePayload.description,
-                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"collapse_id\":\"nope\",\"content-available\":1,\"interruptionLevel\":\"yolo\",\"mutable-content\":1,\"priority\":6,\"push_type\":\"background\",\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"targetContentIdentifier\":\"press\",\"threadId\":\"yep\",\"topic\":\"naw\",\"urlArgs\":[\"help\"]}")
+                       "{\"alert\":{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"},\"badge\":1,\"content-available\":1,\"interruption-level\":\"yolo\",\"mutable-content\":1,\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"target-content-id\":\"press\",\"thread-id\":\"yep\",\"url-args\":[\"help\"]}")
         XCTAssertEqual(alert.description, "{\"action\":\"to\",\"action-loc-key\":\"icon\",\"body\":\"pull up\",\"launch-image\":\"it\",\"loc-args\":[\"mother\"],\"loc-key\":\"cousin\",\"subtitle\":\"trip\",\"subtitle-loc-args\":[\"gone\"],\"subtitle-loc-key\":\"far\",\"title\":\"you\",\"title-loc-args\":[\"arg\"],\"title-loc-key\":\"it\"}")
         let alert2 = ParsePushAppleAlert()
         XCTAssertNotEqual(alert, alert2)
@@ -142,21 +165,119 @@ class ParsePushPayloadAppleTests: XCTestCase, @unchecked Sendable {
         applePayload.sound = AnyCodable(sound)
         applePayload.urlArgs = ["help"]
         applePayload.interruptionLevel = "yolo"
-        applePayload.topic = "naw"
         applePayload.threadId = "yep"
-        applePayload.collapseId = "nope"
-        applePayload.pushType = .background
         applePayload.targetContentId = "press"
         applePayload.relevanceScore = 2.0
-        applePayload.priority = 6
         applePayload.contentAvailable = 1
         applePayload.mutableContent = 1
 
-        guard let jsonData = "{\"alert\":\"pull up\",\"badge\":1,\"collapse_id\":\"nope\",\"content-available\":1,\"interruptionLevel\":\"yolo\",\"mutable-content\":1,\"priority\":6,\"push_type\":\"background\",\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"targetContentIdentifier\":\"press\",\"threadId\":\"yep\",\"topic\":\"naw\",\"urlArgs\":[\"help\"]}".data(using: .utf8) else {
+        guard let jsonData = "{\"alert\":\"pull up\",\"badge\":1,\"content-available\":1,\"interruption-level\":\"yolo\",\"mutable-content\":1,\"relevance-score\":2,\"sound\":{\"critical\":true,\"name\":\"hello\",\"volume\":7},\"target-content-id\":\"press\",\"thread-id\":\"yep\",\"url-args\":[\"help\"]}".data(using: .utf8) else {
             XCTFail("Should have unwrapped")
             return
         }
         let decodedAlert = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: jsonData)
         XCTAssertEqual(decodedAlert, applePayload)
+    }
+
+    func testParsePushAppleNotificationBroadcast() throws {
+        guard let id = UUID(uuidString: "6b71d31d-8dfc-4e4a-8d2c-000000000001"),
+              let requestId = UUID(uuidString: "6b71d31d-8dfc-4e4a-8d2c-000000000002") else {
+            XCTFail("Should create UUIDs")
+            return
+        }
+        var applePayload = ParsePushPayloadApple(body: "Hello from ParseSwift!")
+        applePayload.id = id
+        applePayload.requestId = requestId
+        applePayload.channelId = "channel"
+        applePayload.topic = "com.example.app"
+        // The broadcast header fields are lifted out of the payload and set on the
+        // notification so that the parse-server-push-adapter can populate the APNs headers.
+        let appleNotification = ParsePushAppleNotification(payload: applePayload)
+        XCTAssertEqual(appleNotification.id, id)
+        XCTAssertEqual(appleNotification.requestId, requestId)
+        XCTAssertEqual(appleNotification.channelId, "channel")
+        XCTAssertEqual(appleNotification.topic, "com.example.app")
+        XCTAssertEqual(appleNotification.pushType, .alert)
+    }
+
+    func testParsePushAppleLiveActivity() throws {
+        var payload = ParsePushPayloadAppleLiveActivity()
+        payload.event = .start
+        payload.alert = ParsePushAppleAlert(body: "Live!")
+        XCTAssertEqual(payload.pushType, .liveactivity)
+        XCTAssertEqual(payload.priority, 5)
+        XCTAssertEqual(payload.description,
+                       "{\"alert\":{\"body\":\"Live!\"},\"event\":\"start\"}")
+
+        let notification = ParsePushAppleNotification(payload: payload)
+        XCTAssertEqual(notification.pushType, .liveactivity)
+        XCTAssertEqual(notification.priority, 5)
+        XCTAssertEqual(notification.description,
+                       "{\"aps\":{\"alert\":{\"body\":\"Live!\"},\"event\":\"start\"},\"priority\":5,\"pushType\":\"liveactivity\"}")
+
+        let encoded = try ParseCoding.parseEncoder().encode(payload)
+        let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAppleLiveActivity.self, from: encoded)
+        // `priority` is a notification header default that is not encoded in the `aps`
+        // payload, so only the encodable fields are compared here.
+        XCTAssertEqual(decoded.event, .start)
+        XCTAssertEqual(decoded.alert, payload.alert)
+    }
+
+    func testParsePushAppleLiveActivityContent() throws {
+        let contentState = LiveActivityContentState(currentHealthLevel: 0.5, eventDescription: "hi")
+        var payload = ParsePushPayloadAppleLiveActivity()
+        payload.event = .update
+        payload.timestamp = 1685952000
+        payload.staleDate = 1685955600
+        payload.dismissalDate = 1685959200
+        payload.attributesType = "AdventureAttributes"
+        payload.filterCriteria = "myFocus"
+        payload.relevanceScore = 1.0
+        payload.alert = ParsePushAppleAlert(body: "Live!")
+        payload = payload.setContentState(contentState)
+        payload.topic = "com.example.app"
+
+        let retrievedContentState: LiveActivityContentState = try payload.getContentState()
+        XCTAssertEqual(retrievedContentState, contentState)
+
+        XCTAssertEqual(payload.description,
+                       "{\"alert\":{\"body\":\"Live!\"},\"attributes-type\":\"AdventureAttributes\",\"content-state\":{\"currentHealthLevel\":0.5,\"eventDescription\":\"hi\"},\"dismissal-date\":1685959200,\"event\":\"update\",\"filter-criteria\":\"myFocus\",\"relevance-score\":1,\"stale-date\":1685955600,\"timestamp\":1685952000}")
+
+        // The notification wraps the payload under `aps` and lifts the header fields.
+        let notification = ParsePushAppleNotification(payload: payload)
+        XCTAssertEqual(notification.description,
+                       "{\"aps\":{\"alert\":{\"body\":\"Live!\"},\"attributes-type\":\"AdventureAttributes\",\"content-state\":{\"currentHealthLevel\":0.5,\"eventDescription\":\"hi\"},\"dismissal-date\":1685959200,\"event\":\"update\",\"filter-criteria\":\"myFocus\",\"relevance-score\":1,\"stale-date\":1685955600,\"timestamp\":1685952000},\"priority\":5,\"pushType\":\"liveactivity\",\"topic\":\"com.example.app\"}")
+
+        // Verify the aps-level fields survive a round-trip.
+        let encoded = try ParseCoding.parseEncoder().encode(payload)
+        let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadAppleLiveActivity.self, from: encoded)
+        XCTAssertEqual(decoded.event, .update)
+        XCTAssertEqual(decoded.timestamp, 1685952000)
+        XCTAssertEqual(decoded.staleDate, 1685955600)
+        XCTAssertEqual(decoded.dismissalDate, 1685959200)
+        XCTAssertEqual(decoded.attributesType, "AdventureAttributes")
+        XCTAssertEqual(decoded.filterCriteria, "myFocus")
+        let reEncoded = try ParseCoding.parseEncoder().encode(decoded)
+        XCTAssertEqual(encoded, reEncoded)
+    }
+
+    func testParsePushAppleLiveActivityAttributes() throws {
+        let attributes = LiveActivityContentState(currentHealthLevel: 1.0, eventDescription: "start")
+        let payload = ParsePushPayloadAppleLiveActivity()
+            .setAttributes(attributes)
+        let retrievedAttributes: LiveActivityContentState = try payload.getAttributes()
+        XCTAssertEqual(retrievedAttributes, attributes)
+        XCTAssertThrowsError(try payload.getAttributes() as String)
+    }
+
+    func testFilterCriteria() throws {
+        var applePayload = ParsePushPayloadApple(body: "hello")
+        applePayload.filterCriteria = "myFocus"
+        let encoded = try ParseCoding.parseEncoder().encode(applePayload)
+        let decoded = try ParseCoding.jsonDecoder().decode(ParsePushPayloadApple.self, from: encoded)
+        XCTAssertEqual(applePayload, decoded)
+        XCTAssertEqual(decoded.filterCriteria, "myFocus")
+        XCTAssertEqual(applePayload.description,
+                       "{\"alert\":{\"body\":\"hello\"},\"filter-criteria\":\"myFocus\"}")
     }
 }

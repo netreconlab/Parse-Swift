@@ -150,15 +150,14 @@ class ParsePushTests: XCTestCase, @unchecked Sendable {
 
         let push = ParsePush(payload: applePayload)
         XCTAssertEqual(push.debugDescription,
-                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"},\"push_type\":\"alert\"}}")
+                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"}}}")
         let push2 = ParsePush(payload: applePayload, query: installationQuery)
         XCTAssertEqual(push2.debugDescription,
                        // swiftlint:disable:next line_length
-                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"},\"push_type\":\"alert\"},\"where\":{\"objectId\":{\"$ne\":null}}}")
+                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"}},\"where\":{\"objectId\":{\"$ne\":null}}}")
         let push3 = ParsePush(payload: applePayload, expirationInterval: 7)
         XCTAssertEqual(push3.debugDescription,
-                       // swiftlint:disable:next line_length
-                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"},\"push_type\":\"alert\"},\"expiration_interval\":7}")
+                       "{\"data\":{\"alert\":{\"body\":\"Hello from ParseSwift!\"}},\"expiration_interval\":7}")
         let push4 = ParsePush(payload: fcmPayload)
         XCTAssertEqual(push4.debugDescription,
                        "{\"data\":{\"notification\":{\"body\":\"Bye FCM\"}}}")
