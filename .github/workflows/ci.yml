@@ -21,7 +21,7 @@ jobs:
     runs-on: xcode-27
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=26.2,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.2,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
           - destination: 'platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max'
@@ -30,7 +30,7 @@ jobs:
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
-          - destination: 'platform=visionOS\ Simulator,OS=26.2,name=Apple\ Vision\ Pro'
+          - destination: 'platform=visionOS\ Simulator,OS=27.2,name=Apple\ Vision\ Pro'
             action: 'build'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)'
             action: 'test'
@@ -171,7 +171,7 @@ jobs:
       - name: Build
         uses: skiptools/swift-android-action@v2
         with:
-          swift-version: '6.2'
+          swift-version: '6.4'
           build-tests: true
           run-tests: false
 
@@ -182,8 +182,8 @@ jobs:
       - uses: actions/checkout@v7
       - uses: compnerd/gha-setup-swift@v0.5.1
         with:
-          branch: swift-6.2.3-release
-          tag: 6.2.3-RELEASE
+          branch: swift-6.4.2-release
+          tag: 6.4.2-RELEASE
       - name: Build and Test
         run: |
           swift test --enable-test-discovery --enable-code-coverage
