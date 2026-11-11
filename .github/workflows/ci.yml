@@ -148,7 +148,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: vapor/swiftly-action@v0.2
         with:
-          toolchain: 6.2.3
+          toolchain: 6.4.2
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and Test
         run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-test-discovery --enable-code-coverage
