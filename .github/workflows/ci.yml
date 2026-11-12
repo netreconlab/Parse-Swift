@@ -21,12 +21,12 @@ jobs:
     runs-on: xcode-27
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV\ 4K', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
           - destination: 'platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
+          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV\ 4K'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
