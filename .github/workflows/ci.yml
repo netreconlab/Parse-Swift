@@ -155,7 +155,7 @@ jobs:
       - name: Prepare codecov
         run: |
           cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
-          CODECOV_DIR=$(dirname "$(swift test --enable-code-coverage --show-codecov-path)")
+          CODECOV_DIR=$(dirname "$(swift test --build-system native --enable-test-discovery --enable-code-coverage --show-codecov-path)")
           BIN_PATH=$(swift build --show-bin-path)
           llvm-cov export -format="lcov" \
             "$BIN_PATH/ParseSwiftPackageTests.xctest" \
