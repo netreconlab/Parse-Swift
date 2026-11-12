@@ -9,7 +9,7 @@ on:
 
 env:
   CI_XCODE_OLDEST: '/Applications/Xcode_16.3.app/Contents/Developer'
-  CI_XCODE_LATEST: '/Applications/Xcode_27.2.app/Contents/Developer'
+  CI_XCODE_LATEST: '/Applications/Xcode_27.1.app/Contents/Developer'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,12 +21,12 @@ jobs:
     runs-on: xcode-27
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV\ 4K\ \(3rd\ generation\)', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max', 'platform\=tvOS\ Simulator,OS=27.0,name\=Apple\ TV\ 4K\ \(3rd\ generation\)', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
           - destination: 'platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max'
             action: 'build'
-          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV\ 4K\ \(3rd\ generation\)'
+          - destination: 'platform\=tvOS\ Simulator,OS=27.0,name\=Apple\ TV\ 4K\ \(3rd\ generation\)'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
