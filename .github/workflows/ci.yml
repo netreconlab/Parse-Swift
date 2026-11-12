@@ -155,7 +155,11 @@ jobs:
       - name: Prepare codecov
         run: |
           cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
-          llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/ParseSwiftPackageTests.xctest -instr-profile .build/x86_64-unknown-linux-gnu/debug/codecov/default.profdata > info_linux.lcov
+          CODECOV_DIR=$(dirname "$(swift test --enable-code-coverage --show-codecov-path)")
+          BIN_PATH=$(swift build --show-bin-path)
+          llvm-cov export -format="lcov" \
+            "$BIN_PATH/ParseSwiftPackageTests.xctest" \
+            -instr-profile "$CODECOV_DIR/default.profdata" > info_linux.lcov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7
         with:
