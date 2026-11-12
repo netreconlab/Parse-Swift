@@ -21,18 +21,18 @@ jobs:
     runs-on: xcode-27
     strategy:
       matrix:
-        destination: ['platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.2,name=Apple\ Vision\ Pro']
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)', 'platform=macOS', 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro']
         action: ['test', 'build']
         exclude:
-          - destination: 'platform=iOS\ Simulator,name=iPhone\ 17\ Pro\ Max'
+          - destination: 'platform=iOS\ Simulator,name=iPhone\ 18\ Pro\ Max'
             action: 'build'
           - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
             action: 'build'
           - destination: 'platform=macOS'
             action: 'build'
-          - destination: 'platform=visionOS\ Simulator,OS=27.2,name=Apple\ Vision\ Pro'
+          - destination: 'platform=visionOS\ Simulator,OS=27.0,name=Apple\ Vision\ Pro'
             action: 'build'
-          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 11\ \(46mm\)'
+          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 12\ \(46mm\)'
             action: 'test'
     steps:
     - uses: actions/checkout@v7
@@ -171,7 +171,7 @@ jobs:
       - name: Build
         uses: skiptools/swift-android-action@v2
         with:
-          swift-version: '6.4'
+          swift-version: '6.4.2'
           build-tests: true
           run-tests: false
 
